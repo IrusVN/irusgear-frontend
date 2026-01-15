@@ -15,14 +15,33 @@
 
         <!-- Form -->
         <form @submit.prevent="handleRegister" class="irus-form d-flex flex-column" >
-          <!-- Full name -->
-          <div class="irus-input-wrapper">
-            <span class="irus-input-icon">
-              <UserIcon />
-            </span>
-            <input type="text" class="irus-input" placeholder="Full Name" v-model="fullName" required />
-          </div>
+          <!-- First & Last name -->
+          <div class="d-flex gap-2 name-row">
+            <!-- First name -->
+            <div class="irus-input-wrapper flex-fill">
+              <span class="irus-input-icon">
+                <UserIcon />
+              </span>
+              <input
+                type="text"
+                class="irus-input"
+                placeholder="First Name"
+                v-model="firstName"
+                required
+              />
+            </div>
 
+            <!-- Last name -->
+            <div class="irus-input-wrapper flex-fill">
+              <input
+                type="text"
+                class="irus-input ps-3"
+                placeholder="Last Name"
+                v-model="lastName"
+                required
+              />
+            </div>
+          </div>
           <!-- Email -->
           <div class="irus-input-wrapper">
             <span class="irus-input-icon">
@@ -132,7 +151,8 @@ import TwitterLogo from '@/components/Icons/Logo/TwitterLogo.vue'
 import AppleLogo from '@/components/Icons/Logo/AppleLogo.vue'
 
 const localePath = useLocalePath()
-const fullName = ref('')
+const firstName = ref('')
+const lastName = ref('')
 const email = ref('')
 const phone = ref('')
 const password = ref('')
@@ -154,7 +174,8 @@ const handleRegister = async () => {
   try {
     // Implement register logic here
     console.log('Register with:', {
-      fullName: fullName.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
       email: email.value,
       phone: phone.value,
       password: password.value
@@ -185,6 +206,9 @@ const handleRegister = async () => {
 @media screen and (max-width: 480px) {
   .register-card {
     padding: 32px 24px;
+  }
+  .name-row {
+    flex-direction: column;
   }
 }
 </style>
