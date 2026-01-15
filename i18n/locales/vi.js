@@ -7,6 +7,9 @@ export default {
         signIn: "Đăng nhập",
         or: "HOẶC",
         and: "và",
+        email: "Email",
+        emailAddress: "Địa chỉ Email",
+        password: "Mật khẩu",
     },
     page_titles: {
         home: "Trang chủ",
@@ -33,8 +36,10 @@ export default {
                 emailSent: "Email đã được gửi!",
                 text: "Chúng tôi đã gửi một liên kết đặt lại mật khẩu đến",
                 followInstructions: "Vui lòng kiểm tra hộp thư đến và làm theo hướng dẫn.",
-            }
-            
-        }
+                sendAnother: "Gửi đến email khác",
+            },
+            sendResetLink: "Gửi liên kết đặt lại"
+        },
+        rememberPassword: "Bạn nhớ mật khẩu của mình?"
     }
 }

@@ -27,7 +27,7 @@
             {{ $t("register.email.success.followInstructions") }}
           </p>
           <button class="btn-secondary" @click="resetForm">
-            Send to different email
+            {{ $t("register.email.success.sendAnother") }}
           </button>
         </div>
 
@@ -37,31 +37,22 @@
           <div class="form-group">
             <div class="input-wrapper">
               <span class="input-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect width="20" height="16" x="2" y="4" rx="2"/>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                </svg>
+                <EmailIcon />
               </span>
-              <input 
-                type="email" 
-                class="form-control" 
-                placeholder="Email Address"
-                v-model="email"
-                required
-              />
+              <input type="email" class="form-control" :placeholder="$t('common.emailAddress')" v-model="email" required />
             </div>
           </div>
 
           <!-- Submit Button -->
           <button type="submit" class="btn-submit" :disabled="loading">
             <span v-if="loading" class="spinner-border spinner-border-sm me-2"></span>
-            Send Reset Link
+            {{ $t("register.email.sendResetLink") }}
           </button>
         </form>
 
         <!-- Help Text -->
         <div class="help-section" v-if="!emailSent">
-          <p>Remember your password? <NuxtLink :to="localePath('/auth/login')">Sign in</NuxtLink></p>
+          <p>{{ $t("register.rememberPassword") }} <NuxtLink :to="localePath('/auth/login')">{{ $t("common.signIn") }}</NuxtLink></p>
         </div>
       </div>
     </div>
@@ -70,9 +61,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import ArrowLeft from '../Icons/ArrowLeft.vue'
-import SuccessIcon from '../Icons/SuccessIcon.vue'
 import { useLocalePath } from '#imports'
+import ArrowLeft from '@/components/Icons/ArrowLeft.vue'
+import SuccessIcon from '@/components/Icons/SuccessIcon.vue'
+import EmailIcon from '@/components/Icons/EmailIcon.vue'
 
 const localePath = useLocalePath()
 const email = ref('')

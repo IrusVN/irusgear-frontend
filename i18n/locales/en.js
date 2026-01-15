@@ -7,6 +7,9 @@ export default {
         signIn: "Sign In",
         or: "OR",
         and: "and",
+        email: "Email",
+        emailAddress: "Email Address",
+        password: "Password",
     },
     page_titles: {
         home: "Home",
@@ -33,8 +36,10 @@ export default {
                 emailSent: "Email Sent!",
                 text: "We've sent a password reset link to",
                 followInstructions: "Please check your inbox and follow the instructions.",
-            }
-            
-        }
+                sendAnother: "Send to different email",
+            },
+            sendResetLink: "Send Reset Link"
+        },
+        rememberPassword: "Remember your password?"
     }
 }

@@ -7,7 +7,7 @@
           <h1 class="fw-bold mb-2 auth-title">{{ $t('common.signIn') }}</h1>
           <p class="text-muted mb-0">
             {{ $t('login.newUser') }}
-            <NuxtLink to="/auth/register" class="fw-semibold text-dark text-decoration-none">
+            <NuxtLink :to="localePath('/auth/register')" class="fw-semibold text-dark text-decoration-none">
               {{ $t('login.createAccount') }}
             </NuxtLink>
           </p>
@@ -20,7 +20,7 @@
             <span class="position-absolute start-0 ms-3 text-muted">
               <EmailIcon />
             </span>
-            <input type="email" class="form-control ps-5" placeholder="Email Address" v-model="email" required />
+            <input type="email" class="form-control ps-5" :placeholder="$t('common.emailAddress')" v-model="email" required />
           </div>
 
           <!-- Password -->
@@ -28,7 +28,7 @@
             <span class="position-absolute start-0 ms-3 text-muted">
               <LockIcon />
             </span>
-            <input :type="showPassword ? 'text' : 'password'" class="form-control ps-5 pe-5" placeholder="Password" v-model="password" required />
+            <input :type="showPassword ? 'text' : 'password'" class="form-control ps-5 pe-5" :placeholder="$t('common.password')" v-model="password" required />
             <button type="button" class="btn position-absolute end-0 me-3 p-0 border-0 bg-transparent text-muted" @click="showPassword = !showPassword" >
               <ShowEye v-if="!showPassword" />
               <HideEye v-else />
@@ -37,7 +37,7 @@
 
           <!-- Forgot password -->
           <div class="text-start">
-            <NuxtLink to="/auth/forgot-password" class="text-dark text-decoration-none small">
+            <NuxtLink :to="localePath('/auth/forgot-password')" class="text-dark text-decoration-none small">
               {{ $t('login.forgotPassword') }}
             </NuxtLink>
           </div>
@@ -77,7 +77,7 @@
 
         <!-- Terms -->
         <div class="text-center mt-4">
-          <p class="fs-6 mb-0">
+          <p class="fs-6 mb-0 text-muted">
             {{ $t('login.terms') }}
             <NuxtLink to="#" class="text-dark text-decoration-underline fw-semibold">
               {{ $t('login.termsLink') }}
@@ -95,7 +95,7 @@
 
 <script setup>
 import { ref } from 'vue'
-
+import { useLocalePath } from '#imports'
 import GoogleLogo from '~/components/Icons/Logo/GoogleLogo.vue'
 import FacebookLogo from '~/components/Icons/Logo/FacebookLogo.vue'
 import TwitterLogo from '~/components/Icons/Logo/TwitterLogo.vue'
@@ -105,6 +105,7 @@ import LockIcon from '@/components/Icons/LockIcon.vue'
 import ShowEye from '@/components/Icons/ShowEye.vue'
 import HideEye from '@/components/Icons/HideEye.vue'
 
+const localePath = useLocalePath()
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
