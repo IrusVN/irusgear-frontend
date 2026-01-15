@@ -5,16 +5,20 @@ export default {
         logout: "Đăng xuất",
         register: "Đăng ký",
         signIn: "Đăng nhập",
-        or: "HOẶC",
+        or: "Hoặc",
         and: "và",
         email: "Email",
         emailAddress: "Địa chỉ Email",
         password: "Mật khẩu",
+        createAccount: "Tạo tài khoản",
+        alreadyHaveAccount: "Đã có tài khoản?",
+        phoneNumber: "Số điện thoại",
     },
     page_titles: {
         home: "Trang chủ",
         login: "Trang đăng nhập",
         forgotPassword: "Trang quên mật khẩu",
+        register: "Trang đăng ký",
     },
     login: {
         newUser: "Người dùng mới?",
@@ -41,5 +45,8 @@ export default {
             sendResetLink: "Gửi liên kết đặt lại"
         },
         rememberPassword: "Bạn nhớ mật khẩu của mình?"
+    },
+    validate: {
+        passwordsNotMatch: "Passwords do not match",
     }
 }
