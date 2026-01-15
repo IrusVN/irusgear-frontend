@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -119,7 +119,7 @@ const isActiveRoute = (itemRoute) => {
   display: flex;
   flex-direction: column;
   padding: 20px 16px;
-  transition: width 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
@@ -144,19 +144,37 @@ const isActiveRoute = (itemRoute) => {
 .logo-icon {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: #1f2937;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   font-size: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-icon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.3);
 }
 
 .logo-text {
   font-size: 20px;
   font-weight: 700;
   color: #1a1a2e;
+  animation: fadeInRight 0.3s ease;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .collapse-btn {
@@ -174,14 +192,32 @@ const isActiveRoute = (itemRoute) => {
 }
 
 .collapse-btn:hover {
-  background: #f3f4f6;
-  color: #6366f1;
+  background: #1f2937;
+  border-color: #1f2937;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.collapse-btn:active {
+  transform: scale(0.95);
 }
 
 /* Search */
 .sidebar-search {
   position: relative;
   margin-bottom: 24px;
+  animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .sidebar-search input {
@@ -192,7 +228,7 @@ const isActiveRoute = (itemRoute) => {
   font-size: 14px;
   color: #374151;
   background: #f9fafb;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .sidebar-search input::placeholder {
@@ -201,9 +237,10 @@ const isActiveRoute = (itemRoute) => {
 
 .sidebar-search input:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: #1f2937;
   background: #fff;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(31, 41, 55, 0.1);
+  transform: scale(1.01);
 }
 
 .search-icon {
@@ -213,6 +250,11 @@ const isActiveRoute = (itemRoute) => {
   transform: translateY(-50%);
   color: #9ca3af;
   font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.sidebar-search:focus-within .search-icon {
+  color: #1f2937;
 }
 
 /* Navigation */
@@ -234,12 +276,40 @@ const isActiveRoute = (itemRoute) => {
   letter-spacing: 0.5px;
   margin-bottom: 12px;
   padding-left: 12px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .nav-list {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.nav-list li {
+  animation: slideInLeft 0.3s ease;
+  animation-fill-mode: both;
+}
+
+.nav-list li:nth-child(1) { animation-delay: 0.05s; }
+.nav-list li:nth-child(2) { animation-delay: 0.1s; }
+.nav-list li:nth-child(3) { animation-delay: 0.15s; }
+.nav-list li:nth-child(4) { animation-delay: 0.2s; }
+.nav-list li:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .nav-item {
@@ -252,151 +322,46 @@ const isActiveRoute = (itemRoute) => {
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  transition: all 0.2s ease;
   position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-item i {
   font-size: 18px;
   width: 24px;
   text-align: center;
+  transition: transform 0.3s ease;
 }
 
 .nav-item:hover {
   background: #f3f4f6;
-  color: #6366f1;
+  color: #1f2937;
+  transform: translateX(4px);
+}
+
+.nav-item:hover i {
+  transform: scale(1.15);
+}
+
+.nav-item:active {
+  transform: translateX(2px) scale(0.98);
 }
 
 .nav-item.active {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: #1f2937;
   color: #fff;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.3);
+  transform: translateX(0);
+}
+
+.nav-item.active:hover {
+  transform: translateX(0);
+  box-shadow: 0 6px 16px rgba(31, 41, 55, 0.4);
 }
 
 .nav-item.active i {
   color: #fff;
-}
-
-.nav-badge {
-  margin-left: auto;
-  background: #e0e7ff;
-  color: #6366f1;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-
-.nav-item.active .nav-badge {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-/* Capacity Card */
-.capacity-card {
-  background: #f8fafc;
-  border-radius: 16px;
-  padding: 20px;
-  margin: 16px 0;
-  text-align: center;
-  position: relative;
-}
-
-.capacity-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 24px;
-  height: 24px;
-  border: none;
-  background: transparent;
-  color: #9ca3af;
-  cursor: pointer;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.capacity-close:hover {
-  background: #e5e7eb;
-  color: #374151;
-}
-
-.capacity-ring {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 16px;
-  position: relative;
-}
-
-.circular-chart {
-  width: 100%;
-  height: 100%;
-}
-
-.circle-bg {
-  fill: none;
-  stroke: #e5e7eb;
-  stroke-width: 2.5;
-}
-
-.circle {
-  fill: none;
-  stroke: #6366f1;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  animation: progress 1s ease-out forwards;
-  transform: rotate(-90deg);
-  transform-origin: center;
-}
-
-@keyframes progress {
-  0% {
-    stroke-dasharray: 0 100;
-  }
-}
-
-.capacity-percent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  font-weight: 700;
-  color: #374151;
-}
-
-.capacity-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 4px;
-}
-
-.capacity-desc {
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 12px;
-  line-height: 1.4;
-}
-
-.upgrade-btn {
-  width: 100%;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, #06b6d4, #0891b2);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.upgrade-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
 }
 
 /* Bottom Section */
@@ -414,11 +379,18 @@ const isActiveRoute = (itemRoute) => {
   padding: 12px;
   border-radius: 12px;
   margin-top: 12px;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .user-profile:hover {
   background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.user-profile:active {
+  transform: translateY(0);
 }
 
 .user-icon {
@@ -428,8 +400,13 @@ const isActiveRoute = (itemRoute) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6366f1;
+  color: #1f2937;
   font-size: 32px;
+  transition: transform 0.3s ease;
+}
+
+.user-profile:hover .user-icon {
+  transform: scale(1.1);
 }
 
 .user-info {
@@ -467,11 +444,13 @@ const isActiveRoute = (itemRoute) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .user-menu-btn:hover {
   background: #e5e7eb;
   color: #374151;
+  transform: rotate(90deg);
 }
 
 /* Collapsed state adjustments */
@@ -510,7 +489,7 @@ const isActiveRoute = (itemRoute) => {
   background: #d1d5db;
 }
 
-/* Responsive */
+/* Responsive - Mobile */
 @media (max-width: 768px) {
   .admin-sidebar {
     position: fixed;
@@ -518,11 +497,19 @@ const isActiveRoute = (itemRoute) => {
     top: 0;
     z-index: 1000;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+    height: 100vh;
+    width: 280px;
   }
 
-  .admin-sidebar.show {
+  .admin-sidebar.mobile-open {
     transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .collapse-btn {
+    display: none;
   }
 }
 </style>
