@@ -7,7 +7,7 @@
           <h1 class="fs-3">{{ $t('common.createAccount') }}</h1>
           <p class="register-subtitle mb-0">
             {{ $t('common.alreadyHaveAccount') }}
-            <NuxtLink :to="localePath('/register/login')" class="fw-semibold text-dark text-decoration-none" >
+            <NuxtLink :to="localePath('/auth/login')" class="fw-semibold text-dark text-decoration-none" >
               {{ $t('common.signIn') }}
             </NuxtLink>
           </p>
@@ -22,24 +22,12 @@
               <span class="irus-input-icon">
                 <UserIcon />
               </span>
-              <input
-                type="text"
-                class="irus-input"
-                placeholder="First Name"
-                v-model="firstName"
-                required
-              />
+              <input type="text" class="irus-input" :placeholder="$t('common.firstName')" v-model="firstName" required />
             </div>
 
             <!-- Last name -->
             <div class="irus-input-wrapper flex-fill">
-              <input
-                type="text"
-                class="irus-input ps-3"
-                placeholder="Last Name"
-                v-model="lastName"
-                required
-              />
+              <input type="text" class="irus-input ps-3" :placeholder="$t('common.lastName')" v-model="lastName" required />
             </div>
           </div>
           <!-- Email -->
@@ -63,7 +51,7 @@
             <span class="irus-input-icon">
               <LockIcon />
             </span>
-            <input :type="showPassword ? 'text' : 'password'" class="irus-input" placeholder="Password" v-model="password" required />
+            <input :type="showPassword ? 'text' : 'password'" class="irus-input" :placeholder="$t('common.password')" v-model="password" required />
             <button type="button" class="btn position-absolute end-0 me-3 p-0 border-0 bg-transparent" @click="showPassword = !showPassword" >
               <ShowEye v-if="!showPassword" />
               <HideEye v-else />
@@ -75,7 +63,7 @@
             <span class="irus-input-icon">
               <LockIcon />
             </span>
-            <input :type="showConfirmPassword ? 'text' : 'password'" class="irus-input" placeholder="Confirm Password" v-model="confirmPassword" required />
+            <input :type="showConfirmPassword ? 'text' : 'password'" class="irus-input" :placeholder="$t('common.confirmPassword')" v-model="confirmPassword" required />
             <button type="button" class="btn position-absolute end-0 me-3 p-0 border-0 bg-transparent" @click="showConfirmPassword = !showConfirmPassword" >
               <ShowEye v-if="!showConfirmPassword" />
               <HideEye v-else />

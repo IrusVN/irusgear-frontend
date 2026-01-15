@@ -10,9 +10,12 @@ export default {
         email: "Email",
         emailAddress: "Email Address",
         password: "Password",
+        confirmPassword: "Confirm Password",
         createAccount: "Create Account",
         alreadyHaveAccount: "Already have an account?",
         phoneNumber: "Phone Number",
+        firstName: "First Name",
+        lastName: "Last Name",
     },
     page_titles: {
         home: "Home",

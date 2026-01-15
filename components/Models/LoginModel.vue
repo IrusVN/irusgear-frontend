@@ -7,7 +7,7 @@
           <h1 class="fw-bold fs-3 mb-2">{{ $t('common.signIn') }}</h1>
           <p class="text-muted mb-0">
             {{ $t("login.newUser") }}
-            <NuxtLink to="/auth/register" class="fw-semibold text-decoration-none text-dark">
+            <NuxtLink :to="localePath('/auth/register')" class="fw-semibold text-decoration-none text-dark">
               {{ $t('login.createAccount') }}
             </NuxtLink>
           </p>
@@ -37,7 +37,7 @@
 
           <!-- Forgot -->
           <div class="text-start">
-            <NuxtLink to="/auth/forgot-password" class="text-decoration-none fw-semibold text-dark">
+            <NuxtLink :to="localePath('/auth/forgot-password')" class="text-decoration-none fw-semibold text-dark">
               {{ $t('login.forgotPassword') }}
             </NuxtLink>
           </div>
@@ -81,11 +81,11 @@
         <div class="text-center mt-4">
           <p class="small text-muted mb-0">
             {{ $t('login.terms') }}
-            <NuxtLink to="#" class="fw-semibold text-dark">
+            <NuxtLink :to="localePath('#')" class="fw-semibold text-dark">
               {{ $t('login.termsLink') }}
             </NuxtLink>
             {{ $t('common.and') }}
-            <NuxtLink to="#" class="fw-semibold text-dark">
+            <NuxtLink :to="localePath('#')" class="fw-semibold text-dark">
               {{ $t('login.privacyLink') }}
             </NuxtLink>.
           </p>
@@ -105,7 +105,9 @@ import EmailIcon from '@/components/Icons/EmailIcon.vue'
 import LockIcon from '@/components/Icons/LockIcon.vue'
 import ShowEye from '@/components/Icons/ShowEye.vue'
 import HideEye from '@/components/Icons/HideEye.vue'
+import { useLocalePath } from '#imports'
 
+const localePath = useLocalePath()
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)

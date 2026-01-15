@@ -10,9 +10,12 @@ export default {
         email: "Email",
         emailAddress: "Địa chỉ Email",
         password: "Mật khẩu",
+        confirmPassword: "Xác nhận mật khẩu",
         createAccount: "Tạo tài khoản",
         alreadyHaveAccount: "Đã có tài khoản?",
         phoneNumber: "Số điện thoại",
+        firstName: "Tên",
+        lastName: "Họ",
     },
     page_titles: {
         home: "Trang chủ",

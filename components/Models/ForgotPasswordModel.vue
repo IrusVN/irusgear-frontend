@@ -45,7 +45,7 @@
         <div v-if="!emailSent" class="text-center mt-4" >
           <p class="text-muted mb-0">
             {{ $t('register.rememberPassword') }}
-            <NuxtLink :to="localePath('/auth/login')" class="fw-semibold text-decoration-none" >
+            <NuxtLink :to="localePath('/auth/login')" class="fw-semibold text-decoration-none text-dark" >
               {{ $t('common.signIn') }}
             </NuxtLink>
           </p>
