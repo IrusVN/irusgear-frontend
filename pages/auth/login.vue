@@ -1,3 +1,8 @@
-<template><p>Login page</p></template>
-<script setup></script>
-<style scoped></style>
+<template>
+    <div>
+        <LoginModel />
+    </div>
+</template>
+<script setup>
+import LoginModel from '@/components/Models/LoginModel.vue'
+</script>
