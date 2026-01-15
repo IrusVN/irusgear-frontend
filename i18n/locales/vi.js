@@ -11,6 +11,7 @@ export default {
     page_titles: {
         home: "Trang chủ",
         login: "Trang đăng nhập",
+        forgotPassword: "Trang quên mật khẩu",
     },
     login: {
         newUser: "Người dùng mới?",
@@ -20,5 +21,20 @@ export default {
         terms: "Bằng cách đăng nhập bằng tài khoản, bạn đồng ý với các",
         termsLink: "Điều khoản dịch vụ",
         privacyLink: "Chính sách bảo mật",
+    },
+    register: {
+        backToLogin: "Quay lại đăng nhập",
+        forgotPassword: {
+            title: "Quên mật khẩu?",
+            description: "Không sao đâu! Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu.",
+        },
+        email: {
+            success: {
+                emailSent: "Email đã được gửi!",
+                text: "Chúng tôi đã gửi một liên kết đặt lại mật khẩu đến",
+                followInstructions: "Vui lòng kiểm tra hộp thư đến và làm theo hướng dẫn.",
+            }
+            
+        }
     }
 }

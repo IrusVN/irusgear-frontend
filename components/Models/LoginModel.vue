@@ -95,19 +95,16 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 
-import GoogleLogo from '@/components/Icons/GoogleLogo.vue'
-import FacebookLogo from '@/components/Icons/FacebookLogo.vue'
-import TwitterLogo from '@/components/Icons/TwitterLogo.vue'
-import AppleLogo from '@/components/Icons/AppleLogo.vue'
+import GoogleLogo from '~/components/Icons/Logo/GoogleLogo.vue'
+import FacebookLogo from '~/components/Icons/Logo/FacebookLogo.vue'
+import TwitterLogo from '~/components/Icons/Logo/TwitterLogo.vue'
+import AppleLogo from '~/components/Icons/Logo/AppleLogo.vue'
 import EmailIcon from '@/components/Icons/EmailIcon.vue'
 import LockIcon from '@/components/Icons/LockIcon.vue'
 import ShowEye from '@/components/Icons/ShowEye.vue'
 import HideEye from '@/components/Icons/HideEye.vue'
 
-const { t } = useI18n();
-useHead({ title: t('page_titles.login') });
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
