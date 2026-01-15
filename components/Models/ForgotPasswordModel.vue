@@ -3,7 +3,7 @@
     <div class="auth-container">
       <div class="auth-card">
         <!-- Back Button -->
-        <NuxtLink to="/auth/login" class="back-btn">
+        <NuxtLink :to="localePath('/auth/login')" class="back-btn">
           <ArrowLeft />
           {{ $t("register.backToLogin") }}
         </NuxtLink>
@@ -61,7 +61,7 @@
 
         <!-- Help Text -->
         <div class="help-section" v-if="!emailSent">
-          <p>Remember your password? <NuxtLink to="/auth/login">Sign in</NuxtLink></p>
+          <p>Remember your password? <NuxtLink :to="localePath('/auth/login')">Sign in</NuxtLink></p>
         </div>
       </div>
     </div>
@@ -72,7 +72,9 @@
 import { ref } from 'vue'
 import ArrowLeft from '../Icons/ArrowLeft.vue'
 import SuccessIcon from '../Icons/SuccessIcon.vue'
+import { useLocalePath } from '#imports'
 
+const localePath = useLocalePath()
 const email = ref('')
 const loading = ref(false)
 const emailSent = ref(false)
