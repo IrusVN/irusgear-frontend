@@ -17,6 +17,30 @@ export default {
         firstName: "Tên",
         lastName: "Họ",
     },
+    sidebar: {
+        brandName: "IrusGear",
+        searchPlaceholder: "Tìm kiếm...",
+        sections: {
+            main: "Chính",
+            communication: "Liên lạc",
+        },
+        menu: {
+            home: "Trang chủ",
+            orders: "Đơn hàng",
+            documentation: "Tài liệu",
+            mapOverview: "Bản đồ",
+            statistics: "Thống kê",
+            inbox: "Hộp thư",
+            couriers: "Người giao hàng",
+            settings: "Cài đặt",
+            help: "Trợ giúp",
+        },
+        capacity: {
+            title: "Dung lượng sử dụng",
+            description: "Bạn đã sử dụng {percent}% dung lượng.",
+            upgradeBtn: "Nâng cấp",
+        },
+    },
     page_titles: {
         home: "Trang chủ",
         login: "Trang đăng nhập",

@@ -17,6 +17,30 @@ export default {
         firstName: "First Name",
         lastName: "Last Name",
     },
+    sidebar: {
+        brandName: "IrusGear",
+        searchPlaceholder: "Search for anything...",
+        sections: {
+            main: "Main",
+            communication: "Communication",
+        },
+        menu: {
+            home: "Home",
+            orders: "Orders",
+            documentation: "Documentation",
+            mapOverview: "Map Overview",
+            statistics: "Statistics",
+            inbox: "Inbox",
+            couriers: "Couriers",
+            settings: "Settings",
+            help: "Help",
+        },
+        capacity: {
+            title: "Used capacity",
+            description: "You are already using {percent}% of your capacity.",
+            upgradeBtn: "Upgrade plan",
+        },
+    },
     page_titles: {
         home: "Home",
         login: "Login page",
@@ -35,7 +59,7 @@ export default {
     register: {
         backToLogin: "Back to Login",
         forgotPassword: {
-            title:"Forgot Password?",
+            title: "Forgot Password?",
             description: "No worries! Enter your email address and we'll send you a link to reset your password.",
         },
         email: {
