@@ -5,8 +5,17 @@ export default {
         logout: "Đăng xuất",
         register: "Đăng ký",
         signIn: "Đăng nhập",
-        or: "HOẶC",
+        or: "Hoặc",
         and: "và",
+        email: "Email",
+        emailAddress: "Địa chỉ Email",
+        password: "Mật khẩu",
+        confirmPassword: "Xác nhận mật khẩu",
+        createAccount: "Tạo tài khoản",
+        alreadyHaveAccount: "Đã có tài khoản?",
+        phoneNumber: "Số điện thoại",
+        firstName: "Tên",
+        lastName: "Họ",
     },
     sidebar: {
         brandName: "IrusGear",
@@ -36,6 +45,7 @@ export default {
         home: "Trang chủ",
         login: "Trang đăng nhập",
         forgotPassword: "Trang quên mật khẩu",
+        register: "Trang đăng ký",
     },
     login: {
         newUser: "Người dùng mới?",
@@ -57,8 +67,13 @@ export default {
                 emailSent: "Email đã được gửi!",
                 text: "Chúng tôi đã gửi một liên kết đặt lại mật khẩu đến",
                 followInstructions: "Vui lòng kiểm tra hộp thư đến và làm theo hướng dẫn.",
-            }
-
-        }
+                sendAnother: "Gửi đến email khác",
+            },
+            sendResetLink: "Gửi liên kết đặt lại"
+        },
+        rememberPassword: "Bạn nhớ mật khẩu của mình?"
+    },
+    validate: {
+        passwordsNotMatch: "Passwords do not match",
     }
 }

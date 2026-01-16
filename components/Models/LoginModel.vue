@@ -1,50 +1,50 @@
 <template>
-  <div class="min-vh-100 d-flex align-items-center justify-content-center bg-light px-3 auth-page" >
-    <div class="w-100 auth-container">
-      <div class="bg-white shadow auth-card d-flex flex-column" >
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="login-container w-100">
+      <div class="irus-card p-4 login-card">
         <!-- Header -->
         <div class="mb-4">
-          <h1 class="fw-bold mb-2 auth-title">{{ $t('common.signIn') }}</h1>
+          <h1 class="fw-bold fs-3 mb-2">{{ $t('common.signIn') }}</h1>
           <p class="text-muted mb-0">
-            {{ $t('login.newUser') }}
-            <NuxtLink to="/auth/register" class="fw-semibold text-dark text-decoration-none">
+            {{ $t("login.newUser") }}
+            <NuxtLink :to="localePath('/auth/register')" class="fw-semibold text-decoration-none text-dark">
               {{ $t('login.createAccount') }}
             </NuxtLink>
           </p>
         </div>
 
         <!-- Form -->
-        <form @submit.prevent="handleLogin" class="d-flex flex-column gap-3">
+        <form class="irus-form" @submit.prevent="handleLogin" >
           <!-- Email -->
-          <div class="position-relative d-flex align-items-center">
-            <span class="position-absolute start-0 ms-3 text-muted">
+          <div class="irus-input-wrapper">
+            <span class="irus-input-icon">
               <EmailIcon />
             </span>
-            <input type="email" class="form-control ps-5" placeholder="Email Address" v-model="email" required />
+            <input v-model="email" type="email" class="irus-input" :placeholder="$t('common.emailAddress')" required />
           </div>
 
           <!-- Password -->
-          <div class="position-relative d-flex align-items-center">
-            <span class="position-absolute start-0 ms-3 text-muted">
+          <div class="irus-input-wrapper">
+            <span class="irus-input-icon">
               <LockIcon />
             </span>
-            <input :type="showPassword ? 'text' : 'password'" class="form-control ps-5 pe-5" placeholder="Password" v-model="password" required />
-            <button type="button" class="btn position-absolute end-0 me-3 p-0 border-0 bg-transparent text-muted" @click="showPassword = !showPassword" >
+            <input v-model="password" :type="showPassword ? 'text' : 'password'" class="irus-input" :placeholder="$t('common.password')" required />
+            <button type="button" class="password-toggle" @click="showPassword = !showPassword" >
               <ShowEye v-if="!showPassword" />
               <HideEye v-else />
             </button>
           </div>
 
-          <!-- Forgot password -->
+          <!-- Forgot -->
           <div class="text-start">
-            <NuxtLink to="/auth/forgot-password" class="text-dark text-decoration-none small">
+            <NuxtLink :to="localePath('/auth/forgot-password')" class="text-decoration-none fw-semibold text-dark">
               {{ $t('login.forgotPassword') }}
             </NuxtLink>
           </div>
 
           <!-- Submit -->
-          <button type="submit" class="btn btn-dark rounded-pill py-2 fw-semibold mt-2" :disabled="loading" >
-            <span v-if="loading" class="spinner-border spinner-border-sm me-2" ></span>
+          <button type="submit" class="irus-btn irus-btn--primary" :disabled="loading" >
+            <span v-if="loading" class="spinner-border spinner-border-sm me-2" />
             {{ $t('common.login') }}
           </button>
         </form>
@@ -58,18 +58,20 @@
 
         <!-- Social -->
         <div class="text-center">
-          <p class="small text-muted mb-3"> {{ $t('login.joinSocial') }} </p>
+          <p class="text-muted small mb-3">
+            {{ $t('login.joinSocial') }}
+          </p>
           <div class="d-flex justify-content-center gap-3">
-            <button class="btn rounded-circle border p-3">
+            <button class="social-btn btn rounded-circle border p-3">
               <GoogleLogo />
             </button>
-            <button class="btn rounded-circle border p-3">
+            <button class="social-btn btn rounded-circle border p-3">
               <FacebookLogo />
             </button>
-            <button class="btn rounded-circle border p-3">
+            <button class="social-btn btn rounded-circle border p-3">
               <TwitterLogo />
             </button>
-            <button class="btn rounded-circle border p-3">
+            <button class="social-btn btn rounded-circle border p-3">
               <AppleLogo />
             </button>
           </div>
@@ -77,13 +79,13 @@
 
         <!-- Terms -->
         <div class="text-center mt-4">
-          <p class="fs-6 mb-0">
+          <p class="small text-muted mb-0">
             {{ $t('login.terms') }}
-            <NuxtLink to="#" class="text-dark text-decoration-underline fw-semibold">
+            <NuxtLink :to="localePath('#')" class="fw-semibold text-dark">
               {{ $t('login.termsLink') }}
             </NuxtLink>
             {{ $t('common.and') }}
-            <NuxtLink to="#" class="text-dark text-decoration-underline fw-semibold">
+            <NuxtLink :to="localePath('#')" class="fw-semibold text-dark">
               {{ $t('login.privacyLink') }}
             </NuxtLink>.
           </p>
@@ -95,16 +97,17 @@
 
 <script setup>
 import { ref } from 'vue'
-
-import GoogleLogo from '~/components/Icons/Logo/GoogleLogo.vue'
-import FacebookLogo from '~/components/Icons/Logo/FacebookLogo.vue'
-import TwitterLogo from '~/components/Icons/Logo/TwitterLogo.vue'
-import AppleLogo from '~/components/Icons/Logo/AppleLogo.vue'
+import GoogleLogo from '@/components/Icons/Logo/GoogleLogo.vue'
+import FacebookLogo from '@/components/Icons/Logo/FacebookLogo.vue'
+import TwitterLogo from '@/components/Icons/Logo/TwitterLogo.vue'
+import AppleLogo from '@/components/Icons/Logo/AppleLogo.vue'
 import EmailIcon from '@/components/Icons/EmailIcon.vue'
 import LockIcon from '@/components/Icons/LockIcon.vue'
 import ShowEye from '@/components/Icons/ShowEye.vue'
 import HideEye from '@/components/Icons/HideEye.vue'
+import { useLocalePath } from '#imports'
 
+const localePath = useLocalePath()
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
@@ -113,7 +116,7 @@ const loading = ref(false)
 const handleLogin = async () => {
   loading.value = true
   try {
-    console.log('Login with:', email.value, password.value)
+    console.log('Login:', email.value, password.value)
   } finally {
     loading.value = false
   }
@@ -121,23 +124,32 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
-.auth-container {
+.login-container {
   max-width: 420px;
 }
 
-.auth-card {
-  border-radius: 24px;
-  padding: 50px 32px;
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
 }
 
-/* Responsive mobile */
-@media screen and (max-width: 480px) {
-  .auth-card {
-    padding: 32px 24px;
-  }
+.social-btn {
+  transition: all 0.2s ease;
+}
 
-  .auth-title {
-    font-size: 24px;
+.social-btn:hover {
+  border-color: #ccc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 480px) {
+  .login-card {
+    padding: 32px 24px;
   }
 }
 </style>

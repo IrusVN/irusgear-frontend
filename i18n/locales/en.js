@@ -5,8 +5,17 @@ export default {
         logout: "Logout",
         register: "Register",
         signIn: "Sign In",
-        or: "OR",
+        or: "Or",
         and: "and",
+        email: "Email",
+        emailAddress: "Email Address",
+        password: "Password",
+        confirmPassword: "Confirm Password",
+        createAccount: "Create Account",
+        alreadyHaveAccount: "Already have an account?",
+        phoneNumber: "Phone Number",
+        firstName: "First Name",
+        lastName: "Last Name",
     },
     sidebar: {
         brandName: "IrusGear",
@@ -36,6 +45,7 @@ export default {
         home: "Home",
         login: "Login page",
         forgotPassword: "Forgot password page",
+        register: "Register page",
     },
     login: {
         newUser: "New user?",
@@ -57,8 +67,13 @@ export default {
                 emailSent: "Email Sent!",
                 text: "We've sent a password reset link to",
                 followInstructions: "Please check your inbox and follow the instructions.",
-            }
-
-        }
+                sendAnother: "Send to different email",
+            },
+            sendResetLink: "Send Reset Link"
+        },
+        rememberPassword: "Remember your password?"
+    },
+    validate: {
+        passwordsNotMatch: "Passwords do not match",
     }
 }
