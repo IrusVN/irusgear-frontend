@@ -1,9 +1,9 @@
 <template>
     <footer class="bg-black text-white py-5">
         <div class="container">
-            <div class="row g-4">
+            <div class="d-flex flex-wrap justify-content-between gap-4">
                 <!-- Brand Slogan -->
-                <div class="col-lg-3 col-md-6">
+                <div>
                     <h2 class="fs-3 fw-bold lh-sm">
                         {{ $t('footer.slogan.line1') }}<br>
                         {{ $t('footer.slogan.line2') }}<br>
@@ -12,7 +12,7 @@
                 </div>
                 
                 <!-- Location 1: HCM -->
-                <div class="col-lg-3 col-md-6">
+                <div>
                     <h6 class="text-uppercase fw-bold mb-3 text-white-50">{{ $t('footer.locations.hcm.name') }}</h6>
                     <p class="mb-1">
                         <a href="mailto:contact@irusgear.com" class="text-white text-decoration-underline">
@@ -30,7 +30,7 @@
                 </div>
                 
                 <!-- Location 2: Hanoi -->
-                <div class="col-lg-3 col-md-6">
+                <div>
                     <h6 class="text-uppercase fw-bold mb-3 text-white-50">{{ $t('footer.locations.hanoi.name') }}</h6>
                     <p class="mb-1">
                         <a href="mailto:hanoi@irusgear.com" class="text-white text-decoration-underline">
@@ -48,7 +48,7 @@
                 </div>
                 
                 <!-- Newsletter & Social -->
-                <div class="col-lg-3 col-md-6">
+                <div>
                     <p class="text-uppercase small text-white-50 mb-2">{{ $t('footer.newsletter.question') }}</p>
                     <a href="#" class="text-white text-decoration-underline fw-bold d-block mb-4">
                         {{ $t('footer.newsletter.signup') }} <i class="bi bi-arrow-right"></i>
@@ -68,10 +68,8 @@
             <hr class="my-4 border-secondary">
             
             <!-- Copyright -->
-            <div class="row">
-                <div class="col-12 text-center text-white-50 small">
-                    <p class="mb-0">{{ $t('footer.copyright') }}</p>
-                </div>
+            <div class="text-center text-white-50 small">
+                <p class="mb-0">{{ $t('footer.copyright') }}</p>
             </div>
         </div>
     </footer>
