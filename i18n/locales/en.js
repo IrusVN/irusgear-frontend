@@ -73,6 +73,32 @@ export default {
         },
         rememberPassword: "Remember your password?"
     },
+    footer: {
+        slogan: {
+            line1: "The best gear",
+            line2: "for your",
+            line3: "lifestyle"
+        },
+        locations: {
+            hcm: {
+                name: "Ho Chi Minh",
+                address1: "123 Nguyen Hue,",
+                address2: "District 1, HCMC"
+            },
+            hanoi: {
+                name: "Hanoi",
+                address1: "456 Pho Hue,",
+                address2: "Hai Ba Trung, Hanoi"
+            }
+        },
+        seeOnMap: "SEE ON MAP",
+        newsletter: {
+            question: "Want to be the smartest in your office?",
+            signup: "SIGN UP FOR OUR NEWSLETTER"
+        },
+        followUs: "Follow Us",
+        copyright: "© 2026 IrusGear. All rights reserved."
+    },
     validate: {
         passwordsNotMatch: "Passwords do not match",
     }

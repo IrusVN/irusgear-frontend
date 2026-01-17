@@ -73,7 +73,33 @@ export default {
         },
         rememberPassword: "Bạn nhớ mật khẩu của mình?"
     },
+    footer: {
+        slogan: {
+            line1: "Gear tốt nhất",
+            line2: "cho phong cách",
+            line3: "của bạn"
+        },
+        locations: {
+            hcm: {
+                name: "Hồ Chí Minh",
+                address1: "123 Nguyễn Huệ,",
+                address2: "Quận 1, TP.HCM"
+            },
+            hanoi: {
+                name: "Hà Nội",
+                address1: "456 Phố Huế,",
+                address2: "Hai Bà Trưng, Hà Nội"
+            }
+        },
+        seeOnMap: "XEM BẢN ĐỒ",
+        newsletter: {
+            question: "Muốn nhận tin mới nhất?",
+            signup: "ĐĂNG KÝ NHẬN TIN"
+        },
+        followUs: "Theo dõi chúng tôi",
+        copyright: "© 2026 IrusGear. Bảo lưu mọi quyền."
+    },
     validate: {
-        passwordsNotMatch: "Passwords do not match",
+        passwordsNotMatch: "Mật khẩu không khớp",
     }
 }
