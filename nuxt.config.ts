@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/i18n'],
+  modules: ['@nuxtjs/i18n','@pinia/nuxt'],
   i18n: {
     locales: [
       { code: 'vi', name: 'Tiếng Việt', file: 'vi.js', },
@@ -11,6 +11,11 @@ export default defineNuxtConfig({
     langDir: 'locales',
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
+  },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL ?? 'http://localhost:8000/api/v1',
+    },
   },
   css: [ 'bootstrap/dist/css/bootstrap.min.css' ],
   app: {

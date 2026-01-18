@@ -1,56 +1,88 @@
 // stores/authStore.js
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { useCookie, useRuntimeConfig } from "#imports";
+import { useRuntimeConfig } from "#imports";
+import { navigateTo } from "#app";
 import { resetAllStores } from "@/utils/storeRegistry";
-
-const sanitize = (v) =>
-  v === undefined || v === null || v === "undefined" || v === "null"
-    ? null
-    : v;
 
 export const useAuthStore = defineStore("auth", () => {
   const config = useRuntimeConfig();
 
-  const tokenCookie = useCookie("access_token");
-  const refreshTokenCookie = useCookie("refresh_token");
-
-  const token = ref(sanitize(tokenCookie.value));
-  const refreshToken = ref(sanitize(refreshTokenCookie.value));
-
   const user = ref(null);
   const permissions = ref([]);
+  const loading = ref(false);
 
-  const isAuthenticated = computed(() => Boolean(token.value));
+  const isAuthenticated = computed(() => !!user.value);
 
-  const setAuth = (payload) => {
-    token.value = payload.access_token;
-    refreshToken.value = payload.refresh_token;
-    user.value = payload.user;
-    permissions.value = payload.permissions || [];
+  const login = async (credentials) => {
+    loading.value = true;
+
+    try {
+      const response = await fetch(`${config.public.apiBaseUrl}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(credentials),
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Login failed");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      user.value = null;
+      throw error;
+    } finally {
+      loading.value = false;
+    }
   };
 
-  const logout = () => {
-    token.value = null;
-    refreshToken.value = null;
-    user.value = null;
-    permissions.value = [];
+  const fetchUser = async () => {
+    try {
+      const data = await fetch(`${config.public.apiBaseUrl}/me`, {
+        credentials: "include",
+      }).then((r) => {
+        if (!r.ok) throw new Error("Unauthenticated");
+        return r.json();
+      });
 
-    tokenCookie.value = null;
-    refreshTokenCookie.value = null;
+      user.value = data.user ?? data;
+      permissions.value = data.permissions || [];
+    } catch {
+      user.value = null;
+      permissions.value = [];
+    }
+  };
 
-    resetAllStores();
-    navigateTo("/auth/login");
+  const logout = async () => {
+    try {
+      await fetch(`${config.public.apiBaseUrl}/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } finally {
+      user.value = null;
+      permissions.value = [];
+      resetAllStores();
+      navigateTo("/auth/login");
+    }
   };
 
   return {
-    token,
-    refreshToken,
+    // state
     user,
     permissions,
+    loading,
+
+    // getters
     isAuthenticated,
-    setAuth,
+
+    // actions
+    login,
+    fetchUser,
     logout,
   };
 });
-

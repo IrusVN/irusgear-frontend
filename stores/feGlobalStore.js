@@ -1,4 +1,4 @@
-// stores/crudStoreFactory.js
+// stores/feGlobalStore.js
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
@@ -6,8 +6,7 @@ import { usePaginationStore } from "@/stores/paginationStore";
 import { useUiStore } from "@/stores/uiStore";
 import { useRuntimeConfig } from "#imports";
 
-export function createCrudStore(storeId, resource) {
-  return defineStore(storeId, () => {
+export const useFeGlobalStore = defineStore("frontend/globals", () => {
     const config = useRuntimeConfig();
     const auth = useAuthStore();
     const pagination = usePaginationStore();
@@ -15,9 +14,10 @@ export function createCrudStore(storeId, resource) {
 
     const items = ref([]);
     const error = ref(null);
-
-    const apiUrl = `${config.public.apiBaseUrl}/${resource}`;
-
+    const apiEndpoint = ref(`${config.public.apiBaseUrl}/not-ok`);
+    const setApiUrl = (apiPath) => {
+      apiEndpoint.value = `${config.public.apiBaseUrl}/${apiPath}`;
+    };
     const fetchItems = async (params = {}) => {
       ui.isLoading = true;
       try {
@@ -27,9 +27,9 @@ export function createCrudStore(storeId, resource) {
           ...params,
         }).toString();
 
-        const res = await fetch(`${apiUrl}?${query}`, {
+        const res = await fetch(`${apiEndpoint.value}?${query}`, {
           headers: {
-            Authorization: `Bearer ${auth.token.value}`,
+            Authorization: `Bearer ${auth.token}`,
           },
         });
 
@@ -49,11 +49,11 @@ export function createCrudStore(storeId, resource) {
     const createItem = async (payload) => {
       ui.isCreating = true;
       try {
-        const res = await fetch(apiUrl, {
+        const res = await fetch(apiEndpoint.value, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token.value}`,
+            Authorization: `Bearer ${auth.token}`,
           },
           body: JSON.stringify(payload),
         });
@@ -68,11 +68,11 @@ export function createCrudStore(storeId, resource) {
     const updateItem = async (id, payload) => {
       ui.isUpdating = true;
       try {
-        const res = await fetch(`${apiUrl}/${id}`, {
+        const res = await fetch(`${apiEndpoint.value}/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token.value}`,
+            Authorization: `Bearer ${auth.token}`,
           },
           body: JSON.stringify(payload),
         });
@@ -87,10 +87,10 @@ export function createCrudStore(storeId, resource) {
     const deleteItem = async (id) => {
       ui.isDeleting = true;
       try {
-        const res = await fetch(`${apiUrl}/${id}`, {
+        const res = await fetch(`${apiEndpoint.value}/${id}`, {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${auth.token.value}`,
+            Authorization: `Bearer ${auth.token}`,
           },
         });
 
@@ -109,11 +109,12 @@ export function createCrudStore(storeId, resource) {
     return {
       items,
       error,
+      apiEndpoint,
+      setApiUrl,
       fetchItems,
       createItem,
       updateItem,
       deleteItem,
       reset,
     };
-  });
-}
+});
