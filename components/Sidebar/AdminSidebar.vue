@@ -1,77 +1,80 @@
 <template>
-  <aside class="admin-sidebar d-flex flex-column bg-white border-end p-3" :class="{ collapsed: isCollapsed }">
-    <!-- Toggle Button (outside sidebar) -->
-    <button class="collapse-btn btn btn-outline-secondary btn-sm position-absolute" @click="toggleSidebar">
-      <i class="bi" :class="isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
-    </button>
-
-    <!-- Header -->
-    <div class="d-flex align-items-center gap-2 mb-4">
-      <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center" 
-           style="width: 36px; height: 36px;">
-        <i class="bi bi-bag-check-fill fs-5"></i>
+  <div class="position-relative">
+    <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 position-relative vh-100 overflow-hidden" :class="isCollapsed ? 'sidebar-collapsed' : 'sidebar-expanded'" >
+      <!-- Header -->
+      <div class="d-flex align-items-center gap-2 mb-4">
+        <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center p-2" >
+          <i class="bi bi-bag-check-fill fs-5"></i>
+        </div>
+        <span v-if="!isCollapsed" class="fs-5 fw-bold text-dark">
+          {{ $t('sidebar.brandName') }}
+        </span>
       </div>
-      <span class="fs-5 fw-bold text-dark" v-if="!isCollapsed">{{ $t('sidebar.brandName') }}</span>
-    </div>
 
-    <!-- Search -->
-    <div class="input-group mb-4" v-if="!isCollapsed">
-      <span class="input-group-text bg-light border-end-0">
-        <i class="bi bi-search text-muted"></i>
-      </span>
-      <input type="text" class="form-control bg-light border-start-0" :placeholder="$t('sidebar.searchPlaceholder')" v-model="searchQuery" />
-    </div>
+      <!-- Search -->
+      <div v-if="!isCollapsed" class="input-group mb-4">
+        <span class="input-group-text bg-light border-end-0">
+          <i class="bi bi-search text-muted"></i>
+        </span>
+        <input
+          class="form-control bg-light border-start-0"
+          :placeholder="$t('sidebar.searchPlaceholder')"
+          v-model="searchQuery"
+        />
+      </div>
 
-    <!-- Navigation -->
-    <nav class="sidebar-nav flex-grow-1 overflow-auto">
-      <!-- Main Section -->
-      <div class="mb-4">
-        <small class="text-muted text-uppercase fw-semibold ps-3 d-block mb-2" v-if="!isCollapsed">
-          {{ $t('sidebar.sections.main') }}
-        </small>
-        <ul class="nav flex-column">
-          <li v-for="item in mainMenuItems" :key="item.key">
-            <NuxtLink 
-              :to="item.route" 
-              class="nav-link d-flex align-items-center gap-3 rounded-3 py-2 px-3"
-              :class="isActiveRoute(item.route) ? 'bg-dark text-white' : 'text-secondary'"
-            >
+      <!-- Navigation -->
+      <nav class="flex-grow-1 overflow-auto">
+        <div class="mb-4">
+          <small v-if="!isCollapsed" class="text-muted text-uppercase fw-semibold ps-3 d-block mb-2" >
+            {{ $t('sidebar.sections.main') }}
+          </small>
+
+          <ul class="nav flex-column gap-1">
+            <li v-for="item in mainMenuItems" :key="item.key">
+              <NuxtLink :to="item.route" class="nav-link d-flex align-items-center gap-3 rounded-3 px-3 py-2" :class="isActiveRoute(item.route) ? 'bg-dark text-white' : 'text-secondary'" >
+                <i class="bi fs-5" :class="item.icon"></i>
+                <span v-if="!isCollapsed">{{ $t(item.label) }}</span>
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Bottom -->
+      <div class="pt-3 border-top">
+        <ul class="nav flex-column gap-1 mb-3">
+          <li v-for="item in bottomMenuItems" :key="item.key">
+            <NuxtLink :to="item.route" class="nav-link d-flex align-items-center gap-3 rounded-3 px-3 py-2" :class="isActiveRoute(item.route) ? 'bg-dark text-white' : 'text-secondary'" >
               <i class="bi fs-5" :class="item.icon"></i>
               <span v-if="!isCollapsed">{{ $t(item.label) }}</span>
             </NuxtLink>
           </li>
         </ul>
-      </div>
-    </nav>
 
-    <!-- Bottom Section -->
-    <div class="mt-auto pt-3 border-top">
-      <ul class="nav flex-column">
-        <li v-for="item in bottomMenuItems" :key="item.key">
-          <NuxtLink 
-            :to="item.route" 
-            class="nav-link d-flex align-items-center gap-3 rounded-3 py-2 px-3"
-            :class="isActiveRoute(item.route) ? 'bg-dark text-white' : 'text-secondary'"
-          >
-            <i class="bi fs-5" :class="item.icon"></i>
-            <span v-if="!isCollapsed">{{ $t(item.label) }}</span>
-          </NuxtLink>
-        </li>
-      </ul>
+        <!-- User -->
+        <div class="d-flex align-items-center gap-3 p-3 rounded-3 bg-light">
+          <i class="bi bi-person-circle fs-2 text-dark"></i>
+          <div v-if="!isCollapsed" class="flex-grow-1 overflow-hidden">
+            <div class="fw-semibold text-dark text-truncate small">
+              {{ userName }}
+            </div>
+            <div class="text-muted text-truncate">
+              {{ userEmail }}
+            </div>
+          </div>
 
-      <!-- User Profile -->
-      <div class="d-flex align-items-center gap-3 p-3 rounded-3 mt-3 bg-light">
-        <i class="bi bi-person-circle fs-2 text-dark"></i>
-        <div class="flex-grow-1 overflow-hidden" v-if="!isCollapsed">
-          <div class="fw-semibold text-dark text-truncate small">{{ userName }}</div>
-          <div class="text-muted text-truncate" style="font-size: 12px;">{{ userEmail }}</div>
+          <button v-if="!isCollapsed" class="btn btn-sm p-0 text-muted">
+            <i class="bi bi-three-dots-vertical"></i>
+          </button>
         </div>
-        <button class="btn btn-sm text-muted p-0" v-if="!isCollapsed">
-          <i class="bi bi-three-dots-vertical"></i>
-        </button>
       </div>
-    </div>
-  </aside>
+    </aside>
+    <!-- Toggle button -->
+    <button class="toggle-btn btn btn-outline-secondary btn-sm position-absolute top-50 end-0 rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center" @click="toggleSidebar" >
+      <i class="bi" :class="isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
+    </button>
+  </div>
 </template>
 
 <script setup>
@@ -80,113 +83,40 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-// State
 const isCollapsed = ref(false)
 const searchQuery = ref('')
 
-// User data
 const userName = ref('HuuThangLmao')
 const userEmail = ref('thang@gmail.com')
 
-// Menu items
 const mainMenuItems = [
   { key: 'home', label: 'sidebar.menu.home', icon: 'bi-house-door', route: '/dashboard' },
-  { key: 'orders', label: 'sidebar.menu.orders', icon: 'bi-cart3', route: '/dashboard/orders' },
-  { key: 'documentation', label: 'sidebar.menu.documentation', icon: 'bi-file-earmark-text', route: '/dashboard/documentation' },
-  { key: 'mapOverview', label: 'sidebar.menu.mapOverview', icon: 'bi-grid-1x2', route: '/dashboard/map' },
-  { key: 'statistics', label: 'sidebar.menu.statistics', icon: 'bi-pie-chart', route: '/dashboard/statistics' },
+  { key: 'orders', label: 'sidebar.menu.orders', icon: 'bi-cart3', route: '#' },
+  { key: 'documentation', label: 'sidebar.menu.documentation', icon: 'bi-file-earmark-text', route: '#' },
+  { key: 'map', label: 'sidebar.menu.mapOverview', icon: 'bi-grid-1x2', route: '#' },
+  { key: 'stats', label: 'sidebar.menu.statistics', icon: 'bi-pie-chart', route: '#' },
 ]
 
 const bottomMenuItems = [
-  { key: 'settings', label: 'sidebar.menu.settings', icon: 'bi-gear', route: '/dashboard/settings' },
-  { key: 'help', label: 'sidebar.menu.help', icon: 'bi-question-circle', route: '/dashboard/help' },
+  { key: 'settings', label: 'sidebar.menu.settings', icon: 'bi-gear', route: '#' },
+  { key: 'help', label: 'sidebar.menu.help', icon: 'bi-question-circle', route: '#' },
 ]
 
-// Methods
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value
 }
 
 const isActiveRoute = (itemRoute) => {
+  if (itemRoute === '#') return false
   return route.path === itemRoute || route.path.startsWith(itemRoute + '/')
 }
 </script>
 
 <style scoped>
-/* khúc này bs trap ko có nha ông :v  */
-.admin-sidebar {
-  width: 280px;
-  min-height: 100vh;
-  transition: width 0.3s ease;
-  position: relative;
-  /* Hide scrollbar but allow scrolling */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+.sidebar-admin {
+  transition: width .3s ease;
 }
-
-.admin-sidebar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-.admin-sidebar.collapsed {
-  width: 80px;
-}
-
-/* Toggle button - positioned at right edge of sidebar */
-.collapse-btn {
-  top: 50%;
-  right: -12px;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.collapsed .nav-link {
-  justify-content: center;
-  padding: 12px 8px;
-}
-
-.nav-link:hover {
-  background-color: #f3f4f6;
-}
-
-/* Hide scrollbar for sidebar navigation */
-.sidebar-nav {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-}
-
-.sidebar-nav::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .admin-sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1000;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    height: 100vh;
-  }
-
-  .admin-sidebar.mobile-open {
-    transform: translateX(0);
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .collapse-btn {
-    display: none;
-  }
+.toggle-btn {
+  transform: translate(50%, -50%);
 }
 </style>
