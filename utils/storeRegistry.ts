@@ -1,0 +1,13 @@
+type ResettableStore = {
+  reset: () => void;
+};
+
+const stores: ResettableStore[] = [];
+
+export const registerStore = (store: ResettableStore) => {
+  stores.push(store);
+};
+
+export const resetAllStores = () => {
+  stores.forEach(store => store.reset());
+};

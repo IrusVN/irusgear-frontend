@@ -81,11 +81,11 @@
         <div class="text-center mt-4">
           <p class="small text-muted mb-0">
             {{ $t('login.terms') }}
-            <NuxtLink :to="localePath('#')" class="fw-semibold text-dark">
+            <NuxtLink to="#" class="fw-semibold text-dark">
               {{ $t('login.termsLink') }}
             </NuxtLink>
             {{ $t('common.and') }}
-            <NuxtLink :to="localePath('#')" class="fw-semibold text-dark">
+            <NuxtLink to="#" class="fw-semibold text-dark">
               {{ $t('login.privacyLink') }}
             </NuxtLink>.
           </p>
@@ -106,21 +106,33 @@ import LockIcon from '@/components/Icons/LockIcon.vue'
 import ShowEye from '@/components/Icons/ShowEye.vue'
 import HideEye from '@/components/Icons/HideEye.vue'
 import { useLocalePath } from '#imports'
+import { useAuthStore } from "@/stores/authStore";
 
+const auth = useAuthStore();
 const localePath = useLocalePath()
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const loading = ref(false)
 
-const handleLogin = async () => {
-  loading.value = true
+
+const handleLogin = async () => { debugger
+  loading.value = true;
   try {
-    console.log('Login:', email.value, password.value)
+    const response = await auth.login({
+      email: email.value,
+      password: password.value,
+    });
+    if (response.status === true) {
+      navigateTo('/dashboard');
+      await auth.fetchUser();
+    }
+  } catch (e) {
+    console.error("Login error:", e.message);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 </script>
 
 <style scoped>
