@@ -48,3 +48,15 @@
   border: 1px solid #e5e5e5;
 }
 
+/* Hide Nuxt DevTools toggle button */
+[class*="nuxt-devtools"],
+[id*="nuxt-devtools"],
+button[title*="DevTools"],
+.nuxt-devtools-frame,
+.nuxt-devtools-container {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+

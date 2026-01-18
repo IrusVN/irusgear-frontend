@@ -23,7 +23,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="flex-grow-1 overflow-auto">
+    <nav class="sidebar-nav flex-grow-1 overflow-auto">
       <!-- Main Section -->
       <div class="mb-4">
         <small class="text-muted text-uppercase fw-semibold ps-3 d-block mb-2" v-if="!isCollapsed">
@@ -119,6 +119,13 @@ const isActiveRoute = (itemRoute) => {
   min-height: 100vh;
   transition: width 0.3s ease;
   position: relative;
+  /* Hide scrollbar but allow scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.admin-sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .admin-sidebar.collapsed {
@@ -149,6 +156,16 @@ const isActiveRoute = (itemRoute) => {
 
 .nav-link:hover {
   background-color: #f3f4f6;
+}
+
+/* Hide scrollbar for sidebar navigation */
+.sidebar-nav {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Mobile */
