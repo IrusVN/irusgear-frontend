@@ -1,17 +1,17 @@
 <template>
   <aside class="admin-sidebar d-flex flex-column bg-white border-end p-3" :class="{ collapsed: isCollapsed }">
+    <!-- Toggle Button (outside sidebar) -->
+    <button class="collapse-btn btn btn-outline-secondary btn-sm position-absolute" @click="toggleSidebar">
+      <i class="bi" :class="isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
+    </button>
+
     <!-- Header -->
-    <div class="d-flex align-items-center justify-content-between mb-4">
-      <div class="d-flex align-items-center gap-2">
-        <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center" 
-             style="width: 36px; height: 36px;">
-          <i class="bi bi-bag-check-fill fs-5"></i>
-        </div>
-        <span class="fs-5 fw-bold text-dark" v-if="!isCollapsed">{{ $t('sidebar.brandName') }}</span>
+    <div class="d-flex align-items-center gap-2 mb-4">
+      <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center" 
+           style="width: 36px; height: 36px;">
+        <i class="bi bi-bag-check-fill fs-5"></i>
       </div>
-      <button class="btn btn-outline-secondary btn-sm collapse-btn" @click="toggleSidebar">
-        <i class="bi" :class="isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
-      </button>
+      <span class="fs-5 fw-bold text-dark" v-if="!isCollapsed">{{ $t('sidebar.brandName') }}</span>
     </div>
 
     <!-- Search -->
@@ -118,10 +118,28 @@ const isActiveRoute = (itemRoute) => {
   width: 280px;
   min-height: 100vh;
   transition: width 0.3s ease;
+  position: relative;
 }
 
 .admin-sidebar.collapsed {
   width: 80px;
+}
+
+/* Toggle button - positioned at right edge of sidebar */
+.collapse-btn {
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .collapsed .nav-link {
