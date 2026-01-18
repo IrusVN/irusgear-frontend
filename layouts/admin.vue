@@ -1,20 +1,25 @@
 <template>
-  <div class="admin-layout">
+  <div class="d-flex min-vh-100 bg-light">
     <!-- Mobile Header -->
-    <header class="mobile-header">
-      <button class="hamburger-btn" @click="toggleMobileSidebar" :class="{ active: isMobileSidebarOpen }">
+    <header class="mobile-header d-none d-md-none position-fixed top-0 start-0 end-0 bg-white border-bottom px-3 align-items-center gap-3" style="height: 60px; z-index: 999;">
+      <button class="hamburger-btn btn p-2" @click="toggleMobileSidebar" :class="{ active: isMobileSidebarOpen }">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <span class="mobile-brand">{{ $t('sidebar.brandName') }}</span>
+      <span class="fs-5 fw-bold text-dark">{{ $t('sidebar.brandName') }}</span>
     </header>
 
     <!-- Overlay for mobile -->
-    <div class="sidebar-overlay" :class="{ show: isMobileSidebarOpen }" @click="closeMobileSidebar"></div>
+    <div 
+      class="sidebar-overlay position-fixed top-0 start-0 end-0 bottom-0 d-none d-md-none" 
+      :class="{ show: isMobileSidebarOpen }" 
+      style="background: rgba(0, 0, 0, 0.5); z-index: 998;"
+      @click="closeMobileSidebar"
+    ></div>
 
     <AdminSidebar :class="{ 'mobile-open': isMobileSidebarOpen }" />
-    <main class="admin-main">
+    <main class="admin-main flex-grow-1 p-4 overflow-hidden">
       <slot />
     </main>
   </div>
@@ -36,50 +41,10 @@ const closeMobileSidebar = () => {
 </script>
 
 <style scoped>
-.admin-layout {
-  display: flex;
-  min-height: 100vh;
-  background: #f8fafc;
-}
-
-.admin-main {
-  flex: 1;
-  padding: 24px;
-  overflow-x: hidden;
-  transition: margin-left 0.3s ease;
-}
-
-/* Mobile Header */
-.mobile-header {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background: #fff;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 0 16px;
-  align-items: center;
-  gap: 16px;
-  z-index: 999;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.mobile-brand {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1f2937;
-}
-
-/* Hamburger Button */
+/* Hamburger Button - Bootstrap không có sẵn */
 .hamburger-btn {
   width: 40px;
   height: 40px;
-  padding: 8px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,16 +82,8 @@ const closeMobileSidebar = () => {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Overlay */
+/* Overlay Animation */
 .sidebar-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 998;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -140,15 +97,15 @@ const closeMobileSidebar = () => {
 /* Responsive */
 @media (max-width: 768px) {
   .mobile-header {
-    display: flex;
+    display: flex !important;
   }
 
   .sidebar-overlay {
-    display: block;
+    display: block !important;
   }
 
   .admin-main {
-    padding: 80px 16px 16px;
+    padding: 80px 16px 16px !important;
     margin-left: 0 !important;
   }
 }
