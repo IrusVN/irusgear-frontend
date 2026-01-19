@@ -1,0 +1,15 @@
+# 1. Cài đặt Node.js version ổn định (v20 hoặc v22)
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+# 2. Build Project
+[phases.build]
+cmds = [
+    "npm install",
+    "npm run build"
+]
+
+# 3. Khởi chạy (Chạy file output server của Nuxt)
+# Đây là cách chạy tối ưu nhất cho Production (SSR)
+[start]
+cmd = "node .output/server/index.mjs"
