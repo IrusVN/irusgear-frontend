@@ -1,15 +1,15 @@
-# 1. Cài đặt Node.js version ổn định (v20 hoặc v22)
+# 1. Cài đặt Node.js version 22 (Mới nhất để tương thích Nuxt 3.12+)
 [phases.setup]
-nixPkgs = ["nodejs_20"]
+nixPkgs = ["nodejs_22"]
 
-# 2. Build Project
+# 2. Cài đặt thư viện (Ghi đè pha install mặc định để tránh lỗi npm ci)
+[phases.install]
+cmds = ["npm install"]
+
+# 3. Build Project
 [phases.build]
-cmds = [
-    "npm install",
-    "npm run build"
-]
+cmds = ["npm run build"]
 
-# 3. Khởi chạy (Chạy file output server của Nuxt)
-# Đây là cách chạy tối ưu nhất cho Production (SSR)
+# 4. Khởi chạy
 [start]
 cmd = "node .output/server/index.mjs"
