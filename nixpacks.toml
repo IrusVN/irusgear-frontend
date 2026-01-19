@@ -1,12 +1,12 @@
-# 1. Cài đặt Node.js 22 (Phiên bản mới nhất, tương thích tốt nhất)
+# 1. Cài đặt Node.js 22
 [phases.setup]
 nixPkgs = ["nodejs_22"]
 
-# 2. Cài đặt thư viện (Xóa sạch cache cũ để tránh lỗi binding)
+# 2. Cài đặt thư viện (Cực mạnh tay: Xóa sạch & Bỏ qua optional)
 [phases.install]
 cmds = [
-    "rm -rf node_modules package-lock.json", # Xóa file cũ
-    "npm install"                            # Cài mới tinh
+    "rm -rf node_modules package-lock.json",
+    "npm install --no-optional --legacy-peer-deps"
 ]
 
 # 3. Build Project
