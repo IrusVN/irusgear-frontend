@@ -101,5 +101,23 @@ export default {
     },
     validate: {
         passwordsNotMatch: "Passwords do not match",
-    }
+    },
+    navbar: {
+        category: "Category",
+        searchPlaceholder: "What are you looking for?",
+        storageUsed: "Storage used: {percent} MB",
+        system: "System",
+        trackOrder: "Track",
+        order: "Order",
+        cart: "Cart",
+        signIn: "Sign In",
+        menu: {
+            pcGaming: "PC Gaming 240Hz",
+            hotDeal: "Hot Deal | Laptop",
+            news: "News",
+            techService: "Tech Service",
+            tradeIn: "Trade In",
+            warranty: "Warranty",
+        },
+    },
 }

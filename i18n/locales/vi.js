@@ -101,5 +101,23 @@ export default {
     },
     validate: {
         passwordsNotMatch: "Mật khẩu không khớp",
-    }
+    },
+    navbar: {
+        category: "Danh mục",
+        searchPlaceholder: "Bạn cần tìm gì?",
+        storageUsed: "Mức sử dụng bộ nhớ: {percent} MB",
+        system: "Hệ thống",
+        trackOrder: "Tra cứu",
+        order: "đơn hàng",
+        cart: "Giỏ hàng",
+        signIn: "Đăng nhập",
+        menu: {
+            pcGaming: "Mua PC tăng màn 240Hz",
+            hotDeal: "Hot Deal | Laptop",
+            news: "Tin tức",
+            techService: "Dịch vụ kỹ thuật tại nhà",
+            tradeIn: "Thu cũ đổi mới",
+            warranty: "Tra cứu bảo hành",
+        },
+    },
 }

@@ -68,12 +68,7 @@
             <button class="social-btn btn rounded-circle border p-3">
               <FacebookLogo />
             </button>
-            <button class="social-btn btn rounded-circle border p-3">
-              <TwitterLogo />
-            </button>
-            <button class="social-btn btn rounded-circle border p-3">
-              <AppleLogo />
-            </button>
+
           </div>
         </div>
 
@@ -99,8 +94,7 @@
 import { ref } from 'vue'
 import GoogleLogo from '@/components/Icons/Logo/GoogleLogo.vue'
 import FacebookLogo from '@/components/Icons/Logo/FacebookLogo.vue'
-import TwitterLogo from '@/components/Icons/Logo/TwitterLogo.vue'
-import AppleLogo from '@/components/Icons/Logo/AppleLogo.vue'
+
 import EmailIcon from '@/components/Icons/EmailIcon.vue'
 import LockIcon from '@/components/Icons/LockIcon.vue'
 import ShowEye from '@/components/Icons/ShowEye.vue'
