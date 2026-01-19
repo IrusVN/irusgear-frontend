@@ -1,11 +1,12 @@
-# 1. Cài đặt Node.js 22 và pnpm
+# 1. Cài đặt Node.js 22 và pnpm (Công cụ cài đặt nhanh và ổn định hơn npm)
 [phases.setup]
 nixPkgs = ["nodejs_22", "pnpm"]
 
-# 2. Cài đặt thư viện bằng pnpm (Mạnh mẽ hơn npm)
+# 2. Xóa sạch cache cũ và cài đặt lại từ đầu (Quan trọng!)
 [phases.install]
 cmds = [
-    "pnpm install --frozen-lockfile=false" # Bỏ qua lockfile lỗi, tự giải quyết dependency
+    "rm -rf node_modules package-lock.json pnpm-lock.yaml", # Xóa sạch dấu vết cũ
+    "pnpm install --shamefully-hoist --no-optional"         # Cài đặt chế độ tương thích cao
 ]
 
 # 3. Build Project
