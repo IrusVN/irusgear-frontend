@@ -1,6 +1,6 @@
 <template>
   <div class="position-relative">
-    <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 position-relative vh-100 overflow-hidden" :class="isCollapsed ? 'sidebar-collapsed' : 'sidebar-expanded'" >
+    <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 position-relative vh-100 overflow-hidden" :class="{ 'sidebar-collapsed': isCollapsed }" >
       <!-- Header -->
       <div class="d-flex align-items-center gap-2 mb-4">
         <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center p-2" >
@@ -118,5 +118,27 @@ const isActiveRoute = (itemRoute) => {
 }
 .toggle-btn {
   transform: translate(50%, -50%);
+}
+@media (max-width: 768px) {
+  .sidebar-admin {
+    position: fixed;
+    top: 9.1%;
+    left: 0;
+    height: 100vh;
+    width: 260px;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    background: #fff;
+  }
+
+  .mobile-open .sidebar-admin {
+    transform: translateX(0);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .toggle-btn {
+    display: none !important;
+  }
 }
 </style>
