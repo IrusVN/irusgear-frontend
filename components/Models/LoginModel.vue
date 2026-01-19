@@ -116,7 +116,7 @@ const showPassword = ref(false)
 const loading = ref(false)
 
 
-const handleLogin = async () => { debugger
+const handleLogin = async () => {
   loading.value = true;
   try {
     const response = await auth.login({
