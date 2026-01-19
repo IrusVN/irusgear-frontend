@@ -1,10 +1,13 @@
-# 1. Cài đặt Node.js version 22 (Mới nhất để tương thích Nuxt 3.12+)
+# 1. Cài đặt Node.js 22 (Phiên bản mới nhất, tương thích tốt nhất)
 [phases.setup]
 nixPkgs = ["nodejs_22"]
 
-# 2. Cài đặt thư viện (Ghi đè pha install mặc định để tránh lỗi npm ci)
+# 2. Cài đặt thư viện (Xóa sạch cache cũ để tránh lỗi binding)
 [phases.install]
-cmds = ["npm install"]
+cmds = [
+    "rm -rf node_modules package-lock.json", # Xóa file cũ
+    "npm install"                            # Cài mới tinh
+]
 
 # 3. Build Project
 [phases.build]
