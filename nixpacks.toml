@@ -1,17 +1,17 @@
-# 1. Cài đặt Node.js 22 và pnpm (Công cụ cài đặt nhanh và ổn định hơn npm)
+# 1. Cài đặt Bun (Thay thế Node.js và npm)
 [phases.setup]
-nixPkgs = ["nodejs_22", "pnpm"]
+nixPkgs = ["bun"]
 
-# 2. Xóa sạch cache cũ và cài đặt lại từ đầu (Quan trọng!)
+# 2. Cài đặt thư viện bằng Bun (Bun xử lý native binding cực tốt)
 [phases.install]
 cmds = [
-    "rm -rf node_modules package-lock.json pnpm-lock.yaml", # Xóa sạch dấu vết cũ
-    "pnpm install --shamefully-hoist --no-optional"         # Cài đặt chế độ tương thích cao
+    "rm -rf node_modules package-lock.json pnpm-lock.yaml", # Xóa sạch cũ
+    "bun install --no-save"                                 # Cài bằng Bun
 ]
 
 # 3. Build Project
 [phases.build]
-cmds = ["pnpm run build"]
+cmds = ["bun run build"]
 
 # 4. Khởi chạy
 [start]
