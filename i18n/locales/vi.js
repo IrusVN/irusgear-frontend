@@ -16,6 +16,7 @@ export default {
         phoneNumber: "Số điện thoại",
         firstName: "Tên",
         lastName: "Họ",
+        support: "Hỗ trợ",
     },
     sidebar: {
         brandName: "IrusGear",
@@ -34,6 +35,7 @@ export default {
             couriers: "Người giao hàng",
             settings: "Cài đặt",
             help: "Trợ giúp",
+            products: "Sản phẩm",
         },
         capacity: {
             title: "Dung lượng sử dụng",
@@ -97,7 +99,8 @@ export default {
             signup: "ĐĂNG KÝ NHẬN TIN"
         },
         followUs: "Theo dõi chúng tôi",
-        copyright: "© 2026 IrusGear. Bảo lưu mọi quyền."
+        copyright: "© 2026 IrusGear. Bảo lưu mọi quyền.",
+        description: "Nền tảng mua sắm công nghệ cao cấp. Sản phẩm chính hãng, bảo hành minh bạch, trải nghiệm mượt mà từ UI đến dịch vụ."
     },
     validate: {
         passwordsNotMatch: "Mật khẩu không khớp",

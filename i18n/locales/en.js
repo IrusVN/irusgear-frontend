@@ -16,6 +16,7 @@ export default {
         phoneNumber: "Phone Number",
         firstName: "First Name",
         lastName: "Last Name",
+        support: "Support", 
     },
     sidebar: {
         brandName: "IrusGear",
@@ -34,6 +35,7 @@ export default {
             couriers: "Couriers",
             settings: "Settings",
             help: "Help",
+            products: "Products",
         },
         capacity: {
             title: "Used capacity",
@@ -97,7 +99,8 @@ export default {
             signup: "SIGN UP FOR OUR NEWSLETTER"
         },
         followUs: "Follow Us",
-        copyright: "© 2026 IrusGear. All rights reserved."
+        copyright: "© 2026 IrusGear. All rights reserved.",
+        description: "Premium tech shopping platform. Genuine products, transparent warranty, smooth experience from UI to service."
     },
     validate: {
         passwordsNotMatch: "Passwords do not match",

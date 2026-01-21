@@ -27,7 +27,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import AdminSidebar from '~/components/Sidebar/AdminSidebar.vue'
+import AdminSidebar from '@/components/Sidebar/AdminSidebar.vue'
 
 const isMobileSidebarOpen = ref(false)
 
