@@ -1,8 +1,8 @@
-import Toast from 'vue-toastification'
+import { useToast } from 'vue-toastification'
 import GlobalToast from '@/components/Toast/GlobalToast.vue'
 
 export const useGlobalToast = () => {
-  const toast = Toast.useToast()
+  const toast = useToast()
 
   const show = (message, type = 'info', options = {}) => {
     toast(
