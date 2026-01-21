@@ -1,0 +1,100 @@
+/* Vue Toastification Container Override */
+.Vue-Toastification__toast {
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+}
+
+.Vue-Toastification__toast-body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.Vue-Toastification__close-button,
+.Vue-Toastification__icon {
+  display: none !important;
+}
+
+/* Notification Color Themes */
+.notification--info {
+  --toast-bg: #F0FBFE;
+  --toast-primary: #0EA1E7;
+}
+
+.notification--success {
+  --toast-bg: #ECFBF2;
+  --toast-primary: #335D48;
+}
+
+.notification--error {
+  --toast-bg: #FFF1F6;
+  --toast-primary: #C43060;
+}
+
+.notification--warning {
+  --toast-bg: #FFF9EB;
+  --toast-primary: #d6a024;
+}
+
+/* Notification Base Styles */
+.notification {
+  position: relative;
+  min-width: 22rem;
+  background: var(--toast-bg);
+  color: var(--toast-primary);
+  border-left: 0.25rem solid var(--toast-primary);
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  animation: toast-fade-in 0.35s ease forwards;
+}
+
+.notification__body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem 0.75rem;
+}
+
+.notification__icon {
+  height: 1.625rem;
+  width: 1.625rem;
+  margin-right: 0.6rem;
+  flex-shrink: 0;
+}
+
+.notification__message {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.notification__progress {
+  position: absolute;
+  left: 0.25rem;
+  bottom: 0.25rem;
+  width: calc(100% - 0.5rem);
+  height: 0.2rem;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(to right, var(--toast-bg), var(--toast-primary));
+  border-radius: 2px;
+  animation: toast-progress 2.5s 0.3s linear forwards;
+}
+
+@keyframes toast-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
