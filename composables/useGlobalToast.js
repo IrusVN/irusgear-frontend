@@ -1,5 +1,5 @@
 import Toast from 'vue-toastification'
-import Toast from '@/components/Toast/Toast.vue'
+import GlobalToast from '@/components/Toast/GlobalToast.vue'
 
 export const useGlobalToast = () => {
   const toast = Toast.useToast()
@@ -7,7 +7,7 @@ export const useGlobalToast = () => {
   const show = (message, type = 'info', options = {}) => {
     toast(
       {
-        component: Toast,
+        component: GlobalToast,
         props: {
           message,
           type,
