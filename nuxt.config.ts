@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL ?? 'http://localhost:8000/api/v1',
     },
   },
-  css: [ 'bootstrap/dist/css/bootstrap.min.css' ],
+  css: [ 'bootstrap/dist/css/bootstrap.min.css', '@/public/assets/css/toast.css' ],
   app: {
     head: {
       link: [

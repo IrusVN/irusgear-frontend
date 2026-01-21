@@ -35,6 +35,13 @@
             </button>
           </div>
 
+          <Transition name="fade-slide">
+            <div v-if="errorMessage" class="alert alert-danger d-flex align-items-center gap-2 mt-2 mb-0" role="alert" >
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span class="flex-grow-1">{{ errorMessage }}</span>
+            </div>
+          </Transition>
+
           <!-- Forgot -->
           <div class="text-start">
             <NuxtLink :to="localePath('/auth/forgot-password')" class="text-decoration-none fw-semibold text-dark">
@@ -96,7 +103,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import GoogleLogo from '@/components/Icons/Logo/GoogleLogo.vue'
 import FacebookLogo from '@/components/Icons/Logo/FacebookLogo.vue'
 import TwitterLogo from '@/components/Icons/Logo/TwitterLogo.vue'
@@ -107,28 +114,38 @@ import ShowEye from '@/components/Icons/ShowEye.vue'
 import HideEye from '@/components/Icons/HideEye.vue'
 import { useLocalePath } from '#imports'
 import { useAuthStore } from "@/stores/authStore";
+import { useI18n } from '#imports'
+import { useGlobalToast } from '@/composables/useGlobalToast.js'
 
+const { t } = useI18n();
+const toast = useGlobalToast()
 const auth = useAuthStore();
 const localePath = useLocalePath()
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const loading = ref(false)
+const errorMessage = ref('');
 
+watch([email, password], () => {
+  errorMessage.value = '';
+});
 
 const handleLogin = async () => {
   loading.value = true;
+  errorMessage.value = '';
   try {
     const response = await auth.login({
       email: email.value,
       password: password.value,
     });
     if (response.status === true) {
-      navigateTo('/dashboard');
+      toast.success("login successful !");
+      navigateTo('/dashboard'); 
       await auth.fetchUser();
     }
-  } catch (e) {
-    console.error("Login error:", e.message);
+  } catch (e) { 
+     errorMessage.value = e.message;
   } finally {
     loading.value = false;
   }
@@ -163,5 +180,15 @@ const handleLogin = async () => {
   .login-card {
     padding: 32px 24px;
   }
+}
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
 }
 </style>
