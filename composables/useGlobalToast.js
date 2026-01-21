@@ -1,23 +1,25 @@
-import { useToast } from 'vue-toastification'
 import GlobalToast from '@/components/Toast/GlobalToast.vue'
 
 export const useGlobalToast = () => {
-  const toast = useToast()
+  const nuxtApp = useNuxtApp()
 
   const show = (message, type = 'info', options = {}) => {
-    toast(
-      {
-        component: GlobalToast,
-        props: {
-          message,
-          type,
+    // Only run on client-side where toast is available
+    if (import.meta.client && nuxtApp.$toast) {
+      nuxtApp.$toast(
+        {
+          component: GlobalToast,
+          props: {
+            message,
+            type,
+          },
         },
-      },
-      {
-        timeout: 3000,
-        ...options,
-      }
-    )
+        {
+          timeout: 3000,
+          ...options,
+        }
+      )
+    }
   }
 
   return {
