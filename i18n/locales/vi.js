@@ -104,5 +104,12 @@ export default {
     },
     validate: {
         passwordsNotMatch: "Mật khẩu không khớp",
+    },
+    error: {
+        oops: "Oops",
+        pageNotFound: "Trang bạn tìm kiếm không tồn tại",
+        cantFind: "chúng tôi không tìm thấy trang đó...",
+        dragMe: "kéo tôi",
+        backHome: "Về trang chủ",
     }
 }
