@@ -103,9 +103,10 @@ export default {
         passwordsNotMatch: "Passwords do not match",
     },
     error: {
-        oops: "Oops!",
+        oops: "Oops",
         pageNotFound: "The page you are looking for does not exist",
-        dragHint: "Drag to create a banner and release to see the fireworks effect!",
-        backHome: "Back to Home",
+        cantFind: "we can't find that page...",
+        dragMe: "drag me",
+        backHome: "Back Home",
     }
 }

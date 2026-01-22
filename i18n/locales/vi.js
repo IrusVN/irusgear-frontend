@@ -103,9 +103,10 @@ export default {
         passwordsNotMatch: "Mật khẩu không khớp",
     },
     error: {
-        oops: "Oops!",
+        oops: "Oops",
         pageNotFound: "Trang bạn tìm kiếm không tồn tại",
-        dragHint: "Kéo chuột để tạo băng rôn và thả ra để xem hiệu ứng pháo hoa!",
+        cantFind: "chúng tôi không tìm thấy trang đó...",
+        dragMe: "kéo tôi",
         backHome: "Về trang chủ",
     }
 }
