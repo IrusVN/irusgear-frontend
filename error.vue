@@ -6,7 +6,11 @@
     @mousemove="onDrag" 
     @mouseup="endDrag" 
     @mouseleave="endDrag"
-    style="cursor: crosshair; user-select: none;"
+    @touchstart="startDragTouch"
+    @touchmove="onDragTouch"
+    @touchend="endDrag"
+    @touchcancel="endDrag"
+    style="cursor: crosshair; user-select: none; touch-action: none;"
   >
     <!-- Banner SVG -->
     <svg class="position-absolute top-0 start-0 w-100 h-100 pe-none" style="z-index: 5;" v-if="isDragging || showBanner">
@@ -23,12 +27,12 @@
     <!-- Main Content -->
     <div class="text-center position-relative p-4" style="z-index: 2;">
       <h1 class="display-1 fw-bold text-dark mb-2">{{ error?.statusCode || '404' }}</h1>
-      <h2 class="display-4 fw-bold text-dark mb-3">Oops!</h2>
-      <p class="fs-5 text-secondary mb-2">{{ error?.message || 'Trang bạn tìm kiếm không tồn tại' }}</p>
-      <p class="text-muted fst-italic mb-4">Kéo chuột để tạo băng rôn và thả ra để xem hiệu ứng pháo hoa!</p>
-      <button @click="handleError" class="btn btn-dark btn-lg rounded-pill px-5 py-3 d-inline-flex align-items-center gap-2">
+      <h2 class="display-4 fw-bold text-dark mb-3">{{ $t('error.oops') }}</h2>
+      <p class="fs-5 text-secondary mb-2">{{ error?.message || $t('error.pageNotFound') }}</p>
+      <p class="text-muted fst-italic mb-4">{{ $t('error.dragHint') }}</p>
+      <button @click="handleError" class="btn btn-dark btn-lg rounded-pill px-5 py-3 d-inline-flex align-items-center gap-2" style="touch-action: auto; position: relative; z-index: 10;">
         <i class="bi bi-house-door"></i>
-        Về trang chủ
+        {{ $t('error.backHome') }}
       </button>
     </div>
 
@@ -55,18 +59,46 @@ const bannerPath = ref('')
 
 const handleError = () => clearError({ redirect: '/' })
 
-function startDrag(e) {
-  isDragging.value = true
+function getPosition(e, isTouch = false) {
   const rect = errorPage.value.getBoundingClientRect()
-  startPos.value = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+  if (isTouch) {
+    const touch = e.touches[0] || e.changedTouches[0]
+    return { x: touch.clientX - rect.left, y: touch.clientY - rect.top }
+  }
+  return { x: e.clientX - rect.left, y: e.clientY - rect.top }
+}
+
+function isInteractiveElement(target) {
+  return target.closest('button, a, input, select, textarea')
+}
+
+function startDrag(e) {
+  if (isInteractiveElement(e.target)) return
+  isDragging.value = true
+  startPos.value = getPosition(e)
+  currentPos.value = { ...startPos.value }
+  updateBannerPath()
+}
+
+function startDragTouch(e) {
+  if (isInteractiveElement(e.target)) return
+  e.preventDefault()
+  isDragging.value = true
+  startPos.value = getPosition(e, true)
   currentPos.value = { ...startPos.value }
   updateBannerPath()
 }
 
 function onDrag(e) {
   if (!isDragging.value) return
-  const rect = errorPage.value.getBoundingClientRect()
-  currentPos.value = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+  currentPos.value = getPosition(e)
+  updateBannerPath()
+}
+
+function onDragTouch(e) {
+  if (!isDragging.value) return
+  e.preventDefault()
+  currentPos.value = getPosition(e, true)
   updateBannerPath()
 }
 
@@ -155,3 +187,4 @@ function createRibbon(x, y, color) {
   ], { duration: 1500 + Math.random() * 500, easing: 'ease-out' }).onfinish = () => el.remove()
 }
 </script>
+

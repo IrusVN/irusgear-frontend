@@ -101,5 +101,11 @@ export default {
     },
     validate: {
         passwordsNotMatch: "Mật khẩu không khớp",
+    },
+    error: {
+        oops: "Oops!",
+        pageNotFound: "Trang bạn tìm kiếm không tồn tại",
+        dragHint: "Kéo chuột để tạo băng rôn và thả ra để xem hiệu ứng pháo hoa!",
+        backHome: "Về trang chủ",
     }
 }
