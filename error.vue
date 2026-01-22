@@ -223,7 +223,7 @@ function startDrawing(e) {
   currentLine.setAttribute('y1', startY)
   currentLine.setAttribute('x2', startX)
   currentLine.setAttribute('y2', startY)
-  currentLine.setAttribute('stroke', '#fffce1')
+  currentLine.setAttribute('stroke', '#0e100f')
   currentLine.setAttribute('stroke-width', '2')
   currentLine.setAttribute('stroke-dasharray', '4')
   
