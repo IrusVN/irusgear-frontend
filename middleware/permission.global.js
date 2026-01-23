@@ -14,7 +14,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
     const targetIsAdminRoute = to.path.startsWith('/admin');
 
-    if (isAdmin) { debugger
+    if (isAdmin) {
         if (!targetIsAdminRoute) {
             return navigateTo('/admin/dashboard');
         }
@@ -23,7 +23,7 @@ export default defineNuxtRouteMiddleware((to) => {
             return abortNavigation(createError({
                 statusCode: 403,
                 statusMessage: 'Access Denied',
-                fatal: false
+                fatal: true
             }));
         }
     }
