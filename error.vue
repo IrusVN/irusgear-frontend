@@ -110,7 +110,9 @@ const explosionImages = [
   { key: 'semi', src: 'https://assets.codepen.io/16327/3D-semi.png' }
 ]
 
-const handleError = () => clearError({ redirect: '/' })
+const handleError = () => {
+  clearError({ redirect: '/' });
+}
 
 // Wait for GSAP to load from CDN
 function waitForGSAP() {
