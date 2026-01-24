@@ -1,37 +1,52 @@
-// stores/authStore.js
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { useRuntimeConfig } from "#imports";
-import { navigateTo } from "#app";
+import { useRuntimeConfig, navigateTo, useRequestHeaders } from "#imports";
 import { resetAllStores } from "@/utils/storeRegistry";
 
 export const useAuthStore = defineStore("auth", () => {
   const config = useRuntimeConfig();
-
   const user = ref(null);
   const permissions = ref([]);
   const loading = ref(false);
 
   const isAuthenticated = computed(() => !!user.value);
 
+  const apiFetch = async (endpoint, options = {}) => {
+    return await $fetch(`${config.public.apiBaseUrl}${endpoint}`, {
+      ...options,
+      credentials: "include", 
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        ...options.headers,
+      },
+    });
+  };
+
+  const fetchUser = async () => {
+    try {
+      const headers = useRequestHeaders(['cookie']); 
+      const data = await apiFetch("/me", {
+        headers: headers 
+      });
+      user.value = data.user ?? data;
+      permissions.value = data.permissions || [];
+    } catch (error) {
+      user.value = null;
+      permissions.value = [];
+    }
+  };
+
   const login = async (credentials) => {
     loading.value = true;
-
     try {
-      const response = await fetch(`${config.public.apiBaseUrl}/login`, {
+      await apiFetch("/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(credentials),
+        body: credentials,
       });
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Login failed");
-      }
-      const data = await response.json();
-      return data;
+      await fetchUser();
+      return navigateTo("/"); 
+      
     } catch (error) {
       user.value = null;
       throw error;
@@ -40,29 +55,11 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
-  const fetchUser = async () => {
-    try {
-      const data = await fetch(`${config.public.apiBaseUrl}/me`, {
-        credentials: "include",
-      }).then((r) => {
-        if (!r.ok) throw new Error("Unauthenticated");
-        return r.json();
-      });
-
-      user.value = data.user ?? data;
-      permissions.value = data.permissions || [];
-    } catch {
-      user.value = null;
-      permissions.value = [];
-    }
-  };
-
   const logout = async () => {
     try {
-      await fetch(`${config.public.apiBaseUrl}/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
+      await apiFetch("/logout", { method: "POST" });
+    } catch (e) {
+      console.error("Logout error", e);
     } finally {
       user.value = null;
       permissions.value = [];
@@ -72,15 +69,10 @@ export const useAuthStore = defineStore("auth", () => {
   };
 
   return {
-    // state
     user,
     permissions,
     loading,
-
-    // getters
     isAuthenticated,
-
-    // actions
     login,
     fetchUser,
     logout,

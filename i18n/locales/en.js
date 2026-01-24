@@ -16,7 +16,17 @@ export default {
         phoneNumber: "Phone Number",
         firstName: "First Name",
         lastName: "Last Name",
-        support: "Support", 
+        support: "Support",
+        unknown: "unknown",
+    },
+    role: {
+        default: "DEFAULT",
+        admin: "ADMIN",
+        manager: "MANAGER",
+        customer: "CUSTOMER",
+        new_customer: "NEW CUSTOMER",
+        accountant: "ACCOUNTANT",
+        courier: "COURIER",
     },
     sidebar: {
         brandName: "IrusGear",
@@ -48,6 +58,7 @@ export default {
         login: "Login page",
         forgotPassword: "Forgot password page",
         register: "Register page",
+        dashboard: "Dashboard",
     },
     login: {
         newUser: "New user?",
@@ -57,6 +68,7 @@ export default {
         terms: "By signing in with an account, you agree to SO's",
         termsLink: "Terms of Service",
         privacyLink: "Privacy Policy",
+        rememberMe: "Remember me",
     },
     register: {
         backToLogin: "Back to Login",

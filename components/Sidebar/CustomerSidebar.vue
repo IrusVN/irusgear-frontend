@@ -92,22 +92,56 @@
             </NuxtLink>
             <div class="vr d-none d-lg-block mx-2 bg-secondary opacity-25"></div>
 
-            <div class="dropdown">
-              <a href="#" class="d-flex align-items-center gap-2 text-decoration-none p-1 rounded-pill hover-bg ps-2" data-bs-toggle="dropdown">
-                <img src="https://ui-avatars.com/api/?name=Huy+Hoang&background=000&color=fff" class="rounded-circle border" width="35" height="35" alt="Avatar">
+            <div v-if="!user" class="d-flex align-items-center gap-2">
+              <NuxtLink :to="localePath('/auth/login')" class="btn btn-outline-dark rounded-pill px-3 fw-semibold" >
+                {{ $t('common.login') }}
+              </NuxtLink>
+
+              <NuxtLink :to="localePath('/auth/register')" class="btn btn-dark rounded-pill px-3 fw-semibold" >
+                {{ $t('common.register') }}
+              </NuxtLink>
+            </div>
+
+            <div v-else class="dropdown">
+              <a href="#" class="d-flex align-items-center gap-2 text-decoration-none p-1 rounded-pill hover-bg ps-2" data-bs-toggle="dropdown" >
+                <img class="rounded-circle border" width="35" height="35" alt="Avatar"
+                :src="`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=000&color=fff`"/>
+
                 <div class="d-none d-xl-block text-start lh-1">
-                  <div class="fw-bold text-dark fs-7">Huy Hoàng</div>
-                  <small class="text-secondary fs-8">Thành viên vàng</small>
+                  <div class="fw-bold text-dark fs-7">
+                    {{ user.first_name }} {{ user.last_name }}
+                  </div>
+                  <small class="text-secondary fs-8">
+                    {{ $t(userRoleKey) }}
+                  </small>
                 </div>
+
                 <i class="bi bi-caret-down-fill fs-8 text-secondary ms-1"></i>
               </a>
 
               <ul class="dropdown-menu dropdown-menu-end glass-dropdown border-0 shadow-lg mt-3 rounded-4 p-2">
-                <li><NuxtLink to="#" class="dropdown-item rounded-3 py-2"><i class="bi bi-person me-2"></i>Hồ sơ cá nhân</NuxtLink></li>
-                <li><NuxtLink to="#" class="dropdown-item rounded-3 py-2"><i class="bi bi-box-seam me-2"></i>Đơn mua</NuxtLink></li>
-                <li><NuxtLink to="#" class="dropdown-item rounded-3 py-2"><i class="bi bi-heart me-2"></i>Yêu thích</NuxtLink></li>
+                <li>
+                  <NuxtLink to="/profile" class="dropdown-item rounded-3 py-2">
+                    <i class="bi bi-person me-2"></i>Hồ sơ cá nhân
+                  </NuxtLink>
+                </li>
+
+                <li>
+                  <NuxtLink to="/orders" class="dropdown-item rounded-3 py-2">
+                    <i class="bi bi-box-seam me-2"></i>Đơn mua
+                  </NuxtLink>
+                </li>
+
                 <li><hr class="dropdown-divider opacity-10 my-1"></li>
-                <li><a class="dropdown-item rounded-3 py-2 text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+
+                <li>
+                  <button
+                    class="dropdown-item rounded-3 py-2 text-danger"
+                    @click="auth.logout"
+                  >
+                    <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
@@ -117,7 +151,20 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '@/stores/authStore'
+import { useLocalePath } from '#imports'
+import { getUserRoleKey } from '@/utils/roleHelper'
+
+const auth = useAuthStore()
+const { user } = storeToRefs(auth)
+const localePath = useLocalePath()
+const userRoleKey = computed(() => {
+  return user.value ? getUserRoleKey(user.value.role_id) : ''
+})
+
+</script>
 
 <style scoped>
 @keyframes flow {

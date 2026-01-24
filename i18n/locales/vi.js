@@ -17,6 +17,16 @@ export default {
         firstName: "Tên",
         lastName: "Họ",
         support: "Hỗ trợ",
+        unknown: "Không xác định",
+    },
+    role: {
+        default: "Mặc định",
+        admin: "Quản trị viên",
+        manager: "Quản lý",
+        customer: "Khách hàng",
+        new_customer: "Khách hàng mới",
+        accountant: "Kế toán",
+        courier: "Người giao hàng",
     },
     sidebar: {
         brandName: "IrusGear",
@@ -48,6 +58,7 @@ export default {
         login: "Trang đăng nhập",
         forgotPassword: "Trang quên mật khẩu",
         register: "Trang đăng ký",
+        dashboard: "Bảng điều khiển",
     },
     login: {
         newUser: "Người dùng mới?",
@@ -57,6 +68,7 @@ export default {
         terms: "Bằng cách đăng nhập bằng tài khoản, bạn đồng ý với các",
         termsLink: "Điều khoản dịch vụ",
         privacyLink: "Chính sách bảo mật",
+        rememberMe: "Ghi nhớ đăng nhập",
     },
     register: {
         backToLogin: "Quay lại đăng nhập",

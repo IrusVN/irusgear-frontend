@@ -1,11 +1,16 @@
+<template>
+    <p>Home page</p>
+</template>
+
 <script setup>
-import { useI18n } from "#imports";
-
-const { t } = useI18n();
-
-useHead({ title: t('page_titles.home') });
+import { computed } from "vue";
+import { useI18n, useHead } from "#imports";
 
 definePageMeta({
-  middleware: () => navigateTo('/dashboard')
+  layout: 'default',
 });
+
+const { t } = useI18n();
+useHead({ title: computed(() => t('page_titles.home')) });
 </script>
+<style scoped></style>

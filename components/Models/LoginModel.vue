@@ -35,6 +35,14 @@
             </button>
           </div>
 
+          <!-- Remember me -->
+          <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+            <label class="d-flex align-items-center gap-2 small text-muted">
+              <input type="checkbox" v-model="rememberMe" class="form-check-input mt-0" />
+              {{ $t('login.rememberMe') }}
+            </label>
+          </div>
+
           <Transition name="fade-slide">
             <div v-if="errorMessage" class="alert alert-danger d-flex align-items-center gap-2 mt-2 mb-0" role="alert" >
               <i class="bi bi-exclamation-triangle-fill"></i>
@@ -126,6 +134,7 @@ const password = ref('')
 const showPassword = ref(false)
 const loading = ref(false)
 const errorMessage = ref('');
+const rememberMe = ref(false)
 
 watch([email, password], () => {
   errorMessage.value = '';
@@ -138,6 +147,7 @@ const handleLogin = async () => {
     const response = await auth.login({
       email: email.value,
       password: password.value,
+      rememberMe: rememberMe.value
     });
     if (response.status === true) {
       toast.success("login successful !");
@@ -174,6 +184,11 @@ const handleLogin = async () => {
   border-color: #ccc;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-check-input:checked {
+  background-color: #000;
+  border-color: #000;
 }
 
 @media screen and (max-width: 480px) {
