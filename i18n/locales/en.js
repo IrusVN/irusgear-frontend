@@ -55,9 +55,9 @@ export default {
     },
     page_titles: {
         home: "Home",
-        login: "Login page",
-        forgotPassword: "Forgot password page",
-        register: "Register page",
+        login: "Login",
+        forgotPassword: "Forgot Password",
+        register: "Register",
         dashboard: "Dashboard",
     },
     login: {

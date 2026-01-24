@@ -3,6 +3,7 @@ import { ADMIN_ROLES } from "@/constants/userConstants";
 
 export default defineNuxtRouteMiddleware((to) => {
     const authStore = useAuthStore();
+    const publicRoutes = ['/auth/login', '/auth/register', '/auth/forgot-password'];
 
     if (!authStore.isAuthenticated || !authStore.user) {
         return;
@@ -15,7 +16,7 @@ export default defineNuxtRouteMiddleware((to) => {
     const targetIsAdminRoute = to.path.startsWith('/admin');
 
     if (isAdmin) {
-        if (!targetIsAdminRoute) {
+        if (!targetIsAdminRoute && !publicRoutes.includes(to.path)) {
             return navigateTo('/admin/dashboard');
         }
     } else {

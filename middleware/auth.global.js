@@ -1,17 +1,19 @@
 import { useAuthStore } from "@/stores/authStore";
+import { useCookie } from "#imports";
 
 export default defineNuxtRouteMiddleware(async (to) => {
     const authStore = useAuthStore();
-    const publicRoutes = ['/auth/login', '/auth/register', '/'];
-    const isPublic = publicRoutes.includes(to.path);
+    const token = useCookie('access_token');
+    const isPublic = to.path.startsWith('/auth/');
 
-    if (!authStore.user) {
-        await authStore.fetchUser();
-    }
-
-    if (!authStore.isAuthenticated && !isPublic) {
-        if (to.path.startsWith('/admin')) {
-             return navigateTo('/auth/login');
+    if (!authStore.user && token.value) {
+        if (isPublic) {
+            authStore.fetchUser().catch(() => {}); 
+        } else {
+            await authStore.fetchUser();
         }
+    }
+    if (!authStore.isAuthenticated && !isPublic) {
+        return navigateTo(`/auth/login?redirect=${to.fullPath}`);
     }
 });

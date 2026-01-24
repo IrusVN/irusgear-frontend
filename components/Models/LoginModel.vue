@@ -150,9 +150,8 @@ const handleLogin = async () => {
       rememberMe: rememberMe.value
     });
     if (response.status === true) {
-      toast.success("login successful !");
-      navigateTo('/dashboard'); 
-      await auth.fetchUser();
+      toast.success("login successful!");
+      return navigateTo('/');
     }
   } catch (e) { 
      errorMessage.value = e.message;

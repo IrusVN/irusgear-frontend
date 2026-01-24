@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="d-flex align-items-center justify-content-center vh-100">
         <LoginModel />
     </div>
 </template>
@@ -9,4 +9,8 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n();
 useHead({ title: t('page_titles.login') });
+
+definePageMeta({
+  layout: false,
+});
 </script>
