@@ -222,6 +222,23 @@ const userRoleKey = computed(() => {
   width: 700px;
 }
 
+.dropdown-item:active,
+.dropdown-item.active,
+.dropdown-item.router-link-active {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.dropdown-item:active i,
+.dropdown-item.active i,
+.dropdown-item.router-link-active i {
+  color: #ffffff !important;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 @media (min-width: 992px) {
   .group-hover:hover .dropdown-menu {
     display: block;
