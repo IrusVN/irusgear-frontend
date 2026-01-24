@@ -40,13 +40,17 @@ export const useAuthStore = defineStore("auth", () => {
   const login = async (credentials) => {
     loading.value = true;
     try {
-      await apiFetch("/login", {
+      const data = await apiFetch("/login", {
         method: "POST",
         body: credentials,
       });
-      await fetchUser();
-      return navigateTo("/"); 
-      
+      if (data.user) {
+        user.value = data.user;
+        permissions.value = data.permissions || [];
+      } else {
+        await fetchUser();
+      }
+      return data;
     } catch (error) {
       user.value = null;
       throw error;
