@@ -2,13 +2,9 @@
   <div class="position-relative">
     <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 position-relative vh-100 overflow-hidden" :class="{ 'sidebar-collapsed': isCollapsed }" >
       <!-- Header -->
-      <div class="d-flex align-items-center gap-2 mb-4">
-        <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center p-2" >
-          <i class="bi bi-bag-check-fill fs-5"></i>
-        </div>
-        <span v-if="!isCollapsed" class="fs-5 fw-bold text-dark">
-          {{ $t('sidebar.brandName') }}
-        </span>
+      <div class="sidebar-header d-flex align-items-center gap-2 mb-4">
+        <img v-if="!isCollapsed" src="/image/logo-irusgear-black.png" alt="IrusGear" style="height: 40px;" />
+        <img v-else src="/image/icon-irusgear-black.png" alt="IrusGear" style="height: 32px;" />
       </div>
 
       <!-- Search -->
@@ -78,16 +74,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
 
 const route = useRoute()
+const authStore = useAuthStore()
 
 const isCollapsed = ref(false)
 const searchQuery = ref('')
 
-const userName = ref('HuuThangLmao')
-const userEmail = ref('thang@gmail.com')
+const userName = computed(() => authStore.user?.name || 'Guest')
+const userEmail = computed(() => authStore.user?.email || '')
 
 const mainMenuItems = [
   { key: 'home', label: 'sidebar.menu.home', icon: 'bi-house-door', route: '/admin/dashboard' },
@@ -114,7 +112,11 @@ const isActiveRoute = (itemRoute) => {
 
 <style scoped>
 .sidebar-admin {
+  width: 240px;
   transition: width .3s ease;
+}
+.sidebar-admin.sidebar-collapsed {
+  width: 85px;
 }
 .toggle-btn {
   transform: translate(50%, -50%);
@@ -122,14 +124,15 @@ const isActiveRoute = (itemRoute) => {
 @media (max-width: 768px) {
   .sidebar-admin {
     position: fixed;
-    top: 9.1%;
+    top: 60px;
     left: 0;
-    height: 100vh;
+    height: calc(100vh - 60px) !important;
     width: 260px;
     z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     background: #fff;
+    overflow-y: auto !important;
   }
 
   .mobile-open .sidebar-admin {
@@ -138,6 +141,10 @@ const isActiveRoute = (itemRoute) => {
   }
 
   .toggle-btn {
+    display: none !important;
+  }
+
+  .sidebar-header {
     display: none !important;
   }
 }

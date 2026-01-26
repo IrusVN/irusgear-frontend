@@ -7,7 +7,7 @@
         <span></span>
         <span></span>
       </button>
-      <span class="fs-5 fw-bold text-dark">{{ $t('sidebar.brandName') }}</span>
+      <img src="/image/logo-irusgear-black.png" alt="IrusGear" style="height: 36px;" />
     </header>
 
     <!-- Overlay for mobile -->
@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
 import AdminSidebar from '@/components/Sidebar/AdminSidebar.vue'
 
 const isMobileSidebarOpen = ref(false)
@@ -38,6 +38,24 @@ const toggleMobileSidebar = () => {
 const closeMobileSidebar = () => {
   isMobileSidebarOpen.value = false
 }
+
+// Lock body scroll when mobile sidebar is open
+watch(isMobileSidebarOpen, (isOpen) => {
+  if (typeof document !== 'undefined') {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  }
+})
+
+// Cleanup on unmount
+onUnmounted(() => {
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = ''
+  }
+})
 </script>
 
 <style scoped>
