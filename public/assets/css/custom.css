@@ -10,11 +10,13 @@
   flex-direction: column;
   gap: 16px;
 }
+
 .irus-input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
+
 .irus-input-icon {
   position: absolute;
   left: 16px;
@@ -39,12 +41,40 @@
   border-radius: 26px;
   font-weight: 600;
 }
+
 .irus-btn--primary {
   background: #1a1a1a;
   color: #fff;
 }
+
 .irus-btn--secondary {
   background: transparent;
   border: 1px solid #e5e5e5;
 }
 
+/* Hide scrollbar on sidebar */
+.sidebar,
+.sidebar-content,
+.n-scrollbar,
+.n-scrollbar-content,
+.n-menu,
+[class*="sidebar"],
+[class*="Sidebar"] {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.sidebar::-webkit-scrollbar,
+.sidebar-content::-webkit-scrollbar,
+.n-scrollbar::-webkit-scrollbar,
+.n-scrollbar-content::-webkit-scrollbar,
+.n-menu::-webkit-scrollbar,
+[class*="sidebar"]::-webkit-scrollbar,
+[class*="Sidebar"]::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
+}

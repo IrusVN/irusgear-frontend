@@ -121,6 +121,19 @@ const isActiveRoute = (itemRoute) => {
 .toggle-btn {
   transform: translate(50%, -50%);
 }
+/* Hide scrollbar */
+.sidebar-admin,
+.sidebar-admin nav {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sidebar-admin::-webkit-scrollbar,
+.sidebar-admin nav::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 @media (max-width: 768px) {
   .sidebar-admin {
     position: fixed;
