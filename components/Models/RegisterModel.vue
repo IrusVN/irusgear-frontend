@@ -508,7 +508,7 @@ const handleRegister = async () => {
       navigateTo('/auth/login');
     }
 
-  } catch (err) { debugger
+  } catch (err) {
       if (err.inner) {
         err.inner.forEach((e) => {
           errors[e.path] = e.message;
