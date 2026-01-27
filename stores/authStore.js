@@ -72,6 +72,21 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const register = async (userData) => {
+    loading.value = true;
+    try {
+      const data = await apiFetch("/register", {
+        method: "POST",
+        body: userData,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    } finally {
+      loading.value = false;
+    }
+  };
+ 
   return {
     user,
     permissions,
@@ -80,5 +95,6 @@ export const useAuthStore = defineStore("auth", () => {
     login,
     fetchUser,
     logout,
+    register,
   };
 });
