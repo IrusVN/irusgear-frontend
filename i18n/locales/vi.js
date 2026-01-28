@@ -73,6 +73,7 @@ export default {
     register: {
         title: "Đăng ký",
         subtitle: "Trở thành thành viên ngay hôm nay",
+        haveAccount: "Đã có tài khoản?",
         quickRegister: "Đăng ký nhanh bằng",
         orInfo: "Hoặc điền thông tin",
         personalInfo: "Thông tin cá nhân",
@@ -89,7 +90,7 @@ export default {
         enterPassword: "Mật khẩu",
         reEnterPassword: "Nhập lại mật khẩu",
         promo: "Nhận tin khuyến mãi từ IrusGear",
-        
+
         roleSwitch: "Học sinh - Sinh viên / Giáo viên",
         youAre: "Bạn là:",
         student: "Học sinh - SV",
@@ -125,7 +126,7 @@ export default {
         businessLicense: "Giấy phép kinh doanh",
         authorizationLetter: "Giấy uỷ quyền",
         viewSample: "Xem file mẫu",
-        
+
         backBtn: "Quay lại",
         registerBtn: "Đăng ký",
         agreePolicy: "Bằng việc đăng ký, bạn đồng ý với",

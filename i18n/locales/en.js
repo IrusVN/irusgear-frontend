@@ -73,6 +73,7 @@ export default {
     register: {
         title: "Register",
         subtitle: "Become a member today",
+        haveAccount: "Already have an account?",
         quickRegister: "Quick register with",
         orInfo: "Or enter information",
         personalInfo: "Personal Information",
@@ -89,7 +90,7 @@ export default {
         enterPassword: "Enter password",
         reEnterPassword: "Re-enter password",
         promo: "Receive promotional news from IrusGear",
-        
+
         roleSwitch: "Student / Teacher",
         youAre: "You are:",
         student: "Student",
@@ -125,7 +126,7 @@ export default {
         businessLicense: "Business License",
         authorizationLetter: "Authorization Letter",
         viewSample: "View sample",
-        
+
         backBtn: "Back",
         registerBtn: "Register",
         agreePolicy: "By registering, you agree to",
