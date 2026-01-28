@@ -84,6 +84,9 @@ export const useAuthStore = defineStore("auth", () => {
         method: "POST",
         body: userData,
       });
+      if (data.status && data.user) {
+        setVerifyEmail(data.user.email); 
+      }
       return data;
     } catch (error) {
       throw error;

@@ -58,6 +58,7 @@
       </div>
     </div>
   </div>
+  <pre>{{ authStore }}</pre>
 </template>
 
 <script setup>
