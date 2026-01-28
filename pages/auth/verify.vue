@@ -40,7 +40,7 @@ onMounted(() => {
 })
 
 definePageMeta({
-  layout: false,
+  layout: 'auth',
 });
 </script>
 
