@@ -178,7 +178,6 @@ export default {
         password_min: "Password must be at least 6 characters",
         password_not_match: "Password confirmation does not match",
         max_length: "Must not exceed {max} characters",
-        email_invalid: "Invalid email format",
         xss_invalid: "Please do not enter special characters (&lt;, &gt;, &#123;, &#125;, ;)",
     },
     error: {
@@ -187,5 +186,9 @@ export default {
         cantFind: "we can't find that page...",
         dragMe: "drag me",
         backHome: "Back Home",
+    },
+    verify: {
+        title: "Verify Account",
+        subtitle: "Please enter the verification code sent to your email",
     }
 }

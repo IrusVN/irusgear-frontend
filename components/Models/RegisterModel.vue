@@ -397,6 +397,17 @@ const goBack = () => {
   navigateTo(localePath('/'))
 }
 
+const formData = reactive({
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
+  phoneNumber: '',
+  dob: '',
+  receivePromo: false
+});
+
 const form = ref({
   firstName: '',
   lastName: '',
@@ -505,7 +516,10 @@ const handleRegister = async () => {
     const response = await authStore.register(payload);
     if (response.status === true) {
       toast.success(response.message);
-      navigateTo('/auth/login');
+      navigateTo({
+        path: localePath('/auth/verify'),
+        query: { email: formData.email }
+      });
     }
 
   } catch (err) {

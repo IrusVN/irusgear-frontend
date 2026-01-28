@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useRuntimeConfig, navigateTo, useRequestHeaders } from "#imports";
 import { resetAllStores } from "@/utils/storeRegistry";
+import { useGlobalToast } from "@/composables/useGlobalToast"; // Import Toast
 
 export const useAuthStore = defineStore("auth", () => {
   const config = useRuntimeConfig();
@@ -9,12 +10,16 @@ export const useAuthStore = defineStore("auth", () => {
   const permissions = ref([]);
   const loading = ref(false);
 
+  const verifyEmail = ref("");
+  const otpCode = ref("");
+  const error = ref(null);
+
   const isAuthenticated = computed(() => !!user.value);
 
   const apiFetch = async (endpoint, options = {}) => {
     return await $fetch(`${config.public.apiBaseUrl}${endpoint}`, {
       ...options,
-      credentials: "include", 
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -25,9 +30,9 @@ export const useAuthStore = defineStore("auth", () => {
 
   const fetchUser = async () => {
     try {
-      const headers = useRequestHeaders(['cookie']); 
+      const headers = useRequestHeaders(["cookie"]);
       const data = await apiFetch("/me", {
-        headers: headers 
+        headers: headers,
       });
       user.value = data.user ?? data;
       permissions.value = data.permissions || [];
@@ -86,15 +91,69 @@ export const useAuthStore = defineStore("auth", () => {
       loading.value = false;
     }
   };
- 
+
+  const setVerifyEmail = (email) => {
+    verifyEmail.value = email;
+    otpCode.value = "";
+    error.value = null;
+  };
+
+  const verifyOtp = async () => {
+    loading.value = true;
+    error.value = null;
+
+    try {
+      const data = await apiFetch("/verify-email", {
+        method: "POST",
+        body: {
+          email: verifyEmail.value,
+          otp: otpCode.value,
+        },
+      });
+      return { status: true, data };
+
+    } catch (err) {
+      const msg = err.message;
+      error.value = msg;
+      return { status: false, error: msg };
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const resendOtp = async () => {
+    const toast = useGlobalToast();
+    try {
+      await apiFetch("/resend-otp", {
+        method: "POST",
+        body: { email: verifyEmail.value },
+      });
+      
+      toast.success("Đã gửi lại mã xác thực!");
+      return true;
+    } catch (err) {
+      const msg = error.message;
+      return false;
+    }
+  };
+
   return {
     user,
     permissions,
     loading,
     isAuthenticated,
+
+    verifyEmail,
+    otpCode,
+    error,
+
     login,
     fetchUser,
     logout,
     register,
+
+    setVerifyEmail,
+    verifyOtp,
+    resendOtp,
   };
 });
