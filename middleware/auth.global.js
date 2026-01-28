@@ -1,10 +1,13 @@
 import { useAuthStore } from "@/stores/authStore";
 import { useCookie } from "#imports";
+import { useLocalePath } from "#imports";
 
 export default defineNuxtRouteMiddleware(async (to) => {
     const authStore = useAuthStore();
     const token = useCookie('access_token');
-    const isPublic = to.path.startsWith('/auth/');
+    const localePath = useLocalePath();
+    const routeName = to.name?.toString() || '';
+    const isPublic = routeName.startsWith('auth-') || routeName.startsWith('index');
 
     if (!authStore.user && token.value) {
         if (isPublic) {
@@ -14,6 +17,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
         }
     }
     if (!authStore.isAuthenticated && !isPublic) {
-        return navigateTo(`/auth/login?redirect=${to.fullPath}`);
+        return navigateTo({
+            path: localePath('/auth/login'),
+            query: { redirect: to.fullPath }
+        });
     }
 });

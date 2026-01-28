@@ -505,7 +505,10 @@ const handleRegister = async () => {
     const response = await authStore.register(payload);
     if (response.status === true) {
       toast.success(response.message);
-      navigateTo('/auth/login');
+      navigateTo({
+        path: localePath('/auth/verify'),
+        query: { email: response.user.email }
+      });
     }
 
   } catch (err) {

@@ -59,6 +59,7 @@ export default {
         forgotPassword: "Trang quên mật khẩu",
         register: "Trang đăng ký",
         dashboard: "Bảng điều khiển",
+        verify: "Xác minh tài khoản",
     },
     login: {
         newUser: "Người dùng mới?",
@@ -178,7 +179,6 @@ export default {
         password_min: "Mật khẩu phải có ít nhất 6 ký tự",
         password_not_match: "Mật khẩu xác nhận không khớp",
         max_length: "Nội dung không được vượt quá {max} ký tự",
-        email_invalid: "Email không hợp lệ",
         xss_invalid: "Vui lòng không nhập các ký tự đặc biệt (&lt;, &gt;, &#123;, &#125;, ;)",
     },
     error: {
@@ -187,5 +187,9 @@ export default {
         cantFind: "chúng tôi không tìm thấy trang đó...",
         dragMe: "kéo tôi",
         backHome: "Về trang chủ",
+    },
+    verify: {
+        title: "Xác minh tài khoản",
+        subtitle: "Vui lòng nhập mã xác minh đã được gửi đến email của bạn",
     }
 }

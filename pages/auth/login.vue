@@ -11,6 +11,6 @@ const { t } = useI18n();
 useHead({ title: t('page_titles.login') });
 
 definePageMeta({
-  layout: false,
+  layout: 'auth',
 });
 </script>
