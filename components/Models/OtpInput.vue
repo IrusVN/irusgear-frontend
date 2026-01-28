@@ -171,7 +171,6 @@ onUnmounted(() => {
   font-family: 'Public Sans', sans-serif;
 }
 
-/* Hiệu ứng khi đang focus vào ô */
 .irus-otp-square:focus {
   border-color: #1a1a1a;
   background: #fff;
@@ -184,7 +183,6 @@ onUnmounted(() => {
   border-color: #1a1a1a;
 }
 
-/* Loại bỏ mũi tên tăng giảm của input number trên một số trình duyệt */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
