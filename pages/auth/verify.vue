@@ -1,5 +1,5 @@
 <template>
-  <div class="verify-page d-flex align-items-center justify-content-center py-5">
+  <div class="verify-page d-flex align-items-center justify-content-center py-5 mt-5">
     <div class="verify-container irus-card overflow-hidden">
       <div class="d-flex flex-column flex-lg-row" style="min-height: 500px;">
         
@@ -32,7 +32,8 @@ import { useAuthStore } from '@/stores/authStore'
 
 const route = useRoute()
 const authStore = useAuthStore()
-
+const { t } = useI18n();
+useHead({ title: t('page_titles.verify') });
 onMounted(() => {
   const emailFromUrl = route.query.email || ''
   authStore.setVerifyEmail(emailFromUrl)

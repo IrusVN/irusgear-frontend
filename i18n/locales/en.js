@@ -59,6 +59,7 @@ export default {
         forgotPassword: "Forgot Password",
         register: "Register",
         dashboard: "Dashboard",
+        verify: "Verify Account",
     },
     login: {
         newUser: "New user?",

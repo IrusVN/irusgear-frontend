@@ -59,6 +59,7 @@ export default {
         forgotPassword: "Trang quên mật khẩu",
         register: "Trang đăng ký",
         dashboard: "Bảng điều khiển",
+        verify: "Xác minh tài khoản",
     },
     login: {
         newUser: "Người dùng mới?",
