@@ -1,7 +1,7 @@
 <template>
     <div class="irus-main-layout">
         <div class="d-flex flex-column min-vh-100">
-            <main class="flex-grow-1 py-5 pt-5 mt-5">
+            <main>
                 <slot />
             </main>
         </div>

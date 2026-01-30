@@ -1,12 +1,12 @@
 <template>
-  <div class="w-100" style="max-width: 450px;">
+  <div class="w-100 otp-container">
     <div class="text-center mb-4">
       <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
         <i class="bi bi-shield-check fs-2 text-dark"></i>
       </div>
       <h4 class="fw-bold text-dark mb-2">Xác thực tài khoản</h4>
       <p class="text-secondary small">
-        Mã xác thực đã được gửi đến email <br>
+        Mã xác thực đã được gửi đến email
         <span class="text-dark fw-bold">{{ authStore.verifyEmail }}</span>
       </p>
     </div>
@@ -49,26 +49,28 @@
         <span>Xác nhận</span>
       </button>
 
-      <div class="text-center mt-3">
+      <div class="text-center mt-3 d-flex flex-column gap-2">
         <p class="small text-secondary mb-0">
           Bạn chưa nhận được mã? 
           <button v-if="timer === 0" @click="handleResend" class="btn btn-link p-0 text-dark fw-bold text-decoration-none small">Gửi lại</button>
           <span v-else class="text-dark fw-bold">{{ formatTime(timer) }}</span>
         </p>
+        
+        <button @click="authStore.resetToRegister()" class="btn btn-link text-secondary text-decoration-none small">
+           Quay lại đăng ký
+        </button>
       </div>
     </div>
   </div>
-  <pre>{{ authStore }}</pre>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { useRouter, useLocalePath } from '#imports'
+import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
+import { useLocalePath, navigateTo } from '#imports'
 
-const router = useRouter()
-const localePath = useLocalePath()
 const authStore = useAuthStore()
+const localePath = useLocalePath()
 const digits = reactive(['', '', '', '', '', ''])
 const otpFields = ref([])
 const localError = ref('')
@@ -106,28 +108,31 @@ const handlePaste = (e) => {
   }
 }
 
-const handleVerify = async () => {
+const handleVerify = async () => { debugger
+  localError.value = ''
   if (authStore.otpCode.length < 6) {
     localError.value = 'Vui lòng nhập đủ 6 số.'
     return
   }
-
-  const result = await authStore.verifyOtp()
+  const result = await authStore.verifyOtp();
   
-  if (result.status) {
-    router.push(localePath('/'))
+  if (!result.status === true) {
+    localError.value = result.message
+    return
   }
+  navigateTo(localePath('/auth/login'));
 }
 
-const handleResend = async () => {
-  const success = await authStore.resendOtp()
-  if (success) {
+const handleResend = async () => { debugger
+  localError.value = ''
+  const response = await authStore.resendOtp()
+  if (!response === true) {
+    localError.value = response.message
     startTimer()
+    return
   }
-}
-
-const goBack = () => {
-  router.push(localePath('/auth/register'))
+  localError.value = response.message
+  startTimer()
 }
 
 const formatTime = (seconds) => {
@@ -146,12 +151,15 @@ const startTimer = () => {
 }
 
 onMounted(() => {
-  startTimer()
+  if (!authStore.verifyEmail) {
+    authStore.registerStep = 1;
+  } else {
+    startTimer();
+  }
 })
 
 onUnmounted(() => {
   clearInterval(intervalId)
-  authStore.otpCode = ''
   authStore.error = null
 })
 </script>
