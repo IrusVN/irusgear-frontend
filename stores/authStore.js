@@ -11,6 +11,7 @@ export const useAuthStore = defineStore("auth", () => {
   const loading = ref(false);
 
   const verifyEmail = ref("");
+  const registerStep = ref(1);
   const otpCode = ref("");
   const error = ref(null);
 
@@ -79,13 +80,15 @@ export const useAuthStore = defineStore("auth", () => {
 
   const register = async (userData) => {
     loading.value = true;
+    error.value = null;
     try {
       const data = await apiFetch("/register", {
         method: "POST",
         body: userData,
       });
       if (data.status && data.user) {
-        setVerifyEmail(data.user.email); 
+        verifyEmail.value = userData.email; 
+        registerStep.value = 2;
       }
       return data;
     } catch (error) {
@@ -93,12 +96,6 @@ export const useAuthStore = defineStore("auth", () => {
     } finally {
       loading.value = false;
     }
-  };
-
-  const setVerifyEmail = (email) => {
-    verifyEmail.value = email;
-    otpCode.value = "";
-    error.value = null;
   };
 
   const verifyOtp = async () => {
@@ -113,26 +110,24 @@ export const useAuthStore = defineStore("auth", () => {
           otp: otpCode.value,
         },
       });
-      return { status: true, data };
 
+      registerStep.value = 1; 
+      verifyEmail.value = "";
+      otpCode.value = "";
+      return { status: true, data };
     } catch (err) {
-      const msg = err.message;
-      error.value = msg;
-      return { status: false, error: msg };
+      return { status: false, message: err.data?.message };
     } finally {
       loading.value = false;
     }
   };
 
   const resendOtp = async () => {
-    const toast = useGlobalToast();
-    try {
+    try { 
       await apiFetch("/resend-otp", {
         method: "POST",
         body: { email: verifyEmail.value },
       });
-      
-      toast.success("Đã gửi lại mã xác thực!");
       return true;
     } catch (err) {
       const msg = error.message;
@@ -145,6 +140,7 @@ export const useAuthStore = defineStore("auth", () => {
     permissions,
     loading,
     isAuthenticated,
+    registerStep,
 
     verifyEmail,
     otpCode,
@@ -155,7 +151,6 @@ export const useAuthStore = defineStore("auth", () => {
     logout,
     register,
 
-    setVerifyEmail,
     verifyOtp,
     resendOtp,
   };
