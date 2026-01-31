@@ -23,7 +23,7 @@ export const registerSchema = (isStudent, isBusiness) => {
       .typeError(t('validate.invalid_date'))
       .required(t('validate.required')),
 
-    phone: yup
+    phoneNumber: yup
       .string()
       .required(t('validate.required'))
       .matches(/^[0-9]+$/, t('validate.numeric_only'))

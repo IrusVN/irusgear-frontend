@@ -108,7 +108,7 @@ const handlePaste = (e) => {
   }
 }
 
-const handleVerify = async () => { debugger
+const handleVerify = async () => {
   localError.value = ''
   if (authStore.otpCode.length < 6) {
     localError.value = 'Vui lòng nhập đủ 6 số.'
@@ -123,7 +123,7 @@ const handleVerify = async () => { debugger
   navigateTo(localePath('/auth/login'));
 }
 
-const handleResend = async () => { debugger
+const handleResend = async () => {
   localError.value = ''
   const response = await authStore.resendOtp()
   if (!response === true) {
