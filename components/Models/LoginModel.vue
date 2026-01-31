@@ -17,7 +17,7 @@
       </div>
 
       <!-- Benefits List -->
-      <div class="benefits-list w-50 p-4 bg-white rounded-4 shadow-sm">
+      <div class="benefits-list w-75 p-4 bg-white rounded-4 shadow-sm">
         <span class="corner corner-tl"></span>
         <span class="corner corner-tr"></span>
         <span class="corner corner-bl"></span>
@@ -48,15 +48,15 @@
         </div>
       </div>
 
-      <!-- CTA Link -->
       <div class="mt-4">
         <NuxtLink to="#" class="text-decoration-none fw-semibold benefit-link">
           {{ $t('login.viewMemberPolicy') }} <i class="bi bi-chevron-right"></i>
         </NuxtLink>
       </div>
 
-      <!-- Mobile Sticky Buttons -->
-      <div class="mobile-sticky-buttons d-lg-none d-flex gap-3 w-100 p-3">
+      <div class="d-lg-none w-100" style="height: 100px;"></div>
+
+      <div class="mobile-sticky-buttons d-lg-none d-flex gap-3 w-100 p-3 bg-white border-top shadow-lg">
         <NuxtLink :to="localePath('/auth/register')" class="irus-btn irus-btn--secondary d-flex align-items-center justify-content-center text-dark text-decoration-none">
           {{ $t('common.register') }}
         </NuxtLink>
@@ -345,7 +345,6 @@ const handleLogin = async () => {
     min-width: 100%;
     max-width: 100%;
     min-height: 100vh;
-    padding-bottom: 120px;
   }
 
   .benefits-list {
@@ -359,6 +358,7 @@ const handleLogin = async () => {
   left: 0;
   right: 0;
   z-index: 1000;
+  background-color: #fff;
 }
 
 @media screen and (max-width: 480px) {
