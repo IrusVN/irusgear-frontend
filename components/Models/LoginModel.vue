@@ -7,8 +7,7 @@
       <div class="text-center mb-4">
         <h3 class="fw-bold mb-2">
           {{ $t('login.memberTitle') }}
-          <img src="@/public/image/logo-irusgear-black.png" alt="" height="32px"
-            class="d-inline-block align-text-bottom">
+          <img src="@/public/image/logo-irusgear-black.png" alt="" height="32px" class="d-inline-block align-text-bottom">
         </h3>
         <p class="text-secondary">{{ $t('login.memberSubtitle') }}</p>
       </div>
@@ -32,7 +31,7 @@
             <p class="mb-0">
               <span class="fw-semibold">{{ $t('login.benefitBirthday') }}</span>
               {{ $t('login.benefitBirthdayDesc') }}
-              </p>
+            </p>
           </div>
           <div class="d-flex align-items-start gap-3"><i class="bi bi-arrow-repeat benefit-icon"></i>
             <p class="mb-0">
@@ -70,16 +69,85 @@
       </div>
     </div>
 
-    <Transition name="fade">
-      <div v-if="showMobileLogin" class="mobile-backdrop d-lg-none" @click="closeMobileLogin"></div>
-    </Transition>
-
-    <div class="right-panel d-lg-flex flex-grow-1 justify-content-center align-items-center p-0 p-lg-4" :class="{ 'mobile-active': showMobileLogin }" :style="drawerStyle">
-      <div class="drag-handle-area d-lg-none w-100 d-flex justify-content-center pt-3 pb-1" @touchstart="startDrag" @touchmove="onDrag" @touchend="endDrag">
-        <div class="drag-handle bg-secondary opacity-25 rounded-pill"></div>
+    <div class="right-panel d-none d-lg-flex flex-grow-1 justify-content-center align-items-center p-4">
+      <div class="p-4 login-card w-100 h-100 d-flex flex-column justify-content-center position-relative">
+        <div class="mb-4 text-start">
+          <h1 class="fw-bold fs-2 mb-2">{{ $t('common.signIn') }}</h1>
+          <p class="text-muted mb-0">
+            {{ $t('login.newUser') }}
+            <NuxtLink :to="localePath('/auth/register')" class="fw-bold text-decoration-none text-dark">
+              {{ $t('login.createAccount') }}
+            </NuxtLink>
+          </p>
+        </div>
+        <form class="irus-form" @submit.prevent="handleLogin">
+          <div class="irus-input-wrapper mb-3">
+            <span class="irus-input-icon">
+              <EmailIcon />
+            </span>
+            <input v-model="email" type="email" class="irus-input" :placeholder="$t('common.emailAddress')" required />
+          </div>
+          <div class="irus-input-wrapper mb-3">
+            <span class="irus-input-icon">
+              <LockIcon />
+            </span>
+            <input v-model="password" :type="showPassword ? 'text' : 'password'" class="irus-input" :placeholder="$t('common.password')" required />
+            <button type="button" class="password-toggle" @click="showPassword = !showPassword">
+              <ShowEye v-if="!showPassword" />
+              <HideEye v-else />
+            </button>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+            <label class="d-flex align-items-center gap-2 small text-muted cursor-pointer"><input type="checkbox" v-model="rememberMe" class="form-check-input mt-0" /> {{ $t('login.rememberMe') }}</label>
+          </div>
+          <Transition name="fade-slide">
+            <div v-if="errorMessage" class="alert alert-danger d-flex align-items-center gap-2 mt-2 mb-3 py-2 small" role="alert">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span class="flex-grow-1"> {{ errorMessage }}</span>
+            </div>
+          </Transition>
+          <div class="text-start mb-3">
+            <NuxtLink :to="localePath('/auth/forgot-password')" class="text-decoration-none fw-bold text-dark small">
+              {{ $t('login.forgotPassword') }}
+            </NuxtLink>
+          </div>
+          <button type="submit" class="irus-btn irus-btn--primary" :disabled="loading">
+            <span v-if="loading" class="spinner-border spinner-border-sm me-2" />
+            {{ $t('common.login') }}
+          </button>
+        </form>
+        <div class="d-flex align-items-center my-4">
+          <div class="flex-grow-1 border-top"></div><span class="px-3 text-muted small">{{ $t('common.or') }}</span>
+          <div class="flex-grow-1 border-top"></div>
+        </div>
+        <div class="text-center">
+          <p class="text-muted small mb-3">{{ $t('login.joinSocial') }}</p>
+          <div class="d-flex justify-content-center gap-3">
+            <button class="social-btn btn rounded-circle border p-3">
+              <GoogleLogo />
+            </button>
+            <button class="social-btn btn rounded-circle border p-3">
+              <FacebookLogo />
+            </button>
+            <button class="social-btn btn rounded-circle border p-3">
+              <TwitterLogo />
+            </button>
+            <button class="social-btn btn rounded-circle border p-3">
+              <AppleLogo />
+            </button>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <p class="small text-muted mb-0">By signing in with an account, you agree to SO's <NuxtLink to="#"
+              class="fw-bold text-dark text-decoration-underline">Terms of Service</NuxtLink> and <NuxtLink to="#"
+              class="fw-bold text-dark text-decoration-underline">Privacy Policy</NuxtLink>.</p>
+        </div>
       </div>
-      <div class="p-4 pt-0 pt-lg-4 login-card w-100 h-100 d-flex flex-column justify-content-start justify-content-lg-center position-relative bg-white">
-        <div class="mb-4 mt-2 mt-lg-0 text-start">
+    </div>
+
+    <BottomSheet ref="mobileSheetRef">
+      <div class="p-4 pt-0 login-card h-100 d-flex flex-column justify-content-start bg-white">
+        <div class="mb-4 mt-2 text-start">
           <h1 class="fw-bold fs-2 mb-2">{{ $t('common.signIn') }}</h1>
           <p class="text-muted mb-0">
             {{ $t('login.newUser') }}
@@ -114,7 +182,8 @@
           </div>
           <Transition name="fade-slide">
             <div v-if="errorMessage" class="alert alert-danger d-flex align-items-center gap-2 mt-2 mb-3 py-2 small" role="alert">
-              <i class="bi bi-exclamation-triangle-fill"></i><span class="flex-grow-1">{{ errorMessage }}</span>
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span class="flex-grow-1">{{ errorMessage }}</span>
             </div>
           </Transition>
           <div class="text-start mb-3">
@@ -122,8 +191,7 @@
               {{ $t('login.forgotPassword') }}
             </NuxtLink>
           </div>
-          <button type="submit" class="irus-btn irus-btn--primary" :disabled="loading">
-            <span v-if="loading" class="spinner-border spinner-border-sm me-2" />
+          <button type="submit" class="irus-btn irus-btn--primary" :disabled="loading"><span v-if="loading" class="spinner-border spinner-border-sm me-2" />
             {{ $t('common.login') }}
           </button>
         </form>
@@ -149,19 +217,19 @@
             </button>
           </div>
         </div>
-
-        <div class="text-center mt-4 pb-5 pb-lg-0">
-          <p class="small text-muted mb-0">{{ $t('login.terms') }} <NuxtLink to="#"
-              class="fw-bold text-dark text-decoration-underline">{{ $t('login.termsLink') }}</NuxtLink> and <NuxtLink to="#"
-              class="fw-bold text-dark text-decoration-underline">{{ $t('login.privacyLink') }}</NuxtLink>.</p>
+        <div class="text-center mt-4 pb-5">
+          <p class="small text-muted mb-0">By signing in with an account, you agree to SO's <NuxtLink to="#"
+              class="fw-bold text-dark text-decoration-underline">Terms of Service</NuxtLink> and <NuxtLink to="#"
+              class="fw-bold text-dark text-decoration-underline">Privacy Policy</NuxtLink>.</p>
         </div>
       </div>
-    </div>
+    </BottomSheet>
   </div>
 </template>
 
 <script setup>
-import { ref, watch, computed } from 'vue'
+import { ref, watch } from 'vue'
+import BottomSheet from '@/components/Common/BottomSheet.vue'
 import GoogleLogo from '@/components/Icons/Logo/GoogleLogo.vue'
 import FacebookLogo from '@/components/Icons/Logo/FacebookLogo.vue'
 import TwitterLogo from '@/components/Icons/Logo/TwitterLogo.vue'
@@ -187,47 +255,29 @@ const loading = ref(false)
 const errorMessage = ref('');
 const rememberMe = ref(false)
 
-const showMobileLogin = ref(false)
-const startY = ref(0)
-const currentY = ref(0)
-const isDragging = ref(false)
+const mobileSheetRef = ref(null)
 
 watch([email, password], () => { errorMessage.value = ''; });
 
 const openMobileLogin = () => {
-  showMobileLogin.value = true;
-  if (typeof document !== 'undefined') document.body.style.overflow = 'hidden';
+  mobileSheetRef.value?.open()
 }
-const closeMobileLogin = () => {
-  showMobileLogin.value = false;
-  currentY.value = 0;
-  if (typeof document !== 'undefined') document.body.style.overflow = '';
-}
-const startDrag = (e) => { startY.value = e.touches[0].clientY; isDragging.value = true; }
-const onDrag = (e) => {
-  if (!isDragging.value) return;
-  const diff = e.touches[0].clientY - startY.value;
-  if (diff > 0) currentY.value = diff;
-}
-const endDrag = () => {
-  isDragging.value = false;
-  if (currentY.value > 100) closeMobileLogin();
-  else currentY.value = 0;
-}
-const drawerStyle = computed(() => {
-  if (!isDragging.value && currentY.value === 0) return {};
-  return { transform: isDragging.value ? `translateY(${currentY.value}px)` : '' };
-})
+
 const handleLogin = async () => {
-  loading.value = true; errorMessage.value = '';
+  loading.value = true;
+  errorMessage.value = '';
   try {
     const response = await auth.login({ email: email.value, password: password.value, rememberMe: rememberMe.value });
     if (response.status === true) {
       toast.success("Login successful!");
-      closeMobileLogin();
+      mobileSheetRef.value?.close();
       return navigateTo('/');
     }
-  } catch (e) { errorMessage.value = e.message; } finally { loading.value = false; }
+  } catch (e) {
+    errorMessage.value = e.message;
+  } finally {
+    loading.value = false;
+  }
 };
 </script>
 
@@ -246,64 +296,75 @@ const handleLogin = async () => {
 }
 
 @media screen and (max-width: 992px) {
-  .mobile-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1999;
-    backdrop-filter: blur(2px);
-  }
-
-  .right-panel {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    max-height: 90vh;
-    z-index: 2000;
-    background: white;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    transform: translateY(100%);
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    display: flex !important;
-    flex-direction: column;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
-  }
-
-  .right-panel.mobile-active {
-    transform: translateY(0);
-  }
-
-  .right-panel[style*="translateY"] {
-    transition: none;
-  }
-
-  .login-card {
-    border-radius: 0;
-    padding-bottom: 2rem;
-    overflow-y: auto;
+  .left-panel {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
   }
 }
 
-.drag-handle-area {
-  cursor: grab;
-}
-
-.drag-handle {
-  width: 48px;
-  height: 6px;
-  background-color: #e0e0e0;
+.logo-img {
+  height: 80px;
 }
 
 .benefit-icon {
   color: #1a1a1a;
   font-size: 1.1rem;
   min-width: 24px;
+}
+
+.benefit-link {
+  color: #1a1a1a;
+  transition: opacity 0.2s;
+}
+
+.benefit-link:hover {
+  opacity: 0.7;
+}
+
+.mobile-sticky-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #fff;
+}
+
+.irus-input-wrapper {
+  position: relative;
+}
+
+.irus-input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  display: flex;
+  align-items: center;
+}
+
+.social-btn {
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.social-btn:hover {
+  border-color: #ccc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .corner {
@@ -346,74 +407,6 @@ const handleLogin = async () => {
   border-bottom-width: 3px;
   border-right-width: 3px;
   border-bottom-right-radius: 12px;
-}
-
-.irus-input-wrapper {
-  position: relative;
-}
-
-.irus-input-icon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-}
-
-.password-toggle {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #999;
-  display: flex;
-  align-items: center;
-}
-
-.social-btn {
-  transition: all 0.2s ease;
-  background: #fff;
-}
-
-.social-btn:hover {
-  border-color: #ccc;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.benefit-link {
-  color: #1a1a1a;
-  transition: opacity 0.2s;
-}
-
-.benefit-link:hover {
-  opacity: 0.7;
-}
-
-.mobile-sticky-buttons {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: #fff;
-}
-
-.logo-img {
-  height: 80px;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 
 .fade-slide-enter-active,
