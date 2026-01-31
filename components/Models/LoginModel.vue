@@ -1,7 +1,16 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="login-container w-100">
-      <div class="irus-card p-4 login-card">
+  <div class="d-flex flex-column flex-lg-row min-vh-100">
+    <!-- Left Panel -->
+    <div class="left-panel d-flex flex-column justify-content-center align-items-center text-center bg-light-subtle p-4">
+      <div class="mb-4">
+        <img src="@/public/favicon-dark.svg" alt="Logo" class="mb-3 logo-img">
+        <h3 class="text-dark fw-bold text-uppercase mb-2">{{ $t('register.title') }}</h3>
+        <p class="text-secondary small">{{ $t('register.subtitle') }}</p>
+      </div>
+    </div>
+    <!-- Right Panel -->
+    <div class="right-panel d-flex flex-grow-1 justify-content-center align-items-center p-4">
+      <div class="p-4 login-card">
         <!-- Header -->
         <div class="mb-4">
           <h1 class="fw-bold fs-3 mb-2">{{ $t('common.signIn') }}</h1>
@@ -162,8 +171,12 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
-.login-container {
-  max-width: 420px;
+.left-panel {
+  min-width: 800px;
+}
+
+.logo-img {
+  height: 80px;
 }
 
 .password-toggle {
@@ -190,11 +203,18 @@ const handleLogin = async () => {
   border-color: #000;
 }
 
+@media screen and (max-width: 992px) {
+  .left-panel {
+    min-width: 100%;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .login-card {
     padding: 32px 24px;
   }
 }
+
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition: opacity 0.25s ease, transform 0.25s ease;
