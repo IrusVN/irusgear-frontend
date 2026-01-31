@@ -39,11 +39,11 @@
                 <div class="w-100">
                     <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.phone') }}</label>
                     <div class="irus-input-wrapper">
-                        <input type="tel" class="irus-input ps-3 pe-3" :class="{ 'border-danger': errors.phone }"
-                            :placeholder="$t('register.enterPhone')" v-model="form.phone" @blur="validateField('phone')"
+                        <input type="tel" class="irus-input ps-3 pe-3" :class="{ 'border-danger': errors.phoneNumber }"
+                            :placeholder="$t('register.enterPhone')" v-model="form.phoneNumber" @blur="validateField('phoneNumber')"
                             required />
                     </div>
-                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.phone }}</div>
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.phoneNumber }}</div>
                 </div>
                 <div class="w-100">
                     <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.email') }}</label>
@@ -221,13 +221,13 @@ import { useGlobalToast } from '@/composables/useGlobalToast.js'
 import { navigateTo, useLocalePath } from '#imports'
 
 const form = reactive({
-    firstName: '', lastName: '', dob: '', phone: '', email: '', password: '', confirmPassword: '',
+    firstName: '', lastName: '', dob: '', phoneNumber: '', email: '', password: '', confirmPassword: '',
     receivePromo: false, agreeTerms: false, studentRole: 'student', schoolLevel: '', schoolName: '',
     taxCode: '', companyName: '', companyAddress: '', companyEmail: '', authorizedCCCD: '', note: ''
 })
 
 const errors = reactive({
-    firstName: null, lastName: null, dob: null, phone: null, email: null, password: null, confirmPassword: null,
+    firstName: null, lastName: null, dob: null, phoneNumber: null, email: null, password: null, confirmPassword: null,
     schoolLevel: null, schoolName: null, taxCode: null, companyName: null, companyAddress: null, companyEmail: null, authorizedCCCD: null, note: null
 })
 
@@ -282,7 +282,7 @@ const fieldsToWatch = [
     "firstName",
     "lastName",
     "dob",
-    "phone",
+    "phoneNumber",
     "email",
     "password",
     "confirmPassword",

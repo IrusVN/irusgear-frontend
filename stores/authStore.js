@@ -135,12 +135,17 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const resetToRegister = () => {
+    registerStep.value = 1;
+  };
+
   return {
     user,
     permissions,
     loading,
     isAuthenticated,
     registerStep,
+    resetToRegister,
 
     verifyEmail,
     otpCode,
