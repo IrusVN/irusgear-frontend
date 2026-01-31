@@ -2,14 +2,18 @@
     <Teleport to="body">
         <Transition name="sheet-fade">
             <div v-if="isVisible" class="sheet-backdrop" @click="close">
-                <div class="sheet-panel" @click.stop :style="panelStyle" @touchstart="startDrag" @touchmove="onDrag" @touchend="endDrag">
-                    <div class="drag-handle-area">
+
+                <div class="sheet-panel" @click.stop :style="panelStyle">
+
+                    <div class="drag-handle-area" @touchstart="startDrag" @touchmove="onDrag" @touchend="endDrag">
                         <div class="drag-handle"></div>
                     </div>
+
                     <div class="sheet-content">
                         <slot :close="close"></slot>
                     </div>
                 </div>
+
             </div>
         </Transition>
     </Teleport>
@@ -19,28 +23,16 @@
 import { ref, computed, watch } from 'vue'
 const isVisible = ref(false)
 
-const open = () => {
-    isVisible.value = true
-}
+const open = () => { isVisible.value = true }
+const close = () => { isVisible.value = false; currentY.value = 0 }
 
-const close = () => {
-    isVisible.value = false
-    currentY.value = 0
-}
-
-defineExpose({
-    open,
-    close
-})
+defineExpose({ open, close })
 
 const startY = ref(0)
 const currentY = ref(0)
 const isDragging = ref(false)
 
-const startDrag = (e) => {
-    startY.value = e.touches[0].clientY
-    isDragging.value = true
-}
+const startDrag = (e) => { startY.value = e.touches[0].clientY; isDragging.value = true }
 
 const onDrag = (e) => {
     if (!isDragging.value) return
@@ -107,6 +99,7 @@ watch(isVisible, (val) => {
     cursor: grab;
     background: white;
     flex-shrink: 0;
+    touch-action: none;
 }
 
 .drag-handle {
