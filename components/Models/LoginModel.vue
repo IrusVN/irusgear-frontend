@@ -1,7 +1,73 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="login-container w-100">
-      <div class="irus-card p-4 login-card">
+  <div class="d-flex flex-column flex-lg-row min-vh-100">
+    <!-- Left Panel -->
+    <div class="left-panel d-flex flex-column justify-content-center align-items-center bg-light-subtle p-4 p-lg-5 flex-lg-shrink-0">
+      <!-- Logo -->
+      <div class="mb-4 text-center">
+        <img src="@/public/favicon-dark.svg" alt="Logo" class="mb-3 logo-img">
+      </div>
+
+      <!-- Title -->
+      <div class="text-center mb-4">
+        <h3 class="fw-bold mb-2">
+          {{ $t('login.memberTitle') }}
+          <img src="@/public/image/logo-irusgear-black.png" alt="" height="32px">
+        </h3>
+        <p class="text-secondary">{{ $t('login.memberSubtitle') }}</p>
+      </div>
+
+      <!-- Benefits List -->
+      <div class="benefits-list w-75 p-4 bg-white rounded-4 shadow-sm">
+        <span class="corner corner-tl"></span>
+        <span class="corner corner-tr"></span>
+        <span class="corner corner-bl"></span>
+        <span class="corner corner-br"></span>
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <i class="bi bi-gift-fill benefit-icon"></i>
+          <p class="mb-0"><span class="fw-semibold">{{ $t('login.benefitDiscount') }}</span> {{ $t('login.benefitDiscountDesc') }}</p>
+        </div>
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <i class="bi bi-truck benefit-icon"></i>
+          <p class="mb-0"><span class="fw-semibold">{{ $t('login.benefitShipping') }}</span> {{ $t('login.benefitShippingDesc') }}</p>
+        </div>
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <i class="bi bi-balloon-heart-fill benefit-icon"></i>
+          <p class="mb-0"><span class="fw-semibold">{{ $t('login.benefitBirthday') }}</span> {{ $t('login.benefitBirthdayDesc') }}</p>
+        </div>
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <i class="bi bi-arrow-repeat benefit-icon"></i>
+          <p class="mb-0"><span class="fw-semibold">{{ $t('login.benefitTradeIn') }}</span> {{ $t('login.benefitTradeInDesc') }}</p>
+        </div>
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <i class="bi bi-ticket-perforated-fill benefit-icon"></i>
+          <p class="mb-0"><span class="fw-semibold">{{ $t('login.benefitRankUp') }}</span> {{ $t('login.benefitRankUpDesc') }}</p>
+        </div>
+        <div class="d-flex align-items-start gap-3">
+          <i class="bi bi-briefcase-fill benefit-icon"></i>
+          <p class="mb-0"><span class="fw-semibold">{{ $t('login.benefitBusiness') }}</span> {{ $t('login.benefitBusinessDesc') }}</p>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <NuxtLink to="#" class="text-decoration-none fw-semibold benefit-link">
+          {{ $t('login.viewMemberPolicy') }} <i class="bi bi-chevron-right"></i>
+        </NuxtLink>
+      </div>
+
+      <div class="d-lg-none w-100" style="height: 100px;"></div>
+
+      <div class="mobile-sticky-buttons d-lg-none d-flex gap-3 w-100 p-3 bg-white border-top shadow-lg">
+        <NuxtLink :to="localePath('/auth/register')" class="irus-btn irus-btn--secondary d-flex align-items-center justify-content-center text-dark text-decoration-none">
+          {{ $t('common.register') }}
+        </NuxtLink>
+        <NuxtLink :to="localePath('/auth/login')" class="irus-btn irus-btn--primary d-flex align-items-center justify-content-center text-decoration-none">
+          {{ $t('common.login') }}
+        </NuxtLink>
+      </div>
+    </div>
+    <!-- Right Panel -->
+    <div class="right-panel d-none d-lg-flex flex-grow-1 justify-content-center align-items-center p-4">
+      <div class="p-4 login-card">
         <!-- Header -->
         <div class="mb-4">
           <h1 class="fw-bold fs-3 mb-2">{{ $t('common.signIn') }}</h1>
@@ -162,8 +228,92 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
-.login-container {
-  max-width: 420px;
+.left-panel {
+  flex-basis: 65%;
+  background-image: url('@/public/image/background-image.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #f8f9fa;
+}
+
+.right-panel {
+  flex-basis: 35%;
+}
+
+.logo-img {
+  height: 80px;
+}
+
+.text-primary-custom {
+  color: #1a1a1a;
+}
+
+.benefit-icon {
+  color: #1a1a1a;
+  font-size: 1.1rem;
+  min-width: 20px;
+}
+
+.benefits-list {
+  position: relative;
+}
+
+.corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: #1a1a1a;
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+}
+
+.corner-tl {
+  top: 0;
+  left: 0;
+  border-top-width: 3px;
+  border-left-width: 3px;
+  border-top-left-radius: 12px;
+}
+
+.corner-tr {
+  top: 0;
+  right: 0;
+  border-top-width: 3px;
+  border-right-width: 3px;
+  border-top-right-radius: 12px;
+}
+
+.corner-bl {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+  border-bottom-left-radius: 12px;
+}
+
+.corner-br {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+  border-bottom-right-radius: 12px;
+}
+
+.benefits-list p {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: left;
+}
+
+.benefit-link {
+  color: #1a1a1a;
+  transition: opacity 0.2s ease;
+}
+
+.benefit-link:hover {
+  opacity: 0.7;
 }
 
 .password-toggle {
@@ -186,8 +336,29 @@ const handleLogin = async () => {
 }
 
 .form-check-input:checked {
-  background-color: #000;
-  border-color: #000;
+  background-color: #1a1a1a;
+  border-color: #1a1a1a;
+}
+
+@media screen and (max-width: 992px) {
+  .left-panel {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+  }
+
+  .benefits-list {
+    width: 100% !important;
+  }
+}
+
+.mobile-sticky-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #fff;
 }
 
 @media screen and (max-width: 480px) {
@@ -195,6 +366,7 @@ const handleLogin = async () => {
     padding: 32px 24px;
   }
 }
+
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition: opacity 0.25s ease, transform 0.25s ease;
