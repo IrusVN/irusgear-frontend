@@ -29,318 +29,326 @@
         <div class="d-block d-lg-none border-top w-100 opacity-25"></div>
 
         <div class="p-4 flex-grow-1 bg-white">
-          <div class="d-flex align-items-center mb-4">
-            <div class="flex-grow-1 border-top"></div>
-            <span class="fw-bold text-nowrap ms-3 me-3">{{ $t('register.orInfo') }}</span>
-            <div class="flex-grow-1 border-top"></div>
+
+          <div v-if="authStore.registerStep === 1">
+            <div class="d-flex align-items-center mb-4">
+              <div class="flex-grow-1 border-top"></div>
+              <span class="fw-bold text-nowrap ms-3 me-3">{{ $t('register.orInfo') }}</span>
+              <div class="flex-grow-1 border-top"></div>
+            </div>
+
+            <form @submit.prevent="handleRegister" class="irus-form">
+              <h6 class="fw-bold mb-0 text-dark">{{ $t('register.personalInfo') }}</h6>
+
+              <div class="d-flex gap-3">
+                <div class="w-100">
+                  <label class="form-label small fw-bold text-dark mb-1">{{ $t('common.lastName') }}</label>
+                  <div class="irus-input-wrapper">
+                    <input type="text" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.lastName }"
+                      :placeholder="$t('common.lastName')" 
+                      v-model="form.lastName" 
+                      @blur="validateField('lastName')"
+                      required />
+                  </div>
+                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
+                    {{ errors.lastName }}
+                  </div>
+                </div>
+
+                <div class="w-100">
+                  <label class="form-label small fw-bold text-dark mb-1">{{ $t('common.firstName') }}</label>
+                  <div class="irus-input-wrapper">
+                    <input type="text" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.firstName }"
+                      :placeholder="$t('common.firstName')" 
+                      v-model="form.firstName" 
+                      @blur="validateField('firstName')"
+                      required />
+                  </div>
+                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
+                    {{ errors.firstName }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3">
+                <div class="w-100">
+                  <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.dob') }}</label>
+                  <div class="irus-input-wrapper">
+                    <input type="date" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.dob }"
+                      v-model="form.dob" 
+                      @blur="validateField('dob')"
+                      required />
+                  </div>
+                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
+                    {{ errors.dob }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3">
+                <div class="w-100">
+                  <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.phone') }}</label>
+                  <div class="irus-input-wrapper">
+                    <input type="tel" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.phone }"
+                      :placeholder="$t('register.enterPhone')" 
+                      v-model="form.phone" 
+                      @blur="validateField('phone')"
+                      required />
+                  </div>
+                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
+                    {{ errors.phone }}
+                  </div>
+                </div>
+
+                <div class="w-100">
+                  <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.email') }}</label>
+                  <div class="irus-input-wrapper">
+                    <input type="email" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.email }"
+                      :placeholder="$t('register.enterEmail')" 
+                      v-model="form.email" 
+                      @blur="validateField('email')" />
+                  </div>
+                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
+                    {{ errors.email }}
+                  </div>
+                </div>
+              </div>
+
+              <h6 class="fw-bold mt-2 mb-0 text-dark">{{ $t('register.security') }}</h6>
+
+              <div class="d-flex gap-3">
+                <div class="w-100">
+                  <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.password') }}</label>
+                  <div class="irus-input-wrapper d-flex align-items-center">
+                    <input :type="showPass ? 'text' : 'password'" class="irus-input ps-3 pe-3 flex-grow-1 border-0" 
+                      :class="{ 'border-danger': errors.password }"
+                      :placeholder="$t('register.password')" 
+                      v-model="form.password" 
+                      @blur="validateField('password')"
+                      required />
+                    <button type="button" class="btn text-secondary border-0 bg-transparent px-2" @click="showPass = !showPass">
+                      <i :class="showPass ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                    </button>
+                  </div>
+                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
+                    {{ errors.password }}
+                  </div>
+                </div>
+
+                <div class="w-100">
+                  <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.confirmPassword') }}</label>
+                  <div class="irus-input-wrapper d-flex align-items-center">
+                    <input :type="showConfirmPass ? 'text' : 'password'" class="irus-input ps-3 pe-3 flex-grow-1 border-0" 
+                      :class="{ 'border-danger': errors.confirmPassword }"
+                      :placeholder="$t('register.reEnterPassword')" 
+                      v-model="form.confirmPassword" 
+                      @blur="validateField('confirmPassword')"
+                      required />
+                    <button type="button" class="btn text-secondary border-0 bg-transparent px-2" @click="showConfirmPass = !showConfirmPass">
+                      <i :class="showConfirmPass ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                    </button>
+                  </div>
+                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
+                    {{ errors.confirmPassword }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-check mt-0 mb-3"> 
+                <input class="form-check-input" type="checkbox" id="promo" v-model="form.receivePromo">
+                <label class="form-check-label small text-secondary" for="promo">
+                  {{ $t('register.promo') }}
+                </label>
+              </div>
+
+              <hr class="border-secondary opacity-10 my-3">
+
+              <div class="d-flex justify-content-between align-items-center py-2">
+                <span class="fw-bold small">{{ $t('register.roleSwitch') }}</span>
+                <div class="form-check form-switch m-0">
+                  <input class="form-check-input custom-switch shadow-none" type="checkbox" v-model="isStudent" @change="handleToggle('student')">
+                </div>
+              </div>
+
+              <div v-if="isStudent" class="bg-light p-3 rounded-3 animate-fade mb-3 border">
+                <label class="small fw-bold mb-2 text-dark">{{ $t('register.youAre') }}</label>
+                <div class="d-flex gap-3 mb-3">
+                  <label class="role-selector w-100 cursor-pointer">
+                    <input type="radio" name="role" value="student" v-model="form.studentRole" class="d-none peer">
+                    <div class="selector-content p-2 rounded-3 text-center border d-flex align-items-center justify-content-center gap-2">
+                      <i class="bi bi-backpack"></i> <span class="small fw-bold">{{ $t('register.student') }}</span>
+                    </div>
+                  </label>
+                  <label class="role-selector w-100 cursor-pointer">
+                    <input type="radio" name="role" value="teacher" v-model="form.studentRole" class="d-none peer">
+                    <div class="selector-content p-2 rounded-3 text-center border d-flex align-items-center justify-content-center gap-2">
+                      <i class="bi bi-person-video3"></i> <span class="small fw-bold">{{ $t('register.teacher') }}</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="d-flex gap-3">
+                  <div class="w-100">
+                    <div class="d-flex flex-column w-100" ref="dropdownRef">
+                      <div class="irus-input ps-3 pe-3 d-flex align-items-center justify-content-between cursor-pointer bg-white" 
+                        :class="{ 'border-danger': errors.schoolLevel, 'border-black': isDropdownOpen && !errors.schoolLevel }" 
+                        @click="toggleDropdown">
+                        <span :class="form.schoolLevel ? 'text-dark fw-medium' : 'text-muted'">{{ currentSchoolLabel }}</span>
+                        <i class="bi bi-chevron-down text-secondary transition-rotate" :class="{ 'rotate-180': isDropdownOpen }" style="font-size: 0.85rem;"></i>
+                      </div>
+                      <Transition name="slide-fade">
+                        <div v-if="isDropdownOpen" class="custom-dropdown-menu shadow-lg rounded-4 border-0 mt-2 w-100 bg-white" style="z-index: 1000;">
+                          <ul class="list-unstyled mb-0 p-2">
+                            <li v-for="option in schoolOptions" :key="option.value"
+                              class="dropdown-item rounded-2 py-2 px-3 cursor-pointer d-flex justify-content-between align-items-center"
+                              :class="{ 'active-item': form.schoolLevel === option.value }" @click="selectOption(option)">
+                              <span>{{ option.label }}</span>
+                              <i v-if="form.schoolLevel === option.value" class="bi bi-check-lg text-black"></i>
+                            </li>
+                          </ul>
+                        </div>
+                      </Transition>
+                    </div>
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.schoolLevel }}</div>
+                  </div>
+
+                  <div class="w-100">
+                    <input type="text" class="irus-input ps-3" 
+                      :class="{ 'border-danger': errors.schoolName }"
+                      :placeholder="$t('register.enterSchoolName')" 
+                      v-model="form.schoolName"
+                      @blur="validateField('schoolName')">
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.schoolName }}</div>
+                  </div>
+                </div>
+                
+                <div class="mt-0">
+                  <label class="x-small text-muted mb-2 fw-bold">{{ $t('register.uploadID') }}</label>
+                  <div class="d-flex gap-3">
+                    <div class="w-50 upload-area p-3 text-center bg-white rounded-3 border border-dashed"><i class="bi bi-cloud-arrow-up fs-4 text-secondary"></i><br><span class="x-small text-secondary">{{ $t('register.frontSide') }}</span></div>
+                    <div class="w-50 upload-area p-3 text-center bg-white rounded-3 border border-dashed"><i class="bi bi-cloud-arrow-up fs-4 text-secondary"></i><br><span class="x-small text-secondary">{{ $t('register.backSide') }}</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center py-2 mt-2">
+                <h6 class="fw-bold small">{{ $t('register.businessCustomer') }}</h6>
+                <div class="form-check form-switch m-0">
+                  <input class="form-check-input custom-switch shadow-none" type="checkbox" v-model="isBusiness" @change="handleToggle('business')">
+                </div>
+              </div>
+
+              <div v-if="isBusiness" class="bg-light p-3 rounded-3 animate-fade mb-3 border">
+
+                <div class="d-flex gap-3">
+                  <div class="w-100">
+                    <label class="small fw-bold mb-1 text-dark">{{ $t('register.taxCode') }}</label>
+                    <input type="text" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.taxCode }"
+                      :placeholder="$t('register.enterTaxCode')" 
+                      v-model="form.taxCode"
+                      @blur="validateField('taxCode')">
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.taxCode }}</div>
+                  </div>
+                  <div class="w-100">
+                    <label class="small fw-bold mb-1 text-dark">{{ $t('register.companyName') }}</label>
+                    <input type="text" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.companyName }"
+                      :placeholder="$t('register.enterCompanyName')" 
+                      v-model="form.companyName"
+                      @blur="validateField('companyName')">
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.companyName }}</div>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                  <div class="w-100">
+                    <label class="small fw-bold mb-1 text-dark">{{ $t('register.companyAddress') }}</label>
+                    <input type="text" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.companyAddress }"
+                      :placeholder="$t('register.enterCompanyAddress')" 
+                      v-model="form.companyAddress"
+                      @blur="validateField('companyAddress')">
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.companyAddress }}</div>
+                  </div>
+                  <div class="w-100">
+                    <label class="small fw-bold mb-1 text-dark">{{ $t('register.companyEmail') }}</label>
+                    <input type="email" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.companyEmail }"
+                      :placeholder="$t('register.enterCompanyEmail')" 
+                      v-model="form.companyEmail"
+                      @blur="validateField('companyEmail')">
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.companyEmail }}</div>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                  <div class="w-100">
+                    <label class="small fw-bold mb-1 text-dark">{{ $t('register.authorizedCCCD') }}</label>
+                    <input type="text" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.authorizedCCCD }"
+                      :placeholder="$t('register.enterAuthorizedCCCD')" 
+                      v-model="form.authorizedCCCD"
+                      @blur="validateField('authorizedCCCD')">
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.authorizedCCCD }}</div>
+                  </div>
+                  <div class="w-100">
+                    <label class="small fw-bold mb-1 text-dark">{{ $t('register.note') }} <span class="text-muted fw-normal">{{ $t('register.optional') }}</span></label>
+                    <input type="text" class="irus-input ps-3 pe-3" 
+                      :class="{ 'border-danger': errors.note }"
+                      :placeholder="$t('register.enterNote')" 
+                      v-model="form.note"
+                      @blur="validateField('note')">
+                    <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.note }}</div>
+                  </div>
+                </div>
+                
+                <div class="d-flex gap-3 mt-0">
+                  <div class="w-100">
+                      <label class="small fw-bold mb-1 text-dark">{{ $t('register.businessLicense') }}</label>
+                      <div class="upload-area p-4 text-center bg-white rounded-3 border border-dashed">
+                        <i class="bi bi-upload fs-4 text-dark"></i> <br> <span class="x-small text-secondary">{{ $t('register.uploadFormat') }}</span>
+                      </div>
+                  </div>
+                  <div class="w-100">
+                      <label class="small fw-bold mb-1 text-dark">{{ $t('register.authorizationLetter') }}</label>
+                      <div class="upload-area p-4 text-center bg-white rounded-3 border border-dashed">
+                        <i class="bi bi-upload fs-4 text-dark"></i> <br> <span class="x-small text-secondary">{{ $t('register.uploadFormat') }}</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-check mt-3 mb-3">
+                <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="form.agreeTerms" required>
+                <label class="form-check-label text-secondary" for="agreeTerms">
+                  {{ $t('register.agreeWith') }} <a href="#" class="text-dark">{{ $t('register.terms') }}</a> {{ $t('register.and') }} <a href="#" class="text-dark">{{ $t('register.policy') }}</a>.
+                </label>
+              </div>
+
+              <div class="d-flex gap-3 btn-actions">
+                <button type="button" @click="goBack" class="irus-btn irus-btn--secondary bg-white text-dark w-50 small fw-bold">
+                  {{ $t('register.goBack') }}
+                </button>
+                <button type="submit" 
+                  :disabled="loading"
+                  class="irus-btn irus-btn--primary bg-black border-black w-50 small fw-bold shadow d-flex align-items-center justify-content-center gap-2">
+                  <span v-if="loading" class="spinner-border spinner-border-sm text-white" role="status" aria-hidden="true"></span>
+                  {{ $t('register.register') }}
+                </button>
+              </div>
+            </form>
           </div>
 
-          <form @submit.prevent="handleRegister" class="irus-form">
-            <h6 class="fw-bold mb-0 text-dark">{{ $t('register.personalInfo') }}</h6>
+          <div v-else-if="authStore.registerStep === 2" class="h-100 d-flex align-items-center justify-content-center flex-column">
+            <OtpInput />
+          </div>
 
-            <div class="d-flex gap-3">
-              <div class="w-100">
-                <label class="form-label small fw-bold text-dark mb-1">{{ $t('common.lastName') }}</label>
-                <div class="irus-input-wrapper">
-                  <input type="text" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.lastName }"
-                    :placeholder="$t('common.lastName')" 
-                    v-model="form.lastName" 
-                    @blur="validateField('lastName')"
-                    required />
-                </div>
-                <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
-                  {{ errors.lastName }}
-                </div>
-              </div>
-
-              <div class="w-100">
-                <label class="form-label small fw-bold text-dark mb-1">{{ $t('common.firstName') }}</label>
-                <div class="irus-input-wrapper">
-                  <input type="text" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.firstName }"
-                    :placeholder="$t('common.firstName')" 
-                    v-model="form.firstName" 
-                    @blur="validateField('firstName')"
-                    required />
-                </div>
-                <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
-                  {{ errors.firstName }}
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex gap-3">
-              <div class="w-100">
-                <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.dob') }}</label>
-                <div class="irus-input-wrapper">
-                  <input type="date" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.dob }"
-                    v-model="form.dob" 
-                    @blur="validateField('dob')"
-                    required />
-                </div>
-                <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
-                  {{ errors.dob }}
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex gap-3">
-              <div class="w-100">
-                <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.phone') }}</label>
-                <div class="irus-input-wrapper">
-                  <input type="tel" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.phone }"
-                    :placeholder="$t('register.enterPhone')" 
-                    v-model="form.phone" 
-                    @blur="validateField('phone')"
-                    required />
-                </div>
-                <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
-                  {{ errors.phone }}
-                </div>
-              </div>
-
-              <div class="w-100">
-                <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.email') }}</label>
-                <div class="irus-input-wrapper">
-                  <input type="email" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.email }"
-                    :placeholder="$t('register.enterEmail')" 
-                    v-model="form.email" 
-                    @blur="validateField('email')" />
-                </div>
-                <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
-                  {{ errors.email }}
-                </div>
-              </div>
-            </div>
-
-            <h6 class="fw-bold mt-2 mb-0 text-dark">{{ $t('register.security') }}</h6>
-
-            <div class="d-flex gap-3">
-              <div class="w-100">
-                <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.password') }}</label>
-                <div class="irus-input-wrapper d-flex align-items-center">
-                  <input :type="showPass ? 'text' : 'password'" class="irus-input ps-3 pe-3 flex-grow-1 border-0" 
-                    :class="{ 'border-danger': errors.password }"
-                    :placeholder="$t('register.password')" 
-                    v-model="form.password" 
-                    @blur="validateField('password')"
-                    required />
-                  <button type="button" class="btn text-secondary border-0 bg-transparent px-2" @click="showPass = !showPass">
-                    <i :class="showPass ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
-                  </button>
-                </div>
-                <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
-                  {{ errors.password }}
-                </div>
-              </div>
-
-              <div class="w-100">
-                <label class="form-label small fw-bold text-dark mb-1">{{ $t('register.confirmPassword') }}</label>
-                <div class="irus-input-wrapper d-flex align-items-center">
-                  <input :type="showConfirmPass ? 'text' : 'password'" class="irus-input ps-3 pe-3 flex-grow-1 border-0" 
-                    :class="{ 'border-danger': errors.confirmPassword }"
-                    :placeholder="$t('register.reEnterPassword')" 
-                    v-model="form.confirmPassword" 
-                    @blur="validateField('confirmPassword')"
-                    required />
-                  <button type="button" class="btn text-secondary border-0 bg-transparent px-2" @click="showConfirmPass = !showConfirmPass">
-                    <i :class="showConfirmPass ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
-                  </button>
-                </div>
-                <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">
-                  {{ errors.confirmPassword }}
-                </div>
-              </div>
-            </div>
-
-            <div class="form-check mt-0 mb-3"> 
-              <input class="form-check-input" type="checkbox" id="promo" v-model="form.receivePromo">
-              <label class="form-check-label small text-secondary" for="promo">
-                {{ $t('register.promo') }}
-              </label>
-            </div>
-
-            <hr class="border-secondary opacity-10 my-3">
-
-            <div class="d-flex justify-content-between align-items-center py-2">
-              <span class="fw-bold small">{{ $t('register.roleSwitch') }}</span>
-              <div class="form-check form-switch m-0">
-                <input class="form-check-input custom-switch shadow-none" type="checkbox" v-model="isStudent" @change="handleToggle('student')">
-              </div>
-            </div>
-
-            <div v-if="isStudent" class="bg-light p-3 rounded-3 animate-fade mb-3 border">
-              <label class="small fw-bold mb-2 text-dark">{{ $t('register.youAre') }}</label>
-              <div class="d-flex gap-3 mb-3">
-                <label class="role-selector w-100 cursor-pointer">
-                  <input type="radio" name="role" value="student" v-model="form.studentRole" class="d-none peer">
-                  <div class="selector-content p-2 rounded-3 text-center border d-flex align-items-center justify-content-center gap-2">
-                    <i class="bi bi-backpack"></i> <span class="small fw-bold">{{ $t('register.student') }}</span>
-                  </div>
-                </label>
-                <label class="role-selector w-100 cursor-pointer">
-                  <input type="radio" name="role" value="teacher" v-model="form.studentRole" class="d-none peer">
-                  <div class="selector-content p-2 rounded-3 text-center border d-flex align-items-center justify-content-center gap-2">
-                    <i class="bi bi-person-video3"></i> <span class="small fw-bold">{{ $t('register.teacher') }}</span>
-                  </div>
-                </label>
-              </div>
-
-              <div class="d-flex gap-3">
-                <div class="w-100">
-                  <div class="d-flex flex-column w-100" ref="dropdownRef">
-                    <div class="irus-input ps-3 pe-3 d-flex align-items-center justify-content-between cursor-pointer bg-white" 
-                      :class="{ 'border-danger': errors.schoolLevel, 'border-black': isDropdownOpen && !errors.schoolLevel }" 
-                      @click="toggleDropdown">
-                      <span :class="form.schoolLevel ? 'text-dark fw-medium' : 'text-muted'">{{ currentSchoolLabel }}</span>
-                      <i class="bi bi-chevron-down text-secondary transition-rotate" :class="{ 'rotate-180': isDropdownOpen }" style="font-size: 0.85rem;"></i>
-                    </div>
-                    <Transition name="slide-fade">
-                      <div v-if="isDropdownOpen" class="custom-dropdown-menu shadow-lg rounded-4 border-0 mt-2 w-100 bg-white" style="z-index: 1000;">
-                        <ul class="list-unstyled mb-0 p-2">
-                          <li v-for="option in schoolOptions" :key="option.value"
-                            class="dropdown-item rounded-2 py-2 px-3 cursor-pointer d-flex justify-content-between align-items-center"
-                            :class="{ 'active-item': form.schoolLevel === option.value }" @click="selectOption(option)">
-                            <span>{{ option.label }}</span>
-                            <i v-if="form.schoolLevel === option.value" class="bi bi-check-lg text-black"></i>
-                          </li>
-                        </ul>
-                      </div>
-                    </Transition>
-                  </div>
-                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.schoolLevel }}</div>
-                </div>
-
-                <div class="w-100">
-                  <input type="text" class="irus-input ps-3" 
-                    :class="{ 'border-danger': errors.schoolName }"
-                    :placeholder="$t('register.enterSchoolName')" 
-                    v-model="form.schoolName"
-                    @blur="validateField('schoolName')">
-                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.schoolName }}</div>
-                </div>
-              </div>
-              
-              <div class="mt-0">
-                 <label class="x-small text-muted mb-2 fw-bold">{{ $t('register.uploadID') }}</label>
-                 <div class="d-flex gap-3">
-                   <div class="w-50 upload-area p-3 text-center bg-white rounded-3 border border-dashed"><i class="bi bi-cloud-arrow-up fs-4 text-secondary"></i><br><span class="x-small text-secondary">{{ $t('register.frontSide') }}</span></div>
-                   <div class="w-50 upload-area p-3 text-center bg-white rounded-3 border border-dashed"><i class="bi bi-cloud-arrow-up fs-4 text-secondary"></i><br><span class="x-small text-secondary">{{ $t('register.backSide') }}</span></div>
-                 </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center py-2 mt-2">
-              <h6 class="fw-bold small">{{ $t('register.businessCustomer') }}</h6>
-              <div class="form-check form-switch m-0">
-                <input class="form-check-input custom-switch shadow-none" type="checkbox" v-model="isBusiness" @change="handleToggle('business')">
-              </div>
-            </div>
-
-            <div v-if="isBusiness" class="bg-light p-3 rounded-3 animate-fade mb-3 border">
-
-              <div class="d-flex gap-3">
-                <div class="w-100">
-                  <label class="small fw-bold mb-1 text-dark">{{ $t('register.taxCode') }}</label>
-                  <input type="text" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.taxCode }"
-                    :placeholder="$t('register.enterTaxCode')" 
-                    v-model="form.taxCode"
-                    @blur="validateField('taxCode')">
-                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.taxCode }}</div>
-                </div>
-                <div class="w-100">
-                  <label class="small fw-bold mb-1 text-dark">{{ $t('register.companyName') }}</label>
-                  <input type="text" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.companyName }"
-                    :placeholder="$t('register.enterCompanyName')" 
-                    v-model="form.companyName"
-                    @blur="validateField('companyName')">
-                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.companyName }}</div>
-                </div>
-              </div>
-
-              <div class="d-flex gap-3">
-                <div class="w-100">
-                  <label class="small fw-bold mb-1 text-dark">{{ $t('register.companyAddress') }}</label>
-                  <input type="text" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.companyAddress }"
-                    :placeholder="$t('register.enterCompanyAddress')" 
-                    v-model="form.companyAddress"
-                    @blur="validateField('companyAddress')">
-                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.companyAddress }}</div>
-                </div>
-                <div class="w-100">
-                  <label class="small fw-bold mb-1 text-dark">{{ $t('register.companyEmail') }}</label>
-                  <input type="email" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.companyEmail }"
-                    :placeholder="$t('register.enterCompanyEmail')" 
-                    v-model="form.companyEmail"
-                    @blur="validateField('companyEmail')">
-                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.companyEmail }}</div>
-                </div>
-              </div>
-
-              <div class="d-flex gap-3">
-                <div class="w-100">
-                  <label class="small fw-bold mb-1 text-dark">{{ $t('register.authorizedCCCD') }}</label>
-                  <input type="text" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.authorizedCCCD }"
-                    :placeholder="$t('register.enterAuthorizedCCCD')" 
-                    v-model="form.authorizedCCCD"
-                    @blur="validateField('authorizedCCCD')">
-                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.authorizedCCCD }}</div>
-                </div>
-                <div class="w-100">
-                  <label class="small fw-bold mb-1 text-dark">{{ $t('register.note') }} <span class="text-muted fw-normal">{{ $t('register.optional') }}</span></label>
-                  <input type="text" class="irus-input ps-3 pe-3" 
-                    :class="{ 'border-danger': errors.note }"
-                    :placeholder="$t('register.enterNote')" 
-                    v-model="form.note"
-                    @blur="validateField('note')">
-                  <div class="text-danger x-small mt-1 ps-1" style="min-height: 25px;">{{ errors.note }}</div>
-                </div>
-              </div>
-              
-              <div class="d-flex gap-3 mt-0">
-                 <div class="w-100">
-                    <label class="small fw-bold mb-1 text-dark">{{ $t('register.businessLicense') }}</label>
-                    <div class="upload-area p-4 text-center bg-white rounded-3 border border-dashed">
-                       <i class="bi bi-upload fs-4 text-dark"></i> <br> <span class="x-small text-secondary">{{ $t('register.uploadFormat') }}</span>
-                    </div>
-                 </div>
-                 <div class="w-100">
-                    <label class="small fw-bold mb-1 text-dark">{{ $t('register.authorizationLetter') }}</label>
-                     <div class="upload-area p-4 text-center bg-white rounded-3 border border-dashed">
-                       <i class="bi bi-upload fs-4 text-dark"></i> <br> <span class="x-small text-secondary">{{ $t('register.uploadFormat') }}</span>
-                    </div>
-                 </div>
-              </div>
-            </div>
-
-            <div class="form-check mt-3 mb-3">
-              <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="form.agreeTerms" required>
-              <label class="form-check-label text-secondary" for="agreeTerms">
-                {{ $t('register.agreeWith') }} <a href="#" class="text-dark">{{ $t('register.terms') }}</a> {{ $t('register.and') }} <a href="#" class="text-dark">{{ $t('register.policy') }}</a>.
-              </label>
-            </div>
-
-            <div class="d-flex gap-3 btn-actions">
-              <button type="button" @click="goBack" class="irus-btn irus-btn--secondary bg-white text-dark w-50 small fw-bold">
-                {{ $t('register.goBack') }}
-              </button>
-              <button type="submit" 
-                :disabled="loading"
-                class="irus-btn irus-btn--primary bg-black border-black w-50 small fw-bold shadow d-flex align-items-center justify-content-center gap-2">
-                 <span v-if="loading" class="spinner-border spinner-border-sm text-white" role="status" aria-hidden="true"></span>
-                {{ $t('register.register') }}
-              </button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
@@ -352,6 +360,7 @@ import { ref, reactive, watch, computed, onMounted, onUnmounted } from 'vue'
 import { useLocalePath, navigateTo } from '#imports'
 import GoogleLogo from '@/components/Icons/Logo/GoogleLogo.vue'
 import FacebookLogo from '@/components/Icons/Logo/FacebookLogo.vue'
+import OtpInput from '@/components/Models/OtpInput.vue' // Import OtpInput
 import { registerSchema } from '@/utils/validation/registerSchema'
 import { useGlobalToast } from '@/composables/useGlobalToast.js'
 import { useAuthStore } from '@/stores/authStore.js'
@@ -364,7 +373,7 @@ const isBusiness = ref(false)
 const isDropdownOpen = ref(false)
 const dropdownRef = ref(null)
 const toast = useGlobalToast()
-const authStore = useAuthStore()
+const authStore = useAuthStore() // Sử dụng Store
 const loading = ref(false)
 
 const schoolOptions = [
@@ -502,13 +511,13 @@ const handleRegister = async () => {
       note: isBusiness.value ? (form.value.note || null) : null,
     };
 
+    // GỌI STORE ĐỂ ĐĂNG KÝ
     const response = await authStore.register(payload);
+    
     if (response.status === true) {
       toast.success(response.message);
-      navigateTo({
-        path: localePath('/auth/verify'),
-        query: { email: response.user.email }
-      });
+      // KHÔNG CẦN NAVIGATE
+      // Store sẽ tự động set registerStep = 2 -> Giao diện tự đổi sang OTP
     }
 
   } catch (err) {
@@ -526,7 +535,7 @@ const handleRegister = async () => {
             } 
           });
         } else {
-          toast.error(err.message);
+          toast.error(err.data?.message || err.message || 'Đăng ký thất bại');
         }
       }
   } finally {
@@ -540,6 +549,8 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
+  // Tùy chọn: Reset store về step 1 khi rời trang để lần sau vào lại là form trắng
+  authStore.resetToRegister(); 
 })
 </script>
 
