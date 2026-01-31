@@ -274,7 +274,7 @@ const handleLogin = async () => {
       return navigateTo('/');
     }
   } catch (e) {
-    errorMessage.value = e.message;
+    errorMessage.value = e.data?.message;
   } finally {
     loading.value = false;
   }
