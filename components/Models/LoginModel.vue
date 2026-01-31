@@ -56,11 +56,11 @@
       </div>
 
       <!-- Mobile Sticky Buttons -->
-      <div class="mobile-sticky-buttons d-lg-none d-flex gap-3 w-100 p-3 bg-white shadow-lg">
-        <NuxtLink :to="localePath('/auth/register')" class="btn irus-btn irus-btn--secondary flex-grow-1">
+      <div class="mobile-sticky-buttons d-lg-none d-flex gap-3 w-100 p-3">
+        <NuxtLink :to="localePath('/auth/register')" class="irus-btn irus-btn--secondary d-flex align-items-center justify-content-center text-dark text-decoration-none">
           {{ $t('common.register') }}
         </NuxtLink>
-        <NuxtLink :to="localePath('/auth/login')" class="btn irus-btn irus-btn--primary flex-grow-1">
+        <NuxtLink :to="localePath('/auth/login')" class="irus-btn irus-btn--primary d-flex align-items-center justify-content-center text-decoration-none">
           {{ $t('common.login') }}
         </NuxtLink>
       </div>
@@ -345,7 +345,7 @@ const handleLogin = async () => {
     min-width: 100%;
     max-width: 100%;
     min-height: 100vh;
-    padding-bottom: 100px;
+    padding-bottom: 120px;
   }
 
   .benefits-list {
@@ -359,7 +359,6 @@ const handleLogin = async () => {
   left: 0;
   right: 0;
   z-index: 1000;
-  border-top: 1px solid #e5e5e5;
 }
 
 @media screen and (max-width: 480px) {
