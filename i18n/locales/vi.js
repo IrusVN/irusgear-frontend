@@ -18,6 +18,7 @@ export default {
         lastName: "Họ",
         support: "Hỗ trợ",
         unknown: "Không xác định",
+        back: "Quay lại",
     },
     role: {
         default: "Mặc định",
@@ -206,5 +207,27 @@ export default {
     verify: {
         title: "Xác minh tài khoản",
         subtitle: "Vui lòng nhập mã xác minh đã được gửi đến email của bạn",
+    },
+    restorePassword: {
+        recoverTitle: "Khôi phục mật khẩu",
+        recoverSubtitle: "Nhập email đã đăng ký để nhận mã xác minh",
+        checkSpam: "Kiểm tra hộp thư Spam",
+        checkSpamDesc: "Nếu không thấy mã trong Hộp thư đến, hãy kiểm tra mục Spam hoặc Quảng cáo.",
+        secureTip: "Bảo mật thông tin",
+        secureTipDesc: "Tuyệt đối không chia sẻ mã xác thực (OTP) cho bất kỳ ai, kể cả nhân viên hỗ trợ.",
+        needHelp: "Cần hỗ trợ thêm?",
+        needHelpDesc: "Liên hệ cho chúng tôi nếu bạn không thể truy cập email này.",
+        recover: "Khôi phục",
+        forgotPassword: "@:page_titles.forgotPassword",
+        verification: "Xác minh",
+        resetPassword: "Đặt lại mật khẩu",
+        forgotPasswordSubtitle: "Đừng lo lắng, chúng tôi ở đây để hỗ trợ bạn.",
+        otpSubtitle: "Vui lòng nhập mã xác minh đã được gửi đến email của bạn",
+        newPasswordSubtitle: "Vui lòng nhập mật khẩu mới cho tài khoản của bạn",
+        forgotPasswordNote: "Chúng tôi sẽ gửi mã xác nhận đến email của bạn.",
+        sendCode: "Gửi mã xác nhận",
+        newPassword: "Mật khẩu mới",
+        confirmNewPassword: "Xác nhận mật khẩu mới",
+        resetPasswordBtn: "Đổi mật khẩu",
     }
 }

@@ -3,6 +3,9 @@
     <div class="register-container irus-card overflow-hidden">
       <div class="d-flex flex-column flex-lg-row">
         <div class="p-4 d-flex flex-column justify-content-center align-items-center text-center position-relative" style="min-width: 350px;">
+        <NuxtLink to="/" class="btn btn-light position-fixed top-0 start-0 m-3 d-lg-none rounded-circle shadow d-flex align-items-center justify-content-center btn-back-mobile" >
+          <i class="bi bi-arrow-left text-dark"></i>
+        </NuxtLink>
           <div class="mb-4">
             <img src="/favicon-dark.svg" alt="Logo" class="mb-3" style="height: 80px;">
             <h3 class="text-dark fw-bold text-uppercase mb-2">{{ $t('register.title') }}</h3>
@@ -142,5 +145,12 @@ onUnmounted(() => {
     background: none !important;
     box-shadow: none !important;
   }
+}
+
+.btn-back-mobile {
+  width: 40px;
+  height: 40px;
+  z-index: 1050; 
+  padding: 0;
 }
 </style>

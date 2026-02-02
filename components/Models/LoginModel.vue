@@ -1,6 +1,9 @@
 <template>
   <div class="d-flex flex-column flex-lg-row min-vh-100 position-relative overflow-hidden">
     <div class="left-panel d-flex flex-column justify-content-center align-items-center bg-light-subtle p-4 p-lg-5 flex-lg-shrink-0">
+      <NuxtLink to="/" class="btn btn-light position-fixed top-0 start-0 m-3 d-lg-none rounded-circle shadow d-flex align-items-center justify-content-center btn-back-mobile" >
+        <i class="bi bi-arrow-left text-dark"></i>
+      </NuxtLink>
       <div class="mb-4 text-center">
         <img src="@/public/favicon-dark.svg" alt="Logo" class="mb-3 logo-img">
       </div>
@@ -14,7 +17,7 @@
       <div class="benefits-list w-100 w-lg-75 p-4 bg-white rounded-4 shadow-sm position-relative">
         <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
         <span class="corner corner-bl"></span><span class="corner corner-br"></span>
-        <div class="d-flex flex-column gap-3">
+        <div class="d-flex flex-column gap-3">  
           <div class="d-flex align-items-start gap-3"><i class="bi bi-gift-fill benefit-icon"></i>
             <p class="mb-0">
               <span class="fw-semibold">{{ $t('login.benefitDiscount') }}</span>
@@ -107,7 +110,7 @@
             </div>
           </Transition>
           <div class="text-start mb-3">
-            <NuxtLink :to="localePath('/auth/forgot-password')" class="text-decoration-none fw-bold text-dark small">
+            <NuxtLink :to="localePath('/auth/restore-password')" class="text-decoration-none fw-bold text-dark small">
               {{ $t('login.forgotPassword') }}
             </NuxtLink>
           </div>
@@ -187,7 +190,7 @@
             </div>
           </Transition>
           <div class="text-start mb-3">
-            <NuxtLink :to="localePath('/auth/forgot-password')" class="text-decoration-none fw-bold text-dark small">
+            <NuxtLink :to="localePath('/auth/restore-password')" class="text-decoration-none fw-bold text-dark small">
               {{ $t('login.forgotPassword') }}
             </NuxtLink>
           </div>
@@ -218,9 +221,9 @@
           </div>
         </div>
         <div class="text-center mt-4 pb-5">
-          <p class="small text-muted mb-0">By signing in with an account, you agree to SO's <NuxtLink to="#"
-              class="fw-bold text-dark text-decoration-underline">Terms of Service</NuxtLink> and <NuxtLink to="#"
-              class="fw-bold text-dark text-decoration-underline">Privacy Policy</NuxtLink>.</p>
+          <p class="small text-muted mb-0">{{ $t('login.terms') }} <NuxtLink to="#"
+              class="fw-bold text-dark text-decoration-underline">{{ $t('login.termsLink') }}</NuxtLink> {{ $t('common.and') }} <NuxtLink to="#"
+              class="fw-bold text-dark text-decoration-underline">{{ $t('login.privacyLink') }}</NuxtLink>.</p>
         </div>
       </div>
     </BottomSheet>
@@ -418,5 +421,11 @@ const handleLogin = async () => {
 .fade-slide-leave-to {
   opacity: 0;
   transform: translateY(-6px);
+}
+.btn-back-mobile {
+  width: 40px;
+  height: 40px;
+  z-index: 1050; 
+  padding: 0;
 }
 </style>
