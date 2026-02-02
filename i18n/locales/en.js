@@ -18,6 +18,7 @@ export default {
         lastName: "Last Name",
         support: "Support",
         unknown: "unknown",
+        back: "Back",
     },
     role: {
         default: "DEFAULT",
@@ -206,5 +207,27 @@ export default {
     verify: {
         title: "Verify Account",
         subtitle: "Please enter the verification code sent to your email",
+    },
+    restorePassword: {
+        recoverTitle: "Recover Password",
+        recoverSubtitle: "Enter the registered email to receive a verification code",
+        checkSpam: "Check Spam Folder",
+        checkSpamDesc: "If you don't see the code in your Inbox, check the Spam or Promotions folder.",
+        secureTip: "Security Tip",
+        secureTipDesc: "Never share your verification code (OTP) with anyone, including support staff.",
+        needHelp: "Need more help?",
+        needHelpDesc: "Contact us if you cannot access this email.",
+        recover: "Recover",
+        forgotPassword: "@:page_titles.forgotPassword",
+        verification: "Verification",
+        resetPassword: "Reset Password",
+        forgotPasswordSubtitle: "Don't worry, we're here to help.",
+        otpSubtitle: "Please enter the verification code sent to your email",
+        newPasswordSubtitle: "Please enter a new password for your account",
+        forgotPasswordNote: "We will send a verification code to your email.",
+        sendCode: "Send Verification Code",
+        newPassword: "New Password",
+        confirmNewPassword: "Confirm New Password",
+        resetPasswordBtn: "Reset Password",
     }
 }

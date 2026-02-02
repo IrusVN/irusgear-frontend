@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useRuntimeConfig, navigateTo, useRequestHeaders } from "#imports";
 import { resetAllStores } from "@/utils/storeRegistry";
-import { useGlobalToast } from "@/composables/useGlobalToast"; // Import Toast
 
 export const useAuthStore = defineStore("auth", () => {
   const config = useRuntimeConfig();
@@ -10,10 +9,16 @@ export const useAuthStore = defineStore("auth", () => {
   const permissions = ref([]);
   const loading = ref(false);
 
+  // state đăng ký
   const verifyEmail = ref("");
   const registerStep = ref(1);
   const otpCode = ref("");
   const error = ref(null);
+
+  // state quên mật khẩu
+  const restoreStep = ref(1);
+  const restoreEmail = ref("");
+  const resetToken = ref("");
 
   const isAuthenticated = computed(() => !!user.value);
 
@@ -139,6 +144,89 @@ export const useAuthStore = defineStore("auth", () => {
     registerStep.value = 1;
   };
 
+  const forgotPassword = async (email) => {
+    loading.value = true;
+    try {
+      const data = await apiFetch("/forgot-password", {
+        method: "POST",
+        body: { email }
+      });
+
+      restoreEmail.value = email;
+      restoreStep.value = 2;
+      
+      return data;
+    } catch (err) {
+      throw err;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const verifyResetOtp = async (otp) => {
+    loading.value = true;
+    try {
+      const data = await apiFetch("/verify-reset-otp", {
+        method: "POST",
+        body: { 
+          email: restoreEmail.value, 
+          otp: otp 
+        }
+      });
+      if (data.token) {
+        resetToken.value = data.token;
+        restoreStep.value = 3;
+        return { status: true };
+      } else {
+        throw new Error("Không nhận được token xác thực.");
+      }
+    } catch (err) {
+      throw err;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+const resetPassword = async (password, passwordConfirmation) => {
+    loading.value = true;
+    try {
+      const data = await apiFetch("/reset-password", {
+        method: "POST",
+        body: {
+          email: restoreEmail.value,
+          token: resetToken.value,
+          password: password,
+          password_confirmation: passwordConfirmation
+        }
+      });
+      resetRestoreProcess();
+      return data;
+    } catch (err) {
+      throw err;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const resetRestoreProcess = () => {
+    restoreStep.value = 1;
+    restoreEmail.value = "";
+    resetToken.value = "";
+    otpCode.value = "";
+  };
+
+  const resendResetOtp = async () => {
+    try {
+      await apiFetch("/forgot-password", {
+        method: "POST",
+        body: { email: restoreEmail.value }
+      });
+      return true;
+    } catch (err) {
+      return false;
+    }
+  };
+
   return {
     user,
     permissions,
@@ -155,6 +243,12 @@ export const useAuthStore = defineStore("auth", () => {
     fetchUser,
     logout,
     register,
+    forgotPassword,
+    restoreStep,
+    verifyResetOtp,
+    resetPassword,
+    resendResetOtp,
+    resetRestoreProcess,
 
     verifyOtp,
     resendOtp,
