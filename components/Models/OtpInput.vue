@@ -4,17 +4,17 @@
       <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
         <i class="bi bi-shield-check fs-2 text-dark"></i>
       </div>
-      <h4 class="fw-bold text-dark mb-2">Xác thực tài khoản</h4>
+      <h4 class="fw-bold text-dark mb-2">{{ $t('verify.title') }}</h4>
       <p class="text-secondary small">
-        Mã xác thực đã được gửi đến email
-        <span class="text-dark fw-bold">{{ authStore.verifyEmail }}</span>
+        {{ $t('verify.description') }}
+        <span class="text-dark fw-bold">{{ targetEmail }}</span>
       </p>
     </div>
 
     <div class="irus-form">
       <div class="mb-3">
         <label class="fw-bold text-dark small mb-3 d-block text-center">
-          Nhập mã xác thực
+          {{ $t('verify.otpSubtitle') }}
         </label>
         
         <div class="d-flex justify-content-center gap-2 otp-wrapper">
@@ -46,18 +46,18 @@
         :disabled="isOtpIncomplete || authStore.loading"
       >
         <span v-if="authStore.loading" class="spinner-border spinner-border-sm text-white"></span>
-        <span>Xác nhận</span>
+        <span>{{ $t('verify.verifyBtn') }}</span>
       </button>
 
       <div class="text-center mt-3 d-flex flex-column gap-2">
         <p class="small text-secondary mb-0">
-          Bạn chưa nhận được mã? 
-          <button v-if="timer === 0" @click="handleResend" class="btn btn-link p-0 text-dark fw-bold text-decoration-none small">Gửi lại</button>
+          {{ $t('verify.resendCode') }}
+          <button v-if="timer === 0" @click="handleResend" class="btn btn-link p-0 text-dark fw-bold text-decoration-none small">{{ $t('verify.resendBtn') }}</button>
           <span v-else class="text-dark fw-bold">{{ formatTime(timer) }}</span>
         </p>
         
-        <button @click="authStore.resetToRegister()" class="btn btn-link text-secondary text-decoration-none small">
-           Quay lại đăng ký
+        <button @click="handleBack" class="btn btn-link text-secondary text-decoration-none small" >
+          <i class="bi bi-arrow-left me-1"></i>{{ $t('common.back') }}
         </button>
       </div>
     </div>
@@ -68,7 +68,9 @@
 import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 import { useLocalePath, navigateTo } from '#imports'
+import { useMobileSheet } from '@/composables/useMobileSheet'
 
+const mobileSheetRef = ref(null)
 const authStore = useAuthStore()
 const localePath = useLocalePath()
 const digits = reactive(['', '', '', '', '', ''])
@@ -78,6 +80,34 @@ const timer = ref(60)
 let intervalId = null
 
 const isOtpIncomplete = computed(() => digits.some(d => d === ''))
+
+useMobileSheet(mobileSheetRef, () => {
+  const isRegister = authStore.registerStep === 2;
+  const isForgot = authStore.restoreStep === 2;
+  return isRegister || isForgot;
+});
+
+const currentMode = computed(() => {
+  if (authStore.registerStep === 2) return 'register';
+  if (authStore.restoreStep === 2) return 'forgot-password';
+  return 'register';
+})
+
+const targetEmail = computed(() => {
+  return currentMode.value === 'register' 
+    ? authStore.verifyEmail 
+    : authStore.restoreEmail
+})
+
+const handleBack = () => {
+  localError.value = ''
+  authStore.error = null
+  if (currentMode.value === 'register') {
+    authStore.resetToRegister()
+  } else {
+    authStore.resetRestoreProcess()
+  }
+}
 
 const handleInput = (e, index) => {
   const val = e.target.value.replace(/[^0-9]/g, '')
@@ -114,25 +144,44 @@ const handleVerify = async () => {
     localError.value = 'Vui lòng nhập đủ 6 số.'
     return
   }
-  const result = await authStore.verifyOtp();
-  
-  if (!result.status === true) {
-    localError.value = result.message
-    return
+  try {
+    let result = { status: false, message: '' }
+    if (currentMode.value === 'register') {
+      result = await authStore.verifyOtp();
+      if (result.status) {
+        navigateTo(localePath('/auth/login'));
+        return; 
+      }
+    } else {
+      result = await authStore.verifyResetOtp(authStore.otpCode);
+      if (result.status) {
+        authStore.restoreStep = 3;
+        navigateTo(localePath('/auth/restore-password'));
+        return;
+      }
+    }
+    if (!result.status) {
+      localError.value = result.message;
+    }
+  } catch (err) {
+    localError.value = err.data?.message;
   }
-  navigateTo(localePath('/auth/login'));
 }
 
 const handleResend = async () => {
   localError.value = ''
-  const response = await authStore.resendOtp()
-  if (!response === true) {
-    localError.value = response.message
-    startTimer()
-    return
+  let result = { status: false, message: '' }
+  if (currentMode.value === 'register') {
+    result = await authStore.resendOtp(authStore.verifyEmail)
+  } else {
+    result = await authStore.resendResetOtp(authStore.restoreEmail)
   }
-  localError.value = response.message
-  startTimer()
+  if (result.status === true) {
+    localError.value = result.message
+    startTimer() 
+  } else {
+    localError.value = result.message
+  }
 }
 
 const formatTime = (seconds) => {
@@ -151,11 +200,15 @@ const startTimer = () => {
 }
 
 onMounted(() => {
-  if (!authStore.verifyEmail) {
-    authStore.registerStep = 1;
-  } else {
-    startTimer();
-  }
+  if (!targetEmail.value) {
+     if (currentMode.value === 'register') {
+        authStore.registerStep = 1;
+     } else {
+        authStore.restoreStep = 1;
+     }
+     return;
+  } 
+  startTimer();
 })
 
 onUnmounted(() => {

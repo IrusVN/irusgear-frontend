@@ -104,7 +104,7 @@
             <label class="d-flex align-items-center gap-2 small text-muted cursor-pointer"><input type="checkbox" v-model="rememberMe" class="form-check-input mt-0" /> {{ $t('login.rememberMe') }}</label>
           </div>
           <Transition name="fade-slide">
-            <div v-if="errorMessage" class="alert alert-danger d-flex align-items-center gap-2 mt-2 mb-3 py-2 small" role="alert">
+            <div v-if="errorMessage" class="alert alert-danger d-flex align-items-center gap-2 mt-2 mb-3 small" role="alert">
               <i class="bi bi-exclamation-triangle-fill"></i>
               <span class="flex-grow-1"> {{ errorMessage }}</span>
             </div>
@@ -245,6 +245,7 @@ import { useLocalePath } from '#imports'
 import { useAuthStore } from "@/stores/authStore";
 import { useI18n } from '#imports'
 import { useGlobalToast } from '@/composables/useGlobalToast.js'
+import { useMobileSheet } from '@/composables/useMobileSheet'
 
 const { t } = useI18n();
 const toast = useGlobalToast()
@@ -260,6 +261,12 @@ const rememberMe = ref(false)
 
 const mobileSheetRef = ref(null)
 
+useMobileSheet(mobileSheetRef, () => {
+  const isRegister = auth.registerStep === 2;
+  const isForgot = auth.restoreStep === 2;
+  return isRegister || isForgot;
+});
+
 watch([email, password], () => { errorMessage.value = ''; });
 
 const openMobileLogin = () => {
@@ -272,11 +279,19 @@ const handleLogin = async () => {
   try {
     const response = await auth.login({ email: email.value, password: password.value, rememberMe: rememberMe.value });
     if (response.status === true) {
-      toast.success("Login successful!");
+      toast.success(t('login.loginSuccess'));
       mobileSheetRef.value?.close();
       return navigateTo('/');
     }
   } catch (e) {
+    const errorCode = e.data?.code;
+    if (errorCode === 'ACCOUNT_UNVERIFIED') {
+      auth.verifyEmail = email.value;
+      auth.registerStep = 2;
+      toast.info(e.data?.message);
+      mobileSheetRef.value?.close();
+      return navigateTo(localePath('/auth/register'));
+    }
     errorMessage.value = e.data?.message;
   } finally {
     loading.value = false;

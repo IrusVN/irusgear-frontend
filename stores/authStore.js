@@ -236,6 +236,7 @@ const resetPassword = async (password, passwordConfirmation) => {
     resetToRegister,
 
     verifyEmail,
+    restoreEmail,
     otpCode,
     error,
 
