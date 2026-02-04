@@ -76,13 +76,18 @@ import OtpInput from '@/components/Models/OtpInput.vue'
 import BottomSheet from '@/components/Common/BottomSheet.vue'
 import RegisterForm from '@/components/Models/RegisterForm.vue'
 import { useAuthStore } from '@/stores/authStore.js'
+import { useMobileSheet } from '@/composables/useMobileSheet'
 
 const localePath = useLocalePath()
 const authStore = useAuthStore()
 
 const mobileSheetRef = ref(null)
-const desktopFormRef = ref(null)
-const mobileFormRef = ref(null)
+
+useMobileSheet(mobileSheetRef, () => {
+  const isRegister = authStore.registerStep === 2;
+  const isForgot = authStore.restoreStep === 2;
+  return isRegister || isForgot;
+});
 
 const openMobileRegister = () => {
   mobileSheetRef.value?.open()
@@ -96,6 +101,14 @@ provide('closeSheet', closeSheet)
 onUnmounted(() => {
   authStore.resetToRegister();
 })
+
+onMounted(() => {
+  if (authStore.registerStep === 2 && window.innerWidth < 992) {
+    setTimeout(() => {
+      mobileSheetRef.value?.open();
+    }, 100);
+  }
+});
 </script>
 
 <style scoped>

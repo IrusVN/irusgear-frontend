@@ -91,7 +91,7 @@
         <div v-if="authStore.restoreStep === 1" class="flex-grow-1">
           <SendEmailForm ref="mobileEmailRef" />
         </div>
-        <div v-else-if="authStore.restoreStep === 2" class="flex-grow-1 d-flex flex-column justify-content-center pt-5">
+        <div v-else-if="authStore.restoreStep === 2" class="flex-grow-1 d-flex flex-column justify-content-center">
           <OtpInput mode="reset" />
         </div>
         <div v-else-if="authStore.restoreStep === 3" class="flex-grow-1">
@@ -110,16 +110,18 @@ import SendEmailForm from '@/components/Models/RestoreForms/SendEmailForm.vue'
 import NewPasswordForm from '@/components/Models/RestoreForms/NewPasswordForm.vue'
 import OtpInput from '@/components/Models/OtpInput.vue'
 import { useAuthStore } from '@/stores/authStore.js'
+import { useMobileSheet } from '@/composables/useMobileSheet'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
 const authStore = useAuthStore()
 
 const mobileSheetRef = ref(null)
-const desktopEmailRef = ref(null)
-const mobileEmailRef = ref(null)
-const desktopPassRef = ref(null)
-const mobilePassRef = ref(null)
+useMobileSheet(mobileSheetRef, () => {
+  const isRegister = authStore.registerStep === 2;
+  const isForgot = authStore.restoreStep === 2;
+  return isRegister || isForgot;
+});
 
 const currentTitle = computed(() => {
   switch (authStore.restoreStep) {

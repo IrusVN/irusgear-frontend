@@ -86,6 +86,7 @@ export default {
         benefitBusiness: "Business privileges:",
         benefitBusinessDesc: "Up to 10% discount exclusively for B2B customers",
         viewMemberPolicy: "View member benefits policy details",
+        loginSuccess: "Login successful!",
     },
     register: {
         title: "Register",
@@ -207,6 +208,11 @@ export default {
     verify: {
         title: "Verify Account",
         subtitle: "Please enter the verification code sent to your email",
+        description: "The verification code has been sent to email",
+        otpSubtitle: "Enter verification code",
+        verifyBtn: "Verify",
+        resendCode: "Didn't receive the code? ",
+        resendBtn: "Resend",
     },
     restorePassword: {
         recoverTitle: "Recover Password",

@@ -86,6 +86,7 @@ export default {
         benefitBusiness: "Đặc quyền doanh nghiệp:",
         benefitBusinessDesc: "Chiết khấu đến 10% dành riêng cho khách hàng B2B",
         viewMemberPolicy: "Xem chi tiết chính sách ưu đãi thành viên",
+        loginSuccess: "Đăng nhập thành công!",
     },
     register: {
         title: "Đăng ký",
@@ -207,6 +208,11 @@ export default {
     verify: {
         title: "Xác minh tài khoản",
         subtitle: "Vui lòng nhập mã xác minh đã được gửi đến email của bạn",
+        description: "Mã xác thực đã được gửi đến email",
+        otpSubtitle: "Nhập mã xác thực",
+        verifyBtn: "Xác minh",
+        resendCode: "Bạn chưa nhận được mã? ",
+        resendBtn: "Gửi lại",
     },
     restorePassword: {
         recoverTitle: "Khôi phục mật khẩu",
