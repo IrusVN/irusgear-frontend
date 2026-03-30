@@ -22,7 +22,16 @@
           data-bs-ride="carousel"
           data-bs-interval="4000"
         >
-          <div ref="tabScrollerRef" class="hero-carousel-tabs">
+          <div
+            ref="tabScrollerRef"
+            :class="[
+              'hero-carousel-tabs',
+              {
+                'hero-carousel-tabs-left-wing': activeIndex === 0,
+                'hero-carousel-tabs-right-wing': activeIndex === heroBanners.length - 1,
+              },
+            ]"
+          >
             <button
               v-for="(banner, i) in heroBanners"
               :key="banner.image"
@@ -30,7 +39,14 @@
               type="button"
               :data-bs-target="'#heroCarousel'"
               :data-bs-slide-to="i"
-              :class="['hero-carousel-tab', { active: activeIndex === i }]"
+              :class="[
+                'hero-carousel-tab',
+                {
+                  active: activeIndex === i,
+                  'hero-carousel-tab-first-active': activeIndex === i && i === 0,
+                  'hero-carousel-tab-last-active': activeIndex === i && i === heroBanners.length - 1,
+                },
+              ]"
               @click="activeIndex = i"
             >
               <span v-if="activeIndex === i" class="hero-tab-wing hero-tab-wing-left" aria-hidden="true">
@@ -79,88 +95,92 @@
       </div>
 
       <div class="service-panel d-none d-xl-flex flex-column gap-2 flex-shrink-0">
-        <template v-if="user">
-          <div class="bg-white rounded-3 border shadow-sm overflow-hidden pb-2">
-            <div class="p-3 border-bottom">
-              <div class="fw-bold" style="font-size: 0.95rem;">{{ user.first_name }} {{ user.last_name }}</div>
-              <div class="text-secondary mb-2" style="font-size: 0.75rem;">{{ user.email }}</div>
-              <div class="d-flex gap-1 flex-wrap">
-                <span class="badge bg-dark rounded-pill" style="font-size: 0.68rem;">{{ $t(userRoleKey) }}</span>
+        <div class="service-welcome-card">
+          <template v-if="user">
+            <div class="service-welcome-head">
+              <div class="service-avatar service-avatar-user">
+                <i class="bi bi-person-fill"></i>
+              </div>
+              <div class="flex-grow-1 min-w-0">
+                <p class="service-welcome-title mb-0">{{ user.first_name }} {{ user.last_name }}</p>
+                <p class="service-welcome-subtitle mb-0 text-truncate">{{ user.email }}</p>
               </div>
             </div>
 
-            <div class="px-3 py-2 border-bottom">
-              <a href="#" class="d-flex align-items-center justify-content-between text-decoration-none text-dark">
-                <div class="d-flex align-items-center gap-2">
-                  <span>🎁</span>
-                  <span class="fw-semibold" style="font-size: 0.82rem;">Xem ưu đãi của bạn</span>
-                </div>
-                <i class="bi bi-chevron-right small text-secondary"></i>
-              </a>
+            <div class="d-flex flex-wrap gap-1 mt-2">
+              <span class="service-role-chip">{{ $t(userRoleKey) }}</span>
             </div>
 
-            <div class="px-3 pt-2">
-              <div class="bg-light text-secondary text-center rounded px-2 py-1 mb-1" style="font-size: 0.72rem;">Ưu đãi cho giáo dục</div>
-              <a href="#" class="acct-row"><i class="bi bi-mortarboard-fill text-danger me-1"></i> Đăng ký <b>nhận ưu đãi</b></a>
-              <a href="#" class="acct-row"><i class="bi bi-mortarboard-fill text-danger me-1"></i> Deal hot <b>học sinh sinh viên</b></a>
-              <a href="#" class="acct-row"><i class="bi bi-mortarboard-fill text-danger me-1"></i> Laptop <b>ưu đãi khủng</b></a>
-            </div>
+            <NuxtLink :to="localePath('/')" class="service-perk-link mt-2">
+              <span class="service-perk-icon">
+                <i class="bi bi-gift-fill"></i>
+              </span>
+              <span>Xem ưu đãi của bạn</span>
+              <i class="bi bi-chevron-right service-chevron"></i>
+            </NuxtLink>
+          </template>
 
-            <div class="px-3 pt-1">
-              <div class="bg-light text-secondary text-center rounded px-2 py-1 mb-1" style="font-size: 0.72rem;">Thu cũ lên đời giá hời</div>
-              <a href="#" class="acct-row"><i class="bi bi-arrow-repeat text-danger me-1"></i> iPhone trợ giá <b>đến 3 triệu</b></a>
-              <a href="#" class="acct-row"><i class="bi bi-arrow-repeat text-danger me-1"></i> Samsung trợ giá <b>đến 4 triệu</b></a>
-            </div>
-
-            <div class="px-3 pt-1">
-              <div class="bg-light text-secondary text-center rounded px-2 py-1 mb-1" style="font-size: 0.72rem;">Khách hàng doanh nghiệp (B2B)</div>
-              <a href="#" class="acct-row"><i class="bi bi-briefcase-fill me-1"></i> Đăng ký <b>S-Business</b></a>
-              <a href="#" class="acct-row"><i class="bi bi-briefcase-fill me-1"></i> Chính sách <b>ưu đãi</b></a>
-            </div>
-          </div>
-        </template>
-
-        <template v-else>
-          <div class="bg-white rounded-3 border shadow-sm overflow-hidden pb-2">
-            <div class="p-3 border-bottom">
-              <div class="fw-bold mb-1" style="font-size: 0.9rem;">Chào mừng bạn đến với IrusGear</div>
-              <p class="text-secondary mb-2" style="font-size: 0.75rem;">Nhập hội thành viên để không bỏ lỡ các ưu đãi hấp dẫn.</p>
-              <div class="d-flex gap-2">
-                <NuxtLink :to="localePath('/auth/login')" class="btn btn-dark btn-sm rounded-pill px-3 flex-fill" style="font-size: 0.78rem;">Đăng nhập</NuxtLink>
-                <NuxtLink :to="localePath('/auth/register')" class="btn btn-outline-dark btn-sm rounded-pill px-3 flex-fill" style="font-size: 0.78rem;">Đăng ký</NuxtLink>
+          <template v-else>
+            <div class="service-welcome-head">
+              <div class="service-avatar">
+                <svg viewBox="0 0 48 48" class="service-avatar-logo" aria-hidden="true">
+                  <rect x="6" y="6" width="36" height="36" rx="12" fill="#111827" />
+                  <path d="M17 15h14v4H17zm0 7h14v4H17zm0 7h8v4h-8z" fill="#fff" />
+                  <circle cx="31" cy="31" r="3" fill="#fff" />
+                </svg>
+              </div>
+              <div class="flex-grow-1">
+                <p class="service-welcome-title mb-0">Chào mừng bạn đến với IrusGear</p>
               </div>
             </div>
 
-            <div class="px-3 py-2 border-bottom">
-              <a href="#" class="d-flex align-items-center justify-content-between text-decoration-none text-dark">
-                <div class="d-flex align-items-center gap-2">
-                  <span>🎁</span>
-                  <span class="fw-semibold" style="font-size: 0.82rem;">Xem ưu đãi Smember</span>
-                </div>
-                <i class="bi bi-chevron-right small text-secondary"></i>
-              </a>
+            <p class="service-welcome-copy">
+              Nhập hội thành viên để không bỏ lỡ các ưu đãi hấp dẫn.
+            </p>
+
+            <div class="service-auth-actions">
+              <NuxtLink :to="localePath('/auth/login')" class="service-text-link">Đăng nhập</NuxtLink>
+              <span class="text-secondary">hoặc</span>
+              <NuxtLink :to="localePath('/auth/register')" class="service-text-link">Đăng ký</NuxtLink>
             </div>
 
-            <div class="px-3 pt-2">
-              <div class="bg-light text-secondary text-center rounded px-2 py-1 mb-1" style="font-size: 0.72rem;">Ưu đãi cho giáo dục</div>
-              <a href="#" class="acct-row"><i class="bi bi-mortarboard-fill text-danger me-1"></i> Đăng ký <b>nhận ưu đãi</b></a>
-              <a href="#" class="acct-row"><i class="bi bi-mortarboard-fill text-danger me-1"></i> Deal hot <b>học sinh sinh viên</b></a>
-              <a href="#" class="acct-row"><i class="bi bi-mortarboard-fill text-danger me-1"></i> Laptop <b>ưu đãi khủng</b></a>
-            </div>
+            <NuxtLink :to="localePath('/')" class="service-perk-link">
+              <span class="service-perk-icon">
+                <i class="bi bi-gift-fill"></i>
+              </span>
+              <span>Xem ưu đãi Smember</span>
+              <i class="bi bi-chevron-right service-chevron"></i>
+            </NuxtLink>
+          </template>
+        </div>
 
-            <div class="px-3 pt-1">
-              <div class="bg-light text-secondary text-center rounded px-2 py-1 mb-1" style="font-size: 0.72rem;">Thu cũ lên đời giá hời</div>
-              <a href="#" class="acct-row"><i class="bi bi-arrow-repeat text-danger me-1"></i> iPhone trợ giá <b>đến 3 triệu</b></a>
-              <a href="#" class="acct-row"><i class="bi bi-arrow-repeat text-danger me-1"></i> Samsung trợ giá <b>đến 4 triệu</b></a>
-            </div>
+        <div class="service-benefits-card">
+          <div
+            v-for="group in serviceGroups"
+            :key="group.title"
+            class="service-benefit-group"
+          >
+            <NuxtLink :to="localePath(group.href)" class="service-group-title">
+              {{ group.title }}
+            </NuxtLink>
 
-            <div class="px-3 pt-1">
-              <div class="bg-light text-secondary text-center rounded px-2 py-1 mb-1" style="font-size: 0.72rem;">Khách hàng doanh nghiệp (B2B)</div>
-              <a href="#" class="acct-row"><i class="bi bi-briefcase-fill me-1"></i> Đăng ký <b>S-Business</b></a>
-              <a href="#" class="acct-row"><i class="bi bi-briefcase-fill me-1"></i> Chính sách <b>ưu đãi</b></a>
-            </div>
+            <NuxtLink
+              v-for="item in group.items"
+              :key="item.label"
+              :to="localePath(item.href)"
+              class="acct-row"
+            >
+              <span class="service-item-icon">
+                <i :class="['bi', item.icon]"></i>
+              </span>
+              <span class="flex-grow-1" v-html="item.label"></span>
+            </NuxtLink>
           </div>
-        </template>
+
+          <NuxtLink :to="localePath('/')" class="service-bottom-banner">
+            <span class="service-bottom-pill">Ưu đãi nổi bật</span>
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </div>
@@ -220,6 +240,34 @@ const heroBanners = [
   { image: "/image/dashboard/homehero/swiperslide/mbam5homepae.png", alt: "MacBook Air M5 banner", title: "MACBOOK AIR M5", subtitle: "Đăng ký nhận tin" },
 ];
 
+const serviceGroups = [
+  {
+    title: "Ưu đãi cho giáo dục",
+    href: "/",
+    items: [
+      { icon: "bi-mortarboard-fill", href: "/", label: "Đăng ký <b>nhận ưu đãi</b>" },
+      { icon: "bi-mortarboard-fill", href: "/", label: "Deal hot <b>học sinh sinh viên</b>" },
+      { icon: "bi-mortarboard-fill", href: "/", label: "Laptop <b>ưu đãi khủng</b>" },
+    ],
+  },
+  {
+    title: "Thu cũ lên đời giá hời",
+    href: "/",
+    items: [
+      { icon: "bi-arrow-repeat", href: "/", label: "iPhone trợ giá <b>đến 3 triệu</b>" },
+      { icon: "bi-arrow-repeat", href: "/", label: "Samsung trợ giá <b>đến 4 triệu</b>" },
+    ],
+  },
+  {
+    title: "Khách hàng doanh nghiệp (B2B)",
+    href: "/",
+    items: [
+      { icon: "bi-briefcase-fill", href: "/", label: "Đăng ký <b>S-Business</b>" },
+      { icon: "bi-briefcase-fill", href: "/", label: "Chính sách <b>ưu đãi</b>" },
+    ],
+  },
+];
+
 const fetchCategoriesTree = async () => {
   isLoading.value = true;
   feGlobalStore.setApiUrl("/categories/tree");
@@ -250,7 +298,7 @@ const centerActiveTab = (index) => {
   container.scrollTo({ left: nextLeft, behavior: "smooth" });
 };
 
-const handleCarouselSlid = (event) => {
+const handleCarouselSlide = (event) => {
   activeIndex.value = event?.to ?? 0;
   nextTick(() => centerActiveTab(activeIndex.value));
 };
@@ -259,7 +307,7 @@ onMounted(() => {
   const carouselEl = carouselRef.value;
   if (!carouselEl) return;
 
-  carouselEl.addEventListener("slid.bs.carousel", handleCarouselSlid);
+  carouselEl.addEventListener("slide.bs.carousel", handleCarouselSlide);
   nextTick(() => centerActiveTab(activeIndex.value));
 });
 
@@ -267,7 +315,7 @@ onUnmounted(() => {
   const carouselEl = carouselRef.value;
   if (!carouselEl) return;
 
-  carouselEl.removeEventListener("slid.bs.carousel", handleCarouselSlid);
+  carouselEl.removeEventListener("slide.bs.carousel", handleCarouselSlide);
 });
 </script>
 
@@ -316,27 +364,45 @@ onUnmounted(() => {
 }
 
 .hero-carousel-tabs {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: stretch;
   overflow-x: auto;
   scrollbar-width: none;
   background: #fff;
-  border-bottom: 1px solid #ececec;
+  margin-bottom: -6px;
 }
 
 .hero-carousel-tabs::-webkit-scrollbar {
   display: none;
 }
 
+.hero-carousel-tabs-left-wing {
+  padding-left: 35px;
+}
+
+.hero-carousel-tabs-right-wing {
+  padding-right: 35px;
+}
+
 .hero-carousel-tab {
   position: relative;
   flex: 0 0 auto;
-  padding: 0.55rem 1.8rem;
+  padding: 0.55rem 1.75rem;
   border: 0;
   background: #fff;
   color: #6b7280;
   white-space: nowrap;
   z-index: 0;
+}
+
+.hero-carousel-tab-first-active {
+  margin-left: -1px;
+}
+
+.hero-carousel-tab-last-active {
+  margin-right: -1px;
 }
 
 .hero-tab-label {
@@ -391,8 +457,10 @@ onUnmounted(() => {
 .hero-slide-image {
   display: block;
   width: 100%;
-  height: 360px;
-  object-fit: cover;
+  height: 402px;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
 }
 
 .promo-banner-list {
@@ -413,18 +481,188 @@ onUnmounted(() => {
   object-fit: cover;
 }
 
+.service-welcome-card,
+.service-benefits-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.service-welcome-card {
+  padding: 0.85rem 0.95rem;
+}
+
+.service-welcome-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.service-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff5f0 0%, #f4c8d0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.service-avatar-logo {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.service-avatar-user {
+  background: linear-gradient(180deg, #f3f4f6 0%, #d1d5db 100%);
+  color: #111827;
+  font-size: 1.15rem;
+}
+
+.service-welcome-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #1f2937;
+}
+
+.service-welcome-subtitle,
+.service-welcome-copy {
+  margin-top: 0.2rem;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: #6b7280;
+}
+
+.service-auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.45rem 0 0.55rem;
+  font-size: 0.78rem;
+}
+
+.service-text-link {
+  color: #111827;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.service-text-link:hover {
+  color: #000;
+}
+
+.service-role-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: #111827;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.service-perk-link {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.55rem;
+  text-decoration: none;
+  color: #111827;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.service-perk-link:hover,
+.service-group-title:hover,
+.acct-row:hover {
+  color: #111827;
+}
+
+.service-perk-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  color: #111827;
+}
+
+.service-chevron {
+  margin-left: auto;
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.service-benefits-card {
+  padding: 0.65rem;
+}
+
+.service-benefit-group + .service-benefit-group {
+  margin-top: 0.5rem;
+}
+
+.service-group-title {
+  display: block;
+  padding: 0.34rem 0.55rem;
+  border-radius: 0.45rem;
+  background: #f3f4f6;
+  color: #374151;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-bottom: 0.22rem;
+}
+
 .acct-row {
   display: flex;
   align-items: center;
-  font-size: 0.78rem;
-  color: #222;
+  gap: 0.45rem;
+  min-height: 28px;
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.45rem;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: #1f2937;
   text-decoration: none;
-  padding: 5px 0;
-  transition: color 0.15s;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .acct-row:hover {
-  color: #e53935;
+  background: #f3f4f6;
+}
+
+.service-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  color: #111827;
+  flex-shrink: 0;
+}
+
+.service-bottom-banner {
+  display: block;
+  margin-top: 0.5rem;
+  text-decoration: none;
+}
+
+.service-bottom-pill {
+  display: block;
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.65rem;
+  text-align: center;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #374151 0%, #111827 100%);
 }
 
 @media (max-width: 1399.98px) {
