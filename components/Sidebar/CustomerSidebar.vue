@@ -106,69 +106,43 @@
               <a href="#" class="d-flex align-items-center gap-2 text-decoration-none p-1 rounded-pill hover-bg ps-2" data-bs-toggle="dropdown" >
                 <img class="rounded-circle border" width="35" height="35" alt="Avatar"
                 :src="`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=000&color=fff`"/>
+
                 <div class="d-none d-xl-block text-start lh-1">
-                  <div class="fw-bold text-dark fs-7">{{ user.first_name }} {{ user.last_name }}</div>
-                  <small class="text-secondary fs-8">{{ $t(userRoleKey) }}</small>
+                  <div class="fw-bold text-dark fs-7">
+                    {{ user.first_name }} {{ user.last_name }}
+                  </div>
+                  <small class="text-secondary fs-8">
+                    {{ $t(userRoleKey) }}
+                  </small>
                 </div>
+
                 <i class="bi bi-caret-down-fill fs-8 text-secondary ms-1"></i>
               </a>
 
-              <!-- CellphoneS-style account dropdown -->
-              <div class="dropdown-menu dropdown-menu-end account-dropdown border-0 shadow-lg mt-3 p-0">
-
-                <!-- User info block -->
-                <div class="acct-header p-3 border-bottom">
-                  <div class="fw-bold" style="font-size:1rem">{{ user.first_name }} {{ user.last_name }}</div>
-                  <div class="text-secondary small mb-2">{{ user.email }}</div>
-                  <div class="d-flex gap-2">
-                    <span class="acct-badge dark">{{ $t(userRoleKey) }}</span>
-                    <span v-if="user.role_id === 4" class="acct-badge green">S-Student</span>
-                  </div>
-                </div>
-
-                <!-- Xem ưu đãi -->
-                <div class="px-3 py-2 border-bottom">
-                  <NuxtLink to="/profile" class="acct-promo-row text-decoration-none d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center gap-2">
-                      <span class="acct-promo-icon">🎁</span>
-                      <span class="fw-semibold small">Xem ưu đãi của bạn</span>
-                    </div>
-                    <i class="bi bi-chevron-right text-secondary small"></i>
+              <ul class="dropdown-menu dropdown-menu-end glass-dropdown border-0 shadow-lg mt-3 rounded-4 p-2">
+                <li>
+                  <NuxtLink to="/profile" class="dropdown-item rounded-3 py-2">
+                    <i class="bi bi-person me-2"></i>Hồ sơ cá nhân
                   </NuxtLink>
-                </div>
+                </li>
 
-                <!-- Ưu đãi giáo dục -->
-                <div class="px-3 pt-2">
-                  <div class="acct-group-label">Ưu đãi cho giáo dục</div>
-                  <a href="#" class="acct-menu-item"><i class="bi bi-mortarboard-fill text-danger"></i> Đăng ký <strong>nhận ưu đãi</strong></a>
-                  <a href="#" class="acct-menu-item"><i class="bi bi-mortarboard-fill text-danger"></i> Deal hot <strong>học sinh sinh viên</strong></a>
-                  <a href="#" class="acct-menu-item"><i class="bi bi-mortarboard-fill text-danger"></i> Laptop <strong>ưu đãi khủng</strong></a>
-                </div>
+                <li>
+                  <NuxtLink to="/orders" class="dropdown-item rounded-3 py-2">
+                    <i class="bi bi-box-seam me-2"></i>Đơn mua
+                  </NuxtLink>
+                </li>
 
-                <!-- Thu cũ lên đời -->
-                <div class="px-3 pt-1">
-                  <div class="acct-group-label">Thu cũ lên đời giá hời</div>
-                  <a href="#" class="acct-menu-item"><i class="bi bi-arrow-repeat text-danger"></i> iPhone trợ giá <strong>đến 3 triệu</strong></a>
-                  <a href="#" class="acct-menu-item"><i class="bi bi-arrow-repeat text-danger"></i> Samsung trợ giá <strong>đến 4 triệu</strong></a>
-                </div>
+                <li><hr class="dropdown-divider opacity-10 my-1"></li>
 
-                <!-- B2B -->
-                <div class="px-3 pt-1">
-                  <div class="acct-group-label">Khách hàng doanh nghiệp (B2B)</div>
-                  <a href="#" class="acct-menu-item"><i class="bi bi-briefcase-fill text-dark"></i> Đăng ký <strong>S-Business</strong></a>
-                  <a href="#" class="acct-menu-item"><i class="bi bi-briefcase-fill text-dark"></i> Chính sách <strong>ưu đãi</strong></a>
-                </div>
-
-                <!-- Divider + actions -->
-                <div class="px-3 pt-2 pb-2 border-top mt-2">
-                  <NuxtLink to="/orders" class="acct-menu-item"><i class="bi bi-box-seam text-dark"></i> Đơn hàng của tôi</NuxtLink>
-                  <NuxtLink to="/profile" class="acct-menu-item"><i class="bi bi-person text-dark"></i> Hồ sơ cá nhân</NuxtLink>
-                  <button class="acct-menu-item text-danger border-0 bg-transparent w-100 text-start" @click="auth.logout">
-                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                <li>
+                  <button
+                    class="dropdown-item rounded-3 py-2 text-danger"
+                    @click="auth.logout"
+                  >
+                    <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
                   </button>
-                </div>
-
-              </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
