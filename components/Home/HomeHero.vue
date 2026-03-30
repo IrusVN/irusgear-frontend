@@ -358,8 +358,8 @@ onUnmounted(() => {
 }
 
 .cat-item:hover {
-  background: #fff5f5;
-  color: #d70018 !important;
+  background: black;
+  color: #fff5f5 !important;
   transform: translateX(3px);
 }
 
