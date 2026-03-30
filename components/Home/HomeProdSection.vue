@@ -44,8 +44,8 @@
 
           <!-- Product grid -->
           <div v-else class="px-3 pb-1">
-            <div v-if="products.length > 0" class="row g-2">
-              <div v-for="p in products.slice(0, 10)" :key="p.id" class="col-6 col-md-4 col-lg-prod">
+            <div v-if="products.length > 0" class="d-flex flex-wrap product-list">
+              <div v-for="p in products.slice(0, 10)" :key="p.id" class="product-item">
                 <HomeProdCard :product="p" />
               </div>
             </div>
@@ -92,11 +92,28 @@ const sideColor = computed(() =>
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+.product-list {
+  gap: 0.5rem;
+}
+
+.product-item {
+  flex: 0 0 calc(50% - 0.25rem);
+  min-width: 0;
+}
+
 .tab-btn:not(.btn-dark):hover {
   border-color: #111 !important;
 }
 
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .product-item {
+    flex-basis: calc((100% - 1rem) / 3);
+  }
+}
+
 @media (min-width: 992px) {
-  .col-lg-prod { flex: 0 0 auto; width: 20%; }
+  .product-item {
+    flex-basis: calc((100% - 2rem) / 5);
+  }
 }
 </style>

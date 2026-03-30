@@ -12,7 +12,7 @@
     <div class="p-2">
       <p class="prod-name">{{ product.name }}</p>
 
-      <div class="d-flex align-items-center gap-1 mb-1">
+      <div class="d-flex align-items-center gap-1 mb-1 flex-wrap">
         <span class="price-new">{{ fmt(product.price) }}</span>
         <span class="disc-badge">-{{ product.discount }}%</span>
       </div>
@@ -88,8 +88,15 @@ const fmt = (v) => new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND
 .gift-row { font-size: 0.68rem; color: #555; display: flex; align-items: center; gap: 4px; margin-bottom: 2px; }
 .gift-row .bi { color: #e53935; font-size: 0.62rem; flex-shrink: 0; }
 
-.bottom-row { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f0f0f0; padding-top: 5px; }
+.bottom-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; border-top: 1px solid #f0f0f0; padding-top: 5px; }
 .rating { font-size: 0.72rem; font-weight: 600; color: #111; display: flex; align-items: center; gap: 3px; }
 .rating .bi { color: #f5a623; font-size: 0.65rem; }
 .sold { font-size: 0.68rem; color: #999; }
+
+@media (max-width: 359.98px) {
+  .bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 </style>

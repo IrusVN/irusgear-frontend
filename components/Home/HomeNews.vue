@@ -5,8 +5,8 @@
         <span class="fw-bold m-0" style="font-size: 1rem; letter-spacing: 0.3px;">TIN TỨC</span>
         <a href="#" class="text-dark small text-decoration-none fw-semibold">Xem tất cả ›</a>
       </div>
-      <div class="row g-3">
-        <div v-for="n in newsList" :key="n.id" class="col-6 col-md-4 col-lg-col5">
+      <div class="d-flex flex-wrap news-list">
+        <div v-for="n in newsList" :key="n.id" class="news-item">
           <a href="#" class="text-decoration-none text-dark d-block">
             <img :src="n.img" :alt="n.title" class="w-100 rounded-3 mb-2" style="height:130px;object-fit:cover">
             <p class="small fw-semibold news-clamp mb-0">{{ n.title }}</p>
@@ -28,6 +28,15 @@ const newsList = [
 </script>
 
 <style scoped>
+.news-list {
+  gap: 1rem;
+}
+
+.news-item {
+  flex: 0 0 calc(50% - 0.5rem);
+  min-width: 0;
+}
+
 .news-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -36,7 +45,15 @@ const newsList = [
   line-height: 1.4;
 }
 
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .news-item {
+    flex-basis: calc((100% - 2rem) / 3);
+  }
+}
+
 @media (min-width: 992px) {
-  .col-lg-col5 { flex: 0 0 auto; width: 20%; }
+  .news-item {
+    flex-basis: calc((100% - 4rem) / 5);
+  }
 }
 </style>
