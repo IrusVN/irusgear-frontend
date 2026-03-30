@@ -2,7 +2,7 @@
     <div>
         <div class="d-flex flex-column min-vh-100">
             <CustomerSidebar />
-            <main class="flex-grow-1 pt-5 mt-4">
+            <main class="flex-grow-1 py-5 pt-5 mt-5">
                 <slot />
             </main>
             <Footer />
