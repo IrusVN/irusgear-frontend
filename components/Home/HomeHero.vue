@@ -1,17 +1,68 @@
 <template>
   <div class="container-xl py-3 px-3 mx-auto">
     <div class="hero-layout">
-      <div class="bg-white rounded-3 shadow-sm border overflow-hidden flex-shrink-0 d-none d-lg-flex flex-column justify-content-between py-1">
+      <div
+        class="hero-category-wrap d-none d-lg-flex flex-shrink-0"
+        @mouseenter="openMegaMenu"
+        @mouseleave="closeMegaMenu"
+      >
+        <div class="bg-white rounded-3 shadow-sm border overflow-hidden d-flex flex-column justify-content-between py-1 hero-category-sidebar">
         <a
           v-for="cat in categories"
-          :key="cat.name"
+          :key="cat.key"
           href="#"
           class="d-flex align-items-center gap-2 px-3 text-decoration-none text-dark cat-item border-bottom"
+          :class="{ 'cat-item-active': activeSectionKey === cat.key }"
+          @mouseenter="activateMegaMenu(cat.key)"
+          @focus="activateMegaMenu(cat.key)"
+          @click.prevent
         >
-          <i :class="['bi', cat.icon, 'text-center flex-shrink-0']" style="font-size: 1.2rem; width: 22px;"></i>
+          <span class="hero-category-icon">
+            <i :class="['bi', cat.icon, 'text-center flex-shrink-0']" style="font-size: 1.2rem; width: 22px;"></i>
+          </span>
           <span class="flex-grow-1 fw-semibold" style="font-size: 0.92rem;">{{ cat.name }}</span>
-          <i class="bi bi-chevron-right text-secondary" style="font-size: 0.7rem;"></i>
+          <i class="bi bi-chevron-right" style="font-size: 0.7rem;"></i>
         </a>
+
+          <div
+            v-if="isMegaMenuOpen && activeSection"
+            class="hero-mega-menu-panel bg-white rounded-3 shadow-sm border"
+            @mouseenter="keepMegaMenuOpen"
+            @mouseleave="closeMegaMenu"
+          >
+            <div class="hero-mega-menu-columns">
+              <section
+                v-for="group in activeGroups"
+                :key="group.key || group.title"
+                class="hero-mega-menu-group"
+              >
+                <h3 class="hero-mega-menu-group-title">{{ group.title }}</h3>
+
+                <div class="hero-mega-menu-group-items">
+                  <component
+                    :is="resolveHref(item) ? 'a' : 'div'"
+                    v-for="item in resolveGroupItems(group)"
+                    :key="`${group.key || group.title}-${item.slug || item.title}`"
+                    :href="resolveHref(item) || undefined"
+                    :aria-label="item.title || undefined"
+                    class="hero-mega-menu-chip"
+                    :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }"
+                  >
+                    <img
+                      v-if="item.image"
+                      :src="item.image"
+                      :alt="item.title"
+                      class="hero-mega-menu-chip-image"
+                      loading="lazy"
+                    />
+                    <span v-if="!shouldHideItemTitle(group, item)" class="hero-mega-menu-chip-title">{{ item.title }}</span>
+                    <span v-if="item.badge" class="hero-mega-menu-chip-badge">{{ item.badge }}</span>
+                  </component>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="d-flex flex-column gap-2 min-w-0 overflow-hidden">
@@ -191,21 +242,23 @@ import { computed, nextTick, onBeforeUpdate, onMounted, onUnmounted, ref } from 
 import { useI18n, useLocalePath } from "#imports";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/authStore";
+import { useHomeStore } from "@/stores/homeStore";
 import { getUserRoleKey } from "@/utils/roleHelper";
-import { useFeGlobalStore } from "@/stores/feGlobalStore";
 
 const { t } = useI18n();
 const localePath = useLocalePath();
 const auth = useAuthStore();
+const homeStore = useHomeStore();
+const { megaMenuSections, activeMegaMenuKey } = storeToRefs(homeStore);
 const { user } = storeToRefs(auth);
 const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ""));
 
-const isLoading = ref(false);
-const feGlobalStore = useFeGlobalStore();
 const carouselRef = ref(null);
 const tabScrollerRef = ref(null);
 const tabButtons = ref([]);
 const activeIndex = ref(0);
+const isMegaMenuOpen = ref(false);
+let megaMenuCloseTimer = null;
 
 const setTabButtonRef = (el) => {
   if (el) tabButtons.value.push(el);
@@ -215,19 +268,44 @@ onBeforeUpdate(() => {
   tabButtons.value = [];
 });
 
-const categories = ref([
-  { name: "Điện thoại, Tablet", icon: "bi-phone" },
-  { name: "Laptop", icon: "bi-laptop" },
-  { name: "Âm thanh, Mic thu âm", icon: "bi-headphones" },
-  { name: "Đồng hồ, Camera", icon: "bi-smartwatch" },
-  { name: "Đồ gia dụng, Làm đẹp", icon: "bi-house" },
-  { name: "PC, Màn hình, Máy in", icon: "bi-pc-display" },
-  { name: "Tivi, Điện máy", icon: "bi-display" },
-  { name: "Thu cũ đổi mới", icon: "bi-repeat" },
-  { name: "Hàng cũ", icon: "bi-box-seam" },
-  { name: "Khuyến mãi", icon: "bi-patch-check" },
-  { name: "Tin công nghệ", icon: "bi-card-text" },
-]);
+const normalizedSections = computed(() =>
+  Array.isArray(megaMenuSections.value) ? megaMenuSections.value.filter(Boolean) : []
+);
+
+const categoryIconMap = {
+  "dien-thoai-tablet": "bi-phone",
+  laptop: "bi-laptop",
+  "am-thanh-mic-thu-am": "bi-headphones",
+  "dong-ho-camera": "bi-smartwatch",
+  "do-gia-dung-lam-dep": "bi-house",
+  "pc-man-hinh-may-in": "bi-pc-display",
+  "tv-dien-may": "bi-display",
+  "thu-cu-doi-moi": "bi-repeat",
+  "hang-cu": "bi-box-seam",
+  "khuyen-mai": "bi-patch-check",
+  "tin-cong-nghe": "bi-card-text",
+};
+
+const categories = computed(() =>
+  normalizedSections.value.map((section) => ({
+    key: section.key,
+    name: section.title,
+    icon: categoryIconMap[section.key] || "bi-grid",
+  }))
+);
+
+const activeSectionKey = computed(() => {
+  if (!normalizedSections.value.length) return "";
+
+  const matched = normalizedSections.value.find((section) => section.key === activeMegaMenuKey.value);
+  return matched?.key || normalizedSections.value[0]?.key || "";
+});
+
+const activeSection = computed(
+  () => normalizedSections.value.find((section) => section.key === activeSectionKey.value) || null
+);
+
+const activeGroups = computed(() => activeSection.value?.children || []);
 
 const heroBanners = [
   { image: "/image/dashboard/homehero/swiperslide/Home(3).png", alt: "Galaxy S26 Series banner", title: "GALAXY S26 ULTRA", subtitle: "Mở bán ưu đãi khủng" },
@@ -268,22 +346,73 @@ const serviceGroups = [
   },
 ];
 
-const fetchCategoriesTree = async () => {
-  isLoading.value = true;
-  feGlobalStore.setApiUrl("/categories/tree");
-  try {
-    const res = await feGlobalStore.fetchItems();
-    if (res && res.data) {
-      categories.value = res.data.map((cat) => ({
-        name: cat.name,
-        icon: cat.icon || "bi-tags",
-      }));
-    }
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-  } finally {
-    isLoading.value = false;
+const activateMegaMenu = (key) => {
+  if (!key) return;
+  homeStore.setActiveMegaMenuKey(key);
+  isMegaMenuOpen.value = true;
+};
+
+const resolveGroupItems = (group) => {
+  if (!group) return [];
+
+  if (Array.isArray(group.items) && group.items.length) {
+    return group.items;
   }
+
+  if (Array.isArray(group.children) && group.children.length) {
+    return group.children.filter((child) => child?.title);
+  }
+
+  return [];
+};
+
+const resolveHref = (item) => {
+  if (!item) return "";
+  if (item.url) return item.url;
+  if (item.slug) return `/${item.slug}`;
+  return "";
+};
+
+const normalizeText = (value) =>
+  String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+const isBrandGroup = (group) => {
+  const title = normalizeText(group?.title);
+  return title.includes("hang") || title.includes("thuong hieu") || title.includes("brand");
+};
+
+const shouldHideItemTitle = (group, item) => {
+  return Boolean(item?.image) && isBrandGroup(group);
+};
+
+const openMegaMenu = () => {
+  if (megaMenuCloseTimer) {
+    clearTimeout(megaMenuCloseTimer);
+    megaMenuCloseTimer = null;
+  }
+  isMegaMenuOpen.value = true;
+};
+
+const keepMegaMenuOpen = () => {
+  if (megaMenuCloseTimer) {
+    clearTimeout(megaMenuCloseTimer);
+    megaMenuCloseTimer = null;
+  }
+  isMegaMenuOpen.value = true;
+};
+
+const closeMegaMenu = () => {
+  if (megaMenuCloseTimer) {
+    clearTimeout(megaMenuCloseTimer);
+  }
+
+  megaMenuCloseTimer = setTimeout(() => {
+    isMegaMenuOpen.value = false;
+    megaMenuCloseTimer = null;
+  }, 180);
 };
 
 const centerActiveTab = (index) => {
@@ -304,6 +433,14 @@ const handleCarouselSlide = (event) => {
 };
 
 onMounted(() => {
+  if (!normalizedSections.value.length) {
+    homeStore.fetchMegaMenu().catch(() => {});
+  }
+
+  if (!activeMegaMenuKey.value && normalizedSections.value.length) {
+    homeStore.setActiveMegaMenuKey(normalizedSections.value[0]?.key || "");
+  }
+
   const carouselEl = carouselRef.value;
   if (!carouselEl) return;
 
@@ -312,6 +449,11 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  if (megaMenuCloseTimer) {
+    clearTimeout(megaMenuCloseTimer);
+    megaMenuCloseTimer = null;
+  }
+
   const carouselEl = carouselRef.value;
   if (!carouselEl) return;
 
@@ -353,14 +495,139 @@ onUnmounted(() => {
   transition: background 0.15s, color 0.15s, transform 0.15s;
 }
 
+.hero-category-wrap {
+  position: relative;
+  z-index: 15;
+}
+
+.hero-category-sidebar {
+  width: 258px;
+}
+
+.hero-category-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+  flex-shrink: 0;
+}
+
+.hero-category-icon img {
+  display: none;
+}
+
+.cat-item > .bi-chevron-right {
+  color: #adb5bd;
+}
+
+.cat-item.cat-item-active {
+  background: #f8f9fa;
+}
+
+.cat-item.cat-item-active > span {
+  color: #111827;
+}
+
+.cat-item.cat-item-active > .bi-chevron-right {
+  color: #111827;
+}
+
 .cat-item:last-child {
   border-bottom: none !important;
 }
 
 .cat-item:hover {
-  background: black;
-  color: #fff5f5 !important;
+  background: #f8f9fa;
+  color: #111827 !important;
   transform: translateX(3px);
+}
+
+.hero-mega-menu-panel {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 12px);
+  width: clamp(720px, calc(100vw - 420px), 980px);
+  min-height: 100%;
+  max-height: 465px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.hero-mega-menu-columns {
+  column-count: 3;
+  column-gap: 28px;
+}
+
+.hero-mega-menu-group {
+  break-inside: avoid;
+  margin-bottom: 18px;
+}
+
+.hero-mega-menu-group-title {
+  margin: 0 0 10px;
+  color: #111827;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.hero-mega-menu-group-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero-mega-menu-chip {
+  position: relative;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  background: #fff;
+  color: #111827;
+  font-size: 0.92rem;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.hero-mega-menu-chip:hover {
+  border-color: #cfd4da;
+  color: #111827;
+}
+
+.hero-mega-menu-chip.has-badge {
+  padding-top: 12px;
+}
+
+.hero-mega-menu-chip-image {
+  width: auto;
+  max-width: 92px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.hero-mega-menu-chip-title {
+  white-space: nowrap;
+}
+
+.hero-mega-menu-chip-badge {
+  position: absolute;
+  top: -1px;
+  right: 10px;
+  padding: 2px 6px;
+  border-radius: 0 0 8px 8px;
+  background: #111827;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .hero-carousel-tabs {
@@ -670,6 +937,15 @@ onUnmounted(() => {
     min-height: 45px;
     font-size: 0.9rem;
     padding-inline: 14px !important;
+  }
+
+  .hero-mega-menu-panel {
+    width: clamp(650px, calc(100vw - 360px), 900px);
+    max-height: 430px;
+  }
+
+  .hero-mega-menu-columns {
+    column-gap: 20px;
   }
 
   .hero-slide-image {
