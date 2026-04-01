@@ -293,8 +293,14 @@ export const useHomeStore = defineStore("home", () => {
   };
 
   const fetchMegaMenuLeaves = async ({ force = false } = {}) => {
-    const sections = await fetchMegaMenu({ force });
-    megaMenuLeafByKey.value = toLeafMapFromSections(sections);
+    await fetchMegaMenu({ force });
+
+    // fetchMegaMenu already populates megaMenuLeafByKey from items when available.
+    // Avoid remapping from sections here because section payload shape can differ.
+    if (!megaMenuLeafByKey.value || !Object.keys(megaMenuLeafByKey.value).length) {
+      megaMenuLeafByKey.value = toLeafMapFromSections(megaMenuSections.value);
+    }
+
     return megaMenuLeafByKey.value;
   };
 

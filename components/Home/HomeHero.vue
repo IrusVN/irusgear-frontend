@@ -271,7 +271,7 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 const auth = useAuthStore();
 const homeStore = useHomeStore();
-const { megaMenuLeafByKey, activeMegaMenuKey } = storeToRefs(homeStore);
+const { megaMenuSections, megaMenuLeafByKey, activeMegaMenuKey } = storeToRefs(homeStore);
 const { user } = storeToRefs(auth);
 const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ""));
 
@@ -316,7 +316,14 @@ const activeSection = computed(
   () => categories.find((section) => section.key === activeSectionKey.value) || null
 );
 
-const activeGroups = computed(() => megaMenuLeafByKey.value?.[activeSectionKey.value]?.children || []);
+const activeGroups = computed(() => {
+  const activeKey = activeSectionKey.value;
+  const fromLeafMap = megaMenuLeafByKey.value?.[activeKey]?.children;
+  if (Array.isArray(fromLeafMap) && fromLeafMap.length) return fromLeafMap;
+
+  const section = (megaMenuSections.value || []).find((item) => item?.key === activeKey);
+  return Array.isArray(section?.children) ? section.children : [];
+});
 
 const heroBanners = [
   { image: "/image/dashboard/homehero/swiperslide/Home(3).png", alt: "Galaxy S26 Series banner", title: "GALAXY S26 ULTRA", subtitle: "Mở bán ưu đãi khủng" },
