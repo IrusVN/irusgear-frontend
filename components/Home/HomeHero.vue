@@ -121,14 +121,36 @@
             </button>
           </div>
 
-          <div class="carousel-inner">
-            <div
-              v-for="(banner, i) in heroBanners"
-              :key="banner.image"
-              :class="['carousel-item', { active: i === 0 }]"
-            >
-              <img :src="banner.image" :alt="banner.alt" class="hero-slide-image" />
+          <div class="hero-carousel-image-area">
+            <div class="carousel-inner">
+              <div
+                v-for="(banner, i) in heroBanners"
+                :key="banner.image"
+                :class="['carousel-item', { active: i === 0 }]"
+              >
+                <img :src="banner.image" :alt="banner.alt" class="hero-slide-image" />
+              </div>
             </div>
+
+            <button
+              class="hero-carousel-nav hero-carousel-nav-prev"
+              type="button"
+              data-bs-target="#heroCarousel"
+              data-bs-slide="prev"
+              aria-label="Previous slide"
+            >
+              <i class="bi bi-chevron-left"></i>
+            </button>
+
+            <button
+              class="hero-carousel-nav hero-carousel-nav-next"
+              type="button"
+              data-bs-target="#heroCarousel"
+              data-bs-slide="next"
+              aria-label="Next slide"
+            >
+              <i class="bi bi-chevron-right"></i>
+            </button>
           </div>
         </div>
 
@@ -683,6 +705,61 @@ onUnmounted(() => {
   object-fit: contain;
   object-position: center;
   background: #fff;
+}
+
+.hero-carousel-image-area {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-carousel-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 34px;
+  height: 60px;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(17, 24, 39, 0.32);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: left 0.3s ease, right 0.3s ease, opacity 0.3s ease, background-color 0.2s ease;
+}
+
+.hero-carousel-nav i {
+  font-size: 1.3rem;
+}
+
+.hero-carousel-nav-prev {
+  left: -30px;
+  border-radius: 0 999px 999px 0;
+}
+
+.hero-carousel-nav-next {
+  right: -30px;
+  border-radius: 999px 0 0 999px;
+}
+
+.hero-carousel-image-area:hover .hero-carousel-nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hero-carousel-image-area:hover .hero-carousel-nav-prev {
+  left: 0;
+}
+
+.hero-carousel-image-area:hover .hero-carousel-nav-next {
+  right: 0;
+}
+
+.hero-carousel-nav:hover {
+  background: rgba(0, 0, 0, 0.72);
 }
 
 .promo-banner-list {
