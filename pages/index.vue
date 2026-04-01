@@ -81,20 +81,39 @@ const audioTabs  = ['Tất cả','Tai nghe','Loa','AirPods','Sony','JBL','Bose']
 const watchTabs  = ['Tất cả','Apple Watch','Samsung','Garmin','Casio','Xiaomi'];
 const tabletTabs = ['Tất cả','iPad','Samsung','Xiaomi','Lenovo','Huawei'];
 
-// --- MOCK DATA GENERATOR (BE Team có thể xoá sau khi gắn API) ---
-const mkProducts = (names) =>
-  Array.from({ length: 10 }, (_, i) => ({
-    id: `${names[0]}-${Date.now()}-${i}`,
-    name: `${names[i % names.length]} ${['Pro Max 256GB','Ultra 512GB','Plus 128GB','Standard 256GB'][i%4]} Chính hãng VN/A`,
-    price: (Math.floor(Math.random()*18)+5)*1000000,
-    originalPrice: (Math.floor(Math.random()*8)+20)*1000000,
-    discount: Math.floor(Math.random()*25)+5,
-    rating: (Math.random()*0.8+4.1).toFixed(1),
-    sold: Math.floor(Math.random()*800)+100,
-    badge: ['GIẢM SỐC','TRẢ GÓP 0%',null,'MỚI'][i%4],
-    gifts: ['Ốp lưng chính hãng','Miếng dán cường lực'],
-    img: `https://placehold.co/200x200/f5f5f5/999?text=${encodeURIComponent(names[i%names.length])}`,
-  }));
+// Deterministic generator to keep SSR and client hydration identical.
+const hashString = (value) => {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash * 31 + value.charCodeAt(i)) % 2147483647;
+  }
+  return hash;
+};
+
+const mkProducts = (names) => {
+  const storageOptions = ['Pro Max 256GB', 'Ultra 512GB', 'Plus 128GB', 'Standard 256GB'];
+  const badgeOptions = ['GIẢM SỐC', 'TRẢ GÓP 0%', null, 'MỚI'];
+
+  return Array.from({ length: 10 }, (_, i) => {
+    const baseName = names[i % names.length];
+    const seed = hashString(`${baseName}-${i}-${names.length}`);
+    const price = ((seed % 18) + 5) * 1000000;
+    const extra = ((Math.floor(seed / 11) % 8) + 3) * 1000000;
+
+    return {
+      id: `${baseName.replace(/\s+/g, '-')}-${i}`,
+      name: `${baseName} ${storageOptions[i % storageOptions.length]} Chính hãng VN/A`,
+      price,
+      originalPrice: price + extra,
+      discount: (seed % 25) + 5,
+      rating: (((seed % 9) / 10) + 4.1).toFixed(1),
+      sold: (seed % 800) + 100,
+      badge: badgeOptions[i % badgeOptions.length],
+      gifts: ['Ốp lưng chính hãng', 'Miếng dán cường lực'],
+      img: `https://placehold.co/200x200/f5f5f5/999?text=${encodeURIComponent(baseName)}`,
+    };
+  });
+};
 
 const smPhonesMock = mkProducts(['iPhone 16','Samsung S25','Xiaomi 15','OPPO Find X8','Vivo X200']);
 const laptopsMock = mkProducts(['MacBook Air','Dell XPS','HP Spectre','Asus ZenBook','Lenovo ThinkPad']);

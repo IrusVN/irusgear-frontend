@@ -6,22 +6,22 @@
         @mouseenter="openMegaMenu"
         @mouseleave="closeMegaMenu"
       >
-        <div class="bg-white rounded-3 shadow-sm border overflow-hidden d-flex flex-column justify-content-between py-1 hero-category-sidebar">
+        <div class="bg-white rounded-3 shadow-sm border overflow-hidden d-flex flex-column justify-content-between hero-category-sidebar">
         <a
           v-for="cat in categories"
           :key="cat.key"
           href="#"
           class="d-flex align-items-center gap-2 px-3 text-decoration-none text-dark cat-item border-bottom"
-          :class="{ 'cat-item-active': activeSectionKey === cat.key }"
+          :class="{ 'cat-item-active': highlightedSectionKey === cat.key }"
           @mouseenter="activateMegaMenu(cat.key)"
           @focus="activateMegaMenu(cat.key)"
           @click.prevent
         >
-          <span class="hero-category-icon">
+          <span class="d-inline-flex align-items-center justify-content-center flex-shrink-0 text-dark" style="width: 22px; height: 22px;">
             <i :class="['bi', cat.icon, 'text-center flex-shrink-0']" style="font-size: 1.2rem; width: 22px;"></i>
           </span>
           <span class="flex-grow-1 fw-semibold" style="font-size: 0.92rem;">{{ cat.name }}</span>
-          <i class="bi bi-chevron-right" style="font-size: 0.7rem;"></i>
+          <i class="bi bi-chevron-right text-secondary" style="font-size: 0.7rem;"></i>
         </a>
 
           <div
@@ -36,9 +36,9 @@
                 :key="group.key || group.title"
                 class="hero-mega-menu-group"
               >
-                <h3 class="hero-mega-menu-group-title">{{ group.title }}</h3>
+                <h3 class="fw-bold fs-6 text-dark mb-2">{{ group.title }}</h3>
 
-                <div class="hero-mega-menu-group-items">
+                <div class="d-flex flex-wrap gap-2">
                   <component
                     :is="resolveHref(item) ? 'a' : 'div'"
                     v-for="item in resolveGroupItems(group)"
@@ -145,16 +145,16 @@
         </div>
       </div>
 
-      <div class="service-panel d-none d-xl-flex flex-column gap-2 flex-shrink-0">
-        <div class="service-welcome-card">
+      <div class="service-panel d-none d-xl-flex flex-column gap-3 flex-shrink-0 pt-1">
+        <div class="service-welcome-card p-3">
           <template v-if="user">
-            <div class="service-welcome-head">
+            <div class="d-flex align-items-center gap-2">
               <div class="service-avatar service-avatar-user">
                 <i class="bi bi-person-fill"></i>
               </div>
               <div class="flex-grow-1 min-w-0">
-                <p class="service-welcome-title mb-0">{{ user.first_name }} {{ user.last_name }}</p>
-                <p class="service-welcome-subtitle mb-0 text-truncate">{{ user.email }}</p>
+                <p class="mb-0 fw-bold text-dark fs-6 lh-sm">{{ user.first_name }} {{ user.last_name }}</p>
+                <p class="mb-0 text-secondary text-truncate small lh-base">{{ user.email }}</p>
               </div>
             </div>
 
@@ -162,17 +162,17 @@
               <span class="service-role-chip">{{ $t(userRoleKey) }}</span>
             </div>
 
-            <NuxtLink :to="localePath('/')" class="service-perk-link mt-2">
-              <span class="service-perk-icon">
+            <NuxtLink :to="localePath('/')" class="d-flex align-items-center gap-2 mt-2 text-decoration-none text-dark fw-semibold small">
+              <span class="d-inline-flex align-items-center justify-content-center text-dark" style="width: 18px;">
                 <i class="bi bi-gift-fill"></i>
               </span>
               <span>Xem ưu đãi của bạn</span>
-              <i class="bi bi-chevron-right service-chevron"></i>
+              <i class="bi bi-chevron-right ms-auto text-secondary fs-6"></i>
             </NuxtLink>
           </template>
 
           <template v-else>
-            <div class="service-welcome-head">
+            <div class="d-flex align-items-center gap-2">
               <div class="service-avatar">
                 <svg viewBox="0 0 48 48" class="service-avatar-logo" aria-hidden="true">
                   <rect x="6" y="6" width="36" height="36" rx="12" fill="#111827" />
@@ -181,31 +181,31 @@
                 </svg>
               </div>
               <div class="flex-grow-1">
-                <p class="service-welcome-title mb-0">Chào mừng bạn đến với IrusGear</p>
+                <p class="mb-0 fw-bold text-dark fs-6 lh-sm">Chào mừng bạn đến với IrusGear</p>
               </div>
             </div>
 
-            <p class="service-welcome-copy">
+            <p class="mt-1 text-secondary mb-0 small lh-base">
               Nhập hội thành viên để không bỏ lỡ các ưu đãi hấp dẫn.
             </p>
 
-            <div class="service-auth-actions">
-              <NuxtLink :to="localePath('/auth/login')" class="service-text-link">Đăng nhập</NuxtLink>
+            <div class="d-flex align-items-center gap-1 mt-2 mb-2 small">
+              <NuxtLink :to="localePath('/auth/login')" class="text-decoration-none text-dark fw-semibold">Đăng nhập</NuxtLink>
               <span class="text-secondary">hoặc</span>
-              <NuxtLink :to="localePath('/auth/register')" class="service-text-link">Đăng ký</NuxtLink>
+              <NuxtLink :to="localePath('/auth/register')" class="text-decoration-none text-dark fw-semibold">Đăng ký</NuxtLink>
             </div>
 
-            <NuxtLink :to="localePath('/')" class="service-perk-link">
-              <span class="service-perk-icon">
+            <NuxtLink :to="localePath('/')" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold small">
+              <span class="d-inline-flex align-items-center justify-content-center text-dark" style="width: 18px;">
                 <i class="bi bi-gift-fill"></i>
               </span>
               <span>Xem ưu đãi Smember</span>
-              <i class="bi bi-chevron-right service-chevron"></i>
+              <i class="bi bi-chevron-right ms-auto text-secondary fs-6"></i>
             </NuxtLink>
           </template>
         </div>
 
-        <div class="service-benefits-card">
+        <div class="service-benefits-card p-2">
           <div
             v-for="group in serviceGroups"
             :key="group.title"
@@ -228,7 +228,7 @@
             </NuxtLink>
           </div>
 
-          <NuxtLink :to="localePath('/')" class="service-bottom-banner">
+          <NuxtLink :to="localePath('/')" class="d-block mt-2 text-decoration-none">
             <span class="service-bottom-pill">Ưu đãi nổi bật</span>
           </NuxtLink>
         </div>
@@ -287,6 +287,8 @@ const activeSectionKey = computed(() => {
   const matched = categories.find((section) => section.key === activeMegaMenuKey.value);
   return matched?.key || categories[0]?.key || "";
 });
+
+const highlightedSectionKey = computed(() => (isMegaMenuOpen.value ? activeSectionKey.value : ""));
 
 const activeSection = computed(
   () => categories.find((section) => section.key === activeSectionKey.value) || null
@@ -489,24 +491,6 @@ onUnmounted(() => {
   width: 258px;
 }
 
-.hero-category-icon {
-  width: 22px;
-  height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #111827;
-  flex-shrink: 0;
-}
-
-.hero-category-icon img {
-  display: none;
-}
-
-.cat-item > .bi-chevron-right {
-  color: #adb5bd;
-}
-
 .cat-item.cat-item-active {
   background: #f8f9fa;
 }
@@ -548,20 +532,6 @@ onUnmounted(() => {
 .hero-mega-menu-group {
   break-inside: avoid;
   margin-bottom: 18px;
-}
-
-.hero-mega-menu-group-title {
-  margin: 0 0 10px;
-  color: #111827;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.hero-mega-menu-group-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
 }
 
 .hero-mega-menu-chip {
@@ -709,7 +679,7 @@ onUnmounted(() => {
 .hero-slide-image {
   display: block;
   width: 100%;
-  height: 402px;
+  height: 414px;
   object-fit: contain;
   object-position: center;
   background: #fff;
@@ -741,16 +711,6 @@ onUnmounted(() => {
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
 }
 
-.service-welcome-card {
-  padding: 0.85rem 0.95rem;
-}
-
-.service-welcome-head {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-
 .service-avatar {
   width: 42px;
   height: 42px;
@@ -775,38 +735,6 @@ onUnmounted(() => {
   font-size: 1.15rem;
 }
 
-.service-welcome-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1.35;
-  color: #1f2937;
-}
-
-.service-welcome-subtitle,
-.service-welcome-copy {
-  margin-top: 0.2rem;
-  font-size: 0.74rem;
-  line-height: 1.5;
-  color: #6b7280;
-}
-
-.service-auth-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin: 0.45rem 0 0.55rem;
-  font-size: 0.78rem;
-}
-
-.service-text-link {
-  color: #111827;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.service-text-link:hover {
-  color: #000;
-}
 
 .service-role-chip {
   display: inline-flex;
@@ -820,39 +748,9 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
-.service-perk-link {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-top: 0.55rem;
-  text-decoration: none;
-  color: #111827;
-  font-size: 0.78rem;
-  font-weight: 600;
-}
-
-.service-perk-link:hover,
 .service-group-title:hover,
 .acct-row:hover {
   color: #111827;
-}
-
-.service-perk-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  color: #111827;
-}
-
-.service-chevron {
-  margin-left: auto;
-  color: #9ca3af;
-  font-size: 0.95rem;
-}
-
-.service-benefits-card {
-  padding: 0.65rem;
 }
 
 .service-benefit-group + .service-benefit-group {
@@ -897,12 +795,6 @@ onUnmounted(() => {
   width: 18px;
   color: #111827;
   flex-shrink: 0;
-}
-
-.service-bottom-banner {
-  display: block;
-  margin-top: 0.5rem;
-  text-decoration: none;
 }
 
 .service-bottom-pill {
