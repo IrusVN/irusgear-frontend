@@ -249,7 +249,7 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 const auth = useAuthStore();
 const homeStore = useHomeStore();
-const { megaMenuSections, activeMegaMenuKey } = storeToRefs(homeStore);
+const { megaMenuLeafByKey, activeMegaMenuKey } = storeToRefs(homeStore);
 const { user } = storeToRefs(auth);
 const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ""));
 
@@ -268,44 +268,31 @@ onBeforeUpdate(() => {
   tabButtons.value = [];
 });
 
-const normalizedSections = computed(() =>
-  Array.isArray(megaMenuSections.value) ? megaMenuSections.value.filter(Boolean) : []
-);
-
-const categoryIconMap = {
-  "dien-thoai-tablet": "bi-phone",
-  laptop: "bi-laptop",
-  "am-thanh-mic-thu-am": "bi-headphones",
-  "dong-ho-camera": "bi-smartwatch",
-  "do-gia-dung-lam-dep": "bi-house",
-  "pc-man-hinh-may-in": "bi-pc-display",
-  "tv-dien-may": "bi-display",
-  "thu-cu-doi-moi": "bi-repeat",
-  "hang-cu": "bi-box-seam",
-  "khuyen-mai": "bi-patch-check",
-  "tin-cong-nghe": "bi-card-text",
-};
-
-const categories = computed(() =>
-  normalizedSections.value.map((section) => ({
-    key: section.key,
-    name: section.title,
-    icon: categoryIconMap[section.key] || "bi-grid",
-  }))
-);
+const categories = [
+  { key: "dien-thoai-tablet", name: "Điện thoại, Tablet", icon: "bi-phone" },
+  { key: "laptop", name: "Laptop", icon: "bi-laptop" },
+  { key: "am-thanh-mic-thu-am", name: "Âm thanh, Mic thu âm", icon: "bi-headphones" },
+  { key: "dong-ho-camera", name: "Đồng hồ, Camera", icon: "bi-smartwatch" },
+  { key: "do-gia-dung-lam-dep", name: "Đồ gia dụng, Làm đẹp", icon: "bi-house" },
+  { key: "phu-kien", name: "Phụ kiện", icon: "bi-earbuds" },
+  { key: "pc-man-hinh-may-in", name: "PC, Màn hình, Máy in", icon: "bi-pc-display" },
+  { key: "tv-dien-may", name: "Tivi, Điện máy", icon: "bi-display" },
+  { key: "thu-cu-doi-moi", name: "Thu cũ đổi mới", icon: "bi-repeat" },
+  { key: "hang-cu", name: "Hàng cũ", icon: "bi-box-seam" },
+  { key: "khuyen-mai", name: "Khuyến mãi", icon: "bi-patch-check" },
+  { key: "tin-cong-nghe", name: "Tin công nghệ", icon: "bi-card-text" },
+];
 
 const activeSectionKey = computed(() => {
-  if (!normalizedSections.value.length) return "";
-
-  const matched = normalizedSections.value.find((section) => section.key === activeMegaMenuKey.value);
-  return matched?.key || normalizedSections.value[0]?.key || "";
+  const matched = categories.find((section) => section.key === activeMegaMenuKey.value);
+  return matched?.key || categories[0]?.key || "";
 });
 
 const activeSection = computed(
-  () => normalizedSections.value.find((section) => section.key === activeSectionKey.value) || null
+  () => categories.find((section) => section.key === activeSectionKey.value) || null
 );
 
-const activeGroups = computed(() => activeSection.value?.children || []);
+const activeGroups = computed(() => megaMenuLeafByKey.value?.[activeSectionKey.value]?.children || []);
 
 const heroBanners = [
   { image: "/image/dashboard/homehero/swiperslide/Home(3).png", alt: "Galaxy S26 Series banner", title: "GALAXY S26 ULTRA", subtitle: "Mở bán ưu đãi khủng" },
@@ -433,12 +420,10 @@ const handleCarouselSlide = (event) => {
 };
 
 onMounted(() => {
-  if (!normalizedSections.value.length) {
-    homeStore.fetchMegaMenu().catch(() => {});
-  }
+  homeStore.fetchMegaMenuLeaves().catch(() => {});
 
-  if (!activeMegaMenuKey.value && normalizedSections.value.length) {
-    homeStore.setActiveMegaMenuKey(normalizedSections.value[0]?.key || "");
+  if (!activeMegaMenuKey.value) {
+    homeStore.setActiveMegaMenuKey(categories[0]?.key || "");
   }
 
   const carouselEl = carouselRef.value;
