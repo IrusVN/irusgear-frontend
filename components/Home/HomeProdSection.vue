@@ -25,9 +25,9 @@
 
       <div class="flex-grow-1 section-shell overflow-hidden">
         <div class="d-flex align-items-stretch bg-white">
-          <button type="button" class="section-main-tab active">{{ title }}</button>
+          <button type="button" class="section-main-tab" :class="{ active: activeMainTab === 'primary' }" @click="emit('tab-change', 'primary')">{{ title }}</button>
           <div class="my-auto section-tab-divider"></div>
-          <button type="button" class="section-main-tab">{{ resolvedSecondaryTitle }}</button>
+          <button type="button" class="section-main-tab" :class="{ active: activeMainTab === 'secondary' }" @click="emit('tab-change', 'secondary')">{{ resolvedSecondaryTitle }}</button>
         </div>
 
         <div class="px-2 px-md-3 pt-2">
@@ -155,6 +155,8 @@
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 
+const emit = defineEmits(["tab-change"]);
+
 const props = defineProps({
   title: { type: String, required: true },
   tabs: { type: Array, default: () => [] },
@@ -166,6 +168,7 @@ const props = defineProps({
   desktopBanners: { type: Array, default: () => [] },
   mobileBanners: { type: Array, default: () => [] },
   secondaryTitle: { type: String, default: "" },
+  activeMainTab: { type: String, default: "primary" },
   loading: { type: Boolean, default: false },
 });
 
@@ -383,7 +386,7 @@ watch(
 
 .section-main-tab {
   flex: 1 1 0;
-  min-height: 40px;
+  min-height: 60px;
   border: 0;
   border-bottom: 1px solid #e5e7eb;
   background: #fff;

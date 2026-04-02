@@ -22,12 +22,25 @@ export const useHomeStore = defineStore("home", () => {
   const phoneProducts = ref([]);
   const selectedPhoneBrand = ref(null);
 
+  const tabletCollection = ref({
+    rootTitle: "MÁY TÍNH BẢNG",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/may-tinh-bang?sort=newest&limit=20",
+  });
+  const tabletProducts = ref([]);
+  const tabletLoading = ref(false);
+  const tabletLoaded = ref(false);
+  const tabletError = ref(null);
+
   const homeLoading = ref(false);
   const homeLoaded = ref(false);
   const homeError = ref(null);
 
   let megaMenuPromise = null;
   let homePromise = null;
+  let tabletPromise = null;
 
   const phoneDesktopBanners = [
     {
@@ -160,6 +173,28 @@ export const useHomeStore = defineStore("home", () => {
     };
   };
 
+  const mapTabletProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [12, 8, 6, 5, 10, 7][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 230.000đ", "S-Student giảm thêm 500.000đ", "Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn 3-6 tháng"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
   const filterProductsByBrand = (products, selectedBrand) => {
     if (!selectedBrand || !selectedBrand.slug) return products;
 
@@ -258,6 +293,55 @@ export const useHomeStore = defineStore("home", () => {
     return phoneCollection.value;
   };
 
+  const fetchTabletCollection = async () => {
+    if (tabletLoading.value && tabletPromise) return tabletPromise;
+    if (tabletLoaded.value) return tabletCollection.value;
+
+    tabletLoading.value = true;
+    tabletError.value = null;
+
+    tabletPromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/may-tinh-bang`);
+      if (!res.ok) throw new Error("Fetch tablet collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products) ? payload.products.map(mapTabletProduct) : [];
+
+      tabletCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "MÁY TÍNH BẢNG",
+        needItems: Array.isArray(payload.need_items) ? payload.need_items : [],
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/may-tinh-bang?sort=newest&limit=20",
+      };
+
+      tabletProducts.value = mappedProducts;
+      tabletLoaded.value = true;
+      return tabletCollection.value;
+    })();
+
+    try {
+      return await tabletPromise;
+    } catch (error) {
+      tabletError.value = error instanceof Error ? error.message : "Fetch tablet collection failed";
+      throw error;
+    } finally {
+      tabletLoading.value = false;
+      tabletPromise = null;
+    }
+  };
+
   const selectPhoneBrand = (selectedBrand) => {
     selectedPhoneBrand.value = selectedBrand;
     phoneProducts.value = filterProductsByBrand(phoneCollection.value.allProducts || [], selectedBrand);
@@ -324,6 +408,11 @@ export const useHomeStore = defineStore("home", () => {
     phoneCollection,
     phoneProducts,
     selectedPhoneBrand,
+    tabletCollection,
+    tabletProducts,
+    tabletLoading,
+    tabletLoaded,
+    tabletError,
     phoneDesktopBanners,
     phoneMobileBanners,
     homeLoading,
@@ -333,6 +422,7 @@ export const useHomeStore = defineStore("home", () => {
     fetchMegaMenu,
     fetchMegaMenuLeaves,
     fetchPhoneCollection,
+    fetchTabletCollection,
     selectPhoneBrand,
     fetchHomeData,
     resetMegaMenu,

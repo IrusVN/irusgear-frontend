@@ -5,16 +5,18 @@
     <div class="container-xl px-3 py-4">
       <HomeProdSection
         :title="phoneSectionTitle"
-        secondary-title="MÁY TÍNH BẢNG"
+        :secondary-title="tabletSectionTitle"
+        :active-main-tab="activeDeviceTab === 'phone' ? 'primary' : 'secondary'"
+        @tab-change="handleDeviceTabChange"
         :tabs="phoneTabs"
         :disable-tabs-fallback="true"
-        :need-items="phoneCollection.needItems"
-        :brand-items="phoneCollection.brandItems"
-        :view-all-url="phoneCollection.viewAllUrl"
-        :desktop-banners="phoneDesktopBanners"
-        :mobile-banners="phoneMobileBanners"
-        :products="phoneProducts"
-        :loading="homeLoading"
+        :need-items="activeDeviceCollection.needItems"
+        :brand-items="activeDeviceCollection.brandItems"
+        :view-all-url="activeDeviceCollection.viewAllUrl"
+        :desktop-banners="activeDeviceTab === 'phone' ? phoneDesktopBanners : []"
+        :mobile-banners="activeDeviceTab === 'phone' ? phoneMobileBanners : []"
+        :products="activeDeviceProducts"
+        :loading="activeDeviceLoading"
       />
 
       <HomeProdSection
@@ -38,13 +40,6 @@
         :loading="watchState.loading"
       />
 
-      <HomeProdSection
-        title="MÁY TÍNH BẢNG"
-        :tabs="tabletTabs"
-        :products="tabletState.data"
-        :loading="tabletState.loading"
-      />
-
       <HomeNews />
     </div>
   </div>
@@ -62,16 +57,33 @@ const { t } = useI18n();
 useHead({ title: computed(() => t("page_titles.home")) });
 
 const homeStore = useHomeStore();
-const { phoneCollection, phoneProducts, phoneDesktopBanners, phoneMobileBanners, homeLoading } = storeToRefs(homeStore);
-const { fetchHomeData, selectPhoneBrand } = homeStore;
+const { phoneCollection, phoneProducts, phoneDesktopBanners, phoneMobileBanners, tabletCollection, tabletProducts, homeLoading, tabletLoading } = storeToRefs(homeStore);
+const { fetchHomeData, fetchTabletCollection } = homeStore;
 
 const phoneTabs = ["Tất cả", "iPhone", "Samsung", "Xiaomi", "OPPO", "TECNO", "HONOR"];
 const laptopTabs = ["Tất cả", "MacBook", "Dell", "HP", "Asus", "Lenovo", "Acer"];
 const audioTabs = ["Tất cả", "Tai nghe", "Loa", "AirPods", "Sony", "JBL", "Bose"];
 const watchTabs = ["Tất cả", "Apple Watch", "Samsung", "Garmin", "Casio", "Xiaomi"];
-const tabletTabs = ["Tất cả", "iPad", "Samsung", "Xiaomi", "Lenovo", "Huawei"];
+const activeDeviceTab = ref("phone");
 
 const phoneSectionTitle = computed(() => phoneCollection.value.rootTitle || "ĐIỆN THOẠI");
+const tabletSectionTitle = computed(() => tabletCollection.value.rootTitle || "MÁY TÍNH BẢNG");
+const activeDeviceCollection = computed(() => (activeDeviceTab.value === "phone" ? phoneCollection.value : tabletCollection.value));
+const activeDeviceProducts = computed(() => (activeDeviceTab.value === "phone" ? phoneProducts.value : tabletProducts.value));
+const activeDeviceLoading = computed(() => (activeDeviceTab.value === "phone" ? homeLoading.value : tabletLoading.value));
+
+const handleDeviceTabChange = async (tabType) => {
+  const nextTab = tabType === "secondary" ? "tablet" : "phone";
+  activeDeviceTab.value = nextTab;
+
+  if (nextTab === "tablet") {
+    try {
+      await fetchTabletCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
+  }
+};
 
 const hashString = (value) => {
   let hash = 0;
@@ -136,14 +148,6 @@ const fetchWatches = async (tabName) => {
   }, 350);
 };
 
-const tabletState = ref({ data: mkProducts(["iPad Pro", "Samsung Tab", "Xiaomi Pad", "Lenovo Tab", "Huawei MatePad"]), loading: false });
-const fetchTablets = async (tabName) => {
-  tabletState.value.loading = true;
-  setTimeout(() => {
-    tabletState.value.data = mkProducts([tabName?.title || tabName || "Tablet Mới"]);
-    tabletState.value.loading = false;
-  }, 350);
-};
 </script>
 
 <style scoped>
