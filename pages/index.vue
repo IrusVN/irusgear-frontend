@@ -19,11 +19,19 @@
         :loading="activeDeviceLoading"
       />
 
+      <HomeAccessoryGrid />
+
       <HomeProdSection
-        title="LAPTOP"
-        :tabs="laptopTabs"
-        :products="laptopState.data"
-        :loading="laptopState.loading"
+        :title="activeLaptopCollection.rootTitle || 'LAPTOP'"
+        :header-tabs="laptopHeaderTabs"
+        :active-header-tab-index="activeLaptopHeaderTab"
+        @header-tab-change="handleLaptopHeaderTabChange"
+        :disable-tabs-fallback="true"
+        :need-items="activeLaptopCollection.needItems"
+        :brand-items="activeLaptopCollection.brandItems"
+        :view-all-url="activeLaptopCollection.viewAllUrl"
+        :products="activeLaptopProducts"
+        :loading="activeLaptopLoading"
       />
 
       <HomeProdSection
@@ -57,20 +65,39 @@ const { t } = useI18n();
 useHead({ title: computed(() => t("page_titles.home")) });
 
 const homeStore = useHomeStore();
-const { phoneCollection, phoneProducts, phoneDesktopBanners, phoneMobileBanners, tabletCollection, tabletProducts, homeLoading, tabletLoading } = storeToRefs(homeStore);
-const { fetchHomeData, fetchTabletCollection } = homeStore;
+const { phoneCollection, phoneProducts, phoneDesktopBanners, phoneMobileBanners, tabletCollection, tabletProducts, homeLoading, tabletLoading, laptopCollection, laptopProducts, laptopLoading, monitorCollection, monitorProducts, monitorLoading, pcCollection, pcProducts, pcLoading, computerAccessoryCollection, computerAccessoryProducts, computerAccessoryLoading } = storeToRefs(homeStore);
+const { fetchHomeData, fetchTabletCollection, fetchMonitorCollection, fetchPcCollection, fetchComputerAccessoryCollection } = homeStore;
 
 const phoneTabs = ["Tất cả", "iPhone", "Samsung", "Xiaomi", "OPPO", "TECNO", "HONOR"];
-const laptopTabs = ["Tất cả", "MacBook", "Dell", "HP", "Asus", "Lenovo", "Acer"];
+const laptopHeaderTabs = ["Laptop", "Màn hình máy tính", "PC", "Phụ kiện máy tính"];
 const audioTabs = ["Tất cả", "Tai nghe", "Loa", "AirPods", "Sony", "JBL", "Bose"];
 const watchTabs = ["Tất cả", "Apple Watch", "Samsung", "Garmin", "Casio", "Xiaomi"];
 const activeDeviceTab = ref("phone");
+const activeLaptopHeaderTab = ref(0);
 
 const phoneSectionTitle = computed(() => phoneCollection.value.rootTitle || "ĐIỆN THOẠI");
 const tabletSectionTitle = computed(() => tabletCollection.value.rootTitle || "MÁY TÍNH BẢNG");
 const activeDeviceCollection = computed(() => (activeDeviceTab.value === "phone" ? phoneCollection.value : tabletCollection.value));
 const activeDeviceProducts = computed(() => (activeDeviceTab.value === "phone" ? phoneProducts.value : tabletProducts.value));
 const activeDeviceLoading = computed(() => (activeDeviceTab.value === "phone" ? homeLoading.value : tabletLoading.value));
+const activeLaptopCollection = computed(() => {
+  if (activeLaptopHeaderTab.value === 1) return monitorCollection.value;
+  if (activeLaptopHeaderTab.value === 2) return pcCollection.value;
+  if (activeLaptopHeaderTab.value === 3) return computerAccessoryCollection.value;
+  return laptopCollection.value;
+});
+const activeLaptopProducts = computed(() => {
+  if (activeLaptopHeaderTab.value === 1) return monitorProducts.value;
+  if (activeLaptopHeaderTab.value === 2) return pcProducts.value;
+  if (activeLaptopHeaderTab.value === 3) return computerAccessoryProducts.value;
+  return laptopProducts.value;
+});
+const activeLaptopLoading = computed(() => {
+  if (activeLaptopHeaderTab.value === 1) return monitorLoading.value;
+  if (activeLaptopHeaderTab.value === 2) return pcLoading.value;
+  if (activeLaptopHeaderTab.value === 3) return computerAccessoryLoading.value;
+  return laptopLoading.value;
+});
 
 const handleDeviceTabChange = async (tabType) => {
   const nextTab = tabType === "secondary" ? "tablet" : "phone";
@@ -79,6 +106,34 @@ const handleDeviceTabChange = async (tabType) => {
   if (nextTab === "tablet") {
     try {
       await fetchTabletCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
+  }
+};
+
+const handleLaptopHeaderTabChange = async (tabIndex) => {
+  activeLaptopHeaderTab.value = tabIndex;
+
+  if (tabIndex === 1) {
+    try {
+      await fetchMonitorCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
+  }
+
+  if (tabIndex === 2) {
+    try {
+      await fetchPcCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
+  }
+
+  if (tabIndex === 3) {
+    try {
+      await fetchComputerAccessoryCollection();
     } catch {
       // Keep current UI and avoid throwing in interaction handler.
     }
@@ -120,15 +175,6 @@ const mkProducts = (names) => {
 onMounted(() => {
   fetchHomeData();
 });
-
-const laptopState = ref({ data: mkProducts(["MacBook Air", "Dell XPS", "HP Spectre", "Asus ZenBook", "Lenovo ThinkPad"]), loading: false });
-const fetchLaptops = async (tabName) => {
-  laptopState.value.loading = true;
-  setTimeout(() => {
-    laptopState.value.data = mkProducts([tabName?.title || tabName || "Laptop Mới"]);
-    laptopState.value.loading = false;
-  }, 350);
-};
 
 const audioState = ref({ data: mkProducts(["AirPods Pro", "Sony WH-1000", "JBL Tune", "Samsung Buds", "Bose QC45"]), loading: false });
 const fetchAudio = async (tabName) => {

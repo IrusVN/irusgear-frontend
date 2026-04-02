@@ -25,9 +25,18 @@
 
       <div class="flex-grow-1 section-shell overflow-hidden">
         <div class="d-flex align-items-stretch bg-white">
-          <button type="button" class="section-main-tab" :class="{ active: activeMainTab === 'primary' }" @click="emit('tab-change', 'primary')">{{ title }}</button>
-          <div class="my-auto section-tab-divider"></div>
-          <button type="button" class="section-main-tab" :class="{ active: activeMainTab === 'secondary' }" @click="emit('tab-change', 'secondary')">{{ resolvedSecondaryTitle }}</button>
+          <template v-if="resolvedHeaderTabs.length">
+            <template v-for="(tab, idx) in resolvedHeaderTabs" :key="`${tab}-${idx}`">
+              <button type="button" class="section-main-tab" :class="{ active: props.activeHeaderTabIndex === idx }" @click="emit('header-tab-change', idx)">{{ tab }}</button>
+              <div v-if="idx < resolvedHeaderTabs.length - 1" class="my-auto section-tab-divider"></div>
+            </template>
+          </template>
+
+          <template v-else>
+            <button type="button" class="section-main-tab" :class="{ active: activeMainTab === 'primary' }" @click="emit('tab-change', 'primary')">{{ title }}</button>
+            <div class="my-auto section-tab-divider"></div>
+            <button type="button" class="section-main-tab" :class="{ active: activeMainTab === 'secondary' }" @click="emit('tab-change', 'secondary')">{{ resolvedSecondaryTitle }}</button>
+          </template>
         </div>
 
         <div class="px-2 px-md-3 pt-2">
@@ -155,10 +164,12 @@
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 
-const emit = defineEmits(["tab-change"]);
+const emit = defineEmits(["tab-change", "header-tab-change"]);
 
 const props = defineProps({
   title: { type: String, required: true },
+  headerTabs: { type: Array, default: () => [] },
+  activeHeaderTabIndex: { type: Number, default: 0 },
   tabs: { type: Array, default: () => [] },
   needItems: { type: Array, default: () => [] },
   brandItems: { type: Array, default: () => [] },
@@ -181,6 +192,7 @@ const canScrollProductPrev = ref(false);
 const canScrollProductNext = ref(false);
 const canScrollBrandPrev = ref(false);
 const canScrollBrandNext = ref(false);
+const resolvedHeaderTabs = computed(() => (Array.isArray(props.headerTabs) ? props.headerTabs.filter(Boolean) : []));
 
 const recalcAllNavStates = () => {
   updateStripNavState();
