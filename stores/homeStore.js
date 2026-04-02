@@ -178,6 +178,18 @@ export const useHomeStore = defineStore("home", () => {
   const dryerLoaded = ref(false);
   const dryerError = ref(null);
 
+  const airConditionerCollection = ref({
+    rootTitle: "ĐIỀU HOÀ - MÁY LẠNH",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/dieu-hoa-may-lanh?sort=newest&limit=20",
+  });
+  const airConditionerProducts = ref([]);
+  const airConditionerLoading = ref(false);
+  const airConditionerLoaded = ref(false);
+  const airConditionerError = ref(null);
+
   const homeLoading = ref(false);
   const homeLoaded = ref(false);
   const homeError = ref(null);
@@ -197,6 +209,7 @@ export const useHomeStore = defineStore("home", () => {
   let fridgeFreezerPromise = null;
   let washingMachinePromise = null;
   let dryerPromise = null;
+  let airConditionerPromise = null;
 
   const phoneDesktopBanners = [
     {
@@ -611,6 +624,28 @@ export const useHomeStore = defineStore("home", () => {
       badge: `Giảm ${discount}%`,
       installmentText: "Trả góp 0%",
       gifts: ["Smember giảm đến 400.000đ", "S-Student giảm thêm 250.000đ", "Hỗ trợ giao lắp nhanh"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapAirConditionerProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [10, 8, 7, 9, 6, 11][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 600.000đ", "S-Student giảm thêm 300.000đ", "Lắp đặt nhanh toàn quốc"],
       url: product.slug ? `/category/${product.slug}` : "#",
     };
   };
@@ -1491,6 +1526,68 @@ export const useHomeStore = defineStore("home", () => {
     }
   };
 
+  const fetchAirConditionerCollection = async ({ force = false } = {}) => {
+    if (airConditionerLoading.value && airConditionerPromise) return airConditionerPromise;
+    if (airConditionerLoaded.value && !force) return airConditionerCollection.value;
+
+    airConditionerLoading.value = true;
+    airConditionerError.value = null;
+
+    airConditionerPromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/dieu-hoa-may-lanh`);
+      if (!res.ok) throw new Error("Fetch air conditioner collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-snow2",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapAirConditionerProduct)
+        : [];
+
+      airConditionerCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "ĐIỀU HOÀ - MÁY LẠNH",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/dieu-hoa-may-lanh?sort=newest&limit=20",
+      };
+
+      airConditionerProducts.value = mappedProducts;
+      airConditionerLoaded.value = true;
+      return airConditionerCollection.value;
+    })();
+
+    try {
+      return await airConditionerPromise;
+    } catch (error) {
+      airConditionerError.value =
+        error instanceof Error ? error.message : "Fetch air conditioner collection failed";
+      throw error;
+    } finally {
+      airConditionerLoading.value = false;
+      airConditionerPromise = null;
+    }
+  };
+
   const selectPhoneBrand = (selectedBrand) => {
     selectedPhoneBrand.value = selectedBrand;
     phoneProducts.value = filterProductsByBrand(phoneCollection.value.allProducts || [], selectedBrand);
@@ -1627,6 +1724,11 @@ export const useHomeStore = defineStore("home", () => {
     dryerLoading,
     dryerLoaded,
     dryerError,
+    airConditionerCollection,
+    airConditionerProducts,
+    airConditionerLoading,
+    airConditionerLoaded,
+    airConditionerError,
     phoneDesktopBanners,
     phoneMobileBanners,
     homeLoading,
@@ -1649,6 +1751,7 @@ export const useHomeStore = defineStore("home", () => {
     fetchFridgeFreezerCollection,
     fetchWashingMachineCollection,
     fetchDryerCollection,
+    fetchAirConditionerCollection,
     selectPhoneBrand,
     fetchHomeData,
     resetMegaMenu,

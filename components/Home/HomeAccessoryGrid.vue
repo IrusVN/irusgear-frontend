@@ -1,12 +1,8 @@
 <template>
   <div class="my-3 my-md-4">
     <section class="accessory-section text-neutral-800">
-      <div class="d-flex align-items-center justify-content-between gap-3 accessory-header">
+      <div class="d-flex align-items-center gap-3 accessory-header">
         <h2 class="mb-0 accessory-title">Sắm thêm phụ kiện chất lượng</h2>
-
-        <div class="d-none d-md-block accessory-divider"></div>
-
-        <div class="d-none d-md-flex gap-2"></div>
 
         <a :href="viewAllUrl" class="view-all-link text-decoration-none">
           Xem tất cả
@@ -141,11 +137,6 @@ const accessoryItems = [
   line-height: 1.5;
   font-weight: 700;
   color: #1f2937;
-}
-
-.accessory-divider {
-  height: 24px;
-  border-left: 1px solid #d1d5db;
 }
 
 .view-all-link {

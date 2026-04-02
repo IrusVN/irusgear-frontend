@@ -100,7 +100,9 @@
         :loading="activeCoolingLoading"
       />
 
-      <HomeNews />
+      <HomeUsedGoodsGrid />
+
+      <!-- <HomeNews /> -->
     </div>
   </div>
 </template>
@@ -117,8 +119,8 @@ const { t } = useI18n();
 useHead({ title: computed(() => t("page_titles.home")) });
 
 const homeStore = useHomeStore();
-const { phoneCollection, phoneProducts, phoneDesktopBanners, phoneMobileBanners, tabletCollection, tabletProducts, homeLoading, tabletLoading, laptopCollection, laptopProducts, laptopLoading, monitorCollection, monitorProducts, monitorLoading, pcCollection, pcProducts, pcLoading, computerAccessoryCollection, computerAccessoryProducts, computerAccessoryLoading, watchCollection, watchProducts, watchLoading, audioCollection, audioProducts, audioLoading, tvCollection, tvProducts, tvLoading, homeApplianceCollection, homeApplianceProducts, homeApplianceLoading, beautyHealthCollection, beautyHealthProducts, beautyHealthLoading, fridgeFreezerCollection, fridgeFreezerProducts, fridgeFreezerLoading, washingMachineCollection, washingMachineProducts, washingMachineLoading, dryerCollection, dryerProducts, dryerLoading } = storeToRefs(homeStore);
-const { fetchHomeData, fetchTabletCollection, fetchMonitorCollection, fetchPcCollection, fetchComputerAccessoryCollection, fetchAudioCollection, fetchBeautyHealthCollection, fetchWashingMachineCollection, fetchDryerCollection } = homeStore;
+const { phoneCollection, phoneProducts, phoneDesktopBanners, phoneMobileBanners, tabletCollection, tabletProducts, homeLoading, tabletLoading, laptopCollection, laptopProducts, laptopLoading, monitorCollection, monitorProducts, monitorLoading, pcCollection, pcProducts, pcLoading, computerAccessoryCollection, computerAccessoryProducts, computerAccessoryLoading, watchCollection, watchProducts, watchLoading, audioCollection, audioProducts, audioLoading, tvCollection, tvProducts, tvLoading, homeApplianceCollection, homeApplianceProducts, homeApplianceLoading, beautyHealthCollection, beautyHealthProducts, beautyHealthLoading, fridgeFreezerCollection, fridgeFreezerProducts, fridgeFreezerLoading, washingMachineCollection, washingMachineProducts, washingMachineLoading, dryerCollection, dryerProducts, dryerLoading, airConditionerCollection, airConditionerProducts, airConditionerLoading } = storeToRefs(homeStore);
+const { fetchHomeData, fetchTabletCollection, fetchMonitorCollection, fetchPcCollection, fetchComputerAccessoryCollection, fetchAudioCollection, fetchBeautyHealthCollection, fetchWashingMachineCollection, fetchDryerCollection, fetchAirConditionerCollection } = homeStore;
 
 const phoneTabs = ["Tất cả", "iPhone", "Samsung", "Xiaomi", "OPPO", "TECNO", "HONOR"];
 const laptopHeaderTabs = ["Laptop", "Màn hình máy tính", "PC", "Phụ kiện máy tính"];
@@ -227,28 +229,24 @@ const activeHomeLifeProducts = computed(() =>
 const activeHomeLifeLoading = computed(() =>
   activeHomeLifeTab.value === "home-appliance" ? homeApplianceLoading.value : beautyHealthLoading.value
 );
-const airConditionerFallbackCollection = {
-  rootTitle: "ĐIỀU HOÀ - MÁY LẠNH",
-  needItems: [],
-  brandItems: [],
-  viewAllUrl: "#",
-};
 const activeCoolingCollection = computed(() => {
   if (activeCoolingTab.value === 1) return washingMachineCollection.value;
   if (activeCoolingTab.value === 2) return dryerCollection.value;
-  if (activeCoolingTab.value === 3) return airConditionerFallbackCollection;
+  if (activeCoolingTab.value === 3) return airConditionerCollection.value;
   return fridgeFreezerCollection.value;
 });
 const activeCoolingProducts = computed(() => {
   if (activeCoolingTab.value === 0) return fridgeFreezerProducts.value;
   if (activeCoolingTab.value === 1) return washingMachineProducts.value;
   if (activeCoolingTab.value === 2) return dryerProducts.value;
+  if (activeCoolingTab.value === 3) return airConditionerProducts.value;
   return [];
 });
 const activeCoolingLoading = computed(() => {
   if (activeCoolingTab.value === 0) return fridgeFreezerLoading.value;
   if (activeCoolingTab.value === 1) return washingMachineLoading.value;
   if (activeCoolingTab.value === 2) return dryerLoading.value;
+  if (activeCoolingTab.value === 3) return airConditionerLoading.value;
   return false;
 });
 
@@ -333,6 +331,14 @@ const handleCoolingTabChange = async (tabIndex) => {
   if (tabIndex === 2) {
     try {
       await fetchDryerCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
+  }
+
+  if (tabIndex === 3) {
+    try {
+      await fetchAirConditionerCollection();
     } catch {
       // Keep current UI and avoid throwing in interaction handler.
     }
