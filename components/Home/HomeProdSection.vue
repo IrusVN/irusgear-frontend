@@ -40,7 +40,7 @@
         </div>
 
         <div class="px-2 px-md-3 pt-2">
-          <div class="feature-strip-wrap position-relative">
+          <div v-if="hasNeedItems" class="feature-strip-wrap position-relative">
             <button
               title="Previous"
               class="swiper-button-prev"
@@ -137,7 +137,7 @@
               <i class="bi bi-chevron-left"></i>
             </button>
 
-            <div ref="productStripRef" class="product-strip no-scrollbar" @scroll="updateProductNavState">
+            <div ref="productStripRef" class="product-strip no-scrollbar" :style="productStripStyle" @scroll="updateProductNavState">
               <div v-for="product in displayedProducts" :key="product.id" class="product-grid-item">
                 <HomeProdCard :product="product" />
               </div>
@@ -181,6 +181,7 @@ const props = defineProps({
   secondaryTitle: { type: String, default: "" },
   activeMainTab: { type: String, default: "primary" },
   loading: { type: Boolean, default: false },
+  desktopProductRows: { type: Number, default: 2 },
 });
 
 const featureStripRef = ref(null);
@@ -193,6 +194,13 @@ const canScrollProductNext = ref(false);
 const canScrollBrandPrev = ref(false);
 const canScrollBrandNext = ref(false);
 const resolvedHeaderTabs = computed(() => (Array.isArray(props.headerTabs) ? props.headerTabs.filter(Boolean) : []));
+const productStripStyle = computed(() => {
+  const rows = Number(props.desktopProductRows);
+  const safeRows = Number.isFinite(rows) && rows > 0 ? Math.floor(rows) : 2;
+  return {
+    "--desktop-product-rows": String(safeRows),
+  };
+});
 
 const recalcAllNavStates = () => {
   updateStripNavState();
@@ -215,21 +223,16 @@ const resolvedSecondaryTitle = computed(() => {
 });
 
 const displayedProducts = computed(() => (Array.isArray(props.products) ? props.products : []));
+const hasNeedItems = computed(() => Array.isArray(props.needItems) && props.needItems.length > 0);
 
 const featureChips = computed(() => {
-  if (Array.isArray(props.needItems) && props.needItems.length) {
-    return props.needItems.slice(0, 10).map((item) => ({
-      title: item.title,
-      image: item.image,
-      iconClass: item.iconClass,
-      href: item.url || "#",
-    }));
-  }
+  if (!hasNeedItems.value) return [];
 
-  return displayedProducts.value.slice(0, 8).map((product) => ({
-    title: String(product.name || "").split("|")[0].slice(0, 28),
-    image: product.img,
-    href: "#",
+  return props.needItems.slice(0, 10).map((item) => ({
+    title: item.title,
+    image: item.image,
+    iconClass: item.iconClass,
+    href: item.url || "#",
   }));
 });
 
@@ -699,7 +702,7 @@ watch(
 
 @media (min-width: 768px) {
   .product-strip {
-    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(var(--desktop-product-rows, 2), minmax(0, 1fr));
     grid-auto-columns: 222px;
   }
 

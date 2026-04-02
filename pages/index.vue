@@ -30,22 +30,74 @@
         :need-items="activeLaptopCollection.needItems"
         :brand-items="activeLaptopCollection.brandItems"
         :view-all-url="activeLaptopCollection.viewAllUrl"
+        :desktop-banners="laptopDesktopBanners"
+        :mobile-banners="laptopMobileBanners"
         :products="activeLaptopProducts"
         :loading="activeLaptopLoading"
       />
 
       <HomeProdSection
-        title="ÂM THANH"
+        :title="watchSectionTitle"
+        secondary-title="ÂM THANH"
+        :active-main-tab="activeWatchAudioTab === 'watch' ? 'primary' : 'secondary'"
+        @tab-change="handleWatchAudioTabChange"
         :tabs="audioTabs"
-        :products="audioState.data"
-        :loading="audioState.loading"
+        :disable-tabs-fallback="activeWatchAudioTab === 'watch'"
+        :desktop-product-rows="1"
+        :need-items="activeWatchAudioCollection.needItems"
+        :brand-items="activeWatchAudioCollection.brandItems"
+        :view-all-url="activeWatchAudioCollection.viewAllUrl"
+        :desktop-banners="watchAudioDesktopBanners"
+        :mobile-banners="watchAudioMobileBanners"
+        :products="activeWatchAudioProducts"
+        :loading="activeWatchAudioLoading"
       />
 
       <HomeProdSection
-        title="ĐỒNG HỒ"
-        :tabs="watchTabs"
-        :products="watchState.data"
-        :loading="watchState.loading"
+        :title="tvSectionTitle"
+        :header-tabs="tvHeaderTabs"
+        :active-header-tab-index="0"
+        :disable-tabs-fallback="true"
+        :desktop-product-rows="1"
+        :need-items="tvCollection.needItems"
+        :brand-items="tvCollection.brandItems"
+        :view-all-url="tvCollection.viewAllUrl"
+        :desktop-banners="tvDesktopBanners"
+        :mobile-banners="tvMobileBanners"
+        :products="tvProducts"
+        :loading="tvLoading"
+      />
+
+      <HomeProdSection
+        :title="homeApplianceSectionTitle"
+        secondary-title="SỨC KHOẺ - LÀM ĐẸP"
+        :active-main-tab="activeHomeLifeTab === 'home-appliance' ? 'primary' : 'secondary'"
+        @tab-change="handleHomeLifeTabChange"
+        :disable-tabs-fallback="true"
+        :desktop-product-rows="1"
+        :need-items="activeHomeLifeCollection.needItems"
+        :brand-items="activeHomeLifeCollection.brandItems"
+        :view-all-url="activeHomeLifeCollection.viewAllUrl"
+        :desktop-banners="homeLifeDesktopBanners"
+        :mobile-banners="homeLifeMobileBanners"
+        :products="activeHomeLifeProducts"
+        :loading="activeHomeLifeLoading"
+      />
+
+      <HomeProdSection
+        :title="activeCoolingCollection.rootTitle || 'TỦ LẠNH - TỦ ĐÔNG'"
+        :header-tabs="coolingHeaderTabs"
+        :active-header-tab-index="activeCoolingTab"
+        @header-tab-change="handleCoolingTabChange"
+        :disable-tabs-fallback="true"
+        :desktop-product-rows="1"
+        :need-items="activeCoolingCollection.needItems"
+        :brand-items="activeCoolingCollection.brandItems"
+        :view-all-url="activeCoolingCollection.viewAllUrl"
+        :desktop-banners="coolingDesktopBanners"
+        :mobile-banners="coolingMobileBanners"
+        :products="activeCoolingProducts"
+        :loading="activeCoolingLoading"
       />
 
       <HomeNews />
@@ -65,15 +117,70 @@ const { t } = useI18n();
 useHead({ title: computed(() => t("page_titles.home")) });
 
 const homeStore = useHomeStore();
-const { phoneCollection, phoneProducts, phoneDesktopBanners, phoneMobileBanners, tabletCollection, tabletProducts, homeLoading, tabletLoading, laptopCollection, laptopProducts, laptopLoading, monitorCollection, monitorProducts, monitorLoading, pcCollection, pcProducts, pcLoading, computerAccessoryCollection, computerAccessoryProducts, computerAccessoryLoading } = storeToRefs(homeStore);
-const { fetchHomeData, fetchTabletCollection, fetchMonitorCollection, fetchPcCollection, fetchComputerAccessoryCollection } = homeStore;
+const { phoneCollection, phoneProducts, phoneDesktopBanners, phoneMobileBanners, tabletCollection, tabletProducts, homeLoading, tabletLoading, laptopCollection, laptopProducts, laptopLoading, monitorCollection, monitorProducts, monitorLoading, pcCollection, pcProducts, pcLoading, computerAccessoryCollection, computerAccessoryProducts, computerAccessoryLoading, watchCollection, watchProducts, watchLoading, audioCollection, audioProducts, audioLoading, tvCollection, tvProducts, tvLoading, homeApplianceCollection, homeApplianceProducts, homeApplianceLoading, beautyHealthCollection, beautyHealthProducts, beautyHealthLoading, fridgeFreezerCollection, fridgeFreezerProducts, fridgeFreezerLoading, washingMachineCollection, washingMachineProducts, washingMachineLoading, dryerCollection, dryerProducts, dryerLoading } = storeToRefs(homeStore);
+const { fetchHomeData, fetchTabletCollection, fetchMonitorCollection, fetchPcCollection, fetchComputerAccessoryCollection, fetchAudioCollection, fetchBeautyHealthCollection, fetchWashingMachineCollection, fetchDryerCollection } = homeStore;
 
 const phoneTabs = ["Tất cả", "iPhone", "Samsung", "Xiaomi", "OPPO", "TECNO", "HONOR"];
 const laptopHeaderTabs = ["Laptop", "Màn hình máy tính", "PC", "Phụ kiện máy tính"];
-const audioTabs = ["Tất cả", "Tai nghe", "Loa", "AirPods", "Sony", "JBL", "Bose"];
-const watchTabs = ["Tất cả", "Apple Watch", "Samsung", "Garmin", "Casio", "Xiaomi"];
+const tvHeaderTabs = ["Tivi"];
+const coolingHeaderTabs = ["Tủ lạnh - Tủ đông", "Máy giặt", "Máy sấy quần áo", "Điều hoà - Máy lạnh"];
+const audioTabs = ["Tất cả", "Tai nghe", "Loa", "Mic", "Loa Bluetooth", "Soundbar"];
+const laptopDesktopBanners = [
+  {
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:321:795/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01KK84Q078JE7HEGK1SF3GGZGZ.png",
+    alt: "Laptop Banner 1",
+    href: "/category/laptop?sort=newest&limit=20",
+  },
+  {
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:321:795/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01KK0FDJSHZGMZVASGGYTM8BH7.png",
+    alt: "Laptop Banner 2",
+    href: "/category/laptop?sort=newest&limit=20",
+  },
+];
+const laptopMobileBanners = [...laptopDesktopBanners];
+const watchAudioDesktopBanners = [
+  {
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:321:960/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01KG6K3S7WG02MXRFGD9N1WQQE.png",
+    alt: "Đồng hồ - Âm thanh Banner",
+    href: "/category/dong-ho?sort=newest&limit=20",
+  },
+];
+const watchAudioMobileBanners = [...watchAudioDesktopBanners];
+const tvDesktopBanners = [
+  {
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:321:960/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K9XZX2K0Q0BX8QSVAGM40QYM.png",
+    alt: "Tivi Banner",
+    href: "/category/tivi?sort=newest&limit=20",
+  },
+];
+const tvMobileBanners = [...tvDesktopBanners];
+const homeLifeDesktopBanners = [
+  {
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:321:960/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01KM2R7N6H6P7ADRGPP371BBRF.jpg",
+    alt: "Đồ gia dụng - Sức khoẻ làm đẹp Banner",
+    href: "/category/do-gia-dung?sort=newest&limit=20",
+  },
+];
+const homeLifeMobileBanners = [...homeLifeDesktopBanners];
+const coolingDesktopBanners = [
+  {
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:321:960/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01KDCX8RAFJ8FJT35SAYRW6X0M.jpg",
+    alt: "Tủ lạnh - Máy giặt - Máy sấy - Điều hoà Banner",
+    href: "/category/tu-lanh-tu-dong?sort=newest&limit=20",
+  },
+];
+const coolingMobileBanners = [...coolingDesktopBanners];
 const activeDeviceTab = ref("phone");
 const activeLaptopHeaderTab = ref(0);
+const activeWatchAudioTab = ref("watch");
+const activeHomeLifeTab = ref("home-appliance");
+const activeCoolingTab = ref(0);
 
 const phoneSectionTitle = computed(() => phoneCollection.value.rootTitle || "ĐIỆN THOẠI");
 const tabletSectionTitle = computed(() => tabletCollection.value.rootTitle || "MÁY TÍNH BẢNG");
@@ -97,6 +204,52 @@ const activeLaptopLoading = computed(() => {
   if (activeLaptopHeaderTab.value === 2) return pcLoading.value;
   if (activeLaptopHeaderTab.value === 3) return computerAccessoryLoading.value;
   return laptopLoading.value;
+});
+const watchSectionTitle = computed(() => watchCollection.value.rootTitle || "ĐỒNG HỒ");
+const tvSectionTitle = computed(() => tvCollection.value.rootTitle || "TIVI");
+const homeApplianceSectionTitle = computed(() => homeApplianceCollection.value.rootTitle || "ĐỒ GIA DỤNG");
+const activeWatchAudioCollection = computed(() => {
+  if (activeWatchAudioTab.value === "watch") return watchCollection.value;
+  return audioCollection.value;
+});
+const activeWatchAudioProducts = computed(() =>
+  activeWatchAudioTab.value === "watch" ? watchProducts.value : audioProducts.value
+);
+const activeWatchAudioLoading = computed(() =>
+  activeWatchAudioTab.value === "watch" ? watchLoading.value : audioLoading.value
+);
+const activeHomeLifeCollection = computed(() =>
+  activeHomeLifeTab.value === "home-appliance" ? homeApplianceCollection.value : beautyHealthCollection.value
+);
+const activeHomeLifeProducts = computed(() =>
+  activeHomeLifeTab.value === "home-appliance" ? homeApplianceProducts.value : beautyHealthProducts.value
+);
+const activeHomeLifeLoading = computed(() =>
+  activeHomeLifeTab.value === "home-appliance" ? homeApplianceLoading.value : beautyHealthLoading.value
+);
+const airConditionerFallbackCollection = {
+  rootTitle: "ĐIỀU HOÀ - MÁY LẠNH",
+  needItems: [],
+  brandItems: [],
+  viewAllUrl: "#",
+};
+const activeCoolingCollection = computed(() => {
+  if (activeCoolingTab.value === 1) return washingMachineCollection.value;
+  if (activeCoolingTab.value === 2) return dryerCollection.value;
+  if (activeCoolingTab.value === 3) return airConditionerFallbackCollection;
+  return fridgeFreezerCollection.value;
+});
+const activeCoolingProducts = computed(() => {
+  if (activeCoolingTab.value === 0) return fridgeFreezerProducts.value;
+  if (activeCoolingTab.value === 1) return washingMachineProducts.value;
+  if (activeCoolingTab.value === 2) return dryerProducts.value;
+  return [];
+});
+const activeCoolingLoading = computed(() => {
+  if (activeCoolingTab.value === 0) return fridgeFreezerLoading.value;
+  if (activeCoolingTab.value === 1) return washingMachineLoading.value;
+  if (activeCoolingTab.value === 2) return dryerLoading.value;
+  return false;
 });
 
 const handleDeviceTabChange = async (tabType) => {
@@ -140,59 +293,55 @@ const handleLaptopHeaderTabChange = async (tabIndex) => {
   }
 };
 
-const hashString = (value) => {
-  let hash = 0;
-  for (let i = 0; i < value.length; i += 1) {
-    hash = (hash * 31 + value.charCodeAt(i)) % 2147483647;
+const handleWatchAudioTabChange = async (tabType) => {
+  const nextTab = tabType === "secondary" ? "audio" : "watch";
+  activeWatchAudioTab.value = nextTab;
+
+  if (nextTab === "audio") {
+    try {
+      await fetchAudioCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
   }
-  return hash;
 };
 
-const mkProducts = (names) => {
-  const storageOptions = ["Pro Max 256GB", "Ultra 512GB", "Plus 128GB", "Standard 256GB"];
+const handleHomeLifeTabChange = async (tabType) => {
+  const nextTab = tabType === "secondary" ? "beauty-health" : "home-appliance";
+  activeHomeLifeTab.value = nextTab;
 
-  return Array.from({ length: 10 }, (_, i) => {
-    const baseName = names[i % names.length];
-    const seed = hashString(`${baseName}-${i}-${names.length}`);
-    const price = ((seed % 18) + 5) * 1000000;
-    const discount = (seed % 15) + 5;
+  if (nextTab === "beauty-health") {
+    try {
+      await fetchBeautyHealthCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
+  }
+};
 
-    return {
-      id: `${baseName.replace(/\s+/g, "-")}-${i}`,
-      name: `${baseName} ${storageOptions[i % storageOptions.length]} Chính hãng VN/A`,
-      price,
-      originalPrice: Math.round(price / (1 - discount / 100)),
-      discount,
-      rating: (((seed % 9) / 10) + 4.1).toFixed(1),
-      badge: `Giảm ${discount}%`,
-      installmentText: "Trả góp 0%",
-      gifts: ["Smember giảm thêm 300.000đ", "S-Student giảm thêm 500.000đ"],
-      img: `https://placehold.co/240x240/f5f5f5/999?text=${encodeURIComponent(baseName)}`,
-    };
-  });
+const handleCoolingTabChange = async (tabIndex) => {
+  activeCoolingTab.value = tabIndex;
+
+  if (tabIndex === 1) {
+    try {
+      await fetchWashingMachineCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
+  }
+
+  if (tabIndex === 2) {
+    try {
+      await fetchDryerCollection();
+    } catch {
+      // Keep current UI and avoid throwing in interaction handler.
+    }
+  }
 };
 
 onMounted(() => {
   fetchHomeData();
 });
-
-const audioState = ref({ data: mkProducts(["AirPods Pro", "Sony WH-1000", "JBL Tune", "Samsung Buds", "Bose QC45"]), loading: false });
-const fetchAudio = async (tabName) => {
-  audioState.value.loading = true;
-  setTimeout(() => {
-    audioState.value.data = mkProducts([tabName?.title || tabName || "Tai nghe Mẫu"]);
-    audioState.value.loading = false;
-  }, 350);
-};
-
-const watchState = ref({ data: mkProducts(["Apple Watch", "Samsung Watch", "Garmin Fenix", "Casio G-Shock", "Xiaomi Watch"]), loading: false });
-const fetchWatches = async (tabName) => {
-  watchState.value.loading = true;
-  setTimeout(() => {
-    watchState.value.data = mkProducts([tabName?.title || tabName || "Đồng hồ Mẫu"]);
-    watchState.value.loading = false;
-  }, 350);
-};
 
 </script>
 

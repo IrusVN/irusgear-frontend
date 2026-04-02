@@ -82,6 +82,102 @@ export const useHomeStore = defineStore("home", () => {
   const computerAccessoryLoaded = ref(false);
   const computerAccessoryError = ref(null);
 
+  const watchCollection = ref({
+    rootTitle: "ĐỒNG HỒ",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/dong-ho?sort=newest&limit=20",
+  });
+  const watchProducts = ref([]);
+  const watchLoading = ref(false);
+  const watchLoaded = ref(false);
+  const watchError = ref(null);
+
+  const audioCollection = ref({
+    rootTitle: "ÂM THANH",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/am-thanh?sort=newest&limit=20",
+  });
+  const audioProducts = ref([]);
+  const audioLoading = ref(false);
+  const audioLoaded = ref(false);
+  const audioError = ref(null);
+
+  const tvCollection = ref({
+    rootTitle: "TIVI",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/tivi?sort=newest&limit=20",
+  });
+  const tvProducts = ref([]);
+  const tvLoading = ref(false);
+  const tvLoaded = ref(false);
+  const tvError = ref(null);
+
+  const homeApplianceCollection = ref({
+    rootTitle: "ĐỒ GIA DỤNG",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/do-gia-dung?sort=newest&limit=20",
+  });
+  const homeApplianceProducts = ref([]);
+  const homeApplianceLoading = ref(false);
+  const homeApplianceLoaded = ref(false);
+  const homeApplianceError = ref(null);
+
+  const beautyHealthCollection = ref({
+    rootTitle: "SỨC KHỎE - LÀM ĐẸP",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/suc-khoe-lam-dep?sort=newest&limit=20",
+  });
+  const beautyHealthProducts = ref([]);
+  const beautyHealthLoading = ref(false);
+  const beautyHealthLoaded = ref(false);
+  const beautyHealthError = ref(null);
+
+  const fridgeFreezerCollection = ref({
+    rootTitle: "TỦ LẠNH - TỦ ĐÔNG",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/tu-lanh-tu-dong?sort=newest&limit=20",
+  });
+  const fridgeFreezerProducts = ref([]);
+  const fridgeFreezerLoading = ref(false);
+  const fridgeFreezerLoaded = ref(false);
+  const fridgeFreezerError = ref(null);
+
+  const washingMachineCollection = ref({
+    rootTitle: "MÁY GIẶT",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/may-giat?sort=newest&limit=20",
+  });
+  const washingMachineProducts = ref([]);
+  const washingMachineLoading = ref(false);
+  const washingMachineLoaded = ref(false);
+  const washingMachineError = ref(null);
+
+  const dryerCollection = ref({
+    rootTitle: "MÁY SẤY QUẦN ÁO",
+    needItems: [],
+    brandItems: [],
+    allProducts: [],
+    viewAllUrl: "/category/may-say-quan-ao?sort=newest&limit=20",
+  });
+  const dryerProducts = ref([]);
+  const dryerLoading = ref(false);
+  const dryerLoaded = ref(false);
+  const dryerError = ref(null);
+
   const homeLoading = ref(false);
   const homeLoaded = ref(false);
   const homeError = ref(null);
@@ -93,6 +189,14 @@ export const useHomeStore = defineStore("home", () => {
   let monitorPromise = null;
   let pcPromise = null;
   let computerAccessoryPromise = null;
+  let watchPromise = null;
+  let audioPromise = null;
+  let tvPromise = null;
+  let homeAppliancePromise = null;
+  let beautyHealthPromise = null;
+  let fridgeFreezerPromise = null;
+  let washingMachinePromise = null;
+  let dryerPromise = null;
 
   const phoneDesktopBanners = [
     {
@@ -331,6 +435,182 @@ export const useHomeStore = defineStore("home", () => {
       badge: `Giảm ${discount}%`,
       installmentText: "Trả góp 0%",
       gifts: ["Smember giảm đến 200.000đ", "S-Student giảm thêm 150.000đ", "Giao hàng nhanh toàn quốc"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapWatchProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [8, 6, 5, 9, 7, 4][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 300.000đ", "S-Student giảm thêm 200.000đ", "Bảo hành chính hãng toàn quốc"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapAudioProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [10, 8, 12, 7, 9, 6][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 200.000đ", "S-Student giảm thêm 150.000đ", "Giao hàng nhanh toàn quốc"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapTvProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [11, 9, 8, 10, 7, 6][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 600.000đ", "S-Student giảm thêm 300.000đ", "Giao hàng lắp đặt nhanh toàn quốc"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapHomeApplianceProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [12, 10, 8, 11, 9, 7][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 300.000đ", "S-Student giảm thêm 200.000đ", "Giao nhanh toàn quốc"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapBeautyHealthProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [9, 7, 8, 10, 6, 11][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 250.000đ", "S-Student giảm thêm 150.000đ", "Sản phẩm chính hãng"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapFridgeFreezerProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [9, 7, 8, 10, 6, 11][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 500.000đ", "S-Student giảm thêm 300.000đ", "Hỗ trợ giao lắp nhanh"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapWashingMachineProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [8, 10, 7, 9, 6, 11][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 500.000đ", "S-Student giảm thêm 300.000đ", "Giao lắp nhanh toàn quốc"],
+      url: product.slug ? `/category/${product.slug}` : "#",
+    };
+  };
+
+  const mapDryerProduct = (product, index) => {
+    const rawPrice = Number(product?.price) || 0;
+    const discount = [7, 9, 8, 10, 6, 11][index % 6];
+    const originalPrice = rawPrice > 0 ? Math.round(rawPrice / (1 - discount / 100)) : null;
+
+    return {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      img: product.image,
+      price: rawPrice,
+      originalPrice,
+      discount,
+      rating: product.rating ?? 5,
+      reviewsCount: product.reviews_count ?? 0,
+      badge: `Giảm ${discount}%`,
+      installmentText: "Trả góp 0%",
+      gifts: ["Smember giảm đến 400.000đ", "S-Student giảm thêm 250.000đ", "Hỗ trợ giao lắp nhanh"],
       url: product.slug ? `/category/${product.slug}` : "#",
     };
   };
@@ -721,6 +1001,496 @@ export const useHomeStore = defineStore("home", () => {
     }
   };
 
+  const fetchWatchCollection = async ({ force = false } = {}) => {
+    if (watchLoading.value && watchPromise) return watchPromise;
+    if (watchLoaded.value && !force) return watchCollection.value;
+
+    watchLoading.value = true;
+    watchError.value = null;
+
+    watchPromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/dong-ho`);
+      if (!res.ok) throw new Error("Fetch watch collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-smartwatch",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapWatchProduct)
+        : [];
+
+      watchCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "ĐỒNG HỒ",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/dong-ho?sort=newest&limit=20",
+      };
+
+      watchProducts.value = mappedProducts;
+      watchLoaded.value = true;
+      return watchCollection.value;
+    })();
+
+    try {
+      return await watchPromise;
+    } catch (error) {
+      watchError.value = error instanceof Error ? error.message : "Fetch watch collection failed";
+      throw error;
+    } finally {
+      watchLoading.value = false;
+      watchPromise = null;
+    }
+  };
+
+  const fetchAudioCollection = async ({ force = false } = {}) => {
+    if (audioLoading.value && audioPromise) return audioPromise;
+    if (audioLoaded.value && !force) return audioCollection.value;
+
+    audioLoading.value = true;
+    audioError.value = null;
+
+    audioPromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/am-thanh`);
+      if (!res.ok) throw new Error("Fetch audio collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-headphones",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapAudioProduct)
+        : [];
+
+      audioCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "ÂM THANH",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/am-thanh?sort=newest&limit=20",
+      };
+
+      audioProducts.value = mappedProducts;
+      audioLoaded.value = true;
+      return audioCollection.value;
+    })();
+
+    try {
+      return await audioPromise;
+    } catch (error) {
+      audioError.value = error instanceof Error ? error.message : "Fetch audio collection failed";
+      throw error;
+    } finally {
+      audioLoading.value = false;
+      audioPromise = null;
+    }
+  };
+
+  const fetchTvCollection = async ({ force = false } = {}) => {
+    if (tvLoading.value && tvPromise) return tvPromise;
+    if (tvLoaded.value && !force) return tvCollection.value;
+
+    tvLoading.value = true;
+    tvError.value = null;
+
+    tvPromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/tivi`);
+      if (!res.ok) throw new Error("Fetch TV collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-tv",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapTvProduct)
+        : [];
+
+      tvCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "TIVI",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/tivi?sort=newest&limit=20",
+      };
+
+      tvProducts.value = mappedProducts;
+      tvLoaded.value = true;
+      return tvCollection.value;
+    })();
+
+    try {
+      return await tvPromise;
+    } catch (error) {
+      tvError.value = error instanceof Error ? error.message : "Fetch TV collection failed";
+      throw error;
+    } finally {
+      tvLoading.value = false;
+      tvPromise = null;
+    }
+  };
+
+  const fetchHomeApplianceCollection = async ({ force = false } = {}) => {
+    if (homeApplianceLoading.value && homeAppliancePromise) return homeAppliancePromise;
+    if (homeApplianceLoaded.value && !force) return homeApplianceCollection.value;
+
+    homeApplianceLoading.value = true;
+    homeApplianceError.value = null;
+
+    homeAppliancePromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/do-gia-dung`);
+      if (!res.ok) throw new Error("Fetch home appliance collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-house",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapHomeApplianceProduct)
+        : [];
+
+      homeApplianceCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "ĐỒ GIA DỤNG",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/do-gia-dung?sort=newest&limit=20",
+      };
+
+      homeApplianceProducts.value = mappedProducts;
+      homeApplianceLoaded.value = true;
+      return homeApplianceCollection.value;
+    })();
+
+    try {
+      return await homeAppliancePromise;
+    } catch (error) {
+      homeApplianceError.value = error instanceof Error ? error.message : "Fetch home appliance collection failed";
+      throw error;
+    } finally {
+      homeApplianceLoading.value = false;
+      homeAppliancePromise = null;
+    }
+  };
+
+  const fetchBeautyHealthCollection = async ({ force = false } = {}) => {
+    if (beautyHealthLoading.value && beautyHealthPromise) return beautyHealthPromise;
+    if (beautyHealthLoaded.value && !force) return beautyHealthCollection.value;
+
+    beautyHealthLoading.value = true;
+    beautyHealthError.value = null;
+
+    beautyHealthPromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/suc-khoe-lam-dep`);
+      if (!res.ok) throw new Error("Fetch beauty health collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-heart-pulse",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapBeautyHealthProduct)
+        : [];
+
+      beautyHealthCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "SỨC KHỎE - LÀM ĐẸP",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/suc-khoe-lam-dep?sort=newest&limit=20",
+      };
+
+      beautyHealthProducts.value = mappedProducts;
+      beautyHealthLoaded.value = true;
+      return beautyHealthCollection.value;
+    })();
+
+    try {
+      return await beautyHealthPromise;
+    } catch (error) {
+      beautyHealthError.value = error instanceof Error ? error.message : "Fetch beauty health collection failed";
+      throw error;
+    } finally {
+      beautyHealthLoading.value = false;
+      beautyHealthPromise = null;
+    }
+  };
+
+  const fetchFridgeFreezerCollection = async ({ force = false } = {}) => {
+    if (fridgeFreezerLoading.value && fridgeFreezerPromise) return fridgeFreezerPromise;
+    if (fridgeFreezerLoaded.value && !force) return fridgeFreezerCollection.value;
+
+    fridgeFreezerLoading.value = true;
+    fridgeFreezerError.value = null;
+
+    fridgeFreezerPromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/tu-lanh-tu-dong`);
+      if (!res.ok) throw new Error("Fetch fridge freezer collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-snow",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapFridgeFreezerProduct)
+        : [];
+
+      fridgeFreezerCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "TỦ LẠNH - TỦ ĐÔNG",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/tu-lanh-tu-dong?sort=newest&limit=20",
+      };
+
+      fridgeFreezerProducts.value = mappedProducts;
+      fridgeFreezerLoaded.value = true;
+      return fridgeFreezerCollection.value;
+    })();
+
+    try {
+      return await fridgeFreezerPromise;
+    } catch (error) {
+      fridgeFreezerError.value =
+        error instanceof Error ? error.message : "Fetch fridge freezer collection failed";
+      throw error;
+    } finally {
+      fridgeFreezerLoading.value = false;
+      fridgeFreezerPromise = null;
+    }
+  };
+
+  const fetchWashingMachineCollection = async ({ force = false } = {}) => {
+    if (washingMachineLoading.value && washingMachinePromise) return washingMachinePromise;
+    if (washingMachineLoaded.value && !force) return washingMachineCollection.value;
+
+    washingMachineLoading.value = true;
+    washingMachineError.value = null;
+
+    washingMachinePromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/may-giat`);
+      if (!res.ok) throw new Error("Fetch washing machine collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-badge-wc",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapWashingMachineProduct)
+        : [];
+
+      washingMachineCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "MÁY GIẶT",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/may-giat?sort=newest&limit=20",
+      };
+
+      washingMachineProducts.value = mappedProducts;
+      washingMachineLoaded.value = true;
+      return washingMachineCollection.value;
+    })();
+
+    try {
+      return await washingMachinePromise;
+    } catch (error) {
+      washingMachineError.value =
+        error instanceof Error ? error.message : "Fetch washing machine collection failed";
+      throw error;
+    } finally {
+      washingMachineLoading.value = false;
+      washingMachinePromise = null;
+    }
+  };
+
+  const fetchDryerCollection = async ({ force = false } = {}) => {
+    if (dryerLoading.value && dryerPromise) return dryerPromise;
+    if (dryerLoaded.value && !force) return dryerCollection.value;
+
+    dryerLoading.value = true;
+    dryerError.value = null;
+
+    dryerPromise = (async () => {
+      const res = await fetch(`${config.public.apiBaseUrl}/collections/may-say-quan-ao`);
+      if (!res.ok) throw new Error("Fetch dryer collection failed");
+
+      const json = await res.json();
+      const payload = json?.data || {};
+
+      const mappedNeedItems = Array.isArray(payload.need_items)
+        ? payload.need_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+            iconClass: "bi bi-wind",
+          }))
+        : [];
+
+      const mappedBrandItems = Array.isArray(payload.brand_items)
+        ? payload.brand_items.map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            image: item.image || "",
+            url: item.url || (item.slug ? `/category/${item.slug}` : "#"),
+          }))
+        : [];
+
+      const mappedProducts = Array.isArray(payload.products)
+        ? payload.products.map(mapDryerProduct)
+        : [];
+
+      dryerCollection.value = {
+        rootTitle: payload?.root?.title?.toUpperCase() || "MÁY SẤY QUẦN ÁO",
+        needItems: mappedNeedItems,
+        brandItems: mappedBrandItems,
+        allProducts: mappedProducts,
+        viewAllUrl: "/category/may-say-quan-ao?sort=newest&limit=20",
+      };
+
+      dryerProducts.value = mappedProducts;
+      dryerLoaded.value = true;
+      return dryerCollection.value;
+    })();
+
+    try {
+      return await dryerPromise;
+    } catch (error) {
+      dryerError.value = error instanceof Error ? error.message : "Fetch dryer collection failed";
+      throw error;
+    } finally {
+      dryerLoading.value = false;
+      dryerPromise = null;
+    }
+  };
+
   const selectPhoneBrand = (selectedBrand) => {
     selectedPhoneBrand.value = selectedBrand;
     phoneProducts.value = filterProductsByBrand(phoneCollection.value.allProducts || [], selectedBrand);
@@ -742,6 +1512,10 @@ export const useHomeStore = defineStore("home", () => {
           fetchMegaMenu({ force }),
           fetchPhoneCollection({ selectedBrand }),
           fetchLaptopCollection({ force }),
+          fetchWatchCollection({ force }),
+          fetchTvCollection({ force }),
+          fetchHomeApplianceCollection({ force }),
+          fetchFridgeFreezerCollection({ force }),
         ]);
         homeLoaded.value = true;
       } catch (error) {
@@ -813,6 +1587,46 @@ export const useHomeStore = defineStore("home", () => {
     computerAccessoryLoading,
     computerAccessoryLoaded,
     computerAccessoryError,
+    watchCollection,
+    watchProducts,
+    watchLoading,
+    watchLoaded,
+    watchError,
+    audioCollection,
+    audioProducts,
+    audioLoading,
+    audioLoaded,
+    audioError,
+    tvCollection,
+    tvProducts,
+    tvLoading,
+    tvLoaded,
+    tvError,
+    homeApplianceCollection,
+    homeApplianceProducts,
+    homeApplianceLoading,
+    homeApplianceLoaded,
+    homeApplianceError,
+    beautyHealthCollection,
+    beautyHealthProducts,
+    beautyHealthLoading,
+    beautyHealthLoaded,
+    beautyHealthError,
+    fridgeFreezerCollection,
+    fridgeFreezerProducts,
+    fridgeFreezerLoading,
+    fridgeFreezerLoaded,
+    fridgeFreezerError,
+    washingMachineCollection,
+    washingMachineProducts,
+    washingMachineLoading,
+    washingMachineLoaded,
+    washingMachineError,
+    dryerCollection,
+    dryerProducts,
+    dryerLoading,
+    dryerLoaded,
+    dryerError,
     phoneDesktopBanners,
     phoneMobileBanners,
     homeLoading,
@@ -827,6 +1641,14 @@ export const useHomeStore = defineStore("home", () => {
     fetchMonitorCollection,
     fetchPcCollection,
     fetchComputerAccessoryCollection,
+    fetchWatchCollection,
+    fetchAudioCollection,
+    fetchTvCollection,
+    fetchHomeApplianceCollection,
+    fetchBeautyHealthCollection,
+    fetchFridgeFreezerCollection,
+    fetchWashingMachineCollection,
+    fetchDryerCollection,
     selectPhoneBrand,
     fetchHomeData,
     resetMegaMenu,
