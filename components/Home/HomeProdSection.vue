@@ -27,15 +27,15 @@
         <div class="d-flex align-items-stretch bg-white">
           <template v-if="resolvedHeaderTabs.length">
             <template v-for="(tab, idx) in resolvedHeaderTabs" :key="`${tab}-${idx}`">
-              <button type="button" class="section-main-tab" :class="{ active: props.activeHeaderTabIndex === idx }" @click="emit('header-tab-change', idx)">{{ tab }}</button>
+              <button type="button" class="section-main-tab" :class="{ active: section.activeHeaderTabIndex === idx }" @click="onHeaderTabChange(idx)">{{ tab }}</button>
               <div v-if="idx < resolvedHeaderTabs.length - 1" class="my-auto section-tab-divider"></div>
             </template>
           </template>
 
           <template v-else>
-            <button type="button" class="section-main-tab" :class="{ active: activeMainTab === 'primary' }" @click="emit('tab-change', 'primary')">{{ title }}</button>
+            <button type="button" class="section-main-tab" :class="{ active: section.activeMainTab === 'primary' }" @click="onMainTabChange('primary')">{{ section.title }}</button>
             <div class="my-auto section-tab-divider"></div>
-            <button type="button" class="section-main-tab" :class="{ active: activeMainTab === 'secondary' }" @click="emit('tab-change', 'secondary')">{{ resolvedSecondaryTitle }}</button>
+            <button type="button" class="section-main-tab" :class="{ active: section.activeMainTab === 'secondary' }" @click="onMainTabChange('secondary')">{{ resolvedSecondaryTitle }}</button>
           </template>
         </div>
 
@@ -112,14 +112,14 @@
               </button>
             </div>
 
-            <a :href="viewAllUrl || '#'" class="view-all-btn d-none d-md-inline-flex">
+            <a :href="section.viewAllUrl || '#'" class="view-all-btn d-none d-md-inline-flex">
               Xem tất cả
               <i class="bi bi-chevron-right"></i>
             </a>
           </div>
         </div>
 
-        <div v-if="loading" class="d-flex justify-content-center py-5">
+        <div v-if="section.loading" class="d-flex justify-content-center py-5">
           <div class="spinner-border text-secondary" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
@@ -163,26 +163,15 @@
 
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
-
-const emit = defineEmits(["tab-change", "header-tab-change"]);
+import { useHomeSectionsStore } from "~/stores/homeSectionsStore";
 
 const props = defineProps({
-  title: { type: String, required: true },
-  headerTabs: { type: Array, default: () => [] },
-  activeHeaderTabIndex: { type: Number, default: 0 },
-  tabs: { type: Array, default: () => [] },
-  needItems: { type: Array, default: () => [] },
-  brandItems: { type: Array, default: () => [] },
-  disableTabsFallback: { type: Boolean, default: false },
-  products: { type: Array, default: () => [] },
-  viewAllUrl: { type: String, default: "#" },
-  desktopBanners: { type: Array, default: () => [] },
-  mobileBanners: { type: Array, default: () => [] },
-  secondaryTitle: { type: String, default: "" },
-  activeMainTab: { type: String, default: "primary" },
-  loading: { type: Boolean, default: false },
+  sectionKey: { type: String, required: true },
   desktopProductRows: { type: Number, default: 2 },
 });
+
+const homeSectionsStore = useHomeSectionsStore();
+const section = computed(() => homeSectionsStore.getSection(props.sectionKey) || {});
 
 const featureStripRef = ref(null);
 const productStripRef = ref(null);
@@ -193,7 +182,9 @@ const canScrollProductPrev = ref(false);
 const canScrollProductNext = ref(false);
 const canScrollBrandPrev = ref(false);
 const canScrollBrandNext = ref(false);
-const resolvedHeaderTabs = computed(() => (Array.isArray(props.headerTabs) ? props.headerTabs.filter(Boolean) : []));
+const resolvedHeaderTabs = computed(() =>
+  Array.isArray(section.value.headerTabs) ? section.value.headerTabs.filter(Boolean) : []
+);
 const productStripStyle = computed(() => {
   const rows = Number(props.desktopProductRows);
   const safeRows = Number.isFinite(rows) && rows > 0 ? Math.floor(rows) : 2;
@@ -218,17 +209,21 @@ const scheduleNavRecalc = () => {
 };
 
 const resolvedSecondaryTitle = computed(() => {
-  if (props.secondaryTitle) return props.secondaryTitle;
-  return props.title === "MAY TINH BANG" ? "DIEN THOAI" : "MAY TINH BANG";
+  if (section.value.secondaryTitle) return section.value.secondaryTitle;
+  return "MAY TINH BANG";
 });
 
-const displayedProducts = computed(() => (Array.isArray(props.products) ? props.products : []));
-const hasNeedItems = computed(() => Array.isArray(props.needItems) && props.needItems.length > 0);
+const displayedProducts = computed(() =>
+  Array.isArray(section.value.products) ? section.value.products : []
+);
+const hasNeedItems = computed(() =>
+  Array.isArray(section.value.needItems) && section.value.needItems.length > 0
+);
 
 const featureChips = computed(() => {
   if (!hasNeedItems.value) return [];
 
-  return props.needItems.slice(0, 10).map((item) => ({
+  return section.value.needItems.slice(0, 10).map((item) => ({
     title: item.title,
     image: item.image,
     iconClass: item.iconClass,
@@ -237,8 +232,8 @@ const featureChips = computed(() => {
 });
 
 const resolvedBrands = computed(() => {
-  if (Array.isArray(props.brandItems) && props.brandItems.length) {
-    return props.brandItems.map((item) => ({
+  if (Array.isArray(section.value.brandItems) && section.value.brandItems.length) {
+    return section.value.brandItems.map((item) => ({
       title: item.title,
       image: item.image,
       slug: item.slug,
@@ -246,11 +241,13 @@ const resolvedBrands = computed(() => {
     }));
   }
 
-  if (props.disableTabsFallback) {
+  if (section.value.disableTabsFallback) {
     return [];
   }
 
-  return props.tabs.map((tab) => ({ title: tab }));
+  return Array.isArray(section.value.tabs)
+    ? section.value.tabs.map((tab) => ({ title: tab }))
+    : [];
 });
 
 const fallbackDesktopBanners = [
@@ -286,8 +283,24 @@ const fallbackMobileBanners = [
   },
 ];
 
-const resolvedDesktopBanners = computed(() => (props.desktopBanners.length ? props.desktopBanners : fallbackDesktopBanners));
-const resolvedMobileBanners = computed(() => (props.mobileBanners.length ? props.mobileBanners : fallbackMobileBanners));
+const resolvedDesktopBanners = computed(() =>
+  Array.isArray(section.value.desktopBanners) && section.value.desktopBanners.length
+    ? section.value.desktopBanners
+    : fallbackDesktopBanners
+);
+const resolvedMobileBanners = computed(() =>
+  Array.isArray(section.value.mobileBanners) && section.value.mobileBanners.length
+    ? section.value.mobileBanners
+    : fallbackMobileBanners
+);
+
+const onMainTabChange = async (tabType) => {
+  await homeSectionsStore.handleMainTabChange(props.sectionKey, tabType);
+};
+
+const onHeaderTabChange = async (tabIndex) => {
+  await homeSectionsStore.handleHeaderTabChange(props.sectionKey, tabIndex);
+};
 
 const updateStripNavState = () => {
   const el = featureStripRef.value;
@@ -364,7 +377,7 @@ onUnmounted(() => {
 
 watch(
   () => [
-    props.loading,
+    section.value.loading,
     featureChips.value.length,
     resolvedBrands.value.length,
     displayedProducts.value.length,
