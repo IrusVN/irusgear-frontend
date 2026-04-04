@@ -6,6 +6,7 @@
                 <slot />
             </main>
             <Footer />
+            <ChatbotWidget />
         </div>
     </div>
 </template>
@@ -13,6 +14,8 @@
 <script setup>
 import CustomerSidebar from '@/components/Sidebar/CustomerSidebar.vue'
 import Footer from '@/components/Footer/Footer.vue'
+import ChatbotWidget from '@/components/Chatbot/ChatbotWidget.vue'
 </script>
 
 <style scoped></style>
+
