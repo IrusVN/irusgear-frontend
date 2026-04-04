@@ -206,7 +206,6 @@ export const useHomeSectionsStore = defineStore("home-sections", () => {
         mobileBanners: activeDeviceTab.value === "phone" ? phoneMobileBanners : [],
         products: activeDeviceProducts,
         loading: activeDeviceLoading,
-        desktopProductRows: 2,
       },
       laptop: {
         title: activeLaptopCollection.rootTitle || "LAPTOP",
@@ -220,7 +219,6 @@ export const useHomeSectionsStore = defineStore("home-sections", () => {
         mobileBanners: laptopMobileBanners,
         products: activeLaptopProducts,
         loading: activeLaptopLoading,
-        desktopProductRows: 2,
       },
       watchAudio: {
         title: watchCollection.value.rootTitle || "ĐỒNG HỒ",
@@ -235,7 +233,6 @@ export const useHomeSectionsStore = defineStore("home-sections", () => {
         mobileBanners: watchAudioMobileBanners,
         products: activeWatchAudioProducts,
         loading: activeWatchAudioLoading,
-        desktopProductRows: 1,
       },
       tv: {
         title: tvCollection.value.rootTitle || "TIVI",
@@ -249,7 +246,6 @@ export const useHomeSectionsStore = defineStore("home-sections", () => {
         mobileBanners: tvMobileBanners,
         products: tvProducts.value,
         loading: tvLoading.value,
-        desktopProductRows: 1,
       },
       homeLife: {
         title: homeApplianceCollection.value.rootTitle || "ĐỒ GIA DỤNG",
@@ -263,7 +259,6 @@ export const useHomeSectionsStore = defineStore("home-sections", () => {
         mobileBanners: homeLifeMobileBanners,
         products: activeHomeLifeProducts,
         loading: activeHomeLifeLoading,
-        desktopProductRows: 1,
       },
       cooling: {
         title: activeCoolingCollection.rootTitle || "TỦ LẠNH - TỦ ĐÔNG",
@@ -277,7 +272,6 @@ export const useHomeSectionsStore = defineStore("home-sections", () => {
         mobileBanners: coolingMobileBanners,
         products: activeCoolingProducts,
         loading: activeCoolingLoading,
-        desktopProductRows: 1,
       },
     };
   });
