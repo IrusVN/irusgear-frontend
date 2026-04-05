@@ -114,11 +114,11 @@ const isActiveRoute = (itemRoute) => {
 
 <style scoped>
 .sidebar-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  z-index: 1000;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  z-index: 1000 !important;
   width: 260px;
   transition: width 0.3s ease;
 }
@@ -130,6 +130,7 @@ const isActiveRoute = (itemRoute) => {
 .sidebar-admin {
   width: 100%;
   overflow-y: auto;
+  height: 100%;
 }
 
 .sidebar-admin.sidebar-collapsed {
