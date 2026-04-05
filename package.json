@@ -14,6 +14,7 @@
     "@pinia/nuxt": "^0.11.3",
     "@vee-validate/i18n": "^4.15.1",
     "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.1",
     "gsap": "^3.14.2",
     "nuxt": "^4.2.2",
     "pinia": "^3.0.4",

@@ -1,6 +1,6 @@
 <template>
-  <div class="position-relative">
-    <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 position-relative vh-100 overflow-hidden" :class="{ 'sidebar-collapsed': isCollapsed }" >
+  <div class="sidebar-wrapper position-relative">
+    <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 h-100" :class="{ 'sidebar-collapsed': isCollapsed }" >
       <!-- Header -->
       <div class="d-flex align-items-center gap-2 mb-4">
         <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center p-2" >
@@ -113,26 +113,55 @@ const isActiveRoute = (itemRoute) => {
 </script>
 
 <style scoped>
+.sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  width: 260px;
+  transition: width 0.3s ease;
+}
+
+.sidebar-wrapper:has(.sidebar-collapsed) {
+  width: 80px;
+}
+
 .sidebar-admin {
-  transition: width .3s ease;
+  width: 100%;
+  overflow-y: auto;
 }
+
+.sidebar-admin.sidebar-collapsed {
+  overflow-x: hidden;
+}
+
 .toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
   transform: translate(50%, -50%);
+  z-index: 1001;
+  width: 32px;
+  height: 32px;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.toggle-btn i {
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
-  .sidebar-admin {
-    position: fixed;
-    top: 9.1%;
-    left: 0;
-    height: 100vh;
+  .sidebar-wrapper {
     width: 260px;
-    z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    background: #fff;
   }
 
-  .mobile-open .sidebar-admin {
+  .sidebar-wrapper.mobile-open {
     transform: translateX(0);
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
   }

@@ -47,3 +47,76 @@
   background: transparent;
   border: 1px solid #1a1a1a;
 }
+
+/* Dashboard Styles */
+.dashboard-container {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sidebar Width */
+.sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  width: 260px;
+  transition: width 0.3s ease;
+}
+
+.sidebar-wrapper:has(.sidebar-collapsed) {
+  width: 80px;
+}
+
+.admin-main {
+  margin-left: 260px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar-wrapper:has(.sidebar-collapsed) ~ .admin-main {
+  margin-left: 80px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar-wrapper {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar-wrapper.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .admin-main {
+    margin-left: 0 !important;
+  }
+}
+
+/* Custom scrollbar for dashboard */
+.admin-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-main::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.admin-main::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.admin-main::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
