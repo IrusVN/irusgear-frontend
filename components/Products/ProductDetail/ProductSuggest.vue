@@ -1,2210 +1,573 @@
 <template>
-    <div data-v-7496f6e0="" id="block-same-product" class="block-same-product">
-        <div data-v-7496f6e0="" class="same-product-head">
-            <h2 data-v-7496f6e0="" class="same-product-title mt-2">Có thể bạn cũng thích</h2>
-        </div>
-        <div data-v-7496f6e0="" class="same-product-options-list is-flex is-justify-content-space-between">
-            <div data-v-7496f6e0="" class="product-options-tabs" style="">
-                <div data-v-7496f6e0="" class="item button__tab active">
-                    <p data-v-7496f6e0="">Thu cũ đổi mới</p>
-                </div>
-                <div data-v-7496f6e0="" class="item button__tab">
-                    <p data-v-7496f6e0="">Sản phẩm tương tự</p>
-                </div>
-                <div data-v-7496f6e0="" class="item button__tab">
-                    <p data-v-7496f6e0="">Tham khảo hàng cũ</p>
-                </div>
+  <div class="product-suggest">
+    <section id="comboBlock" class="combo-block">
+      <div class="combov2 my-3">
+        <div class="combov2__wrapper list-option">
+          <div class="list-option__head">
+            <div class="option__title">
+              <div class="icon-fire">
+                <img
+                  src="https://cdn2.cellphones.com.vn/x/media/wysiwyg/fire-icon-2025.gif"
+                  alt="Lửa bập bùng"
+                />
+              </div>
+              <span>Mua kèm giá sốc</span>
             </div>
-        </div>
-        <div data-v-7496f6e0="" class="product-list-swiper">
-            <div class="swiper-container p-2 swiper-container-initialized swiper-container-horizontal">
-                <div class="swiper-wrapper"
-                    style="transform: translate3d(-1432.8px, 0px, 0px); transition-duration: 0ms;">
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-13_2_2.jpg"
-                                            width="358" height="358" alt="iPhone 13 128GB | Chính hãng VN/A"
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 13 128GB | Chính hãng VN/A</h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>5.197.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=36242-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-12.png"
-                                            width="358" height="358" alt="iPhone 12 64GB | Chính hãng VN/A "
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 12 64GB | Chính hãng VN/A </h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>4.147.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=24746-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/1/_/1_359_1.png"
-                                            width="358" height="358" alt="iPhone SE 2022 | Chính hãng VN/A"
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone SE 2022 | Chính hãng VN/A</h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>2.257.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=31075-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-12-128gb_2.png"
-                                            width="358" height="358" alt="iPhone 12 128GB | Chính hãng VN/A "
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 12 128GB | Chính hãng VN/A </h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>4.672.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=27451-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/1/_/1_253_2.jpg"
-                                            width="358" height="358" alt="iPhone 11 256GB I Chính hãng VN/A "
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 11 256GB I Chính hãng VN/A </h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>4.462.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=18395-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide swiper-slide-prev" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-13-02_4.jpg"
-                                            width="358" height="358" alt="iPhone 13 512GB | Chính hãng VN/A"
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 13 512GB | Chính hãng VN/A</h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>6.457.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=36486-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide swiper-slide-active" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/1/_/1_359.png"
-                                            width="358" height="358" alt="iPhone SE 2022 256GB | Chính hãng VN/A"
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone SE 2022 256GB | Chính hãng VN/A</h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>3.307.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=44672-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide swiper-slide-next" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-12_7__7.jpg"
-                                            width="358" height="358" alt="iPhone 12 256GB I Chính hãng VN/A "
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 12 256GB I Chính hãng VN/A </h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>5.197.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=27457-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/1/_/1_359_2.png"
-                                            width="358" height="358" alt="iPhone SE 2022 128GB | Chính hãng VN/A"
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone SE 2022 128GB | Chính hãng VN/A</h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>2.782.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=44667-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/p/apple_iphone_xs_max_64gb_8.jpg"
-                                            width="358" height="358" alt="Apple iPhone XS 512GB I Chính hãng VN/A "
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>Apple iPhone XS 512GB I Chính hãng VN/A </h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>3.727.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=12292-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/p/apple_iphone_xs_max_64gb_7.jpg"
-                                            width="358" height="358" alt="Apple iPhone XS 256GB I Chính hãng VN/A "
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>Apple iPhone XS 256GB I Chính hãng VN/A </h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>3.202.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=12288-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/1/1/11_3_12_2_1_6.jpg"
-                                            width="358" height="358" alt="iPhone 13 256GB | Chính hãng VN/A"
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 13 256GB | Chính hãng VN/A</h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>5.932.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=36485-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11-128gb.png"
-                                            width="358" height="358" alt="iPhone 11 128GB | Chính hãng VN/A "
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 11 128GB | Chính hãng VN/A </h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>3.937.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=18388-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div class="product-info-container">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-11.png"
-                                            width="358" height="358" alt="iPhone 11 64GB | Chính hãng VN/A "
-                                            class="product__img"></div> <span class="product__name">
-                                        <h3>iPhone 11 64GB | Chính hãng VN/A </h3>
-                                    </span>
-                                    <p class="trade--price">Giá thu đến: <strong>3.412.500đ</strong></p>
-                                </a> <a target="_blank"
-                                    href="https://cellphones.com.vn/thu-cu-doi-moi?exchange=16520-31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Lên
-                                    đời ngay</a></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="width: 228.8px; margin-right: 10px;">
-                        <div
-                            class="product-info-container more-trade-product is-flex is-flex-wrap-wrap is-justify-content-center is-align-items-center">
-                            <div class="product-info"><a class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:69:69/q:90/plain/https://cellphones.com.vn/media/cps-images/trade-placeholder.png"
-                                            width="69" height="69" alt="Thu cũ đổi mới" class="product__img"></div>
-                                </a> <a target="_blank" href="https://cellphones.com.vn/thu-cu-doi-moi?id=31495"
-                                    class="exchange button__compare is-flex is-justify-content-center is-align-items-center">Chọn
-                                    sản phẩm khác</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-button-prev button__view-product-prev" tabindex="0" role="button"
-                    aria-label="Previous slide" aria-disabled="false"></div>
-                <div class="swiper-button-next button__view-product-next" tabindex="0" role="button"
-                    aria-label="Next slide" aria-disabled="false"></div><span class="swiper-notification"
-                    aria-live="assertive" aria-atomic="true"></span>
+            <div class="option__action">
+              <button type="button">
+                Xem tất cả
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M6 4L10 8L6 12"
+                    stroke="#3B82F6"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
             </div>
-        </div>
-        <div data-v-7496f6e0="" class="product-list-swiper" style="display: none;">
-            <div class="swiper-container p-2 swiper-container-initialized swiper-container-horizontal">
-                <div class="swiper-wrapper" style="transition-duration: 0ms;">
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel="" href="https://cellphones.com.vn/iphone-16e-256gb.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16e-256gb.png"
-                                            width="358" height="358" alt="iPhone 16e 256GB | Chính hãng VN/A"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 16e 256GB | Chính hãng VN/A</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                14.490.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                19.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>28%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Ưu đãi iPhone 16e chỉ từ 12.49 triệu khi mua kèm
-                                                    sim Viettel 5G</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
+          </div>
 
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    5
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
+          <div class="list-option__body">
+            <div
+              v-for="item in comboDeals"
+              :key="item.title"
+              class="list-option__item"
+            >
+              <div class="item-wrapper">
+                <div class="image">
+                  <img :src="item.image" :alt="item.title" />
                 </div>
-                <div class="swiper-button-prev button__view-product-prev" tabindex="0" role="button"
-                    aria-label="Previous slide" aria-disabled="false"><svg width="20" height="20" viewBox="0 0 20 20"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="19" height="19" transform="translate(0.5 0.5)" fill="white"></rect>
-                        <path d="M12.375 5.25L7.625 10L12.375 14.75" stroke="#18181B" stroke-width="1.58333"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg></div>
-                <div class="swiper-button-next button__view-product-next" tabindex="0" role="button"
-                    aria-label="Next slide" aria-disabled="false"><svg width="20" height="20" viewBox="0 0 20 20"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="19" height="19" transform="translate(0.5 0.5)" fill="white"></rect>
-                        <path d="M7.625 5.25L12.375 10L7.625 14.75" stroke="#18181B" stroke-width="1.58333"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg></div><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-            </div>
-        </div>
-        <div data-v-7496f6e0="" class="product-list-swiper" style="display: none;">
-            <div class="swiper-container p-2 swiper-container-initialized swiper-container-horizontal">
-                <div class="swiper-wrapper" style="transition-duration: 0ms;">
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-max-cu-dep.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_18_1_3_2.png"
-                                            width="358" height="358" alt="iPhone 14 Pro Max 128GB - Cũ Đẹp"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro Max 128GB - Cũ Đẹp</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                17.990.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                29.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>40%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Phụ kiện ỐP DÁN mua kèm máy giảm thêm đến 15% (áp
-                                                    dụng trên giá giảm)</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
+                <div class="info">
+                  <a
+                    v-if="item.link"
+                    :href="item.link"
+                    target="_blank"
+                    class="info__name"
+                  >
+                    {{ item.title }}
+                  </a>
+                  <p v-else class="info__name">
+                    {{ item.title }}
+                  </p>
 
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    5
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
+                  <div class="upsell-item-action">
+                    <div v-if="item.price" class="block-box-price">
+                      <div class="box-info__box-price">
+                        <p class="product__price--show">{{ item.price }}</p>
+                        <p v-if="item.oldPrice" class="product__price--through">
+                          {{ item.oldPrice }}
+                        </p>
+                      </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-max-256gb-cu-dep.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/_/v_ng_20_2_1_2_1.png"
-                                            width="358" height="358" alt="iPhone 14 Pro Max 256GB - Cũ Đẹp"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro Max 256GB - Cũ Đẹp</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                19.990.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                32.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>39%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Trả góp 0% lãi suất, tối đa 9 tháng, trả trước từ
-                                                    10% qua CTTC hoặc 0đ qua thẻ tín dụng</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
 
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    4.8
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-plus-cu-dep.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/p/h/photo_2022-09-28_21-58-51_4_1_2_2.jpg"
-                                            width="358" height="358" alt="iPhone 14 Plus 128GB - Cũ Đẹp"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Plus 128GB - Cũ Đẹp</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                12.590.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                19.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>37%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Trả góp 0% lãi suất, tối đa 9 tháng, trả trước từ
-                                                    10% qua CTTC hoặc 0đ qua thẻ tín dụng</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
+                    <p v-else class="info__percent">{{ item.badge }}</p>
 
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    4.5
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-max-cu-tray-xuoc.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_18_1_3_2_1.png"
-                                            width="358" height="358" alt="iPhone 14 Pro Max 128GB - Cũ Trầy Xước"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro Max 128GB - Cũ Trầy Xước</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                16.990.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                29.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>43%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Phụ kiện ỐP DÁN mua kèm máy giảm thêm đến 15% (áp
-                                                    dụng trên giá giảm)</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
-
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    5
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-max-cu-xuoc-can.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_18_1_3_2_1_2.png"
-                                            width="358" height="358" alt="iPhone 14 Pro Max 128GB - Cũ Xước Cấn"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro Max 128GB - Cũ Xước Cấn</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                15.990.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                29.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>47%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Trả góp 0% lãi suất, tối đa 9 tháng, trả trước từ
-                                                    10% qua CTTC hoặc 0đ qua thẻ tín dụng</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
-
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    5
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-max-256gb-cu-tray-xuoc.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/_/v_ng_20_2_1_2.png"
-                                            width="358" height="358" alt="iPhone 14 Pro Max 256GB - Cũ Trầy Xước"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro Max 256GB - Cũ Trầy Xước</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                18.990.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                32.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>42%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Phụ kiện ỐP DÁN mua kèm máy giảm thêm đến 15% (áp
-                                                    dụng trên giá giảm)</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
-
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    4.2
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-cu-dep.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_12_1_3_2.png"
-                                            width="358" height="358" alt="iPhone 14 Pro 128GB - Cũ Đẹp"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro 128GB - Cũ Đẹp</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                16.190.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                27.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>42%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Trả góp 0% lãi suất, tối đa 9 tháng, trả trước từ
-                                                    10% qua CTTC hoặc 0đ qua thẻ tín dụng</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
-
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    5
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-256gb-cu-dep.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_13_1_2.png"
-                                            width="358" height="358" alt="iPhone 14 Pro 256GB - Cũ Đẹp"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro 256GB - Cũ Đẹp</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                17.190.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                29.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>43%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Trả góp 0% lãi suất, tối đa 9 tháng, trả trước từ
-                                                    10% qua CTTC hoặc 0đ qua thẻ tín dụng</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
-
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    4.3
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-max-512gb-cu-dep.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m-iphone-14-pro_2_1_1_2.png"
-                                            width="358" height="358" alt="iPhone 14 Pro Max 512GB - Cũ Đẹp"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro Max 512GB - Cũ Đẹp</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                21.490.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                38.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>45%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Trả góp 0% lãi suất, tối đa 9 tháng, trả trước từ
-                                                    10% qua CTTC hoặc 0đ qua thẻ tín dụng</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
-
-                            </div>
-                            <div class="bottom-div">
-                                <div class="product__box-rating">
-                                    <div class="icon-star is-active"><svg height="15" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 576 512">
-                                            <path
-                                                d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                            </path>
-                                        </svg></div>
-                                    5
-                                </div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-info-container">
-                            <div class="product-info"><a rel=""
-                                    href="https://cellphones.com.vn/iphone-14-pro-max-256gb-cu-xuoc-can.html"
-                                    class="product__link button__link">
-                                    <div class="product__image"><img
-                                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/_/v_ng_20_2_1_2_1_3.png"
-                                            width="358" height="358" alt="iPhone 14 Pro Max 256GB - Cũ Xước Cấn"
-                                            class="product__img"></div>
-                                    <div class="product__name">
-                                        <h3>iPhone 14 Pro Max 256GB - Cũ Xước Cấn</h3>
-                                    </div>
-                                    <div class="block-box-price">
-                                        <div class="box-info__installment" style="display: none;">
-                                            Trả góp 0%</div> <span class="title-price" style="display: none;">
-                                            :
-                                        </span>
-                                        <div class="box-info__box-price">
-                                            <p class="product__price--show">
-                                                17.990.000đ
-                                            </p>
-                                            <p class="product__price--through">
-                                                32.990.000đ
-                                            </p>
-                                            <div class="product__price--percent">
-                                                <p class="product__price--percent-detail">
-                                                    Giảm&nbsp;<span>45%</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions">
-                                        <div>
-                                            <div class="promotion">
-                                                <p class="gift-cont">Phụ kiện ỐP DÁN mua kèm máy giảm thêm đến 15% (áp
-                                                    dụng trên giá giảm)</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__promotions" style="display: none;">
-                                        <div class="promotion">
-                                            <p class="gift-cont"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="product__sticker-doc-quyen"
-                                    style="display: none; background-image: url(&quot;https://cdn2.cellphones.com.vn/200x/media/wysiwyg/placehoder.png&quot;);"
-                                    data-src="https://cdn2.cellphones.com.vn/70x/media/sticker/sticker-doc-quyen-3.svg"
-                                    lazy="loading"></div>
-
-                            </div>
-                            <div class="bottom-div">
-                                <div></div>
-                                <div class="btn-wish-list"><button id="wishListBtn">
-                                        <div class="btn__effect button__add-wishlist inactive"><svg
-                                                viewBox="20 18 29 28" aria-hidden="true" focusable="false"
-                                                class="heart-border icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-stroke icon-svg icon-svg--color-silver">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
-                                                class="heart-full icon-svg icon-svg--color-cps">
-                                                <path
-                                                    d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
-                                                </path>
-                                            </svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="5.707 17 48 20" class="broken-heart">
-                                                <g fill="#3b82f6">
-                                                    <path
-                                                        d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                                                        class="broken-heart--left"></path>
-                                                    <path
-                                                        d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                                                        class="broken-heart--right"></path>
-                                                </g>
-                                                <path fill="none" stroke="#FFF" stroke-miterlimit="10"
-                                                    d="M29.865 18.205v14.573" class="broken-heart--crack"></path>
-                                            </svg> <span class="effect-group"><span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span> <span
-                                                    class="effect"></span> <span class="effect"></span></span></div>
-                                        <span class="text-wishlist">&nbsp;Yêu thích</span>
-                                    </button></div>
-                            </div>
-                            <div class="install-0-tag"><span>Trả góp <strong>0%</strong></span>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="button" class="button">
+                      <span>Chọn thêm</span>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                      >
+                        <path
+                          d="M8 3.33325V12.6666"
+                          stroke="#3B82F6"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M3.3335 8H12.6668"
+                          stroke="#3B82F6"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-                <div class="swiper-button-prev button__view-product-prev" tabindex="0" role="button"
-                    aria-label="Previous slide" aria-disabled="false"><svg width="20" height="20" viewBox="0 0 20 20"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="19" height="19" transform="translate(0.5 0.5)" fill="white"></rect>
-                        <path d="M12.375 5.25L7.625 10L12.375 14.75" stroke="#18181B" stroke-width="1.58333"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg></div>
-                <div class="swiper-button-next button__view-product-next" tabindex="0" role="button"
-                    aria-label="Next slide" aria-disabled="false"><svg width="20" height="20" viewBox="0 0 20 20"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="19" height="19" transform="translate(0.5 0.5)" fill="white"></rect>
-                        <path d="M7.625 5.25L12.375 10L7.625 14.75" stroke="#18181B" stroke-width="1.58333"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg></div><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+
+    <section id="boxUpsell" class="my-3">
+      <p class="upsell-title">Phụ kiện mua cùng</p>
+      <div class="upsell-block-product">
+        <div class="upsell-grid">
+          <article
+            v-for="item in accessoryDeals"
+            :key="item.title"
+            class="upsell-item"
+          >
+            <div class="upsell-item-wrapper">
+              <img
+                :src="item.image"
+                :alt="item.title"
+                class="upsell-item-image"
+              />
+              <div class="upsell-item-info">
+                <div class="upsell-item-text">
+                  <a :href="item.link" target="_blank">
+                    <p class="upsell-item-name">{{ item.title }}</p>
+                  </a>
+                  <p class="upsell-item-member">
+                    Smember giảm thêm đến
+                    <span>{{ item.memberDiscount }}</span>
+                  </p>
+                </div>
+
+                <div class="upsell-item-action">
+                  <div class="block-box-price">
+                    <div class="box-info__box-price">
+                      <p class="product__price--show">{{ item.price }}</p>
+                      <p class="product__price--through">{{ item.oldPrice }}</p>
+                    </div>
+                  </div>
+
+                  <button type="button" class="button button-add-cart">
+                    <span>Thêm vào giỏ</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M8 3.33325V12.6666"
+                        stroke="#D70018"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M3.3335 8H12.6668"
+                        stroke="#D70018"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
-<script setup></script>
+
+<script setup>
+const comboDeals = [
+  {
+    title: "Sạc nhanh Belkin 20W 1 cổng USB-C PD/PPS Cubic Wall Charger",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:90/plain/https://cellphones.com.vn/media/catalog/product/f/r/frame_522_17_.png",
+    price: "200.000đ",
+    oldPrice: "390.000đ",
+    link: "https://cellphones.com.vn/cu-sac-nhanh-belkin-20w-1-cong-usb-c-pd-pps-cubic-wall-charger.html",
+  },
+  {
+    title: "Mua kèm sim giảm thêm 50K",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Text_ng_n_-_2024-11-19T091535.894.png",
+    badge: "Giảm tối đa 50.000đ",
+  },
+  {
+    title: "Khăn lau màn hình Apple - MW693ZA/A",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:90/plain/https://cellphones.com.vn/media/catalog/product/k/h/khan-lau-man-hinh-apple_1_.png",
+    price: "489.000đ",
+    oldPrice: "539.000đ",
+    link: "https://cellphones.com.vn/khan-lau-man-hinh-apple.html",
+  },
+  {
+    title: "Mua kèm tay cầm chụp ảnh",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tay-cam-telesin-fun-shot-magnetic-grip-2_2_.png",
+    badge: "Giảm thêm 5%",
+  },
+  {
+    title: "Mua kèm ống kính camera",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/s/ssss_1__87.png",
+    badge: "Giảm thêm 5%",
+  },
+];
+
+const accessoryDeals = [
+  {
+    title: "Sim 5G Viettel 5G150N 8GB/Ngày (Free TV360 4K)",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/i/sim-5g-viettel-5g150n-8gb-ngay_2.png",
+    memberDiscount: "16.000đ",
+    price: "320.000đ",
+    oldPrice: "420.000đ",
+    link: "https://cellphones.com.vn/sim-5g-viettel-5g150n-8gb-ngay.html",
+  },
+  {
+    title: "Sạc nhanh Apple 20W USB-C chính hãng Apple Việt Nam",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/g/r/group_117_1.png",
+    memberDiscount: "26.000đ",
+    price: "520.000đ",
+    oldPrice: "890.000đ",
+    link: "https://cellphones.com.vn/cu-sac-nhanh-iphone-20w-pd-type-c.html",
+  },
+  {
+    title: "Dán kính cường lực màn hình iPhone 14/13/13 Pro Kasr Full màn hình",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/k/i/kinh-cuong-luc-iphone-11-kasr-0_1_1.png",
+    memberDiscount: "5.000đ",
+    price: "109.000đ",
+    oldPrice: "120.000đ",
+    link: "https://cellphones.com.vn/kinh-cuong-luc-iphone-14-13-13-pro-kasr.html",
+  },
+  {
+    title:
+      "Dán kính cường lực màn hình Apple iPhone 16e/14/13/13 Pro Zagg full cao cấp",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/k/i/kinh-cuong-luc-iphone-13-14-13-pro-se-40-zagg-full_1_.png",
+    memberDiscount: "13.000đ",
+    price: "261.000đ",
+    oldPrice: "290.000đ",
+    link: "https://cellphones.com.vn/kinh-cuong-luc-iphone-16e-14-13-13-pro-zagg-full.html",
+  },
+  {
+    title: "Ốp Lưng iPhone 13/14 Filada",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/g/r/group_9_2_3.png",
+    memberDiscount: "11.000đ",
+    price: "225.000đ",
+    oldPrice: "250.000đ",
+    link: "https://cellphones.com.vn/op-lung-iphone-13-14-filada.html",
+  },
+  {
+    title: "Dán kính cường lực màn hình iPhone 14/13/13 Pro JCPal",
+    image:
+      "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/3/7/37_1.png",
+    memberDiscount: "14.000đ",
+    price: "270.000đ",
+    oldPrice: "390.000đ",
+    link: "https://cellphones.com.vn/kinh-cuong-luc-iphone-14-13-13-pro-jcpal.html",
+  },
+];
+</script>
+
 <style scoped>
-.block-same-product {
-    margin-top: 20px;
-    width: 100%;
+.product-suggest {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.block-same-product .same-product-options-list {
-    align-items: center;
-    margin: 10px auto;
+.combov2 {
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  width: 100%;
 }
 
-.block-same-product .same-product-options-list .product-options-tabs {
-    display: flex;
+.combov2__wrapper {
+  width: 100%;
 }
 
-.block-same-product .same-product-options-list .item {
-    border-bottom: 1px solid transparent;
-    color: #71717a;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 400;
-    max-height: 30px;
-    padding: 5px 0;
-    text-align: center;
-    transition: border 0.3s ease;
-    width: 155px;
+.list-option {
+  overflow: hidden;
 }
 
-.block-same-product .same-product-options-list .active {
-    border-bottom: 1px solid #d70018;
-    color: #d70018;
-    font-weight: 600;
+.list-option__head {
+  align-items: center;
+  background-clip: padding-box, border-box;
+  background-image:
+    linear-gradient(90deg, #fff5c7, #fffced),
+    linear-gradient(90deg, #ffe880, #fffcb0);
+  background-origin: border-box;
+  border: 1px solid transparent;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
 }
 
-.block-same-product .same-product-options-list:empty {
-    margin: 0;
+.option__title {
+  align-items: center;
+  color: #1d1d20;
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  gap: 8px;
 }
 
-.block-same-product .same-product-head {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+.icon-fire {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  height: 24px;
+  width: 24px;
 }
 
-.block-same-product .same-product-head .same-product-title {
-    font-size: 20px;
-    font-weight: 600;
+.icon-fire img {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
 }
 
-.block-same-product .product-list-swiper .product-info-container .product__promotions div.promotion {
-    height: 60px;
+.option__action button {
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 4px;
+  padding: 0;
 }
 
-.product-list-swiper .swiper-container .swiper-slide {
-    border-radius: 15px;
-    box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.11), 0 0 10px 0 rgba(0, 0, 0, 0.059);
-    height: auto;
-    margin-right: 10px;
-    max-width: calc(20% - 8px);
+.list-option__body {
+  background: #fff;
+  border: 1px solid #f3e7a4;
+  border-radius: 0 0 16px 16px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 10px;
 }
 
-.product-list-swiper .swiper-container .swiper-slide .product-info-container {
-    background-color: transparent;
-    border: 0;
-    box-shadow: none;
-    height: calc(100% - 20px);
-    margin: auto;
+.list-option__item {
+  min-width: 0;
 }
 
-.product-list-swiper .swiper-container .swiper-button-next,
-.product-list-swiper .swiper-container .swiper-button-prev {
-    align-items: center;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.059), 0 0 24px -4px rgba(0, 0, 0, 0.059);
-    display: flex;
-    font-size: 1.8rem;
-    height: 38px;
-    justify-content: center;
-    outline: none;
-    top: 50%;
-    transition: 0.3s;
-    width: 38px;
+.item-wrapper {
+  align-items: center;
+  background: #fffced;
+  border: 1px solid #ffe880;
+  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  height: 100%;
+  padding: 12px;
 }
 
-.product-list-swiper .swiper-container .swiper-button-next svg,
-.product-list-swiper .swiper-container .swiper-button-prev svg {
-    color: #18181b;
+.image {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  width: 90px;
 }
 
-.product-list-swiper .swiper-container .swiper-button-next:after,
-.product-list-swiper .swiper-container .swiper-button-prev:after {
-    display: none;
+.image img {
+  display: block;
+  max-width: 90px;
+  width: 100%;
 }
 
-.product-list-swiper .swiper-container .swiper-button-next.swiper-button-disabled,
-.product-list-swiper .swiper-container .swiper-button-prev.swiper-button-disabled {
-    opacity: 0.1;
-    pointer-events: none;
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
 }
 
-.product-list-swiper .swiper-container .swiper-button-prev {
-    left: 0;
+.info__name {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #18181b;
+  display: -webkit-box;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow: hidden;
+  text-decoration: none;
 }
 
-.product-list-swiper .swiper-container .swiper-button-next {
-    right: 0;
+.info__percent {
+  color: #d70018;
+  font-size: 13px;
+  font-weight: 700;
 }
 
-.product-info-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
-    display: flex;
-    flex-flow: column;
-    height: auto;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    min-height: 202px;
+.upsell-item-action {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.block-box-price {
+  min-width: 0;
+}
+
+.box-info__box-price {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.product__price--show {
+  color: #d70018;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.product__price--through {
+  color: #71717a;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.button {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  color: #3b82f6;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 4px;
+  padding: 8px 10px;
+}
+
+#boxUpsell {
+  background: #f7f7f8;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.upsell-title {
+  color: #18181b;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.upsell-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.upsell-item {
+  min-width: 0;
+}
+
+.upsell-item-wrapper {
+  background: #fff;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  padding: 12px;
+}
+
+.upsell-item-image {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  display: block;
+  flex-shrink: 0;
+  height: 110px;
+  object-fit: cover;
+  width: 110px;
+}
+
+.upsell-item-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.upsell-item-text a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.upsell-item-name {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #18181b;
+  display: -webkit-box;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.upsell-item-member {
+  color: #444;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.upsell-item-member span {
+  color: #d70018;
+  font-weight: 700;
+}
+
+.button-add-cart {
+  border-color: #fecaca;
+  color: #d70018;
+}
+
+.my-3 {
+  margin-bottom: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+@media screen and (max-width: 990px) {
+  .list-option__body,
+  .upsell-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .list-option__head,
+  #boxUpsell {
+    padding: 12px;
+  }
+
+  .option__title,
+  .upsell-title {
+    font-size: 16px;
+  }
+
+  .list-option__body,
+  .upsell-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .item-wrapper,
+  .upsell-item-wrapper {
     padding: 10px;
-    position: relative;
-    width: auto;
-}
-
-.product-info-container:hover .product-info a .product__image img {
-    transform: scale(1.03);
-}
-
-.product-info-container .product-info {
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-}
-
-.product-info-container .product-info a {
-    color: #181818;
-}
-
-.product-info-container .product-info a .product__name {
-    margin-bottom: 4px;
-}
-
-.product-info-container .product-info a .product__name h3,
-.product-info-container .product-info a .product__name p {
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    font-size: 14px;
-    font-weight: 700;
-    height: 42px;
-    overflow: hidden;
-    position: relative;
-    z-index: 9;
-}
-
-.product-info-container .product-info a .product__image {
-    text-align: center;
-}
-
-.product-info-container .product-info a .product__image img {
-    aspect-ratio: 1 / 1;
-    display: block;
-    margin: 12px auto;
-    transition: 0.3s;
-    width: 160px;
-}
-
-.product-info-container .product-info a .product__promotions {
-    margin-bottom: 10px;
-}
-
-.product-info-container .product-info a .product__promotions .promotion {
-    align-items: flex-start;
-    background: #f2f2f3;
-    border-radius: 5px;
-    color: #18181b;
-    display: flex;
-    font-size: 12px;
-    font-weight: 400;
-    gap: 5px;
-    line-height: 1.5;
-    margin-left: 0;
-    overflow: hidden;
-    padding: 5px;
-    text-transform: none;
-    width: auto;
-}
-
-.product-info-container .product-info a .product__promotions .promotion .coupon-price,
-.product-info-container .product-info a .product__promotions .promotion .gift-cont {
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    overflow: hidden;
-}
-
-.block-box-price .box-info__installment {
-    background-color: #fef2f2;
-    border: 1px solid #d70018;
-    border-radius: 5px;
-    color: #d70018;
-    font-size: 12px;
-    margin-bottom: 10px !important;
-    padding: 4px 5px;
-    width: -moz-fit-content;
-    width: fit-content;
-}
-
-.product-info-container .product-info a .block-box-price .box-info__box-price {
-    align-items: center;
-    color: #444;
-    display: flex;
-    font-family: Inter, sans-serif;
-    font-weight: 700;
-    line-height: 1.5;
-    margin-bottom: 4px;
-}
-
-.product-info-container .product-info a .block-box-price .box-info__box-price .product__price--show {
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.product-info-container .product-info a .block-box-price .box-info__box-price .product__price--through {
-    color: #a1a1aa;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.5;
-}
-
-.product-info-container .product-info a .block-box-price .box-info__box-price .product__price--percent {
-    background: url(https://cdn2.cellphones.com.vn/x/media/wysiwyg/discount-badge-ui-2025.png) 50% no-repeat;
-    height: 22px;
-    left: 10px;
-    margin: auto;
-    position: absolute;
-    top: -6px;
-    width: 78px;
-}
-
-.product-info-container .product-info a .block-box-price .box-info__box-price .product__price--percent-detail {
-    align-items: center;
-    color: #fff;
-    display: flex;
-    font-size: 10px;
-    font-weight: 500;
-    height: 100%;
-    justify-content: center;
-    margin: auto;
-    text-align: center;
-    width: 100%;
-}
-
-.product-info-container .product-info a .block-box-price .box-info__box-price .product__price--percent-detail span {
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.product-info-container .product-info a .product__sticker-doc-quyen {
-    background: 50% no-repeat;
-    background-size: cover;
-    height: 70px;
-    left: 0;
-    position: absolute;
-    top: 115px;
-    width: 70px;
-    z-index: 1;
-}
-
-.product-info-container .bottom-div {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-}
-
-.product-info-container .bottom-div .product__box-rating {
-    align-items: center;
-    color: #18181b;
-    display: flex;
-    font-size: 16px;
-    font-weight: 600;
-    gap: 4px;
-    justify-content: space-between;
-}
-
-.product-info-container .bottom-div .product__box-rating .icon-star {
-    align-items: center;
-    display: inline-flex;
-}
-
-.product-info-container .bottom-div .product__box-rating .icon-star svg {
-    height: 15px;
-}
-
-.product-info-container .bottom-div .product__box-rating .icon-star.is-active svg {
-    fill: #ffd530;
-}
-
-.product-info-container .bottom-div .btn-wish-list {
-    align-items: center;
-    border-radius: 8px;
-    display: flex;
-    padding: 8px 16px;
-}
-
-.product-info-container .bottom-div .btn-wish-list:hover {
-    background-color: #f7f7f8;
-}
-
-.product-info-container .install-0-tag {
-    align-items: center;
-    background: url(https://cdn2.cellphones.com.vn/x/media/wysiwyg/zero-ins-badge-ui-2025.png) 50% no-repeat;
-    display: flex;
-    font-weight: 500;
-    height: 29px;
-    justify-content: center;
-    padding: 0;
-    position: absolute;
-    right: -5px;
-    top: 0;
-    width: 75px;
-}
-
-.product-info-container .install-0-tag span {
-    color: #3b82f6;
-    font-size: 10px;
-    font-weight: 400;
-    margin: auto;
-    transform: translateY(-5px);
-}
-
-.product-info-container .install-0-tag span strong {
-    color: #3b82f6;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.product-info-container.more-trade-product .product-info {
-    width: 100%;
-}
-
-.product-info-container.more-trade-product .product-info a.product__link .product__image img {
-    width: 69px;
-}
-
-.trade--price {
-    color: #d70018;
-    text-align: center;
-}
-
-.exchange {
-    background: #c52927;
-    border: 1px solid #c52927;
-    border-radius: 10px;
-    color: #fff !important;
-    display: flex;
-    font-size: 12px;
-    font-weight: 600;
-    height: 25px;
-    margin: 5px auto;
-    width: 95%;
-}
-
-#wishListBtn {
-    align-items: center;
-    background-color: transparent;
-    border: none;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    padding: 0;
-}
-
-#wishListBtn:hover .btn__effect:not(.active) .heart-stroke {
-    animation: pulseCps 1s ease-out infinite;
-}
-
-#wishListBtn .icon-svg--color-silver {
-    color: #fff;
-    fill: #fff;
-}
-
-#wishListBtn .icon-svg--color-cps {
-    color: #3b82f6;
-    fill: #3b82f6;
-}
-
-#wishListBtn .icon-svg {
-    display: inline-block;
-    height: 20px;
-    vertical-align: middle;
-    width: 20px;
-}
-
-#wishListBtn .heart-full {
-    opacity: 0;
-}
-
-#wishListBtn .heart-border,
-#wishListBtn .heart-full {
-    left: 50%;
-    position: absolute;
-    top: 0;
-    transform: translateX(-50%);
-}
-
-#wishListBtn .heart-border {
-    height: 22px;
-    width: 20px;
-}
-
-#wishListBtn .btn__effect {
-    align-items: center;
-    background-color: transparent;
-    border: 0;
-    display: flex;
-    height: 20px;
-    justify-content: center;
-    padding: 0;
-    position: relative;
-    width: 20px;
-}
-
-#wishListBtn .btn__effect:hover {
-    cursor: pointer;
-}
-
-#wishListBtn .effect-group {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transform: rotate(25deg);
-    width: 100%;
-}
-
-#wishListBtn .effect-group .effect {
-    display: block;
-    left: 50%;
-    position: absolute;
-    top: 38%;
-    transform-origin: 0 2px;
-    width: 20px;
-}
-
-#wishListBtn .effect-group .effect:nth-child(2) {
-    transform: rotate(72deg);
-}
-
-#wishListBtn .effect-group .effect:nth-child(3) {
-    transform: rotate(144deg);
-}
-
-#wishListBtn .effect-group .effect:nth-child(4) {
-    transform: rotate(216deg);
-}
-
-#wishListBtn .effect-group .effect:nth-child(5) {
-    transform: rotate(288deg);
-}
-
-#wishListBtn .effect-group .effect:before {
-    background: #3b82f6;
-    border-radius: 1.5px;
-    content: "";
-    display: block;
-    height: 3px;
-    position: absolute;
-    right: 0;
-}
-
-#wishListBtn .effect-group .effect:after {
-    background: #f60;
-    border-radius: 50%;
-    content: "";
-    display: block;
-    height: 3px;
-    position: absolute;
-    right: 10%;
-    top: 10px;
-    transform: scale(0);
-    width: 3px;
-}
-
-#wishListBtn .active .heart-stroke {
-    opacity: 0;
-}
-
-#wishListBtn .active .heart-full {
-    opacity: 1;
-}
-
-#wishListBtn .active .heart-border {
-    color: #fff;
-    fill: #fff;
-}
-
-#wishListBtn .active .icon-svg {
-    animation: bounceIn 0.5s linear;
-}
-
-#wishListBtn .active .effect:before {
-    animation: fireworkLine 0.5s linear 0.1s;
-}
-
-#wishListBtn .active .effect:after {
-    animation: fireworkPoint 0.5s linear 0.1s;
-}
-
-#wishListBtn .broken-heart {
-    left: 4px;
-    opacity: 0;
-    position: absolute;
-    top: 5px;
-    transform: scale(1.3);
-}
-
-#wishListBtn .broken-heart--left {
-    transform: rotate(0deg);
-    transform-origin: 60% 200%;
-}
-
-#wishListBtn .broken-heart--right {
-    transform: rotate(0deg);
-    transform-origin: 63% 200%;
-}
-
-#wishListBtn .broken-heart--crack {
-    stroke-dasharray: 15;
-    stroke-dashoffset: 15;
-}
-
-#wishListBtn .deactivate .broken-heart {
-    opacity: 1;
-}
-
-#wishListBtn .deactivate .broken-heart--left {
-    animation: crackLeft 0.35s cubic-bezier(0.68, -0.55, 0.265, 2.85) 0.15s forwards,
-        hide 0.25s ease-in 0.55s forwards;
-}
-
-#wishListBtn .deactivate .broken-heart--right {
-    animation: crackRight 0.35s cubic-bezier(0.68, -0.55, 0.265, 2.85) 0.15s forwards,
-        hide 0.25s ease-in 0.55s forwards;
-}
-
-#wishListBtn .deactivate .broken-heart--crack {
-    animation: crack 0.2s ease-in forwards;
-}
-
-@keyframes pulseCps {
-    0% {
-        fill: #fff;
-        transform: scale(0.8);
-        transform-origin: center center;
-    }
-
-    50% {
-        fill: #3b82f6;
-        transform: scale(1.1);
-    }
-
-    to {
-        fill: #fff;
-        transform: scale(0.8);
-    }
-}
-
-@keyframes fireworkLine {
-    0% {
-        right: 20%;
-        transform: scale(0);
-    }
-
-    25% {
-        right: 20%;
-        transform: scale(1);
-        width: 6px;
-    }
-
-    35% {
-        right: 0;
-        width: 35%;
-    }
-
-    70% {
-        right: 0;
-        transform: scale(1);
-        width: 4px;
-    }
-
-    to {
-        right: 0;
-        transform: scale(0);
-    }
-}
-
-@keyframes fireworkPoint {
-    30% {
-        transform: scale(0);
-    }
-
-    60% {
-        transform: scale(1);
-    }
-
-    to {
-        transform: scale(0);
-    }
-}
-
-@keyframes bounceIn {
-    0% {
-        transform: scale(0);
-    }
-
-    30% {
-        transform: scale(1.25);
-    }
-
-    50% {
-        transform: scale(0.9);
-    }
-
-    70% {
-        transform: scale(1.1);
-    }
-
-    80% {
-        transform: scale(1);
-    }
-}
-
-@keyframes crackLeft {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(-45deg);
-    }
-}
-
-@keyframes crackRight {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(45deg);
-    }
-}
-
-@keyframes crack {
-    0% {
-        stroke-dasharray: 15;
-        stroke-dashoffset: 15;
-    }
-
-    80% {
-        opacity: 1;
-        stroke-dasharray: 15;
-        stroke-dashoffset: 0;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes hide {
-    0% {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-.is-flex {
-    display: flex !important;
-}
-
-.is-flex-wrap-wrap {
-    flex-wrap: wrap !important;
-}
-
-.is-justify-content-center {
-    justify-content: center !important;
-}
-
-.is-justify-content-space-between {
-    justify-content: space-between !important;
-}
-
-.is-align-items-center {
-    align-items: center !important;
-}
-
-.mt-2 {
-    margin-top: 0.5rem !important;
-}
-
-.p-2 {
-    padding: 0.5rem !important;
-}
-
-@media screen and (max-width: 1199px) {
-    .product-list-swiper .swiper-container .swiper-slide {
-        max-width: calc(25% - 7.5px);
-    }
-}
-
-@media screen and (max-width: 989px) {
-    .product-list-swiper .swiper-container .swiper-slide {
-        max-width: calc(33.33333% - 6.66667px);
-    }
-}
-
-@media screen and (max-width: 716px) {
-    .product-list-swiper .swiper-container .swiper-slide {
-        max-width: calc(29.41176% - 5.88235px);
-    }
-}
-
-@media only screen and (max-width: 540px) {
-    .trade--price {
-        font-size: 12px;
-    }
-
-    .block-same-product .same-product-head .same-product-title {
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .block-same-product .same-product-options-list .product-options-tabs {
-        width: 100%;
-    }
-
-    .block-same-product .same-product-options-list .product-options-tabs .item {
-        border-bottom: 1px solid #e4e4e7;
-        flex: 1;
-        max-height: 46px;
-        padding: 12px 0;
-        width: auto;
-    }
-
-    .block-same-product .same-product-options-list .product-options-tabs .item:first-child p {
-        border-right: 1px solid #e4e4e7;
-    }
-
-    .block-same-product .same-product-options-list .product-options-tabs .active {
-        border-bottom: 1px solid #d70018;
-    }
-
-    .product-list-swiper .swiper-container .swiper-slide {
-        max-width: calc(50% - 5px);
-    }
-
-    .block-box-price .box-info__installment {
-        margin-bottom: 5px !important;
-    }
-
-    .product-info-container {
-        padding: 5px;
-    }
-
-    .product-info-container .product-info a .product__name h3,
-    .product-info-container .product-info a .product__name p {
-        font-size: 12px;
-        height: 36px;
-    }
-
-    .product-info-container .bottom-div .product__box-rating {
-        font-size: 14px;
-    }
-
-    .product-info-container .bottom-div .product__box-rating .icon-star svg {
-        height: 16px;
-    }
-
-    .product-info-container .bottom-div .btn-wish-list {
-        padding: 4px;
-    }
-
-    #wishListBtn .text-wishlist {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 440px) {
-    .product-info-container .product-info a .product__promotions .promotion {
-        font-size: 10px;
-    }
-
-    .product-info-container .product-info a .block-box-price .box-info__box-price .product__price--show {
-        font-size: 14px;
-    }
-
-    .product-info-container .product-info a .block-box-price .box-info__box-price .product__price--through {
-        font-size: 12px;
-    }
-
-    .product-info-container .product-info a .product__sticker-doc-quyen {
-        height: 40px;
-        top: 100px;
-        width: 40px;
-    }
-}
-
-@media screen and (max-width: 390px) {
-    .product-info-container .product-info a .block-box-price .box-info__box-price .product__price--show {
-        font-size: 12px;
-    }
-
-    .product-info-container .product-info a .block-box-price .box-info__box-price .product__price--through {
-        font-size: 10px;
-    }
+  }
+
+  .image {
+    width: 72px;
+  }
+
+  .image img {
+    max-width: 72px;
+  }
+
+  .upsell-item-image {
+    height: 84px;
+    width: 84px;
+  }
 }
 </style>
