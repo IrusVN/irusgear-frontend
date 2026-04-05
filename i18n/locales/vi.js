@@ -237,3 +237,61 @@ export default {
         resetPasswordBtn: "Đổi mật khẩu",
     }
 }
+    dashboard: {
+        welcome: "Chào mừng trở lại",
+        overview: "Tổng quan",
+        stats: {
+            totalRevenue: "Tổng doanh thu",
+            totalOrders: "Tổng đơn hàng",
+            totalCustomers: "Tổng khách hàng",
+            totalProducts: "Tổng sản phẩm",
+            vsLastMonth: "so với tháng trước",
+        },
+        recentOrders: {
+            title: "Đơn hàng gần đây",
+            viewAll: "Xem tất cả",
+            orderId: "Mã đơn",
+            customer: "Khách hàng",
+            date: "Ngày",
+            amount: "Số tiền",
+            status: "Trạng thái",
+            noOrders: "Chưa có đơn hàng nào",
+        },
+        orderStatus: {
+            pending: "Chờ xử lý",
+            processing: "Đang xử lý",
+            shipped: "Đã giao",
+            delivered: "Hoàn thành",
+            cancelled: "Đã hủy",
+        },
+        salesChart: {
+            title: "Doanh thu theo tháng",
+            revenue: "Doanh thu",
+        },
+        topProducts: {
+            title: "Sản phẩm bán chạy",
+            product: "Sản phẩm",
+            sold: "Đã bán",
+            revenue: "Doanh thu",
+        },
+    },
+    orders: {
+        title: "Quản lý đơn hàng",
+        subtitle: "Xem và quản lý tất cả đơn hàng",
+        noOrders: "Chưa có đơn hàng nào",
+        filters: {
+            search: "Tìm kiếm",
+            searchPlaceholder: "Tìm theo mã đơn, tên khách hàng...",
+            status: "Trạng thái",
+            allStatus: "Tất cả trạng thái",
+        },
+        table: {
+            orderId: "Mã đơn hàng",
+            customer: "Khách hàng",
+            items: "Sản phẩm",
+            total: "Tổng tiền",
+            status: "Trạng thái",
+            date: "Ngày tạo",
+            actions: "Thao tác",
+        },
+    },
