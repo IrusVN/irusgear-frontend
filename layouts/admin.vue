@@ -22,12 +22,16 @@
     <main class="admin-main flex-grow-1 p-4 overflow-hidden">
       <slot />
     </main>
+    
+    <!-- Chatbot Widget -->
+    <ChatbotWidget />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import AdminSidebar from '@/components/Sidebar/AdminSidebar.vue'
+import ChatbotWidget from '@/components/Chatbot/ChatbotWidget.vue'
 
 const isMobileSidebarOpen = ref(false)
 
