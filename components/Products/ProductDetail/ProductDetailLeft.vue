@@ -2150,13 +2150,32 @@ onBeforeUnmount(() => {
   .thumbnail-slide.swiper-container
   .swiper-button-prev
   .icon {
+  align-items: center;
   backdrop-filter: blur(0);
   background: #fff;
   border-radius: 50%;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
   height: 24px;
+  justify-content: center;
+  line-height: 1;
   padding: 5px;
   width: 24px;
+  color: #000;
+}
+
+.gallery-product-detail
+  .thumbnail-slide.swiper-container
+  .swiper-button-next
+  .icon
+  svg,
+.gallery-product-detail
+  .thumbnail-slide.swiper-container
+  .swiper-button-prev
+  .icon
+  svg {
+  display: block;
+  transform: translateY(-1px);
 }
 
 .gallery-product-detail

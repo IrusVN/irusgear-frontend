@@ -5359,10 +5359,17 @@
 }
 
 .box-product-variants .list-variants .item-variant a {
+  color: inherit;
   gap: 8px;
   justify-content: flex-start;
   padding: 4px 12px;
+  text-decoration: none;
   width: 100%;
+}
+
+.box-product-variants .list-variants .item-variant a:hover,
+.box-product-variants .list-variants .item-variant a:focus {
+  text-decoration: none;
 }
 
 .box-product-variants .list-variants .item-variant a span,
