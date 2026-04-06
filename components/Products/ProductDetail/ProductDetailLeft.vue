@@ -2336,13 +2336,14 @@ onBeforeUnmount(() => {
 .cps-block-technicalInfo .technical-content {
   border: 1px solid #e5e7eb;
   border-collapse: separate;
+  border-spacing: 0;
   border-radius: 10px;
   overflow: hidden;
+  table-layout: fixed;
   width: 100%;
 }
 
 .cps-block-technicalInfo .technical-content .technical-content-item {
-  border-bottom: 1px solid #e4e4e7;
   font-size: 14px;
   width: 100%;
 }
@@ -2399,6 +2400,7 @@ onBeforeUnmount(() => {
   display: flex;
   font-size: 12px;
   font-weight: 500;
+  background-color: transparent;
 }
 
 .cps-block-technicalInfo .button__show-modal-technical .icon-svg {
