@@ -5,7 +5,6 @@
         <ProductDetailLeft />
         <ProductDetailRight />
       </div>
-      <ProductSuggest />
       <div class="block-content-product">
         <ProductContentLeft />
         <ProductContentRight />
@@ -18,7 +17,6 @@
 <script setup>
 import ProductDetailLeft from "@/components/Products/ProductDetail/ProductDetailLeft.vue";
 import ProductDetailRight from "@/components/Products/ProductDetail/ProductDetailRight.vue";
-import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
 import ProductContentLeft from "@/components/Products/ProductDetail/ProductContentLeft.vue";
 import ProductContentRight from "@/components/Products/ProductDetail/ProductContentRight.vue";
 import ProductBoxReview from "@/components/Products/ProductDetail/ProductBoxReview.vue";

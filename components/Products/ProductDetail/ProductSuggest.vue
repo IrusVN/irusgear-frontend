@@ -336,7 +336,7 @@ const accessoryDeals = [
   border-radius: 0 0 16px 16px;
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   padding: 10px;
 }
 
@@ -350,9 +350,9 @@ const accessoryDeals = [
   border: 1px solid #ffe880;
   border-radius: 12px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
   height: 100%;
-  padding: 12px;
+  padding: 10px;
 }
 
 .image {
@@ -360,12 +360,12 @@ const accessoryDeals = [
   display: flex;
   flex-shrink: 0;
   justify-content: center;
-  width: 90px;
+  width: 72px;
 }
 
 .image img {
   display: block;
-  max-width: 90px;
+  max-width: 72px;
   width: 100%;
 }
 
@@ -373,7 +373,7 @@ const accessoryDeals = [
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
 }
 
@@ -384,6 +384,7 @@ const accessoryDeals = [
   display: -webkit-box;
   font-size: 14px;
   font-weight: 600;
+  line-clamp: 2;
   line-height: 1.4;
   overflow: hidden;
   text-decoration: none;
@@ -400,6 +401,14 @@ const accessoryDeals = [
   display: flex;
   gap: 8px;
   justify-content: space-between;
+}
+
+.upsell-item-action .block-box-price {
+  flex: 1;
+}
+
+.upsell-item-action .button {
+  margin-left: auto;
 }
 
 .block-box-price {
@@ -456,7 +465,7 @@ const accessoryDeals = [
 .upsell-grid {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .upsell-item {
@@ -468,9 +477,9 @@ const accessoryDeals = [
   border: 1px solid #e4e4e7;
   border-radius: 12px;
   display: flex;
-  gap: 10px;
+  gap: 8px;
   height: 100%;
-  padding: 12px;
+  padding: 10px;
 }
 
 .upsell-item-image {
@@ -478,9 +487,9 @@ const accessoryDeals = [
   border-radius: 10px;
   display: block;
   flex-shrink: 0;
-  height: 110px;
+  height: 82px;
   object-fit: cover;
-  width: 110px;
+  width: 82px;
 }
 
 .upsell-item-info {
@@ -501,17 +510,18 @@ const accessoryDeals = [
   -webkit-line-clamp: 2;
   color: #18181b;
   display: -webkit-box;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 6px;
+  line-clamp: 2;
+  line-height: 1.35;
+  margin-bottom: 4px;
   overflow: hidden;
 }
 
 .upsell-item-member {
   color: #444;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 11px;
+  line-height: 1.3;
 }
 
 .upsell-item-member span {
@@ -549,25 +559,34 @@ const accessoryDeals = [
 
   .list-option__body,
   .upsell-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .item-wrapper,
   .upsell-item-wrapper {
-    padding: 10px;
+    padding: 8px;
   }
 
   .image {
-    width: 72px;
+    width: 56px;
   }
 
   .image img {
-    max-width: 72px;
+    max-width: 56px;
   }
 
   .upsell-item-image {
-    height: 84px;
-    width: 84px;
+    height: 58px;
+    width: 58px;
+  }
+
+  .button {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .product__price--show {
+    font-size: 14px;
   }
 }
 </style>

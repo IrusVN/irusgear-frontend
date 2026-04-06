@@ -1,5 +1,5 @@
-<template>
-  <div class="box-detail-product__box-center column">
+﻿<template>
+  <div ref="rootEl" class="box-detail-product__box-center column">
     <div class="box-product-price">
       <div class="box-product-price-wrapper">
         <div class="smember-price-label">
@@ -1059,26 +1059,7 @@
           ></span>
         </div>
         <div
-          class="swiper-button-prev swiper-button-disabled"
-          tabindex="-1"
-          role="button"
-          aria-label="Previous slide"
-          aria-disabled="true"
-        >
-          <div class="icon">
-            <svg
-              height="15"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 320 512"
-            >
-              <path
-                d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
-              ></path>
-            </svg>
-          </div>
-        </div>
-        <div
-          class="swiper-button-next"
+          class="swiper-button-next button__view-gallery-next"
           tabindex="0"
           role="button"
           aria-label="Next slide"
@@ -1092,6 +1073,25 @@
             >
               <path
                 d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <div
+          class="swiper-button-prev button__view-gallery-prev"
+          tabindex="0"
+          role="button"
+          aria-label="Previous slide"
+          aria-disabled="false"
+        >
+          <div class="icon">
+            <svg
+              height="15"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+            >
+              <path
+                d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
               ></path>
             </svg>
           </div>
@@ -4747,6 +4747,44 @@
             </div>
           </div>
           <div
+            class="swiper-button-next button-navigate-thumbnail__next"
+            tabindex="0"
+            role="button"
+            aria-label="Next slide"
+            aria-disabled="false"
+          >
+            <div class="icon">
+              <svg
+                height="15"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+              >
+                <path
+                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div
+            class="swiper-button-prev button-navigate-thumbnail__prev swiper-button-disabled"
+            tabindex="0"
+            role="button"
+            aria-label="Previous slide"
+            aria-disabled="false"
+          >
+            <div class="icon">
+              <svg
+                height="15"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+              >
+                <path
+                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div
             class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"
             style="display: none"
           >
@@ -4916,6 +4954,7 @@
         </div>
       </div>
     </div>
+    <ProductSuggest />
     <div></div>
     <div></div>
     <div></div>
@@ -4924,7 +4963,105 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+const rootEl = ref(null);
+let morePromotionSwiper = null;
+let onStockSwiper = null;
+
+const initMorePromotionSwiper = async () => {
+  if (!import.meta.client || !rootEl.value) return;
+
+  const [{ default: Swiper }, modules] = await Promise.all([
+    import("swiper"),
+    import("swiper/modules"),
+  ]);
+
+  const { Navigation, Pagination } = modules;
+  const promotionEl = rootEl.value.querySelector(".box-more-promotion-swiper");
+
+  if (!promotionEl) return;
+
+  if (morePromotionSwiper && !morePromotionSwiper.destroyed) {
+    morePromotionSwiper.destroy(true, true);
+  }
+
+  morePromotionSwiper = new Swiper(promotionEl, {
+    modules: [Navigation, Pagination],
+    slidesPerView: "auto",
+    spaceBetween: 8,
+    navigation: {
+      nextEl: promotionEl.querySelector(".swiper-button-next"),
+      prevEl: promotionEl.querySelector(".swiper-button-prev"),
+    },
+    pagination: {
+      el: promotionEl.querySelector(".swiper-pagination"),
+      clickable: true,
+    },
+    observer: true,
+    observeParents: true,
+  });
+};
+
+const initOnStockSwiper = async () => {
+  if (!import.meta.client || !rootEl.value) return;
+
+  const [{ default: Swiper }, modules] = await Promise.all([
+    import("swiper"),
+    import("swiper/modules"),
+  ]);
+
+  const { Navigation, Pagination } = modules;
+  const onStockEl = rootEl.value.querySelector(
+    ".box-on-stock-address .swiper-container.swiper-pdp"
+  );
+
+  if (!onStockEl) return;
+
+  if (onStockSwiper && !onStockSwiper.destroyed) {
+    onStockSwiper.destroy(true, true);
+  }
+
+  onStockSwiper = new Swiper(onStockEl, {
+    modules: [Navigation, Pagination],
+    slidesPerView: "auto",
+    spaceBetween: 10,
+    navigation: {
+      nextEl: onStockEl.querySelector(".button-navigate-thumbnail__next"),
+      prevEl: onStockEl.querySelector(".button-navigate-thumbnail__prev"),
+    },
+    pagination: {
+      el: onStockEl.querySelector(".swiper-pagination"),
+      clickable: true,
+    },
+    observer: true,
+    observeParents: true,
+  });
+};
+
+onMounted(async () => {
+  await nextTick();
+  await initMorePromotionSwiper();
+  await initOnStockSwiper();
+});
+
+onBeforeUnmount(() => {
+  if (morePromotionSwiper && !morePromotionSwiper.destroyed) {
+    morePromotionSwiper.destroy(true, true);
+  }
+  if (onStockSwiper && !onStockSwiper.destroyed) {
+    onStockSwiper.destroy(true, true);
+  }
+  morePromotionSwiper = null;
+  onStockSwiper = null;
+});
+</script>
 <style scoped>
 .column {
   display: block;
@@ -4991,9 +5128,10 @@
 .icon {
   align-items: center;
   display: inline-flex;
-  height: 1.5rem;
+  height: 0.8rem;
   justify-content: center;
   width: 1.5rem;
+  color: #000;
 }
 
 .icon.is-small {
@@ -5072,6 +5210,147 @@
   svg {
   height: 20px !important;
   width: 18px;
+}
+
+.box-delivery-address {
+  background: #f7f7f8;
+  border-radius: 12px;
+  margin-top: 12px;
+  padding: 12px;
+}
+
+.box-delivery-address .head {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.box-delivery-address .head .icon {
+  flex-shrink: 0;
+  height: 18px;
+  width: 18px;
+}
+
+.box-delivery-address .title {
+  color: #1d1d20;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.box-delivery-address .content {
+  margin-top: 8px;
+}
+
+.box-delivery-address .btn-change-address {
+  align-items: center;
+  color: #3b82f6;
+  display: inline-flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+  line-height: 1.35;
+}
+
+.box-delivery-address .btn-change-address .icon {
+  flex-shrink: 0;
+  height: 16px;
+  width: 16px;
+}
+
+.box-delivery-address .btn-change-address .label-new {
+  background: #d70018;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 3px 8px;
+}
+
+.box-order-button-container {
+  margin-top: 10px;
+}
+
+.box-order-button-container .mb-3 {
+  align-items: stretch;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 0 !important;
+}
+
+.box-order-button-container .btn-cta {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  display: flex;
+  font-family: inherit;
+  justify-content: center;
+  min-height: 58px;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.box-order-button-container .installment-wrapper {
+  flex: 0 0 22%;
+}
+
+.box-order-button-container .installment-group-cta {
+  background: #fff;
+  border-color: #3b82f6;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  width: 100%;
+}
+
+.box-order-button-container .order-button.button--large {
+  background: linear-gradient(180deg, #eb3349 0%, #d70018 100%);
+  border-color: #d70018;
+  color: #fff;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.box-order-button-container .order-button.button--large strong {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.box-order-button-container .order-button.button--large span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.box-order-button-container .add-to-cart-button {
+  background: #fff;
+  border-color: #ef4444;
+  color: #d70018;
+  flex: 0 0 22%;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.box-order-button-container .add-to-cart-button svg {
+  flex-shrink: 0;
+  height: 18px;
+  width: 18px;
+}
+
+.box-order-button-container .add-to-cart-button strong {
+  color: #d70018;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .box-product-price {
@@ -5791,19 +6070,19 @@
 }
 
 .box-more-promotion .box-more-promotion-swiper.swiper-container {
+  --swiper-theme-color: #d70018;
   cursor: grabbing;
   padding-bottom: 0;
   position: static;
 }
 
-.box-more-promotion .box-more-promotion-swiper .swiper-pagination {
+.box-more-promotion .box-more-promotion-swiper :deep(.swiper-pagination) {
   bottom: 6px;
 }
 
 .box-more-promotion
   .box-more-promotion-swiper
-  .swiper-pagination
-  .swiper-pagination-bullet {
+  :deep(.swiper-pagination .swiper-pagination-bullet) {
   background-color: #e4e4e7;
   border-radius: 50px;
   height: 2px;
@@ -5815,27 +6094,68 @@
 
 .box-more-promotion
   .box-more-promotion-swiper
-  .swiper-pagination
-  .swiper-pagination-bullet-active {
+  :deep(.swiper-pagination .swiper-pagination-bullet-active) {
   background: #d70018;
   border-radius: 50px;
   width: 16px;
 }
 
-.box-more-promotion .box-more-promotion-swiper .swiper-button-next,
-.box-more-promotion .box-more-promotion-swiper .swiper-button-prev {
+.box-more-promotion .box-more-promotion-swiper :deep(.swiper-button-next),
+.box-more-promotion .box-more-promotion-swiper :deep(.swiper-button-prev) {
+  align-items: center;
   background-color: #fff;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
-  height: 48px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  font-size: 1.8rem;
+  /* height: 60px; */
+  justify-content: center;
   margin: 0;
+  opacity: 1;
   outline: none;
-  top: calc(50% - 20px);
-  transition: opacity 0.3s;
-  width: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.3s;
+  width: 30px;
+  z-index: 2;
 }
 
-.box-more-promotion .box-more-promotion-swiper .swiper-button-next:after,
-.box-more-promotion .box-more-promotion-swiper .swiper-button-prev:after {
+.box-more-promotion .box-more-promotion-swiper :deep(.swiper-button-prev) {
+  border-radius: 0 100px 100px 0;
+  left: -8px;
+  padding-left: 0;
+}
+
+.box-more-promotion .box-more-promotion-swiper :deep(.swiper-button-next) {
+  border-radius: 100px 0 0 100px;
+  padding-right: 0;
+  right: -8px;
+}
+
+.box-more-promotion
+  .box-more-promotion-swiper
+  :deep(.swiper-button-next .icon),
+.box-more-promotion
+  .box-more-promotion-swiper
+  :deep(.swiper-button-prev .icon) {
+  align-items: center;
+  color: #707070;
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+}
+
+.box-more-promotion
+  .box-more-promotion-swiper
+  :deep(.swiper-button-next .icon svg),
+.box-more-promotion
+  .box-more-promotion-swiper
+  :deep(.swiper-button-prev .icon svg) {
+  fill: #707070;
+  transform: translateY(-1px);
+}
+
+.box-more-promotion .box-more-promotion-swiper :deep(.swiper-button-next:after),
+.box-more-promotion .box-more-promotion-swiper :deep(.swiper-button-prev:after) {
   display: none;
 }
 
@@ -5851,7 +6171,7 @@
   color: inherit;
   display: flex;
   gap: 6px;
-  height: calc(100% - 18px);
+  /* height: calc(100% - 18px); */
   mask:
     radial-gradient(circle 8px at left center, transparent 98%, #000) left,
     radial-gradient(circle 8px at right center, transparent 98%, #000) right,
@@ -6058,6 +6378,18 @@
   stroke: #18181b;
 }
 
+.box-on-stock-stores .box-on-stock-address .swiper-container.swiper-pdp {
+  overflow: hidden;
+  position: relative;
+}
+
+.box-on-stock-stores
+  .box-on-stock-address
+  .swiper-container.swiper-pdp
+  .swiper-button-next {
+  right: 8px;
+}
+
 .swiper-container.swiper-pdp:has(.swiper-pagination):has(
     .swiper-pagination > .swiper-pagination-bullet:nth-child(n + 2)
   ) {
@@ -6233,6 +6565,38 @@
 
   .box-on-stock-stores .box-on-stock-option-location .box-on-stock-option {
     width: 100%;
+  }
+
+  .box-delivery-address {
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .box-order-button-container .mb-3 {
+    gap: 6px;
+  }
+
+  .box-order-button-container .installment-wrapper,
+  .box-order-button-container .add-to-cart-button {
+    flex-basis: 23%;
+  }
+
+  .box-order-button-container .btn-cta {
+    min-height: 52px;
+    padding: 6px 8px;
+  }
+
+  .box-order-button-container .installment-group-cta,
+  .box-order-button-container .add-to-cart-button strong {
+    font-size: 13px;
+  }
+
+  .box-order-button-container .order-button.button--large strong {
+    font-size: 18px;
+  }
+
+  .box-order-button-container .order-button.button--large span {
+    font-size: 11px;
   }
 }
 </style>
