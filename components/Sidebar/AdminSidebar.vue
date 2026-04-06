@@ -93,8 +93,6 @@ const mainMenuItems = [
   { key: 'home', label: 'sidebar.menu.home', icon: 'bi-house-door', route: '/admin/dashboard' },
   { key: 'orders', label: 'sidebar.menu.orders', icon: 'bi-cart3', route: '/admin/orders' },
   { key: 'products', label: 'sidebar.menu.products', icon: 'bi-box-seam', route: '/admin/products' },
-  { key: 'map', label: 'sidebar.menu.mapOverview', icon: 'bi-grid-1x2', route: '#' },
-  { key: 'stats', label: 'sidebar.menu.statistics', icon: 'bi-pie-chart', route: '#' },
 ]
 
 const bottomMenuItems = [
