@@ -27,8 +27,12 @@
           </div>
         </div>
       </div>
-      <div class="exclusive-price-block">
-        <div class="is-flex">
+      <div class="exclusive-price-block pt-1">
+        <div class="is-flex d-flex flex-column align-items-center justify-content-center text-center flex-grow-1 pe-0" 
+          style="background-image: linear-gradient(to right, #9bb8f3 50%, transparent 50%); 
+                  background-size: 14px 1px; 
+                  background-repeat: repeat-x; 
+                  background-position: top;">
           <div class="promotion-row member-row">
             <p class="promotion-row__icon">
               <img
@@ -42,8 +46,8 @@
                 Tiết kiệm lên đến
                 <strong class="bold">140.000đ</strong>
                 cho Smember
+                <a class="dang_nhap_xem_gia link"> Kiểm tra ngay </a>
               </div>
-              <a class="dang_nhap_xem_gia link"> Kiểm tra ngay </a>
             </div>
           </div>
         </div>
