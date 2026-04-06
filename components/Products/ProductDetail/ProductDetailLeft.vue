@@ -2029,7 +2029,12 @@ onBeforeUnmount(() => {
   .gallery-slide.swiper-container
   .swiper-button-prev
   .icon {
+  align-items: center;
   color: #fff;
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+  transform: translateY(-1px);
 }
 
 .gallery-product-detail
