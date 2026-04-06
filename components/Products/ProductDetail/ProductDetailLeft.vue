@@ -2029,8 +2029,7 @@ onBeforeUnmount(() => {
   .gallery-slide.swiper-container
   .swiper-button-prev
   .icon {
-  fill: #fff;
-  width: 14px;
+  color: #fff;
 }
 
 .gallery-product-detail
