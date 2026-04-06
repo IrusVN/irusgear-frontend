@@ -1203,10 +1203,10 @@
       <div role="tablist" class="accordion">
         <div class="accordion-item">
           <div class="accordion-label button__show-faq" @click="toggleFaq(0)">
-            <h3>
+            <h6>
               Pin iPhone 14 có dung lượng bao nhiêu, dùng được trong bao lâu? Có
               hỗ trợ sạc nhanh không?
-            </h3>
+            </h6>
             <div class="icon" :class="{ active: openFaqIndex === 0 }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1233,7 +1233,7 @@
         </div>
         <div class="accordion-item">
           <div class="accordion-label button__show-faq" @click="toggleFaq(1)">
-            <h3>iPhone 14 có mấy SIM? Bản eSim có dùng được ở Việt Nam?</h3>
+            <h6>iPhone 14 có mấy SIM? Bản eSim có dùng được ở Việt Nam?</h6>
             <div class="icon" :class="{ active: openFaqIndex === 1 }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1262,9 +1262,9 @@
         </div>
         <div class="accordion-item">
           <div class="accordion-label button__show-faq" @click="toggleFaq(2)">
-            <h3>
+            <h6>
               Camera của iPhone 14 có cải tiến nổi bật nào so với iPhone 13?
-            </h3>
+            </h6>
             <div class="icon" :class="{ active: openFaqIndex === 2 }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1295,9 +1295,9 @@
         </div>
         <div class="accordion-item">
           <div class="accordion-label button__show-faq" @click="toggleFaq(3)">
-            <h3>
+            <h6>
               iPhone 14 có mấy màu? Màu đặc trưng của iPhone 14 2023 là màu nào?
-            </h3>
+            </h6>
             <div class="icon" :class="{ active: openFaqIndex === 3 }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1328,7 +1328,7 @@
     <div class="compare-apple-devices">
       <a
         href="/so-sanh-iphone"
-        class="compare-apple-devices-btn"
+        class="compare-apple-devices-btn text-decoration-none"
         target="_blank"
         rel="nofollow"
       >
