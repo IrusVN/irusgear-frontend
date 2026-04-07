@@ -4955,6 +4955,7 @@
       </div>
     </div>
     <ProductSuggest />
+    <ProductBoxWarranty />
     <div></div>
     <div></div>
     <div></div>
@@ -4965,6 +4966,7 @@
 </template>
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import ProductBoxWarranty from "@/components/Products/ProductDetail/ProductBoxWarranty.vue";
 import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
 
 import "swiper/css";

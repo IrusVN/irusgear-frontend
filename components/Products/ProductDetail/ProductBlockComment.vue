@@ -2,7 +2,7 @@
   <div
     id="block-comment-cps"
     product-id="31495"
-    class="comment-container"
+    class="comment-container pt-3"
     data-v-0da19d40=""
     bis_skin_checked="1"
   >
@@ -950,6 +950,15 @@
 </template>
 <script setup></script>
 <style scoped>
+.comment-container {
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  box-sizing: border-box;
+  margin-top: 24px;
+  padding: 16px;
+  width: 100%;
+}
+
 .button {
   background-color: #fff;
   border-color: #dbdbdb;

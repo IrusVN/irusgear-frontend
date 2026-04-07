@@ -265,7 +265,7 @@
             aria-disabled="false"
           >
             <div class="icon">
-              <svgbutton button-select
+              <svg
                 height="15"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 320 512"
@@ -273,8 +273,8 @@
                 <path
                   d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
                 ></path>
-              </svgbutton>
-            </div>button button-select
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -560,11 +560,6 @@ onBeforeUnmount(() => {
   position: relative;
 }
 
-.list-option__body--combo {
-  border: 1px solid #f5dea2;
-  padding: 12px;
-}
-
 #boxUpsell {
   background: #f7f7f8;
   padding: 16px 12px 12px;
@@ -605,6 +600,10 @@ onBeforeUnmount(() => {
   min-width: 0;
 }
 
+.list-option__item {
+  overflow: hidden;
+}
+
 .item-wrapper,
 .upsell-item-wrapper {
   background: #fff;
@@ -615,16 +614,18 @@ onBeforeUnmount(() => {
   gap: var(--suggest-card-gap);
   overflow: hidden;
   padding: 12px;
-  width: 100%;
 }
 
 .item-wrapper {
   align-items: flex-start;
   min-height: var(--combo-card-height);
+  max-width: 100%;
+  width: 108%;
 }
 
 .upsell-item-wrapper {
   min-height: var(--accessory-card-height);
+  width: 100%;
 }
 
 .image {
@@ -719,7 +720,7 @@ onBeforeUnmount(() => {
 .item-action {
   align-items: flex-end;
   display: flex;
-  gap: 16px;
+  gap: 12px;
   justify-content: space-between;
   min-height: 42px;
 }
@@ -733,7 +734,6 @@ onBeforeUnmount(() => {
 .info__percent {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .box-info__box-price {
@@ -765,12 +765,12 @@ onBeforeUnmount(() => {
   cursor: pointer;
   display: inline-flex;
   flex-shrink: 0;
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 600;
   gap: 4px;
   justify-content: center;
   line-height: 1;
-  padding: 8px 12px;
+  padding: 8px 5px;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
@@ -781,9 +781,9 @@ onBeforeUnmount(() => {
 .button-select {
   border: 1px solid #d8e7ff;
   color: #3b82f6;
-  min-width: 112px;
-  padding-left: 14px;
-  padding-right: 14px;
+  min-width: 96px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .button-select:hover {
@@ -793,7 +793,6 @@ onBeforeUnmount(() => {
 .button-add-cart {
   border: 1px solid #fecaca;
   color: #d70018;
-  min-width: 122px;
 }
 
 .button-add-cart:hover {
@@ -834,7 +833,7 @@ onBeforeUnmount(() => {
   justify-content: center;
   margin: 0;
   opacity: 1;
-  top: calc(50% - 12px);
+  top: 40%;
   transition: opacity 0.2s ease;
   width: 22px;
 }
@@ -933,7 +932,7 @@ onBeforeUnmount(() => {
   }
 
   .button-select {
-    min-width: 104px;
+    min-width: 88px;
   }
 
   .product__price--show {

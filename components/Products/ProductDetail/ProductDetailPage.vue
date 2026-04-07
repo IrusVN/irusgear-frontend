@@ -5,6 +5,7 @@
         <ProductDetailLeft />
         <ProductDetailRight />
       </div>
+      <ProductSameProduct />
       <div class="block-content-product">
         <ProductContentLeft />
         <ProductContentRight />
@@ -17,6 +18,7 @@
 <script setup>
 import ProductDetailLeft from "@/components/Products/ProductDetail/ProductDetailLeft.vue";
 import ProductDetailRight from "@/components/Products/ProductDetail/ProductDetailRight.vue";
+import ProductSameProduct from "@/components/Products/ProductDetail/ProductSameProduct.vue";
 import ProductContentLeft from "@/components/Products/ProductDetail/ProductContentLeft.vue";
 import ProductContentRight from "@/components/Products/ProductDetail/ProductContentRight.vue";
 import ProductBoxReview from "@/components/Products/ProductDetail/ProductBoxReview.vue";

@@ -1650,6 +1650,11 @@
 
 <script setup></script>
 <style scoped>
+.boxReview {
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  padding: 24px 48px;
+}
 .is-flex {
   display: flex !important;
 }
