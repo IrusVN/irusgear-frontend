@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="devide-price-label">
-          <div class="divide top"></div>
+          <div class="divide top mb-3"></div>
           <p>Hoặc</p>
           <div class="divide bottom"></div>
         </div>
