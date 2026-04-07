@@ -85,11 +85,7 @@
             class="swiper-slide warranty-slide"
           >
             <label
-              :class="[
-                'radio',
-                'button__choose-warranty',
-                { active: selectedId === item.id },
-              ]"
+              :class="[ 'radio', 'button__choose-warranty', { active: selectedId === item.id }, ]"
             >
               <input
                 :checked="selectedId === item.id"

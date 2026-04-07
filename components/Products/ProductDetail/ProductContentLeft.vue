@@ -1,15 +1,14 @@
 <template>
-  <div class="block-content-product-left" bis_skin_checked="1">
+  <div class="block-content-product-left">
     <div
       id="cpsContent"
       class="cps-block-content"
       style="max-height: 567px"
-      bis_skin_checked="1"
     >
       <h2 class="ksp-title">
         Đặc điểm nổi bật của iPhone 14 128GB | Chính hãng VN/A
       </h2>
-      <div class="ksp-content" style="" bis_skin_checked="1">
+      <div class="ksp-content" style="">
         <p style="text-align: center">
           <strong
             ><a
@@ -56,15 +55,12 @@
           >
         </p>
       </div>
-      <div data-v-1bddbad4="" class="table-content" bis_skin_checked="1">
+      <div class="table-content">
         <div
-          data-v-1bddbad4=""
           class="table-content__title"
-          bis_skin_checked="1"
         >
-          <p data-v-1bddbad4="">Nội dung chính</p>
+          <p>Nội dung chính</p>
           <svg
-            data-v-1bddbad4=""
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -73,7 +69,6 @@
             class="rotate"
           >
             <path
-              data-v-1bddbad4=""
               d="M5 7.5L10 12.5L15 7.5"
               stroke="#18181B"
               stroke-width="1.5"
@@ -83,213 +78,176 @@
           </svg>
         </div>
         <div
-          data-v-1bddbad4=""
           class="table-content__wrapper"
           style="max-height: 100000px"
-          bis_skin_checked="1"
         >
           <div
-            data-v-1bddbad4=""
             class="table-content__list"
-            bis_skin_checked="1"
           >
             <a
-              data-v-1bddbad4=""
               href="#uu-dai-hap-dan-khi-mua-hang-tra-gop-iphone-14-series-tai-cellphones"
               class="table-content__item level-2"
             >
               1. Ưu đãi hấp dẫn khi mua hàng - trả góp iPhone 14 series tại
               CellphoneS </a
             ><a
-              data-v-1bddbad4=""
               href="#iphone-14-mau-vang-yellow-moi"
               class="table-content__item level-2"
             >
               2. iPhone 14 màu vàng (Yellow) mới </a
             ><a
-              data-v-1bddbad4=""
               href="#mo-hop-iphone-14-mau-vang"
               class="table-content__item level-3"
             >
               2.1. Mở hộp iPhone 14 màu vàng </a
             ><a
-              data-v-1bddbad4=""
               href="#tren-tay-iphone-14-vang-sang-trong-thoi-thuong-trong-tung-chi-tiet"
               class="table-content__item level-3"
             >
               2.2. Trên tay iPhone 14 vàng - Sang trọng, thời thượng trong từng
               chi tiết </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-vang-ra-mat-khi-nao"
               class="table-content__item level-3"
             >
               2.3. Điện thoại iPhone 14 vàng ra mắt khi nào? </a
             ><a
-              data-v-1bddbad4=""
               href="#gia-iphone-14-mau-vang-128gb-la-bao-nhieu"
               class="table-content__item level-3"
             >
               2.4. Giá iPhone 14 màu vàng 128GB là bao nhiêu? </a
             ><a
-              data-v-1bddbad4=""
               href="#ai-nen-mua-dien-thoai-iphone-14-vang"
               class="table-content__item level-3"
             >
               2.5. Ai nên mua điện thoại iPhone 14 vàng? </a
             ><a
-              data-v-1bddbad4=""
               href="#so-sanh-dien-thoai-iphone-14-voi-iphone-13"
               class="table-content__item level-2"
             >
               3. So sánh điện thoại iPhone 14 với iPhone 13 </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-pin-trau-gia-ban-khong-doi"
               class="table-content__item level-2"
             >
               4. Điện thoại iPhone 14 -&nbsp; Pin trâu, giá bán không đổi </a
             ><a
-              data-v-1bddbad4=""
               href="#man-hinh-oled-6-1-inch-trai-nhiem-hinh-anh-sac-net"
               class="table-content__item level-3"
             >
               4.1. Màn hình OLED 6.1 inch - trải nhiệm hình ảnh sắc nét </a
             ><a
-              data-v-1bddbad4=""
               href="#thiet-ke-tuong-tu-iphone-13-khung-kim-loai-chac-chan"
               class="table-content__item level-3"
             >
               4.2. Thiết kế tương tự iPhone 13, khung kim loại chắc chắn </a
             ><a
-              data-v-1bddbad4=""
               href="#camera-kep-12mp-voi-cam-bien-moi"
               class="table-content__item level-3"
             >
               4.3. Camera kép 12MP với cảm biến mới </a
             ><a
-              data-v-1bddbad4=""
               href="#vi-xu-ly-a15-bionic-cai-tien-voi-phien-ban-5-nhan"
               class="table-content__item level-3"
             >
               4.4. Vi xử lý&nbsp;A15 Bionic cải tiến với phiên bản 5 nhân </a
             ><a
-              data-v-1bddbad4=""
               href="#dung-luong-pin-duoc-cai-thien-ho-tro-sac-magsafe"
               class="table-content__item level-3"
             >
               4.5. Dung lượng pin được cải thiện, hỗ trợ sạc&nbsp;MagSafe </a
             ><a
-              data-v-1bddbad4=""
               href="#nhung-tinh-nang-dang-chu-y-khac-tren-iphone-14"
               class="table-content__item level-3"
             >
               4.6. Những tính năng đáng chú ý khác trên iPhone 14 </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-gia-ban-bao-nhieu-tien-iphone-14-khi-nao-ra-mat"
               class="table-content__item level-2"
             >
               5. Điện thoại iPhone 14 giá bán bao nhiêu tiền? iPhone 14 khi nào
               ra mắt? </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-co-may-mau"
               class="table-content__item level-2"
             >
               6. Điện thoại iPhone 14 có mấy màu? </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-mau-den-midnight"
               class="table-content__item level-3"
             >
               6.1. Điện thoại iPhone 14 màu đen Midnight </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-mau-starlight"
               class="table-content__item level-3"
             >
               6.2. Điện thoại iPhone 14 màu Starlight </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-mau-do-product-red"
               class="table-content__item level-3"
             >
               6.3. Điện thoại iPhone 14 màu đỏ (PRODUCT) RED </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-mau-tim-purple"
               class="table-content__item level-3"
             >
               6.4. Điện thoại iPhone 14 màu tím Purple </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-mau-xanh-blue"
               class="table-content__item level-3"
             >
               6.5. Điện thoại iPhone 14 màu xanh Blue </a
             ><a
-              data-v-1bddbad4=""
               href="#iphone-14-mau-nao-dep-nhat-mua-mau-nao-phu-hop"
               class="table-content__item level-2"
             >
               7. iPhone 14 màu nào đẹp nhất, mua màu nào phù hợp </a
             ><a
-              data-v-1bddbad4=""
               href="#dung-luong-iphone-14-bao-nhieu-gb"
               class="table-content__item level-2"
             >
               8. Dung lượng iPhone 14 bao nhiêu GB? </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-128gb"
               class="table-content__item level-3"
             >
               8.1. Điện thoại iPhone 14 128GB&nbsp; </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-256gb"
               class="table-content__item level-3"
             >
               8.2. Điện thoại iPhone 14 256GB&nbsp; </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-512gb"
               class="table-content__item level-3"
             >
               8.3. Điện thoại iPhone 14 512GB&nbsp; </a
             ><a
-              data-v-1bddbad4=""
               href="#dien-thoai-iphone-14-co-may-sim"
               class="table-content__item level-2"
             >
               9. Điện thoại iPhone 14 có mấy sim? </a
             ><a
-              data-v-1bddbad4=""
               href="#tai-sao-nen-mua-dien-thoai-iphone-14-series-tai-cellphones"
               class="table-content__item level-2"
             >
               10. Tại sao nên mua điện thoại iPhone 14 Series tại CellPhoneS </a
             ><a
-              data-v-1bddbad4=""
               href="#nhan-hang-chinh-hang-som-nhat-tai-viet-nam"
               class="table-content__item level-3"
             >
               10.1. Nhận hàng chính hãng sớm nhất tại Việt Nam </a
             ><a
-              data-v-1bddbad4=""
               href="#so-huu-iphone-14-series-voi-gia-soc-uu-dai-bat-ngo"
               class="table-content__item level-3"
             >
               10.2. Sở hữu iPhone 14 series với giá sốc, ưu đãi bất ngờ </a
             ><a
-              data-v-1bddbad4=""
               href="#ho-tro-tro-gia-khi-thu-cu-va-len-doi"
               class="table-content__item level-3"
             >
               10.3. Hỗ trợ trợ giá khi thu cũ và lên đời </a
             ><a
-              data-v-1bddbad4=""
               href="#uu-dai-tu-nhieu-ngan-hang-khi-thanh-toan"
               class="table-content__item level-3"
             >
@@ -298,7 +256,7 @@
           </div>
         </div>
       </div>
-      <div id="cpsContentSEO" bis_skin_checked="1">
+      <div id="cpsContentSEO">
         <h2
           style="scroll-margin: 148px"
           id="uu-dai-hap-dan-khi-mua-hang-tra-gop-iphone-14-series-tai-cellphones"
@@ -1626,11 +1584,10 @@
       <div
         class="cps-block-content_btn-showmore"
         style="display:"
-        bis_skin_checked="1"
       >
         <a class="btn-show-more button__content-show-more">
           Xem thêm &emsp;
-          <div bis_skin_checked="1">
+          <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"

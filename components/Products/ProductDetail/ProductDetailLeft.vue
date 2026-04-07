@@ -241,14 +241,14 @@
     <div class="box-gallery">
       <div class="gallery-product-detail mb-2">
         <div
-          class="gallery-slide gallery-top swiper swiper-container swiper-container-initialized swiper-container-horizontal"
+          class="gallery-slide gallery-top swiper swiper-container"
         >
           <div
             class="swiper-wrapper"
             style="transform: translate3d(0px, 0px, 0px)"
           >
             <div
-              class="swiper-slide ksp-gallery swiper-slide-active"
+              class="swiper-slide ksp-gallery"
               style="width: 589px; margin-right: 20px"
             >
               <div class="box-ksp ksp-video">
@@ -282,7 +282,7 @@
             </div>
             <div
               id="v2Gallery"
-              class="swiper-slide ksp-gallery swiper-slide-next"
+              class="swiper-slide ksp-gallery"
               style="width: 589px; margin-right: 20px"
             >
               <div class="box-ksp is-flex is-flex-direction-row">
@@ -523,14 +523,14 @@
           ></span>
         </div>
         <div
-          class="thumbnail-slide swiper swiper-container gallery-thumbs swiper-container-initialized swiper-container-horizontal swiper-container-free-mode swiper-container-thumbs"
+          class="thumbnail-slide swiper swiper-container gallery-thumbs"
         >
           <div
             class="swiper-wrapper"
             style="transform: translate3d(0px, 0px, 0px)"
           >
             <div
-              class="swiper-slide ksp-thumbs button__view-gallery-vid swiper-slide-visible swiper-slide-active swiper-slide-thumb-active"
+              class="swiper-slide ksp-thumbs button__view-gallery-vid"
               style="margin-right: 10px"
             >
               <svg
@@ -559,7 +559,7 @@
               <p>Video</p>
             </div>
             <div
-              class="swiper-slide ksp-thumbs button__view-gallery-thumb swiper-slide-visible swiper-slide-next"
+              class="swiper-slide ksp-thumbs button__view-gallery-thumb"
               style="margin-right: 10px"
             >
               <svg
@@ -580,7 +580,7 @@
               <p>Tính năng nổi bật</p>
             </div>
             <div
-              class="swiper-slide button__view-gallery swiper-slide-visible"
+              class="swiper-slide button__view-gallery"
               style="margin-right: 10px"
             >
               <img
@@ -593,7 +593,7 @@
               />
             </div>
             <div
-              class="swiper-slide button__view-gallery swiper-slide-visible"
+              class="swiper-slide button__view-gallery"
               style="margin-right: 10px"
             >
               <img
@@ -606,7 +606,7 @@
               />
             </div>
             <div
-              class="swiper-slide button__view-gallery swiper-slide-visible"
+              class="swiper-slide button__view-gallery"
               style="margin-right: 10px"
             >
               <img
@@ -619,7 +619,7 @@
               />
             </div>
             <div
-              class="swiper-slide button__view-gallery swiper-slide-visible"
+              class="swiper-slide button__view-gallery"
               style="margin-right: 10px"
             >
               <img
@@ -632,7 +632,7 @@
               />
             </div>
             <div
-              class="swiper-slide button__view-gallery swiper-slide-visible"
+              class="swiper-slide button__view-gallery"
               style="margin-right: 10px"
             >
               <img
@@ -645,7 +645,7 @@
               />
             </div>
             <div
-              class="swiper-slide button__view-gallery swiper-slide-visible"
+              class="swiper-slide button__view-gallery"
               style="margin-right: 10px"
             >
               <img
@@ -730,7 +730,7 @@
             </div>
           </div>
           <div
-            class="swiper-button-prev button-navigate-thumbnail__prev swiper-button-disabled"
+            class="swiper-button-prev button-navigate-thumbnail__prev"
             tabindex="0"
             role="button"
             aria-label="Previous slide"
@@ -763,14 +763,14 @@
         </div>
         <div class="box-content warranty-info">
           <div
-            class="swiper swiper-container swiper-pdp swiper-container-initialized swiper-container-horizontal swiper-container-multirow"
+            class="swiper swiper-container swiper-pdp"
           >
             <div
               class="swiper-wrapper"
               style="width: 602px; transform: translate3d(0px, 0px, 0px)"
             >
               <div
-                class="swiper-slide swiper-slide-active"
+                class="swiper-slide"
                 style="
                   order: 0;
                   width: 291px;
@@ -824,7 +824,7 @@
                 </div>
               </div>
               <div
-                class="swiper-slide swiper-slide-next"
+                class="swiper-slide"
                 style="
                   -webkit-box-ordinal-group: 1;
                   order: 1;
@@ -1008,7 +1008,7 @@
               ></span>
             </div>
             <div
-              class="swiper-button-prev swiper-button-disabled swiper-button-lock"
+              class="swiper-button-prev"
               tabindex="0"
               role="button"
               aria-label="Previous slide"
@@ -1027,7 +1027,7 @@
               </div>
             </div>
             <div
-              class="swiper-button-next swiper-button-disabled swiper-button-lock"
+              class="swiper-button-next"
               tabindex="0"
               role="button"
               aria-label="Next slide"
@@ -1052,7 +1052,7 @@
             ></span>
           </div>
           <div
-            class="swiper swiper-container is-hidden swiper-container-initialized swiper-container-horizontal swiper-container-multirow"
+            class="swiper swiper-container is-hidden"
           >
             <div class="swiper-wrapper" style="transition-duration: 0ms">
               <div class="swiper-slide" style="height: 148px"></div>

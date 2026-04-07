@@ -32,10 +32,7 @@
             class="swiper-slide"
           >
             <div
-              :class="[
-                'product-info-container',
-                { 'more-trade-product': item.variant === 'trade-placeholder' },
-              ]"
+              :class="[ 'product-info-container', { 'more-trade-product': item.variant === 'trade-placeholder' }, ]"
             >
               <div class="product-info">
                 <a

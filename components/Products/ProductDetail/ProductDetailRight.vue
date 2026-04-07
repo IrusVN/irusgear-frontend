@@ -53,21 +53,19 @@
         </div>
       </div>
     </div>
-    <div class="box-linked" data-v-e3cf964a="">
-      <div class="box-title" data-v-e3cf964a="">
-        <p data-v-e3cf964a="">Phiên bản</p>
+    <div class="box-linked">
+      <div class="box-title">
+        <p>Phiên bản</p>
       </div>
-      <div class="list-linked" data-v-e3cf964a="">
+      <div class="list-linked">
         <a
           href="/iphone-14-256gb.html"
           class="item-linked button__link linked-0 false"
-          data-v-e3cf964a=""
-          ><strong data-v-e3cf964a="">256GB</strong></a
+          ><strong>256GB</strong></a
         ><a
           href="/iphone-14.html"
           class="item-linked button__link linked-1 active"
-          data-v-e3cf964a=""
-          ><strong data-v-e3cf964a="">128GB</strong></a
+          ><strong>128GB</strong></a
         >
       </div>
     </div>
@@ -459,14 +457,14 @@
     </div>
     <div class="block-special-promotion-banner my-3">
       <div
-        class="swiper-container banner-slide swiper-container-initialized swiper-container-horizontal"
+        class="swiper-container banner-slide"
       >
         <div
           class="swiper-wrapper"
           style="transform: translate3d(0px, 0px, 0px)"
         >
           <div
-            class="swiper-slide swiper-slide-active"
+            class="swiper-slide"
             style="width: 592px; margin-right: 10px"
           >
             <a class="button__special-promotion-banner"
@@ -479,7 +477,7 @@
           </div>
         </div>
         <div
-          class="swiper-button-prev button__view-banner-prev swiper-button-disabled"
+          class="swiper-button-prev button__view-banner-prev"
           tabindex="-1"
           role="button"
           aria-label="Previous slide"
@@ -498,7 +496,7 @@
           </div>
         </div>
         <div
-          class="swiper-button-next button__view-banner-next swiper-button-disabled"
+          class="swiper-button-next button__view-banner-next"
           tabindex="-1"
           role="button"
           aria-label="Next slide"
@@ -687,14 +685,14 @@
         <span>Ưu đãi thanh toán</span>
       </div>
       <div
-        class="swiper-container box-more-promotion-swiper swiper-container-initialized swiper-container-horizontal"
+        class="swiper-container box-more-promotion-swiper"
       >
         <div
           class="swiper-wrapper"
           style="transform: translate3d(0px, 0px, 0px)"
         >
           <div
-            class="box-more-promotion-slide swiper-slide swiper-slide-active"
+            class="box-more-promotion-slide swiper-slide"
             style="width: 232px; margin-right: 8px"
           >
             <div class="box-more-promotion-item">
@@ -749,7 +747,7 @@
             </div>
           </div>
           <div
-            class="box-more-promotion-slide swiper-slide swiper-slide-next"
+            class="box-more-promotion-slide swiper-slide"
             style="width: 232px; margin-right: 8px"
           >
             <div class="box-more-promotion-item">
@@ -1192,14 +1190,14 @@
       </div>
       <div class="box-on-stock-address">
         <div
-          class="swiper-container swiper-pdp swiper-container-initialized swiper-container-horizontal"
+          class="swiper-container swiper-pdp"
         >
           <div
             class="swiper-wrapper"
             style="transform: translate3d(0px, 0px, 0px)"
           >
             <div
-              class="swiper-slide swiper-slide-active"
+              class="swiper-slide"
               style="margin-right: 10px"
             >
               <div class="box-on-stock-item">
@@ -1276,7 +1274,7 @@
               </div>
             </div>
             <div
-              class="swiper-slide swiper-slide-next"
+              class="swiper-slide"
               style="margin-right: 10px"
             >
               <div class="box-on-stock-item">
@@ -4766,7 +4764,7 @@
             </div>
           </div>
           <div
-            class="swiper-button-prev button-navigate-thumbnail__prev swiper-button-disabled"
+            class="swiper-button-prev button-navigate-thumbnail__prev"
             tabindex="0"
             role="button"
             aria-label="Previous slide"
@@ -4803,10 +4801,9 @@
         </div>
       </div>
     </div>
-    <div data-v-31ed5646="" class="box-delivery-address">
-      <div data-v-31ed5646="" class="head">
+    <div class="box-delivery-address">
+      <div class="head">
         <svg
-          data-v-31ed5646=""
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -4815,7 +4812,6 @@
           class="icon"
         >
           <path
-            data-v-31ed5646=""
             d="M5 17C5 17.5304 5.21071 18.0391 5.58579 18.4142C5.96086 18.7893 6.46957 19 7 19C7.53043 19 8.03914 18.7893 8.41421 18.4142C8.78929 18.0391 9 17.5304 9 17C9 16.4696 8.78929 15.9609 8.41421 15.5858C8.03914 15.2107 7.53043 15 7 15C6.46957 15 5.96086 15.2107 5.58579 15.5858C5.21071 15.9609 5 16.4696 5 17Z"
             stroke="#A1A1AA"
             stroke-width="1.5"
@@ -4823,7 +4819,6 @@
             stroke-linejoin="round"
           ></path>
           <path
-            data-v-31ed5646=""
             d="M15 17C15 17.5304 15.2107 18.0391 15.5858 18.4142C15.9609 18.7893 16.4696 19 17 19C17.5304 19 18.0391 18.7893 18.4142 18.4142C18.7893 18.0391 19 17.5304 19 17C19 16.4696 18.7893 15.9609 18.4142 15.5858C18.0391 15.2107 17.5304 15 17 15C16.4696 15 15.9609 15.2107 15.5858 15.5858C15.2107 15.9609 15 16.4696 15 17Z"
             stroke="#A1A1AA"
             stroke-width="1.5"
@@ -4831,7 +4826,6 @@
             stroke-linejoin="round"
           ></path>
           <path
-            data-v-31ed5646=""
             d="M5 17H3V13M2 5H13V17M9 17H15M19 17H21V11M21 11H13M21 11L18 6H13"
             stroke="#A1A1AA"
             stroke-width="1.5"
@@ -4839,7 +4833,6 @@
             stroke-linejoin="round"
           ></path>
           <path
-            data-v-31ed5646=""
             d="M3 9H7"
             stroke="#A1A1AA"
             stroke-width="1.5"
@@ -4847,12 +4840,11 @@
             stroke-linejoin="round"
           ></path>
         </svg>
-        <p data-v-31ed5646="" class="title">Thông tin vận chuyển</p>
+        <p class="title">Thông tin vận chuyển</p>
       </div>
-      <div data-v-31ed5646="" class="content">
-        <div data-v-31ed5646="" class="btn-change-address">
+      <div class="content">
+        <div class="btn-change-address">
           <svg
-            data-v-31ed5646=""
             width="16"
             height="16"
             viewBox="0 0 16 16"
@@ -4861,7 +4853,6 @@
             class="icon"
           >
             <path
-              data-v-31ed5646=""
               d="M6 7.33337C6 7.86381 6.21071 8.37251 6.58579 8.74759C6.96086 9.12266 7.46957 9.33337 8 9.33337C8.53043 9.33337 9.03914 9.12266 9.41421 8.74759C9.78929 8.37251 10 7.86381 10 7.33337C10 6.80294 9.78929 6.29423 9.41421 5.91916C9.03914 5.54409 8.53043 5.33337 8 5.33337C7.46957 5.33337 6.96086 5.54409 6.58579 5.91916C6.21071 6.29423 6 6.80294 6 7.33337Z"
               stroke="#3B82F6"
               stroke-width="1.5"
@@ -4869,7 +4860,6 @@
               stroke-linejoin="round"
             ></path>
             <path
-              data-v-31ed5646=""
               d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
               stroke="#3B82F6"
               stroke-width="1.5"
@@ -4877,8 +4867,8 @@
               stroke-linejoin="round"
             ></path>
           </svg>
-          <span data-v-31ed5646="">Chọn địa chỉ giao hàng để nhận ưu đãi</span>
-          <div data-v-31ed5646="" class="label-new">Mới</div>
+          <span>Chọn địa chỉ giao hàng để nhận ưu đãi</span>
+          <div class="label-new">Mới</div>
         </div>
       </div>
     </div>

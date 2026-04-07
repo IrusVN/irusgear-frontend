@@ -3,47 +3,38 @@
     id="block-comment-cps"
     product-id="31495"
     class="comment-container pt-3"
-    data-v-0da19d40=""
-    bis_skin_checked="1"
   >
-    <div class="comment-form" data-v-0da19d40="" bis_skin_checked="1">
-      <p id="total_comment" class="comment-form-title" data-v-0da19d40="">
+    <div class="comment-form">
+      <p id="total_comment" class="comment-form-title">
         Hỏi và đáp
       </p>
-      <div class="comment-form-content" data-v-0da19d40="" bis_skin_checked="1">
+      <div class="comment-form-content">
         <img
           src="https://cdn2.cellphones.com.vn/insecure/rs:fill:160:0/q:90/plain/https://cellphones.com.vn/media/wysiwyg/ant-hello-2025.png"
           width="160"
           alt="cps ant icon"
           quantity="auto"
           class="cps-ant-cmt"
-          data-v-0da19d40=""
         />
         <div
           class="question"
-          data-v-41878334=""
-          data-v-0da19d40=""
-          bis_skin_checked="1"
         >
           <div
             class="is-flex is-align-items-center"
-            data-v-41878334=""
-            bis_skin_checked="1"
           >
-            <p class="question-title" data-v-41878334="">
+            <p class="question-title">
               Hãy đặt câu hỏi cho chúng tôi
             </p>
           </div>
-          <p class="question-content" data-v-41878334="">
+          <p class="question-content">
             CellphoneS sẽ phản hồi trong vòng 1 giờ. Nếu Quý khách gửi câu hỏi
             sau 22h, chúng tôi sẽ trả lời vào sáng hôm sau.<br
-              data-v-41878334=""
             />
             Thông tin có thể thay đổi theo thời gian, vui lòng đặt câu hỏi để
             nhận được cập nhật mới nhất!
           </p>
-          <div class="textarea-wrapper" data-v-41878334="" bis_skin_checked="1">
-            <div class="textarea-comment" bis_skin_checked="1">
+          <div class="textarea-wrapper">
+            <div class="textarea-comment">
               <textarea
                 id=""
                 placeholder="Viết câu hỏi của bạn tại đây"
@@ -81,27 +72,25 @@
       </div>
     </div>
     <div
-      data-v-0da19d40=""
       class="block-comment__box-list-comment"
-      bis_skin_checked="1"
     >
       <p style="opacity: 0; height: 0px">
         CellphoneS sẽ trả lời trong 1 giờ (sau 22h, phản hồi vào sáng hôm sau).
         Một số thông tin có thể thay đổi, Quý khách hãy đặt câu hỏi để được cập
         nhật mới nhất.
       </p>
-      <div id="page_comment_list" class="list-comment" bis_skin_checked="1">
-        <div class="item-comment" bis_skin_checked="1">
-          <div class="item-comment__box-cmt" bis_skin_checked="1">
-            <div class="box-cmt__box-info" bis_skin_checked="1">
-              <div class="box-info" bis_skin_checked="1">
-                <div class="box-info__avatar" bis_skin_checked="1">
+      <div id="page_comment_list" class="list-comment">
+        <div class="item-comment">
+          <div class="item-comment__box-cmt">
+            <div class="box-cmt__box-info">
+              <div class="box-info">
+                <div class="box-info__avatar">
                   <span> N </span>
                 </div>
                 <p class="box-info__name">Ngọc Lan</p>
               </div>
-              <div class="box-time-cmt" bis_skin_checked="1">
-                <div bis_skin_checked="1">
+              <div class="box-time-cmt">
+                <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -118,14 +107,14 @@
                 &nbsp;10 tiếng trước
               </div>
             </div>
-            <div class="box-cmt__box-question" bis_skin_checked="1">
-              <div class="content" bis_skin_checked="1">
+            <div class="box-cmt__box-question">
+              <div class="content">
                 <p>
                   Tại cơ sở 244 Phạm Văn Đồng, Hà Nội còn iphone 14 new ko ạ
                 </p>
               </div>
               <button class="btn-rep-cmt respondent button__cmt-rep">
-                <div bis_skin_checked="1">
+                <div>
                   <svg
                     width="16"
                     height="16"
@@ -159,22 +148,22 @@
                 &nbsp;Phản hồi
               </button>
             </div>
-            <div class="item-comment__box-rep-comment" bis_skin_checked="1">
-              <div class="list-rep-comment" bis_skin_checked="1"></div>
+            <div class="item-comment__box-rep-comment">
+              <div class="list-rep-comment"></div>
             </div>
           </div>
         </div>
-        <div class="item-comment" bis_skin_checked="1">
-          <div class="item-comment__box-cmt" bis_skin_checked="1">
-            <div class="box-cmt__box-info" bis_skin_checked="1">
-              <div class="box-info" bis_skin_checked="1">
-                <div class="box-info__avatar" bis_skin_checked="1">
+        <div class="item-comment">
+          <div class="item-comment__box-cmt">
+            <div class="box-cmt__box-info">
+              <div class="box-info">
+                <div class="box-info__avatar">
                   <span> N </span>
                 </div>
                 <p class="box-info__name">Ngô Ngọc Linh</p>
               </div>
-              <div class="box-time-cmt" bis_skin_checked="1">
-                <div bis_skin_checked="1">
+              <div class="box-time-cmt">
+                <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -191,12 +180,12 @@
                 &nbsp;18 tiếng trước
               </div>
             </div>
-            <div class="box-cmt__box-question" bis_skin_checked="1">
-              <div class="content" bis_skin_checked="1">
+            <div class="box-cmt__box-question">
+              <div class="content">
                 <p>Iphone 14 đập hộp có ưu đãi student ko ạ</p>
               </div>
               <button class="btn-rep-cmt respondent button__cmt-rep">
-                <div bis_skin_checked="1">
+                <div>
                   <svg
                     width="16"
                     height="16"
@@ -229,10 +218,10 @@
                 </div>
                 &nbsp;Phản hồi
               </button>
-              <div class="fieldset-bottom" bis_skin_checked="1">
-                <div class="btn-toggle-list-comment" bis_skin_checked="1">
+              <div class="fieldset-bottom">
+                <div class="btn-toggle-list-comment">
                   Thu gọn phản hồi
-                  <div bis_skin_checked="1">
+                  <div>
                     <svg
                       height="15"
                       xmlns="http://www.w3.org/2000/svg"
@@ -247,14 +236,14 @@
                 </div>
               </div>
             </div>
-            <div class="item-comment__box-rep-comment" bis_skin_checked="1">
-              <div class="list-rep-comment" bis_skin_checked="1">
-                <div class="item-rep-comment" bis_skin_checked="1">
-                  <div class="box-cmt__box-info" bis_skin_checked="1">
-                    <div class="box-info" bis_skin_checked="1">
-                      <div class="box-info__avatar" bis_skin_checked="1">
+            <div class="item-comment__box-rep-comment">
+              <div class="list-rep-comment">
+                <div class="item-rep-comment">
+                  <div class="box-cmt__box-info">
+                    <div class="box-info">
+                      <div class="box-info__avatar">
                         <span class="icon-cps"
-                          ><div bis_skin_checked="1">
+                          ><div>
                             <svg
                               viewBox="0 0 40 40"
                               fill="none"
@@ -291,8 +280,8 @@
                       <p class="box-info__name">Quản trị viên</p>
                       <span class="box-info__tag">QTV</span>
                     </div>
-                    <div class="box-time-cmt" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="box-time-cmt">
+                      <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="12"
@@ -309,38 +298,38 @@
                       &nbsp;17 tiếng trước
                     </div>
                   </div>
-                  <div class="box-cmt__box-question" bis_skin_checked="1">
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">Chào Chị Linh!</div>
+                  <div class="box-cmt__box-question">
+                    <div class="content">
+                      <div>Chào Chị Linh!</div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Dạ APPLE IPHONE 14 128GB TRẮNG CHÍNH HÃNG (VN/A) Giá
                         thời điểm hiện tại 13.990.000đ khu vực phía nam
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Em rất tiếc sản phẩm chưa giảm S-student
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Không biết mình còn ở khu vực Tây Hồ , Hà Nội không em
                         tiện kiểm tra hàng và giữ hàng , giá trong 24 giờ mình
                         đến tham khảo nhé
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Mong nhận được phản hồi từ mình
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1"></div>
+                    <div class="content">
+                      <div></div>
                     </div>
                     <button class="btn-rep-cmt respondent button__cmt-rep">
-                      <div bis_skin_checked="1">
+                      <div>
                         <svg
                           width="16"
                           height="16"
@@ -379,17 +368,17 @@
             </div>
           </div>
         </div>
-        <div class="item-comment" bis_skin_checked="1">
-          <div class="item-comment__box-cmt" bis_skin_checked="1">
-            <div class="box-cmt__box-info" bis_skin_checked="1">
-              <div class="box-info" bis_skin_checked="1">
-                <div class="box-info__avatar" bis_skin_checked="1">
+        <div class="item-comment">
+          <div class="item-comment__box-cmt">
+            <div class="box-cmt__box-info">
+              <div class="box-info">
+                <div class="box-info__avatar">
                   <span> T </span>
                 </div>
                 <p class="box-info__name">Trần Huyền</p>
               </div>
-              <div class="box-time-cmt" bis_skin_checked="1">
-                <div bis_skin_checked="1">
+              <div class="box-time-cmt">
+                <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -406,12 +395,12 @@
                 &nbsp;2 ngày trước
               </div>
             </div>
-            <div class="box-cmt__box-question" bis_skin_checked="1">
-              <div class="content" bis_skin_checked="1">
+            <div class="box-cmt__box-question">
+              <div class="content">
                 <p>14plus bản xước giá bao nhiêu</p>
               </div>
               <button class="btn-rep-cmt respondent button__cmt-rep">
-                <div bis_skin_checked="1">
+                <div>
                   <svg
                     width="16"
                     height="16"
@@ -444,10 +433,10 @@
                 </div>
                 &nbsp;Phản hồi
               </button>
-              <div class="fieldset-bottom" bis_skin_checked="1">
-                <div class="btn-toggle-list-comment" bis_skin_checked="1">
+              <div class="fieldset-bottom">
+                <div class="btn-toggle-list-comment">
                   Thu gọn phản hồi
-                  <div bis_skin_checked="1">
+                  <div>
                     <svg
                       height="15"
                       xmlns="http://www.w3.org/2000/svg"
@@ -462,14 +451,14 @@
                 </div>
               </div>
             </div>
-            <div class="item-comment__box-rep-comment" bis_skin_checked="1">
-              <div class="list-rep-comment" bis_skin_checked="1">
-                <div class="item-rep-comment" bis_skin_checked="1">
-                  <div class="box-cmt__box-info" bis_skin_checked="1">
-                    <div class="box-info" bis_skin_checked="1">
-                      <div class="box-info__avatar" bis_skin_checked="1">
+            <div class="item-comment__box-rep-comment">
+              <div class="list-rep-comment">
+                <div class="item-rep-comment">
+                  <div class="box-cmt__box-info">
+                    <div class="box-info">
+                      <div class="box-info__avatar">
                         <span class="icon-cps"
-                          ><div bis_skin_checked="1">
+                          ><div>
                             <svg
                               viewBox="0 0 40 40"
                               fill="none"
@@ -506,8 +495,8 @@
                       <p class="box-info__name">Quản trị viên</p>
                       <span class="box-info__tag">QTV</span>
                     </div>
-                    <div class="box-time-cmt" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="box-time-cmt">
+                      <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="12"
@@ -524,19 +513,19 @@
                       &nbsp;2 ngày trước
                     </div>
                   </div>
-                  <div class="box-cmt__box-question" bis_skin_checked="1">
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">Xin chào Chị Huyền,</div>
+                  <div class="box-cmt__box-question">
+                    <div class="content">
+                      <div>Xin chào Chị Huyền,</div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Dạ sản phẩm APPLE IPHONE 14 PLUS 128GB TRẮNG CŨ - TRẦY
                         XƯỚC giá khuyến mãi hiện tại là 11.890.000đ (giá miền
                         Nam thời điểm hiện tại)
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Ngoài ra CellphoneS có chương trình thu cũ giá ngon và
                         ưu đãi lên đời cực tốt, em gửi mình tham khảo thêm ạ:
                         <a
@@ -547,8 +536,8 @@
                         >
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Sản phẩm thu lại từ khách hàng không còn nhu cầu, ngoại
                         hình đẹp như máy mới (Một số sản phẩm có thể đã qua bảo
                         hành hãng hoặc sửa chữa thay thế linh kiện, hiệu suất
@@ -558,21 +547,21 @@
                         ngày nếu có lỗi phần cứng từ nhà sản xuất
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Không biết hiện tại mình đang ở khu vực nào hay tỉnh
                         thành nào để em kiểm tra cửa hàng gần mình nhất có sẵn
                         sản phẩm ạ.
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">Xin thông tin đến Chị.</div>
+                    <div class="content">
+                      <div>Xin thông tin đến Chị.</div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1"></div>
+                    <div class="content">
+                      <div></div>
                     </div>
                     <button class="btn-rep-cmt respondent button__cmt-rep">
-                      <div bis_skin_checked="1">
+                      <div>
                         <svg
                           width="16"
                           height="16"
@@ -611,17 +600,17 @@
             </div>
           </div>
         </div>
-        <div class="item-comment" bis_skin_checked="1">
-          <div class="item-comment__box-cmt" bis_skin_checked="1">
-            <div class="box-cmt__box-info" bis_skin_checked="1">
-              <div class="box-info" bis_skin_checked="1">
-                <div class="box-info__avatar" bis_skin_checked="1">
+        <div class="item-comment">
+          <div class="item-comment__box-cmt">
+            <div class="box-cmt__box-info">
+              <div class="box-info">
+                <div class="box-info__avatar">
                   <span> T </span>
                 </div>
                 <p class="box-info__name">Trần Huyền</p>
               </div>
-              <div class="box-time-cmt" bis_skin_checked="1">
-                <div bis_skin_checked="1">
+              <div class="box-time-cmt">
+                <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -638,15 +627,15 @@
                 &nbsp;2 ngày trước
               </div>
             </div>
-            <div class="box-cmt__box-question" bis_skin_checked="1">
-              <div class="content" bis_skin_checked="1">
+            <div class="box-cmt__box-question">
+              <div class="content">
                 <p>
                   Ở Hà Nội, còn ip14 không ạ, với cho em xin giá ip 14 đập hộp
                   và ip 14 cũ ạ.
                 </p>
               </div>
               <button class="btn-rep-cmt respondent button__cmt-rep">
-                <div bis_skin_checked="1">
+                <div>
                   <svg
                     width="16"
                     height="16"
@@ -679,10 +668,10 @@
                 </div>
                 &nbsp;Phản hồi
               </button>
-              <div class="fieldset-bottom" bis_skin_checked="1">
-                <div class="btn-toggle-list-comment" bis_skin_checked="1">
+              <div class="fieldset-bottom">
+                <div class="btn-toggle-list-comment">
                   Thu gọn phản hồi
-                  <div bis_skin_checked="1">
+                  <div>
                     <svg
                       height="15"
                       xmlns="http://www.w3.org/2000/svg"
@@ -697,14 +686,14 @@
                 </div>
               </div>
             </div>
-            <div class="item-comment__box-rep-comment" bis_skin_checked="1">
-              <div class="list-rep-comment" bis_skin_checked="1">
-                <div class="item-rep-comment" bis_skin_checked="1">
-                  <div class="box-cmt__box-info" bis_skin_checked="1">
-                    <div class="box-info" bis_skin_checked="1">
-                      <div class="box-info__avatar" bis_skin_checked="1">
+            <div class="item-comment__box-rep-comment">
+              <div class="list-rep-comment">
+                <div class="item-rep-comment">
+                  <div class="box-cmt__box-info">
+                    <div class="box-info">
+                      <div class="box-info__avatar">
                         <span class="icon-cps"
-                          ><div bis_skin_checked="1">
+                          ><div>
                             <svg
                               viewBox="0 0 40 40"
                               fill="none"
@@ -741,8 +730,8 @@
                       <p class="box-info__name">Quản trị viên</p>
                       <span class="box-info__tag">QTV</span>
                     </div>
-                    <div class="box-time-cmt" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="box-time-cmt">
+                      <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="12"
@@ -759,31 +748,31 @@
                       &nbsp;2 ngày trước
                     </div>
                   </div>
-                  <div class="box-cmt__box-question" bis_skin_checked="1">
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">Xin chào chị Huyền,</div>
+                  <div class="box-cmt__box-question">
+                    <div class="content">
+                      <div>Xin chào chị Huyền,</div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Dạ sản phẩm APPLE IPHONE 14 128GB ĐEN CHÍNH HÃNG (VN/A)
                         giá khuyến mãi hiện tại là 13.990.000đ (giá miền Bắc
                         thời điểm hiện tại)
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         APPLE IPHONE 14 128GB ĐEN CŨ - ĐẸP giá khuyến mãi hiện
                         tại là 10.690.000đ (giá miền Bắc thời điểm hiện tại)
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Sản phẩm còn hàng ở chi nhánh CellphoneS 278-280 Nguyễn
                         Văn Cừ, P. Ngọc Lâm, Q. Long Biên
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Ngoài ra CellphoneS có chương trình thu cũ giá ngon và
                         ưu đãi lên đời cực tốt, em gửi mình tham khảo thêm ạ:
                         <a
@@ -794,8 +783,8 @@
                         >
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Sản phẩm thu lại từ khách hàng không còn nhu cầu, ngoại
                         hình đẹp như máy mới (Một số sản phẩm có thể đã qua bảo
                         hành hãng hoặc sửa chữa thay thế linh kiện, hiệu suất
@@ -805,21 +794,21 @@
                         ngày nếu có lỗi phần cứng từ nhà sản xuất
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">
+                    <div class="content">
+                      <div>
                         Dạ không biết khi nào mình tiện đến cửa hàng bên em để
                         em lên đơn giữ hàng cho mình tại cửa hàng 24h tránh tình
                         trạng hết hàng ạ.
                       </div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1">Xin thông tin đến Anh.</div>
+                    <div class="content">
+                      <div>Xin thông tin đến Anh.</div>
                     </div>
-                    <div class="content" bis_skin_checked="1">
-                      <div bis_skin_checked="1"></div>
+                    <div class="content">
+                      <div></div>
                     </div>
                     <button class="btn-rep-cmt respondent button__cmt-rep">
-                      <div bis_skin_checked="1">
+                      <div>
                         <svg
                           width="16"
                           height="16"
@@ -858,17 +847,17 @@
             </div>
           </div>
         </div>
-        <div class="item-comment" bis_skin_checked="1">
-          <div class="item-comment__box-cmt" bis_skin_checked="1">
-            <div class="box-cmt__box-info" bis_skin_checked="1">
-              <div class="box-info" bis_skin_checked="1">
-                <div class="box-info__avatar" bis_skin_checked="1">
+        <div class="item-comment">
+          <div class="item-comment__box-cmt">
+            <div class="box-cmt__box-info">
+              <div class="box-info">
+                <div class="box-info__avatar">
                   <span> M </span>
                 </div>
                 <p class="box-info__name">MinhThao</p>
               </div>
-              <div class="box-time-cmt" bis_skin_checked="1">
-                <div bis_skin_checked="1">
+              <div class="box-time-cmt">
+                <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -885,12 +874,12 @@
                 &nbsp;1 tuần trước
               </div>
             </div>
-            <div class="box-cmt__box-question" bis_skin_checked="1">
-              <div class="content" bis_skin_checked="1">
+            <div class="box-cmt__box-question">
+              <div class="content">
                 <p>14 plus bản sước giá bao nhiêu</p>
               </div>
               <button class="btn-rep-cmt respondent button__cmt-rep">
-                <div bis_skin_checked="1">
+                <div>
                   <svg
                     width="16"
                     height="16"
@@ -924,14 +913,14 @@
                 &nbsp;Phản hồi
               </button>
             </div>
-            <div class="item-comment__box-rep-comment" bis_skin_checked="1">
-              <div class="list-rep-comment" bis_skin_checked="1"></div>
+            <div class="item-comment__box-rep-comment">
+              <div class="list-rep-comment"></div>
             </div>
           </div>
         </div>
         <button type="button" class="btn-show-more button__cmt-showmore">
           Xem thêm 658 bình luận &emsp;
-          <div class="is-inline-block" bis_skin_checked="1">
+          <div class="is-inline-block">
             <svg
               height="15"
               xmlns="http://www.w3.org/2000/svg"
