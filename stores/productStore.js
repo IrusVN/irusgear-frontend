@@ -42,11 +42,37 @@ export const useProductStore = defineStore("product", () => {
     currentSlug.value = "";
   };
 
+  const selectColorVariant = (url) => {
+    if (!productDetail.value || !productDetail.value.colorOptions) return;
+
+    const targetColor = productDetail.value.colorOptions.find(c => c.url === url);
+    if (!targetColor) return;
+
+    const newDetail = JSON.parse(JSON.stringify(productDetail.value));
+
+    newDetail.colorOptions.forEach(c => {
+      c.active = c.url === url;
+    });
+
+    if (targetColor.price && newDetail.pricing) {
+      newDetail.pricing.salePrice = targetColor.price;
+    }
+
+    productDetail.value = newDetail;
+
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('color-variant-selected', { detail: { thumbnail: targetColor.thumbnail } }));
+      }, 50);
+    }
+  };
+
   return {
     productDetail,
     currentSlug,
     productError,
     fetchProductDetail,
     resetProductDetail,
+    selectColorVariant,
   };
 });

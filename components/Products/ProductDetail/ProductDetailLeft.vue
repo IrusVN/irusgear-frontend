@@ -145,9 +145,11 @@
           <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px)">
 
             <div v-for="item in productStore.productDetail?.gallery || []" :key="`thumb-${item.id}`"
-              class="swiper-slide button__view-gallery" style="margin-right: 10px">
-              <img :src="item.thumbnail" style="width: 58px; height: 58px; object-fit: contain;" :alt="item.alt"
-                loading="lazy" :title="item.title" />
+              class="swiper-slide button__view-gallery"
+              style="margin-right: 10px; display: flex; align-items: center; justify-content: center;">
+              <img :src="item.thumbnail"
+                style="width: 100%; height: 100%; max-width: 58px; max-height: 58px; object-fit: contain;"
+                :alt="item.alt" loading="lazy" :title="item.title" />
             </div>
           </div>
           <div class="swiper-button-next button-navigate-thumbnail__next" tabindex="0" role="button"
@@ -736,15 +738,27 @@ const destroySwipers = () => {
   warrantySwiper = null;
 };
 
+const handleColorSelected = (e) => {
+  const thumb = e.detail.thumbnail;
+  if (!productStore.productDetail?.gallery) return;
+  const index = productStore.productDetail.gallery.findIndex(g => g.image === thumb || g.thumbnail === thumb);
+  if (index !== -1 && galleryTopSwiper) {
+    galleryTopSwiper.slideTo(index);
+  }
+};
+
 onMounted(async () => {
   await nextTick();
   if (productStore.productDetail) {
     await initSwipers();
   }
+  if (typeof window !== 'undefined') {
+    window.addEventListener('color-variant-selected', handleColorSelected);
+  }
 });
 
-watch(() => productStore.productDetail, async (newVal) => {
-  if (newVal && rootEl.value) {
+watch(() => productStore.productDetail?.gallery, async (newVal, oldVal) => {
+  if (newVal && rootEl.value && JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
     destroySwipers();
     await nextTick();
     setTimeout(async () => {
@@ -754,6 +768,9 @@ watch(() => productStore.productDetail, async (newVal) => {
 }, { deep: true });
 
 onBeforeUnmount(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('color-variant-selected', handleColorSelected);
+  }
   destroySwipers();
 
   if (resetWishlistTimer) {
@@ -1311,16 +1328,23 @@ onBeforeUnmount(() => {
 }
 
 .box-warranty-info .box-content.warranty-info .icon {
-  background: linear-gradient(231deg, #ed8a95 -68.73%, #c40016 91.14%);
+  background: #000;
   border-radius: 4px;
   height: 24px;
   margin-bottom: 10px;
   width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .box-warranty-info .box-content.warranty-info .icon svg {
   height: 18px;
   width: 18px;
+}
+
+.box-warranty-info .box-content.warranty-info .icon svg path {
+  stroke: #ffffff !important;
 }
 
 .box-warranty-info .box-content.warranty-info .description a {
