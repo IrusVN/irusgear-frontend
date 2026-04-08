@@ -38,9 +38,13 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
 
         const json = await res.json();
         items.value = json.data;
-        pagination.setPagination(json.pagination);
+        if (json.pagination) {
+          pagination.setPagination(json.pagination);
+        }
+        return json;
       } catch (e) {
         error.value = e.message;
+        return null;
       } finally {
         ui.isLoading = false;
       }
