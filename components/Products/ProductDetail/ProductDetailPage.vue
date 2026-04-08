@@ -28,10 +28,13 @@ import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
 import { useProductStore } from "@/stores/productStore";
 
+const route = useRoute();
 const productStore = useProductStore();
 
 onMounted(async () => {
-  await productStore.fetchProductDetail(slug);
+  if (route.params.slug) {
+    await productStore.fetchProductDetail(route.params.slug);
+  }
 });
 
 </script>
@@ -48,18 +51,18 @@ onMounted(async () => {
   margin-top: 10px !important;
 }
 
-.detail-top-layout > [class*="box-detail-product__box-"] {
+.detail-top-layout>[class*="box-detail-product__box-"] {
   overflow-x: hidden;
   padding: 0;
 }
 
-.detail-top-layout > .box-detail-product__box-left {
+.detail-top-layout>.box-detail-product__box-left {
   height: max-content;
   position: sticky;
   top: 88px;
 }
 
-.detail-top-layout > .box-detail-product__box-center {
+.detail-top-layout>.box-detail-product__box-center {
   height: max-content;
   position: sticky;
   top: 88px;
@@ -72,11 +75,11 @@ onMounted(async () => {
   margin: 10px auto;
 }
 
-.content-layout > .block-content-product-left {
+.content-layout>.block-content-product-left {
   flex: 2;
 }
 
-.content-layout > .block-content-product-right {
+.content-layout>.block-content-product-right {
   flex: 1;
   height: fit-content;
   max-height: calc(100vh - 200px);
@@ -100,8 +103,8 @@ onMounted(async () => {
     max-width: 100%;
   }
 
-  .content-layout > .block-content-product-left,
-  .content-layout > .block-content-product-right {
+  .content-layout>.block-content-product-left,
+  .content-layout>.block-content-product-right {
     width: 50%;
   }
 }
@@ -118,8 +121,8 @@ onMounted(async () => {
     gap: 20px;
   }
 
-  .detail-top-layout > .box-detail-product__box-left,
-  .detail-top-layout > .box-detail-product__box-center {
+  .detail-top-layout>.box-detail-product__box-left,
+  .detail-top-layout>.box-detail-product__box-center {
     width: 50%;
   }
 
@@ -128,11 +131,11 @@ onMounted(async () => {
     max-width: 991px;
   }
 
-  .content-layout > .block-content-product-left {
+  .content-layout>.block-content-product-left {
     width: 66.6666666667%;
   }
 
-  .content-layout > .block-content-product-right {
+  .content-layout>.block-content-product-right {
     width: 33.3333333333%;
   }
 }
@@ -148,18 +151,18 @@ onMounted(async () => {
     gap: 0;
   }
 
-  .detail-top-layout > .box-detail-product__box-left,
-  .detail-top-layout > .box-detail-product__box-center {
+  .detail-top-layout>.box-detail-product__box-left,
+  .detail-top-layout>.box-detail-product__box-center {
     position: relative;
     top: 10px !important;
     width: 100%;
   }
 
-  .content-layout > .block-content-product-left {
+  .content-layout>.block-content-product-left {
     width: 100%;
   }
 
-  .content-layout > .block-content-product-right {
+  .content-layout>.block-content-product-right {
     display: none;
   }
 }

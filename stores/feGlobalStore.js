@@ -77,6 +77,32 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       }
     };
 
+    const fetchItem = async (params = {}) => {
+      ui.isLoading = true;
+      try {
+        const query = new URLSearchParams(params).toString();
+        const url = query ? `${apiEndpoint.value}?${query}` : apiEndpoint.value;
+
+        const res = await fetch(url, {
+          credentials: "include",
+          headers: buildHeaders(),
+        });
+
+        if (res.status === 401) {
+          auth.logout();
+          return null;
+        }
+        if (!res.ok) throw new Error("Fetch failed");
+
+        return await res.json();
+      } catch (e) {
+        error.value = e.message;
+        return null;
+      } finally {
+        ui.isLoading = false;
+      }
+    };
+
     const createItem = async (payload) => {
       ui.isCreating = true;
       try {
@@ -138,6 +164,7 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       apiEndpoint,
       setApiUrl,
       fetchItems,
+      fetchItem,
       createItem,
       updateItem,
       deleteItem,

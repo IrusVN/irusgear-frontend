@@ -21,7 +21,7 @@ export const useProductStore = defineStore("product", () => {
       currentSlug.value = slug;
       feGlobalStore.setApiUrl(`products/${slug}`);
 
-      const res = await feGlobalStore.fetchItems();
+      const res = await feGlobalStore.fetchItem(params);
 
       if (res?.status === true && res.data) {
         productDetail.value = res.data;
