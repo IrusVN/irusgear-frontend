@@ -1,14 +1,14 @@
 <template>
-  <div class="block-content-product-left">
+  <div class="content-left-shell flex-grow-1">
     <div
       id="cpsContent"
-      class="cps-block-content"
+      class="content-card position-relative overflow-hidden"
       style="max-height: 567px"
     >
-      <h2 class="ksp-title">
+      <h2 class="content-title fw-bold mb-3">
         Đặc điểm nổi bật của iPhone 14 128GB | Chính hãng VN/A
       </h2>
-      <div class="ksp-content" style="">
+      <div class="content-highlight rounded-3 p-2 mb-3" style="">
         <p style="text-align: center">
           <strong
             ><a
@@ -55,9 +55,9 @@
           >
         </p>
       </div>
-      <div class="table-content">
+      <div class="mb-3">
         <div
-          class="table-content__title"
+          class="toc-title d-flex align-items-center justify-content-between rounded-3 px-3 py-2"
         >
           <p>Nội dung chính</p>
           <svg
@@ -78,11 +78,11 @@
           </svg>
         </div>
         <div
-          class="table-content__wrapper"
+          class="toc-wrapper"
           style="max-height: 100000px"
         >
           <div
-            class="table-content__list"
+            class="toc-list rounded-3 mt-2 px-3 py-2"
           >
             <a
               href="#uu-dai-hap-dan-khi-mua-hang-tra-gop-iphone-14-series-tai-cellphones"
@@ -1606,11 +1606,11 @@
 </template>
 <script setup></script>
 <style scoped>
-.block-content-product-left {
+.content-left-shell {
   flex: 2;
 }
 
-.cps-block-content {
+.content-card {
   background: #f7f7f8;
   border-radius: 16px;
   display: block;
@@ -1620,79 +1620,74 @@
   overflow: hidden;
   padding: 16px;
   position: relative;
-  text-align: justify;
   width: 100%;
 }
 
-.cps-block-content h1 {
+.content-card h1 {
   font-size: 25px;
 }
 
-.cps-block-content p {
+.content-card p {
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
   margin: 0 0 10px;
 }
 
-.cps-block-content h2 {
+.content-card h2 {
   font-size: 21px;
 }
 
-.cps-block-content h3 {
+.content-card h3 {
   font-size: 16px;
   font-weight: 700;
   padding: 8px 0;
 }
 
-.cps-block-content span {
+.content-card span {
   color: #000;
   font-family: arial, helvetica, sans-serif;
 }
 
-.cps-block-content .large-span {
+.content-card .large-span {
   font-size: large;
 }
 
-.cps-block-content .ksp-title {
+.content-title {
   color: #18181b;
   font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 16px;
 }
 
-.cps-block-content .ksp-content {
+.content-highlight {
   background-color: #fff;
-  border-radius: 0.5rem;
   font-size: 14px;
   margin: 8px auto 16px;
-  padding: 8px;
   width: 100%;
 }
 
-.cps-block-content .ksp-content:empty {
+.content-highlight:empty {
   display: none;
 }
 
-.cps-block-content .ksp-content ul {
+.content-highlight ul {
   -ms-overflow-style: none;
   overflow-y: auto;
   scrollbar-width: none;
 }
 
-.cps-block-content .ksp-content ul::-webkit-scrollbar {
+.content-highlight ul::-webkit-scrollbar {
   display: none;
   scrollbar-width: 5px;
 }
 
-.cps-block-content .ksp-content ul li {
+.content-highlight ul li {
   display: flex;
   font-size: 14px;
   line-height: 1.45;
   text-align: left;
 }
 
-.cps-block-content .ksp-content ul li:before {
+.content-highlight ul li:before {
   align-items: center;
   color: #000;
   content: "\\2022";
@@ -1703,11 +1698,11 @@
   width: auto;
 }
 
-.cps-block-content .ksp-content ul li:not(:last-child) {
+.content-highlight ul li:not(:last-child) {
   margin-bottom: 5px;
 }
 
-.cps-block-content .btn-default {
+.content-card .btn-default {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
@@ -1729,43 +1724,43 @@
   white-space: nowrap;
 }
 
-.cps-block-content a {
+.content-card a {
   color: #d70018;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.cps-block-content table {
+.content-card table {
   border-collapse: collapse;
   display: block;
   overflow-x: auto;
   width: 100% !important;
 }
 
-.cps-block-content .table {
+.content-card .table {
   background-color: #fff;
   color: #363636;
 }
 
-.cps-block-content .table td,
-.cps-block-content .table th {
+.content-card .table td,
+.content-card .table th {
   border: solid #dbdbdb;
   border-width: 0 0 1px;
   padding: 0.5em 0.75em;
   vertical-align: top;
 }
 
-.cps-block-content table p {
+.content-card table p {
   margin-top: 10px;
   text-align: center;
 }
 
-.cps-block-content table tbody {
+.content-card table tbody {
   display: table;
   width: 100%;
 }
 
-.cps-block-content table td {
+.content-card table td {
   border-bottom: 1px solid #d9d9dd;
   border-left: 1px solid #d3d3d3;
   border-right: 1px solid #d3d3d3;
@@ -1774,54 +1769,54 @@
   vertical-align: inherit;
 }
 
-.cps-block-content img {
+.content-card img {
   border-radius: 8px;
 }
 
-.cps-block-content table .success {
+.content-card table .success {
   background-color: #dff0d8;
   color: #3d6611;
   font-size: 12px;
 }
 
-.cps-block-content table.seo-table {
+.content-card table.seo-table {
   border: 1px;
   width: 100% !important;
 }
 
-.cps-block-content table.seo-table thead,
-.cps-block-content table.seo-table tbody {
+.content-card table.seo-table thead,
+.content-card table.seo-table tbody {
   width: 100% !important;
 }
 
-.cps-block-content table.seo-table thead {
+.content-card table.seo-table thead {
   display: table;
 }
 
-.cps-block-content table.seo-table tbody tr:first-child td {
+.content-card table.seo-table tbody tr:first-child td {
   border-top: none !important;
 }
 
-.cps-block-content table.seo-table a {
+.content-card table.seo-table a {
   color: #485fc7;
 }
 
-.cps-block-content table.seo-table p {
+.content-card table.seo-table p {
   margin: 10px 0;
 }
 
-.cps-block-content blockquote {
+.content-card blockquote {
   color: #646464;
   padding-left: 20px;
   position: relative;
 }
 
-.cps-block-content blockquote p,
-.cps-block-content blockquote span {
+.content-card blockquote p,
+.content-card blockquote span {
   color: inherit;
 }
 
-.cps-block-content blockquote:after {
+.content-card blockquote:after {
   background: #e5e7eb;
   content: "";
   height: 100%;
@@ -1831,18 +1826,18 @@
   width: 5px;
 }
 
-.cps-block-content #cpsContentSEO {
+.content-card #cpsContentSEO {
   background-color: #fff;
   border-radius: 8px;
   padding: 8px;
 }
 
-.cps-block-content #cpsContentSEO ul {
+.content-card #cpsContentSEO ul {
   list-style: inherit;
   padding-left: 40px;
 }
 
-.cps-block-content #cpsContentSEO ul li {
+.content-card #cpsContentSEO ul li {
   display: list-item;
 }
 
@@ -1893,28 +1888,19 @@
   height: 10px;
 }
 
-.table-content {
-  margin-bottom: 16px;
-}
-
-.table-content .table-content__title {
-  align-items: center;
+.toc-title {
   background: #e4e4e7;
-  border-radius: 8px;
   cursor: pointer;
-  display: flex;
   font-size: 14px;
   font-weight: 500;
-  justify-content: space-between;
-  padding: 8px 16px;
 }
 
-.table-content .table-content__title p {
+.toc-title p {
   font-size: 14px;
   margin-bottom: 0;
 }
 
-.table-content .table-content__title svg {
+.toc-title svg {
   stroke: #1d1d20;
   height: 20px;
   transform: rotate(0deg);
@@ -1922,30 +1908,25 @@
   width: 20px;
 }
 
-.table-content .table-content__title svg.rotate {
+.toc-title svg.rotate {
   transform: rotate(180deg);
 }
 
-.table-content .table-content__title:hover {
+.toc-title:hover {
   opacity: 0.8;
 }
 
-.table-content .table-content__wrapper {
+.toc-wrapper {
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
-.table-content .table-content__wrapper .table-content__list {
+.toc-list {
   background: #e4e4e7;
-  border-radius: 8px;
-  margin-top: 8px;
-  padding: 8px 16px;
 }
 
-.table-content
-  .table-content__wrapper
-  .table-content__list
-  .table-content__item {
+.table-content__item,
+.toc-list .table-content__item {
   color: #4a4a4a;
   cursor: pointer;
   display: block;
@@ -1953,69 +1934,61 @@
   font-weight: 400;
 }
 
-.table-content
-  .table-content__wrapper
-  .table-content__list
-  .table-content__item.level-2 {
+.table-content__item.level-2,
+.toc-list .table-content__item.level-2 {
   margin-top: 5px;
 }
 
-.table-content
-  .table-content__wrapper
-  .table-content__list
-  .table-content__item.level-3 {
+.table-content__item.level-3,
+.toc-list .table-content__item.level-3 {
   padding-left: 20px;
 }
 
-.table-content
-  .table-content__wrapper
-  .table-content__list
-  .table-content__item:hover {
+.table-content__item:hover,
+.toc-list .table-content__item:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
 @media only screen and (min-width: 991px) and (max-width: 1199px) {
-  .block-content-product-left {
+  .content-left-shell {
     width: 50%;
   }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 990px) {
-  .block-content-product-left {
+  .content-left-shell {
     width: 66.6666666667%;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .table-content .table-content__title,
-  .table-content .table-content__title p,
-  .table-content
-    .table-content__wrapper
-    .table-content__list
-    .table-content__item {
+  .toc-title,
+  .toc-title p,
+  .table-content__item,
+  .toc-list .table-content__item {
     font-size: 12px;
   }
 }
 
 @media only screen and (max-width: 899px) {
-  .cps-block-content div h2 {
+  .content-card div h2 {
     font-size: 16px;
   }
 
-  .cps-block-content div h3 {
+  .content-card div h3 {
     font-size: 14px;
   }
 
-  .cps-block-content div p {
+  .content-card div p {
     font-size: 12px;
   }
 
-  .cps-block-content img {
+  .content-card img {
     width: 100%;
   }
 
-  .cps-block-content .ksp-title {
+  .content-title {
     font-size: 16px;
   }
 }
