@@ -1,26 +1,28 @@
-﻿<template>
+<template>
   <div ref="rootEl" class="box-detail-product__box-center column">
     <div class="box-product-price">
       <div class="box-product-price-wrapper">
         <div class="smember-price-label">
           <div class="is-flex is-align-items-center">
-            <div class="sale-price">13.990.000đ</div>
-            <del class="base-price">14.990.000đ</del>
+            <div class="sale-price">{{ productStore.productDetail?.pricing?.salePrice?.formatted || '' }}</div>
+            <del v-if="productStore.productDetail?.pricing?.basePrice?.value > productStore.productDetail?.pricing?.salePrice?.value" class="base-price">
+              {{ productStore.productDetail?.pricing?.basePrice?.formatted || '' }}
+            </del>
           </div>
         </div>
-        <div class="devide-price-label">
+        <div class="devide-price-label" v-if="productStore.productDetail?.pricing?.tradeInPrice?.value">
           <div class="divide top mb-3"></div>
           <p>Hoặc</p>
           <div class="divide bottom"></div>
         </div>
-        <div class="trade-price-label">
+        <div class="trade-price-label" v-if="productStore.productDetail?.pricing?.tradeInPrice?.value">
           <div class="price-label">Thu cũ lên đời chỉ từ</div>
           <div class="trade-price-info is-flex is-align-items-center">
-            <div class="sale-price">10.850.000đ</div>
-            <span class="text-navi"
+            <div class="sale-price">{{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}</div>
+            <span class="text-navi" v-if="productStore.productDetail?.pricing?.tradeInSupport?.value"
               ><span>
                 Trợ giá đến
-                <span class="value">3 triệu</span></span
+                <span class="value">{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || '' }}</span></span
               >
               <a> Định giá ngay </a></span
             >
@@ -44,7 +46,7 @@
             <div class="promotion-row__ct is-member">
               <div class="txt">
                 Tiết kiệm lên đến
-                <strong class="bold">140.000đ</strong>
+                <strong class="bold">{{ productStore.productDetail?.pricing?.memberSaving?.formatted || '' }}</strong>
                 cho Smember
                 <a class="dang_nhap_xem_gia link"> Kiểm tra ngay </a>
               </div>
@@ -59,13 +61,12 @@
       </div>
       <div class="list-linked">
         <a
-          href="/iphone-14-256gb.html"
-          class="item-linked button__link linked-0 false"
-          ><strong>256GB</strong></a
-        ><a
-          href="/iphone-14.html"
-          class="item-linked button__link linked-1 active"
-          ><strong>128GB</strong></a
+          v-for="storage in productStore.productDetail?.storageOptions || []"
+          :key="storage.id"
+          :href="storage.url"
+          class="item-linked button__link"
+          :class="[{ active: storage.active }, `linked-${storage.id}`]"
+          ><strong>{{ storage.label }}</strong></a
         >
       </div>
     </div>
@@ -75,159 +76,30 @@
       </div>
       <div class="box-content">
         <ul class="list-variants ps-0 mb-0">
-          <li data-product-id="52376" class="item-variant">
+          <li v-for="color in productStore.productDetail?.colorOptions || []" :key="color.id" :data-product-id="color.productId" class="item-variant" :class="{ active: color.active, disable: color.disabled }">
             <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png"
+              v-if="color.flashSale?.enabled"
+              :src="color.flashSale?.badgeImage || 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png'"
               height="30"
               alt="Flash Sale"
               loading="lazy"
               class="sticker-flash-sale"
             />
             <a
-              href="/iphone-14.html?product_id=52376"
-              data-index="0"
-              title="Đen"
+              :href="color.url"
+              :title="color.name"
               class="button__change-color is-flex is-align-items-center"
+              :class="{ disabled: color.disabled }"
               ><img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/p/h/photo_2022-09-28_21-58-57_2.jpg"
+                :src="color.thumbnail"
                 width="50"
                 height="50"
-                alt="iPhone 14 128GB  | Chính hãng VN/A-Đen"
+                :alt="color.name"
                 loading="lazy"
               />
               <div class="is-flex is-flex-direction-column">
-                <strong class="item-variant-name">Đen</strong>
-                <span class="item-variant-price"> 13.990.000₫ </span>
-              </div>
-            </a>
-          </li>
-          <li data-product-id="52380" class="item-variant active">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png"
-              height="30"
-              alt="Flash Sale"
-              loading="lazy"
-              class="sticker-flash-sale"
-            />
-            <a
-              href="/iphone-14.html?product_id=52380"
-              data-index="1"
-              title="Trắng"
-              class="button__change-color is-flex is-align-items-center"
-              ><img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/p/h/photo_2022-09-28_21-58-48_1.jpg"
-                width="50"
-                height="50"
-                alt="iPhone 14 128GB  | Chính hãng VN/A-Trắng"
-                loading="lazy"
-              />
-              <div class="is-flex is-flex-direction-column">
-                <strong class="item-variant-name">Trắng</strong>
-                <span class="item-variant-price"> 13.990.000₫ </span>
-              </div>
-            </a>
-          </li>
-          <li data-product-id="52353" class="item-variant">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png"
-              height="30"
-              alt="Flash Sale"
-              loading="lazy"
-              class="sticker-flash-sale"
-            />
-            <a
-              href="/iphone-14.html?product_id=52353"
-              data-index="2"
-              title="Xanh"
-              class="button__change-color is-flex is-align-items-center"
-              ><img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/p/h/photo_2022-09-28_21-58-51_1.jpg"
-                width="50"
-                height="50"
-                alt="iPhone 14 (128GB)  | Chính hãng VN/A-Xanh"
-                loading="lazy"
-              />
-              <div class="is-flex is-flex-direction-column">
-                <strong class="item-variant-name">Xanh</strong>
-                <span class="item-variant-price"> 13.990.000₫ </span>
-              </div>
-            </a>
-          </li>
-          <li data-product-id="52377" class="item-variant disable">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png"
-              height="30"
-              alt="Flash Sale"
-              loading="lazy"
-              class="sticker-flash-sale"
-            />
-            <a
-              href="/iphone-14.html?product_id=52377"
-              data-index="3"
-              title="Đỏ"
-              class="button__change-color is-flex is-align-items-center disabled"
-              ><img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/p/h/photo_2022-09-28_21-58-54_1.jpg"
-                width="50"
-                height="50"
-                alt="iPhone 14 128GB  | Chính hãng VN/A-Đỏ"
-                loading="lazy"
-              />
-              <div class="is-flex is-flex-direction-column">
-                <strong class="item-variant-name">Đỏ</strong>
-                <span class="item-variant-price"> 13.990.000₫ </span>
-              </div>
-            </a>
-          </li>
-          <li data-product-id="60934" class="item-variant disable">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png"
-              height="30"
-              alt="Flash Sale"
-              loading="lazy"
-              class="sticker-flash-sale"
-            />
-            <a
-              href="/iphone-14.html?product_id=60934"
-              data-index="4"
-              title="Vàng"
-              class="button__change-color is-flex is-align-items-center disabled"
-              ><img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-14-storage-select-202209-6-1inch-y889_1.jpg"
-                width="50"
-                height="50"
-                alt="iPhone 14 128GB Vàng | Chính hãng VN/A "
-                loading="lazy"
-              />
-              <div class="is-flex is-flex-direction-column">
-                <strong class="item-variant-name">Vàng</strong>
-                <span class="item-variant-price"> 13.990.000₫ </span>
-              </div>
-            </a>
-          </li>
-          <li data-product-id="52379" class="item-variant disable">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png"
-              height="30"
-              alt="Flash Sale"
-              loading="lazy"
-              class="sticker-flash-sale"
-            />
-            <a
-              href="/iphone-14.html?product_id=52379"
-              data-index="5"
-              title="Tím"
-              class="button__change-color is-flex is-align-items-center disabled"
-              ><img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/p/h/photo_2022-09-28_21-58-56_1.jpg"
-                width="50"
-                height="50"
-                alt="iPhone 14 128GB  | Chính hãng VN/A-Tím"
-                loading="lazy"
-              />
-              <div class="is-flex is-flex-direction-column">
-                <strong class="item-variant-name">Tím</strong>
-                <span class="item-variant-price"> 13.990.000₫ </span>
+                <strong class="item-variant-name">{{ color.name }}</strong>
+                <span class="item-variant-price"> {{ color.price?.formatted || '' }} </span>
               </div>
             </a>
           </li>
@@ -327,10 +199,10 @@
               <div class="price-thu-cu">
                 <strong>Thu cũ lên đời </strong>
                 <hr class="divider" />
-                <span>Chỉ từ <strong> 10.850.000đ </strong></span>
+                <span>Chỉ từ <strong> {{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }} </strong></span>
               </div>
               <div class="smember-discount">
-                Giảm thêm đến&nbsp;<b>3 triệu</b>&nbsp;(Bao gồm cả Smember)
+                Giảm thêm đến&nbsp;<b>{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || '' }}</b>&nbsp;(Bao gồm cả Smember)
               </div>
             </div>
           </div>
@@ -4958,6 +4830,9 @@
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import ProductBoxWarranty from "@/components/Products/ProductDetail/ProductBoxWarranty.vue";
 import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
+import { useProductStore } from '@/stores/productStore';
+
+const productStore = useProductStore();
 
 import "swiper/css";
 import "swiper/css/navigation";

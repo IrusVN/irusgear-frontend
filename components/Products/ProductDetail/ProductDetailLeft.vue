@@ -2,7 +2,7 @@
   <div ref="rootEl" class="box-detail-product__box-left column">
     <div class="box-header box-header-desktop">
       <div class="box-product-name">
-        <h1>iPhone 14 128GB | Chính hãng VN/A</h1>
+        <h1>{{ productStore.productDetail?.general?.name }}</h1>
       </div>
       <div class="is-flex is-align-items-center mt-2">
         <div class="box-rating">
@@ -11,7 +11,7 @@
               d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z"
             ></path>
           </svg>
-          <span>4.9</span> <span class="total-rating">(56 đánh giá)</span>
+          <span>{{ productStore.productDetail?.ratingSummary?.average || 0 }}</span> <span class="total-rating">({{ productStore.productDetail?.ratingSummary?.count || 0 }} đánh giá)</span>
         </div>
       </div>
       <div class="box-header__bottom">
@@ -347,133 +347,21 @@
                 </div>
               </div>
             </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
+            <div
+              v-for="item in productStore.productDetail?.gallery || []"
+              :key="item.id"
+              class="swiper-slide"
+              style="width: 589px; margin-right: 20px"
+            >
               <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-14_2_1.jpg"
+                :href="item.image"
                 class="spotlight"
                 ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-14_2_1.jpg"
+                  :src="item.thumbnail"
                   height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 1"
+                  :alt="item.alt"
                   loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-1b_blue_color_vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-1b_blue_color_vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 2"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-2_design_vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-2_design_vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 3"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-3_camera_vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-3_camera_vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 4"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-4_lineup_vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-4_lineup_vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 5"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-5_colors__vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-5_colors__vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 6"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-6_size_comparison__vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-6_size_comparison__vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 7"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-7_features_specs__vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-7_features_specs__vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 8"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-8_accessory_vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-8_accessory_vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 9"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  rel="preload"
-              /></a>
-            </div>
-            <div class="swiper-slide" style="width: 589px; margin-right: 20px">
-              <a
-                href="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-9_typec_lightning_cable_vn.png"
-                class="spotlight"
-                ><img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-9_typec_lightning_cable_vn.png"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A - 10"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
+                  :title="item.title"
                   rel="preload"
               /></a>
             </div>
@@ -580,133 +468,18 @@
               <p>Tính năng nổi bật</p>
             </div>
             <div
+              v-for="item in productStore.productDetail?.gallery || []"
+              :key="`thumb-${item.id}`"
               class="swiper-slide button__view-gallery"
               style="margin-right: 10px"
             >
               <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-14_2_1.jpg"
+                :src="item.thumbnail"
                 width="58"
                 height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 1"
+                :alt="item.alt"
                 loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-1b_blue_color_vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 2"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-2_design_vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 3"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-3_camera_vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 4"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-4_lineup_vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 5"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-5_colors__vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 6"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-6_size_comparison__vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 7"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-7_features_specs__vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 8"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-8_accessory_vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 9"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
-              />
-            </div>
-            <div
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:58:58/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_14_blue_pdp_image_position-9_typec_lightning_cable_vn.png"
-                width="58"
-                height="58"
-                alt="iPhone 14 128GB  | Chính hãng VN/A - 10"
-                loading="lazy"
-                title="iPhone 14 128GB  | Chính hãng VN/A"
+                :title="item.title"
               />
             </div>
           </div>
@@ -1355,6 +1128,9 @@
 
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { useProductStore } from '@/stores/productStore';
+
+const productStore = useProductStore();
 
 import "swiper/css";
 import "swiper/css/free-mode";
