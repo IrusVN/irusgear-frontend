@@ -4,7 +4,7 @@ import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import { usePaginationStore } from "@/stores/paginationStore";
 import { useUiStore } from "@/stores/uiStore";
-import { useRuntimeConfig } from "#imports";
+import { useRuntimeConfig, useRequestHeaders } from "#imports";
 
 export const useFeGlobalStore = defineStore("frontend/globals", () => {
     const config = useRuntimeConfig();
@@ -15,9 +15,34 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
     const items = ref([]);
     const error = ref(null);
     const apiEndpoint = ref(`${config.public.apiBaseUrl}/not-ok`);
+
+    /**
+     * Build common headers for authenticated requests.
+     * Uses cookie-based auth (credentials: 'include') matching authStore pattern.
+     * On SSR, forwards the incoming cookie header so the API sees the session.
+     */
+    const buildHeaders = (extra = {}) => {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        ...extra,
+      };
+
+      // Forward cookies on server-side rendering
+      if (import.meta.server) {
+        const reqHeaders = useRequestHeaders(["cookie"]);
+        if (reqHeaders.cookie) {
+          headers.cookie = reqHeaders.cookie;
+        }
+      }
+
+      return headers;
+    };
+
     const setApiUrl = (apiPath) => {
       apiEndpoint.value = `${config.public.apiBaseUrl}/${apiPath}`;
     };
+
     const fetchItems = async (params = {}) => {
       ui.isLoading = true;
       try {
@@ -28,12 +53,14 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         }).toString();
 
         const res = await fetch(`${apiEndpoint.value}?${query}`, {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
+          credentials: "include",
+          headers: buildHeaders(),
         });
 
-        if (res.status === 401) auth.logout();
+        if (res.status === 401) {
+          auth.logout();
+          return null;
+        }
         if (!res.ok) throw new Error("Fetch failed");
 
         const json = await res.json();
@@ -55,10 +82,8 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       try {
         const res = await fetch(apiEndpoint.value, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
+          credentials: "include",
+          headers: buildHeaders(),
           body: JSON.stringify(payload),
         });
 
@@ -74,10 +99,8 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       try {
         const res = await fetch(`${apiEndpoint.value}/${id}`, {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
+          credentials: "include",
+          headers: buildHeaders(),
           body: JSON.stringify(payload),
         });
 
@@ -93,9 +116,8 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       try {
         const res = await fetch(`${apiEndpoint.value}/${id}`, {
           method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
+          credentials: "include",
+          headers: buildHeaders(),
         });
 
         if (!res.ok) throw new Error("Delete failed");

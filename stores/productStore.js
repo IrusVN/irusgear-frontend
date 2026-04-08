@@ -12,7 +12,7 @@ export const useProductStore = defineStore("product", () => {
 
   const productError = computed(() => error.value);
 
-  const fetchProductDetail = async (slug, params = {}) => { debugger
+  const fetchProductDetail = async (slug, params = {}) => {
     try {
       if (!slug) {
         return navigateTo("/products");

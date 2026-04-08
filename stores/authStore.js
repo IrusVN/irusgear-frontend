@@ -135,7 +135,7 @@ export const useAuthStore = defineStore("auth", () => {
       });
       return true;
     } catch (err) {
-      const msg = error.message;
+      console.error('Resend OTP failed:', err?.data?.message || err.message);
       return false;
     }
   };
