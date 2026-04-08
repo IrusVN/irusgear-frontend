@@ -2,237 +2,104 @@
   <div ref="rootEl" class="box-detail-product__box-left column">
     <div class="box-header box-header-desktop">
       <div class="box-product-name">
-        <h1>{{ productStore.productDetail?.general?.name }}</h1>
+        <h1>{{ productStore.productDetail?.name }}</h1>
       </div>
       <div class="is-flex is-align-items-center mt-2">
         <div class="box-rating">
           <svg height="15" viewBox="0 0 576 512">
             <path
-              d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z"
-            ></path>
+              d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
+            </path>
           </svg>
-          <span>{{ productStore.productDetail?.ratingSummary?.average || 0 }}</span> <span class="total-rating">({{ productStore.productDetail?.ratingSummary?.count || 0 }} đánh giá)</span>
+          <span>{{ productStore.productDetail?.ratingSummary?.average || 0 }}</span> <span class="total-rating">({{
+            productStore.productDetail?.ratingSummary?.count || 0 }} đánh giá)</span>
         </div>
       </div>
       <div class="box-header__bottom">
         <div class="box-bottom-item">
           <button id="wishListBtn" type="button" @click="toggleWishlist">
             <div class="btn__effect button__add-wishlist inactive">
-              <svg
-                viewBox="20 18 29 28"
-                aria-hidden="true"
-                focusable="false"
-                class="heart-border icon-svg icon-svg--color-cps"
-              >
+              <svg viewBox="20 18 29 28" aria-hidden="true" focusable="false"
+                class="heart-border icon-svg icon-svg--color-cps">
                 <path
-                  d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z"
-                ></path>
+                  d="M28.3 21.1a4.3 4.3 0 0 1 4.1 2.6 2.5 2.5 0 0 0 2.3 1.7c1 0 1.7-.6 2.2-1.7a3.7 3.7 0 0 1 3.7-2.6c2.7 0 5.2 2.7 5.3 5.8.2 4-5.4 11.2-9.3 15a2.8 2.8 0 0 1-2 1 3.4 3.4 0 0 1-2.2-1c-9.6-10-9.4-13.2-9.3-15 0-1 .6-5.8 5.2-5.8m0-3c-5.3 0-7.9 4.3-8.2 8.5-.2 3.2.4 7.2 10.2 17.4a6.3 6.3 0 0 0 4.3 1.9 5.7 5.7 0 0 0 4.1-1.9c1.1-1 10.6-10.7 10.3-17.3-.2-4.6-4-8.6-8.4-8.6a7.6 7.6 0 0 0-6 2.7 8.1 8.1 0 0 0-6.2-2.7z">
+                </path>
               </svg>
-              <svg
-                viewBox="0 0 19.2 18.5"
-                aria-hidden="true"
-                focusable="false"
-                class="heart-stroke icon-svg icon-svg--color-silver"
-              >
+              <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
+                class="heart-stroke icon-svg icon-svg--color-silver">
                 <path
-                  d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z"
-                ></path>
+                  d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
+                </path>
               </svg>
-              <svg
-                viewBox="0 0 19.2 18.5"
-                aria-hidden="true"
-                focusable="false"
-                class="heart-full icon-svg icon-svg--color-cps"
-              >
+              <svg viewBox="0 0 19.2 18.5" aria-hidden="true" focusable="false"
+                class="heart-full icon-svg icon-svg--color-cps">
                 <path
-                  d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z"
-                ></path>
+                  d="M9.66 18.48a4.23 4.23 0 0 1-2.89-1.22C.29 10.44-.12 7.79.02 5.67.21 2.87 1.95.03 5.42.01c1.61-.07 3.16.57 4.25 1.76A5.07 5.07 0 0 1 13.6 0c2.88 0 5.43 2.66 5.59 5.74.2 4.37-6.09 10.79-6.8 11.5-.71.77-1.7 1.21-2.74 1.23z">
+                </path>
               </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="5.707 17 48 20"
-                class="broken-heart"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="5.707 17 48 20"
+                class="broken-heart">
                 <g fill="#3b82f6">
                   <path
                     d="M29.865 32.735V18.703a4.562 4.562 0 0 0-3.567-1.476c-2.916.017-4.378 2.403-4.538 4.756-.118 1.781.227 4.006 5.672 9.737a3.544 3.544 0 0 0 2.428 1.025l-.008-.008.013-.002z"
-                    class="broken-heart--left"
-                  ></path>
+                    class="broken-heart--left"></path>
                   <path
                     d="M37.868 22.045c-.135-2.588-2.277-4.823-4.697-4.823a4.258 4.258 0 0 0-3.302 1.487l-.004-.003v14.035a3.215 3.215 0 0 0 2.289-1.033c.598-.596 5.882-5.99 5.714-9.663z"
-                    class="broken-heart--right"
-                  ></path>
+                    class="broken-heart--right"></path>
                 </g>
-                <path
-                  fill="none"
-                  stroke="#FFF"
-                  stroke-miterlimit="10"
-                  d="M29.865 18.205v14.573"
-                  class="broken-heart--crack"
-                ></path>
+                <path fill="none" stroke="#FFF" stroke-miterlimit="10" d="M29.865 18.205v14.573"
+                  class="broken-heart--crack"></path>
               </svg>
-              <span class="effect-group"
-                ><span class="effect"></span> <span class="effect"></span>
+              <span class="effect-group"><span class="effect"></span> <span class="effect"></span>
                 <span class="effect"></span> <span class="effect"></span>
-                <span class="effect"></span
-              ></span>
+                <span class="effect"></span></span>
             </div>
-            <span class="text-wishlist" style="display: none"
-              >&nbsp;Yêu thích</span
-            >
+            <span class="text-wishlist" style="display: none">&nbsp;Yêu thích</span>
           </button>
           <span class="label">Yêu thích</span>
         </div>
         <div class="box-bottom-item">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 9H16"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M8 13H14"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 9H16" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8 13H14" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </path>
             <path
               d="M9 18H6C5.20435 18 4.44129 17.6839 3.87868 17.1213C3.31607 16.5587 3 15.7956 3 15V7C3 6.20435 3.31607 5.44129 3.87868 4.87868C4.44129 4.31607 5.20435 4 6 4H18C18.7956 4 19.5587 4.31607 20.1213 4.87868C20.6839 5.44129 21 6.20435 21 7V15C21 15.7956 20.6839 16.5587 20.1213 17.1213C19.5587 17.6839 18.7956 18 18 18H15L12 21L9 18Z"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
+              stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
           <span class="label">Hỏi đáp</span>
         </div>
         <div class="box-bottom-item">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="5"
-              y="5"
-              width="14"
-              height="14"
-              rx="2"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></rect>
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="14" height="14" rx="2" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round"></rect>
+            <path fill-rule="evenodd" clip-rule="evenodd"
               d="M9 10C9 9.44772 9.44772 9 10 9H14C14.5523 9 15 9.44772 15 10V14C15 14.5523 14.5523 15 14 15H10C9.44772 15 9 14.5523 9 14V10Z"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M3 10H5"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M3 14H5"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M10 3V5"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M14 3V5"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M21 10H19"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M21 14H19"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M14 21V19"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M10 21V19"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
+              stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M3 10H5" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M3 14H5" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M10 3V5" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M14 3V5" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M21 10H19" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </path>
+            <path d="M21 14H19" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </path>
+            <path d="M14 21V19" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </path>
+            <path d="M10 21V19" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </path>
           </svg>
           <span class="label"> Thông số </span>
         </div>
         <div class="pdp-compare-button-box is-flex is-align-items-center">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M3 12C3 13.1819 3.23279 14.3522 3.68508 15.4442C4.13738 16.5361 4.80031 17.5282 5.63604 18.364C6.47177 19.1997 7.46392 19.8626 8.55585 20.3149C9.64778 20.7672 10.8181 21 12 21C13.1819 21 14.3522 20.7672 15.4442 20.3149C16.5361 19.8626 17.5282 19.1997 18.364 18.364C19.1997 17.5282 19.8626 16.5361 20.3149 15.4442C20.7672 14.3522 21 13.1819 21 12C21 9.61305 20.0518 7.32387 18.364 5.63604C16.6761 3.94821 14.3869 3 12 3C9.61305 3 7.32387 3.94821 5.63604 5.63604C3.94821 7.32387 3 9.61305 3 12Z"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M9 12H15"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M12 9V15"
-              stroke="#3B82F6"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
+              stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M9 12H15" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </path>
+            <path d="M12 9V15" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </path>
           </svg>
           <a class="label"> So sánh</a>
         </div>
@@ -240,292 +107,70 @@
     </div>
     <div class="box-gallery">
       <div class="gallery-product-detail mb-2">
-        <div
-          class="gallery-slide gallery-top swiper swiper-container"
-        >
-          <div
-            class="swiper-wrapper"
-            style="transform: translate3d(0px, 0px, 0px)"
-          >
-            <div
-              class="swiper-slide ksp-gallery"
-              style="width: 589px; margin-right: 20px"
-            >
-              <div class="box-ksp ksp-video">
-                <div class="video-thumbnail-wrapper" @click="playVideo">
-                  <template v-if="!isVideoPlaying">
-                    <img
-                      src="https://img.youtube.com/vi/8LwmuPL-YZU/maxresdefault.jpg"
-                      alt="Video thumbnail"
-                      class="video-thumbnail"
-                    />
-                    <div class="youtube-play-button">
-                      <svg width="68" height="48" viewBox="0 0 68 48">
-                        <path
-                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.63-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"
-                          fill="#f00"
-                        ></path>
-                        <path d="M 45,24 27,14 27,34" fill="#fff"></path>
-                      </svg>
-                    </div>
-                  </template>
-                  <iframe
-                    v-else
-                    src="https://www.youtube.com/embed/8LwmuPL-YZU?autoplay=1&rel=0"
-                    title="iPhone 14 video"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-            <div
-              id="v2Gallery"
-              class="swiper-slide ksp-gallery"
-              style="width: 589px; margin-right: 20px"
-            >
-              <div class="box-ksp is-flex is-flex-direction-row">
-                <img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-14_2_1.jpg"
-                  width="358"
-                  height="358"
-                  alt="iPhone 14 128GB  | Chính hãng VN/A"
-                  loading="lazy"
-                  title="iPhone 14 128GB  | Chính hãng VN/A"
-                  class="mb-1 mr-2"
-                />
-                <div>
-                  <p class="title desktop">Tính năng nổi bật</p>
-                  <div class="desktop">
-                    <ul>
-                      <li>
-                        iPhone 14 trang bị màn hình Super Retina XDR 6,1 inch
-                        cho trải nghiệm hình ảnh sắc nét và sống động.
-                      </li>
-                      <li>
-                        Thời lượng pin cả ngày cho phép bạn xem video lên đến 20
-                        giờ, luôn sẵn sàng cho những ngày làm việc dài.
-                      </li>
-                      <li>
-                        Với các tính năng độ bền như Ceramic Shield và khả năng
-                        chống nước, iPhone 14 đảm bảo an toàn trong mọi tình
-                        huống.
-                      </li>
-                      <li>
-                        Chip A15 Bionic với GPU 5 lõi mang lại hiệu suất siêu
-                        nhanh, cùng mạng di động 5G cho khả năng làm việc từ xa
-                        và họp trực tuyến chất lượng cao.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="mobile">
-                  <p class="title">Tính năng nổi bật</p>
-                  <div>
-                    <ul>
-                      <li>
-                        iPhone 14 trang bị màn hình Super Retina XDR 6,1 inch
-                        cho trải nghiệm hình ảnh sắc nét và sống động.
-                      </li>
-                      <li>
-                        Thời lượng pin cả ngày cho phép bạn xem video lên đến 20
-                        giờ, luôn sẵn sàng cho những ngày làm việc dài.
-                      </li>
-                      <li>
-                        Với các tính năng độ bền như Ceramic Shield và khả năng
-                        chống nước, iPhone 14 đảm bảo an toàn trong mọi tình
-                        huống.
-                      </li>
-                      <li>
-                        Chip A15 Bionic với GPU 5 lõi mang lại hiệu suất siêu
-                        nhanh, cùng mạng di động 5G cho khả năng làm việc từ xa
-                        và họp trực tuyến chất lượng cao.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              v-for="item in productStore.productDetail?.gallery || []"
-              :key="item.id"
-              class="swiper-slide"
-              style="width: 589px; margin-right: 20px"
-            >
-              <a
-                :href="item.image"
-                class="spotlight"
-                ><img
-                  :src="item.thumbnail"
-                  height="358"
-                  :alt="item.alt"
-                  loading="lazy"
-                  :title="item.title"
-                  rel="preload"
-              /></a>
+        <div class="gallery-slide gallery-top swiper swiper-container">
+          <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px)">
+
+
+            <div v-for="item in productStore.productDetail?.gallery || []" :key="item.id" class="swiper-slide"
+              style="width: 589px; margin-right: 20px">
+              <a :href="item.image" class="spotlight">
+                <img :src="item.thumbnail" style="width: 100%; height: 358px; object-fit: contain;" :alt="item.alt"
+                  loading="lazy" :title="item.title" rel="preload" />
+              </a>
             </div>
           </div>
-          <div
-            class="swiper-button-next button__view-gallery-next"
-            tabindex="0"
-            role="button"
-            aria-label="Next slide"
-            aria-disabled="false"
-          >
+          <div class="swiper-button-next button__view-gallery-next" tabindex="0" role="button" aria-label="Next slide"
+            aria-disabled="false">
             <div class="icon">
-              <svg
-                height="15"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
+              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                 <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
-                ></path>
+                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
+                </path>
               </svg>
             </div>
           </div>
-          <div
-            class="swiper-button-prev button__view-gallery-prev"
-            tabindex="0"
-            role="button"
-            aria-label="Previous slide"
-            aria-disabled="false"
-          >
+          <div class="swiper-button-prev button__view-gallery-prev" tabindex="0" role="button"
+            aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg
-                height="15"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
+              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                 <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
-                ></path>
+                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
+                </path>
               </svg>
             </div>
           </div>
-          <span
-            class="swiper-notification"
-            aria-live="assertive"
-            aria-atomic="true"
-          ></span>
+          <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
         </div>
-        <div
-          class="thumbnail-slide swiper swiper-container gallery-thumbs"
-        >
-          <div
-            class="swiper-wrapper"
-            style="transform: translate3d(0px, 0px, 0px)"
-          >
-            <div
-              class="swiper-slide ksp-thumbs button__view-gallery-vid"
-              style="margin-right: 10px"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
-                  stroke="#292D32"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-                <path
-                  d="M9.09998 12V10.52C9.09998 8.60999 10.45 7.83999 12.1 8.78999L13.38 9.52999L14.66 10.27C16.31 11.22 16.31 12.78 14.66 13.73L13.38 14.47L12.1 15.21C10.45 16.16 9.09998 15.38 9.09998 13.48V12Z"
-                  stroke="#292D32"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-              <p>Video</p>
-            </div>
-            <div
-              class="swiper-slide ksp-thumbs button__view-gallery-thumb"
-              style="margin-right: 10px"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M13.73 3.50989L15.49 7.02989C15.73 7.51989 16.37 7.98989 16.91 8.07989L20.1 8.60989C22.14 8.94989 22.62 10.4299 21.15 11.8899L18.67 14.3699C18.25 14.7899 18.02 15.5999 18.15 16.1799L18.86 19.2499C19.42 21.6799 18.13 22.6199 15.98 21.3499L12.99 19.5799C12.45 19.2599 11.56 19.2599 11.01 19.5799L8.02003 21.3499C5.88003 22.6199 4.58003 21.6699 5.14003 19.2499L5.85003 16.1799C5.98003 15.5999 5.75003 14.7899 5.33003 14.3699L2.85003 11.8899C1.39003 10.4299 1.86003 8.94989 3.90003 8.60989L7.09003 8.07989C7.62003 7.98989 8.26003 7.51989 8.50003 7.02989L10.26 3.50989C11.22 1.59989 12.78 1.59989 13.73 3.50989Z"
-                  stroke="#292D32"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-              <p>Tính năng nổi bật</p>
-            </div>
-            <div
-              v-for="item in productStore.productDetail?.gallery || []"
-              :key="`thumb-${item.id}`"
-              class="swiper-slide button__view-gallery"
-              style="margin-right: 10px"
-            >
-              <img
-                :src="item.thumbnail"
-                width="58"
-                height="58"
-                :alt="item.alt"
-                loading="lazy"
-                :title="item.title"
-              />
+        <div class="thumbnail-slide swiper swiper-container gallery-thumbs">
+          <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px)">
+
+            <div v-for="item in productStore.productDetail?.gallery || []" :key="`thumb-${item.id}`"
+              class="swiper-slide button__view-gallery" style="margin-right: 10px">
+              <img :src="item.thumbnail" style="width: 58px; height: 58px; object-fit: contain;" :alt="item.alt"
+                loading="lazy" :title="item.title" />
             </div>
           </div>
-          <div
-            class="swiper-button-next button-navigate-thumbnail__next"
-            tabindex="0"
-            role="button"
-            aria-label="Next slide"
-            aria-disabled="false"
-          >
+          <div class="swiper-button-next button-navigate-thumbnail__next" tabindex="0" role="button"
+            aria-label="Next slide" aria-disabled="false">
             <div class="icon">
-              <svg
-                height="15"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
+              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                 <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
-                ></path>
+                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
+                </path>
               </svg>
             </div>
           </div>
-          <div
-            class="swiper-button-prev button-navigate-thumbnail__prev"
-            tabindex="0"
-            role="button"
-            aria-label="Previous slide"
-            aria-disabled="false"
-          >
+          <div class="swiper-button-prev button-navigate-thumbnail__prev" tabindex="0" role="button"
+            aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg
-                height="15"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
+              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                 <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
-                ></path>
+                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
+                </path>
               </svg>
             </div>
           </div>
-          <span
-            class="swiper-notification"
-            aria-live="assertive"
-            aria-atomic="true"
-          ></span>
+          <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
         </div>
       </div>
     </div>
@@ -535,49 +180,26 @@
           <p>Cam kết sản phẩm</p>
         </div>
         <div class="box-content warranty-info">
-          <div
-            class="swiper swiper-container swiper-pdp"
-          >
-            <div
-              class="swiper-wrapper"
-              style="width: 602px; transform: translate3d(0px, 0px, 0px)"
-            >
-              <div
-                class="swiper-slide"
-                style="
+          <div class="swiper swiper-container swiper-pdp">
+            <div class="swiper-wrapper" style="width: 602px; transform: translate3d(0px, 0px, 0px)">
+              <div class="swiper-slide" style="
                   order: 0;
                   width: 291px;
                   height: 148px;
                   margin-right: 10px;
-                "
-              >
+                ">
                 <div class="item-warranty-info">
                   <div class="icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_2841_934)">
                         <path
                           d="M8.625 15.75H6C5.60218 15.75 5.22064 15.592 4.93934 15.3107C4.65804 15.0294 4.5 14.6478 4.5 14.25V3.75C4.5 3.35218 4.65804 2.97064 4.93934 2.68934C5.22064 2.40804 5.60218 2.25 6 2.25H12C12.3978 2.25 12.7794 2.40804 13.0607 2.68934C13.342 2.97064 13.5 3.35218 13.5 3.75V10.875M8.25 3H9.75M9 12.75V12.7575M11.25 14.25L12.75 15.75L15.75 12.75"
-                          stroke="url(#paint0_linear_2841_934)"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        ></path>
+                          stroke="url(#paint0_linear_2841_934)" stroke-width="1.5" stroke-linecap="round"
+                          stroke-linejoin="round"></path>
                       </g>
                       <defs>
-                        <linearGradient
-                          id="paint0_linear_2841_934"
-                          x1="10.125"
-                          y1="2.25"
-                          x2="10.125"
-                          y2="15.75"
-                          gradientUnits="userSpaceOnUse"
-                        >
+                        <linearGradient id="paint0_linear_2841_934" x1="10.125" y1="2.25" x2="10.125" y2="15.75"
+                          gradientUnits="userSpaceOnUse">
                           <stop stop-color="#FFF5F0"></stop>
                           <stop offset="0.67" stop-color="#F4C8D0"></stop>
                         </linearGradient>
@@ -596,43 +218,25 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="swiper-slide"
-                style="
+              <div class="swiper-slide" style="
                   -webkit-box-ordinal-group: 1;
                   order: 1;
                   width: 291px;
                   height: 148px;
                   margin-right: 10px;
-                "
-              >
+                ">
                 <div class="item-warranty-info">
                   <div class="icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_2841_940)">
                         <path
                           d="M8.59506 15.6345C6.33703 14.9346 4.44505 13.3743 3.32797 11.2908C2.21089 9.20739 1.9584 6.76808 2.62506 4.5C4.96171 4.60692 7.24819 3.79993 9.00006 2.25C10.7519 3.79993 13.0384 4.60692 15.3751 4.5C15.8841 6.23183 15.8605 8.07671 15.3076 9.795M11.2501 14.25L12.7501 15.75L15.7501 12.75"
-                          stroke="url(#paint0_linear_2841_940)"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        ></path>
+                          stroke="url(#paint0_linear_2841_940)" stroke-width="1.5" stroke-linecap="round"
+                          stroke-linejoin="round"></path>
                       </g>
                       <defs>
-                        <linearGradient
-                          id="paint0_linear_2841_940"
-                          x1="9.00491"
-                          y1="2.25"
-                          x2="9.00491"
-                          y2="15.75"
-                          gradientUnits="userSpaceOnUse"
-                        >
+                        <linearGradient id="paint0_linear_2841_940" x1="9.00491" y1="2.25" x2="9.00491" y2="15.75"
+                          gradientUnits="userSpaceOnUse">
                           <stop stop-color="#FFF5F0"></stop>
                           <stop offset="0.67" stop-color="#F4C8D0"></stop>
                         </linearGradient>
@@ -646,60 +250,36 @@
                     <div class="description">
                       1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất.
                       Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple:
-                      CareS.vn<a
-                        href="https://cellphones.com.vn/chinh-sach-bao-hanh"
-                        target="_blank"
-                      >
-                        Xem chi tiết</a
-                      >
+                      CareS.vn<a href="https://cellphones.com.vn/chinh-sach-bao-hanh" target="_blank">
+                        Xem chi tiết</a>
                     </div>
                     <div class="description">
                       Xem thông tin kích hoạt bảo hành các sản phẩm Apple
-                      <a
-                        target="_blank"
-                        href="https://cellphones.com.vn/kich-hoat-bao-hanh-sam-pham-apple"
-                        >Chi tiết tại đây
+                      <a target="_blank" href="https://cellphones.com.vn/kich-hoat-bao-hanh-sam-pham-apple">Chi tiết tại
+                        đây
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                class="swiper-slide"
-                style="
+              <div class="swiper-slide" style="
                   -webkit-box-ordinal-group: 2;
                   order: 2;
                   margin-top: 10px;
                   width: 291px;
                   height: 148px;
                   margin-right: 10px;
-                "
-              >
+                ">
                 <div class="item-warranty-info">
                   <div class="icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M2.25 7.5H3.75M2.25 10.5H3.75M7.5 2.25V3.75M10.5 2.25V3.75M15.75 7.5H14.25M15.75 10.5H14.25M10.5 15.75V14.25M7.5 15.75V14.25M5.75 14.25H12.25C13.3546 14.25 14.25 13.3546 14.25 12.25V5.75C14.25 4.64543 13.3546 3.75 12.25 3.75H5.75C4.64543 3.75 3.75 4.64543 3.75 5.75V12.25C3.75 13.3546 4.64543 14.25 5.75 14.25ZM7.75 11.25H10.25C10.8023 11.25 11.25 10.8023 11.25 10.25V7.75C11.25 7.19772 10.8023 6.75 10.25 6.75H7.75C7.19772 6.75 6.75 7.19772 6.75 7.75V10.25C6.75 10.8023 7.19772 11.25 7.75 11.25Z"
-                        stroke="url(#paint0_linear_2841_949)"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
+                        stroke="url(#paint0_linear_2841_949)" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
                       <defs>
-                        <linearGradient
-                          id="paint0_linear_2841_949"
-                          x1="9"
-                          y1="2.25"
-                          x2="9"
-                          y2="15.75"
-                          gradientUnits="userSpaceOnUse"
-                        >
+                        <linearGradient id="paint0_linear_2841_949" x1="9" y1="2.25" x2="9" y2="15.75"
+                          gradientUnits="userSpaceOnUse">
                           <stop stop-color="#FFF5F0"></stop>
                           <stop offset="0.67" stop-color="#F4C8D0"></stop>
                         </linearGradient>
@@ -711,44 +291,26 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="swiper-slide"
-                style="
+              <div class="swiper-slide" style="
                   -webkit-box-ordinal-group: 3;
                   order: 3;
                   margin-top: 10px;
                   width: 291px;
                   height: 148px;
                   margin-right: 10px;
-                "
-              >
+                ">
                 <div class="item-warranty-info">
                   <div class="icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_2841_954)">
                         <path
                           d="M13.5 14.25L14.694 13.056C15.3718 12.3781 15.7526 11.4587 15.7526 10.5C15.7526 9.54134 15.3718 8.62193 14.694 7.944L11.25 4.5M5.25 7.5H5.2425M2.25 6V9.129C2.25008 9.52679 2.40818 9.90826 2.6895 10.1895L6.972 14.472C7.31096 14.8109 7.77067 15.0013 8.25 15.0013C8.72933 15.0013 9.18904 14.8109 9.528 14.472L12.222 11.778C12.5609 11.439 12.7513 10.9793 12.7513 10.5C12.7513 10.0207 12.5609 9.56096 12.222 9.222L7.9395 4.9395C7.65826 4.65818 7.27679 4.50008 6.879 4.5H3.75C3.35218 4.5 2.97064 4.65804 2.68934 4.93934C2.40804 5.22064 2.25 5.60218 2.25 6Z"
-                          stroke="url(#paint0_linear_2841_954)"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        ></path>
+                          stroke="url(#paint0_linear_2841_954)" stroke-width="1.5" stroke-linecap="round"
+                          stroke-linejoin="round"></path>
                       </g>
                       <defs>
-                        <linearGradient
-                          id="paint0_linear_2841_954"
-                          x1="9.00131"
-                          y1="4.5"
-                          x2="9.00131"
-                          y2="15.0013"
-                          gradientUnits="userSpaceOnUse"
-                        >
+                        <linearGradient id="paint0_linear_2841_954" x1="9.00131" y1="4.5" x2="9.00131" y2="15.0013"
+                          gradientUnits="userSpaceOnUse">
                           <stop stop-color="#FFF5F0"></stop>
                           <stop offset="0.67" stop-color="#F4C8D0"></stop>
                         </linearGradient>
@@ -760,111 +322,58 @@
                   </div>
                   <div class="description">
                     Giá sản phẩm <b>đã bao gồm thuế VAT</b>, có hỗ trợ
-                    <a
-                      href="https://cellphones.com.vn/vat-refund"
-                      target="_blank"
-                      >hoàn thuế VAT - Tax Refund</a
-                    >
+                    <a href="https://cellphones.com.vn/vat-refund" target="_blank">hoàn thuế VAT - Tax Refund</a>
                     cho khách du lịch.
                   </div>
                 </div>
               </div>
             </div>
-            <div
-              class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-lock"
-            >
-              <span
-                class="swiper-pagination-bullet swiper-pagination-bullet-active"
-                tabindex="0"
-                role="button"
-                aria-label="Go to slide 1"
-              ></span>
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-lock">
+              <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+                aria-label="Go to slide 1"></span>
             </div>
-            <div
-              class="swiper-button-prev"
-              tabindex="0"
-              role="button"
-              aria-label="Previous slide"
-              aria-disabled="false"
-            >
+            <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"
+              aria-disabled="false">
               <div>
-                <svg
-                  height="15"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 320 512"
-                >
+                <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                   <path
-                    d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
-                  ></path>
+                    d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
+                  </path>
                 </svg>
               </div>
             </div>
-            <div
-              class="swiper-button-next"
-              tabindex="0"
-              role="button"
-              aria-label="Next slide"
-              aria-disabled="false"
-            >
+            <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false">
               <div>
-                <svg
-                  height="15"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 320 512"
-                >
+                <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                   <path
-                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
-                  ></path>
+                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
+                  </path>
                 </svg>
               </div>
             </div>
-            <span
-              class="swiper-notification"
-              aria-live="assertive"
-              aria-atomic="true"
-            ></span>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
           </div>
-          <div
-            class="swiper swiper-container is-hidden"
-          >
+          <div class="swiper swiper-container is-hidden">
             <div class="swiper-wrapper" style="transition-duration: 0ms">
               <div class="swiper-slide" style="height: 148px"></div>
             </div>
-            <div
-              class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"
-            ></div>
-            <span
-              class="swiper-notification"
-              aria-live="assertive"
-              aria-atomic="true"
-            ></span>
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
           </div>
         </div>
       </div>
     </div>
-    <div
-      id="thong-so-ky-thuat"
-      promotion-pack="[object Object]"
-      show-button-print="true"
-      class="cps-block-technicalInfo"
-    >
-      <div
-        class="box-title is-flex is-justify-content-space-between is-align-items-center"
-      >
+    <div id="thong-so-ky-thuat" promotion-pack="[object Object]" show-button-print="true"
+      class="cps-block-technicalInfo">
+      <div class="box-title is-flex is-justify-content-space-between is-align-items-center">
         <h2 class="title">Thông số kỹ thuật</h2>
-        <button
-          class="button button__show-modal-technical is-flex is-justify-content-center"
-        >
+        <button class="button button__show-modal-technical is-flex is-justify-content-center">
           Xem tất cả
           <div class="icon-svg">
-            <svg
-              height="15"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 320 512"
-            >
+            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
               <path
-                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
-              ></path>
+                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
+              </path>
             </svg>
           </div>
         </button>
@@ -881,12 +390,7 @@
             <td>Công nghệ màn hình</td>
             <td>
               <p>
-                <a
-                  href="https://cellphones.com.vn/sforum/man-hinh-oled"
-                  target="_blank"
-                  rel="nofollow"
-                  >OLED</a
-                >
+                <a href="https://cellphones.com.vn/sforum/man-hinh-oled" target="_blank" rel="nofollow">OLED</a>
               </p>
             </td>
           </tr>
@@ -981,22 +485,14 @@
               hỗ trợ sạc nhanh không?
             </h6>
             <div class="icon" :class="{ active: openFaqIndex === 0 }">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                width="10"
-                height="10"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
                 <path
-                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
-                ></path>
+                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
+                </path>
               </svg>
             </div>
           </div>
-          <div
-            class="accordion-content"
-            :style="{ maxHeight: openFaqIndex === 0 ? '480px' : '0px' }"
-          >
+          <div class="accordion-content" :style="{ maxHeight: openFaqIndex === 0 ? '480px' : '0px' }">
             <div>
               iPhone 14 có dung lượng 3.279 mAh với thời gian phát video tối đa
               20 giờ, đồng thời tích hợp công suất sạc nhanh 20W trở lên hỗ trợ
@@ -1008,22 +504,14 @@
           <div class="accordion-label button__show-faq" @click="toggleFaq(1)">
             <h6>iPhone 14 có mấy SIM? Bản eSim có dùng được ở Việt Nam?</h6>
             <div class="icon" :class="{ active: openFaqIndex === 1 }">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                width="10"
-                height="10"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
                 <path
-                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
-                ></path>
+                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
+                </path>
               </svg>
             </div>
           </div>
-          <div
-            class="accordion-content"
-            :style="{ maxHeight: openFaqIndex === 1 ? '480px' : '0px' }"
-          >
+          <div class="accordion-content" :style="{ maxHeight: openFaqIndex === 1 ? '480px' : '0px' }">
             <div>
               iPhone 14 có 2 loại SIM cho người dùng lựa chọn bao gồm: SIM kép
               (1 SIM vật lý và 1 eSIM) và eSIM. Tuy nhiên, chỉ có mẫu máy iPhone
@@ -1039,22 +527,14 @@
               Camera của iPhone 14 có cải tiến nổi bật nào so với iPhone 13?
             </h6>
             <div class="icon" :class="{ active: openFaqIndex === 2 }">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                width="10"
-                height="10"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
                 <path
-                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
-                ></path>
+                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
+                </path>
               </svg>
             </div>
           </div>
-          <div
-            class="accordion-content"
-            :style="{ maxHeight: openFaqIndex === 2 ? '480px' : '0px' }"
-          >
+          <div class="accordion-content" :style="{ maxHeight: openFaqIndex === 2 ? '480px' : '0px' }">
             <div>
               Cả 2 model đều sở hữu 2 cảm biến 12MP, bao gồm 1 cảm biến góc rộng
               tiêu chuẩn và 1 cảm biến góc siêu rộng. Tuy nhiên, điểm nâng cấp
@@ -1072,22 +552,14 @@
               iPhone 14 có mấy màu? Màu đặc trưng của iPhone 14 2023 là màu nào?
             </h6>
             <div class="icon" :class="{ active: openFaqIndex === 3 }">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                width="10"
-                height="10"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
                 <path
-                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"
-                ></path>
+                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
+                </path>
               </svg>
             </div>
           </div>
-          <div
-            class="accordion-content"
-            :style="{ maxHeight: openFaqIndex === 3 ? '480px' : '0px' }"
-          >
+          <div class="accordion-content" :style="{ maxHeight: openFaqIndex === 3 ? '480px' : '0px' }">
             <div>
               iPhone 14 bao gồm 5 màu sắc trẻ trung và năng động phù hợp với
               nhiều lứa tuổi và đối tượng, cụ thể là Blue (xanh), Purple (tím),
@@ -1099,35 +571,19 @@
       </div>
     </div>
     <div class="compare-apple-devices">
-      <a
-        href="/so-sanh-iphone"
-        class="compare-apple-devices-btn text-decoration-none"
-        target="_blank"
-        rel="nofollow"
-      >
+      <a href="/so-sanh-iphone" class="compare-apple-devices-btn text-decoration-none" target="_blank" rel="nofollow">
         So sánh các phiên bản iPhone
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M6 4L10 8L6 12"
-            stroke="#3B82F6"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path></svg
-      ></a>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 4L10 8L6 12" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          </path>
+        </svg></a>
     </div>
     <div></div>
   </div>
 </template>
 
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useProductStore } from '@/stores/productStore';
 
 const productStore = useProductStore();
@@ -1282,8 +738,20 @@ const destroySwipers = () => {
 
 onMounted(async () => {
   await nextTick();
-  await initSwipers();
+  if (productStore.productDetail) {
+    await initSwipers();
+  }
 });
+
+watch(() => productStore.productDetail, async (newVal) => {
+  if (newVal && rootEl.value) {
+    destroySwipers();
+    await nextTick();
+    setTimeout(async () => {
+      await initSwipers();
+    }, 100);
+  }
+}, { deep: true });
 
 onBeforeUnmount(() => {
   destroySwipers();
@@ -1499,7 +967,7 @@ onBeforeUnmount(() => {
   border: 1px solid #d1d5db;
   border-radius: 15px;
   display: flex;
-  height: 325px;
+  height: 366px;
   justify-content: center;
   margin-bottom: 16px;
   width: 100%;
@@ -1518,9 +986,7 @@ onBeforeUnmount(() => {
   text-align: center;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery {
   align-items: center;
   background: linear-gradient(90deg, #dd5e89, #f7bb97);
   border: 0;
@@ -1532,21 +998,14 @@ onBeforeUnmount(() => {
   user-select: none;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video {
   display: block;
   height: 100%;
   position: relative;
   width: 100%;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  .icon {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .icon {
   height: 60px;
   left: 50%;
   position: absolute;
@@ -1555,20 +1014,11 @@ onBeforeUnmount(() => {
   width: 70px;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  .icon
-  svg {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .icon svg {
   height: 100%;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  .video-thumbnail-wrapper {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .video-thumbnail-wrapper {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -1578,24 +1028,14 @@ onBeforeUnmount(() => {
   width: 100%;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  .video-thumbnail-wrapper
-  .video-thumbnail {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .video-thumbnail-wrapper .video-thumbnail {
   display: block;
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  .video-thumbnail-wrapper
-  .youtube-play-button {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .video-thumbnail-wrapper .youtube-play-button {
   left: 50%;
   pointer-events: none;
   position: absolute;
@@ -1605,48 +1045,25 @@ onBeforeUnmount(() => {
   z-index: 1;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  .video-thumbnail-wrapper
-  .youtube-play-button:hover {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .video-thumbnail-wrapper .youtube-play-button:hover {
   transform: translate(-50%, -50%) scale(1.1);
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  .video-thumbnail-wrapper
-  .youtube-play-button
-  svg {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .video-thumbnail-wrapper .youtube-play-button svg {
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
   height: auto;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  .video-thumbnail-wrapper:hover
-  .youtube-play-button {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .video-thumbnail-wrapper:hover .youtube-play-button {
   transform: translate(-50%, -50%) scale(1.1);
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .ksp-video
-  iframe {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video iframe {
   height: 100%;
   width: 100%;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp {
   align-items: center;
   color: #fff;
   display: flex;
@@ -1659,19 +1076,11 @@ onBeforeUnmount(() => {
   position: relative;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  .mobile {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp .mobile {
   display: none;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  .title {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp .title {
   bottom: 5px;
   color: #fff;
   font-size: 18px;
@@ -1681,11 +1090,7 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  > img {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp>img {
   background: #fff;
   border-radius: 10px;
   height: 180px;
@@ -1694,32 +1099,19 @@ onBeforeUnmount(() => {
   width: 180px;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  ul {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul {
   -ms-overflow-style: none;
   max-height: 160px;
   overflow-y: auto;
   scrollbar-width: none;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  ul::-webkit-scrollbar {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul::-webkit-scrollbar {
   display: none;
   scrollbar-width: 5px;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  ul
-  li {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul li {
   color: #fff;
   display: flex;
   font-size: 14px;
@@ -1727,12 +1119,7 @@ onBeforeUnmount(() => {
   text-align: left;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  ul
-  li:before {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul li:before {
   align-items: center;
   color: pink;
   content: "•";
@@ -1743,29 +1130,15 @@ onBeforeUnmount(() => {
   width: auto;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  ul
-  li:not(:last-child) {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul li:not(:last-child) {
   margin-bottom: 5px;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  ul:last-child {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul:last-child {
   list-style: inherit;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-slide.ksp-gallery
-  .box-ksp
-  ul:last-child
-  img {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul:last-child img {
   display: none !important;
 }
 
@@ -1797,14 +1170,8 @@ onBeforeUnmount(() => {
   width: 30px;
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-button-next
-  .icon,
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-button-prev
-  .icon {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-button-next .icon,
+.gallery-product-detail .gallery-slide.swiper-container .swiper-button-prev .icon {
   align-items: center;
   color: #fff;
   display: flex;
@@ -1813,18 +1180,10 @@ onBeforeUnmount(() => {
   transform: translateY(-1px);
 }
 
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-button-next.swiper-button-disabled,
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-button-next:after,
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-button-prev.swiper-button-disabled,
-.gallery-product-detail
-  .gallery-slide.swiper-container
-  .swiper-button-prev:after {
+.gallery-product-detail .gallery-slide.swiper-container .swiper-button-next.swiper-button-disabled,
+.gallery-product-detail .gallery-slide.swiper-container .swiper-button-next:after,
+.gallery-product-detail .gallery-slide.swiper-container .swiper-button-prev.swiper-button-disabled,
+.gallery-product-detail .gallery-slide.swiper-container .swiper-button-prev:after {
   display: none;
 }
 
@@ -1846,10 +1205,7 @@ onBeforeUnmount(() => {
   width: 100%;
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-wrapper
-  .swiper-slide {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-wrapper .swiper-slide {
   background: #fff;
   border-radius: 0.5rem;
   box-shadow: 0 0 0 1px #d1d5db;
@@ -1859,30 +1215,19 @@ onBeforeUnmount(() => {
   width: 64px;
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-wrapper
-  .swiper-slide.ksp-thumbs {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-wrapper .swiper-slide.ksp-thumbs {
   align-items: center;
   display: flex;
   flex-flow: column;
   justify-content: center;
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-wrapper
-  .swiper-slide.ksp-thumbs
-  svg {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-wrapper .swiper-slide.ksp-thumbs svg {
   height: 25px;
   margin-top: 3px;
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-wrapper
-  .swiper-slide.ksp-thumbs
-  p {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-wrapper .swiper-slide.ksp-thumbs p {
   color: #666;
   font-size: 10px;
   font-weight: 700;
@@ -1891,10 +1236,7 @@ onBeforeUnmount(() => {
   text-align: center;
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-wrapper
-  .swiper-slide.swiper-slide-thumb-active {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-wrapper .swiper-slide.swiper-slide-thumb-active {
   box-shadow: 0 0 0 1px #d70018;
 }
 
@@ -1918,14 +1260,8 @@ onBeforeUnmount(() => {
   width: 52px;
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-next
-  .icon,
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-prev
-  .icon {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-next .icon,
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-prev .icon {
   align-items: center;
   backdrop-filter: blur(0);
   background: #fff;
@@ -1940,43 +1276,21 @@ onBeforeUnmount(() => {
   color: #000;
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-next
-  .icon
-  svg,
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-prev
-  .icon
-  svg {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-next .icon svg,
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-prev .icon svg {
   display: block;
   transform: translateY(-1px);
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-next.swiper-button-disabled,
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-next:after,
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-prev.swiper-button-disabled,
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-prev:after {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-next.swiper-button-disabled,
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-next:after,
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-prev.swiper-button-disabled,
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-prev:after {
   display: none;
 }
 
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-next:hover
-  .icon,
-.gallery-product-detail
-  .thumbnail-slide.swiper-container
-  .swiper-button-prev:hover
-  .icon {
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-next:hover .icon,
+.gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-prev:hover .icon {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6);
 }
 
@@ -2022,20 +1336,12 @@ onBeforeUnmount(() => {
   padding: 12px;
 }
 
-.swiper-container.swiper-pdp:has(.swiper-pagination):has(
-    .swiper-pagination > .swiper-pagination-bullet:nth-child(n + 2)
-  ) {
+.swiper-container.swiper-pdp:has(.swiper-pagination):has(.swiper-pagination > .swiper-pagination-bullet:nth-child(n + 2)) {
   padding-bottom: 20px;
 }
 
-.swiper-container.swiper-pdp:has(.swiper-pagination):has(
-    .swiper-pagination > .swiper-pagination-bullet:nth-child(n + 2)
-  )
-  .swiper-button-next,
-.swiper-container.swiper-pdp:has(.swiper-pagination):has(
-    .swiper-pagination > .swiper-pagination-bullet:nth-child(n + 2)
-  )
-  .swiper-button-prev {
+.swiper-container.swiper-pdp:has(.swiper-pagination):has(.swiper-pagination > .swiper-pagination-bullet:nth-child(n + 2)) .swiper-button-next,
+.swiper-container.swiper-pdp:has(.swiper-pagination):has(.swiper-pagination > .swiper-pagination-bullet:nth-child(n + 2)) .swiper-button-prev {
   transform: translateY(calc(-50% - 10px));
 }
 
@@ -2073,9 +1379,7 @@ onBeforeUnmount(() => {
   justify-content: center;
 }
 
-.swiper-container.swiper-pdp
-  .swiper-pagination
-  .swiper-pagination-bullet.swiper-pagination-bullet-active:only-child {
+.swiper-container.swiper-pdp .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active:only-child {
   display: none;
 }
 
@@ -2089,9 +1393,7 @@ onBeforeUnmount(() => {
   width: 8px;
 }
 
-.swiper-container.swiper-pdp
-  .swiper-pagination
-  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+.swiper-container.swiper-pdp .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: #d70018;
   width: 16px;
 }
@@ -2124,10 +1426,7 @@ onBeforeUnmount(() => {
   width: 100%;
 }
 
-.cps-block-technicalInfo
-  .technical-content
-  .technical-content-item:not(:last-child)
-  td {
+.cps-block-technicalInfo .technical-content .technical-content-item:not(:last-child) td {
   border-bottom: 1px solid #e4e4e7;
 }
 
@@ -2137,19 +1436,13 @@ onBeforeUnmount(() => {
   vertical-align: middle;
 }
 
-.cps-block-technicalInfo
-  .technical-content
-  .technical-content-item
-  td:first-child {
+.cps-block-technicalInfo .technical-content .technical-content-item td:first-child {
   background-color: #f2f2f2;
   border-right: 1px solid #e4e4e7;
   width: 30%;
 }
 
-.cps-block-technicalInfo
-  .technical-content
-  .technical-content-item
-  td:nth-child(2) {
+.cps-block-technicalInfo .technical-content .technical-content-item td:nth-child(2) {
   width: 70%;
 }
 
@@ -2791,41 +2084,21 @@ onBeforeUnmount(() => {
     margin-bottom: 16px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery {
     padding: 0;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .ksp-video
-    .video-thumbnail-wrapper
-    .video-thumbnail,
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .ksp-video
-    iframe {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .video-thumbnail-wrapper .video-thumbnail,
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video iframe {
     height: 325px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    > img {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp>img {
     height: 200px;
     width: 200px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    ul
-    li {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul li {
     font-size: 13px;
   }
 }
@@ -2844,50 +2117,24 @@ onBeforeUnmount(() => {
     width: 80%;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .ksp-video
-    .video-thumbnail-wrapper
-    .video-thumbnail,
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .ksp-video
-    iframe {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video .video-thumbnail-wrapper .video-thumbnail,
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .ksp-video iframe {
     height: 340px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    .title {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp .title {
     font-size: 12px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    > img {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp>img {
     height: 90px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    ul {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul {
     height: auto;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    ul
-    li {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul li {
     font-size: 11px;
   }
 }
@@ -2907,10 +2154,7 @@ onBeforeUnmount(() => {
     width: 40%;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -2919,59 +2163,34 @@ onBeforeUnmount(() => {
     padding: 10px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    .title {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp .title {
     font-size: 20px;
     margin-top: 10px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    .mobile {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp .mobile {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: calc(100% - 100px);
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    .desktop {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp .desktop {
     display: none;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    > img {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp>img {
     height: 140px;
     width: 140px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    ul {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul {
     margin-left: 5px;
     position: relative;
     top: 10px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    ul
-    li {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul li {
     font-size: 14px;
   }
 
@@ -3014,62 +2233,33 @@ onBeforeUnmount(() => {
     width: 50%;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp.ksp-video {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp.ksp-video {
     height: 100%;
     width: 100%;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp.ksp-video
-    .video-thumbnail-wrapper
-    .video-thumbnail,
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp.ksp-video
-    iframe {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp.ksp-video .video-thumbnail-wrapper .video-thumbnail,
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp.ksp-video iframe {
     height: 220px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    .icon {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp .icon {
     left: 43%;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    .title {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp .title {
     font-size: 16px;
     margin-bottom: 0;
     position: relative;
     text-align: left;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    > img {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp>img {
     height: 80px;
     width: 80px;
   }
 
-  .gallery-product-detail
-    .gallery-slide.swiper-container
-    .swiper-slide.ksp-gallery
-    .box-ksp
-    ul
-    li {
+  .gallery-product-detail .gallery-slide.swiper-container .swiper-slide.ksp-gallery .box-ksp ul li {
     font-size: 12px;
   }
 
@@ -3080,11 +2270,7 @@ onBeforeUnmount(() => {
     width: 25px;
   }
 
-  .gallery-product-detail
-    .thumbnail-slide.swiper-container
-    .swiper-wrapper
-    .swiper-slide.ksp-thumbs
-    p {
+  .gallery-product-detail .thumbnail-slide.swiper-container .swiper-wrapper .swiper-slide.ksp-thumbs p {
     font-size: 8px;
     font-weight: 600;
   }
