@@ -222,7 +222,7 @@
                 alt="Banner Trả góp" loading="lazy" /></a>
           </div>
         </div>
-        <div class="swiper-button-prev button__view-banner-prev" tabindex="-1" role="button" aria-label="Previous slide"
+        <!-- <div class="swiper-button-prev button__view-banner-prev" tabindex="-1" role="button" aria-label="Previous slide"
           aria-disabled="true">
           <div class="icon">
             <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -241,7 +241,7 @@
               </path>
             </svg>
           </div>
-        </div>
+        </div> -->
         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
       </div>
       <div id="modalVoucher" class="modal" style="display: none">

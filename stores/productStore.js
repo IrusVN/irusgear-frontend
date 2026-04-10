@@ -51,7 +51,9 @@ export const useProductStore = defineStore("product", () => {
       feGlobalStore.setApiUrl(`products/${id}/suggestions`);
       const res = await feGlobalStore.fetchItem(params);
 
-      if (res?.status === true && res.data) {
+      if (res?.comboDeals || res?.accessoryDeals) {
+        productSuggestions.value = res;
+      } else if (res?.status === true && res.data) {
         productSuggestions.value = res.data;
       } else {
         productSuggestions.value = [];
@@ -69,17 +71,13 @@ export const useProductStore = defineStore("product", () => {
     const targetColor = productDetail.value.colorOptions.find(c => c.url === url);
     if (!targetColor) return;
 
-    const newDetail = JSON.parse(JSON.stringify(productDetail.value));
-
-    newDetail.colorOptions.forEach(c => {
+    productDetail.value.colorOptions.forEach(c => {
       c.active = c.url === url;
     });
 
-    if (targetColor.price && newDetail.pricing) {
-      newDetail.pricing.salePrice = targetColor.price;
+    if (targetColor.price && productDetail.value.pricing) {
+      productDetail.value.pricing.salePrice = targetColor.price;
     }
-
-    productDetail.value = newDetail;
 
     if (typeof window !== 'undefined') {
       setTimeout(() => {
