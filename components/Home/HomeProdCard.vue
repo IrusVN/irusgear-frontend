@@ -8,7 +8,7 @@
     </span>
 
     <div class="prod-card h-100 position-relative">
-      <a :href="product.url || '#'" class="prod-main group d-flex flex-column flex-grow-1 text-decoration-none">
+      <NuxtLink :to="productLink" class="prod-main group d-flex flex-column flex-grow-1 text-decoration-none">
         <div class="img-box d-flex align-items-center justify-content-center px-2">
           <img :src="product.img" :alt="product.name" class="prod-img">
         </div>
@@ -28,7 +28,7 @@
             <div v-if="product.gifts[2]" class="promo-row">{{ product.gifts[2] }}</div>
           </div>
         </div>
-      </a>
+      </NuxtLink>
 
       <div class="bottom-row">
         <span class="rating"><i class="bi bi-star-fill"></i> {{ normalizedRating }}</span>
@@ -45,14 +45,28 @@
 import { computed } from 'vue';
 
 const props = defineProps({ product: { type: Object, required: true } });
+
 const fmt = (v) => {
   const value = Number(v) || 0;
   return `${new Intl.NumberFormat('vi-VN').format(value)} đ`;
 };
+
 const normalizedRating = computed(() => {
   const value = Number(props.product?.rating);
   if (Number.isFinite(value) && value > 0) return value.toFixed(1);
   return '5.0';
+});
+
+const productLink = computed(() => {
+  if (props.product?.slug) {
+    return `/products/${props.product.slug}`;
+  }
+
+  if (typeof props.product?.url === 'string' && props.product.url.trim()) {
+    return props.product.url;
+  }
+
+  return '/';
 });
 </script>
 

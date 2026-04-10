@@ -1,14 +1,14 @@
 <template>
-  <div class="cps-container">
-    <section class="block-detail-product">
-      <div class="box-detail-product columns m-0">
+  <div class="product-detail-page container-shell mx-auto position-relative">
+    <section class="pt-2 position-relative">
+      <div class="d-flex flex-wrap align-items-start detail-top-layout m-0">
         <ProductDetailLeft />
         <ProductDetailRight />
       </div>
-      <ProductSuggest />
-      <div class="block-content-product">
-        <ProductContentLeft />
-        <ProductContentRight />
+      <ProductSameProduct />
+      <div class="d-flex justify-content-between content-layout position-relative">
+        <ProductContentLeft class="block-content-product-left" />
+        <ProductContentRight class="block-content-product-right" />
       </div>
       <ProductBoxReview />
       <ProductBlockComment />
@@ -18,184 +18,54 @@
 <script setup>
 import ProductDetailLeft from "@/components/Products/ProductDetail/ProductDetailLeft.vue";
 import ProductDetailRight from "@/components/Products/ProductDetail/ProductDetailRight.vue";
-import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
+import ProductSameProduct from "@/components/Products/ProductDetail/ProductSameProduct.vue";
 import ProductContentLeft from "@/components/Products/ProductDetail/ProductContentLeft.vue";
 import ProductContentRight from "@/components/Products/ProductDetail/ProductContentRight.vue";
 import ProductBoxReview from "@/components/Products/ProductDetail/ProductBoxReview.vue";
 import ProductBlockComment from "@/components/Products/ProductDetail/ProductBlockComment.vue";
+import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
+import { useRoute } from "vue-router";
+import { useProductStore } from "@/stores/productStore";
+
+const route = useRoute();
+const productStore = useProductStore();
+
+onMounted(async () => {
+  if (route.params.slug) {
+    const detail = await productStore.fetchProductDetail(route.params.slug);
+    if (detail && detail.id) {
+      productStore.fetchProductSuggest(detail.id);
+    }
+  }
+});
+
 </script>
 <style>
-.cps-container {
+.product-detail-page {
   box-sizing: border-box;
-  display: block;
   height: 100%;
-  margin: 0 auto;
-  position: relative;
   width: 1200px;
 }
 
-@media only screen and (max-width: 1199px) {
-  .cps-container {
-    max-width: 1200px !important;
-    padding: 0 10px;
-    width: 100% !important;
-  }
-}
-
-.columns {
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
-  margin-top: -0.75rem;
-}
-
-.columns:last-child {
-  margin-bottom: -0.75rem;
-}
-
-.columns:not(:last-child) {
-  margin-bottom: 0.75rem;
-}
-
-@media print, screen and (min-width: 769px) {
-  .columns:not(.is-desktop) {
-    display: flex;
-  }
-}
-
-.column {
-  display: block;
-  flex-basis: 0;
-  flex-grow: 1;
-  flex-shrink: 1;
-  padding: 0.75rem;
-}
-
-.is-flex {
-  display: flex !important;
-}
-
-.is-flex-direction-column {
-  flex-direction: column !important;
-}
-
-.is-flex-direction-row {
-  flex-direction: row !important;
-}
-
-.is-align-items-center {
-  align-items: center !important;
-}
-
-.is-align-content-center {
-  align-content: center !important;
-}
-
-.is-justify-content-center {
-  justify-content: center !important;
-}
-
-.is-justify-content-space-between {
-  justify-content: space-between !important;
-}
-
-.m-0 {
-  margin: 0 !important;
-}
-
-.mb-0 {
-  margin-bottom: 0 !important;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem !important;
-}
-
-.mt-2 {
-  margin-top: 0.5rem !important;
-}
-
-.mr-2 {
-  margin-right: 0.5rem !important;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem !important;
-}
-
-.my-2 {
-  margin-bottom: 0.5rem !important;
-  margin-top: 0.5rem !important;
-}
-
-.mb-3 {
-  margin-bottom: 0.75rem !important;
-}
-
-.my-3 {
-  margin-bottom: 0.75rem !important;
-  margin-top: 0.75rem !important;
-}
-
-.mt-5 {
-  margin-top: 1.5rem !important;
-}
-
-.mx-auto {
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.has-text-black {
-  color: #0a0a0a !important;
-}
-
-.has-text-white {
-  color: #fff !important;
-}
-
-.has-text-primary-light {
-  color: #ebfffc !important;
-}
-
-.has-text-centered {
-  text-align: center !important;
-}
-
-.has-text-weight-semibold {
-  font-weight: 600 !important;
-}
-
-.is-hidden {
-  display: none !important;
-}
-
-.block-detail-product {
-  padding-top: 10px;
-  position: relative;
-}
-
-.block-detail-product .mobile {
-  display: none;
-}
-
-.block-detail-product .box-detail-product {
+.detail-top-layout {
   gap: 16px;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 10px !important;
+  margin-top: 10px !important;
 }
 
-.block-detail-product .box-detail-product [class*="box-detail-product__box-"] {
+.detail-top-layout>[class*="box-detail-product__box-"] {
   overflow-x: hidden;
   padding: 0;
 }
 
-.block-detail-product .box-detail-product .box-detail-product__box-left {
+.detail-top-layout>.box-detail-product__box-left {
   height: max-content;
   position: sticky;
   top: 88px;
 }
 
-.block-detail-product .box-detail-product .box-detail-product__box-center {
+.detail-top-layout>.box-detail-product__box-center {
   height: max-content;
   position: sticky;
   top: 88px;
@@ -203,98 +73,98 @@ import ProductBlockComment from "@/components/Products/ProductDetail/ProductBloc
   z-index: 10;
 }
 
-.block-detail-product .block-content-product {
-  display: flex;
+.content-layout {
   gap: 24px;
-  justify-content: space-between;
   margin: 10px auto;
-  position: relative;
 }
 
-.block-detail-product .block-content-product .block-content-product-left {
+.content-layout>.block-content-product-left {
   flex: 2;
 }
 
-.block-detail-product .block-content-product .block-content-product-right {
+.content-layout>.block-content-product-right {
   flex: 1;
   height: fit-content;
-  max-height: calc(100vh - 200px);
   overflow-y: auto;
   position: sticky;
   top: 88px;
 }
 
 @media only screen and (min-width: 991px) and (max-width: 1199px) {
-  .block-detail-product .box-detail-product {
-    gap: 20px;
-    padding-top: 0;
+  .product-detail-page {
+    max-width: 1200px !important;
+    padding: 0 10px;
+    width: 100% !important;
   }
 
-  .block-detail-product .block-content-product {
+  .detail-top-layout {
+    gap: 20px;
+  }
+
+  .content-layout {
     max-width: 100%;
   }
 
-  .block-detail-product .block-content-product .block-content-product-left,
-  .block-detail-product .block-content-product .block-content-product-right {
+  .content-layout>.block-content-product-left,
+  .content-layout>.block-content-product-right {
     width: 50%;
   }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 990px) {
-  .block-detail-product {
-    padding-top: 0;
+  .product-detail-page {
+    max-width: 1200px !important;
+    padding: 0 10px;
+    width: 100% !important;
   }
 
-  .block-detail-product .box-detail-product {
+  .detail-top-layout {
     flex-wrap: wrap;
     gap: 20px;
-    padding-top: 0;
   }
 
-  .block-detail-product .box-detail-product .box-detail-product__box-left,
-  .block-detail-product .box-detail-product .box-detail-product__box-center {
+  .detail-top-layout>.box-detail-product__box-left,
+  .detail-top-layout>.box-detail-product__box-center {
     width: 50%;
   }
 
-  .block-detail-product .block-content-product {
+  .content-layout {
     margin: auto;
     max-width: 991px;
   }
 
-  .block-detail-product .block-content-product .block-content-product-left {
+  .content-layout>.block-content-product-left {
     width: 66.6666666667%;
   }
 
-  .block-detail-product .block-content-product .block-content-product-right {
+  .content-layout>.block-content-product-right {
     width: 33.3333333333%;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .block-detail-product {
-    padding-top: 0;
+  .product-detail-page {
+    max-width: 1200px !important;
+    padding: 0 10px;
+    width: 100% !important;
   }
 
-  .block-detail-product .mobile {
-    display: block;
-  }
-
-  .block-detail-product .box-detail-product {
+  .detail-top-layout {
     gap: 0;
   }
 
-  .block-detail-product .box-detail-product .box-detail-product__box-left,
-  .block-detail-product .box-detail-product .box-detail-product__box-center {
+  .detail-top-layout>.box-detail-product__box-left,
+  .detail-top-layout>.box-detail-product__box-center {
     position: relative;
     top: 10px !important;
     width: 100%;
   }
 
-  .block-detail-product .block-content-product .block-content-product-left {
+  .content-layout>.block-content-product-left {
     width: 100%;
   }
 
-  .block-detail-product .block-content-product .block-content-product-right {
+  .content-layout>.block-content-product-right {
     display: none;
   }
 }

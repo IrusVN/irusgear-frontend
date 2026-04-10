@@ -5,7 +5,7 @@
       <a
         target="_blank"
         href="https://cellphones.com.vn/sforum/tag/apple-iphone-14"
-        class="btn-show-more button__link"
+        class="btn-show-more button__link text-decoration-none"
       >
         Xem tất cả
         <div>
@@ -24,7 +24,7 @@
       <a
         target="_blank"
         href="https://cellphones.com.vn/sforum/cares-trung-tam-bao-hanh-uy-quyen-apple-chinh-hang-tai-viet-nam"
-        class="sforum__content-item button__link is-flex"
+        class="sforum__content-item button__link is-flex text-decoration-none"
         ><img
           src="https://cdn.sforum.vn/sforum/wp-content/uploads/2024/01/CareS-8-2-e1704785259475.jpg"
           alt="CareS - Trung tâm bảo hành ủy quyền Apple chính hãng tại Việt Nam"
@@ -37,7 +37,7 @@
       ><a
         target="_blank"
         href="https://cellphones.com.vn/sforum/cach-khoi-dong-lai-iphone-14"
-        class="sforum__content-item button__link is-flex"
+        class="sforum__content-item button__link is-flex text-decoration-none"
         ><img
           src="https://cdn-media.sforum.vn/storage/app/media/nguyenhang/cach-khoi-dong-lai-iphone-14/cach-khoi-dong-lai-iphone-14-12.jpg"
           alt="Cách khởi động lại iPhone 14 khi bị giật, lag máy"
@@ -50,7 +50,7 @@
       ><a
         target="_blank"
         href="https://cellphones.com.vn/sforum/cach-tat-hdr-tren-iphone-14"
-        class="sforum__content-item button__link is-flex"
+        class="sforum__content-item button__link is-flex text-decoration-none"
         ><img
           src="https://cdn-media.sforum.vn/storage/app/media/nhuy/Nhu-Y-1/cach-tat-hdr-tren-iphone-14.jpg"
           alt="Cách tắt HDR trên iPhone 14 nhanh chóng, đơn giản nhất"
@@ -63,7 +63,7 @@
       ><a
         target="_blank"
         href="https://cellphones.com.vn/sforum/so-sanh-iphone-17-vs-14"
-        class="sforum__content-item button__link is-flex"
+        class="sforum__content-item button__link is-flex text-decoration-none"
         ><img
           src="https://cdn-media.sforum.vn/storage/app/media/trannghia/trannghia2/so-sanh-iphone-17-vs-14-cover.jpg"
           alt="So sánh iPhone 17 vs 14: Đã đến lúc người dùng nâng cấp!!!"
@@ -76,7 +76,7 @@
       ><a
         target="_blank"
         href="https://cellphones.com.vn/sforum/so-sanh-honor-400-vs-iphone-14"
-        class="sforum__content-item button__link is-flex"
+        class="sforum__content-item button__link is-flex text-decoration-none"
         ><img
           src="https://cdn-media.sforum.vn/storage/app/media/maithuong/honor-400-vs-iphone-14-cover.jpg"
           alt="So sánh Honor 400 vs iPhone 14: Lựa chọn nào đáng tin cậy hơn trong phân khúc hơn 12 triệu đồng?"
@@ -90,23 +90,6 @@
       </a>
     </div>
   </div>
-  <div class="cps-block-boxProductTvc">
-    <div class="boxProductTvc-title">
-      <p>Video đánh giá</p>
-      <!---->
-    </div>
-    <div class="boxProductTvc-content">
-      <div class="boxProductTvc-content-item">
-        <img
-          src="https://img.youtube.com/vi/8LwmuPL-YZU/maxresdefault.jpg"
-          alt="iPhone 14 - 14 Plus | Lớn và lớn hơn"
-          loading="lazy"
-        />
-        <p>iPhone 14 - 14 Plus | Lớn và lớn hơn</p>
-      </div>
-    </div>
-    <!---->
-  </div>
 </template>
 <script setup></script>
 <style scoped>
@@ -117,7 +100,6 @@
   padding: 16px;
   position: relative;
   right: 2px;
-  width: 100%;
 }
 
 .block-sforum-v2 .sforum__title {
@@ -145,8 +127,6 @@
   gap: 4px;
   justify-content: center;
   padding: 4px;
-  -webkit-text-decoration: none;
-  text-decoration: none;
 }
 
 .block-sforum-v2 .sforum__title .btn-show-more svg {

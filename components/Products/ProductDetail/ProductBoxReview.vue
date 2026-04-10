@@ -1,20 +1,19 @@
 <template>
-  <div class="boxReview" bis_skin_checked="1">
+  <div class="boxReview">
     <div
       class="boxReview-head is-flex is-justify-content-space-between is-align-items-center"
-      bis_skin_checked="1"
     >
       <h2 class="title">Đánh giá iPhone 14 128GB | Chính hãng VN/A</h2>
     </div>
-    <div class="boxReview-review" bis_skin_checked="1">
-      <div class="boxReview-overview" bis_skin_checked="1">
-        <div class="boxReview-score has-product" bis_skin_checked="1">
-          <div class="rating" bis_skin_checked="1">
+    <div class="boxReview-review">
+      <div class="boxReview-overview">
+        <div class="boxReview-score has-product">
+          <div class="rating">
             <span class="average-rating">4.9</span>/5
           </div>
-          <div class="item-star" bis_skin_checked="1">
-            <div class="star-container" bis_skin_checked="1">
-              <div class="icon is-active" bis_skin_checked="1">
+          <div class="item-star">
+            <div class="star-container">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +25,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +37,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +49,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +61,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -78,9 +77,8 @@
             <div
               class="star-container-level"
               style="width: 98%"
-              bis_skin_checked="1"
             >
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +90,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +102,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +114,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +126,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="icon is-active" bis_skin_checked="1">
+              <div class="icon is-active">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -148,17 +146,15 @@
           Viết đánh giá
         </button>
       </div>
-      <div class="boxReview-star has-product" bis_skin_checked="1">
+      <div class="boxReview-star has-product">
         <div
           class="rating-level is-flex is-align-items-center is-justify-content-space-evenly"
-          bis_skin_checked="1"
         >
           <div
             class="star-count is-flex is-align-items-center"
-            bis_skin_checked="1"
           >
-            <div bis_skin_checked="1">5</div>
-            <div class="is-active" bis_skin_checked="1">
+            <div>5</div>
+            <div class="is-active">
               <svg
                 height="15"
                 xmlns="http://www.w3.org/2000/svg"
@@ -180,14 +176,12 @@
         </div>
         <div
           class="rating-level is-flex is-align-items-center is-justify-content-space-evenly"
-          bis_skin_checked="1"
         >
           <div
             class="star-count is-flex is-align-items-center"
-            bis_skin_checked="1"
           >
-            <div bis_skin_checked="1">4</div>
-            <div class="is-active" bis_skin_checked="1">
+            <div>4</div>
+            <div class="is-active">
               <svg
                 height="15"
                 xmlns="http://www.w3.org/2000/svg"
@@ -205,14 +199,12 @@
         </div>
         <div
           class="rating-level is-flex is-align-items-center is-justify-content-space-evenly"
-          bis_skin_checked="1"
         >
           <div
             class="star-count is-flex is-align-items-center"
-            bis_skin_checked="1"
           >
-            <div bis_skin_checked="1">3</div>
-            <div class="is-active" bis_skin_checked="1">
+            <div>3</div>
+            <div class="is-active">
               <svg
                 height="15"
                 xmlns="http://www.w3.org/2000/svg"
@@ -230,14 +222,12 @@
         </div>
         <div
           class="rating-level is-flex is-align-items-center is-justify-content-space-evenly"
-          bis_skin_checked="1"
         >
           <div
             class="star-count is-flex is-align-items-center"
-            bis_skin_checked="1"
           >
-            <div bis_skin_checked="1">2</div>
-            <div class="is-active" bis_skin_checked="1">
+            <div>2</div>
+            <div class="is-active">
               <svg
                 height="15"
                 xmlns="http://www.w3.org/2000/svg"
@@ -255,14 +245,12 @@
         </div>
         <div
           class="rating-level is-flex is-align-items-center is-justify-content-space-evenly"
-          bis_skin_checked="1"
         >
           <div
             class="star-count is-flex is-align-items-center"
-            bis_skin_checked="1"
           >
-            <div bis_skin_checked="1">1</div>
-            <div class="is-active" bis_skin_checked="1">
+            <div>1</div>
+            <div class="is-active">
               <svg
                 height="15"
                 xmlns="http://www.w3.org/2000/svg"
@@ -279,14 +267,14 @@
           <span>0 đánh giá</span>
         </div>
       </div>
-      <div class="box-experience-review" bis_skin_checked="1">
-        <div class="title" bis_skin_checked="1">Đánh giá theo trải nghiệm</div>
-        <div class="experience-review__item" bis_skin_checked="1">
-          <div class="item-title" bis_skin_checked="1">Hiệu năng</div>
-          <div class="item-review-result is-flex" bis_skin_checked="1">
-            <div class="item-star" bis_skin_checked="1">
-              <div class="star-container" bis_skin_checked="1">
-                <div class="icon is-active" bis_skin_checked="1">
+      <div class="box-experience-review">
+        <div class="title">Đánh giá theo trải nghiệm</div>
+        <div class="experience-review__item">
+          <div class="item-title">Hiệu năng</div>
+          <div class="item-review-result is-flex">
+            <div class="item-star">
+              <div class="star-container">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -298,7 +286,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -310,7 +298,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -322,7 +310,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -334,7 +322,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -350,9 +338,8 @@
               <div
                 class="star-container-level"
                 style="width: 100%"
-                bis_skin_checked="1"
               >
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -364,7 +351,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -376,7 +363,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -388,7 +375,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -400,7 +387,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -414,18 +401,18 @@
                 </div>
               </div>
             </div>
-            <div class="item-point" bis_skin_checked="1">5/5</div>
-            <div class="item-review-count" bis_skin_checked="1">
+            <div class="item-point">5/5</div>
+            <div class="item-review-count">
               (26 đánh giá)
             </div>
           </div>
         </div>
-        <div class="experience-review__item" bis_skin_checked="1">
-          <div class="item-title" bis_skin_checked="1">Thời lượng pin</div>
-          <div class="item-review-result is-flex" bis_skin_checked="1">
-            <div class="item-star" bis_skin_checked="1">
-              <div class="star-container" bis_skin_checked="1">
-                <div class="icon is-active" bis_skin_checked="1">
+        <div class="experience-review__item">
+          <div class="item-title">Thời lượng pin</div>
+          <div class="item-review-result is-flex">
+            <div class="item-star">
+              <div class="star-container">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -437,7 +424,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -449,7 +436,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -461,7 +448,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -473,7 +460,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -489,9 +476,8 @@
               <div
                 class="star-container-level"
                 style="width: 100%"
-                bis_skin_checked="1"
               >
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -503,7 +489,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -515,7 +501,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -527,7 +513,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -539,7 +525,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -553,18 +539,18 @@
                 </div>
               </div>
             </div>
-            <div class="item-point" bis_skin_checked="1">5/5</div>
-            <div class="item-review-count" bis_skin_checked="1">
+            <div class="item-point">5/5</div>
+            <div class="item-review-count">
               (26 đánh giá)
             </div>
           </div>
         </div>
-        <div class="experience-review__item" bis_skin_checked="1">
-          <div class="item-title" bis_skin_checked="1">Chất lượng camera</div>
-          <div class="item-review-result is-flex" bis_skin_checked="1">
-            <div class="item-star" bis_skin_checked="1">
-              <div class="star-container" bis_skin_checked="1">
-                <div class="icon is-active" bis_skin_checked="1">
+        <div class="experience-review__item">
+          <div class="item-title">Chất lượng camera</div>
+          <div class="item-review-result is-flex">
+            <div class="item-star">
+              <div class="star-container">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -576,7 +562,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -588,7 +574,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -600,7 +586,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -612,7 +598,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -628,9 +614,8 @@
               <div
                 class="star-container-level"
                 style="width: 100%"
-                bis_skin_checked="1"
               >
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -642,7 +627,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -654,7 +639,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -666,7 +651,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -678,7 +663,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -692,54 +677,52 @@
                 </div>
               </div>
             </div>
-            <div class="item-point" bis_skin_checked="1">5/5</div>
-            <div class="item-review-count" bis_skin_checked="1">
+            <div class="item-point">5/5</div>
+            <div class="item-review-count">
               (26 đánh giá)
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="review" bis_skin_checked="1">
-      <div class="box-review-filter" bis_skin_checked="1">
-        <div class="title" bis_skin_checked="1">Lọc đánh giá theo</div>
-        <div class="filter-container" bis_skin_checked="1">
-          <div class="filter-item active" bis_skin_checked="1">Tất cả</div>
-          <div class="filter-item" bis_skin_checked="1">Có hình ảnh</div>
-          <div class="filter-item" bis_skin_checked="1">Đã mua hàng</div>
-          <div class="filter-item star" bis_skin_checked="1"><p>5 sao</p></div>
-          <div class="filter-item star" bis_skin_checked="1"><p>4 sao</p></div>
-          <div class="filter-item star" bis_skin_checked="1"><p>3 sao</p></div>
-          <div class="filter-item star" bis_skin_checked="1"><p>2 sao</p></div>
-          <div class="filter-item star" bis_skin_checked="1"><p>1 sao</p></div>
+    <div id="review">
+      <div class="box-review-filter">
+        <div class="title">Lọc đánh giá theo</div>
+        <div class="filter-container">
+          <div class="filter-item active">Tất cả</div>
+          <div class="filter-item">Có hình ảnh</div>
+          <div class="filter-item">Đã mua hàng</div>
+          <div class="filter-item star"><p>5 sao</p></div>
+          <div class="filter-item star"><p>4 sao</p></div>
+          <div class="filter-item star"><p>3 sao</p></div>
+          <div class="filter-item star"><p>2 sao</p></div>
+          <div class="filter-item star"><p>1 sao</p></div>
         </div>
       </div>
-      <div class="boxReview-comment" bis_skin_checked="1">
-        <div class="boxReview-comment-item" bis_skin_checked="1">
+      <div class="boxReview-comment">
+        <div class="boxReview-comment-item">
           <div
             class="boxReview-comment-item-title is-flex"
-            bis_skin_checked="1"
           >
-            <div class="is-flex is-align-items-center" bis_skin_checked="1">
+            <div class="is-flex is-align-items-center">
               <p
                 class="mr-2 is-flex is-align-items-center is-justify-content-center name-letter"
               >
                 P
               </p>
-              <div class="block-info" bis_skin_checked="1">
-                <div class="block-info__name" bis_skin_checked="1">
+              <div class="block-info">
+                <div class="block-info__name">
                   <span class="name">Phúc Nguyên Hoàng</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="boxReview-comment-item-review" bis_skin_checked="1">
-            <div class="item-review-rating" bis_skin_checked="1">
+          <div class="boxReview-comment-item-review">
+            <div class="item-review-rating">
               <div
                 class="item-review-rating__star has-attribute"
-                bis_skin_checked="1"
               >
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -751,7 +734,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -763,7 +746,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -775,7 +758,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -787,7 +770,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -799,10 +782,10 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="rating-label" bis_skin_checked="1">Tuyệt vời</div>
+                <div class="rating-label">Tuyệt vời</div>
               </div>
               <span class="bought-cps is-flex is-align-items-center"
-                ><div class="tick-icon" bis_skin_checked="1">
+                ><div class="tick-icon">
                   <svg
                     width="16"
                     height="16"
@@ -828,23 +811,19 @@
               </span>
               <div
                 class="item-review-rating__list-attribute"
-                bis_skin_checked="1"
               >
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Hiệu năng Siêu mạnh mẽ
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Thời lượng pin Cực khủng
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Chất lượng camera Chụp đẹp, chuyên nghiệp
                 </div>
@@ -852,14 +831,13 @@
             </div>
             <div
               class="item-review-comment is-flex is-justify-content-space-between is-flex-direction-column"
-              bis_skin_checked="1"
             >
-              <div class="comment-content" bis_skin_checked="1">
+              <div class="comment-content">
                 <p>Siêuuuu hài lòng</p>
               </div>
             </div>
-            <div class="date-time" bis_skin_checked="1">
-              <div class="icon-clock" bis_skin_checked="1">
+            <div class="date-time">
+              <div class="icon-clock">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -875,31 +853,29 @@
             </div>
           </div>
         </div>
-        <div class="boxReview-comment-item" bis_skin_checked="1">
+        <div class="boxReview-comment-item">
           <div
             class="boxReview-comment-item-title is-flex"
-            bis_skin_checked="1"
           >
-            <div class="is-flex is-align-items-center" bis_skin_checked="1">
+            <div class="is-flex is-align-items-center">
               <p
                 class="mr-2 is-flex is-align-items-center is-justify-content-center name-letter"
               >
                 Q
               </p>
-              <div class="block-info" bis_skin_checked="1">
-                <div class="block-info__name" bis_skin_checked="1">
+              <div class="block-info">
+                <div class="block-info__name">
                   <span class="name">Quỳnh Nhiii</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="boxReview-comment-item-review" bis_skin_checked="1">
-            <div class="item-review-rating" bis_skin_checked="1">
+          <div class="boxReview-comment-item-review">
+            <div class="item-review-rating">
               <div
                 class="item-review-rating__star has-attribute"
-                bis_skin_checked="1"
               >
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -911,7 +887,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -923,7 +899,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -935,7 +911,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -947,7 +923,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -959,27 +935,23 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="rating-label" bis_skin_checked="1">Tuyệt vời</div>
+                <div class="rating-label">Tuyệt vời</div>
               </div>
               <div
                 class="item-review-rating__list-attribute"
-                bis_skin_checked="1"
               >
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Hiệu năng Siêu mạnh mẽ
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Thời lượng pin Cực khủng
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Chất lượng camera Chụp đẹp, chuyên nghiệp
                 </div>
@@ -987,15 +959,14 @@
             </div>
             <div
               class="item-review-comment is-flex is-justify-content-space-between is-flex-direction-column"
-              bis_skin_checked="1"
             >
-              <div class="comment-content" bis_skin_checked="1">
+              <div class="comment-content">
                 <p>Huế có sẵn 14 128G k ạ ?</p>
                 <p>Máy new hay cũ vậy ạ ?</p>
               </div>
             </div>
-            <div class="date-time" bis_skin_checked="1">
-              <div class="icon-clock" bis_skin_checked="1">
+            <div class="date-time">
+              <div class="icon-clock">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1011,31 +982,29 @@
             </div>
           </div>
         </div>
-        <div class="boxReview-comment-item" bis_skin_checked="1">
+        <div class="boxReview-comment-item">
           <div
             class="boxReview-comment-item-title is-flex"
-            bis_skin_checked="1"
           >
-            <div class="is-flex is-align-items-center" bis_skin_checked="1">
+            <div class="is-flex is-align-items-center">
               <p
                 class="mr-2 is-flex is-align-items-center is-justify-content-center name-letter"
               >
                 n
               </p>
-              <div class="block-info" bis_skin_checked="1">
-                <div class="block-info__name" bis_skin_checked="1">
+              <div class="block-info">
+                <div class="block-info__name">
                   <span class="name">ngân mon</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="boxReview-comment-item-review" bis_skin_checked="1">
-            <div class="item-review-rating" bis_skin_checked="1">
+          <div class="boxReview-comment-item-review">
+            <div class="item-review-rating">
               <div
                 class="item-review-rating__star has-attribute"
-                bis_skin_checked="1"
               >
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1047,7 +1016,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1059,7 +1028,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1071,7 +1040,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1083,7 +1052,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon" bis_skin_checked="1">
+                <div class="icon">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1095,27 +1064,23 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="rating-label" bis_skin_checked="1">Tốt</div>
+                <div class="rating-label">Tốt</div>
               </div>
               <div
                 class="item-review-rating__list-attribute"
-                bis_skin_checked="1"
               >
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Hiệu năng Siêu mạnh mẽ
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Thời lượng pin Cực khủng
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Chất lượng camera Chụp đẹp, chuyên nghiệp
                 </div>
@@ -1123,17 +1088,16 @@
             </div>
             <div
               class="item-review-comment is-flex is-justify-content-space-between is-flex-direction-column"
-              bis_skin_checked="1"
             >
-              <div class="comment-content" bis_skin_checked="1">
+              <div class="comment-content">
                 <p>
                   Xsmax 64G máy đẹp,pin còn 83% thì thu lại và bù bao nhiêu tiền
                   khi mua 14pro vậy shop
                 </p>
               </div>
             </div>
-            <div class="date-time" bis_skin_checked="1">
-              <div class="icon-clock" bis_skin_checked="1">
+            <div class="date-time">
+              <div class="icon-clock">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1149,31 +1113,29 @@
             </div>
           </div>
         </div>
-        <div class="boxReview-comment-item" bis_skin_checked="1">
+        <div class="boxReview-comment-item">
           <div
             class="boxReview-comment-item-title is-flex"
-            bis_skin_checked="1"
           >
-            <div class="is-flex is-align-items-center" bis_skin_checked="1">
+            <div class="is-flex is-align-items-center">
               <p
                 class="mr-2 is-flex is-align-items-center is-justify-content-center name-letter"
               >
                 N
               </p>
-              <div class="block-info" bis_skin_checked="1">
-                <div class="block-info__name" bis_skin_checked="1">
+              <div class="block-info">
+                <div class="block-info__name">
                   <span class="name">Nguyễn Thị Kim Ngân</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="boxReview-comment-item-review" bis_skin_checked="1">
-            <div class="item-review-rating" bis_skin_checked="1">
+          <div class="boxReview-comment-item-review">
+            <div class="item-review-rating">
               <div
                 class="item-review-rating__star has-attribute"
-                bis_skin_checked="1"
               >
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1185,7 +1147,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1197,7 +1159,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1209,7 +1171,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1221,7 +1183,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1233,27 +1195,23 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="rating-label" bis_skin_checked="1">Tuyệt vời</div>
+                <div class="rating-label">Tuyệt vời</div>
               </div>
               <div
                 class="item-review-rating__list-attribute"
-                bis_skin_checked="1"
               >
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Hiệu năng Siêu mạnh mẽ
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Thời lượng pin Cực khủng
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Chất lượng camera Chụp đẹp, chuyên nghiệp
                 </div>
@@ -1261,17 +1219,16 @@
             </div>
             <div
               class="item-review-comment is-flex is-justify-content-space-between is-flex-direction-column"
-              bis_skin_checked="1"
             >
-              <div class="comment-content" bis_skin_checked="1">
+              <div class="comment-content">
                 <p>
                   E có ip 11 pin 87% màn hình sọc đen nhẹ em muốn lên đời Ip 14
                   thường trả trc 4 triệu góp 6 tháng mỗi tháng trả nhiu ạ
                 </p>
               </div>
             </div>
-            <div class="date-time" bis_skin_checked="1">
-              <div class="icon-clock" bis_skin_checked="1">
+            <div class="date-time">
+              <div class="icon-clock">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1287,31 +1244,29 @@
             </div>
           </div>
         </div>
-        <div class="boxReview-comment-item" bis_skin_checked="1">
+        <div class="boxReview-comment-item">
           <div
             class="boxReview-comment-item-title is-flex"
-            bis_skin_checked="1"
           >
-            <div class="is-flex is-align-items-center" bis_skin_checked="1">
+            <div class="is-flex is-align-items-center">
               <p
                 class="mr-2 is-flex is-align-items-center is-justify-content-center name-letter"
               >
                 V
               </p>
-              <div class="block-info" bis_skin_checked="1">
-                <div class="block-info__name" bis_skin_checked="1">
+              <div class="block-info">
+                <div class="block-info__name">
                   <span class="name">Vănn Tứ</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="boxReview-comment-item-review" bis_skin_checked="1">
-            <div class="item-review-rating" bis_skin_checked="1">
+          <div class="boxReview-comment-item-review">
+            <div class="item-review-rating">
               <div
                 class="item-review-rating__star has-attribute"
-                bis_skin_checked="1"
               >
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1323,7 +1278,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1335,7 +1290,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1347,7 +1302,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1359,7 +1314,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="icon is-active" bis_skin_checked="1">
+                <div class="icon is-active">
                   <svg
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1371,27 +1326,23 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="rating-label" bis_skin_checked="1">Tuyệt vời</div>
+                <div class="rating-label">Tuyệt vời</div>
               </div>
               <div
                 class="item-review-rating__list-attribute"
-                bis_skin_checked="1"
               >
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Hiệu năng Siêu mạnh mẽ
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Thời lượng pin Cực khủng
                 </div>
                 <div
                   class="item-review-rating__item-attribute"
-                  bis_skin_checked="1"
                 >
                   Chất lượng camera Chụp đẹp, chuyên nghiệp
                 </div>
@@ -1399,14 +1350,13 @@
             </div>
             <div
               class="item-review-comment is-flex is-justify-content-space-between is-flex-direction-column"
-              bis_skin_checked="1"
             >
-              <div class="comment-content" bis_skin_checked="1">
+              <div class="comment-content">
                 <p>Này mua trả góp phải trả trước bao nhiêu tiền vậy shop</p>
               </div>
             </div>
-            <div class="date-time" bis_skin_checked="1">
-              <div class="icon-clock" bis_skin_checked="1">
+            <div class="date-time">
+              <div class="icon-clock">
                 <svg
                   height="15"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1425,7 +1375,7 @@
         <a
           class="has-text-centered button__view-more-review is-flex is-align-items-center is-justify-content-center load-more"
           >Xem tất cả đánh giá
-          <div class="icon" bis_skin_checked="1">
+          <div class="icon">
             <svg
               height="15"
               xmlns="http://www.w3.org/2000/svg"
@@ -1439,19 +1389,17 @@
         ></a>
       </div>
     </div>
-    <div class="modal modal-review" bis_skin_checked="1">
-      <div class="modal-background" bis_skin_checked="1"></div>
-      <div class="modal-content" bis_skin_checked="1">
-        <div class="review-container" bis_skin_checked="1">
+    <div class="modal modal-review">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="review-container">
           <div
             class="content__close-btn modal__button"
-            bis_skin_checked="1"
           ></div>
           <div
             class="content__close-btn-desk modal__button"
-            bis_skin_checked="1"
           >
-            <div class="close-icon" bis_skin_checked="1">
+            <div class="close-icon">
               <svg
                 height="15"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1464,30 +1412,26 @@
               </svg>
             </div>
           </div>
-          <div class="title is-6 mb-0 px-4" bis_skin_checked="1">
+          <div class="title is-6 mb-0 px-4">
             Đánh giá &amp; nhận xét
           </div>
           <form enctype="multipart/form-data" class="modal-review-content p-4">
-            <div class="title-review-star-items" bis_skin_checked="1">
+            <div class="title-review-star-items">
               Đánh giá chung
             </div>
             <div
               class="modal-review-star is-flex is-justify-content-space-between my-3"
-              bis_skin_checked="1"
             >
               <div
                 class="star-all is-flex is-justify-content-space-evenly"
-                bis_skin_checked="1"
               >
                 <div
                   class="modal__button has-text-centered"
-                  bis_skin_checked="1"
                 >
                   <div
                     icon="star"
                     class="icon is-active"
                     style="cursor: pointer"
-                    bis_skin_checked="1"
                   >
                     <svg
                       height="15"
@@ -1504,13 +1448,11 @@
                 </div>
                 <div
                   class="modal__button has-text-centered"
-                  bis_skin_checked="1"
                 >
                   <div
                     icon="star"
                     class="icon is-active"
                     style="cursor: pointer"
-                    bis_skin_checked="1"
                   >
                     <svg
                       height="15"
@@ -1527,13 +1469,11 @@
                 </div>
                 <div
                   class="modal__button has-text-centered"
-                  bis_skin_checked="1"
                 >
                   <div
                     icon="star"
                     class="icon is-active"
                     style="cursor: pointer"
-                    bis_skin_checked="1"
                   >
                     <svg
                       height="15"
@@ -1550,13 +1490,11 @@
                 </div>
                 <div
                   class="modal__button has-text-centered"
-                  bis_skin_checked="1"
                 >
                   <div
                     icon="star"
                     class="icon is-active"
                     style="cursor: pointer"
-                    bis_skin_checked="1"
                   >
                     <svg
                       height="15"
@@ -1573,13 +1511,11 @@
                 </div>
                 <div
                   class="modal__button has-text-centered"
-                  bis_skin_checked="1"
                 >
                   <div
                     icon="star"
                     class="icon is-active"
                     style="cursor: pointer"
-                    bis_skin_checked="1"
                   >
                     <svg
                       height="15"
@@ -1600,7 +1536,7 @@
               placeholder="Xin mời chia sẻ một số cảm nhận về sản phẩm (nhập tối thiểu 15 kí tự)"
               class="textarea"
             ></textarea>
-            <div class="group-input is-flex" bis_skin_checked="1">
+            <div class="group-input is-flex">
               <input
                 id="image"
                 accept="image/x-png,image/gif,image/jpeg"
@@ -1611,7 +1547,7 @@
               <label
                 for="image"
                 class="btn-add modal__button my-2 is-flex is-flex-direction-column is-align-items-center"
-                ><div class="input-icon" bis_skin_checked="1">
+                ><div class="input-icon">
                   <svg
                     width="24"
                     height="24"
@@ -1635,8 +1571,8 @@
                 Thêm hình ảnh
               </label>
             </div>
-            <div class="clear__review" bis_skin_checked="1"></div>
-            <div class="button-container" bis_skin_checked="1">
+            <div class="clear__review"></div>
+            <div class="button-container">
               <button type="submit" class="button modal__button has-text-white">
                 GỬI ĐÁNH GIÁ
               </button>
@@ -1650,6 +1586,11 @@
 
 <script setup></script>
 <style scoped>
+.boxReview {
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  padding: 24px 48px;
+}
 .is-flex {
   display: flex !important;
 }
