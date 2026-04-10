@@ -100,7 +100,6 @@
   padding: 16px;
   position: relative;
   right: 2px;
-  width: 100%;
 }
 
 .block-sforum-v2 .sforum__title {

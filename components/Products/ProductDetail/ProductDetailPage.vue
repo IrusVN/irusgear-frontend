@@ -7,8 +7,8 @@
       </div>
       <ProductSameProduct />
       <div class="d-flex justify-content-between content-layout position-relative">
-        <ProductContentLeft />
-        <ProductContentRight />
+        <ProductContentLeft class="block-content-product-left" />
+        <ProductContentRight class="block-content-product-right" />
       </div>
       <ProductBoxReview />
       <ProductBlockComment />
@@ -85,7 +85,6 @@ onMounted(async () => {
 .content-layout>.block-content-product-right {
   flex: 1;
   height: fit-content;
-  max-height: calc(100vh - 200px);
   overflow-y: auto;
   position: sticky;
   top: 88px;
