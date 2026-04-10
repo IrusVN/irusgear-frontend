@@ -365,12 +365,12 @@
         </div>
       </div>
     </div>
-    <div id="thong-so-ky-thuat" promotion-pack="[object Object]" show-button-print="true"
-      class="cps-block-technicalInfo">
+    <div id="thong-so-ky-thuat" class="cps-block-technicalInfo">
       <div class="box-title is-flex is-justify-content-space-between is-align-items-center">
         <h2 class="title">Thông số kỹ thuật</h2>
-        <button class="button button__show-modal-technical is-flex is-justify-content-center">
-          Xem tất cả
+        <button class="button button__show-modal-technical is-flex is-justify-content-center"
+          @click="showAllSpecs = !showAllSpecs">
+          {{ showAllSpecs ? 'Thu gọn' : 'Xem tất cả' }}
           <div class="icon-svg">
             <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
               <path
@@ -380,215 +380,75 @@
           </div>
         </button>
       </div>
-      <table class="technical-content">
-        <tbody>
-          <tr class="technical-content-item">
-            <td>Kích thước màn hình</td>
-            <td>
-              <p>6.1 inches</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Công nghệ màn hình</td>
-            <td>
-              <p>
-                <a href="https://cellphones.com.vn/sforum/man-hinh-oled" target="_blank" rel="nofollow">OLED</a>
-              </p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Camera sau</td>
-            <td>
-              <p>
-                Camera góc rộng: 12MP, ƒ/1.5<br />Camera góc siêu rộng: 12MP,
-                ƒ/2.4
-              </p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Camera trước</td>
-            <td>
-              <p>12MP, ƒ/1.9</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Chipset</td>
-            <td>
-              <p>Apple A15 Bionic 6 nhân</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Công nghệ NFC</td>
-            <td>
-              <p>Có</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Dung lượng RAM</td>
-            <td>
-              <p>6 GB</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Bộ nhớ trong</td>
-            <td>
-              <p>128 GB</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Pin</td>
-            <td>
-              <p>3,279mAh</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Thẻ SIM</td>
-            <td>
-              <p>2 SIM (nano‑SIM và eSIM)</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Hệ điều hành</td>
-            <td>
-              <p>iOS 16</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Độ phân giải màn hình</td>
-            <td>
-              <p>2532 x 1170 pixels</p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Tính năng màn hình</td>
-            <td>
-              <p>
-                Tần số quét 60Hz, 1200 nits, Kính cường lực Ceramic Shield,
-                Super Retina XDR
-              </p>
-            </td>
-          </tr>
-          <tr class="technical-content-item">
-            <td>Loại CPU</td>
-            <td>
-              <p>3.22 GHz</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+      <!-- Dynamic specs from API -->
+      <template v-if="productSpecs && Object.keys(productSpecs).length > 0">
+        <table class="technical-content">
+          <tbody>
+            <tr v-for="(value, key, index) in productSpecs" :key="key" class="technical-content-item"
+              v-show="showAllSpecs || index < 7">
+              <td>{{ key }}</td>
+              <td>
+                <p>{{ value }}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div v-if="!showAllSpecs && Object.keys(productSpecs).length > 7" class="specs-show-more">
+          <button @click="showAllSpecs = true" class="btn-show-more-specs">
+            Xem thêm {{ Object.keys(productSpecs).length - 7 }} thông số
+            <svg height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path
+                d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
+              </path>
+            </svg>
+          </button>
+        </div>
+      </template>
+
+      <!-- Fallback skeleton when specs not loaded yet -->
+      <template v-else-if="!productStore.productDetail">
+        <table class="technical-content">
+          <tbody>
+            <tr v-for="n in 6" :key="n" class="technical-content-item">
+              <td>
+                <div class="spec-skeleton spec-skeleton--key"></div>
+              </td>
+              <td>
+                <div class="spec-skeleton spec-skeleton--value"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <!-- Message when no specs available -->
+      <template v-else>
+        <p class="no-specs-msg">Thông số kỹ thuật đang được cập nhật.</p>
+      </template>
     </div>
-    <div id="boxFAQ">
-      <h2 class="title">Câu hỏi thường gặp</h2>
-      <div role="tablist" class="accordion">
-        <div class="accordion-item">
-          <div class="accordion-label button__show-faq" @click="toggleFaq(0)">
-            <h6>
-              Pin iPhone 14 có dung lượng bao nhiêu, dùng được trong bao lâu? Có
-              hỗ trợ sạc nhanh không?
-            </h6>
-            <div class="icon" :class="{ active: openFaqIndex === 0 }">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
-                <path
-                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
-                </path>
-              </svg>
-            </div>
-          </div>
-          <div class="accordion-content" :style="{ maxHeight: openFaqIndex === 0 ? '480px' : '0px' }">
-            <div>
-              iPhone 14 có dung lượng 3.279 mAh với thời gian phát video tối đa
-              20 giờ, đồng thời tích hợp công suất sạc nhanh 20W trở lên hỗ trợ
-              rút ngắn thời gian sạc pin xuống còn 1 tiếng rưỡi.
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <div class="accordion-label button__show-faq" @click="toggleFaq(1)">
-            <h6>iPhone 14 có mấy SIM? Bản eSim có dùng được ở Việt Nam?</h6>
-            <div class="icon" :class="{ active: openFaqIndex === 1 }">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
-                <path
-                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
-                </path>
-              </svg>
-            </div>
-          </div>
-          <div class="accordion-content" :style="{ maxHeight: openFaqIndex === 1 ? '480px' : '0px' }">
-            <div>
-              iPhone 14 có 2 loại SIM cho người dùng lựa chọn bao gồm: SIM kép
-              (1 SIM vật lý và 1 eSIM) và eSIM. Tuy nhiên, chỉ có mẫu máy iPhone
-              14 tại Mỹ sẽ bị loại bỏ khe cắm SIM vật lý và chỉ sử dụng eSIM. Do
-              đó iPhone 14 chính hãng tại Việt Nam vẫn còn khay sim vật lý và hỗ
-              trợ eSIM.
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <div class="accordion-label button__show-faq" @click="toggleFaq(2)">
-            <h6>
-              Camera của iPhone 14 có cải tiến nổi bật nào so với iPhone 13?
-            </h6>
-            <div class="icon" :class="{ active: openFaqIndex === 2 }">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
-                <path
-                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
-                </path>
-              </svg>
-            </div>
-          </div>
-          <div class="accordion-content" :style="{ maxHeight: openFaqIndex === 2 ? '480px' : '0px' }">
-            <div>
-              Cả 2 model đều sở hữu 2 cảm biến 12MP, bao gồm 1 cảm biến góc rộng
-              tiêu chuẩn và 1 cảm biến góc siêu rộng. Tuy nhiên, điểm nâng cấp
-              tạo nên sự khác biệt ở camera của iPhone 14 là cảm biến camera
-              chính có khẩu độ f/1.5 tăng khả năng chụp thiếu sáng thêm 49% so
-              với iPhone 1, do đó đem lại khả năng chụp thiếu sáng tốt hơn.
-              Ngoài ra, camera góc rộng cũng được tối ưu để phơi sáng nhanh và
-              bắt nét hiệu quả hơn.
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <div class="accordion-label button__show-faq" @click="toggleFaq(3)">
-            <h6>
-              iPhone 14 có mấy màu? Màu đặc trưng của iPhone 14 2023 là màu nào?
-            </h6>
-            <div class="icon" :class="{ active: openFaqIndex === 3 }">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
-                <path
-                  d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
-                </path>
-              </svg>
-            </div>
-          </div>
-          <div class="accordion-content" :style="{ maxHeight: openFaqIndex === 3 ? '480px' : '0px' }">
-            <div>
-              iPhone 14 bao gồm 5 màu sắc trẻ trung và năng động phù hợp với
-              nhiều lứa tuổi và đối tượng, cụ thể là Blue (xanh), Purple (tím),
-              Midnight (đen), Starlight (trắng), Product (đỏ). Trong đó, hai màu
-              hoàn toàn mới so với iPhone 13 là màu xanh và tím.&nbsp;
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="compare-apple-devices">
-      <a href="/so-sanh-iphone" class="compare-apple-devices-btn text-decoration-none" target="_blank" rel="nofollow">
-        So sánh các phiên bản iPhone
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 4L10 8L6 12" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          </path>
-        </svg></a>
-    </div>
-    <div></div>
   </div>
 </template>
 
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useProductStore } from '@/stores/productStore';
 
 const productStore = useProductStore();
+
+// Dynamic specs & article state
+const showAllSpecs = ref(false);
+
+const productSpecs = computed(() => {
+  const specs = productStore.productDetail?.specs;
+  if (!specs || typeof specs !== 'object' || Array.isArray(specs)) return null;
+  return specs;
+});
+
+// Reset expand state when product changes
+watch(() => productStore.productDetail?.id, () => {
+  showAllSpecs.value = false;
+});
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -2298,5 +2158,121 @@ onBeforeUnmount(() => {
     font-size: 8px;
     font-weight: 600;
   }
+}
+
+/* ===== Skeleton loading for specs ===== */
+.spec-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  height: 14px;
+}
+
+.spec-skeleton--key {
+  width: 100px;
+}
+
+.spec-skeleton--value {
+  width: 180px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ===== Specs show more button ===== */
+.specs-show-more {
+  text-align: center;
+  padding: 8px 0 4px;
+}
+
+.btn-show-more-specs {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-show-more-specs:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+
+/* ===== No specs message ===== */
+.no-specs-msg {
+  color: #888;
+  font-size: 14px;
+  padding: 12px 0;
+  text-align: center;
+}
+
+/* ===== Article / Description ===== */
+.cps-block-article {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.cps-block-article .article-header {
+  margin-bottom: 12px;
+}
+
+.article-content {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.article-content.article-collapsed {
+  max-height: 400px;
+  position: relative;
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+/* Responsive images inside injected article HTML */
+:deep(.article-content img) {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+:deep(.article-content a) {
+  color: #3b82f6;
+}
+
+.article-expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  color: #3b82f6;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 0 4px;
+  user-select: none;
+}
+
+.article-expand-btn svg {
+  transition: transform 0.3s ease;
+  fill: #3b82f6;
 }
 </style>

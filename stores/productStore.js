@@ -8,6 +8,7 @@ export const useProductStore = defineStore("product", () => {
   const { items, error } = storeToRefs(feGlobalStore);
 
   const productDetail = ref(null);
+  const productSuggestions = ref([]);
   const currentSlug = ref("");
 
   const productError = computed(() => error.value);
@@ -40,6 +41,26 @@ export const useProductStore = defineStore("product", () => {
   const resetProductDetail = () => {
     productDetail.value = null;
     currentSlug.value = "";
+    productSuggestions.value = [];
+  };
+
+  const fetchProductSuggest = async (id, params = {}) => {
+    try {
+      if (!id) return [];
+
+      feGlobalStore.setApiUrl(`products/${id}/suggestions`);
+      const res = await feGlobalStore.fetchItem(params);
+
+      if (res?.status === true && res.data) {
+        productSuggestions.value = res.data;
+      } else {
+        productSuggestions.value = [];
+      }
+    } catch (e) {
+      productSuggestions.value = [];
+    }
+
+    return productSuggestions.value;
   };
 
   const selectColorVariant = (url) => {
@@ -69,9 +90,11 @@ export const useProductStore = defineStore("product", () => {
 
   return {
     productDetail,
+    productSuggestions,
     currentSlug,
     productError,
     fetchProductDetail,
+    fetchProductSuggest,
     resetProductDetail,
     selectColorVariant,
   };

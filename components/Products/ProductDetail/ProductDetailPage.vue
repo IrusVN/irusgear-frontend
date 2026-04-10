@@ -33,7 +33,10 @@ const productStore = useProductStore();
 
 onMounted(async () => {
   if (route.params.slug) {
-    await productStore.fetchProductDetail(route.params.slug);
+    const detail = await productStore.fetchProductDetail(route.params.slug);
+    if (detail && detail.id) {
+      productStore.fetchProductSuggest(detail.id);
+    }
   }
 });
 
