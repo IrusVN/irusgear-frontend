@@ -23,22 +23,35 @@ import ProductContentLeft from "@/components/Products/ProductDetail/ProductConte
 import ProductContentRight from "@/components/Products/ProductDetail/ProductContentRight.vue";
 import ProductBoxReview from "@/components/Products/ProductDetail/ProductBoxReview.vue";
 import ProductBlockComment from "@/components/Products/ProductDetail/ProductBlockComment.vue";
-import { onMounted } from "vue";
-import { storeToRefs } from "pinia";
+import { watch } from "vue";
 import { useRoute } from "vue-router";
 import { useProductStore } from "@/stores/productStore";
 
 const route = useRoute();
 const productStore = useProductStore();
 
-onMounted(async () => {
-  if (route.params.slug) {
-    const detail = await productStore.fetchProductDetail(route.params.slug);
+watch(
+  () => [route.params.slug, route.query.product_id],
+  async ([slug, productId]) => {
+    if (!slug) return;
+
+    const normalizedProductId = productId ? String(productId) : null;
+    const sameSlugLoaded = productStore.currentSlug === slug && productStore.productDetail;
+
+    if (sameSlugLoaded) {
+      const applied = productStore.selectColorVariant(normalizedProductId);
+      if (applied) {
+        return;
+      }
+    }
+
+    const detail = await productStore.fetchProductDetail(slug, normalizedProductId ? { product_id: normalizedProductId } : {});
     if (detail && detail.id) {
       productStore.fetchProductSuggest(detail.id);
     }
-  }
-});
+  },
+  { immediate: true },
+);
 
 </script>
 <style>
