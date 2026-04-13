@@ -58,6 +58,7 @@
       </div>
       <div class="list-linked">
         <a v-for="storage in productStore.productDetail?.storageOptions || []" :key="storage.id" :href="storage.url"
+          @click.prevent="handleChangeStorage(storage)"
           class="item-linked button__link" :class="[{ active: storage.active }, `linked-${storage.id}`]"><strong>{{
             storage.label }}</strong></a>
       </div>
@@ -74,7 +75,7 @@
             <img v-if="color.flashSale?.enabled"
               :src="color.flashSale?.badgeImage || 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png'"
               height="30" alt="Flash Sale" loading="lazy" class="sticker-flash-sale" />
-            <a :href="color.url" @click.prevent="handleChangeColor(color)" :title="color.name"
+            <a :href="buildColorHref(color)" @click.prevent="handleChangeColor(color)" :title="color.name"
               class="button__change-color is-flex is-align-items-center" :class="{ disabled: color.disabled }"><img
                 :src="color.thumbnail" width="50" height="50" :alt="color.name" loading="lazy" />
               <div class="is-flex is-flex-direction-column">
@@ -2288,16 +2289,52 @@
 </template>
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import ProductBoxWarranty from "@/components/Products/ProductDetail/ProductBoxWarranty.vue";
 import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
 import { useProductStore } from '@/stores/productStore';
 
 const productStore = useProductStore();
+const route = useRoute();
+const router = useRouter();
 
-const handleChangeColor = (color) => {
-  if (color.active) return;
-  productStore.selectColorVariant(color.url);
-  window.history.pushState({}, '', color.url);
+const buildColorHref = (color) => {
+  if (!color?.productId) {
+    return route.fullPath;
+  }
+
+  const query = new URLSearchParams();
+  Object.entries(route.query || {}).forEach(([key, value]) => {
+    if (value == null || key === "product_id") return;
+    if (Array.isArray(value)) {
+      value.forEach((item) => query.append(key, item));
+      return;
+    }
+    query.set(key, value);
+  });
+  query.set("product_id", color.productId);
+
+  return `${route.path}?${query.toString()}`;
+};
+
+const handleChangeStorage = async (storage) => {
+  if (!storage?.url || storage.active) return;
+
+  await router.push(storage.url);
+};
+
+const handleChangeColor = async (color) => {
+  if (!color || color.active || !color.productId) return;
+
+  productStore.selectColorVariant(color.productId);
+
+  await router.replace({
+    path: route.path,
+    query: {
+      ...route.query,
+      product_id: color.productId,
+    },
+  });
 };
 
 import "swiper/css";
