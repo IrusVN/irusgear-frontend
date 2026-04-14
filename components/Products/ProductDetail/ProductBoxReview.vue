@@ -1589,7 +1589,7 @@
 .boxReview {
   background-color: #f5f5f5;
   border-radius: 16px;
-  padding: 24px 48px;
+  padding: 18px 18px;
 }
 .is-flex {
   display: flex !important;

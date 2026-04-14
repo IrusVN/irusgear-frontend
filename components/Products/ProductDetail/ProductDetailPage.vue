@@ -48,6 +48,7 @@ watch(
     const detail = await productStore.fetchProductDetail(slug, normalizedProductId ? { product_id: normalizedProductId } : {});
     if (detail && detail.id) {
       productStore.fetchProductSuggest(detail.id);
+      productStore.fetchProductSameProducts(detail.id);
     }
   },
   { immediate: true },

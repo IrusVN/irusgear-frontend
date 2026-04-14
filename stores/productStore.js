@@ -9,8 +9,12 @@ export const useProductStore = defineStore("product", () => {
 
   const productDetail = ref(null);
   const productSuggestions = ref([]);
+  const productSameProducts = ref({ tabs: [] });
   const currentSlug = ref("");
   const currentParams = ref({});
+  const detailRequestToken = ref(0);
+  const suggestRequestToken = ref(0);
+  const sameProductsRequestToken = ref(0);
 
   const productError = computed(() => error.value);
 
@@ -102,16 +106,34 @@ export const useProductStore = defineStore("product", () => {
   };
 
   const fetchProductDetail = async (slug, params = {}) => {
+    let requestToken = detailRequestToken.value;
+
     try {
       if (!slug) {
         return navigateTo("/products");
       }
 
+      const nextParams = { ...params };
+      const isNewSlug = currentSlug.value !== slug;
+      requestToken = detailRequestToken.value + 1;
+
+      detailRequestToken.value = requestToken;
+
+      if (isNewSlug) {
+        productDetail.value = null;
+        productSuggestions.value = [];
+        productSameProducts.value = { tabs: [] };
+      }
+
       currentSlug.value = slug;
-      currentParams.value = { ...params };
+      currentParams.value = nextParams;
       feGlobalStore.setApiUrl(`products/${slug}`);
 
-      const res = await feGlobalStore.fetchItem(params);
+      const res = await feGlobalStore.fetchItem(nextParams);
+
+      if (detailRequestToken.value !== requestToken || currentSlug.value !== slug) {
+        return productDetail.value;
+      }
 
       if (res?.status === true && res.data) {
         productDetail.value = normalizeProductDetail(res.data);
@@ -120,6 +142,10 @@ export const useProductStore = defineStore("product", () => {
         return navigateTo("/products");
       }
     } catch (e) {
+      if (detailRequestToken.value !== requestToken) {
+        return productDetail.value;
+      }
+
       productDetail.value = null;
       return navigateTo("/products");
     }
@@ -128,18 +154,28 @@ export const useProductStore = defineStore("product", () => {
   };
 
   const resetProductDetail = () => {
+    detailRequestToken.value += 1;
+    suggestRequestToken.value += 1;
+    sameProductsRequestToken.value += 1;
     productDetail.value = null;
     currentSlug.value = "";
     currentParams.value = {};
     productSuggestions.value = [];
+    productSameProducts.value = { tabs: [] };
   };
 
   const fetchProductSuggest = async (id, params = {}) => {
     try {
       if (!id) return [];
 
+      const requestToken = suggestRequestToken.value + 1;
+      suggestRequestToken.value = requestToken;
       feGlobalStore.setApiUrl(`products/${id}/suggestions`);
       const res = await feGlobalStore.fetchItem(params);
+
+      if (suggestRequestToken.value !== requestToken) {
+        return productSuggestions.value;
+      }
 
       if (res?.comboDeals || res?.accessoryDeals) {
         productSuggestions.value = res;
@@ -153,6 +189,36 @@ export const useProductStore = defineStore("product", () => {
     }
 
     return productSuggestions.value;
+  };
+
+  const fetchProductSameProducts = async (id, params = {}) => {
+    try {
+      if (!id) {
+        productSameProducts.value = { tabs: [] };
+        return productSameProducts.value;
+      }
+
+      const requestToken = sameProductsRequestToken.value + 1;
+      sameProductsRequestToken.value = requestToken;
+      feGlobalStore.setApiUrl(`products/${id}/same-products`);
+      const res = await feGlobalStore.fetchItem(params);
+
+      if (sameProductsRequestToken.value !== requestToken) {
+        return productSameProducts.value;
+      }
+
+      if (Array.isArray(res?.tabs)) {
+        productSameProducts.value = { tabs: res.tabs };
+      } else if (res?.status === true && Array.isArray(res?.data?.tabs)) {
+        productSameProducts.value = { tabs: res.data.tabs };
+      } else {
+        productSameProducts.value = { tabs: [] };
+      }
+    } catch (e) {
+      productSameProducts.value = { tabs: [] };
+    }
+
+    return productSameProducts.value;
   };
 
   const selectColorVariant = (productId) => {
@@ -214,11 +280,13 @@ export const useProductStore = defineStore("product", () => {
   return {
     productDetail,
     productSuggestions,
+    productSameProducts,
     currentSlug,
     currentParams,
     productError,
     fetchProductDetail,
     fetchProductSuggest,
+    fetchProductSameProducts,
     resetProductDetail,
     selectColorVariant,
   };
