@@ -75,33 +75,6 @@
           </button>
         </div>
       </div>
-
-      <a href="tel:18002097" class="button-mobile-contact" aria-label="Liên hệ">
-        <span>Liên hệ</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M5 4H8.32297C8.73187 4 9.09958 4.24895 9.25144 4.62861L10.6837 8.20928C10.866 8.66499 10.6906 9.18564 10.2697 9.43816L9.28972 10.0262C8.84345 10.2939 8.67302 10.8621 8.94144 11.308C9.86688 12.8453 11.1547 14.1331 12.692 15.0586C13.1379 15.327 13.7061 15.1565 13.9738 14.7103L14.5618 13.7303C14.8144 13.3094 15.335 13.134 15.7907 13.3163L19.3714 14.7486C19.751 14.9004 20 15.2681 20 15.677V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21C14.0993 20.763 10.4202 19.1065 7.65683 16.3432C4.8935 13.5798 3.23705 9.90074 3 6C3 5.46957 3.21071 4.96086 3.58579 4.58579C3.96086 4.21071 4.46957 4 5 4Z"
-            stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M15 7C15.5304 7 16.0391 7.21071 16.4142 7.58579C16.7893 7.96086 17 8.46957 17 9"
-            stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M15 3C16.5913 3 18.1174 3.63214 19.2426 4.75736C20.3679 5.88258 21 7.4087 21 9"
-            stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </a>
     </div>
   </div>
 </template>
@@ -164,12 +137,10 @@ const showBasePrice = computed(() => {
 }
 
 .block-order-shell {
-  align-items: center;
   display: flex;
-  gap: 14px;
   justify-content: center;
   margin: 0 auto;
-  max-width: 1060px;
+  max-width: 920px;
   padding: 0 16px;
 }
 
@@ -285,7 +256,7 @@ const showBasePrice = computed(() => {
 }
 
 .button-desktop:hover,
-.button-mobile-contact:hover {
+.button-add-to-cart:hover {
   transform: translateY(-1px);
 }
 
@@ -314,35 +285,7 @@ const showBasePrice = computed(() => {
   width: 42px;
 }
 
-.button-mobile-contact {
-  align-items: center;
-  align-self: stretch;
-  background: #d70018;
-  border-radius: 12px;
-  box-shadow: 0 12px 30px -20px rgba(215, 0, 24, 0.7);
-  color: #fff;
-  display: inline-flex;
-  flex: 0 0 112px;
-  font-size: 16px;
-  font-weight: 700;
-  gap: 6px;
-  justify-content: center;
-  min-height: 40px;
-  padding: 0 18px;
-  pointer-events: auto;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.button-mobile-contact svg {
-  flex-shrink: 0;
-}
-
 @media only screen and (max-width: 1199px) {
-  .block-order-shell {
-    max-width: 980px;
-  }
-
   .cps-block-order-button-desktop {
     gap: 14px;
   }

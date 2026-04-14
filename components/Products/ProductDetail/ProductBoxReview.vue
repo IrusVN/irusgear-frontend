@@ -1,4 +1,5 @@
 <template>
+  <div>
   <section id="review" class="boxReview" v-if="productDetail">
     <div class="boxReview-head is-flex is-justify-content-space-between is-align-items-center">
       <h2 class="title">Đánh giá {{ productDetail.name }}</h2>
@@ -143,12 +144,15 @@
       </button>
     </div>
   </section>
+  <ModalReview />
+  </div>
 </template>
 
 <script setup>
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useProductStore } from "@/stores/productStore";
+import ModalReview from "@/components/Models/ModalReview.vue";
 
 const productStore = useProductStore();
 const {
