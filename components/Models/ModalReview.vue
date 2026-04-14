@@ -16,7 +16,7 @@
 
           <div class="title is-6 mb-0 px-4">Đánh giá & nhận xét</div>
 
-          <div class="modal-review-title is-flex is-align-items-center px-4">
+          <div class="modal-review-title is-flex is-align-items-center">
             <img
               src="https://cdn2.cellphones.com.vn/insecure/rs:fill:100:100/q:90/plain/https://cellphones.com.vn/media/wysiwyg/cps-ant.png"
               width="100"
@@ -84,18 +84,33 @@
               class="textarea"
             />
 
-            <div class="group-input is-flex">
-              <input
-                id="review-image"
-                accept="image/x-png,image/gif,image/jpeg"
+            <div class="group-input is-flex pb-3">
+                <input
+                  id="review-image"
+                  accept="image/x-png,image/gif,image/jpeg"
                 multiple
                 type="file"
-                class="is-hidden"
-                @change="handleFileChange"
-              />
-              <label for="review-image" class="btn-add modal__button my-2 is-flex is-flex-direction-column is-align-items-center">
-                <div class="input-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  class="is-hidden"
+                  @change="handleFileChange"
+                />
+                <div
+                  v-for="item in selectedFiles"
+                  :key="item.id"
+                  class="selected-file-card"
+                >
+                  <img :src="item.preview" :alt="item.file.name" class="selected-file-card__image" />
+                  <button
+                    type="button"
+                    class="selected-file-card__remove"
+                    aria-label="Xóa ảnh"
+                    @click="removeSelectedFile(item.id)"
+                  >
+                    ×
+                  </button>
+                </div>
+                <label for="review-image" class="btn-add modal__button my-2 is-flex is-flex-direction-column is-align-items-center">
+                  <div class="input-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M3 8C3 8.55 3.45 9 4 9C4.55 9 5 8.55 5 8V6H7C7.55 6 8 5.55 8 5C8 4.45 7.55 4 7 4H5V2C5 1.45 4.55 1 4 1C3.45 1 3 1.45 3 2V4H1C0.45 4 0 4.45 0 5C0 5.55 0.45 6 1 6H3V8Z"
                       fill="#637381"
@@ -108,14 +123,10 @@
                       fill="#637381"
                     />
                   </svg>
-                </div>
-                <span>Thêm hình ảnh</span>
-              </label>
-
-              <div v-if="selectedFiles.length" class="selected-files">
-                <span class="selected-files__count">{{ selectedFiles.length }} ảnh đã chọn</span>
+                  </div>
+                  <span>Thêm hình ảnh</span>
+                </label>
               </div>
-            </div>
 
             <p v-if="submitError" class="feedback-text error">{{ submitError }}</p>
             <p v-if="submitSuccess" class="feedback-text success">{{ submitSuccess }}</p>
@@ -196,12 +207,12 @@ const experienceRows = computed(() => {
 const productName = computed(() => productDetail.value?.name || "Sản phẩm");
 
 const resetForm = () => {
+  cleanupSelectedFiles();
   reviewForm.rating = 5;
   reviewForm.content = "";
   reviewForm.experienceRatings = Object.fromEntries(
     experienceRows.value.map((item) => [item.key, 5]),
   );
-  selectedFiles.value = [];
   submitError.value = "";
   submitSuccess.value = "";
 };
@@ -209,16 +220,10 @@ const resetForm = () => {
 const openModal = () => {
   resetForm();
   isOpen.value = true;
-  if (typeof document !== "undefined") {
-    document.body.style.overflow = "hidden";
-  }
 };
 
 const closeModal = () => {
   isOpen.value = false;
-  if (typeof document !== "undefined") {
-    document.body.style.overflow = "";
-  }
 };
 
 const experienceStatus = (key) => {
@@ -229,7 +234,31 @@ const experienceStatus = (key) => {
 };
 
 const handleFileChange = (event) => {
-  selectedFiles.value = Array.from(event.target.files || []);
+  cleanupSelectedFiles();
+  selectedFiles.value = Array.from(event.target.files || []).map((file, index) => ({
+    id: `${file.name}-${file.size}-${index}`,
+    file,
+    preview: URL.createObjectURL(file),
+  }));
+};
+
+const removeSelectedFile = (id) => {
+  const target = selectedFiles.value.find((item) => item.id === id);
+  if (target?.preview) {
+    URL.revokeObjectURL(target.preview);
+  }
+
+  selectedFiles.value = selectedFiles.value.filter((item) => item.id !== id);
+};
+
+const cleanupSelectedFiles = () => {
+  selectedFiles.value.forEach((item) => {
+    if (item?.preview) {
+      URL.revokeObjectURL(item.preview);
+    }
+  });
+
+  selectedFiles.value = [];
 };
 
 const submitReview = async () => {
@@ -294,12 +323,10 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  cleanupSelectedFiles();
+
   if (typeof window !== "undefined") {
     window.removeEventListener("open-review-modal", openHandler);
-  }
-
-  if (typeof document !== "undefined") {
-    document.body.style.overflow = "";
   }
 });
 </script>
@@ -307,10 +334,14 @@ onBeforeUnmount(() => {
 <style scoped>
 .modal-review {
   align-items: center;
+  animation: modalOverlayFadeIn 0.22s ease;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   left: 0;
+  padding: 16px;
   position: fixed;
+  scrollbar-gutter: stable;
   top: 0;
   width: 100%;
   z-index: 1200;
@@ -323,11 +354,12 @@ onBeforeUnmount(() => {
 }
 
 .modal-review .modal-content {
-  margin: 16px;
+  animation: modalSlideUpIn 0.42s cubic-bezier(0.16, 1, 0.3, 1);
   max-height: calc(100vh - 32px);
   max-width: 640px;
   position: relative;
-  width: min(640px, calc(100vw - 32px));
+  will-change: transform, opacity;
+  width: min(640px, 100%);
   z-index: 1;
 }
 
@@ -335,7 +367,19 @@ onBeforeUnmount(() => {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 18px 60px rgba(15, 23, 42, 0.18);
-  overflow: hidden;
+  max-height: calc(100vh - 32px);
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.review-container::-webkit-scrollbar {
+  display: none;
+}
+
+.review-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .content__close-btn-desk {
@@ -344,13 +388,14 @@ onBeforeUnmount(() => {
   border: 0;
   cursor: pointer;
   display: inline-flex;
+  float: right;
   height: 28px;
   justify-content: center;
-  position: absolute;
-  right: 16px;
-  top: 16px;
+  margin: 14px 14px -42px 0;
+  position: sticky;
+  top: 14px;
   width: 28px;
-  z-index: 2;
+  z-index: 4;
 }
 
 .close-icon {
@@ -365,6 +410,10 @@ onBeforeUnmount(() => {
   font-weight: 700;
   line-height: 1.2;
   padding: 18px 22px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 3;
 }
 
 .modal-review-title {
@@ -374,7 +423,6 @@ onBeforeUnmount(() => {
   flex-direction: row;
   flex-wrap: nowrap;
   gap: 14px;
-  padding: 18px 22px 8px;
 }
 
 .modal-review-title img {
@@ -400,7 +448,8 @@ onBeforeUnmount(() => {
 
 .modal-review-content {
   background-color: #fff;
-  padding: 0 22px 20px;
+  padding: 0 22px 84px;
+  position: relative;
 }
 
 .title-review-star-items {
@@ -516,10 +565,66 @@ onBeforeUnmount(() => {
 }
 
 .group-input {
+  display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
   gap: 12px;
   margin: 16px 0 10px;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 8px 10px 8px 0;
+  white-space: nowrap;
+}
+
+.group-input::-webkit-scrollbar {
+  display: none;
+}
+
+.group-input {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.selected-file-card {
+  background: #fff;
+  border: 1px solid #d8dde5;
+  border-radius: 10px;
+  display: inline-block;
+  flex: 0 0 118px;
+  height: 72px;
+  overflow: visible;
+  position: relative;
+  vertical-align: top;
+  width: 118px;
+}
+
+.selected-file-card__image {
+  border-radius: 10px;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.selected-file-card__remove {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #94a3b8;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+  color: #475569;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 18px;
+  height: 22px;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 22px;
 }
 
 .is-hidden {
@@ -543,23 +648,13 @@ onBeforeUnmount(() => {
   min-width: 118px;
   padding: 10px 12px;
   text-align: center;
+  vertical-align: top;
 }
 
 .input-icon {
   align-items: center;
   display: flex;
   justify-content: center;
-}
-
-.selected-files {
-  color: #637381;
-  font-size: 13px;
-}
-
-.selected-files__count {
-  background: #f8fafc;
-  border-radius: 999px;
-  padding: 6px 10px;
 }
 
 .feedback-text {
@@ -576,20 +671,29 @@ onBeforeUnmount(() => {
 }
 
 .button-container {
-  padding-top: 14px;
+  background: #fff;
+  bottom: 0;
+  border-top: 1px solid #eef2f6;
+  padding: 10px 16px 12px;
+  position: sticky;
+  width: 100%;
+  z-index: 3;
 }
 
 .button-container .button {
   background: #d70018;
   border: 0;
-  border-radius: 10px;
+  border-radius: 9px;
   color: #fff;
   cursor: pointer;
-  display: inline-flex;
-  font-size: 16px;
+  display: flex;
+  font-size: 17px;
   font-weight: 700;
-  height: 48px;
+  height: 40px;
   justify-content: center;
+  align-items: center;
+  letter-spacing: 0;
+  line-height: 1;
   text-transform: uppercase;
   width: 100%;
 }
@@ -599,16 +703,51 @@ onBeforeUnmount(() => {
   opacity: 0.75;
 }
 
+@keyframes modalOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideUpIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100vh, 0);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translate3d(0, 14px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @media screen and (max-width: 768px) {
+  .modal-review {
+    padding: 8px;
+  }
+
   .modal-review .modal-content {
-    margin: 8px;
     max-height: calc(100vh - 16px);
-    width: calc(100vw - 16px);
+    width: 100%;
   }
 
   .title.is-6 {
     font-size: 18px;
     padding: 16px 18px;
+  }
+
+  .content__close-btn-desk {
+    margin: 10px 12px -40px 0;
+    top: 12px;
   }
 
   .modal-review-title {
@@ -621,7 +760,11 @@ onBeforeUnmount(() => {
   }
 
   .modal-review-content {
-    padding: 0 18px 18px;
+    padding: 0 18px 82px;
+  }
+
+  .button-container {
+    padding: 10px 12px 12px;
   }
 
   .review-all {
