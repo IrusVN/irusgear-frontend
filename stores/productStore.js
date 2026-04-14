@@ -10,11 +10,18 @@ export const useProductStore = defineStore("product", () => {
   const productDetail = ref(null);
   const productSuggestions = ref([]);
   const productSameProducts = ref({ tabs: [] });
+  const productReviewSummary = ref(null);
+  const productReviewFilters = ref({ experienceKeys: [], attributeOptions: [], sortOptions: [] });
+  const productReviewList = ref({ items: [], pagination: null, filters: { rating: null, sort: "latest" } });
+  const productQuestions = ref({ items: [], pagination: null });
   const currentSlug = ref("");
   const currentParams = ref({});
   const detailRequestToken = ref(0);
   const suggestRequestToken = ref(0);
   const sameProductsRequestToken = ref(0);
+  const reviewSummaryRequestToken = ref(0);
+  const reviewListRequestToken = ref(0);
+  const questionListRequestToken = ref(0);
 
   const productError = computed(() => error.value);
 
@@ -123,6 +130,10 @@ export const useProductStore = defineStore("product", () => {
         productDetail.value = null;
         productSuggestions.value = [];
         productSameProducts.value = { tabs: [] };
+        productReviewSummary.value = null;
+        productReviewFilters.value = { experienceKeys: [], attributeOptions: [], sortOptions: [] };
+        productReviewList.value = { items: [], pagination: null, filters: { rating: null, sort: "latest" } };
+        productQuestions.value = { items: [], pagination: null };
       }
 
       currentSlug.value = slug;
@@ -157,11 +168,18 @@ export const useProductStore = defineStore("product", () => {
     detailRequestToken.value += 1;
     suggestRequestToken.value += 1;
     sameProductsRequestToken.value += 1;
+    reviewSummaryRequestToken.value += 1;
+    reviewListRequestToken.value += 1;
+    questionListRequestToken.value += 1;
     productDetail.value = null;
     currentSlug.value = "";
     currentParams.value = {};
     productSuggestions.value = [];
     productSameProducts.value = { tabs: [] };
+    productReviewSummary.value = null;
+    productReviewFilters.value = { experienceKeys: [], attributeOptions: [], sortOptions: [] };
+    productReviewList.value = { items: [], pagination: null, filters: { rating: null, sort: "latest" } };
+    productQuestions.value = { items: [], pagination: null };
   };
 
   const fetchProductSuggest = async (id, params = {}) => {
@@ -277,16 +295,147 @@ export const useProductStore = defineStore("product", () => {
     return productDetail.value;
   };
 
+  const fetchProductReviewSummary = async (id) => {
+    try {
+      if (!id) {
+        productReviewSummary.value = null;
+        return null;
+      }
+
+      const requestToken = reviewSummaryRequestToken.value + 1;
+      reviewSummaryRequestToken.value = requestToken;
+      feGlobalStore.setApiUrl(`products/${id}/reviews/summary`);
+      const res = await feGlobalStore.fetchItem();
+
+      if (reviewSummaryRequestToken.value !== requestToken) {
+        return productReviewSummary.value;
+      }
+
+      productReviewSummary.value = res?.summary ? res : res?.data || null;
+    } catch (e) {
+      productReviewSummary.value = null;
+    }
+
+    return productReviewSummary.value;
+  };
+
+  const fetchProductReviewFilters = async (id) => {
+    try {
+      if (!id) {
+        productReviewFilters.value = { experienceKeys: [], attributeOptions: [], sortOptions: [] };
+        return productReviewFilters.value;
+      }
+
+      feGlobalStore.setApiUrl(`products/${id}/review-filters`);
+      const res = await feGlobalStore.fetchItem();
+      productReviewFilters.value = res?.experienceKeys ? res : res?.data || { experienceKeys: [], attributeOptions: [], sortOptions: [] };
+    } catch (e) {
+      productReviewFilters.value = { experienceKeys: [], attributeOptions: [], sortOptions: [] };
+    }
+
+    return productReviewFilters.value;
+  };
+
+  const fetchProductReviews = async (id, params = {}, options = {}) => {
+    try {
+      if (!id) {
+        productReviewList.value = { items: [], pagination: null, filters: { rating: null, sort: "latest" } };
+        return productReviewList.value;
+      }
+
+      const requestToken = reviewListRequestToken.value + 1;
+      reviewListRequestToken.value = requestToken;
+      feGlobalStore.setApiUrl(`products/${id}/reviews`);
+      const res = await feGlobalStore.fetchItem(params);
+
+      if (reviewListRequestToken.value !== requestToken) {
+        return productReviewList.value;
+      }
+
+      const payload = res?.items ? res : res?.data || { items: [], pagination: null, filters: { rating: null, sort: "latest" } };
+
+      productReviewList.value = {
+        items: options.append ? [...(productReviewList.value.items || []), ...(payload.items || [])] : (payload.items || []),
+        pagination: payload.pagination || null,
+        filters: payload.filters || { rating: null, sort: "latest" },
+      };
+    } catch (e) {
+      productReviewList.value = { items: [], pagination: null, filters: { rating: null, sort: "latest" } };
+    }
+
+    return productReviewList.value;
+  };
+
+  const submitProductReview = async (id, payload) => {
+    if (!id) return null;
+
+    feGlobalStore.setApiUrl(`products/${id}/reviews`);
+    return feGlobalStore.createItem(payload);
+  };
+
+  const fetchProductQuestions = async (id, params = {}, options = {}) => {
+    try {
+      if (!id) {
+        productQuestions.value = { items: [], pagination: null };
+        return productQuestions.value;
+      }
+
+      const requestToken = questionListRequestToken.value + 1;
+      questionListRequestToken.value = requestToken;
+      feGlobalStore.setApiUrl(`products/${id}/questions`);
+      const res = await feGlobalStore.fetchItem(params);
+
+      if (questionListRequestToken.value !== requestToken) {
+        return productQuestions.value;
+      }
+
+      const payload = res?.items ? res : res?.data || { items: [], pagination: null };
+      productQuestions.value = {
+        items: options.append ? [...(productQuestions.value.items || []), ...(payload.items || [])] : (payload.items || []),
+        pagination: payload.pagination || null,
+      };
+    } catch (e) {
+      productQuestions.value = { items: [], pagination: null };
+    }
+
+    return productQuestions.value;
+  };
+
+  const submitProductQuestion = async (id, payload) => {
+    if (!id) return null;
+
+    feGlobalStore.setApiUrl(`products/${id}/questions`);
+    return feGlobalStore.createItem(payload);
+  };
+
+  const submitProductQuestionReply = async (productId, questionId, payload) => {
+    if (!productId || !questionId) return null;
+
+    feGlobalStore.setApiUrl(`products/${productId}/questions/${questionId}/replies`);
+    return feGlobalStore.createItem(payload);
+  };
+
   return {
     productDetail,
     productSuggestions,
     productSameProducts,
+    productReviewSummary,
+    productReviewFilters,
+    productReviewList,
+    productQuestions,
     currentSlug,
     currentParams,
     productError,
     fetchProductDetail,
     fetchProductSuggest,
     fetchProductSameProducts,
+    fetchProductReviewSummary,
+    fetchProductReviewFilters,
+    fetchProductReviews,
+    submitProductReview,
+    fetchProductQuestions,
+    submitProductQuestion,
+    submitProductQuestionReply,
     resetProductDetail,
     selectColorVariant,
   };

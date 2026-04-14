@@ -1,6 +1,6 @@
 <template>
   <div class="product-detail-page container-shell mx-auto position-relative">
-    <section class="pt-2 position-relative">
+    <section ref="pageSectionEl" class="pt-2 position-relative">
       <div class="d-flex flex-wrap align-items-start detail-top-layout m-0">
         <ProductDetailLeft />
         <ProductDetailRight />
@@ -13,9 +13,11 @@
       <ProductBoxReview />
       <ProductBlockComment />
     </section>
+    <ProductBlockOrder :visible="showFloatingOrder" />
   </div>
 </template>
 <script setup>
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import ProductDetailLeft from "@/components/Products/ProductDetail/ProductDetailLeft.vue";
 import ProductDetailRight from "@/components/Products/ProductDetail/ProductDetailRight.vue";
 import ProductSameProduct from "@/components/Products/ProductDetail/ProductSameProduct.vue";
@@ -23,12 +25,39 @@ import ProductContentLeft from "@/components/Products/ProductDetail/ProductConte
 import ProductContentRight from "@/components/Products/ProductDetail/ProductContentRight.vue";
 import ProductBoxReview from "@/components/Products/ProductDetail/ProductBoxReview.vue";
 import ProductBlockComment from "@/components/Products/ProductDetail/ProductBlockComment.vue";
-import { watch } from "vue";
+import ProductBlockOrder from "@/components/Products/ProductDetail/ProductBlockOrder.vue";
 import { useRoute } from "vue-router";
 import { useProductStore } from "@/stores/productStore";
 
 const route = useRoute();
 const productStore = useProductStore();
+const pageSectionEl = ref(null);
+const scrollY = ref(0);
+
+const showFloatingOrder = computed(() => {
+  if (!process.client || !productStore.productDetail || window.innerWidth <= 990) {
+    return false;
+  }
+
+  const threshold = 420;
+  const currentScroll = scrollY.value;
+
+  if (currentScroll < threshold) {
+    return false;
+  }
+
+  const pageRect = pageSectionEl.value?.getBoundingClientRect();
+
+  if (!pageRect) {
+    return true;
+  }
+
+  return pageRect.bottom > 220;
+});
+
+const handleScroll = () => {
+  scrollY.value = window.scrollY || window.pageYOffset || 0;
+};
 
 watch(
   () => [route.params.slug, route.query.product_id],
@@ -49,11 +78,38 @@ watch(
     if (detail && detail.id) {
       productStore.fetchProductSuggest(detail.id);
       productStore.fetchProductSameProducts(detail.id);
+      productStore.fetchProductReviewSummary(detail.id);
+      productStore.fetchProductReviewFilters(detail.id);
+      productStore.fetchProductReviews(detail.id, { page: 1, per_page: 5, sort: "latest" });
+      productStore.fetchProductQuestions(detail.id, { page: 1, per_page: 5 });
     }
   },
   { immediate: true },
 );
 
+watch(
+  () => route.params.slug,
+  () => {
+    if (process.client) {
+      scrollY.value = window.scrollY || 0;
+    }
+  },
+);
+
+onMounted(() => {
+  if (!process.client) return;
+
+  handleScroll();
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("resize", handleScroll, { passive: true });
+});
+
+onBeforeUnmount(() => {
+  if (!process.client) return;
+
+  window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("resize", handleScroll);
+});
 </script>
 <style>
 .product-detail-page {
