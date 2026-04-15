@@ -50,6 +50,21 @@
           </div>
         </div>
       </div>
+
+      <div class="product-series-block">
+        <h2 class="product-series-title">Macbook</h2>
+
+        <div class="product-series-list">
+          <a
+            v-for="item in productSeries"
+            :key="item.label"
+            :href="item.href"
+            class="product-series-chip"
+          >
+            {{ item.label }}
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -122,6 +137,37 @@ const bannerGroups = computed(() => [
   },
 ]);
 
+const productSeries = [
+  {
+    label: "MACBOOK AIR",
+    href: "#",
+  },
+  {
+    label: "MACBOOK PRO",
+    href: "#",
+  },
+  {
+    label: "MAC MINI",
+    href: "#",
+  },
+  {
+    label: "MACBOOK NEO",
+    href: "#",
+  },
+  {
+    label: "MAC STUDIO",
+    href: "#",
+  },
+  {
+    label: "STUDIO DISPLAY",
+    href: "#",
+  },
+  {
+    label: "IMAC",
+    href: "#",
+  },
+];
+
 let swiperInstances = [];
 
 const initSwipers = async () => {
@@ -186,6 +232,49 @@ onBeforeUnmount(() => {
   display: flex;
   gap: 10px;
   margin-bottom: 24px;
+}
+
+.product-series-block {
+  margin-top: 4px;
+}
+
+.product-series-title {
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 16px;
+}
+
+.product-series-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-series-chip {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #111827;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 12px;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.product-series-chip:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.08);
+  color: #111827;
 }
 
 .is-flex {
@@ -369,6 +458,11 @@ onBeforeUnmount(() => {
   .block-sliding {
     width: 100%;
   }
+
+  .product-series-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
 }
 
 @media screen and (max-width: 540px) {
@@ -377,6 +471,16 @@ onBeforeUnmount(() => {
     font-size: 1.2rem;
     height: 50px;
     width: 25px;
+  }
+
+  .product-series-list {
+    gap: 6px;
+  }
+
+  .product-series-chip {
+    font-size: 12px;
+    min-height: 36px;
+    padding: 8px 10px;
   }
 }
 </style>
