@@ -125,9 +125,55 @@
             :key="`sticky-${activeDropdown.key}`"
             ref="dropdownEl"
             class="product-filter-dropdown"
+            :class="{ 'product-filter-dropdown--mega': activeDropdown.key === 'filter' }"
             :style="dropdownStyle"
           >
-            <div class="product-filter-dropdown__options">
+            <div v-if="activeDropdown.key === 'filter'" class="product-filter-mega-scroll">
+              <div class="product-filter-mega-grid">
+                <div
+                  v-for="section in megaFilterSections"
+                  :key="`sticky-mega-${section.key}`"
+                  class="product-filter-group"
+                >
+                  <div class="product-filter-group__title">
+                    <span>{{ section.label }}</span>
+                    <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
+                      <svg viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M10 8.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
+                      </svg>
+                    </span>
+                  </div>
+
+                  <div class="product-filter-group__options">
+                    <button
+                      v-for="option in section.options"
+                      :key="`sticky-${section.key}-${option}`"
+                      type="button"
+                      :class="[
+                        'product-filter-option',
+                        {
+                          'product-filter-option--selected': selectedOptionsByFilter[section.key]?.includes(option),
+                        },
+                      ]"
+                      @click="toggleFilterOption(section.key, option)"
+                    >
+                      <span>{{ option }}</span>
+                      <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
+                          <path d="M10 8.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                          <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div v-else class="product-filter-dropdown__options">
               <button
                 v-for="option in activeDropdown.options"
                 :key="`sticky-${activeDropdown.key}-${option}`"
@@ -157,14 +203,14 @@
                 class="product-filter-dropdown__button product-filter-dropdown__button--ghost"
                 @click="closeDropdown"
               >
-                ÄÃ³ng
+                Đóng
               </button>
               <button
                 type="button"
                 class="product-filter-dropdown__button product-filter-dropdown__button--primary"
                 @click="closeDropdown"
               >
-                Xem káº¿t quáº£
+                Xem kết quả
               </button>
             </div>
           </div>
@@ -361,9 +407,55 @@
             :key="activeDropdown.key"
             ref="dropdownEl"
             class="product-filter-dropdown"
+            :class="{ 'product-filter-dropdown--mega': activeDropdown.key === 'filter' }"
             :style="dropdownStyle"
           >
-            <div class="product-filter-dropdown__options">
+            <div v-if="activeDropdown.key === 'filter'" class="product-filter-mega-scroll">
+              <div class="product-filter-mega-grid">
+                <div
+                  v-for="section in megaFilterSections"
+                  :key="`mega-${section.key}`"
+                  class="product-filter-group"
+                >
+                  <div class="product-filter-group__title">
+                    <span>{{ section.label }}</span>
+                    <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
+                      <svg viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M10 8.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
+                      </svg>
+                    </span>
+                  </div>
+
+                  <div class="product-filter-group__options">
+                    <button
+                      v-for="option in section.options"
+                      :key="`${section.key}-${option}`"
+                      type="button"
+                      :class="[
+                        'product-filter-option',
+                        {
+                          'product-filter-option--selected': selectedOptionsByFilter[section.key]?.includes(option),
+                        },
+                      ]"
+                      @click="toggleFilterOption(section.key, option)"
+                    >
+                      <span>{{ option }}</span>
+                      <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
+                          <path d="M10 8.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                          <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div v-else class="product-filter-dropdown__options">
               <button
                 v-for="option in activeDropdown.options"
                 :key="`${activeDropdown.key}-${option}`"
@@ -559,12 +651,14 @@ const productFilters = [
 ];
 
 const activeDropdownKey = ref(null);
-const selectedOptionsByFilter = ref({
-  usage: ["Học tập - Văn phòng"],
-});
+const selectedOptionsByFilter = ref({});
 
 const activeDropdown = computed(() =>
-  productFilters.find((filter) => filter.key === activeDropdownKey.value && filter.options?.length),
+  productFilters.find((filter) => filter.key === activeDropdownKey.value && (filter.options?.length || filter.key === "filter")),
+);
+
+const megaFilterSections = computed(() =>
+  productFilters.filter((filter) => filter.key !== "filter" && filter.options?.length),
 );
 
 let swiperInstances = [];
@@ -582,7 +676,7 @@ const setFilterChipRef = (key, el, scope = "primary") => {
 };
 
 const handleFilterClick = (filter) => {
-  if (!filter.options?.length) return;
+  if (!filter.options?.length && filter.key !== "filter") return;
 
   activeDropdownKey.value = activeDropdownKey.value === filter.key ? null : filter.key;
 };
@@ -1144,10 +1238,64 @@ onBeforeUnmount(() => {
   z-index: 20;
 }
 
+.product-filter-dropdown--mega {
+  max-width: min(100%, 1000px);
+  min-width: min(100%, 920px);
+}
+
 .product-filter-dropdown__options {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 14px;
+}
+
+.product-filter-mega-scroll {
+  max-height: min(52vh, 520px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+.product-filter-mega-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.product-filter-mega-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product-filter-mega-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+
+.product-filter-mega-grid {
+  column-gap: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  row-gap: 28px;
+}
+
+.product-filter-group {
+  min-width: 0;
+}
+
+.product-filter-group__title {
+  align-items: center;
+  color: #374151;
+  display: inline-flex;
+  font-size: 15px;
+  font-weight: 700;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.product-filter-group__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
 }
 
 .product-filter-option {
@@ -1245,6 +1393,15 @@ onBeforeUnmount(() => {
     font-size: 18px;
     margin-bottom: 12px;
   }
+
+  .product-filter-dropdown--mega {
+    min-width: min(100%, 100%);
+  }
+
+  .product-filter-mega-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 22px;
+  }
 }
 
 @media screen and (max-width: 540px) {
@@ -1271,6 +1428,10 @@ onBeforeUnmount(() => {
     padding: 14px;
   }
 
+  .product-filter-dropdown--mega {
+    min-width: 100%;
+  }
+
   .product-filter-dropdown__footer {
     grid-template-columns: 1fr;
   }
@@ -1278,6 +1439,10 @@ onBeforeUnmount(() => {
   .product-filter-option {
     min-height: 38px;
     padding: 8px 14px;
+  }
+
+  .product-filter-mega-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
