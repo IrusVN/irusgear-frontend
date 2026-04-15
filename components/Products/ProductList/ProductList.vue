@@ -498,12 +498,41 @@
           </div>
         </transition>
       </div>
+
+      <div class="product-sort-block">
+        <h2 class="product-sort-title">Sắp xếp theo</h2>
+
+        <div class="product-sort-list">
+          <button
+            v-for="sort in sortOptions"
+            :key="sort.key"
+            type="button"
+            :class="[
+              'product-sort-chip',
+              { 'product-sort-chip--active': activeSortKey === sort.key },
+            ]"
+            @click="activeSortKey = sort.key"
+          >
+            <span class="product-sort-chip__icon" aria-hidden="true" v-html="sort.icon" />
+            <span>{{ sort.label }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="product-card-grid">
+        <HomeProdCard
+          v-for="product in sortedProductListItems"
+          :key="product.id"
+          :product="product"
+        />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import HomeProdCard from "@/components/Home/HomeProdCard.vue";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -518,6 +547,7 @@ const primaryFilterChipRefs = new Map();
 const stickyFilterChipRefs = new Map();
 const isStickyFilterVisible = ref(false);
 const stickyTopOffset = ref(0);
+const activeSortKey = ref("popular");
 
 const banners = [
   {
@@ -587,6 +617,136 @@ const productSeries = [
   { label: "STUDIO DISPLAY", href: "#" },
   { label: "IMAC", href: "#" },
 ];
+
+const sortOptions = [
+  {
+    key: "popular",
+    label: "Phổ biến",
+    icon:
+      '<svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5L12.25 7.05L17.25 7.77L13.63 11.3L14.48 16.27L10 13.92L5.52 16.27L6.37 11.3L2.75 7.77L7.75 7.05L10 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+  },
+  {
+    key: "promo",
+    label: "Khuyến mãi HOT",
+    icon:
+      '<svg viewBox="0 0 20 20" fill="none"><path d="M10 3L11.9 4.65L14.42 4.45L14.93 6.92L17 8.35L15.74 10.55L16.35 13L13.92 13.82L12.55 15.95L10 15.2L7.45 15.95L6.08 13.82L3.65 13L4.26 10.55L3 8.35L5.07 6.92L5.58 4.45L8.1 4.65L10 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 10L9.3 11.3L12.5 8.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  },
+  {
+    key: "price_asc",
+    label: "Giá Thấp - Cao",
+    icon:
+      '<svg viewBox="0 0 20 20" fill="none"><path d="M4 5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 9H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 13H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 14.5V5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11.5 8L14 5.5L16.5 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  },
+  {
+    key: "price_desc",
+    label: "Giá Cao - Thấp",
+    icon:
+      '<svg viewBox="0 0 20 20" fill="none"><path d="M4 5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 9H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 13H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 5.5V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11.5 12L14 14.5L16.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  },
+];
+
+const productListItems = [
+  {
+    id: 1,
+    badge: true,
+    discount: 3,
+    installmentText: "Tráº£ gÃ³p",
+    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook-neo.png",
+    name: "MacBook Neo 13 inch A18 Pro 2026 6CPU 5GPU 8GB 256GB",
+    price: 15990000,
+    originalPrice: 16490000,
+    gifts: [
+      "HÃ ng má»›i vá»",
+      "GiÃ¡ S-Student 15.490.000Ä‘",
+      "KhÃ´ng phÃ­ chuyá»ƒn Ä‘á»•i kÃ¬ tráº£ gÃ³p 0% qua tháº» tÃ­n dá»¥ng ká»³ háº¡n 3-6 thÃ¡ng",
+    ],
+    rating: 5,
+    slug: "macbook-neo-13-inch-a18-pro-2026",
+  },
+  {
+    id: 2,
+    badge: true,
+    discount: 5,
+    installmentText: "Tráº£ gÃ³p",
+    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook_air_m4_13_2025.png",
+    name: "MacBook Air M4 13 inch 2025 10CPU 8GPU 16GB 256GB",
+    price: 25590000,
+    originalPrice: 26990000,
+    gifts: [
+      "HÃ ng má»›i vá»",
+      "GiÃ¡ S-Student 25.090.000Ä‘",
+      "Tráº£ gÃ³p 0% - 0Ä‘ phá»¥ phÃ­ - 0Ä‘ tráº£ trÆ°á»›c - ká»³ háº¡n Ä‘áº¿n 12 thÃ¡ng",
+    ],
+    rating: 4.9,
+    slug: "macbook-air-m4-13-2025-16gb-256gb",
+  },
+  {
+    id: 3,
+    badge: true,
+    discount: 12,
+    installmentText: "Tráº£ gÃ³p",
+    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook_air_m2.png",
+    name: "Apple MacBook Air M2 2024 8CPU 8GPU 16GB 256GB",
+    price: 21990000,
+    originalPrice: 24990000,
+    gifts: [
+      "HÃ ng má»›i vá»",
+      "GiÃ¡ S-Student 21.490.000Ä‘",
+      "Tráº£ gÃ³p 0% - 0Ä‘ phá»¥ phÃ­ - 0Ä‘ tráº£ trÆ°á»›c - ká»³ háº¡n Ä‘áº¿n 12 thÃ¡ng",
+    ],
+    rating: 4.9,
+    slug: "macbook-air-m2-2024-16gb-256gb",
+  },
+  {
+    id: 4,
+    badge: true,
+    discount: 2,
+    installmentText: "Tráº£ gÃ³p",
+    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook_air_m5_13_2026.png",
+    name: "MacBook Air M5 13 inch 2026 10CPU 8GPU 16GB 512GB",
+    price: 29490000,
+    originalPrice: 29990000,
+    gifts: [
+      "HÃ ng má»›i vá»",
+      "GiÃ¡ S-Student 28.990.000Ä‘",
+      "Tráº£ gÃ³p 0% - 0Ä‘ phá»¥ phÃ­ - 0Ä‘ tráº£ trÆ°á»›c - ká»³ háº¡n Ä‘áº¿n 12 thÃ¡ng",
+    ],
+    rating: 5,
+    slug: "macbook-air-m5-13-2026-16gb-512gb",
+  },
+  {
+    id: 5,
+    badge: true,
+    discount: 1,
+    installmentText: "Tráº£ gÃ³p",
+    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook_pro_14_m5.png",
+    name: "MacBook Pro 14 M5 10CPU 10GPU 16GB 512GB",
+    price: 41490000,
+    originalPrice: 41990000,
+    gifts: [
+      "HÃ ng má»›i vá»",
+      "GiÃ¡ S-Student 40.990.000Ä‘",
+      "Tráº£ gÃ³p 0% - 0Ä‘ phá»¥ phÃ­ - 0Ä‘ tráº£ trÆ°á»›c - ká»³ háº¡n Ä‘áº¿n 12 thÃ¡ng",
+    ],
+    rating: 5,
+    slug: "macbook-pro-14-m5-16gb-512gb",
+  },
+];
+
+const sortedProductListItems = computed(() => {
+  const items = [...productListItems];
+
+  switch (activeSortKey.value) {
+    case "promo":
+      return items.sort((a, b) => (Number(b.discount) || 0) - (Number(a.discount) || 0));
+    case "price_asc":
+      return items.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
+    case "price_desc":
+      return items.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
+    default:
+      return items;
+  }
+});
 
 const productFilters = [
   { key: "filter", label: "Bộ lọc", leadingIcon: "filter", primary: true },
@@ -1152,6 +1312,78 @@ onBeforeUnmount(() => {
   margin: 0;
 }
 
+.product-sort-block {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-top: 28px;
+}
+
+.product-sort-title {
+  color: #111827;
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.product-sort-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.product-card-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 16px;
+}
+
+.product-sort-chip {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  color: #111827;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 16px;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.product-sort-chip:hover {
+  background: #f8fafc;
+  border-color: #9ca3af;
+}
+
+.product-sort-chip--active {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+}
+
+.product-sort-chip__icon {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.product-sort-chip__icon :deep(svg) {
+  height: 18px;
+  width: 18px;
+}
+
 .product-filter-chip {
   align-items: center;
   background: #f3f4f6;
@@ -1389,9 +1621,23 @@ onBeforeUnmount(() => {
   }
 
   .product-series-title,
-  .product-filter-title {
+  .product-filter-title,
+  .product-sort-title {
     font-size: 18px;
     margin-bottom: 12px;
+  }
+
+  .product-sort-block {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .product-sort-list {
+    justify-content: flex-start;
+  }
+
+  .product-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .product-filter-dropdown--mega {
@@ -1417,8 +1663,13 @@ onBeforeUnmount(() => {
     gap: 6px;
   }
 
+  .product-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .product-series-chip,
-  .product-filter-chip {
+  .product-filter-chip,
+  .product-sort-chip {
     font-size: 12px;
     min-height: 36px;
     padding: 8px 10px;
