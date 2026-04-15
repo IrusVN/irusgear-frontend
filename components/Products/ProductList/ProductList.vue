@@ -521,10 +521,27 @@
 
       <div class="product-card-grid">
         <HomeProdCard
-          v-for="product in sortedProductListItems"
+          v-for="product in visibleProductListItems"
           :key="product.id"
           :product="product"
         />
+      </div>
+
+      <div v-if="hasMoreProducts" class="product-load-more">
+        <button type="button" class="product-load-more__button" @click="handleLoadMoreProducts">
+          <span>Xem thêm {{ remainingProductCount }} sản phẩm</span>
+          <span class="product-load-more__icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path
+                d="M5 7.5L10 12.5L15 7.5"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
       </div>
     </div>
   </section>
@@ -548,6 +565,8 @@ const stickyFilterChipRefs = new Map();
 const isStickyFilterVisible = ref(false);
 const stickyTopOffset = ref(0);
 const activeSortKey = ref("popular");
+const initialVisibleProductCount = 4;
+const visibleProductCount = ref(initialVisibleProductCount);
 
 const banners = [
   {
@@ -748,6 +767,12 @@ const sortedProductListItems = computed(() => {
   }
 });
 
+const visibleProductListItems = computed(() => sortedProductListItems.value.slice(0, visibleProductCount.value));
+
+const remainingProductCount = computed(() => Math.max(0, sortedProductListItems.value.length - visibleProductCount.value));
+
+const hasMoreProducts = computed(() => remainingProductCount.value > 0);
+
 const productFilters = [
   { key: "filter", label: "Bộ lọc", leadingIcon: "filter", primary: true },
   { key: "stock", label: "Sẵn hàng", leadingIcon: "truck" },
@@ -855,6 +880,13 @@ const toggleFilterOption = (filterKey, option) => {
 
 const closeDropdown = () => {
   activeDropdownKey.value = null;
+};
+
+const handleLoadMoreProducts = () => {
+  visibleProductCount.value = Math.min(
+    sortedProductListItems.value.length,
+    visibleProductCount.value + initialVisibleProductCount,
+  );
 };
 
 const updateDropdownPosition = async () => {
@@ -1018,6 +1050,10 @@ watch(activeDropdownKey, async () => {
 
 watch(isStickyFilterVisible, async () => {
   await updateDropdownPosition();
+});
+
+watch(activeSortKey, () => {
+  visibleProductCount.value = initialVisibleProductCount;
 });
 
 onBeforeUnmount(() => {
@@ -1341,6 +1377,52 @@ onBeforeUnmount(() => {
   gap: 16px;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   margin-top: 16px;
+}
+
+.product-load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.product-load-more__button {
+  align-items: center;
+  background: #dbeafe;
+  border: 0;
+  border-radius: 12px;
+  color: #3b82f6;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  justify-content: center;
+  min-height: 50px;
+  padding: 12px 28px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.product-load-more__button:hover {
+  background: #bfdbfe;
+  color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.product-load-more__button span:first-child {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.product-load-more__icon {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.product-load-more__icon svg {
+  height: 18px;
+  width: 18px;
 }
 
 .product-sort-chip {
