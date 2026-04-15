@@ -65,18 +65,191 @@
           </a>
         </div>
       </div>
+
+      <div ref="filterBlockEl" class="product-filter-block">
+        <h2 class="product-filter-title">Chọn theo tiêu chí</h2>
+
+        <div class="product-filter-list">
+          <button
+            v-for="filter in productFilters"
+            :key="filter.key"
+            :ref="(el) => setFilterChipRef(filter.key, el)"
+            type="button"
+            :class="[
+              'product-filter-chip',
+              {
+                'product-filter-chip--primary': filter.primary && activeDropdownKey !== filter.key,
+                'product-filter-chip--active': activeDropdownKey === filter.key,
+              },
+            ]"
+            @click="handleFilterClick(filter)"
+          >
+            <span v-if="filter.leadingIcon === 'filter'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M4 5H20L13.5 12.4375V18.25L10.5 19.75V12.4375L4 5Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <span v-else-if="filter.leadingIcon === 'truck'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M3 6.5H13V14.5H3V6.5Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M13 9H17L20 12V14.5H13V9Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+                <circle cx="7" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
+                <circle cx="17" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
+                <path d="M5 9.5H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                <path d="M3 12H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+              </svg>
+            </span>
+
+            <span v-else-if="filter.leadingIcon === 'new'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 5.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                <path
+                  d="M5 7H14.75L13.25 10.5L14.75 14H5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path d="M16 13.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                <circle cx="16" cy="10" r="1.75" stroke="currentColor" stroke-width="1.7" />
+                <path d="M18.5 18.5H13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+              </svg>
+            </span>
+
+            <span v-else-if="filter.leadingIcon === 'price'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7" />
+                <path
+                  d="M12 8.5V12H15"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <span>{{ filter.label }}</span>
+
+            <span v-if="filter.trailingIcon === 'chevron'" class="product-filter-chip__meta" aria-hidden="true">
+              <svg :class="{ 'is-rotated': activeDropdownKey === filter.key }" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M5 7.5L10 12.5L15 7.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <span
+              v-else-if="filter.trailingIcon === 'chevron-info'"
+              class="product-filter-chip__meta product-filter-chip__meta-group"
+              aria-hidden="true"
+            >
+              <svg :class="{ 'is-rotated': activeDropdownKey === filter.key }" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M5 7.5L10 12.5L15 7.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <svg viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
+                <path d="M10 8.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <transition name="filter-dropdown" mode="out-in">
+          <div
+            v-if="activeDropdown"
+            :key="activeDropdown.key"
+            ref="dropdownEl"
+            class="product-filter-dropdown"
+            :style="dropdownStyle"
+          >
+            <div class="product-filter-dropdown__options">
+              <button
+                v-for="option in activeDropdown.options"
+                :key="`${activeDropdown.key}-${option}`"
+                type="button"
+                :class="[
+                  'product-filter-option',
+                  {
+                    'product-filter-option--selected': selectedOptionsByFilter[activeDropdown.key]?.includes(option),
+                  },
+                ]"
+                @click="toggleFilterOption(activeDropdown.key, option)"
+              >
+                <span>{{ option }}</span>
+                <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M10 8.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                    <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+
+            <div class="product-filter-dropdown__footer">
+              <button
+                type="button"
+                class="product-filter-dropdown__button product-filter-dropdown__button--ghost"
+                @click="closeDropdown"
+              >
+                Đóng
+              </button>
+              <button
+                type="button"
+                class="product-filter-dropdown__button product-filter-dropdown__button--primary"
+                @click="closeDropdown"
+              >
+                Xem kết quả
+              </button>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const rootEl = ref(null);
+const filterBlockEl = ref(null);
+const dropdownEl = ref(null);
+const dropdownStyle = ref({});
+const filterChipRefs = new Map();
 
 const banners = [
   {
@@ -138,37 +311,183 @@ const bannerGroups = computed(() => [
 ]);
 
 const productSeries = [
+  { label: "MACBOOK AIR", href: "#" },
+  { label: "MACBOOK PRO", href: "#" },
+  { label: "MAC MINI", href: "#" },
+  { label: "MACBOOK NEO", href: "#" },
+  { label: "MAC STUDIO", href: "#" },
+  { label: "STUDIO DISPLAY", href: "#" },
+  { label: "IMAC", href: "#" },
+];
+
+const productFilters = [
+  { key: "filter", label: "Bộ lọc", leadingIcon: "filter", primary: true },
+  { key: "stock", label: "Sẵn hàng", leadingIcon: "truck" },
+  { key: "new", label: "Hàng mới về", leadingIcon: "new" },
+  { key: "price", label: "Xem theo giá", leadingIcon: "price" },
   {
-    label: "MACBOOK AIR",
-    href: "#",
+    key: "major",
+    label: "Ngành học",
+    trailingIcon: "chevron",
+    options: ["Công nghệ thông tin", "Kinh tế", "Thiết kế", "Marketing", "Kế toán"],
   },
   {
-    label: "MACBOOK PRO",
-    href: "#",
+    key: "usage",
+    label: "Nhu cầu sử dụng",
+    trailingIcon: "chevron-info",
+    options: [
+      "Học tập - Văn phòng",
+      "Đồ họa - Kỹ thuật",
+      "Cao cấp - Sang trọng",
+      "Laptop sáng tạo nội dung",
+      "Mỏng nhẹ",
+      "Gaming",
+    ],
   },
   {
-    label: "MAC MINI",
-    href: "#",
+    key: "cpu",
+    label: "CPU",
+    trailingIcon: "chevron",
+    options: ["Apple M1", "Apple M2", "Apple M3", "Apple M4", "Intel Core i7"],
   },
   {
-    label: "MACBOOK NEO",
-    href: "#",
+    key: "ram",
+    label: "Dung lượng RAM",
+    trailingIcon: "chevron-info",
+    options: ["8 GB", "16 GB", "18 GB", "24 GB", "32 GB"],
   },
   {
-    label: "MAC STUDIO",
-    href: "#",
+    key: "storage",
+    label: "Ổ cứng",
+    trailingIcon: "chevron-info",
+    options: ["256 GB", "512 GB", "1 TB", "2 TB"],
   },
   {
-    label: "STUDIO DISPLAY",
-    href: "#",
+    key: "screen",
+    label: "Kích thước màn hình",
+    trailingIcon: "chevron",
+    options: ["13 inch", "14 inch", "15 inch", "16 inch"],
   },
   {
-    label: "IMAC",
-    href: "#",
+    key: "resolution",
+    label: "Độ phân giải",
+    trailingIcon: "chevron",
+    options: ["Retina", "Liquid Retina", "Liquid Retina XDR", "4.5K"],
+  },
+  {
+    key: "feature",
+    label: "Tính năng đặc biệt",
+    trailingIcon: "chevron",
+    options: ["Touch ID", "Wi-Fi 6E", "Thunderbolt 4", "120Hz ProMotion"],
   },
 ];
 
+const activeDropdownKey = ref("usage");
+const selectedOptionsByFilter = ref({
+  usage: ["Học tập - Văn phòng"],
+});
+
+const activeDropdown = computed(() =>
+  productFilters.find((filter) => filter.key === activeDropdownKey.value && filter.options?.length),
+);
+
 let swiperInstances = [];
+let mounted = false;
+
+const setFilterChipRef = (key, el) => {
+  if (el) {
+    filterChipRefs.set(key, el);
+    return;
+  }
+
+  filterChipRefs.delete(key);
+};
+
+const handleFilterClick = (filter) => {
+  if (!filter.options?.length) return;
+
+  activeDropdownKey.value = activeDropdownKey.value === filter.key ? null : filter.key;
+};
+
+const toggleFilterOption = (filterKey, option) => {
+  const current = selectedOptionsByFilter.value[filterKey] || [];
+  const next = current.includes(option)
+    ? current.filter((item) => item !== option)
+    : [...current, option];
+
+  selectedOptionsByFilter.value = {
+    ...selectedOptionsByFilter.value,
+    [filterKey]: next,
+  };
+};
+
+const closeDropdown = () => {
+  activeDropdownKey.value = null;
+};
+
+const updateDropdownPosition = async () => {
+  if (!activeDropdownKey.value || !filterBlockEl.value) {
+    dropdownStyle.value = {};
+    return;
+  }
+
+  const triggerEl = filterChipRefs.get(activeDropdownKey.value);
+
+  if (!triggerEl) {
+    dropdownStyle.value = {};
+    return;
+  }
+
+  await nextTick();
+
+  const containerRect = filterBlockEl.value.getBoundingClientRect();
+  const triggerRect = triggerEl.getBoundingClientRect();
+  const dropdownNode = dropdownEl.value;
+  const top = triggerRect.bottom - containerRect.top + 10;
+  const triggerLeft = triggerRect.left - containerRect.left;
+  const triggerRight = containerRect.right - triggerRect.right;
+
+  if (dropdownNode) {
+    const dropdownWidth = dropdownNode.offsetWidth;
+    const fitsRightFromLeftAnchor = triggerLeft + dropdownWidth <= containerRect.width;
+    const fitsLeftFromRightAnchor = triggerRight + dropdownWidth <= containerRect.width;
+
+    if (!fitsRightFromLeftAnchor && fitsLeftFromRightAnchor) {
+      dropdownStyle.value = {
+        right: `${Math.max(0, triggerRight)}px`,
+        left: "auto",
+        top: `${top}px`,
+      };
+      return;
+    }
+
+    const maxLeft = Math.max(0, containerRect.width - dropdownWidth);
+    const left = Math.min(Math.max(0, triggerLeft), maxLeft);
+
+    dropdownStyle.value = {
+      left: `${left}px`,
+      right: "auto",
+      top: `${top}px`,
+    };
+    return;
+  }
+
+  dropdownStyle.value = {
+    left: `${triggerLeft}px`,
+    right: "auto",
+    top: `${top}px`,
+  };
+};
+
+const handleClickOutside = (event) => {
+  if (!filterBlockEl.value?.contains(event.target)) {
+    closeDropdown();
+  }
+};
+
+const handleWindowResize = () => {
+  updateDropdownPosition();
+};
 
 const initSwipers = async () => {
   if (!import.meta.client || !rootEl.value) return;
@@ -216,10 +535,27 @@ const destroySwipers = () => {
 onMounted(async () => {
   await nextTick();
   await initSwipers();
+  await updateDropdownPosition();
+
+  if (!mounted && typeof window !== "undefined") {
+    window.addEventListener("click", handleClickOutside);
+    window.addEventListener("resize", handleWindowResize);
+    mounted = true;
+  }
+});
+
+watch(activeDropdownKey, async () => {
+  await updateDropdownPosition();
 });
 
 onBeforeUnmount(() => {
   destroySwipers();
+
+  if (mounted && typeof window !== "undefined") {
+    window.removeEventListener("click", handleClickOutside);
+    window.removeEventListener("resize", handleWindowResize);
+    mounted = false;
+  }
 });
 </script>
 
@@ -228,53 +564,11 @@ onBeforeUnmount(() => {
   background: #f8fafc;
   min-height: 100%;
 }
+
 .block-top-sliding-banner {
   display: flex;
   gap: 10px;
   margin-bottom: 24px;
-}
-
-.product-series-block {
-  margin-top: 4px;
-}
-
-.product-series-title {
-  color: #111827;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.3;
-  margin: 0 0 16px;
-}
-
-.product-series-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.product-series-chip {
-  align-items: center;
-  background: #fff;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  color: #111827;
-  display: inline-flex;
-  font-size: 13px;
-  font-weight: 700;
-  justify-content: center;
-  min-height: 40px;
-  padding: 8px 12px;
-  text-decoration: none;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    color 0.2s ease;
-}
-
-.product-series-chip:hover {
-  border-color: #9ca3af;
-  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.08);
-  color: #111827;
 }
 
 .is-flex {
@@ -450,6 +744,241 @@ onBeforeUnmount(() => {
   opacity: 1;
 }
 
+.product-series-block {
+  margin-top: 4px;
+}
+
+.product-series-title {
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 16px;
+}
+
+.product-series-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-series-chip {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #111827;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 12px;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.product-series-chip:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.08);
+  color: #111827;
+}
+
+.product-filter-block {
+  margin-top: 28px;
+  position: relative;
+}
+
+.product-filter-title {
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 16px;
+}
+
+.product-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-filter-chip {
+  align-items: center;
+  background: #f3f4f6;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #111827;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 14px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.product-filter-chip--primary {
+  background: #fff5f5;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.product-filter-chip--active {
+  background: #fff;
+  border-color: #ef4444;
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+  color: #ef4444;
+}
+
+.product-filter-chip__icon,
+.product-filter-chip__meta {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.product-filter-chip__icon svg {
+  height: 18px;
+  width: 18px;
+}
+
+.product-filter-chip__meta svg {
+  height: 16px;
+  transition: transform 0.2s ease;
+  width: 16px;
+}
+
+.product-filter-chip__meta--info {
+  color: #6b7280;
+}
+
+.product-filter-chip--active .product-filter-chip__meta--info {
+  color: #ef4444;
+}
+
+.product-filter-chip__meta-group {
+  gap: 4px;
+}
+
+.product-filter-chip:hover {
+  background: #eceef2;
+}
+
+.product-filter-chip--primary:hover {
+  background: #ffe8e8;
+}
+
+.product-filter-chip__meta .is-rotated {
+  transform: rotate(180deg);
+}
+
+.product-filter-dropdown {
+  position: absolute;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 22px 44px rgba(15, 23, 42, 0.16);
+  max-width: min(100%, 600px);
+  min-width: min(100%, 420px);
+  padding: 16px;
+  width: fit-content;
+  z-index: 20;
+}
+
+.product-filter-dropdown__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.product-filter-option {
+  align-items: center;
+  background: #f8f8f8;
+  border: 1px solid #d9dde5;
+  border-radius: 999px;
+  color: #374151;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 6px;
+  min-height: 40px;
+  padding: 10px 18px;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.product-filter-option:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #2563eb;
+}
+
+.product-filter-option--selected {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #2563eb;
+}
+
+.product-filter-option--selected .product-filter-chip__meta--info {
+  color: #2563eb;
+}
+
+.product-filter-dropdown__footer {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 14px;
+}
+
+.product-filter-dropdown__button {
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  min-height: 42px;
+  padding: 10px 18px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.product-filter-dropdown__button--ghost {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  color: #111827;
+}
+
+.product-filter-dropdown__button--primary {
+  background: #d70018;
+  border: 1px solid transparent;
+  color: #fff;
+}
+
+.product-filter-dropdown__button--primary:hover {
+  background: #bf0015;
+}
+
+.filter-dropdown-enter-active,
+.filter-dropdown-leave-active {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.filter-dropdown-enter-from,
+.filter-dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
 @media screen and (max-width: 768px) {
   .block-top-sliding-banner {
     flex-direction: column;
@@ -459,7 +988,8 @@ onBeforeUnmount(() => {
     width: 100%;
   }
 
-  .product-series-title {
+  .product-series-title,
+  .product-filter-title {
     font-size: 18px;
     margin-bottom: 12px;
   }
@@ -473,14 +1003,29 @@ onBeforeUnmount(() => {
     width: 25px;
   }
 
-  .product-series-list {
+  .product-series-list,
+  .product-filter-list {
     gap: 6px;
   }
 
-  .product-series-chip {
+  .product-series-chip,
+  .product-filter-chip {
     font-size: 12px;
     min-height: 36px;
     padding: 8px 10px;
+  }
+
+  .product-filter-dropdown {
+    padding: 14px;
+  }
+
+  .product-filter-dropdown__footer {
+    grid-template-columns: 1fr;
+  }
+
+  .product-filter-option {
+    min-height: 38px;
+    padding: 8px 14px;
   }
 }
 </style>
