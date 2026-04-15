@@ -512,7 +512,7 @@
               'product-sort-chip',
               { 'product-sort-chip--active': activeSortKey === sort.key },
             ]"
-            @click="activeSortKey = sort.key"
+            @click="handleSortClick(sort.key)"
           >
             <span class="product-sort-chip__icon" aria-hidden="true" v-html="sort.icon" />
             <span>{{ sort.label }}</span>
@@ -550,15 +550,32 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { storeToRefs } from "pinia";
 import HomeProdCard from "@/components/Home/HomeProdCard.vue";
+import { useProductListingStore } from "@/stores/productListingStore";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const config = useRuntimeConfig();
-const categorySlug = "macbook";
-const apiBaseUrl = computed(() => String(config.public.apiBaseUrl || "").replace(/\/$/, ""));
+const productListingStore = useProductListingStore();
+const {
+  pageTitle,
+  loadError,
+  isPageLoading,
+  isLoadingMore,
+  selectedSeriesKey,
+  bannerGroups,
+  productSeries,
+  sortOptions,
+  productFilters,
+  visibleProductListItems,
+  remainingProductCount,
+  hasMoreProducts,
+  paginationState,
+  activeSortKey,
+  selectedOptionsByFilter,
+} = storeToRefs(productListingStore);
 
 const rootEl = ref(null);
 const filterBlockEl = ref(null);
@@ -569,356 +586,8 @@ const primaryFilterChipRefs = new Map();
 const stickyFilterChipRefs = new Map();
 const isStickyFilterVisible = ref(false);
 const stickyTopOffset = ref(0);
-const activeSortKey = ref("popular");
-const pageTitle = ref("Macbook");
-const loadError = ref(null);
-const isPageLoading = ref(false);
-const isLoadingMore = ref(false);
-const selectedSeriesKey = ref("");
-const bannerGroups = ref([
-  { id: "primary", items: [] },
-  { id: "secondary", items: [] },
-]);
-const productSeries = ref([]);
-const sortOptions = ref([]);
-const productFilters = ref([]);
-const productListItems = ref([]);
-const paginationState = ref({
-  page: 1,
-  limit: 20,
-  totalItems: 0,
-  hasNext: false,
-  nextPage: null,
-  remainingItems: 0,
-});
 const activeDropdownKey = ref(null);
-const selectedOptionsByFilter = ref({});
 let requestRefreshTimer = null;
-let isApplyingListingResponse = false;
-
-const DEFAULT_SORT_OPTIONS = [
-  {
-    key: "popular",
-    label: "Ph\u1ed5 bi\u1ebfn",
-    icon:
-      '<svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5L12.25 7.05L17.25 7.77L13.63 11.3L14.48 16.27L10 13.92L5.52 16.27L6.37 11.3L2.75 7.77L7.75 7.05L10 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
-  },
-  {
-    key: "promo",
-    label: "Khuy\u1ebfn m\u00e3i HOT",
-    icon:
-      '<svg viewBox="0 0 20 20" fill="none"><path d="M10 3L11.9 4.65L14.42 4.45L14.93 6.92L17 8.35L15.74 10.55L16.35 13L13.92 13.82L12.55 15.95L10 15.2L7.45 15.95L6.08 13.82L3.65 13L4.26 10.55L3 8.35L5.07 6.92L5.58 4.45L8.1 4.65L10 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 10L9.3 11.3L12.5 8.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  },
-  {
-    key: "price_asc",
-    label: "Gi\u00e1 Th\u1ea5p - Cao",
-    icon:
-      '<svg viewBox="0 0 20 20" fill="none"><path d="M4 5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 9H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 13H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 14.5V5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11.5 8L14 5.5L16.5 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  },
-  {
-    key: "price_desc",
-    label: "Gi\u00e1 Cao - Th\u1ea5p",
-    icon:
-      '<svg viewBox="0 0 20 20" fill="none"><path d="M4 5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 9H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 13H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 5.5V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11.5 12L14 14.5L16.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  },
-];
-
-const FILTER_PRESENTATION_MAP = {
-  filter: { leadingIcon: "filter", primary: true },
-  stock: { leadingIcon: "truck" },
-  new: { leadingIcon: "new" },
-  price: { leadingIcon: "price" },
-  major: { trailingIcon: "chevron" },
-  usage: { trailingIcon: "chevron-info" },
-  cpu: { trailingIcon: "chevron" },
-  ram: { trailingIcon: "chevron-info" },
-  storage: { trailingIcon: "chevron-info" },
-  screen: { trailingIcon: "chevron" },
-  resolution: { trailingIcon: "chevron" },
-  feature: { trailingIcon: "chevron" },
-};
-
-const PRODUCT_FILTER_BUTTON = {
-  key: "filter",
-  label: "B\u1ed9 l\u1ecdc",
-  leadingIcon: "filter",
-  primary: true,
-  options: [],
-  optionMeta: [],
-};
-
-const QUICK_FILTER_KEYS = ["filter", "stock", "new", "price"];
-
-const toArray = (value) => {
-  if (Array.isArray(value)) return value;
-  if (value == null) return [];
-  return [value];
-};
-
-const toNumber = (value, fallback = 0) => {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : fallback;
-};
-
-const buildSortOptions = (options = []) => {
-  const sourceOptions = options.length ? options : DEFAULT_SORT_OPTIONS;
-  return sourceOptions.map((option) => {
-    const fallback = DEFAULT_SORT_OPTIONS.find((item) => item.key === option?.key);
-    return {
-      key: option?.key || fallback?.key || "",
-      label: option?.label || fallback?.label || option?.key || "",
-      icon: fallback?.icon || DEFAULT_SORT_OPTIONS[0].icon,
-    };
-  });
-};
-
-const normalizeBannerGroups = (banners = {}) => {
-  const primaryItems = toArray(banners?.primary).filter(Boolean);
-  const secondaryItems = toArray(banners?.secondary).filter(Boolean);
-  const fallbackItems = primaryItems.length ? primaryItems : secondaryItems;
-
-  return [
-    {
-      id: "primary",
-      items: primaryItems.length ? primaryItems : fallbackItems,
-    },
-    {
-      id: "secondary",
-      items: secondaryItems.length ? secondaryItems : [...fallbackItems].reverse(),
-    },
-  ];
-};
-
-const normalizeSeries = (series = [], activeKey = "") =>
-  toArray(series)
-    .filter(Boolean)
-    .map((item) => {
-      const key = String(item?.key || item?.slug || item?.value || item?.label || "");
-      return {
-        key,
-        label: String(item?.label || item?.title || item?.name || ""),
-        href: item?.href || item?.url || "",
-        active: key === activeKey,
-      };
-    });
-
-const normalizeFilters = (filters = []) => {
-  const normalizedFilters = toArray(filters)
-    .filter((filter) => filter?.key && filter?.label)
-    .map((filter) => {
-      const optionMeta = toArray(filter?.options)
-        .filter(Boolean)
-        .map((option) => ({
-          value: String(option?.value ?? option?.key ?? option?.slug ?? option?.label ?? option),
-          label: String(option?.label ?? option?.title ?? option?.name ?? option),
-          count: option?.count,
-        }));
-      const presentation = FILTER_PRESENTATION_MAP[filter.key] || {};
-
-      return {
-        key: String(filter.key),
-        label: String(filter.label),
-        leadingIcon: presentation.leadingIcon,
-        trailingIcon: presentation.trailingIcon || (optionMeta.length ? "chevron" : undefined),
-        primary: Boolean(presentation.primary),
-        options: optionMeta.map((option) => option.label),
-        optionMeta,
-      };
-    });
-
-  const quickFilters = QUICK_FILTER_KEYS.map((filterKey) => {
-    if (filterKey === "filter") return PRODUCT_FILTER_BUTTON;
-
-    const apiFilter = normalizedFilters.find((filter) => filter.key === filterKey);
-    if (apiFilter) return apiFilter;
-
-    return {
-      key: filterKey,
-      label:
-        filterKey === "stock"
-          ? "S\u1eb5n h\u00e0ng"
-          : filterKey === "new"
-            ? "H\u00e0ng m\u1edbi v\u1ec1"
-            : "Xem theo gi\u00e1",
-      leadingIcon: FILTER_PRESENTATION_MAP[filterKey]?.leadingIcon,
-      trailingIcon: undefined,
-      primary: false,
-      options: [],
-      optionMeta: [],
-    };
-  });
-
-  const secondaryFilters = normalizedFilters.filter((filter) => !QUICK_FILTER_KEYS.includes(filter.key));
-
-  return [...quickFilters, ...secondaryFilters];
-};
-
-const mapApiProductToCard = (product = {}) => {
-  const gifts = toArray(product.gifts).filter((gift) => typeof gift === "string" && gift.trim());
-  const idSeed = product.id ?? product.product_id ?? product.slug ?? product.url ?? product.name ?? "";
-
-  return {
-    id: idSeed,
-    slug: product.slug || product.handle || "",
-    url: product.url || product.href || "",
-    img: product.img || product.image || product.thumbnail || product.thumbnail_url || "",
-    name: product.name || product.title || "",
-    badge: typeof product.badge === "boolean" ? product.badge : toNumber(product.discount) > 0,
-    discount: toNumber(product.discount),
-    installmentText: product.installmentText || product.installment_text || "",
-    price: toNumber(product.price),
-    originalPrice: toNumber(product.originalPrice ?? product.original_price),
-    gifts,
-    rating: toNumber(product.rating, 5),
-  };
-};
-
-const normalizePagination = (pagination = {}, meta = {}, itemCount = 0) => {
-  const page = toNumber(pagination.page ?? meta.current_page, 1);
-  const limit = toNumber(pagination.limit ?? meta.per_page, itemCount || 20);
-  const totalItems = toNumber(pagination.totalItems ?? meta.total, itemCount);
-  const hasNext = typeof pagination.hasNext === "boolean" ? pagination.hasNext : page * limit < totalItems;
-  const nextPage = pagination.nextPage ?? (hasNext ? page + 1 : null);
-  const remainingItems = pagination.remainingItems ?? Math.max(0, totalItems - page * limit);
-
-  return {
-    page,
-    limit,
-    totalItems,
-    hasNext: Boolean(hasNext),
-    nextPage: hasNext ? toNumber(nextPage, page + 1) : null,
-    remainingItems: toNumber(remainingItems),
-  };
-};
-
-const normalizeApplied = (payload = {}) => {
-  const applied = payload?.applied || payload?.meta?.applied || {};
-  const filters = applied?.filters || payload?.filters || {};
-
-  return {
-    sort: applied?.sort || payload?.sort || "popular",
-    series: applied?.series || payload?.series || "",
-    filters,
-  };
-};
-
-const normalizeProductListingResponse = (payload = {}) => {
-  const rawItems = Array.isArray(payload?.items)
-    ? payload.items
-    : Array.isArray(payload?.data)
-      ? payload.data
-      : Array.isArray(payload?.data?.items)
-        ? payload.data.items
-        : [];
-  const meta = payload?.meta || {};
-
-  return {
-    title: payload?.title || meta?.title || "Macbook",
-    series: normalizeSeries(payload?.series || meta?.series || [], normalizeApplied(payload).series),
-    banners: normalizeBannerGroups(payload?.banners || meta?.banners || {}),
-    filters: normalizeFilters(payload?.filters || meta?.filters || []),
-    sortOptions: buildSortOptions(payload?.sortOptions || meta?.sortOptions || []),
-    items: rawItems.map(mapApiProductToCard),
-    pagination: normalizePagination(payload?.pagination || {}, meta, rawItems.length),
-    applied: normalizeApplied(payload),
-  };
-};
-
-const resolveOptionValue = (filterKey, optionLabel) => {
-  const filter = productFilters.value.find((item) => item.key === filterKey);
-  const option = filter?.optionMeta?.find((item) => item.label === optionLabel);
-  return option?.value || optionLabel;
-};
-
-const mapAppliedFiltersToSelections = (filters = {}) => {
-  return Object.entries(filters).reduce((accumulator, [filterKey, filterValue]) => {
-    const filter = productFilters.value.find((item) => item.key === filterKey);
-    if (!filter) return accumulator;
-
-    const values = String(filterValue || "")
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
-
-    if (!values.length) return accumulator;
-
-    if (!filter.optionMeta?.length) {
-      accumulator[filterKey] = [filter.label];
-      return accumulator;
-    }
-
-    accumulator[filterKey] = values
-      .map((value) => filter.optionMeta.find((option) => option.value === value)?.label)
-      .filter(Boolean);
-
-    return accumulator;
-  }, {});
-};
-
-const syncSelectedStateFromApplied = (applied = {}) => {
-  isApplyingListingResponse = true;
-  activeSortKey.value = applied.sort || "popular";
-  selectedSeriesKey.value = applied.series || "";
-  selectedOptionsByFilter.value = mapAppliedFiltersToSelections(applied.filters || {});
-  isApplyingListingResponse = false;
-};
-
-const applyNormalizedListingResponse = (normalizedResponse, { append = false } = {}) => {
-  pageTitle.value = normalizedResponse.title || "Macbook";
-  bannerGroups.value = normalizedResponse.banners;
-  sortOptions.value = normalizedResponse.sortOptions;
-  productFilters.value = normalizedResponse.filters;
-  paginationState.value = normalizedResponse.pagination;
-  syncSelectedStateFromApplied(normalizedResponse.applied);
-  productSeries.value = normalizeSeries(normalizedResponse.series, selectedSeriesKey.value);
-  productListItems.value = append
-    ? [...productListItems.value, ...normalizedResponse.items]
-    : normalizedResponse.items;
-};
-
-const buildProductQuery = ({ page = 1 } = {}) => {
-  const query = {
-    category: categorySlug,
-    page,
-    limit: paginationState.value.limit || 20,
-    sort: activeSortKey.value || "popular",
-  };
-
-  if (selectedSeriesKey.value) {
-    query.series = selectedSeriesKey.value;
-  }
-
-  Object.entries(selectedOptionsByFilter.value).forEach(([filterKey, labels]) => {
-    const selectedLabels = toArray(labels).filter(Boolean);
-    if (!selectedLabels.length) return;
-
-    if (filterKey === "stock" || filterKey === "new") {
-      query[filterKey] = "true";
-      return;
-    }
-
-    const values = selectedLabels
-      .map((label) => resolveOptionValue(filterKey, label))
-      .filter(Boolean);
-
-    if (values.length) {
-      query[filterKey] = values.join(",");
-    }
-  });
-
-  return query;
-};
-
-const fetchProductListingPayload = async ({ page = 1 } = {}) =>
-  await $fetch(`${apiBaseUrl.value}/products`, {
-    query: buildProductQuery({ page }),
-  });
-
-const visibleProductListItems = computed(() => productListItems.value);
-
-const remainingProductCount = computed(() => toNumber(paginationState.value.remainingItems));
-
-const hasMoreProducts = computed(() => Boolean(paginationState.value.hasNext));
 
 const activeDropdown = computed(() =>
   productFilters.value.find((filter) => filter.key === activeDropdownKey.value && (filter.options?.length || filter.key === "filter")),
@@ -952,9 +621,11 @@ const scheduleProductListingRefresh = () => {
     clearTimeout(requestRefreshTimer);
   }
 
-  requestRefreshTimer = setTimeout(() => {
+  requestRefreshTimer = setTimeout(async () => {
     requestRefreshTimer = null;
-    loadProductListingPage({ page: 1 });
+    await productListingStore.loadProductListingPage({ page: 1 });
+    await nextTick();
+    await updateDropdownPosition();
   }, 150);
 };
 
@@ -962,11 +633,7 @@ const handleFilterClick = (filter) => {
   if (!filter) return;
 
   if (filter.key === "stock" || filter.key === "new") {
-    const current = selectedOptionsByFilter.value[filter.key] || [];
-    selectedOptionsByFilter.value = {
-      ...selectedOptionsByFilter.value,
-      [filter.key]: current.length ? [] : [filter.label],
-    };
+    productListingStore.toggleBooleanFilter(filter.key, filter.label);
     closeDropdown();
     scheduleProductListingRefresh();
     return;
@@ -978,16 +645,7 @@ const handleFilterClick = (filter) => {
 };
 
 const toggleFilterOption = (filterKey, option) => {
-  const current = selectedOptionsByFilter.value[filterKey] || [];
-  const next = current.includes(option)
-    ? current.filter((item) => item !== option)
-    : [...current, option];
-
-  selectedOptionsByFilter.value = {
-    ...selectedOptionsByFilter.value,
-    [filterKey]: next,
-  };
-
+  productListingStore.toggleFilterOption(filterKey, option);
   scheduleProductListingRefresh();
 };
 
@@ -995,19 +653,23 @@ const closeDropdown = () => {
   activeDropdownKey.value = null;
 };
 
+const handleSortClick = async (sortKey) => {
+  await productListingStore.setSortKey(sortKey);
+  await nextTick();
+  await updateDropdownPosition();
+};
+
 const handleSeriesClick = async (series) => {
-  const nextSeriesKey = selectedSeriesKey.value === series.key ? "" : series.key;
-  selectedSeriesKey.value = nextSeriesKey;
-  productSeries.value = productSeries.value.map((item) => ({
-    ...item,
-    active: item.key === nextSeriesKey,
-  }));
-  await loadProductListingPage({ page: 1 });
+  await productListingStore.toggleSeries(series.key);
+  await nextTick();
+  await updateDropdownPosition();
 };
 
 const handleLoadMoreProducts = async () => {
   if (!paginationState.value.nextPage || isLoadingMore.value) return;
-  await loadProductListingPage({ page: paginationState.value.nextPage, append: true });
+  await productListingStore.loadProductListingPage({ page: paginationState.value.nextPage, append: true });
+  await nextTick();
+  await updateDropdownPosition();
 };
 
 const updateDropdownPosition = async () => {
@@ -1107,36 +769,6 @@ const updateStickyOffset = () => {
   stickyTopOffset.value = 0;
 };
 
-const loadProductListingPage = async ({ page = 1, append = false } = {}) => {
-  if (append) {
-    isLoadingMore.value = true;
-  } else {
-    isPageLoading.value = true;
-  }
-
-  loadError.value = null;
-
-  try {
-    const payload = await fetchProductListingPayload({ page });
-    const normalizedResponse = normalizeProductListingResponse(payload);
-
-    applyNormalizedListingResponse(normalizedResponse, { append });
-    await nextTick();
-    await updateDropdownPosition();
-
-    if (!append) {
-      destroySwipers();
-      await initSwipers();
-    }
-  } catch (error) {
-    loadError.value = error;
-    console.error("Failed to load product listing", error);
-  } finally {
-    isPageLoading.value = false;
-    isLoadingMore.value = false;
-  }
-};
-
 const initSwipers = async () => {
   if (!import.meta.client || !rootEl.value) return;
 
@@ -1180,15 +812,9 @@ const destroySwipers = () => {
   swiperInstances = [];
 };
 
-const initialPayload = await fetchProductListingPayload({ page: 1 }).catch((error) => {
-  loadError.value = error;
-  console.error("Failed to load initial product listing", error);
-  return null;
+await productListingStore.initializeListing({ category: "macbook" }).catch((error) => {
+  console.error("Failed to initialize product listing store", error);
 });
-
-if (initialPayload) {
-  applyNormalizedListingResponse(normalizeProductListingResponse(initialPayload));
-}
 
 onMounted(async () => {
   await nextTick();
@@ -1211,11 +837,6 @@ watch(activeDropdownKey, async () => {
 
 watch(isStickyFilterVisible, async () => {
   await updateDropdownPosition();
-});
-
-watch(activeSortKey, (nextSortKey, previousSortKey) => {
-  if (!nextSortKey || nextSortKey === previousSortKey || isApplyingListingResponse) return;
-  loadProductListingPage({ page: 1 });
 });
 
 onBeforeUnmount(() => {
