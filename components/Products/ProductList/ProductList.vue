@@ -1,5 +1,177 @@
 <template>
   <section class="product-list-page">
+    <div
+      :class="['sticky-filter-bar', { 'sticky-filter-bar--visible': isStickyFilterVisible }]"
+      :style="{ top: `${stickyTopOffset}px` }"
+    >
+      <div ref="stickyFilterInnerEl" class="container-xl px-3 py-3 sticky-filter-bar__inner">
+        <div class="product-filter-list product-filter-list--sticky">
+          <button
+            v-for="filter in productFilters"
+            :key="`sticky-${filter.key}`"
+            :ref="(el) => setFilterChipRef(filter.key, el, 'sticky')"
+            type="button"
+            :class="[
+              'product-filter-chip',
+              {
+                'product-filter-chip--primary': filter.primary && activeDropdownKey !== filter.key,
+                'product-filter-chip--active': activeDropdownKey === filter.key,
+              },
+            ]"
+            @click="handleFilterClick(filter)"
+          >
+            <span v-if="filter.leadingIcon === 'filter'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M4 5H20L13.5 12.4375V18.25L10.5 19.75V12.4375L4 5Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <span v-else-if="filter.leadingIcon === 'truck'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M3 6.5H13V14.5H3V6.5Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M13 9H17L20 12V14.5H13V9Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+                <circle cx="7" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
+                <circle cx="17" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
+                <path d="M5 9.5H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                <path d="M3 12H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+              </svg>
+            </span>
+
+            <span v-else-if="filter.leadingIcon === 'new'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 5.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                <path
+                  d="M5 7H14.75L13.25 10.5L14.75 14H5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path d="M16 13.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                <circle cx="16" cy="10" r="1.75" stroke="currentColor" stroke-width="1.7" />
+                <path d="M18.5 18.5H13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+              </svg>
+            </span>
+
+            <span v-else-if="filter.leadingIcon === 'price'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7" />
+                <path
+                  d="M12 8.5V12H15"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <span>{{ filter.label }}</span>
+
+            <span v-if="filter.trailingIcon === 'chevron'" class="product-filter-chip__meta" aria-hidden="true">
+              <svg :class="{ 'is-rotated': activeDropdownKey === filter.key }" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M5 7.5L10 12.5L15 7.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <span
+              v-else-if="filter.trailingIcon === 'chevron-info'"
+              class="product-filter-chip__meta product-filter-chip__meta-group"
+              aria-hidden="true"
+            >
+              <svg :class="{ 'is-rotated': activeDropdownKey === filter.key }" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M5 7.5L10 12.5L15 7.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <svg viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
+                <path d="M10 8.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <transition name="filter-dropdown" mode="out-in">
+          <div
+            v-if="activeDropdown && isStickyFilterVisible"
+            :key="`sticky-${activeDropdown.key}`"
+            ref="dropdownEl"
+            class="product-filter-dropdown"
+            :style="dropdownStyle"
+          >
+            <div class="product-filter-dropdown__options">
+              <button
+                v-for="option in activeDropdown.options"
+                :key="`sticky-${activeDropdown.key}-${option}`"
+                type="button"
+                :class="[
+                  'product-filter-option',
+                  {
+                    'product-filter-option--selected': selectedOptionsByFilter[activeDropdown.key]?.includes(option),
+                  },
+                ]"
+                @click="toggleFilterOption(activeDropdown.key, option)"
+              >
+                <span>{{ option }}</span>
+                <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M10 8.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                    <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+
+            <div class="product-filter-dropdown__footer">
+              <button
+                type="button"
+                class="product-filter-dropdown__button product-filter-dropdown__button--ghost"
+                @click="closeDropdown"
+              >
+                ÄÃ³ng
+              </button>
+              <button
+                type="button"
+                class="product-filter-dropdown__button product-filter-dropdown__button--primary"
+                @click="closeDropdown"
+              >
+                Xem káº¿t quáº£
+              </button>
+            </div>
+          </div>
+        </transition>
+      </div>
+    </div>
+
     <div class="container-xl px-3 py-4">
       <div ref="rootEl" data-fetch-key="TopSlidingBanner:0" class="block-top-sliding-banner is-flex">
         <div
@@ -185,7 +357,7 @@
 
         <transition name="filter-dropdown" mode="out-in">
           <div
-            v-if="activeDropdown"
+            v-if="activeDropdown && !isStickyFilterVisible"
             :key="activeDropdown.key"
             ref="dropdownEl"
             class="product-filter-dropdown"
@@ -247,9 +419,13 @@ import "swiper/css/pagination";
 
 const rootEl = ref(null);
 const filterBlockEl = ref(null);
+const stickyFilterInnerEl = ref(null);
 const dropdownEl = ref(null);
 const dropdownStyle = ref({});
-const filterChipRefs = new Map();
+const primaryFilterChipRefs = new Map();
+const stickyFilterChipRefs = new Map();
+const isStickyFilterVisible = ref(false);
+const stickyTopOffset = ref(0);
 
 const banners = [
   {
@@ -382,7 +558,7 @@ const productFilters = [
   },
 ];
 
-const activeDropdownKey = ref("usage");
+const activeDropdownKey = ref(null);
 const selectedOptionsByFilter = ref({
   usage: ["Học tập - Văn phòng"],
 });
@@ -394,13 +570,15 @@ const activeDropdown = computed(() =>
 let swiperInstances = [];
 let mounted = false;
 
-const setFilterChipRef = (key, el) => {
+const setFilterChipRef = (key, el, scope = "primary") => {
+  const targetMap = scope === "sticky" ? stickyFilterChipRefs : primaryFilterChipRefs;
+
   if (el) {
-    filterChipRefs.set(key, el);
+    targetMap.set(key, el);
     return;
   }
 
-  filterChipRefs.delete(key);
+  targetMap.delete(key);
 };
 
 const handleFilterClick = (filter) => {
@@ -426,12 +604,15 @@ const closeDropdown = () => {
 };
 
 const updateDropdownPosition = async () => {
-  if (!activeDropdownKey.value || !filterBlockEl.value) {
+  const containerEl = isStickyFilterVisible.value ? stickyFilterInnerEl.value : filterBlockEl.value;
+  const triggerMap = isStickyFilterVisible.value ? stickyFilterChipRefs : primaryFilterChipRefs;
+
+  if (!activeDropdownKey.value || !containerEl) {
     dropdownStyle.value = {};
     return;
   }
 
-  const triggerEl = filterChipRefs.get(activeDropdownKey.value);
+  const triggerEl = triggerMap.get(activeDropdownKey.value);
 
   if (!triggerEl) {
     dropdownStyle.value = {};
@@ -440,7 +621,7 @@ const updateDropdownPosition = async () => {
 
   await nextTick();
 
-  const containerRect = filterBlockEl.value.getBoundingClientRect();
+  const containerRect = containerEl.getBoundingClientRect();
   const triggerRect = triggerEl.getBoundingClientRect();
   const dropdownNode = dropdownEl.value;
   const top = triggerRect.bottom - containerRect.top + 10;
@@ -480,13 +661,43 @@ const updateDropdownPosition = async () => {
 };
 
 const handleClickOutside = (event) => {
-  if (!filterBlockEl.value?.contains(event.target)) {
+  const clickedInsidePrimary = filterBlockEl.value?.contains(event.target);
+  const clickedInsideSticky = stickyFilterInnerEl.value?.contains(event.target);
+
+  if (!clickedInsidePrimary && !clickedInsideSticky) {
     closeDropdown();
   }
 };
 
 const handleWindowResize = () => {
+  updateStickyOffset();
   updateDropdownPosition();
+};
+
+const handleWindowScroll = () => {
+  if (!filterBlockEl.value) return;
+
+  updateStickyOffset();
+  isStickyFilterVisible.value = filterBlockEl.value.getBoundingClientRect().top <= stickyTopOffset.value;
+};
+
+const updateStickyOffset = () => {
+  if (typeof document === "undefined") return;
+
+  const navbarWrapper = document.querySelector(".fixed-top");
+  const navbar = document.querySelector(".glass-navbar");
+
+  if (navbarWrapper instanceof HTMLElement) {
+    stickyTopOffset.value = Math.ceil(navbarWrapper.getBoundingClientRect().bottom + 2);
+    return;
+  }
+
+  if (navbar instanceof HTMLElement) {
+    stickyTopOffset.value = Math.ceil(navbar.getBoundingClientRect().bottom + 2);
+    return;
+  }
+
+  stickyTopOffset.value = 0;
 };
 
 const initSwipers = async () => {
@@ -535,16 +746,23 @@ const destroySwipers = () => {
 onMounted(async () => {
   await nextTick();
   await initSwipers();
+  updateStickyOffset();
+  handleWindowScroll();
   await updateDropdownPosition();
 
   if (!mounted && typeof window !== "undefined") {
     window.addEventListener("click", handleClickOutside);
     window.addEventListener("resize", handleWindowResize);
+    window.addEventListener("scroll", handleWindowScroll, { passive: true });
     mounted = true;
   }
 });
 
 watch(activeDropdownKey, async () => {
+  await updateDropdownPosition();
+});
+
+watch(isStickyFilterVisible, async () => {
   await updateDropdownPosition();
 });
 
@@ -554,6 +772,7 @@ onBeforeUnmount(() => {
   if (mounted && typeof window !== "undefined") {
     window.removeEventListener("click", handleClickOutside);
     window.removeEventListener("resize", handleWindowResize);
+    window.removeEventListener("scroll", handleWindowScroll);
     mounted = false;
   }
 });
@@ -563,6 +782,35 @@ onBeforeUnmount(() => {
 .product-list-page {
   background: #f8fafc;
   min-height: 100%;
+}
+
+.sticky-filter-bar {
+  /* background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12); */
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translateY(-100%);
+  transition:
+    opacity 0.25s ease,
+    transform 0.3s ease;
+  z-index: 60;
+}
+
+.sticky-filter-bar--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.sticky-filter-bar__inner {
+  position: relative;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+  border-radius: 12px;
 }
 
 .block-top-sliding-banner {
@@ -804,6 +1052,10 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.product-filter-list--sticky {
+  margin: 0;
 }
 
 .product-filter-chip {
