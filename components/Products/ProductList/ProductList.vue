@@ -15,7 +15,7 @@
               'product-filter-chip',
               {
                 'product-filter-chip--primary': filter.primary && activeDropdownKey !== filter.key,
-                'product-filter-chip--active': activeDropdownKey === filter.key,
+                'product-filter-chip--active': activeDropdownKey === filter.key || isFilterSelected(filter.key),
               },
             ]"
             @click="handleFilterClick(filter)"
@@ -270,17 +270,18 @@
       </div>
 
       <div class="product-series-block">
-        <h2 class="product-series-title">Macbook</h2>
+        <h2 class="product-series-title">{{ pageTitle }}</h2>
 
         <div class="product-series-list">
-          <a
+          <button
             v-for="item in productSeries"
-            :key="item.label"
-            :href="item.href"
-            class="product-series-chip"
+            :key="item.key || item.label"
+            type="button"
+            :class="['product-series-chip', { 'product-series-chip--active': item.active }]"
+            @click="handleSeriesClick(item)"
           >
             {{ item.label }}
-          </a>
+          </button>
         </div>
       </div>
 
@@ -297,7 +298,7 @@
               'product-filter-chip',
               {
                 'product-filter-chip--primary': filter.primary && activeDropdownKey !== filter.key,
-                'product-filter-chip--active': activeDropdownKey === filter.key,
+                'product-filter-chip--active': activeDropdownKey === filter.key || isFilterSelected(filter.key),
               },
             ]"
             @click="handleFilterClick(filter)"
@@ -555,6 +556,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+const config = useRuntimeConfig();
+const categorySlug = "macbook";
+const apiBaseUrl = computed(() => String(config.public.apiBaseUrl || "").replace(/\/$/, ""));
+
 const rootEl = ref(null);
 const filterBlockEl = ref(null);
 const stickyFilterInnerEl = ref(null);
@@ -565,285 +570,362 @@ const stickyFilterChipRefs = new Map();
 const isStickyFilterVisible = ref(false);
 const stickyTopOffset = ref(0);
 const activeSortKey = ref("popular");
-const initialVisibleProductCount = 4;
-const visibleProductCount = ref(initialVisibleProductCount);
-
-const banners = [
-  {
-    href: "https://cellphones.com.vn/laptop/mac/macbook-neo.html#2dproductviewer",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/Cate-tinhnang2-mac.png",
-    alt: "MacBook Neo feature",
-  },
-  {
-    href: "https://cellphones.com.vn/laptop/mac/macbook-neo.html",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/bannercatemobanmacneo.png",
-    alt: "MacBook Neo",
-  },
-  {
-    href: "https://cellphones.com.vn/bo-loc/mac-mini-m4-series",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/s%C4%91fsfsssf.png",
-    alt: "Mac mini M4",
-  },
-  {
-    href: "https://cellphones.com.vn/laptop/mac/macbook-air/m5.html",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/catemacbookairm5mowban.png",
-    alt: "MacBook Air M5",
-  },
-  {
-    href: "https://cellphones.com.vn/laptop/mac/macbook-pro.html?laptop_cpu=apple-m5-pro,apple-m5-max",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/mbpm5mobannnn.png",
-    alt: "MacBook Pro M5",
-  },
-  {
-    href: "https://cellphones.com.vn/bo-loc/macbook-air-m4",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/svss.png",
-    alt: "MacBook Air M4",
-  },
-  {
-    href: "https://cellphones.com.vn/khuyen-mai-macbook-air-m4-512gb",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/sfhghsdhsb.png",
-    alt: "MacBook Air M4 512GB promotion",
-  },
-  {
-    href: "https://cellphones.com.vn/laptop/mac/macbook-pro/macbook-pro-2025.html",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/prom55555.png",
-    alt: "MacBook Pro 2025",
-  },
-  {
-    href: "https://cellphones.com.vn/bo-loc/imac-m4",
-    src: "https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/cate-m4-12-06.jpg",
-    alt: "iMac M4 2024",
-  },
-];
-
-const bannerGroups = computed(() => [
-  {
-    id: "primary",
-    items: banners,
-  },
-  {
-    id: "secondary",
-    items: [...banners].reverse(),
-  },
+const pageTitle = ref("Macbook");
+const loadError = ref(null);
+const isPageLoading = ref(false);
+const isLoadingMore = ref(false);
+const selectedSeriesKey = ref("");
+const bannerGroups = ref([
+  { id: "primary", items: [] },
+  { id: "secondary", items: [] },
 ]);
+const productSeries = ref([]);
+const sortOptions = ref([]);
+const productFilters = ref([]);
+const productListItems = ref([]);
+const paginationState = ref({
+  page: 1,
+  limit: 20,
+  totalItems: 0,
+  hasNext: false,
+  nextPage: null,
+  remainingItems: 0,
+});
+const activeDropdownKey = ref(null);
+const selectedOptionsByFilter = ref({});
+let requestRefreshTimer = null;
+let isApplyingListingResponse = false;
 
-const productSeries = [
-  { label: "MACBOOK AIR", href: "#" },
-  { label: "MACBOOK PRO", href: "#" },
-  { label: "MAC MINI", href: "#" },
-  { label: "MACBOOK NEO", href: "#" },
-  { label: "MAC STUDIO", href: "#" },
-  { label: "STUDIO DISPLAY", href: "#" },
-  { label: "IMAC", href: "#" },
-];
-
-const sortOptions = [
+const DEFAULT_SORT_OPTIONS = [
   {
     key: "popular",
-    label: "Phổ biến",
+    label: "Ph\u1ed5 bi\u1ebfn",
     icon:
       '<svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5L12.25 7.05L17.25 7.77L13.63 11.3L14.48 16.27L10 13.92L5.52 16.27L6.37 11.3L2.75 7.77L7.75 7.05L10 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
   },
   {
     key: "promo",
-    label: "Khuyến mãi HOT",
+    label: "Khuy\u1ebfn m\u00e3i HOT",
     icon:
       '<svg viewBox="0 0 20 20" fill="none"><path d="M10 3L11.9 4.65L14.42 4.45L14.93 6.92L17 8.35L15.74 10.55L16.35 13L13.92 13.82L12.55 15.95L10 15.2L7.45 15.95L6.08 13.82L3.65 13L4.26 10.55L3 8.35L5.07 6.92L5.58 4.45L8.1 4.65L10 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 10L9.3 11.3L12.5 8.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   },
   {
     key: "price_asc",
-    label: "Giá Thấp - Cao",
+    label: "Gi\u00e1 Th\u1ea5p - Cao",
     icon:
       '<svg viewBox="0 0 20 20" fill="none"><path d="M4 5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 9H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 13H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 14.5V5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11.5 8L14 5.5L16.5 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   },
   {
     key: "price_desc",
-    label: "Giá Cao - Thấp",
+    label: "Gi\u00e1 Cao - Th\u1ea5p",
     icon:
       '<svg viewBox="0 0 20 20" fill="none"><path d="M4 5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 9H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 13H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 5.5V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11.5 12L14 14.5L16.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   },
 ];
 
-const productListItems = [
-  {
-    id: 1,
-    badge: true,
-    discount: 3,
-    installmentText: "Tráº£ gÃ³p",
-    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook-neo.png",
-    name: "MacBook Neo 13 inch A18 Pro 2026 6CPU 5GPU 8GB 256GB",
-    price: 15990000,
-    originalPrice: 16490000,
-    gifts: [
-      "HÃ ng má»›i vá»",
-      "GiÃ¡ S-Student 15.490.000Ä‘",
-      "KhÃ´ng phÃ­ chuyá»ƒn Ä‘á»•i kÃ¬ tráº£ gÃ³p 0% qua tháº» tÃ­n dá»¥ng ká»³ háº¡n 3-6 thÃ¡ng",
-    ],
-    rating: 5,
-    slug: "macbook-neo-13-inch-a18-pro-2026",
-  },
-  {
-    id: 2,
-    badge: true,
-    discount: 5,
-    installmentText: "Tráº£ gÃ³p",
-    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook_air_m4_13_2025.png",
-    name: "MacBook Air M4 13 inch 2025 10CPU 8GPU 16GB 256GB",
-    price: 25590000,
-    originalPrice: 26990000,
-    gifts: [
-      "HÃ ng má»›i vá»",
-      "GiÃ¡ S-Student 25.090.000Ä‘",
-      "Tráº£ gÃ³p 0% - 0Ä‘ phá»¥ phÃ­ - 0Ä‘ tráº£ trÆ°á»›c - ká»³ háº¡n Ä‘áº¿n 12 thÃ¡ng",
-    ],
-    rating: 4.9,
-    slug: "macbook-air-m4-13-2025-16gb-256gb",
-  },
-  {
-    id: 3,
-    badge: true,
-    discount: 12,
-    installmentText: "Tráº£ gÃ³p",
-    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook_air_m2.png",
-    name: "Apple MacBook Air M2 2024 8CPU 8GPU 16GB 256GB",
-    price: 21990000,
-    originalPrice: 24990000,
-    gifts: [
-      "HÃ ng má»›i vá»",
-      "GiÃ¡ S-Student 21.490.000Ä‘",
-      "Tráº£ gÃ³p 0% - 0Ä‘ phá»¥ phÃ­ - 0Ä‘ tráº£ trÆ°á»›c - ká»³ háº¡n Ä‘áº¿n 12 thÃ¡ng",
-    ],
-    rating: 4.9,
-    slug: "macbook-air-m2-2024-16gb-256gb",
-  },
-  {
-    id: 4,
-    badge: true,
-    discount: 2,
-    installmentText: "Tráº£ gÃ³p",
-    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook_air_m5_13_2026.png",
-    name: "MacBook Air M5 13 inch 2026 10CPU 8GPU 16GB 512GB",
-    price: 29490000,
-    originalPrice: 29990000,
-    gifts: [
-      "HÃ ng má»›i vá»",
-      "GiÃ¡ S-Student 28.990.000Ä‘",
-      "Tráº£ gÃ³p 0% - 0Ä‘ phá»¥ phÃ­ - 0Ä‘ tráº£ trÆ°á»›c - ká»³ háº¡n Ä‘áº¿n 12 thÃ¡ng",
-    ],
-    rating: 5,
-    slug: "macbook-air-m5-13-2026-16gb-512gb",
-  },
-  {
-    id: 5,
-    badge: true,
-    discount: 1,
-    installmentText: "Tráº£ gÃ³p",
-    img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook_pro_14_m5.png",
-    name: "MacBook Pro 14 M5 10CPU 10GPU 16GB 512GB",
-    price: 41490000,
-    originalPrice: 41990000,
-    gifts: [
-      "HÃ ng má»›i vá»",
-      "GiÃ¡ S-Student 40.990.000Ä‘",
-      "Tráº£ gÃ³p 0% - 0Ä‘ phá»¥ phÃ­ - 0Ä‘ tráº£ trÆ°á»›c - ká»³ háº¡n Ä‘áº¿n 12 thÃ¡ng",
-    ],
-    rating: 5,
-    slug: "macbook-pro-14-m5-16gb-512gb",
-  },
-];
+const FILTER_PRESENTATION_MAP = {
+  filter: { leadingIcon: "filter", primary: true },
+  stock: { leadingIcon: "truck" },
+  new: { leadingIcon: "new" },
+  price: { leadingIcon: "price" },
+  major: { trailingIcon: "chevron" },
+  usage: { trailingIcon: "chevron-info" },
+  cpu: { trailingIcon: "chevron" },
+  ram: { trailingIcon: "chevron-info" },
+  storage: { trailingIcon: "chevron-info" },
+  screen: { trailingIcon: "chevron" },
+  resolution: { trailingIcon: "chevron" },
+  feature: { trailingIcon: "chevron" },
+};
 
-const sortedProductListItems = computed(() => {
-  const items = [...productListItems];
+const PRODUCT_FILTER_BUTTON = {
+  key: "filter",
+  label: "B\u1ed9 l\u1ecdc",
+  leadingIcon: "filter",
+  primary: true,
+  options: [],
+  optionMeta: [],
+};
 
-  switch (activeSortKey.value) {
-    case "promo":
-      return items.sort((a, b) => (Number(b.discount) || 0) - (Number(a.discount) || 0));
-    case "price_asc":
-      return items.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
-    case "price_desc":
-      return items.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
-    default:
-      return items;
+const QUICK_FILTER_KEYS = ["filter", "stock", "new", "price"];
+
+const toArray = (value) => {
+  if (Array.isArray(value)) return value;
+  if (value == null) return [];
+  return [value];
+};
+
+const toNumber = (value, fallback = 0) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+};
+
+const buildSortOptions = (options = []) => {
+  const sourceOptions = options.length ? options : DEFAULT_SORT_OPTIONS;
+  return sourceOptions.map((option) => {
+    const fallback = DEFAULT_SORT_OPTIONS.find((item) => item.key === option?.key);
+    return {
+      key: option?.key || fallback?.key || "",
+      label: option?.label || fallback?.label || option?.key || "",
+      icon: fallback?.icon || DEFAULT_SORT_OPTIONS[0].icon,
+    };
+  });
+};
+
+const normalizeBannerGroups = (banners = {}) => {
+  const primaryItems = toArray(banners?.primary).filter(Boolean);
+  const secondaryItems = toArray(banners?.secondary).filter(Boolean);
+  const fallbackItems = primaryItems.length ? primaryItems : secondaryItems;
+
+  return [
+    {
+      id: "primary",
+      items: primaryItems.length ? primaryItems : fallbackItems,
+    },
+    {
+      id: "secondary",
+      items: secondaryItems.length ? secondaryItems : [...fallbackItems].reverse(),
+    },
+  ];
+};
+
+const normalizeSeries = (series = [], activeKey = "") =>
+  toArray(series)
+    .filter(Boolean)
+    .map((item) => {
+      const key = String(item?.key || item?.slug || item?.value || item?.label || "");
+      return {
+        key,
+        label: String(item?.label || item?.title || item?.name || ""),
+        href: item?.href || item?.url || "",
+        active: key === activeKey,
+      };
+    });
+
+const normalizeFilters = (filters = []) => {
+  const normalizedFilters = toArray(filters)
+    .filter((filter) => filter?.key && filter?.label)
+    .map((filter) => {
+      const optionMeta = toArray(filter?.options)
+        .filter(Boolean)
+        .map((option) => ({
+          value: String(option?.value ?? option?.key ?? option?.slug ?? option?.label ?? option),
+          label: String(option?.label ?? option?.title ?? option?.name ?? option),
+          count: option?.count,
+        }));
+      const presentation = FILTER_PRESENTATION_MAP[filter.key] || {};
+
+      return {
+        key: String(filter.key),
+        label: String(filter.label),
+        leadingIcon: presentation.leadingIcon,
+        trailingIcon: presentation.trailingIcon || (optionMeta.length ? "chevron" : undefined),
+        primary: Boolean(presentation.primary),
+        options: optionMeta.map((option) => option.label),
+        optionMeta,
+      };
+    });
+
+  const quickFilters = QUICK_FILTER_KEYS.map((filterKey) => {
+    if (filterKey === "filter") return PRODUCT_FILTER_BUTTON;
+
+    const apiFilter = normalizedFilters.find((filter) => filter.key === filterKey);
+    if (apiFilter) return apiFilter;
+
+    return {
+      key: filterKey,
+      label:
+        filterKey === "stock"
+          ? "S\u1eb5n h\u00e0ng"
+          : filterKey === "new"
+            ? "H\u00e0ng m\u1edbi v\u1ec1"
+            : "Xem theo gi\u00e1",
+      leadingIcon: FILTER_PRESENTATION_MAP[filterKey]?.leadingIcon,
+      trailingIcon: undefined,
+      primary: false,
+      options: [],
+      optionMeta: [],
+    };
+  });
+
+  const secondaryFilters = normalizedFilters.filter((filter) => !QUICK_FILTER_KEYS.includes(filter.key));
+
+  return [...quickFilters, ...secondaryFilters];
+};
+
+const mapApiProductToCard = (product = {}) => {
+  const gifts = toArray(product.gifts).filter((gift) => typeof gift === "string" && gift.trim());
+  const idSeed = product.id ?? product.product_id ?? product.slug ?? product.url ?? product.name ?? "";
+
+  return {
+    id: idSeed,
+    slug: product.slug || product.handle || "",
+    url: product.url || product.href || "",
+    img: product.img || product.image || product.thumbnail || product.thumbnail_url || "",
+    name: product.name || product.title || "",
+    badge: typeof product.badge === "boolean" ? product.badge : toNumber(product.discount) > 0,
+    discount: toNumber(product.discount),
+    installmentText: product.installmentText || product.installment_text || "",
+    price: toNumber(product.price),
+    originalPrice: toNumber(product.originalPrice ?? product.original_price),
+    gifts,
+    rating: toNumber(product.rating, 5),
+  };
+};
+
+const normalizePagination = (pagination = {}, meta = {}, itemCount = 0) => {
+  const page = toNumber(pagination.page ?? meta.current_page, 1);
+  const limit = toNumber(pagination.limit ?? meta.per_page, itemCount || 20);
+  const totalItems = toNumber(pagination.totalItems ?? meta.total, itemCount);
+  const hasNext = typeof pagination.hasNext === "boolean" ? pagination.hasNext : page * limit < totalItems;
+  const nextPage = pagination.nextPage ?? (hasNext ? page + 1 : null);
+  const remainingItems = pagination.remainingItems ?? Math.max(0, totalItems - page * limit);
+
+  return {
+    page,
+    limit,
+    totalItems,
+    hasNext: Boolean(hasNext),
+    nextPage: hasNext ? toNumber(nextPage, page + 1) : null,
+    remainingItems: toNumber(remainingItems),
+  };
+};
+
+const normalizeApplied = (payload = {}) => {
+  const applied = payload?.applied || payload?.meta?.applied || {};
+  const filters = applied?.filters || payload?.filters || {};
+
+  return {
+    sort: applied?.sort || payload?.sort || "popular",
+    series: applied?.series || payload?.series || "",
+    filters,
+  };
+};
+
+const normalizeProductListingResponse = (payload = {}) => {
+  const rawItems = Array.isArray(payload?.items)
+    ? payload.items
+    : Array.isArray(payload?.data)
+      ? payload.data
+      : Array.isArray(payload?.data?.items)
+        ? payload.data.items
+        : [];
+  const meta = payload?.meta || {};
+
+  return {
+    title: payload?.title || meta?.title || "Macbook",
+    series: normalizeSeries(payload?.series || meta?.series || [], normalizeApplied(payload).series),
+    banners: normalizeBannerGroups(payload?.banners || meta?.banners || {}),
+    filters: normalizeFilters(payload?.filters || meta?.filters || []),
+    sortOptions: buildSortOptions(payload?.sortOptions || meta?.sortOptions || []),
+    items: rawItems.map(mapApiProductToCard),
+    pagination: normalizePagination(payload?.pagination || {}, meta, rawItems.length),
+    applied: normalizeApplied(payload),
+  };
+};
+
+const resolveOptionValue = (filterKey, optionLabel) => {
+  const filter = productFilters.value.find((item) => item.key === filterKey);
+  const option = filter?.optionMeta?.find((item) => item.label === optionLabel);
+  return option?.value || optionLabel;
+};
+
+const mapAppliedFiltersToSelections = (filters = {}) => {
+  return Object.entries(filters).reduce((accumulator, [filterKey, filterValue]) => {
+    const filter = productFilters.value.find((item) => item.key === filterKey);
+    if (!filter) return accumulator;
+
+    const values = String(filterValue || "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    if (!values.length) return accumulator;
+
+    if (!filter.optionMeta?.length) {
+      accumulator[filterKey] = [filter.label];
+      return accumulator;
+    }
+
+    accumulator[filterKey] = values
+      .map((value) => filter.optionMeta.find((option) => option.value === value)?.label)
+      .filter(Boolean);
+
+    return accumulator;
+  }, {});
+};
+
+const syncSelectedStateFromApplied = (applied = {}) => {
+  isApplyingListingResponse = true;
+  activeSortKey.value = applied.sort || "popular";
+  selectedSeriesKey.value = applied.series || "";
+  selectedOptionsByFilter.value = mapAppliedFiltersToSelections(applied.filters || {});
+  isApplyingListingResponse = false;
+};
+
+const applyNormalizedListingResponse = (normalizedResponse, { append = false } = {}) => {
+  pageTitle.value = normalizedResponse.title || "Macbook";
+  bannerGroups.value = normalizedResponse.banners;
+  sortOptions.value = normalizedResponse.sortOptions;
+  productFilters.value = normalizedResponse.filters;
+  paginationState.value = normalizedResponse.pagination;
+  syncSelectedStateFromApplied(normalizedResponse.applied);
+  productSeries.value = normalizeSeries(normalizedResponse.series, selectedSeriesKey.value);
+  productListItems.value = append
+    ? [...productListItems.value, ...normalizedResponse.items]
+    : normalizedResponse.items;
+};
+
+const buildProductQuery = ({ page = 1 } = {}) => {
+  const query = {
+    category: categorySlug,
+    page,
+    limit: paginationState.value.limit || 20,
+    sort: activeSortKey.value || "popular",
+  };
+
+  if (selectedSeriesKey.value) {
+    query.series = selectedSeriesKey.value;
   }
-});
 
-const visibleProductListItems = computed(() => sortedProductListItems.value.slice(0, visibleProductCount.value));
+  Object.entries(selectedOptionsByFilter.value).forEach(([filterKey, labels]) => {
+    const selectedLabels = toArray(labels).filter(Boolean);
+    if (!selectedLabels.length) return;
 
-const remainingProductCount = computed(() => Math.max(0, sortedProductListItems.value.length - visibleProductCount.value));
+    if (filterKey === "stock" || filterKey === "new") {
+      query[filterKey] = "true";
+      return;
+    }
 
-const hasMoreProducts = computed(() => remainingProductCount.value > 0);
+    const values = selectedLabels
+      .map((label) => resolveOptionValue(filterKey, label))
+      .filter(Boolean);
 
-const productFilters = [
-  { key: "filter", label: "Bộ lọc", leadingIcon: "filter", primary: true },
-  { key: "stock", label: "Sẵn hàng", leadingIcon: "truck" },
-  { key: "new", label: "Hàng mới về", leadingIcon: "new" },
-  { key: "price", label: "Xem theo giá", leadingIcon: "price" },
-  {
-    key: "major",
-    label: "Ngành học",
-    trailingIcon: "chevron",
-    options: ["Công nghệ thông tin", "Kinh tế", "Thiết kế", "Marketing", "Kế toán"],
-  },
-  {
-    key: "usage",
-    label: "Nhu cầu sử dụng",
-    trailingIcon: "chevron-info",
-    options: [
-      "Học tập - Văn phòng",
-      "Đồ họa - Kỹ thuật",
-      "Cao cấp - Sang trọng",
-      "Laptop sáng tạo nội dung",
-      "Mỏng nhẹ",
-      "Gaming",
-    ],
-  },
-  {
-    key: "cpu",
-    label: "CPU",
-    trailingIcon: "chevron",
-    options: ["Apple M1", "Apple M2", "Apple M3", "Apple M4", "Intel Core i7"],
-  },
-  {
-    key: "ram",
-    label: "Dung lượng RAM",
-    trailingIcon: "chevron-info",
-    options: ["8 GB", "16 GB", "18 GB", "24 GB", "32 GB"],
-  },
-  {
-    key: "storage",
-    label: "Ổ cứng",
-    trailingIcon: "chevron-info",
-    options: ["256 GB", "512 GB", "1 TB", "2 TB"],
-  },
-  {
-    key: "screen",
-    label: "Kích thước màn hình",
-    trailingIcon: "chevron",
-    options: ["13 inch", "14 inch", "15 inch", "16 inch"],
-  },
-  {
-    key: "resolution",
-    label: "Độ phân giải",
-    trailingIcon: "chevron",
-    options: ["Retina", "Liquid Retina", "Liquid Retina XDR", "4.5K"],
-  },
-  {
-    key: "feature",
-    label: "Tính năng đặc biệt",
-    trailingIcon: "chevron",
-    options: ["Touch ID", "Wi-Fi 6E", "Thunderbolt 4", "120Hz ProMotion"],
-  },
-];
+    if (values.length) {
+      query[filterKey] = values.join(",");
+    }
+  });
 
-const activeDropdownKey = ref(null);
-const selectedOptionsByFilter = ref({});
+  return query;
+};
+
+const fetchProductListingPayload = async ({ page = 1 } = {}) =>
+  await $fetch(`${apiBaseUrl.value}/products`, {
+    query: buildProductQuery({ page }),
+  });
+
+const visibleProductListItems = computed(() => productListItems.value);
+
+const remainingProductCount = computed(() => toNumber(paginationState.value.remainingItems));
+
+const hasMoreProducts = computed(() => Boolean(paginationState.value.hasNext));
 
 const activeDropdown = computed(() =>
-  productFilters.find((filter) => filter.key === activeDropdownKey.value && (filter.options?.length || filter.key === "filter")),
+  productFilters.value.find((filter) => filter.key === activeDropdownKey.value && (filter.options?.length || filter.key === "filter")),
 );
 
 const megaFilterSections = computed(() =>
-  productFilters.filter((filter) => filter.key !== "filter" && filter.options?.length),
+  productFilters.value.filter((filter) => filter.key !== "filter" && filter.options?.length),
 );
 
 let swiperInstances = [];
@@ -860,7 +942,36 @@ const setFilterChipRef = (key, el, scope = "primary") => {
   targetMap.delete(key);
 };
 
+const isFilterSelected = (filterKey) => {
+  const selected = selectedOptionsByFilter.value[filterKey];
+  return Array.isArray(selected) && selected.length > 0;
+};
+
+const scheduleProductListingRefresh = () => {
+  if (requestRefreshTimer) {
+    clearTimeout(requestRefreshTimer);
+  }
+
+  requestRefreshTimer = setTimeout(() => {
+    requestRefreshTimer = null;
+    loadProductListingPage({ page: 1 });
+  }, 150);
+};
+
 const handleFilterClick = (filter) => {
+  if (!filter) return;
+
+  if (filter.key === "stock" || filter.key === "new") {
+    const current = selectedOptionsByFilter.value[filter.key] || [];
+    selectedOptionsByFilter.value = {
+      ...selectedOptionsByFilter.value,
+      [filter.key]: current.length ? [] : [filter.label],
+    };
+    closeDropdown();
+    scheduleProductListingRefresh();
+    return;
+  }
+
   if (!filter.options?.length && filter.key !== "filter") return;
 
   activeDropdownKey.value = activeDropdownKey.value === filter.key ? null : filter.key;
@@ -876,17 +987,27 @@ const toggleFilterOption = (filterKey, option) => {
     ...selectedOptionsByFilter.value,
     [filterKey]: next,
   };
+
+  scheduleProductListingRefresh();
 };
 
 const closeDropdown = () => {
   activeDropdownKey.value = null;
 };
 
-const handleLoadMoreProducts = () => {
-  visibleProductCount.value = Math.min(
-    sortedProductListItems.value.length,
-    visibleProductCount.value + initialVisibleProductCount,
-  );
+const handleSeriesClick = async (series) => {
+  const nextSeriesKey = selectedSeriesKey.value === series.key ? "" : series.key;
+  selectedSeriesKey.value = nextSeriesKey;
+  productSeries.value = productSeries.value.map((item) => ({
+    ...item,
+    active: item.key === nextSeriesKey,
+  }));
+  await loadProductListingPage({ page: 1 });
+};
+
+const handleLoadMoreProducts = async () => {
+  if (!paginationState.value.nextPage || isLoadingMore.value) return;
+  await loadProductListingPage({ page: paginationState.value.nextPage, append: true });
 };
 
 const updateDropdownPosition = async () => {
@@ -986,6 +1107,36 @@ const updateStickyOffset = () => {
   stickyTopOffset.value = 0;
 };
 
+const loadProductListingPage = async ({ page = 1, append = false } = {}) => {
+  if (append) {
+    isLoadingMore.value = true;
+  } else {
+    isPageLoading.value = true;
+  }
+
+  loadError.value = null;
+
+  try {
+    const payload = await fetchProductListingPayload({ page });
+    const normalizedResponse = normalizeProductListingResponse(payload);
+
+    applyNormalizedListingResponse(normalizedResponse, { append });
+    await nextTick();
+    await updateDropdownPosition();
+
+    if (!append) {
+      destroySwipers();
+      await initSwipers();
+    }
+  } catch (error) {
+    loadError.value = error;
+    console.error("Failed to load product listing", error);
+  } finally {
+    isPageLoading.value = false;
+    isLoadingMore.value = false;
+  }
+};
+
 const initSwipers = async () => {
   if (!import.meta.client || !rootEl.value) return;
 
@@ -997,8 +1148,8 @@ const initSwipers = async () => {
   const { Navigation, Pagination } = modules;
   const sliderEls = rootEl.value.querySelectorAll(".banner-slide");
 
-  swiperInstances = Array.from(sliderEls).map((sliderEl, index) => {
-    return new Swiper(sliderEl, {
+  swiperInstances = Array.from(sliderEls).map((sliderEl, index) =>
+    new Swiper(sliderEl, {
       modules: [Navigation, Pagination],
       slidesPerView: 1,
       spaceBetween: 10,
@@ -1015,8 +1166,8 @@ const initSwipers = async () => {
       initialSlide: index === 0 ? 2 : 5,
       observer: true,
       observeParents: true,
-    });
-  });
+    }),
+  );
 };
 
 const destroySwipers = () => {
@@ -1028,6 +1179,16 @@ const destroySwipers = () => {
 
   swiperInstances = [];
 };
+
+const initialPayload = await fetchProductListingPayload({ page: 1 }).catch((error) => {
+  loadError.value = error;
+  console.error("Failed to load initial product listing", error);
+  return null;
+});
+
+if (initialPayload) {
+  applyNormalizedListingResponse(normalizeProductListingResponse(initialPayload));
+}
 
 onMounted(async () => {
   await nextTick();
@@ -1052,12 +1213,17 @@ watch(isStickyFilterVisible, async () => {
   await updateDropdownPosition();
 });
 
-watch(activeSortKey, () => {
-  visibleProductCount.value = initialVisibleProductCount;
+watch(activeSortKey, (nextSortKey, previousSortKey) => {
+  if (!nextSortKey || nextSortKey === previousSortKey || isApplyingListingResponse) return;
+  loadProductListingPage({ page: 1 });
 });
 
 onBeforeUnmount(() => {
   destroySwipers();
+
+  if (requestRefreshTimer) {
+    clearTimeout(requestRefreshTimer);
+  }
 
   if (mounted && typeof window !== "undefined") {
     window.removeEventListener("click", handleClickOutside);
@@ -1323,6 +1489,13 @@ onBeforeUnmount(() => {
   border-color: #9ca3af;
   box-shadow: 0 2px 8px rgba(17, 24, 39, 0.08);
   color: #111827;
+}
+
+.product-series-chip--active {
+  background: #fff;
+  border-color: #ef4444;
+  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.12);
+  color: #ef4444;
 }
 
 .product-filter-block {
