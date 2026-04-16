@@ -644,6 +644,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const routeCategory = computed(() => {
+  if (route.query.category) return route.query.category;
   if (route.params.slug) return route.params.slug;
   if (route.name?.toString().includes('category')) return route.params.slug;
   return "";
