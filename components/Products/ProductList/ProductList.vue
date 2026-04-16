@@ -1,51 +1,28 @@
 <template>
   <section class="product-list-page">
-    <div
-      :class="['sticky-filter-bar', { 'sticky-filter-bar--visible': isStickyFilterVisible }]"
-      :style="{ top: `${stickyTopOffset}px` }"
-    >
+    <div :class="['sticky-filter-bar', { 'sticky-filter-bar--visible': isStickyFilterVisible }]"
+      :style="{ top: `${stickyTopOffset}px` }">
       <div ref="stickyFilterInnerEl" class="container-xl px-3 py-3 sticky-filter-bar__inner">
         <div class="product-filter-list product-filter-list--sticky">
-          <button
-            v-for="filter in productFilters"
-            :key="`sticky-${filter.key}`"
-            :ref="(el) => setFilterChipRef(filter.key, el, 'sticky')"
-            type="button"
-            :class="[
+          <button v-for="filter in productFilters" :key="`sticky-${filter.key}`"
+            :ref="(el) => setFilterChipRef(filter.key, el, 'sticky')" type="button" :class="[
               'product-filter-chip',
               {
                 'product-filter-chip--primary': filter.primary && activeDropdownKey !== filter.key,
                 'product-filter-chip--active': activeDropdownKey === filter.key || isFilterSelected(filter.key),
               },
-            ]"
-            @click="handleFilterClick(filter)"
-          >
+            ]" @click="handleFilterClick(filter)">
             <span v-if="filter.leadingIcon === 'filter'" class="product-filter-chip__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M4 5H20L13.5 12.4375V18.25L10.5 19.75V12.4375L4 5Z"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M4 5H20L13.5 12.4375V18.25L10.5 19.75V12.4375L4 5Z" stroke="currentColor" stroke-width="1.7"
+                  stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </span>
 
             <span v-else-if="filter.leadingIcon === 'truck'" class="product-filter-chip__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M3 6.5H13V14.5H3V6.5Z"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M13 9H17L20 12V14.5H13V9Z"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linejoin="round"
-                />
+                <path d="M3 6.5H13V14.5H3V6.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                <path d="M13 9H17L20 12V14.5H13V9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
                 <circle cx="7" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
                 <circle cx="17" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
                 <path d="M5 9.5H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
@@ -56,13 +33,8 @@
             <span v-else-if="filter.leadingIcon === 'new'" class="product-filter-chip__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M5 5.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                <path
-                  d="M5 7H14.75L13.25 10.5L14.75 14H5"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M5 7H14.75L13.25 10.5L14.75 14H5" stroke="currentColor" stroke-width="1.7"
+                  stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M16 13.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
                 <circle cx="16" cy="10" r="1.75" stroke="currentColor" stroke-width="1.7" />
                 <path d="M18.5 18.5H13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
@@ -72,13 +44,8 @@
             <span v-else-if="filter.leadingIcon === 'price'" class="product-filter-chip__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7" />
-                <path
-                  d="M12 8.5V12H15"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M12 8.5V12H15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
             </span>
 
@@ -86,29 +53,16 @@
 
             <span v-if="filter.trailingIcon === 'chevron'" class="product-filter-chip__meta" aria-hidden="true">
               <svg :class="{ 'is-rotated': activeDropdownKey === filter.key }" viewBox="0 0 20 20" fill="none">
-                <path
-                  d="M5 7.5L10 12.5L15 7.5"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
             </span>
 
-            <span
-              v-else-if="filter.trailingIcon === 'chevron-info'"
-              class="product-filter-chip__meta product-filter-chip__meta-group"
-              aria-hidden="true"
-            >
+            <span v-else-if="filter.trailingIcon === 'chevron-info'"
+              class="product-filter-chip__meta product-filter-chip__meta-group" aria-hidden="true">
               <svg :class="{ 'is-rotated': activeDropdownKey === filter.key }" viewBox="0 0 20 20" fill="none">
-                <path
-                  d="M5 7.5L10 12.5L15 7.5"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
               <svg viewBox="0 0 20 20" fill="none">
                 <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
@@ -120,21 +74,13 @@
         </div>
 
         <transition name="filter-dropdown" mode="out-in">
-          <div
-            v-if="activeDropdown && isStickyFilterVisible"
-            :key="`sticky-${activeDropdown.key}`"
-            ref="dropdownEl"
+          <div v-if="activeDropdown && isStickyFilterVisible" :key="`sticky-${activeDropdown.key}`" ref="dropdownEl"
             class="product-filter-dropdown"
-            :class="{ 'product-filter-dropdown--mega': activeDropdown.key === 'filter' }"
-            :style="dropdownStyle"
-          >
+            :class="{ 'product-filter-dropdown--mega': activeDropdown.key === 'filter' }" :style="dropdownStyle">
             <div v-if="activeDropdown.key === 'filter'" class="product-filter-mega-scroll">
               <div class="product-filter-mega-grid">
-                <div
-                  v-for="section in megaFilterSections"
-                  :key="`sticky-mega-${section.key}`"
-                  class="product-filter-group"
-                >
+                <div v-for="section in megaFilterSections" :key="`sticky-mega-${section.key}`"
+                  class="product-filter-group">
                   <div class="product-filter-group__title">
                     <span>{{ section.label }}</span>
                     <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
@@ -147,18 +93,13 @@
                   </div>
 
                   <div class="product-filter-group__options">
-                    <button
-                      v-for="option in section.options"
-                      :key="`sticky-${section.key}-${option}`"
-                      type="button"
+                    <button v-for="option in section.options" :key="`sticky-${section.key}-${option}`" type="button"
                       :class="[
                         'product-filter-option',
                         {
                           'product-filter-option--selected': selectedOptionsByFilter[section.key]?.includes(option),
                         },
-                      ]"
-                      @click="toggleFilterOption(section.key, option)"
-                    >
+                      ]" @click="toggleFilterOption(section.key, option)">
                       <span>{{ option }}</span>
                       <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
                         <svg viewBox="0 0 20 20" fill="none">
@@ -174,18 +115,13 @@
             </div>
 
             <div v-else class="product-filter-dropdown__options">
-              <button
-                v-for="option in activeDropdown.options"
-                :key="`sticky-${activeDropdown.key}-${option}`"
-                type="button"
-                :class="[
+              <button v-for="option in activeDropdown.options" :key="`sticky-${activeDropdown.key}-${option}`"
+                type="button" :class="[
                   'product-filter-option',
                   {
                     'product-filter-option--selected': selectedOptionsByFilter[activeDropdown.key]?.includes(option),
                   },
-                ]"
-                @click="toggleFilterOption(activeDropdown.key, option)"
-              >
+                ]" @click="toggleFilterOption(activeDropdown.key, option)">
                 <span>{{ option }}</span>
                 <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
                   <svg viewBox="0 0 20 20" fill="none">
@@ -198,18 +134,12 @@
             </div>
 
             <div class="product-filter-dropdown__footer">
-              <button
-                type="button"
-                class="product-filter-dropdown__button product-filter-dropdown__button--ghost"
-                @click="closeDropdown"
-              >
+              <button type="button" class="product-filter-dropdown__button product-filter-dropdown__button--ghost"
+                @click="closeDropdown">
                 Đóng
               </button>
-              <button
-                type="button"
-                class="product-filter-dropdown__button product-filter-dropdown__button--primary"
-                @click="closeDropdown"
-              >
+              <button type="button" class="product-filter-dropdown__button product-filter-dropdown__button--primary"
+                @click="closeDropdown">
                 Xem kết quả
               </button>
             </div>
@@ -219,39 +149,27 @@
     </div>
 
     <div class="container-xl px-3 py-4">
-      <div ref="rootEl" data-fetch-key="TopSlidingBanner:0" class="block-top-sliding-banner is-flex">
-        <div
-          v-for="(group, index) in bannerGroups"
-          :key="group.id"
-          :class="['block-sliding', { reverseBanner: index === 1 }]"
-        >
-          <div class="swiper banner-slide swiper-container">
+      <div v-if="bannerGroups.some(group => group.items && group.items.length > 0)" ref="rootEl"
+        data-fetch-key="TopSlidingBanner:0" class="block-top-sliding-banner is-flex">
+        <div v-for="(group, index) in bannerGroups" :key="group.id"
+          :class="['block-sliding', { reverseBanner: index === 1 }]">
+          <div v-if="group.items && group.items.length > 0" class="swiper banner-slide swiper-container">
             <div class="swiper-wrapper">
-              <div
-                v-for="banner in group.items"
-                :key="`${group.id}-${banner.href}`"
-                class="swiper-slide"
-              >
+              <div v-for="banner in group.items" :key="`${group.id}-${banner.href}`" class="swiper-slide">
                 <a :href="banner.href" class="banner-img button__link-banner">
-                  <img
-                    :src="banner.src"
-                    :alt="banner.alt"
-                    width="595"
-                    height="100"
-                    loading="lazy"
-                  />
+                  <img :src="banner.src" :alt="banner.alt" width="595" height="100" loading="lazy" />
                 </a>
               </div>
             </div>
 
             <div class="swiper-pagination" />
 
-            <div class="swiper-button-prev button__view-banner-prev" tabindex="0" role="button" aria-label="Previous slide">
+            <div class="swiper-button-prev button__view-banner-prev" tabindex="0" role="button"
+              aria-label="Previous slide">
               <div class="icon">
                 <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                   <path
-                    d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
-                  />
+                    d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z" />
                 </svg>
               </div>
             </div>
@@ -260,8 +178,7 @@
               <div class="icon">
                 <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                   <path
-                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
-                  />
+                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z" />
                 </svg>
               </div>
             </div>
@@ -270,16 +187,12 @@
       </div>
 
       <div class="product-series-block">
-        <h2 class="product-series-title">{{ pageTitle }}</h2>
+        <h2 v-if="pageTitle" class="product-series-title">{{ pageTitle }}</h2>
 
         <div class="product-series-list">
-          <button
-            v-for="item in productSeries"
-            :key="item.key || item.label"
-            type="button"
+          <button v-for="item in productSeries" :key="item.key || item.label" type="button"
             :class="['product-series-chip', { 'product-series-chip--active': item.active }]"
-            @click="handleSeriesClick(item)"
-          >
+            @click="handleSeriesClick(item)">
             {{ item.label }}
           </button>
         </div>
@@ -289,46 +202,25 @@
         <h2 class="product-filter-title">Chọn theo tiêu chí</h2>
 
         <div class="product-filter-list">
-          <button
-            v-for="filter in productFilters"
-            :key="filter.key"
-            :ref="(el) => setFilterChipRef(filter.key, el)"
-            type="button"
-            :class="[
+          <button v-for="filter in productFilters" :key="filter.key" :ref="(el) => setFilterChipRef(filter.key, el)"
+            type="button" :class="[
               'product-filter-chip',
               {
                 'product-filter-chip--primary': filter.primary && activeDropdownKey !== filter.key,
                 'product-filter-chip--active': activeDropdownKey === filter.key || isFilterSelected(filter.key),
               },
-            ]"
-            @click="handleFilterClick(filter)"
-          >
+            ]" @click="handleFilterClick(filter)">
             <span v-if="filter.leadingIcon === 'filter'" class="product-filter-chip__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M4 5H20L13.5 12.4375V18.25L10.5 19.75V12.4375L4 5Z"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M4 5H20L13.5 12.4375V18.25L10.5 19.75V12.4375L4 5Z" stroke="currentColor" stroke-width="1.7"
+                  stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </span>
 
             <span v-else-if="filter.leadingIcon === 'truck'" class="product-filter-chip__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M3 6.5H13V14.5H3V6.5Z"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M13 9H17L20 12V14.5H13V9Z"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linejoin="round"
-                />
+                <path d="M3 6.5H13V14.5H3V6.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                <path d="M13 9H17L20 12V14.5H13V9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
                 <circle cx="7" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
                 <circle cx="17" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
                 <path d="M5 9.5H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
@@ -339,13 +231,8 @@
             <span v-else-if="filter.leadingIcon === 'new'" class="product-filter-chip__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M5 5.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                <path
-                  d="M5 7H14.75L13.25 10.5L14.75 14H5"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M5 7H14.75L13.25 10.5L14.75 14H5" stroke="currentColor" stroke-width="1.7"
+                  stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M16 13.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
                 <circle cx="16" cy="10" r="1.75" stroke="currentColor" stroke-width="1.7" />
                 <path d="M18.5 18.5H13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
@@ -355,13 +242,8 @@
             <span v-else-if="filter.leadingIcon === 'price'" class="product-filter-chip__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7" />
-                <path
-                  d="M12 8.5V12H15"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M12 8.5V12H15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
             </span>
 
@@ -369,29 +251,16 @@
 
             <span v-if="filter.trailingIcon === 'chevron'" class="product-filter-chip__meta" aria-hidden="true">
               <svg :class="{ 'is-rotated': activeDropdownKey === filter.key }" viewBox="0 0 20 20" fill="none">
-                <path
-                  d="M5 7.5L10 12.5L15 7.5"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
             </span>
 
-            <span
-              v-else-if="filter.trailingIcon === 'chevron-info'"
-              class="product-filter-chip__meta product-filter-chip__meta-group"
-              aria-hidden="true"
-            >
+            <span v-else-if="filter.trailingIcon === 'chevron-info'"
+              class="product-filter-chip__meta product-filter-chip__meta-group" aria-hidden="true">
               <svg :class="{ 'is-rotated': activeDropdownKey === filter.key }" viewBox="0 0 20 20" fill="none">
-                <path
-                  d="M5 7.5L10 12.5L15 7.5"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
               <svg viewBox="0 0 20 20" fill="none">
                 <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
@@ -403,21 +272,12 @@
         </div>
 
         <transition name="filter-dropdown" mode="out-in">
-          <div
-            v-if="activeDropdown && !isStickyFilterVisible"
-            :key="activeDropdown.key"
-            ref="dropdownEl"
+          <div v-if="activeDropdown && !isStickyFilterVisible" :key="activeDropdown.key" ref="dropdownEl"
             class="product-filter-dropdown"
-            :class="{ 'product-filter-dropdown--mega': activeDropdown.key === 'filter' }"
-            :style="dropdownStyle"
-          >
+            :class="{ 'product-filter-dropdown--mega': activeDropdown.key === 'filter' }" :style="dropdownStyle">
             <div v-if="activeDropdown.key === 'filter'" class="product-filter-mega-scroll">
               <div class="product-filter-mega-grid">
-                <div
-                  v-for="section in megaFilterSections"
-                  :key="`mega-${section.key}`"
-                  class="product-filter-group"
-                >
+                <div v-for="section in megaFilterSections" :key="`mega-${section.key}`" class="product-filter-group">
                   <div class="product-filter-group__title">
                     <span>{{ section.label }}</span>
                     <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
@@ -430,18 +290,12 @@
                   </div>
 
                   <div class="product-filter-group__options">
-                    <button
-                      v-for="option in section.options"
-                      :key="`${section.key}-${option}`"
-                      type="button"
-                      :class="[
-                        'product-filter-option',
-                        {
-                          'product-filter-option--selected': selectedOptionsByFilter[section.key]?.includes(option),
-                        },
-                      ]"
-                      @click="toggleFilterOption(section.key, option)"
-                    >
+                    <button v-for="option in section.options" :key="`${section.key}-${option}`" type="button" :class="[
+                      'product-filter-option',
+                      {
+                        'product-filter-option--selected': selectedOptionsByFilter[section.key]?.includes(option),
+                      },
+                    ]" @click="toggleFilterOption(section.key, option)">
                       <span>{{ option }}</span>
                       <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
                         <svg viewBox="0 0 20 20" fill="none">
@@ -457,18 +311,13 @@
             </div>
 
             <div v-else class="product-filter-dropdown__options">
-              <button
-                v-for="option in activeDropdown.options"
-                :key="`${activeDropdown.key}-${option}`"
-                type="button"
+              <button v-for="option in activeDropdown.options" :key="`${activeDropdown.key}-${option}`" type="button"
                 :class="[
                   'product-filter-option',
                   {
                     'product-filter-option--selected': selectedOptionsByFilter[activeDropdown.key]?.includes(option),
                   },
-                ]"
-                @click="toggleFilterOption(activeDropdown.key, option)"
-              >
+                ]" @click="toggleFilterOption(activeDropdown.key, option)">
                 <span>{{ option }}</span>
                 <span class="product-filter-chip__meta product-filter-chip__meta--info" aria-hidden="true">
                   <svg viewBox="0 0 20 20" fill="none">
@@ -481,18 +330,12 @@
             </div>
 
             <div class="product-filter-dropdown__footer">
-              <button
-                type="button"
-                class="product-filter-dropdown__button product-filter-dropdown__button--ghost"
-                @click="closeDropdown"
-              >
+              <button type="button" class="product-filter-dropdown__button product-filter-dropdown__button--ghost"
+                @click="closeDropdown">
                 Đóng
               </button>
-              <button
-                type="button"
-                class="product-filter-dropdown__button product-filter-dropdown__button--primary"
-                @click="closeDropdown"
-              >
+              <button type="button" class="product-filter-dropdown__button product-filter-dropdown__button--primary"
+                @click="closeDropdown">
                 Xem kết quả
               </button>
             </div>
@@ -504,16 +347,10 @@
         <h2 class="product-sort-title">Sắp xếp theo</h2>
 
         <div class="product-sort-list">
-          <button
-            v-for="sort in sortOptions"
-            :key="sort.key"
-            type="button"
-            :class="[
-              'product-sort-chip',
-              { 'product-sort-chip--active': activeSortKey === sort.key },
-            ]"
-            @click="handleSortClick(sort.key)"
-          >
+          <button v-for="sort in sortOptions" :key="sort.key" type="button" :class="[
+            'product-sort-chip',
+            { 'product-sort-chip--active': activeSortKey === sort.key },
+          ]" @click="handleSortClick(sort.key)">
             <span class="product-sort-chip__icon" aria-hidden="true" v-html="sort.icon" />
             <span>{{ sort.label }}</span>
           </button>
@@ -521,11 +358,7 @@
       </div>
 
       <div class="product-card-grid">
-        <HomeProdCard
-          v-for="product in visibleProductListItems"
-          :key="product.id"
-          :product="product"
-        />
+        <HomeProdCard v-for="product in visibleProductListItems" :key="product.id" :product="product" />
       </div>
 
       <div v-if="hasMoreProducts" class="product-load-more">
@@ -533,13 +366,8 @@
           <span>Xem thêm {{ remainingProductCount }} sản phẩm</span>
           <span class="product-load-more__icon" aria-hidden="true">
             <svg viewBox="0 0 20 20" fill="none">
-              <path
-                d="M5 7.5L10 12.5L15 7.5"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+              <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
             </svg>
           </span>
         </button>
@@ -812,11 +640,20 @@ const destroySwipers = () => {
   swiperInstances = [];
 };
 
-await productListingStore.initializeListing({ category: "macbook" }).catch((error) => {
-  console.error("Failed to initialize product listing store", error);
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const routeCategory = computed(() => {
+  if (route.params.slug) return route.params.slug;
+  if (route.name?.toString().includes('category')) return route.params.slug;
+  return "";
 });
 
 onMounted(async () => {
+  await productListingStore.initializeListing({ category: routeCategory.value }).catch((error) => {
+    console.error("Failed to initialize product listing store", error);
+  });
+
   await nextTick();
   await initSwipers();
   updateStickyOffset();
@@ -970,7 +807,7 @@ onBeforeUnmount(() => {
   z-index: 10;
 }
 
-.swiper-container-horizontal > .swiper-pagination-bullets,
+.swiper-container-horizontal>.swiper-pagination-bullets,
 .swiper-pagination-custom,
 .swiper-pagination-fraction {
   bottom: 10px;
@@ -984,7 +821,7 @@ onBeforeUnmount(() => {
   transition: 0.3s;
 }
 
-.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
   margin: 0 4px;
 }
 
@@ -1527,6 +1364,7 @@ onBeforeUnmount(() => {
 }
 
 @media screen and (max-width: 540px) {
+
   .block-sliding .banner-slide .swiper-button-next,
   .block-sliding .banner-slide .swiper-button-prev {
     font-size: 1.2rem;

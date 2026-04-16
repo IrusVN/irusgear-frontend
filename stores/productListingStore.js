@@ -15,17 +15,17 @@ const SORT_ICONS = {
 };
 
 const SORT_LABELS = {
-  popular: "Pho bien",
-  promo: "Khuyen mai HOT",
-  price_asc: "Gia Thap - Cao",
-  price_desc: "Gia Cao - Thap",
+  popular: "Phổ biến",
+  promo: "Khuyến mãi HOT",
+  price_asc: "Giá Thấp - Cao",
+  price_desc: "Giá Cao - Thấp",
 };
 
 const FILTER_UI = {
-  filter: { label: "Bo loc", leadingIcon: "filter", primary: true },
-  stock: { label: "San hang", leadingIcon: "truck" },
-  new: { label: "Hang moi ve", leadingIcon: "new" },
-  price: { label: "Xem theo gia", leadingIcon: "price" },
+  filter: { label: "Bộ lọc", leadingIcon: "filter", primary: true },
+  stock: { label: "Sẵn hàng", leadingIcon: "truck" },
+  new: { label: "Hàng mới về", leadingIcon: "new" },
+  price: { label: "Xem theo giá", leadingIcon: "price" },
   major: { trailingIcon: "chevron" },
   usage: { trailingIcon: "chevron-info" },
   cpu: { trailingIcon: "chevron" },
@@ -174,7 +174,7 @@ const transformListingPayload = (payload = {}) => {
       : page * limit < totalItems;
 
   return {
-    pageTitle: String(payload?.title || meta?.title || "Macbook"),
+    pageTitle: payload?.title || meta?.title ? String(payload.title || meta.title) : "",
     bannerGroups: [
       { id: "primary", items: primaryBanners.length ? primaryBanners : fallbackBanners },
       {
@@ -193,11 +193,7 @@ const transformListingPayload = (payload = {}) => {
           active: key === selectedSeriesKey,
         };
       }),
-    sortOptions: (sortSource.length ? sortSource : DEFAULT_SORT_OPTIONS).map((option) => ({
-      key: String(option?.key || ""),
-      label: String(option?.label || SORT_LABELS[option?.key] || option?.key || ""),
-      icon: SORT_ICONS[option?.key] || SORT_ICONS.popular,
-    })),
+    sortOptions: DEFAULT_SORT_OPTIONS,
     productFilters,
     productListItems: rawItems.map((product) => ({
       id: product?.id ?? product?.product_id ?? product?.slug ?? product?.url ?? product?.name ?? "",
@@ -231,7 +227,7 @@ const transformListingPayload = (payload = {}) => {
 };
 
 const createDefaultListingState = () => ({
-  pageTitle: "Macbook",
+  pageTitle: "",
   bannerGroups: [...DEFAULT_BANNERS],
   productSeries: [],
   sortOptions: [...DEFAULT_SORT_OPTIONS],
@@ -247,8 +243,8 @@ export const useProductListingStore = defineStore("product-listing", () => {
   const feGlobalStore = useFeGlobalStore();
   const { error } = storeToRefs(feGlobalStore);
 
-  const categorySlug = ref("macbook");
-  const pageTitle = ref("Macbook");
+  const categorySlug = ref("");
+  const pageTitle = ref("");
   const bannerGroups = ref([...DEFAULT_BANNERS]);
   const productSeries = ref([]);
   const sortOptions = ref([...DEFAULT_SORT_OPTIONS]);
@@ -276,11 +272,14 @@ export const useProductListingStore = defineStore("product-listing", () => {
 
   const buildQueryParams = ({ page = 1 } = {}) => {
     const params = {
-      category: categorySlug.value,
       page,
       limit: paginationState.value.limit || 20,
       sort: activeSortKey.value || "popular",
     };
+
+    if (categorySlug.value) {
+      params.category = categorySlug.value;
+    }
 
     if (selectedSeriesKey.value) {
       params.series = selectedSeriesKey.value;
@@ -369,7 +368,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
     return productListItems.value;
   };
 
-  const initializeListing = async ({ category = "macbook", force = false } = {}) => {
+  const initializeListing = async ({ category = "", force = false } = {}) => {
     const isNewCategory = categorySlug.value !== category;
 
     if (isNewCategory) {
