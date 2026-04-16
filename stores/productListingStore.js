@@ -346,7 +346,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
       }
 
       if (res) {
-        applyListingState(res, { append });
+        applyListingState(res.data || res, { append });
       } else if (!append) {
         productListItems.value = [];
       }
