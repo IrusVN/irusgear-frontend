@@ -1,63 +1,39 @@
 <template>
   <div class="container-xl py-3 px-3 mx-auto">
     <div class="hero-layout">
-      <div
-        class="hero-category-wrap d-none d-lg-flex flex-shrink-0"
-        @mouseenter="openMegaMenu"
-        @mouseleave="closeMegaMenu"
-      >
-        <div class="bg-white rounded-3 shadow-sm border overflow-hidden d-flex flex-column justify-content-between hero-category-sidebar">
-        <a
-          v-for="cat in categories"
-          :key="cat.key"
-          href="#"
-          class="d-flex align-items-center gap-2 px-3 text-decoration-none text-dark cat-item border-bottom"
-          :class="{ 'cat-item-active': highlightedSectionKey === cat.key }"
-          @mouseenter="activateMegaMenu(cat.key)"
-          @focus="activateMegaMenu(cat.key)"
-          @click.prevent
-        >
-          <span class="d-inline-flex align-items-center justify-content-center flex-shrink-0 text-dark" style="width: 22px; height: 22px;">
-            <i :class="['bi', cat.icon, 'text-center flex-shrink-0']" style="font-size: 1.2rem; width: 22px;"></i>
-          </span>
-          <span class="flex-grow-1 fw-semibold" style="font-size: 0.92rem;">{{ cat.name }}</span>
-          <i class="bi bi-chevron-right text-secondary" style="font-size: 0.7rem;"></i>
-        </a>
+      <div class="hero-category-wrap d-none d-lg-flex flex-shrink-0" @mouseenter="openMegaMenu"
+        @mouseleave="closeMegaMenu">
+        <div
+          class="bg-white rounded-3 shadow-sm border overflow-hidden d-flex flex-column justify-content-between hero-category-sidebar">
+          <a v-for="cat in categories" :key="cat.key" href="#"
+            class="d-flex align-items-center gap-2 px-3 text-decoration-none text-dark cat-item border-bottom"
+            :class="{ 'cat-item-active': highlightedSectionKey === cat.key }" @mouseenter="activateMegaMenu(cat.key)"
+            @focus="activateMegaMenu(cat.key)" @click.prevent>
+            <span class="d-inline-flex align-items-center justify-content-center flex-shrink-0 text-dark"
+              style="width: 22px; height: 22px;">
+              <i :class="['bi', cat.icon, 'text-center flex-shrink-0']" style="font-size: 1.2rem; width: 22px;"></i>
+            </span>
+            <span class="flex-grow-1 fw-semibold" style="font-size: 0.92rem;">{{ cat.name }}</span>
+            <i class="bi bi-chevron-right text-secondary" style="font-size: 0.7rem;"></i>
+          </a>
 
-          <div
-            v-if="isMegaMenuOpen && activeSection"
-            class="hero-mega-menu-panel bg-white rounded-3 shadow-sm border"
-            @mouseenter="keepMegaMenuOpen"
-            @mouseleave="closeMegaMenu"
-          >
+          <div v-if="isMegaMenuOpen && activeSection" class="hero-mega-menu-panel bg-white rounded-3 shadow-sm border"
+            @mouseenter="keepMegaMenuOpen" @mouseleave="closeMegaMenu">
             <div class="hero-mega-menu-columns">
-              <section
-                v-for="group in activeGroups"
-                :key="group.key || group.title"
-                class="hero-mega-menu-group"
-              >
+              <section v-for="group in activeGroups" :key="group.key || group.title" class="hero-mega-menu-group">
                 <h3 class="fw-bold fs-6 text-dark mb-2">{{ group.title }}</h3>
 
                 <div class="d-flex flex-wrap gap-2">
-                  <component
-                    :is="resolveHref(item) ? 'a' : 'div'"
-                    v-for="item in resolveGroupItems(group)"
+                  <NuxtLink v-for="item in resolveGroupItems(group)"
                     :key="`${group.key || group.title}-${item.slug || item.title}`"
-                    :href="resolveHref(item) || undefined"
-                    :aria-label="item.title || undefined"
-                    class="hero-mega-menu-chip"
-                    :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }"
-                  >
-                    <img
-                      v-if="item.image"
-                      :src="item.image"
-                      :alt="item.title"
-                      class="hero-mega-menu-chip-image"
-                      loading="lazy"
-                    />
-                    <span v-if="!shouldHideItemTitle(group, item)" class="hero-mega-menu-chip-title">{{ item.title }}</span>
+                    :to="`/products/?category=${item.slug || item.title}`" :aria-label="item.title || undefined"
+                    class="hero-mega-menu-chip" :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }">
+                    <img v-if="item.image" :src="item.image" :alt="item.title" class="hero-mega-menu-chip-image"
+                      loading="lazy" />
+                    <span v-if="!shouldHideItemTitle(group, item)" class="hero-mega-menu-chip-title">{{ item.title
+                    }}</span>
                     <span v-if="item.badge" class="hero-mega-menu-chip-badge">{{ item.badge }}</span>
-                  </component>
+                  </NuxtLink>
                 </div>
               </section>
             </div>
@@ -66,44 +42,32 @@
       </div>
 
       <div class="d-flex flex-column gap-2 min-w-0 overflow-hidden">
-        <div
-          id="heroCarousel"
-          ref="carouselRef"
-          class="carousel slide rounded-3 shadow-sm overflow-hidden bg-white"
-          data-bs-ride="carousel"
-          data-bs-interval="4000"
-        >
-          <div
-            ref="tabScrollerRef"
-            :class="[
-              'hero-carousel-tabs',
-              {
-                'hero-carousel-tabs-left-wing': activeIndex === 0,
-                'hero-carousel-tabs-right-wing': activeIndex === heroBanners.length - 1,
-              },
-            ]"
-          >
-            <button
-              v-for="(banner, i) in heroBanners"
-              :key="banner.image"
-              :ref="setTabButtonRef"
-              type="button"
-              :data-bs-target="'#heroCarousel'"
-              :data-bs-slide-to="i"
-              :class="[
+        <div id="heroCarousel" ref="carouselRef" class="carousel slide rounded-3 shadow-sm overflow-hidden bg-white"
+          data-bs-ride="carousel" data-bs-interval="4000">
+          <div ref="tabScrollerRef" :class="[
+            'hero-carousel-tabs',
+            {
+              'hero-carousel-tabs-left-wing': activeIndex === 0,
+              'hero-carousel-tabs-right-wing': activeIndex === heroBanners.length - 1,
+            },
+          ]">
+            <button v-for="(banner, i) in heroBanners" :key="banner.image" :ref="setTabButtonRef" type="button"
+              :data-bs-target="'#heroCarousel'" :data-bs-slide-to="i" :class="[
                 'hero-carousel-tab',
                 {
                   active: activeIndex === i,
                   'hero-carousel-tab-first-active': activeIndex === i && i === 0,
                   'hero-carousel-tab-last-active': activeIndex === i && i === heroBanners.length - 1,
                 },
-              ]"
-              @click="activeIndex = i"
-            >
+              ]" @click="activeIndex = i">
               <span v-if="activeIndex === i" class="hero-tab-wing hero-tab-wing-left" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1362" preserveAspectRatio="none">
-                  <path d="M 988.750 22.566 C 986.138 23.926, 984 25.262, 984 25.536 C 984 25.982, 993.900 21.306, 994.917 20.380 C 996.155 19.251, 992.901 20.405, 988.750 22.566 M 747.477 195.250 L 739.500 203.500 747.750 195.523 C 752.288 191.136, 756 187.424, 756 187.273 C 756 186.544, 754.885 187.588, 747.477 195.250 M 329.987 1194.750 L 315.500 1209.500 330.250 1195.013 C 343.952 1181.555, 345.453 1180, 344.737 1180 C 344.592 1180, 337.955 1186.638, 329.987 1194.750 M 292.971 1229.750 L 286.500 1236.500 293.250 1230.029 C 299.520 1224.018, 300.457 1223, 299.721 1223 C 299.568 1223, 296.530 1226.037, 292.971 1229.750 M 16.750 1357.743 C 20.738 1357.932, 27.262 1357.932, 31.250 1357.743 C 35.237 1357.553, 31.975 1357.397, 24 1357.397 C 16.025 1357.397, 12.762 1357.553, 16.750 1357.743" fill="transparent"></path>
-                  <path d="M 0 678.441 L 0 1355.877 4.698 1356.582 C 11.713 1357.634, 49.378 1356.255, 58.142 1354.625 C 75.112 1351.470, 113.306 1338.882, 134.500 1329.459 C 183.168 1307.823, 221.770 1285.436, 260.997 1256.099 C 280.057 1241.844, 298.425 1225.449, 328.826 1195.554 C 362.127 1162.808, 385.286 1133.566, 407.670 1096 C 427.019 1063.527, 430.431 1056.966, 447.458 1019.500 C 460.942 989.828, 464.472 978.257, 483.609 901 C 498.035 842.766, 549.729 636.436, 554.012 620 C 572.473 549.145, 592.445 478.080, 606.847 432 C 622.391 382.262, 630.945 362.446, 654.762 321 C 689.890 259.869, 708.840 234.684, 755.500 187.112 C 804.088 137.573, 860.800 92.593, 909.500 64.967 C 927.984 54.482, 991.312 21.173, 1017.500 8.161 L 1023.500 5.180 1024.001 680.340 L 1024.502 1355.500 1024.751 678 L 1025 0.500 512.500 0.752 L 0 1.004 0 678.441 M 0.497 678.500 C 0.497 1051.400, 0.611 1204.100, 0.750 1017.832 C 0.889 831.565, 0.889 526.465, 0.750 339.832 C 0.611 153.200, 0.497 305.600, 0.497 678.500" fill="#f2f2f3"></path>
+                  <path
+                    d="M 988.750 22.566 C 986.138 23.926, 984 25.262, 984 25.536 C 984 25.982, 993.900 21.306, 994.917 20.380 C 996.155 19.251, 992.901 20.405, 988.750 22.566 M 747.477 195.250 L 739.500 203.500 747.750 195.523 C 752.288 191.136, 756 187.424, 756 187.273 C 756 186.544, 754.885 187.588, 747.477 195.250 M 329.987 1194.750 L 315.500 1209.500 330.250 1195.013 C 343.952 1181.555, 345.453 1180, 344.737 1180 C 344.592 1180, 337.955 1186.638, 329.987 1194.750 M 292.971 1229.750 L 286.500 1236.500 293.250 1230.029 C 299.520 1224.018, 300.457 1223, 299.721 1223 C 299.568 1223, 296.530 1226.037, 292.971 1229.750 M 16.750 1357.743 C 20.738 1357.932, 27.262 1357.932, 31.250 1357.743 C 35.237 1357.553, 31.975 1357.397, 24 1357.397 C 16.025 1357.397, 12.762 1357.553, 16.750 1357.743"
+                    fill="transparent"></path>
+                  <path
+                    d="M 0 678.441 L 0 1355.877 4.698 1356.582 C 11.713 1357.634, 49.378 1356.255, 58.142 1354.625 C 75.112 1351.470, 113.306 1338.882, 134.500 1329.459 C 183.168 1307.823, 221.770 1285.436, 260.997 1256.099 C 280.057 1241.844, 298.425 1225.449, 328.826 1195.554 C 362.127 1162.808, 385.286 1133.566, 407.670 1096 C 427.019 1063.527, 430.431 1056.966, 447.458 1019.500 C 460.942 989.828, 464.472 978.257, 483.609 901 C 498.035 842.766, 549.729 636.436, 554.012 620 C 572.473 549.145, 592.445 478.080, 606.847 432 C 622.391 382.262, 630.945 362.446, 654.762 321 C 689.890 259.869, 708.840 234.684, 755.500 187.112 C 804.088 137.573, 860.800 92.593, 909.500 64.967 C 927.984 54.482, 991.312 21.173, 1017.500 8.161 L 1023.500 5.180 1024.001 680.340 L 1024.502 1355.500 1024.751 678 L 1025 0.500 512.500 0.752 L 0 1.004 0 678.441 M 0.497 678.500 C 0.497 1051.400, 0.611 1204.100, 0.750 1017.832 C 0.889 831.565, 0.889 526.465, 0.750 339.832 C 0.611 153.200, 0.497 305.600, 0.497 678.500"
+                    fill="#f2f2f3"></path>
                 </svg>
               </span>
 
@@ -114,8 +78,12 @@
 
               <span v-if="activeIndex === i" class="hero-tab-wing hero-tab-wing-right" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1362" preserveAspectRatio="none">
-                  <path d="M 988.750 22.566 C 986.138 23.926, 984 25.262, 984 25.536 C 984 25.982, 993.900 21.306, 994.917 20.380 C 996.155 19.251, 992.901 20.405, 988.750 22.566 M 747.477 195.250 L 739.500 203.500 747.750 195.523 C 752.288 191.136, 756 187.424, 756 187.273 C 756 186.544, 754.885 187.588, 747.477 195.250 M 329.987 1194.750 L 315.500 1209.500 330.250 1195.013 C 343.952 1181.555, 345.453 1180, 344.737 1180 C 344.592 1180, 337.955 1186.638, 329.987 1194.750 M 292.971 1229.750 L 286.500 1236.500 293.250 1230.029 C 299.520 1224.018, 300.457 1223, 299.721 1223 C 299.568 1223, 296.530 1226.037, 292.971 1229.750 M 16.750 1357.743 C 20.738 1357.932, 27.262 1357.932, 31.250 1357.743 C 35.237 1357.553, 31.975 1357.397, 24 1357.397 C 16.025 1357.397, 12.762 1357.553, 16.750 1357.743" fill="transparent"></path>
-                  <path d="M 0 678.441 L 0 1355.877 4.698 1356.582 C 11.713 1357.634, 49.378 1356.255, 58.142 1354.625 C 75.112 1351.470, 113.306 1338.882, 134.500 1329.459 C 183.168 1307.823, 221.770 1285.436, 260.997 1256.099 C 280.057 1241.844, 298.425 1225.449, 328.826 1195.554 C 362.127 1162.808, 385.286 1133.566, 407.670 1096 C 427.019 1063.527, 430.431 1056.966, 447.458 1019.500 C 460.942 989.828, 464.472 978.257, 483.609 901 C 498.035 842.766, 549.729 636.436, 554.012 620 C 572.473 549.145, 592.445 478.080, 606.847 432 C 622.391 382.262, 630.945 362.446, 654.762 321 C 689.890 259.869, 708.840 234.684, 755.500 187.112 C 804.088 137.573, 860.800 92.593, 909.500 64.967 C 927.984 54.482, 991.312 21.173, 1017.500 8.161 L 1023.500 5.180 1024.001 680.340 L 1024.502 1355.500 1024.751 678 L 1025 0.500 512.500 0.752 L 0 1.004 0 678.441 M 0.497 678.500 C 0.497 1051.400, 0.611 1204.100, 0.750 1017.832 C 0.889 831.565, 0.889 526.465, 0.750 339.832 C 0.611 153.200, 0.497 305.600, 0.497 678.500" fill="#f2f2f3"></path>
+                  <path
+                    d="M 988.750 22.566 C 986.138 23.926, 984 25.262, 984 25.536 C 984 25.982, 993.900 21.306, 994.917 20.380 C 996.155 19.251, 992.901 20.405, 988.750 22.566 M 747.477 195.250 L 739.500 203.500 747.750 195.523 C 752.288 191.136, 756 187.424, 756 187.273 C 756 186.544, 754.885 187.588, 747.477 195.250 M 329.987 1194.750 L 315.500 1209.500 330.250 1195.013 C 343.952 1181.555, 345.453 1180, 344.737 1180 C 344.592 1180, 337.955 1186.638, 329.987 1194.750 M 292.971 1229.750 L 286.500 1236.500 293.250 1230.029 C 299.520 1224.018, 300.457 1223, 299.721 1223 C 299.568 1223, 296.530 1226.037, 292.971 1229.750 M 16.750 1357.743 C 20.738 1357.932, 27.262 1357.932, 31.250 1357.743 C 35.237 1357.553, 31.975 1357.397, 24 1357.397 C 16.025 1357.397, 12.762 1357.553, 16.750 1357.743"
+                    fill="transparent"></path>
+                  <path
+                    d="M 0 678.441 L 0 1355.877 4.698 1356.582 C 11.713 1357.634, 49.378 1356.255, 58.142 1354.625 C 75.112 1351.470, 113.306 1338.882, 134.500 1329.459 C 183.168 1307.823, 221.770 1285.436, 260.997 1256.099 C 280.057 1241.844, 298.425 1225.449, 328.826 1195.554 C 362.127 1162.808, 385.286 1133.566, 407.670 1096 C 427.019 1063.527, 430.431 1056.966, 447.458 1019.500 C 460.942 989.828, 464.472 978.257, 483.609 901 C 498.035 842.766, 549.729 636.436, 554.012 620 C 572.473 549.145, 592.445 478.080, 606.847 432 C 622.391 382.262, 630.945 362.446, 654.762 321 C 689.890 259.869, 708.840 234.684, 755.500 187.112 C 804.088 137.573, 860.800 92.593, 909.500 64.967 C 927.984 54.482, 991.312 21.173, 1017.500 8.161 L 1023.500 5.180 1024.001 680.340 L 1024.502 1355.500 1024.751 678 L 1025 0.500 512.500 0.752 L 0 1.004 0 678.441 M 0.497 678.500 C 0.497 1051.400, 0.611 1204.100, 0.750 1017.832 C 0.889 831.565, 0.889 526.465, 0.750 339.832 C 0.611 153.200, 0.497 305.600, 0.497 678.500"
+                    fill="#f2f2f3"></path>
                 </svg>
               </span>
             </button>
@@ -123,32 +91,19 @@
 
           <div class="hero-carousel-image-area">
             <div class="carousel-inner">
-              <div
-                v-for="(banner, i) in heroBanners"
-                :key="banner.image"
-                :class="['carousel-item', { active: i === 0 }]"
-              >
+              <div v-for="(banner, i) in heroBanners" :key="banner.image"
+                :class="['carousel-item', { active: i === 0 }]">
                 <img :src="banner.image" :alt="banner.alt" class="hero-slide-image" />
               </div>
             </div>
 
-            <button
-              class="hero-carousel-nav hero-carousel-nav-prev"
-              type="button"
-              data-bs-target="#heroCarousel"
-              data-bs-slide="prev"
-              aria-label="Previous slide"
-            >
+            <button class="hero-carousel-nav hero-carousel-nav-prev" type="button" data-bs-target="#heroCarousel"
+              data-bs-slide="prev" aria-label="Previous slide">
               <i class="bi bi-chevron-left"></i>
             </button>
 
-            <button
-              class="hero-carousel-nav hero-carousel-nav-next"
-              type="button"
-              data-bs-target="#heroCarousel"
-              data-bs-slide="next"
-              aria-label="Next slide"
-            >
+            <button class="hero-carousel-nav hero-carousel-nav-next" type="button" data-bs-target="#heroCarousel"
+              data-bs-slide="next" aria-label="Next slide">
               <i class="bi bi-chevron-right"></i>
             </button>
           </div>
@@ -162,7 +117,8 @@
             <img src="/image/dashboard/homehero/a-17.png" alt="Samsung Galaxy A17 5G" class="promo-banner-image" />
           </div>
           <div class="promo-banner-item">
-            <img src="/image/dashboard/homehero/macbook-giao-xa-2026.png" alt="Mua laptop online" class="promo-banner-image" />
+            <img src="/image/dashboard/homehero/macbook-giao-xa-2026.png" alt="Mua laptop online"
+              class="promo-banner-image" />
           </div>
         </div>
       </div>
@@ -184,7 +140,8 @@
               <span class="service-role-chip">{{ $t(userRoleKey) }}</span>
             </div>
 
-            <NuxtLink :to="localePath('/')" class="d-flex align-items-center gap-2 mt-2 text-decoration-none text-dark fw-semibold small">
+            <NuxtLink :to="localePath('/')"
+              class="d-flex align-items-center gap-2 mt-2 text-decoration-none text-dark fw-semibold small">
               <span class="d-inline-flex align-items-center justify-content-center text-dark" style="width: 18px;">
                 <i class="bi bi-gift-fill"></i>
               </span>
@@ -212,12 +169,15 @@
             </p>
 
             <div class="d-flex align-items-center gap-1 mt-2 mb-2 small">
-              <NuxtLink :to="localePath('/auth/login')" class="text-decoration-none text-dark fw-semibold">Đăng nhập</NuxtLink>
+              <NuxtLink :to="localePath('/auth/login')" class="text-decoration-none text-dark fw-semibold">Đăng nhập
+              </NuxtLink>
               <span class="text-secondary">hoặc</span>
-              <NuxtLink :to="localePath('/auth/register')" class="text-decoration-none text-dark fw-semibold">Đăng ký</NuxtLink>
+              <NuxtLink :to="localePath('/auth/register')" class="text-decoration-none text-dark fw-semibold">Đăng ký
+              </NuxtLink>
             </div>
 
-            <NuxtLink :to="localePath('/')" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold small">
+            <NuxtLink :to="localePath('/')"
+              class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold small">
               <span class="d-inline-flex align-items-center justify-content-center text-dark" style="width: 18px;">
                 <i class="bi bi-gift-fill"></i>
               </span>
@@ -228,21 +188,12 @@
         </div>
 
         <div class="service-benefits-card p-2">
-          <div
-            v-for="group in serviceGroups"
-            :key="group.title"
-            class="service-benefit-group"
-          >
+          <div v-for="group in serviceGroups" :key="group.title" class="service-benefit-group">
             <NuxtLink :to="localePath(group.href)" class="service-group-title">
               {{ group.title }}
             </NuxtLink>
 
-            <NuxtLink
-              v-for="item in group.items"
-              :key="item.label"
-              :to="localePath(item.href)"
-              class="acct-row"
-            >
+            <NuxtLink v-for="item in group.items" :key="item.label" :to="localePath(item.href)" class="acct-row">
               <span class="service-item-icon">
                 <i :class="['bi', item.icon]"></i>
               </span>
@@ -451,7 +402,7 @@ const handleCarouselSlide = (event) => {
 };
 
 onMounted(() => {
-  homeStore.fetchMegaMenuLeaves().catch(() => {});
+  homeStore.fetchMegaMenuLeaves().catch(() => { });
 
   if (!activeMegaMenuKey.value) {
     homeStore.setActiveMegaMenuKey(categories[0]?.key || "");
@@ -524,11 +475,11 @@ onUnmounted(() => {
   background: #f8f9fa;
 }
 
-.cat-item.cat-item-active > span {
+.cat-item.cat-item-active>span {
   color: #111827;
 }
 
-.cat-item.cat-item-active > .bi-chevron-right {
+.cat-item.cat-item-active>.bi-chevron-right {
   color: #111827;
 }
 
@@ -837,7 +788,7 @@ onUnmounted(() => {
   color: #111827;
 }
 
-.service-benefit-group + .service-benefit-group {
+.service-benefit-group+.service-benefit-group {
   margin-top: 0.5rem;
 }
 

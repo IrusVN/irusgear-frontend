@@ -1,7 +1,7 @@
 <template>
-  <div id="block-same-product" ref="rootEl" class="block-same-product">
+  <div v-if="normalizedTabs.length" id="block-same-product" ref="rootEl" class="block-same-product">
     <div class="same-product-head">
-      <h2 class="same-product-title mt-2">{{ title }}</h2>
+      <h2 class="same-product-title mt-2">Có thể bạn cũng thích</h2>
     </div>
 
     <div class="same-product-options-list is-flex is-justify-content-space-between">
@@ -31,112 +31,7 @@
             :key="`${activeTab}-${item.id}`"
             class="swiper-slide"
           >
-            <div
-              :class="[ 'product-info-container', { 'more-trade-product': item.variant === 'trade-placeholder' }, ]"
-            >
-              <div class="product-info">
-                <a
-                  :href="item.href || '#'"
-                  class="product__link button__link"
-                  :target="item.external ? '_blank' : undefined"
-                  :rel="item.external ? 'noopener noreferrer' : undefined"
-                >
-                  <div class="product__image">
-                    <img
-                      :src="item.image"
-                      :alt="item.name"
-                      width="358"
-                      height="358"
-                      class="product__img"
-                    />
-                  </div>
-
-                  <div class="product__name">
-                    <h3>{{ item.name }}</h3>
-                  </div>
-
-                  <p v-if="item.variant === 'trade'" class="trade--price">
-                    Giá thu đến: <strong>{{ item.tradePrice }}</strong>
-                  </p>
-
-                  <template v-else-if="item.variant === 'trade-placeholder'">
-                    <p class="trade-placeholder-copy">Thu cũ đổi mới</p>
-                  </template>
-
-                  <template v-else>
-                    <div class="block-box-price">
-                      <div class="box-info__box-price">
-                        <p class="product__price--show">{{ item.price }}</p>
-                        <p
-                          v-if="item.oldPrice"
-                          class="product__price--through"
-                        >
-                          {{ item.oldPrice }}
-                        </p>
-                        <div
-                          v-if="item.discountPercent"
-                          class="product__price--percent"
-                        >
-                          <p class="product__price--percent-detail">
-                            Giảm <span>{{ item.discountPercent }}</span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      v-if="item.promotion"
-                      class="product__promotions"
-                    >
-                      <div class="promotion">
-                        <p class="gift-cont">{{ item.promotion }}</p>
-                      </div>
-                    </div>
-                  </template>
-                </a>
-
-                <a
-                  v-if="item.ctaLabel"
-                  :href="item.ctaHref || item.href || '#'"
-                  class="exchange button__compare is-flex is-justify-content-center is-align-items-center"
-                  :target="item.external ? '_blank' : undefined"
-                  :rel="item.external ? 'noopener noreferrer' : undefined"
-                >
-                  {{ item.ctaLabel }}
-                </a>
-              </div>
-
-              <div
-                v-if="item.variant === 'product' || item.variant === 'used'"
-                class="bottom-div"
-              >
-                <div
-                  v-if="item.rating"
-                  class="product__box-rating"
-                >
-                  <span class="icon-star is-active">
-                    <svg
-                      height="15"
-                      viewBox="0 0 576 512"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M381.2 150.3 524.9 171.5c11.9 1.7 21.9 10.1 25.7 21.6 3.8 11.6.7 24.2-7.9 32.8L438.5 328.1l24.6 146.6c2 12-3 24.2-13 31.3-9.9 7.1-23 8-33.7 2.3l-128.3-68.5-128.3 68.5c-10.8 5.7-23.9 4.8-33.8-2.3-9.9-7.1-14.9-19.3-12.8-31.3l24.6-146.6L33.6 225.9c-8.6-8.6-11.7-21.2-7.9-32.8 3.8-11.5 13.8-19.9 25.7-21.6L195 150.3 259.4 18c5.3-11 16.5-18 28.7-18s23.4 7 28.8 18l64.3 132.3Z"
-                      />
-                    </svg>
-                  </span>
-                  {{ item.rating }}
-                </div>
-
-                <div
-                  v-if="item.installment"
-                  class="install-0-tag"
-                >
-                  <span>Trả góp <strong>{{ item.installment }}</strong></span>
-                </div>
-              </div>
-            </div>
+            <HomeProdCard :product="mapCardProduct(item)" />
           </div>
         </div>
 
@@ -187,302 +82,19 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { storeToRefs } from "pinia";
 import "swiper/css";
 import "swiper/css/navigation";
+import { useProductStore } from "@/stores/productStore";
+import HomeProdCard from "@/components/Home/HomeProdCard.vue";
 
-const defaultTabs = [
-  {
-    id: "trade-in",
-    label: "Thu cũ đổi mới",
-    items: [
-      {
-        id: 1,
-        variant: "trade",
-        name: "iPhone 13 128GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-13_2_2.jpg",
-        tradePrice: "5.197.500đ",
-        href: "https://cellphones.com.vn/iphone-13.html",
-        ctaHref: "https://cellphones.com.vn/thu-cu-doi-moi?exchange=36242-31495",
-        ctaLabel: "Lên đời ngay",
-        external: true,
-      },
-      {
-        id: 2,
-        variant: "trade",
-        name: "iPhone 12 64GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-12.png",
-        tradePrice: "4.147.500đ",
-        href: "https://cellphones.com.vn/iphone-12.html",
-        ctaHref: "https://cellphones.com.vn/thu-cu-doi-moi?exchange=24746-31495",
-        ctaLabel: "Lên đời ngay",
-        external: true,
-      },
-      {
-        id: 3,
-        variant: "trade",
-        name: "iPhone 12 128GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-12-128gb_2.png",
-        tradePrice: "4.672.500đ",
-        href: "https://cellphones.com.vn/iphone-12-128gb.html",
-        ctaHref: "https://cellphones.com.vn/thu-cu-doi-moi?exchange=27451-31495",
-        ctaLabel: "Lên đời ngay",
-        external: true,
-      },
-      {
-        id: 4,
-        variant: "trade",
-        name: "iPhone SE 2022 | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/1/_/1_359_1.png",
-        tradePrice: "2.257.500đ",
-        href: "https://cellphones.com.vn/iphone-se-2022.html",
-        ctaHref: "https://cellphones.com.vn/thu-cu-doi-moi?exchange=31075-31495",
-        ctaLabel: "Lên đời ngay",
-        external: true,
-      },
-      {
-        id: 5,
-        variant: "trade",
-        name: "iPhone 11 256GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/1/_/1_253_2.jpg",
-        tradePrice: "4.462.500đ",
-        href: "https://cellphones.com.vn/iphone-11-256gb.html",
-        ctaHref: "https://cellphones.com.vn/thu-cu-doi-moi?exchange=18395-31495",
-        ctaLabel: "Lên đời ngay",
-        external: true,
-      },
-      {
-        id: 6,
-        variant: "trade",
-        name: "iPhone 13 512GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-13-02_4.jpg",
-        tradePrice: "6.457.500đ",
-        href: "https://cellphones.com.vn/iphone-13-512gb.html",
-        ctaHref: "https://cellphones.com.vn/thu-cu-doi-moi?exchange=36486-31495",
-        ctaLabel: "Lên đời ngay",
-        external: true,
-      },
-      {
-        id: 7,
-        variant: "trade-placeholder",
-        name: "Chọn sản phẩm khác",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:69:69/q:90/plain/https://cellphones.com.vn/media/cps-images/trade-placeholder.png",
-        ctaHref: "https://cellphones.com.vn/thu-cu-doi-moi?id=31495",
-        ctaLabel: "Chọn sản phẩm khác",
-        external: true,
-      },
-    ],
-  },
-  {
-    id: "similar",
-    label: "Sản phẩm tương tự",
-    items: [
-      {
-        id: 11,
-        variant: "product",
-        name: "iPhone 16e 256GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16e-256gb.png",
-        href: "https://cellphones.com.vn/iphone-16e-256gb.html",
-        price: "14.490.000đ",
-        oldPrice: "19.990.000đ",
-        discountPercent: "28%",
-        promotion: "Ưu đãi iPhone 16e chỉ từ 12.49 triệu khi mua kèm sim Viettel 5G",
-        rating: "5",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 12,
-        variant: "product",
-        name: "iPhone 16e 128GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16e.png",
-        href: "https://cellphones.com.vn/iphone-16e.html",
-        price: "12.990.000đ",
-        oldPrice: "16.990.000đ",
-        discountPercent: "24%",
-        promotion: "Thu cũ đổi mới trợ giá đến 2 triệu, áp dụng số lượng có hạn",
-        rating: "4.9",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 13,
-        variant: "product",
-        name: "iPhone 15 128GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-15-plus-128gb.png",
-        href: "https://cellphones.com.vn/iphone-15.html",
-        price: "16.990.000đ",
-        oldPrice: "22.990.000đ",
-        discountPercent: "26%",
-        promotion: "Tặng gói bảo hành rơi vỡ 6 tháng khi đặt online",
-        rating: "4.8",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 14,
-        variant: "product",
-        name: "iPhone 15 Plus 128GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-15-plus_1__4.png",
-        href: "https://cellphones.com.vn/iphone-15-plus.html",
-        price: "19.490.000đ",
-        oldPrice: "25.990.000đ",
-        discountPercent: "25%",
-        promotion: "Giảm thêm 500.000đ khi thanh toán qua thẻ tín dụng đối tác",
-        rating: "4.7",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 15,
-        variant: "product",
-        name: "iPhone 14 128GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/p/h/photo_2022-09-28_21-58-48_1.jpg",
-        href: "https://cellphones.com.vn/iphone-14.html",
-        price: "13.990.000đ",
-        oldPrice: "14.990.000đ",
-        discountPercent: "7%",
-        promotion: "Thu cũ trợ giá đến 3 triệu, hỗ trợ trả góp 0%",
-        rating: "4.8",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 16,
-        variant: "product",
-        name: "iPhone 13 256GB | Chính hãng VN/A",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/1/1/11_3_12_2_1_6.jpg",
-        href: "https://cellphones.com.vn/iphone-13-256gb.html",
-        price: "15.290.000đ",
-        oldPrice: "18.990.000đ",
-        discountPercent: "19%",
-        promotion: "Tặng voucher phụ kiện 500.000đ khi mua online",
-        rating: "5",
-        installment: "0%",
-        external: true,
-      },
-    ],
-  },
-  {
-    id: "used",
-    label: "Tham khảo hàng cũ",
-    items: [
-      {
-        id: 21,
-        variant: "used",
-        name: "iPhone 14 Pro Max 128GB - Cũ Đẹp",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_18_1_3_2.png",
-        href: "https://cellphones.com.vn/iphone-14-pro-max-cu-dep.html",
-        price: "17.990.000đ",
-        oldPrice: "29.990.000đ",
-        discountPercent: "40%",
-        promotion: "Phụ kiện ốp dán mua kèm máy giảm thêm đến 15%",
-        rating: "5",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 22,
-        variant: "used",
-        name: "iPhone 14 Pro Max 256GB - Cũ Đẹp",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/_/v_ng_20_2_1_2_1.png",
-        href: "https://cellphones.com.vn/iphone-14-pro-max-256gb-cu-dep.html",
-        price: "19.990.000đ",
-        oldPrice: "32.990.000đ",
-        discountPercent: "39%",
-        promotion: "Trả góp 0% lãi suất, tối đa 9 tháng qua đối tác tài chính",
-        rating: "4.8",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 23,
-        variant: "used",
-        name: "iPhone 14 Plus 128GB - Cũ Đẹp",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/p/h/photo_2022-09-28_21-58-51_4_1_2_2.jpg",
-        href: "https://cellphones.com.vn/iphone-14-plus-cu-dep.html",
-        price: "12.590.000đ",
-        oldPrice: "19.990.000đ",
-        discountPercent: "37%",
-        promotion: "Trả góp 0% lãi suất, tối đa 9 tháng qua đối tác tài chính",
-        rating: "4.5",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 24,
-        variant: "used",
-        name: "iPhone 14 Pro Max 128GB - Cũ Trầy Xước",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_18_1_3_2_1.png",
-        href: "https://cellphones.com.vn/iphone-14-pro-max-cu-tray-xuoc.html",
-        price: "16.990.000đ",
-        oldPrice: "29.990.000đ",
-        discountPercent: "43%",
-        promotion: "Phụ kiện ốp dán mua kèm máy giảm thêm đến 15%",
-        rating: "5",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 25,
-        variant: "used",
-        name: "iPhone 14 Pro 128GB - Cũ Đẹp",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_12_1_3_2.png",
-        href: "https://cellphones.com.vn/iphone-14-pro-cu-dep.html",
-        price: "16.190.000đ",
-        oldPrice: "27.990.000đ",
-        discountPercent: "42%",
-        promotion: "Trả góp 0% lãi suất, tối đa 9 tháng qua đối tác tài chính",
-        rating: "5",
-        installment: "0%",
-        external: true,
-      },
-      {
-        id: 26,
-        variant: "used",
-        name: "iPhone 14 Pro 256GB - Cũ Đẹp",
-        image:
-          "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/_/t_m_13_1_2.png",
-        href: "https://cellphones.com.vn/iphone-14-pro-256gb-cu-dep.html",
-        price: "17.190.000đ",
-        oldPrice: "29.990.000đ",
-        discountPercent: "43%",
-        promotion: "Trả góp 0% lãi suất, tối đa 9 tháng qua đối tác tài chính",
-        rating: "4.3",
-        installment: "0%",
-        external: true,
-      },
-    ],
-  },
-];
+const productStore = useProductStore();
+const { productSameProducts } = storeToRefs(productStore);
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: "Có thể bạn cũng thích",
-  },
-  tabs: {
-    type: Array,
-    default: () => [],
-  },
-});
+const TAB_LABELS = {
+  similar: "Sản phẩm tương tự",
+  used: "Tham khảo hàng cũ",
+};
 
 const rootEl = ref(null);
 const activeTab = ref("");
@@ -492,7 +104,13 @@ const swiperKey = ref(0);
 let swiperInstance = null;
 
 const normalizedTabs = computed(() =>
-  props.tabs?.length ? props.tabs : defaultTabs,
+  (productSameProducts.value?.tabs || [])
+    .filter((tab) => Array.isArray(tab?.items) && tab.items.length)
+    .map((tab) => ({
+      ...tab,
+      label: TAB_LABELS[tab.id] || tab.id,
+    }))
+    .filter((tab) => Boolean(TAB_LABELS[tab.id])),
 );
 
 const activeItems = computed(() => {
@@ -500,6 +118,29 @@ const activeItems = computed(() => {
     normalizedTabs.value.find((tab) => tab.id === activeTab.value) ??
     normalizedTabs.value[0];
   return currentTab?.items ?? [];
+});
+
+const parseMoney = (value) => {
+  if (typeof value === "number") return value;
+  if (typeof value !== "string") return 0;
+  const digits = value.replace(/[^\d]/g, "");
+  return digits ? Number(digits) : 0;
+};
+
+const mapCardProduct = (item) => ({
+  name: item?.name || "",
+  img: item?.image || "",
+  price: parseMoney(item?.price),
+  originalPrice: parseMoney(item?.oldPrice),
+  discount: Number(String(item?.discountPercent || "").replace(/[^\d]/g, "")) || 0,
+  badge: Boolean(item?.discountPercent),
+  installmentText: item?.installment || "",
+  gifts: item?.promotion ? [item.promotion] : [],
+  rating: Number(item?.rating) || 0,
+  slug: typeof item?.href === "string" && item.href.startsWith("/products/")
+    ? item.href.replace(/^\/products\//, "")
+    : "",
+  url: item?.href || "/",
 });
 
 const destroySwiper = () => {
@@ -510,7 +151,7 @@ const destroySwiper = () => {
 };
 
 const initSwiper = async () => {
-  if (!import.meta.client || !rootEl.value) return;
+  if (!import.meta.client || !rootEl.value || !normalizedTabs.value.length) return;
 
   const swiperEl = rootEl.value.querySelector(".same-product-swiper");
   if (!swiperEl) return;
@@ -560,21 +201,32 @@ const setActiveTab = async (tabId) => {
 
 watch(
   normalizedTabs,
-  (tabs) => {
+  async (tabs) => {
     if (!tabs.length) {
       activeTab.value = "";
+      isSwiperReady.value = false;
+      destroySwiper();
       return;
     }
 
     if (!tabs.some((tab) => tab.id === activeTab.value)) {
       activeTab.value = tabs[0].id;
     }
+
+    if (!isSwiperMounted.value) return;
+
+    isSwiperReady.value = false;
+    swiperKey.value += 1;
+    await nextTick();
+    await initSwiper();
+    isSwiperReady.value = true;
   },
   { immediate: true },
 );
 
 onMounted(async () => {
   isSwiperMounted.value = true;
+  if (!normalizedTabs.value.length) return;
   await nextTick();
   await initSwiper();
   isSwiperReady.value = true;
@@ -681,209 +333,10 @@ onBeforeUnmount(() => {
 }
 
 .same-product-swiper .swiper-slide {
-  border-radius: 15px;
-  box-shadow:
-    0 4px 20px -8px rgba(0, 0, 0, 0.11),
-    0 0 10px 0 rgba(0, 0, 0, 0.059);
   box-sizing: border-box;
   height: auto;
   max-width: calc(20% - 8px);
 }
-
-.product-info-container {
-  background: #fff;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 100%;
-}
-
-.product-info {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px;
-}
-
-.product__link {
-  color: inherit;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.product__image {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  min-height: 132px;
-}
-
-.product__img {
-  display: block;
-  height: 120px;
-  object-fit: contain;
-  width: 120px;
-}
-
-.product__name h3 {
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  color: #18181b;
-  display: -webkit-box;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.45;
-  margin: 0;
-  min-height: 40px;
-  overflow: hidden;
-}
-
-.trade--price,
-.trade-placeholder-copy {
-  color: #52525b;
-  font-size: 14px;
-  line-height: 1.45;
-  margin: 0;
-}
-
-.trade--price strong {
-  color: #d70018;
-  font-size: 16px;
-}
-
-.block-box-price {
-  margin-top: auto;
-}
-
-.box-info__box-price {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.product__price--show {
-  color: #d70018;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.product__price--through {
-  color: #71717a;
-  font-size: 14px;
-  margin: 0;
-  text-decoration: line-through;
-}
-
-.product__price--percent {
-  align-items: center;
-  display: inline-flex;
-  width: fit-content;
-}
-
-.product__price--percent-detail {
-  background: #fff1f2;
-  border-radius: 999px;
-  color: #d70018;
-  font-size: 12px;
-  font-weight: 600;
-  margin: 0;
-  padding: 4px 8px;
-}
-
-.product__promotions {
-  background: #f8fafc;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.gift-cont {
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  color: #3f3f46;
-  display: -webkit-box;
-  font-size: 12px;
-  line-height: 1.5;
-  margin: 0;
-  overflow: hidden;
-}
-
-.exchange {
-  align-items: center;
-  background: #fff5f5;
-  border: 1px solid #fca5a5;
-  border-radius: 12px;
-  color: #d70018;
-  display: inline-flex;
-  font-size: 14px;
-  font-weight: 600;
-  min-height: 40px;
-  padding: 10px 12px;
-  text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.exchange:hover {
-  background: #fee2e2;
-  border-color: #f87171;
-}
-
-.more-trade-product {
-  justify-content: center;
-}
-
-.more-trade-product .product-info {
-  justify-content: center;
-}
-
-.more-trade-product .product__image {
-  min-height: 100px;
-}
-
-.more-trade-product .product__img {
-  height: 69px;
-  width: 69px;
-}
-
-.bottom-div {
-  align-items: center;
-  border-top: 1px solid #f1f5f9;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 16px 16px;
-}
-
-.product__box-rating {
-  align-items: center;
-  color: #18181b;
-  display: inline-flex;
-  font-size: 13px;
-  font-weight: 600;
-  gap: 4px;
-}
-
-.icon-star svg {
-  fill: #f59e0b;
-}
-
-.install-0-tag span {
-  background: #eff6ff;
-  border-radius: 999px;
-  color: #2563eb;
-  display: inline-flex;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 8px;
-}
-
 .same-product-swiper :deep(.swiper-button-next),
 .same-product-swiper :deep(.swiper-button-prev) {
   align-items: center;

@@ -1,22 +1,11 @@
 <template>
   <div class="mega-menu">
     <div class="mega-menu-sidebar bg-white rounded-3 shadow-sm border overflow-hidden">
-      <button
-        v-for="section in normalizedSections"
-        :key="section.key || section.title"
-        type="button"
-        class="mega-menu-sidebar-item"
-        :class="{ active: activeSectionKey === section.key }"
-        @mouseenter="activate(section.key)"
-        @focus="activate(section.key)"
-      >
+      <button v-for="section in normalizedSections" :key="section.key || section.title" type="button"
+        class="mega-menu-sidebar-item" :class="{ active: activeSectionKey === section.key }"
+        @mouseenter="activate(section.key)" @focus="activate(section.key)">
         <span class="mega-menu-sidebar-icon">
-          <img
-            v-if="section.icon"
-            :src="section.icon"
-            :alt="section.title"
-            loading="lazy"
-          />
+          <img v-if="section.icon" :src="section.icon" :alt="section.title" loading="lazy" />
           <i v-else class="bi bi-grid"></i>
         </span>
         <span class="mega-menu-sidebar-label">{{ section.title }}</span>
@@ -26,32 +15,17 @@
 
     <div v-if="activeSection" class="mega-menu-panel bg-white rounded-3 shadow-sm border">
       <div class="mega-menu-columns">
-        <section
-          v-for="group in activeGroups"
-          :key="group.key || group.title"
-          class="mega-menu-group"
-        >
+        <section v-for="group in activeGroups" :key="group.key || group.title" class="mega-menu-group">
           <h3 class="mega-menu-group-title">{{ group.title }}</h3>
 
           <div class="mega-menu-group-items">
-            <component
-              :is="resolveHref(item) ? 'a' : 'div'"
-              v-for="item in group.items || []"
-              :key="`${group.key || group.title}-${item.slug || item.title}`"
-              :href="resolveHref(item) || undefined"
-              class="mega-menu-chip"
-              :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }"
-            >
-              <img
-                v-if="item.image"
-                :src="item.image"
-                :alt="item.title"
-                class="mega-menu-chip-image"
-                loading="lazy"
-              />
+            <NuxtLink v-for="item in group.items || []" :key="`${group.key || group.title}-${item.slug || item.title}`"
+              :to="`/products/?category=${item.slug || item.title}`" class="mega-menu-chip"
+              :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }">
+              <img v-if="item.image" :src="item.image" :alt="item.title" class="mega-menu-chip-image" loading="lazy" />
               <span class="mega-menu-chip-title">{{ item.title }}</span>
               <span v-if="item.badge" class="mega-menu-chip-badge">{{ item.badge }}</span>
-            </component>
+            </NuxtLink>
           </div>
         </section>
       </div>
@@ -109,7 +83,7 @@ watch(
 
 onMounted(() => {
   if (!normalizedSections.value.length) {
-    homeStore.fetchMegaMenu().catch(() => {});
+    homeStore.fetchMegaMenu().catch(() => { });
   }
 });
 </script>
