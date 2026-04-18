@@ -79,7 +79,32 @@ const toNumber = (value, fallback = 0) => {
   return Number.isFinite(parsed) ? parsed : fallback;
 };
 
-const transformListingPayload = (payload = {}) => {
+const normalizeSelectedValues = (value) => {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => String(item || "").trim())
+      .filter(Boolean);
+  }
+
+  if (typeof value === "string") {
+    return value
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  if (typeof value === "boolean") {
+    return value ? ["true"] : [];
+  }
+
+  if (value == null) {
+    return [];
+  }
+
+  return [String(value).trim()].filter(Boolean);
+};
+
+const transformListingPayload = (payload = {}, previousSelection = {}) => {
   const meta = payload?.meta || {};
   const applied = payload?.applied || meta?.applied || {};
   const appliedFilters = applied?.filters || payload?.filters || {};
@@ -98,7 +123,10 @@ const transformListingPayload = (payload = {}) => {
   const sortSource = toArray(payload?.sortOptions || meta?.sortOptions);
   const filterSource = toArray(payload?.filters || meta?.filters);
   const seriesSource = toArray(payload?.series || meta?.series);
-  const selectedSeriesKey = String(applied?.series || payload?.series || "");
+  const selectedSeriesKeys = normalizeSelectedValues(applied?.series);
+  const selectedSeriesKey =
+    selectedSeriesKeys[0] ||
+    String(seriesSource.find((item) => Boolean(item?.active))?.key || "");
   const activeSortKey = String(applied?.sort || payload?.sort || "popular");
 
   const apiFilters = filterSource
@@ -146,10 +174,7 @@ const transformListingPayload = (payload = {}) => {
     const filter = productFilters.find((item) => item.key === filterKey);
     if (!filter) return accumulator;
 
-    const values = String(filterValue || "")
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
+    const values = normalizeSelectedValues(filterValue);
 
     if (!values.length) return accumulator;
 
@@ -164,6 +189,20 @@ const transformListingPayload = (payload = {}) => {
 
     return accumulator;
   }, {});
+
+  QUICK_FILTER_KEYS
+    .filter((filterKey) => filterKey !== "filter")
+    .forEach((filterKey) => {
+      if (selectedOptionsByFilter[filterKey]?.length) return;
+
+      const previousValues = toArray(previousSelection?.[filterKey]).filter(Boolean);
+      if (!previousValues.length) return;
+
+      const filter = productFilters.find((item) => item.key === filterKey);
+      if (!filter) return;
+
+      selectedOptionsByFilter[filterKey] = previousValues;
+    });
 
   const totalItems = toNumber(payload?.pagination?.totalItems ?? meta?.total, rawItems.length);
   const page = toNumber(payload?.pagination?.page ?? meta?.current_page, 1);
@@ -190,7 +229,7 @@ const transformListingPayload = (payload = {}) => {
           key,
           label: String(item?.label || item?.title || item?.name || ""),
           href: item?.href || item?.url || "",
-          active: key === selectedSeriesKey,
+          active: Boolean(item?.active) || key === selectedSeriesKey,
         };
       }),
     sortOptions: DEFAULT_SORT_OPTIONS,
@@ -308,7 +347,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
   };
 
   const applyListingState = (payload, { append = false } = {}) => {
-    const nextState = transformListingPayload(payload);
+    const nextState = transformListingPayload(payload, selectedOptionsByFilter.value);
 
     pageTitle.value = nextState.pageTitle;
     bannerGroups.value = nextState.bannerGroups;
