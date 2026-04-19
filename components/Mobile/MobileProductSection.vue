@@ -13,7 +13,7 @@
     </div>
 
     <NuxtLink v-if="viewAllLink" :to="viewAllLink" class="mobile-prod-view-all">
-      Xem tất cả
+      {{ $t('mobile.sections.viewAll') }}
       <i class="bi bi-chevron-right"></i>
     </NuxtLink>
   </div>

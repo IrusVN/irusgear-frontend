@@ -11,31 +11,31 @@
       <MobileFlashSale />
 
       <MobileProductSection
-        title="Điện thoại nổi bật"
+        :title="$t('mobile.sections.featuredPhones')"
         :products="deviceSection?.products || []"
         :view-all-link="deviceSection?.viewAllUrl || '/products?category=dien-thoai'"
       />
 
       <MobileProductSection
-        title="Laptop"
+        :title="$t('mobile.sections.laptop')"
         :products="laptopSection?.products || []"
         :view-all-link="laptopSection?.viewAllUrl || '/products?category=laptop'"
       />
 
       <MobileProductSection
-        title="Đồng hồ"
+        :title="$t('mobile.sections.watch')"
         :products="watchSection?.products || []"
         :view-all-link="watchSection?.viewAllUrl || '/products?category=dong-ho'"
       />
 
       <MobileProductSection
-        title="Tivi"
+        :title="$t('mobile.sections.tv')"
         :products="tvSection?.products || []"
         :view-all-link="tvSection?.viewAllUrl || '/products?category=tivi'"
       />
 
       <MobileProductSection
-        title="Đồ gia dụng"
+        :title="$t('mobile.sections.homeAppliance')"
         :products="homeLifeSection?.products || []"
         :view-all-link="homeLifeSection?.viewAllUrl || '/products?category=do-gia-dung'"
       />

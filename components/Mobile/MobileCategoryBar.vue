@@ -17,20 +17,25 @@
 </template>
 
 <script setup>
-const categories = [
-  { key: 'dien-thoai', name: 'Điện thoại', icon: 'bi-phone' },
-  { key: 'may-tinh-bang', name: 'Tablet', icon: 'bi-tablet' },
-  { key: 'laptop', name: 'Laptop', icon: 'bi-laptop' },
-  { key: 'dong-ho', name: 'Đồng hồ', icon: 'bi-smartwatch' },
-  { key: 'am-thanh', name: 'Âm thanh', icon: 'bi-headphones' },
-  { key: 'phu-kien', name: 'Phụ kiện', icon: 'bi-earbuds' },
-  { key: 'pc', name: 'PC', icon: 'bi-pc-display' },
-  { key: 'tivi', name: 'Tivi', icon: 'bi-display' },
-  { key: 'thu-cu', name: 'Thu cũ', icon: 'bi-repeat' },
-  { key: 'hang-cu', name: 'Hàng cũ', icon: 'bi-box-seam' },
-  { key: 'khuyen-mai', name: 'Khuyến mãi', icon: 'bi-patch-check' },
-  { key: 'do-gia-dung', name: 'Gia dụng', icon: 'bi-house' },
-]
+import { computed } from 'vue'
+import { useI18n } from '#imports'
+
+const { t } = useI18n()
+
+const categories = computed(() => [
+  { key: 'dien-thoai', name: t('mobile.categories.phone'), icon: 'bi-phone' },
+  { key: 'may-tinh-bang', name: t('mobile.categories.tablet'), icon: 'bi-tablet' },
+  { key: 'laptop', name: t('mobile.categories.laptop'), icon: 'bi-laptop' },
+  { key: 'dong-ho', name: t('mobile.categories.watch'), icon: 'bi-smartwatch' },
+  { key: 'am-thanh', name: t('mobile.categories.audio'), icon: 'bi-headphones' },
+  { key: 'phu-kien', name: t('mobile.categories.accessories'), icon: 'bi-earbuds' },
+  { key: 'pc', name: t('mobile.categories.pc'), icon: 'bi-pc-display' },
+  { key: 'tivi', name: t('mobile.categories.tv'), icon: 'bi-display' },
+  { key: 'thu-cu', name: t('mobile.categories.tradeIn'), icon: 'bi-repeat' },
+  { key: 'hang-cu', name: t('mobile.categories.used'), icon: 'bi-box-seam' },
+  { key: 'khuyen-mai', name: t('mobile.categories.deals'), icon: 'bi-patch-check' },
+  { key: 'do-gia-dung', name: t('mobile.categories.homeAppliance'), icon: 'bi-house' },
+])
 </script>
 
 <style scoped>

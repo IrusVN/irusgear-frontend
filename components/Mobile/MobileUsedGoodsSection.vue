@@ -1,9 +1,9 @@
 <template>
   <div class="mobile-used-section">
     <div class="mobile-used-header">
-      <h2 class="mobile-used-title">HÀNG CŨ</h2>
+      <h2 class="mobile-used-title">{{ $t('mobile.usedGoods.title') }}</h2>
       <NuxtLink to="/products?condition=used" class="mobile-used-view-all">
-        Xem tất cả <i class="bi bi-chevron-right"></i>
+        {{ $t('mobile.usedGoods.viewAll') }} <i class="bi bi-chevron-right"></i>
       </NuxtLink>
     </div>
 
@@ -24,68 +24,73 @@
 </template>
 
 <script setup>
-const usedItems = [
+import { computed } from 'vue'
+import { useI18n } from '#imports'
+
+const { t } = useI18n()
+
+const usedItems = computed(() => [
   {
-    title: 'Điện thoại cũ',
+    title: t('mobile.usedGoods.phoneUsed'),
     href: '/hang-cu/dien-thoai.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHN1CX574BKJDSX3XTV0Z.png',
   },
   {
-    title: 'Máy tính bảng cũ',
+    title: t('mobile.usedGoods.tabletUsed'),
     href: '/hang-cu/may-tinh-bang.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNEN2HYY96910SE6P5CX.png',
   },
   {
-    title: 'MacBook cũ',
+    title: t('mobile.usedGoods.macbookUsed'),
     href: '/hang-cu/mac.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNKVTJ1GTEQVKXBVPHVK.png',
   },
   {
-    title: 'Laptop cũ',
+    title: t('mobile.usedGoods.laptopUsed'),
     href: '/hang-cu/laptop.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNPGC65TPCJ4WCMBMWFQ.png',
   },
   {
-    title: 'Tai nghe cũ',
+    title: t('mobile.usedGoods.headphoneUsed'),
     href: '/hang-cu/tai-nghe.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNSHME314PFV4CS149PF.png',
   },
   {
-    title: 'Loa cũ',
+    title: t('mobile.usedGoods.speakerUsed'),
     href: '/hang-cu/loa.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNWWHR58EFPQMW478WE8.png',
   },
   {
-    title: 'Đồng hồ cũ',
+    title: t('mobile.usedGoods.watchUsed'),
     href: '/hang-cu/dong-ho-thong-minh.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP0S6KFMG1WQC3ATY7W9.png',
   },
   {
-    title: 'Đồ gia dụng cũ',
+    title: t('mobile.usedGoods.applianceUsed'),
     href: '/hang-cu/do-gia-dung.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6F9S2R1MRJKN8S46YXGE197.png',
   },
   {
-    title: 'Phụ kiện cũ',
+    title: t('mobile.usedGoods.accessoryUsed'),
     href: '/hang-cu/phu-kien.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP4WXYP5MVQ0RN85RND2.png',
   },
   {
-    title: 'Màn hình cũ',
+    title: t('mobile.usedGoods.monitorUsed'),
     href: '/hang-cu/man-hinh.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP91VN84H4GS1KNY86KA.png',
   },
   {
-    title: 'Tivi cũ',
+    title: t('mobile.usedGoods.tvUsed'),
     href: '/hang-cu/tivi.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6F9S3JQH0CMJDFZAR5C1589.png',
   },
   {
-    title: 'Cáp sạc cũ',
+    title: t('mobile.usedGoods.cableUsed'),
     href: '/hang-cu/phu-kien/cap-sac.html',
     image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHPE4CGXKHP6ZD2MBVYZ4.png',
   },
-]
+])
 </script>
 
 <style scoped>

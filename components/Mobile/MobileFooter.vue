@@ -37,12 +37,12 @@
       <img src="/image/logo-irusgear-black.png" alt="IrusGear" class="mobile-footer-logo" />
 
       <p class="mobile-footer-desc">
-        Premium tech shopping platform. Genuine products, transparent warranty, smooth experience.
+        {{ $t('mobile.footer.companyDesc') }}
       </p>
 
       <div class="mobile-footer-contact">
-        <span><i class="bi bi-geo-alt-fill"></i> 123 Nguyễn Văn Linh, Quận 7, TP.HCM</span>
-        <span><i class="bi bi-telephone-fill"></i> 1800 1234 (Miễn phí)</span>
+        <span><i class="bi bi-geo-alt-fill"></i> {{ $t('mobile.footer.address') }}</span>
+        <span><i class="bi bi-telephone-fill"></i> {{ $t('mobile.footer.phone') }}</span>
       </div>
 
       <div class="mobile-footer-socials">
@@ -55,13 +55,13 @@
 
     <!-- Block 4: Legal -->
     <div class="mobile-footer-legal">
-      <span class="mobile-footer-copyright">© 2026 IrusGear. All rights reserved.</span>
+      <span class="mobile-footer-copyright">{{ $t('mobile.footer.copyright') }}</span>
       <div class="mobile-footer-legal-links">
-        <a href="#">Điều khoản</a>
+        <a href="#">{{ $t('mobile.footer.terms') }}</a>
         <span class="mobile-footer-legal-sep">|</span>
-        <a href="#">Bảo mật</a>
+        <a href="#">{{ $t('mobile.footer.privacy') }}</a>
         <span class="mobile-footer-legal-sep">|</span>
-        <a href="#">Cookies</a>
+        <a href="#">{{ $t('mobile.footer.cookies') }}</a>
       </div>
     </div>
   </footer>
@@ -92,8 +92,8 @@ const infoLinksLeft = [
   { label: 'Điện thoại', to: '/products?category=dien-thoai' },
   { label: 'Điện thoại iPhone', to: '/products?q=iphone' },
   { label: 'Xiaomi', to: '/products?q=xiaomi' },
-  { label: 'Điện thoại Samsung Galaxy', to: '/products?q=samsung+galaxy' },
-  { label: 'Điện thoại OPPO', to: '/products?q=oppo' },
+  { label: 'Samsung Galaxy', to: '/products?q=samsung+galaxy' },
+  { label: 'OPPO', to: '/products?q=oppo' },
 ]
 
 const infoLinksRight = [

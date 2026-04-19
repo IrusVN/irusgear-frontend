@@ -6,10 +6,10 @@
       </NuxtLink>
 
       <div class="mobile-header-actions">
-        <NuxtLink to="/products" class="mobile-header-icon-btn" aria-label="Tìm kiếm">
+        <NuxtLink to="/products" class="mobile-header-icon-btn" aria-label="Search">
           <i class="bi bi-search"></i>
         </NuxtLink>
-        <NuxtLink to="/cart" class="mobile-header-icon-btn mobile-cart-btn" aria-label="Giỏ hàng">
+        <NuxtLink to="/cart" class="mobile-header-icon-btn mobile-cart-btn" aria-label="Cart">
           <i class="bi bi-cart3"></i>
           <span class="mobile-cart-badge">0</span>
         </NuxtLink>
@@ -19,14 +19,7 @@
     <div class="mobile-header-marquee">
       <div class="mobile-marquee-track">
         <span class="mobile-marquee-text">
-          🎉 Giảm đến 50% toàn bộ sản phẩm &nbsp;•&nbsp;
-          📱 Trả góp 0% lãi suất &nbsp;•&nbsp;
-          🚚 Giao hàng miễn phí &nbsp;•&nbsp;
-          🔥 Flash Sale mỗi ngày &nbsp;•&nbsp;
-          🎉 Giảm đến 50% toàn bộ sản phẩm &nbsp;•&nbsp;
-          📱 Trả góp 0% lãi suất &nbsp;•&nbsp;
-          🚚 Giao hàng miễn phí &nbsp;•&nbsp;
-          🔥 Flash Sale mỗi ngày &nbsp;•&nbsp;
+          {{ $t('mobile.header.marquee') }}
         </span>
       </div>
     </div>

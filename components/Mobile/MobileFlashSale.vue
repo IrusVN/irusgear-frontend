@@ -2,7 +2,7 @@
   <div class="mobile-flash-sale">
     <div class="mobile-flash-header">
       <div class="mobile-flash-title">
-        <span class="mobile-flash-label">FLASH SALE</span>
+        <span class="mobile-flash-label">{{ $t('mobile.flashSale.title') }}</span>
         <span class="mobile-flash-fire">🔥</span>
       </div>
       <div class="mobile-flash-countdown">
@@ -37,7 +37,7 @@
     </div>
 
     <div v-else class="mobile-flash-empty">
-      <span class="text-muted small">Đang cập nhật...</span>
+      <span class="text-muted small">{{ $t('mobile.flashSale.updating') }}</span>
     </div>
   </div>
 </template>

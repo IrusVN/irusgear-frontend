@@ -18,19 +18,21 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '~/stores/authStore'
+import { useI18n } from '#imports'
 
+const { t } = useI18n()
 const route = useRoute()
 const authStore = useAuthStore()
 const { isAuthenticated } = storeToRefs(authStore)
 
 const tabs = computed(() => [
-  { key: 'home', label: 'Trang chủ', icon: 'bi-house-fill', to: '/' },
-  { key: 'category', label: 'Danh mục', icon: 'bi-grid-fill', to: '/products' },
-  { key: 'promo', label: 'Khuyến mãi', icon: 'bi-lightning-charge-fill', to: '/products?sale=true' },
-  { key: 'search', label: 'Tìm kiếm', icon: 'bi-search', to: '/products' },
+  { key: 'home', label: t('mobile.bottomNav.home'), icon: 'bi-house-fill', to: '/' },
+  { key: 'category', label: t('mobile.bottomNav.category'), icon: 'bi-grid-fill', to: '/products' },
+  { key: 'promo', label: t('mobile.bottomNav.promo'), icon: 'bi-lightning-charge-fill', to: '/products?sale=true' },
+  { key: 'search', label: t('mobile.bottomNav.search'), icon: 'bi-search', to: '/products' },
   {
     key: 'account',
-    label: 'Tài khoản',
+    label: t('mobile.bottomNav.account'),
     icon: 'bi-person-fill',
     to: isAuthenticated.value ? '/profile' : '/auth/login',
   },
