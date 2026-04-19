@@ -76,7 +76,7 @@
                 <NuxtLink to="#" class="nav-link px-3 py-2 rounded-pill fw-semibold text-secondary">Tin tức</NuxtLink>
               </li>
               <li class="nav-item">
-                <NuxtLink to="#" class="nav-link px-3 py-2 rounded-pill fw-semibold text-secondary">Liên hệ</NuxtLink>
+                <NuxtLink :to="localePath('/contact')" class="nav-link px-3 py-2 rounded-pill fw-semibold text-secondary">{{ $t('contact.pageTitle') }}</NuxtLink>
               </li>
             </ul>
           </div>

@@ -9,7 +9,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
     const routeName = to.name?.toString() || '';
     const routePath = to.path || '';
     const isPublicProductPath = /^\/(?:[a-z]{2}\/)?products(?:\/|$)/i.test(routePath);
-    const isPublic = routeName.startsWith('auth-') || routeName.startsWith('index') || isPublicProductPath;
+    const isContactPath = /^\/(?:[a-z]{2}\/)?contact(?:\/|$)/i.test(routePath);
+    const isPublic = routeName.startsWith('auth-') || routeName.startsWith('index') || isPublicProductPath || isContactPath;
 
     if (!authStore.user && token.value) {
         if (isPublic) {
