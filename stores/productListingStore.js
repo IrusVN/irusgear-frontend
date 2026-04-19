@@ -104,6 +104,36 @@ const normalizeSelectedValues = (value) => {
   return [String(value).trim()].filter(Boolean);
 };
 
+const normalizeListingContext = (context = {}) =>
+  Object.entries(context).reduce((accumulator, [key, value]) => {
+    const normalizedKey = String(key || "").trim();
+    const normalizedValue = Array.isArray(value)
+      ? String(value[0] || "").trim()
+      : String(value || "").trim();
+
+    if (normalizedKey && normalizedValue) {
+      accumulator[normalizedKey] = normalizedValue;
+    }
+
+    return accumulator;
+  }, {});
+
+const serializeListingContext = (context = {}) => {
+  const normalizedContext = normalizeListingContext(context);
+
+  return JSON.stringify(
+    Object.keys(normalizedContext)
+      .sort()
+      .reduce((accumulator, key) => {
+        accumulator[key] = normalizedContext[key];
+        return accumulator;
+      }, {}),
+  );
+};
+
+const isSameListingContext = (left = {}, right = {}) =>
+  serializeListingContext(left) === serializeListingContext(right);
+
 const transformListingPayload = (payload = {}, previousSelection = {}) => {
   const meta = payload?.meta || {};
   const applied = payload?.applied || meta?.applied || {};
@@ -282,7 +312,8 @@ export const useProductListingStore = defineStore("product-listing", () => {
   const feGlobalStore = useFeGlobalStore();
   const { error } = storeToRefs(feGlobalStore);
 
-  const categorySlug = ref("");
+  const listingContext = ref(normalizeListingContext());
+  const categorySlug = computed(() => String(listingContext.value.category || ""));
   const pageTitle = ref("");
   const bannerGroups = ref([...DEFAULT_BANNERS]);
   const productSeries = ref([]);
@@ -316,9 +347,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
       sort: activeSortKey.value || "popular",
     };
 
-    if (categorySlug.value) {
-      params.category = categorySlug.value;
-    }
+    Object.assign(params, normalizeListingContext(listingContext.value));
 
     if (selectedSeriesKey.value) {
       params.series = selectedSeriesKey.value;
@@ -407,15 +436,16 @@ export const useProductListingStore = defineStore("product-listing", () => {
     return productListItems.value;
   };
 
-  const initializeListing = async ({ category = "", force = false } = {}) => {
-    const isNewCategory = categorySlug.value !== category;
+  const initializeListing = async ({ context = {}, force = false } = {}) => {
+    const nextContext = normalizeListingContext(context);
+    const isNewContext = !isSameListingContext(listingContext.value, nextContext);
 
-    if (isNewCategory) {
+    if (isNewContext) {
       resetListing();
-      categorySlug.value = category;
+      listingContext.value = nextContext;
     }
 
-    if (!force && isLoaded.value && !isNewCategory) {
+    if (!force && isLoaded.value && !isNewContext) {
       return productListItems.value;
     }
 
@@ -469,6 +499,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
     const defaultState = createDefaultListingState();
 
     listingRequestToken.value += 1;
+    listingContext.value = normalizeListingContext();
     pageTitle.value = defaultState.pageTitle;
     bannerGroups.value = defaultState.bannerGroups;
     productSeries.value = defaultState.productSeries;
@@ -485,6 +516,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
   };
 
   return {
+    listingContext,
     categorySlug,
     pageTitle,
     bannerGroups,
