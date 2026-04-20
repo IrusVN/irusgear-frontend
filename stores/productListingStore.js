@@ -134,6 +134,11 @@ const serializeListingContext = (context = {}) => {
 const isSameListingContext = (left = {}, right = {}) =>
   serializeListingContext(left) === serializeListingContext(right);
 
+const normalizePositiveInteger = (value, fallback) => {
+  const parsed = Math.floor(toNumber(value, fallback));
+  return parsed > 0 ? parsed : fallback;
+};
+
 const transformListingPayload = (payload = {}, previousSelection = {}) => {
   const meta = payload?.meta || {};
   const applied = payload?.applied || meta?.applied || {};
@@ -342,12 +347,11 @@ export const useProductListingStore = defineStore("product-listing", () => {
 
   const buildQueryParams = ({ page = 1 } = {}) => {
     const params = {
+      ...normalizeListingContext(listingContext.value),
       page,
-      limit: paginationState.value.limit || 20,
+      limit: paginationState.value.limit || DEFAULT_PAGINATION.limit,
       sort: activeSortKey.value || "popular",
     };
-
-    Object.assign(params, normalizeListingContext(listingContext.value));
 
     if (selectedSeriesKey.value) {
       params.series = selectedSeriesKey.value;
@@ -439,17 +443,29 @@ export const useProductListingStore = defineStore("product-listing", () => {
   const initializeListing = async ({ context = {}, force = false } = {}) => {
     const nextContext = normalizeListingContext(context);
     const isNewContext = !isSameListingContext(listingContext.value, nextContext);
+    const requestedPage = normalizePositiveInteger(nextContext.page, DEFAULT_PAGINATION.page);
+    const requestedLimit = normalizePositiveInteger(nextContext.limit, DEFAULT_PAGINATION.limit);
+    const requestedSort = String(nextContext.sort || DEFAULT_SORT_OPTIONS[0]?.key || "popular").trim() || "popular";
 
     if (isNewContext) {
       resetListing();
       listingContext.value = nextContext;
     }
 
+    if (isNewContext || !isLoaded.value || force) {
+      paginationState.value = {
+        ...paginationState.value,
+        page: requestedPage,
+        limit: requestedLimit,
+      };
+      activeSortKey.value = requestedSort;
+    }
+
     if (!force && isLoaded.value && !isNewContext) {
       return productListItems.value;
     }
 
-    return fetchProductListing({ page: 1 });
+    return fetchProductListing({ page: requestedPage });
   };
 
   const loadProductListingPage = async ({ page = 1, append = false } = {}) => {

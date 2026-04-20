@@ -648,20 +648,31 @@ const normalizeRouteValue = (value) => {
   return String(value || "").trim();
 };
 
-const routeListingContext = computed(() => {
-  const category =
-    normalizeRouteValue(route.query.category) ||
-    normalizeRouteValue(route.params.slug) ||
-    (route.name?.toString().includes('category') ? normalizeRouteValue(route.params.slug) : "");
-  const child = normalizeRouteValue(route.query.child);
+const buildRouteListingContext = () => {
+  const context = Object.entries(route.query || {}).reduce((accumulator, [key, value]) => {
+    const normalizedKey = String(key || "").trim();
+    const normalizedValue = normalizeRouteValue(value);
 
-  return Object.entries({ category, child }).reduce((accumulator, [key, value]) => {
-    if (value) {
-      accumulator[key] = value;
+    if (normalizedKey && normalizedValue) {
+      accumulator[normalizedKey] = normalizedValue;
     }
 
     return accumulator;
   }, {});
+
+  const fallbackCategory =
+    normalizeRouteValue(route.params.slug) ||
+    (route.name?.toString().includes('category') ? normalizeRouteValue(route.params.slug) : "");
+
+  if (!context.category && fallbackCategory) {
+    context.category = fallbackCategory;
+  }
+
+  return context;
+};
+
+const routeListingContext = computed(() => {
+  return buildRouteListingContext();
 });
 
 const syncListingFromRoute = async ({ force = false, refreshSwipers = false } = {}) => {

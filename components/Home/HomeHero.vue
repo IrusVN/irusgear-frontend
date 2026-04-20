@@ -26,7 +26,7 @@
                 <div class="d-flex flex-wrap gap-2">
                   <NuxtLink v-for="item in resolveGroupItems(group)"
                     :key="`${group.key || group.title}-${item.slug || item.title}`"
-                    :to="`/products/?category=${item.slug || item.title}`" :aria-label="item.title || undefined"
+                    :to="item.to" :aria-label="item.title || undefined"
                     class="hero-mega-menu-chip" :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }">
                     <img v-if="item.image" :src="item.image" :alt="item.title" class="hero-mega-menu-chip-image"
                       loading="lazy" />

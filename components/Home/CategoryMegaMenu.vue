@@ -20,7 +20,7 @@
 
           <div class="mega-menu-group-items">
             <NuxtLink v-for="item in group.items || []" :key="`${group.key || group.title}-${item.slug || item.title}`"
-              :to="`/products/?category=${item.slug || item.title}`" class="mega-menu-chip"
+              :to="item.to" class="mega-menu-chip"
               :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }">
               <img v-if="item.image" :src="item.image" :alt="item.title" class="mega-menu-chip-image" loading="lazy" />
               <span class="mega-menu-chip-title">{{ item.title }}</span>
