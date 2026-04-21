@@ -1,7 +1,9 @@
 <template>
   <section class="product-list-page">
-    <div :class="['sticky-filter-bar', { 'sticky-filter-bar--visible': isStickyFilterVisible }]"
-      :style="{ top: `${stickyTopOffset}px` }">
+    <div
+      :class="['sticky-filter-bar', { 'sticky-filter-bar--visible': isStickyFilterVisible }]"
+      :style="stickyFilterBarStyle"
+    >
       <div ref="stickyFilterInnerEl" class="container-xl px-3 py-3 sticky-filter-bar__inner">
         <div class="product-filter-list product-filter-list--sticky">
           <button v-for="filter in productFilters" :key="`sticky-${filter.key}`"
@@ -417,6 +419,10 @@ const stickyTopOffset = ref(0);
 const activeDropdownKey = ref(null);
 let requestRefreshTimer = null;
 
+const stickyFilterBarStyle = computed(() => ({
+  top: `var(--customer-sidebar-offset, ${stickyTopOffset.value}px)`,
+}));
+
 const activeDropdown = computed(() =>
   productFilters.value.find((filter) => filter.key === activeDropdownKey.value && (filter.options?.length || filter.key === "filter")),
 );
@@ -567,18 +573,35 @@ const handleClickOutside = (event) => {
 };
 
 const handleWindowResize = () => {
-  updateStickyOffset();
+  syncStickyState();
   updateDropdownPosition();
 };
 
 const handleWindowScroll = () => {
-  if (!filterBlockEl.value) return;
+  syncStickyState();
+};
 
-  updateStickyOffset();
-  isStickyFilterVisible.value = filterBlockEl.value.getBoundingClientRect().top <= stickyTopOffset.value;
+const getCustomerSidebarOffset = () => {
+  if (typeof document === "undefined") return;
+
+  const rawOffset = getComputedStyle(document.documentElement)
+    .getPropertyValue("--customer-sidebar-offset")
+    .trim();
+  const parsedOffset = Number.parseFloat(rawOffset);
+
+  if (Number.isFinite(parsedOffset)) {
+    return Math.ceil(parsedOffset);
+  }
 };
 
 const updateStickyOffset = () => {
+  const customerSidebarOffset = getCustomerSidebarOffset();
+
+  if (Number.isFinite(customerSidebarOffset)) {
+    stickyTopOffset.value = customerSidebarOffset;
+    return;
+  }
+
   if (typeof document === "undefined") return;
 
   const navbarWrapper = document.querySelector(".fixed-top");
@@ -595,6 +618,18 @@ const updateStickyOffset = () => {
   }
 
   stickyTopOffset.value = 0;
+};
+
+const syncStickyState = () => {
+  if (!filterBlockEl.value) return;
+
+  updateStickyOffset();
+  isStickyFilterVisible.value = filterBlockEl.value.getBoundingClientRect().top <= stickyTopOffset.value;
+};
+
+const handleCustomerSidebarOffsetChange = () => {
+  syncStickyState();
+  updateDropdownPosition();
 };
 
 const initSwipers = async () => {
@@ -691,14 +726,14 @@ onMounted(async () => {
   await syncListingFromRoute();
   await nextTick();
   await initSwipers();
-  updateStickyOffset();
-  handleWindowScroll();
+  syncStickyState();
   await updateDropdownPosition();
 
   if (!mounted && typeof window !== "undefined") {
     window.addEventListener("click", handleClickOutside);
     window.addEventListener("resize", handleWindowResize);
     window.addEventListener("scroll", handleWindowScroll, { passive: true });
+    window.addEventListener("customer-sidebar:offset-change", handleCustomerSidebarOffsetChange);
     mounted = true;
   }
 });
@@ -732,6 +767,7 @@ onBeforeUnmount(() => {
     window.removeEventListener("click", handleClickOutside);
     window.removeEventListener("resize", handleWindowResize);
     window.removeEventListener("scroll", handleWindowScroll);
+    window.removeEventListener("customer-sidebar:offset-change", handleCustomerSidebarOffsetChange);
     mounted = false;
   }
 });
@@ -754,6 +790,7 @@ onBeforeUnmount(() => {
   top: 0;
   transform: translateY(-100%);
   transition:
+    top 0.32s ease,
     opacity 0.25s ease,
     transform 0.3s ease;
   z-index: 60;

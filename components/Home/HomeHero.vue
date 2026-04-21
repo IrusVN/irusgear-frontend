@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <div class="service-panel d-none d-xl-flex flex-column gap-3 flex-shrink-0 pt-1">
+      <div class="service-panel d-none d-xl-flex flex-column gap-3 flex-shrink-0">
         <div class="service-welcome-card p-3">
           <template v-if="user">
             <div class="d-flex align-items-center gap-2">
@@ -222,7 +222,7 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 const auth = useAuthStore();
 const homeStore = useHomeStore();
-const { megaMenuSections, megaMenuLeafByKey, activeMegaMenuKey } = storeToRefs(homeStore);
+const { megaMenuSections, megaMenuLeafByKey, activeMegaMenuKey, heroMegaMenuOpen } = storeToRefs(homeStore);
 const { user } = storeToRefs(auth);
 const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ""));
 
@@ -230,7 +230,10 @@ const carouselRef = ref(null);
 const tabScrollerRef = ref(null);
 const tabButtons = ref([]);
 const activeIndex = ref(0);
-const isMegaMenuOpen = ref(false);
+const isMegaMenuOpen = computed({
+  get: () => heroMegaMenuOpen.value,
+  set: (value) => homeStore.setHeroMegaMenuOpen(value),
+});
 let megaMenuCloseTimer = null;
 
 const setTabButtonRef = (el) => {
@@ -318,7 +321,7 @@ const serviceGroups = [
 const activateMegaMenu = (key) => {
   if (!key) return;
   homeStore.setActiveMegaMenuKey(key);
-  isMegaMenuOpen.value = true;
+  homeStore.openHeroMegaMenu();
 };
 
 const resolveGroupItems = (group) => {
@@ -362,7 +365,7 @@ const openMegaMenu = () => {
     clearTimeout(megaMenuCloseTimer);
     megaMenuCloseTimer = null;
   }
-  isMegaMenuOpen.value = true;
+  homeStore.openHeroMegaMenu();
 };
 
 const keepMegaMenuOpen = () => {
@@ -370,7 +373,7 @@ const keepMegaMenuOpen = () => {
     clearTimeout(megaMenuCloseTimer);
     megaMenuCloseTimer = null;
   }
-  isMegaMenuOpen.value = true;
+  homeStore.openHeroMegaMenu();
 };
 
 const closeMegaMenu = () => {
@@ -379,7 +382,7 @@ const closeMegaMenu = () => {
   }
 
   megaMenuCloseTimer = setTimeout(() => {
-    isMegaMenuOpen.value = false;
+    homeStore.closeHeroMegaMenu();
     megaMenuCloseTimer = null;
   }, 180);
 };
@@ -420,6 +423,8 @@ onUnmounted(() => {
     clearTimeout(megaMenuCloseTimer);
     megaMenuCloseTimer = null;
   }
+
+  homeStore.closeHeroMegaMenu();
 
   const carouselEl = carouselRef.value;
   if (!carouselEl) return;
@@ -497,7 +502,7 @@ onUnmounted(() => {
   position: absolute;
   top: 0;
   left: calc(100% + 12px);
-  width: clamp(720px, calc(100vw - 420px), 980px);
+  width: clamp(720px, calc(100vw - 420px), 1010px);
   min-height: 100%;
   max-height: 465px;
   padding: 16px;
@@ -742,7 +747,7 @@ onUnmounted(() => {
 .service-benefits-card {
   background: #fff;
   border: 1px solid #ececec;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
 }
 

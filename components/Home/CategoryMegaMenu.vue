@@ -1,12 +1,17 @@
 <template>
   <div class="mega-menu">
     <div class="mega-menu-sidebar bg-white rounded-3 shadow-sm border overflow-hidden">
-      <button v-for="section in normalizedSections" :key="section.key || section.title" type="button"
-        class="mega-menu-sidebar-item" :class="{ active: activeSectionKey === section.key }"
-        @mouseenter="activate(section.key)" @focus="activate(section.key)">
+      <button
+        v-for="section in normalizedSections"
+        :key="section.key || section.title"
+        type="button"
+        class="mega-menu-sidebar-item"
+        :class="{ active: activeSectionKey === section.key }"
+        @mouseenter="activate(section.key)"
+        @focus="activate(section.key)"
+      >
         <span class="mega-menu-sidebar-icon">
-          <img v-if="section.icon" :src="section.icon" :alt="section.title" loading="lazy" />
-          <i v-else class="bi bi-grid"></i>
+          <i :class="section.iconClass"></i>
         </span>
         <span class="mega-menu-sidebar-label">{{ section.title }}</span>
         <i class="bi bi-chevron-right mega-menu-sidebar-chevron"></i>
@@ -19,11 +24,15 @@
           <h3 class="mega-menu-group-title">{{ group.title }}</h3>
 
           <div class="mega-menu-group-items">
-            <NuxtLink v-for="item in group.items || []" :key="`${group.key || group.title}-${item.slug || item.title}`"
-              :to="item.to" class="mega-menu-chip"
-              :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }">
+            <NuxtLink
+              v-for="item in resolveGroupItems(group)"
+              :key="`${group.key || group.title}-${item.slug || item.title}`"
+              :to="item.to"
+              class="mega-menu-chip"
+              :class="{ 'has-badge': !!item.badge, 'has-image': !!item.image }"
+            >
               <img v-if="item.image" :src="item.image" :alt="item.title" class="mega-menu-chip-image" loading="lazy" />
-              <span class="mega-menu-chip-title">{{ item.title }}</span>
+              <span v-if="!shouldHideItemTitle(group, item)" class="mega-menu-chip-title">{{ item.title }}</span>
               <span v-if="item.badge" class="mega-menu-chip-badge">{{ item.badge }}</span>
             </NuxtLink>
           </div>
@@ -39,10 +48,30 @@ import { storeToRefs } from "pinia";
 import { useHomeStore } from "@/stores/homeStore";
 
 const homeStore = useHomeStore();
-const { megaMenuSections, activeMegaMenuKey } = storeToRefs(homeStore);
+const { megaMenuSections, megaMenuLeafByKey, activeMegaMenuKey } = storeToRefs(homeStore);
+
+const iconClassByKey = {
+  "dien-thoai-tablet": "bi bi-phone",
+  laptop: "bi bi-laptop",
+  "am-thanh-mic-thu-am": "bi bi-headphones",
+  "dong-ho-camera": "bi bi-smartwatch",
+  "do-gia-dung-lam-dep": "bi bi-house",
+  "phu-kien": "bi bi-earbuds",
+  "pc-man-hinh-may-in": "bi bi-pc-display",
+  "tv-dien-may": "bi bi-display",
+  "thu-cu-doi-moi": "bi bi-repeat",
+  "hang-cu": "bi bi-box-seam",
+  "khuyen-mai": "bi bi-patch-check",
+  "tin-cong-nghe": "bi bi-card-text",
+};
 
 const normalizedSections = computed(() =>
-  Array.isArray(megaMenuSections.value) ? megaMenuSections.value.filter(Boolean) : []
+  Array.isArray(megaMenuSections.value)
+    ? megaMenuSections.value.filter(Boolean).map((section) => ({
+      ...section,
+      iconClass: iconClassByKey[section.key] || "bi bi-grid",
+    }))
+    : []
 );
 
 const activeSectionKey = computed(() => {
@@ -56,17 +85,47 @@ const activeSection = computed(
   () => normalizedSections.value.find((section) => section.key === activeSectionKey.value) || null
 );
 
-const activeGroups = computed(() => activeSection.value?.children || []);
+const activeGroups = computed(() => {
+  const activeKey = activeSectionKey.value;
+  const fromLeafMap = megaMenuLeafByKey.value?.[activeKey]?.children;
+  if (Array.isArray(fromLeafMap) && fromLeafMap.length) return fromLeafMap;
+
+  const section = normalizedSections.value.find((item) => item?.key === activeKey);
+  return Array.isArray(section?.children) ? section.children : [];
+});
 
 const activate = (key) => {
   if (!key || key === activeSectionKey.value) return;
   homeStore.setActiveMegaMenuKey(key);
 };
 
-const resolveHref = (item) => {
-  if (!item) return "";
-  if (item.url) return item.url;
-  return "";
+const resolveGroupItems = (group) => {
+  if (!group) return [];
+
+  if (Array.isArray(group.items) && group.items.length) {
+    return group.items;
+  }
+
+  if (Array.isArray(group.children) && group.children.length) {
+    return group.children.filter((child) => child?.title);
+  }
+
+  return [];
+};
+
+const normalizeText = (value) =>
+  String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+const isBrandGroup = (group) => {
+  const title = normalizeText(group?.title);
+  return title.includes("hang") || title.includes("thuong hieu") || title.includes("brand");
+};
+
+const shouldHideItemTitle = (group, item) => {
+  return Boolean(item?.image) && isBrandGroup(group);
 };
 
 watch(
@@ -83,7 +142,7 @@ watch(
 
 onMounted(() => {
   if (!normalizedSections.value.length) {
-    homeStore.fetchMegaMenu().catch(() => { });
+    homeStore.fetchMegaMenuLeaves().catch(() => { });
   }
 });
 </script>
@@ -96,12 +155,11 @@ onMounted(() => {
 
 .mega-menu-sidebar {
   width: 258px;
-  padding: 4px 0;
 }
 
 .mega-menu-sidebar-item {
   width: 100%;
-  min-height: 40px;
+  min-height: 47px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -109,9 +167,9 @@ onMounted(() => {
   border: 0;
   border-bottom: 1px solid #f1f3f5;
   background: #fff;
-  color: #212529;
+  color: #111827;
   text-align: left;
-  transition: background-color 0.16s ease, color 0.16s ease;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
 .mega-menu-sidebar-item:last-child {
@@ -121,15 +179,17 @@ onMounted(() => {
 .mega-menu-sidebar-item:hover,
 .mega-menu-sidebar-item.active {
   background: #f8f9fa;
+  color: #111827;
+  transform: translateX(3px);
 }
 
 .mega-menu-sidebar-item.active .mega-menu-sidebar-label {
-  color: #d70018;
+  color: #111827;
 }
 
 .mega-menu-sidebar-item.active .mega-menu-sidebar-icon,
 .mega-menu-sidebar-item.active .mega-menu-sidebar-chevron {
-  color: #d70018;
+  color: #111827;
 }
 
 .mega-menu-sidebar-icon {
@@ -138,14 +198,13 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #d70018;
+  color: #111827;
   flex-shrink: 0;
 }
 
-.mega-menu-sidebar-icon img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
+.mega-menu-sidebar-icon i {
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 .mega-menu-sidebar-label {
@@ -157,15 +216,15 @@ onMounted(() => {
 }
 
 .mega-menu-sidebar-chevron {
-  color: #adb5bd;
-  font-size: 0.85rem;
+  color: #6b7280;
+  font-size: 0.7rem;
 }
 
 .mega-menu-panel {
   position: absolute;
   top: 0;
   left: calc(100% + 12px);
-  width: clamp(720px, calc(100vw - 420px), 980px);
+  width: clamp(720px, calc(100vw - 420px), 1010px);
   min-height: 100%;
   max-height: 465px;
   padding: 16px;
@@ -214,7 +273,7 @@ onMounted(() => {
 
 .mega-menu-chip:hover {
   border-color: #cfd4da;
-  color: #d70018;
+  color: #111827;
 }
 
 .mega-menu-chip.has-badge {
