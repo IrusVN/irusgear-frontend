@@ -79,7 +79,67 @@ const toNumber = (value, fallback = 0) => {
   return Number.isFinite(parsed) ? parsed : fallback;
 };
 
-const transformListingPayload = (payload = {}) => {
+const normalizeSelectedValues = (value) => {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => String(item || "").trim())
+      .filter(Boolean);
+  }
+
+  if (typeof value === "string") {
+    return value
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  if (typeof value === "boolean") {
+    return value ? ["true"] : [];
+  }
+
+  if (value == null) {
+    return [];
+  }
+
+  return [String(value).trim()].filter(Boolean);
+};
+
+const normalizeListingContext = (context = {}) =>
+  Object.entries(context).reduce((accumulator, [key, value]) => {
+    const normalizedKey = String(key || "").trim();
+    const normalizedValue = Array.isArray(value)
+      ? String(value[0] || "").trim()
+      : String(value || "").trim();
+
+    if (normalizedKey && normalizedValue) {
+      accumulator[normalizedKey] = normalizedValue;
+    }
+
+    return accumulator;
+  }, {});
+
+const serializeListingContext = (context = {}) => {
+  const normalizedContext = normalizeListingContext(context);
+
+  return JSON.stringify(
+    Object.keys(normalizedContext)
+      .sort()
+      .reduce((accumulator, key) => {
+        accumulator[key] = normalizedContext[key];
+        return accumulator;
+      }, {}),
+  );
+};
+
+const isSameListingContext = (left = {}, right = {}) =>
+  serializeListingContext(left) === serializeListingContext(right);
+
+const normalizePositiveInteger = (value, fallback) => {
+  const parsed = Math.floor(toNumber(value, fallback));
+  return parsed > 0 ? parsed : fallback;
+};
+
+const transformListingPayload = (payload = {}, previousSelection = {}) => {
   const meta = payload?.meta || {};
   const applied = payload?.applied || meta?.applied || {};
   const appliedFilters = applied?.filters || payload?.filters || {};
@@ -98,7 +158,10 @@ const transformListingPayload = (payload = {}) => {
   const sortSource = toArray(payload?.sortOptions || meta?.sortOptions);
   const filterSource = toArray(payload?.filters || meta?.filters);
   const seriesSource = toArray(payload?.series || meta?.series);
-  const selectedSeriesKey = String(applied?.series || payload?.series || "");
+  const selectedSeriesKeys = normalizeSelectedValues(applied?.series);
+  const selectedSeriesKey =
+    selectedSeriesKeys[0] ||
+    String(seriesSource.find((item) => Boolean(item?.active))?.key || "");
   const activeSortKey = String(applied?.sort || payload?.sort || "popular");
 
   const apiFilters = filterSource
@@ -146,10 +209,7 @@ const transformListingPayload = (payload = {}) => {
     const filter = productFilters.find((item) => item.key === filterKey);
     if (!filter) return accumulator;
 
-    const values = String(filterValue || "")
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
+    const values = normalizeSelectedValues(filterValue);
 
     if (!values.length) return accumulator;
 
@@ -164,6 +224,20 @@ const transformListingPayload = (payload = {}) => {
 
     return accumulator;
   }, {});
+
+  QUICK_FILTER_KEYS
+    .filter((filterKey) => filterKey !== "filter")
+    .forEach((filterKey) => {
+      if (selectedOptionsByFilter[filterKey]?.length) return;
+
+      const previousValues = toArray(previousSelection?.[filterKey]).filter(Boolean);
+      if (!previousValues.length) return;
+
+      const filter = productFilters.find((item) => item.key === filterKey);
+      if (!filter) return;
+
+      selectedOptionsByFilter[filterKey] = previousValues;
+    });
 
   const totalItems = toNumber(payload?.pagination?.totalItems ?? meta?.total, rawItems.length);
   const page = toNumber(payload?.pagination?.page ?? meta?.current_page, 1);
@@ -190,7 +264,7 @@ const transformListingPayload = (payload = {}) => {
           key,
           label: String(item?.label || item?.title || item?.name || ""),
           href: item?.href || item?.url || "",
-          active: key === selectedSeriesKey,
+          active: Boolean(item?.active) || key === selectedSeriesKey,
         };
       }),
     sortOptions: DEFAULT_SORT_OPTIONS,
@@ -243,7 +317,8 @@ export const useProductListingStore = defineStore("product-listing", () => {
   const feGlobalStore = useFeGlobalStore();
   const { error } = storeToRefs(feGlobalStore);
 
-  const categorySlug = ref("");
+  const listingContext = ref(normalizeListingContext());
+  const categorySlug = computed(() => String(listingContext.value.category || ""));
   const pageTitle = ref("");
   const bannerGroups = ref([...DEFAULT_BANNERS]);
   const productSeries = ref([]);
@@ -272,14 +347,11 @@ export const useProductListingStore = defineStore("product-listing", () => {
 
   const buildQueryParams = ({ page = 1 } = {}) => {
     const params = {
+      ...normalizeListingContext(listingContext.value),
       page,
-      limit: paginationState.value.limit || 20,
+      limit: paginationState.value.limit || DEFAULT_PAGINATION.limit,
       sort: activeSortKey.value || "popular",
     };
-
-    if (categorySlug.value) {
-      params.category = categorySlug.value;
-    }
 
     if (selectedSeriesKey.value) {
       params.series = selectedSeriesKey.value;
@@ -308,7 +380,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
   };
 
   const applyListingState = (payload, { append = false } = {}) => {
-    const nextState = transformListingPayload(payload);
+    const nextState = transformListingPayload(payload, selectedOptionsByFilter.value);
 
     pageTitle.value = nextState.pageTitle;
     bannerGroups.value = nextState.bannerGroups;
@@ -368,19 +440,32 @@ export const useProductListingStore = defineStore("product-listing", () => {
     return productListItems.value;
   };
 
-  const initializeListing = async ({ category = "", force = false } = {}) => {
-    const isNewCategory = categorySlug.value !== category;
+  const initializeListing = async ({ context = {}, force = false } = {}) => {
+    const nextContext = normalizeListingContext(context);
+    const isNewContext = !isSameListingContext(listingContext.value, nextContext);
+    const requestedPage = normalizePositiveInteger(nextContext.page, DEFAULT_PAGINATION.page);
+    const requestedLimit = normalizePositiveInteger(nextContext.limit, DEFAULT_PAGINATION.limit);
+    const requestedSort = String(nextContext.sort || DEFAULT_SORT_OPTIONS[0]?.key || "popular").trim() || "popular";
 
-    if (isNewCategory) {
+    if (isNewContext) {
       resetListing();
-      categorySlug.value = category;
+      listingContext.value = nextContext;
     }
 
-    if (!force && isLoaded.value && !isNewCategory) {
+    if (isNewContext || !isLoaded.value || force) {
+      paginationState.value = {
+        ...paginationState.value,
+        page: requestedPage,
+        limit: requestedLimit,
+      };
+      activeSortKey.value = requestedSort;
+    }
+
+    if (!force && isLoaded.value && !isNewContext) {
       return productListItems.value;
     }
 
-    return fetchProductListing({ page: 1 });
+    return fetchProductListing({ page: requestedPage });
   };
 
   const loadProductListingPage = async ({ page = 1, append = false } = {}) => {
@@ -430,6 +515,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
     const defaultState = createDefaultListingState();
 
     listingRequestToken.value += 1;
+    listingContext.value = normalizeListingContext();
     pageTitle.value = defaultState.pageTitle;
     bannerGroups.value = defaultState.bannerGroups;
     productSeries.value = defaultState.productSeries;
@@ -446,6 +532,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
   };
 
   return {
+    listingContext,
     categorySlug,
     pageTitle,
     bannerGroups,

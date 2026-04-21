@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useRuntimeConfig } from "#imports";
 import { createCollection, createProductMapper } from "./collectionFactory";
+import { resolveProductListingTo } from "@/utils/productListingRoute";
 
 export const useHomeStore = defineStore("home", () => {
   const config = useRuntimeConfig();
@@ -296,6 +297,39 @@ export const useHomeStore = defineStore("home", () => {
     activeMegaMenuKey.value = key;
   };
 
+  const createMegaMenuLinkItem = (item = {}) => ({
+    ...item,
+    type: item.type || "link",
+    rootKey: item.rootKey || item.root_key || "",
+    rootTitle: item.rootTitle || item.root_title || "",
+    route: item.route || null,
+    title: item.title || "",
+    slug: item.slug || "",
+    url: item.url || "",
+    image: item.image || "",
+    badge: item.badge || "",
+    to: resolveProductListingTo(item),
+  });
+
+  const normalizeMegaMenuNode = (node) => {
+    if (!node || typeof node !== "object") return node;
+
+    if (!Array.isArray(node.items) && !Array.isArray(node.children)) {
+      return createMegaMenuLinkItem(node);
+    }
+
+    return {
+      ...node,
+      items: Array.isArray(node.items) ? node.items.map(normalizeMegaMenuNode) : node.items,
+      children: Array.isArray(node.children)
+        ? node.children.map(normalizeMegaMenuNode)
+        : node.children,
+    };
+  };
+
+  const normalizeMegaMenuSections = (sections) =>
+    (Array.isArray(sections) ? sections : []).map(normalizeMegaMenuNode);
+
   const toLeafMapFromSections = (sections) => {
     const next = {};
     (Array.isArray(sections) ? sections : []).forEach((section) => {
@@ -334,12 +368,7 @@ export const useHomeStore = defineStore("home", () => {
       }
 
       groupNode.items.push({
-        type: item.type || "link",
-        title: item.title || "",
-        slug: item.slug || "",
-        url: item.url || (item.slug ? `/${item.slug}` : ""),
-        image: item.image || "",
-        badge: item.badge || "",
+        ...createMegaMenuLinkItem(item),
       });
     });
     return rootMap;
@@ -372,7 +401,7 @@ export const useHomeStore = defineStore("home", () => {
           megaMenuLeafByKey.value = toLeafMapFromItems(items);
           megaMenuSections.value = leafMapToSections(megaMenuLeafByKey.value);
         } else {
-          megaMenuSections.value = Array.isArray(sections) ? sections : [];
+          megaMenuSections.value = normalizeMegaMenuSections(sections);
           megaMenuLeafByKey.value = toLeafMapFromSections(megaMenuSections.value);
         }
 

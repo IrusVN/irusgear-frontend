@@ -643,18 +643,52 @@ const destroySwipers = () => {
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const routeCategory = computed(() => {
-  if (route.query.category) return route.query.category;
-  if (route.params.slug) return route.params.slug;
-  if (route.name?.toString().includes('category')) return route.params.slug;
-  return "";
+const normalizeRouteValue = (value) => {
+  if (Array.isArray(value)) return String(value[0] || "").trim();
+  return String(value || "").trim();
+};
+
+const buildRouteListingContext = () => {
+  const context = Object.entries(route.query || {}).reduce((accumulator, [key, value]) => {
+    const normalizedKey = String(key || "").trim();
+    const normalizedValue = normalizeRouteValue(value);
+
+    if (normalizedKey && normalizedValue) {
+      accumulator[normalizedKey] = normalizedValue;
+    }
+
+    return accumulator;
+  }, {});
+
+  const fallbackCategory =
+    normalizeRouteValue(route.params.slug) ||
+    (route.name?.toString().includes('category') ? normalizeRouteValue(route.params.slug) : "");
+
+  if (!context.category && fallbackCategory) {
+    context.category = fallbackCategory;
+  }
+
+  return context;
+};
+
+const routeListingContext = computed(() => {
+  return buildRouteListingContext();
 });
 
-onMounted(async () => {
-  await productListingStore.initializeListing({ category: routeCategory.value }).catch((error) => {
+const syncListingFromRoute = async ({ force = false, refreshSwipers = false } = {}) => {
+  await productListingStore.initializeListing({ context: routeListingContext.value, force }).catch((error) => {
     console.error("Failed to initialize product listing store", error);
   });
 
+  if (!refreshSwipers) return;
+
+  await nextTick();
+  destroySwipers();
+  await initSwipers();
+};
+
+onMounted(async () => {
+  await syncListingFromRoute();
   await nextTick();
   await initSwipers();
   updateStickyOffset();
@@ -672,6 +706,16 @@ onMounted(async () => {
 watch(activeDropdownKey, async () => {
   await updateDropdownPosition();
 });
+
+watch(routeListingContext, async (nextContext, previousContext) => {
+  if (JSON.stringify(nextContext) === JSON.stringify(previousContext)) {
+    return;
+  }
+
+  closeDropdown();
+  await syncListingFromRoute({ force: true, refreshSwipers: true });
+  await updateDropdownPosition();
+}, { deep: true });
 
 watch(isStickyFilterVisible, async () => {
   await updateDropdownPosition();
