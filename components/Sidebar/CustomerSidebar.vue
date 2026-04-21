@@ -1,148 +1,184 @@
 <template>
   <div class="position-relative">
-    <div class="fixed-top w-100 d-flex justify-content-center mt-4 px-3">
-      <nav class="container navbar navbar-expand-lg glass-navbar rounded-pill px-4 py-2 w-100 shadow-sm">
-        <div class="container-fluid px-0">
-          <NuxtLink to="/" class="navbar-brand d-flex align-items-center gap-2 fw-bolder text-dark me-0">
-            <img src="@/public/image/logo-irusgear-black.png" alt="" class="img-fluid navbar-logo">
-          </NuxtLink>
+    <div class="fixed-top w-100 px-2 px-lg-3 pt-1 pt-lg-1 customer-sidebar-wrap">
+      <nav class="customer-shell container-xxl w-100 px-0">
+        <div class="d-flex flex-column">
+          <div class="d-flex align-items-center gap-2 gap-lg-3 px-3 px-lg-4 py-3 flex-nowrap border-bottom border-light-subtle">
+            <NuxtLink
+              :to="localePath('/')"
+              class="d-flex align-items-center flex-shrink-0 text-decoration-none"
+            >
+              <img
+                src="@/public/image/logo-irusgear-black.png"
+                alt="IrusGear"
+                class="img-fluid navbar-logo"
+              >
+            </NuxtLink>
 
-          <div class="d-none d-lg-flex mx-auto">
-            <ul class="navbar-nav d-flex flex-row align-items-center gap-1">
-              <li class="nav-item">
-                <NuxtLink to="/" class="nav-link px-3 py-2 rounded-pill fw-semibold text-secondary">{{ $t('sidebar.menu.home') }}</NuxtLink>
-              </li>
-
-              <li class="nav-item dropdown group-hover position-static">
-                <a class="nav-link px-3 py-2 rounded-pill fw-semibold text-secondary dropdown-toggle no-caret" href="#" role="button">
-                  {{ $t('sidebar.menu.products') }} <i class="bi bi-chevron-down ms-1"></i>
-                </a>
-
-                <div class="dropdown-menu glass-dropdown border-0 shadow-lg p-0 rounded-4 overflow-hidden mega-dropdown">
-                  <div class="container-fluid p-4 bg-white bg-opacity-75">
-                    <div class="d-flex gap-4">
-                      <!-- Cột 1 -->
-                      <div class="flex-fill">
-                        <h6 class="text-uppercase text-secondary fw-bold fs-7 mb-3 ls-1">
-                          Công nghệ
-                        </h6>
-                        <div class="d-flex flex-column gap-2">
-                          <NuxtLink to="#" class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2 text-dark">
-                            <i class="bi bi-laptop text-secondary"></i> Laptop & PC
-                          </NuxtLink>
-                          <NuxtLink to="#" class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2 text-dark">
-                            <i class="bi bi-phone text-secondary"></i> Smart Phone
-                          </NuxtLink>
-                          <NuxtLink to="#" class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2 text-dark">
-                            <i class="bi bi-headphones text-secondary"></i> Âm thanh
-                          </NuxtLink>
-                        </div>
-                      </div>
-
-                      <!-- Cột 2 -->
-                      <div class="flex-fill">
-                        <h6 class="text-uppercase text-secondary fw-bold fs-7 mb-3 ls-1">
-                          Phụ kiện
-                        </h6>
-                        <div class="d-flex flex-column gap-2">
-                          <NuxtLink to="#" class="dropdown-item rounded-3 p-2 text-dark">
-                            Bàn phím cơ
-                          </NuxtLink>
-                          <NuxtLink to="#" class="dropdown-item rounded-3 p-2 text-dark">
-                            Chuột Gaming
-                          </NuxtLink>
-                          <NuxtLink to="#" class="dropdown-item rounded-3 p-2 text-dark">
-                            Setup bàn làm việc
-                          </NuxtLink>
-                        </div>
-                      </div>
-
-                      <!-- Cột 3 -->
-                      <div class="flex-fill">
-                        <div class="card border-0 h-100 bg-light rounded-3 overflow-hidden position-relative text-white">
-                          <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-gradient"></div>
-                          <div class="card-body position-relative d-flex flex-column justify-content-end h-100 pt-5">
-                            <span class="badge bg-primary mb-2">New</span>
-                            <h6 class="fw-bold mb-0">RTX 5090 Series</h6>
-                            <small class="text-white-50">Sức mạnh tối thượng</small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="nav-item">
-                <NuxtLink to="#" class="nav-link px-3 py-2 rounded-pill fw-semibold text-secondary">Tin tức</NuxtLink>
-              </li>
-              <li class="nav-item">
-                <NuxtLink to="#" class="nav-link px-3 py-2 rounded-pill fw-semibold text-secondary">Liên hệ</NuxtLink>
-              </li>
-            </ul>
-          </div>
-
-          <div class="d-flex align-items-center gap-2">
-            <button class="btn btn-icon text-secondary rounded-circle">
-              <i class="bi bi-search fs-5"></i>
+            <button
+              type="button"
+              class="btn header-search d-none d-md-flex align-items-center gap-2 gap-lg-3 flex-grow-1 text-start px-3 px-lg-4 py-2"
+              title="Tim kiem san pham"
+            >
+              <i class="bi bi-search fs-6 text-secondary"></i>
+              <span class="search-text small text-secondary-emphasis text-truncate">
+                Tìm kiếm sản phẩm, danh mục...
+              </span>
+              <span class="search-shortcut d-none d-xl-inline-flex align-items-center justify-content-center">
+                Ctrl K
+              </span>
             </button>
 
-            <NuxtLink to="#" class="btn btn-icon text-secondary rounded-circle position-relative me-2">
-              <i class="bi bi-cart3 fs-5"></i>
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white p-1">2</span>
-            </NuxtLink>
-            <div class="vr d-none d-lg-block mx-2 bg-secondary opacity-25"></div>
-
-            <div v-if="!user" class="d-flex align-items-center gap-2">
-              <NuxtLink :to="localePath('/auth/login')" class="btn btn-outline-dark rounded-pill px-3 fw-semibold" >
-                {{ $t('common.login') }}
+            <div class="d-flex align-items-center gap-1 gap-xl-2 ms-auto flex-shrink-0 flex-nowrap">
+              <NuxtLink
+                v-for="link in utilityLinks"
+                :key="link.label"
+                :to="link.to"
+                class="btn header-text-btn d-none d-xxl-inline-flex align-items-center gap-2 px-3 py-2 border-0"
+              >
+                <i :class="link.icon"></i>
+                <span>{{ link.label }}</span>
               </NuxtLink>
 
-              <NuxtLink :to="localePath('/auth/register')" class="btn btn-dark rounded-pill px-3 fw-semibold" >
-                {{ $t('common.register') }}
+              <NuxtLink
+                :to="ctaLink.to"
+                class="btn btn-dark rounded-pill px-3 px-xl-4 py-2 fw-semibold d-none d-lg-inline-flex align-items-center gap-2 shadow-sm"
+              >
+                <i :class="ctaLink.icon"></i>
+                <span>{{ ctaLink.label }}</span>
               </NuxtLink>
+
+              <button type="button" class="btn header-icon-btn d-md-none" aria-label="Tim kiem">
+                <i class="bi bi-search"></i>
+              </button>
+
+              <NuxtLink
+                :to="localePath('/cart')"
+                class="btn header-icon-btn position-relative"
+                aria-label="Gio hang"
+              >
+                <i class="bi bi-cart3"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white">
+                  2
+                </span>
+              </NuxtLink>
+
+              <button type="button" class="btn header-icon-btn d-none d-xl-inline-flex" aria-label="Thong bao">
+                <i class="bi bi-bell"></i>
+              </button>
+
+              <button type="button" class="btn header-icon-btn d-none d-xxl-inline-flex" aria-label="Ngon ngu">
+                <i class="bi bi-globe2"></i>
+              </button>
+
+              <div class="vr d-none d-lg-block mx-1 opacity-25"></div>
+
+              <div v-if="!user" class="d-flex align-items-center gap-2 flex-nowrap">
+                <NuxtLink
+                  :to="localePath('/auth/login')"
+                  class="btn header-text-btn d-inline-flex align-items-center gap-2 px-2 px-lg-3 py-2 border-0"
+                >
+                  <i class="bi bi-box-arrow-in-right"></i>
+                  <span class="d-none d-sm-inline">{{ $t('common.login') }}</span>
+                </NuxtLink>
+
+                <NuxtLink
+                  :to="localePath('/auth/register')"
+                  class="btn btn-dark rounded-pill px-3 py-2 fw-semibold d-none d-sm-inline-flex"
+                >
+                  {{ $t('common.register') }}
+                </NuxtLink>
+              </div>
+
+              <div v-else class="dropdown">
+                <button
+                  type="button"
+                  class="btn customer-user-trigger d-flex align-items-center gap-2 rounded-pill border-0 ps-2 pe-3 py-1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    class="rounded-circle border"
+                    width="36"
+                    height="36"
+                    alt="Avatar"
+                    :src="avatarUrl"
+                  >
+
+                  <div class="d-none d-xl-block text-start lh-sm">
+                    <div class="fw-semibold text-dark small">{{ fullName }}</div>
+                    <small class="text-secondary">{{ $t(userRoleKey) }}</small>
+                  </div>
+
+                  <i class="bi bi-chevron-down small text-secondary"></i>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end glass-dropdown border-0 shadow-sm mt-3 rounded-4 p-2">
+                  <li>
+                    <NuxtLink :to="localePath('/profile')" class="dropdown-item rounded-3 py-2">
+                      <i class="bi bi-person me-2"></i>Hồ sơ cá nhân
+                    </NuxtLink>
+                  </li>
+                  <li>
+                    <NuxtLink :to="localePath('/orders')" class="dropdown-item rounded-3 py-2">
+                      <i class="bi bi-box-seam me-2"></i>Đơn mua
+                    </NuxtLink>
+                  </li>
+                  <li><hr class="dropdown-divider opacity-10 my-1"></li>
+                  <li>
+                    <button class="dropdown-item rounded-3 py-2 text-danger" @click="auth.logout">
+                      <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-none d-lg-flex align-items-center justify-content-between gap-3 px-3 px-xl-4 py-2">
+            <div class="d-flex align-items-center gap-1 gap-xl-2 flex-nowrap">
+              <NuxtLink
+                v-for="item in primaryNavItems"
+                :key="item.label"
+                :to="item.to"
+                class="btn header-nav-link d-inline-flex align-items-center gap-2 px-3 py-2 border-0"
+              >
+                <i :class="item.icon"></i>
+                <span>{{ item.label }}</span>
+              </NuxtLink>
+
+              <div class="dropdown position-static header-products">
+                <button
+                  type="button"
+                  class="btn header-nav-link d-inline-flex align-items-center gap-2 px-3 py-2 border-0"
+                >
+                  <i class="bi bi-grid"></i>
+                  <span>{{ $t('sidebar.menu.products') }}</span>
+                  <i class="bi bi-chevron-down small"></i>
+                </button>
+
+                <div class="dropdown-menu border-0 bg-transparent shadow-none p-0 mt-3 header-mega-menu">
+                  <CategoryMegaMenu />
+                </div>
+              </div>
             </div>
 
-            <div v-else class="dropdown">
-              <a href="#" class="d-flex align-items-center gap-2 text-decoration-none p-1 rounded-pill hover-bg ps-2" data-bs-toggle="dropdown" >
-                <img class="rounded-circle border" width="35" height="35" alt="Avatar"
-                :src="`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=000&color=fff`"/>
+            <div class="d-flex align-items-center gap-2 flex-nowrap">
+              <div class="vr opacity-25 mx-1"></div>
 
-                <div class="d-none d-xl-block text-start lh-1">
-                  <div class="fw-bold text-dark fs-7">
-                    {{ user.first_name }} {{ user.last_name }}
-                  </div>
-                  <small class="text-secondary fs-8">
-                    {{ $t(userRoleKey) }}
-                  </small>
-                </div>
+              <div class="d-flex align-items-center gap-1 px-2 py-1 rounded-pill featured-nav">
+                <span class="featured-nav-label d-none d-xl-inline px-2">Danh mục</span>
 
-                <i class="bi bi-caret-down-fill fs-8 text-secondary ms-1"></i>
-              </a>
-
-              <ul class="dropdown-menu dropdown-menu-end glass-dropdown border-0 shadow-lg mt-3 rounded-4 p-2">
-                <li>
-                  <NuxtLink to="/profile" class="dropdown-item rounded-3 py-2">
-                    <i class="bi bi-person me-2"></i>Hồ sơ cá nhân
-                  </NuxtLink>
-                </li>
-
-                <li>
-                  <NuxtLink to="/orders" class="dropdown-item rounded-3 py-2">
-                    <i class="bi bi-box-seam me-2"></i>Đơn mua
-                  </NuxtLink>
-                </li>
-
-                <li><hr class="dropdown-divider opacity-10 my-1"></li>
-
-                <li>
-                  <button
-                    class="dropdown-item rounded-3 py-2 text-danger"
-                    @click="auth.logout"
-                  >
-                    <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
-                  </button>
-                </li>
-              </ul>
+                <NuxtLink
+                  v-for="item in featuredNavItems"
+                  :key="item.label"
+                  :to="item.to"
+                  class="btn featured-nav-link d-inline-flex align-items-center gap-2 rounded-pill border-0 px-3 py-2"
+                >
+                  <i :class="item.icon"></i>
+                  <span>{{ item.label }}</span>
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>
@@ -152,102 +188,249 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useAuthStore } from '@/stores/authStore'
 import { useLocalePath } from '#imports'
+import CategoryMegaMenu from '@/components/Home/CategoryMegaMenu.vue'
+import { useAuthStore } from '@/stores/authStore'
 import { getUserRoleKey } from '@/utils/roleHelper'
 
 const auth = useAuthStore()
 const { user } = storeToRefs(auth)
 const localePath = useLocalePath()
-const userRoleKey = computed(() => {
-  return user.value ? getUserRoleKey(user.value.role_id) : ''
+
+const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ''))
+
+const fullName = computed(() => {
+  if (!user.value) return ''
+  return `${user.value.first_name || ''} ${user.value.last_name || ''}`.trim()
 })
 
+const avatarUrl = computed(() =>
+  user.value
+    ? `https://ui-avatars.com/api/?name=${user.value.first_name}+${user.value.last_name}&background=000&color=fff`
+    : ''
+)
+
+const utilityLinks = computed(() => [
+  {
+    label: 'Khuyến mãi',
+    to: localePath('/khuyen-mai'),
+    icon: 'bi bi-tags',
+  },
+])
+
+const ctaLink = computed(() => ({
+  label: 'Deal Hot',
+  to: localePath('/khuyen-mai'),
+  icon: 'bi bi-stars',
+}))
+
+const primaryNavItems = computed(() => [
+  {
+    label: 'Trang chủ',
+    to: localePath('/'),
+    icon: 'bi bi-house-door',
+  },
+  {
+    label: 'Tin tức',
+    to: localePath('/tin-tuc'),
+    icon: 'bi bi-newspaper',
+  },
+  {
+    label: 'Khuyến mãi',
+    to: localePath('/khuyen-mai'),
+    icon: 'bi bi-megaphone',
+  },
+  {
+    label: 'Liên hệ',
+    to: localePath('/lien-he'),
+    icon: 'bi bi-headset',
+  },
+])
+
+const featuredNavItems = computed(() => [
+  {
+    label: 'Laptop',
+    to: '/category/laptop?sort=newest&limit=20',
+    icon: 'bi bi-laptop',
+  },
+  {
+    label: 'Âm thanh',
+    to: '/category/am-thanh?sort=newest&limit=20',
+    icon: 'bi bi-headphones',
+  },
+  {
+    label: 'Đồng hồ',
+    to: '/category/dong-ho?sort=newest&limit=20',
+    icon: 'bi bi-smartwatch',
+  },
+  {
+    label: 'Phụ kiện',
+    to: '/category/phu-kien?sort=newest&limit=20',
+    icon: 'bi bi-mouse2',
+  },
+])
 </script>
 
 <style scoped>
-@keyframes flow {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
+.customer-sidebar-wrap {
+  z-index: 1040;
 }
 
-.glass-navbar {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-}
-
-.nav-link {
-  transition: all 0.2s ease;
-  font-size: 0.95rem;
-}
-
-.nav-link:hover {
-  color: #000 !important;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.btn-icon {
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  background: transparent; border: none;
-  transition: 0.2s;
-}
-.btn-icon:hover {
-  background-color: rgba(0,0,0,0.05);
-  color: black !important;
-}
-
-.no-caret::after { display: none; }
-
-.glass-dropdown {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+.customer-shell {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, 0.985);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.09);
 }
 
 .navbar-logo {
-  height: 32px;
   width: auto;
+  height: 32px;
 }
 
-.mega-dropdown {
+.header-search,
+.header-text-btn,
+.header-icon-btn,
+.header-nav-link,
+.featured-nav-link,
+.customer-user-trigger {
+  color: #5f6472;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.header-search {
+  min-width: 0;
+  min-height: 46px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 1rem;
+  background: #f6f7f9;
+}
+
+.search-text {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.header-search:hover,
+.header-text-btn:hover,
+.header-icon-btn:hover,
+.header-nav-link:hover,
+.featured-nav-link:hover,
+.customer-user-trigger:hover {
+  color: #16181d;
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.search-shortcut {
+  min-width: 58px;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 0.7rem;
+  background: #fff;
+  color: #8a8f9c;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.header-text-btn,
+.header-nav-link,
+.featured-nav-link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.header-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 0.9rem;
+  background: transparent;
+  font-size: 1rem;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.header-icon-btn > i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.header-icon-btn .badge {
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.customer-user-trigger {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.glass-dropdown {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.featured-nav {
+  border: 1px solid rgba(229, 189, 46, 0.35);
+  background: #fff8df;
+}
+
+.featured-nav-label {
+  color: #d08a00;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header-mega-menu {
   left: 50%;
+  width: min(1180px, calc(100vw - 64px));
   transform: translateX(-50%);
-  width: 700px;
 }
 
 .dropdown-item:active,
 .dropdown-item.active,
 .dropdown-item.router-link-active {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-}
-
-.dropdown-item:active i,
-.dropdown-item.active i,
-.dropdown-item.router-link-active i {
-  color: #ffffff !important;
-}
-
-.dropdown-item:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  color: #fff !important;
+  background-color: #111 !important;
 }
 
 @media (min-width: 992px) {
-  .group-hover:hover .dropdown-menu {
+  .header-products:hover .dropdown-menu {
     display: block;
-    animation: slideUp 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media (max-width: 1399.98px) {
+  .featured-nav-link {
+    padding-right: 0.8rem !important;
+    padding-left: 0.8rem !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .customer-shell {
+    border-radius: 1.25rem;
+  }
 }
 </style>
