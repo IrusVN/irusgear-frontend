@@ -120,7 +120,7 @@
               </div>
               <div class="smember-discount">
                 Giảm thêm đến&nbsp;<b>{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || ''
-                }}</b>&nbsp;(Bao gồm cả Smember)
+                }}</b>&nbsp;(Bao gồm cả IrusGear Member)
               </div>
             </div>
           </div>

@@ -181,7 +181,7 @@
               <span class="d-inline-flex align-items-center justify-content-center text-dark" style="width: 18px;">
                 <i class="bi bi-gift-fill"></i>
               </span>
-              <span>Xem ưu đãi Smember</span>
+              <span>Xem ưu đãi IrusGear</span>
               <i class="bi bi-chevron-right ms-auto text-secondary fs-6"></i>
             </NuxtLink>
           </template>
@@ -309,7 +309,7 @@ const serviceGroups = [
     title: "Khách hàng doanh nghiệp (B2B)",
     href: "/",
     items: [
-      { icon: "bi-briefcase-fill", href: "/", label: "Đăng ký <b>S-Business</b>" },
+      { icon: "bi-briefcase-fill", href: "/", label: "Đăng ký <b>IrusGear Business</b>" },
       { icon: "bi-briefcase-fill", href: "/", label: "Chính sách <b>ưu đãi</b>" },
     ],
   },
