@@ -21,12 +21,13 @@ const buildListingQuery = (item) => {
     return routeQuery;
   }
 
-  const routeCategory = normalizeRouteValue(item?.route?.category);
-  const routeChild = normalizeRouteValue(item?.route?.child);
-  const category = normalizeRouteValue(routeCategory || item?.category);
-  const child = normalizeRouteValue(
-    routeCategory ? routeChild : item?.child ?? item?.slug
-  );
+  const category = normalizeRouteValue(item?.category);
+  const child = normalizeRouteValue(item?.child);
+
+  if (!category && !child) {
+    return {};
+  }
+
   const query = {};
 
   if (category) query.category = category;
@@ -38,6 +39,14 @@ const buildListingQuery = (item) => {
 export const resolveProductListingTo = (item) => {
   if (!item) return "/products/";
 
+  const query = buildListingQuery(item);
+  if (Object.keys(query).length) {
+    return {
+      path: "/products/",
+      query,
+    };
+  }
+
   const productUrl =
     item?.type === "product" ? normalizeRouteValue(item?.url) : "";
   if (productUrl) {
@@ -48,14 +57,6 @@ export const resolveProductListingTo = (item) => {
     item?.type === "product" ? normalizeRouteValue(item?.slug) : "";
   if (productSlug) {
     return `/products/${productSlug}`;
-  }
-
-  const query = buildListingQuery(item);
-  if (Object.keys(query).length) {
-    return {
-      path: "/products/",
-      query,
-    };
   }
 
   if (item.url) return item.url;
