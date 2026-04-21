@@ -29,28 +29,7 @@
           </div>
         </div>
       </div>
-      <div class="exclusive-price-block pt-1">
-        <div class="is-flex d-flex flex-column align-items-center justify-content-center text-center flex-grow-1 pe-0"
-          style="background-image: linear-gradient(to right, #9bb8f3 50%, transparent 50%); 
-                  background-size: 14px 1px; 
-                  background-repeat: repeat-x; 
-                  background-position: top;">
-          <div class="promotion-row member-row">
-            <p class="promotion-row__icon">
-              <img src="https://cdn2.cellphones.com.vn/x/media/wysiwyg/Web/Logo/promotion-icon02.png" alt=""
-                loading="lazy" />
-            </p>
-            <div class="promotion-row__ct is-member">
-              <div class="txt">
-                Tiết kiệm lên đến
-                <strong class="bold">{{ productStore.productDetail?.pricing?.memberSaving?.formatted || '' }}</strong>
-                cho Smember
-                <a class="dang_nhap_xem_gia link"> Kiểm tra ngay </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
     <div class="box-linked">
       <div class="box-title">

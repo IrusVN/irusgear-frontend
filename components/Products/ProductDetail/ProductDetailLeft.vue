@@ -213,7 +213,7 @@
                   </div>
                   <div class="box-wrapper">
                     <div class="description">
-                      Máy mới 100% , chính hãng Apple Việt Nam.<br />CellphoneS
+                      Máy mới 100% , chính hãng Apple Việt Nam.<br />IrusGear
                       hiện là đại lý bán lẻ uỷ quyền iPhone chính hãng VN/A của
                       Apple Việt Nam
                     </div>

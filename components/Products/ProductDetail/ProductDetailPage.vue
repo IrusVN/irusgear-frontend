@@ -11,7 +11,6 @@
         <ProductContentRight class="block-content-product-right" />
       </div>
       <ProductBoxReview />
-      <ProductBlockComment />
     </section>
     <ProductBlockOrder :visible="showFloatingOrder" />
   </div>
@@ -24,7 +23,6 @@ import ProductSameProduct from "@/components/Products/ProductDetail/ProductSameP
 import ProductContentLeft from "@/components/Products/ProductDetail/ProductContentLeft.vue";
 import ProductContentRight from "@/components/Products/ProductDetail/ProductContentRight.vue";
 import ProductBoxReview from "@/components/Products/ProductDetail/ProductBoxReview.vue";
-import ProductBlockComment from "@/components/Products/ProductDetail/ProductBlockComment.vue";
 import ProductBlockOrder from "@/components/Products/ProductDetail/ProductBlockOrder.vue";
 import { useRoute } from "vue-router";
 import { useProductStore } from "@/stores/productStore";
@@ -81,7 +79,6 @@ watch(
       productStore.fetchProductReviewSummary(detail.id);
       productStore.fetchProductReviewFilters(detail.id);
       productStore.fetchProductReviews(detail.id, { page: 1, per_page: 5, sort: "latest" });
-      productStore.fetchProductQuestions(detail.id, { page: 1, per_page: 5 });
     }
   },
   { immediate: true },

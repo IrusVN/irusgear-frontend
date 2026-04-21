@@ -119,7 +119,7 @@
                         </a>
                         <p v-else class="upsell-item-name">{{ item.title }}</p>
                         <p class="upsell-item-member" v-if="item.memberDiscount">
-                          Smember giảm thêm đến
+                          Giảm thêm đến
                           <span>{{ item.memberDiscount?.formatted || item.memberDiscount }}</span>
                         </p>
                       </div>
