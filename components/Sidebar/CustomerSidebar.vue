@@ -1,6 +1,6 @@
 <template>
   <div class="position-relative">
-    <div class="fixed-top w-100 px-2 px-lg-3 pt-1 pt-lg-1 customer-sidebar-wrap">
+    <div ref="customerSidebarWrapRef" class="fixed-top w-100 px-2 px-lg-3 pt-1 pt-lg-1 customer-sidebar-wrap">
       <nav class="customer-shell container-xxl w-100 px-0">
         <div class="d-flex flex-column">
           <div class="d-flex align-items-center gap-2 gap-lg-3 px-3 px-lg-4 py-3 flex-nowrap border-bottom border-light-subtle">
@@ -135,7 +135,10 @@
             </div>
           </div>
 
-          <div class="d-none d-lg-flex align-items-center justify-content-between gap-3 px-3 px-xl-4 py-2">
+          <div
+            class="d-none d-lg-flex align-items-center justify-content-between gap-3 px-3 px-xl-4 py-2 header-secondary-nav"
+            :class="{ 'is-hidden': isSecondaryNavHidden }"
+          >
             <div class="d-flex align-items-center gap-1 gap-xl-2 flex-nowrap">
               <NuxtLink
                 v-for="item in primaryNavItems"
@@ -147,19 +150,20 @@
                 <span>{{ item.label }}</span>
               </NuxtLink>
 
-              <div class="dropdown position-static header-products">
+              <div class="header-products">
                 <button
+                  ref="productsButtonRef"
                   type="button"
                   class="btn header-nav-link d-inline-flex align-items-center gap-2 px-3 py-2 border-0"
+                  :class="{ 'is-open': isProductsMenuOpen }"
+                  :aria-expanded="isProductsMenuOpen ? 'true' : 'false'"
+                  aria-haspopup="true"
+                  @click="handleProductsClick"
                 >
                   <i class="bi bi-grid"></i>
                   <span>{{ $t('sidebar.menu.products') }}</span>
-                  <i class="bi bi-chevron-down small"></i>
+                  <i class="bi bi-chevron-down small header-nav-link-chevron"></i>
                 </button>
-
-                <div class="dropdown-menu border-0 bg-transparent shadow-none p-0 mt-3 header-mega-menu">
-                  <CategoryMegaMenu />
-                </div>
               </div>
             </div>
 
@@ -173,7 +177,11 @@
                   v-for="item in featuredNavItems"
                   :key="item.label"
                   :to="item.to"
-                  class="btn featured-nav-link d-inline-flex align-items-center gap-2 rounded-pill border-0 px-3 py-2"
+                  :class="[
+                    'btn featured-nav-link d-inline-flex align-items-center gap-2 rounded-pill border-0 px-3 py-2',
+                    { 'featured-nav-link--active': isFeaturedNavItemActive(item) },
+                  ]"
+                  :aria-current="isFeaturedNavItemActive(item) ? 'page' : undefined"
                 >
                   <i :class="item.icon"></i>
                   <span>{{ item.label }}</span>
@@ -182,22 +190,55 @@
             </div>
           </div>
         </div>
+
+        <div
+          v-if="!isHomeRoute && isHeaderCategoryMenuOpen"
+          ref="productsDropdownRef"
+          class="header-mega-menu"
+        >
+          <CategoryMegaMenu />
+        </div>
       </nav>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useLocalePath } from '#imports'
+import { useLocalePath, useRoute } from '#imports'
 import CategoryMegaMenu from '@/components/Home/CategoryMegaMenu.vue'
+import { useHomeStore } from '@/stores/homeStore'
 import { useAuthStore } from '@/stores/authStore'
 import { getUserRoleKey } from '@/utils/roleHelper'
 
 const auth = useAuthStore()
+const homeStore = useHomeStore()
 const { user } = storeToRefs(auth)
+const { heroMegaMenuOpen } = storeToRefs(homeStore)
 const localePath = useLocalePath()
+const route = useRoute()
+const customerSidebarWrapRef = ref(null)
+const productsButtonRef = ref(null)
+const productsDropdownRef = ref(null)
+const isHeaderCategoryMenuOpen = ref(false)
+const isSecondaryNavHidden = ref(false)
+let customerSidebarResizeObserver = null
+let customerSidebarOffsetFrame = null
+
+const normalizePath = (value) => String(value || '').replace(/\/+$/, '') || '/'
+const homePath = computed(() => localePath('/'))
+const productsPath = computed(() => localePath('/products'))
+const isHomeRoute = computed(() => normalizePath(route.path) === normalizePath(homePath.value))
+const isProductsRoute = computed(() => normalizePath(route.path) === normalizePath(productsPath.value))
+const isProductsMenuOpen = computed(() =>
+  isHomeRoute.value ? heroMegaMenuOpen.value : isHeaderCategoryMenuOpen.value
+)
+const activeFeaturedCategory = computed(() => {
+  const value = route.query?.category
+  if (Array.isArray(value)) return String(value[0] || '').trim()
+  return String(value || '').trim()
+})
 
 const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ''))
 
@@ -211,6 +252,157 @@ const avatarUrl = computed(() =>
     ? `https://ui-avatars.com/api/?name=${user.value.first_name}+${user.value.last_name}&background=000&color=fff`
     : ''
 )
+
+const closeHeaderCategoryMenu = () => {
+  isHeaderCategoryMenuOpen.value = false
+}
+
+const syncCustomerSidebarOffset = () => {
+  if (typeof document === 'undefined') return
+
+  const sidebarWrapEl = customerSidebarWrapRef.value
+  const nextOffset = sidebarWrapEl instanceof HTMLElement
+    ? Math.ceil(sidebarWrapEl.getBoundingClientRect().bottom + 2)
+    : 0
+
+  document.documentElement.style.setProperty('--customer-sidebar-offset', `${nextOffset}px`)
+
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(
+      new CustomEvent('customer-sidebar:offset-change', {
+        detail: { offset: nextOffset },
+      }),
+    )
+  }
+}
+
+const scheduleCustomerSidebarOffsetSync = () => {
+  if (typeof window === 'undefined') return
+  if (customerSidebarOffsetFrame !== null) return
+
+  customerSidebarOffsetFrame = window.requestAnimationFrame(() => {
+    customerSidebarOffsetFrame = null
+    syncCustomerSidebarOffset()
+  })
+}
+
+const setSecondaryNavHidden = (value) => {
+  const nextValue = Boolean(value)
+  if (isSecondaryNavHidden.value === nextValue) return
+
+  isSecondaryNavHidden.value = nextValue
+
+  if (nextValue) {
+    closeHeaderCategoryMenu()
+    homeStore.closeHeroMegaMenu()
+  }
+}
+
+const handleProductsClick = async () => {
+  await homeStore.fetchMegaMenuLeaves().catch(() => {})
+
+  if (!isHomeRoute.value) {
+    if (isHeaderCategoryMenuOpen.value) {
+      closeHeaderCategoryMenu()
+      return
+    }
+
+    homeStore.closeHeroMegaMenu()
+    isHeaderCategoryMenuOpen.value = true
+    return
+  }
+
+  closeHeaderCategoryMenu()
+
+  if (isProductsMenuOpen.value) {
+    homeStore.closeHeroMegaMenu()
+    return
+  }
+
+  homeStore.openHeroMegaMenu()
+
+  if (typeof window !== 'undefined') {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
+
+const handleDocumentPointerDown = (event) => {
+  if (!isHeaderCategoryMenuOpen.value) return
+
+  const target = event.target
+  if (!(target instanceof Node)) return
+
+  const clickedButton = productsButtonRef.value?.contains(target)
+  const clickedDropdown = productsDropdownRef.value?.contains(target)
+
+  if (clickedButton || clickedDropdown) return
+  closeHeaderCategoryMenu()
+}
+
+const getSecondaryNavHideThreshold = () => {
+  if (typeof window === 'undefined') return 0
+  return window.innerHeight * 0.25
+}
+
+const syncSecondaryNavVisibility = () => {
+  if (typeof window === 'undefined') return
+
+  const hideThreshold = getSecondaryNavHideThreshold()
+
+  if (window.scrollY <= hideThreshold) {
+    setSecondaryNavHidden(false)
+    return
+  }
+
+  setSecondaryNavHidden(true)
+}
+
+watch(
+  () => route.fullPath,
+  async () => {
+    closeHeaderCategoryMenu()
+    setSecondaryNavHidden(false)
+    await nextTick()
+    syncSecondaryNavVisibility()
+    scheduleCustomerSidebarOffsetSync()
+  }
+)
+
+onMounted(() => {
+  if (typeof document === 'undefined' || typeof window === 'undefined') return
+  document.addEventListener('pointerdown', handleDocumentPointerDown)
+  window.addEventListener('scroll', syncSecondaryNavVisibility, { passive: true })
+  window.addEventListener('resize', syncSecondaryNavVisibility, { passive: true })
+
+  if (typeof ResizeObserver !== 'undefined' && customerSidebarWrapRef.value instanceof HTMLElement) {
+    customerSidebarResizeObserver = new ResizeObserver(() => {
+      scheduleCustomerSidebarOffsetSync()
+    })
+    customerSidebarResizeObserver.observe(customerSidebarWrapRef.value)
+  }
+
+  nextTick(() => {
+    syncSecondaryNavVisibility()
+    syncCustomerSidebarOffset()
+  })
+})
+
+onBeforeUnmount(() => {
+  if (typeof document === 'undefined' || typeof window === 'undefined') return
+  document.removeEventListener('pointerdown', handleDocumentPointerDown)
+  window.removeEventListener('scroll', syncSecondaryNavVisibility)
+  window.removeEventListener('resize', syncSecondaryNavVisibility)
+
+  if (customerSidebarResizeObserver) {
+    customerSidebarResizeObserver.disconnect()
+    customerSidebarResizeObserver = null
+  }
+
+  if (customerSidebarOffsetFrame !== null) {
+    window.cancelAnimationFrame(customerSidebarOffsetFrame)
+    customerSidebarOffsetFrame = null
+  }
+})
 
 const utilityLinks = computed(() => [
   {
@@ -249,25 +441,44 @@ const primaryNavItems = computed(() => [
   },
 ])
 
+const buildProductsCategoryLink = (category) => {
+  const query = new URLSearchParams({
+    category,
+    sort: 'newest',
+    limit: '20',
+  })
+
+  return `${localePath('/products')}?${query.toString()}`
+}
+
+const isFeaturedNavItemActive = (item) => {
+  if (!isProductsRoute.value) return false
+  return item?.category === activeFeaturedCategory.value
+}
+
 const featuredNavItems = computed(() => [
   {
     label: 'Laptop',
-    to: '/category/laptop?sort=newest&limit=20',
+    category: 'laptop',
+    to: buildProductsCategoryLink('laptop'),
     icon: 'bi bi-laptop',
   },
   {
     label: 'Âm thanh',
-    to: '/category/am-thanh?sort=newest&limit=20',
+    category: 'am-thanh',
+    to: buildProductsCategoryLink('am-thanh'),
     icon: 'bi bi-headphones',
   },
   {
     label: 'Đồng hồ',
-    to: '/category/dong-ho?sort=newest&limit=20',
+    category: 'dong-ho',
+    to: buildProductsCategoryLink('dong-ho'),
     icon: 'bi bi-smartwatch',
   },
   {
     label: 'Phụ kiện',
-    to: '/category/phu-kien?sort=newest&limit=20',
+    category: 'phu-kien',
+    to: buildProductsCategoryLink('phu-kien'),
     icon: 'bi bi-mouse2',
   },
 ])
@@ -279,6 +490,7 @@ const featuredNavItems = computed(() => [
 }
 
 .customer-shell {
+  position: relative;
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 1.75rem;
   background: rgba(255, 255, 255, 0.985);
@@ -326,6 +538,13 @@ const featuredNavItems = computed(() => [
   background: rgba(15, 23, 42, 0.05);
 }
 
+.featured-nav-link--active,
+.featured-nav-link--active:hover {
+  color: #111827;
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
+}
+
 .search-shortcut {
   min-width: 58px;
   padding: 0.25rem 0.55rem;
@@ -344,6 +563,47 @@ const featuredNavItems = computed(() => [
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
+}
+
+.header-nav-link-chevron {
+  transition: transform 0.2s ease;
+}
+
+.header-nav-link.is-open .header-nav-link-chevron {
+  transform: rotate(180deg);
+}
+
+.header-secondary-nav {
+  overflow: hidden;
+  transform: translateY(0);
+  opacity: 1;
+  max-height: 96px;
+  transition:
+    max-height 0.32s ease,
+    opacity 0.24s ease,
+    transform 0.32s ease,
+    padding-top 0.32s ease,
+    padding-bottom 0.32s ease;
+}
+
+.header-secondary-nav.is-hidden {
+  opacity: 0;
+  transform: translateY(-18px);
+  max-height: 0;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  pointer-events: none;
+}
+
+.header-products {
+  position: relative;
+}
+
+.header-mega-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: clamp(12px, 2vw, 28px);
+  z-index: 1060;
 }
 
 .header-icon-btn {
@@ -402,12 +662,6 @@ const featuredNavItems = computed(() => [
   text-transform: uppercase;
 }
 
-.header-mega-menu {
-  left: 50%;
-  width: min(1180px, calc(100vw - 64px));
-  transform: translateX(-50%);
-}
-
 .dropdown-item:active,
 .dropdown-item.active,
 .dropdown-item.router-link-active {
@@ -415,13 +669,11 @@ const featuredNavItems = computed(() => [
   background-color: #111 !important;
 }
 
-@media (min-width: 992px) {
-  .header-products:hover .dropdown-menu {
-    display: block;
-  }
-}
-
 @media (max-width: 1399.98px) {
+  .header-mega-menu {
+    left: 16px;
+  }
+
   .featured-nav-link {
     padding-right: 0.8rem !important;
     padding-left: 0.8rem !important;

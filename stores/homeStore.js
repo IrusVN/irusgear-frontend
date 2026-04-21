@@ -12,6 +12,7 @@ export const useHomeStore = defineStore("home", () => {
   const megaMenuSections = ref([]);
   const megaMenuLeafByKey = ref({});
   const activeMegaMenuKey = ref("");
+  const heroMegaMenuOpen = ref(false);
   const megaMenuLoading = ref(false);
   const megaMenuLoaded = ref(false);
   const megaMenuError = ref(null);
@@ -297,6 +298,23 @@ export const useHomeStore = defineStore("home", () => {
     activeMegaMenuKey.value = key;
   };
 
+  const setHeroMegaMenuOpen = (value) => {
+    heroMegaMenuOpen.value = Boolean(value);
+  };
+
+  const openHeroMegaMenu = () => {
+    heroMegaMenuOpen.value = true;
+  };
+
+  const closeHeroMegaMenu = () => {
+    heroMegaMenuOpen.value = false;
+  };
+
+  const toggleHeroMegaMenu = () => {
+    heroMegaMenuOpen.value = !heroMegaMenuOpen.value;
+    return heroMegaMenuOpen.value;
+  };
+
   const createMegaMenuLinkItem = (item = {}) => ({
     ...item,
     type: item.type || "link",
@@ -435,6 +453,7 @@ export const useHomeStore = defineStore("home", () => {
     megaMenuSections.value = [];
     megaMenuLeafByKey.value = {};
     activeMegaMenuKey.value = "";
+    heroMegaMenuOpen.value = false;
     megaMenuLoading.value = false;
     megaMenuLoaded.value = false;
     megaMenuError.value = null;
@@ -541,6 +560,7 @@ export const useHomeStore = defineStore("home", () => {
     megaMenuSections,
     megaMenuLeafByKey,
     activeMegaMenuKey,
+    heroMegaMenuOpen,
     megaMenuLoading,
     megaMenuLoaded,
     megaMenuError,
@@ -657,6 +677,10 @@ export const useHomeStore = defineStore("home", () => {
 
     // Actions
     setActiveMegaMenuKey,
+    setHeroMegaMenuOpen,
+    openHeroMegaMenu,
+    closeHeroMegaMenu,
+    toggleHeroMegaMenu,
     fetchMegaMenu,
     fetchMegaMenuLeaves,
     fetchPhoneCollection,

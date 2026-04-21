@@ -222,7 +222,7 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 const auth = useAuthStore();
 const homeStore = useHomeStore();
-const { megaMenuSections, megaMenuLeafByKey, activeMegaMenuKey } = storeToRefs(homeStore);
+const { megaMenuSections, megaMenuLeafByKey, activeMegaMenuKey, heroMegaMenuOpen } = storeToRefs(homeStore);
 const { user } = storeToRefs(auth);
 const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ""));
 
@@ -230,7 +230,10 @@ const carouselRef = ref(null);
 const tabScrollerRef = ref(null);
 const tabButtons = ref([]);
 const activeIndex = ref(0);
-const isMegaMenuOpen = ref(false);
+const isMegaMenuOpen = computed({
+  get: () => heroMegaMenuOpen.value,
+  set: (value) => homeStore.setHeroMegaMenuOpen(value),
+});
 let megaMenuCloseTimer = null;
 
 const setTabButtonRef = (el) => {
@@ -318,7 +321,7 @@ const serviceGroups = [
 const activateMegaMenu = (key) => {
   if (!key) return;
   homeStore.setActiveMegaMenuKey(key);
-  isMegaMenuOpen.value = true;
+  homeStore.openHeroMegaMenu();
 };
 
 const resolveGroupItems = (group) => {
@@ -362,7 +365,7 @@ const openMegaMenu = () => {
     clearTimeout(megaMenuCloseTimer);
     megaMenuCloseTimer = null;
   }
-  isMegaMenuOpen.value = true;
+  homeStore.openHeroMegaMenu();
 };
 
 const keepMegaMenuOpen = () => {
@@ -370,7 +373,7 @@ const keepMegaMenuOpen = () => {
     clearTimeout(megaMenuCloseTimer);
     megaMenuCloseTimer = null;
   }
-  isMegaMenuOpen.value = true;
+  homeStore.openHeroMegaMenu();
 };
 
 const closeMegaMenu = () => {
@@ -379,7 +382,7 @@ const closeMegaMenu = () => {
   }
 
   megaMenuCloseTimer = setTimeout(() => {
-    isMegaMenuOpen.value = false;
+    homeStore.closeHeroMegaMenu();
     megaMenuCloseTimer = null;
   }, 180);
 };
@@ -420,6 +423,8 @@ onUnmounted(() => {
     clearTimeout(megaMenuCloseTimer);
     megaMenuCloseTimer = null;
   }
+
+  homeStore.closeHeroMegaMenu();
 
   const carouselEl = carouselRef.value;
   if (!carouselEl) return;
