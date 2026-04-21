@@ -647,6 +647,12 @@ const featuredNavItems = computed(() => [
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  transform-origin: top right;
+}
+
+.glass-dropdown.dropdown-menu.show {
+  animation: customerDropdownSlideDown 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, translate;
 }
 
 .featured-nav {
@@ -667,6 +673,18 @@ const featuredNavItems = computed(() => [
 .dropdown-item.router-link-active {
   color: #fff !important;
   background-color: #111 !important;
+}
+
+@keyframes customerDropdownSlideDown {
+  from {
+    opacity: 0;
+    translate: 0 -12px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
 }
 
 @media (max-width: 1399.98px) {
