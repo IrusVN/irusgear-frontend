@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <div class="service-panel d-none d-xl-flex flex-column gap-3 flex-shrink-0 pt-1">
+      <div class="service-panel d-none d-xl-flex flex-column gap-3 flex-shrink-0">
         <div class="service-welcome-card p-3">
           <template v-if="user">
             <div class="d-flex align-items-center gap-2">
@@ -497,7 +497,7 @@ onUnmounted(() => {
   position: absolute;
   top: 0;
   left: calc(100% + 12px);
-  width: clamp(720px, calc(100vw - 420px), 980px);
+  width: clamp(720px, calc(100vw - 420px), 1010px);
   min-height: 100%;
   max-height: 465px;
   padding: 16px;
@@ -742,7 +742,7 @@ onUnmounted(() => {
 .service-benefits-card {
   background: #fff;
   border: 1px solid #ececec;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
 }
 
