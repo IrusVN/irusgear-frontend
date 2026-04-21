@@ -8,6 +8,7 @@ export const useAuthStore = defineStore("auth", () => {
   const user = ref(null);
   const permissions = ref([]);
   const loading = ref(false);
+  const sessionResolved = ref(false);
 
   // state đăng ký
   const verifyEmail = ref("");
@@ -34,27 +35,41 @@ export const useAuthStore = defineStore("auth", () => {
     });
   };
 
-  const fetchUser = async () => {
+  const fetchUser = async ({ force = false } = {}) => {
+    if (sessionResolved.value && !force) {
+      return user.value;
+    }
+
     try {
-      const headers = useRequestHeaders(["cookie"]);
+      const headers = import.meta.server ? useRequestHeaders(["cookie"]) : {};
       const data = await apiFetch("/me", {
         headers: headers,
       });
       user.value = data.user ?? data;
       permissions.value = data.permissions || [];
+      return user.value;
     } catch (error) {
       user.value = null;
       permissions.value = [];
+      return null;
+    } finally {
+      sessionResolved.value = true;
     }
   };
 
   const login = async (credentials) => {
     loading.value = true;
     try {
+      const payload = { ...(credentials || {}) };
+      const remember = Boolean(payload.remember ?? payload.rememberMe);
+      payload.remember = remember;
+      payload.rememberMe = remember;
+
       const data = await apiFetch("/login", {
         method: "POST",
-        body: credentials,
+        body: payload,
       });
+      sessionResolved.value = true;
       if (data.user) {
         user.value = data.user;
         permissions.value = data.permissions || [];
@@ -64,6 +79,8 @@ export const useAuthStore = defineStore("auth", () => {
       return data;
     } catch (error) {
       user.value = null;
+      permissions.value = [];
+      sessionResolved.value = true;
       throw error;
     } finally {
       loading.value = false;
@@ -78,6 +95,7 @@ export const useAuthStore = defineStore("auth", () => {
     } finally {
       user.value = null;
       permissions.value = [];
+      sessionResolved.value = true;
       resetAllStores();
       navigateTo("/auth/login");
     }
@@ -232,6 +250,7 @@ const resetPassword = async (password, passwordConfirmation) => {
     permissions,
     loading,
     isAuthenticated,
+    sessionResolved,
     registerStep,
     resetToRegister,
 
