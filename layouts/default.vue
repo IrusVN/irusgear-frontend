@@ -7,6 +7,7 @@
                 <slot />
             </main>
             <Footer />
+            <AddToCartSheet />
         </div>
     </div>
 </template>
@@ -15,6 +16,12 @@
 import CustomerSidebar from '@/components/Sidebar/CustomerSidebar.vue'
 import Footer from '@/components/Footer/Footer.vue'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
+import AddToCartSheet from '@/components/Cart/AddToCartSheet.vue'
+import { useCartStore } from '@/stores/cartStore'
+
+const cartStore = useCartStore()
+
+await cartStore.fetchCart({ silent: true })
 </script>
 
 <style scoped>

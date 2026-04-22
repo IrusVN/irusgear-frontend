@@ -58,8 +58,11 @@
                 aria-label="Gio hang"
               >
                 <i class="bi bi-cart3"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white">
-                  2
+                <span
+                  v-if="itemCount > 0"
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                >
+                  {{ itemCount }}
                 </span>
               </NuxtLink>
 
@@ -210,11 +213,14 @@ import { useLocalePath, useRoute } from '#imports'
 import CategoryMegaMenu from '@/components/Home/CategoryMegaMenu.vue'
 import { useHomeStore } from '@/stores/homeStore'
 import { useAuthStore } from '@/stores/authStore'
+import { useCartStore } from '@/stores/cartStore'
 import { getUserRoleKey } from '@/utils/roleHelper'
 
 const auth = useAuthStore()
+const cartStore = useCartStore()
 const homeStore = useHomeStore()
 const { user } = storeToRefs(auth)
+const { itemCount } = storeToRefs(cartStore)
 const { heroMegaMenuOpen } = storeToRefs(homeStore)
 const localePath = useLocalePath()
 const route = useRoute()

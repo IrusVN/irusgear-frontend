@@ -106,6 +106,7 @@ export const useProductStore = defineStore("product", () => {
       normalized.colorOptions.find((color) => color?.active) || normalized.colorOptions[0] || null;
     normalized.sharedGallery = sharedGallery;
     normalized.defaultColorProductId = activeColor?.productId || activeColor?.id || null;
+    normalized.selectedProductId = activeColor?.productId || activeColor?.id || detail?.id || null;
     normalized.gallery = buildMergedGallery(sharedGallery, activeColor, detail?.name || "");
     normalized.activeColor = activeColor;
 
@@ -263,6 +264,8 @@ export const useProductStore = defineStore("product", () => {
       ...targetColor,
       active: true,
     };
+    productDetail.value.selectedProductId =
+      targetColor.productId || targetColor.id || productDetail.value.id || null;
     productDetail.value.gallery = buildMergedGallery(
       productDetail.value.sharedGallery || [],
       productDetail.value.activeColor,

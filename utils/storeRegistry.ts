@@ -5,7 +5,9 @@ type ResettableStore = {
 const stores: ResettableStore[] = [];
 
 export const registerStore = (store: ResettableStore) => {
-  stores.push(store);
+  if (!stores.includes(store)) {
+    stores.push(store);
+  }
 };
 
 export const resetAllStores = () => {

@@ -136,7 +136,7 @@
                           </div>
                         </div>
 
-                        <button type="button" class="button button-add-cart">
+                        <button type="button" class="button button-add-cart" :disabled="cartBusy" @click="handleAccessoryAdd(item)">
                           <span>Thêm vào giỏ</span>
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M8 3.33325V12.6666" stroke="#D70018" stroke-width="1.5" stroke-linecap="round"
@@ -184,11 +184,13 @@
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref, computed, watch } from "vue";
 import { useProductStore } from "@/stores/productStore";
+import { useCartActions } from "@/composables/useCartActions";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const productStore = useProductStore();
+const { cartBusy, addProductToCart } = useCartActions();
 
 const rootEl = ref(null);
 const isSwiperMounted = ref(false);
@@ -209,6 +211,12 @@ const accessoryDeals = computed(() => productStore.productSuggestions?.accessory
 
 const comboSlides = computed(() => chunkItems(comboDeals.value, 2));
 const accessorySlides = computed(() => chunkItems(accessoryDeals.value, 2));
+
+const handleAccessoryAdd = async (item) => {
+  if (!item?.id) return;
+
+  await addProductToCart(item);
+};
 
 const destroySwiper = (instance) => {
   if (instance && !instance.destroyed) {

@@ -2,9 +2,11 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useRuntimeConfig, navigateTo, useRequestHeaders } from "#imports";
 import { resetAllStores } from "@/utils/storeRegistry";
+import { useCartStore } from "@/stores/cartStore";
 
 export const useAuthStore = defineStore("auth", () => {
   const config = useRuntimeConfig();
+  const cartStore = useCartStore();
   const user = ref(null);
   const permissions = ref([]);
   const loading = ref(false);
@@ -76,6 +78,7 @@ export const useAuthStore = defineStore("auth", () => {
       } else {
         await fetchUser();
       }
+      await cartStore.fetchCart({ force: true, silent: true });
       return data;
     } catch (error) {
       user.value = null;

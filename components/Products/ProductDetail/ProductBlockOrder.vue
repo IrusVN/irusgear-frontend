@@ -31,11 +31,22 @@
             <p>Trả góp 0%</p>
           </button>
 
-          <button type="button" class="button-desktop button-desktop-order">
+          <button
+            type="button"
+            class="button-desktop button-desktop-order"
+            :disabled="cartBusy"
+            @click="buyCurrentProductNow"
+          >
             <p>Mua Ngay</p>
           </button>
 
-          <button type="button" class="button-desktop button-add-to-cart" aria-label="Thêm vào giỏ hàng">
+          <button
+            type="button"
+            class="button-desktop button-add-to-cart"
+            aria-label="Thêm vào giỏ hàng"
+            :disabled="cartBusy"
+            @click="addCurrentProductToCart()"
+          >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse
                 cx="4.99992"
@@ -83,6 +94,7 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProductStore } from "@/stores/productStore";
+import { useCartActions } from "@/composables/useCartActions";
 
 defineProps({
   visible: {
@@ -92,6 +104,7 @@ defineProps({
 });
 
 const productStore = useProductStore();
+const { cartBusy, addCurrentProductToCart, buyCurrentProductNow } = useCartActions();
 const { productDetail } = storeToRefs(productStore);
 
 const productName = computed(() => productDetail.value?.name || "");
