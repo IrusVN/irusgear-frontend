@@ -1,6 +1,7 @@
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
-import { useRuntimeConfig, useRequestHeaders } from "#imports";
+import { useRequestHeaders } from "#imports";
+import { useFeGlobalStore } from "@/stores/feGlobalStore";
 import { registerStore } from "@/utils/storeRegistry";
 
 const formatMoney = (value = 0) => {
@@ -33,7 +34,7 @@ const createEmptyCart = () => ({
 });
 
 export const useCartStore = defineStore("cart", () => {
-  const config = useRuntimeConfig();
+  const feGlobalStore = useFeGlobalStore();
 
   const cart = ref(createEmptyCart());
   const isLoading = ref(false);
@@ -61,12 +62,34 @@ export const useCartStore = defineStore("cart", () => {
     return headers;
   };
 
-  const apiFetch = async (endpoint, options = {}) => {
-    return $fetch(`${config.public.apiBaseUrl}${endpoint}`, {
+  const requestCart = async (apiPath, { method = "GET", body, headers, params, itemId } = {}) => {
+    feGlobalStore.setApiUrl(apiPath);
+
+    if (method === "GET") {
+      return feGlobalStore.fetchItem(params);
+    }
+
+    if (method === "POST") {
+      return feGlobalStore.createItem(body);
+    }
+
+    if (method === "DELETE" && itemId != null) {
+      return feGlobalStore.deleteItem(itemId);
+    }
+
+    // feGlobalStore does not currently expose PATCH or base-endpoint DELETE helpers.
+    const response = await fetch(feGlobalStore.apiEndpoint, {
+      method,
       credentials: "include",
-      headers: buildHeaders(options.headers),
-      ...options,
+      headers: buildHeaders(headers),
+      body: body == null ? undefined : JSON.stringify(body),
     });
+
+    if (!response.ok) {
+      throw new Error(`Cart request failed: ${method} ${apiPath}`);
+    }
+
+    return response.json();
   };
 
   const addPendingItem = (itemId) => {
@@ -131,7 +154,7 @@ export const useCartStore = defineStore("cart", () => {
     }
 
     try {
-      const response = await apiFetch("/cart");
+      const response = await requestCart("cart");
       return applyCartPayload(response);
     } catch (error) {
       cart.value = createEmptyCart();
@@ -148,7 +171,7 @@ export const useCartStore = defineStore("cart", () => {
     isMutating.value = true;
 
     try {
-      const response = await apiFetch("/cart/items", {
+      const response = await requestCart("cart/items", {
         method: "POST",
         body: payload,
       });
@@ -175,7 +198,7 @@ export const useCartStore = defineStore("cart", () => {
     addPendingItem(itemId);
 
     try {
-      const response = await apiFetch(`/cart/items/${itemId}`, {
+      const response = await requestCart(`cart/items/${itemId}`, {
         method: "PATCH",
         body: { quantity },
       });
@@ -194,8 +217,9 @@ export const useCartStore = defineStore("cart", () => {
     addPendingItem(itemId);
 
     try {
-      const response = await apiFetch(`/cart/items/${itemId}`, {
+      const response = await requestCart("cart/items", {
         method: "DELETE",
+        itemId,
       });
 
       lastRemovedItem.value = removedItemSnapshot;
@@ -234,7 +258,7 @@ export const useCartStore = defineStore("cart", () => {
     isMutating.value = true;
 
     try {
-      const response = await apiFetch("/cart", {
+      const response = await requestCart("cart", {
         method: "DELETE",
       });
 
