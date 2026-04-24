@@ -2252,11 +2252,19 @@
                 </button>
               </div>
             </div>
-            <button class="btn-cta order-button button--large is-flex is-justify-content-center is-align-items-center">
+            <button
+              class="btn-cta order-button button--large is-flex is-justify-content-center is-align-items-center"
+              :disabled="cartBusy"
+              @click="buyCurrentProductNow"
+            >
               <strong>MUA NGAY</strong>
               <span>Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng</span>
             </button>
-            <button class="btn-cta button button--small add-to-cart-button">
+            <button
+              class="btn-cta button button--small add-to-cart-button"
+              :disabled="cartBusy"
+              @click="addCurrentProductToCart()"
+            >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                 <circle cx="6" cy="19" r="2" stroke="#D70018" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round"></circle>
@@ -2293,8 +2301,10 @@ import { useRoute, useRouter } from "vue-router";
 import ProductBoxWarranty from "@/components/Products/ProductDetail/ProductBoxWarranty.vue";
 import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
 import { useProductStore } from '@/stores/productStore';
+import { useCartActions } from '@/composables/useCartActions';
 
 const productStore = useProductStore();
+const { cartBusy, addCurrentProductToCart, buyCurrentProductNow } = useCartActions();
 const route = useRoute();
 const router = useRouter();
 

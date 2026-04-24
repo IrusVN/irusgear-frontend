@@ -21,10 +21,18 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+const emit = defineEmits(['open', 'close'])
 const isVisible = ref(false)
 
-const open = () => { isVisible.value = true }
-const close = () => { isVisible.value = false; currentY.value = 0 }
+const open = () => {
+    isVisible.value = true
+    emit('open')
+}
+const close = () => {
+    isVisible.value = false
+    currentY.value = 0
+    emit('close')
+}
 
 defineExpose({ open, close })
 
