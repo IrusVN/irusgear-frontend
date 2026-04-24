@@ -10,8 +10,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
     const isPublicCartPath = /^\/(?:[a-z]{2}\/)?cart(?:\/|$)/i.test(routePath);
     const isPublic = routeName.startsWith('auth-') || routeName.startsWith('index') || isPublicProductPath || isPublicCartPath;
 
-    if (!authStore.sessionResolved) {
+    if (!authStore.sessionResolved && !isPublic) {
         await authStore.fetchUser();
+    }
+
+    if (!authStore.sessionResolved && isPublic && import.meta.client && !authStore.sessionLoading) {
+        authStore.fetchUser().catch(() => {});
     }
 
     if (!authStore.isAuthenticated && !isPublic) {

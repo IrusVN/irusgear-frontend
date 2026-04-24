@@ -151,6 +151,10 @@ const props = defineProps({
     type: [Number, String],
     default: 2000,
   },
+  overlayBackground: {
+    type: String,
+    default: "transparent",
+  },
   ariaLabel: {
     type: String,
     default: "Dang tai noi dung",
@@ -169,6 +173,7 @@ const rayRefs = [];
 const themeClass = computed(() => `logo-loading-overlay--${props.theme}`);
 const overlayStyle = computed(() => ({
   zIndex: String(props.zIndex),
+  background: props.overlayBackground,
 }));
 
 let animationFrameId = 0;

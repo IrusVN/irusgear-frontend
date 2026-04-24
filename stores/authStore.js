@@ -10,7 +10,9 @@ export const useAuthStore = defineStore("auth", () => {
   const user = ref(null);
   const permissions = ref([]);
   const loading = ref(false);
+  const sessionLoading = ref(false);
   const sessionResolved = ref(false);
+  let sessionPromise = null;
 
   // state đăng ký
   const verifyEmail = ref("");
@@ -42,21 +44,33 @@ export const useAuthStore = defineStore("auth", () => {
       return user.value;
     }
 
-    try {
-      const headers = import.meta.server ? useRequestHeaders(["cookie"]) : {};
-      const data = await apiFetch("/me", {
-        headers: headers,
-      });
-      user.value = data.user ?? data;
-      permissions.value = data.permissions || [];
-      return user.value;
-    } catch (error) {
-      user.value = null;
-      permissions.value = [];
-      return null;
-    } finally {
-      sessionResolved.value = true;
+    if (sessionLoading.value && sessionPromise) {
+      return sessionPromise;
     }
+
+    sessionLoading.value = true;
+
+    sessionPromise = (async () => {
+      try {
+        const headers = import.meta.server ? useRequestHeaders(["cookie"]) : {};
+        const data = await apiFetch("/me", {
+          headers: headers,
+        });
+        user.value = data.user ?? data;
+        permissions.value = data.permissions || [];
+        return user.value;
+      } catch (error) {
+        user.value = null;
+        permissions.value = [];
+        return null;
+      } finally {
+        sessionResolved.value = true;
+        sessionLoading.value = false;
+        sessionPromise = null;
+      }
+    })();
+
+    return sessionPromise;
   };
 
   const login = async (credentials) => {
@@ -252,6 +266,7 @@ const resetPassword = async (password, passwordConfirmation) => {
     user,
     permissions,
     loading,
+    sessionLoading,
     isAuthenticated,
     sessionResolved,
     registerStep,

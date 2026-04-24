@@ -13,15 +13,24 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import CustomerSidebar from '@/components/Sidebar/CustomerSidebar.vue'
 import Footer from '@/components/Footer/Footer.vue'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 import AddToCartSheet from '@/components/Cart/AddToCartSheet.vue'
 import { useCartStore } from '@/stores/cartStore'
+import { useAuthStore } from '@/stores/authStore'
 
 const cartStore = useCartStore()
+const authStore = useAuthStore()
 
-await cartStore.fetchCart({ silent: true })
+onMounted(() => {
+    if (!authStore.sessionResolved && !authStore.sessionLoading) {
+        authStore.fetchUser().catch(() => {})
+    }
+
+    cartStore.fetchCart({ silent: true }).catch(() => {})
+})
 </script>
 
 <style scoped>
