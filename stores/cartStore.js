@@ -1,6 +1,5 @@
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
-import { useRequestHeaders } from "#imports";
 import { useFeGlobalStore } from "@/stores/feGlobalStore";
 import { registerStore } from "@/utils/storeRegistry";
 
@@ -45,24 +44,7 @@ export const useCartStore = defineStore("cart", () => {
   const isAddToCartSheetOpen = ref(false);
   const pendingItemIds = ref([]);
 
-  const buildHeaders = (extra = {}) => {
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...extra,
-    };
-
-    if (import.meta.server) {
-      const requestHeaders = useRequestHeaders(["cookie"]);
-      if (requestHeaders.cookie) {
-        headers.cookie = requestHeaders.cookie;
-      }
-    }
-
-    return headers;
-  };
-
-  const requestCart = async (apiPath, { method = "GET", body, headers, params, itemId } = {}) => {
+  const requestCart = async (apiPath, { method = "GET", body, params, itemId } = {}) => {
     feGlobalStore.setApiUrl(apiPath);
 
     if (method === "GET") {
@@ -73,23 +55,17 @@ export const useCartStore = defineStore("cart", () => {
       return feGlobalStore.createItem(body);
     }
 
-    if (method === "DELETE" && itemId != null) {
+    if (method === "PATCH") {
+      return itemId == null
+        ? feGlobalStore.patchItem(body)
+        : feGlobalStore.patchItem(itemId, body);
+    }
+
+    if (method === "DELETE") {
       return feGlobalStore.deleteItem(itemId);
     }
 
-    // feGlobalStore does not currently expose PATCH or base-endpoint DELETE helpers.
-    const response = await fetch(feGlobalStore.apiEndpoint, {
-      method,
-      credentials: "include",
-      headers: buildHeaders(headers),
-      body: body == null ? undefined : JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Cart request failed: ${method} ${apiPath}`);
-    }
-
-    return response.json();
+    throw new Error(`Unsupported cart request method: ${method}`);
   };
 
   const addPendingItem = (itemId) => {
@@ -198,8 +174,9 @@ export const useCartStore = defineStore("cart", () => {
     addPendingItem(itemId);
 
     try {
-      const response = await requestCart(`cart/items/${itemId}`, {
+      const response = await requestCart("cart/items", {
         method: "PATCH",
+        itemId,
         body: { quantity },
       });
 

@@ -137,10 +137,34 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       }
     };
 
-    const deleteItem = async (id) => {
+    const patchItem = async (idOrPayload, payload) => {
+      ui.isUpdating = true;
+      try {
+        const hasId = payload !== undefined;
+        const id = hasId ? idOrPayload : null;
+        const requestPayload = hasId ? payload : idOrPayload;
+        const url = id == null ? apiEndpoint.value : `${apiEndpoint.value}/${id}`;
+
+        const res = await fetch(url, {
+          method: "PATCH",
+          credentials: "include",
+          headers: buildHeaders(),
+          body: JSON.stringify(requestPayload),
+        });
+
+        if (!res.ok) throw new Error("Patch failed");
+        return await res.json();
+      } finally {
+        ui.isUpdating = false;
+      }
+    };
+
+    const deleteItem = async (id = null) => {
       ui.isDeleting = true;
       try {
-        const res = await fetch(`${apiEndpoint.value}/${id}`, {
+        const url = id == null ? apiEndpoint.value : `${apiEndpoint.value}/${id}`;
+
+        const res = await fetch(url, {
           method: "DELETE",
           credentials: "include",
           headers: buildHeaders(),
@@ -167,6 +191,7 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       fetchItem,
       createItem,
       updateItem,
+      patchItem,
       deleteItem,
       reset,
     };
