@@ -119,9 +119,9 @@
           </div>
         </div>
 
-        <div v-if="section.loading" class="d-flex justify-content-center py-5">
-          <div class="spinner-border text-secondary" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div v-if="section.loading" class="px-2 px-md-3 pb-2 pb-md-3">
+          <div class="skeleton-product-grid" :style="productStripStyle">
+            <SkeletonCard v-for="n in skeletonCount" :key="n" />
           </div>
         </div>
 
@@ -164,6 +164,7 @@
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { useHomeSectionsStore } from "~/stores/homeSectionsStore";
+import SkeletonCard from "~/components/common/SkeletonCard.vue";
 
 const props = defineProps({
   sectionKey: { type: String, required: true },
@@ -191,6 +192,12 @@ const productStripStyle = computed(() => {
   return {
     "--desktop-product-rows": String(safeRows),
   };
+});
+
+const skeletonCount = computed(() => {
+  const rows = Number(props.desktopProductRows);
+  const safeRows = Number.isFinite(rows) && rows > 0 ? Math.floor(rows) : 2;
+  return safeRows * 2;
 });
 
 const recalcAllNavStates = () => {
@@ -733,6 +740,23 @@ watch(
   .product-swiper-button-next {
     height: 72px;
     width: 34px;
+  }
+}
+
+.skeleton-product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, calc((100% - 8px) / 2));
+  gap: 8px;
+}
+
+.skeleton-product-grid .skeleton-card-shell {
+  height: 100%;
+  min-height: 280px;
+}
+
+@media (min-width: 768px) {
+  .skeleton-product-grid {
+    grid-template-columns: repeat(var(--desktop-product-rows, 2), 222px);
   }
 }
 </style>
