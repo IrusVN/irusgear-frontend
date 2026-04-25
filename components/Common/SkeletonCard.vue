@@ -2,9 +2,7 @@
   <div class="skeleton-card-shell h-100 px-1 py-1">
     <div class="skeleton-card h-100">
       <div class="skeleton-image-area">
-        <div class="skeleton-logo-text">
-          <span class="fw-normal">Irus</span><span class="fw-bold">Gear</span>
-        </div>
+        <img src="/image/logo-irusgear-black.png" alt="" class="skeleton-logo-img" />
       </div>
 
       <div class="skeleton-body">
@@ -74,12 +72,10 @@ defineProps({
   animation: skeletonShimmer 1.5s infinite;
 }
 
-.skeleton-logo-text {
-  opacity: 0.8;
-  font-size: 1.4rem;
-  letter-spacing: 1px;
-  user-select: none;
-  color: #fff;
+.skeleton-logo-img {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
   position: relative;
   z-index: 1;
   animation: skeletonPulse 2s infinite ease-in-out;

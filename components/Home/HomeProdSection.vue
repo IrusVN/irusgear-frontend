@@ -40,8 +40,9 @@
         </div>
 
         <div class="px-2 px-md-3 pt-2">
-          <div v-if="hasNeedItems" class="feature-strip-wrap position-relative">
+          <div class="feature-strip-wrap position-relative">
             <button
+              v-if="!section.loading && hasNeedItems"
               title="Previous"
               class="swiper-button-prev"
               type="button"
@@ -51,22 +52,32 @@
               <i class="bi bi-chevron-left"></i>
             </button>
 
-            <div ref="featureStripRef" class="feature-strip d-flex gap-2 overflow-auto no-scrollbar pe-4 pt-1" @scroll="updateStripNavState">
-              <a
-                v-for="(item, i) in featureChips"
-                :key="`${item.title}-${i}`"
-                :href="item.href || '#'"
-                class="feature-chip text-decoration-none text-dark"
-              >
-                <img v-if="item.image" :src="item.image" :alt="item.title" class="feature-chip-image" loading="lazy" />
-                <span v-else class="feature-chip-icon-wrap">
-                  <i :class="item.iconClass || 'bi bi-phone'" aria-hidden="true"></i>
-                </span>
-                <span class="feature-chip-title">{{ item.title }}</span>
-              </a>
+            <div
+              ref="featureStripRef"
+              class="feature-strip d-flex gap-2 overflow-auto no-scrollbar pe-4 pt-1"
+              @scroll="updateStripNavState"
+            >
+              <template v-if="section.loading || !hasNeedItems">
+                <SkeletonFeatureChip v-for="n in 10" :key="n" />
+              </template>
+              <template v-else>
+                <a
+                  v-for="(item, i) in featureChips"
+                  :key="`${item.title}-${i}`"
+                  :href="item.href || '#'"
+                  class="feature-chip text-decoration-none text-dark"
+                >
+                  <img v-if="item.image" :src="item.image" :alt="item.title" class="feature-chip-image" loading="lazy" />
+                  <span v-else class="feature-chip-icon-wrap">
+                    <i :class="item.iconClass || 'bi bi-phone'" aria-hidden="true"></i>
+                  </span>
+                  <span class="feature-chip-title">{{ item.title }}</span>
+                </a>
+              </template>
             </div>
 
             <button
+              v-if="!section.loading && hasNeedItems"
               title="Next"
               class="swiper-button-next"
               type="button"
@@ -171,6 +182,7 @@
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { useHomeSectionsStore } from "~/stores/homeSectionsStore";
 import SkeletonCard from "~/components/Common/SkeletonCard.vue";
+import SkeletonFeatureChip from "~/components/Common/SkeletonFeatureChip.vue";
 
 const props = defineProps({
   sectionKey: { type: String, required: true },
