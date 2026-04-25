@@ -119,9 +119,11 @@
           </div>
         </div>
 
-        <div v-if="section.loading" class="px-2 px-md-3 pb-2 pb-md-3">
-          <div class="skeleton-product-grid" :style="productStripStyle">
-            <SkeletonCard v-for="n in skeletonCount" :key="n" />
+        <div v-if="section.loading" class="px-2 px-md-3 pb-2 pb-md-3 section-products-body">
+          <div class="skeleton-product-strip no-scrollbar" :style="productStripStyle">
+            <div v-for="n in skeletonCount" :key="n" class="skeleton-grid-item">
+              <SkeletonCard />
+            </div>
           </div>
         </div>
 
@@ -154,7 +156,11 @@
             </button>
           </div>
 
-          <div v-else class="text-center py-5 text-muted small">Không có sản phẩm nào</div>
+          <div v-else class="skeleton-product-strip">
+            <div v-for="n in skeletonCount" :key="n" class="skeleton-grid-item">
+              <SkeletonCard />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -164,7 +170,7 @@
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { useHomeSectionsStore } from "~/stores/homeSectionsStore";
-import SkeletonCard from "~/components/common/SkeletonCard.vue";
+import SkeletonCard from "~/components/Common/SkeletonCard.vue";
 
 const props = defineProps({
   sectionKey: { type: String, required: true },
@@ -197,7 +203,7 @@ const productStripStyle = computed(() => {
 const skeletonCount = computed(() => {
   const rows = Number(props.desktopProductRows);
   const safeRows = Number.isFinite(rows) && rows > 0 ? Math.floor(rows) : 2;
-  return safeRows * 2;
+  return safeRows * 8;
 });
 
 const recalcAllNavStates = () => {
@@ -743,20 +749,36 @@ watch(
   }
 }
 
-.skeleton-product-grid {
+.skeleton-product-strip {
   display: grid;
-  grid-template-columns: repeat(2, calc((100% - 8px) / 2));
+  grid-auto-flow: column;
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+  grid-auto-columns: calc((100% - 8px) / 2);
   gap: 8px;
+  overflow-x: auto;
+  padding: 4px 18px;
+  height: 100%;
+  align-items: stretch;
 }
 
-.skeleton-product-grid .skeleton-card-shell {
+.skeleton-grid-item {
+  min-width: 0;
+  height: 100%;
+}
+
+.skeleton-grid-item .skeleton-card-shell {
   height: 100%;
   min-height: 280px;
 }
 
 @media (min-width: 768px) {
-  .skeleton-product-grid {
-    grid-template-columns: repeat(var(--desktop-product-rows, 2), 222px);
+  .skeleton-product-strip {
+    grid-template-rows: repeat(var(--desktop-product-rows, 2), minmax(0, 1fr));
+    grid-auto-columns: 222px;
+  }
+
+  .skeleton-grid-item {
+    min-height: 100%;
   }
 }
 </style>
