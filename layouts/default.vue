@@ -1,7 +1,12 @@
 <template>
     <div>
         <div class="d-flex flex-column min-vh-100">
-            <CustomerSidebar />
+            <ClientOnly>
+              <CustomerSidebar />
+              <template #fallback>
+                <div class="customer-sidebar-ssr-placeholder"></div>
+              </template>
+            </ClientOnly>
             <main class="flex-grow-1 main-with-customer-sidebar">
                 <Breadcrumb />
                 <slot />
@@ -39,9 +44,20 @@ onMounted(() => {
     padding-bottom: 3rem;
 }
 
+.customer-sidebar-ssr-placeholder {
+    height: 80px;
+    width: 100%;
+}
+
 @media (max-width: 991.98px) {
     .main-with-customer-sidebar {
         padding-top: 6.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .customer-sidebar-ssr-placeholder {
+        height: 72px;
     }
 }
 </style>

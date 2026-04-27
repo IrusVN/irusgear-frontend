@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="home-page pb-4 bg-light">
-      <HomeHero />
+      <ClientOnly>
+        <HomeHero />
+        <template #fallback>
+          <div class="home-hero-placeholder"></div>
+        </template>
+      </ClientOnly>
 
       <div class="container-xl px-3 py-4">
         <HomeProdSection section-key="device" />
@@ -45,7 +50,7 @@ const HOME_LOGO_LOADING_PROPS = Object.freeze({
 });
 
 const { t } = useI18n();
-useHead({ title: computed(() => t("page_titles.home")) });
+useHead({ title: computed(() => t("page_titles.home", "Trang chủ")) });
 
 const homeSectionsStore = useHomeSectionsStore();
 const authStore = useAuthStore();
@@ -79,4 +84,8 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+.home-hero-placeholder {
+  min-height: 420px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
 </style>
