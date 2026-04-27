@@ -24,6 +24,8 @@ export default {
         welcomeTo: "Welcome to",
         loading: "Loading...",
         seeAll: "See all",
+        discount: "Save",
+        installment: "Installment",
     },
     role: {
         default: "DEFAULT",
@@ -607,7 +609,7 @@ export default {
         newsAlt5: "MacBook Air M4 performance",
     },
     footerNav: {
-        laptopPc: "Laptop & PC",
+        laptopPc: "Laptop",
         smartphone: "Smart Phone",
         audioDevice: "Audio Device",
         orderLookup: "Order Lookup",

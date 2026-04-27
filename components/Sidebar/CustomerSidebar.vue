@@ -70,9 +70,7 @@
                 <i class="bi bi-bell"></i>
               </button>
 
-              <button type="button" class="btn header-icon-btn d-none d-xxl-inline-flex" :aria-label="$t('common.language')">
-                <i class="bi bi-globe2"></i>
-              </button>
+              <LanguageSwitcher />
 
               <div class="vr d-none d-lg-block mx-1 opacity-25"></div>
 
@@ -211,6 +209,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocalePath, useRoute, useI18n } from '#imports'
 import CategoryMegaMenu from '@/components/Home/CategoryMegaMenu.vue'
+import LanguageSwitcher from '@/components/Sidebar/LanguageSwitcher.vue'
 import { useHomeStore } from '@/stores/homeStore'
 import { useAuthStore } from '@/stores/authStore'
 import { useCartStore } from '@/stores/cartStore'

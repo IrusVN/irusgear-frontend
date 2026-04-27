@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       { code: 'en', name: 'English', file: 'en.js', },
     ],
     langDir: 'locales',
-    defaultLocale: 'en',
+    defaultLocale: 'vi',
     strategy: 'prefix_except_default',
   },
   runtimeConfig: {
