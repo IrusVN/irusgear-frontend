@@ -607,7 +607,7 @@ export default {
         newsAlt5: "MacBook Air M4 performance",
     },
     footerNav: {
-        laptopPc: "Laptop & PC",
+        laptopPc: "Laptop",
         smartphone: "Smart Phone",
         audioDevice: "Audio Device",
         orderLookup: "Order Lookup",
