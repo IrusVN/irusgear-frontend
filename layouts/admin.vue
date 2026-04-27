@@ -19,7 +19,7 @@
     ></div>
 
     <AdminSidebar :class="{ 'mobile-open': isMobileSidebarOpen }" />
-    <main class="admin-main flex-grow-1 p-4 overflow-hidden">
+    <main class="admin-main flex-grow-1 p-4">
       <slot />
     </main>
   </div>
