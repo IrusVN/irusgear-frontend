@@ -24,6 +24,8 @@ export default {
         welcomeTo: "Welcome to",
         loading: "Loading...",
         seeAll: "See all",
+        discount: "Save",
+        installment: "Installment",
     },
     role: {
         default: "DEFAULT",

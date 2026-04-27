@@ -21,6 +21,8 @@ export default {
         back: "Quay lại",
         notification: "Thông báo",
         language: "Ngôn ngữ",
+        discount: "Giảm",
+        installment: "Trả góp",
     },
     role: {
         default: "Mặc định",
