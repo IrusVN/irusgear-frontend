@@ -11,7 +11,7 @@
           class="cps-ant-cmt"
         />
         <div class="question">
-          <div class="is-flex is-align-items-center">
+          <div class="d-flex align-items-center">
             <p class="question-title">Hãy đặt câu hỏi cho chúng tôi</p>
           </div>
           <p class="question-content">

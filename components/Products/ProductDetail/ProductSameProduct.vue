@@ -4,7 +4,7 @@
       <h2 class="same-product-title mt-2">Có thể bạn cũng thích</h2>
     </div>
 
-    <div class="same-product-options-list is-flex is-justify-content-space-between">
+    <div class="same-product-options-list d-flex justify-content-between">
       <div class="product-options-tabs">
         <button
           v-for="tab in normalizedTabs"
@@ -43,16 +43,7 @@
           aria-disabled="false"
         >
           <div class="icon">
-            <svg
-              height="15"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 320 512"
-              aria-hidden="true"
-            >
-              <path
-                d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
-              ></path>
-            </svg>
+            <ArrowIcon direction="left" />
           </div>
         </div>
         <div
@@ -63,16 +54,7 @@
           aria-disabled="false"
         >
           <div class="icon">
-            <svg
-              height="15"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 320 512"
-              aria-hidden="true"
-            >
-              <path
-                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
-              ></path>
-            </svg>
+            <ArrowIcon direction="right" />
           </div>
         </div>
       </div>
@@ -85,6 +67,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { storeToRefs } from "pinia";
 import "swiper/css";
 import "swiper/css/navigation";
+import ArrowIcon from "@/components/Icons/ArrowIcon.vue";
 import { useProductStore } from "@/stores/productStore";
 import HomeProdCard from "@/components/Home/HomeProdCard.vue";
 
@@ -260,22 +243,6 @@ onBeforeUnmount(() => {
 .same-product-options-list {
   align-items: center;
   margin: 10px auto 14px;
-}
-
-.is-flex {
-  display: flex !important;
-}
-
-.is-justify-content-space-between {
-  justify-content: space-between !important;
-}
-
-.is-justify-content-center {
-  justify-content: center !important;
-}
-
-.is-align-items-center {
-  align-items: center !important;
 }
 
 .product-options-tabs {

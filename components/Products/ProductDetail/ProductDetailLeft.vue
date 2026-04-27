@@ -4,7 +4,7 @@
       <div class="box-product-name">
         <h1>{{ productStore.productDetail?.name }}</h1>
       </div>
-      <div class="is-flex is-align-items-center mt-2">
+      <div class="d-flex align-items-center mt-2">
         <div class="box-rating">
           <svg height="15" viewBox="0 0 576 512">
             <path
@@ -91,7 +91,7 @@
           </svg>
           <span class="label"> Thông số </span>
         </div>
-        <div class="pdp-compare-button-box is-flex is-align-items-center">
+        <div class="pdp-compare-button-box d-flex align-items-center">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M3 12C3 13.1819 3.23279 14.3522 3.68508 15.4442C4.13738 16.5361 4.80031 17.5282 5.63604 18.364C6.47177 19.1997 7.46392 19.8626 8.55585 20.3149C9.64778 20.7672 10.8181 21 12 21C13.1819 21 14.3522 20.7672 15.4442 20.3149C16.5361 19.8626 17.5282 19.1997 18.364 18.364C19.1997 17.5282 19.8626 16.5361 20.3149 15.4442C20.7672 14.3522 21 13.1819 21 12C21 9.61305 20.0518 7.32387 18.364 5.63604C16.6761 3.94821 14.3869 3 12 3C9.61305 3 7.32387 3.94821 5.63604 5.63604C3.94821 7.32387 3 9.61305 3 12Z"
@@ -122,21 +122,13 @@
           <div class="swiper-button-next button__view-gallery-next" tabindex="0" role="button" aria-label="Next slide"
             aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="right" />
             </div>
           </div>
           <div class="swiper-button-prev button__view-gallery-prev" tabindex="0" role="button"
             aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="left" />
             </div>
           </div>
           <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
@@ -155,21 +147,13 @@
           <div class="swiper-button-next button-navigate-thumbnail__next" tabindex="0" role="button"
             aria-label="Next slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="right" />
             </div>
           </div>
           <div class="swiper-button-prev button-navigate-thumbnail__prev" tabindex="0" role="button"
             aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="left" />
             </div>
           </div>
           <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
@@ -336,26 +320,14 @@
             </div>
             <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"
               aria-disabled="false">
-              <div>
-                <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                  <path
-                    d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                  </path>
-                </svg>
-              </div>
+              <ArrowIcon direction="left" />
             </div>
             <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false">
-              <div>
-                <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                  <path
-                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                  </path>
-                </svg>
-              </div>
+              <ArrowIcon direction="right" />
             </div>
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
           </div>
-          <div class="swiper swiper-container is-hidden">
+          <div class="swiper swiper-container d-none">
             <div class="swiper-wrapper" style="transition-duration: 0ms">
               <div class="swiper-slide" style="height: 148px"></div>
             </div>
@@ -366,18 +338,12 @@
       </div>
     </div>
     <div id="thong-so-ky-thuat" class="cps-block-technicalInfo">
-      <div class="box-title is-flex is-justify-content-space-between is-align-items-center">
+      <div class="box-title d-flex justify-content-between align-items-center">
         <h2 class="title">Thông số kỹ thuật</h2>
-        <button class="button button__show-modal-technical is-flex is-justify-content-center"
+        <button class="button button__show-modal-technical d-flex justify-content-center"
           @click="showAllSpecs = !showAllSpecs">
           {{ showAllSpecs ? 'Thu gọn' : 'Xem tất cả' }}
-          <div class="icon-svg">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-              </path>
-            </svg>
-          </div>
+          <ArrowIcon direction="right" :size="15" />
         </button>
       </div>
 
@@ -397,11 +363,7 @@
         <div v-if="!showAllSpecs && Object.keys(productSpecs).length > 7" class="specs-show-more">
           <button @click="showAllSpecs = true" class="btn-show-more-specs">
             Xem thêm {{ Object.keys(productSpecs).length - 7 }} thông số
-            <svg height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-              <path
-                d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
-              </path>
-            </svg>
+            <ArrowIcon direction="down" :size="10" />
           </button>
         </div>
       </template>
@@ -433,6 +395,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useProductStore } from '@/stores/productStore';
+import ArrowIcon from '@/components/Icons/ArrowIcon.vue';
 
 const productStore = useProductStore();
 
@@ -646,30 +609,6 @@ onBeforeUnmount(() => {
   flex-grow: 1;
   flex-shrink: 1;
   padding: 0.75rem;
-}
-
-.is-flex {
-  display: flex !important;
-}
-
-.is-hidden {
-  display: none !important;
-}
-
-.is-flex-direction-row {
-  flex-direction: row !important;
-}
-
-.is-justify-content-center {
-  justify-content: center !important;
-}
-
-.is-justify-content-space-between {
-  justify-content: space-between !important;
-}
-
-.is-align-items-center {
-  align-items: center !important;
 }
 
 .mb-1 {
@@ -1354,14 +1293,10 @@ onBeforeUnmount(() => {
   font-size: 12px;
   font-weight: 500;
   background-color: transparent;
+  gap: 4px;
 }
 
-.cps-block-technicalInfo .button__show-modal-technical .icon-svg {
-  align-items: center;
-  display: flex;
-}
-
-.cps-block-technicalInfo .button__show-modal-technical .icon-svg svg {
+.cps-block-technicalInfo .button__show-modal-technical :deep(svg) {
   fill: #3b82f6;
 }
 

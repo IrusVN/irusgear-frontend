@@ -12,7 +12,7 @@
             loading="lazy"
             class="cta-product-image"
           />
-          <div class="is-flex-column">
+          <div class="d-flex flex-column">
             <p class="cta-product-name">{{ productName }}</p>
           </div>
         </div>
@@ -189,13 +189,6 @@ const showBasePrice = computed(() => {
   height: 56px;
   object-fit: cover;
   width: 56px;
-}
-
-.is-flex-column {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
 }
 
 .cta-product-name {

@@ -14,6 +14,20 @@
       <ProductBlockComment />
     </section>
     <ProductBlockOrder :visible="showFloatingOrder" />
+    <MobileProductInfoSheet ref="mobileInfoSheetRef" />
+    <button
+      v-if="showMobileInfoButton"
+      type="button"
+      class="mobile-info-trigger"
+      aria-label="Xem thông tin sản phẩm"
+      @click="openMobileInfo"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9H21M3 15H21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <path d="M9 21H15M12 3V9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Mua ngay</span>
+    </button>
   </div>
 </template>
 <script setup>
@@ -26,13 +40,27 @@ import ProductContentRight from "@/components/Products/ProductDetail/ProductCont
 import ProductBoxReview from "@/components/Products/ProductDetail/ProductBoxReview.vue";
 import ProductBlockComment from "@/components/Products/ProductDetail/ProductBlockComment.vue";
 import ProductBlockOrder from "@/components/Products/ProductDetail/ProductBlockOrder.vue";
+import MobileProductInfoSheet from "@/components/Products/ProductDetail/MobileProductInfoSheet.vue";
 import { useRoute } from "vue-router";
 import { useProductStore } from "@/stores/productStore";
 
 const route = useRoute();
 const productStore = useProductStore();
 const pageSectionEl = ref(null);
+const mobileInfoSheetRef = ref(null);
 const scrollY = ref(0);
+const windowWidth = ref(
+  typeof window !== "undefined" ? window.innerWidth : 1200,
+);
+
+const showMobileInfoButton = computed(() => {
+  if (!process.client) return false;
+  return windowWidth.value <= 768 && productStore.productDetail;
+});
+
+const openMobileInfo = () => {
+  mobileInfoSheetRef.value?.open();
+};
 
 const showFloatingOrder = computed(() => {
   if (!process.client || !productStore.productDetail || window.innerWidth <= 990) {
@@ -57,6 +85,7 @@ const showFloatingOrder = computed(() => {
 
 const handleScroll = () => {
   scrollY.value = window.scrollY || window.pageYOffset || 0;
+  windowWidth.value = window.innerWidth;
 };
 
 watch(
@@ -233,9 +262,36 @@ onBeforeUnmount(() => {
   .content-layout>.block-content-product-left {
     width: 100%;
   }
+}
 
-  .content-layout>.block-content-product-right {
-    display: none;
+.mobile-info-trigger {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 102;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: #d70018;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(215, 0, 24, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.mobile-info-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(215, 0, 24, 0.45);
+}
+
+@media only screen and (max-width: 768px) {
+  .mobile-info-trigger {
+    display: flex;
   }
 }
 </style>

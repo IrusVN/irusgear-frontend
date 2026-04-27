@@ -3,7 +3,7 @@
     <div class="box-product-price">
       <div class="box-product-price-wrapper">
         <div class="smember-price-label">
-          <div class="is-flex is-align-items-center">
+          <div class="d-flex align-items-center">
             <div class="sale-price">{{ productStore.productDetail?.pricing?.salePrice?.formatted || '' }}</div>
             <del
               v-if="productStore.productDetail?.pricing?.basePrice?.value > productStore.productDetail?.pricing?.salePrice?.value"
@@ -19,7 +19,7 @@
         </div>
         <div class="trade-price-label" v-if="productStore.productDetail?.pricing?.tradeInPrice?.value">
           <div class="price-label">Thu cũ lên đời chỉ từ</div>
-          <div class="trade-price-info is-flex is-align-items-center">
+          <div class="trade-price-info d-flex align-items-center">
             <div class="sale-price">{{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}</div>
             <span class="text-navi" v-if="productStore.productDetail?.pricing?.tradeInSupport?.value"><span>
                 Trợ giá đến
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="exclusive-price-block pt-1">
-        <div class="is-flex d-flex flex-column align-items-center justify-content-center text-center flex-grow-1 pe-0"
+        <div class="d-flex flex-column align-items-center justify-content-center text-center flex-grow-1 pe-0"
           style="background-image: linear-gradient(to right, #9bb8f3 50%, transparent 50%); 
                   background-size: 14px 1px; 
                   background-repeat: repeat-x; 
@@ -76,9 +76,9 @@
               :src="color.flashSale?.badgeImage || 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png'"
               height="30" alt="Flash Sale" loading="lazy" class="sticker-flash-sale" />
             <a :href="buildColorHref(color)" @click.prevent="handleChangeColor(color)" :title="color.name"
-              class="button__change-color is-flex is-align-items-center" :class="{ disabled: color.disabled }"><img
+              class="button__change-color d-flex align-items-center" :class="{ disabled: color.disabled }"><img
                 :src="color.thumbnail" width="50" height="50" :alt="color.name" loading="lazy" />
-              <div class="is-flex is-flex-direction-column">
+              <div class="d-flex flex-column">
                 <strong class="item-variant-name">{{ color.name }}</strong>
                 <span class="item-variant-price"> {{ color.price?.formatted || '' }} </span>
               </div>
@@ -160,7 +160,7 @@
       </div>
     </div>
     <div class="box-product-promotion">
-      <div class="box-product-promotion-header is-flex has-text-weight-semibold is-align-items-center">
+      <div class="box-product-promotion-header d-flex has-text-weight-semibold align-items-center">
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M2 15.5H11V24.5H7C5.67392 24.5 4.40215 23.9732 3.46447 23.0355C2.52678 22.0979 2 20.8261 2 19.5V15.5ZM24 11.5C24 12.0304 23.7893 12.5391 23.4142 12.9142C23.0391 13.2893 22.5304 13.5 22 13.5H13V9.457C12.664 9.483 12.329 9.5 12 9.5C11.671 9.5 11.336 9.483 11 9.457V13.5H2C1.46957 13.5 0.960859 13.2893 0.585786 12.9142C0.210714 12.5391 0 12.0304 0 11.5C0 10.4391 0.421427 9.42172 1.17157 8.67157C1.92172 7.92143 2.93913 7.5 4 7.5H5.738C5.1726 7.0016 4.7238 6.38488 4.42344 5.6936C4.12307 5.00232 3.97851 4.25341 4 3.5C4 3.23478 4.10536 2.98043 4.29289 2.79289C4.48043 2.60536 4.73478 2.5 5 2.5C5.26522 2.5 5.51957 2.60536 5.70711 2.79289C5.89464 2.98043 6 3.23478 6 3.5C6 6.122 8.371 7.03 10.174 7.341C9.50852 6.16105 9.10791 4.85037 9 3.5C9 2.70435 9.31607 1.94129 9.87868 1.37868C10.4413 0.81607 11.2044 0.5 12 0.5C12.7956 0.5 13.5587 0.81607 14.1213 1.37868C14.6839 1.94129 15 2.70435 15 3.5C14.8921 4.85037 14.4915 6.16105 13.826 7.341C15.629 7.03 18 6.122 18 3.5C18 3.23478 18.1054 2.98043 18.2929 2.79289C18.4804 2.60536 18.7348 2.5 19 2.5C19.2652 2.5 19.5196 2.60536 19.7071 2.79289C19.8946 2.98043 20 3.23478 20 3.5C20.0215 4.25341 19.8769 5.00232 19.5766 5.6936C19.2762 6.38488 18.8274 7.0016 18.262 7.5H20C21.0609 7.5 22.0783 7.92143 22.8284 8.67157C23.5786 9.42172 24 10.4391 24 11.5ZM11 3.5C11.1207 4.56283 11.4613 5.58891 12 6.513C12.5387 5.58891 12.8793 4.56283 13 3.5C13 3.23478 12.8946 2.98043 12.7071 2.79289C12.5196 2.60536 12.2652 2.5 12 2.5C11.7348 2.5 11.4804 2.60536 11.2929 2.79289C11.1054 2.98043 11 3.23478 11 3.5ZM13 24.5H17C17.6566 24.5 18.3068 24.3707 18.9134 24.1194C19.52 23.8681 20.0712 23.4998 20.5355 23.0355C20.9998 22.5712 21.3681 22.02 21.6194 21.4134C21.8707 20.8068 22 20.1566 22 19.5V15.5H13V24.5Z"
@@ -223,26 +223,6 @@
                 alt="Banner Trả góp" loading="lazy" /></a>
           </div>
         </div>
-        <!-- <div class="swiper-button-prev button__view-banner-prev" tabindex="-1" role="button" aria-label="Previous slide"
-          aria-disabled="true">
-          <div class="icon">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-              </path>
-            </svg>
-          </div>
-        </div>
-        <div class="swiper-button-next button__view-banner-next" tabindex="-1" role="button" aria-label="Next slide"
-          aria-disabled="true">
-          <div class="icon">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-              </path>
-            </svg>
-          </div>
-        </div> -->
         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
       </div>
       <div id="modalVoucher" class="modal" style="display: none">
@@ -545,21 +525,13 @@
         <div class="swiper-button-next button__view-gallery-next" tabindex="0" role="button" aria-label="Next slide"
           aria-disabled="false">
           <div class="icon">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-              </path>
-            </svg>
+            <ArrowIcon direction="right" />
           </div>
         </div>
         <div class="swiper-button-prev button__view-gallery-prev" tabindex="0" role="button" aria-label="Previous slide"
           aria-disabled="false">
           <div class="icon">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-              </path>
-            </svg>
+            <ArrowIcon direction="left" />
           </div>
         </div>
         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
@@ -650,7 +622,7 @@
                 <p title="55B Trần Quang Khải, P. Tân Định, Q. 1, TP. HCM" class="address">
                   55B Trần Quang Khải, P. Tân Định, Q. 1, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871083355" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -682,7 +654,7 @@
                 <p title="134 Nguyễn Thái Học, P. Phạm Ngũ Lão, Q.1, TP HCM" class="address">
                   134 Nguyễn Thái Học, P. Phạm Ngũ Lão, Q.1, TP HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000132" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -714,7 +686,7 @@
                 <p title="218-220 Trần Quang Khải, P. Tân Định, Q.1, TP. HCM" class="address">
                   218-220 Trần Quang Khải, P. Tân Định, Q.1, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000218" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -746,7 +718,7 @@
                 <p title="157-159 Nguyễn Thị Minh Khai, P. Phạm Ngũ Lão, Q. 1, TP. HCM" class="address">
                   157-159 Nguyễn Thị Minh Khai, P. Phạm Ngũ Lão, Q. 1, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871066159" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -778,7 +750,7 @@
                 <p title="139 Trần Não, P. Bình An, Q.2, TP. HCM" class="address">
                   139 Trần Não, P. Bình An, Q.2, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000139" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -810,7 +782,7 @@
                 <p title="190 Nguyễn Thị Định, khu phố 2, P. An Phú, Q.2, TP. HCM" class="address">
                   190 Nguyễn Thị Định, khu phố 2, P. An Phú, Q.2, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871010190" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -842,7 +814,7 @@
                 <p title="177 Khánh Hội, P. 3, Q. 4, TP. HCM" class="address">
                   177 Khánh Hội, P. 3, Q. 4, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871067171" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -874,7 +846,7 @@
                 <p title="785 Trần Hưng Đạo, P.1, Q.5, TP. HCM" class="address">
                   785 Trần Hưng Đạo, P.1, Q.5, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871011785" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -906,7 +878,7 @@
                 <p title="1075B Hậu Giang, P. 11, Q. 6, TP. HCM" class="address">
                   1075B Hậu Giang, P. 11, Q. 6, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088075" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -938,7 +910,7 @@
                 <p title="458 - 460 Hậu Giang, P.12, Q.6, TP. HCM" class="address">
                   458 - 460 Hậu Giang, P.12, Q.6, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000460" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -970,7 +942,7 @@
                 <p title="248 Nguyễn Thị Thập, P. Tân Quy, Q.7, TP. HCM" class="address">
                   248 Nguyễn Thị Thập, P. Tân Quy, Q.7, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088248" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1002,7 +974,7 @@
                 <p title="571 Huỳnh Tấn Phát, P. Tân Thuận Đông, Q.7, TP. HCM" class="address">
                   571 Huỳnh Tấn Phát, P. Tân Thuận Đông, Q.7, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000571" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1034,7 +1006,7 @@
                 <p title="435 Nguyễn Thị Thập, P. Tân Phong, Q.7, TP. HCM" class="address">
                   435 Nguyễn Thị Thập, P. Tân Phong, Q.7, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000435" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1066,7 +1038,7 @@
                 <p title="579 Dương Bá Trạc, P.1, Q.8, TP. HCM" class="address">
                   579 Dương Bá Trạc, P.1, Q.8, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871001579" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1098,7 +1070,7 @@
                 <p title="125 Lê Văn Việt, P. Hiệp Phú, Q. 9, TP. HCM" class="address">
                   125 Lê Văn Việt, P. Hiệp Phú, Q. 9, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871061125" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1130,7 +1102,7 @@
                 <p title="241 Lê Văn Việt, P. Hiệp Phú, Q.9, TP. HCM" class="address">
                   241 Lê Văn Việt, P. Hiệp Phú, Q.9, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000241" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1162,7 +1134,7 @@
                 <p title="241-243, Đỗ Xuân Hợp, P. Phước Long B, Q.9, TP. HCM" class="address">
                   241-243, Đỗ Xuân Hợp, P. Phước Long B, Q.9, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088241" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1194,7 +1166,7 @@
                 <p title="347 Nguyễn Tri Phương, Phường 5, Quận 10, TP. HCM" class="address">
                   347 Nguyễn Tri Phương, Phường 5, Quận 10, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000347" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1226,7 +1198,7 @@
                 <p title="288 Đường 3/2, P. 12, Q. 10, TP. HCM" class="address">
                   288 Đường 3/2, P. 12, Q. 10, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871066288" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1258,7 +1230,7 @@
                 <p title="457B Lê Đại Hành, P.11, Q.11, TP. HCM" class="address">
                   457B Lê Đại Hành, P.11, Q.11, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000457" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1290,7 +1262,7 @@
                 <p title="17 Phan Văn Hớn, P. Tân Thới Nhất, Q.12, TP. HCM" class="address">
                   17 Phan Văn Hớn, P. Tân Thới Nhất, Q.12, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871012017" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1322,7 +1294,7 @@
                 <p title="93/8C Nguyễn Ảnh Thủ, P. Trung Mỹ Tây, Q.12, TP. HCM" class="address">
                   93/8C Nguyễn Ảnh Thủ, P. Trung Mỹ Tây, Q.12, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000093" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1354,7 +1326,7 @@
                 <p title="1A Nguyễn Ảnh Thủ, khu phố 1, P. Hiệp Thành, Q.12, TP. HCM" class="address">
                   1A Nguyễn Ảnh Thủ, khu phố 1, P. Hiệp Thành, Q.12, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088001" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1386,7 +1358,7 @@
                 <p title="632A Kha Vạn Cân, P. Linh Đông, TP. Thủ Đức, TP. HCM" class="address">
                   632A Kha Vạn Cân, P. Linh Đông, TP. Thủ Đức, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000632" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1418,7 +1390,7 @@
                 <p title="943 Kha Vạn Cân, P. Linh Trung, Thủ Đức, TP. HCM" class="address">
                   943 Kha Vạn Cân, P. Linh Trung, Thủ Đức, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000943" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1450,7 +1422,7 @@
                 <p title="18 Võ Văn Ngân, P. Trường Thọ, Q. Thủ Đức, TP. HCM" class="address">
                   18 Võ Văn Ngân, P. Trường Thọ, Q. Thủ Đức, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871097939" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1482,7 +1454,7 @@
                 <p title="4/39 Quang Trung, Thới Tam Thôn, H. Hóc Môn, TP. HCM" class="address">
                   4/39 Quang Trung, Thới Tam Thôn, H. Hóc Môn, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088439" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1514,7 +1486,7 @@
                 <p title="C3/1A Phạm Hùng, X. Bình Hưng, H. Bình Chánh, TP. HCM" class="address">
                   C3/1A Phạm Hùng, X. Bình Hưng, H. Bình Chánh, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000312" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1546,7 +1518,7 @@
                 <p title="1716/1 Huỳnh Tấn Phát, thị trấn Nhà Bè, Huyện Nhà Bè, TP. HCM" class="address">
                   1716/1 Huỳnh Tấn Phát, thị trấn Nhà Bè, Huyện Nhà Bè, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871061716" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1578,7 +1550,7 @@
                 <p title="193 Tỉnh Lộ 8, Khu phố 3, Thị trấn Củ Chi, H. Củ Chi, TP. HCM" class="address">
                   193 Tỉnh Lộ 8, Khu phố 3, Thị trấn Củ Chi, H. Củ Chi, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000193" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1610,7 +1582,7 @@
                 <p title="58 Tỉnh Lộ 8, Ấp 1, Xã Tân Thạnh Tây, Huyện Củ Chi, TP. HCM" class="address">
                   58 Tỉnh Lộ 8, Ấp 1, Xã Tân Thạnh Tây, Huyện Củ Chi, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871200058" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1642,7 +1614,7 @@
                 <p title="359 Cộng Hòa, P.13, Q. Tân Bình, TP. HCM" class="address">
                   359 Cộng Hòa, P.13, Q. Tân Bình, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871015359" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1674,7 +1646,7 @@
                 <p title="190B Hoàng Văn Thụ, P4, Q. Tân Bình, TP. HCM" class="address">
                   190B Hoàng Văn Thụ, P4, Q. Tân Bình, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000190" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1706,7 +1678,7 @@
                 <p title="672-674 Âu Cơ, P. 14, Q. Tân Bình, TP. HCM" class="address">
                   672-674 Âu Cơ, P. 14, Q. Tân Bình, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088672" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1738,7 +1710,7 @@
                 <p title="956 Âu Cơ, P.14, Q. Tân Bình, TP. HCM" class="address">
                   956 Âu Cơ, P.14, Q. Tân Bình, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000956" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1770,7 +1742,7 @@
                 <p title="377-379 Điện Biên Phủ, P. 25, Q. Bình Thạnh, TP. HCM" class="address">
                   377-379 Điện Biên Phủ, P. 25, Q. Bình Thạnh, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871077377" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1802,7 +1774,7 @@
                 <p title="536 Xô Viết Nghệ Tĩnh, P. 25, Q. Bình Thạnh, TP. HCM" class="address">
                   536 Xô Viết Nghệ Tĩnh, P. 25, Q. Bình Thạnh, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871065536" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1834,7 +1806,7 @@
                 <p title="59 Quang Trung, P. 10, Q. Gò Vấp, TP. HCM" class="address">
                   59 Quang Trung, P. 10, Q. Gò Vấp, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088059" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1866,7 +1838,7 @@
                 <p title="272 Nguyễn Oanh, P.17, Q. Gò Vấp, TP. HCM" class="address">
                   272 Nguyễn Oanh, P.17, Q. Gò Vấp, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000272" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1898,7 +1870,7 @@
                 <p title="567 Lê Quang Định, P.1, Q. Gò Vấp, TP. HCM" class="address">
                   567 Lê Quang Định, P.1, Q. Gò Vấp, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000567" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1930,7 +1902,7 @@
                 <p title="525 Quang Trung, P.10, Q. Gò Vấp, TP. HCM" class="address">
                   525 Quang Trung, P.10, Q. Gò Vấp, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000525" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1962,7 +1934,7 @@
                 <p title="888 Tỉnh Lộ 10, P. Bình Trị Đông A, Q. Bình Tân, TP. HCM" class="address">
                   888 Tỉnh Lộ 10, P. Bình Trị Đông A, Q. Bình Tân, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871068880" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1994,7 +1966,7 @@
                 <p title="127 Nguyễn Thị Tú, P. Bình Hưng Hoà B, Q. Bình Tân, TP. HCM" class="address">
                   127 Nguyễn Thị Tú, P. Bình Hưng Hoà B, Q. Bình Tân, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000229" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2027,7 +1999,7 @@
                   386 Hương Lộ 2, P. Bình Trị Đông, Q. Bình Tân (Ngã Tư Bốn Xã),
                   TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871087386" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2059,7 +2031,7 @@
                 <p title="161 Nguyễn Sơn, P. Phú Thạnh, Q. Tân Phú, TP. HCM" class="address">
                   161 Nguyễn Sơn, P. Phú Thạnh, Q. Tân Phú, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871016161" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2091,7 +2063,7 @@
                 <p title="449 - 451 Tân Kỳ Tân Quý, P. Tân Quý, Q. Tân Phú, TP. HCM" class="address">
                   449 - 451 Tân Kỳ Tân Quý, P. Tân Quý, Q. Tân Phú, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000449" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2123,7 +2095,7 @@
                 <p title="472 - 474 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP. HCM" class="address">
                   472 - 474 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000472" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2155,7 +2127,7 @@
                 <p title="114 Phan Đăng Lưu, P. 3, Q. Phú Nhuận, TP. HCM" class="address">
                   114 Phan Đăng Lưu, P. 3, Q. Phú Nhuận, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871097020" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2186,21 +2158,13 @@
           <div class="swiper-button-next button-navigate-thumbnail__next" tabindex="0" role="button"
             aria-label="Next slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="right" />
             </div>
           </div>
           <div class="swiper-button-prev button-navigate-thumbnail__prev" tabindex="0" role="button"
             aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="left" />
             </div>
           </div>
           <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets" style="display: none">
@@ -2244,7 +2208,7 @@
     <div>
       <div user="[object Object]" data-fetch-key="BoxOrderButton:0">
         <div class="box-order-button-container">
-          <div class="mb-3 is-flex is-justify-content-space-between" style="gap: 6px">
+          <div class="mb-3 d-flex justify-content-between" style="gap: 6px">
             <div class="installment-wrapper">
               <div style="height: 100%">
                 <button id="installmentCta" class="btn-cta installment-group-cta">
@@ -2253,7 +2217,7 @@
               </div>
             </div>
             <button
-              class="btn-cta order-button button--large is-flex is-justify-content-center is-align-items-center"
+              class="btn-cta order-button button--large d-flex justify-content-center align-items-center"
               :disabled="cartBusy"
               @click="buyCurrentProductNow"
             >
@@ -2300,6 +2264,7 @@ import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import ProductBoxWarranty from "@/components/Products/ProductDetail/ProductBoxWarranty.vue";
 import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
+import ArrowIcon from "@/components/Icons/ArrowIcon.vue";
 import { useProductStore } from '@/stores/productStore';
 import { useCartActions } from '@/composables/useCartActions';
 
@@ -2449,30 +2414,6 @@ onBeforeUnmount(() => {
   flex-grow: 1;
   flex-shrink: 1;
   padding: 0.75rem;
-}
-
-.is-flex {
-  display: flex !important;
-}
-
-.is-flex-direction-column {
-  flex-direction: column !important;
-}
-
-.is-justify-content-center {
-  justify-content: center !important;
-}
-
-.is-justify-content-space-between {
-  justify-content: space-between !important;
-}
-
-.is-align-content-center {
-  align-content: center !important;
-}
-
-.is-align-items-center {
-  align-items: center !important;
 }
 
 .has-text-black {
@@ -2819,24 +2760,24 @@ onBeforeUnmount(() => {
   flex: 1;
 }
 
-.box-product-price .smember-price-label .is-flex,
-.box-product-price .trade-price-label .is-flex {
+.box-product-price .smember-price-label .d-flex,
+.box-product-price .trade-price-label .d-flex {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 0;
   justify-content: center;
 }
 
-.box-product-price .smember-price-label .is-flex .sale-price,
-.box-product-price .trade-price-label .is-flex .sale-price {
+.box-product-price .smember-price-label .d-flex .sale-price,
+.box-product-price .trade-price-label .d-flex .sale-price {
   color: #1d1d20;
   font-size: 20px;
   font-weight: 600;
   line-height: 100%;
 }
 
-.box-product-price .smember-price-label .is-flex .base-price,
-.box-product-price .trade-price-label .is-flex .base-price {
+.box-product-price .smember-price-label .d-flex .base-price,
+.box-product-price .trade-price-label .d-flex .base-price {
   color: #a1a1aa;
   font-size: 14px;
   font-weight: 400;

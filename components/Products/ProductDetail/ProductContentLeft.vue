@@ -7,27 +7,14 @@
       <div v-if="!isExpanded && cleanedDescription" class="irus-btn-showmore-wrapper">
         <a class="btn-show-more button__content-show-more" @click.prevent="isExpanded = true">
           Xem thêm &emsp;
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
-              <path
-                d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
-              </path>
-            </svg>
-          </div>
+          <ArrowIcon direction="down" :size="10" />
         </a>
       </div>
       <div v-else-if="isExpanded" class="text-center mt-3 mb-2">
         <a class="btn-show-more button__content-show-more" @click.prevent="isExpanded = false"
           style="background:#fff; color:#3b82f6; border-radius:10px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; padding: 6px 12px; font-size:14px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-decoration:none;">
           Thu gọn &emsp;
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10"
-              style="transform: rotate(180deg);">
-              <path
-                d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
-              </path>
-            </svg>
-          </div>
+          <ArrowIcon direction="up" :size="10" />
         </a>
       </div>
     </div>
@@ -36,6 +23,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useProductStore } from '~/stores/productStore'
+import ArrowIcon from '@/components/Icons/ArrowIcon.vue'
 
 const productStore = useProductStore()
 const product = computed(() => productStore.productDetail)
@@ -335,7 +323,7 @@ const cleanedDescription = computed(() => {
   opacity: 0.8;
 }
 
-.irus-btn-showmore-wrapper .btn-show-more svg {
+.irus-btn-showmore-wrapper .btn-show-more :deep(svg) {
   fill: #3b82f6;
   height: 10px;
 }
