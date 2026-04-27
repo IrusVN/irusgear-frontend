@@ -145,7 +145,7 @@
               <span class="d-inline-flex align-items-center justify-content-center text-dark" style="width: 18px;">
                 <i class="bi bi-gift-fill"></i>
               </span>
-              <span>Xem ưu đãi của bạn</span>
+              <span>{{ $t('common.seeYourOffers') }}</span>
               <i class="bi bi-chevron-right ms-auto text-secondary fs-6"></i>
             </NuxtLink>
           </template>
@@ -160,19 +160,19 @@
                 </svg>
               </div>
               <div class="flex-grow-1">
-                <p class="mb-0 fw-bold text-dark fs-6 lh-sm">Chào mừng bạn đến với IrusGear</p>
+                <p class="mb-0 fw-bold text-dark fs-6 lh-sm">{{ $t('common.welcomeTo') }}</p>
               </div>
             </div>
 
             <p class="mt-1 text-secondary mb-0 small lh-base">
-              Nhập hội thành viên để không bỏ lỡ các ưu đãi hấp dẫn.
+              {{ $t('home.memberPromoNote') }}
             </p>
 
             <div class="d-flex align-items-center gap-1 mt-2 mb-2 small">
-              <NuxtLink :to="localePath('/auth/login')" class="text-decoration-none text-dark fw-semibold">Đăng nhập
+              <NuxtLink :to="localePath('/auth/login')" class="text-decoration-none text-dark fw-semibold">{{ $t('common.login') }}
               </NuxtLink>
-              <span class="text-secondary">hoặc</span>
-              <NuxtLink :to="localePath('/auth/register')" class="text-decoration-none text-dark fw-semibold">Đăng ký
+              <span class="text-secondary">{{ $t('home.or') }}</span>
+              <NuxtLink :to="localePath('/auth/register')" class="text-decoration-none text-dark fw-semibold">{{ $t('common.register') }}
               </NuxtLink>
             </div>
 
@@ -181,7 +181,7 @@
               <span class="d-inline-flex align-items-center justify-content-center text-dark" style="width: 18px;">
                 <i class="bi bi-gift-fill"></i>
               </span>
-              <span>Xem ưu đãi Smember</span>
+              <span>{{ $t('home.viewSmemberOffers') }}</span>
               <i class="bi bi-chevron-right ms-auto text-secondary fs-6"></i>
             </NuxtLink>
           </template>
@@ -202,7 +202,7 @@
           </div>
 
           <NuxtLink :to="localePath('/')" class="d-block mt-2 text-decoration-none">
-            <span class="service-bottom-pill">Ưu đãi nổi bật</span>
+            <span class="service-bottom-pill">{{ $t('home.featuredPromotions') }}</span>
           </NuxtLink>
         </div>
       </div>
@@ -245,18 +245,18 @@ onBeforeUpdate(() => {
 });
 
 const categories = [
-  { key: "dien-thoai-tablet", name: "Điện thoại, Tablet", icon: "bi-phone" },
-  { key: "laptop", name: "Laptop", icon: "bi-laptop" },
-  { key: "am-thanh-mic-thu-am", name: "Âm thanh, Mic thu âm", icon: "bi-headphones" },
-  { key: "dong-ho-camera", name: "Đồng hồ, Camera", icon: "bi-smartwatch" },
-  { key: "do-gia-dung-lam-dep", name: "Đồ gia dụng, Làm đẹp", icon: "bi-house" },
-  { key: "phu-kien", name: "Phụ kiện", icon: "bi-earbuds" },
-  { key: "pc-man-hinh-may-in", name: "PC, Màn hình, Máy in", icon: "bi-pc-display" },
-  { key: "tv-dien-may", name: "Tivi, Điện máy", icon: "bi-display" },
-  { key: "thu-cu-doi-moi", name: "Thu cũ đổi mới", icon: "bi-repeat" },
-  { key: "hang-cu", name: "Hàng cũ", icon: "bi-box-seam" },
-  { key: "khuyen-mai", name: "Khuyến mãi", icon: "bi-patch-check" },
-  { key: "tin-cong-nghe", name: "Tin công nghệ", icon: "bi-card-text" },
+  { key: "dien-thoai-tablet", name: t('home.catPhoneTablet'), icon: "bi-phone" },
+  { key: "laptop", name: t('cart.laptop'), icon: "bi-laptop" },
+  { key: "am-thanh-mic-thu-am", name: t('home.catAudioMic'), icon: "bi-headphones" },
+  { key: "dong-ho-camera", name: t('home.catWatchCamera'), icon: "bi-smartwatch" },
+  { key: "do-gia-dung-lam-dep", name: t('home.catHomeAppliances'), icon: "bi-house" },
+  { key: "phu-kien", name: t('cart.accessory'), icon: "bi-earbuds" },
+  { key: "pc-man-hinh-may-in", name: t('home.catPcMonitorPrinter'), icon: "bi-pc-display" },
+  { key: "tv-dien-may", name: t('home.catTvAppliances'), icon: "bi-display" },
+  { key: "thu-cu-doi-moi", name: t('home.catTradeIn'), icon: "bi-repeat" },
+  { key: "hang-cu", name: t('home.catUsedGoods'), icon: "bi-box-seam" },
+  { key: "khuyen-mai", name: t('home.promotion'), icon: "bi-patch-check" },
+  { key: "tin-cong-nghe", name: t('home.catTechNews'), icon: "bi-card-text" },
 ];
 
 const activeSectionKey = computed(() => {
@@ -292,28 +292,28 @@ const heroBanners = [
 
 const serviceGroups = [
   {
-    title: "Ưu đãi cho giáo dục",
+    title: t('home.educationPromo'),
     href: "/",
     items: [
-      { icon: "bi-mortarboard-fill", href: "/", label: "Đăng ký <b>nhận ưu đãi</b>" },
-      { icon: "bi-mortarboard-fill", href: "/", label: "Deal hot <b>học sinh sinh viên</b>" },
-      { icon: "bi-mortarboard-fill", href: "/", label: "Laptop <b>ưu đãi khủng</b>" },
+      { icon: "bi-mortarboard-fill", href: "/", label: t('home.registerPromoLabel') },
+      { icon: "bi-mortarboard-fill", href: "/", label: t('home.hotDealStudentLabel') },
+      { icon: "bi-mortarboard-fill", href: "/", label: t('home.laptopPromoLabel') },
     ],
   },
   {
-    title: "Thu cũ lên đời giá hời",
+    title: t('home.tradeInTitle'),
     href: "/",
     items: [
-      { icon: "bi-arrow-repeat", href: "/", label: "iPhone trợ giá <b>đến 3 triệu</b>" },
-      { icon: "bi-arrow-repeat", href: "/", label: "Samsung trợ giá <b>đến 4 triệu</b>" },
+      { icon: "bi-arrow-repeat", href: "/", label: t('home.iphoneTradeInLabel') },
+      { icon: "bi-arrow-repeat", href: "/", label: t('home.samsungTradeInLabel') },
     ],
   },
   {
-    title: "Khách hàng doanh nghiệp (B2B)",
+    title: t('home.b2bTitle'),
     href: "/",
     items: [
-      { icon: "bi-briefcase-fill", href: "/", label: "Đăng ký <b>S-Business</b>" },
-      { icon: "bi-briefcase-fill", href: "/", label: "Chính sách <b>ưu đãi</b>" },
+      { icon: "bi-briefcase-fill", href: "/", label: t('home.registerSBusinessLabel') },
+      { icon: "bi-briefcase-fill", href: "/", label: t('home.policyPromoLabel') },
     ],
   },
 ];

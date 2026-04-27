@@ -3,7 +3,7 @@
     <div class="box-product-price">
       <div class="box-product-price-wrapper">
         <div class="smember-price-label">
-          <div class="is-flex is-align-items-center">
+          <div class="d-flex align-items-center">
             <div class="sale-price">{{ productStore.productDetail?.pricing?.salePrice?.formatted || '' }}</div>
             <del
               v-if="productStore.productDetail?.pricing?.basePrice?.value > productStore.productDetail?.pricing?.salePrice?.value"
@@ -14,23 +14,23 @@
         </div>
         <div class="devide-price-label" v-if="productStore.productDetail?.pricing?.tradeInPrice?.value">
           <div class="divide top mb-3"></div>
-          <p>Hoặc</p>
+          <p>{{ $t('product.or') }}</p>
           <div class="divide bottom"></div>
         </div>
         <div class="trade-price-label" v-if="productStore.productDetail?.pricing?.tradeInPrice?.value">
-          <div class="price-label">Thu cũ lên đời chỉ từ</div>
-          <div class="trade-price-info is-flex is-align-items-center">
+          <div class="price-label">{{ $t('product.tradeInFrom') }}</div>
+          <div class="trade-price-info d-flex align-items-center">
             <div class="sale-price">{{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}</div>
             <span class="text-navi" v-if="productStore.productDetail?.pricing?.tradeInSupport?.value"><span>
-                Trợ giá đến
+                {{ $t('product.tradeInSupport') }}
                 <span class="value">{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || ''
                 }}</span></span>
-              <a> Định giá ngay </a></span>
+              <a> {{ $t('product.rateNow') }} </a></span>
           </div>
         </div>
       </div>
       <div class="exclusive-price-block pt-1">
-        <div class="is-flex d-flex flex-column align-items-center justify-content-center text-center flex-grow-1 pe-0"
+        <div class="d-flex flex-column align-items-center justify-content-center text-center flex-grow-1 pe-0"
           style="background-image: linear-gradient(to right, #9bb8f3 50%, transparent 50%); 
                   background-size: 14px 1px; 
                   background-repeat: repeat-x; 
@@ -42,10 +42,10 @@
             </p>
             <div class="promotion-row__ct is-member">
               <div class="txt">
-                Tiết kiệm lên đến
+                {{ $t('product.memberSaving') }}
                 <strong class="bold">{{ productStore.productDetail?.pricing?.memberSaving?.formatted || '' }}</strong>
-                cho Smember
-                <a class="dang_nhap_xem_gia link"> Kiểm tra ngay </a>
+                {{ $t('product.forSmember') }}
+                <a class="dang_nhap_xem_gia link"> {{ $t('product.checkNow') }} </a>
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="box-linked">
       <div class="box-title">
-        <p>Phiên bản</p>
+        <p>{{ $t('product.version') }}</p>
       </div>
       <div class="list-linked">
         <a v-for="storage in productStore.productDetail?.storageOptions || []" :key="storage.id" :href="storage.url"
@@ -65,7 +65,7 @@
     </div>
     <div class="box-product-variants">
       <div class="box-title">
-        <p>Màu sắc</p>
+        <p>{{ $t('product.color') }}</p>
       </div>
       <div class="box-content">
         <ul class="list-variants ps-0 mb-0">
@@ -76,9 +76,9 @@
               :src="color.flashSale?.badgeImage || 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png'"
               height="30" alt="Flash Sale" loading="lazy" class="sticker-flash-sale" />
             <a :href="buildColorHref(color)" @click.prevent="handleChangeColor(color)" :title="color.name"
-              class="button__change-color is-flex is-align-items-center" :class="{ disabled: color.disabled }"><img
+              class="button__change-color d-flex align-items-center" :class="{ disabled: color.disabled }"><img
                 :src="color.thumbnail" width="50" height="50" :alt="color.name" loading="lazy" />
-              <div class="is-flex is-flex-direction-column">
+              <div class="d-flex flex-column">
                 <strong class="item-variant-name">{{ color.name }}</strong>
                 <span class="item-variant-price"> {{ color.price?.formatted || '' }} </span>
               </div>
@@ -134,19 +134,19 @@
             </div>
             <div>
               <div class="price-thu-cu">
-                <strong>Thu cũ lên đời </strong>
+                <strong>{{ $t('product.tradeInTitle') }}</strong>
                 <hr class="divider" />
-                <span>Chỉ từ <strong> {{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}
+                <span>{{ $t('product.tradeInFrom') }} <strong> {{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}
                   </strong></span>
               </div>
               <div class="smember-discount">
-                Giảm thêm đến&nbsp;<b>{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || ''
-                }}</b>&nbsp;(Bao gồm cả Smember)
+                {{ $t('product.tradeInIncluded') }}&nbsp;<b>{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || ''
+                }}</b>
               </div>
             </div>
           </div>
           <button class="btn-submit-search desktop">
-            <span>Kiểm tra ngay</span>
+            <span>{{ $t('product.checkNow') }}</span>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12.5H19" stroke="#D70018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               </path>
@@ -160,7 +160,7 @@
       </div>
     </div>
     <div class="box-product-promotion">
-      <div class="box-product-promotion-header is-flex has-text-weight-semibold is-align-items-center">
+      <div class="box-product-promotion-header d-flex has-text-weight-semibold align-items-center">
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M2 15.5H11V24.5H7C5.67392 24.5 4.40215 23.9732 3.46447 23.0355C2.52678 22.0979 2 20.8261 2 19.5V15.5ZM24 11.5C24 12.0304 23.7893 12.5391 23.4142 12.9142C23.0391 13.2893 22.5304 13.5 22 13.5H13V9.457C12.664 9.483 12.329 9.5 12 9.5C11.671 9.5 11.336 9.483 11 9.457V13.5H2C1.46957 13.5 0.960859 13.2893 0.585786 12.9142C0.210714 12.5391 0 12.0304 0 11.5C0 10.4391 0.421427 9.42172 1.17157 8.67157C1.92172 7.92143 2.93913 7.5 4 7.5H5.738C5.1726 7.0016 4.7238 6.38488 4.42344 5.6936C4.12307 5.00232 3.97851 4.25341 4 3.5C4 3.23478 4.10536 2.98043 4.29289 2.79289C4.48043 2.60536 4.73478 2.5 5 2.5C5.26522 2.5 5.51957 2.60536 5.70711 2.79289C5.89464 2.98043 6 3.23478 6 3.5C6 6.122 8.371 7.03 10.174 7.341C9.50852 6.16105 9.10791 4.85037 9 3.5C9 2.70435 9.31607 1.94129 9.87868 1.37868C10.4413 0.81607 11.2044 0.5 12 0.5C12.7956 0.5 13.5587 0.81607 14.1213 1.37868C14.6839 1.94129 15 2.70435 15 3.5C14.8921 4.85037 14.4915 6.16105 13.826 7.341C15.629 7.03 18 6.122 18 3.5C18 3.23478 18.1054 2.98043 18.2929 2.79289C18.4804 2.60536 18.7348 2.5 19 2.5C19.2652 2.5 19.5196 2.60536 19.7071 2.79289C19.8946 2.98043 20 3.23478 20 3.5C20.0215 4.25341 19.8769 5.00232 19.5766 5.6936C19.2762 6.38488 18.8274 7.0016 18.262 7.5H20C21.0609 7.5 22.0783 7.92143 22.8284 8.67157C23.5786 9.42172 24 10.4391 24 11.5ZM11 3.5C11.1207 4.56283 11.4613 5.58891 12 6.513C12.5387 5.58891 12.8793 4.56283 13 3.5C13 3.23478 12.8946 2.98043 12.7071 2.79289C12.5196 2.60536 12.2652 2.5 12 2.5C11.7348 2.5 11.4804 2.60536 11.2929 2.79289C11.1054 2.98043 11 3.23478 11 3.5ZM13 24.5H17C17.6566 24.5 18.3068 24.3707 18.9134 24.1194C19.52 23.8681 20.0712 23.4998 20.5355 23.0355C20.9998 22.5712 21.3681 22.02 21.6194 21.4134C21.8707 20.8068 22 20.1566 22 19.5V15.5H13V24.5Z"
@@ -173,7 +173,7 @@
             </linearGradient>
           </defs>
         </svg>
-        <span>Khuyến mãi đi kèm</span>
+        <span>{{ $t('product.promotionIncluded') }}</span>
       </div>
       <div class="box-product-promotion-content show-all">
         <div class="list-promotion-pack">
@@ -182,9 +182,8 @@
               <p>1</p>
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
-              Đặc quyền trợ giá lên đến 3 triệu khi thu cũ lên đời iPhone
-              <a target="_blank" href="https://cellphones.com.vn/chuong-trinh-thu-cu-len-doi-iphone">&nbsp; Xem chi
-                tiết</a>
+              {{ $t('product.tradeInPrivilege') }}
+              <a target="_blank" href="https://cellphones.com.vn/chuong-trinh-thu-cu-len-doi-iphone">&nbsp; {{ $t('product.details') }}</a>
             </p>
           </div>
           <div class="promotion-pack_item is-flex is-align-content-center">
@@ -192,11 +191,10 @@
               <p>2</p>
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
-              Tặng Sim/Esim 5G VNSKY, có ngay 3GB data/ngày+500 phút gọi
-              Mobifone &amp; VNSKY, miễn phí 30 ngày đầu - chỉ áp dụng tại cửa
-              hàng
+              {{ $t('product.simOffer') }}
+              {{ $t('product.simOfferDetail') }}
               <a target="_blank" href="https://cellphones.com.vn/sim-5g-vnsky-5g89c-3gb-ngay-free-1-thang.html">&nbsp;
-                Xem chi tiết</a>
+                {{ $t('product.details') }}</a>
             </p>
           </div>
           <div class="promotion-pack_item is-flex is-align-content-center">
@@ -204,9 +202,8 @@
               <p>3</p>
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
-              Giảm thêm 10% cho Pin dự phòng - Camera - Gia dụng - Sức khỏe Làm
-              đẹp - Đồng hồ trẻ em khi mua Điện thoại/Laptop
-              <a target="_blank" href="https://cellphones.com.vn/qua-tang-tri-an-khach-hang">&nbsp; Xem chi tiết</a>
+              {{ $t('product.accessoryDiscount') }}
+              <a target="_blank" href="https://cellphones.com.vn/qua-tang-tri-an-khach-hang">&nbsp; {{ $t('product.details') }}</a>
             </p>
           </div>
         </div>
@@ -223,26 +220,6 @@
                 alt="Banner Trả góp" loading="lazy" /></a>
           </div>
         </div>
-        <!-- <div class="swiper-button-prev button__view-banner-prev" tabindex="-1" role="button" aria-label="Previous slide"
-          aria-disabled="true">
-          <div class="icon">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-              </path>
-            </svg>
-          </div>
-        </div>
-        <div class="swiper-button-next button__view-banner-next" tabindex="-1" role="button" aria-label="Next slide"
-          aria-disabled="true">
-          <div class="icon">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-              </path>
-            </svg>
-          </div>
-        </div> -->
         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
       </div>
       <div id="modalVoucher" class="modal" style="display: none">
@@ -272,7 +249,7 @@
             <div class="voucher-clipboard-outline"></div>
           </section>
           <footer class="modal-card-foot">
-            <button class="button">Đóng</button>
+            <button class="button">{{ $t('product.close') }}</button>
           </footer>
         </div>
       </div>
@@ -288,15 +265,14 @@
                   stroke-linejoin="round"></path>
               </svg>
             </button>
-            <p class="title">Tham gia chương trình</p>
+            <p class="title">{{ $t('product.joinProgram') }}</p>
             <div>
               <p class="has-text-centered mb-3 mx-auto">
-                Vui lòng nhập số điện thoại để tham gia chương trình ưu đãi cho
-                khách hàng mới.
+                {{ $t('product.enterPhoneToJoin') }}
               </p>
               <div class="field">
                 <p class="control has-icons-right">
-                  <input id="phoneGuest" type="text" placeholder="Nhập số điện thoại" maxlength="10" class="input" />
+                  <input id="phoneGuest" type="text" :placeholder="$t('register.enterPhone')" maxlength="10" class="input" />
                   <span class="icon is-small is-right" style="display: none"><svg width="48" height="48"
                       viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M30 18L18 30" stroke="#18181B" stroke-width="1.5" stroke-linecap="round"
@@ -319,7 +295,7 @@
               </div>
             </div>
             <button disabled="disabled" class="button submit-phone">
-              Tiếp tục
+              {{ $t('product.continue') }}
             </button>
           </section>
         </div>
@@ -339,7 +315,7 @@
             </linearGradient>
           </defs>
         </svg>
-        <span>Ưu đãi thanh toán</span>
+        <span>{{ $t('product.paymentOffers') }}</span>
       </div>
       <div class="swiper-container box-more-promotion-swiper">
         <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px)">
@@ -351,14 +327,14 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Giảm ngay 700K khi trả góp qua thẻ TECHCOMBANK
+                  {{ $t('product.paymentOffer1') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/techcombank" target="_blank"
-                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -382,14 +358,14 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Giảm 500K khi thanh toán qua thẻ tín dụng OCB
+                  {{ $t('product.paymentOffer2') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/ocb" target="_blank" rel="noopener noreferrer"
-                    class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -414,14 +390,14 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Hoàn tiền đến 2 triệu khi mở thẻ tín dụng HSBC
+                  {{ $t('product.creditCardRefund') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/mo-the-tin-dung-hsbc" target="_blank"
-                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -446,14 +422,14 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Giảm đến 5.000.000đ khi thanh toán qua Kredivo
+                  {{ $t('product.paymentOffer3') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/kredivo" target="_blank" rel="noopener noreferrer"
-                    class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -478,14 +454,14 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Mở thẻ VIB nhận E-Voucher đến 600K
+                  {{ $t('product.paymentOffer4') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-mo-the-vib-cash-back" target="_blank"
-                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -510,14 +486,14 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Giảm đến 500K khi mở thẻ TPBANK EVO
+                  {{ $t('product.paymentOffer5') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/tpbank-evo" target="_blank"
-                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -545,21 +521,13 @@
         <div class="swiper-button-next button__view-gallery-next" tabindex="0" role="button" aria-label="Next slide"
           aria-disabled="false">
           <div class="icon">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-              </path>
-            </svg>
+            <ArrowIcon direction="right" />
           </div>
         </div>
         <div class="swiper-button-prev button__view-gallery-prev" tabindex="0" role="button" aria-label="Previous slide"
           aria-disabled="false">
           <div class="icon">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-              </path>
-            </svg>
+            <ArrowIcon direction="left" />
           </div>
         </div>
         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
@@ -568,15 +536,15 @@
     <div class="box-on-stock-stores">
       <div class="box-on-stock-option-location">
         <div class="box-on-stock-count">
-          <strong>Xem chi nhánh có hàng</strong>
+          <strong>{{ $t('product.viewBranches') }}</strong>
           <p>
-            Có
+            {{ $t('product.inStock') }}
             <span class="count">48</span>
-            cửa hàng có sản phẩm
+            {{ $t('product.storesWithProduct') }}
           </p>
         </div>
         <div class="box-on-stock-option button__change-province">
-          Hồ Chí Minh
+          {{ $t('product.hoChiMinh') }}
           <div class="icon-down">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
               <path
@@ -587,20 +555,20 @@
         </div>
         <div class="box-on-stock-option">
           <select id="districtOptions">
-            <option value="">Quận/Huyện</option>
-            <option class="button__change-district" value="1">Quận 1</option>
-            <option class="button__change-district" value="2">Quận 2</option>
-            <option class="button__change-district" value="4">Quận 4</option>
-            <option class="button__change-district" value="5">Quận 5</option>
-            <option class="button__change-district" value="6">Quận 6</option>
-            <option class="button__change-district" value="7">Quận 7</option>
-            <option class="button__change-district" value="8">Quận 8</option>
-            <option class="button__change-district" value="9">Quận 9</option>
-            <option class="button__change-district" value="10">Quận 10</option>
-            <option class="button__change-district" value="11">Quận 11</option>
-            <option class="button__change-district" value="12">Quận 12</option>
+            <option value="">{{ $t('product.selectDistrict') }}</option>
+            <option class="button__change-district" value="1">{{ $t('product.district1') }}</option>
+            <option class="button__change-district" value="2">{{ $t('product.district2') }}</option>
+            <option class="button__change-district" value="4">{{ $t('product.district4') }}</option>
+            <option class="button__change-district" value="5">{{ $t('product.district5') }}</option>
+            <option class="button__change-district" value="6">{{ $t('product.district6') }}</option>
+            <option class="button__change-district" value="7">{{ $t('product.district7') }}</option>
+            <option class="button__change-district" value="8">{{ $t('product.district8') }}</option>
+            <option class="button__change-district" value="9">{{ $t('product.district9') }}</option>
+            <option class="button__change-district" value="10">{{ $t('product.district10') }}</option>
+            <option class="button__change-district" value="11">{{ $t('product.district11') }}</option>
+            <option class="button__change-district" value="12">{{ $t('product.district12') }}</option>
             <option class="button__change-district" value="13">
-              Quận Thủ Đức
+              {{ $t('product.thuDuc') }}
             </option>
             <option class="button__change-district" value="14">
               Huyện Hóc Môn
@@ -615,22 +583,22 @@
               Huyện Củ Chi
             </option>
             <option class="button__change-district" value="74">
-              Quận Tân Bình
+              {{ $t('product.tanBinh') }}
             </option>
             <option class="button__change-district" value="86">
-              Quận Bình Thạnh
+              {{ $t('product.binhThanh') }}
             </option>
             <option class="button__change-district" value="87">
-              Quận Gò Vấp
+              {{ $t('product.goVap') }}
             </option>
             <option class="button__change-district" value="109">
-              Quận Bình Tân
+              {{ $t('product.binhTan') }}
             </option>
             <option class="button__change-district" value="127">
-              Quận Tân Phú
+              {{ $t('product.tanPhu') }}
             </option>
             <option class="button__change-district" value="157">
-              Quận Phú Nhuận
+              {{ $t('product.phuNhuan') }}
             </option>
           </select>
           <div class="icon-down">
@@ -650,7 +618,7 @@
                 <p title="55B Trần Quang Khải, P. Tân Định, Q. 1, TP. HCM" class="address">
                   55B Trần Quang Khải, P. Tân Định, Q. 1, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871083355" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -673,7 +641,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -682,7 +650,7 @@
                 <p title="134 Nguyễn Thái Học, P. Phạm Ngũ Lão, Q.1, TP HCM" class="address">
                   134 Nguyễn Thái Học, P. Phạm Ngũ Lão, Q.1, TP HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000132" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -705,7 +673,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -714,7 +682,7 @@
                 <p title="218-220 Trần Quang Khải, P. Tân Định, Q.1, TP. HCM" class="address">
                   218-220 Trần Quang Khải, P. Tân Định, Q.1, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000218" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -737,7 +705,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -746,7 +714,7 @@
                 <p title="157-159 Nguyễn Thị Minh Khai, P. Phạm Ngũ Lão, Q. 1, TP. HCM" class="address">
                   157-159 Nguyễn Thị Minh Khai, P. Phạm Ngũ Lão, Q. 1, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871066159" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -769,7 +737,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -778,7 +746,7 @@
                 <p title="139 Trần Não, P. Bình An, Q.2, TP. HCM" class="address">
                   139 Trần Não, P. Bình An, Q.2, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000139" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -801,7 +769,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -810,7 +778,7 @@
                 <p title="190 Nguyễn Thị Định, khu phố 2, P. An Phú, Q.2, TP. HCM" class="address">
                   190 Nguyễn Thị Định, khu phố 2, P. An Phú, Q.2, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871010190" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -833,7 +801,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -842,7 +810,7 @@
                 <p title="177 Khánh Hội, P. 3, Q. 4, TP. HCM" class="address">
                   177 Khánh Hội, P. 3, Q. 4, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871067171" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -865,7 +833,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -874,7 +842,7 @@
                 <p title="785 Trần Hưng Đạo, P.1, Q.5, TP. HCM" class="address">
                   785 Trần Hưng Đạo, P.1, Q.5, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871011785" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -897,7 +865,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -906,7 +874,7 @@
                 <p title="1075B Hậu Giang, P. 11, Q. 6, TP. HCM" class="address">
                   1075B Hậu Giang, P. 11, Q. 6, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088075" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -929,7 +897,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -938,7 +906,7 @@
                 <p title="458 - 460 Hậu Giang, P.12, Q.6, TP. HCM" class="address">
                   458 - 460 Hậu Giang, P.12, Q.6, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000460" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -961,7 +929,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -970,7 +938,7 @@
                 <p title="248 Nguyễn Thị Thập, P. Tân Quy, Q.7, TP. HCM" class="address">
                   248 Nguyễn Thị Thập, P. Tân Quy, Q.7, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088248" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -993,7 +961,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1002,7 +970,7 @@
                 <p title="571 Huỳnh Tấn Phát, P. Tân Thuận Đông, Q.7, TP. HCM" class="address">
                   571 Huỳnh Tấn Phát, P. Tân Thuận Đông, Q.7, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000571" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1025,7 +993,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1034,7 +1002,7 @@
                 <p title="435 Nguyễn Thị Thập, P. Tân Phong, Q.7, TP. HCM" class="address">
                   435 Nguyễn Thị Thập, P. Tân Phong, Q.7, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000435" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1057,7 +1025,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1066,7 +1034,7 @@
                 <p title="579 Dương Bá Trạc, P.1, Q.8, TP. HCM" class="address">
                   579 Dương Bá Trạc, P.1, Q.8, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871001579" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1089,7 +1057,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1098,7 +1066,7 @@
                 <p title="125 Lê Văn Việt, P. Hiệp Phú, Q. 9, TP. HCM" class="address">
                   125 Lê Văn Việt, P. Hiệp Phú, Q. 9, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871061125" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1121,7 +1089,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1130,7 +1098,7 @@
                 <p title="241 Lê Văn Việt, P. Hiệp Phú, Q.9, TP. HCM" class="address">
                   241 Lê Văn Việt, P. Hiệp Phú, Q.9, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000241" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1153,7 +1121,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1162,7 +1130,7 @@
                 <p title="241-243, Đỗ Xuân Hợp, P. Phước Long B, Q.9, TP. HCM" class="address">
                   241-243, Đỗ Xuân Hợp, P. Phước Long B, Q.9, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088241" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1185,7 +1153,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1194,7 +1162,7 @@
                 <p title="347 Nguyễn Tri Phương, Phường 5, Quận 10, TP. HCM" class="address">
                   347 Nguyễn Tri Phương, Phường 5, Quận 10, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000347" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1217,7 +1185,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1226,7 +1194,7 @@
                 <p title="288 Đường 3/2, P. 12, Q. 10, TP. HCM" class="address">
                   288 Đường 3/2, P. 12, Q. 10, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871066288" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1249,7 +1217,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1258,7 +1226,7 @@
                 <p title="457B Lê Đại Hành, P.11, Q.11, TP. HCM" class="address">
                   457B Lê Đại Hành, P.11, Q.11, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000457" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1281,7 +1249,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1290,7 +1258,7 @@
                 <p title="17 Phan Văn Hớn, P. Tân Thới Nhất, Q.12, TP. HCM" class="address">
                   17 Phan Văn Hớn, P. Tân Thới Nhất, Q.12, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871012017" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1313,7 +1281,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1322,7 +1290,7 @@
                 <p title="93/8C Nguyễn Ảnh Thủ, P. Trung Mỹ Tây, Q.12, TP. HCM" class="address">
                   93/8C Nguyễn Ảnh Thủ, P. Trung Mỹ Tây, Q.12, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000093" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1345,7 +1313,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1354,7 +1322,7 @@
                 <p title="1A Nguyễn Ảnh Thủ, khu phố 1, P. Hiệp Thành, Q.12, TP. HCM" class="address">
                   1A Nguyễn Ảnh Thủ, khu phố 1, P. Hiệp Thành, Q.12, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088001" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1377,7 +1345,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1386,7 +1354,7 @@
                 <p title="632A Kha Vạn Cân, P. Linh Đông, TP. Thủ Đức, TP. HCM" class="address">
                   632A Kha Vạn Cân, P. Linh Đông, TP. Thủ Đức, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000632" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1409,7 +1377,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1418,7 +1386,7 @@
                 <p title="943 Kha Vạn Cân, P. Linh Trung, Thủ Đức, TP. HCM" class="address">
                   943 Kha Vạn Cân, P. Linh Trung, Thủ Đức, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000943" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1441,7 +1409,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1450,7 +1418,7 @@
                 <p title="18 Võ Văn Ngân, P. Trường Thọ, Q. Thủ Đức, TP. HCM" class="address">
                   18 Võ Văn Ngân, P. Trường Thọ, Q. Thủ Đức, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871097939" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1473,7 +1441,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1482,7 +1450,7 @@
                 <p title="4/39 Quang Trung, Thới Tam Thôn, H. Hóc Môn, TP. HCM" class="address">
                   4/39 Quang Trung, Thới Tam Thôn, H. Hóc Môn, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088439" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1505,7 +1473,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1514,7 +1482,7 @@
                 <p title="C3/1A Phạm Hùng, X. Bình Hưng, H. Bình Chánh, TP. HCM" class="address">
                   C3/1A Phạm Hùng, X. Bình Hưng, H. Bình Chánh, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000312" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1537,7 +1505,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1546,7 +1514,7 @@
                 <p title="1716/1 Huỳnh Tấn Phát, thị trấn Nhà Bè, Huyện Nhà Bè, TP. HCM" class="address">
                   1716/1 Huỳnh Tấn Phát, thị trấn Nhà Bè, Huyện Nhà Bè, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871061716" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1569,7 +1537,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1578,7 +1546,7 @@
                 <p title="193 Tỉnh Lộ 8, Khu phố 3, Thị trấn Củ Chi, H. Củ Chi, TP. HCM" class="address">
                   193 Tỉnh Lộ 8, Khu phố 3, Thị trấn Củ Chi, H. Củ Chi, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000193" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1601,7 +1569,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1610,7 +1578,7 @@
                 <p title="58 Tỉnh Lộ 8, Ấp 1, Xã Tân Thạnh Tây, Huyện Củ Chi, TP. HCM" class="address">
                   58 Tỉnh Lộ 8, Ấp 1, Xã Tân Thạnh Tây, Huyện Củ Chi, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871200058" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1633,7 +1601,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1642,7 +1610,7 @@
                 <p title="359 Cộng Hòa, P.13, Q. Tân Bình, TP. HCM" class="address">
                   359 Cộng Hòa, P.13, Q. Tân Bình, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871015359" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1665,7 +1633,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1674,7 +1642,7 @@
                 <p title="190B Hoàng Văn Thụ, P4, Q. Tân Bình, TP. HCM" class="address">
                   190B Hoàng Văn Thụ, P4, Q. Tân Bình, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000190" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1697,7 +1665,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1706,7 +1674,7 @@
                 <p title="672-674 Âu Cơ, P. 14, Q. Tân Bình, TP. HCM" class="address">
                   672-674 Âu Cơ, P. 14, Q. Tân Bình, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088672" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1729,7 +1697,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1738,7 +1706,7 @@
                 <p title="956 Âu Cơ, P.14, Q. Tân Bình, TP. HCM" class="address">
                   956 Âu Cơ, P.14, Q. Tân Bình, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000956" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1761,7 +1729,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1770,7 +1738,7 @@
                 <p title="377-379 Điện Biên Phủ, P. 25, Q. Bình Thạnh, TP. HCM" class="address">
                   377-379 Điện Biên Phủ, P. 25, Q. Bình Thạnh, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871077377" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1793,7 +1761,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1802,7 +1770,7 @@
                 <p title="536 Xô Viết Nghệ Tĩnh, P. 25, Q. Bình Thạnh, TP. HCM" class="address">
                   536 Xô Viết Nghệ Tĩnh, P. 25, Q. Bình Thạnh, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871065536" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1825,7 +1793,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1834,7 +1802,7 @@
                 <p title="59 Quang Trung, P. 10, Q. Gò Vấp, TP. HCM" class="address">
                   59 Quang Trung, P. 10, Q. Gò Vấp, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871088059" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1857,7 +1825,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1866,7 +1834,7 @@
                 <p title="272 Nguyễn Oanh, P.17, Q. Gò Vấp, TP. HCM" class="address">
                   272 Nguyễn Oanh, P.17, Q. Gò Vấp, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000272" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1889,7 +1857,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1898,7 +1866,7 @@
                 <p title="567 Lê Quang Định, P.1, Q. Gò Vấp, TP. HCM" class="address">
                   567 Lê Quang Định, P.1, Q. Gò Vấp, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000567" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1921,7 +1889,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1930,7 +1898,7 @@
                 <p title="525 Quang Trung, P.10, Q. Gò Vấp, TP. HCM" class="address">
                   525 Quang Trung, P.10, Q. Gò Vấp, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000525" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1953,7 +1921,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1962,7 +1930,7 @@
                 <p title="888 Tỉnh Lộ 10, P. Bình Trị Đông A, Q. Bình Tân, TP. HCM" class="address">
                   888 Tỉnh Lộ 10, P. Bình Trị Đông A, Q. Bình Tân, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871068880" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -1985,7 +1953,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1994,7 +1962,7 @@
                 <p title="127 Nguyễn Thị Tú, P. Bình Hưng Hoà B, Q. Bình Tân, TP. HCM" class="address">
                   127 Nguyễn Thị Tú, P. Bình Hưng Hoà B, Q. Bình Tân, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000229" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2017,7 +1985,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2027,7 +1995,7 @@
                   386 Hương Lộ 2, P. Bình Trị Đông, Q. Bình Tân (Ngã Tư Bốn Xã),
                   TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871087386" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2050,7 +2018,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2059,7 +2027,7 @@
                 <p title="161 Nguyễn Sơn, P. Phú Thạnh, Q. Tân Phú, TP. HCM" class="address">
                   161 Nguyễn Sơn, P. Phú Thạnh, Q. Tân Phú, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871016161" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2082,7 +2050,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2091,7 +2059,7 @@
                 <p title="449 - 451 Tân Kỳ Tân Quý, P. Tân Quý, Q. Tân Phú, TP. HCM" class="address">
                   449 - 451 Tân Kỳ Tân Quý, P. Tân Quý, Q. Tân Phú, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000449" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2114,7 +2082,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2123,7 +2091,7 @@
                 <p title="472 - 474 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP. HCM" class="address">
                   472 - 474 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871000472" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2146,7 +2114,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2155,7 +2123,7 @@
                 <p title="114 Phan Đăng Lưu, P. 3, Q. Phú Nhuận, TP. HCM" class="address">
                   114 Phan Đăng Lưu, P. 3, Q. Phú Nhuận, TP. HCM
                 </p>
-                <div class="is-flex">
+                <div class="d-flex">
                   <a href="tel:02871097020" class="phone disabled"><svg width="16" height="16" viewBox="0 0 16 16"
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -2178,7 +2146,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2186,21 +2154,13 @@
           <div class="swiper-button-next button-navigate-thumbnail__next" tabindex="0" role="button"
             aria-label="Next slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="right" />
             </div>
           </div>
           <div class="swiper-button-prev button-navigate-thumbnail__prev" tabindex="0" role="button"
             aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="left" />
             </div>
           </div>
           <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets" style="display: none">
@@ -2224,7 +2184,7 @@
             stroke-linecap="round" stroke-linejoin="round"></path>
           <path d="M3 9H7" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
-        <p class="title">Thông tin vận chuyển</p>
+        <p class="title">{{ $t('product.shippingInfo') }}</p>
       </div>
       <div class="content">
         <div class="btn-change-address">
@@ -2236,29 +2196,29 @@
               d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
               stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
-          <span>Chọn địa chỉ giao hàng để nhận ưu đãi</span>
-          <div class="label-new">Mới</div>
+          <span>{{ $t('product.selectAddressForOffer') }}</span>
+          <div class="label-new">{{ $t('product.newLabel') }}</div>
         </div>
       </div>
     </div>
     <div>
       <div user="[object Object]" data-fetch-key="BoxOrderButton:0">
         <div class="box-order-button-container">
-          <div class="mb-3 is-flex is-justify-content-space-between" style="gap: 6px">
+          <div class="mb-3 d-flex justify-content-between" style="gap: 6px">
             <div class="installment-wrapper">
               <div style="height: 100%">
                 <button id="installmentCta" class="btn-cta installment-group-cta">
-                  <strong>Trả góp 0%</strong>
+                  <strong>{{ $t('common.installment0') }}</strong>
                 </button>
               </div>
             </div>
             <button
-              class="btn-cta order-button button--large is-flex is-justify-content-center is-align-items-center"
+              class="btn-cta order-button button--large d-flex justify-content-center align-items-center"
               :disabled="cartBusy"
               @click="buyCurrentProductNow"
             >
-              <strong>MUA NGAY</strong>
-              <span>Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng</span>
+              <strong>{{ $t('common.buyNowAction') }}</strong>
+              <span>{{ $t('product.fastDeliveryNote') }}</span>
             </button>
             <button
               class="btn-cta button button--small add-to-cart-button"
@@ -2279,7 +2239,7 @@
                   d="M15 5C14.4477 5 14 5.44772 14 6C14 6.55228 14.4477 7 15 7V5ZM21 7C21.5523 7 22 6.55228 22 6C22 5.44772 21.5523 5 21 5V7ZM19 3C19 2.44772 18.5523 2 18 2C17.4477 2 17 2.44772 17 3H19ZM17 9C17 9.55228 17.4477 10 18 10C18.5523 10 19 9.55228 19 9H17ZM15 7H21V5H15V7ZM17 3V9H19V3H17Z"
                   fill="#D70018"></path>
               </svg>
-              <strong class="">Thêm vào giỏ</strong>
+              <strong class="">{{ $t('product.addToCart') }}</strong>
             </button>
           </div>
         </div>
@@ -2300,6 +2260,7 @@ import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import ProductBoxWarranty from "@/components/Products/ProductDetail/ProductBoxWarranty.vue";
 import ProductSuggest from "@/components/Products/ProductDetail/ProductSuggest.vue";
+import ArrowIcon from "@/components/Icons/ArrowIcon.vue";
 import { useProductStore } from '@/stores/productStore';
 import { useCartActions } from '@/composables/useCartActions';
 
@@ -2449,30 +2410,6 @@ onBeforeUnmount(() => {
   flex-grow: 1;
   flex-shrink: 1;
   padding: 0.75rem;
-}
-
-.is-flex {
-  display: flex !important;
-}
-
-.is-flex-direction-column {
-  flex-direction: column !important;
-}
-
-.is-justify-content-center {
-  justify-content: center !important;
-}
-
-.is-justify-content-space-between {
-  justify-content: space-between !important;
-}
-
-.is-align-content-center {
-  align-content: center !important;
-}
-
-.is-align-items-center {
-  align-items: center !important;
 }
 
 .has-text-black {
@@ -2819,24 +2756,24 @@ onBeforeUnmount(() => {
   flex: 1;
 }
 
-.box-product-price .smember-price-label .is-flex,
-.box-product-price .trade-price-label .is-flex {
+.box-product-price .smember-price-label .d-flex,
+.box-product-price .trade-price-label .d-flex {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 0;
   justify-content: center;
 }
 
-.box-product-price .smember-price-label .is-flex .sale-price,
-.box-product-price .trade-price-label .is-flex .sale-price {
+.box-product-price .smember-price-label .d-flex .sale-price,
+.box-product-price .trade-price-label .d-flex .sale-price {
   color: #1d1d20;
   font-size: 20px;
   font-weight: 600;
   line-height: 100%;
 }
 
-.box-product-price .smember-price-label .is-flex .base-price,
-.box-product-price .trade-price-label .is-flex .base-price {
+.box-product-price .smember-price-label .d-flex .base-price,
+.box-product-price .trade-price-label .d-flex .base-price {
   color: #a1a1aa;
   font-size: 14px;
   font-weight: 400;

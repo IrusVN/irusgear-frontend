@@ -4,7 +4,7 @@
       <div class="box-product-name">
         <h1>{{ productStore.productDetail?.name }}</h1>
       </div>
-      <div class="is-flex is-align-items-center mt-2">
+      <div class="d-flex align-items-center mt-2">
         <div class="box-rating">
           <svg height="15" viewBox="0 0 576 512">
             <path
@@ -12,7 +12,7 @@
             </path>
           </svg>
           <span>{{ productStore.productDetail?.ratingSummary?.average || 0 }}</span> <span class="total-rating">({{
-            productStore.productDetail?.ratingSummary?.count || 0 }} đánh giá)</span>
+            $t('product.reviewCountLabel', { count: productStore.productDetail?.ratingSummary?.count || 0 }) }})</span>
         </div>
       </div>
       <div class="box-header__bottom">
@@ -54,9 +54,9 @@
                 <span class="effect"></span> <span class="effect"></span>
                 <span class="effect"></span></span>
             </div>
-            <span class="text-wishlist" style="display: none">&nbsp;Yêu thích</span>
+            <span class="text-wishlist" style="display: none">&nbsp;{{ $t('product.favorite') }}</span>
           </button>
-          <span class="label">Yêu thích</span>
+          <span class="label">{{ $t('product.favorite') }}</span>
         </div>
         <div class="box-bottom-item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@
               d="M9 18H6C5.20435 18 4.44129 17.6839 3.87868 17.1213C3.31607 16.5587 3 15.7956 3 15V7C3 6.20435 3.31607 5.44129 3.87868 4.87868C4.44129 4.31607 5.20435 4 6 4H18C18.7956 4 19.5587 4.31607 20.1213 4.87868C20.6839 5.44129 21 6.20435 21 7V15C21 15.7956 20.6839 16.5587 20.1213 17.1213C19.5587 17.6839 18.7956 18 18 18H15L12 21L9 18Z"
               stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
-          <span class="label">Hỏi đáp</span>
+          <span class="label">{{ $t('common.qa') }}</span>
         </div>
         <div class="box-bottom-item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,9 +89,9 @@
             <path d="M10 21V19" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             </path>
           </svg>
-          <span class="label"> Thông số </span>
+          <span class="label"> {{ $t('product.specs') }} </span>
         </div>
-        <div class="pdp-compare-button-box is-flex is-align-items-center">
+        <div class="pdp-compare-button-box d-flex align-items-center">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M3 12C3 13.1819 3.23279 14.3522 3.68508 15.4442C4.13738 16.5361 4.80031 17.5282 5.63604 18.364C6.47177 19.1997 7.46392 19.8626 8.55585 20.3149C9.64778 20.7672 10.8181 21 12 21C13.1819 21 14.3522 20.7672 15.4442 20.3149C16.5361 19.8626 17.5282 19.1997 18.364 18.364C19.1997 17.5282 19.8626 16.5361 20.3149 15.4442C20.7672 14.3522 21 13.1819 21 12C21 9.61305 20.0518 7.32387 18.364 5.63604C16.6761 3.94821 14.3869 3 12 3C9.61305 3 7.32387 3.94821 5.63604 5.63604C3.94821 7.32387 3 9.61305 3 12Z"
@@ -101,7 +101,7 @@
             <path d="M12 9V15" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             </path>
           </svg>
-          <a class="label"> So sánh</a>
+          <a class="label"> {{ $t('product.compare') }}</a>
         </div>
       </div>
     </div>
@@ -122,21 +122,13 @@
           <div class="swiper-button-next button__view-gallery-next" tabindex="0" role="button" aria-label="Next slide"
             aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="right" />
             </div>
           </div>
           <div class="swiper-button-prev button__view-gallery-prev" tabindex="0" role="button"
             aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="left" />
             </div>
           </div>
           <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
@@ -155,21 +147,13 @@
           <div class="swiper-button-next button-navigate-thumbnail__next" tabindex="0" role="button"
             aria-label="Next slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="right" />
             </div>
           </div>
           <div class="swiper-button-prev button-navigate-thumbnail__prev" tabindex="0" role="button"
             aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="left" />
             </div>
           </div>
           <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
@@ -179,7 +163,7 @@
     <div class="mt-5">
       <div class="box-warranty-info">
         <div class="box-title">
-          <p>Cam kết sản phẩm</p>
+          <p>{{ $t('common.productCommitment') }}</p>
         </div>
         <div class="box-content warranty-info">
           <div class="swiper swiper-container swiper-pdp">
@@ -212,11 +196,7 @@
                     </svg>
                   </div>
                   <div class="box-wrapper">
-                    <div class="description">
-                      Máy mới 100% , chính hãng Apple Việt Nam.<br />CellphoneS
-                      hiện là đại lý bán lẻ uỷ quyền iPhone chính hãng VN/A của
-                      Apple Việt Nam
-                    </div>
+                    <div class="description" v-html="$t('common.authenticApple')"></div>
                   </div>
                 </div>
               </div>
@@ -249,18 +229,8 @@
                     </svg>
                   </div>
                   <div class="box-wrapper">
-                    <div class="description">
-                      1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất.
-                      Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple:
-                      CareS.vn<a href="https://cellphones.com.vn/chinh-sach-bao-hanh" target="_blank">
-                        Xem chi tiết</a>
-                    </div>
-                    <div class="description">
-                      Xem thông tin kích hoạt bảo hành các sản phẩm Apple
-                      <a target="_blank" href="https://cellphones.com.vn/kich-hoat-bao-hanh-sam-pham-apple">Chi tiết tại
-                        đây
-                      </a>
-                    </div>
+                    <div class="description" v-html="$t('common.exchange30days')"></div>
+                    <div class="description" v-html="$t('common.activateWarranty')"></div>
                   </div>
                 </div>
               </div>
@@ -288,9 +258,7 @@
                       </defs>
                     </svg>
                   </div>
-                  <div class="description">
-                    Hộp, Sách hướng dẫn, Cây lấy sim, Cáp Lightning - Type C
-                  </div>
+                  <div class="description" v-html="$t('common.boxIncludes')"></div>
                 </div>
               </div>
               <div class="swiper-slide" style="
@@ -322,11 +290,7 @@
                       </defs>
                     </svg>
                   </div>
-                  <div class="description">
-                    Giá sản phẩm <b>đã bao gồm thuế VAT</b>, có hỗ trợ
-                    <a href="https://cellphones.com.vn/vat-refund" target="_blank">hoàn thuế VAT - Tax Refund</a>
-                    cho khách du lịch.
-                  </div>
+                  <div class="description" v-html="$t('common.vatIncluded')"></div>
                 </div>
               </div>
             </div>
@@ -336,26 +300,14 @@
             </div>
             <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"
               aria-disabled="false">
-              <div>
-                <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                  <path
-                    d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                  </path>
-                </svg>
-              </div>
+              <ArrowIcon direction="left" />
             </div>
             <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false">
-              <div>
-                <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                  <path
-                    d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                  </path>
-                </svg>
-              </div>
+              <ArrowIcon direction="right" />
             </div>
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
           </div>
-          <div class="swiper swiper-container is-hidden">
+          <div class="swiper swiper-container d-none">
             <div class="swiper-wrapper" style="transition-duration: 0ms">
               <div class="swiper-slide" style="height: 148px"></div>
             </div>
@@ -366,18 +318,12 @@
       </div>
     </div>
     <div id="thong-so-ky-thuat" class="cps-block-technicalInfo">
-      <div class="box-title is-flex is-justify-content-space-between is-align-items-center">
-        <h2 class="title">Thông số kỹ thuật</h2>
-        <button class="button button__show-modal-technical is-flex is-justify-content-center"
+      <div class="box-title d-flex justify-content-between align-items-center">
+        <h2 class="title">{{ $t('product.specsTitle') }}</h2>
+        <button class="button button__show-modal-technical d-flex justify-content-center"
           @click="showAllSpecs = !showAllSpecs">
-          {{ showAllSpecs ? 'Thu gọn' : 'Xem tất cả' }}
-          <div class="icon-svg">
-            <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path
-                d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-              </path>
-            </svg>
-          </div>
+          {{ showAllSpecs ? $t('common.collapseExpand') : $t('common.showAllSpecs') }}
+          <ArrowIcon direction="right" :size="15" />
         </button>
       </div>
 
@@ -396,12 +342,8 @@
         </table>
         <div v-if="!showAllSpecs && Object.keys(productSpecs).length > 7" class="specs-show-more">
           <button @click="showAllSpecs = true" class="btn-show-more-specs">
-            Xem thêm {{ Object.keys(productSpecs).length - 7 }} thông số
-            <svg height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-              <path
-                d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z">
-              </path>
-            </svg>
+            {{ $t('product.showMoreSpecs', { count: Object.keys(productSpecs).length - 7 }) }}
+            <ArrowIcon direction="down" :size="10" />
           </button>
         </div>
       </template>
@@ -424,7 +366,7 @@
 
       <!-- Message when no specs available -->
       <template v-else>
-        <p class="no-specs-msg">Thông số kỹ thuật đang được cập nhật.</p>
+        <p class="no-specs-msg">{{ $t('product.specsUpdating') }}</p>
       </template>
     </div>
   </div>
@@ -433,6 +375,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useProductStore } from '@/stores/productStore';
+import ArrowIcon from '@/components/Icons/ArrowIcon.vue';
 
 const productStore = useProductStore();
 
@@ -646,30 +589,6 @@ onBeforeUnmount(() => {
   flex-grow: 1;
   flex-shrink: 1;
   padding: 0.75rem;
-}
-
-.is-flex {
-  display: flex !important;
-}
-
-.is-hidden {
-  display: none !important;
-}
-
-.is-flex-direction-row {
-  flex-direction: row !important;
-}
-
-.is-justify-content-center {
-  justify-content: center !important;
-}
-
-.is-justify-content-space-between {
-  justify-content: space-between !important;
-}
-
-.is-align-items-center {
-  align-items: center !important;
 }
 
 .mb-1 {
@@ -1354,14 +1273,10 @@ onBeforeUnmount(() => {
   font-size: 12px;
   font-weight: 500;
   background-color: transparent;
+  gap: 4px;
 }
 
-.cps-block-technicalInfo .button__show-modal-technical .icon-svg {
-  align-items: center;
-  display: flex;
-}
-
-.cps-block-technicalInfo .button__show-modal-technical .icon-svg svg {
+.cps-block-technicalInfo .button__show-modal-technical :deep(svg) {
   fill: #3b82f6;
 }
 

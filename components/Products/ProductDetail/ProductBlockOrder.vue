@@ -12,7 +12,7 @@
             loading="lazy"
             class="cta-product-image"
           />
-          <div class="is-flex-column">
+          <div class="d-flex flex-column">
             <p class="cta-product-name">{{ productName }}</p>
           </div>
         </div>
@@ -28,7 +28,7 @@
           </div>
 
           <button type="button" class="button-desktop button-desktop-installment">
-            <p>Trả góp 0%</p>
+            <p>{{ $t('common.installment0') }}</p>
           </button>
 
           <button
@@ -37,13 +37,13 @@
             :disabled="cartBusy"
             @click="buyCurrentProductNow"
           >
-            <p>Mua Ngay</p>
+            <p>{{ $t('common.buyNowAction') }}</p>
           </button>
 
           <button
             type="button"
             class="button-desktop button-add-to-cart"
-            aria-label="Thêm vào giỏ hàng"
+            :aria-label="$t('product.addToCart')"
             :disabled="cartBusy"
             @click="addCurrentProductToCart()"
           >
@@ -189,13 +189,6 @@ const showBasePrice = computed(() => {
   height: 56px;
   object-fit: cover;
   width: 56px;
-}
-
-.is-flex-column {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
 }
 
 .cta-product-name {

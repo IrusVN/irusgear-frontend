@@ -18,14 +18,14 @@
             <button
               type="button"
               class="btn header-search d-none d-md-flex align-items-center gap-2 gap-lg-3 flex-grow-1 text-start px-3 px-lg-4 py-2"
-              title="Tim kiem san pham"
+              :title="$t('sidebar.searchPlaceholder')"
             >
               <i class="bi bi-search fs-6 text-secondary"></i>
               <span class="search-text small text-secondary-emphasis text-truncate">
-                Tìm kiếm sản phẩm, danh mục...
+                {{ $t('home.searchProducts') }}
               </span>
               <span class="search-shortcut d-none d-xl-inline-flex align-items-center justify-content-center">
-                Ctrl K
+                {{ $t('home.searchShortcut') }}
               </span>
             </button>
 
@@ -48,14 +48,14 @@
                 <span>{{ ctaLink.label }}</span>
               </NuxtLink>
 
-              <button type="button" class="btn header-icon-btn d-md-none" aria-label="Tim kiem">
+              <button type="button" class="btn header-icon-btn d-md-none" :aria-label="$t('sidebar.searchPlaceholder')">
                 <i class="bi bi-search"></i>
               </button>
 
               <NuxtLink
                 :to="localePath('/cart')"
                 class="btn header-icon-btn position-relative"
-                aria-label="Gio hang"
+                :aria-label="$t('cart.cart')"
               >
                 <i class="bi bi-cart3"></i>
                 <span
@@ -66,11 +66,11 @@
                 </span>
               </NuxtLink>
 
-              <button type="button" class="btn header-icon-btn d-none d-xl-inline-flex" aria-label="Thong bao">
+              <button type="button" class="btn header-icon-btn d-none d-xl-inline-flex" :aria-label="$t('common.notification')">
                 <i class="bi bi-bell"></i>
               </button>
 
-              <button type="button" class="btn header-icon-btn d-none d-xxl-inline-flex" aria-label="Ngon ngu">
+              <button type="button" class="btn header-icon-btn d-none d-xxl-inline-flex" :aria-label="$t('common.language')">
                 <i class="bi bi-globe2"></i>
               </button>
 
@@ -119,18 +119,18 @@
                 <ul class="dropdown-menu dropdown-menu-end glass-dropdown border-0 shadow-sm mt-3 rounded-4 p-2">
                   <li>
                     <NuxtLink :to="localePath('/profile')" class="dropdown-item rounded-3 py-2">
-                      <i class="bi bi-person me-2"></i>Hồ sơ cá nhân
+                      <i class="bi bi-person me-2"></i>{{ $t('common.profile') }}
                     </NuxtLink>
                   </li>
                   <li>
                     <NuxtLink :to="localePath('/orders')" class="dropdown-item rounded-3 py-2">
-                      <i class="bi bi-box-seam me-2"></i>Đơn mua
+                      <i class="bi bi-box-seam me-2"></i>{{ $t('common.orders') }}
                     </NuxtLink>
                   </li>
                   <li><hr class="dropdown-divider opacity-10 my-1"></li>
                   <li>
                     <button class="dropdown-item rounded-3 py-2 text-danger" @click="auth.logout">
-                      <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
+                      <i class="bi bi-box-arrow-right me-2"></i>{{ $t('common.logout') }}
                     </button>
                   </li>
                 </ul>
@@ -174,7 +174,7 @@
               <div class="vr opacity-25 mx-1"></div>
 
               <div class="d-flex align-items-center gap-1 px-2 py-1 rounded-pill featured-nav">
-                <span class="featured-nav-label d-none d-xl-inline px-2">Danh mục</span>
+                <span class="featured-nav-label d-none d-xl-inline px-2">{{ $t('home.category') }}</span>
 
                 <NuxtLink
                   v-for="item in featuredNavItems"
@@ -209,7 +209,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useLocalePath, useRoute } from '#imports'
+import { useLocalePath, useRoute, useI18n } from '#imports'
 import CategoryMegaMenu from '@/components/Home/CategoryMegaMenu.vue'
 import { useHomeStore } from '@/stores/homeStore'
 import { useAuthStore } from '@/stores/authStore'
@@ -224,6 +224,7 @@ const { itemCount } = storeToRefs(cartStore)
 const { heroMegaMenuOpen } = storeToRefs(homeStore)
 const localePath = useLocalePath()
 const route = useRoute()
+const { t } = useI18n()
 const customerSidebarWrapRef = ref(null)
 const productsButtonRef = ref(null)
 const productsDropdownRef = ref(null)
@@ -412,36 +413,36 @@ onBeforeUnmount(() => {
 
 const utilityLinks = computed(() => [
   {
-    label: 'Khuyến mãi',
+    label: t('home.promotion'),
     to: localePath('/khuyen-mai'),
     icon: 'bi bi-tags',
   },
 ])
 
 const ctaLink = computed(() => ({
-  label: 'Deal Hot',
+  label: t('home.dealHot'),
   to: localePath('/khuyen-mai'),
   icon: 'bi bi-stars',
 }))
 
 const primaryNavItems = computed(() => [
   {
-    label: 'Trang chủ',
+    label: t('home.home'),
     to: localePath('/'),
     icon: 'bi bi-house-door',
   },
   {
-    label: 'Tin tức',
+    label: t('home.news'),
     to: localePath('/tin-tuc'),
     icon: 'bi bi-newspaper',
   },
   {
-    label: 'Khuyến mãi',
+    label: t('home.promotion'),
     to: localePath('/khuyen-mai'),
     icon: 'bi bi-megaphone',
   },
   {
-    label: 'Liên hệ',
+    label: t('home.contact'),
     to: localePath('/lien-he'),
     icon: 'bi bi-headset',
   },
@@ -464,25 +465,25 @@ const isFeaturedNavItemActive = (item) => {
 
 const featuredNavItems = computed(() => [
   {
-    label: 'Laptop',
+    label: t('footerNav.laptopPc'),
     category: 'laptop',
     to: buildProductsCategoryLink('laptop'),
     icon: 'bi bi-laptop',
   },
   {
-    label: 'Âm thanh',
+    label: t('footerNav.audioDevice'),
     category: 'am-thanh',
     to: buildProductsCategoryLink('am-thanh'),
     icon: 'bi bi-headphones',
   },
   {
-    label: 'Đồng hồ',
+    label: t('home.catWatchCamera'),
     category: 'dong-ho',
     to: buildProductsCategoryLink('dong-ho'),
     icon: 'bi bi-smartwatch',
   },
   {
-    label: 'Phụ kiện',
+    label: t('cart.accessory'),
     category: 'phu-kien',
     to: buildProductsCategoryLink('phu-kien'),
     icon: 'bi bi-mouse2',

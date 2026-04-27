@@ -1,10 +1,10 @@
 <template>
   <div class="card-shell h-100 px-1 py-1 position-relative">
     <span v-if="product.badge" class="pos-badge">
-      Giảm <span class="badge-strong">{{ product.discount }}%</span>
+      {{ $t('common.discount') }} <span class="badge-strong">{{ product.discount }}%</span>
     </span>
     <span v-if="product.installmentText" class="pos-installment">
-      Trả góp <span class="badge-strong">0%</span>
+      {{ $t('common.installment') }} <span class="badge-strong">0%</span>
     </span>
 
     <div class="prod-card h-100 position-relative">
@@ -32,9 +32,9 @@
 
       <div class="bottom-row">
         <span class="rating"><i class="bi bi-star-fill"></i> {{ normalizedRating }}</span>
-        <button type="button" class="fav-btn" aria-label="Yeu thich">
+        <button type="button" class="fav-btn" :aria-label="$t('product.favorite')">
           <i class="bi bi-heart"></i>
-          <span class="d-none d-sm-inline">Yêu thích</span>
+          <span class="d-none d-sm-inline">{{ $t('product.favorite') }}</span>
         </button>
       </div>
     </div>

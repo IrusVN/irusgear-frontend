@@ -51,7 +51,7 @@
           type="button"
           class="cart-item__remove"
           :disabled="busy"
-          aria-label="Xóa sản phẩm khỏi giỏ"
+          :aria-label="$t('cart.removeFromCart')"
           @click="emit('remove', item.id)"
         >
           <i class="bi bi-trash3"></i>
@@ -67,14 +67,14 @@
         </div>
 
         <div class="cart-item__quantity-wrap">
-          <span class="cart-item__quantity-label">Số lượng</span>
+          <span class="cart-item__quantity-label">{{ $t('cart.quantity') }}</span>
 
           <div class="cart-item__quantity">
             <button
               type="button"
               class="cart-item__quantity-btn"
               :disabled="busy"
-              aria-label="Giảm số lượng sản phẩm"
+              :aria-label="$t('cart.decreaseQuantity')"
               @click="decrement"
             >
               <i class="bi bi-dash"></i>
@@ -86,7 +86,7 @@
               type="button"
               class="cart-item__quantity-btn"
               :disabled="busy || item.availability?.inStock === false"
-              aria-label="Tăng số lượng sản phẩm"
+              :aria-label="$t('cart.increaseQuantity')"
               @click="increment"
             >
               <i class="bi bi-plus"></i>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="cart-item__line-total">
-          <span class="cart-item__line-total-label">Thành tiền</span>
+          <span class="cart-item__line-total-label">{{ $t('cart.total') }}</span>
           <strong>{{ item.currentLineTotal?.formatted || item.lineTotal?.formatted }}</strong>
         </div>
       </div>
@@ -105,7 +105,9 @@
 
 <script setup>
 import { computed } from "vue";
-import { useLocalePath } from "#imports";
+import { useLocalePath, useI18n } from "#imports";
+
+const { t } = useI18n();
 
 const props = defineProps({
   item: {
@@ -142,19 +144,19 @@ const statusChips = computed(() => {
 
   if (props.item?.availability?.isActive === false) {
     chips.push({
-      label: "Ngừng bán",
+      label: t('cart.stoppedSelling'),
       tone: "danger",
     });
   } else if (props.item?.availability?.inStock === false) {
     chips.push({
-      label: "Hết hàng",
+      label: t('cart.outOfStock'),
       tone: "warning",
     });
   }
 
   if (props.item?.priceChanged) {
     chips.push({
-      label: "Giá mới",
+      label: t('cart.newPrice'),
       tone: "info",
     });
   }

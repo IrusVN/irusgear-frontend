@@ -2,7 +2,7 @@
   <div>
   <section id="review" class="boxReview" v-if="productDetail">
     <div class="boxReview-head is-flex is-justify-content-space-between is-align-items-center">
-      <h2 class="title">Đánh giá {{ productDetail.name }}</h2>
+      <h2 class="title">{{ $t('product.reviewTitle', { name: productDetail.name }) }}</h2>
     </div>
 
     <div class="boxReview-review">
@@ -15,10 +15,10 @@
           <div class="summary-stars">
             <span v-for="star in 5" :key="`summary-${star}`" class="mini-star active">★</span>
           </div>
-          <p class="boxReview-score__count">{{ totalReviews }} lượt đánh giá</p>
+          <p class="boxReview-score__count">{{ totalReviews }} {{ $t('product.reviewCount') }}</p>
         </div>
         <button type="button" class="button button__review" @click="openReviewModal">
-          Viết đánh giá
+          {{ $t('product.writeReview') }}
         </button>
       </div>
 
@@ -37,12 +37,12 @@
             class="progress is-small m-0"
             :value="star.count"
           />
-          <span class="rating-count-text">{{ star.count }} đánh giá</span>
+          <span class="rating-count-text">{{ star.count }} {{ $t('product.reviews') }}</span>
         </div>
       </div>
 
       <div class="box-experience-review">
-        <div class="title">Đánh giá theo trải nghiệm</div>
+        <div class="title">{{ $t('product.reviewByExperience') }}</div>
         <div
           v-for="experience in experienceRows"
           :key="experience.key"
@@ -54,14 +54,14 @@
               <span v-for="star in 5" :key="`${experience.key}-${star}`" class="mini-star active small">★</span>
             </div>
             <div class="experience-average">{{ Number(experience.average || 0).toFixed(1) }}/5</div>
-            <div class="item-count">({{ experience.total }} đánh giá)</div>
+            <div class="item-count">({{ experience.total }} {{ $t('product.reviews') }})</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="box-review-filter">
-      <div class="title">Lọc đánh giá</div>
+      <div class="title">{{ $t('product.filterReviews') }}</div>
       <div class="filter-container">
         <button
           v-for="option in ratingFilterOptions"
@@ -140,7 +140,7 @@
         :disabled="isLoadingMoreReviews"
         @click="loadMoreReviews"
       >
-        {{ isLoadingMoreReviews ? "Đang tải..." : "Xem thêm đánh giá" }}
+        {{ isLoadingMoreReviews ? $t('common.loading') : $t('product.seeMoreReviews') }}
       </button>
     </div>
   </section>
@@ -151,9 +151,11 @@
 <script setup>
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
+import { useI18n } from "#imports";
 import { useProductStore } from "@/stores/productStore";
 import ModalReview from "@/components/Models/ModalReview.vue";
 
+const { t } = useI18n();
 const productStore = useProductStore();
 const {
   productDetail,
@@ -165,11 +167,11 @@ const {
 const isLoadingMoreReviews = ref(false);
 
 const experienceLabelMap = {
-  performance: "Hiệu năng",
-  camera: "Chất lượng camera",
-  battery: "Thời lượng pin",
-  design: "Thiết kế",
-  screen: "Màn hình",
+  performance: t('product.expPerformance'),
+  camera: t('product.expCamera'),
+  battery: t('product.expBattery'),
+  design: t('product.expDesign'),
+  screen: t('product.expScreen'),
 };
 
 const averageRatingDisplay = computed(() =>
@@ -181,10 +183,10 @@ const selectedRating = computed(() => productReviewList.value?.filters?.rating ?
 const selectedSort = computed(() => productReviewList.value?.filters?.sort || "latest");
 const sortOptions = computed(() => {
   const defaults = {
-    latest: "Mới nhất",
-    highest: "Đánh giá cao",
-    lowest: "Đánh giá thấp",
-    helpful: "Hữu ích",
+    latest: t('product.sortLatest'),
+    highest: t('product.highReviews'),
+    lowest: t('product.lowReviews'),
+    helpful: t('product.helpful'),
   };
 
   return (productReviewFilters.value?.sortOptions || []).map((item) => ({
@@ -193,12 +195,12 @@ const sortOptions = computed(() => {
   }));
 });
 const ratingFilterOptions = computed(() => ([
-  { value: null, label: "Tất cả" },
-  { value: 5, label: "5 sao" },
-  { value: 4, label: "4 sao" },
-  { value: 3, label: "3 sao" },
-  { value: 2, label: "2 sao" },
-  { value: 1, label: "1 sao" },
+  { value: null, label: t('product.all') },
+  { value: 5, label: "5 " + t('product.star') },
+  { value: 4, label: "4 " + t('product.star') },
+  { value: 3, label: "3 " + t('product.star') },
+  { value: 2, label: "2 " + t('product.star') },
+  { value: 1, label: "1 " + t('product.star') },
 ]));
 const ratingRows = computed(() => {
   const breakdown = productReviewSummary.value?.summary?.ratingBreakdown || {};
@@ -268,11 +270,11 @@ const loadMoreReviews = async () => {
 };
 
 const reviewRatingLabel = (rating) => {
-  if (rating >= 5) return "Tuyệt vời";
-  if (rating >= 4) return "Rất tốt";
-  if (rating >= 3) return "Tốt";
-  if (rating >= 2) return "Tạm được";
-  return "Chưa tốt";
+  if (rating >= 5) return t('product.ratingExcellent');
+  if (rating >= 4) return t('product.ratingVeryGood');
+  if (rating >= 3) return t('product.ratingGood');
+  if (rating >= 2) return t('product.ratingOkay');
+  return t('product.ratingBad');
 };
 </script>
 

@@ -8,11 +8,11 @@
               <div class="icon-fire">
                 <img src="https://cdn2.cellphones.com.vn/x/media/wysiwyg/fire-icon-2025.gif" alt="Lửa bập bùng" />
               </div>
-              <span>Mua kèm giá sốc</span>
+              <span>{{ $t('product.comboPriceLabel') }}</span>
             </div>
             <div class="option__action">
               <button type="button">
-                Xem tất cả
+                {{ $t('product.seeAll') }}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M6 4L10 8L6 12" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -56,7 +56,7 @@
                             <p v-else class="info__percent">{{ item.badge }}</p>
 
                             <button type="button" class="button button-select">
-                              <span>Chọn thêm</span>
+                              <span>{{ $t('common.comboSelect') }}</span>
                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                 <path d="M8 3.33325V12.6666" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"
                                   stroke-linejoin="round" />
@@ -77,21 +77,13 @@
               <div class="swiper-button-next button-navigate-thumbnail__next" tabindex="0" role="button"
                 aria-label="Next slide" aria-disabled="false">
                 <div class="icon">
-                  <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                    <path
-                      d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                    </path>
-                  </svg>
+                  <ArrowIcon direction="right" />
                 </div>
               </div>
               <div class="swiper-button-prev button-navigate-thumbnail__prev" tabindex="0" role="button"
                 aria-label="Previous slide" aria-disabled="false">
                 <div class="icon">
-                  <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                    <path
-                      d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                    </path>
-                  </svg>
+                  <ArrowIcon direction="left" />
                 </div>
               </div>
             </div>
@@ -101,7 +93,7 @@
     </section>
 
     <section v-if="accessoryDeals.length" id="boxUpsell" class="my-3">
-      <p class="upsell-title">Phụ kiện mua cùng</p>
+      <p class="upsell-title">{{ $t('cart.comboAccessory') }}</p>
       <div class="upsell-block-product">
         <div v-if="isSwiperMounted" :class="{ 'swiper--ready': isSwiperReady }" class="swiper accessory-swiper">
           <div class="swiper-wrapper">
@@ -137,7 +129,7 @@
                         </div>
 
                         <button type="button" class="button button-add-cart" :disabled="cartBusy" @click="handleAccessoryAdd(item)">
-                          <span>Thêm vào giỏ</span>
+                          <span>{{ $t('product.addToCart') }}</span>
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M8 3.33325V12.6666" stroke="#D70018" stroke-width="1.5" stroke-linecap="round"
                               stroke-linejoin="round" />
@@ -158,21 +150,13 @@
           <div class="swiper-button-next button-navigate-thumbnail__next" tabindex="0" role="button"
             aria-label="Next slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="right" />
             </div>
           </div>
           <div class="swiper-button-prev button-navigate-thumbnail__prev" tabindex="0" role="button"
             aria-label="Previous slide" aria-disabled="false">
             <div class="icon">
-              <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path
-                  d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
-                </path>
-              </svg>
+              <ArrowIcon direction="left" />
             </div>
           </div>
         </div>
@@ -185,6 +169,7 @@
 import { nextTick, onBeforeUnmount, onMounted, ref, computed, watch } from "vue";
 import { useProductStore } from "@/stores/productStore";
 import { useCartActions } from "@/composables/useCartActions";
+import ArrowIcon from "@/components/Icons/ArrowIcon.vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

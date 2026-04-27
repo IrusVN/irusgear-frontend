@@ -24,10 +24,10 @@
         <div class="">
           <h6 class="footer-title">{{ $t('sidebar.menu.products') }}</h6>
           <ul class="footer-list">
-            <li><NuxtLink to="#">Laptop & PC</NuxtLink></li>
-            <li><NuxtLink to="#">Smart Phone</NuxtLink></li>
-            <li><NuxtLink to="#">Thiết bị âm thanh</NuxtLink></li>
-            <li><NuxtLink to="#" class="text-danger">Khuyến mãi</NuxtLink></li>
+            <li><NuxtLink to="#">{{ $t('footerNav.laptopPc') }}</NuxtLink></li>
+            <li><NuxtLink to="#">{{ $t('footerNav.smartphone') }}</NuxtLink></li>
+            <li><NuxtLink to="#">{{ $t('footerNav.audioDevice') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-danger">{{ $t('footerNav.getOffers') }}</NuxtLink></li>
           </ul>
         </div>
 
@@ -35,23 +35,23 @@
         <div class="">
           <h6 class="footer-title">{{ $t('common.support') }}</h6>
           <ul class="footer-list">
-            <li><NuxtLink to="#">Tra cứu đơn hàng</NuxtLink></li>
-            <li><NuxtLink to="#">Chính sách bảo hành</NuxtLink></li>
-            <li><NuxtLink to="#">FAQ</NuxtLink></li>
-            <li><NuxtLink to="#">Liên hệ</NuxtLink></li>
+            <li><NuxtLink to="#">{{ $t('footerNav.orderLookup') }}</NuxtLink></li>
+            <li><NuxtLink to="#">{{ $t('footerNav.warrantyPolicy') }}</NuxtLink></li>
+            <li><NuxtLink to="#">{{ $t('footerNav.faq') }}</NuxtLink></li>
+            <li><NuxtLink to="#">{{ $t('footerNav.contactFooter') }}</NuxtLink></li>
           </ul>
         </div>
 
         <!-- NEWSLETTER -->
         <div class="footer-newsletter">
-          <h6 class="footer-title">Nhận ưu đãi</h6>
+          <h6 class="footer-title">{{ $t('home.newsletterTitle') }}</h6>
           <p class="text-secondary small mb-3">
-            Đăng ký email để nhận voucher
-            <strong>500.000đ</strong> cho đơn đầu tiên
+            {{ $t('home.newsletterDesc') }}
+            <strong>500.000đ</strong> {{ $t('home.firstOrderVoucher') }}
           </p>
 
           <div class="newsletter">
-            <input type="email" class="form-control" placeholder="Email của bạn" />
+            <input type="email" class="form-control" :placeholder="$t('home.emailPlaceholder')" />
             <button type="button" class="newsletter-btn">
               <i class="bi bi-arrow-right"></i>
             </button>
@@ -73,9 +73,9 @@
         </span>
 
         <div class="d-flex gap-4">
-          <a class="footer-link-sm">Điều khoản</a>
-          <a class="footer-link-sm">Bảo mật</a>
-          <a class="footer-link-sm">Cookies</a>
+          <a class="footer-link-sm">{{ $t('footerNav.terms') }}</a>
+          <a class="footer-link-sm">{{ $t('footerNav.privacy') }}</a>
+          <a class="footer-link-sm">{{ $t('footerNav.cookies') }}</a>
         </div>
       </div>
     </div>

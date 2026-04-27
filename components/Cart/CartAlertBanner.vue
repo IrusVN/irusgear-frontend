@@ -27,7 +27,7 @@
         v-if="dismissible"
         type="button"
         class="cart-alert__dismiss"
-        aria-label="Đóng thông báo"
+        :aria-label="$t('common.closeNotification')"
         @click="$emit('dismiss')"
       >
         <i class="bi bi-x-lg"></i>

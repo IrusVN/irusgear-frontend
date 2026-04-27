@@ -2,23 +2,23 @@
   <section v-if="loading || hasRecommendations" class="cart-recommendations">
     <div class="cart-recommendations__head">
       <div>
-        <p class="cart-recommendations__eyebrow">Gợi ý cho bạn</p>
-        <h2 class="cart-recommendations__title">Mua thêm cho trọn bộ</h2>
+        <p class="cart-recommendations__eyebrow">{{ $t('cart.suggestionForYou') }}</p>
+        <h2 class="cart-recommendations__title">{{ $t('cart.buyMoreCompleteSet') }}</h2>
       </div>
 
       <p class="cart-recommendations__description">
-        Mình đang ưu tiên các combo và phụ kiện phù hợp với sản phẩm đang có trong giỏ.
+        {{ $t('cart.suggestionDesc') }}
       </p>
     </div>
 
     <article v-if="loading" class="cart-recommendations__loading">
-      Đang tải gợi ý phù hợp cho giỏ hàng...
+      {{ $t('cart.loadingSuggestions') }}
     </article>
 
     <div v-if="comboDeals.length" class="cart-recommendations__section">
       <div class="cart-recommendations__section-head">
-        <h3>Mua kèm giá tốt</h3>
-        <span>{{ comboDeals.length }} gợi ý</span>
+        <h3>{{ $t('cart.comboPrice') }}</h3>
+        <span>{{ $t('cart.comboSuggestion', { count: comboDeals.length }) }}</span>
       </div>
 
       <div class="cart-recommendations__grid">
@@ -36,12 +36,12 @@
 
             <div class="cart-recommendations__card-content">
               <span class="cart-recommendations__badge cart-recommendations__badge--combo">
-                {{ product.badge || "Ưu đãi mua kèm" }}
+                {{ product.badge || $t('cart.bundleDeal') }}
               </span>
               <h4 class="cart-recommendations__name">{{ product.title }}</h4>
 
               <div class="cart-recommendations__price">
-                <strong>{{ product.price?.formatted || "Liên hệ" }}</strong>
+                <strong>{{ product.price?.formatted || $t('cart.contact') }}</strong>
                 <span v-if="product.oldPrice?.value > product.price?.value">
                   {{ product.oldPrice?.formatted }}
                 </span>
@@ -55,7 +55,7 @@
             :disabled="cartBusy || isAdding(product.id)"
             @click="handleAdd(product)"
           >
-            Thêm ngay
+            {{ $t('cart.addNow') }}
           </button>
         </article>
       </div>
@@ -63,8 +63,8 @@
 
     <div v-if="accessoryDeals.length" class="cart-recommendations__section">
       <div class="cart-recommendations__section-head">
-        <h3>Phụ kiện phù hợp</h3>
-        <span>{{ accessoryDeals.length }} gợi ý</span>
+        <h3>{{ $t('cart.comboAccessory') }}</h3>
+        <span>{{ $t('cart.comboSuggestion', { count: accessoryDeals.length }) }}</span>
       </div>
 
       <div class="cart-recommendations__grid">
@@ -82,19 +82,19 @@
 
             <div class="cart-recommendations__card-content">
               <span class="cart-recommendations__badge cart-recommendations__badge--accessory">
-                Phụ kiện gợi ý
+                {{ $t('cart.suggestedAccessory') }}
               </span>
               <h4 class="cart-recommendations__name">{{ product.title }}</h4>
 
               <div class="cart-recommendations__price">
-                <strong>{{ product.price?.formatted || "Liên hệ" }}</strong>
+                <strong>{{ product.price?.formatted || $t('cart.contact') }}</strong>
                 <span v-if="product.oldPrice?.value > product.price?.value">
                   {{ product.oldPrice?.formatted }}
                 </span>
               </div>
 
               <p v-if="product.memberDiscount?.value > 0" class="cart-recommendations__member">
-                Smember giảm thêm đến {{ product.memberDiscount.formatted }}
+                {{ $t('cart.smemberDiscount', { amount: product.memberDiscount.formatted }) }}
               </p>
             </div>
           </NuxtLink>
@@ -105,7 +105,7 @@
             :disabled="cartBusy || isAdding(product.id)"
             @click="handleAdd(product)"
           >
-            Thêm vào giỏ
+            {{ $t('cart.addToCart') }}
           </button>
         </article>
       </div>
@@ -115,8 +115,10 @@
 
 <script setup>
 import { computed, ref, watch } from "vue";
-import { useLocalePath, useRuntimeConfig } from "#imports";
+import { useLocalePath, useRuntimeConfig, useI18n } from "#imports";
 import { useCartActions } from "@/composables/useCartActions";
+
+const { t } = useI18n();
 
 const props = defineProps({
   items: {
@@ -271,7 +273,7 @@ const handleAdd = async (product) => {
   try {
     await addProductToCart(product, {
       openSheet: false,
-      successMessage: "Đã thêm gợi ý vào giỏ hàng.",
+      successMessage: t('cart.suggestionAdded'),
     });
   } finally {
     removeAddingId(product.id);

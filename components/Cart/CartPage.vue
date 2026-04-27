@@ -6,9 +6,9 @@
       <CartAlertBanner
         v-if="summary.hasWarnings"
         tone="warning"
-        title="Cần kiểm tra lại giỏ hàng"
+        :title="$t('cart.checkCart')"
         :description="warningBannerDescription"
-        action-label="Kiểm tra ngay"
+        :action-label="$t('cart.checkNow')"
         @action="focusFirstWarning"
       />
 
@@ -16,8 +16,8 @@
         v-if="lastRemovedItem"
         tone="success"
         :title="removedBannerTitle"
-        description="Sản phẩm đã được lấy khỏi giỏ. Bạn có thể hoàn tác ngay nếu vừa thao tác nhầm."
-        action-label="Hoàn tác"
+        :description="$t('cart.productRemoved')"
+        :action-label="$t('cart.undo')"
         dismissible
         @action="handleUndoRemove"
         @dismiss="cartStore.dismissLastRemovedItem()"
@@ -29,15 +29,15 @@
         <div class="cart-page__items">
           <div class="cart-page__items-head">
             <div>
-              <h2 class="cart-page__items-title">Danh sách sản phẩm</h2>
+              <h2 class="cart-page__items-title">{{ $t('cart.productList') }}</h2>
               <p class="cart-page__items-description">
-                Bạn có thể cập nhật số lượng trực tiếp tại đây. Hệ thống sẽ làm mới giá và thành tiền ngay sau mỗi thao tác.
+                {{ $t('cart.updateQuantityNote') }}
               </p>
             </div>
           </div>
 
           <article v-if="isLoading" class="cart-page__loading">
-            Đang tải giỏ hàng...
+            {{ $t('cart.loadingCart') }}
           </article>
 
           <CartItemRow
@@ -79,6 +79,7 @@
 
 <script setup>
 import { computed } from "vue";
+import { useI18n } from "#imports";
 import { storeToRefs } from "pinia";
 import CartAlertBanner from "@/components/Cart/CartAlertBanner.vue";
 import CartEmptyState from "@/components/Cart/CartEmptyState.vue";
@@ -106,6 +107,7 @@ const createFallbackSummary = () => ({
 
 const cartStore = useCartStore();
 const toast = useGlobalToast();
+const { t } = useI18n();
 const {
   cart,
   isLoading,
@@ -129,7 +131,7 @@ const warningBannerDescription = computed(() => {
   }
 
   if (blockingItems.value.length) {
-    return `${blockingItems.value.length} sản phẩm hiện đang hết hàng hoặc không còn sẵn sàng để bán. Vui lòng rà soát lại trước khi tiếp tục.`;
+    return t('cart.itemCountWarning', { count: blockingItems.value.length });
   }
 
   const uniqueWarnings = [...new Set(warningItems.value.flatMap((item) => item.warnings || []))];
@@ -138,35 +140,35 @@ const warningBannerDescription = computed(() => {
     return uniqueWarnings[0];
   }
 
-  return `${warningItems.value.length} sản phẩm đang có thay đổi về giá hoặc trạng thái tồn kho.`;
+  return t('cart.priceStockChange', { count: warningItems.value.length });
 });
 
 const removedBannerTitle = computed(() => {
   if (!lastRemovedItem.value?.productName) {
-    return "Đã xóa sản phẩm khỏi giỏ";
+    return t('cart.productRemovedTitle');
   }
 
-  return `Đã xóa ${lastRemovedItem.value.productName} khỏi giỏ`;
+  return t('cart.productRemovedTitleWithName', { name: lastRemovedItem.value.productName });
 });
 
 const primaryActionLabel = computed(() => {
   if (!items.value.length) {
-    return "Giỏ đang trống";
+    return t('cart.emptyCart');
   }
 
-  return canCheckout.value ? "Tiến hành đặt hàng" : "Kiểm tra giỏ hàng";
+  return canCheckout.value ? t('cart.proceedOrder') : t('cart.checkCartItems');
 });
 
 const summaryHelperText = computed(() => {
   if (!items.value.length) {
-    return "Thêm sản phẩm để bắt đầu bước tiếp theo.";
+    return t('cart.addProductNextStep');
   }
 
   if (!canCheckout.value) {
-    return "Một số sản phẩm chưa sẵn sàng. Mình sẽ đưa bạn tới đúng vị trí cần kiểm tra trong giỏ.";
+    return t('cart.someItemsNotReady');
   }
 
-  return "Luồng thông tin nhận hàng và thanh toán sẽ được nối sang bước tiếp theo của dự án.";
+  return t('cart.nextStepNote');
 });
 
 const focusFirstWarning = () => {
@@ -185,7 +187,7 @@ const handleUpdateQuantity = async ({ itemId, quantity }) => {
   try {
     await cartStore.updateQuantity(itemId, quantity);
   } catch (error) {
-    toast.error(error?.data?.message || "Không thể cập nhật số lượng sản phẩm.");
+    toast.error(error?.data?.message || t('cart.updateQuantityError'));
   }
 };
 
@@ -193,16 +195,16 @@ const handleRemoveItem = async (itemId) => {
   try {
     await cartStore.removeItem(itemId);
   } catch (error) {
-    toast.error(error?.data?.message || "Không thể xóa sản phẩm khỏi giỏ hàng.");
+    toast.error(error?.data?.message || t('cart.removeFromCartError'));
   }
 };
 
 const handleUndoRemove = async () => {
   try {
     await cartStore.undoLastRemoval();
-    toast.success("Đã khôi phục sản phẩm vào giỏ hàng.");
+    toast.success(t('cart.restoreToCart'));
   } catch (error) {
-    toast.error(error?.data?.message || "Không thể khôi phục sản phẩm vừa xóa.");
+    toast.error(error?.data?.message || t('cart.restoreError'));
   }
 };
 
@@ -216,17 +218,15 @@ const handlePrimaryAction = () => {
     return;
   }
 
-  toast.info(
-    "Luồng checkout đang được hoàn thiện. Cart đã sẵn sàng để nối sang bước thông tin và thanh toán ở phase tiếp theo.",
-  );
+  toast.info(t('cart.checkoutNote'));
 };
 
 const handleClearCart = async () => {
   try {
     await cartStore.clearCart();
-    toast.success("Giỏ hàng đã được làm trống.");
+    toast.success(t('cart.clearCart'));
   } catch (error) {
-    toast.error(error?.data?.message || "Không thể làm trống giỏ hàng.");
+    toast.error(error?.data?.message || t('cart.clearCartError'));
   }
 };
 </script>

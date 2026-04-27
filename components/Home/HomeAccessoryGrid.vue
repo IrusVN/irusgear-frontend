@@ -2,10 +2,10 @@
   <div class="my-3 my-md-4">
     <section class="accessory-section text-neutral-800">
       <div class="d-flex align-items-center gap-3 accessory-header">
-        <h2 class="mb-0 accessory-title">Sắm thêm phụ kiện chất lượng</h2>
+        <h2 class="mb-0 accessory-title">{{ $t('home.accessoryTitle') }}</h2>
 
         <a :href="viewAllUrl" class="view-all-link text-decoration-none">
-          Xem tất cả
+          {{ $t('common.seeAll') }}
           <i class="bi bi-chevron-right ms-1"></i>
         </a>
       </div>
@@ -20,9 +20,9 @@
               class="accessory-item text-decoration-none text-dark"
             >
               <span class="accessory-image-wrap">
-                <img :src="item.image" :alt="item.title" class="accessory-image" loading="lazy" />
+                <img :src="item.image" :alt="t(item.titleKey)" class="accessory-image" loading="lazy" />
               </span>
-              <p class="mb-0 accessory-name">{{ item.title }}</p>
+              <p class="mb-0 accessory-name">{{ t(item.titleKey) }}</p>
             </a>
 
             <div class="grid-edge-right"></div>
@@ -35,96 +35,97 @@
 </template>
 
 <script setup>
+const { t } = useI18n()
 const viewAllUrl = "/phu-kien.html";
 
 const accessoryItems = [
   {
-    title: "Phụ kiện Apple",
+    titleKey: "home.accessoryApple",
     href: "/phu-kien/apple.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9G05VYEFVX2VCHYZY1R7.png",
   },
   {
-    title: "Cáp, sạc",
+    titleKey: "home.accessoryCable",
     href: "/phu-kien/sac-dien-thoai.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GEB6TV510FK9GJPJK4N.png",
   },
   {
-    title: "Pin sạc dự phòng",
+    titleKey: "home.accessoryBattery",
     href: "/phu-kien/pin-du-phong.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GHJ4RRYBDS2Y2WEKRZV.png",
   },
   {
-    title: "Ốp lưng - Bao da",
+    titleKey: "home.accessoryCase",
     href: "/phu-kien/bao-da-op-lung.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GMV76QGJDAPAAJ9M26V.png",
   },
   {
-    title: "Dán màn hình",
+    titleKey: "home.accessoryScreen",
     href: "/phu-kien/dan-man-hinh.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GSARTJ2C2XKJSJZB85Z.png",
   },
   {
-    title: "Thẻ nhớ, USB",
+    titleKey: "home.accessoryStorage",
     href: "/phu-kien/the-nho-usb-otg.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GX3JKD0AHHSWBBK44TP.png",
   },
   {
-    title: "Gaming Gear, Playstation",
+    titleKey: "home.gamingGear",
     href: "/phu-kien/gaming-gear.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H0DYE4E1791SFPXEMY7.png",
   },
   {
-    title: "Sim 4G - 5G",
+    titleKey: "home.sim4g5g",
     href: "/sim-3g-4g-nghe-goi.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H3ZX03AZB1CNX48DG80.png",
   },
   {
-    title: "Thiết bị mạng",
+    titleKey: "home.accessoryNetwork",
     href: "/phu-kien/thiet-bi-mang.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H7Y53763DEK7J2A2TKP.png",
   },
   {
-    title: "Camera",
+    titleKey: "home.camera",
     href: "/phu-kien/camera.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9HBE3PQPJEBJNS1ZZDZQ.png",
   },
   {
-    title: "Gimbal",
+    titleKey: "home.gimbal",
     href: "/phu-kien/camera/gimbal.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG655JQDK9DBG3DW9ARDT.png",
   },
   {
-    title: "Flycam",
+    titleKey: "home.flycam",
     href: "/flycam.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6G9DFQVSS6CYZA2YAFQ.png",
   },
   {
-    title: "Máy ảnh",
+    titleKey: "home.camera",
     href: "/may-anh.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6KJ98DW8KHNXKFWARYF.png",
   },
   {
-    title: "Chuột, bàn phím",
+    titleKey: "home.accessoryKeyboard",
     href: "/phu-kien/chuot-ban-phim-may-tinh.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6Q4JA1NNV2BFRPWFDGY.png",
   },
   {
-    title: "Balo, túi xách",
+    titleKey: "home.accessoryBag",
     href: "/phu-kien/balo-tui-chong-soc-laptop.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6T4966NR0Z7ZSFXW5WD.png",
   },
   {
-    title: "Hub chuyển đổi",
+    titleKey: "home.accessoryHub",
     href: "/phu-kien/sac-dien-thoai/cap-chuyen-doi-dau-chuyen-doi-macbook.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6WZJ9RRA8H9VTQP9CHS.png",
   },
   {
-    title: "Phụ kiện điện thoại",
+    titleKey: "home.accessoryPhone",
     href: "/phu-kien/phu-kien-tien-ich.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6ZTGEC28FWZRJX0TBWS.png",
   },
   {
-    title: "Phụ kiện Laptop",
+    titleKey: "home.accessoryLaptop",
     href: "/phu-kien/may-tinh-laptop.html",
     image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG72ZEC79BAJY70V3ESD0.png",
   },

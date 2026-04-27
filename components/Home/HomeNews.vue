@@ -2,8 +2,8 @@
   <section class="mb-3">
     <div class="bg-white rounded p-3">
       <div class="d-flex align-items-center justify-content-between mb-3" style="border-left: 4px solid #111; padding-left: 12px;">
-        <span class="fw-bold m-0" style="font-size: 1rem; letter-spacing: 0.3px;">TIN TỨC</span>
-        <a href="#" class="text-dark small text-decoration-none fw-semibold">Xem tất cả ›</a>
+        <span class="fw-bold m-0" style="font-size: 1rem; letter-spacing: 0.3px;">{{ $t('home.newsTitle') }}</span>
+        <a href="#" class="text-dark small text-decoration-none fw-semibold">{{ $t('common.seeAll') }} ›</a>
       </div>
       <div class="d-flex flex-wrap news-list">
         <div v-for="n in newsList" :key="n.id" class="news-item">

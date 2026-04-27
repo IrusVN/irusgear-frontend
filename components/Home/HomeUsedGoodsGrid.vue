@@ -2,7 +2,7 @@
   <div class="my-3 my-md-4">
     <section class="used-section text-neutral-800">
       <div class="d-flex align-items-center gap-3 used-header">
-        <h2 class="mb-0 used-title">Hàng cũ</h2>
+        <h2 class="mb-0 used-title">{{ $t('home.usedGoodsTitle') }}</h2>
 
         <div class="d-none d-md-block used-divider"></div>
 
