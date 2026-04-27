@@ -93,7 +93,7 @@
     </section>
 
     <section v-if="accessoryDeals.length" id="boxUpsell" class="my-3">
-      <p class="upsell-title">Phụ kiện mua cùng</p>
+      <p class="upsell-title">{{ $t('cart.comboAccessory') }}</p>
       <div class="upsell-block-product">
         <div v-if="isSwiperMounted" :class="{ 'swiper--ready': isSwiperReady }" class="swiper accessory-swiper">
           <div class="swiper-wrapper">

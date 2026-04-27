@@ -134,19 +134,19 @@
             </div>
             <div>
               <div class="price-thu-cu">
-                <strong>Thu cũ lên đời </strong>
+                <strong>{{ $t('product.tradeInTitle') }}</strong>
                 <hr class="divider" />
-                <span>Chỉ từ <strong> {{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}
+                <span>{{ $t('product.tradeInFrom') }} <strong> {{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}
                   </strong></span>
               </div>
               <div class="smember-discount">
-                Giảm thêm đến&nbsp;<b>{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || ''
-                }}</b>&nbsp;(Bao gồm cả Smember)
+                {{ $t('product.tradeInIncluded') }}&nbsp;<b>{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || ''
+                }}</b>
               </div>
             </div>
           </div>
           <button class="btn-submit-search desktop">
-            <span>Kiểm tra ngay</span>
+            <span>{{ $t('product.checkNow') }}</span>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12.5H19" stroke="#D70018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               </path>
@@ -182,7 +182,7 @@
               <p>1</p>
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
-              Đặc quyền trợ giá lên đến 3 triệu khi thu cũ lên đời iPhone
+              {{ $t('product.tradeInPrivilege') }}
               <a target="_blank" href="https://cellphones.com.vn/chuong-trinh-thu-cu-len-doi-iphone">&nbsp; {{ $t('product.details') }}</a>
             </p>
           </div>
@@ -191,9 +191,8 @@
               <p>2</p>
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
-              Tặng Sim/Esim 5G VNSKY, có ngay 3GB data/ngày+500 phút gọi
-              Mobifone &amp; VNSKY, miễn phí 30 ngày đầu - chỉ áp dụng tại cửa
-              hàng
+              {{ $t('product.simOffer') }}
+              {{ $t('product.simOfferDetail') }}
               <a target="_blank" href="https://cellphones.com.vn/sim-5g-vnsky-5g89c-3gb-ngay-free-1-thang.html">&nbsp;
                 {{ $t('product.details') }}</a>
             </p>
@@ -203,8 +202,7 @@
               <p>3</p>
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
-              Giảm thêm 10% cho Pin dự phòng - Camera - Gia dụng - Sức khỏe Làm
-              đẹp - Đồng hồ trẻ em khi mua Điện thoại/Laptop
+              {{ $t('product.accessoryDiscount') }}
               <a target="_blank" href="https://cellphones.com.vn/qua-tang-tri-an-khach-hang">&nbsp; {{ $t('product.details') }}</a>
             </p>
           </div>
@@ -317,7 +315,7 @@
             </linearGradient>
           </defs>
         </svg>
-        <span>Ưu đãi thanh toán</span>
+        <span>{{ $t('product.paymentOffers') }}</span>
       </div>
       <div class="swiper-container box-more-promotion-swiper">
         <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px)">
@@ -329,11 +327,11 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Giảm ngay 700K khi trả góp qua thẻ TECHCOMBANK
+                  {{ $t('product.paymentOffer1') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/techcombank" target="_blank"
                     rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
@@ -360,11 +358,11 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Giảm 500K khi thanh toán qua thẻ tín dụng OCB
+                  {{ $t('product.paymentOffer2') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/ocb" target="_blank" rel="noopener noreferrer"
                     class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
@@ -396,7 +394,7 @@
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/mo-the-tin-dung-hsbc" target="_blank"
                     rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
@@ -424,11 +422,11 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Giảm đến 5.000.000đ khi thanh toán qua Kredivo
+                  {{ $t('product.paymentOffer3') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/kredivo" target="_blank" rel="noopener noreferrer"
                     class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
@@ -456,11 +454,11 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Mở thẻ VIB nhận E-Voucher đến 600K
+                  {{ $t('product.paymentOffer4') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-mo-the-vib-cash-back" target="_blank"
                     rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
@@ -488,11 +486,11 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Giảm đến 500K khi mở thẻ TPBANK EVO
+                  {{ $t('product.paymentOffer5') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
-                    Đang diễn ra
+                    {{ $t('product.ongoing') }}
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/tpbank-evo" target="_blank"
                     rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
@@ -538,15 +536,15 @@
     <div class="box-on-stock-stores">
       <div class="box-on-stock-option-location">
         <div class="box-on-stock-count">
-          <strong>Xem chi nhánh có hàng</strong>
+          <strong>{{ $t('product.viewBranches') }}</strong>
           <p>
-            Có
+            {{ $t('product.inStock') }}
             <span class="count">48</span>
-            cửa hàng có sản phẩm
+            {{ $t('product.storesWithProduct') }}
           </p>
         </div>
         <div class="box-on-stock-option button__change-province">
-          Hồ Chí Minh
+          {{ $t('product.hoChiMinh') }}
           <div class="icon-down">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10">
               <path
@@ -557,20 +555,20 @@
         </div>
         <div class="box-on-stock-option">
           <select id="districtOptions">
-            <option value="">Quận/Huyện</option>
-            <option class="button__change-district" value="1">Quận 1</option>
-            <option class="button__change-district" value="2">Quận 2</option>
-            <option class="button__change-district" value="4">Quận 4</option>
-            <option class="button__change-district" value="5">Quận 5</option>
-            <option class="button__change-district" value="6">Quận 6</option>
-            <option class="button__change-district" value="7">Quận 7</option>
-            <option class="button__change-district" value="8">Quận 8</option>
-            <option class="button__change-district" value="9">Quận 9</option>
-            <option class="button__change-district" value="10">Quận 10</option>
-            <option class="button__change-district" value="11">Quận 11</option>
-            <option class="button__change-district" value="12">Quận 12</option>
+            <option value="">{{ $t('product.selectDistrict') }}</option>
+            <option class="button__change-district" value="1">{{ $t('product.district1') }}</option>
+            <option class="button__change-district" value="2">{{ $t('product.district2') }}</option>
+            <option class="button__change-district" value="4">{{ $t('product.district4') }}</option>
+            <option class="button__change-district" value="5">{{ $t('product.district5') }}</option>
+            <option class="button__change-district" value="6">{{ $t('product.district6') }}</option>
+            <option class="button__change-district" value="7">{{ $t('product.district7') }}</option>
+            <option class="button__change-district" value="8">{{ $t('product.district8') }}</option>
+            <option class="button__change-district" value="9">{{ $t('product.district9') }}</option>
+            <option class="button__change-district" value="10">{{ $t('product.district10') }}</option>
+            <option class="button__change-district" value="11">{{ $t('product.district11') }}</option>
+            <option class="button__change-district" value="12">{{ $t('product.district12') }}</option>
             <option class="button__change-district" value="13">
-              Quận Thủ Đức
+              {{ $t('product.thuDuc') }}
             </option>
             <option class="button__change-district" value="14">
               Huyện Hóc Môn
@@ -585,22 +583,22 @@
               Huyện Củ Chi
             </option>
             <option class="button__change-district" value="74">
-              Quận Tân Bình
+              {{ $t('product.tanBinh') }}
             </option>
             <option class="button__change-district" value="86">
-              Quận Bình Thạnh
+              {{ $t('product.binhThanh') }}
             </option>
             <option class="button__change-district" value="87">
-              Quận Gò Vấp
+              {{ $t('product.goVap') }}
             </option>
             <option class="button__change-district" value="109">
-              Quận Bình Tân
+              {{ $t('product.binhTan') }}
             </option>
             <option class="button__change-district" value="127">
-              Quận Tân Phú
+              {{ $t('product.tanPhu') }}
             </option>
             <option class="button__change-district" value="157">
-              Quận Phú Nhuận
+              {{ $t('product.phuNhuan') }}
             </option>
           </select>
           <div class="icon-down">
@@ -643,7 +641,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -675,7 +673,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -707,7 +705,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -739,7 +737,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -771,7 +769,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -803,7 +801,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -835,7 +833,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -867,7 +865,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -899,7 +897,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -931,7 +929,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -963,7 +961,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -995,7 +993,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1027,7 +1025,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1059,7 +1057,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1091,7 +1089,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1123,7 +1121,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1155,7 +1153,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1187,7 +1185,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1219,7 +1217,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1251,7 +1249,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1283,7 +1281,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1315,7 +1313,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1347,7 +1345,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1379,7 +1377,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1411,7 +1409,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1443,7 +1441,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1475,7 +1473,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1507,7 +1505,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1539,7 +1537,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1571,7 +1569,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1603,7 +1601,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1635,7 +1633,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1667,7 +1665,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1699,7 +1697,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1731,7 +1729,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1763,7 +1761,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1795,7 +1793,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1827,7 +1825,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1859,7 +1857,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1891,7 +1889,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1923,7 +1921,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1955,7 +1953,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -1987,7 +1985,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2020,7 +2018,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2052,7 +2050,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2084,7 +2082,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2116,7 +2114,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2148,7 +2146,7 @@
                         d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
                         stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <span>Bản đồ</span></a>
+                    <span>{{ $t('product.viewOnMap') }}</span></a>
                 </div>
               </div>
             </div>
@@ -2186,7 +2184,7 @@
             stroke-linecap="round" stroke-linejoin="round"></path>
           <path d="M3 9H7" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
-        <p class="title">Thông tin vận chuyển</p>
+        <p class="title">{{ $t('product.shippingInfo') }}</p>
       </div>
       <div class="content">
         <div class="btn-change-address">
@@ -2198,8 +2196,8 @@
               d="M11.7712 11.1047L8.94251 13.9334C8.6925 14.1831 8.35356 14.3234 8.00017 14.3234C7.64678 14.3234 7.30785 14.1831 7.05784 13.9334L4.22851 11.1047C3.48265 10.3588 2.97473 9.40852 2.76896 8.37396C2.5632 7.3394 2.66883 6.26706 3.07251 5.29254C3.47618 4.31801 4.15977 3.48508 5.03683 2.89905C5.91388 2.31303 6.94502 2.00024 7.99984 2.00024C9.05466 2.00024 10.0858 2.31303 10.9629 2.89905C11.8399 3.48508 12.5235 4.31801 12.9272 5.29254C13.3308 6.26706 13.4365 7.3394 13.2307 8.37396C13.0249 9.40852 12.517 10.3588 11.7712 11.1047Z"
               stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
-          <span>Chọn địa chỉ giao hàng để nhận ưu đãi</span>
-          <div class="label-new">Mới</div>
+          <span>{{ $t('product.selectAddressForOffer') }}</span>
+          <div class="label-new">{{ $t('product.newLabel') }}</div>
         </div>
       </div>
     </div>
@@ -2210,7 +2208,7 @@
             <div class="installment-wrapper">
               <div style="height: 100%">
                 <button id="installmentCta" class="btn-cta installment-group-cta">
-                  <strong>Trả góp 0%</strong>
+                  <strong>{{ $t('common.installment0') }}</strong>
                 </button>
               </div>
             </div>
@@ -2219,8 +2217,8 @@
               :disabled="cartBusy"
               @click="buyCurrentProductNow"
             >
-              <strong>MUA NGAY</strong>
-              <span>Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng</span>
+              <strong>{{ $t('common.buyNowAction') }}</strong>
+              <span>{{ $t('product.fastDeliveryNote') }}</span>
             </button>
             <button
               class="btn-cta button button--small add-to-cart-button"

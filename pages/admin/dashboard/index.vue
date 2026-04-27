@@ -1,5 +1,5 @@
 <template>
-    <p>Admin Dashboard</p>
+    <p>{{ $t('page_titles.dashboard') }}</p>
 </template>
 
 <script setup>

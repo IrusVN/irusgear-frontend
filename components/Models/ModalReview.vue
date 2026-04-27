@@ -4,7 +4,7 @@
       <div class="modal-background" @click="closeModal"></div>
       <div class="modal-content">
         <div class="review-container">
-          <button type="button" class="content__close-btn-desk modal__button" aria-label="Đóng" @click="closeModal">
+          <button type="button" class="content__close-btn-desk modal__button" :aria-label="$t('common.close')" @click="closeModal">
             <div class="close-icon">
               <svg height="20" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -14,7 +14,7 @@
             </div>
           </button>
 
-          <div class="title is-6 mb-0 px-4">Đánh giá & nhận xét</div>
+          <div class="title is-6 mb-0 px-4">{{ $t('modalReview.title') }}</div>
 
           <div class="modal-review-title is-flex is-align-items-center">
             <img
@@ -27,7 +27,7 @@
           </div>
 
           <form class="modal-review-content p-4" @submit.prevent="submitReview">
-            <div class="title-review-star-items">Đánh giá chung</div>
+            <div class="title-review-star-items">{{ $t('modalReview.overallRating') }}</div>
 
             <div class="modal-review-star review-all">
               <button
@@ -49,7 +49,7 @@
               </button>
             </div>
 
-            <div class="title-review-star-items">Theo trải nghiệm</div>
+            <div class="title-review-star-items">{{ $t('modalReview.byExperience') }}</div>
 
             <div
               v-for="experience in experienceRows"
@@ -80,7 +80,7 @@
 
             <textarea
               v-model="reviewForm.content"
-              placeholder="Xin mời chia sẻ một số cảm nhận về sản phẩm (nhập tối thiểu 15 kí tự)"
+              :placeholder="$t('modalReview.reviewPlaceholder')"
               class="textarea"
             />
 
@@ -102,7 +102,7 @@
                   <button
                     type="button"
                     class="selected-file-card__remove"
-                    aria-label="Xóa ảnh"
+                    :aria-label="$t('modalReview.deleteImage')"
                     @click="removeSelectedFile(item.id)"
                   >
                     ×
@@ -124,7 +124,7 @@
                     />
                   </svg>
                   </div>
-                  <span>Thêm hình ảnh</span>
+                  <span>{{ $t('modalReview.addImages') }}</span>
                 </label>
               </div>
 
@@ -133,7 +133,7 @@
 
             <div class="button-container">
               <button type="submit" class="button modal__button has-text-white" :disabled="isSubmitting">
-                {{ isSubmitting ? "ĐANG GỬI..." : "GỬI ĐÁNH GIÁ" }}
+                {{ isSubmitting ? $t('modalReview.sending') : $t('modalReview.sendReview') }}
               </button>
             </div>
           </form>
@@ -147,7 +147,9 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useProductStore } from "@/stores/productStore";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const productStore = useProductStore();
 const { productDetail, productReviewFilters } = storeToRefs(productStore);
 
@@ -266,17 +268,17 @@ const submitReview = async () => {
   submitSuccess.value = "";
 
   if (!productDetail.value?.id) {
-    submitError.value = "Không tìm thấy sản phẩm để gửi đánh giá.";
+    submitError.value = t('modalReview.errNoProduct');
     return;
   }
 
   if (!reviewForm.rating) {
-    submitError.value = "Vui lòng chọn đánh giá chung.";
+    submitError.value = t('modalReview.errNoRating');
     return;
   }
 
   if ((reviewForm.content || "").trim().length < 15) {
-    submitError.value = "Vui lòng nhập tối thiểu 15 kí tự.";
+    submitError.value = t('modalReview.errMinChars');
     return;
   }
 
@@ -291,12 +293,12 @@ const submitReview = async () => {
       attributes: [],
       images: [],
       author: {
-        name: "Khách hàng",
+        name: t('modalReview.authorName'),
         phone: "",
       },
     });
 
-    submitSuccess.value = "Gửi đánh giá thành công.";
+    submitSuccess.value = t('modalReview.success');
     await Promise.all([
       productStore.fetchProductReviewSummary(productDetail.value.id),
       productStore.fetchProductReviews(productDetail.value.id, { page: 1, per_page: 5, sort: "latest" }),
@@ -306,7 +308,7 @@ const submitReview = async () => {
       closeModal();
     }, 600);
   } catch (error) {
-    submitError.value = error?.data?.message || "Không thể gửi đánh giá lúc này.";
+    submitError.value = error?.data?.message || t('modalReview.errSubmitFailed');
   } finally {
     isSubmitting.value = false;
   }
