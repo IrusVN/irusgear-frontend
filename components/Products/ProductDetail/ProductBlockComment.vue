@@ -1,7 +1,7 @@
 <template>
   <div v-if="productDetail" id="block-comment-cps" class="comment-container pt-3">
     <div class="comment-form">
-      <p id="total_comment" class="comment-form-title">Hỏi và đáp</p>
+      <p id="total_comment" class="comment-form-title">{{ $t('product.qaTitle') }}</p>
       <div class="comment-form-content">
         <img
           src="https://cdn2.cellphones.com.vn/insecure/rs:fill:160:0/q:90/plain/https://cellphones.com.vn/media/wysiwyg/ant-hello-2025.png"
@@ -12,7 +12,7 @@
         />
         <div class="question">
           <div class="d-flex align-items-center">
-            <p class="question-title">Hãy đặt câu hỏi cho chúng tôi</p>
+            <p class="question-title">{{ $t('product.askQuestion') }}</p>
           </div>
           <p class="question-content">
             CellphoneS sẽ phản hồi trong vòng 1 giờ. Nếu Quý khách gửi câu hỏi sau 22h, chúng tôi sẽ trả lời vào sáng hôm sau.<br />
@@ -22,11 +22,11 @@
             <div class="textarea-comment">
               <textarea
                 v-model="questionForm.content"
-                placeholder="Viết câu hỏi của bạn tại đây"
+                :placeholder="$t('product.writeQuestionPlaceholder')"
                 class="textarea"
               />
               <button class="button button__cmt-send" :disabled="isSubmittingQuestion" @click="submitQuestion">
-                {{ isSubmittingQuestion ? "Đang gửi" : "Gửi câu hỏi" }}
+                {{ isSubmittingQuestion ? $t('product.sending') : $t('product.sendQuestion') }}
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-paper-plane">
                   <path d="M10 14L21 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                   <path
@@ -94,16 +94,16 @@
                 <textarea
                   v-model="replyForms[item.id].content"
                   class="textarea"
-                  placeholder="Viết phản hồi của bạn"
+                  :placeholder="$t('product.writeReplyPlaceholder')"
                 />
                 <input
                   v-model="replyForms[item.id].author.name"
                   type="text"
                   class="meta-input"
-                  placeholder="Họ tên"
+                  :placeholder="$t('product.fullNamePlaceholder')"
                 />
                 <button class="button button__cmt-send" :disabled="isSubmittingReply" @click="submitReply(item.id)">
-                  {{ isSubmittingReply ? "Đang gửi" : "Gửi phản hồi" }}
+                  {{ isSubmittingReply ? $t('product.sending') : $t('product.sendReply') }}
                 </button>
               </div>
 
@@ -178,7 +178,7 @@
         :disabled="isLoadingMoreQuestions"
         @click="loadMoreQuestions"
       >
-        {{ isLoadingMoreQuestions ? "Đang tải..." : "Xem thêm câu hỏi" }}
+        {{ isLoadingMoreQuestions ? $t('common.loading') : $t('product.seeMoreQuestions') }}
       </button>
     </div>
   </div>
@@ -187,7 +187,10 @@
 <script setup>
 import { computed, reactive, ref } from "vue";
 import { storeToRefs } from "pinia";
+import { useI18n } from "#imports";
 import { useProductStore } from "@/stores/productStore";
+
+const { t } = useI18n();
 
 const productStore = useProductStore();
 const { productDetail, productQuestions } = storeToRefs(productStore);
@@ -264,7 +267,7 @@ const submitQuestion = async () => {
       return;
     }
 
-    questionSuccess.value = response?.message || "Gửi câu hỏi thành công.";
+    questionSuccess.value = response?.message || t('product.questionSuccess');
     questionForm.content = "";
     questionForm.author.name = "";
     questionForm.author.phone = "";

@@ -2,18 +2,18 @@
   <div class="content-left-shell">
     <div class="content-card position-relative overflow-hidden" :style="{ maxHeight: isExpanded ? 'none' : '567px' }">
       <div v-if="cleanedDescription" class="content-description" v-html="cleanedDescription"></div>
-      <div v-else class="text-center py-4">Đang cập nhật mô tả...</div>
+      <div v-else class="text-center py-4">{{ $t('product.descriptionUpdating') }}</div>
 
       <div v-if="!isExpanded && cleanedDescription" class="irus-btn-showmore-wrapper">
         <a class="btn-show-more button__content-show-more" @click.prevent="isExpanded = true">
-          Xem thêm &emsp;
+          {{ $t('common.seeMore') }} &emsp;
           <ArrowIcon direction="down" :size="10" />
         </a>
       </div>
       <div v-else-if="isExpanded" class="text-center mt-3 mb-2">
         <a class="btn-show-more button__content-show-more" @click.prevent="isExpanded = false"
           style="background:#fff; color:#3b82f6; border-radius:10px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; padding: 6px 12px; font-size:14px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-decoration:none;">
-          Thu gọn &emsp;
+          {{ $t('common.collapseExpand') }} &emsp;
           <ArrowIcon direction="up" :size="10" />
         </a>
       </div>

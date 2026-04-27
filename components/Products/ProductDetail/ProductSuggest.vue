@@ -8,11 +8,11 @@
               <div class="icon-fire">
                 <img src="https://cdn2.cellphones.com.vn/x/media/wysiwyg/fire-icon-2025.gif" alt="Lửa bập bùng" />
               </div>
-              <span>Mua kèm giá sốc</span>
+              <span>{{ $t('product.comboPriceLabel') }}</span>
             </div>
             <div class="option__action">
               <button type="button">
-                Xem tất cả
+                {{ $t('product.seeAll') }}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M6 4L10 8L6 12" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -56,7 +56,7 @@
                             <p v-else class="info__percent">{{ item.badge }}</p>
 
                             <button type="button" class="button button-select">
-                              <span>Chọn thêm</span>
+                              <span>{{ $t('common.comboSelect') }}</span>
                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                 <path d="M8 3.33325V12.6666" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"
                                   stroke-linejoin="round" />
@@ -129,7 +129,7 @@
                         </div>
 
                         <button type="button" class="button button-add-cart" :disabled="cartBusy" @click="handleAccessoryAdd(item)">
-                          <span>Thêm vào giỏ</span>
+                          <span>{{ $t('product.addToCart') }}</span>
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M8 3.33325V12.6666" stroke="#D70018" stroke-width="1.5" stroke-linecap="round"
                               stroke-linejoin="round" />

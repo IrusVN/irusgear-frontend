@@ -22,7 +22,7 @@
       </div>
 
       <div v-if="storageOptions.length" class="sheet-section">
-        <p class="section-label">Phiên bản</p>
+        <p class="section-label">{{ $t('product.version') }}</p>
         <div class="option-buttons">
           <button
             v-for="storage in storageOptions"
@@ -38,7 +38,7 @@
       </div>
 
       <div v-if="colorOptions.length" class="sheet-section">
-        <p class="section-label">Màu sắc</p>
+        <p class="section-label">{{ $t('product.color') }}</p>
         <div class="color-buttons">
           <button
             v-for="color in colorOptions"
@@ -63,7 +63,7 @@
           :disabled="cartBusy"
           @click="addCurrentProductToCart"
         >
-          Thêm vào giỏ
+          {{ $t('product.addToCart') }}
         </button>
         <button
           type="button"
@@ -71,7 +71,7 @@
           :disabled="cartBusy"
           @click="buyCurrentProductNow"
         >
-          Mua ngay
+          {{ $t('product.buyNow') }}
         </button>
       </div>
     </div>

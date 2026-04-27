@@ -1,7 +1,7 @@
 <template>
   <div class="skeleton-feature-chip">
     <img src="/image/logo-irusgear-black.png" alt="" class="skeleton-feature-icon" />
-    <div class="skeleton-feature-text">Đang tải ...</div>
+    <div class="skeleton-feature-text">{{ $t('common.loading') }}</div>
   </div>
 </template>
 

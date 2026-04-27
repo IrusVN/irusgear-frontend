@@ -1,13 +1,13 @@
 <template>
   <div class="block-sforum-v2">
     <div class="sforum__title">
-      <p>Tin tức sản phẩm</p>
+      <p>{{ $t('product.newsProduct') }}</p>
       <a
         target="_blank"
         href="https://cellphones.com.vn/sforum/tag/apple-iphone-14"
         class="btn-show-more button__link text-decoration-none"
       >
-        Xem tất cả
+        {{ $t('common.seeAllNews') }}
         <ArrowIcon direction="right" :size="15" />
       </a>
     </div>

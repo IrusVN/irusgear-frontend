@@ -28,7 +28,7 @@
           </div>
 
           <button type="button" class="button-desktop button-desktop-installment">
-            <p>Trả góp 0%</p>
+            <p>{{ $t('common.installment0') }}</p>
           </button>
 
           <button
@@ -37,13 +37,13 @@
             :disabled="cartBusy"
             @click="buyCurrentProductNow"
           >
-            <p>Mua Ngay</p>
+            <p>{{ $t('common.buyNowAction') }}</p>
           </button>
 
           <button
             type="button"
             class="button-desktop button-add-to-cart"
-            aria-label="Thêm vào giỏ hàng"
+            :aria-label="$t('product.addToCart')"
             :disabled="cartBusy"
             @click="addCurrentProductToCart()"
           >

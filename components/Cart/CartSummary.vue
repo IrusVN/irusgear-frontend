@@ -1,49 +1,49 @@
 <template>
   <aside class="cart-summary">
     <div class="cart-summary__head">
-      <p class="cart-summary__eyebrow">Tóm tắt</p>
-      <h2 class="cart-summary__title">Thông tin giỏ hàng</h2>
+      <p class="cart-summary__eyebrow">{{ $t('cart.subtotal') }}</p>
+      <h2 class="cart-summary__title">{{ $t('cart.cartSummary') }}</h2>
     </div>
 
     <div v-if="savings?.value > 0" class="cart-summary__saving-pill">
-      Bạn đang tiết kiệm <strong>{{ savings.formatted }}</strong> so với mức giá đã lưu trước đó.
+      {{ $t('cart.saving', { amount: savings.formatted }) }}
     </div>
 
     <dl class="cart-summary__rows">
       <div class="cart-summary__row">
-        <dt>Sản phẩm</dt>
+        <dt>{{ $t('cart.products') }}</dt>
         <dd>{{ summary.itemCount || 0 }}</dd>
       </div>
 
       <div class="cart-summary__row">
-        <dt>Dòng hàng</dt>
+        <dt>{{ $t('cart.productLines') }}</dt>
         <dd>{{ summary.lineCount || 0 }}</dd>
       </div>
 
       <div v-if="savings?.value > 0" class="cart-summary__row">
-        <dt>Tiết kiệm</dt>
+        <dt>{{ $t('cart.savingAmount') }}</dt>
         <dd class="cart-summary__saving">{{ savings.formatted }}</dd>
       </div>
 
       <div class="cart-summary__row">
-        <dt>Giao hàng</dt>
-        <dd class="cart-summary__muted">Tính ở bước tiếp theo</dd>
+        <dt>{{ $t('cart.delivery') }}</dt>
+        <dd class="cart-summary__muted">{{ $t('cart.deliveryNote') }}</dd>
       </div>
 
       <div class="cart-summary__row cart-summary__row--total">
-        <dt>Tạm tính</dt>
+        <dt>{{ $t('cart.subtotal') }}</dt>
         <dd>{{ summary.subtotal?.formatted || "0đ" }}</dd>
       </div>
     </dl>
 
     <p v-if="summary.hasWarnings" class="cart-summary__warning">
-      Một vài sản phẩm đang thay đổi về giá hoặc tồn kho. Bạn nên kiểm tra lại trước khi tiếp tục.
+      {{ $t('cart.someItemsWarning') }}
     </p>
 
     <ul class="cart-summary__trust">
-      <li>Giữ nguyên giỏ khi đăng nhập và chuyển thiết bị.</li>
-      <li>Giá và tồn kho sẽ được đồng bộ ngay trên giỏ.</li>
-      <li>Phù hợp với phong cách mua sắm retail điện tử hiện tại của site.</li>
+      <li>{{ $t('cart.trustNote1') }}</li>
+      <li>{{ $t('cart.trustNote2') }}</li>
+      <li>{{ $t('cart.trustNote3') }}</li>
     </ul>
 
     <div class="cart-summary__actions">
@@ -61,7 +61,7 @@
       </button>
 
       <NuxtLink :to="localePath('/products')" class="cart-summary__cta cart-summary__cta--secondary">
-        Tiếp tục mua
+        {{ $t('cart.continueBuy') }}
       </NuxtLink>
 
       <button
@@ -70,7 +70,7 @@
         :disabled="busy || !hasItems"
         @click="$emit('clear')"
       >
-        Xóa tất cả
+        {{ $t('cart.clearAll') }}
       </button>
     </div>
 
@@ -109,7 +109,7 @@ defineProps({
   },
   primaryActionLabel: {
     type: String,
-    default: "Tiến hành đặt hàng",
+    default: "",
   },
   helperText: {
     type: String,

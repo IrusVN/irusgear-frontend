@@ -1,5 +1,5 @@
 <template>
-  <nav class="cart-progress" aria-label="Tiến trình giỏ hàng">
+  <nav class="cart-progress" :aria-label="$t('cart.cartProgress')">
     <div
       :class="['cart-progress-sticky', { 'cart-progress-sticky--visible': isStickyVisible }]"
       :style="stickyBarStyle"
@@ -59,29 +59,32 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { useI18n } from "#imports";
 
-const steps = [
+const { t } = useI18n();
+
+const steps = computed(() => [
   {
     id: 1,
-    label: "Giỏ hàng",
+    label: t('cart.cart'),
     icon: "bi bi-bag-check",
   },
   {
     id: 2,
-    label: "Thông tin đặt hàng",
+    label: t('cart.orderInfo'),
     icon: "bi bi-postcard",
   },
   {
     id: 3,
-    label: "Thanh toán",
+    label: t('cart.checkout'),
     icon: "bi bi-credit-card-2-front",
   },
   {
     id: 4,
-    label: "Hoàn tất",
+    label: t('cart.complete'),
     icon: "bi bi-check-circle",
   },
-];
+]);
 
 defineProps({
   currentStep: {

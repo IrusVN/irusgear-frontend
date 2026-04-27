@@ -1,7 +1,7 @@
 <template>
   <div v-if="normalizedTabs.length" id="block-same-product" ref="rootEl" class="block-same-product">
     <div class="same-product-head">
-      <h2 class="same-product-title mt-2">Có thể bạn cũng thích</h2>
+      <h2 class="same-product-title mt-2">{{ $t('product.mayAlsoLike') }}</h2>
     </div>
 
     <div class="same-product-options-list d-flex justify-content-between">
@@ -64,6 +64,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { useI18n } from "#imports";
 import { storeToRefs } from "pinia";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -74,9 +75,11 @@ import HomeProdCard from "@/components/Home/HomeProdCard.vue";
 const productStore = useProductStore();
 const { productSameProducts } = storeToRefs(productStore);
 
+const { t } = useI18n();
+
 const TAB_LABELS = {
-  similar: "Sản phẩm tương tự",
-  used: "Tham khảo hàng cũ",
+  similar: t('common.similarProducts'),
+  used: t('product.usedRef'),
 };
 
 const rootEl = ref(null);

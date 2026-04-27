@@ -14,18 +14,18 @@
         </div>
         <div class="devide-price-label" v-if="productStore.productDetail?.pricing?.tradeInPrice?.value">
           <div class="divide top mb-3"></div>
-          <p>Hoặc</p>
+          <p>{{ $t('product.or') }}</p>
           <div class="divide bottom"></div>
         </div>
         <div class="trade-price-label" v-if="productStore.productDetail?.pricing?.tradeInPrice?.value">
-          <div class="price-label">Thu cũ lên đời chỉ từ</div>
+          <div class="price-label">{{ $t('product.tradeInFrom') }}</div>
           <div class="trade-price-info d-flex align-items-center">
             <div class="sale-price">{{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}</div>
             <span class="text-navi" v-if="productStore.productDetail?.pricing?.tradeInSupport?.value"><span>
-                Trợ giá đến
+                {{ $t('product.tradeInSupport') }}
                 <span class="value">{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || ''
                 }}</span></span>
-              <a> Định giá ngay </a></span>
+              <a> {{ $t('product.rateNow') }} </a></span>
           </div>
         </div>
       </div>
@@ -42,10 +42,10 @@
             </p>
             <div class="promotion-row__ct is-member">
               <div class="txt">
-                Tiết kiệm lên đến
+                {{ $t('product.memberSaving') }}
                 <strong class="bold">{{ productStore.productDetail?.pricing?.memberSaving?.formatted || '' }}</strong>
-                cho Smember
-                <a class="dang_nhap_xem_gia link"> Kiểm tra ngay </a>
+                {{ $t('product.forSmember') }}
+                <a class="dang_nhap_xem_gia link"> {{ $t('product.checkNow') }} </a>
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="box-linked">
       <div class="box-title">
-        <p>Phiên bản</p>
+        <p>{{ $t('product.version') }}</p>
       </div>
       <div class="list-linked">
         <a v-for="storage in productStore.productDetail?.storageOptions || []" :key="storage.id" :href="storage.url"
@@ -65,7 +65,7 @@
     </div>
     <div class="box-product-variants">
       <div class="box-title">
-        <p>Màu sắc</p>
+        <p>{{ $t('product.color') }}</p>
       </div>
       <div class="box-content">
         <ul class="list-variants ps-0 mb-0">
@@ -173,7 +173,7 @@
             </linearGradient>
           </defs>
         </svg>
-        <span>Khuyến mãi đi kèm</span>
+        <span>{{ $t('product.promotionIncluded') }}</span>
       </div>
       <div class="box-product-promotion-content show-all">
         <div class="list-promotion-pack">
@@ -183,8 +183,7 @@
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
               Đặc quyền trợ giá lên đến 3 triệu khi thu cũ lên đời iPhone
-              <a target="_blank" href="https://cellphones.com.vn/chuong-trinh-thu-cu-len-doi-iphone">&nbsp; Xem chi
-                tiết</a>
+              <a target="_blank" href="https://cellphones.com.vn/chuong-trinh-thu-cu-len-doi-iphone">&nbsp; {{ $t('product.details') }}</a>
             </p>
           </div>
           <div class="promotion-pack_item is-flex is-align-content-center">
@@ -196,7 +195,7 @@
               Mobifone &amp; VNSKY, miễn phí 30 ngày đầu - chỉ áp dụng tại cửa
               hàng
               <a target="_blank" href="https://cellphones.com.vn/sim-5g-vnsky-5g89c-3gb-ngay-free-1-thang.html">&nbsp;
-                Xem chi tiết</a>
+                {{ $t('product.details') }}</a>
             </p>
           </div>
           <div class="promotion-pack_item is-flex is-align-content-center">
@@ -206,7 +205,7 @@
             <p class="box-product-promotion-detail has-text-black button__promotion">
               Giảm thêm 10% cho Pin dự phòng - Camera - Gia dụng - Sức khỏe Làm
               đẹp - Đồng hồ trẻ em khi mua Điện thoại/Laptop
-              <a target="_blank" href="https://cellphones.com.vn/qua-tang-tri-an-khach-hang">&nbsp; Xem chi tiết</a>
+              <a target="_blank" href="https://cellphones.com.vn/qua-tang-tri-an-khach-hang">&nbsp; {{ $t('product.details') }}</a>
             </p>
           </div>
         </div>
@@ -252,7 +251,7 @@
             <div class="voucher-clipboard-outline"></div>
           </section>
           <footer class="modal-card-foot">
-            <button class="button">Đóng</button>
+            <button class="button">{{ $t('product.close') }}</button>
           </footer>
         </div>
       </div>
@@ -268,15 +267,14 @@
                   stroke-linejoin="round"></path>
               </svg>
             </button>
-            <p class="title">Tham gia chương trình</p>
+            <p class="title">{{ $t('product.joinProgram') }}</p>
             <div>
               <p class="has-text-centered mb-3 mx-auto">
-                Vui lòng nhập số điện thoại để tham gia chương trình ưu đãi cho
-                khách hàng mới.
+                {{ $t('product.enterPhoneToJoin') }}
               </p>
               <div class="field">
                 <p class="control has-icons-right">
-                  <input id="phoneGuest" type="text" placeholder="Nhập số điện thoại" maxlength="10" class="input" />
+                  <input id="phoneGuest" type="text" :placeholder="$t('register.enterPhone')" maxlength="10" class="input" />
                   <span class="icon is-small is-right" style="display: none"><svg width="48" height="48"
                       viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M30 18L18 30" stroke="#18181B" stroke-width="1.5" stroke-linecap="round"
@@ -299,7 +297,7 @@
               </div>
             </div>
             <button disabled="disabled" class="button submit-phone">
-              Tiếp tục
+              {{ $t('product.continue') }}
             </button>
           </section>
         </div>
@@ -338,7 +336,7 @@
                     Đang diễn ra
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/techcombank" target="_blank"
-                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -369,7 +367,7 @@
                     Đang diễn ra
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/ocb" target="_blank" rel="noopener noreferrer"
-                    class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -394,14 +392,14 @@
               </div>
               <div class="box-more-promotion-item__content">
                 <p class="box-more-promotion-item__desc">
-                  Hoàn tiền đến 2 triệu khi mở thẻ tín dụng HSBC
+                  {{ $t('product.creditCardRefund') }}
                 </p>
                 <div class="box-more-promotion-item__info">
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
                     Đang diễn ra
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/mo-the-tin-dung-hsbc" target="_blank"
-                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -433,7 +431,7 @@
                     Đang diễn ra
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/kredivo" target="_blank" rel="noopener noreferrer"
-                    class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -465,7 +463,7 @@
                     Đang diễn ra
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-mo-the-vib-cash-back" target="_blank"
-                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -497,7 +495,7 @@
                     Đang diễn ra
                   </p>
                   <a href="https://cellphones.com.vn/uu-dai-doi-tac/tpbank-evo" target="_blank"
-                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>Chi tiết</span>
+                    rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="#3B82F6" stroke-width="1.125" stroke-linecap="round"
@@ -2243,7 +2241,7 @@
                   d="M15 5C14.4477 5 14 5.44772 14 6C14 6.55228 14.4477 7 15 7V5ZM21 7C21.5523 7 22 6.55228 22 6C22 5.44772 21.5523 5 21 5V7ZM19 3C19 2.44772 18.5523 2 18 2C17.4477 2 17 2.44772 17 3H19ZM17 9C17 9.55228 17.4477 10 18 10C18.5523 10 19 9.55228 19 9H17ZM15 7H21V5H15V7ZM17 3V9H19V3H17Z"
                   fill="#D70018"></path>
               </svg>
-              <strong class="">Thêm vào giỏ</strong>
+              <strong class="">{{ $t('product.addToCart') }}</strong>
             </button>
           </div>
         </div>

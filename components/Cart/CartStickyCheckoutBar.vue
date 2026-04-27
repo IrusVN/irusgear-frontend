@@ -1,10 +1,10 @@
 <template>
   <div class="cart-sticky-checkout">
     <div class="cart-sticky-checkout__meta">
-      <span class="cart-sticky-checkout__label">Tạm tính</span>
+      <span class="cart-sticky-checkout__label">{{ $t('cart.subtotal') }}</span>
       <strong class="cart-sticky-checkout__value">{{ subtotal?.formatted || "0đ" }}</strong>
       <span v-if="savings?.value > 0" class="cart-sticky-checkout__hint">
-        Tiết kiệm {{ savings.formatted }}
+        {{ $t('cart.hintSave', { amount: savings.formatted }) }}
       </span>
     </div>
 
@@ -47,7 +47,7 @@ defineProps({
   },
   buttonLabel: {
     type: String,
-    default: "Tiến hành đặt hàng",
+    default: "",
   },
 });
 </script>

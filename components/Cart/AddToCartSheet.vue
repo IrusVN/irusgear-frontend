@@ -2,8 +2,8 @@
   <BottomSheet ref="sheetRef" @close="handleClose">
     <div class="cart-sheet">
       <div class="cart-sheet__header">
-        <p class="cart-sheet__eyebrow">Giỏ hàng</p>
-        <h3 class="cart-sheet__title">Đã thêm sản phẩm vào giỏ</h3>
+        <p class="cart-sheet__eyebrow">{{ $t('cart.cart') }}</p>
+        <h3 class="cart-sheet__title">{{ $t('cart.addedToCart') }}</h3>
       </div>
 
       <div v-if="lastAddedItem" class="cart-sheet__item">
@@ -27,7 +27,7 @@
           </div>
 
           <div class="cart-sheet__meta">
-            <span>Số lượng: {{ lastAddedItem.quantity }}</span>
+            <span>{{ $t('cart.quantity') }}: {{ lastAddedItem.quantity }}</span>
             <strong>{{ lastAddedItem.currentLineTotal?.formatted || lastAddedItem.lineTotal?.formatted }}</strong>
           </div>
         </div>
@@ -35,22 +35,22 @@
 
       <div class="cart-sheet__summary">
         <div class="cart-sheet__summary-row">
-          <span>{{ itemCount || 0 }} sản phẩm trong giỏ</span>
+          <span>{{ $t('cart.productsInCart', { count: itemCount || 0 }) }}</span>
           <strong>{{ subtotal?.formatted || "0đ" }}</strong>
         </div>
 
         <p v-if="savings?.value > 0" class="cart-sheet__summary-note">
-          Bạn đang tiết kiệm {{ savings.formatted }} so với mức giá đã lưu trước đó.
+          {{ $t('cart.saving', { amount: savings.formatted }) }}
         </p>
 
         <p class="cart-sheet__summary-note">
-          Giỏ của bạn sẽ được giữ lại khi đăng nhập hoặc quay lại trên cùng trình duyệt.
+          {{ $t('cart.cartRetainNote') }}
         </p>
       </div>
 
       <div class="cart-sheet__actions">
         <button type="button" class="cart-sheet__btn cart-sheet__btn--ghost" @click="handleClose">
-          Mua tiếp
+          {{ $t('cart.continueShopping') }}
         </button>
 
         <NuxtLink
@@ -58,7 +58,7 @@
           class="cart-sheet__btn cart-sheet__btn--primary"
           @click="handleGoToCart"
         >
-          Xem giỏ hàng
+          {{ $t('cart.viewCart') }}
         </NuxtLink>
       </div>
     </div>

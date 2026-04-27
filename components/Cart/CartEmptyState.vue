@@ -3,13 +3,13 @@
     <div class="cart-empty__icon">
       <i class="bi bi-cart-x"></i>
     </div>
-    <h2 class="cart-empty__title">Giỏ hàng của bạn đang trống</h2>
+    <h2 class="cart-empty__title">{{ $t('cart.emptyTitle') }}</h2>
     <p class="cart-empty__description">
-      Hãy chọn thêm sản phẩm để bắt đầu mua sắm nhé. Mình gợi ý vài lối đi nhanh để bạn quay lại đúng khu vực đang quan tâm.
+      {{ $t('cart.emptyDescription') }}
     </p>
 
     <NuxtLink :to="localePath('/products')" class="cart-empty__cta">
-      Khám phá sản phẩm
+      {{ $t('cart.exploreProducts') }}
     </NuxtLink>
 
     <div class="cart-empty__chips">
@@ -27,13 +27,14 @@
 
 <script setup>
 import { computed } from "vue";
-import { useLocalePath } from "#imports";
+import { useLocalePath, useI18n } from "#imports";
 
 const localePath = useLocalePath();
+const { t } = useI18n();
 
 const quickLinks = computed(() => [
   {
-    label: "Laptop",
+    label: t('cart.laptop'),
     to: {
       path: "/products",
       query: {
@@ -44,7 +45,7 @@ const quickLinks = computed(() => [
     },
   },
   {
-    label: "Âm thanh",
+    label: t('cart.audio'),
     to: {
       path: "/products",
       query: {
@@ -55,7 +56,7 @@ const quickLinks = computed(() => [
     },
   },
   {
-    label: "Đồng hồ",
+    label: t('cart.watch'),
     to: {
       path: "/products",
       query: {
@@ -66,7 +67,7 @@ const quickLinks = computed(() => [
     },
   },
   {
-    label: "Phụ kiện",
+    label: t('cart.accessory'),
     to: {
       path: "/products",
       query: {

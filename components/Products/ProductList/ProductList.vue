@@ -195,7 +195,7 @@
       </div>
 
       <div ref="filterBlockEl" class="product-filter-block">
-        <h2 class="product-filter-title">Chọn theo tiêu chí</h2>
+        <h2 class="product-filter-title">{{ $t('common.productFilter') }}</h2>
 
         <div class="product-filter-list">
           <button v-for="filter in productFilters" :key="filter.key" :ref="(el) => setFilterChipRef(filter.key, el)"
@@ -340,7 +340,7 @@
       </div>
 
       <div class="product-sort-block">
-        <h2 class="product-sort-title">Sắp xếp theo</h2>
+        <h2 class="product-sort-title">{{ $t('common.sortBy') }}</h2>
 
         <div class="product-sort-list">
           <button v-for="sort in sortOptions" :key="sort.key" type="button" :class="[
@@ -359,7 +359,7 @@
 
       <div v-if="hasMoreProducts" class="product-load-more">
         <button type="button" class="product-load-more__button" @click="handleLoadMoreProducts">
-          <span>Xem thêm {{ remainingProductCount }} sản phẩm</span>
+          <span>{{ $t('common.viewMoreProducts', { count: remainingProductCount }) }}</span>
           <span class="product-load-more__icon" aria-hidden="true">
             <svg viewBox="0 0 20 20" fill="none">
               <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
