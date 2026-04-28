@@ -1,5 +1,5 @@
 <template>
-  <aside class="cart-summary">
+  <aside class="cart-summary" :style="summaryStyle">
     <div class="cart-summary__head">
       <p class="cart-summary__eyebrow">{{ $t('cart.subtotal') }}</p>
       <h2 class="cart-summary__title">{{ $t('cart.cartSummary') }}</h2>
@@ -81,9 +81,12 @@
 </template>
 
 <script setup>
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useLocalePath } from "#imports";
 
-defineProps({
+defineEmits(["clear", "checkout"]);
+
+const props = defineProps({
   summary: {
     type: Object,
     required: true,
@@ -117,9 +120,29 @@ defineProps({
   },
 });
 
-defineEmits(["clear", "checkout"]);
-
 const localePath = useLocalePath();
+
+const progressExtraOffset = ref(0);
+
+const summaryStyle = computed(() => ({
+  top: `calc(var(--customer-sidebar-offset, 90px) + ${16 + progressExtraOffset.value}px)`,
+}));
+
+const handleProgressStickyChange = ({ detail }) => {
+  progressExtraOffset.value = detail.isSticky ? detail.height : 0;
+};
+
+onMounted(() => {
+  if (typeof window !== "undefined") {
+    window.addEventListener("cart-progress:sticky-change", handleProgressStickyChange);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (typeof window !== "undefined") {
+    window.removeEventListener("cart-progress:sticky-change", handleProgressStickyChange);
+  }
+});
 </script>
 
 <style scoped>
@@ -132,7 +155,6 @@ const localePath = useLocalePath();
   gap: 18px;
   padding: 22px;
   position: sticky;
-  top: calc(var(--customer-sidebar-offset, 90px) + 16px);
 }
 
 .cart-summary__head {

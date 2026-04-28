@@ -97,10 +97,21 @@ const progressBlockEl = ref(null);
 const isStickyVisible = ref(false);
 const stickyTopOffset = ref(0);
 let mounted = false;
+let progressResizeObserver = null;
 
 const stickyBarStyle = computed(() => ({
   top: `var(--customer-sidebar-offset, ${stickyTopOffset.value}px)`,
 }));
+
+const dispatchStickyChangeEvent = () => {
+  if (typeof window === "undefined") return;
+  const height = progressBlockEl.value?.offsetHeight ?? 0;
+  window.dispatchEvent(
+    new CustomEvent("cart-progress:sticky-change", {
+      detail: { isSticky: isStickyVisible.value, height },
+    })
+  );
+};
 
 const getCustomerSidebarOffset = () => {
   if (typeof document === "undefined") {
@@ -149,7 +160,12 @@ const syncStickyState = () => {
   }
 
   updateStickyOffset();
+  const wasSticky = isStickyVisible.value;
   isStickyVisible.value = progressBlockEl.value.getBoundingClientRect().top <= stickyTopOffset.value;
+
+  if (wasSticky !== isStickyVisible.value) {
+    dispatchStickyChangeEvent();
+  }
 };
 
 const handleWindowScroll = () => {
@@ -172,6 +188,13 @@ onMounted(() => {
     window.addEventListener("resize", handleWindowResize);
     window.addEventListener("customer-sidebar:offset-change", handleCustomerSidebarOffsetChange);
     mounted = true;
+
+    if (typeof ResizeObserver !== "undefined" && progressBlockEl.value instanceof HTMLElement) {
+      progressResizeObserver = new ResizeObserver(() => {
+        dispatchStickyChangeEvent();
+      });
+      progressResizeObserver.observe(progressBlockEl.value);
+    }
   }
 });
 
@@ -181,6 +204,11 @@ onBeforeUnmount(() => {
     window.removeEventListener("resize", handleWindowResize);
     window.removeEventListener("customer-sidebar:offset-change", handleCustomerSidebarOffsetChange);
     mounted = false;
+  }
+
+  if (progressResizeObserver) {
+    progressResizeObserver.disconnect();
+    progressResizeObserver = null;
   }
 });
 </script>

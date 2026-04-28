@@ -73,7 +73,7 @@
             <button
               type="button"
               class="cart-item__quantity-btn"
-              :disabled="busy"
+              :disabled="busy || item.quantity <= 1"
               :aria-label="$t('cart.decreaseQuantity')"
               @click="decrement"
             >
