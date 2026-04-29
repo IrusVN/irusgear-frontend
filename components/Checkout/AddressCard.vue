@@ -12,7 +12,7 @@
       <i class="bi bi-check-lg"></i>
     </div>
 
-    <span v-if="address.isDefault" class="address-card__badge">
+    <span v-if="isDefault" class="address-card__badge">
       {{ $t("checkout.default") }}
     </span>
 
@@ -30,12 +30,13 @@
 
       <div class="address-card__actions">
         <button
-          v-if="!address.isDefault"
+          v-if="showSetDefault"
           type="button"
           class="address-card__action address-card__action--muted"
+          :disabled="checkoutStore.setDefaultLoading"
           @click.stop="$emit('set-default')"
         >
-          {{ $t("checkout.setDefault") }}
+          {{ checkoutStore.setDefaultLoading ? $t("checkout.settingDefault") : $t("checkout.setDefault") }}
         </button>
         <button
           type="button"
@@ -59,6 +60,7 @@
 <script setup>
 import { computed } from "vue";
 import { useI18n } from "#imports";
+import { useCheckoutStore } from "@/stores/checkoutStore";
 
 const props = defineProps({
   address: {
@@ -72,6 +74,11 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["select", "edit", "delete", "set-default"]);
+
+const checkoutStore = useCheckoutStore();
+
+const isDefault = computed(() => !!props.address.is_default);
+const showSetDefault = computed(() => !props.address.is_default);
 
 const fullAddress = computed(() => {
   // Backend trả province/district/ward là object {code, name}

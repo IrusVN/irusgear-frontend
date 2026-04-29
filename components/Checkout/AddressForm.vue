@@ -133,9 +133,10 @@
       <button type="button" class="address-form__btn address-form__btn--cancel" @click="$emit('cancel')">
         {{ $t("checkout.cancel") }}
       </button>
-      <button type="submit" class="address-form__btn address-form__btn--save">
-        <i class="bi bi-check-lg"></i>
-        {{ $t("checkout.saveAddress") }}
+      <button type="submit" class="address-form__btn address-form__btn--save" :disabled="saving">
+        <i v-if="saving" class="bi bi-arrow-repeat spin"></i>
+        <i v-else class="bi bi-check-lg"></i>
+        {{ saving ? $t("checkout.saving") : $t("checkout.saveAddress") }}
       </button>
     </div>
   </form>
@@ -149,6 +150,13 @@ import { useAddress } from "@/composables/useAddress";
 import AddressSearchSelect from "@/components/Checkout/AddressSearchSelect.vue";
 
 const emit = defineEmits(["save", "cancel"]);
+
+const props = defineProps({
+  saving: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const checkoutStore = useCheckoutStore();
 const { addressForm: storeForm, editingAddressId } = storeToRefs(checkoutStore);
@@ -370,6 +378,20 @@ const handleSubmit = () => {
 
 .address-form__btn--save:hover {
   background: #b80015;
+}
+
+.address-form__btn--save:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @media (max-width: 575.98px) {

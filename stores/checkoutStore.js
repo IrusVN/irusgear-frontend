@@ -12,6 +12,9 @@ const _addressCache = {
   loaded: false,
 };
 
+// Single delivery options cache — same options apply to all addresses
+let _deliveryOptionsCache = null;
+
 const _loadAddressData = async () => {
   if (_addressCache.loaded) return;
   _addressCache.provinces = await vietnamAddressApi.getProvinces();
@@ -33,6 +36,12 @@ const formatMoney = (value = 0) => {
   };
 };
 
+const _getFallbackDeliveryOptions = () => [
+  { id: "standard", name: "Tiết kiệm", description: "Giao thường", time: "3-5 ngày", fee: 0, hasTimeSlots: false },
+  { id: "express", name: "Nhanh", description: "Giao nhanh", time: "1-2 ngày", fee: 30000, hasTimeSlots: true },
+  { id: "pickup", name: "Nhận tại cửa hàng", description: "Tự đến lấy", time: "Linh hoạt", fee: 0, hasTimeSlots: false },
+];
+
 export const useCheckoutStore = defineStore("checkout", () => {
   const feGlobalStore = useFeGlobalStore();
   const cartStore = useCartStore();
@@ -53,6 +62,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
   const isEditingAddress = ref(false);
   const editingAddressId = ref(null);
   const addressesLoading = ref(false);
+  const addressSaving = ref(false); // spam protection
+  const setDefaultLoading = ref(false);
 
   // Delivery state
   const deliveryOptions = ref([]);
@@ -153,13 +164,25 @@ export const useCheckoutStore = defineStore("checkout", () => {
       feGlobalStore.setApiUrl("addresses");
       const response = await feGlobalStore.fetchItem();
       if (response?.data) {
-        savedAddresses.value = response.data;
-        const defaultAddr = savedAddresses.value.find((a) => a.isDefault);
+        savedAddresses.value = response.data.map((a) => ({
+          ...a,
+          // Normalize: backend may return isDefault (camelCase) or is_default
+          is_default: a.is_default ?? a.isDefault ?? false,
+        }));
+        // Sort: default address first, then by creation order
+        savedAddresses.value.sort((a, b) => {
+          if (a.is_default && !b.is_default) return -1;
+          if (!a.is_default && b.is_default) return 1;
+          return 0;
+        });
+        const defaultAddr = savedAddresses.value.find((a) => a.is_default);
         if (defaultAddr) {
           selectedAddressId.value = String(defaultAddr.id);
         } else if (savedAddresses.value.length > 0) {
           selectedAddressId.value = String(savedAddresses.value[0].id);
         }
+        // Fetch delivery options once (same options for all addresses)
+        await fetchDeliveryOptions();
       }
     } catch (e) {
       console.error("fetchAddresses error:", e);
@@ -170,45 +193,33 @@ export const useCheckoutStore = defineStore("checkout", () => {
 
   const fetchDeliveryOptions = async () => {
     if (!selectedAddressId.value) return;
+
+    // Use cached options if available (instant, no API call)
+    if (_deliveryOptionsCache) {
+      deliveryOptions.value = _deliveryOptionsCache;
+      if (!selectedDeliveryId.value && deliveryOptions.value.length > 0) {
+        selectedDeliveryId.value = String(deliveryOptions.value[0].id);
+      }
+      return;
+    }
+
     deliveryLoading.value = true;
     try {
       feGlobalStore.setApiUrl("checkout/delivery-options");
       const response = await feGlobalStore.createItem({ address_id: selectedAddressId.value });
-      if (response?.data) {
+      if (response?.data && response.data.length > 0) {
+        _deliveryOptionsCache = response.data;
         deliveryOptions.value = response.data;
-        if (deliveryOptions.value.length > 0 && !selectedDeliveryId.value) {
-          selectedDeliveryId.value = String(deliveryOptions.value[0].id);
+        if (!selectedDeliveryId.value) {
+          selectedDeliveryId.value = String(response.data[0].id);
         }
+      } else {
+        deliveryOptions.value = _getFallbackDeliveryOptions();
+        selectedDeliveryId.value = "standard";
       }
     } catch (e) {
       console.error("fetchDeliveryOptions error:", e);
-      // Fallback default options
-      deliveryOptions.value = [
-        {
-          id: "standard",
-          name: "Tiết kiệm",
-          description: "Giao thường",
-          time: "3-5 ngày",
-          fee: 0,
-          hasTimeSlots: false,
-        },
-        {
-          id: "express",
-          name: "Nhanh",
-          description: "Giao nhanh",
-          time: "1-2 ngày",
-          fee: 30000,
-          hasTimeSlots: true,
-        },
-        {
-          id: "pickup",
-          name: "Nhận tại cửa hàng",
-          description: "Tự đến lấy",
-          time: "Linh hoạt",
-          fee: 0,
-          hasTimeSlots: false,
-        },
-      ];
+      deliveryOptions.value = _getFallbackDeliveryOptions();
       selectedDeliveryId.value = "standard";
     } finally {
       deliveryLoading.value = false;
@@ -282,74 +293,114 @@ export const useCheckoutStore = defineStore("checkout", () => {
   };
 
   const saveAddress = async (addressData) => {
-    // AddressSearchSelect dùng format {value, label} — extract code cho backend
-    const payload = {
-      name: addressData.name,
-      phone: addressData.phone,
-      province_code: addressData.province?.value || addressData.province?.code || null,
-      district_code: addressData.district?.value || addressData.district?.code || null,
-      ward_code: addressData.ward?.value || addressData.ward?.code || null,
-      address_line1: addressData.detail || null,
-      label: addressData.label || "home",
-      is_default: addressData.isDefault || false,
-    };
-    feGlobalStore.setApiUrl("addresses");
-    const response = await feGlobalStore.createItem(payload);
-    if (response?.data) {
-      savedAddresses.value.unshift(response.data);
-      selectedAddressId.value = String(response.data.id);
+    if (addressSaving.value) return;
+    addressSaving.value = true;
+    try {
+      const payload = {
+        name: addressData.name,
+        phone: addressData.phone,
+        province_code: addressData.province?.value || addressData.province?.code || null,
+        district_code: addressData.district?.value || addressData.district?.code || null,
+        ward_code: addressData.ward?.value || addressData.ward?.code || null,
+        address_line1: addressData.detail || null,
+        label: addressData.label || "home",
+        is_default: addressData.isDefault || false,
+      };
+      feGlobalStore.setApiUrl("addresses");
+      const response = await feGlobalStore.createItem(payload);
+      if (response?.data) {
+        const newAddr = {
+          ...response.data,
+          is_default: response.data.is_default ?? response.data.isDefault ?? false,
+        };
+        savedAddresses.value.unshift(newAddr);
+        selectedAddressId.value = String(response.data.id);
+        if (newAddr.is_default) {
+          savedAddresses.value.sort((a, b) => {
+            if (a.is_default && !b.is_default) return -1;
+            if (!a.is_default && b.is_default) return 1;
+            return 0;
+          });
+        }
+      }
+      isEditingAddress.value = false;
+      editingAddressId.value = null;
+      resetAddressForm();
+      return response;
+    } finally {
+      addressSaving.value = false;
     }
-    isEditingAddress.value = false;
-    editingAddressId.value = null;
-    resetAddressForm();
-    return response;
   };
 
   const updateAddress = async (id, addressData) => {
-    // AddressSearchSelect dùng format {value, label} — extract code cho backend
-    const payload = {
-      name: addressData.name,
-      phone: addressData.phone,
-      province_code: addressData.province?.value || addressData.province?.code || null,
-      district_code: addressData.district?.value || addressData.district?.code || null,
-      ward_code: addressData.ward?.value || addressData.ward?.code || null,
-      address_line1: addressData.detail || null,
-      label: addressData.label || "home",
-      is_default: addressData.isDefault || false,
-    };
-    feGlobalStore.setApiUrl("addresses");
-    const response = await feGlobalStore.updateItem(id, payload);
-    if (response?.data) {
-      const idx = savedAddresses.value.findIndex((a) => String(a.id) === String(id));
-      if (idx !== -1) {
-        savedAddresses.value[idx] = response.data;
+    if (addressSaving.value) return;
+    addressSaving.value = true;
+    try {
+      const payload = {
+        name: addressData.name,
+        phone: addressData.phone,
+        province_code: addressData.province?.value || addressData.province?.code || null,
+        district_code: addressData.district?.value || addressData.district?.code || null,
+        ward_code: addressData.ward?.value || addressData.ward?.code || null,
+        address_line1: addressData.detail || null,
+        label: addressData.label || "home",
+        is_default: addressData.isDefault || false,
+      };
+      feGlobalStore.setApiUrl("addresses");
+      const response = await feGlobalStore.updateItem(id, payload);
+      if (response?.data) {
+        const idx = savedAddresses.value.findIndex((a) => String(a.id) === String(id));
+        if (idx !== -1) {
+          savedAddresses.value[idx] = {
+            ...response.data,
+            is_default: response.data.is_default ?? response.data.isDefault ?? savedAddresses.value[idx].is_default,
+          };
+        }
       }
+      isEditingAddress.value = false;
+      editingAddressId.value = null;
+      resetAddressForm();
+      return response;
+    } finally {
+      addressSaving.value = false;
     }
-    isEditingAddress.value = false;
-    editingAddressId.value = null;
-    resetAddressForm();
-    return response;
   };
 
   const deleteAddress = async (id) => {
+    const strId = String(id);
     feGlobalStore.setApiUrl("addresses");
     const response = await feGlobalStore.deleteItem(id);
-    savedAddresses.value = savedAddresses.value.filter((a) => String(a.id) !== String(id));
-    if (String(selectedAddressId.value) === String(id)) {
+    savedAddresses.value = savedAddresses.value.filter((a) => String(a.id) !== strId);
+    if (String(selectedAddressId.value) === strId) {
       selectedAddressId.value = savedAddresses.value[0] ? String(savedAddresses.value[0].id) : null;
     }
     return response;
   };
 
   const setDefaultAddress = async (id) => {
-    await feGlobalStore.putItem(`addresses/${id}/default`);
-    savedAddresses.value.forEach((a) => {
-      a.isDefault = String(a.id) === String(id);
-    });
+    setDefaultLoading.value = true;
+    try {
+      await feGlobalStore.putItem(`addresses/${id}/default`);
+      // Optimistic update: set is_default locally, no refetch needed
+      savedAddresses.value.forEach((a) => {
+        a.is_default = String(a.id) === String(id);
+      });
+      // Sort: default address first
+      savedAddresses.value.sort((a, b) => {
+        if (a.is_default && !b.is_default) return -1;
+        if (!a.is_default && b.is_default) return 1;
+        return 0;
+      });
+    } finally {
+      setDefaultLoading.value = false;
+    }
   };
 
   const selectAddress = (id) => {
-    selectedAddressId.value = String(id);
+    const newId = String(id);
+    if (selectedAddressId.value === newId) return; // skip if same address
+    selectedAddressId.value = newId;
+    selectedTimeSlot.value = null;
     fetchDeliveryOptions();
   };
 
@@ -414,7 +465,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
         ward: wardOpt,
         detail: address.detail || address.addressLine1 || "",
         label: address.label || "home",
-        isDefault: address.isDefault || false,
+        isDefault: address.is_default || false,
       };
     } else {
       editingAddressId.value = null;
@@ -497,6 +548,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
   const resetCheckout = () => {
     selectedAddressId.value = null;
     deliveryOptions.value = [];
+    _deliveryOptionsCache = null;
     selectedDeliveryId.value = null;
     selectedTimeSlot.value = null;
     appliedVoucher.value = null;
@@ -528,6 +580,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
     isEditingAddress,
     editingAddressId,
     addressesLoading,
+    addressSaving,
+    setDefaultLoading,
 
     // Delivery state
     deliveryOptions,

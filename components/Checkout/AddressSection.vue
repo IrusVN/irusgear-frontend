@@ -62,6 +62,7 @@
     <!-- Address form -->
     <AddressForm
       v-if="checkoutStore.isEditingAddress"
+      :saving="checkoutStore.addressSaving"
       @save="handleSaveAddress"
       @cancel="checkoutStore.closeAddressForm()"
     />
