@@ -1,0 +1,191 @@
+[
+  {
+    "code": "10342",
+    "name": "Bạch Hạ",
+    "full_name": "Xã Bạch Hạ",
+    "type": "Xã Bạch",
+    "district_code": "280"
+  },
+  {
+    "code": "10348",
+    "name": "Châu Can",
+    "full_name": "Xã Châu Can",
+    "type": "Xã Châu",
+    "district_code": "280"
+  },
+  {
+    "code": "10321",
+    "name": "Chuyên Mỹ",
+    "full_name": "Xã Chuyên Mỹ",
+    "type": "Xã Chuyên",
+    "district_code": "280"
+  },
+  {
+    "code": "10303",
+    "name": "Hoàng Long",
+    "full_name": "Xã Hoàng Long",
+    "type": "Xã Hoàng",
+    "district_code": "280"
+  },
+  {
+    "code": "10276",
+    "name": "Hồng Minh",
+    "full_name": "Xã Hồng Minh",
+    "type": "Xã Hồng",
+    "district_code": "280"
+  },
+  {
+    "code": "10300",
+    "name": "Hồng Thái",
+    "full_name": "Xã Hồng Thái",
+    "type": "Xã Hồng",
+    "district_code": "280"
+  },
+  {
+    "code": "10324",
+    "name": "Khai Thái",
+    "full_name": "Xã Khai Thái",
+    "type": "Xã Khai",
+    "district_code": "280"
+  },
+  {
+    "code": "10351",
+    "name": "Minh Tân",
+    "full_name": "Xã Minh Tân",
+    "type": "Xã Minh",
+    "district_code": "280"
+  },
+  {
+    "code": "10309",
+    "name": "Nam Phong",
+    "full_name": "Xã Nam Phong",
+    "type": "Xã Nam",
+    "district_code": "280"
+  },
+  {
+    "code": "10282",
+    "name": "Nam Tiến",
+    "full_name": "Xã Nam Tiến",
+    "type": "Xã Nam",
+    "district_code": "280"
+  },
+  {
+    "code": "10312",
+    "name": "Nam Triều",
+    "full_name": "Xã Nam Triều",
+    "type": "Xã Nam",
+    "district_code": "280"
+  },
+  {
+    "code": "10270",
+    "name": "Phú Minh",
+    "full_name": "Thị trấn Phú Minh",
+    "type": "Thị trấn Phú",
+    "district_code": "280"
+  },
+  {
+    "code": "10294",
+    "name": "Phú Túc",
+    "full_name": "Xã Phú Túc",
+    "type": "Xã Phú",
+    "district_code": "280"
+  },
+  {
+    "code": "10273",
+    "name": "Phú Xuyên",
+    "full_name": "Thị trấn Phú Xuyên",
+    "type": "Thị trấn Phú",
+    "district_code": "280"
+  },
+  {
+    "code": "10339",
+    "name": "Phú Yên",
+    "full_name": "Xã Phú Yên",
+    "type": "Xã Phú",
+    "district_code": "280"
+  },
+  {
+    "code": "10327",
+    "name": "Phúc Tiến",
+    "full_name": "Xã Phúc Tiến",
+    "type": "Xã Phúc",
+    "district_code": "280"
+  },
+  {
+    "code": "10279",
+    "name": "Phượng Dực",
+    "full_name": "Xã Phượng Dực",
+    "type": "Xã Phượng",
+    "district_code": "280"
+  },
+  {
+    "code": "10345",
+    "name": "Quang Lãng",
+    "full_name": "Xã Quang Lãng",
+    "type": "Xã Quang",
+    "district_code": "280"
+  },
+  {
+    "code": "10306",
+    "name": "Quang Trung",
+    "full_name": "Xã Quang Trung",
+    "type": "Xã Quang",
+    "district_code": "280"
+  },
+  {
+    "code": "10318",
+    "name": "Sơn Hà",
+    "full_name": "Xã Sơn Hà",
+    "type": "Xã Sơn",
+    "district_code": "280"
+  },
+  {
+    "code": "10315",
+    "name": "Tân Dân",
+    "full_name": "Xã Tân Dân",
+    "type": "Xã Tân",
+    "district_code": "280"
+  },
+  {
+    "code": "10333",
+    "name": "Tri Thủy",
+    "full_name": "Xã Tri Thủy",
+    "type": "Xã Tri",
+    "district_code": "280"
+  },
+  {
+    "code": "10288",
+    "name": "Tri Trung",
+    "full_name": "Xã Tri Trung",
+    "type": "Xã Tri",
+    "district_code": "280"
+  },
+  {
+    "code": "10297",
+    "name": "Văn Hoàng",
+    "full_name": "Xã Văn Hoàng",
+    "type": "Xã Văn",
+    "district_code": "280"
+  },
+  {
+    "code": "10330",
+    "name": "Vân Từ",
+    "full_name": "Xã Vân Từ",
+    "type": "Xã Vân",
+    "district_code": "280"
+  },
+  {
+    "code": "10291",
+    "name": "Đại Thắng",
+    "full_name": "Xã Đại Thắng",
+    "type": "Xã Đại",
+    "district_code": "280"
+  },
+  {
+    "code": "10336",
+    "name": "Đại Xuyên",
+    "full_name": "Xã Đại Xuyên",
+    "type": "Xã Đại",
+    "district_code": "280"
+  }
+]

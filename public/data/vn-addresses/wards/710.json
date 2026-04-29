@@ -1,0 +1,65 @@
+[
+  {
+    "code": "25666",
+    "name": "Bàu Đồn",
+    "full_name": "Xã Bàu Đồn",
+    "type": "Xã Bàu",
+    "district_code": "710"
+  },
+  {
+    "code": "25660",
+    "name": "Cẩm Giang",
+    "full_name": "Xã Cẩm Giang",
+    "type": "Xã Cẩm",
+    "district_code": "710"
+  },
+  {
+    "code": "25654",
+    "name": "Gò Dầu",
+    "full_name": "Thị trấn Gò Dầu",
+    "type": "Thị trấn Gò",
+    "district_code": "710"
+  },
+  {
+    "code": "25663",
+    "name": "Hiệp Thạnh",
+    "full_name": "Xã Hiệp Thạnh",
+    "type": "Xã Hiệp",
+    "district_code": "710"
+  },
+  {
+    "code": "25669",
+    "name": "Phước Thạnh",
+    "full_name": "Xã Phước Thạnh",
+    "type": "Xã Phước",
+    "district_code": "710"
+  },
+  {
+    "code": "25675",
+    "name": "Phước Trạch",
+    "full_name": "Xã Phước Trạch",
+    "type": "Xã Phước",
+    "district_code": "710"
+  },
+  {
+    "code": "25672",
+    "name": "Phước Đông",
+    "full_name": "Xã Phước Đông",
+    "type": "Xã Phước",
+    "district_code": "710"
+  },
+  {
+    "code": "25678",
+    "name": "Thanh Phước",
+    "full_name": "Xã Thanh Phước",
+    "type": "Xã Thanh",
+    "district_code": "710"
+  },
+  {
+    "code": "25657",
+    "name": "Thạnh Đức",
+    "full_name": "Xã Thạnh Đức",
+    "type": "Xã Thạnh",
+    "district_code": "710"
+  }
+]

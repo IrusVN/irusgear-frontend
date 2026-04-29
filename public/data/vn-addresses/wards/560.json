@@ -1,0 +1,100 @@
+[
+  {
+    "code": "22180",
+    "name": "Cà Lúi",
+    "full_name": "Xã Cà Lúi",
+    "type": "Xã Cà",
+    "district_code": "560"
+  },
+  {
+    "code": "22165",
+    "name": "Củng Sơn",
+    "full_name": "Thị trấn Củng Sơn",
+    "type": "Thị trấn Củng",
+    "district_code": "560"
+  },
+  {
+    "code": "22192",
+    "name": "Eachà Rang",
+    "full_name": "Xã Eachà Rang",
+    "type": "Xã Eachà",
+    "district_code": "560"
+  },
+  {
+    "code": "22195",
+    "name": "Krông Pa",
+    "full_name": "Xã Krông Pa",
+    "type": "Xã Krông",
+    "district_code": "560"
+  },
+  {
+    "code": "22168",
+    "name": "Phước Tân",
+    "full_name": "Xã Phước Tân",
+    "type": "Xã Phước",
+    "district_code": "560"
+  },
+  {
+    "code": "22201",
+    "name": "Sơn Hà",
+    "full_name": "Xã Sơn Hà",
+    "type": "Xã Sơn",
+    "district_code": "560"
+  },
+  {
+    "code": "22171",
+    "name": "Sơn Hội",
+    "full_name": "Xã Sơn Hội",
+    "type": "Xã Sơn",
+    "district_code": "560"
+  },
+  {
+    "code": "22177",
+    "name": "Sơn Long",
+    "full_name": "Xã Sơn Long",
+    "type": "Xã Sơn",
+    "district_code": "560"
+  },
+  {
+    "code": "22189",
+    "name": "Sơn Nguyên",
+    "full_name": "Xã Sơn Nguyên",
+    "type": "Xã Sơn",
+    "district_code": "560"
+  },
+  {
+    "code": "22183",
+    "name": "Sơn Phước",
+    "full_name": "Xã Sơn Phước",
+    "type": "Xã Sơn",
+    "district_code": "560"
+  },
+  {
+    "code": "22186",
+    "name": "Sơn Xuân",
+    "full_name": "Xã Sơn Xuân",
+    "type": "Xã Sơn",
+    "district_code": "560"
+  },
+  {
+    "code": "22174",
+    "name": "Sơn Định",
+    "full_name": "Xã Sơn Định",
+    "type": "Xã Sơn",
+    "district_code": "560"
+  },
+  {
+    "code": "22198",
+    "name": "Suối Bạc",
+    "full_name": "Xã Suối Bạc",
+    "type": "Xã Suối",
+    "district_code": "560"
+  },
+  {
+    "code": "22204",
+    "name": "Suối Trai",
+    "full_name": "Xã Suối Trai",
+    "type": "Xã Suối",
+    "district_code": "560"
+  }
+]

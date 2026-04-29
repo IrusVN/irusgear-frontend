@@ -1,0 +1,58 @@
+[
+  {
+    "code": "29770",
+    "name": "Cái Vồn",
+    "full_name": "Phường Cái Vồn",
+    "type": "Phường Cái",
+    "district_code": "861"
+  },
+  {
+    "code": "29815",
+    "name": "Mỹ Hòa",
+    "full_name": "Xã Mỹ Hòa",
+    "type": "Xã Mỹ",
+    "district_code": "861"
+  },
+  {
+    "code": "29771",
+    "name": "Thành Phước",
+    "full_name": "Phường Thành Phước",
+    "type": "Phường Thành",
+    "district_code": "861"
+  },
+  {
+    "code": "29806",
+    "name": "Thuận An",
+    "full_name": "Xã Thuận An",
+    "type": "Xã Thuận",
+    "district_code": "861"
+  },
+  {
+    "code": "29812",
+    "name": "Đông Bình",
+    "full_name": "Xã Đông Bình",
+    "type": "Xã Đông",
+    "district_code": "861"
+  },
+  {
+    "code": "29809",
+    "name": "Đông Thạnh",
+    "full_name": "Xã Đông Thạnh",
+    "type": "Xã Đông",
+    "district_code": "861"
+  },
+  {
+    "code": "29818",
+    "name": "Đông Thành",
+    "full_name": "Xã Đông Thành",
+    "type": "Xã Đông",
+    "district_code": "861"
+  },
+  {
+    "code": "29813",
+    "name": "Đông Thuận",
+    "full_name": "Phường Đông Thuận",
+    "type": "Phường Đông",
+    "district_code": "861"
+  }
+]

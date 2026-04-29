@@ -1,0 +1,107 @@
+[
+  {
+    "code": "28012",
+    "name": "An Thạnh",
+    "full_name": "Xã An Thạnh",
+    "type": "Xã An",
+    "district_code": "803"
+  },
+  {
+    "code": "27991",
+    "name": "Bến Lức",
+    "full_name": "Thị trấn Bến Lức",
+    "type": "Thị trấn Bến",
+    "district_code": "803"
+  },
+  {
+    "code": "28015",
+    "name": "Bình Đức",
+    "full_name": "Xã Bình Đức",
+    "type": "Xã Bình",
+    "district_code": "803"
+  },
+  {
+    "code": "28024",
+    "name": "Long Hiệp",
+    "full_name": "Xã Long Hiệp",
+    "type": "Xã Long",
+    "district_code": "803"
+  },
+  {
+    "code": "27997",
+    "name": "Lương Bình",
+    "full_name": "Xã Lương Bình",
+    "type": "Xã Lương",
+    "district_code": "803"
+  },
+  {
+    "code": "28003",
+    "name": "Lương Hòa",
+    "full_name": "Xã Lương Hòa",
+    "type": "Xã Lương",
+    "district_code": "803"
+  },
+  {
+    "code": "28018",
+    "name": "Mỹ Yên",
+    "full_name": "Xã Mỹ Yên",
+    "type": "Xã Mỹ",
+    "district_code": "803"
+  },
+  {
+    "code": "28033",
+    "name": "Nhựt Chánh",
+    "full_name": "Xã Nhựt Chánh",
+    "type": "Xã Nhựt",
+    "district_code": "803"
+  },
+  {
+    "code": "28030",
+    "name": "Phước Lợi",
+    "full_name": "Xã Phước Lợi",
+    "type": "Xã Phước",
+    "district_code": "803"
+  },
+  {
+    "code": "28009",
+    "name": "Tân Bửu",
+    "full_name": "Xã Tân Bửu",
+    "type": "Xã Tân",
+    "district_code": "803"
+  },
+  {
+    "code": "28006",
+    "name": "Tân Hòa",
+    "full_name": "Xã Tân Hòa",
+    "type": "Xã Tân",
+    "district_code": "803"
+  },
+  {
+    "code": "28000",
+    "name": "Thạnh Hòa",
+    "full_name": "Xã Thạnh Hòa",
+    "type": "Xã Thạnh",
+    "district_code": "803"
+  },
+  {
+    "code": "27994",
+    "name": "Thạnh Lợi",
+    "full_name": "Xã Thạnh Lợi",
+    "type": "Xã Thạnh",
+    "district_code": "803"
+  },
+  {
+    "code": "28021",
+    "name": "Thanh Phú",
+    "full_name": "Xã Thanh Phú",
+    "type": "Xã Thanh",
+    "district_code": "803"
+  },
+  {
+    "code": "28027",
+    "name": "Thạnh Đức",
+    "full_name": "Xã Thạnh Đức",
+    "type": "Xã Thạnh",
+    "district_code": "803"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "23857",
+    "name": "Chư Ty",
+    "full_name": "Thị trấn Chư Ty",
+    "type": "Thị trấn Chư",
+    "district_code": "631"
+  },
+  {
+    "code": "23866",
+    "name": "Ia Din",
+    "full_name": "Xã Ia Din",
+    "type": "Xã Ia",
+    "district_code": "631"
+  },
+  {
+    "code": "23860",
+    "name": "Ia Dơk",
+    "full_name": "Xã Ia Dơk",
+    "type": "Xã Ia",
+    "district_code": "631"
+  },
+  {
+    "code": "23872",
+    "name": "Ia Dom",
+    "full_name": "Xã Ia Dom",
+    "type": "Xã Ia",
+    "district_code": "631"
+  },
+  {
+    "code": "23869",
+    "name": "Ia Kla",
+    "full_name": "Xã Ia Kla",
+    "type": "Xã Ia",
+    "district_code": "631"
+  },
+  {
+    "code": "23863",
+    "name": "Ia Krêl",
+    "full_name": "Xã Ia Krêl",
+    "type": "Xã Ia",
+    "district_code": "631"
+  },
+  {
+    "code": "23878",
+    "name": "Ia Kriêng",
+    "full_name": "Xã Ia Kriêng",
+    "type": "Xã Ia",
+    "district_code": "631"
+  },
+  {
+    "code": "23875",
+    "name": "Ia Lang",
+    "full_name": "Xã Ia Lang",
+    "type": "Xã Ia",
+    "district_code": "631"
+  },
+  {
+    "code": "23884",
+    "name": "Ia Nan",
+    "full_name": "Xã Ia Nan",
+    "type": "Xã Ia",
+    "district_code": "631"
+  },
+  {
+    "code": "23881",
+    "name": "Ia Pnôn",
+    "full_name": "Xã Ia Pnôn",
+    "type": "Xã Ia",
+    "district_code": "631"
+  }
+]

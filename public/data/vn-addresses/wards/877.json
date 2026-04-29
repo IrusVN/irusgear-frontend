@@ -1,0 +1,86 @@
+[
+  {
+    "code": "30247",
+    "name": "An Hiệp",
+    "full_name": "Xã An Hiệp",
+    "type": "Xã An",
+    "district_code": "877"
+  },
+  {
+    "code": "30271",
+    "name": "An Khánh",
+    "full_name": "Xã An Khánh",
+    "type": "Xã An",
+    "district_code": "877"
+  },
+  {
+    "code": "30250",
+    "name": "An Nhơn",
+    "full_name": "Xã An Nhơn",
+    "type": "Xã An",
+    "district_code": "877"
+  },
+  {
+    "code": "30265",
+    "name": "An Phú Thuận",
+    "full_name": "Xã An Phú Thuận",
+    "type": "Xã An Phú",
+    "district_code": "877"
+  },
+  {
+    "code": "30244",
+    "name": "Cái Tàu Hạ",
+    "full_name": "Thị trấn Cái Tàu Hạ",
+    "type": "Thị trấn Cái Tàu",
+    "district_code": "877"
+  },
+  {
+    "code": "30277",
+    "name": "Hòa Tân",
+    "full_name": "Xã Hòa Tân",
+    "type": "Xã Hòa",
+    "district_code": "877"
+  },
+  {
+    "code": "30268",
+    "name": "Phú Hựu",
+    "full_name": "Xã Phú Hựu",
+    "type": "Xã Phú",
+    "district_code": "877"
+  },
+  {
+    "code": "30262",
+    "name": "Phú Long",
+    "full_name": "Xã Phú Long",
+    "type": "Xã Phú",
+    "district_code": "877"
+  },
+  {
+    "code": "30256",
+    "name": "Tân Bình",
+    "full_name": "Xã Tân Bình",
+    "type": "Xã Tân",
+    "district_code": "877"
+  },
+  {
+    "code": "30253",
+    "name": "Tân Nhuận Đông",
+    "full_name": "Xã Tân Nhuận Đông",
+    "type": "Xã Tân Nhuận",
+    "district_code": "877"
+  },
+  {
+    "code": "30274",
+    "name": "Tân Phú",
+    "full_name": "Xã Tân Phú",
+    "type": "Xã Tân",
+    "district_code": "877"
+  },
+  {
+    "code": "30259",
+    "name": "Tân Phú Trung",
+    "full_name": "Xã Tân Phú Trung",
+    "type": "Xã Tân Phú",
+    "district_code": "877"
+  }
+]

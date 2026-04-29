@@ -1,4 +1,5 @@
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
+import { vietnamAddressApi } from "./useVietnamAddressApi";
 
 const provinces = ref([]);
 const districts = ref([]);
@@ -6,45 +7,24 @@ const wards = ref([]);
 const districtsLoading = ref(false);
 const wardsLoading = ref(false);
 
-const provinceOptions = computed(() =>
-  provinces.value.map((p) => ({
-    value: p.id || p.code || p.name,
-    label: p.name,
-  }))
-);
+const provinceOptions = computed(() => provinces.value);
+const districtOptions = computed(() => districts.value);
+const wardOptions = computed(() => wards.value);
 
-const districtOptions = computed(() =>
-  districts.value.map((d) => ({
-    value: d.id || d.code || d.name,
-    label: d.name,
-  }))
-);
-
-const wardOptions = computed(() =>
-  wards.value.map((w) => ({
-    value: w.id || w.code || w.name,
-    label: w.name,
-  }))
-);
+const loadProvinces = async () => {
+  if (provinces.value.length > 0) return;
+  provinces.value = await vietnamAddressApi.getProvinces();
+};
 
 const loadDistricts = async (province) => {
-  if (!province) {
+  const code = province?.code || province?.value;
+  if (!code) {
     districts.value = [];
     return;
   }
   districtsLoading.value = true;
   try {
-    const code = province.code || province.value;
-    if (!code) {
-      districts.value = [];
-      return;
-    }
-    const res = await fetch(`/data/vn-addresses/districts/${code}.json`);
-    if (res.ok) {
-      districts.value = await res.json();
-    } else {
-      districts.value = [];
-    }
+    districts.value = await vietnamAddressApi.getDistricts(code);
   } catch {
     districts.value = [];
   } finally {
@@ -53,23 +33,14 @@ const loadDistricts = async (province) => {
 };
 
 const loadWards = async (district) => {
-  if (!district) {
+  const code = district?.code || district?.value;
+  if (!code) {
     wards.value = [];
     return;
   }
   wardsLoading.value = true;
   try {
-    const code = district.code || district.value;
-    if (!code) {
-      wards.value = [];
-      return;
-    }
-    const res = await fetch(`/data/vn-addresses/wards/${code}.json`);
-    if (res.ok) {
-      wards.value = await res.json();
-    } else {
-      wards.value = [];
-    }
+    wards.value = await vietnamAddressApi.getWards(code);
   } catch {
     wards.value = [];
   } finally {
@@ -77,31 +48,31 @@ const loadWards = async (district) => {
   }
 };
 
-const loadProvinces = async () => {
-  if (provinces.value.length > 0) return;
-  try {
-    const res = await fetch("/data/vn-addresses/provinces.json");
-    if (res.ok) {
-      provinces.value = await res.json();
-    }
-  } catch {
-    provinces.value = [];
-  }
-};
-
 const onProvinceChange = (province) => {
   wards.value = [];
-  districts.value = [];
-  if (province) {
-    loadDistricts(province);
+  if (!province) {
+    districts.value = [];
+    return;
   }
+  const code = province.code || province.value;
+  if (!code) {
+    districts.value = [];
+    return;
+  }
+  loadDistricts(province);
 };
 
 const onDistrictChange = (district) => {
-  wards.value = [];
-  if (district) {
-    loadWards(district);
+  if (!district) {
+    wards.value = [];
+    return;
   }
+  const code = district.code || district.value;
+  if (!code) {
+    wards.value = [];
+    return;
+  }
+  loadWards(district);
 };
 
 const resetAddressFields = (form) => {

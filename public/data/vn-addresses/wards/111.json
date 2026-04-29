@@ -1,0 +1,72 @@
+[
+  {
+    "code": "03607",
+    "name": "Hố Mít",
+    "full_name": "Xã Hố Mít",
+    "type": "Xã Hố",
+    "district_code": "111"
+  },
+  {
+    "code": "03601",
+    "name": "Mường Khoa",
+    "full_name": "Xã Mường Khoa",
+    "type": "Xã Mường",
+    "district_code": "111"
+  },
+  {
+    "code": "03610",
+    "name": "Nậm Cần",
+    "full_name": "Xã Nậm Cần",
+    "type": "Xã Nậm",
+    "district_code": "111"
+  },
+  {
+    "code": "03613",
+    "name": "Nậm Sỏ",
+    "full_name": "Xã Nậm Sỏ",
+    "type": "Xã Nậm",
+    "district_code": "111"
+  },
+  {
+    "code": "03616",
+    "name": "Pắc Ta",
+    "full_name": "Xã Pắc Ta",
+    "type": "Xã Pắc",
+    "district_code": "111"
+  },
+  {
+    "code": "03602",
+    "name": "Phúc Khoa",
+    "full_name": "Xã Phúc Khoa",
+    "type": "Xã Phúc",
+    "district_code": "111"
+  },
+  {
+    "code": "03622",
+    "name": "Tà Mít",
+    "full_name": "Xã Tà Mít",
+    "type": "Xã Tà",
+    "district_code": "111"
+  },
+  {
+    "code": "03598",
+    "name": "Tân Uyên",
+    "full_name": "Thị trấn Tân Uyên",
+    "type": "Thị trấn Tân",
+    "district_code": "111"
+  },
+  {
+    "code": "03604",
+    "name": "Thân Thuộc",
+    "full_name": "Xã Thân Thuộc",
+    "type": "Xã Thân",
+    "district_code": "111"
+  },
+  {
+    "code": "03605",
+    "name": "Trung Đồng",
+    "full_name": "Xã Trung Đồng",
+    "type": "Xã Trung",
+    "district_code": "111"
+  }
+]

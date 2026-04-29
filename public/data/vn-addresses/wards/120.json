@@ -1,0 +1,114 @@
+[
+  {
+    "code": "03832",
+    "name": "Chiềng Ân",
+    "full_name": "Xã Chiềng Ân",
+    "type": "Xã Chiềng",
+    "district_code": "120"
+  },
+  {
+    "code": "03838",
+    "name": "Chiềng Công",
+    "full_name": "Xã Chiềng Công",
+    "type": "Xã Chiềng",
+    "district_code": "120"
+  },
+  {
+    "code": "03850",
+    "name": "Chiềng Hoa",
+    "full_name": "Xã Chiềng Hoa",
+    "type": "Xã Chiềng",
+    "district_code": "120"
+  },
+  {
+    "code": "03814",
+    "name": "Chiềng Lao",
+    "full_name": "Xã Chiềng Lao",
+    "type": "Xã Chiềng",
+    "district_code": "120"
+  },
+  {
+    "code": "03829",
+    "name": "Chiềng Muôn",
+    "full_name": "Xã Chiềng Muôn",
+    "type": "Xã Chiềng",
+    "district_code": "120"
+  },
+  {
+    "code": "03844",
+    "name": "Chiềng San",
+    "full_name": "Xã Chiềng San",
+    "type": "Xã Chiềng",
+    "district_code": "120"
+  },
+  {
+    "code": "03817",
+    "name": "Hua Trai",
+    "full_name": "Xã Hua Trai",
+    "type": "Xã Hua",
+    "district_code": "120"
+  },
+  {
+    "code": "03808",
+    "name": "Ít Ong",
+    "full_name": "Thị trấn Ít Ong",
+    "type": "Thị trấn Ít",
+    "district_code": "120"
+  },
+  {
+    "code": "03847",
+    "name": "Mường Bú",
+    "full_name": "Xã Mường Bú",
+    "type": "Xã Mường",
+    "district_code": "120"
+  },
+  {
+    "code": "03853",
+    "name": "Mường Chùm",
+    "full_name": "Xã Mường Chùm",
+    "type": "Xã Mường",
+    "district_code": "120"
+  },
+  {
+    "code": "03823",
+    "name": "Mường Trai",
+    "full_name": "Xã Mường Trai",
+    "type": "Xã Mường",
+    "district_code": "120"
+  },
+  {
+    "code": "03811",
+    "name": "Nậm Giôn",
+    "full_name": "Xã Nậm Giôn",
+    "type": "Xã Nậm",
+    "district_code": "120"
+  },
+  {
+    "code": "03826",
+    "name": "Nậm Păm",
+    "full_name": "Xã Nậm Păm",
+    "type": "Xã Nậm",
+    "district_code": "120"
+  },
+  {
+    "code": "03820",
+    "name": "Ngọc Chiến",
+    "full_name": "Xã Ngọc Chiến",
+    "type": "Xã Ngọc",
+    "district_code": "120"
+  },
+  {
+    "code": "03835",
+    "name": "Pi Toong",
+    "full_name": "Xã Pi Toong",
+    "type": "Xã Pi",
+    "district_code": "120"
+  },
+  {
+    "code": "03841",
+    "name": "Tạ Bú",
+    "full_name": "Xã Tạ Bú",
+    "type": "Xã Tạ",
+    "district_code": "120"
+  }
+]

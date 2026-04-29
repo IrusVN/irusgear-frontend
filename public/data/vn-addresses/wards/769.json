@@ -1,0 +1,240 @@
+[
+  {
+    "code": "27094",
+    "name": "An Khánh",
+    "full_name": "Phường An Khánh",
+    "type": "Phường An",
+    "district_code": "769"
+  },
+  {
+    "code": "27115",
+    "name": "An Lợi Đông",
+    "full_name": "Phường An Lợi Đông",
+    "type": "Phường An Lợi",
+    "district_code": "769"
+  },
+  {
+    "code": "27091",
+    "name": "An Phú",
+    "full_name": "Phường An Phú",
+    "type": "Phường An",
+    "district_code": "769"
+  },
+  {
+    "code": "26797",
+    "name": "Bình Chiểu",
+    "full_name": "Phường Bình Chiểu",
+    "type": "Phường Bình",
+    "district_code": "769"
+  },
+  {
+    "code": "26824",
+    "name": "Bình Thọ",
+    "full_name": "Phường Bình Thọ",
+    "type": "Phường Bình",
+    "district_code": "769"
+  },
+  {
+    "code": "27100",
+    "name": "Bình Trưng Tây",
+    "full_name": "Phường Bình Trưng Tây",
+    "type": "Phường Bình Trưng",
+    "district_code": "769"
+  },
+  {
+    "code": "27097",
+    "name": "Bình Trưng Đông",
+    "full_name": "Phường Bình Trưng Đông",
+    "type": "Phường Bình Trưng",
+    "district_code": "769"
+  },
+  {
+    "code": "27109",
+    "name": "Cát Lái",
+    "full_name": "Phường Cát Lái",
+    "type": "Phường Cát",
+    "district_code": "769"
+  },
+  {
+    "code": "26812",
+    "name": "Hiệp Bình Chánh",
+    "full_name": "Phường Hiệp Bình Chánh",
+    "type": "Phường Hiệp Bình",
+    "district_code": "769"
+  },
+  {
+    "code": "26809",
+    "name": "Hiệp Bình Phước",
+    "full_name": "Phường Hiệp Bình Phước",
+    "type": "Phường Hiệp Bình",
+    "district_code": "769"
+  },
+  {
+    "code": "26839",
+    "name": "Hiệp Phú",
+    "full_name": "Phường Hiệp Phú",
+    "type": "Phường Hiệp",
+    "district_code": "769"
+  },
+  {
+    "code": "26815",
+    "name": "Linh Chiểu",
+    "full_name": "Phường Linh Chiểu",
+    "type": "Phường Linh",
+    "district_code": "769"
+  },
+  {
+    "code": "26818",
+    "name": "Linh Tây",
+    "full_name": "Phường Linh Tây",
+    "type": "Phường Linh",
+    "district_code": "769"
+  },
+  {
+    "code": "26800",
+    "name": "Linh Trung",
+    "full_name": "Phường Linh Trung",
+    "type": "Phường Linh",
+    "district_code": "769"
+  },
+  {
+    "code": "26794",
+    "name": "Linh Xuân",
+    "full_name": "Phường Linh Xuân",
+    "type": "Phường Linh",
+    "district_code": "769"
+  },
+  {
+    "code": "26821",
+    "name": "Linh Đông",
+    "full_name": "Phường Linh Đông",
+    "type": "Phường Linh",
+    "district_code": "769"
+  },
+  {
+    "code": "26830",
+    "name": "Long Bình",
+    "full_name": "Phường Long Bình",
+    "type": "Phường Long",
+    "district_code": "769"
+  },
+  {
+    "code": "26857",
+    "name": "Long Phước",
+    "full_name": "Phường Long Phước",
+    "type": "Phường Long",
+    "district_code": "769"
+  },
+  {
+    "code": "26833",
+    "name": "Long Thạnh Mỹ",
+    "full_name": "Phường Long Thạnh Mỹ",
+    "type": "Phường Long Thạnh",
+    "district_code": "769"
+  },
+  {
+    "code": "26860",
+    "name": "Long Trường",
+    "full_name": "Phường Long Trường",
+    "type": "Phường Long",
+    "district_code": "769"
+  },
+  {
+    "code": "26866",
+    "name": "Phú Hữu",
+    "full_name": "Phường Phú Hữu",
+    "type": "Phường Phú",
+    "district_code": "769"
+  },
+  {
+    "code": "26863",
+    "name": "Phước Bình",
+    "full_name": "Phường Phước Bình",
+    "type": "Phường Phước",
+    "district_code": "769"
+  },
+  {
+    "code": "26851",
+    "name": "Phước Long A",
+    "full_name": "Phường Phước Long A",
+    "type": "Phường Phước Long",
+    "district_code": "769"
+  },
+  {
+    "code": "26848",
+    "name": "Phước Long B",
+    "full_name": "Phường Phước Long B",
+    "type": "Phường Phước Long",
+    "district_code": "769"
+  },
+  {
+    "code": "26803",
+    "name": "Tam Bình",
+    "full_name": "Phường Tam Bình",
+    "type": "Phường Tam",
+    "district_code": "769"
+  },
+  {
+    "code": "26806",
+    "name": "Tam Phú",
+    "full_name": "Phường Tam Phú",
+    "type": "Phường Tam",
+    "district_code": "769"
+  },
+  {
+    "code": "26836",
+    "name": "Tân Phú",
+    "full_name": "Phường Tân Phú",
+    "type": "Phường Tân",
+    "district_code": "769"
+  },
+  {
+    "code": "26842",
+    "name": "Tăng Nhơn Phú A",
+    "full_name": "Phường Tăng Nhơn Phú A",
+    "type": "Phường Tăng Nhơn Phú",
+    "district_code": "769"
+  },
+  {
+    "code": "26845",
+    "name": "Tăng Nhơn Phú B",
+    "full_name": "Phường Tăng Nhơn Phú B",
+    "type": "Phường Tăng Nhơn Phú",
+    "district_code": "769"
+  },
+  {
+    "code": "27112",
+    "name": "Thạnh Mỹ Lợi",
+    "full_name": "Phường Thạnh Mỹ Lợi",
+    "type": "Phường Thạnh Mỹ",
+    "district_code": "769"
+  },
+  {
+    "code": "27088",
+    "name": "Thảo Điền",
+    "full_name": "Phường Thảo Điền",
+    "type": "Phường Thảo",
+    "district_code": "769"
+  },
+  {
+    "code": "27118",
+    "name": "Thủ Thiêm",
+    "full_name": "Phường Thủ Thiêm",
+    "type": "Phường Thủ",
+    "district_code": "769"
+  },
+  {
+    "code": "26854",
+    "name": "Trường Thạnh",
+    "full_name": "Phường Trường Thạnh",
+    "type": "Phường Trường",
+    "district_code": "769"
+  },
+  {
+    "code": "26827",
+    "name": "Trường Thọ",
+    "full_name": "Phường Trường Thọ",
+    "type": "Phường Trường",
+    "district_code": "769"
+  }
+]

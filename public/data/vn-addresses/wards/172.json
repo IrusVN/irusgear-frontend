@@ -1,0 +1,128 @@
+[
+  {
+    "code": "05860",
+    "name": "Ba Hàng",
+    "full_name": "Phường Ba Hàng",
+    "type": "Phường Ba",
+    "district_code": "172"
+  },
+  {
+    "code": "05857",
+    "name": "Bắc Sơn",
+    "full_name": "Phường Bắc Sơn",
+    "type": "Phường Bắc",
+    "district_code": "172"
+  },
+  {
+    "code": "05854",
+    "name": "Bãi Bông",
+    "full_name": "Phường Bãi Bông",
+    "type": "Phường Bãi",
+    "district_code": "172"
+  },
+  {
+    "code": "05869",
+    "name": "Hồng Tiến",
+    "full_name": "Phường Hồng Tiến",
+    "type": "Phường Hồng",
+    "district_code": "172"
+  },
+  {
+    "code": "05872",
+    "name": "Minh Đức",
+    "full_name": "Xã Minh Đức",
+    "type": "Xã Minh",
+    "district_code": "172"
+  },
+  {
+    "code": "05890",
+    "name": "Nam Tiến",
+    "full_name": "Phường Nam Tiến",
+    "type": "Phường Nam",
+    "district_code": "172"
+  },
+  {
+    "code": "05863",
+    "name": "Phúc Tân",
+    "full_name": "Xã Phúc Tân",
+    "type": "Xã Phúc",
+    "district_code": "172"
+  },
+  {
+    "code": "05866",
+    "name": "Phúc Thuận",
+    "full_name": "Xã Phúc Thuận",
+    "type": "Xã Phúc",
+    "district_code": "172"
+  },
+  {
+    "code": "05893",
+    "name": "Tân Hương",
+    "full_name": "Phường Tân Hương",
+    "type": "Phường Tân",
+    "district_code": "172"
+  },
+  {
+    "code": "05902",
+    "name": "Tân Phú",
+    "full_name": "Phường Tân Phú",
+    "type": "Phường Tân",
+    "district_code": "172"
+  },
+  {
+    "code": "05881",
+    "name": "Thành Công",
+    "full_name": "Xã Thành Công",
+    "type": "Xã Thành",
+    "district_code": "172"
+  },
+  {
+    "code": "05905",
+    "name": "Thuận Thành",
+    "full_name": "Phường Thuận Thành",
+    "type": "Phường Thuận",
+    "district_code": "172"
+  },
+  {
+    "code": "05884",
+    "name": "Tiên Phong",
+    "full_name": "Phường Tiên Phong",
+    "type": "Phường Tiên",
+    "district_code": "172"
+  },
+  {
+    "code": "05899",
+    "name": "Trung Thành",
+    "full_name": "Phường Trung Thành",
+    "type": "Phường Trung",
+    "district_code": "172"
+  },
+  {
+    "code": "05887",
+    "name": "Vạn Phái",
+    "full_name": "Xã Vạn Phái",
+    "type": "Xã Vạn",
+    "district_code": "172"
+  },
+  {
+    "code": "05875",
+    "name": "Đắc Sơn",
+    "full_name": "Phường Đắc Sơn",
+    "type": "Phường Đắc",
+    "district_code": "172"
+  },
+  {
+    "code": "05896",
+    "name": "Đông Cao",
+    "full_name": "Phường Đông Cao",
+    "type": "Phường Đông",
+    "district_code": "172"
+  },
+  {
+    "code": "05878",
+    "name": "Đồng Tiến",
+    "full_name": "Phường Đồng Tiến",
+    "type": "Phường Đồng",
+    "district_code": "172"
+  }
+]

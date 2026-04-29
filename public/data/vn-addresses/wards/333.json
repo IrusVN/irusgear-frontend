@@ -1,0 +1,100 @@
+[
+  {
+    "code": "12403",
+    "name": "Minh Hoàng",
+    "full_name": "Xã Minh Hoàng",
+    "type": "Xã Minh",
+    "district_code": "333"
+  },
+  {
+    "code": "12394",
+    "name": "Minh Tân",
+    "full_name": "Xã Minh Tân",
+    "type": "Xã Minh",
+    "district_code": "333"
+  },
+  {
+    "code": "12424",
+    "name": "Minh Tiến",
+    "full_name": "Xã Minh Tiến",
+    "type": "Xã Minh",
+    "district_code": "333"
+  },
+  {
+    "code": "12427",
+    "name": "Nguyên Hòa",
+    "full_name": "Xã Nguyên Hòa",
+    "type": "Xã Nguyên",
+    "district_code": "333"
+  },
+  {
+    "code": "12415",
+    "name": "Nhật Quang",
+    "full_name": "Xã Nhật Quang",
+    "type": "Xã Nhật",
+    "district_code": "333"
+  },
+  {
+    "code": "12397",
+    "name": "Phan Sào Nam",
+    "full_name": "Xã Phan Sào Nam",
+    "type": "Xã Phan Sào",
+    "district_code": "333"
+  },
+  {
+    "code": "12400",
+    "name": "Quang Hưng",
+    "full_name": "Xã Quang Hưng",
+    "type": "Xã Quang",
+    "district_code": "333"
+  },
+  {
+    "code": "12421",
+    "name": "Tam Đa",
+    "full_name": "Xã Tam Đa",
+    "type": "Xã Tam",
+    "district_code": "333"
+  },
+  {
+    "code": "12418",
+    "name": "Tiền Tiến",
+    "full_name": "Xã Tiền Tiến",
+    "type": "Xã Tiền",
+    "district_code": "333"
+  },
+  {
+    "code": "12409",
+    "name": "Tống Phan",
+    "full_name": "Xã Tống Phan",
+    "type": "Xã Tống",
+    "district_code": "333"
+  },
+  {
+    "code": "12430",
+    "name": "Tống Trân",
+    "full_name": "Xã Tống Trân",
+    "type": "Xã Tống",
+    "district_code": "333"
+  },
+  {
+    "code": "12391",
+    "name": "Trần Cao",
+    "full_name": "Thị trấn Trần Cao",
+    "type": "Thị trấn Trần",
+    "district_code": "333"
+  },
+  {
+    "code": "12412",
+    "name": "Đình Cao",
+    "full_name": "Xã Đình Cao",
+    "type": "Xã Đình",
+    "district_code": "333"
+  },
+  {
+    "code": "12406",
+    "name": "Đoàn Đào",
+    "full_name": "Xã Đoàn Đào",
+    "type": "Xã Đoàn",
+    "district_code": "333"
+  }
+]

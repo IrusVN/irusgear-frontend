@@ -1,0 +1,58 @@
+[
+  {
+    "code": "105",
+    "name": "Lai Châu",
+    "full_name": "Thành phố Lai Châu",
+    "type": "Thành phố Lai",
+    "province_code": "12"
+  },
+  {
+    "code": "107",
+    "name": "Mường Tè",
+    "full_name": "Huyện Mường Tè",
+    "type": "Huyện Mường",
+    "province_code": "12"
+  },
+  {
+    "code": "112",
+    "name": "Nậm Nhùn",
+    "full_name": "Huyện Nậm Nhùn",
+    "type": "Huyện Nậm",
+    "province_code": "12"
+  },
+  {
+    "code": "109",
+    "name": "Phong Thổ",
+    "full_name": "Huyện Phong Thổ",
+    "type": "Huyện Phong",
+    "province_code": "12"
+  },
+  {
+    "code": "108",
+    "name": "Sìn Hồ",
+    "full_name": "Huyện Sìn Hồ",
+    "type": "Huyện Sìn",
+    "province_code": "12"
+  },
+  {
+    "code": "106",
+    "name": "Tam Đường",
+    "full_name": "Huyện Tam Đường",
+    "type": "Huyện Tam",
+    "province_code": "12"
+  },
+  {
+    "code": "111",
+    "name": "Tân Uyên",
+    "full_name": "Huyện Tân Uyên",
+    "type": "Huyện Tân",
+    "province_code": "12"
+  },
+  {
+    "code": "110",
+    "name": "Than Uyên",
+    "full_name": "Huyện Than Uyên",
+    "type": "Huyện Than",
+    "province_code": "12"
+  }
+]

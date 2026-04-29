@@ -1,0 +1,226 @@
+[
+  {
+    "code": "13012",
+    "name": "An Ninh",
+    "full_name": "Xã An Ninh",
+    "type": "Xã An",
+    "district_code": "342"
+  },
+  {
+    "code": "13048",
+    "name": "Bắc Hải",
+    "full_name": "Xã Bắc Hải",
+    "type": "Xã Bắc",
+    "district_code": "342"
+  },
+  {
+    "code": "13045",
+    "name": "Nam Chính",
+    "full_name": "Xã Nam Chính",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13036",
+    "name": "Nam Cường",
+    "full_name": "Xã Nam Cường",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13054",
+    "name": "Nam Hà",
+    "full_name": "Xã Nam Hà",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13069",
+    "name": "Nam Hải",
+    "full_name": "Xã Nam Hải",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13063",
+    "name": "Nam Hồng",
+    "full_name": "Xã Nam Hồng",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13066",
+    "name": "Nam Hưng",
+    "full_name": "Xã Nam Hưng",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13072",
+    "name": "Nam Phú",
+    "full_name": "Xã Nam Phú",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13042",
+    "name": "Nam Thắng",
+    "full_name": "Xã Nam Thắng",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13057",
+    "name": "Nam Thanh",
+    "full_name": "Xã Nam Thanh",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13051",
+    "name": "Nam Thịnh",
+    "full_name": "Xã Nam Thịnh",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13060",
+    "name": "Nam Trung",
+    "full_name": "Xã Nam Trung",
+    "type": "Xã Nam",
+    "district_code": "342"
+  },
+  {
+    "code": "13027",
+    "name": "Phương Công",
+    "full_name": "Xã Phương Công",
+    "type": "Xã Phương",
+    "district_code": "342"
+  },
+  {
+    "code": "13021",
+    "name": "Tây Giang",
+    "full_name": "Xã Tây Giang",
+    "type": "Xã Tây",
+    "district_code": "342"
+  },
+  {
+    "code": "12991",
+    "name": "Tây Lương",
+    "full_name": "Xã Tây Lương",
+    "type": "Xã Tây",
+    "district_code": "342"
+  },
+  {
+    "code": "12994",
+    "name": "Tây Ninh",
+    "full_name": "Xã Tây Ninh",
+    "type": "Xã Tây",
+    "district_code": "342"
+  },
+  {
+    "code": "13030",
+    "name": "Tây Phong",
+    "full_name": "Xã Tây Phong",
+    "type": "Xã Tây",
+    "district_code": "342"
+  },
+  {
+    "code": "13033",
+    "name": "Tây Tiến",
+    "full_name": "Xã Tây Tiến",
+    "type": "Xã Tây",
+    "district_code": "342"
+  },
+  {
+    "code": "12970",
+    "name": "Tiền Hải",
+    "full_name": "Thị trấn Tiền Hải",
+    "type": "Thị trấn Tiền",
+    "district_code": "342"
+  },
+  {
+    "code": "13039",
+    "name": "Vân Trường",
+    "full_name": "Xã Vân Trường",
+    "type": "Xã Vân",
+    "district_code": "342"
+  },
+  {
+    "code": "12985",
+    "name": "Vũ Lăng",
+    "full_name": "Xã Vũ Lăng",
+    "type": "Xã Vũ",
+    "district_code": "342"
+  },
+  {
+    "code": "13018",
+    "name": "Đông Cơ",
+    "full_name": "Xã Đông Cơ",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "13000",
+    "name": "Đông Hoàng",
+    "full_name": "Xã Đông Hoàng",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "13024",
+    "name": "Đông Lâm",
+    "full_name": "Xã Đông Lâm",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "12979",
+    "name": "Đông Long",
+    "full_name": "Xã Đông Long",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "13003",
+    "name": "Đông Minh",
+    "full_name": "Xã Đông Minh",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "13009",
+    "name": "Đông Phong",
+    "full_name": "Xã Đông Phong",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "12982",
+    "name": "Đông Quí",
+    "full_name": "Xã Đông Quí",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "12976",
+    "name": "Đông Trà",
+    "full_name": "Xã Đông Trà",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "12997",
+    "name": "Đông Trung",
+    "full_name": "Xã Đông Trung",
+    "type": "Xã Đông",
+    "district_code": "342"
+  },
+  {
+    "code": "12988",
+    "name": "Đông Xuyên",
+    "full_name": "Xã Đông Xuyên",
+    "type": "Xã Đông",
+    "district_code": "342"
+  }
+]

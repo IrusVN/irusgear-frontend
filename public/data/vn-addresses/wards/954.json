@@ -1,0 +1,72 @@
+[
+  {
+    "code": "31825",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "954"
+  },
+  {
+    "code": "31813",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "954"
+  },
+  {
+    "code": "31816",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "954"
+  },
+  {
+    "code": "31819",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "954"
+  },
+  {
+    "code": "31822",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "954"
+  },
+  {
+    "code": "31828",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "954"
+  },
+  {
+    "code": "31840",
+    "name": "Hiệp Thành",
+    "full_name": "Xã Hiệp Thành",
+    "type": "Xã Hiệp",
+    "district_code": "954"
+  },
+  {
+    "code": "31831",
+    "name": "Nhà Mát",
+    "full_name": "Phường Nhà Mát",
+    "type": "Phường Nhà",
+    "district_code": "954"
+  },
+  {
+    "code": "31834",
+    "name": "Vĩnh Trạch",
+    "full_name": "Xã Vĩnh Trạch",
+    "type": "Xã Vĩnh",
+    "district_code": "954"
+  },
+  {
+    "code": "31837",
+    "name": "Vĩnh Trạch Đông",
+    "full_name": "Xã Vĩnh Trạch Đông",
+    "type": "Xã Vĩnh Trạch",
+    "district_code": "954"
+  }
+]

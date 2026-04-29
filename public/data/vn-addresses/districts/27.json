@@ -1,0 +1,58 @@
+[
+  {
+    "code": "256",
+    "name": "Bắc Ninh",
+    "full_name": "Thành phố Bắc Ninh",
+    "type": "Thành phố Bắc",
+    "province_code": "27"
+  },
+  {
+    "code": "263",
+    "name": "Gia Bình",
+    "full_name": "Huyện Gia Bình",
+    "type": "Huyện Gia",
+    "province_code": "27"
+  },
+  {
+    "code": "264",
+    "name": "Lương Tài",
+    "full_name": "Huyện Lương Tài",
+    "type": "Huyện Lương",
+    "province_code": "27"
+  },
+  {
+    "code": "259",
+    "name": "Quế Võ",
+    "full_name": "Thị xã Quế Võ",
+    "type": "Thị xã Quế",
+    "province_code": "27"
+  },
+  {
+    "code": "262",
+    "name": "Thuận Thành",
+    "full_name": "Thị xã Thuận Thành",
+    "type": "Thị xã Thuận",
+    "province_code": "27"
+  },
+  {
+    "code": "260",
+    "name": "Tiên Du",
+    "full_name": "Huyện Tiên Du",
+    "type": "Huyện Tiên",
+    "province_code": "27"
+  },
+  {
+    "code": "261",
+    "name": "Từ Sơn",
+    "full_name": "Thành phố Từ Sơn",
+    "type": "Thành phố Từ",
+    "province_code": "27"
+  },
+  {
+    "code": "258",
+    "name": "Yên Phong",
+    "full_name": "Huyện Yên Phong",
+    "type": "Huyện Yên",
+    "province_code": "27"
+  }
+]

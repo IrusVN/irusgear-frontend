@@ -1,0 +1,121 @@
+[
+  {
+    "code": "11629",
+    "name": "An Lão",
+    "full_name": "Thị trấn An Lão",
+    "type": "Thị trấn An",
+    "district_code": "313"
+  },
+  {
+    "code": "11677",
+    "name": "An Thái",
+    "full_name": "Xã An Thái",
+    "type": "Xã An",
+    "district_code": "313"
+  },
+  {
+    "code": "11653",
+    "name": "An Thắng",
+    "full_name": "Xã An Thắng",
+    "type": "Xã An",
+    "district_code": "313"
+  },
+  {
+    "code": "11674",
+    "name": "An Thọ",
+    "full_name": "Xã An Thọ",
+    "type": "Xã An",
+    "district_code": "313"
+  },
+  {
+    "code": "11641",
+    "name": "An Tiến",
+    "full_name": "Xã An Tiến",
+    "type": "Xã An",
+    "district_code": "313"
+  },
+  {
+    "code": "11632",
+    "name": "Bát Trang",
+    "full_name": "Xã Bát Trang",
+    "type": "Xã Bát",
+    "district_code": "313"
+  },
+  {
+    "code": "11671",
+    "name": "Chiến Thắng",
+    "full_name": "Xã Chiến Thắng",
+    "type": "Xã Chiến",
+    "district_code": "313"
+  },
+  {
+    "code": "11668",
+    "name": "Mỹ Đức",
+    "full_name": "Xã Mỹ Đức",
+    "type": "Xã Mỹ",
+    "district_code": "313"
+  },
+  {
+    "code": "11644",
+    "name": "Quang Hưng",
+    "full_name": "Xã Quang Hưng",
+    "type": "Xã Quang",
+    "district_code": "313"
+  },
+  {
+    "code": "11647",
+    "name": "Quang Trung",
+    "full_name": "Xã Quang Trung",
+    "type": "Xã Quang",
+    "district_code": "313"
+  },
+  {
+    "code": "11650",
+    "name": "Quốc Tuấn",
+    "full_name": "Xã Quốc Tuấn",
+    "type": "Xã Quốc",
+    "district_code": "313"
+  },
+  {
+    "code": "11659",
+    "name": "Tân Dân",
+    "full_name": "Xã Tân Dân",
+    "type": "Xã Tân",
+    "district_code": "313"
+  },
+  {
+    "code": "11665",
+    "name": "Tân Viên",
+    "full_name": "Xã Tân Viên",
+    "type": "Xã Tân",
+    "district_code": "313"
+  },
+  {
+    "code": "11662",
+    "name": "Thái Sơn",
+    "full_name": "Xã Thái Sơn",
+    "type": "Xã Thái",
+    "district_code": "313"
+  },
+  {
+    "code": "11656",
+    "name": "Trường Sơn",
+    "full_name": "Thị trấn Trường Sơn",
+    "type": "Thị trấn Trường",
+    "district_code": "313"
+  },
+  {
+    "code": "11638",
+    "name": "Trường Thành",
+    "full_name": "Xã Trường Thành",
+    "type": "Xã Trường",
+    "district_code": "313"
+  },
+  {
+    "code": "11635",
+    "name": "Trường Thọ",
+    "full_name": "Xã Trường Thọ",
+    "type": "Xã Trường",
+    "district_code": "313"
+  }
+]

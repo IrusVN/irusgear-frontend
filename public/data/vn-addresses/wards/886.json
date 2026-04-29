@@ -1,0 +1,100 @@
+[
+  {
+    "code": "30337",
+    "name": "An Phú",
+    "full_name": "Thị trấn An Phú",
+    "type": "Thị trấn An",
+    "district_code": "886"
+  },
+  {
+    "code": "30340",
+    "name": "Khánh An",
+    "full_name": "Xã Khánh An",
+    "type": "Xã Khánh",
+    "district_code": "886"
+  },
+  {
+    "code": "30343",
+    "name": "Khánh Bình",
+    "full_name": "Xã Khánh Bình",
+    "type": "Xã Khánh",
+    "district_code": "886"
+  },
+  {
+    "code": "30341",
+    "name": "Long Bình",
+    "full_name": "Thị trấn Long Bình",
+    "type": "Thị trấn Long",
+    "district_code": "886"
+  },
+  {
+    "code": "30349",
+    "name": "Nhơn Hội",
+    "full_name": "Xã Nhơn Hội",
+    "type": "Xã Nhơn",
+    "district_code": "886"
+  },
+  {
+    "code": "30355",
+    "name": "Phú Hội",
+    "full_name": "Xã Phú Hội",
+    "type": "Xã Phú",
+    "district_code": "886"
+  },
+  {
+    "code": "30352",
+    "name": "Phú Hữu",
+    "full_name": "Xã Phú Hữu",
+    "type": "Xã Phú",
+    "district_code": "886"
+  },
+  {
+    "code": "30358",
+    "name": "Phước Hưng",
+    "full_name": "Xã Phước Hưng",
+    "type": "Xã Phước",
+    "district_code": "886"
+  },
+  {
+    "code": "30346",
+    "name": "Quốc Thái",
+    "full_name": "Xã Quốc Thái",
+    "type": "Xã Quốc",
+    "district_code": "886"
+  },
+  {
+    "code": "30364",
+    "name": "Vĩnh Hậu",
+    "full_name": "Xã Vĩnh Hậu",
+    "type": "Xã Vĩnh",
+    "district_code": "886"
+  },
+  {
+    "code": "30370",
+    "name": "Vĩnh Hội Đông",
+    "full_name": "Xã Vĩnh Hội Đông",
+    "type": "Xã Vĩnh Hội",
+    "district_code": "886"
+  },
+  {
+    "code": "30361",
+    "name": "Vĩnh Lộc",
+    "full_name": "Xã Vĩnh Lộc",
+    "type": "Xã Vĩnh",
+    "district_code": "886"
+  },
+  {
+    "code": "30367",
+    "name": "Vĩnh Trường",
+    "full_name": "Xã Vĩnh Trường",
+    "type": "Xã Vĩnh",
+    "district_code": "886"
+  },
+  {
+    "code": "30373",
+    "name": "Đa Phước",
+    "full_name": "Thị trấn Đa Phước",
+    "type": "Thị trấn Đa",
+    "district_code": "886"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "code": "20194",
+    "name": "Hòa Hiệp Bắc",
+    "full_name": "Phường Hòa Hiệp Bắc",
+    "type": "Phường Hòa Hiệp",
+    "district_code": "490"
+  },
+  {
+    "code": "20195",
+    "name": "Hòa Hiệp Nam",
+    "full_name": "Phường Hòa Hiệp Nam",
+    "type": "Phường Hòa Hiệp",
+    "district_code": "490"
+  },
+  {
+    "code": "20197",
+    "name": "Hòa Khánh Bắc",
+    "full_name": "Phường Hòa Khánh Bắc",
+    "type": "Phường Hòa Khánh",
+    "district_code": "490"
+  },
+  {
+    "code": "20198",
+    "name": "Hòa Khánh Nam",
+    "full_name": "Phường Hòa Khánh Nam",
+    "type": "Phường Hòa Khánh",
+    "district_code": "490"
+  },
+  {
+    "code": "20200",
+    "name": "Hòa Minh",
+    "full_name": "Phường Hòa Minh",
+    "type": "Phường Hòa",
+    "district_code": "490"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "32128",
+    "name": "Cái Nước",
+    "full_name": "Thị trấn Cái Nước",
+    "type": "Thị trấn Cái",
+    "district_code": "969"
+  },
+  {
+    "code": "32141",
+    "name": "Hoà Mỹ",
+    "full_name": "Xã Hoà Mỹ",
+    "type": "Xã Hoà",
+    "district_code": "969"
+  },
+  {
+    "code": "32140",
+    "name": "Hưng Mỹ",
+    "full_name": "Xã Hưng Mỹ",
+    "type": "Xã Hưng",
+    "district_code": "969"
+  },
+  {
+    "code": "32131",
+    "name": "Lương Thế Trân",
+    "full_name": "Xã Lương Thế Trân",
+    "type": "Xã Lương Thế",
+    "district_code": "969"
+  },
+  {
+    "code": "32134",
+    "name": "Phú Hưng",
+    "full_name": "Xã Phú Hưng",
+    "type": "Xã Phú",
+    "district_code": "969"
+  },
+  {
+    "code": "32137",
+    "name": "Tân Hưng",
+    "full_name": "Xã Tân Hưng",
+    "type": "Xã Tân",
+    "district_code": "969"
+  },
+  {
+    "code": "32146",
+    "name": "Tân Hưng Đông",
+    "full_name": "Xã Tân Hưng Đông",
+    "type": "Xã Tân Hưng",
+    "district_code": "969"
+  },
+  {
+    "code": "32130",
+    "name": "Thạnh Phú",
+    "full_name": "Xã Thạnh Phú",
+    "type": "Xã Thạnh",
+    "district_code": "969"
+  },
+  {
+    "code": "32149",
+    "name": "Trần Thới",
+    "full_name": "Xã Trần Thới",
+    "type": "Xã Trần",
+    "district_code": "969"
+  },
+  {
+    "code": "32142",
+    "name": "Đông Hưng",
+    "full_name": "Xã Đông Hưng",
+    "type": "Xã Đông",
+    "district_code": "969"
+  },
+  {
+    "code": "32143",
+    "name": "Đông Thới",
+    "full_name": "Xã Đông Thới",
+    "type": "Xã Đông",
+    "district_code": "969"
+  }
+]

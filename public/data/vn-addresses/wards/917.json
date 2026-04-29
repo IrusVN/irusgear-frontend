@@ -1,0 +1,51 @@
+[
+  {
+    "code": "31153",
+    "name": "Châu Văn Liêm",
+    "full_name": "Phường Châu Văn Liêm",
+    "type": "Phường Châu Văn",
+    "district_code": "917"
+  },
+  {
+    "code": "31157",
+    "name": "Long Hưng",
+    "full_name": "Phường Long Hưng",
+    "type": "Phường Long",
+    "district_code": "917"
+  },
+  {
+    "code": "31162",
+    "name": "Phước Thới",
+    "full_name": "Phường Phước Thới",
+    "type": "Phường Phước",
+    "district_code": "917"
+  },
+  {
+    "code": "31159",
+    "name": "Thới An",
+    "full_name": "Phường Thới An",
+    "type": "Phường Thới",
+    "district_code": "917"
+  },
+  {
+    "code": "31154",
+    "name": "Thới Hòa",
+    "full_name": "Phường Thới Hòa",
+    "type": "Phường Thới",
+    "district_code": "917"
+  },
+  {
+    "code": "31156",
+    "name": "Thới Long",
+    "full_name": "Phường Thới Long",
+    "type": "Phường Thới",
+    "district_code": "917"
+  },
+  {
+    "code": "31165",
+    "name": "Trường Lạc",
+    "full_name": "Phường Trường Lạc",
+    "type": "Phường Trường",
+    "district_code": "917"
+  }
+]

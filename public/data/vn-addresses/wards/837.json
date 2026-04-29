@@ -1,0 +1,128 @@
+[
+  {
+    "code": "29224",
+    "name": "An Nhơn",
+    "full_name": "Xã An Nhơn",
+    "type": "Xã An",
+    "district_code": "837"
+  },
+  {
+    "code": "29218",
+    "name": "An Quy",
+    "full_name": "Xã An Quy",
+    "type": "Xã An",
+    "district_code": "837"
+  },
+  {
+    "code": "29200",
+    "name": "An Thạnh",
+    "full_name": "Xã An Thạnh",
+    "type": "Xã An",
+    "district_code": "837"
+  },
+  {
+    "code": "29215",
+    "name": "An Thuận",
+    "full_name": "Xã An Thuận",
+    "type": "Xã An",
+    "district_code": "837"
+  },
+  {
+    "code": "29209",
+    "name": "An Điền",
+    "full_name": "Xã An Điền",
+    "type": "Xã An",
+    "district_code": "837"
+  },
+  {
+    "code": "29212",
+    "name": "Bình Thạnh",
+    "full_name": "Xã Bình Thạnh",
+    "type": "Xã Bình",
+    "district_code": "837"
+  },
+  {
+    "code": "29227",
+    "name": "Giao Thạnh",
+    "full_name": "Xã Giao Thạnh",
+    "type": "Xã Giao",
+    "district_code": "837"
+  },
+  {
+    "code": "29206",
+    "name": "Hòa Lợi",
+    "full_name": "Xã Hòa Lợi",
+    "type": "Xã Hòa",
+    "district_code": "837"
+  },
+  {
+    "code": "29233",
+    "name": "Mỹ An",
+    "full_name": "Xã Mỹ An",
+    "type": "Xã Mỹ",
+    "district_code": "837"
+  },
+  {
+    "code": "29197",
+    "name": "Mỹ Hưng",
+    "full_name": "Xã Mỹ Hưng",
+    "type": "Xã Mỹ",
+    "district_code": "837"
+  },
+  {
+    "code": "29185",
+    "name": "Phú Khánh",
+    "full_name": "Xã Phú Khánh",
+    "type": "Xã Phú",
+    "district_code": "837"
+  },
+  {
+    "code": "29191",
+    "name": "Quới Điền",
+    "full_name": "Xã Quới Điền",
+    "type": "Xã Quới",
+    "district_code": "837"
+  },
+  {
+    "code": "29194",
+    "name": "Tân Phong",
+    "full_name": "Xã Tân Phong",
+    "type": "Xã Tân",
+    "district_code": "837"
+  },
+  {
+    "code": "29221",
+    "name": "Thạnh Hải",
+    "full_name": "Xã Thạnh Hải",
+    "type": "Xã Thạnh",
+    "district_code": "837"
+  },
+  {
+    "code": "29230",
+    "name": "Thạnh Phong",
+    "full_name": "Xã Thạnh Phong",
+    "type": "Xã Thạnh",
+    "district_code": "837"
+  },
+  {
+    "code": "29182",
+    "name": "Thạnh Phú",
+    "full_name": "Thị trấn Thạnh Phú",
+    "type": "Thị trấn Thạnh",
+    "district_code": "837"
+  },
+  {
+    "code": "29203",
+    "name": "Thới Thạnh",
+    "full_name": "Xã Thới Thạnh",
+    "type": "Xã Thới",
+    "district_code": "837"
+  },
+  {
+    "code": "29188",
+    "name": "Đại Điền",
+    "full_name": "Xã Đại Điền",
+    "type": "Xã Đại",
+    "district_code": "837"
+  }
+]

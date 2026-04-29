@@ -1,0 +1,65 @@
+[
+  {
+    "code": "25105",
+    "name": "Hà Lâm",
+    "full_name": "Xã Hà Lâm",
+    "type": "Xã Hà",
+    "district_code": "681"
+  },
+  {
+    "code": "25099",
+    "name": "Ma Đa Guôi",
+    "full_name": "Thị trấn Ma Đa Guôi",
+    "type": "Thị trấn Ma Đa",
+    "district_code": "681"
+  },
+  {
+    "code": "25117",
+    "name": "Ma Đa Guôi",
+    "full_name": "Xã Ma Đa Guôi",
+    "type": "Xã Ma Đa",
+    "district_code": "681"
+  },
+  {
+    "code": "25123",
+    "name": "Phước Lộc",
+    "full_name": "Xã Phước Lộc",
+    "type": "Xã Phước",
+    "district_code": "681"
+  },
+  {
+    "code": "25096",
+    "name": "Đạ M'ri",
+    "full_name": "Thị trấn Đạ M'ri",
+    "type": "Thị trấn Đạ",
+    "district_code": "681"
+  },
+  {
+    "code": "25111",
+    "name": "Đạ Oai",
+    "full_name": "Xã Đạ Oai",
+    "type": "Xã Đạ",
+    "district_code": "681"
+  },
+  {
+    "code": "25114",
+    "name": "Đạ Ploa",
+    "full_name": "Xã Đạ Ploa",
+    "type": "Xã Đạ",
+    "district_code": "681"
+  },
+  {
+    "code": "25108",
+    "name": "Đạ Tồn",
+    "full_name": "Xã Đạ Tồn",
+    "type": "Xã Đạ",
+    "district_code": "681"
+  },
+  {
+    "code": "25120",
+    "name": "Đoàn Kết",
+    "full_name": "Xã Đoàn Kết",
+    "type": "Xã Đoàn",
+    "district_code": "681"
+  }
+]

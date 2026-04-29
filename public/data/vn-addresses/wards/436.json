@@ -1,0 +1,107 @@
+[
+  {
+    "code": "18076",
+    "name": "Bắc Hà",
+    "full_name": "Phường Bắc Hà",
+    "type": "Phường Bắc",
+    "district_code": "436"
+  },
+  {
+    "code": "18085",
+    "name": "Hà Huy Tập",
+    "full_name": "Phường Hà Huy Tập",
+    "type": "Phường Hà Huy",
+    "district_code": "436"
+  },
+  {
+    "code": "18073",
+    "name": "Nam Hà",
+    "full_name": "Phường Nam Hà",
+    "type": "Phường Nam",
+    "district_code": "436"
+  },
+  {
+    "code": "18077",
+    "name": "Nguyễn Du",
+    "full_name": "Phường Nguyễn Du",
+    "type": "Phường Nguyễn",
+    "district_code": "436"
+  },
+  {
+    "code": "18079",
+    "name": "Tân Giang",
+    "full_name": "Phường Tân Giang",
+    "type": "Phường Tân",
+    "district_code": "436"
+  },
+  {
+    "code": "18112",
+    "name": "Thạch Bình",
+    "full_name": "Xã Thạch Bình",
+    "type": "Xã Thạch",
+    "district_code": "436"
+  },
+  {
+    "code": "18100",
+    "name": "Thạch Hạ",
+    "full_name": "Xã Thạch Hạ",
+    "type": "Xã Thạch",
+    "district_code": "436"
+  },
+  {
+    "code": "18109",
+    "name": "Thạch Hưng",
+    "full_name": "Xã Thạch Hưng",
+    "type": "Xã Thạch",
+    "district_code": "436"
+  },
+  {
+    "code": "18094",
+    "name": "Thạch Linh",
+    "full_name": "Phường Thạch Linh",
+    "type": "Phường Thạch",
+    "district_code": "436"
+  },
+  {
+    "code": "18091",
+    "name": "Thạch Quý",
+    "full_name": "Phường Thạch Quý",
+    "type": "Phường Thạch",
+    "district_code": "436"
+  },
+  {
+    "code": "18088",
+    "name": "Thạch Trung",
+    "full_name": "Xã Thạch Trung",
+    "type": "Xã Thạch",
+    "district_code": "436"
+  },
+  {
+    "code": "18070",
+    "name": "Trần Phú",
+    "full_name": "Phường Trần Phú",
+    "type": "Phường Trần",
+    "district_code": "436"
+  },
+  {
+    "code": "18097",
+    "name": "Văn Yên",
+    "full_name": "Phường Văn Yên",
+    "type": "Phường Văn",
+    "district_code": "436"
+  },
+  {
+    "code": "18082",
+    "name": "Đại Nài",
+    "full_name": "Phường Đại Nài",
+    "type": "Phường Đại",
+    "district_code": "436"
+  },
+  {
+    "code": "18103",
+    "name": "Đồng Môn",
+    "full_name": "Xã Đồng Môn",
+    "type": "Xã Đồng",
+    "district_code": "436"
+  }
+]

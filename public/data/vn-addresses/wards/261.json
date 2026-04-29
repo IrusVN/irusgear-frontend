@@ -1,0 +1,86 @@
+[
+  {
+    "code": "09388",
+    "name": "Châu Khê",
+    "full_name": "Phường Châu Khê",
+    "type": "Phường Châu",
+    "district_code": "261"
+  },
+  {
+    "code": "09373",
+    "name": "Hương Mạc",
+    "full_name": "Phường Hương Mạc",
+    "type": "Phường Hương",
+    "district_code": "261"
+  },
+  {
+    "code": "09397",
+    "name": "Phù Chẩn",
+    "full_name": "Phường Phù Chẩn",
+    "type": "Phường Phù",
+    "district_code": "261"
+  },
+  {
+    "code": "09379",
+    "name": "Phù Khê",
+    "full_name": "Phường Phù Khê",
+    "type": "Phường Phù",
+    "district_code": "261"
+  },
+  {
+    "code": "09370",
+    "name": "Tam Sơn",
+    "full_name": "Phường Tam Sơn",
+    "type": "Phường Tam",
+    "district_code": "261"
+  },
+  {
+    "code": "09391",
+    "name": "Tân Hồng",
+    "full_name": "Phường Tân Hồng",
+    "type": "Phường Tân",
+    "district_code": "261"
+  },
+  {
+    "code": "09383",
+    "name": "Trang Hạ",
+    "full_name": "Phường Trang Hạ",
+    "type": "Phường Trang",
+    "district_code": "261"
+  },
+  {
+    "code": "09376",
+    "name": "Tương Giang",
+    "full_name": "Phường Tương Giang",
+    "type": "Phường Tương",
+    "district_code": "261"
+  },
+  {
+    "code": "09394",
+    "name": "Đình Bảng",
+    "full_name": "Phường Đình Bảng",
+    "type": "Phường Đình",
+    "district_code": "261"
+  },
+  {
+    "code": "09382",
+    "name": "Đồng Kỵ",
+    "full_name": "Phường Đồng Kỵ",
+    "type": "Phường Đồng",
+    "district_code": "261"
+  },
+  {
+    "code": "09367",
+    "name": "Đông Ngàn",
+    "full_name": "Phường Đông Ngàn",
+    "type": "Phường Đông",
+    "district_code": "261"
+  },
+  {
+    "code": "09385",
+    "name": "Đồng Nguyên",
+    "full_name": "Phường Đồng Nguyên",
+    "type": "Phường Đồng",
+    "district_code": "261"
+  }
+]

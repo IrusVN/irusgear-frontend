@@ -1,0 +1,72 @@
+[
+  {
+    "code": "27760",
+    "name": "Hưng Điền A",
+    "full_name": "Xã Hưng Điền A",
+    "type": "Xã Hưng Điền",
+    "district_code": "797"
+  },
+  {
+    "code": "27763",
+    "name": "Khánh Hưng",
+    "full_name": "Xã Khánh Hưng",
+    "type": "Xã Khánh",
+    "district_code": "797"
+  },
+  {
+    "code": "27772",
+    "name": "Thái Bình Trung",
+    "full_name": "Xã Thái Bình Trung",
+    "type": "Xã Thái Bình",
+    "district_code": "797"
+  },
+  {
+    "code": "27766",
+    "name": "Thái Trị",
+    "full_name": "Xã Thái Trị",
+    "type": "Xã Thái",
+    "district_code": "797"
+  },
+  {
+    "code": "27781",
+    "name": "Tuyên Bình",
+    "full_name": "Xã Tuyên Bình",
+    "type": "Xã Tuyên",
+    "district_code": "797"
+  },
+  {
+    "code": "27784",
+    "name": "Tuyên Bình Tây",
+    "full_name": "Xã Tuyên Bình Tây",
+    "type": "Xã Tuyên Bình",
+    "district_code": "797"
+  },
+  {
+    "code": "27775",
+    "name": "Vĩnh Bình",
+    "full_name": "Xã Vĩnh Bình",
+    "type": "Xã Vĩnh",
+    "district_code": "797"
+  },
+  {
+    "code": "27757",
+    "name": "Vĩnh Hưng",
+    "full_name": "Thị trấn Vĩnh Hưng",
+    "type": "Thị trấn Vĩnh",
+    "district_code": "797"
+  },
+  {
+    "code": "27778",
+    "name": "Vĩnh Thuận",
+    "full_name": "Xã Vĩnh Thuận",
+    "type": "Xã Vĩnh",
+    "district_code": "797"
+  },
+  {
+    "code": "27769",
+    "name": "Vĩnh Trị",
+    "full_name": "Xã Vĩnh Trị",
+    "type": "Xã Vĩnh",
+    "district_code": "797"
+  }
+]

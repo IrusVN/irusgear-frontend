@@ -1,0 +1,72 @@
+[
+  {
+    "code": "25735",
+    "name": "An Hòa",
+    "full_name": "Phường An Hòa",
+    "type": "Phường An",
+    "district_code": "712"
+  },
+  {
+    "code": "25732",
+    "name": "An Tịnh",
+    "full_name": "Phường An Tịnh",
+    "type": "Phường An",
+    "district_code": "712"
+  },
+  {
+    "code": "25723",
+    "name": "Gia Bình",
+    "full_name": "Phường Gia Bình",
+    "type": "Phường Gia",
+    "district_code": "712"
+  },
+  {
+    "code": "25720",
+    "name": "Gia Lộc",
+    "full_name": "Phường Gia Lộc",
+    "type": "Phường Gia",
+    "district_code": "712"
+  },
+  {
+    "code": "25714",
+    "name": "Hưng Thuận",
+    "full_name": "Xã Hưng Thuận",
+    "type": "Xã Hưng",
+    "district_code": "712"
+  },
+  {
+    "code": "25717",
+    "name": "Lộc Hưng",
+    "full_name": "Phường Lộc Hưng",
+    "type": "Phường Lộc",
+    "district_code": "712"
+  },
+  {
+    "code": "25729",
+    "name": "Phước Bình",
+    "full_name": "Xã Phước Bình",
+    "type": "Xã Phước",
+    "district_code": "712"
+  },
+  {
+    "code": "25738",
+    "name": "Phước Chỉ",
+    "full_name": "Xã Phước Chỉ",
+    "type": "Xã Phước",
+    "district_code": "712"
+  },
+  {
+    "code": "25708",
+    "name": "Trảng Bàng",
+    "full_name": "Phường Trảng Bàng",
+    "type": "Phường Trảng",
+    "district_code": "712"
+  },
+  {
+    "code": "25711",
+    "name": "Đôn Thuận",
+    "full_name": "Xã Đôn Thuận",
+    "type": "Xã Đôn",
+    "district_code": "712"
+  }
+]

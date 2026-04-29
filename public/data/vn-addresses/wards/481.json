@@ -1,0 +1,128 @@
+[
+  {
+    "code": "20044",
+    "name": "A Lưới",
+    "full_name": "Thị trấn A Lưới",
+    "type": "Thị trấn A",
+    "district_code": "481"
+  },
+  {
+    "code": "20068",
+    "name": "A Ngo",
+    "full_name": "Xã A Ngo",
+    "type": "Xã A",
+    "district_code": "481"
+  },
+  {
+    "code": "20095",
+    "name": "A Roàng",
+    "full_name": "Xã A Roàng",
+    "type": "Xã A",
+    "district_code": "481"
+  },
+  {
+    "code": "20065",
+    "name": "Hồng Bắc",
+    "full_name": "Xã Hồng Bắc",
+    "type": "Xã Hồng",
+    "district_code": "481"
+  },
+  {
+    "code": "20050",
+    "name": "Hồng Hạ",
+    "full_name": "Xã Hồng Hạ",
+    "type": "Xã Hồng",
+    "district_code": "481"
+  },
+  {
+    "code": "20053",
+    "name": "Hồng Kim",
+    "full_name": "Xã Hồng Kim",
+    "type": "Xã Hồng",
+    "district_code": "481"
+  },
+  {
+    "code": "20089",
+    "name": "Hồng Thái",
+    "full_name": "Xã Hồng Thái",
+    "type": "Xã Hồng",
+    "district_code": "481"
+  },
+  {
+    "code": "20086",
+    "name": "Hồng Thượng",
+    "full_name": "Xã Hồng Thượng",
+    "type": "Xã Hồng",
+    "district_code": "481"
+  },
+  {
+    "code": "20104",
+    "name": "Hồng Thủy",
+    "full_name": "Xã Hồng Thủy",
+    "type": "Xã Hồng",
+    "district_code": "481"
+  },
+  {
+    "code": "20047",
+    "name": "Hồng Vân",
+    "full_name": "Xã Hồng Vân",
+    "type": "Xã Hồng",
+    "district_code": "481"
+  },
+  {
+    "code": "20059",
+    "name": "Hương Nguyên",
+    "full_name": "Xã Hương Nguyên",
+    "type": "Xã Hương",
+    "district_code": "481"
+  },
+  {
+    "code": "20080",
+    "name": "Hương Phong",
+    "full_name": "Xã Hương Phong",
+    "type": "Xã Hương",
+    "district_code": "481"
+  },
+  {
+    "code": "20101",
+    "name": "Lâm Đớt",
+    "full_name": "Xã Lâm Đớt",
+    "type": "Xã Lâm",
+    "district_code": "481"
+  },
+  {
+    "code": "20074",
+    "name": "Phú Vinh",
+    "full_name": "Xã Phú Vinh",
+    "type": "Xã Phú",
+    "district_code": "481"
+  },
+  {
+    "code": "20083",
+    "name": "Quảng Nhâm",
+    "full_name": "Xã Quảng Nhâm",
+    "type": "Xã Quảng",
+    "district_code": "481"
+  },
+  {
+    "code": "20071",
+    "name": "Sơn Thủy",
+    "full_name": "Xã Sơn Thủy",
+    "type": "Xã Sơn",
+    "district_code": "481"
+  },
+  {
+    "code": "20056",
+    "name": "Trung Sơn",
+    "full_name": "Xã Trung Sơn",
+    "type": "Xã Trung",
+    "district_code": "481"
+  },
+  {
+    "code": "20098",
+    "name": "Đông Sơn",
+    "full_name": "Xã Đông Sơn",
+    "type": "Xã Đông",
+    "district_code": "481"
+  }
+]

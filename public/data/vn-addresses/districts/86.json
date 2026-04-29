@@ -1,0 +1,58 @@
+[
+  {
+    "code": "861",
+    "name": "Bình Minh",
+    "full_name": "Thị xã Bình Minh",
+    "type": "Thị xã Bình",
+    "province_code": "86"
+  },
+  {
+    "code": "863",
+    "name": "Bình Tân",
+    "full_name": "Huyện Bình Tân",
+    "type": "Huyện Bình",
+    "province_code": "86"
+  },
+  {
+    "code": "857",
+    "name": "Long Hồ",
+    "full_name": "Huyện Long Hồ",
+    "type": "Huyện Long",
+    "province_code": "86"
+  },
+  {
+    "code": "858",
+    "name": "Mang Thít",
+    "full_name": "Huyện Mang Thít",
+    "type": "Huyện Mang",
+    "province_code": "86"
+  },
+  {
+    "code": "860",
+    "name": "Tam Bình",
+    "full_name": "Huyện Tam Bình",
+    "type": "Huyện Tam",
+    "province_code": "86"
+  },
+  {
+    "code": "862",
+    "name": "Trà Ôn",
+    "full_name": "Huyện Trà Ôn",
+    "type": "Huyện Trà",
+    "province_code": "86"
+  },
+  {
+    "code": "855",
+    "name": "Vĩnh Long",
+    "full_name": "Thành phố Vĩnh Long",
+    "type": "Thành phố Vĩnh",
+    "province_code": "86"
+  },
+  {
+    "code": "859",
+    "name": "Vũng Liêm",
+    "full_name": "Huyện Vũng Liêm",
+    "type": "Huyện Vũng",
+    "province_code": "86"
+  }
+]

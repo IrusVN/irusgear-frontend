@@ -1,0 +1,107 @@
+[
+  {
+    "code": "11371",
+    "name": "An Biên",
+    "full_name": "Phường An Biên",
+    "type": "Phường An",
+    "district_code": "305"
+  },
+  {
+    "code": "11377",
+    "name": "An Dương",
+    "full_name": "Phường An Dương",
+    "type": "Phường An",
+    "district_code": "305"
+  },
+  {
+    "code": "11368",
+    "name": "Cát Dài",
+    "full_name": "Phường Cát Dài",
+    "type": "Phường Cát",
+    "district_code": "305"
+  },
+  {
+    "code": "11389",
+    "name": "Dư Hàng",
+    "full_name": "Phường Dư Hàng",
+    "type": "Phường Dư",
+    "district_code": "305"
+  },
+  {
+    "code": "11404",
+    "name": "Dư Hàng Kênh",
+    "full_name": "Phường Dư Hàng Kênh",
+    "type": "Phường Dư Hàng",
+    "district_code": "305"
+  },
+  {
+    "code": "11392",
+    "name": "Hàng Kênh",
+    "full_name": "Phường Hàng Kênh",
+    "type": "Phường Hàng",
+    "district_code": "305"
+  },
+  {
+    "code": "11383",
+    "name": "Hồ Nam",
+    "full_name": "Phường Hồ Nam",
+    "type": "Phường Hồ",
+    "district_code": "305"
+  },
+  {
+    "code": "11405",
+    "name": "Kênh Dương",
+    "full_name": "Phường Kênh Dương",
+    "type": "Phường Kênh",
+    "district_code": "305"
+  },
+  {
+    "code": "11374",
+    "name": "Lam Sơn",
+    "full_name": "Phường Lam Sơn",
+    "type": "Phường Lam",
+    "district_code": "305"
+  },
+  {
+    "code": "11401",
+    "name": "Nghĩa Xá",
+    "full_name": "Phường Nghĩa Xá",
+    "type": "Phường Nghĩa",
+    "district_code": "305"
+  },
+  {
+    "code": "11398",
+    "name": "Niệm Nghĩa",
+    "full_name": "Phường Niệm Nghĩa",
+    "type": "Phường Niệm",
+    "district_code": "305"
+  },
+  {
+    "code": "11386",
+    "name": "Trại Cau",
+    "full_name": "Phường Trại Cau",
+    "type": "Phường Trại",
+    "district_code": "305"
+  },
+  {
+    "code": "11380",
+    "name": "Trần Nguyên Hãn",
+    "full_name": "Phường Trần Nguyên Hãn",
+    "type": "Phường Trần Nguyên",
+    "district_code": "305"
+  },
+  {
+    "code": "11407",
+    "name": "Vĩnh Niệm",
+    "full_name": "Phường Vĩnh Niệm",
+    "type": "Phường Vĩnh",
+    "district_code": "305"
+  },
+  {
+    "code": "11395",
+    "name": "Đông Hải",
+    "full_name": "Phường Đông Hải",
+    "type": "Phường Đông",
+    "district_code": "305"
+  }
+]

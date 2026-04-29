@@ -1,0 +1,121 @@
+[
+  {
+    "code": "20965",
+    "name": "Núi Thành",
+    "full_name": "Thị trấn Núi Thành",
+    "type": "Thị trấn Núi",
+    "district_code": "517"
+  },
+  {
+    "code": "20983",
+    "name": "Tam Anh Bắc",
+    "full_name": "Xã Tam Anh Bắc",
+    "type": "Xã Tam Anh",
+    "district_code": "517"
+  },
+  {
+    "code": "20984",
+    "name": "Tam Anh Nam",
+    "full_name": "Xã Tam Anh Nam",
+    "type": "Xã Tam Anh",
+    "district_code": "517"
+  },
+  {
+    "code": "20995",
+    "name": "Tam Giang",
+    "full_name": "Xã Tam Giang",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "20992",
+    "name": "Tam Hải",
+    "full_name": "Xã Tam Hải",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "20989",
+    "name": "Tam Hiệp",
+    "full_name": "Xã Tam Hiệp",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "20986",
+    "name": "Tam Hòa",
+    "full_name": "Xã Tam Hòa",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "21004",
+    "name": "Tam Mỹ Tây",
+    "full_name": "Xã Tam Mỹ Tây",
+    "type": "Xã Tam Mỹ",
+    "district_code": "517"
+  },
+  {
+    "code": "21005",
+    "name": "Tam Mỹ Đông",
+    "full_name": "Xã Tam Mỹ Đông",
+    "type": "Xã Tam Mỹ",
+    "district_code": "517"
+  },
+  {
+    "code": "21001",
+    "name": "Tam Nghĩa",
+    "full_name": "Xã Tam Nghĩa",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "20998",
+    "name": "Tam Quang",
+    "full_name": "Xã Tam Quang",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "20977",
+    "name": "Tam Sơn",
+    "full_name": "Xã Tam Sơn",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "20980",
+    "name": "Tam Thạnh",
+    "full_name": "Xã Tam Thạnh",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "20974",
+    "name": "Tam Tiến",
+    "full_name": "Xã Tam Tiến",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "21007",
+    "name": "Tam Trà",
+    "full_name": "Xã Tam Trà",
+    "type": "Xã Tam",
+    "district_code": "517"
+  },
+  {
+    "code": "20968",
+    "name": "Tam Xuân I",
+    "full_name": "Xã Tam Xuân I",
+    "type": "Xã Tam Xuân",
+    "district_code": "517"
+  },
+  {
+    "code": "20971",
+    "name": "Tam Xuân II",
+    "full_name": "Xã Tam Xuân II",
+    "type": "Xã Tam Xuân",
+    "district_code": "517"
+  }
+]

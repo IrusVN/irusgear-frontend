@@ -1,0 +1,79 @@
+[
+  {
+    "code": "31031",
+    "name": "Tân Thạnh",
+    "full_name": "Xã Tân Thạnh",
+    "type": "Xã Tân",
+    "district_code": "909"
+  },
+  {
+    "code": "31018",
+    "name": "Thứ Mười Một",
+    "full_name": "Thị trấn Thứ Mười Một",
+    "type": "Thị trấn Thứ Mười",
+    "district_code": "909"
+  },
+  {
+    "code": "31021",
+    "name": "Thuận Hoà",
+    "full_name": "Xã Thuận Hoà",
+    "type": "Xã Thuận",
+    "district_code": "909"
+  },
+  {
+    "code": "31042",
+    "name": "Vân Khánh",
+    "full_name": "Xã Vân Khánh",
+    "type": "Xã Vân",
+    "district_code": "909"
+  },
+  {
+    "code": "31048",
+    "name": "Vân Khánh Tây",
+    "full_name": "Xã Vân Khánh Tây",
+    "type": "Xã Vân Khánh",
+    "district_code": "909"
+  },
+  {
+    "code": "31045",
+    "name": "Vân Khánh Đông",
+    "full_name": "Xã Vân Khánh Đông",
+    "type": "Xã Vân Khánh",
+    "district_code": "909"
+  },
+  {
+    "code": "31024",
+    "name": "Đông Hòa",
+    "full_name": "Xã Đông Hòa",
+    "type": "Xã Đông",
+    "district_code": "909"
+  },
+  {
+    "code": "31033",
+    "name": "Đông Hưng",
+    "full_name": "Xã Đông Hưng",
+    "type": "Xã Đông",
+    "district_code": "909"
+  },
+  {
+    "code": "31036",
+    "name": "Đông Hưng A",
+    "full_name": "Xã Đông Hưng A",
+    "type": "Xã Đông Hưng",
+    "district_code": "909"
+  },
+  {
+    "code": "31039",
+    "name": "Đông Hưng B",
+    "full_name": "Xã Đông Hưng B",
+    "type": "Xã Đông Hưng",
+    "district_code": "909"
+  },
+  {
+    "code": "31030",
+    "name": "Đông Thạnh",
+    "full_name": "Xã Đông Thạnh",
+    "type": "Xã Đông",
+    "district_code": "909"
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "code": "16729",
+    "name": "Nghi Hải",
+    "full_name": "Phường Nghi Hải",
+    "type": "Phường Nghi",
+    "district_code": "413"
+  },
+  {
+    "code": "16726",
+    "name": "Nghi Hòa",
+    "full_name": "Phường Nghi Hòa",
+    "type": "Phường Nghi",
+    "district_code": "413"
+  },
+  {
+    "code": "16732",
+    "name": "Nghi Hương",
+    "full_name": "Phường Nghi Hương",
+    "type": "Phường Nghi",
+    "district_code": "413"
+  },
+  {
+    "code": "16720",
+    "name": "Nghi Tân",
+    "full_name": "Phường Nghi Tân",
+    "type": "Phường Nghi",
+    "district_code": "413"
+  },
+  {
+    "code": "16735",
+    "name": "Nghi Thu",
+    "full_name": "Phường Nghi Thu",
+    "type": "Phường Nghi",
+    "district_code": "413"
+  },
+  {
+    "code": "16717",
+    "name": "Nghi Thuỷ",
+    "full_name": "Phường Nghi Thuỷ",
+    "type": "Phường Nghi",
+    "district_code": "413"
+  },
+  {
+    "code": "16723",
+    "name": "Thu Thuỷ",
+    "full_name": "Phường Thu Thuỷ",
+    "type": "Phường Thu",
+    "district_code": "413"
+  }
+]

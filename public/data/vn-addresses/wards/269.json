@@ -1,0 +1,107 @@
+[
+  {
+    "code": "09616",
+    "name": "Cổ Đông",
+    "full_name": "Xã Cổ Đông",
+    "type": "Xã Cổ",
+    "district_code": "269"
+  },
+  {
+    "code": "09610",
+    "name": "Kim Sơn",
+    "full_name": "Xã Kim Sơn",
+    "type": "Xã Kim",
+    "district_code": "269"
+  },
+  {
+    "code": "09574",
+    "name": "Lê Lợi",
+    "full_name": "Phường Lê Lợi",
+    "type": "Phường Lê",
+    "district_code": "269"
+  },
+  {
+    "code": "09580",
+    "name": "Ngô Quyền",
+    "full_name": "Phường Ngô Quyền",
+    "type": "Phường Ngô",
+    "district_code": "269"
+  },
+  {
+    "code": "09577",
+    "name": "Phú Thịnh",
+    "full_name": "Phường Phú Thịnh",
+    "type": "Phường Phú",
+    "district_code": "269"
+  },
+  {
+    "code": "09583",
+    "name": "Quang Trung",
+    "full_name": "Phường Quang Trung",
+    "type": "Phường Quang",
+    "district_code": "269"
+  },
+  {
+    "code": "09586",
+    "name": "Sơn Lộc",
+    "full_name": "Phường Sơn Lộc",
+    "type": "Phường Sơn",
+    "district_code": "269"
+  },
+  {
+    "code": "09613",
+    "name": "Sơn Đông",
+    "full_name": "Xã Sơn Đông",
+    "type": "Xã Sơn",
+    "district_code": "269"
+  },
+  {
+    "code": "09604",
+    "name": "Thanh Mỹ",
+    "full_name": "Xã Thanh Mỹ",
+    "type": "Xã Thanh",
+    "district_code": "269"
+  },
+  {
+    "code": "09601",
+    "name": "Trung Hưng",
+    "full_name": "Phường Trung Hưng",
+    "type": "Phường Trung",
+    "district_code": "269"
+  },
+  {
+    "code": "09607",
+    "name": "Trung Sơn Trầm",
+    "full_name": "Phường Trung Sơn Trầm",
+    "type": "Phường Trung Sơn",
+    "district_code": "269"
+  },
+  {
+    "code": "09595",
+    "name": "Viên Sơn",
+    "full_name": "Phường Viên Sơn",
+    "type": "Phường Viên",
+    "district_code": "269"
+  },
+  {
+    "code": "09589",
+    "name": "Xuân Khanh",
+    "full_name": "Phường Xuân Khanh",
+    "type": "Phường Xuân",
+    "district_code": "269"
+  },
+  {
+    "code": "09598",
+    "name": "Xuân Sơn",
+    "full_name": "Xã Xuân Sơn",
+    "type": "Xã Xuân",
+    "district_code": "269"
+  },
+  {
+    "code": "09592",
+    "name": "Đường Lâm",
+    "full_name": "Xã Đường Lâm",
+    "type": "Xã Đường",
+    "district_code": "269"
+  }
+]

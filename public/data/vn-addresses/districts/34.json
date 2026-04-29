@@ -1,0 +1,58 @@
+[
+  {
+    "code": "339",
+    "name": "Hưng Hà",
+    "full_name": "Huyện Hưng Hà",
+    "type": "Huyện Hưng",
+    "province_code": "34"
+  },
+  {
+    "code": "343",
+    "name": "Kiến Xương",
+    "full_name": "Huyện Kiến Xương",
+    "type": "Huyện Kiến",
+    "province_code": "34"
+  },
+  {
+    "code": "338",
+    "name": "Quỳnh Phụ",
+    "full_name": "Huyện Quỳnh Phụ",
+    "type": "Huyện Quỳnh",
+    "province_code": "34"
+  },
+  {
+    "code": "336",
+    "name": "Thái Bình",
+    "full_name": "Thành phố Thái Bình",
+    "type": "Thành phố Thái",
+    "province_code": "34"
+  },
+  {
+    "code": "341",
+    "name": "Thái Thụy",
+    "full_name": "Huyện Thái Thụy",
+    "type": "Huyện Thái",
+    "province_code": "34"
+  },
+  {
+    "code": "342",
+    "name": "Tiền Hải",
+    "full_name": "Huyện Tiền Hải",
+    "type": "Huyện Tiền",
+    "province_code": "34"
+  },
+  {
+    "code": "344",
+    "name": "Vũ Thư",
+    "full_name": "Huyện Vũ Thư",
+    "type": "Huyện Vũ",
+    "province_code": "34"
+  },
+  {
+    "code": "340",
+    "name": "Đông Hưng",
+    "full_name": "Huyện Đông Hưng",
+    "type": "Huyện Đông",
+    "province_code": "34"
+  }
+]

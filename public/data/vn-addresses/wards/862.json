@@ -1,0 +1,100 @@
+[
+  {
+    "code": "29830",
+    "name": "Hòa Bình",
+    "full_name": "Xã Hòa Bình",
+    "type": "Xã Hòa",
+    "district_code": "862"
+  },
+  {
+    "code": "29842",
+    "name": "Hựu Thành",
+    "full_name": "Xã Hựu Thành",
+    "type": "Xã Hựu",
+    "district_code": "862"
+  },
+  {
+    "code": "29857",
+    "name": "Lục Sỹ Thành",
+    "full_name": "Xã Lục Sỹ Thành",
+    "type": "Xã Lục Sỹ",
+    "district_code": "862"
+  },
+  {
+    "code": "29827",
+    "name": "Nhơn Bình",
+    "full_name": "Xã Nhơn Bình",
+    "type": "Xã Nhơn",
+    "district_code": "862"
+  },
+  {
+    "code": "29851",
+    "name": "Phú Thành",
+    "full_name": "Xã Phú Thành",
+    "type": "Xã Phú",
+    "district_code": "862"
+  },
+  {
+    "code": "29839",
+    "name": "Tân Mỹ",
+    "full_name": "Xã Tân Mỹ",
+    "type": "Xã Tân",
+    "district_code": "862"
+  },
+  {
+    "code": "29854",
+    "name": "Thiện Mỹ",
+    "full_name": "Xã Thiện Mỹ",
+    "type": "Xã Thiện",
+    "district_code": "862"
+  },
+  {
+    "code": "29833",
+    "name": "Thới Hòa",
+    "full_name": "Xã Thới Hòa",
+    "type": "Xã Thới",
+    "district_code": "862"
+  },
+  {
+    "code": "29848",
+    "name": "Thuận Thới",
+    "full_name": "Xã Thuận Thới",
+    "type": "Xã Thuận",
+    "district_code": "862"
+  },
+  {
+    "code": "29860",
+    "name": "Tích Thiện",
+    "full_name": "Xã Tích Thiện",
+    "type": "Xã Tích",
+    "district_code": "862"
+  },
+  {
+    "code": "29836",
+    "name": "Trà Côn",
+    "full_name": "Xã Trà Côn",
+    "type": "Xã Trà",
+    "district_code": "862"
+  },
+  {
+    "code": "29821",
+    "name": "Trà Ôn",
+    "full_name": "Thị trấn Trà Ôn",
+    "type": "Thị trấn Trà",
+    "district_code": "862"
+  },
+  {
+    "code": "29845",
+    "name": "Vĩnh Xuân",
+    "full_name": "Xã Vĩnh Xuân",
+    "type": "Xã Vĩnh",
+    "district_code": "862"
+  },
+  {
+    "code": "29824",
+    "name": "Xuân Hiệp",
+    "full_name": "Xã Xuân Hiệp",
+    "type": "Xã Xuân",
+    "district_code": "862"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "code": "23275",
+    "name": "Long Hải",
+    "full_name": "Xã Long Hải",
+    "type": "Xã Long",
+    "district_code": "602"
+  },
+  {
+    "code": "23272",
+    "name": "Ngũ Phụng",
+    "full_name": "Xã Ngũ Phụng",
+    "type": "Xã Ngũ",
+    "district_code": "602"
+  },
+  {
+    "code": "23278",
+    "name": "Tam Thanh",
+    "full_name": "Xã Tam Thanh",
+    "type": "Xã Tam",
+    "district_code": "602"
+  }
+]

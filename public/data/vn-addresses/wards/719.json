@@ -1,0 +1,51 @@
+[
+  {
+    "code": "25819",
+    "name": "Cây Trường II",
+    "full_name": "Xã Cây Trường II",
+    "type": "Xã Cây Trường",
+    "district_code": "719"
+  },
+  {
+    "code": "25831",
+    "name": "Hưng Hòa",
+    "full_name": "Xã Hưng Hòa",
+    "type": "Xã Hưng",
+    "district_code": "719"
+  },
+  {
+    "code": "25834",
+    "name": "Lai Hưng",
+    "full_name": "Xã Lai Hưng",
+    "type": "Xã Lai",
+    "district_code": "719"
+  },
+  {
+    "code": "25822",
+    "name": "Lai Uyên",
+    "full_name": "Thị trấn Lai Uyên",
+    "type": "Thị trấn Lai",
+    "district_code": "719"
+  },
+  {
+    "code": "25828",
+    "name": "Long Nguyên",
+    "full_name": "Xã Long Nguyên",
+    "type": "Xã Long",
+    "district_code": "719"
+  },
+  {
+    "code": "25825",
+    "name": "Tân Hưng",
+    "full_name": "Xã Tân Hưng",
+    "type": "Xã Tân",
+    "district_code": "719"
+  },
+  {
+    "code": "25816",
+    "name": "Trừ Văn Thố",
+    "full_name": "Xã Trừ Văn Thố",
+    "type": "Xã Trừ Văn",
+    "district_code": "719"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "596",
+    "name": "Bắc Bình",
+    "full_name": "Huyện Bắc Bình",
+    "type": "Huyện Bắc",
+    "province_code": "60"
+  },
+  {
+    "code": "601",
+    "name": "Hàm Tân",
+    "full_name": "Huyện Hàm Tân",
+    "type": "Huyện Hàm",
+    "province_code": "60"
+  },
+  {
+    "code": "597",
+    "name": "Hàm Thuận Bắc",
+    "full_name": "Huyện Hàm Thuận Bắc",
+    "type": "Huyện Hàm Thuận",
+    "province_code": "60"
+  },
+  {
+    "code": "598",
+    "name": "Hàm Thuận Nam",
+    "full_name": "Huyện Hàm Thuận Nam",
+    "type": "Huyện Hàm Thuận",
+    "province_code": "60"
+  },
+  {
+    "code": "594",
+    "name": "La Gi",
+    "full_name": "Thị xã La Gi",
+    "type": "Thị xã La",
+    "province_code": "60"
+  },
+  {
+    "code": "593",
+    "name": "Phan Thiết",
+    "full_name": "Thành phố Phan Thiết",
+    "type": "Thành phố Phan",
+    "province_code": "60"
+  },
+  {
+    "code": "602",
+    "name": "Phú Quí",
+    "full_name": "Huyện Phú Quí",
+    "type": "Huyện Phú",
+    "province_code": "60"
+  },
+  {
+    "code": "599",
+    "name": "Tánh Linh",
+    "full_name": "Huyện Tánh Linh",
+    "type": "Huyện Tánh",
+    "province_code": "60"
+  },
+  {
+    "code": "595",
+    "name": "Tuy Phong",
+    "full_name": "Huyện Tuy Phong",
+    "type": "Huyện Tuy",
+    "province_code": "60"
+  },
+  {
+    "code": "600",
+    "name": "Đức Linh",
+    "full_name": "Huyện Đức Linh",
+    "type": "Huyện Đức",
+    "province_code": "60"
+  }
+]

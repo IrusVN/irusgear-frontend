@@ -1,0 +1,93 @@
+[
+  {
+    "code": "28240",
+    "name": "An Lục Long",
+    "full_name": "Xã An Lục Long",
+    "type": "Xã An Lục",
+    "district_code": "808"
+  },
+  {
+    "code": "28213",
+    "name": "Bình Quới",
+    "full_name": "Xã Bình Quới",
+    "type": "Xã Bình",
+    "district_code": "808"
+  },
+  {
+    "code": "28237",
+    "name": "Dương Xuân Hội",
+    "full_name": "Xã Dương Xuân Hội",
+    "type": "Xã Dương Xuân",
+    "district_code": "808"
+  },
+  {
+    "code": "28228",
+    "name": "Hiệp Thạnh",
+    "full_name": "Xã Hiệp Thạnh",
+    "type": "Xã Hiệp",
+    "district_code": "808"
+  },
+  {
+    "code": "28216",
+    "name": "Hòa Phú",
+    "full_name": "Xã Hòa Phú",
+    "type": "Xã Hòa",
+    "district_code": "808"
+  },
+  {
+    "code": "28243",
+    "name": "Long Trì",
+    "full_name": "Xã Long Trì",
+    "type": "Xã Long",
+    "district_code": "808"
+  },
+  {
+    "code": "28219",
+    "name": "Phú Ngãi Trị",
+    "full_name": "Xã Phú Ngãi Trị",
+    "type": "Xã Phú Ngãi",
+    "district_code": "808"
+  },
+  {
+    "code": "28231",
+    "name": "Phước Tân Hưng",
+    "full_name": "Xã Phước Tân Hưng",
+    "type": "Xã Phước Tân",
+    "district_code": "808"
+  },
+  {
+    "code": "28210",
+    "name": "Tầm Vu",
+    "full_name": "Thị trấn Tầm Vu",
+    "type": "Thị trấn Tầm",
+    "district_code": "808"
+  },
+  {
+    "code": "28234",
+    "name": "Thanh Phú Long",
+    "full_name": "Xã Thanh Phú Long",
+    "type": "Xã Thanh Phú",
+    "district_code": "808"
+  },
+  {
+    "code": "28246",
+    "name": "Thanh Vĩnh Đông",
+    "full_name": "Xã Thanh Vĩnh Đông",
+    "type": "Xã Thanh Vĩnh",
+    "district_code": "808"
+  },
+  {
+    "code": "28225",
+    "name": "Thuận Mỹ",
+    "full_name": "Xã Thuận Mỹ",
+    "type": "Xã Thuận",
+    "district_code": "808"
+  },
+  {
+    "code": "28222",
+    "name": "Vĩnh Công",
+    "full_name": "Xã Vĩnh Công",
+    "type": "Xã Vĩnh",
+    "district_code": "808"
+  }
+]

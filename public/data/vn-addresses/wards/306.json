@@ -1,0 +1,58 @@
+[
+  {
+    "code": "11422",
+    "name": "Cát Bi",
+    "full_name": "Phường Cát Bi",
+    "type": "Phường Cát",
+    "district_code": "306"
+  },
+  {
+    "code": "11419",
+    "name": "Nam Hải",
+    "full_name": "Phường Nam Hải",
+    "type": "Phường Nam",
+    "district_code": "306"
+  },
+  {
+    "code": "11414",
+    "name": "Thành Tô",
+    "full_name": "Phường Thành Tô",
+    "type": "Phường Thành",
+    "district_code": "306"
+  },
+  {
+    "code": "11425",
+    "name": "Tràng Cát",
+    "full_name": "Phường Tràng Cát",
+    "type": "Phường Tràng",
+    "district_code": "306"
+  },
+  {
+    "code": "11416",
+    "name": "Đằng Hải",
+    "full_name": "Phường Đằng Hải",
+    "type": "Phường Đằng",
+    "district_code": "306"
+  },
+  {
+    "code": "11413",
+    "name": "Đằng Lâm",
+    "full_name": "Phường Đằng Lâm",
+    "type": "Phường Đằng",
+    "district_code": "306"
+  },
+  {
+    "code": "11410",
+    "name": "Đông Hải 1",
+    "full_name": "Phường Đông Hải 1",
+    "type": "Phường Đông Hải",
+    "district_code": "306"
+  },
+  {
+    "code": "11411",
+    "name": "Đông Hải 2",
+    "full_name": "Phường Đông Hải 2",
+    "type": "Phường Đông Hải",
+    "district_code": "306"
+  }
+]

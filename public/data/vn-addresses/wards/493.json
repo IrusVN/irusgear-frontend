@@ -1,0 +1,51 @@
+[
+  {
+    "code": "20272",
+    "name": "An Hải Bắc",
+    "full_name": "Phường An Hải Bắc",
+    "type": "Phường An Hải",
+    "district_code": "493"
+  },
+  {
+    "code": "20278",
+    "name": "An Hải Tây",
+    "full_name": "Phường An Hải Tây",
+    "type": "Phường An Hải",
+    "district_code": "493"
+  },
+  {
+    "code": "20281",
+    "name": "An Hải Đông",
+    "full_name": "Phường An Hải Đông",
+    "type": "Phường An Hải",
+    "district_code": "493"
+  },
+  {
+    "code": "20269",
+    "name": "Mân Thái",
+    "full_name": "Phường Mân Thái",
+    "type": "Phường Mân",
+    "district_code": "493"
+  },
+  {
+    "code": "20266",
+    "name": "Nại Hiên Đông",
+    "full_name": "Phường Nại Hiên Đông",
+    "type": "Phường Nại Hiên",
+    "district_code": "493"
+  },
+  {
+    "code": "20275",
+    "name": "Phước Mỹ",
+    "full_name": "Phường Phước Mỹ",
+    "type": "Phường Phước",
+    "district_code": "493"
+  },
+  {
+    "code": "20263",
+    "name": "Thọ Quang",
+    "full_name": "Phường Thọ Quang",
+    "type": "Phường Thọ",
+    "district_code": "493"
+  }
+]

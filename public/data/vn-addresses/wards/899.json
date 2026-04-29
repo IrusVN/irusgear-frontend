@@ -1,0 +1,86 @@
+[
+  {
+    "code": "30751",
+    "name": "An Bình",
+    "full_name": "Phường An Bình",
+    "type": "Phường An",
+    "district_code": "899"
+  },
+  {
+    "code": "30748",
+    "name": "An Hòa",
+    "full_name": "Phường An Hòa",
+    "type": "Phường An",
+    "district_code": "899"
+  },
+  {
+    "code": "30763",
+    "name": "Phi Thông",
+    "full_name": "Xã Phi Thông",
+    "type": "Xã Phi",
+    "district_code": "899"
+  },
+  {
+    "code": "30754",
+    "name": "Rạch Sỏi",
+    "full_name": "Phường Rạch Sỏi",
+    "type": "Phường Rạch",
+    "district_code": "899"
+  },
+  {
+    "code": "30742",
+    "name": "Vĩnh Bảo",
+    "full_name": "Phường Vĩnh Bảo",
+    "type": "Phường Vĩnh",
+    "district_code": "899"
+  },
+  {
+    "code": "30739",
+    "name": "Vĩnh Hiệp",
+    "full_name": "Phường Vĩnh Hiệp",
+    "type": "Phường Vĩnh",
+    "district_code": "899"
+  },
+  {
+    "code": "30745",
+    "name": "Vĩnh Lạc",
+    "full_name": "Phường Vĩnh Lạc",
+    "type": "Phường Vĩnh",
+    "district_code": "899"
+  },
+  {
+    "code": "30757",
+    "name": "Vĩnh Lợi",
+    "full_name": "Phường Vĩnh Lợi",
+    "type": "Phường Vĩnh",
+    "district_code": "899"
+  },
+  {
+    "code": "30736",
+    "name": "Vĩnh Quang",
+    "full_name": "Phường Vĩnh Quang",
+    "type": "Phường Vĩnh",
+    "district_code": "899"
+  },
+  {
+    "code": "30733",
+    "name": "Vĩnh Thanh",
+    "full_name": "Phường Vĩnh Thanh",
+    "type": "Phường Vĩnh",
+    "district_code": "899"
+  },
+  {
+    "code": "30730",
+    "name": "Vĩnh Thanh Vân",
+    "full_name": "Phường Vĩnh Thanh Vân",
+    "type": "Phường Vĩnh Thanh",
+    "district_code": "899"
+  },
+  {
+    "code": "30760",
+    "name": "Vĩnh Thông",
+    "full_name": "Phường Vĩnh Thông",
+    "type": "Phường Vĩnh",
+    "district_code": "899"
+  }
+]

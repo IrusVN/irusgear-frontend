@@ -1,0 +1,72 @@
+[
+  {
+    "code": "043",
+    "name": "Bảo Lạc",
+    "full_name": "Huyện Bảo Lạc",
+    "type": "Huyện Bảo",
+    "province_code": "04"
+  },
+  {
+    "code": "042",
+    "name": "Bảo Lâm",
+    "full_name": "Huyện Bảo Lâm",
+    "type": "Huyện Bảo",
+    "province_code": "04"
+  },
+  {
+    "code": "040",
+    "name": "Cao Bằng",
+    "full_name": "Thành phố Cao Bằng",
+    "type": "Thành phố Cao",
+    "province_code": "04"
+  },
+  {
+    "code": "048",
+    "name": "Hạ Lang",
+    "full_name": "Huyện Hạ Lang",
+    "type": "Huyện Hạ",
+    "province_code": "04"
+  },
+  {
+    "code": "045",
+    "name": "Hà Quảng",
+    "full_name": "Huyện Hà Quảng",
+    "type": "Huyện Hà",
+    "province_code": "04"
+  },
+  {
+    "code": "051",
+    "name": "Hoà An",
+    "full_name": "Huyện Hoà An",
+    "type": "Huyện Hoà",
+    "province_code": "04"
+  },
+  {
+    "code": "052",
+    "name": "Nguyên Bình",
+    "full_name": "Huyện Nguyên Bình",
+    "type": "Huyện Nguyên",
+    "province_code": "04"
+  },
+  {
+    "code": "049",
+    "name": "Quảng Hòa",
+    "full_name": "Huyện Quảng Hòa",
+    "type": "Huyện Quảng",
+    "province_code": "04"
+  },
+  {
+    "code": "053",
+    "name": "Thạch An",
+    "full_name": "Huyện Thạch An",
+    "type": "Huyện Thạch",
+    "province_code": "04"
+  },
+  {
+    "code": "047",
+    "name": "Trùng Khánh",
+    "full_name": "Huyện Trùng Khánh",
+    "type": "Huyện Trùng",
+    "province_code": "04"
+  }
+]

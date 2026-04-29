@@ -1,0 +1,65 @@
+[
+  {
+    "code": "32212",
+    "name": "Cái Đôi Vàm",
+    "full_name": "Thị trấn Cái Đôi Vàm",
+    "type": "Thị trấn Cái Đôi",
+    "district_code": "972"
+  },
+  {
+    "code": "32230",
+    "name": "Nguyễn Việt Khái",
+    "full_name": "Xã Nguyễn Việt Khái",
+    "type": "Xã Nguyễn Việt",
+    "district_code": "972"
+  },
+  {
+    "code": "32215",
+    "name": "Phú Mỹ",
+    "full_name": "Xã Phú Mỹ",
+    "type": "Xã Phú",
+    "district_code": "972"
+  },
+  {
+    "code": "32218",
+    "name": "Phú Tân",
+    "full_name": "Xã Phú Tân",
+    "type": "Xã Phú",
+    "district_code": "972"
+  },
+  {
+    "code": "32214",
+    "name": "Phú Thuận",
+    "full_name": "Xã Phú Thuận",
+    "type": "Xã Phú",
+    "district_code": "972"
+  },
+  {
+    "code": "32228",
+    "name": "Rạch Chèo",
+    "full_name": "Xã Rạch Chèo",
+    "type": "Xã Rạch",
+    "district_code": "972"
+  },
+  {
+    "code": "32221",
+    "name": "Tân Hải",
+    "full_name": "Xã Tân Hải",
+    "type": "Xã Tân",
+    "district_code": "972"
+  },
+  {
+    "code": "32227",
+    "name": "Tân Hưng Tây",
+    "full_name": "Xã Tân Hưng Tây",
+    "type": "Xã Tân Hưng",
+    "district_code": "972"
+  },
+  {
+    "code": "32224",
+    "name": "Việt Thắng",
+    "full_name": "Xã Việt Thắng",
+    "type": "Xã Việt",
+    "district_code": "972"
+  }
+]

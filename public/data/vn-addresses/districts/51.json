@@ -1,0 +1,86 @@
+[
+  {
+    "code": "535",
+    "name": "Ba Tơ",
+    "full_name": "Huyện Ba Tơ",
+    "type": "Huyện Ba",
+    "province_code": "51"
+  },
+  {
+    "code": "524",
+    "name": "Bình Sơn",
+    "full_name": "Huyện Bình Sơn",
+    "type": "Huyện Bình",
+    "province_code": "51"
+  },
+  {
+    "code": "531",
+    "name": "Minh Long",
+    "full_name": "Huyện Minh Long",
+    "type": "Huyện Minh",
+    "province_code": "51"
+  },
+  {
+    "code": "533",
+    "name": "Mộ Đức",
+    "full_name": "Huyện Mộ Đức",
+    "type": "Huyện Mộ",
+    "province_code": "51"
+  },
+  {
+    "code": "532",
+    "name": "Nghĩa Hành",
+    "full_name": "Huyện Nghĩa Hành",
+    "type": "Huyện Nghĩa",
+    "province_code": "51"
+  },
+  {
+    "code": "522",
+    "name": "Quảng Ngãi",
+    "full_name": "Thành phố Quảng Ngãi",
+    "type": "Thành phố Quảng",
+    "province_code": "51"
+  },
+  {
+    "code": "529",
+    "name": "Sơn Hà",
+    "full_name": "Huyện Sơn Hà",
+    "type": "Huyện Sơn",
+    "province_code": "51"
+  },
+  {
+    "code": "530",
+    "name": "Sơn Tây",
+    "full_name": "Huyện Sơn Tây",
+    "type": "Huyện Sơn",
+    "province_code": "51"
+  },
+  {
+    "code": "527",
+    "name": "Sơn Tịnh",
+    "full_name": "Huyện Sơn Tịnh",
+    "type": "Huyện Sơn",
+    "province_code": "51"
+  },
+  {
+    "code": "525",
+    "name": "Trà Bồng",
+    "full_name": "Huyện Trà Bồng",
+    "type": "Huyện Trà",
+    "province_code": "51"
+  },
+  {
+    "code": "528",
+    "name": "Tư Nghĩa",
+    "full_name": "Huyện Tư Nghĩa",
+    "type": "Huyện Tư",
+    "province_code": "51"
+  },
+  {
+    "code": "534",
+    "name": "Đức Phổ",
+    "full_name": "Thị xã Đức Phổ",
+    "type": "Thị xã Đức",
+    "province_code": "51"
+  }
+]

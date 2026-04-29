@@ -1,0 +1,128 @@
+[
+  {
+    "code": "01102",
+    "name": "Bản Díu",
+    "full_name": "Xã Bản Díu",
+    "type": "Xã Bản",
+    "district_code": "033"
+  },
+  {
+    "code": "01135",
+    "name": "Bản Ngò",
+    "full_name": "Xã Bản Ngò",
+    "type": "Xã Bản",
+    "district_code": "033"
+  },
+  {
+    "code": "01138",
+    "name": "Chế Là",
+    "full_name": "Xã Chế Là",
+    "type": "Xã Chế",
+    "district_code": "033"
+  },
+  {
+    "code": "01105",
+    "name": "Chí Cà",
+    "full_name": "Xã Chí Cà",
+    "type": "Xã Chí",
+    "district_code": "033"
+  },
+  {
+    "code": "01096",
+    "name": "Cốc Pài",
+    "full_name": "Thị trấn Cốc Pài",
+    "type": "Thị trấn Cốc",
+    "district_code": "033"
+  },
+  {
+    "code": "01123",
+    "name": "Cốc Rế",
+    "full_name": "Xã Cốc Rế",
+    "type": "Xã Cốc",
+    "district_code": "033"
+  },
+  {
+    "code": "01150",
+    "name": "Khuôn Lùng",
+    "full_name": "Xã Khuôn Lùng",
+    "type": "Xã Khuôn",
+    "district_code": "033"
+  },
+  {
+    "code": "01147",
+    "name": "Nà Chì",
+    "full_name": "Xã Nà Chì",
+    "type": "Xã Nà",
+    "district_code": "033"
+  },
+  {
+    "code": "01141",
+    "name": "Nấm Dẩn",
+    "full_name": "Xã Nấm Dẩn",
+    "type": "Xã Nấm",
+    "district_code": "033"
+  },
+  {
+    "code": "01129",
+    "name": "Nàn Ma",
+    "full_name": "Xã Nàn Ma",
+    "type": "Xã Nàn",
+    "district_code": "033"
+  },
+  {
+    "code": "01099",
+    "name": "Nàn Xỉn",
+    "full_name": "Xã Nàn Xỉn",
+    "type": "Xã Nàn",
+    "district_code": "033"
+  },
+  {
+    "code": "01120",
+    "name": "Pà Vầy Sủ",
+    "full_name": "Xã Pà Vầy Sủ",
+    "type": "Xã Pà Vầy",
+    "district_code": "033"
+  },
+  {
+    "code": "01144",
+    "name": "Quảng Nguyên",
+    "full_name": "Xã Quảng Nguyên",
+    "type": "Xã Quảng",
+    "district_code": "033"
+  },
+  {
+    "code": "01132",
+    "name": "Tả Nhìu",
+    "full_name": "Xã Tả Nhìu",
+    "type": "Xã Tả",
+    "district_code": "033"
+  },
+  {
+    "code": "01114",
+    "name": "Thèn Phàng",
+    "full_name": "Xã Thèn Phàng",
+    "type": "Xã Thèn",
+    "district_code": "033"
+  },
+  {
+    "code": "01126",
+    "name": "Thu Tà",
+    "full_name": "Xã Thu Tà",
+    "type": "Xã Thu",
+    "district_code": "033"
+  },
+  {
+    "code": "01117",
+    "name": "Trung Thịnh",
+    "full_name": "Xã Trung Thịnh",
+    "type": "Xã Trung",
+    "district_code": "033"
+  },
+  {
+    "code": "01108",
+    "name": "Xín Mần",
+    "full_name": "Xã Xín Mần",
+    "type": "Xã Xín",
+    "district_code": "033"
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "code": "25404",
+    "name": "Bình Minh",
+    "full_name": "Xã Bình Minh",
+    "type": "Xã Bình",
+    "district_code": "696"
+  },
+  {
+    "code": "25405",
+    "name": "Bom Bo",
+    "full_name": "Xã Bom Bo",
+    "type": "Xã Bom",
+    "district_code": "696"
+  },
+  {
+    "code": "25408",
+    "name": "Minh Hưng",
+    "full_name": "Xã Minh Hưng",
+    "type": "Xã Minh",
+    "district_code": "696"
+  },
+  {
+    "code": "25424",
+    "name": "Nghĩa Bình",
+    "full_name": "Xã Nghĩa Bình",
+    "type": "Xã Nghĩa",
+    "district_code": "696"
+  },
+  {
+    "code": "25423",
+    "name": "Nghĩa Trung",
+    "full_name": "Xã Nghĩa Trung",
+    "type": "Xã Nghĩa",
+    "district_code": "696"
+  },
+  {
+    "code": "25400",
+    "name": "Phú Sơn",
+    "full_name": "Xã Phú Sơn",
+    "type": "Xã Phú",
+    "district_code": "696"
+  },
+  {
+    "code": "25429",
+    "name": "Phước Sơn",
+    "full_name": "Xã Phước Sơn",
+    "type": "Xã Phước",
+    "district_code": "696"
+  },
+  {
+    "code": "25402",
+    "name": "Thọ Sơn",
+    "full_name": "Xã Thọ Sơn",
+    "type": "Xã Thọ",
+    "district_code": "696"
+  },
+  {
+    "code": "25420",
+    "name": "Thống Nhất",
+    "full_name": "Xã Thống Nhất",
+    "type": "Xã Thống",
+    "district_code": "696"
+  },
+  {
+    "code": "25399",
+    "name": "Đak Nhau",
+    "full_name": "Xã Đak Nhau",
+    "type": "Xã Đak",
+    "district_code": "696"
+  },
+  {
+    "code": "25426",
+    "name": "Đăng Hà",
+    "full_name": "Xã Đăng Hà",
+    "type": "Xã Đăng",
+    "district_code": "696"
+  },
+  {
+    "code": "25411",
+    "name": "Đoàn Kết",
+    "full_name": "Xã Đoàn Kết",
+    "type": "Xã Đoàn",
+    "district_code": "696"
+  },
+  {
+    "code": "25414",
+    "name": "Đồng Nai",
+    "full_name": "Xã Đồng Nai",
+    "type": "Xã Đồng",
+    "district_code": "696"
+  },
+  {
+    "code": "25417",
+    "name": "Đức Liễu",
+    "full_name": "Xã Đức Liễu",
+    "type": "Xã Đức",
+    "district_code": "696"
+  },
+  {
+    "code": "25396",
+    "name": "Đức Phong",
+    "full_name": "Thị trấn Đức Phong",
+    "type": "Thị trấn Đức",
+    "district_code": "696"
+  },
+  {
+    "code": "25398",
+    "name": "Đường 10",
+    "full_name": "Xã Đường 10",
+    "type": "Xã Đường",
+    "district_code": "696"
+  }
+]

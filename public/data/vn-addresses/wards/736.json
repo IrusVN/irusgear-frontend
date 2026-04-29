@@ -1,0 +1,100 @@
+[
+  {
+    "code": "26230",
+    "name": "Gia Canh",
+    "full_name": "Xã Gia Canh",
+    "type": "Xã Gia",
+    "district_code": "736"
+  },
+  {
+    "code": "26227",
+    "name": "La Ngà",
+    "full_name": "Xã La Ngà",
+    "type": "Xã La",
+    "district_code": "736"
+  },
+  {
+    "code": "26224",
+    "name": "Ngọc Định",
+    "full_name": "Xã Ngọc Định",
+    "type": "Xã Ngọc",
+    "district_code": "736"
+  },
+  {
+    "code": "26236",
+    "name": "Phú Cường",
+    "full_name": "Xã Phú Cường",
+    "type": "Xã Phú",
+    "district_code": "736"
+  },
+  {
+    "code": "26221",
+    "name": "Phú Hòa",
+    "full_name": "Xã Phú Hòa",
+    "type": "Xã Phú",
+    "district_code": "736"
+  },
+  {
+    "code": "26218",
+    "name": "Phú Lợi",
+    "full_name": "Xã Phú Lợi",
+    "type": "Xã Phú",
+    "district_code": "736"
+  },
+  {
+    "code": "26233",
+    "name": "Phú Ngọc",
+    "full_name": "Xã Phú Ngọc",
+    "type": "Xã Phú",
+    "district_code": "736"
+  },
+  {
+    "code": "26212",
+    "name": "Phú Tân",
+    "full_name": "Xã Phú Tân",
+    "type": "Xã Phú",
+    "district_code": "736"
+  },
+  {
+    "code": "26242",
+    "name": "Phú Túc",
+    "full_name": "Xã Phú Túc",
+    "type": "Xã Phú",
+    "district_code": "736"
+  },
+  {
+    "code": "26215",
+    "name": "Phú Vinh",
+    "full_name": "Xã Phú Vinh",
+    "type": "Xã Phú",
+    "district_code": "736"
+  },
+  {
+    "code": "26245",
+    "name": "Suối Nho",
+    "full_name": "Xã Suối Nho",
+    "type": "Xã Suối",
+    "district_code": "736"
+  },
+  {
+    "code": "26209",
+    "name": "Thanh Sơn",
+    "full_name": "Xã Thanh Sơn",
+    "type": "Xã Thanh",
+    "district_code": "736"
+  },
+  {
+    "code": "26239",
+    "name": "Túc Trưng",
+    "full_name": "Xã Túc Trưng",
+    "type": "Xã Túc",
+    "district_code": "736"
+  },
+  {
+    "code": "26206",
+    "name": "Định Quán",
+    "full_name": "Thị trấn Định Quán",
+    "type": "Thị trấn Định",
+    "district_code": "736"
+  }
+]

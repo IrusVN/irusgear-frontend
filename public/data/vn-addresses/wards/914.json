@@ -1,0 +1,37 @@
+[
+  {
+    "code": "30797",
+    "name": "Phú Lợi",
+    "full_name": "Xã Phú Lợi",
+    "type": "Xã Phú",
+    "district_code": "914"
+  },
+  {
+    "code": "30799",
+    "name": "Phú Mỹ",
+    "full_name": "Xã Phú Mỹ",
+    "type": "Xã Phú",
+    "district_code": "914"
+  },
+  {
+    "code": "30796",
+    "name": "Tân Khánh Hòa",
+    "full_name": "Xã Tân Khánh Hòa",
+    "type": "Xã Tân Khánh",
+    "district_code": "914"
+  },
+  {
+    "code": "30791",
+    "name": "Vĩnh Phú",
+    "full_name": "Xã Vĩnh Phú",
+    "type": "Xã Vĩnh",
+    "district_code": "914"
+  },
+  {
+    "code": "30793",
+    "name": "Vĩnh Điều",
+    "full_name": "Xã Vĩnh Điều",
+    "type": "Xã Vĩnh",
+    "district_code": "914"
+  }
+]

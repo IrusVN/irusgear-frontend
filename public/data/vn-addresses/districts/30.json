@@ -1,0 +1,86 @@
+[
+  {
+    "code": "296",
+    "name": "Bình Giang",
+    "full_name": "Huyện Bình Giang",
+    "type": "Huyện Bình",
+    "province_code": "30"
+  },
+  {
+    "code": "295",
+    "name": "Cẩm Giàng",
+    "full_name": "Huyện Cẩm Giàng",
+    "type": "Huyện Cẩm",
+    "province_code": "30"
+  },
+  {
+    "code": "290",
+    "name": "Chí Linh",
+    "full_name": "Thành phố Chí Linh",
+    "type": "Thành phố Chí",
+    "province_code": "30"
+  },
+  {
+    "code": "297",
+    "name": "Gia Lộc",
+    "full_name": "Huyện Gia Lộc",
+    "type": "Huyện Gia",
+    "province_code": "30"
+  },
+  {
+    "code": "288",
+    "name": "Hải Dương",
+    "full_name": "Thành phố Hải Dương",
+    "type": "Thành phố Hải",
+    "province_code": "30"
+  },
+  {
+    "code": "293",
+    "name": "Kim Thành",
+    "full_name": "Huyện Kim Thành",
+    "type": "Huyện Kim",
+    "province_code": "30"
+  },
+  {
+    "code": "292",
+    "name": "Kinh Môn",
+    "full_name": "Thị xã Kinh Môn",
+    "type": "Thị xã Kinh",
+    "province_code": "30"
+  },
+  {
+    "code": "291",
+    "name": "Nam Sách",
+    "full_name": "Huyện Nam Sách",
+    "type": "Huyện Nam",
+    "province_code": "30"
+  },
+  {
+    "code": "299",
+    "name": "Ninh Giang",
+    "full_name": "Huyện Ninh Giang",
+    "type": "Huyện Ninh",
+    "province_code": "30"
+  },
+  {
+    "code": "294",
+    "name": "Thanh Hà",
+    "full_name": "Huyện Thanh Hà",
+    "type": "Huyện Thanh",
+    "province_code": "30"
+  },
+  {
+    "code": "300",
+    "name": "Thanh Miện",
+    "full_name": "Huyện Thanh Miện",
+    "type": "Huyện Thanh",
+    "province_code": "30"
+  },
+  {
+    "code": "298",
+    "name": "Tứ Kỳ",
+    "full_name": "Huyện Tứ Kỳ",
+    "type": "Huyện Tứ",
+    "province_code": "30"
+  }
+]

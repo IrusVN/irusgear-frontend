@@ -1,0 +1,86 @@
+[
+  {
+    "code": "25930",
+    "name": "Bạch Đằng",
+    "full_name": "Xã Bạch Đằng",
+    "type": "Xã Bạch",
+    "district_code": "723"
+  },
+  {
+    "code": "25915",
+    "name": "Hội Nghĩa",
+    "full_name": "Phường Hội Nghĩa",
+    "type": "Phường Hội",
+    "district_code": "723"
+  },
+  {
+    "code": "25921",
+    "name": "Khánh Bình",
+    "full_name": "Phường Khánh Bình",
+    "type": "Phường Khánh",
+    "district_code": "723"
+  },
+  {
+    "code": "25924",
+    "name": "Phú Chánh",
+    "full_name": "Phường Phú Chánh",
+    "type": "Phường Phú",
+    "district_code": "723"
+  },
+  {
+    "code": "25920",
+    "name": "Tân Hiệp",
+    "full_name": "Phường Tân Hiệp",
+    "type": "Phường Tân",
+    "district_code": "723"
+  },
+  {
+    "code": "25891",
+    "name": "Tân Phước Khánh",
+    "full_name": "Phường Tân Phước Khánh",
+    "type": "Phường Tân Phước",
+    "district_code": "723"
+  },
+  {
+    "code": "25933",
+    "name": "Tân Vĩnh Hiệp",
+    "full_name": "Phường Tân Vĩnh Hiệp",
+    "type": "Phường Tân Vĩnh",
+    "district_code": "723"
+  },
+  {
+    "code": "25939",
+    "name": "Thái Hòa",
+    "full_name": "Phường Thái Hòa",
+    "type": "Phường Thái",
+    "district_code": "723"
+  },
+  {
+    "code": "25937",
+    "name": "Thạnh Hội",
+    "full_name": "Xã Thạnh Hội",
+    "type": "Xã Thạnh",
+    "district_code": "723"
+  },
+  {
+    "code": "25936",
+    "name": "Thạnh Phước",
+    "full_name": "Phường Thạnh Phước",
+    "type": "Phường Thạnh",
+    "district_code": "723"
+  },
+  {
+    "code": "25888",
+    "name": "Uyên Hưng",
+    "full_name": "Phường Uyên Hưng",
+    "type": "Phường Uyên",
+    "district_code": "723"
+  },
+  {
+    "code": "25912",
+    "name": "Vĩnh Tân",
+    "full_name": "Phường Vĩnh Tân",
+    "type": "Phường Vĩnh",
+    "district_code": "723"
+  }
+]

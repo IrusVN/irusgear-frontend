@@ -1,0 +1,79 @@
+[
+  {
+    "code": "24823",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "673"
+  },
+  {
+    "code": "24820",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "673"
+  },
+  {
+    "code": "24826",
+    "name": "B'lao",
+    "full_name": "Phường B'lao",
+    "type": "Phường",
+    "district_code": "673"
+  },
+  {
+    "code": "24841",
+    "name": "Lộc Châu",
+    "full_name": "Xã Lộc Châu",
+    "type": "Xã Lộc",
+    "district_code": "673"
+  },
+  {
+    "code": "24838",
+    "name": "Lộc Nga",
+    "full_name": "Xã Lộc Nga",
+    "type": "Xã Lộc",
+    "district_code": "673"
+  },
+  {
+    "code": "24814",
+    "name": "Lộc Phát",
+    "full_name": "Phường Lộc Phát",
+    "type": "Phường Lộc",
+    "district_code": "673"
+  },
+  {
+    "code": "24829",
+    "name": "Lộc Sơn",
+    "full_name": "Phường Lộc Sơn",
+    "type": "Phường Lộc",
+    "district_code": "673"
+  },
+  {
+    "code": "24835",
+    "name": "Lộc Thanh",
+    "full_name": "Xã Lộc Thanh",
+    "type": "Xã Lộc",
+    "district_code": "673"
+  },
+  {
+    "code": "24817",
+    "name": "Lộc Tiến",
+    "full_name": "Phường Lộc Tiến",
+    "type": "Phường Lộc",
+    "district_code": "673"
+  },
+  {
+    "code": "24844",
+    "name": "Đại Lào",
+    "full_name": "Xã Đại Lào",
+    "type": "Xã Đại",
+    "district_code": "673"
+  },
+  {
+    "code": "24832",
+    "name": "Đạm Bri",
+    "full_name": "Xã Đạm Bri",
+    "type": "Xã Đạm",
+    "district_code": "673"
+  }
+]

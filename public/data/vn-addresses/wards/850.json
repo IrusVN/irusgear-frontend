@@ -1,0 +1,51 @@
+[
+  {
+    "code": "29521",
+    "name": "Long Khánh",
+    "full_name": "Xã Long Khánh",
+    "type": "Xã Long",
+    "district_code": "850"
+  },
+  {
+    "code": "29513",
+    "name": "Long Thành",
+    "full_name": "Thị trấn Long Thành",
+    "type": "Thị trấn Long",
+    "district_code": "850"
+  },
+  {
+    "code": "29533",
+    "name": "Long Vĩnh",
+    "full_name": "Xã Long Vĩnh",
+    "type": "Xã Long",
+    "district_code": "850"
+  },
+  {
+    "code": "29530",
+    "name": "Ngũ Lạc",
+    "full_name": "Xã Ngũ Lạc",
+    "type": "Xã Ngũ",
+    "district_code": "850"
+  },
+  {
+    "code": "29500",
+    "name": "Đôn Châu",
+    "full_name": "Xã Đôn Châu",
+    "type": "Xã Đôn",
+    "district_code": "850"
+  },
+  {
+    "code": "29497",
+    "name": "Đôn Xuân",
+    "full_name": "Xã Đôn Xuân",
+    "type": "Xã Đôn",
+    "district_code": "850"
+  },
+  {
+    "code": "29536",
+    "name": "Đông Hải",
+    "full_name": "Xã Đông Hải",
+    "type": "Xã Đông",
+    "district_code": "850"
+  }
+]

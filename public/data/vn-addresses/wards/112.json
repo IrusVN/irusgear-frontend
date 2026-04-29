@@ -1,0 +1,79 @@
+[
+  {
+    "code": "03460",
+    "name": "Hua Bun",
+    "full_name": "Xã Hua Bun",
+    "type": "Xã Hua",
+    "district_code": "112"
+  },
+  {
+    "code": "03481",
+    "name": "Lê Lợi",
+    "full_name": "Xã Lê Lợi",
+    "type": "Xã Lê",
+    "district_code": "112"
+  },
+  {
+    "code": "03472",
+    "name": "Mường Mô",
+    "full_name": "Xã Mường Mô",
+    "type": "Xã Mường",
+    "district_code": "112"
+  },
+  {
+    "code": "03502",
+    "name": "Nậm Ban",
+    "full_name": "Xã Nậm Ban",
+    "type": "Xã Nậm",
+    "district_code": "112"
+  },
+  {
+    "code": "03473",
+    "name": "Nậm Chà",
+    "full_name": "Xã Nậm Chà",
+    "type": "Xã Nậm",
+    "district_code": "112"
+  },
+  {
+    "code": "03475",
+    "name": "Nậm Hàng",
+    "full_name": "Xã Nậm Hàng",
+    "type": "Xã Nậm",
+    "district_code": "112"
+  },
+  {
+    "code": "03474",
+    "name": "Nậm Manh",
+    "full_name": "Xã Nậm Manh",
+    "type": "Xã Nậm",
+    "district_code": "112"
+  },
+  {
+    "code": "03434",
+    "name": "Nậm Nhùn",
+    "full_name": "Thị trấn Nậm Nhùn",
+    "type": "Thị trấn Nậm",
+    "district_code": "112"
+  },
+  {
+    "code": "03488",
+    "name": "Nậm Pì",
+    "full_name": "Xã Nậm Pì",
+    "type": "Xã Nậm",
+    "district_code": "112"
+  },
+  {
+    "code": "03484",
+    "name": "Pú Đao",
+    "full_name": "Xã Pú Đao",
+    "type": "Xã Pú",
+    "district_code": "112"
+  },
+  {
+    "code": "03503",
+    "name": "Trung Chải",
+    "full_name": "Xã Trung Chải",
+    "type": "Xã Trung",
+    "district_code": "112"
+  }
+]

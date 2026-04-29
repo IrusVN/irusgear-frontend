@@ -1,0 +1,72 @@
+[
+  {
+    "code": "31346",
+    "name": "Bảy Ngàn",
+    "full_name": "Thị trấn Bảy Ngàn",
+    "type": "Thị trấn Bảy",
+    "district_code": "932"
+  },
+  {
+    "code": "31362",
+    "name": "Cái Tắc",
+    "full_name": "Thị trấn Cái Tắc",
+    "type": "Thị trấn Cái",
+    "district_code": "932"
+  },
+  {
+    "code": "31342",
+    "name": "Một Ngàn",
+    "full_name": "Thị trấn Một Ngàn",
+    "type": "Thị trấn Một",
+    "district_code": "932"
+  },
+  {
+    "code": "31357",
+    "name": "Nhơn Nghĩa A",
+    "full_name": "Xã Nhơn Nghĩa A",
+    "type": "Xã Nhơn Nghĩa",
+    "district_code": "932"
+  },
+  {
+    "code": "31359",
+    "name": "Rạch Gòi",
+    "full_name": "Thị trấn Rạch Gòi",
+    "type": "Thị trấn Rạch",
+    "district_code": "932"
+  },
+  {
+    "code": "31345",
+    "name": "Tân Hoà",
+    "full_name": "Xã Tân Hoà",
+    "type": "Xã Tân",
+    "district_code": "932"
+  },
+  {
+    "code": "31363",
+    "name": "Tân Phú Thạnh",
+    "full_name": "Xã Tân Phú Thạnh",
+    "type": "Xã Tân Phú",
+    "district_code": "932"
+  },
+  {
+    "code": "31360",
+    "name": "Thạnh Xuân",
+    "full_name": "Xã Thạnh Xuân",
+    "type": "Xã Thạnh",
+    "district_code": "932"
+  },
+  {
+    "code": "31351",
+    "name": "Trường Long A",
+    "full_name": "Xã Trường Long A",
+    "type": "Xã Trường Long",
+    "district_code": "932"
+  },
+  {
+    "code": "31348",
+    "name": "Trường Long Tây",
+    "full_name": "Xã Trường Long Tây",
+    "type": "Xã Trường Long",
+    "district_code": "932"
+  }
+]

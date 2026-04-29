@@ -1,0 +1,44 @@
+[
+  {
+    "code": "11467",
+    "name": "Bàng La",
+    "full_name": "Phường Bàng La",
+    "type": "Phường Bàng",
+    "district_code": "308"
+  },
+  {
+    "code": "11458",
+    "name": "Hải Sơn",
+    "full_name": "Phường Hải Sơn",
+    "type": "Phường Hải",
+    "district_code": "308"
+  },
+  {
+    "code": "11737",
+    "name": "Hợp Đức",
+    "full_name": "Phường Hợp Đức",
+    "type": "Phường Hợp",
+    "district_code": "308"
+  },
+  {
+    "code": "11465",
+    "name": "Minh Đức",
+    "full_name": "Phường Minh Đức",
+    "type": "Phường Minh",
+    "district_code": "308"
+  },
+  {
+    "code": "11455",
+    "name": "Ngọc Xuyên",
+    "full_name": "Phường Ngọc Xuyên",
+    "type": "Phường Ngọc",
+    "district_code": "308"
+  },
+  {
+    "code": "11461",
+    "name": "Vạn Hương",
+    "full_name": "Phường Vạn Hương",
+    "type": "Phường Vạn",
+    "district_code": "308"
+  }
+]

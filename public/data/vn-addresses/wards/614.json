@@ -1,0 +1,51 @@
+[
+  {
+    "code": "23497",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "614"
+  },
+  {
+    "code": "23482",
+    "name": "Đắk Kôi",
+    "full_name": "Xã Đắk Kôi",
+    "type": "Xã Đắk",
+    "district_code": "614"
+  },
+  {
+    "code": "23491",
+    "name": "Đắk Pne",
+    "full_name": "Xã Đắk Pne",
+    "type": "Xã Đắk",
+    "district_code": "614"
+  },
+  {
+    "code": "23488",
+    "name": "Đắk Ruồng",
+    "full_name": "Xã Đắk Ruồng",
+    "type": "Xã Đắk",
+    "district_code": "614"
+  },
+  {
+    "code": "23479",
+    "name": "Đắk Rve",
+    "full_name": "Thị trấn Đắk Rve",
+    "type": "Thị trấn Đắk",
+    "district_code": "614"
+  },
+  {
+    "code": "23485",
+    "name": "Đắk Tơ Lung",
+    "full_name": "Xã Đắk Tơ Lung",
+    "type": "Xã Đắk Tơ",
+    "district_code": "614"
+  },
+  {
+    "code": "23494",
+    "name": "Đắk Tờ Re",
+    "full_name": "Xã Đắk Tờ Re",
+    "type": "Xã Đắk Tờ",
+    "district_code": "614"
+  }
+]

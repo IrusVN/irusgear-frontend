@@ -1,0 +1,58 @@
+[
+  {
+    "code": "32194",
+    "name": "Hàm Rồng",
+    "full_name": "Xã Hàm Rồng",
+    "type": "Xã Hàm",
+    "district_code": "971"
+  },
+  {
+    "code": "32203",
+    "name": "Hàng Vịnh",
+    "full_name": "Xã Hàng Vịnh",
+    "type": "Xã Hàng",
+    "district_code": "971"
+  },
+  {
+    "code": "32197",
+    "name": "Hiệp Tùng",
+    "full_name": "Xã Hiệp Tùng",
+    "type": "Xã Hiệp",
+    "district_code": "971"
+  },
+  {
+    "code": "32201",
+    "name": "Lâm Hải",
+    "full_name": "Xã Lâm Hải",
+    "type": "Xã Lâm",
+    "district_code": "971"
+  },
+  {
+    "code": "32191",
+    "name": "Năm Căn",
+    "full_name": "Thị trấn Năm Căn",
+    "type": "Thị trấn Năm",
+    "district_code": "971"
+  },
+  {
+    "code": "32206",
+    "name": "Tam Giang",
+    "full_name": "Xã Tam Giang",
+    "type": "Xã Tam",
+    "district_code": "971"
+  },
+  {
+    "code": "32209",
+    "name": "Tam Giang Đông",
+    "full_name": "Xã Tam Giang Đông",
+    "type": "Xã Tam Giang",
+    "district_code": "971"
+  },
+  {
+    "code": "32200",
+    "name": "Đất Mới",
+    "full_name": "Xã Đất Mới",
+    "type": "Xã Đất",
+    "district_code": "971"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "19993",
+    "name": "Dương Hòa",
+    "full_name": "Xã Dương Hòa",
+    "type": "Xã Dương",
+    "district_code": "479"
+  },
+  {
+    "code": "19960",
+    "name": "Phú Bài",
+    "full_name": "Phường Phú Bài",
+    "type": "Phường Phú",
+    "district_code": "479"
+  },
+  {
+    "code": "19990",
+    "name": "Phú Sơn",
+    "full_name": "Xã Phú Sơn",
+    "type": "Xã Phú",
+    "district_code": "479"
+  },
+  {
+    "code": "19975",
+    "name": "Thủy Châu",
+    "full_name": "Phường Thủy Châu",
+    "type": "Phường Thủy",
+    "district_code": "479"
+  },
+  {
+    "code": "19969",
+    "name": "Thủy Dương",
+    "full_name": "Phường Thủy Dương",
+    "type": "Phường Thủy",
+    "district_code": "479"
+  },
+  {
+    "code": "19978",
+    "name": "Thủy Lương",
+    "full_name": "Phường Thủy Lương",
+    "type": "Phường Thủy",
+    "district_code": "479"
+  },
+  {
+    "code": "19987",
+    "name": "Thủy Phù",
+    "full_name": "Xã Thủy Phù",
+    "type": "Xã Thủy",
+    "district_code": "479"
+  },
+  {
+    "code": "19972",
+    "name": "Thủy Phương",
+    "full_name": "Phường Thủy Phương",
+    "type": "Phường Thủy",
+    "district_code": "479"
+  },
+  {
+    "code": "19984",
+    "name": "Thủy Tân",
+    "full_name": "Xã Thủy Tân",
+    "type": "Xã Thủy",
+    "district_code": "479"
+  },
+  {
+    "code": "19966",
+    "name": "Thủy Thanh",
+    "full_name": "Xã Thủy Thanh",
+    "type": "Xã Thủy",
+    "district_code": "479"
+  }
+]

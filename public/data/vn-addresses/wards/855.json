@@ -1,0 +1,79 @@
+[
+  {
+    "code": "29548",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "855"
+  },
+  {
+    "code": "29551",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "855"
+  },
+  {
+    "code": "29557",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "855"
+  },
+  {
+    "code": "29554",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "855"
+  },
+  {
+    "code": "29545",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "855"
+  },
+  {
+    "code": "29560",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "855"
+  },
+  {
+    "code": "29542",
+    "name": "9",
+    "full_name": "Phường 9",
+    "type": "Phường",
+    "district_code": "855"
+  },
+  {
+    "code": "29566",
+    "name": "Tân Hòa",
+    "full_name": "Phường Tân Hòa",
+    "type": "Phường Tân",
+    "district_code": "855"
+  },
+  {
+    "code": "29569",
+    "name": "Tân Hội",
+    "full_name": "Phường Tân Hội",
+    "type": "Phường Tân",
+    "district_code": "855"
+  },
+  {
+    "code": "29563",
+    "name": "Tân Ngãi",
+    "full_name": "Phường Tân Ngãi",
+    "type": "Phường Tân",
+    "district_code": "855"
+  },
+  {
+    "code": "29572",
+    "name": "Trường An",
+    "full_name": "Phường Trường An",
+    "type": "Phường Trường",
+    "district_code": "855"
+  }
+]

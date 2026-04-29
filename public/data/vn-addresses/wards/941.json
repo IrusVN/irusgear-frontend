@@ -1,0 +1,72 @@
+[
+  {
+    "code": "31513",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31525",
+    "name": "10",
+    "full_name": "Phường 10",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31510",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31519",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31516",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31498",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31507",
+    "name": "6",
+    "full_name": "Phường 6",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31501",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31504",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "941"
+  },
+  {
+    "code": "31522",
+    "name": "9",
+    "full_name": "Phường 9",
+    "type": "Phường",
+    "district_code": "941"
+  }
+]

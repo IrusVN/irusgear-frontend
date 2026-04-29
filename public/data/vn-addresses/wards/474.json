@@ -1,0 +1,254 @@
+[
+  {
+    "code": "19801",
+    "name": "An Cựu",
+    "full_name": "Phường An Cựu",
+    "type": "Phường An",
+    "district_code": "474"
+  },
+  {
+    "code": "19803",
+    "name": "An Hòa",
+    "full_name": "Phường An Hòa",
+    "type": "Phường An",
+    "district_code": "474"
+  },
+  {
+    "code": "19816",
+    "name": "An Tây",
+    "full_name": "Phường An Tây",
+    "type": "Phường An",
+    "district_code": "474"
+  },
+  {
+    "code": "19815",
+    "name": "An Đông",
+    "full_name": "Phường An Đông",
+    "type": "Phường An",
+    "district_code": "474"
+  },
+  {
+    "code": "19756",
+    "name": "Gia Hội",
+    "full_name": "Phường Gia Hội",
+    "type": "Phường Gia",
+    "district_code": "474"
+  },
+  {
+    "code": "19999",
+    "name": "Hải Dương",
+    "full_name": "Xã Hải Dương",
+    "type": "Xã Hải",
+    "district_code": "474"
+  },
+  {
+    "code": "20023",
+    "name": "Hương An",
+    "full_name": "Phường Hương An",
+    "type": "Phường Hương",
+    "district_code": "474"
+  },
+  {
+    "code": "20029",
+    "name": "Hương Hồ",
+    "full_name": "Phường Hương Hồ",
+    "type": "Phường Hương",
+    "district_code": "474"
+  },
+  {
+    "code": "19810",
+    "name": "Hương Long",
+    "full_name": "Phường Hương Long",
+    "type": "Phường Hương",
+    "district_code": "474"
+  },
+  {
+    "code": "20002",
+    "name": "Hương Phong",
+    "full_name": "Xã Hương Phong",
+    "type": "Xã Hương",
+    "district_code": "474"
+  },
+  {
+    "code": "19804",
+    "name": "Hương Sơ",
+    "full_name": "Phường Hương Sơ",
+    "type": "Phường Hương",
+    "district_code": "474"
+  },
+  {
+    "code": "20032",
+    "name": "Hương Thọ",
+    "full_name": "Xã Hương Thọ",
+    "type": "Xã Hương",
+    "district_code": "474"
+  },
+  {
+    "code": "20014",
+    "name": "Hương Vinh",
+    "full_name": "Phường Hương Vinh",
+    "type": "Phường Hương",
+    "district_code": "474"
+  },
+  {
+    "code": "19774",
+    "name": "Kim Long",
+    "full_name": "Phường Kim Long",
+    "type": "Phường Kim",
+    "district_code": "474"
+  },
+  {
+    "code": "19906",
+    "name": "Phú Dương",
+    "full_name": "Xã Phú Dương",
+    "type": "Xã Phú",
+    "district_code": "474"
+  },
+  {
+    "code": "19759",
+    "name": "Phú Hậu",
+    "full_name": "Phường Phú Hậu",
+    "type": "Phường Phú",
+    "district_code": "474"
+  },
+  {
+    "code": "19786",
+    "name": "Phú Hội",
+    "full_name": "Phường Phú Hội",
+    "type": "Phường Phú",
+    "district_code": "474"
+  },
+  {
+    "code": "19909",
+    "name": "Phú Mậu",
+    "full_name": "Xã Phú Mậu",
+    "type": "Xã Phú",
+    "district_code": "474"
+  },
+  {
+    "code": "19789",
+    "name": "Phú Nhuận",
+    "full_name": "Phường Phú Nhuận",
+    "type": "Phường Phú",
+    "district_code": "474"
+  },
+  {
+    "code": "19924",
+    "name": "Phú Thanh",
+    "full_name": "Xã Phú Thanh",
+    "type": "Xã Phú",
+    "district_code": "474"
+  },
+  {
+    "code": "19930",
+    "name": "Phú Thượng",
+    "full_name": "Phường Phú Thượng",
+    "type": "Phường Phú",
+    "district_code": "474"
+  },
+  {
+    "code": "19798",
+    "name": "Phước Vĩnh",
+    "full_name": "Phường Phước Vĩnh",
+    "type": "Phường Phước",
+    "district_code": "474"
+  },
+  {
+    "code": "19780",
+    "name": "Phường Đúc",
+    "full_name": "Phường Phường Đúc",
+    "type": "Phường Phường",
+    "district_code": "474"
+  },
+  {
+    "code": "19750",
+    "name": "Tây Lộc",
+    "full_name": "Phường Tây Lộc",
+    "type": "Phường Tây",
+    "district_code": "474"
+  },
+  {
+    "code": "19900",
+    "name": "Thuận An",
+    "full_name": "Phường Thuận An",
+    "type": "Phường Thuận",
+    "district_code": "474"
+  },
+  {
+    "code": "19762",
+    "name": "Thuận Hòa",
+    "full_name": "Phường Thuận Hòa",
+    "type": "Phường Thuận",
+    "district_code": "474"
+  },
+  {
+    "code": "19753",
+    "name": "Thuận Lộc",
+    "full_name": "Phường Thuận Lộc",
+    "type": "Phường Thuận",
+    "district_code": "474"
+  },
+  {
+    "code": "19981",
+    "name": "Thủy Bằng",
+    "full_name": "Xã Thủy Bằng",
+    "type": "Xã Thủy",
+    "district_code": "474"
+  },
+  {
+    "code": "19807",
+    "name": "Thuỷ Biều",
+    "full_name": "Phường Thuỷ Biều",
+    "type": "Phường Thuỷ",
+    "district_code": "474"
+  },
+  {
+    "code": "19963",
+    "name": "Thủy Vân",
+    "full_name": "Phường Thủy Vân",
+    "type": "Phường Thủy",
+    "district_code": "474"
+  },
+  {
+    "code": "19813",
+    "name": "Thuỷ Xuân",
+    "full_name": "Phường Thuỷ Xuân",
+    "type": "Phường Thuỷ",
+    "district_code": "474"
+  },
+  {
+    "code": "19795",
+    "name": "Trường An",
+    "full_name": "Phường Trường An",
+    "type": "Phường Trường",
+    "district_code": "474"
+  },
+  {
+    "code": "19783",
+    "name": "Vĩnh Ninh",
+    "full_name": "Phường Vĩnh Ninh",
+    "type": "Phường Vĩnh",
+    "district_code": "474"
+  },
+  {
+    "code": "19777",
+    "name": "Vỹ Dạ",
+    "full_name": "Phường Vỹ Dạ",
+    "type": "Phường Vỹ",
+    "district_code": "474"
+  },
+  {
+    "code": "19792",
+    "name": "Xuân Phú",
+    "full_name": "Phường Xuân Phú",
+    "type": "Phường Xuân",
+    "district_code": "474"
+  },
+  {
+    "code": "19768",
+    "name": "Đông Ba",
+    "full_name": "Phường Đông Ba",
+    "type": "Phường Đông",
+    "district_code": "474"
+  }
+]

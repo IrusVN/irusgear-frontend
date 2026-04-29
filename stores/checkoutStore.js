@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useFeGlobalStore } from "@/stores/feGlobalStore";
 import { useCartStore } from "@/stores/cartStore";
+import { vietnamAddressApi } from "@/composables/useVietnamAddressApi";
 
 // Cache provinces/districts/wards data for resolving address codes to names
 const _addressCache = {
@@ -13,22 +14,15 @@ const _addressCache = {
 
 const _loadAddressData = async () => {
   if (_addressCache.loaded) return;
-  try {
-    const res = await fetch("/data/vn-addresses/provinces.json");
-    if (res.ok) {
-      _addressCache.provinces = await res.json();
-    }
-    _addressCache.loaded = true;
-  } catch {
-    _addressCache.loaded = true;
-  }
+  _addressCache.provinces = await vietnamAddressApi.getProvinces();
+  _addressCache.loaded = true;
 };
 
 const _resolveProvince = (code) => {
   const p = _addressCache.provinces.find(
-    (pr) => String(pr.code) === String(code)
+    (pr) => String(pr.value) === String(code)
   );
-  return p ? { value: String(code), label: p.name } : { value: String(code), label: String(code) };
+  return p ? { value: String(code), label: p.label } : { value: String(code), label: String(code) };
 };
 
 const formatMoney = (value = 0) => {
@@ -392,41 +386,23 @@ export const useCheckoutStore = defineStore("checkout", () => {
       // Province — resolve từ cache
       const provinceOpt = _resolveProvince(provinceCode);
 
-      // District — load từ province file nếu có province code
+      // District — load từ API
       let districtOpt = null;
       if (districtCode && provinceCode) {
-        const key = String(provinceCode);
-        if (!_addressCache.districts[key]) {
-          try {
-            const res = await fetch(`/data/vn-addresses/districts/${provinceCode}.json`);
-            if (res.ok) {
-              _addressCache.districts[key] = await res.json();
-            }
-          } catch { /* ignore */ }
-        }
-        const districts = _addressCache.districts[key] || [];
-        const d = districts.find((dr) => String(dr.code) === String(districtCode));
+        const districts = await vietnamAddressApi.getDistricts(provinceCode);
+        const d = districts.find((dr) => String(dr.value) === String(districtCode));
         districtOpt = d
-          ? { value: String(districtCode), label: d.name }
+          ? { value: String(districtCode), label: d.label }
           : { value: String(districtCode), label: String(districtCode) };
       }
 
-      // Ward — load từ district file nếu có district code
+      // Ward — load từ API
       let wardOpt = null;
       if (wardCode && districtCode) {
-        const key = String(districtCode);
-        if (!_addressCache.wards[key]) {
-          try {
-            const res = await fetch(`/data/vn-addresses/wards/${districtCode}.json`);
-            if (res.ok) {
-              _addressCache.wards[key] = await res.json();
-            }
-          } catch { /* ignore */ }
-        }
-        const wards = _addressCache.wards[key] || [];
-        const w = wards.find((wr) => String(wr.code) === String(wardCode));
+        const wards = await vietnamAddressApi.getWards(districtCode);
+        const w = wards.find((wr) => String(wr.value) === String(wardCode));
         wardOpt = w
-          ? { value: String(wardCode), label: w.name }
+          ? { value: String(wardCode), label: w.label }
           : { value: String(wardCode), label: String(wardCode) };
       }
 

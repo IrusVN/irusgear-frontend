@@ -1,0 +1,100 @@
+[
+  {
+    "code": "01789",
+    "name": "Canh Tân",
+    "full_name": "Xã Canh Tân",
+    "type": "Xã Canh",
+    "district_code": "053"
+  },
+  {
+    "code": "01792",
+    "name": "Kim Đồng",
+    "full_name": "Xã Kim Đồng",
+    "type": "Xã Kim",
+    "district_code": "053"
+  },
+  {
+    "code": "01819",
+    "name": "Lê Lai",
+    "full_name": "Xã Lê Lai",
+    "type": "Xã Lê",
+    "district_code": "053"
+  },
+  {
+    "code": "01828",
+    "name": "Lê Lợi",
+    "full_name": "Xã Lê Lợi",
+    "type": "Xã Lê",
+    "district_code": "053"
+  },
+  {
+    "code": "01795",
+    "name": "Minh Khai",
+    "full_name": "Xã Minh Khai",
+    "type": "Xã Minh",
+    "district_code": "053"
+  },
+  {
+    "code": "01813",
+    "name": "Quang Trọng",
+    "full_name": "Xã Quang Trọng",
+    "type": "Xã Quang",
+    "district_code": "053"
+  },
+  {
+    "code": "01804",
+    "name": "Thái Cường",
+    "full_name": "Xã Thái Cường",
+    "type": "Xã Thái",
+    "district_code": "053"
+  },
+  {
+    "code": "01810",
+    "name": "Thụy Hùng",
+    "full_name": "Xã Thụy Hùng",
+    "type": "Xã Thụy",
+    "district_code": "053"
+  },
+  {
+    "code": "01816",
+    "name": "Trọng Con",
+    "full_name": "Xã Trọng Con",
+    "type": "Xã Trọng",
+    "district_code": "053"
+  },
+  {
+    "code": "01807",
+    "name": "Vân Trình",
+    "full_name": "Xã Vân Trình",
+    "type": "Xã Vân",
+    "district_code": "053"
+  },
+  {
+    "code": "01786",
+    "name": "Đông Khê",
+    "full_name": "Thị trấn Đông Khê",
+    "type": "Thị trấn Đông",
+    "district_code": "053"
+  },
+  {
+    "code": "01822",
+    "name": "Đức Long",
+    "full_name": "Xã Đức Long",
+    "type": "Xã Đức",
+    "district_code": "053"
+  },
+  {
+    "code": "01801",
+    "name": "Đức Thông",
+    "full_name": "Xã Đức Thông",
+    "type": "Xã Đức",
+    "district_code": "053"
+  },
+  {
+    "code": "01831",
+    "name": "Đức Xuân",
+    "full_name": "Xã Đức Xuân",
+    "type": "Xã Đức",
+    "district_code": "053"
+  }
+]

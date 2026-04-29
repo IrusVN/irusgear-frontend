@@ -1,0 +1,65 @@
+[
+  {
+    "code": "085",
+    "name": "Bắc Hà",
+    "full_name": "Huyện Bắc Hà",
+    "type": "Huyện Bắc",
+    "province_code": "10"
+  },
+  {
+    "code": "086",
+    "name": "Bảo Thắng",
+    "full_name": "Huyện Bảo Thắng",
+    "type": "Huyện Bảo",
+    "province_code": "10"
+  },
+  {
+    "code": "087",
+    "name": "Bảo Yên",
+    "full_name": "Huyện Bảo Yên",
+    "type": "Huyện Bảo",
+    "province_code": "10"
+  },
+  {
+    "code": "082",
+    "name": "Bát Xát",
+    "full_name": "Huyện Bát Xát",
+    "type": "Huyện Bát",
+    "province_code": "10"
+  },
+  {
+    "code": "080",
+    "name": "Lào Cai",
+    "full_name": "Thành phố Lào Cai",
+    "type": "Thành phố Lào",
+    "province_code": "10"
+  },
+  {
+    "code": "083",
+    "name": "Mường Khương",
+    "full_name": "Huyện Mường Khương",
+    "type": "Huyện Mường",
+    "province_code": "10"
+  },
+  {
+    "code": "088",
+    "name": "Sa Pa",
+    "full_name": "Thị xã Sa Pa",
+    "type": "Thị xã Sa",
+    "province_code": "10"
+  },
+  {
+    "code": "084",
+    "name": "Si Ma Cai",
+    "full_name": "Huyện Si Ma Cai",
+    "type": "Huyện Si Ma",
+    "province_code": "10"
+  },
+  {
+    "code": "089",
+    "name": "Văn Bàn",
+    "full_name": "Huyện Văn Bàn",
+    "type": "Huyện Văn",
+    "province_code": "10"
+  }
+]

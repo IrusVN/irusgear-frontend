@@ -1,0 +1,93 @@
+[
+  {
+    "code": "32110",
+    "name": "Khánh Bình",
+    "full_name": "Xã Khánh Bình",
+    "type": "Xã Khánh",
+    "district_code": "968"
+  },
+  {
+    "code": "32104",
+    "name": "Khánh Bình Tây",
+    "full_name": "Xã Khánh Bình Tây",
+    "type": "Xã Khánh Bình",
+    "district_code": "968"
+  },
+  {
+    "code": "32101",
+    "name": "Khánh Bình Tây Bắc",
+    "full_name": "Xã Khánh Bình Tây Bắc",
+    "type": "Xã Khánh Bình Tây",
+    "district_code": "968"
+  },
+  {
+    "code": "32116",
+    "name": "Khánh Bình Đông",
+    "full_name": "Xã Khánh Bình Đông",
+    "type": "Xã Khánh Bình",
+    "district_code": "968"
+  },
+  {
+    "code": "32119",
+    "name": "Khánh Hải",
+    "full_name": "Xã Khánh Hải",
+    "type": "Xã Khánh",
+    "district_code": "968"
+  },
+  {
+    "code": "32113",
+    "name": "Khánh Hưng",
+    "full_name": "Xã Khánh Hưng",
+    "type": "Xã Khánh",
+    "district_code": "968"
+  },
+  {
+    "code": "32108",
+    "name": "Khánh Lộc",
+    "full_name": "Xã Khánh Lộc",
+    "type": "Xã Khánh",
+    "district_code": "968"
+  },
+  {
+    "code": "32122",
+    "name": "Lợi An",
+    "full_name": "Xã Lợi An",
+    "type": "Xã Lợi",
+    "district_code": "968"
+  },
+  {
+    "code": "32125",
+    "name": "Phong Lạc",
+    "full_name": "Xã Phong Lạc",
+    "type": "Xã Phong",
+    "district_code": "968"
+  },
+  {
+    "code": "32124",
+    "name": "Phong Điền",
+    "full_name": "Xã Phong Điền",
+    "type": "Xã Phong",
+    "district_code": "968"
+  },
+  {
+    "code": "32098",
+    "name": "Sông Đốc",
+    "full_name": "Thị trấn Sông Đốc",
+    "type": "Thị trấn Sông",
+    "district_code": "968"
+  },
+  {
+    "code": "32107",
+    "name": "Trần Hợi",
+    "full_name": "Xã Trần Hợi",
+    "type": "Xã Trần",
+    "district_code": "968"
+  },
+  {
+    "code": "32095",
+    "name": "Trần Văn Thời",
+    "full_name": "Thị trấn Trần Văn Thời",
+    "type": "Thị trấn Trần Văn",
+    "district_code": "968"
+  }
+]

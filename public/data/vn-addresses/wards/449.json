@@ -1,0 +1,79 @@
+[
+  {
+    "code": "18754",
+    "name": "Hưng Trí",
+    "full_name": "Phường Hưng Trí",
+    "type": "Phường Hưng",
+    "district_code": "449"
+  },
+  {
+    "code": "18808",
+    "name": "Kỳ Hà",
+    "full_name": "Xã Kỳ Hà",
+    "type": "Xã Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18829",
+    "name": "Kỳ Hoa",
+    "full_name": "Xã Kỳ Hoa",
+    "type": "Xã Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18841",
+    "name": "Kỳ Liên",
+    "full_name": "Phường Kỳ Liên",
+    "type": "Phường Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18796",
+    "name": "Kỳ Lợi",
+    "full_name": "Xã Kỳ Lợi",
+    "type": "Xã Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18835",
+    "name": "Kỳ Long",
+    "full_name": "Phường Kỳ Long",
+    "type": "Phường Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18847",
+    "name": "Kỳ Nam",
+    "full_name": "Xã Kỳ Nam",
+    "type": "Xã Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18781",
+    "name": "Kỳ Ninh",
+    "full_name": "Xã Kỳ Ninh",
+    "type": "Xã Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18832",
+    "name": "Kỳ Phương",
+    "full_name": "Phường Kỳ Phương",
+    "type": "Phường Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18823",
+    "name": "Kỳ Thịnh",
+    "full_name": "Phường Kỳ Thịnh",
+    "type": "Phường Kỳ",
+    "district_code": "449"
+  },
+  {
+    "code": "18820",
+    "name": "Kỳ Trinh",
+    "full_name": "Phường Kỳ Trinh",
+    "type": "Phường Kỳ",
+    "district_code": "449"
+  }
+]

@@ -1,0 +1,100 @@
+[
+  {
+    "code": "09499",
+    "name": "An Thịnh",
+    "full_name": "Xã An Thịnh",
+    "type": "Xã An",
+    "district_code": "264"
+  },
+  {
+    "code": "09529",
+    "name": "Bình Định",
+    "full_name": "Xã Bình Định",
+    "type": "Xã Bình",
+    "district_code": "264"
+  },
+  {
+    "code": "09520",
+    "name": "Lai Hạ",
+    "full_name": "Xã Lai Hạ",
+    "type": "Xã Lai",
+    "district_code": "264"
+  },
+  {
+    "code": "09535",
+    "name": "Lâm Thao",
+    "full_name": "Xã Lâm Thao",
+    "type": "Xã Lâm",
+    "district_code": "264"
+  },
+  {
+    "code": "09526",
+    "name": "Minh Tân",
+    "full_name": "Xã Minh Tân",
+    "type": "Xã Minh",
+    "district_code": "264"
+  },
+  {
+    "code": "09508",
+    "name": "Mỹ Hương",
+    "full_name": "Xã Mỹ Hương",
+    "type": "Xã Mỹ",
+    "district_code": "264"
+  },
+  {
+    "code": "09505",
+    "name": "Phú Hòa",
+    "full_name": "Xã Phú Hòa",
+    "type": "Xã Phú",
+    "district_code": "264"
+  },
+  {
+    "code": "09532",
+    "name": "Phú Lương",
+    "full_name": "Xã Phú Lương",
+    "type": "Xã Phú",
+    "district_code": "264"
+  },
+  {
+    "code": "09514",
+    "name": "Quảng Phú",
+    "full_name": "Xã Quảng Phú",
+    "type": "Xã Quảng",
+    "district_code": "264"
+  },
+  {
+    "code": "09511",
+    "name": "Tân Lãng",
+    "full_name": "Xã Tân Lãng",
+    "type": "Xã Tân",
+    "district_code": "264"
+  },
+  {
+    "code": "09496",
+    "name": "Thứa",
+    "full_name": "Thị trấn Thứa",
+    "type": "Thị trấn",
+    "district_code": "264"
+  },
+  {
+    "code": "09523",
+    "name": "Trung Chính",
+    "full_name": "Xã Trung Chính",
+    "type": "Xã Trung",
+    "district_code": "264"
+  },
+  {
+    "code": "09502",
+    "name": "Trung Kênh",
+    "full_name": "Xã Trung Kênh",
+    "type": "Xã Trung",
+    "district_code": "264"
+  },
+  {
+    "code": "09517",
+    "name": "Trừng Xá",
+    "full_name": "Xã Trừng Xá",
+    "type": "Xã Trừng",
+    "district_code": "264"
+  }
+]

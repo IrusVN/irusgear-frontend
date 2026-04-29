@@ -1,0 +1,72 @@
+[
+  {
+    "code": "01876",
+    "name": "An Thắng",
+    "full_name": "Xã An Thắng",
+    "type": "Xã An",
+    "district_code": "060"
+  },
+  {
+    "code": "01858",
+    "name": "Bằng Thành",
+    "full_name": "Xã Bằng Thành",
+    "type": "Xã Bằng",
+    "district_code": "060"
+  },
+  {
+    "code": "01864",
+    "name": "Bộc Bố",
+    "full_name": "Xã Bộc Bố",
+    "type": "Xã Bộc",
+    "district_code": "060"
+  },
+  {
+    "code": "01885",
+    "name": "Cao Tân",
+    "full_name": "Xã Cao Tân",
+    "type": "Xã Cao",
+    "district_code": "060"
+  },
+  {
+    "code": "01879",
+    "name": "Cổ Linh",
+    "full_name": "Xã Cổ Linh",
+    "type": "Xã Cổ",
+    "district_code": "060"
+  },
+  {
+    "code": "01867",
+    "name": "Công Bằng",
+    "full_name": "Xã Công Bằng",
+    "type": "Xã Công",
+    "district_code": "060"
+  },
+  {
+    "code": "01870",
+    "name": "Giáo Hiệu",
+    "full_name": "Xã Giáo Hiệu",
+    "type": "Xã Giáo",
+    "district_code": "060"
+  },
+  {
+    "code": "01882",
+    "name": "Nghiên Loan",
+    "full_name": "Xã Nghiên Loan",
+    "type": "Xã Nghiên",
+    "district_code": "060"
+  },
+  {
+    "code": "01861",
+    "name": "Nhạn Môn",
+    "full_name": "Xã Nhạn Môn",
+    "type": "Xã Nhạn",
+    "district_code": "060"
+  },
+  {
+    "code": "01873",
+    "name": "Xuân La",
+    "full_name": "Xã Xuân La",
+    "type": "Xã Xuân",
+    "district_code": "060"
+  }
+]

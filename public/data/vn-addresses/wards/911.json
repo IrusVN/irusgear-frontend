@@ -1,0 +1,65 @@
+[
+  {
+    "code": "31081",
+    "name": "An Thới",
+    "full_name": "Phường An Thới",
+    "type": "Phường An",
+    "district_code": "911"
+  },
+  {
+    "code": "31102",
+    "name": "Bãi Thơm",
+    "full_name": "Xã Bãi Thơm",
+    "type": "Xã Bãi",
+    "district_code": "911"
+  },
+  {
+    "code": "31084",
+    "name": "Cửa Cạn",
+    "full_name": "Xã Cửa Cạn",
+    "type": "Xã Cửa",
+    "district_code": "911"
+  },
+  {
+    "code": "31090",
+    "name": "Cửa Dương",
+    "full_name": "Xã Cửa Dương",
+    "type": "Xã Cửa",
+    "district_code": "911"
+  },
+  {
+    "code": "31096",
+    "name": "Dương Tơ",
+    "full_name": "Xã Dương Tơ",
+    "type": "Xã Dương",
+    "district_code": "911"
+  },
+  {
+    "code": "31078",
+    "name": "Dương Đông",
+    "full_name": "Phường Dương Đông",
+    "type": "Phường Dương",
+    "district_code": "911"
+  },
+  {
+    "code": "31087",
+    "name": "Gành Dầu",
+    "full_name": "Xã Gành Dầu",
+    "type": "Xã Gành",
+    "district_code": "911"
+  },
+  {
+    "code": "31093",
+    "name": "Hàm Ninh",
+    "full_name": "Xã Hàm Ninh",
+    "type": "Xã Hàm",
+    "district_code": "911"
+  },
+  {
+    "code": "31105",
+    "name": "Thổ Châu",
+    "full_name": "Xã Thổ Châu",
+    "type": "Xã Thổ",
+    "district_code": "911"
+  }
+]

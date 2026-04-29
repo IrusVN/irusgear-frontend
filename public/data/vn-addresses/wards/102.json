@@ -1,0 +1,72 @@
+[
+  {
+    "code": "03310",
+    "name": "Ẳng Cang",
+    "full_name": "Xã Ẳng Cang",
+    "type": "Xã Ẳng",
+    "district_code": "102"
+  },
+  {
+    "code": "03307",
+    "name": "Ẳng Nưa",
+    "full_name": "Xã Ẳng Nưa",
+    "type": "Xã Ẳng",
+    "district_code": "102"
+  },
+  {
+    "code": "03292",
+    "name": "Ẳng Tở",
+    "full_name": "Xã Ẳng Tở",
+    "type": "Xã Ẳng",
+    "district_code": "102"
+  },
+  {
+    "code": "03301",
+    "name": "Búng Lao",
+    "full_name": "Xã Búng Lao",
+    "type": "Xã Búng",
+    "district_code": "102"
+  },
+  {
+    "code": "03256",
+    "name": "Mường Ảng",
+    "full_name": "Thị trấn Mường Ảng",
+    "type": "Thị trấn Mường",
+    "district_code": "102"
+  },
+  {
+    "code": "03313",
+    "name": "Mường Lạn",
+    "full_name": "Xã Mường Lạn",
+    "type": "Xã Mường",
+    "district_code": "102"
+  },
+  {
+    "code": "03286",
+    "name": "Mường Đăng",
+    "full_name": "Xã Mường Đăng",
+    "type": "Xã Mường",
+    "district_code": "102"
+  },
+  {
+    "code": "03312",
+    "name": "Nặm Lịch",
+    "full_name": "Xã Nặm Lịch",
+    "type": "Xã Nặm",
+    "district_code": "102"
+  },
+  {
+    "code": "03287",
+    "name": "Ngối Cáy",
+    "full_name": "Xã Ngối Cáy",
+    "type": "Xã Ngối",
+    "district_code": "102"
+  },
+  {
+    "code": "03302",
+    "name": "Xuân Lao",
+    "full_name": "Xã Xuân Lao",
+    "type": "Xã Xuân",
+    "district_code": "102"
+  }
+]

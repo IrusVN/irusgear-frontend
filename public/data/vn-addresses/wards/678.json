@@ -1,0 +1,107 @@
+[
+  {
+    "code": "24970",
+    "name": "Bình Thạnh",
+    "full_name": "Xã Bình Thạnh",
+    "type": "Xã Bình",
+    "district_code": "678"
+  },
+  {
+    "code": "24961",
+    "name": "Hiệp An",
+    "full_name": "Xã Hiệp An",
+    "type": "Xã Hiệp",
+    "district_code": "678"
+  },
+  {
+    "code": "24967",
+    "name": "Hiệp Thạnh",
+    "full_name": "Xã Hiệp Thạnh",
+    "type": "Xã Hiệp",
+    "district_code": "678"
+  },
+  {
+    "code": "24964",
+    "name": "Liên Hiệp",
+    "full_name": "Xã Liên Hiệp",
+    "type": "Xã Liên",
+    "district_code": "678"
+  },
+  {
+    "code": "24958",
+    "name": "Liên Nghĩa",
+    "full_name": "Thị trấn Liên Nghĩa",
+    "type": "Thị trấn Liên",
+    "district_code": "678"
+  },
+  {
+    "code": "24973",
+    "name": "N'Thol Hạ",
+    "full_name": "Xã N'Thol Hạ",
+    "type": "Xã N'Thol",
+    "district_code": "678"
+  },
+  {
+    "code": "24985",
+    "name": "Ninh Gia",
+    "full_name": "Xã Ninh Gia",
+    "type": "Xã Ninh",
+    "district_code": "678"
+  },
+  {
+    "code": "24997",
+    "name": "Ninh Loan",
+    "full_name": "Xã Ninh Loan",
+    "type": "Xã Ninh",
+    "district_code": "678"
+  },
+  {
+    "code": "24982",
+    "name": "Phú Hội",
+    "full_name": "Xã Phú Hội",
+    "type": "Xã Phú",
+    "district_code": "678"
+  },
+  {
+    "code": "24991",
+    "name": "Tà Hine",
+    "full_name": "Xã Tà Hine",
+    "type": "Xã Tà",
+    "district_code": "678"
+  },
+  {
+    "code": "24988",
+    "name": "Tà Năng",
+    "full_name": "Xã Tà Năng",
+    "type": "Xã Tà",
+    "district_code": "678"
+  },
+  {
+    "code": "24976",
+    "name": "Tân Hội",
+    "full_name": "Xã Tân Hội",
+    "type": "Xã Tân",
+    "district_code": "678"
+  },
+  {
+    "code": "24979",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "678"
+  },
+  {
+    "code": "24994",
+    "name": "Đà Loan",
+    "full_name": "Xã Đà Loan",
+    "type": "Xã Đà",
+    "district_code": "678"
+  },
+  {
+    "code": "24989",
+    "name": "Đa Quyn",
+    "full_name": "Xã Đa Quyn",
+    "type": "Xã Đa",
+    "district_code": "678"
+  }
+]

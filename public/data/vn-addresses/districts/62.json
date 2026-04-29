@@ -1,0 +1,72 @@
+[
+  {
+    "code": "618",
+    "name": "Ia H' Drai",
+    "full_name": "Huyện Ia H' Drai",
+    "type": "Huyện Ia H'",
+    "province_code": "62"
+  },
+  {
+    "code": "613",
+    "name": "Kon Plông",
+    "full_name": "Huyện Kon Plông",
+    "type": "Huyện Kon",
+    "province_code": "62"
+  },
+  {
+    "code": "614",
+    "name": "Kon Rẫy",
+    "full_name": "Huyện Kon Rẫy",
+    "type": "Huyện Kon",
+    "province_code": "62"
+  },
+  {
+    "code": "608",
+    "name": "Kon Tum",
+    "full_name": "Thành phố Kon Tum",
+    "type": "Thành phố Kon",
+    "province_code": "62"
+  },
+  {
+    "code": "611",
+    "name": "Ngọc Hồi",
+    "full_name": "Huyện Ngọc Hồi",
+    "type": "Huyện Ngọc",
+    "province_code": "62"
+  },
+  {
+    "code": "616",
+    "name": "Sa Thầy",
+    "full_name": "Huyện Sa Thầy",
+    "type": "Huyện Sa",
+    "province_code": "62"
+  },
+  {
+    "code": "617",
+    "name": "Tu Mơ Rông",
+    "full_name": "Huyện Tu Mơ Rông",
+    "type": "Huyện Tu Mơ",
+    "province_code": "62"
+  },
+  {
+    "code": "610",
+    "name": "Đắk Glei",
+    "full_name": "Huyện Đắk Glei",
+    "type": "Huyện Đắk",
+    "province_code": "62"
+  },
+  {
+    "code": "615",
+    "name": "Đắk Hà",
+    "full_name": "Huyện Đắk Hà",
+    "type": "Huyện Đắk",
+    "province_code": "62"
+  },
+  {
+    "code": "612",
+    "name": "Đắk Tô",
+    "full_name": "Huyện Đắk Tô",
+    "type": "Huyện Đắk",
+    "province_code": "62"
+  }
+]

@@ -1,0 +1,261 @@
+[
+  {
+    "code": "11533",
+    "name": "An Lư",
+    "full_name": "Xã An Lư",
+    "type": "Xã An",
+    "district_code": "311"
+  },
+  {
+    "code": "11479",
+    "name": "An Sơn",
+    "full_name": "Xã An Sơn",
+    "type": "Xã An",
+    "district_code": "311"
+  },
+  {
+    "code": "11518",
+    "name": "Cao Nhân",
+    "full_name": "Xã Cao Nhân",
+    "type": "Xã Cao",
+    "district_code": "311"
+  },
+  {
+    "code": "11509",
+    "name": "Chính Mỹ",
+    "full_name": "Xã Chính Mỹ",
+    "type": "Xã Chính",
+    "district_code": "311"
+  },
+  {
+    "code": "11578",
+    "name": "Dương Quan",
+    "full_name": "Xã Dương Quan",
+    "type": "Xã Dương",
+    "district_code": "311"
+  },
+  {
+    "code": "11494",
+    "name": "Gia Minh",
+    "full_name": "Xã Gia Minh",
+    "type": "Xã Gia",
+    "district_code": "311"
+  },
+  {
+    "code": "11497",
+    "name": "Gia Đức",
+    "full_name": "Xã Gia Đức",
+    "type": "Xã Gia",
+    "district_code": "311"
+  },
+  {
+    "code": "11527",
+    "name": "Hoà Bình",
+    "full_name": "Xã Hoà Bình",
+    "type": "Xã Hoà",
+    "district_code": "311"
+  },
+  {
+    "code": "11572",
+    "name": "Hoa Động",
+    "full_name": "Xã Hoa Động",
+    "type": "Xã Hoa",
+    "district_code": "311"
+  },
+  {
+    "code": "11566",
+    "name": "Hoàng Động",
+    "full_name": "Xã Hoàng Động",
+    "type": "Xã Hoàng",
+    "district_code": "311"
+  },
+  {
+    "code": "11515",
+    "name": "Hợp Thành",
+    "full_name": "Xã Hợp Thành",
+    "type": "Xã Hợp",
+    "district_code": "311"
+  },
+  {
+    "code": "11512",
+    "name": "Kênh Giang",
+    "full_name": "Xã Kênh Giang",
+    "type": "Xã Kênh",
+    "district_code": "311"
+  },
+  {
+    "code": "11554",
+    "name": "Kiền Bái",
+    "full_name": "Xã Kiền Bái",
+    "type": "Xã Kiền",
+    "district_code": "311"
+  },
+  {
+    "code": "11482",
+    "name": "Kỳ Sơn",
+    "full_name": "Xã Kỳ Sơn",
+    "type": "Xã Kỳ",
+    "district_code": "311"
+  },
+  {
+    "code": "11476",
+    "name": "Lại Xuân",
+    "full_name": "Xã Lại Xuân",
+    "type": "Xã Lại",
+    "district_code": "311"
+  },
+  {
+    "code": "11569",
+    "name": "Lâm Động",
+    "full_name": "Xã Lâm Động",
+    "type": "Xã Lâm",
+    "district_code": "311"
+  },
+  {
+    "code": "11551",
+    "name": "Lập Lễ",
+    "full_name": "Xã Lập Lễ",
+    "type": "Xã Lập",
+    "district_code": "311"
+  },
+  {
+    "code": "11485",
+    "name": "Liên Khê",
+    "full_name": "Xã Liên Khê",
+    "type": "Xã Liên",
+    "district_code": "311"
+  },
+  {
+    "code": "11488",
+    "name": "Lưu Kiếm",
+    "full_name": "Xã Lưu Kiếm",
+    "type": "Xã Lưu",
+    "district_code": "311"
+  },
+  {
+    "code": "11491",
+    "name": "Lưu Kỳ",
+    "full_name": "Xã Lưu Kỳ",
+    "type": "Xã Lưu",
+    "district_code": "311"
+  },
+  {
+    "code": "11500",
+    "name": "Minh Tân",
+    "full_name": "Xã Minh Tân",
+    "type": "Xã Minh",
+    "district_code": "311"
+  },
+  {
+    "code": "11473",
+    "name": "Minh Đức",
+    "full_name": "Thị trấn Minh Đức",
+    "type": "Thị trấn Minh",
+    "district_code": "311"
+  },
+  {
+    "code": "11521",
+    "name": "Mỹ Đồng",
+    "full_name": "Xã Mỹ Đồng",
+    "type": "Xã Mỹ",
+    "district_code": "311"
+  },
+  {
+    "code": "11539",
+    "name": "Ngũ Lão",
+    "full_name": "Xã Ngũ Lão",
+    "type": "Xã Ngũ",
+    "district_code": "311"
+  },
+  {
+    "code": "11470",
+    "name": "Núi Đèo",
+    "full_name": "Thị trấn Núi Đèo",
+    "type": "Thị trấn Núi",
+    "district_code": "311"
+  },
+  {
+    "code": "11548",
+    "name": "Phả Lễ",
+    "full_name": "Xã Phả Lễ",
+    "type": "Xã Phả",
+    "district_code": "311"
+  },
+  {
+    "code": "11503",
+    "name": "Phù Ninh",
+    "full_name": "Xã Phù Ninh",
+    "type": "Xã Phù",
+    "district_code": "311"
+  },
+  {
+    "code": "11542",
+    "name": "Phục Lễ",
+    "full_name": "Xã Phục Lễ",
+    "type": "Xã Phục",
+    "district_code": "311"
+  },
+  {
+    "code": "11506",
+    "name": "Quảng Thanh",
+    "full_name": "Xã Quảng Thanh",
+    "type": "Xã Quảng",
+    "district_code": "311"
+  },
+  {
+    "code": "11545",
+    "name": "Tam Hưng",
+    "full_name": "Xã Tam Hưng",
+    "type": "Xã Tam",
+    "district_code": "311"
+  },
+  {
+    "code": "11575",
+    "name": "Tân Dương",
+    "full_name": "Xã Tân Dương",
+    "type": "Xã Tân",
+    "district_code": "311"
+  },
+  {
+    "code": "11557",
+    "name": "Thiên Hương",
+    "full_name": "Xã Thiên Hương",
+    "type": "Xã Thiên",
+    "district_code": "311"
+  },
+  {
+    "code": "11560",
+    "name": "Thuỷ Sơn",
+    "full_name": "Xã Thuỷ Sơn",
+    "type": "Xã Thuỷ",
+    "district_code": "311"
+  },
+  {
+    "code": "11536",
+    "name": "Thuỷ Triều",
+    "full_name": "Xã Thuỷ Triều",
+    "type": "Xã Thuỷ",
+    "district_code": "311"
+  },
+  {
+    "code": "11563",
+    "name": "Thuỷ Đường",
+    "full_name": "Xã Thuỷ Đường",
+    "type": "Xã Thuỷ",
+    "district_code": "311"
+  },
+  {
+    "code": "11530",
+    "name": "Trung Hà",
+    "full_name": "Xã Trung Hà",
+    "type": "Xã Trung",
+    "district_code": "311"
+  },
+  {
+    "code": "11524",
+    "name": "Đông Sơn",
+    "full_name": "Xã Đông Sơn",
+    "type": "Xã Đông",
+    "district_code": "311"
+  }
+]

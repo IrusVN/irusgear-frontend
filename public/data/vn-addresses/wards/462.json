@@ -1,0 +1,37 @@
+[
+  {
+    "code": "19357",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "462"
+  },
+  {
+    "code": "19360",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "462"
+  },
+  {
+    "code": "19361",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "462"
+  },
+  {
+    "code": "19358",
+    "name": "An Đôn",
+    "full_name": "Phường An Đôn",
+    "type": "Phường An",
+    "district_code": "462"
+  },
+  {
+    "code": "19705",
+    "name": "Hải Lệ",
+    "full_name": "Xã Hải Lệ",
+    "type": "Xã Hải",
+    "district_code": "462"
+  }
+]

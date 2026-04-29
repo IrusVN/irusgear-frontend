@@ -1,0 +1,191 @@
+[
+  {
+    "code": "386",
+    "name": "Bá Thước",
+    "full_name": "Huyện Bá Thước",
+    "type": "Huyện Bá",
+    "province_code": "38"
+  },
+  {
+    "code": "381",
+    "name": "Bỉm Sơn",
+    "full_name": "Thị xã Bỉm Sơn",
+    "type": "Thị xã Bỉm",
+    "province_code": "38"
+  },
+  {
+    "code": "390",
+    "name": "Cẩm Thủy",
+    "full_name": "Huyện Cẩm Thủy",
+    "type": "Huyện Cẩm",
+    "province_code": "38"
+  },
+  {
+    "code": "392",
+    "name": "Hà Trung",
+    "full_name": "Huyện Hà Trung",
+    "type": "Huyện Hà",
+    "province_code": "38"
+  },
+  {
+    "code": "400",
+    "name": "Hậu Lộc",
+    "full_name": "Huyện Hậu Lộc",
+    "type": "Huyện Hậu",
+    "province_code": "38"
+  },
+  {
+    "code": "399",
+    "name": "Hoằng Hóa",
+    "full_name": "Huyện Hoằng Hóa",
+    "type": "Huyện Hoằng",
+    "province_code": "38"
+  },
+  {
+    "code": "388",
+    "name": "Lang Chánh",
+    "full_name": "Huyện Lang Chánh",
+    "type": "Huyện Lang",
+    "province_code": "38"
+  },
+  {
+    "code": "384",
+    "name": "Mường Lát",
+    "full_name": "Huyện Mường Lát",
+    "type": "Huyện Mường",
+    "province_code": "38"
+  },
+  {
+    "code": "401",
+    "name": "Nga Sơn",
+    "full_name": "Huyện Nga Sơn",
+    "type": "Huyện Nga",
+    "province_code": "38"
+  },
+  {
+    "code": "407",
+    "name": "Nghi Sơn",
+    "full_name": "Thị xã Nghi Sơn",
+    "type": "Thị xã Nghi",
+    "province_code": "38"
+  },
+  {
+    "code": "389",
+    "name": "Ngọc Lặc",
+    "full_name": "Huyện Ngọc Lặc",
+    "type": "Huyện Ngọc",
+    "province_code": "38"
+  },
+  {
+    "code": "403",
+    "name": "Như Thanh",
+    "full_name": "Huyện Như Thanh",
+    "type": "Huyện Như",
+    "province_code": "38"
+  },
+  {
+    "code": "402",
+    "name": "Như Xuân",
+    "full_name": "Huyện Như Xuân",
+    "type": "Huyện Như",
+    "province_code": "38"
+  },
+  {
+    "code": "404",
+    "name": "Nông Cống",
+    "full_name": "Huyện Nông Cống",
+    "type": "Huyện Nông",
+    "province_code": "38"
+  },
+  {
+    "code": "385",
+    "name": "Quan Hóa",
+    "full_name": "Huyện Quan Hóa",
+    "type": "Huyện Quan",
+    "province_code": "38"
+  },
+  {
+    "code": "387",
+    "name": "Quan Sơn",
+    "full_name": "Huyện Quan Sơn",
+    "type": "Huyện Quan",
+    "province_code": "38"
+  },
+  {
+    "code": "406",
+    "name": "Quảng Xương",
+    "full_name": "Huyện Quảng Xương",
+    "type": "Huyện Quảng",
+    "province_code": "38"
+  },
+  {
+    "code": "382",
+    "name": "Sầm Sơn",
+    "full_name": "Thành phố Sầm Sơn",
+    "type": "Thành phố Sầm",
+    "province_code": "38"
+  },
+  {
+    "code": "391",
+    "name": "Thạch Thành",
+    "full_name": "Huyện Thạch Thành",
+    "type": "Huyện Thạch",
+    "province_code": "38"
+  },
+  {
+    "code": "380",
+    "name": "Thanh Hóa",
+    "full_name": "Thành phố Thanh Hóa",
+    "type": "Thành phố Thanh",
+    "province_code": "38"
+  },
+  {
+    "code": "398",
+    "name": "Thiệu Hóa",
+    "full_name": "Huyện Thiệu Hóa",
+    "type": "Huyện Thiệu",
+    "province_code": "38"
+  },
+  {
+    "code": "395",
+    "name": "Thọ Xuân",
+    "full_name": "Huyện Thọ Xuân",
+    "type": "Huyện Thọ",
+    "province_code": "38"
+  },
+  {
+    "code": "396",
+    "name": "Thường Xuân",
+    "full_name": "Huyện Thường Xuân",
+    "type": "Huyện Thường",
+    "province_code": "38"
+  },
+  {
+    "code": "397",
+    "name": "Triệu Sơn",
+    "full_name": "Huyện Triệu Sơn",
+    "type": "Huyện Triệu",
+    "province_code": "38"
+  },
+  {
+    "code": "393",
+    "name": "Vĩnh Lộc",
+    "full_name": "Huyện Vĩnh Lộc",
+    "type": "Huyện Vĩnh",
+    "province_code": "38"
+  },
+  {
+    "code": "394",
+    "name": "Yên Định",
+    "full_name": "Huyện Yên Định",
+    "type": "Huyện Yên",
+    "province_code": "38"
+  },
+  {
+    "code": "405",
+    "name": "Đông Sơn",
+    "full_name": "Huyện Đông Sơn",
+    "type": "Huyện Đông",
+    "province_code": "38"
+  }
+]

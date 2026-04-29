@@ -1,0 +1,51 @@
+[
+  {
+    "code": "06838",
+    "name": "Bình Liêu",
+    "full_name": "Thị trấn Bình Liêu",
+    "type": "Thị trấn Bình",
+    "district_code": "198"
+  },
+  {
+    "code": "06841",
+    "name": "Hoành Mô",
+    "full_name": "Xã Hoành Mô",
+    "type": "Xã Hoành",
+    "district_code": "198"
+  },
+  {
+    "code": "06859",
+    "name": "Húc Động",
+    "full_name": "Xã Húc Động",
+    "type": "Xã Húc",
+    "district_code": "198"
+  },
+  {
+    "code": "06856",
+    "name": "Lục Hồn",
+    "full_name": "Xã Lục Hồn",
+    "type": "Xã Lục",
+    "district_code": "198"
+  },
+  {
+    "code": "06853",
+    "name": "Vô Ngại",
+    "full_name": "Xã Vô Ngại",
+    "type": "Xã Vô",
+    "district_code": "198"
+  },
+  {
+    "code": "06844",
+    "name": "Đồng Tâm",
+    "full_name": "Xã Đồng Tâm",
+    "type": "Xã Đồng",
+    "district_code": "198"
+  },
+  {
+    "code": "06847",
+    "name": "Đồng Văn",
+    "full_name": "Xã Đồng Văn",
+    "type": "Xã Đồng",
+    "district_code": "198"
+  }
+]

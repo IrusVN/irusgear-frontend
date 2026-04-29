@@ -1,0 +1,184 @@
+[
+  {
+    "code": "00403",
+    "name": "Bắc Phú",
+    "full_name": "Xã Bắc Phú",
+    "type": "Xã Bắc",
+    "district_code": "016"
+  },
+  {
+    "code": "00379",
+    "name": "Bắc Sơn",
+    "full_name": "Xã Bắc Sơn",
+    "type": "Xã Bắc",
+    "district_code": "016"
+  },
+  {
+    "code": "00412",
+    "name": "Hiền Ninh",
+    "full_name": "Xã Hiền Ninh",
+    "type": "Xã Hiền",
+    "district_code": "016"
+  },
+  {
+    "code": "00385",
+    "name": "Hồng Kỳ",
+    "full_name": "Xã Hồng Kỳ",
+    "type": "Xã Hồng",
+    "district_code": "016"
+  },
+  {
+    "code": "00439",
+    "name": "Kim Lũ",
+    "full_name": "Xã Kim Lũ",
+    "type": "Xã Kim",
+    "district_code": "016"
+  },
+  {
+    "code": "00427",
+    "name": "Mai Đình",
+    "full_name": "Xã Mai Đình",
+    "type": "Xã Mai",
+    "district_code": "016"
+  },
+  {
+    "code": "00397",
+    "name": "Minh Phú",
+    "full_name": "Xã Minh Phú",
+    "type": "Xã Minh",
+    "district_code": "016"
+  },
+  {
+    "code": "00382",
+    "name": "Minh Trí",
+    "full_name": "Xã Minh Trí",
+    "type": "Xã Minh",
+    "district_code": "016"
+  },
+  {
+    "code": "00388",
+    "name": "Nam Sơn",
+    "full_name": "Xã Nam Sơn",
+    "type": "Xã Nam",
+    "district_code": "016"
+  },
+  {
+    "code": "00442",
+    "name": "Phú Cường",
+    "full_name": "Xã Phú Cường",
+    "type": "Xã Phú",
+    "district_code": "016"
+  },
+  {
+    "code": "00400",
+    "name": "Phù Linh",
+    "full_name": "Xã Phù Linh",
+    "type": "Xã Phù",
+    "district_code": "016"
+  },
+  {
+    "code": "00448",
+    "name": "Phù Lỗ",
+    "full_name": "Xã Phù Lỗ",
+    "type": "Xã Phù",
+    "district_code": "016"
+  },
+  {
+    "code": "00445",
+    "name": "Phú Minh",
+    "full_name": "Xã Phú Minh",
+    "type": "Xã Phú",
+    "district_code": "016"
+  },
+  {
+    "code": "00409",
+    "name": "Quang Tiến",
+    "full_name": "Xã Quang Tiến",
+    "type": "Xã Quang",
+    "district_code": "016"
+  },
+  {
+    "code": "00376",
+    "name": "Sóc Sơn",
+    "full_name": "Thị trấn Sóc Sơn",
+    "type": "Thị trấn Sóc",
+    "district_code": "016"
+  },
+  {
+    "code": "00415",
+    "name": "Tân Dân",
+    "full_name": "Xã Tân Dân",
+    "type": "Xã Tân",
+    "district_code": "016"
+  },
+  {
+    "code": "00394",
+    "name": "Tân Hưng",
+    "full_name": "Xã Tân Hưng",
+    "type": "Xã Tân",
+    "district_code": "016"
+  },
+  {
+    "code": "00406",
+    "name": "Tân Minh",
+    "full_name": "Xã Tân Minh",
+    "type": "Xã Tân",
+    "district_code": "016"
+  },
+  {
+    "code": "00433",
+    "name": "Thanh Xuân",
+    "full_name": "Xã Thanh Xuân",
+    "type": "Xã Thanh",
+    "district_code": "016"
+  },
+  {
+    "code": "00418",
+    "name": "Tiên Dược",
+    "full_name": "Xã Tiên Dược",
+    "type": "Xã Tiên",
+    "district_code": "016"
+  },
+  {
+    "code": "00391",
+    "name": "Trung Giã",
+    "full_name": "Xã Trung Giã",
+    "type": "Xã Trung",
+    "district_code": "016"
+  },
+  {
+    "code": "00421",
+    "name": "Việt Long",
+    "full_name": "Xã Việt Long",
+    "type": "Xã Việt",
+    "district_code": "016"
+  },
+  {
+    "code": "00424",
+    "name": "Xuân Giang",
+    "full_name": "Xã Xuân Giang",
+    "type": "Xã Xuân",
+    "district_code": "016"
+  },
+  {
+    "code": "00451",
+    "name": "Xuân Thu",
+    "full_name": "Xã Xuân Thu",
+    "type": "Xã Xuân",
+    "district_code": "016"
+  },
+  {
+    "code": "00436",
+    "name": "Đông Xuân",
+    "full_name": "Xã Đông Xuân",
+    "type": "Xã Đông",
+    "district_code": "016"
+  },
+  {
+    "code": "00430",
+    "name": "Đức Hoà",
+    "full_name": "Xã Đức Hoà",
+    "type": "Xã Đức",
+    "district_code": "016"
+  }
+]

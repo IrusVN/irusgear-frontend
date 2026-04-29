@@ -1,0 +1,23 @@
+[
+  {
+    "code": "07192",
+    "name": "Cô Tô",
+    "full_name": "Thị trấn Cô Tô",
+    "type": "Thị trấn Cô",
+    "district_code": "207"
+  },
+  {
+    "code": "07198",
+    "name": "Thanh Lân",
+    "full_name": "Xã Thanh Lân",
+    "type": "Xã Thanh",
+    "district_code": "207"
+  },
+  {
+    "code": "07195",
+    "name": "Đồng Tiến",
+    "full_name": "Xã Đồng Tiến",
+    "type": "Xã Đồng",
+    "district_code": "207"
+  }
+]

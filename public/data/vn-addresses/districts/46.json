@@ -1,0 +1,65 @@
+[
+  {
+    "code": "481",
+    "name": "A Lưới",
+    "full_name": "Huyện A Lưới",
+    "type": "Huyện A",
+    "province_code": "46"
+  },
+  {
+    "code": "474",
+    "name": "Huế",
+    "full_name": "Thành phố Huế",
+    "type": "Thành phố",
+    "province_code": "46"
+  },
+  {
+    "code": "479",
+    "name": "Hương Thủy",
+    "full_name": "Thị xã Hương Thủy",
+    "type": "Thị xã Hương",
+    "province_code": "46"
+  },
+  {
+    "code": "480",
+    "name": "Hương Trà",
+    "full_name": "Thị xã Hương Trà",
+    "type": "Thị xã Hương",
+    "province_code": "46"
+  },
+  {
+    "code": "483",
+    "name": "Nam Đông",
+    "full_name": "Huyện Nam Đông",
+    "type": "Huyện Nam",
+    "province_code": "46"
+  },
+  {
+    "code": "476",
+    "name": "Phong Điền",
+    "full_name": "Huyện Phong Điền",
+    "type": "Huyện Phong",
+    "province_code": "46"
+  },
+  {
+    "code": "482",
+    "name": "Phú Lộc",
+    "full_name": "Huyện Phú Lộc",
+    "type": "Huyện Phú",
+    "province_code": "46"
+  },
+  {
+    "code": "478",
+    "name": "Phú Vang",
+    "full_name": "Huyện Phú Vang",
+    "type": "Huyện Phú",
+    "province_code": "46"
+  },
+  {
+    "code": "477",
+    "name": "Quảng Điền",
+    "full_name": "Huyện Quảng Điền",
+    "type": "Huyện Quảng",
+    "province_code": "46"
+  }
+]

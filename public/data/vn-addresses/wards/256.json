@@ -1,0 +1,135 @@
+[
+  {
+    "code": "09331",
+    "name": "Hạp Lĩnh",
+    "full_name": "Phường Hạp Lĩnh",
+    "type": "Phường Hạp",
+    "district_code": "256"
+  },
+  {
+    "code": "09214",
+    "name": "Hòa Long",
+    "full_name": "Phường Hòa Long",
+    "type": "Phường Hòa",
+    "district_code": "256"
+  },
+  {
+    "code": "09325",
+    "name": "Khắc Niệm",
+    "full_name": "Phường Khắc Niệm",
+    "type": "Phường Khắc",
+    "district_code": "256"
+  },
+  {
+    "code": "09235",
+    "name": "Khúc Xuyên",
+    "full_name": "Phường Khúc Xuyên",
+    "type": "Phường Khúc",
+    "district_code": "256"
+  },
+  {
+    "code": "09256",
+    "name": "Kim Chân",
+    "full_name": "Phường Kim Chân",
+    "type": "Phường Kim",
+    "district_code": "256"
+  },
+  {
+    "code": "09172",
+    "name": "Kinh Bắc",
+    "full_name": "Phường Kinh Bắc",
+    "type": "Phường Kinh",
+    "district_code": "256"
+  },
+  {
+    "code": "09286",
+    "name": "Nam Sơn",
+    "full_name": "Phường Nam Sơn",
+    "type": "Phường Nam",
+    "district_code": "256"
+  },
+  {
+    "code": "09184",
+    "name": "Ninh Xá",
+    "full_name": "Phường Ninh Xá",
+    "type": "Phường Ninh",
+    "district_code": "256"
+  },
+  {
+    "code": "09244",
+    "name": "Phong Khê",
+    "full_name": "Phường Phong Khê",
+    "type": "Phường Phong",
+    "district_code": "256"
+  },
+  {
+    "code": "09187",
+    "name": "Suối Hoa",
+    "full_name": "Phường Suối Hoa",
+    "type": "Phường Suối",
+    "district_code": "256"
+  },
+  {
+    "code": "09169",
+    "name": "Thị Cầu",
+    "full_name": "Phường Thị Cầu",
+    "type": "Phường Thị",
+    "district_code": "256"
+  },
+  {
+    "code": "09178",
+    "name": "Tiền An",
+    "full_name": "Phường Tiền An",
+    "type": "Phường Tiền",
+    "district_code": "256"
+  },
+  {
+    "code": "09226",
+    "name": "Vạn An",
+    "full_name": "Phường Vạn An",
+    "type": "Phường Vạn",
+    "district_code": "256"
+  },
+  {
+    "code": "09271",
+    "name": "Vân Dương",
+    "full_name": "Phường Vân Dương",
+    "type": "Phường Vân",
+    "district_code": "256"
+  },
+  {
+    "code": "09175",
+    "name": "Vệ An",
+    "full_name": "Phường Vệ An",
+    "type": "Phường Vệ",
+    "district_code": "256"
+  },
+  {
+    "code": "09190",
+    "name": "Võ Cường",
+    "full_name": "Phường Võ Cường",
+    "type": "Phường Võ",
+    "district_code": "256"
+  },
+  {
+    "code": "09163",
+    "name": "Vũ Ninh",
+    "full_name": "Phường Vũ Ninh",
+    "type": "Phường Vũ",
+    "district_code": "256"
+  },
+  {
+    "code": "09181",
+    "name": "Đại Phúc",
+    "full_name": "Phường Đại Phúc",
+    "type": "Phường Đại",
+    "district_code": "256"
+  },
+  {
+    "code": "09166",
+    "name": "Đáp Cầu",
+    "full_name": "Phường Đáp Cầu",
+    "type": "Phường Đáp",
+    "district_code": "256"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "code": "711",
+    "name": "Bến Cầu",
+    "full_name": "Huyện Bến Cầu",
+    "type": "Huyện Bến",
+    "province_code": "72"
+  },
+  {
+    "code": "708",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "72"
+  },
+  {
+    "code": "707",
+    "name": "Dương Minh Châu",
+    "full_name": "Huyện Dương Minh Châu",
+    "type": "Huyện Dương Minh",
+    "province_code": "72"
+  },
+  {
+    "code": "710",
+    "name": "Gò Dầu",
+    "full_name": "Huyện Gò Dầu",
+    "type": "Huyện Gò",
+    "province_code": "72"
+  },
+  {
+    "code": "709",
+    "name": "Hòa Thành",
+    "full_name": "Thị xã Hòa Thành",
+    "type": "Thị xã Hòa",
+    "province_code": "72"
+  },
+  {
+    "code": "705",
+    "name": "Tân Biên",
+    "full_name": "Huyện Tân Biên",
+    "type": "Huyện Tân",
+    "province_code": "72"
+  },
+  {
+    "code": "706",
+    "name": "Tân Châu",
+    "full_name": "Huyện Tân Châu",
+    "type": "Huyện Tân",
+    "province_code": "72"
+  },
+  {
+    "code": "703",
+    "name": "Tây Ninh",
+    "full_name": "Thành phố Tây Ninh",
+    "type": "Thành phố Tây",
+    "province_code": "72"
+  },
+  {
+    "code": "712",
+    "name": "Trảng Bàng",
+    "full_name": "Thị xã Trảng Bàng",
+    "type": "Thị xã Trảng",
+    "province_code": "72"
+  }
+]

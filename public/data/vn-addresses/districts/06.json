@@ -1,0 +1,58 @@
+[
+  {
+    "code": "061",
+    "name": "Ba Bể",
+    "full_name": "Huyện Ba Bể",
+    "type": "Huyện Ba",
+    "province_code": "06"
+  },
+  {
+    "code": "058",
+    "name": "Bắc Kạn",
+    "full_name": "Thành phố Bắc Kạn",
+    "type": "Thành phố Bắc",
+    "province_code": "06"
+  },
+  {
+    "code": "063",
+    "name": "Bạch Thông",
+    "full_name": "Huyện Bạch Thông",
+    "type": "Huyện Bạch",
+    "province_code": "06"
+  },
+  {
+    "code": "065",
+    "name": "Chợ Mới",
+    "full_name": "Huyện Chợ Mới",
+    "type": "Huyện Chợ",
+    "province_code": "06"
+  },
+  {
+    "code": "064",
+    "name": "Chợ Đồn",
+    "full_name": "Huyện Chợ Đồn",
+    "type": "Huyện Chợ",
+    "province_code": "06"
+  },
+  {
+    "code": "066",
+    "name": "Na Rì",
+    "full_name": "Huyện Na Rì",
+    "type": "Huyện Na",
+    "province_code": "06"
+  },
+  {
+    "code": "062",
+    "name": "Ngân Sơn",
+    "full_name": "Huyện Ngân Sơn",
+    "type": "Huyện Ngân",
+    "province_code": "06"
+  },
+  {
+    "code": "060",
+    "name": "Pác Nặm",
+    "full_name": "Huyện Pác Nặm",
+    "type": "Huyện Pác",
+    "province_code": "06"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "29344",
+    "name": "Cầu Quan",
+    "full_name": "Thị trấn Cầu Quan",
+    "type": "Thị trấn Cầu",
+    "district_code": "846"
+  },
+  {
+    "code": "29353",
+    "name": "Hiếu Trung",
+    "full_name": "Xã Hiếu Trung",
+    "type": "Xã Hiếu",
+    "district_code": "846"
+  },
+  {
+    "code": "29350",
+    "name": "Hiếu Tử",
+    "full_name": "Xã Hiếu Tử",
+    "type": "Xã Hiếu",
+    "district_code": "846"
+  },
+  {
+    "code": "29359",
+    "name": "Hùng Hòa",
+    "full_name": "Xã Hùng Hòa",
+    "type": "Xã Hùng",
+    "district_code": "846"
+  },
+  {
+    "code": "29356",
+    "name": "Long Thới",
+    "full_name": "Xã Long Thới",
+    "type": "Xã Long",
+    "district_code": "846"
+  },
+  {
+    "code": "29368",
+    "name": "Ngãi Hùng",
+    "full_name": "Xã Ngãi Hùng",
+    "type": "Xã Ngãi",
+    "district_code": "846"
+  },
+  {
+    "code": "29347",
+    "name": "Phú Cần",
+    "full_name": "Xã Phú Cần",
+    "type": "Xã Phú",
+    "district_code": "846"
+  },
+  {
+    "code": "29371",
+    "name": "Tân Hòa",
+    "full_name": "Xã Tân Hòa",
+    "type": "Xã Tân",
+    "district_code": "846"
+  },
+  {
+    "code": "29362",
+    "name": "Tân Hùng",
+    "full_name": "Xã Tân Hùng",
+    "type": "Xã Tân",
+    "district_code": "846"
+  },
+  {
+    "code": "29365",
+    "name": "Tập Ngãi",
+    "full_name": "Xã Tập Ngãi",
+    "type": "Xã Tập",
+    "district_code": "846"
+  },
+  {
+    "code": "29341",
+    "name": "Tiểu Cần",
+    "full_name": "Thị trấn Tiểu Cần",
+    "type": "Thị trấn Tiểu",
+    "district_code": "846"
+  }
+]

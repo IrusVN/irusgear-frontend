@@ -1,0 +1,114 @@
+[
+  {
+    "code": "24784",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24796",
+    "name": "10",
+    "full_name": "Phường 10",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24799",
+    "name": "11",
+    "full_name": "Phường 11",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24775",
+    "name": "12",
+    "full_name": "Phường 12",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24781",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24802",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24793",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24790",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24787",
+    "name": "6",
+    "full_name": "Phường 6",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24769",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24772",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24778",
+    "name": "9",
+    "full_name": "Phường 9",
+    "type": "Phường",
+    "district_code": "672"
+  },
+  {
+    "code": "24808",
+    "name": "Tà Nung",
+    "full_name": "Xã Tà Nung",
+    "type": "Xã Tà",
+    "district_code": "672"
+  },
+  {
+    "code": "24810",
+    "name": "Trạm Hành",
+    "full_name": "Xã Trạm Hành",
+    "type": "Xã Trạm",
+    "district_code": "672"
+  },
+  {
+    "code": "24805",
+    "name": "Xuân Thọ",
+    "full_name": "Xã Xuân Thọ",
+    "type": "Xã Xuân",
+    "district_code": "672"
+  },
+  {
+    "code": "24811",
+    "name": "Xuân Trường",
+    "full_name": "Xã Xuân Trường",
+    "type": "Xã Xuân",
+    "district_code": "672"
+  }
+]

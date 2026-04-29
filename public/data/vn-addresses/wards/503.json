@@ -1,0 +1,93 @@
+[
+  {
+    "code": "20419",
+    "name": "Cẩm An",
+    "full_name": "Phường Cẩm An",
+    "type": "Phường Cẩm",
+    "district_code": "503"
+  },
+  {
+    "code": "20413",
+    "name": "Cẩm Châu",
+    "full_name": "Phường Cẩm Châu",
+    "type": "Phường Cẩm",
+    "district_code": "503"
+  },
+  {
+    "code": "20422",
+    "name": "Cẩm Hà",
+    "full_name": "Xã Cẩm Hà",
+    "type": "Xã Cẩm",
+    "district_code": "503"
+  },
+  {
+    "code": "20425",
+    "name": "Cẩm Kim",
+    "full_name": "Xã Cẩm Kim",
+    "type": "Xã Cẩm",
+    "district_code": "503"
+  },
+  {
+    "code": "20428",
+    "name": "Cẩm Nam",
+    "full_name": "Phường Cẩm Nam",
+    "type": "Phường Cẩm",
+    "district_code": "503"
+  },
+  {
+    "code": "20404",
+    "name": "Cẩm Phô",
+    "full_name": "Phường Cẩm Phô",
+    "type": "Phường Cẩm",
+    "district_code": "503"
+  },
+  {
+    "code": "20431",
+    "name": "Cẩm Thanh",
+    "full_name": "Xã Cẩm Thanh",
+    "type": "Xã Cẩm",
+    "district_code": "503"
+  },
+  {
+    "code": "20416",
+    "name": "Cửa Đại",
+    "full_name": "Phường Cửa Đại",
+    "type": "Phường Cửa",
+    "district_code": "503"
+  },
+  {
+    "code": "20398",
+    "name": "Minh An",
+    "full_name": "Phường Minh An",
+    "type": "Phường Minh",
+    "district_code": "503"
+  },
+  {
+    "code": "20410",
+    "name": "Sơn Phong",
+    "full_name": "Phường Sơn Phong",
+    "type": "Phường Sơn",
+    "district_code": "503"
+  },
+  {
+    "code": "20401",
+    "name": "Tân An",
+    "full_name": "Phường Tân An",
+    "type": "Phường Tân",
+    "district_code": "503"
+  },
+  {
+    "code": "20434",
+    "name": "Tân Hiệp",
+    "full_name": "Xã Tân Hiệp",
+    "type": "Xã Tân",
+    "district_code": "503"
+  },
+  {
+    "code": "20407",
+    "name": "Thanh Hà",
+    "full_name": "Phường Thanh Hà",
+    "type": "Phường Thanh",
+    "district_code": "503"
+  }
+]

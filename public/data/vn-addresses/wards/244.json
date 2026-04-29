@@ -1,0 +1,72 @@
+[
+  {
+    "code": "08752",
+    "name": "Cao Minh",
+    "full_name": "Xã Cao Minh",
+    "type": "Xã Cao",
+    "district_code": "244"
+  },
+  {
+    "code": "08737",
+    "name": "Hùng Vương",
+    "full_name": "Phường Hùng Vương",
+    "type": "Phường Hùng",
+    "district_code": "244"
+  },
+  {
+    "code": "08755",
+    "name": "Nam Viêm",
+    "full_name": "Phường Nam Viêm",
+    "type": "Phường Nam",
+    "district_code": "244"
+  },
+  {
+    "code": "08749",
+    "name": "Ngọc Thanh",
+    "full_name": "Xã Ngọc Thanh",
+    "type": "Xã Ngọc",
+    "district_code": "244"
+  },
+  {
+    "code": "08743",
+    "name": "Phúc Thắng",
+    "full_name": "Phường Phúc Thắng",
+    "type": "Phường Phúc",
+    "district_code": "244"
+  },
+  {
+    "code": "08758",
+    "name": "Tiền Châu",
+    "full_name": "Phường Tiền Châu",
+    "type": "Phường Tiền",
+    "district_code": "244"
+  },
+  {
+    "code": "08740",
+    "name": "Trưng Nhị",
+    "full_name": "Phường Trưng Nhị",
+    "type": "Phường Trưng",
+    "district_code": "244"
+  },
+  {
+    "code": "08734",
+    "name": "Trưng Trắc",
+    "full_name": "Phường Trưng Trắc",
+    "type": "Phường Trưng",
+    "district_code": "244"
+  },
+  {
+    "code": "08746",
+    "name": "Xuân Hoà",
+    "full_name": "Phường Xuân Hoà",
+    "type": "Phường Xuân",
+    "district_code": "244"
+  },
+  {
+    "code": "08747",
+    "name": "Đồng Xuân",
+    "full_name": "Phường Đồng Xuân",
+    "type": "Phường Đồng",
+    "district_code": "244"
+  }
+]

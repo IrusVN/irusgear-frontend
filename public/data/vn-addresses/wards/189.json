@@ -1,0 +1,86 @@
+[
+  {
+    "code": "06646",
+    "name": "Bắc Lãng",
+    "full_name": "Xã Bắc Lãng",
+    "type": "Xã Bắc",
+    "district_code": "189"
+  },
+  {
+    "code": "06619",
+    "name": "Bắc Xa",
+    "full_name": "Xã Bắc Xa",
+    "type": "Xã Bắc",
+    "district_code": "189"
+  },
+  {
+    "code": "06622",
+    "name": "Bính Xá",
+    "full_name": "Xã Bính Xá",
+    "type": "Xã Bính",
+    "district_code": "189"
+  },
+  {
+    "code": "06637",
+    "name": "Châu Sơn",
+    "full_name": "Xã Châu Sơn",
+    "type": "Xã Châu",
+    "district_code": "189"
+  },
+  {
+    "code": "06634",
+    "name": "Cường Lợi",
+    "full_name": "Xã Cường Lợi",
+    "type": "Xã Cường",
+    "district_code": "189"
+  },
+  {
+    "code": "06625",
+    "name": "Kiên Mộc",
+    "full_name": "Xã Kiên Mộc",
+    "type": "Xã Kiên",
+    "district_code": "189"
+  },
+  {
+    "code": "06640",
+    "name": "Lâm Ca",
+    "full_name": "Xã Lâm Ca",
+    "type": "Xã Lâm",
+    "district_code": "189"
+  },
+  {
+    "code": "06616",
+    "name": "NT Thái Bình",
+    "full_name": "Thị trấn NT Thái Bình",
+    "type": "Thị trấn NT Thái",
+    "district_code": "189"
+  },
+  {
+    "code": "06631",
+    "name": "Thái Bình",
+    "full_name": "Xã Thái Bình",
+    "type": "Xã Thái",
+    "district_code": "189"
+  },
+  {
+    "code": "06613",
+    "name": "Đình Lập",
+    "full_name": "Thị trấn Đình Lập",
+    "type": "Thị trấn Đình",
+    "district_code": "189"
+  },
+  {
+    "code": "06628",
+    "name": "Đình Lập",
+    "full_name": "Xã Đình Lập",
+    "type": "Xã Đình",
+    "district_code": "189"
+  },
+  {
+    "code": "06643",
+    "name": "Đồng Thắng",
+    "full_name": "Xã Đồng Thắng",
+    "type": "Xã Đồng",
+    "district_code": "189"
+  }
+]

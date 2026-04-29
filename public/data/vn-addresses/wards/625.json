@@ -1,0 +1,100 @@
+[
+  {
+    "code": "23638",
+    "name": "KBang",
+    "full_name": "Thị trấn KBang",
+    "type": "Thị trấn",
+    "district_code": "625"
+  },
+  {
+    "code": "23641",
+    "name": "Kon Pne",
+    "full_name": "Xã Kon Pne",
+    "type": "Xã Kon",
+    "district_code": "625"
+  },
+  {
+    "code": "23668",
+    "name": "Kông Lơng Khơng",
+    "full_name": "Xã Kông Lơng Khơng",
+    "type": "Xã Kông Lơng",
+    "district_code": "625"
+  },
+  {
+    "code": "23671",
+    "name": "Kông Pla",
+    "full_name": "Xã Kông Pla",
+    "type": "Xã Kông",
+    "district_code": "625"
+  },
+  {
+    "code": "23650",
+    "name": "KRong",
+    "full_name": "Xã KRong",
+    "type": "Xã",
+    "district_code": "625"
+  },
+  {
+    "code": "23656",
+    "name": "Lơ Ku",
+    "full_name": "Xã Lơ Ku",
+    "type": "Xã Lơ",
+    "district_code": "625"
+  },
+  {
+    "code": "23662",
+    "name": "Nghĩa An",
+    "full_name": "Xã Nghĩa An",
+    "type": "Xã Nghĩa",
+    "district_code": "625"
+  },
+  {
+    "code": "23653",
+    "name": "Sơ Pai",
+    "full_name": "Xã Sơ Pai",
+    "type": "Xã Sơ",
+    "district_code": "625"
+  },
+  {
+    "code": "23647",
+    "name": "Sơn Lang",
+    "full_name": "Xã Sơn Lang",
+    "type": "Xã Sơn",
+    "district_code": "625"
+  },
+  {
+    "code": "23665",
+    "name": "Tơ Tung",
+    "full_name": "Xã Tơ Tung",
+    "type": "Xã Tơ",
+    "district_code": "625"
+  },
+  {
+    "code": "23674",
+    "name": "Đăk HLơ",
+    "full_name": "Xã Đăk HLơ",
+    "type": "Xã Đăk",
+    "district_code": "625"
+  },
+  {
+    "code": "23644",
+    "name": "Đăk Roong",
+    "full_name": "Xã Đăk Roong",
+    "type": "Xã Đăk",
+    "district_code": "625"
+  },
+  {
+    "code": "23660",
+    "name": "Đak SMar",
+    "full_name": "Xã Đak SMar",
+    "type": "Xã Đak",
+    "district_code": "625"
+  },
+  {
+    "code": "23659",
+    "name": "Đông",
+    "full_name": "Xã Đông",
+    "type": "Xã",
+    "district_code": "625"
+  }
+]
