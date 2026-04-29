@@ -79,7 +79,7 @@
 
 <script setup>
 import { computed } from "vue";
-import { useI18n } from "#imports";
+import { useI18n, useLocalePath, navigateTo } from "#imports";
 import { storeToRefs } from "pinia";
 import CartAlertBanner from "@/components/Cart/CartAlertBanner.vue";
 import CartEmptyState from "@/components/Cart/CartEmptyState.vue";
@@ -108,6 +108,7 @@ const createFallbackSummary = () => ({
 const cartStore = useCartStore();
 const toast = useGlobalToast();
 const { t } = useI18n();
+const localePath = useLocalePath();
 const {
   cart,
   isLoading,
@@ -218,7 +219,7 @@ const handlePrimaryAction = () => {
     return;
   }
 
-  toast.info(t('cart.checkoutNote'));
+  navigateTo(localePath("/cart/checkout"));
 };
 
 const handleClearCart = async () => {
