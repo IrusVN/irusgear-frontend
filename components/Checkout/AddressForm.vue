@@ -1,5 +1,5 @@
 <template>
-  <form class="address-form" @submit.prevent="handleSubmit">
+  <form class="address-form m-3" @submit.prevent="handleSubmit">
     <div class="address-form__header">
       <h3 class="address-form__title">
         {{ isEditing ? $t("checkout.editAddress") : $t("checkout.newAddress") }}
