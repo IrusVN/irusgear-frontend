@@ -1,6 +1,7 @@
 <template>
   <nav class="checkout-progress" :aria-label="$t('checkout.progressAria')">
     <div
+      ref="stickyBlockEl"
       :class="['checkout-progress-sticky', { 'checkout-progress-sticky--visible': isStickyVisible }]"
       :style="stickyBarStyle"
     >
@@ -79,12 +80,30 @@ defineProps({
 });
 
 const progressBlockEl = ref(null);
+const stickyBlockEl = ref(null);
 const isStickyVisible = ref(false);
 const stickyTopOffset = ref(0);
+let mounted = false;
+let progressResizeObserver = null;
 
 const stickyBarStyle = computed(() => ({
   top: `var(--customer-sidebar-offset, ${stickyTopOffset.value}px)`,
 }));
+
+const dispatchStickyChangeEvent = () => {
+  if (typeof window === "undefined") return;
+  const normalHeight = progressBlockEl.value?.offsetHeight ?? 0;
+  const stickyHeight = stickyBlockEl.value?.offsetHeight ?? 0;
+  window.dispatchEvent(
+    new CustomEvent("checkout-progress:sticky-change", {
+      detail: {
+        isSticky: isStickyVisible.value,
+        normalHeight,
+        stickyHeight,
+      },
+    })
+  );
+};
 
 const getCustomerSidebarOffset = () => {
   if (typeof document === "undefined") return null;
@@ -116,19 +135,32 @@ const updateStickyOffset = () => {
 const syncStickyState = () => {
   if (!progressBlockEl.value) return;
   updateStickyOffset();
+  const wasSticky = isStickyVisible.value;
   isStickyVisible.value = progressBlockEl.value.getBoundingClientRect().top <= stickyTopOffset.value;
+
+  if (wasSticky !== isStickyVisible.value) {
+    dispatchStickyChangeEvent();
+  }
 };
 
-let mounted = false;
 const handleScroll = () => syncStickyState();
 const handleResize = () => syncStickyState();
+const handleSidebarOffsetChange = () => syncStickyState();
 
 onMounted(() => {
   syncStickyState();
   if (!mounted && typeof window !== "undefined") {
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
+    window.addEventListener("customer-sidebar:offset-change", handleSidebarOffsetChange);
     mounted = true;
+
+    if (typeof ResizeObserver !== "undefined" && progressBlockEl.value instanceof HTMLElement) {
+      progressResizeObserver = new ResizeObserver(() => {
+        dispatchStickyChangeEvent();
+      });
+      progressResizeObserver.observe(progressBlockEl.value);
+    }
   }
 });
 
@@ -136,7 +168,13 @@ onBeforeUnmount(() => {
   if (mounted && typeof window !== "undefined") {
     window.removeEventListener("scroll", handleScroll);
     window.removeEventListener("resize", handleResize);
+    window.removeEventListener("customer-sidebar:offset-change", handleSidebarOffsetChange);
     mounted = false;
+  }
+
+  if (progressResizeObserver) {
+    progressResizeObserver.disconnect();
+    progressResizeObserver = null;
   }
 });
 </script>

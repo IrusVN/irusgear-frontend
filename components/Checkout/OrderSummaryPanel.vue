@@ -1,6 +1,6 @@
 <template>
-  <aside class="checkout-summary">
-    <div class="checkout-summary__head">
+  <aside class="checkout-summary" :style="summaryStyle">
+    <div class="d-flex flex-column gap-1">
       <p class="checkout-summary__eyebrow">{{ $t("checkout.orderSummary") }}</p>
       <h2 class="checkout-summary__title">
         {{ $t("checkout.orderCount", { count: cartStore.itemCount }) }}
@@ -21,9 +21,9 @@
       <div
         v-for="item in cartStore.items"
         :key="item.id"
-        class="checkout-summary__item"
+        class="d-flex gap-2 align-items-start"
       >
-        <div class="checkout-summary__item-image">
+        <div class="checkout-summary__item-image position-relative">
           <img
             :src="item.image || fallbackImage"
             :alt="item.productName"
@@ -32,7 +32,7 @@
           />
           <span class="checkout-summary__item-qty">{{ item.quantity }}</span>
         </div>
-        <div class="checkout-summary__item-info">
+        <div class="flex-grow-1 minw-0">
           <p class="checkout-summary__item-name">{{ item.productName }}</p>
           <p v-if="item.selectedOptionsText" class="checkout-summary__item-options">
             {{ item.selectedOptionsText }}
@@ -48,58 +48,59 @@
       </div>
     </div>
 
-    <div class="checkout-summary__divider"></div>
+    <div class="border-top my-1"></div>
 
-    <dl class="checkout-summary__pricing">
-      <div class="checkout-summary__row">
-        <dt>{{ $t("checkout.subtotal") }}</dt>
-        <dd>{{ checkoutStore.subtotal?.formatted || "0đ" }}</dd>
+    <dl class="d-flex flex-column gap-2 m-0">
+      <div class="d-flex justify-content-between align-items-center">
+        <dt class="text-secondary m-0">{{ $t("checkout.subtotal") }}</dt>
+        <dd class="m-0">{{ checkoutStore.subtotal?.formatted || "0đ" }}</dd>
       </div>
 
-      <div v-if="checkoutStore.savings?.value > 0" class="checkout-summary__row checkout-summary__row--discount">
-        <dt>{{ $t("checkout.discount") }}</dt>
-        <dd>-{{ checkoutStore.savings?.formatted || "0đ" }}</dd>
+      <div v-if="checkoutStore.savings?.value > 0" class="d-flex justify-content-between align-items-center">
+        <dt class="text-secondary m-0">{{ $t("checkout.discount") }}</dt>
+        <dd class="m-0 text-success">-{{ checkoutStore.savings?.formatted || "0đ" }}</dd>
       </div>
 
-      <div v-if="checkoutStore.appliedVoucher" class="checkout-summary__row checkout-summary__row--voucher">
-        <dt>{{ $t("checkout.voucher") }}</dt>
-        <dd>-{{ checkoutStore.voucherDiscount?.formatted || "0đ" }}</dd>
+      <div v-if="checkoutStore.appliedVoucher" class="d-flex justify-content-between align-items-center">
+        <dt class="text-secondary m-0">{{ $t("checkout.voucher") }}</dt>
+        <dd class="m-0 checkout-summary__voucher">-{{ checkoutStore.voucherDiscount?.formatted || "0đ" }}</dd>
       </div>
 
-      <div v-if="checkoutStore.finalDeliveryFee > 0" class="checkout-summary__row">
-        <dt>{{ $t("checkout.deliveryFee") }}</dt>
-        <dd>+{{ formatMoneyValue(checkoutStore.finalDeliveryFee) }}</dd>
+      <div v-if="checkoutStore.finalDeliveryFee > 0" class="d-flex justify-content-between align-items-center">
+        <dt class="text-secondary m-0">{{ $t("checkout.deliveryFee") }}</dt>
+        <dd class="m-0">+{{ formatMoneyValue(checkoutStore.finalDeliveryFee) }}</dd>
       </div>
 
-      <div v-if="checkoutStore.finalDeliveryFee === 0" class="checkout-summary__row">
-        <dt>{{ $t("checkout.deliveryFee") }}</dt>
-        <dd class="checkout-summary__free">{{ $t("checkout.free") }}</dd>
+      <div v-if="checkoutStore.finalDeliveryFee === 0" class="d-flex justify-content-between align-items-center">
+        <dt class="text-secondary m-0">{{ $t("checkout.deliveryFee") }}</dt>
+        <dd class="m-0 checkout-summary__free">{{ $t("checkout.free") }}</dd>
       </div>
 
-      <div v-if="checkoutStore.insuranceFee?.value > 0" class="checkout-summary__row">
-        <dt>{{ $t("checkout.insurance") }}</dt>
-        <dd>+{{ checkoutStore.insuranceFee?.formatted }}</dd>
+      <div v-if="checkoutStore.insuranceFee?.value > 0" class="d-flex justify-content-between align-items-center">
+        <dt class="text-secondary m-0">{{ $t("checkout.insurance") }}</dt>
+        <dd class="m-0">+{{ checkoutStore.insuranceFee?.formatted }}</dd>
       </div>
     </dl>
 
-    <div class="checkout-summary__divider"></div>
+    <div class="border-top my-1"></div>
 
-    <div class="checkout-summary__total">
-      <span>{{ $t("checkout.total") }}</span>
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="fw-semibold">{{ $t("checkout.total") }}</span>
       <span class="checkout-summary__total-value">{{ checkoutStore.finalTotal?.formatted || "0đ" }}</span>
     </div>
 
-    <label class="checkout-summary__agreement">
+    <label class="d-flex gap-2 align-items-start cursor-pointer">
       <input
         type="checkbox"
         v-model="checkoutStore.agreedToTerms"
         :aria-invalid="agreedError"
+        class="checkout-summary__checkbox"
       />
-      <span>
+      <span class="checkout-summary__agreement-text">
         {{ $t("checkout.agreeTerms") }}
-        <a :href="$t('checkout.termsUrl')" target="_blank" rel="noopener">{{ $t("checkout.terms") }}</a>
+        <a :href="$t('checkout.termsUrl')" target="_blank" rel="noopener noreferrer">{{ $t("checkout.terms") }}</a>
         {{ $t("checkout.and") }}
-        <a :href="$t('checkout.shippingPolicyUrl')" target="_blank" rel="noopener">{{ $t("checkout.shippingPolicy") }}</a>
+        <a :href="$t('checkout.shippingPolicyUrl')" target="_blank" rel="noopener noreferrer">{{ $t("checkout.shippingPolicy") }}</a>
       </span>
     </label>
     <p v-if="agreedError" class="checkout-summary__agreement-error" role="alert">
@@ -122,9 +123,9 @@
       </span>
     </button>
 
-    <div class="checkout-summary__trust">
-      <div class="checkout-summary__trust-item">
-        <i class="bi bi-shield-lock"></i>
+    <div class="d-flex flex-column gap-1">
+      <div class="d-flex align-items-center gap-1 text-secondary small">
+        <i class="bi bi-shield-lock text-success"></i>
         <span>{{ $t("checkout.securePayment") }}</span>
       </div>
     </div>
@@ -133,7 +134,6 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
-import { storeToRefs } from "pinia";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useCartStore } from "@/stores/cartStore";
 
@@ -141,11 +141,15 @@ defineEmits(["submit"]);
 
 const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
-const { agreedToTerms } = storeToRefs(checkoutStore);
 
 const expanded = ref(false);
+const progressExtraOffset = ref(0);
 
 const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
+
+const summaryStyle = computed(() => ({
+  "--summary-offset-top": `${16 + progressExtraOffset.value}px`,
+}));
 
 const agreedError = computed(() => {
   return false;
@@ -160,8 +164,7 @@ const formatMoneyValue = (value) => {
 };
 
 const handleProgressStickyChange = ({ detail }) => {
-  const extra = detail.isSticky ? detail.height : 0;
-  document.documentElement.style.setProperty("--checkout-summary-offset", `${16 + extra}px`);
+  progressExtraOffset.value = detail.isSticky ? detail.stickyHeight : detail.normalHeight;
 };
 
 onMounted(() => {
@@ -187,13 +190,7 @@ onBeforeUnmount(() => {
   gap: 16px;
   padding: 22px;
   position: sticky;
-  top: calc(var(--customer-sidebar-offset, 90px) + var(--checkout-summary-offset, 16px));
-}
-
-.checkout-summary__head {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  top: calc(var(--customer-sidebar-offset, 90px) + var(--summary-offset-top, 16px));
 }
 
 .checkout-summary__eyebrow {
@@ -247,15 +244,8 @@ onBeforeUnmount(() => {
   overflow-y: auto;
 }
 
-.checkout-summary__item {
-  align-items: flex-start;
-  display: flex;
-  gap: 12px;
-}
-
 .checkout-summary__item-image {
   flex-shrink: 0;
-  position: relative;
 }
 
 .checkout-summary__item-image img {
@@ -279,11 +269,6 @@ onBeforeUnmount(() => {
   position: absolute;
   right: -6px;
   top: -6px;
-}
-
-.checkout-summary__item-info {
-  flex: 1;
-  min-width: 0;
 }
 
 .checkout-summary__item-name {
@@ -317,58 +302,9 @@ onBeforeUnmount(() => {
   padding: 12px 0;
 }
 
-.checkout-summary__divider {
-  border-top: 1px solid #ececf1;
-}
-
-.checkout-summary__pricing {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0;
-}
-
-.checkout-summary__row {
-  align-items: center;
-  color: #52525b;
-  display: flex;
-  font-size: 14px;
-  justify-content: space-between;
-}
-
-.checkout-summary__row dt {
-  margin: 0;
-}
-
-.checkout-summary__row dd {
-  color: #18181b;
-  font-weight: 600;
-  margin: 0;
-}
-
-.checkout-summary__row--discount dd {
-  color: #15803d;
-}
-
-.checkout-summary__row--voucher dd {
-  color: #d70018;
-}
-
 .checkout-summary__free {
   color: #15803d !important;
   font-weight: 700 !important;
-}
-
-.checkout-summary__total {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
-
-.checkout-summary__total > span:first-child {
-  color: #18181b;
-  font-size: 16px;
-  font-weight: 600;
 }
 
 .checkout-summary__total-value {
@@ -377,30 +313,30 @@ onBeforeUnmount(() => {
   font-weight: 700;
 }
 
-.checkout-summary__agreement {
-  align-items: flex-start;
-  cursor: pointer;
-  display: flex;
-  gap: 10px;
-  font-size: 12px;
-  line-height: 1.55;
-  color: #52525b;
+.checkout-summary__voucher {
+  color: #d70018 !important;
 }
 
-.checkout-summary__agreement input[type="checkbox"] {
-  margin-top: 2px;
+.checkout-summary__checkbox {
   flex-shrink: 0;
+  margin-top: 2px;
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
 
-.checkout-summary__agreement a {
+.checkout-summary__agreement-text {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #52525b;
+}
+
+.checkout-summary__agreement-text a {
   color: #d70018;
   text-decoration: none;
 }
 
-.checkout-summary__agreement a:hover {
+.checkout-summary__agreement-text a:hover {
   text-decoration: underline;
 }
 
@@ -439,24 +375,6 @@ onBeforeUnmount(() => {
 .checkout-summary__cta:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-}
-
-.checkout-summary__trust {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.checkout-summary__trust-item {
-  align-items: center;
-  color: #71717a;
-  display: flex;
-  font-size: 12px;
-  gap: 6px;
-}
-
-.checkout-summary__trust-item i {
-  color: #15803d;
 }
 
 @keyframes spin {

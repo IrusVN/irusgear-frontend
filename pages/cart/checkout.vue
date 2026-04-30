@@ -3,17 +3,17 @@
     <div class="container-xl">
       <CheckoutProgress :current-step="2" />
 
-      <div v-if="checkoutLoading" class="checkout-page__loading">
-        <div class="checkout-page__loading-inner">
-          <div class="checkout-page__skeleton skeleton-title"></div>
-          <div class="checkout-page__skeleton skeleton-card"></div>
-          <div class="checkout-page__skeleton skeleton-card"></div>
-          <div class="checkout-page__skeleton skeleton-card"></div>
+      <div v-if="checkoutLoading" class="bg-white border rounded-4 p-4">
+        <div class="d-flex flex-column gap-3">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
         </div>
       </div>
 
-      <div v-else class="checkout-page__layout">
-        <div class="checkout-page__form-col">
+      <div v-else class="d-flex flex-column flex-lg-row gap-4">
+        <div class="flex-grow-1 minw-0">
           <OrderInfoForm />
         </div>
 
@@ -107,38 +107,7 @@ const handleConfirmOrder = async () => {
   padding: 18px 0 120px;
 }
 
-.checkout-page__layout {
-  align-items: start;
-  display: grid;
-  gap: 24px;
-  grid-template-columns: minmax(0, 1.7fr) minmax(320px, 0.95fr);
-}
-
-.checkout-page__form-col {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  min-width: 0;
-}
-
-.checkout-page__summary-col {
-  min-width: 0;
-}
-
-.checkout-page__loading {
-  background: #fff;
-  border: 1px solid #ececf1;
-  border-radius: 24px;
-  padding: 24px;
-}
-
-.checkout-page__loading-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.checkout-page__skeleton {
+.skeleton {
   background: linear-gradient(90deg, #f4f4f5 25%, #e4e4e7 50%, #f4f4f5 75%);
   background-size: 200% 100%;
   border-radius: 12px;
@@ -163,10 +132,6 @@ const handleConfirmOrder = async () => {
 @media (max-width: 991.98px) {
   .checkout-page {
     padding-bottom: 160px;
-  }
-
-  .checkout-page__layout {
-    grid-template-columns: 1fr;
   }
 
   .checkout-page__summary-col {
