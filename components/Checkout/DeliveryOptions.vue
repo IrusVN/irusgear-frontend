@@ -110,7 +110,7 @@ onUnmounted(() => {
   border: 1px solid #ececf1;
   border-radius: 18px;
   overflow: hidden;
-  width: 950px;
+  width: 870px;
 }
 
 .delivery-options__header {

@@ -179,7 +179,7 @@ const handleDeleteAddress = async (id) => {
   border: 1px solid #ececf1;
   border-radius: 18px;
   overflow: hidden;
-  max-width: 950px;
+  max-width: 870px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;

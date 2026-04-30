@@ -21,11 +21,11 @@
       <div
         v-for="item in cartStore.items"
         :key="item.id"
-        class="d-flex gap-2 align-items-start"
+        class="d-flex gap-2 align-items-start pt-2"
       >
         <div class="checkout-summary__item-image position-relative">
           <img
-            :src="item.image || fallbackImage"
+            :src="item.thumbnail || fallbackImage"
             :alt="item.productName"
             loading="lazy"
             @error="handleImageError"
@@ -34,12 +34,12 @@
         </div>
         <div class="flex-grow-1 minw-0">
           <p class="checkout-summary__item-name">{{ item.productName }}</p>
-          <p v-if="item.selectedOptionsText" class="checkout-summary__item-options">
-            {{ item.selectedOptionsText }}
+          <p v-if="getSelectedOptionsText(item)" class="checkout-summary__item-options">
+            {{ getSelectedOptionsText(item) }}
           </p>
         </div>
         <div class="checkout-summary__item-price">
-          {{ item.price?.formatted || item.subtotal?.formatted || "0đ" }}
+          {{ item.lineTotal?.formatted || item.currentLineTotal?.formatted || "0đ" }}
         </div>
       </div>
 
@@ -161,6 +161,11 @@ const handleImageError = (e) => {
 
 const formatMoneyValue = (value) => {
   return `${new Intl.NumberFormat("vi-VN").format(value)}đ`;
+};
+
+const getSelectedOptionsText = (item) => {
+  if (!item?.selectedOptions) return null;
+  return Object.values(item.selectedOptions).join(", ");
 };
 
 const handleProgressStickyChange = ({ detail }) => {
