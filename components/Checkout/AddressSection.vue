@@ -59,14 +59,14 @@
           class="swiper-button-prev address-swiper__prev"
           aria-label="Previous"
         >
-          <i class="bi bi-chevron-left"></i>
+          <ArrowIcon direction="left" :size="12" />
         </button>
         <button
           ref="nextBtn"
           class="swiper-button-next address-swiper__next"
           aria-label="Next"
         >
-          <i class="bi bi-chevron-right"></i>
+          <ArrowIcon direction="right" :size="12" />
         </button>
       </div>
     </div>
@@ -106,6 +106,7 @@ import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useGlobalToast } from "@/composables/useGlobalToast";
 import AddressCard from "@/components/Checkout/AddressCard.vue";
 import AddressForm from "@/components/Checkout/AddressForm.vue";
+import ArrowIcon from "@/components/Icons/ArrowIcon.vue";
 
 const checkoutStore = useCheckoutStore();
 const toast = useGlobalToast();
@@ -217,12 +218,16 @@ const handleDeleteAddress = async (id) => {
 
 /* Swiper overrides */
 .address-swiper {
-  padding: 12px 44px;
-  overflow: hidden;
+  padding: 12px 48px;
+  overflow: visible;
 }
 
 .address-swiper__prev,
 .address-swiper__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
   width: 32px;
   height: 32px;
   border-radius: 999px;
@@ -233,9 +238,16 @@ const handleDeleteAddress = async (id) => {
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   color: #52525b;
-  font-size: 16px;
   padding: 0;
   transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.address-swiper__prev {
+  left: 8px;
+}
+
+.address-swiper__next {
+  right: 8px;
 }
 
 .address-swiper__prev:hover,
@@ -246,7 +258,7 @@ const handleDeleteAddress = async (id) => {
 
 .address-swiper__prev::after,
 .address-swiper__next::after {
-  display: none;
+  display: none !important;
 }
 
 .address-swiper .swiper-button-disabled {

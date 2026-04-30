@@ -67,6 +67,12 @@ const formatMoney = (value) => {
   gap: 12px;
   padding: 14px 16px;
   transition: border-color 0.2s ease, box-shadow 0.15s ease, background 0.15s ease;
+  min-width: 320px;
+  max-width: 320px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  scroll-snap-align: start;
+  box-sizing: border-box;
 }
 
 .delivery-option:hover {
@@ -153,5 +159,12 @@ const formatMoney = (value) => {
   color: #71717a;
   font-size: 13px;
   margin: 4px 0 0;
+}
+
+@media (max-width: 575.98px) {
+  .delivery-option {
+    min-width: calc(100vw - 28px);
+    max-width: calc(100vw - 28px);
+  }
 }
 </style>
