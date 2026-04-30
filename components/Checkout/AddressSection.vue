@@ -1,32 +1,74 @@
 <template>
   <section class="address-section" aria-labelledby="address-heading">
     <div class="address-section__header">
-      <h2 id="address-heading" class="address-section__title">
-        <i class="bi bi-geo-alt"></i>
-        {{ $t("checkout.deliveryAddress") }}
-      </h2>
+      <div class="address-section__header-row">
+        <h2 id="address-heading" class="address-section__title">
+          <i class="bi bi-geo-alt"></i>
+          {{ $t("checkout.deliveryAddress") }}
+        </h2>
+        <button
+          v-if="checkoutStore.savedAddresses.length > 0 && !checkoutStore.isEditingAddress"
+          type="button"
+          class="address-section__add-btn"
+          @click="checkoutStore.openAddressForm()"
+        >
+          <i class="bi bi-plus-lg"></i>
+          {{ $t("checkout.addNewAddress") }}
+        </button>
+      </div>
     </div>
 
     <!-- Loading state -->
-    <div v-if="checkoutStore.addressesLoading" class="address-section__loading">
-      <div v-for="i in 2" :key="i" class="address-section__skeleton-card"></div>
+    <div
+      v-if="checkoutStore.addressesLoading"
+      class="address-section__carousel-wrapper"
+    >
+      <div class="swiper-container address-swiper">
+        <div class="swiper-wrapper">
+          <div
+            v-for="i in 2"
+            :key="i"
+            class="swiper-slide address-section__skeleton-card"
+          ></div>
+        </div>
+      </div>
     </div>
 
     <!-- Address list -->
     <div
       v-else-if="checkoutStore.savedAddresses.length > 0 && !checkoutStore.isEditingAddress"
-      class="address-section__list"
+      class="address-section__carousel-wrapper"
     >
-      <AddressCard
-        v-for="address in checkoutStore.savedAddresses"
-        :key="address.id"
-        :address="address"
-        :selected="String(address.id) === String(checkoutStore.selectedAddressId)"
-        @select="checkoutStore.selectAddress(address.id)"
-        @edit="checkoutStore.openAddressForm(address)"
-        @delete="handleDeleteAddress(address.id)"
-        @set-default="checkoutStore.setDefaultAddress(address.id)"
-      />
+      <div ref="swiperEl" class="swiper-container address-swiper">
+        <div class="swiper-wrapper">
+          <AddressCard
+            v-for="address in checkoutStore.savedAddresses"
+            :key="address.id"
+            class="swiper-slide"
+            :address="address"
+            :selected="String(address.id) === String(checkoutStore.selectedAddressId)"
+            @select="checkoutStore.selectAddress(address.id)"
+            @edit="checkoutStore.openAddressForm(address)"
+            @delete="handleDeleteAddress(address.id)"
+            @set-default="checkoutStore.setDefaultAddress(address.id)"
+          />
+        </div>
+
+        <button
+          ref="prevBtn"
+          class="swiper-button-prev address-swiper__prev"
+          aria-label="Previous"
+        >
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button
+          ref="nextBtn"
+          class="swiper-button-next address-swiper__next"
+          aria-label="Next"
+        >
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Empty state -->
@@ -48,17 +90,6 @@
       </button>
     </div>
 
-    <!-- Add new button (has addresses but not editing) -->
-    <button
-      v-if="checkoutStore.savedAddresses.length > 0 && !checkoutStore.isEditingAddress"
-      type="button"
-      class="address-section__add-btn address-section__add-btn--outline"
-      @click="checkoutStore.openAddressForm()"
-    >
-      <i class="bi bi-plus-lg"></i>
-      {{ $t("checkout.addNewAddress") }}
-    </button>
-
     <!-- Address form -->
     <AddressForm
       v-if="checkoutStore.isEditingAddress"
@@ -70,6 +101,7 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useGlobalToast } from "@/composables/useGlobalToast";
 import AddressCard from "@/components/Checkout/AddressCard.vue";
@@ -78,6 +110,40 @@ import AddressForm from "@/components/Checkout/AddressForm.vue";
 const checkoutStore = useCheckoutStore();
 const toast = useGlobalToast();
 const { t } = useI18n();
+
+const swiperEl = ref(null);
+const prevBtn = ref(null);
+const nextBtn = ref(null);
+let addressSwiper = null;
+
+onMounted(async () => {
+  if (!import.meta.client || !swiperEl.value) return;
+
+  const [{ default: Swiper }, modules] = await Promise.all([
+    import("swiper"),
+    import("swiper/modules"),
+  ]);
+
+  const { Navigation } = modules;
+
+  addressSwiper = new Swiper(swiperEl.value, {
+    modules: [Navigation],
+    slidesPerView: "auto",
+    spaceBetween: 10,
+    navigation: {
+      nextEl: nextBtn.value,
+      prevEl: prevBtn.value,
+    },
+    observer: true,
+    observeParents: true,
+  });
+});
+
+onUnmounted(() => {
+  if (addressSwiper && !addressSwiper.destroyed) {
+    addressSwiper.destroy(true, true);
+  }
+});
 
 const handleSaveAddress = async (addressData) => {
   try {
@@ -104,52 +170,107 @@ const handleDeleteAddress = async (id) => {
 </script>
 
 <style scoped>
+@import "swiper/css";
+@import "swiper/css/navigation";
+
 .address-section {
   background: #fff;
   border: 1px solid #ececf1;
   border-radius: 18px;
   overflow: hidden;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .address-section__header {
-  padding: 18px 20px 14px;
+  padding: 14px 16px 12px;
   border-bottom: 1px solid #f0f0f2;
+}
+
+.address-section__header-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .address-section__title {
   align-items: center;
   color: #18181b;
   display: flex;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
 }
 
 .address-section__title i {
   color: #d70018;
+  font-size: 18px;
 }
 
-.address-section__loading {
+.address-section__carousel-wrapper {
+  position: relative;
+}
+
+/* Swiper overrides */
+.address-swiper {
+  padding: 12px 44px;
+  overflow: hidden;
+}
+
+.address-swiper__prev,
+.address-swiper__next {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1.5px solid #e4e4e7;
+  background: #fff;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px 20px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  color: #52525b;
+  font-size: 16px;
+  padding: 0;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
 }
 
+.address-swiper__prev:hover,
+.address-swiper__next:hover {
+  background: #f4f4f5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.address-swiper__prev::after,
+.address-swiper__next::after {
+  display: none;
+}
+
+.address-swiper .swiper-button-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Skeleton */
 .address-section__skeleton-card {
   background: linear-gradient(90deg, #f4f4f5 25%, #e4e4e7 50%, #f4f4f5 75%);
   background-size: 200% 100%;
-  border-radius: 14px;
-  height: 110px;
+  border-radius: 12px;
+  height: 90px;
+  min-width: 300px;
+  max-width: 300px;
   animation: shimmer 1.5s infinite;
+  box-sizing: border-box;
 }
 
-.address-section__list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px 20px;
+/* Address card inside swiper */
+.address-swiper .swiper-slide {
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
 }
 
 .address-section__empty {
@@ -176,34 +297,66 @@ const handleDeleteAddress = async (id) => {
   align-items: center;
   background: #d70018;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   color: #fff;
   cursor: pointer;
   display: inline-flex;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   gap: 6px;
-  padding: 10px 18px;
+  padding: 8px 14px;
   transition: background 0.15s ease;
+  white-space: nowrap;
 }
 
 .address-section__add-btn:hover {
   background: #b80015;
 }
 
-.address-section__add-btn--outline {
-  background: #fff;
-  border: 1.5px dashed #d70018;
-  color: #d70018;
-  margin: 0 20px 16px;
-}
-
-.address-section__add-btn--outline:hover {
-  background: #fff7f7;
-}
-
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+@media (max-width: 767.98px) {
+  .address-swiper__prev,
+  .address-swiper__next {
+    display: none;
+  }
+
+  .address-swiper {
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .address-section__header {
+    padding: 12px 14px 10px;
+  }
+
+  .address-section__title {
+    font-size: 14px;
+  }
+
+  .address-section__title i {
+    font-size: 16px;
+  }
+
+  .address-section__add-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .address-section__skeleton-card {
+    height: 80px;
+    min-width: calc(100vw - 48px);
+    max-width: calc(100vw - 48px);
+  }
+
+  .address-swiper .swiper-slide {
+    width: calc(100vw - 48px);
+    min-width: calc(100vw - 48px);
+    max-width: calc(100vw - 48px);
+  }
 }
 </style>

@@ -12,20 +12,23 @@
       <i class="bi bi-check-lg"></i>
     </div>
 
-    <span v-if="isDefault" class="address-card__badge">
-      {{ $t("checkout.default") }}
-    </span>
-
     <div class="address-card__body">
       <div class="address-card__label-row">
         <i :class="address.label === 'office' ? 'bi bi-building' : 'bi bi-house'"></i>
         <span class="address-card__label">
           {{ address.label === "office" ? $t("checkout.office") : $t("checkout.home") }}
         </span>
+        <span v-if="isDefault" class="address-card__badge">
+          {{ $t("checkout.default") }}
+        </span>
       </div>
 
-      <p class="address-card__name">{{ address.name }}</p>
-      <p class="address-card__phone">{{ formatPhone(address.phone) }}</p>
+      <div class="address-card__contact">
+        <span class="address-card__name">{{ address.name }}</span>
+        <span class="address-card__separator">•</span>
+        <span class="address-card__phone">{{ formatPhone(address.phone) }}</span>
+      </div>
+
       <p class="address-card__address">{{ fullAddress }}</p>
 
       <div class="address-card__actions">
@@ -110,11 +113,17 @@ const handleDelete = () => {
 .address-card {
   background: #fff;
   border: 1.5px solid #ececf1;
-  border-radius: 14px;
+  border-radius: 12px;
   cursor: pointer;
-  padding: 16px;
+  padding: 12px 14px;
   position: relative;
   transition: border-color 0.2s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  min-width: 300px;
+  max-width: 300px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  scroll-snap-align: start;
+  box-sizing: border-box;
 }
 
 .address-card:hover {
@@ -135,13 +144,13 @@ const handleDelete = () => {
   border-radius: 999px;
   color: #fff;
   display: inline-flex;
-  font-size: 12px;
-  height: 22px;
+  font-size: 11px;
+  height: 20px;
   justify-content: center;
   position: absolute;
-  right: 14px;
-  top: 14px;
-  width: 22px;
+  right: 10px;
+  top: 10px;
+  width: 20px;
   opacity: 0;
   transform: scale(0.5);
   transition: opacity 0.2s ease, transform 0.15s ease;
@@ -156,12 +165,9 @@ const handleDelete = () => {
   background: #d70018;
   border-radius: 999px;
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 2px 10px;
-  position: absolute;
-  right: 44px;
-  top: 14px;
+  padding: 1px 8px;
 }
 
 .address-card__body {
@@ -177,6 +183,15 @@ const handleDelete = () => {
   font-size: 13px;
   gap: 4px;
   margin-bottom: 4px;
+  position: relative;
+  padding-right: 32px;
+}
+
+.address-card__contact {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .address-card__name {
@@ -184,6 +199,11 @@ const handleDelete = () => {
   font-size: 15px;
   font-weight: 700;
   margin: 0;
+}
+
+.address-card__separator {
+  color: #d4d4d8;
+  font-size: 14px;
 }
 
 .address-card__phone {
@@ -197,12 +217,17 @@ const handleDelete = () => {
   font-size: 13px;
   line-height: 1.5;
   margin: 4px 0 0;
+  /* Giới hạn 2 dòng cho address */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .address-card__actions {
   display: flex;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 8px;
   flex-wrap: wrap;
 }
 
@@ -212,7 +237,7 @@ const handleDelete = () => {
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 5px 10px;
   transition: background 0.15s ease;
 }
 
@@ -241,5 +266,30 @@ const handleDelete = () => {
 
 .address-card__action--danger:hover {
   background: #fff1f2;
+}
+
+@media (max-width: 575.98px) {
+  .address-card {
+    padding: 10px 12px;
+    min-width: calc(100vw - 48px);
+    max-width: calc(100vw - 48px);
+  }
+
+  .address-card__name {
+    font-size: 14px;
+  }
+
+  .address-card__phone {
+    font-size: 12px;
+  }
+
+  .address-card__actions {
+    gap: 6px;
+  }
+
+  .address-card__action {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
 }
 </style>

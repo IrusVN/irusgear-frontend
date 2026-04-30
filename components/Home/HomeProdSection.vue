@@ -613,7 +613,7 @@ watch(
 .swiper-button-prev,
 .swiper-button-next {
   position: absolute;
-  top: 54%;
+  top: 102%;
   z-index: 3;
   width: 24px;
   height: 39px;
