@@ -8,8 +8,20 @@
     }"
     @click="$emit('select', method)"
   >
-    <div class="payment-card__icon">
-      <i :class="iconClass"></i>
+    <div class="payment-card__icon" :class="{ 'payment-card__icon--cod': method === 'cod' }">
+      <img
+        v-if="method === 'momo'"
+        src="https://homepage.momocdn.net/fileuploads/svg/momo-file-240411162904.svg"
+        alt="MoMo"
+        class="payment-card__logo"
+      />
+      <img
+        v-else-if="method === 'vnpay'"
+        src="https://stcd02206177151.cloud.edgevnpay.vn/assets/images/logo-icon/logo-primary.svg"
+        alt="VNPay"
+        class="payment-card__logo"
+      />
+      <i v-else :class="iconClass"></i>
     </div>
     <div class="payment-card__content">
       <span class="payment-card__name">{{ name }}</span>
@@ -47,12 +59,8 @@ defineEmits(["select"]);
 
 const iconClass = computed(() => {
   switch (props.method) {
-    case "momo":
-      return "bi bi-circle-fill payment-card__icon--momo";
-    case "vnpay":
-      return "bi bi-credit-card-2-front-fill payment-card__icon--vnpay";
     case "cod":
-      return "bi bi-truck payment-card__icon--cod";
+      return "bi bi-truck";
     default:
       return "bi bi-wallet2";
   }
@@ -96,18 +104,24 @@ const iconClass = computed(() => {
 }
 
 .payment-card__icon--momo {
-  background: #fff0f0;
-  color: #a50064;
+  background: #a50064;
+  padding: 8px;
 }
 
 .payment-card__icon--vnpay {
   background: #f0f7ff;
-  color: #004f9f;
+  padding: 6px;
 }
 
 .payment-card__icon--cod {
   background: #f0fdf4;
   color: #15803d;
+}
+
+.payment-card__logo {
+  height: 32px;
+  object-fit: contain;
+  width: 32px;
 }
 
 .payment-card__content {
