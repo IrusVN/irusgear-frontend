@@ -59,22 +59,22 @@
               class="review-item"
             >
               <img
-                :src="item.image || fallbackImage"
+                :src="item.thumbnail || fallbackImage"
                 :alt="item.productName"
                 class="review-item__image"
                 loading="lazy"
               />
               <div class="review-item__info">
                 <p class="review-item__name">{{ item.productName }}</p>
-                <p v-if="item.selectedOptionsText" class="review-item__options">
-                  {{ item.selectedOptionsText }}
+                <p v-if="getSelectedOptionsText(item)" class="review-item__options">
+                  {{ getSelectedOptionsText(item) }}
                 </p>
                 <p class="review-item__meta">
-                  <span>{{ item.quantity }} × {{ item.price?.formatted || "0đ" }}</span>
+                  <span>{{ item.quantity }} × {{ item.unitPrice?.formatted || "0đ" }}</span>
                 </p>
               </div>
               <span class="review-item__price">
-                {{ item.subtotal?.formatted || "0đ" }}
+                {{ item.currentLineTotal?.formatted || "0đ" }}
               </span>
             </div>
           </div>
@@ -180,6 +180,11 @@ const deliveryTime = computed(() => {
 
 const formatMoney = (value) => {
   return `${new Intl.NumberFormat("vi-VN").format(value)}đ`;
+};
+
+const getSelectedOptionsText = (item) => {
+  if (!item?.selectedOptions) return null;
+  return Object.values(item.selectedOptions).join(", ");
 };
 </script>
 
