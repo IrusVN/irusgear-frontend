@@ -1,19 +1,13 @@
 <template>
   <section class="order-insurance" aria-labelledby="insurance-heading">
-    <button
-      type="button"
-      class="order-insurance__toggle"
-      @click="expanded = !expanded"
-    >
-      <div class="order-insurance__toggle-left">
-        <i class="bi bi-shield-plus"></i>
-        <span>{{ $t("checkout.orderInsurance") }}</span>
-        <span class="order-insurance__price">{{ $t("checkout.insuranceFee") }}</span>
-      </div>
-      <i :class="expanded ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
-    </button>
+    <label class="order-insurance__checkbox-row">
+      <input type="checkbox" v-model="checkoutStore.orderInsurance" />
+      <i class="bi bi-shield-plus"></i>
+      <span class="order-insurance__label">{{ $t("checkout.orderInsurance") }}</span>
+      <span class="order-insurance__price">{{ $t("checkout.insuranceFee") }}</span>
+    </label>
 
-    <div v-if="expanded" class="order-insurance__body">
+    <div v-if="checkoutStore.orderInsurance" class="order-insurance__body">
       <div class="order-insurance__info">
         <p class="order-insurance__title">{{ $t("checkout.insuranceTitle") }}</p>
         <ul class="order-insurance__list">
@@ -22,11 +16,6 @@
         </ul>
         <p class="order-insurance__fee-note">{{ $t("checkout.insuranceFeeNote") }}</p>
       </div>
-
-      <label class="order-insurance__action">
-        <input type="checkbox" v-model="checkoutStore.orderInsurance" />
-        <span>{{ $t("checkout.addInsurance") }}</span>
-      </label>
 
       <div v-if="checkoutStore.orderInsurance" class="order-insurance__added">
         <i class="bi bi-check-circle-fill"></i>
@@ -37,11 +26,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 
 const checkoutStore = useCheckoutStore();
-const expanded = ref(false);
 </script>
 
 <style scoped>
@@ -52,26 +39,26 @@ const expanded = ref(false);
   overflow: hidden;
 }
 
-.order-insurance__toggle {
+.order-insurance__checkbox-row {
   align-items: center;
-  background: none;
-  border: none;
   cursor: pointer;
   display: flex;
   font-size: 14px;
   font-weight: 600;
   gap: 8px;
-  justify-content: space-between;
   padding: 16px 20px;
-  width: 100%;
   color: #18181b;
 }
 
-.order-insurance__toggle-left {
-  align-items: center;
-  display: flex;
-  gap: 8px;
-  color: #d70018;
+.order-insurance__checkbox-row input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #d70018;
+}
+
+.order-insurance__label {
+  flex: 1;
 }
 
 .order-insurance__price {
@@ -80,10 +67,6 @@ const expanded = ref(false);
   color: #d70018;
   font-size: 12px;
   padding: 2px 8px;
-}
-
-.order-insurance__toggle i:last-child {
-  color: #71717a;
 }
 
 .order-insurance__body {
@@ -132,21 +115,6 @@ const expanded = ref(false);
   color: #71717a;
   font-size: 11px;
   margin: 8px 0 0;
-}
-
-.order-insurance__action {
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  font-size: 13px;
-  font-weight: 600;
-  gap: 8px;
-  color: #18181b;
-}
-
-.order-insurance__action input {
-  width: 16px;
-  height: 16px;
 }
 
 .order-insurance__added {

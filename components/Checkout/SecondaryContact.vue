@@ -1,24 +1,13 @@
 <template>
   <section class="secondary-contact" aria-labelledby="secondary-heading">
-    <button
-      type="button"
-      class="secondary-contact__toggle"
-      @click="expanded = !expanded"
-    >
-      <div class="secondary-contact__toggle-left">
-        <i class="bi bi-person-plus"></i>
-        <span>{{ $t("checkout.deliverToOther") }}</span>
-      </div>
-      <i :class="expanded ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
-    </button>
+    <label class="secondary-contact__checkbox-row">
+      <input type="checkbox" v-model="checkoutStore.secondaryContact.enabled" />
+      <i class="bi bi-person-plus"></i>
+      <span class="secondary-contact__label">{{ $t("checkout.deliverToOther") }}</span>
+    </label>
 
-    <div v-if="expanded" class="secondary-contact__body">
-      <label class="secondary-contact__checkbox">
-        <input type="checkbox" v-model="checkoutStore.secondaryContact.enabled" />
-        <span>{{ $t("checkout.enableSecondary") }}</span>
-      </label>
-
-      <div v-if="checkoutStore.secondaryContact.enabled" class="secondary-contact__fields">
+    <div v-if="checkoutStore.secondaryContact.enabled" class="secondary-contact__body">
+      <div class="secondary-contact__fields">
         <div class="secondary-contact__row">
           <div class="secondary-contact__field">
             <label class="secondary-contact__label">{{ $t("checkout.receiverName") }}</label>
@@ -50,11 +39,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 
 const checkoutStore = useCheckoutStore();
-const expanded = ref(false);
 </script>
 
 <style scoped>
@@ -65,30 +52,30 @@ const expanded = ref(false);
   overflow: hidden;
 }
 
-.secondary-contact__toggle {
+.secondary-contact__checkbox-row {
   align-items: center;
-  background: none;
-  border: none;
   cursor: pointer;
   display: flex;
   font-size: 14px;
   font-weight: 600;
   gap: 8px;
-  justify-content: space-between;
   padding: 16px 20px;
-  width: 100%;
   color: #18181b;
 }
 
-.secondary-contact__toggle-left {
-  align-items: center;
-  display: flex;
-  gap: 8px;
+.secondary-contact__checkbox-row input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #d70018;
+}
+
+.secondary-contact__checkbox-row i {
   color: #d70018;
 }
 
-.secondary-contact__toggle i:last-child {
-  color: #71717a;
+.secondary-contact__label {
+  flex: 1;
 }
 
 .secondary-contact__body {
@@ -99,23 +86,19 @@ const expanded = ref(false);
   gap: 12px;
 }
 
-.secondary-contact__checkbox {
+.secondary-contact__checkbox--sub {
   align-items: center;
   cursor: pointer;
   display: flex;
-  font-size: 13px;
+  font-size: 12px;
   gap: 8px;
-  color: #18181b;
+  color: #71717a;
 }
 
-.secondary-contact__checkbox input {
+.secondary-contact__checkbox--sub input {
   width: 16px;
   height: 16px;
-}
-
-.secondary-contact__checkbox--sub {
-  color: #71717a;
-  font-size: 12px;
+  cursor: pointer;
 }
 
 .secondary-contact__fields {
