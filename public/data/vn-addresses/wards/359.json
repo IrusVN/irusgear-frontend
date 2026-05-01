@@ -1,0 +1,128 @@
+[
+  {
+    "code": "13762",
+    "name": "Cộng Hòa",
+    "full_name": "Xã Cộng Hòa",
+    "type": "Xã Cộng",
+    "district_code": "359"
+  },
+  {
+    "code": "13741",
+    "name": "Gôi",
+    "full_name": "Thị trấn Gôi",
+    "type": "Thị trấn",
+    "district_code": "359"
+  },
+  {
+    "code": "13747",
+    "name": "Hiển Khánh",
+    "full_name": "Xã Hiển Khánh",
+    "type": "Xã Hiển",
+    "district_code": "359"
+  },
+  {
+    "code": "13753",
+    "name": "Hợp Hưng",
+    "full_name": "Xã Hợp Hưng",
+    "type": "Xã Hợp",
+    "district_code": "359"
+  },
+  {
+    "code": "13780",
+    "name": "Kim Thái",
+    "full_name": "Xã Kim Thái",
+    "type": "Xã Kim",
+    "district_code": "359"
+  },
+  {
+    "code": "13774",
+    "name": "Liên Bảo",
+    "full_name": "Xã Liên Bảo",
+    "type": "Xã Liên",
+    "district_code": "359"
+  },
+  {
+    "code": "13783",
+    "name": "Liên Minh",
+    "full_name": "Xã Liên Minh",
+    "type": "Xã Liên",
+    "district_code": "359"
+  },
+  {
+    "code": "13771",
+    "name": "Minh Tân",
+    "full_name": "Xã Minh Tân",
+    "type": "Xã Minh",
+    "district_code": "359"
+  },
+  {
+    "code": "13744",
+    "name": "Minh Thuận",
+    "full_name": "Xã Minh Thuận",
+    "type": "Xã Minh",
+    "district_code": "359"
+  },
+  {
+    "code": "13768",
+    "name": "Quang Trung",
+    "full_name": "Xã Quang Trung",
+    "type": "Xã Quang",
+    "district_code": "359"
+  },
+  {
+    "code": "13789",
+    "name": "Tam Thanh",
+    "full_name": "Xã Tam Thanh",
+    "type": "Xã Tam",
+    "district_code": "359"
+  },
+  {
+    "code": "13750",
+    "name": "Tân Khánh",
+    "full_name": "Xã Tân Khánh",
+    "type": "Xã Tân",
+    "district_code": "359"
+  },
+  {
+    "code": "13759",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "359"
+  },
+  {
+    "code": "13777",
+    "name": "Thành Lợi",
+    "full_name": "Xã Thành Lợi",
+    "type": "Xã Thành",
+    "district_code": "359"
+  },
+  {
+    "code": "13765",
+    "name": "Trung Thành",
+    "full_name": "Xã Trung Thành",
+    "type": "Xã Trung",
+    "district_code": "359"
+  },
+  {
+    "code": "13792",
+    "name": "Vĩnh Hào",
+    "full_name": "Xã Vĩnh Hào",
+    "type": "Xã Vĩnh",
+    "district_code": "359"
+  },
+  {
+    "code": "13756",
+    "name": "Đại An",
+    "full_name": "Xã Đại An",
+    "type": "Xã Đại",
+    "district_code": "359"
+  },
+  {
+    "code": "13786",
+    "name": "Đại Thắng",
+    "full_name": "Xã Đại Thắng",
+    "type": "Xã Đại",
+    "district_code": "359"
+  }
+]

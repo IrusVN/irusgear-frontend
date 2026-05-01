@@ -1,0 +1,58 @@
+[
+  {
+    "code": "31594",
+    "name": "An Hiệp",
+    "full_name": "Xã An Hiệp",
+    "type": "Xã An",
+    "district_code": "942"
+  },
+  {
+    "code": "31600",
+    "name": "An Ninh",
+    "full_name": "Xã An Ninh",
+    "type": "Xã An",
+    "district_code": "942"
+  },
+  {
+    "code": "31569",
+    "name": "Châu Thành",
+    "full_name": "Thị trấn Châu Thành",
+    "type": "Thị trấn Châu",
+    "district_code": "942"
+  },
+  {
+    "code": "31570",
+    "name": "Hồ Đắc Kiện",
+    "full_name": "Xã Hồ Đắc Kiện",
+    "type": "Xã Hồ Đắc",
+    "district_code": "942"
+  },
+  {
+    "code": "31573",
+    "name": "Phú Tâm",
+    "full_name": "Xã Phú Tâm",
+    "type": "Xã Phú",
+    "district_code": "942"
+  },
+  {
+    "code": "31582",
+    "name": "Phú Tân",
+    "full_name": "Xã Phú Tân",
+    "type": "Xã Phú",
+    "district_code": "942"
+  },
+  {
+    "code": "31585",
+    "name": "Thiện Mỹ",
+    "full_name": "Xã Thiện Mỹ",
+    "type": "Xã Thiện",
+    "district_code": "942"
+  },
+  {
+    "code": "31576",
+    "name": "Thuận Hòa",
+    "full_name": "Xã Thuận Hòa",
+    "type": "Xã Thuận",
+    "district_code": "942"
+  }
+]

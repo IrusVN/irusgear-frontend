@@ -1,0 +1,65 @@
+[
+  {
+    "code": "726",
+    "name": "Bắc Tân Uyên",
+    "full_name": "Huyện Bắc Tân Uyên",
+    "type": "Huyện Bắc Tân",
+    "province_code": "74"
+  },
+  {
+    "code": "719",
+    "name": "Bàu Bàng",
+    "full_name": "Huyện Bàu Bàng",
+    "type": "Huyện Bàu",
+    "province_code": "74"
+  },
+  {
+    "code": "721",
+    "name": "Bến Cát",
+    "full_name": "Thị xã Bến Cát",
+    "type": "Thị xã Bến",
+    "province_code": "74"
+  },
+  {
+    "code": "720",
+    "name": "Dầu Tiếng",
+    "full_name": "Huyện Dầu Tiếng",
+    "type": "Huyện Dầu",
+    "province_code": "74"
+  },
+  {
+    "code": "724",
+    "name": "Dĩ An",
+    "full_name": "Thành phố Dĩ An",
+    "type": "Thành phố Dĩ",
+    "province_code": "74"
+  },
+  {
+    "code": "722",
+    "name": "Phú Giáo",
+    "full_name": "Huyện Phú Giáo",
+    "type": "Huyện Phú",
+    "province_code": "74"
+  },
+  {
+    "code": "723",
+    "name": "Tân Uyên",
+    "full_name": "Thành phố Tân Uyên",
+    "type": "Thành phố Tân",
+    "province_code": "74"
+  },
+  {
+    "code": "718",
+    "name": "Thủ Dầu Một",
+    "full_name": "Thành phố Thủ Dầu Một",
+    "type": "Thành phố Thủ Dầu",
+    "province_code": "74"
+  },
+  {
+    "code": "725",
+    "name": "Thuận An",
+    "full_name": "Thành phố Thuận An",
+    "type": "Thành phố Thuận",
+    "province_code": "74"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "code": "23203",
+    "name": "Mê Pu",
+    "full_name": "Xã Mê Pu",
+    "type": "Xã Mê",
+    "district_code": "600"
+  },
+  {
+    "code": "23206",
+    "name": "Nam Chính",
+    "full_name": "Xã Nam Chính",
+    "type": "Xã Nam",
+    "district_code": "600"
+  },
+  {
+    "code": "23200",
+    "name": "Sùng Nhơn",
+    "full_name": "Xã Sùng Nhơn",
+    "type": "Xã Sùng",
+    "district_code": "600"
+  },
+  {
+    "code": "23221",
+    "name": "Tân Hà",
+    "full_name": "Xã Tân Hà",
+    "type": "Xã Tân",
+    "district_code": "600"
+  },
+  {
+    "code": "23227",
+    "name": "Trà Tân",
+    "full_name": "Xã Trà Tân",
+    "type": "Xã Trà",
+    "district_code": "600"
+  },
+  {
+    "code": "23191",
+    "name": "Võ Xu",
+    "full_name": "Thị trấn Võ Xu",
+    "type": "Thị trấn Võ",
+    "district_code": "600"
+  },
+  {
+    "code": "23218",
+    "name": "Vũ Hoà",
+    "full_name": "Xã Vũ Hoà",
+    "type": "Xã Vũ",
+    "district_code": "600"
+  },
+  {
+    "code": "23197",
+    "name": "Đa Kai",
+    "full_name": "Xã Đa Kai",
+    "type": "Xã Đa",
+    "district_code": "600"
+  },
+  {
+    "code": "23224",
+    "name": "Đông Hà",
+    "full_name": "Xã Đông Hà",
+    "type": "Xã Đông",
+    "district_code": "600"
+  },
+  {
+    "code": "23212",
+    "name": "Đức Hạnh",
+    "full_name": "Xã Đức Hạnh",
+    "type": "Xã Đức",
+    "district_code": "600"
+  },
+  {
+    "code": "23194",
+    "name": "Đức Tài",
+    "full_name": "Thị trấn Đức Tài",
+    "type": "Thị trấn Đức",
+    "district_code": "600"
+  },
+  {
+    "code": "23215",
+    "name": "Đức Tín",
+    "full_name": "Xã Đức Tín",
+    "type": "Xã Đức",
+    "district_code": "600"
+  }
+]

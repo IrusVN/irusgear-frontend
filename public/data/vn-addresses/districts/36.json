@@ -1,0 +1,72 @@
+[
+  {
+    "code": "365",
+    "name": "Giao Thủy",
+    "full_name": "Huyện Giao Thủy",
+    "type": "Huyện Giao",
+    "province_code": "36"
+  },
+  {
+    "code": "366",
+    "name": "Hải Hậu",
+    "full_name": "Huyện Hải Hậu",
+    "type": "Huyện Hải",
+    "province_code": "36"
+  },
+  {
+    "code": "358",
+    "name": "Mỹ Lộc",
+    "full_name": "Huyện Mỹ Lộc",
+    "type": "Huyện Mỹ",
+    "province_code": "36"
+  },
+  {
+    "code": "362",
+    "name": "Nam Trực",
+    "full_name": "Huyện Nam Trực",
+    "type": "Huyện Nam",
+    "province_code": "36"
+  },
+  {
+    "code": "356",
+    "name": "Nam Định",
+    "full_name": "Thành phố Nam Định",
+    "type": "Thành phố Nam",
+    "province_code": "36"
+  },
+  {
+    "code": "361",
+    "name": "Nghĩa Hưng",
+    "full_name": "Huyện Nghĩa Hưng",
+    "type": "Huyện Nghĩa",
+    "province_code": "36"
+  },
+  {
+    "code": "363",
+    "name": "Trực Ninh",
+    "full_name": "Huyện Trực Ninh",
+    "type": "Huyện Trực",
+    "province_code": "36"
+  },
+  {
+    "code": "359",
+    "name": "Vụ Bản",
+    "full_name": "Huyện Vụ Bản",
+    "type": "Huyện Vụ",
+    "province_code": "36"
+  },
+  {
+    "code": "364",
+    "name": "Xuân Trường",
+    "full_name": "Huyện Xuân Trường",
+    "type": "Huyện Xuân",
+    "province_code": "36"
+  },
+  {
+    "code": "360",
+    "name": "Ý Yên",
+    "full_name": "Huyện Ý Yên",
+    "type": "Huyện Ý",
+    "province_code": "36"
+  }
+]

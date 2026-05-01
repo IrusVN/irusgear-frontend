@@ -1,0 +1,86 @@
+[
+  {
+    "code": "121",
+    "name": "Bắc Yên",
+    "full_name": "Huyện Bắc Yên",
+    "type": "Huyện Bắc",
+    "province_code": "14"
+  },
+  {
+    "code": "125",
+    "name": "Mai Sơn",
+    "full_name": "Huyện Mai Sơn",
+    "type": "Huyện Mai",
+    "province_code": "14"
+  },
+  {
+    "code": "123",
+    "name": "Mộc Châu",
+    "full_name": "Huyện Mộc Châu",
+    "type": "Huyện Mộc",
+    "province_code": "14"
+  },
+  {
+    "code": "120",
+    "name": "Mường La",
+    "full_name": "Huyện Mường La",
+    "type": "Huyện Mường",
+    "province_code": "14"
+  },
+  {
+    "code": "122",
+    "name": "Phù Yên",
+    "full_name": "Huyện Phù Yên",
+    "type": "Huyện Phù",
+    "province_code": "14"
+  },
+  {
+    "code": "118",
+    "name": "Quỳnh Nhai",
+    "full_name": "Huyện Quỳnh Nhai",
+    "type": "Huyện Quỳnh",
+    "province_code": "14"
+  },
+  {
+    "code": "116",
+    "name": "Sơn La",
+    "full_name": "Thành phố Sơn La",
+    "type": "Thành phố Sơn",
+    "province_code": "14"
+  },
+  {
+    "code": "126",
+    "name": "Sông Mã",
+    "full_name": "Huyện Sông Mã",
+    "type": "Huyện Sông",
+    "province_code": "14"
+  },
+  {
+    "code": "127",
+    "name": "Sốp Cộp",
+    "full_name": "Huyện Sốp Cộp",
+    "type": "Huyện Sốp",
+    "province_code": "14"
+  },
+  {
+    "code": "119",
+    "name": "Thuận Châu",
+    "full_name": "Huyện Thuận Châu",
+    "type": "Huyện Thuận",
+    "province_code": "14"
+  },
+  {
+    "code": "128",
+    "name": "Vân Hồ",
+    "full_name": "Huyện Vân Hồ",
+    "type": "Huyện Vân",
+    "province_code": "14"
+  },
+  {
+    "code": "124",
+    "name": "Yên Châu",
+    "full_name": "Huyện Yên Châu",
+    "type": "Huyện Yên",
+    "province_code": "14"
+  }
+]

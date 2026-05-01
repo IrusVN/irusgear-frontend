@@ -1,0 +1,44 @@
+[
+  {
+    "code": "11689",
+    "name": "Anh Dũng",
+    "full_name": "Phường Anh Dũng",
+    "type": "Phường Anh",
+    "district_code": "309"
+  },
+  {
+    "code": "11692",
+    "name": "Hải Thành",
+    "full_name": "Phường Hải Thành",
+    "type": "Phường Hải",
+    "district_code": "309"
+  },
+  {
+    "code": "11707",
+    "name": "Hoà Nghĩa",
+    "full_name": "Phường Hoà Nghĩa",
+    "type": "Phường Hoà",
+    "district_code": "309"
+  },
+  {
+    "code": "11686",
+    "name": "Hưng Đạo",
+    "full_name": "Phường Hưng Đạo",
+    "type": "Phường Hưng",
+    "district_code": "309"
+  },
+  {
+    "code": "11740",
+    "name": "Tân Thành",
+    "full_name": "Phường Tân Thành",
+    "type": "Phường Tân",
+    "district_code": "309"
+  },
+  {
+    "code": "11683",
+    "name": "Đa Phúc",
+    "full_name": "Phường Đa Phúc",
+    "type": "Phường Đa",
+    "district_code": "309"
+  }
+]

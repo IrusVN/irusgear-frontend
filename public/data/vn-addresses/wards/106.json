@@ -1,0 +1,93 @@
+[
+  {
+    "code": "03424",
+    "name": "Bản Bo",
+    "full_name": "Xã Bản Bo",
+    "type": "Xã Bản",
+    "district_code": "106"
+  },
+  {
+    "code": "03418",
+    "name": "Bản Giang",
+    "full_name": "Xã Bản Giang",
+    "type": "Xã Bản",
+    "district_code": "106"
+  },
+  {
+    "code": "03421",
+    "name": "Bản Hon",
+    "full_name": "Xã Bản Hon",
+    "type": "Xã Bản",
+    "district_code": "106"
+  },
+  {
+    "code": "03412",
+    "name": "Bình Lư",
+    "full_name": "Xã Bình Lư",
+    "type": "Xã Bình",
+    "district_code": "106"
+  },
+  {
+    "code": "03405",
+    "name": "Giang Ma",
+    "full_name": "Xã Giang Ma",
+    "type": "Xã Giang",
+    "district_code": "106"
+  },
+  {
+    "code": "03406",
+    "name": "Hồ Thầu",
+    "full_name": "Xã Hồ Thầu",
+    "type": "Xã Hồ",
+    "district_code": "106"
+  },
+  {
+    "code": "03430",
+    "name": "Khun Há",
+    "full_name": "Xã Khun Há",
+    "type": "Xã Khun",
+    "district_code": "106"
+  },
+  {
+    "code": "03427",
+    "name": "Nà Tăm",
+    "full_name": "Xã Nà Tăm",
+    "type": "Xã Nà",
+    "district_code": "106"
+  },
+  {
+    "code": "03415",
+    "name": "Nùng Nàng",
+    "full_name": "Xã Nùng Nàng",
+    "type": "Xã Nùng",
+    "district_code": "106"
+  },
+  {
+    "code": "03413",
+    "name": "Sơn Bình",
+    "full_name": "Xã Sơn Bình",
+    "type": "Xã Sơn",
+    "district_code": "106"
+  },
+  {
+    "code": "03400",
+    "name": "Tả Lèng",
+    "full_name": "Xã Tả Lèng",
+    "type": "Xã Tả",
+    "district_code": "106"
+  },
+  {
+    "code": "03390",
+    "name": "Tam Đường",
+    "full_name": "Thị trấn Tam Đường",
+    "type": "Thị trấn Tam",
+    "district_code": "106"
+  },
+  {
+    "code": "03394",
+    "name": "Thèn Sin",
+    "full_name": "Xã Thèn Sin",
+    "type": "Xã Thèn",
+    "district_code": "106"
+  }
+]

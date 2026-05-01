@@ -1,0 +1,72 @@
+[
+  {
+    "code": "26314",
+    "name": "Bàu Hàm 2",
+    "full_name": "Xã Bàu Hàm 2",
+    "type": "Xã Bàu Hàm",
+    "district_code": "738"
+  },
+  {
+    "code": "26326",
+    "name": "Dầu Giây",
+    "full_name": "Thị trấn Dầu Giây",
+    "type": "Thị trấn Dầu",
+    "district_code": "738"
+  },
+  {
+    "code": "26308",
+    "name": "Gia Kiệm",
+    "full_name": "Xã Gia Kiệm",
+    "type": "Xã Gia",
+    "district_code": "738"
+  },
+  {
+    "code": "26299",
+    "name": "Gia Tân 1",
+    "full_name": "Xã Gia Tân 1",
+    "type": "Xã Gia Tân",
+    "district_code": "738"
+  },
+  {
+    "code": "26302",
+    "name": "Gia Tân 2",
+    "full_name": "Xã Gia Tân 2",
+    "type": "Xã Gia Tân",
+    "district_code": "738"
+  },
+  {
+    "code": "26305",
+    "name": "Gia Tân 3",
+    "full_name": "Xã Gia Tân 3",
+    "type": "Xã Gia Tân",
+    "district_code": "738"
+  },
+  {
+    "code": "26317",
+    "name": "Hưng Lộc",
+    "full_name": "Xã Hưng Lộc",
+    "type": "Xã Hưng",
+    "district_code": "738"
+  },
+  {
+    "code": "26320",
+    "name": "Lộ 25",
+    "full_name": "Xã Lộ 25",
+    "type": "Xã Lộ",
+    "district_code": "738"
+  },
+  {
+    "code": "26311",
+    "name": "Quang Trung",
+    "full_name": "Xã Quang Trung",
+    "type": "Xã Quang",
+    "district_code": "738"
+  },
+  {
+    "code": "26323",
+    "name": "Xuân Thiện",
+    "full_name": "Xã Xuân Thiện",
+    "type": "Xã Xuân",
+    "district_code": "738"
+  }
+]

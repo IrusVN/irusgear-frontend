@@ -1,0 +1,79 @@
+[
+  {
+    "code": "05008",
+    "name": "Cao Dương",
+    "full_name": "Xã Cao Dương",
+    "type": "Xã Cao",
+    "district_code": "152"
+  },
+  {
+    "code": "04957",
+    "name": "Cao Sơn",
+    "full_name": "Xã Cao Sơn",
+    "type": "Xã Cao",
+    "district_code": "152"
+  },
+  {
+    "code": "04960",
+    "name": "Cư Yên",
+    "full_name": "Xã Cư Yên",
+    "type": "Xã Cư",
+    "district_code": "152"
+  },
+  {
+    "code": "04945",
+    "name": "Hòa Sơn",
+    "full_name": "Xã Hòa Sơn",
+    "type": "Xã Hòa",
+    "district_code": "152"
+  },
+  {
+    "code": "04942",
+    "name": "Lâm Sơn",
+    "full_name": "Xã Lâm Sơn",
+    "type": "Xã Lâm",
+    "district_code": "152"
+  },
+  {
+    "code": "04969",
+    "name": "Liên Sơn",
+    "full_name": "Xã Liên Sơn",
+    "type": "Xã Liên",
+    "district_code": "152"
+  },
+  {
+    "code": "04924",
+    "name": "Lương Sơn",
+    "full_name": "Thị trấn Lương Sơn",
+    "type": "Thị trấn Lương",
+    "district_code": "152"
+  },
+  {
+    "code": "04954",
+    "name": "Nhuận Trạch",
+    "full_name": "Xã Nhuận Trạch",
+    "type": "Xã Nhuận",
+    "district_code": "152"
+  },
+  {
+    "code": "04951",
+    "name": "Tân Vinh",
+    "full_name": "Xã Tân Vinh",
+    "type": "Xã Tân",
+    "district_code": "152"
+  },
+  {
+    "code": "05047",
+    "name": "Thanh Cao",
+    "full_name": "Xã Thanh Cao",
+    "type": "Xã Thanh",
+    "district_code": "152"
+  },
+  {
+    "code": "05041",
+    "name": "Thanh Sơn",
+    "full_name": "Xã Thanh Sơn",
+    "type": "Xã Thanh",
+    "district_code": "152"
+  }
+]

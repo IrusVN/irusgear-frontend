@@ -1,0 +1,205 @@
+[
+  {
+    "code": "16369",
+    "name": "Công Chính",
+    "full_name": "Xã Công Chính",
+    "type": "Xã Công",
+    "district_code": "404"
+  },
+  {
+    "code": "16354",
+    "name": "Công Liêm",
+    "full_name": "Xã Công Liêm",
+    "type": "Xã Công",
+    "district_code": "404"
+  },
+  {
+    "code": "16294",
+    "name": "Hoàng Giang",
+    "full_name": "Xã Hoàng Giang",
+    "type": "Xã Hoàng",
+    "district_code": "404"
+  },
+  {
+    "code": "16288",
+    "name": "Hoàng Sơn",
+    "full_name": "Xã Hoàng Sơn",
+    "type": "Xã Hoàng",
+    "district_code": "404"
+  },
+  {
+    "code": "16324",
+    "name": "Minh Khôi",
+    "full_name": "Xã Minh Khôi",
+    "type": "Xã Minh",
+    "district_code": "404"
+  },
+  {
+    "code": "16321",
+    "name": "Minh Nghĩa",
+    "full_name": "Xã Minh Nghĩa",
+    "type": "Xã Minh",
+    "district_code": "404"
+  },
+  {
+    "code": "16279",
+    "name": "Nông Cống",
+    "full_name": "Thị trấn Nông Cống",
+    "type": "Thị trấn Nông",
+    "district_code": "404"
+  },
+  {
+    "code": "16291",
+    "name": "Tân Khang",
+    "full_name": "Xã Tân Khang",
+    "type": "Xã Tân",
+    "district_code": "404"
+  },
+  {
+    "code": "16282",
+    "name": "Tân Phúc",
+    "full_name": "Xã Tân Phúc",
+    "type": "Xã Tân",
+    "district_code": "404"
+  },
+  {
+    "code": "16285",
+    "name": "Tân Thọ",
+    "full_name": "Xã Tân Thọ",
+    "type": "Xã Tân",
+    "district_code": "404"
+  },
+  {
+    "code": "16315",
+    "name": "Tế Lợi",
+    "full_name": "Xã Tế Lợi",
+    "type": "Xã Tế",
+    "district_code": "404"
+  },
+  {
+    "code": "16318",
+    "name": "Tế Nông",
+    "full_name": "Xã Tế Nông",
+    "type": "Xã Tế",
+    "district_code": "404"
+  },
+  {
+    "code": "16309",
+    "name": "Tế Thắng",
+    "full_name": "Xã Tế Thắng",
+    "type": "Xã Tế",
+    "district_code": "404"
+  },
+  {
+    "code": "16351",
+    "name": "Thăng Bình",
+    "full_name": "Xã Thăng Bình",
+    "type": "Xã Thăng",
+    "district_code": "404"
+  },
+  {
+    "code": "16342",
+    "name": "Thăng Long",
+    "full_name": "Xã Thăng Long",
+    "type": "Xã Thăng",
+    "district_code": "404"
+  },
+  {
+    "code": "16360",
+    "name": "Thăng Thọ",
+    "full_name": "Xã Thăng Thọ",
+    "type": "Xã Thăng",
+    "district_code": "404"
+  },
+  {
+    "code": "16297",
+    "name": "Trung Chính",
+    "full_name": "Xã Trung Chính",
+    "type": "Xã Trung",
+    "district_code": "404"
+  },
+  {
+    "code": "16303",
+    "name": "Trung Thành",
+    "full_name": "Xã Trung Thành",
+    "type": "Xã Trung",
+    "district_code": "404"
+  },
+  {
+    "code": "16336",
+    "name": "Trường Giang",
+    "full_name": "Xã Trường Giang",
+    "type": "Xã Trường",
+    "district_code": "404"
+  },
+  {
+    "code": "16345",
+    "name": "Trường Minh",
+    "full_name": "Xã Trường Minh",
+    "type": "Xã Trường",
+    "district_code": "404"
+  },
+  {
+    "code": "16348",
+    "name": "Trường Sơn",
+    "full_name": "Xã Trường Sơn",
+    "type": "Xã Trường",
+    "district_code": "404"
+  },
+  {
+    "code": "16330",
+    "name": "Trường Trung",
+    "full_name": "Xã Trường Trung",
+    "type": "Xã Trường",
+    "district_code": "404"
+  },
+  {
+    "code": "16363",
+    "name": "Tượng Lĩnh",
+    "full_name": "Xã Tượng Lĩnh",
+    "type": "Xã Tượng",
+    "district_code": "404"
+  },
+  {
+    "code": "16366",
+    "name": "Tượng Sơn",
+    "full_name": "Xã Tượng Sơn",
+    "type": "Xã Tượng",
+    "district_code": "404"
+  },
+  {
+    "code": "16357",
+    "name": "Tượng Văn",
+    "full_name": "Xã Tượng Văn",
+    "type": "Xã Tượng",
+    "district_code": "404"
+  },
+  {
+    "code": "16327",
+    "name": "Vạn Hòa",
+    "full_name": "Xã Vạn Hòa",
+    "type": "Xã Vạn",
+    "district_code": "404"
+  },
+  {
+    "code": "16333",
+    "name": "Vạn Thắng",
+    "full_name": "Xã Vạn Thắng",
+    "type": "Xã Vạn",
+    "district_code": "404"
+  },
+  {
+    "code": "16339",
+    "name": "Vạn Thiện",
+    "full_name": "Xã Vạn Thiện",
+    "type": "Xã Vạn",
+    "district_code": "404"
+  },
+  {
+    "code": "16375",
+    "name": "Yên Mỹ",
+    "full_name": "Xã Yên Mỹ",
+    "type": "Xã Yên",
+    "district_code": "404"
+  }
+]

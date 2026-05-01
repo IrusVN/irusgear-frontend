@@ -1,0 +1,72 @@
+[
+  {
+    "code": "213",
+    "name": "Bắc Giang",
+    "full_name": "Thành phố Bắc Giang",
+    "type": "Thành phố Bắc",
+    "province_code": "24"
+  },
+  {
+    "code": "223",
+    "name": "Hiệp Hòa",
+    "full_name": "Huyện Hiệp Hòa",
+    "type": "Huyện Hiệp",
+    "province_code": "24"
+  },
+  {
+    "code": "217",
+    "name": "Lạng Giang",
+    "full_name": "Huyện Lạng Giang",
+    "type": "Huyện Lạng",
+    "province_code": "24"
+  },
+  {
+    "code": "218",
+    "name": "Lục Nam",
+    "full_name": "Huyện Lục Nam",
+    "type": "Huyện Lục",
+    "province_code": "24"
+  },
+  {
+    "code": "219",
+    "name": "Lục Ngạn",
+    "full_name": "Huyện Lục Ngạn",
+    "type": "Huyện Lục",
+    "province_code": "24"
+  },
+  {
+    "code": "220",
+    "name": "Sơn Động",
+    "full_name": "Huyện Sơn Động",
+    "type": "Huyện Sơn",
+    "province_code": "24"
+  },
+  {
+    "code": "216",
+    "name": "Tân Yên",
+    "full_name": "Huyện Tân Yên",
+    "type": "Huyện Tân",
+    "province_code": "24"
+  },
+  {
+    "code": "222",
+    "name": "Việt Yên",
+    "full_name": "Thị xã Việt Yên",
+    "type": "Thị xã Việt",
+    "province_code": "24"
+  },
+  {
+    "code": "221",
+    "name": "Yên Dũng",
+    "full_name": "Huyện Yên Dũng",
+    "type": "Huyện Yên",
+    "province_code": "24"
+  },
+  {
+    "code": "215",
+    "name": "Yên Thế",
+    "full_name": "Huyện Yên Thế",
+    "type": "Huyện Yên",
+    "province_code": "24"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "code": "05983",
+    "name": "Chi Lăng",
+    "full_name": "Phường Chi Lăng",
+    "type": "Phường Chi",
+    "district_code": "178"
+  },
+  {
+    "code": "05971",
+    "name": "Hoàng Văn Thụ",
+    "full_name": "Phường Hoàng Văn Thụ",
+    "type": "Phường Hoàng Văn",
+    "district_code": "178"
+  },
+  {
+    "code": "05986",
+    "name": "Hoàng Đồng",
+    "full_name": "Xã Hoàng Đồng",
+    "type": "Xã Hoàng",
+    "district_code": "178"
+  },
+  {
+    "code": "05992",
+    "name": "Mai Pha",
+    "full_name": "Xã Mai Pha",
+    "type": "Xã Mai",
+    "district_code": "178"
+  },
+  {
+    "code": "05989",
+    "name": "Quảng Lạc",
+    "full_name": "Xã Quảng Lạc",
+    "type": "Xã Quảng",
+    "district_code": "178"
+  },
+  {
+    "code": "05974",
+    "name": "Tam Thanh",
+    "full_name": "Phường Tam Thanh",
+    "type": "Phường Tam",
+    "district_code": "178"
+  },
+  {
+    "code": "05977",
+    "name": "Vĩnh Trại",
+    "full_name": "Phường Vĩnh Trại",
+    "type": "Phường Vĩnh",
+    "district_code": "178"
+  },
+  {
+    "code": "05980",
+    "name": "Đông Kinh",
+    "full_name": "Phường Đông Kinh",
+    "type": "Phường Đông",
+    "district_code": "178"
+  }
+]

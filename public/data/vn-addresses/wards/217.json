@@ -1,0 +1,149 @@
+[
+  {
+    "code": "07396",
+    "name": "An Hà",
+    "full_name": "Xã An Hà",
+    "type": "Xã An",
+    "district_code": "217"
+  },
+  {
+    "code": "07408",
+    "name": "Dương Đức",
+    "full_name": "Xã Dương Đức",
+    "type": "Xã Dương",
+    "district_code": "217"
+  },
+  {
+    "code": "07405",
+    "name": "Hương Lạc",
+    "full_name": "Xã Hương Lạc",
+    "type": "Xã Hương",
+    "district_code": "217"
+  },
+  {
+    "code": "07387",
+    "name": "Hương Sơn",
+    "full_name": "Xã Hương Sơn",
+    "type": "Xã Hương",
+    "district_code": "217"
+  },
+  {
+    "code": "07399",
+    "name": "Kép",
+    "full_name": "Thị trấn Kép",
+    "type": "Thị trấn",
+    "district_code": "217"
+  },
+  {
+    "code": "07402",
+    "name": "Mỹ Hà",
+    "full_name": "Xã Mỹ Hà",
+    "type": "Xã Mỹ",
+    "district_code": "217"
+  },
+  {
+    "code": "07420",
+    "name": "Mỹ Thái",
+    "full_name": "Xã Mỹ Thái",
+    "type": "Xã Mỹ",
+    "district_code": "217"
+  },
+  {
+    "code": "07378",
+    "name": "Nghĩa Hòa",
+    "full_name": "Xã Nghĩa Hòa",
+    "type": "Xã Nghĩa",
+    "district_code": "217"
+  },
+  {
+    "code": "07381",
+    "name": "Nghĩa Hưng",
+    "full_name": "Xã Nghĩa Hưng",
+    "type": "Xã Nghĩa",
+    "district_code": "217"
+  },
+  {
+    "code": "07384",
+    "name": "Quang Thịnh",
+    "full_name": "Xã Quang Thịnh",
+    "type": "Xã Quang",
+    "district_code": "217"
+  },
+  {
+    "code": "07432",
+    "name": "Tân Dĩnh",
+    "full_name": "Xã Tân Dĩnh",
+    "type": "Xã Tân",
+    "district_code": "217"
+  },
+  {
+    "code": "07417",
+    "name": "Tân Hưng",
+    "full_name": "Xã Tân Hưng",
+    "type": "Xã Tân",
+    "district_code": "217"
+  },
+  {
+    "code": "07411",
+    "name": "Tân Thanh",
+    "full_name": "Xã Tân Thanh",
+    "type": "Xã Tân",
+    "district_code": "217"
+  },
+  {
+    "code": "07438",
+    "name": "Thái Đào",
+    "full_name": "Xã Thái Đào",
+    "type": "Xã Thái",
+    "district_code": "217"
+  },
+  {
+    "code": "07393",
+    "name": "Tiên Lục",
+    "full_name": "Xã Tiên Lục",
+    "type": "Xã Tiên",
+    "district_code": "217"
+  },
+  {
+    "code": "07375",
+    "name": "Vôi",
+    "full_name": "Thị trấn Vôi",
+    "type": "Thị trấn",
+    "district_code": "217"
+  },
+  {
+    "code": "07429",
+    "name": "Xuân Hương",
+    "full_name": "Xã Xuân Hương",
+    "type": "Xã Xuân",
+    "district_code": "217"
+  },
+  {
+    "code": "07426",
+    "name": "Xương Lâm",
+    "full_name": "Xã Xương Lâm",
+    "type": "Xã Xương",
+    "district_code": "217"
+  },
+  {
+    "code": "07414",
+    "name": "Yên Mỹ",
+    "full_name": "Xã Yên Mỹ",
+    "type": "Xã Yên",
+    "district_code": "217"
+  },
+  {
+    "code": "07435",
+    "name": "Đại Lâm",
+    "full_name": "Xã Đại Lâm",
+    "type": "Xã Đại",
+    "district_code": "217"
+  },
+  {
+    "code": "07390",
+    "name": "Đào Mỹ",
+    "full_name": "Xã Đào Mỹ",
+    "type": "Xã Đào",
+    "district_code": "217"
+  }
+]

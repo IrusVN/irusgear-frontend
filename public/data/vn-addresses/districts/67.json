@@ -1,0 +1,58 @@
+[
+  {
+    "code": "662",
+    "name": "Cư Jút",
+    "full_name": "Huyện Cư Jút",
+    "type": "Huyện Cư",
+    "province_code": "67"
+  },
+  {
+    "code": "660",
+    "name": "Gia Nghĩa",
+    "full_name": "Thành phố Gia Nghĩa",
+    "type": "Thành phố Gia",
+    "province_code": "67"
+  },
+  {
+    "code": "664",
+    "name": "Krông Nô",
+    "full_name": "Huyện Krông Nô",
+    "type": "Huyện Krông",
+    "province_code": "67"
+  },
+  {
+    "code": "667",
+    "name": "Tuy Đức",
+    "full_name": "Huyện Tuy Đức",
+    "type": "Huyện Tuy",
+    "province_code": "67"
+  },
+  {
+    "code": "661",
+    "name": "Đăk Glong",
+    "full_name": "Huyện Đăk Glong",
+    "type": "Huyện Đăk",
+    "province_code": "67"
+  },
+  {
+    "code": "663",
+    "name": "Đắk Mil",
+    "full_name": "Huyện Đắk Mil",
+    "type": "Huyện Đắk",
+    "province_code": "67"
+  },
+  {
+    "code": "666",
+    "name": "Đắk R'Lấp",
+    "full_name": "Huyện Đắk R'Lấp",
+    "type": "Huyện Đắk",
+    "province_code": "67"
+  },
+  {
+    "code": "665",
+    "name": "Đắk Song",
+    "full_name": "Huyện Đắk Song",
+    "type": "Huyện Đắk",
+    "province_code": "67"
+  }
+]

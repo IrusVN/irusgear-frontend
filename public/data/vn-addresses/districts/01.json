@@ -1,0 +1,212 @@
+[
+  {
+    "code": "271",
+    "name": "Ba Vì",
+    "full_name": "Huyện Ba Vì",
+    "type": "Huyện Ba",
+    "province_code": "01"
+  },
+  {
+    "code": "001",
+    "name": "Ba Đình",
+    "full_name": "Quận Ba Đình",
+    "type": "Quận Ba",
+    "province_code": "01"
+  },
+  {
+    "code": "021",
+    "name": "Bắc Từ Liêm",
+    "full_name": "Quận Bắc Từ Liêm",
+    "type": "Quận Bắc Từ",
+    "province_code": "01"
+  },
+  {
+    "code": "005",
+    "name": "Cầu Giấy",
+    "full_name": "Quận Cầu Giấy",
+    "type": "Quận Cầu",
+    "province_code": "01"
+  },
+  {
+    "code": "277",
+    "name": "Chương Mỹ",
+    "full_name": "Huyện Chương Mỹ",
+    "type": "Huyện Chương",
+    "province_code": "01"
+  },
+  {
+    "code": "018",
+    "name": "Gia Lâm",
+    "full_name": "Huyện Gia Lâm",
+    "type": "Huyện Gia",
+    "province_code": "01"
+  },
+  {
+    "code": "268",
+    "name": "Hà Đông",
+    "full_name": "Quận Hà Đông",
+    "type": "Quận Hà",
+    "province_code": "01"
+  },
+  {
+    "code": "007",
+    "name": "Hai Bà Trưng",
+    "full_name": "Quận Hai Bà Trưng",
+    "type": "Quận Hai Bà",
+    "province_code": "01"
+  },
+  {
+    "code": "274",
+    "name": "Hoài Đức",
+    "full_name": "Huyện Hoài Đức",
+    "type": "Huyện Hoài",
+    "province_code": "01"
+  },
+  {
+    "code": "002",
+    "name": "Hoàn Kiếm",
+    "full_name": "Quận Hoàn Kiếm",
+    "type": "Quận Hoàn",
+    "province_code": "01"
+  },
+  {
+    "code": "008",
+    "name": "Hoàng Mai",
+    "full_name": "Quận Hoàng Mai",
+    "type": "Quận Hoàng",
+    "province_code": "01"
+  },
+  {
+    "code": "004",
+    "name": "Long Biên",
+    "full_name": "Quận Long Biên",
+    "type": "Quận Long",
+    "province_code": "01"
+  },
+  {
+    "code": "250",
+    "name": "Mê Linh",
+    "full_name": "Huyện Mê Linh",
+    "type": "Huyện Mê",
+    "province_code": "01"
+  },
+  {
+    "code": "282",
+    "name": "Mỹ Đức",
+    "full_name": "Huyện Mỹ Đức",
+    "type": "Huyện Mỹ",
+    "province_code": "01"
+  },
+  {
+    "code": "019",
+    "name": "Nam Từ Liêm",
+    "full_name": "Quận Nam Từ Liêm",
+    "type": "Quận Nam Từ",
+    "province_code": "01"
+  },
+  {
+    "code": "280",
+    "name": "Phú Xuyên",
+    "full_name": "Huyện Phú Xuyên",
+    "type": "Huyện Phú",
+    "province_code": "01"
+  },
+  {
+    "code": "272",
+    "name": "Phúc Thọ",
+    "full_name": "Huyện Phúc Thọ",
+    "type": "Huyện Phúc",
+    "province_code": "01"
+  },
+  {
+    "code": "275",
+    "name": "Quốc Oai",
+    "full_name": "Huyện Quốc Oai",
+    "type": "Huyện Quốc",
+    "province_code": "01"
+  },
+  {
+    "code": "016",
+    "name": "Sóc Sơn",
+    "full_name": "Huyện Sóc Sơn",
+    "type": "Huyện Sóc",
+    "province_code": "01"
+  },
+  {
+    "code": "269",
+    "name": "Sơn Tây",
+    "full_name": "Thị xã Sơn Tây",
+    "type": "Thị xã Sơn",
+    "province_code": "01"
+  },
+  {
+    "code": "003",
+    "name": "Tây Hồ",
+    "full_name": "Quận Tây Hồ",
+    "type": "Quận Tây",
+    "province_code": "01"
+  },
+  {
+    "code": "276",
+    "name": "Thạch Thất",
+    "full_name": "Huyện Thạch Thất",
+    "type": "Huyện Thạch",
+    "province_code": "01"
+  },
+  {
+    "code": "278",
+    "name": "Thanh Oai",
+    "full_name": "Huyện Thanh Oai",
+    "type": "Huyện Thanh",
+    "province_code": "01"
+  },
+  {
+    "code": "020",
+    "name": "Thanh Trì",
+    "full_name": "Huyện Thanh Trì",
+    "type": "Huyện Thanh",
+    "province_code": "01"
+  },
+  {
+    "code": "009",
+    "name": "Thanh Xuân",
+    "full_name": "Quận Thanh Xuân",
+    "type": "Quận Thanh",
+    "province_code": "01"
+  },
+  {
+    "code": "279",
+    "name": "Thường Tín",
+    "full_name": "Huyện Thường Tín",
+    "type": "Huyện Thường",
+    "province_code": "01"
+  },
+  {
+    "code": "281",
+    "name": "Ứng Hòa",
+    "full_name": "Huyện Ứng Hòa",
+    "type": "Huyện Ứng",
+    "province_code": "01"
+  },
+  {
+    "code": "273",
+    "name": "Đan Phượng",
+    "full_name": "Huyện Đan Phượng",
+    "type": "Huyện Đan",
+    "province_code": "01"
+  },
+  {
+    "code": "017",
+    "name": "Đông Anh",
+    "full_name": "Huyện Đông Anh",
+    "type": "Huyện Đông",
+    "province_code": "01"
+  },
+  {
+    "code": "006",
+    "name": "Đống Đa",
+    "full_name": "Quận Đống Đa",
+    "type": "Quận Đống",
+    "province_code": "01"
+  }
+]

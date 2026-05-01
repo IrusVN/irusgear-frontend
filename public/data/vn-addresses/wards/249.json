@@ -1,0 +1,93 @@
+[
+  {
+    "code": "08944",
+    "name": "Bá Hiến",
+    "full_name": "Thị trấn Bá Hiến",
+    "type": "Thị trấn Bá",
+    "district_code": "249"
+  },
+  {
+    "code": "08936",
+    "name": "Gia Khánh",
+    "full_name": "Thị trấn Gia Khánh",
+    "type": "Thị trấn Gia",
+    "district_code": "249"
+  },
+  {
+    "code": "08935",
+    "name": "Hương Canh",
+    "full_name": "Thị trấn Hương Canh",
+    "type": "Thị trấn Hương",
+    "district_code": "249"
+  },
+  {
+    "code": "08950",
+    "name": "Hương Sơn",
+    "full_name": "Xã Hương Sơn",
+    "type": "Xã Hương",
+    "district_code": "249"
+  },
+  {
+    "code": "08971",
+    "name": "Phú Xuân",
+    "full_name": "Xã Phú Xuân",
+    "type": "Xã Phú",
+    "district_code": "249"
+  },
+  {
+    "code": "08956",
+    "name": "Quất Lưu",
+    "full_name": "Xã Quất Lưu",
+    "type": "Xã Quất",
+    "district_code": "249"
+  },
+  {
+    "code": "08959",
+    "name": "Sơn Lôi",
+    "full_name": "Xã Sơn Lôi",
+    "type": "Xã Sơn",
+    "district_code": "249"
+  },
+  {
+    "code": "08953",
+    "name": "Tam Hợp",
+    "full_name": "Xã Tam Hợp",
+    "type": "Xã Tam",
+    "district_code": "249"
+  },
+  {
+    "code": "08965",
+    "name": "Tân Phong",
+    "full_name": "Xã Tân Phong",
+    "type": "Xã Tân",
+    "district_code": "249"
+  },
+  {
+    "code": "08968",
+    "name": "Thanh Lãng",
+    "full_name": "Thị trấn Thanh Lãng",
+    "type": "Thị trấn Thanh",
+    "district_code": "249"
+  },
+  {
+    "code": "08947",
+    "name": "Thiện Kế",
+    "full_name": "Xã Thiện Kế",
+    "type": "Xã Thiện",
+    "district_code": "249"
+  },
+  {
+    "code": "08938",
+    "name": "Trung Mỹ",
+    "full_name": "Xã Trung Mỹ",
+    "type": "Xã Trung",
+    "district_code": "249"
+  },
+  {
+    "code": "08962",
+    "name": "Đạo Đức",
+    "full_name": "Thị trấn Đạo Đức",
+    "type": "Thị trấn Đạo",
+    "district_code": "249"
+  }
+]

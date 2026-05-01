@@ -1,0 +1,114 @@
+[
+  {
+    "code": "16177",
+    "name": "Bãi Trành",
+    "full_name": "Xã Bãi Trành",
+    "type": "Xã Bãi",
+    "district_code": "402"
+  },
+  {
+    "code": "16204",
+    "name": "Bình Lương",
+    "full_name": "Xã Bình Lương",
+    "type": "Xã Bình",
+    "district_code": "402"
+  },
+  {
+    "code": "16198",
+    "name": "Cát Tân",
+    "full_name": "Xã Cát Tân",
+    "type": "Xã Cát",
+    "district_code": "402"
+  },
+  {
+    "code": "16195",
+    "name": "Cát Vân",
+    "full_name": "Xã Cát Vân",
+    "type": "Xã Cát",
+    "district_code": "402"
+  },
+  {
+    "code": "16186",
+    "name": "Hóa Quỳ",
+    "full_name": "Xã Hóa Quỳ",
+    "type": "Xã Hóa",
+    "district_code": "402"
+  },
+  {
+    "code": "16201",
+    "name": "Tân Bình",
+    "full_name": "Xã Tân Bình",
+    "type": "Xã Tân",
+    "district_code": "402"
+  },
+  {
+    "code": "16213",
+    "name": "Thanh Hòa",
+    "full_name": "Xã Thanh Hòa",
+    "type": "Xã Thanh",
+    "district_code": "402"
+  },
+  {
+    "code": "16219",
+    "name": "Thanh Lâm",
+    "full_name": "Xã Thanh Lâm",
+    "type": "Xã Thanh",
+    "district_code": "402"
+  },
+  {
+    "code": "16216",
+    "name": "Thanh Phong",
+    "full_name": "Xã Thanh Phong",
+    "type": "Xã Thanh",
+    "district_code": "402"
+  },
+  {
+    "code": "16207",
+    "name": "Thanh Quân",
+    "full_name": "Xã Thanh Quân",
+    "type": "Xã Thanh",
+    "district_code": "402"
+  },
+  {
+    "code": "16222",
+    "name": "Thanh Sơn",
+    "full_name": "Xã Thanh Sơn",
+    "type": "Xã Thanh",
+    "district_code": "402"
+  },
+  {
+    "code": "16210",
+    "name": "Thanh Xuân",
+    "full_name": "Xã Thanh Xuân",
+    "type": "Xã Thanh",
+    "district_code": "402"
+  },
+  {
+    "code": "16225",
+    "name": "Thượng Ninh",
+    "full_name": "Xã Thượng Ninh",
+    "type": "Xã Thượng",
+    "district_code": "402"
+  },
+  {
+    "code": "16183",
+    "name": "Xuân Bình",
+    "full_name": "Xã Xuân Bình",
+    "type": "Xã Xuân",
+    "district_code": "402"
+  },
+  {
+    "code": "16180",
+    "name": "Xuân Hòa",
+    "full_name": "Xã Xuân Hòa",
+    "type": "Xã Xuân",
+    "district_code": "402"
+  },
+  {
+    "code": "16174",
+    "name": "Yên Cát",
+    "full_name": "Thị trấn Yên Cát",
+    "type": "Thị trấn Yên",
+    "district_code": "402"
+  }
+]

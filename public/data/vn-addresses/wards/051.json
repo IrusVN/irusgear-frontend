@@ -1,0 +1,107 @@
+[
+  {
+    "code": "01708",
+    "name": "Bạch Đằng",
+    "full_name": "Xã Bạch Đằng",
+    "type": "Xã Bạch",
+    "district_code": "051"
+  },
+  {
+    "code": "01711",
+    "name": "Bình Dương",
+    "full_name": "Xã Bình Dương",
+    "type": "Xã Bình",
+    "district_code": "051"
+  },
+  {
+    "code": "01657",
+    "name": "Dân Chủ",
+    "full_name": "Xã Dân Chủ",
+    "type": "Xã Dân",
+    "district_code": "051"
+  },
+  {
+    "code": "01696",
+    "name": "Hoàng Tung",
+    "full_name": "Xã Hoàng Tung",
+    "type": "Xã Hoàng",
+    "district_code": "051"
+  },
+  {
+    "code": "01723",
+    "name": "Hồng Nam",
+    "full_name": "Xã Hồng Nam",
+    "type": "Xã Hồng",
+    "district_code": "051"
+  },
+  {
+    "code": "01687",
+    "name": "Hồng Việt",
+    "full_name": "Xã Hồng Việt",
+    "type": "Xã Hồng",
+    "district_code": "051"
+  },
+  {
+    "code": "01714",
+    "name": "Lê Chung",
+    "full_name": "Xã Lê Chung",
+    "type": "Xã Lê",
+    "district_code": "051"
+  },
+  {
+    "code": "01660",
+    "name": "Nam Tuấn",
+    "full_name": "Xã Nam Tuấn",
+    "type": "Xã Nam",
+    "district_code": "051"
+  },
+  {
+    "code": "01672",
+    "name": "Ngũ Lão",
+    "full_name": "Xã Ngũ Lão",
+    "type": "Xã Ngũ",
+    "district_code": "051"
+  },
+  {
+    "code": "01699",
+    "name": "Nguyễn Huệ",
+    "full_name": "Xã Nguyễn Huệ",
+    "type": "Xã Nguyễn",
+    "district_code": "051"
+  },
+  {
+    "code": "01654",
+    "name": "Nước Hai",
+    "full_name": "Thị trấn Nước Hai",
+    "type": "Thị trấn Nước",
+    "district_code": "051"
+  },
+  {
+    "code": "01702",
+    "name": "Quang Trung",
+    "full_name": "Xã Quang Trung",
+    "type": "Xã Quang",
+    "district_code": "051"
+  },
+  {
+    "code": "01675",
+    "name": "Trương Lương",
+    "full_name": "Xã Trương Lương",
+    "type": "Xã Trương",
+    "district_code": "051"
+  },
+  {
+    "code": "01666",
+    "name": "Đại Tiến",
+    "full_name": "Xã Đại Tiến",
+    "type": "Xã Đại",
+    "district_code": "051"
+  },
+  {
+    "code": "01669",
+    "name": "Đức Long",
+    "full_name": "Xã Đức Long",
+    "type": "Xã Đức",
+    "district_code": "051"
+  }
+]

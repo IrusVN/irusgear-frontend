@@ -1,0 +1,79 @@
+[
+  {
+    "code": "11992",
+    "name": "Chỉ Đạo",
+    "full_name": "Xã Chỉ Đạo",
+    "type": "Xã Chỉ",
+    "district_code": "325"
+  },
+  {
+    "code": "12016",
+    "name": "Lạc Hồng",
+    "full_name": "Xã Lạc Hồng",
+    "type": "Xã Lạc",
+    "district_code": "325"
+  },
+  {
+    "code": "11989",
+    "name": "Lạc Đạo",
+    "full_name": "Xã Lạc Đạo",
+    "type": "Xã Lạc",
+    "district_code": "325"
+  },
+  {
+    "code": "12010",
+    "name": "Lương Tài",
+    "full_name": "Xã Lương Tài",
+    "type": "Xã Lương",
+    "district_code": "325"
+  },
+  {
+    "code": "12007",
+    "name": "Minh Hải",
+    "full_name": "Xã Minh Hải",
+    "type": "Xã Minh",
+    "district_code": "325"
+  },
+  {
+    "code": "11986",
+    "name": "Như Quỳnh",
+    "full_name": "Thị trấn Như Quỳnh",
+    "type": "Thị trấn Như",
+    "district_code": "325"
+  },
+  {
+    "code": "12001",
+    "name": "Tân Quang",
+    "full_name": "Xã Tân Quang",
+    "type": "Xã Tân",
+    "district_code": "325"
+  },
+  {
+    "code": "12013",
+    "name": "Trưng Trắc",
+    "full_name": "Xã Trưng Trắc",
+    "type": "Xã Trưng",
+    "district_code": "325"
+  },
+  {
+    "code": "11998",
+    "name": "Việt Hưng",
+    "full_name": "Xã Việt Hưng",
+    "type": "Xã Việt",
+    "district_code": "325"
+  },
+  {
+    "code": "11995",
+    "name": "Đại Đồng",
+    "full_name": "Xã Đại Đồng",
+    "type": "Xã Đại",
+    "district_code": "325"
+  },
+  {
+    "code": "12004",
+    "name": "Đình Dù",
+    "full_name": "Xã Đình Dù",
+    "type": "Xã Đình",
+    "district_code": "325"
+  }
+]

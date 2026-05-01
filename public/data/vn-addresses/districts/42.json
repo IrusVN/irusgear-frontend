@@ -1,0 +1,93 @@
+[
+  {
+    "code": "446",
+    "name": "Cẩm Xuyên",
+    "full_name": "Huyện Cẩm Xuyên",
+    "type": "Huyện Cẩm",
+    "province_code": "42"
+  },
+  {
+    "code": "443",
+    "name": "Can Lộc",
+    "full_name": "Huyện Can Lộc",
+    "type": "Huyện Can",
+    "province_code": "42"
+  },
+  {
+    "code": "436",
+    "name": "Hà Tĩnh",
+    "full_name": "Thành phố Hà Tĩnh",
+    "type": "Thành phố Hà",
+    "province_code": "42"
+  },
+  {
+    "code": "437",
+    "name": "Hồng Lĩnh",
+    "full_name": "Thị xã Hồng Lĩnh",
+    "type": "Thị xã Hồng",
+    "province_code": "42"
+  },
+  {
+    "code": "444",
+    "name": "Hương Khê",
+    "full_name": "Huyện Hương Khê",
+    "type": "Huyện Hương",
+    "province_code": "42"
+  },
+  {
+    "code": "439",
+    "name": "Hương Sơn",
+    "full_name": "Huyện Hương Sơn",
+    "type": "Huyện Hương",
+    "province_code": "42"
+  },
+  {
+    "code": "447",
+    "name": "Kỳ Anh",
+    "full_name": "Huyện Kỳ Anh",
+    "type": "Huyện Kỳ",
+    "province_code": "42"
+  },
+  {
+    "code": "449",
+    "name": "Kỳ Anh",
+    "full_name": "Thị xã Kỳ Anh",
+    "type": "Thị xã Kỳ",
+    "province_code": "42"
+  },
+  {
+    "code": "448",
+    "name": "Lộc Hà",
+    "full_name": "Huyện Lộc Hà",
+    "type": "Huyện Lộc",
+    "province_code": "42"
+  },
+  {
+    "code": "442",
+    "name": "Nghi Xuân",
+    "full_name": "Huyện Nghi Xuân",
+    "type": "Huyện Nghi",
+    "province_code": "42"
+  },
+  {
+    "code": "445",
+    "name": "Thạch Hà",
+    "full_name": "Huyện Thạch Hà",
+    "type": "Huyện Thạch",
+    "province_code": "42"
+  },
+  {
+    "code": "441",
+    "name": "Vũ Quang",
+    "full_name": "Huyện Vũ Quang",
+    "type": "Huyện Vũ",
+    "province_code": "42"
+  },
+  {
+    "code": "440",
+    "name": "Đức Thọ",
+    "full_name": "Huyện Đức Thọ",
+    "type": "Huyện Đức",
+    "province_code": "42"
+  }
+]

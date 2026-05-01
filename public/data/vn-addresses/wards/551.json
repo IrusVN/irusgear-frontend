@@ -1,0 +1,51 @@
+[
+  {
+    "code": "22006",
+    "name": "Canh Hiển",
+    "full_name": "Xã Canh Hiển",
+    "type": "Xã Canh",
+    "district_code": "551"
+  },
+  {
+    "code": "22000",
+    "name": "Canh Hiệp",
+    "full_name": "Xã Canh Hiệp",
+    "type": "Xã Canh",
+    "district_code": "551"
+  },
+  {
+    "code": "22012",
+    "name": "Canh Hòa",
+    "full_name": "Xã Canh Hòa",
+    "type": "Xã Canh",
+    "district_code": "551"
+  },
+  {
+    "code": "21997",
+    "name": "Canh Liên",
+    "full_name": "Xã Canh Liên",
+    "type": "Xã Canh",
+    "district_code": "551"
+  },
+  {
+    "code": "22009",
+    "name": "Canh Thuận",
+    "full_name": "Xã Canh Thuận",
+    "type": "Xã Canh",
+    "district_code": "551"
+  },
+  {
+    "code": "22003",
+    "name": "Canh Vinh",
+    "full_name": "Xã Canh Vinh",
+    "type": "Xã Canh",
+    "district_code": "551"
+  },
+  {
+    "code": "21994",
+    "name": "Vân Canh",
+    "full_name": "Thị trấn Vân Canh",
+    "type": "Thị trấn Vân",
+    "district_code": "551"
+  }
+]

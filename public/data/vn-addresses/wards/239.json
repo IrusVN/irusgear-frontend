@@ -1,0 +1,79 @@
+[
+  {
+    "code": "08680",
+    "name": "Bảo Yên",
+    "full_name": "Xã Bảo Yên",
+    "type": "Xã Bảo",
+    "district_code": "239"
+  },
+  {
+    "code": "08689",
+    "name": "Hoàng Xá",
+    "full_name": "Xã Hoàng Xá",
+    "type": "Xã Hoàng",
+    "district_code": "239"
+  },
+  {
+    "code": "08677",
+    "name": "Sơn Thủy",
+    "full_name": "Xã Sơn Thủy",
+    "type": "Xã Sơn",
+    "district_code": "239"
+  },
+  {
+    "code": "08671",
+    "name": "Tân Phương",
+    "full_name": "Xã Tân Phương",
+    "type": "Xã Tân",
+    "district_code": "239"
+  },
+  {
+    "code": "08665",
+    "name": "Thạch Đồng",
+    "full_name": "Xã Thạch Đồng",
+    "type": "Xã Thạch",
+    "district_code": "239"
+  },
+  {
+    "code": "08674",
+    "name": "Thanh Thủy",
+    "full_name": "Thị trấn Thanh Thủy",
+    "type": "Thị trấn Thanh",
+    "district_code": "239"
+  },
+  {
+    "code": "08701",
+    "name": "Tu Vũ",
+    "full_name": "Xã Tu Vũ",
+    "type": "Xã Tu",
+    "district_code": "239"
+  },
+  {
+    "code": "08668",
+    "name": "Xuân Lộc",
+    "full_name": "Xã Xuân Lộc",
+    "type": "Xã Xuân",
+    "district_code": "239"
+  },
+  {
+    "code": "08662",
+    "name": "Đào Xá",
+    "full_name": "Xã Đào Xá",
+    "type": "Xã Đào",
+    "district_code": "239"
+  },
+  {
+    "code": "08683",
+    "name": "Đoan Hạ",
+    "full_name": "Xã Đoan Hạ",
+    "type": "Xã Đoan",
+    "district_code": "239"
+  },
+  {
+    "code": "08686",
+    "name": "Đồng Trung",
+    "full_name": "Xã Đồng Trung",
+    "type": "Xã Đồng",
+    "district_code": "239"
+  }
+]

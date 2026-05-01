@@ -1,0 +1,65 @@
+[
+  {
+    "code": "08920",
+    "name": "Bồ Lý",
+    "full_name": "Xã Bồ Lý",
+    "type": "Xã Bồ",
+    "district_code": "248"
+  },
+  {
+    "code": "08929",
+    "name": "Hồ Sơn",
+    "full_name": "Xã Hồ Sơn",
+    "type": "Xã Hồ",
+    "district_code": "248"
+  },
+  {
+    "code": "08911",
+    "name": "Hợp Châu",
+    "full_name": "Thị trấn Hợp Châu",
+    "type": "Thị trấn Hợp",
+    "district_code": "248"
+  },
+  {
+    "code": "08932",
+    "name": "Minh Quang",
+    "full_name": "Xã Minh Quang",
+    "type": "Xã Minh",
+    "district_code": "248"
+  },
+  {
+    "code": "08926",
+    "name": "Tam Quan",
+    "full_name": "Xã Tam Quan",
+    "type": "Xã Tam",
+    "district_code": "248"
+  },
+  {
+    "code": "08908",
+    "name": "Tam Đảo",
+    "full_name": "Thị trấn Tam Đảo",
+    "type": "Thị trấn Tam",
+    "district_code": "248"
+  },
+  {
+    "code": "08917",
+    "name": "Yên Dương",
+    "full_name": "Xã Yên Dương",
+    "type": "Xã Yên",
+    "district_code": "248"
+  },
+  {
+    "code": "08923",
+    "name": "Đại Đình",
+    "full_name": "Thị trấn Đại Đình",
+    "type": "Thị trấn Đại",
+    "district_code": "248"
+  },
+  {
+    "code": "08914",
+    "name": "Đạo Trù",
+    "full_name": "Xã Đạo Trù",
+    "type": "Xã Đạo",
+    "district_code": "248"
+  }
+]

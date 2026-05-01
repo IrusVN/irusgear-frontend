@@ -1,0 +1,65 @@
+[
+  {
+    "code": "24721",
+    "name": "Nam Bình",
+    "full_name": "Xã Nam Bình",
+    "type": "Xã Nam",
+    "district_code": "665"
+  },
+  {
+    "code": "24728",
+    "name": "Nâm N'Jang",
+    "full_name": "Xã Nâm N'Jang",
+    "type": "Xã Nâm",
+    "district_code": "665"
+  },
+  {
+    "code": "24722",
+    "name": "Thuận Hà",
+    "full_name": "Xã Thuận Hà",
+    "type": "Xã Thuận",
+    "district_code": "665"
+  },
+  {
+    "code": "24724",
+    "name": "Thuận Hạnh",
+    "full_name": "Xã Thuận Hạnh",
+    "type": "Xã Thuận",
+    "district_code": "665"
+  },
+  {
+    "code": "24730",
+    "name": "Trường Xuân",
+    "full_name": "Xã Trường Xuân",
+    "type": "Xã Trường",
+    "district_code": "665"
+  },
+  {
+    "code": "24719",
+    "name": "Đắk Hòa",
+    "full_name": "Xã Đắk Hòa",
+    "type": "Xã Đắk",
+    "district_code": "665"
+  },
+  {
+    "code": "24718",
+    "name": "Đắk Môl",
+    "full_name": "Xã Đắk Môl",
+    "type": "Xã Đắk",
+    "district_code": "665"
+  },
+  {
+    "code": "24727",
+    "name": "Đắk N'Dung",
+    "full_name": "Xã Đắk N'Dung",
+    "type": "Xã Đắk",
+    "district_code": "665"
+  },
+  {
+    "code": "24717",
+    "name": "Đức An",
+    "full_name": "Thị trấn Đức An",
+    "type": "Thị trấn Đức",
+    "district_code": "665"
+  }
+]

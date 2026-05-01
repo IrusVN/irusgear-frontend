@@ -1,0 +1,86 @@
+[
+  {
+    "code": "28342",
+    "name": "Hưng Thạnh",
+    "full_name": "Xã Hưng Thạnh",
+    "type": "Xã Hưng",
+    "district_code": "818"
+  },
+  {
+    "code": "28321",
+    "name": "Mỹ Phước",
+    "full_name": "Thị trấn Mỹ Phước",
+    "type": "Thị trấn Mỹ",
+    "district_code": "818"
+  },
+  {
+    "code": "28336",
+    "name": "Phú Mỹ",
+    "full_name": "Xã Phú Mỹ",
+    "type": "Xã Phú",
+    "district_code": "818"
+  },
+  {
+    "code": "28357",
+    "name": "Phước Lập",
+    "full_name": "Xã Phước Lập",
+    "type": "Xã Phước",
+    "district_code": "818"
+  },
+  {
+    "code": "28348",
+    "name": "Tân Hòa Tây",
+    "full_name": "Xã Tân Hòa Tây",
+    "type": "Xã Tân Hòa",
+    "district_code": "818"
+  },
+  {
+    "code": "28339",
+    "name": "Tân Hòa Thành",
+    "full_name": "Xã Tân Hòa Thành",
+    "type": "Xã Tân Hòa",
+    "district_code": "818"
+  },
+  {
+    "code": "28324",
+    "name": "Tân Hòa Đông",
+    "full_name": "Xã Tân Hòa Đông",
+    "type": "Xã Tân Hòa",
+    "district_code": "818"
+  },
+  {
+    "code": "28345",
+    "name": "Tân Lập 1",
+    "full_name": "Xã Tân Lập 1",
+    "type": "Xã Tân Lập",
+    "district_code": "818"
+  },
+  {
+    "code": "28354",
+    "name": "Tân Lập 2",
+    "full_name": "Xã Tân Lập 2",
+    "type": "Xã Tân Lập",
+    "district_code": "818"
+  },
+  {
+    "code": "28333",
+    "name": "Thạnh Hoà",
+    "full_name": "Xã Thạnh Hoà",
+    "type": "Xã Thạnh",
+    "district_code": "818"
+  },
+  {
+    "code": "28330",
+    "name": "Thạnh Mỹ",
+    "full_name": "Xã Thạnh Mỹ",
+    "type": "Xã Thạnh",
+    "district_code": "818"
+  },
+  {
+    "code": "28327",
+    "name": "Thạnh Tân",
+    "full_name": "Xã Thạnh Tân",
+    "type": "Xã Thạnh",
+    "district_code": "818"
+  }
+]

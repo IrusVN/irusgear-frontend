@@ -1,0 +1,170 @@
+[
+  {
+    "code": "00976",
+    "name": "Bạch Ngọc",
+    "full_name": "Xã Bạch Ngọc",
+    "type": "Xã Bạch",
+    "district_code": "030"
+  },
+  {
+    "code": "00952",
+    "name": "Cao Bồ",
+    "full_name": "Xã Cao Bồ",
+    "type": "Xã Cao",
+    "district_code": "030"
+  },
+  {
+    "code": "00709",
+    "name": "Kim Linh",
+    "full_name": "Xã Kim Linh",
+    "type": "Xã Kim",
+    "district_code": "030"
+  },
+  {
+    "code": "00703",
+    "name": "Kim Thạch",
+    "full_name": "Xã Kim Thạch",
+    "type": "Xã Kim",
+    "district_code": "030"
+  },
+  {
+    "code": "00943",
+    "name": "Lao Chải",
+    "full_name": "Xã Lao Chải",
+    "type": "Xã Lao",
+    "district_code": "030"
+  },
+  {
+    "code": "00961",
+    "name": "Linh Hồ",
+    "full_name": "Xã Linh Hồ",
+    "type": "Xã Linh",
+    "district_code": "030"
+  },
+  {
+    "code": "00919",
+    "name": "Minh Tân",
+    "full_name": "Xã Minh Tân",
+    "type": "Xã Minh",
+    "district_code": "030"
+  },
+  {
+    "code": "00970",
+    "name": "Ngọc Linh",
+    "full_name": "Xã Ngọc Linh",
+    "type": "Xã Ngọc",
+    "district_code": "030"
+  },
+  {
+    "code": "00973",
+    "name": "Ngọc Minh",
+    "full_name": "Xã Ngọc Minh",
+    "type": "Xã Ngọc",
+    "district_code": "030"
+  },
+  {
+    "code": "00916",
+    "name": "Nông Trường Việt Lâm",
+    "full_name": "Thị trấn Nông Trường Việt Lâm",
+    "type": "Thị trấn Nông Trường Việt",
+    "district_code": "030"
+  },
+  {
+    "code": "00934",
+    "name": "Phong Quang",
+    "full_name": "Xã Phong Quang",
+    "type": "Xã Phong",
+    "district_code": "030"
+  },
+  {
+    "code": "00706",
+    "name": "Phú Linh",
+    "full_name": "Xã Phú Linh",
+    "type": "Xã Phú",
+    "district_code": "030"
+  },
+  {
+    "code": "00940",
+    "name": "Phương Tiến",
+    "full_name": "Xã Phương Tiến",
+    "type": "Xã Phương",
+    "district_code": "030"
+  },
+  {
+    "code": "00964",
+    "name": "Quảng Ngần",
+    "full_name": "Xã Quảng Ngần",
+    "type": "Xã Quảng",
+    "district_code": "030"
+  },
+  {
+    "code": "00928",
+    "name": "Thanh Thủy",
+    "full_name": "Xã Thanh Thủy",
+    "type": "Xã Thanh",
+    "district_code": "030"
+  },
+  {
+    "code": "00931",
+    "name": "Thanh Đức",
+    "full_name": "Xã Thanh Đức",
+    "type": "Xã Thanh",
+    "district_code": "030"
+  },
+  {
+    "code": "00922",
+    "name": "Thuận Hoà",
+    "full_name": "Xã Thuận Hoà",
+    "type": "Xã Thuận",
+    "district_code": "030"
+  },
+  {
+    "code": "00958",
+    "name": "Thượng Sơn",
+    "full_name": "Xã Thượng Sơn",
+    "type": "Xã Thượng",
+    "district_code": "030"
+  },
+  {
+    "code": "00979",
+    "name": "Trung Thành",
+    "full_name": "Xã Trung Thành",
+    "type": "Xã Trung",
+    "district_code": "030"
+  },
+  {
+    "code": "00925",
+    "name": "Tùng Bá",
+    "full_name": "Xã Tùng Bá",
+    "type": "Xã Tùng",
+    "district_code": "030"
+  },
+  {
+    "code": "00913",
+    "name": "Vị Xuyên",
+    "full_name": "Thị trấn Vị Xuyên",
+    "type": "Thị trấn Vị",
+    "district_code": "030"
+  },
+  {
+    "code": "00967",
+    "name": "Việt Lâm",
+    "full_name": "Xã Việt Lâm",
+    "type": "Xã Việt",
+    "district_code": "030"
+  },
+  {
+    "code": "00937",
+    "name": "Xín Chải",
+    "full_name": "Xã Xín Chải",
+    "type": "Xã Xín",
+    "district_code": "030"
+  },
+  {
+    "code": "00955",
+    "name": "Đạo Đức",
+    "full_name": "Xã Đạo Đức",
+    "type": "Xã Đạo",
+    "district_code": "030"
+  }
+]

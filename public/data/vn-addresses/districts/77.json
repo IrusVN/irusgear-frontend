@@ -1,0 +1,51 @@
+[
+  {
+    "code": "748",
+    "name": "Bà Rịa",
+    "full_name": "Thành phố Bà Rịa",
+    "type": "Thành phố Bà",
+    "province_code": "77"
+  },
+  {
+    "code": "750",
+    "name": "Châu Đức",
+    "full_name": "Huyện Châu Đức",
+    "type": "Huyện Châu",
+    "province_code": "77"
+  },
+  {
+    "code": "752",
+    "name": "Long Điền",
+    "full_name": "Huyện Long Điền",
+    "type": "Huyện Long",
+    "province_code": "77"
+  },
+  {
+    "code": "754",
+    "name": "Phú Mỹ",
+    "full_name": "Thị xã Phú Mỹ",
+    "type": "Thị xã Phú",
+    "province_code": "77"
+  },
+  {
+    "code": "747",
+    "name": "Vũng Tàu",
+    "full_name": "Thành phố Vũng Tàu",
+    "type": "Thành phố Vũng",
+    "province_code": "77"
+  },
+  {
+    "code": "751",
+    "name": "Xuyên Mộc",
+    "full_name": "Huyện Xuyên Mộc",
+    "type": "Huyện Xuyên",
+    "province_code": "77"
+  },
+  {
+    "code": "753",
+    "name": "Đất Đỏ",
+    "full_name": "Huyện Đất Đỏ",
+    "type": "Huyện Đất",
+    "province_code": "77"
+  }
+]

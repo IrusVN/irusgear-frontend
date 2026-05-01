@@ -1,0 +1,177 @@
+[
+  {
+    "code": "14638",
+    "name": "Ân Hòa",
+    "full_name": "Xã Ân Hòa",
+    "type": "Xã Ân",
+    "district_code": "376"
+  },
+  {
+    "code": "14623",
+    "name": "Bình Minh",
+    "full_name": "Thị trấn Bình Minh",
+    "type": "Thị trấn Bình",
+    "district_code": "376"
+  },
+  {
+    "code": "14653",
+    "name": "Chất Bình",
+    "full_name": "Xã Chất Bình",
+    "type": "Xã Chất",
+    "district_code": "376"
+  },
+  {
+    "code": "14689",
+    "name": "Cồn Thoi",
+    "full_name": "Xã Cồn Thoi",
+    "type": "Xã Cồn",
+    "district_code": "376"
+  },
+  {
+    "code": "14629",
+    "name": "Hồi Ninh",
+    "full_name": "Xã Hồi Ninh",
+    "type": "Xã Hồi",
+    "district_code": "376"
+  },
+  {
+    "code": "14641",
+    "name": "Hùng Tiến",
+    "full_name": "Xã Hùng Tiến",
+    "type": "Xã Hùng",
+    "district_code": "376"
+  },
+  {
+    "code": "14659",
+    "name": "Kim Chính",
+    "full_name": "Xã Kim Chính",
+    "type": "Xã Kim",
+    "district_code": "376"
+  },
+  {
+    "code": "14692",
+    "name": "Kim Hải",
+    "full_name": "Xã Kim Hải",
+    "type": "Xã Kim",
+    "district_code": "376"
+  },
+  {
+    "code": "14686",
+    "name": "Kim Mỹ",
+    "full_name": "Xã Kim Mỹ",
+    "type": "Xã Kim",
+    "district_code": "376"
+  },
+  {
+    "code": "14683",
+    "name": "Kim Tân",
+    "full_name": "Xã Kim Tân",
+    "type": "Xã Kim",
+    "district_code": "376"
+  },
+  {
+    "code": "14695",
+    "name": "Kim Trung",
+    "full_name": "Xã Kim Trung",
+    "type": "Xã Kim",
+    "district_code": "376"
+  },
+  {
+    "code": "14635",
+    "name": "Kim Định",
+    "full_name": "Xã Kim Định",
+    "type": "Xã Kim",
+    "district_code": "376"
+  },
+  {
+    "code": "14698",
+    "name": "Kim Đông",
+    "full_name": "Xã Kim Đông",
+    "type": "Xã Kim",
+    "district_code": "376"
+  },
+  {
+    "code": "14674",
+    "name": "Lai Thành",
+    "full_name": "Xã Lai Thành",
+    "type": "Xã Lai",
+    "district_code": "376"
+  },
+  {
+    "code": "14665",
+    "name": "Lưu Phương",
+    "full_name": "Xã Lưu Phương",
+    "type": "Xã Lưu",
+    "district_code": "376"
+  },
+  {
+    "code": "14650",
+    "name": "Như Hòa",
+    "full_name": "Xã Như Hòa",
+    "type": "Xã Như",
+    "district_code": "376"
+  },
+  {
+    "code": "14620",
+    "name": "Phát Diệm",
+    "full_name": "Thị trấn Phát Diệm",
+    "type": "Thị trấn Phát",
+    "district_code": "376"
+  },
+  {
+    "code": "14647",
+    "name": "Quang Thiện",
+    "full_name": "Xã Quang Thiện",
+    "type": "Xã Quang",
+    "district_code": "376"
+  },
+  {
+    "code": "14668",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "376"
+  },
+  {
+    "code": "14662",
+    "name": "Thượng Kiệm",
+    "full_name": "Xã Thượng Kiệm",
+    "type": "Xã Thượng",
+    "district_code": "376"
+  },
+  {
+    "code": "14680",
+    "name": "Văn Hải",
+    "full_name": "Xã Văn Hải",
+    "type": "Xã Văn",
+    "district_code": "376"
+  },
+  {
+    "code": "14632",
+    "name": "Xuân Chính",
+    "full_name": "Xã Xuân Chính",
+    "type": "Xã Xuân",
+    "district_code": "376"
+  },
+  {
+    "code": "14671",
+    "name": "Yên Lộc",
+    "full_name": "Xã Yên Lộc",
+    "type": "Xã Yên",
+    "district_code": "376"
+  },
+  {
+    "code": "14677",
+    "name": "Định Hóa",
+    "full_name": "Xã Định Hóa",
+    "type": "Xã Định",
+    "district_code": "376"
+  },
+  {
+    "code": "14656",
+    "name": "Đồng Hướng",
+    "full_name": "Xã Đồng Hướng",
+    "type": "Xã Đồng",
+    "district_code": "376"
+  }
+]

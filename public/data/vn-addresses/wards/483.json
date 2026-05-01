@@ -1,0 +1,72 @@
+[
+  {
+    "code": "20182",
+    "name": "Hương Hữu",
+    "full_name": "Xã Hương Hữu",
+    "type": "Xã Hương",
+    "district_code": "483"
+  },
+  {
+    "code": "20170",
+    "name": "Hương Lộc",
+    "full_name": "Xã Hương Lộc",
+    "type": "Xã Hương",
+    "district_code": "483"
+  },
+  {
+    "code": "20164",
+    "name": "Hương Phú",
+    "full_name": "Xã Hương Phú",
+    "type": "Xã Hương",
+    "district_code": "483"
+  },
+  {
+    "code": "20167",
+    "name": "Hương Sơn",
+    "full_name": "Xã Hương Sơn",
+    "type": "Xã Hương",
+    "district_code": "483"
+  },
+  {
+    "code": "20179",
+    "name": "Hương Xuân",
+    "full_name": "Xã Hương Xuân",
+    "type": "Xã Hương",
+    "district_code": "483"
+  },
+  {
+    "code": "20161",
+    "name": "Khe Tre",
+    "full_name": "Thị trấn Khe Tre",
+    "type": "Thị trấn Khe",
+    "district_code": "483"
+  },
+  {
+    "code": "20185",
+    "name": "Thượng Lộ",
+    "full_name": "Xã Thượng Lộ",
+    "type": "Xã Thượng",
+    "district_code": "483"
+  },
+  {
+    "code": "20188",
+    "name": "Thượng Long",
+    "full_name": "Xã Thượng Long",
+    "type": "Xã Thượng",
+    "district_code": "483"
+  },
+  {
+    "code": "20191",
+    "name": "Thượng Nhật",
+    "full_name": "Xã Thượng Nhật",
+    "type": "Xã Thượng",
+    "district_code": "483"
+  },
+  {
+    "code": "20173",
+    "name": "Thượng Quảng",
+    "full_name": "Xã Thượng Quảng",
+    "type": "Xã Thượng",
+    "district_code": "483"
+  }
+]

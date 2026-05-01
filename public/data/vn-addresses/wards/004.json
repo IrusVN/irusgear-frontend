@@ -1,0 +1,100 @@
+[
+  {
+    "code": "00139",
+    "name": "Bồ Đề",
+    "full_name": "Phường Bồ Đề",
+    "type": "Phường Bồ",
+    "district_code": "004"
+  },
+  {
+    "code": "00154",
+    "name": "Cự Khối",
+    "full_name": "Phường Cự Khối",
+    "type": "Phường Cự",
+    "district_code": "004"
+  },
+  {
+    "code": "00130",
+    "name": "Gia Thụy",
+    "full_name": "Phường Gia Thụy",
+    "type": "Phường Gia",
+    "district_code": "004"
+  },
+  {
+    "code": "00121",
+    "name": "Giang Biên",
+    "full_name": "Phường Giang Biên",
+    "type": "Phường Giang",
+    "district_code": "004"
+  },
+  {
+    "code": "00145",
+    "name": "Long Biên",
+    "full_name": "Phường Long Biên",
+    "type": "Phường Long",
+    "district_code": "004"
+  },
+  {
+    "code": "00133",
+    "name": "Ngọc Lâm",
+    "full_name": "Phường Ngọc Lâm",
+    "type": "Phường Ngọc",
+    "district_code": "004"
+  },
+  {
+    "code": "00118",
+    "name": "Ngọc Thụy",
+    "full_name": "Phường Ngọc Thụy",
+    "type": "Phường Ngọc",
+    "district_code": "004"
+  },
+  {
+    "code": "00136",
+    "name": "Phúc Lợi",
+    "full_name": "Phường Phúc Lợi",
+    "type": "Phường Phúc",
+    "district_code": "004"
+  },
+  {
+    "code": "00151",
+    "name": "Phúc Đồng",
+    "full_name": "Phường Phúc Đồng",
+    "type": "Phường Phúc",
+    "district_code": "004"
+  },
+  {
+    "code": "00142",
+    "name": "Sài Đồng",
+    "full_name": "Phường Sài Đồng",
+    "type": "Phường Sài",
+    "district_code": "004"
+  },
+  {
+    "code": "00148",
+    "name": "Thạch Bàn",
+    "full_name": "Phường Thạch Bàn",
+    "type": "Phường Thạch",
+    "district_code": "004"
+  },
+  {
+    "code": "00115",
+    "name": "Thượng Thanh",
+    "full_name": "Phường Thượng Thanh",
+    "type": "Phường Thượng",
+    "district_code": "004"
+  },
+  {
+    "code": "00127",
+    "name": "Việt Hưng",
+    "full_name": "Phường Việt Hưng",
+    "type": "Phường Việt",
+    "district_code": "004"
+  },
+  {
+    "code": "00124",
+    "name": "Đức Giang",
+    "full_name": "Phường Đức Giang",
+    "type": "Phường Đức",
+    "district_code": "004"
+  }
+]

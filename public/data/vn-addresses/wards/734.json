@@ -1,0 +1,128 @@
+[
+  {
+    "code": "26119",
+    "name": "Dak Lua",
+    "full_name": "Xã Dak Lua",
+    "type": "Xã Dak",
+    "district_code": "734"
+  },
+  {
+    "code": "26122",
+    "name": "Nam Cát Tiên",
+    "full_name": "Xã Nam Cát Tiên",
+    "type": "Xã Nam Cát",
+    "district_code": "734"
+  },
+  {
+    "code": "26128",
+    "name": "Núi Tượng",
+    "full_name": "Xã Núi Tượng",
+    "type": "Xã Núi",
+    "district_code": "734"
+  },
+  {
+    "code": "26125",
+    "name": "Phú An",
+    "full_name": "Xã Phú An",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26158",
+    "name": "Phú Bình",
+    "full_name": "Xã Phú Bình",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26155",
+    "name": "Phú Lâm",
+    "full_name": "Xã Phú Lâm",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26134",
+    "name": "Phú Lập",
+    "full_name": "Xã Phú Lập",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26152",
+    "name": "Phú Lộc",
+    "full_name": "Xã Phú Lộc",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26137",
+    "name": "Phú Sơn",
+    "full_name": "Xã Phú Sơn",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26161",
+    "name": "Phú Thanh",
+    "full_name": "Xã Phú Thanh",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26140",
+    "name": "Phú Thịnh",
+    "full_name": "Xã Phú Thịnh",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26146",
+    "name": "Phú Trung",
+    "full_name": "Xã Phú Trung",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26149",
+    "name": "Phú Xuân",
+    "full_name": "Xã Phú Xuân",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26167",
+    "name": "Phú Điền",
+    "full_name": "Xã Phú Điền",
+    "type": "Xã Phú",
+    "district_code": "734"
+  },
+  {
+    "code": "26131",
+    "name": "Tà Lài",
+    "full_name": "Xã Tà Lài",
+    "type": "Xã Tà",
+    "district_code": "734"
+  },
+  {
+    "code": "26116",
+    "name": "Tân Phú",
+    "full_name": "Thị trấn Tân Phú",
+    "type": "Thị trấn Tân",
+    "district_code": "734"
+  },
+  {
+    "code": "26143",
+    "name": "Thanh Sơn",
+    "full_name": "Xã Thanh Sơn",
+    "type": "Xã Thanh",
+    "district_code": "734"
+  },
+  {
+    "code": "26164",
+    "name": "Trà Cổ",
+    "full_name": "Xã Trà Cổ",
+    "type": "Xã Trà",
+    "district_code": "734"
+  }
+]

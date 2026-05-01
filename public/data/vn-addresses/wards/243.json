@@ -1,0 +1,65 @@
+[
+  {
+    "code": "08713",
+    "name": "Hội Hợp",
+    "full_name": "Phường Hội Hợp",
+    "type": "Phường Hội",
+    "district_code": "243"
+  },
+  {
+    "code": "08728",
+    "name": "Khai Quang",
+    "full_name": "Phường Khai Quang",
+    "type": "Phường Khai",
+    "district_code": "243"
+  },
+  {
+    "code": "08710",
+    "name": "Liên Bảo",
+    "full_name": "Phường Liên Bảo",
+    "type": "Phường Liên",
+    "district_code": "243"
+  },
+  {
+    "code": "08719",
+    "name": "Ngô Quyền",
+    "full_name": "Phường Ngô Quyền",
+    "type": "Phường Ngô",
+    "district_code": "243"
+  },
+  {
+    "code": "08731",
+    "name": "Thanh Trù",
+    "full_name": "Xã Thanh Trù",
+    "type": "Xã Thanh",
+    "district_code": "243"
+  },
+  {
+    "code": "08707",
+    "name": "Tích Sơn",
+    "full_name": "Phường Tích Sơn",
+    "type": "Phường Tích",
+    "district_code": "243"
+  },
+  {
+    "code": "08725",
+    "name": "Định Trung",
+    "full_name": "Phường Định Trung",
+    "type": "Phường Định",
+    "district_code": "243"
+  },
+  {
+    "code": "08722",
+    "name": "Đồng Tâm",
+    "full_name": "Phường Đồng Tâm",
+    "type": "Phường Đồng",
+    "district_code": "243"
+  },
+  {
+    "code": "08716",
+    "name": "Đống Đa",
+    "full_name": "Phường Đống Đa",
+    "type": "Phường Đống",
+    "district_code": "243"
+  }
+]

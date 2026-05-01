@@ -1,0 +1,219 @@
+[
+  {
+    "code": "13795",
+    "name": "Lâm",
+    "full_name": "Thị trấn Lâm",
+    "type": "Thị trấn",
+    "district_code": "360"
+  },
+  {
+    "code": "13876",
+    "name": "Yên Bằng",
+    "full_name": "Xã Yên Bằng",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13825",
+    "name": "Yên Bình",
+    "full_name": "Xã Yên Bình",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13822",
+    "name": "Yên Chính",
+    "full_name": "Xã Yên Chính",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13870",
+    "name": "Yên Cường",
+    "full_name": "Xã Yên Cường",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13834",
+    "name": "Yên Dương",
+    "full_name": "Xã Yên Dương",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13855",
+    "name": "Yên Hồng",
+    "full_name": "Xã Yên Hồng",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13840",
+    "name": "Yên Hưng",
+    "full_name": "Xã Yên Hưng",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13882",
+    "name": "Yên Khang",
+    "full_name": "Xã Yên Khang",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13843",
+    "name": "Yên Khánh",
+    "full_name": "Xã Yên Khánh",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13873",
+    "name": "Yên Lộc",
+    "full_name": "Xã Yên Lộc",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13807",
+    "name": "Yên Lợi",
+    "full_name": "Xã Yên Lợi",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13852",
+    "name": "Yên Lương",
+    "full_name": "Xã Yên Lương",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13816",
+    "name": "Yên Minh",
+    "full_name": "Xã Yên Minh",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13831",
+    "name": "Yên Mỹ",
+    "full_name": "Xã Yên Mỹ",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13813",
+    "name": "Yên Nghĩa",
+    "full_name": "Xã Yên Nghĩa",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13885",
+    "name": "Yên Nhân",
+    "full_name": "Xã Yên Nhân",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13849",
+    "name": "Yên Ninh",
+    "full_name": "Xã Yên Ninh",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13846",
+    "name": "Yên Phong",
+    "full_name": "Xã Yên Phong",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13828",
+    "name": "Yên Phú",
+    "full_name": "Xã Yên Phú",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13867",
+    "name": "Yên Phúc",
+    "full_name": "Xã Yên Phúc",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13819",
+    "name": "Yên Phương",
+    "full_name": "Xã Yên Phương",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13858",
+    "name": "Yên Quang",
+    "full_name": "Xã Yên Quang",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13804",
+    "name": "Yên Tân",
+    "full_name": "Xã Yên Tân",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13864",
+    "name": "Yên Thắng",
+    "full_name": "Xã Yên Thắng",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13801",
+    "name": "Yên Thành",
+    "full_name": "Xã Yên Thành",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13810",
+    "name": "Yên Thọ",
+    "full_name": "Xã Yên Thọ",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13861",
+    "name": "Yên Tiến",
+    "full_name": "Xã Yên Tiến",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13888",
+    "name": "Yên Trị",
+    "full_name": "Xã Yên Trị",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13798",
+    "name": "Yên Trung",
+    "full_name": "Xã Yên Trung",
+    "type": "Xã Yên",
+    "district_code": "360"
+  },
+  {
+    "code": "13879",
+    "name": "Yên Đồng",
+    "full_name": "Xã Yên Đồng",
+    "type": "Xã Yên",
+    "district_code": "360"
+  }
+]

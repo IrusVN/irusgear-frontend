@@ -1,0 +1,65 @@
+[
+  {
+    "code": "25129",
+    "name": "An Nhơn",
+    "full_name": "Xã An Nhơn",
+    "type": "Xã An",
+    "district_code": "682"
+  },
+  {
+    "code": "25135",
+    "name": "Mỹ Đức",
+    "full_name": "Xã Mỹ Đức",
+    "type": "Xã Mỹ",
+    "district_code": "682"
+  },
+  {
+    "code": "25138",
+    "name": "Quảng Trị",
+    "full_name": "Xã Quảng Trị",
+    "type": "Xã Quảng",
+    "district_code": "682"
+  },
+  {
+    "code": "25132",
+    "name": "Quốc Oai",
+    "full_name": "Xã Quốc Oai",
+    "type": "Xã Quốc",
+    "district_code": "682"
+  },
+  {
+    "code": "25147",
+    "name": "Triệu Hải",
+    "full_name": "Xã Triệu Hải",
+    "type": "Xã Triệu",
+    "district_code": "682"
+  },
+  {
+    "code": "25153",
+    "name": "Đạ Kho",
+    "full_name": "Xã Đạ Kho",
+    "type": "Xã Đạ",
+    "district_code": "682"
+  },
+  {
+    "code": "25141",
+    "name": "Đạ Lây",
+    "full_name": "Xã Đạ Lây",
+    "type": "Xã Đạ",
+    "district_code": "682"
+  },
+  {
+    "code": "25156",
+    "name": "Đạ Pal",
+    "full_name": "Xã Đạ Pal",
+    "type": "Xã Đạ",
+    "district_code": "682"
+  },
+  {
+    "code": "25126",
+    "name": "Đạ Tẻh",
+    "full_name": "Thị trấn Đạ Tẻh",
+    "type": "Thị trấn Đạ",
+    "district_code": "682"
+  }
+]

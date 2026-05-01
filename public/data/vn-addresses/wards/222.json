@@ -1,0 +1,121 @@
+[
+  {
+    "code": "07777",
+    "name": "Bích Động",
+    "full_name": "Phường Bích Động",
+    "type": "Phường Bích",
+    "district_code": "222"
+  },
+  {
+    "code": "07783",
+    "name": "Hồng Thái",
+    "full_name": "Phường Hồng Thái",
+    "type": "Phường Hồng",
+    "district_code": "222"
+  },
+  {
+    "code": "07771",
+    "name": "Hương Mai",
+    "full_name": "Xã Hương Mai",
+    "type": "Xã Hương",
+    "district_code": "222"
+  },
+  {
+    "code": "07768",
+    "name": "Minh Đức",
+    "full_name": "Xã Minh Đức",
+    "type": "Xã Minh",
+    "district_code": "222"
+  },
+  {
+    "code": "07795",
+    "name": "Nếnh",
+    "full_name": "Phường Nếnh",
+    "type": "Phường",
+    "district_code": "222"
+  },
+  {
+    "code": "07765",
+    "name": "Nghĩa Trung",
+    "full_name": "Xã Nghĩa Trung",
+    "type": "Xã Nghĩa",
+    "district_code": "222"
+  },
+  {
+    "code": "07798",
+    "name": "Ninh Sơn",
+    "full_name": "Phường Ninh Sơn",
+    "type": "Phường Ninh",
+    "district_code": "222"
+  },
+  {
+    "code": "07807",
+    "name": "Quang Châu",
+    "full_name": "Phường Quang Châu",
+    "type": "Phường Quang",
+    "district_code": "222"
+  },
+  {
+    "code": "07792",
+    "name": "Quảng Minh",
+    "full_name": "Phường Quảng Minh",
+    "type": "Phường Quảng",
+    "district_code": "222"
+  },
+  {
+    "code": "07789",
+    "name": "Tăng Tiến",
+    "full_name": "Phường Tăng Tiến",
+    "type": "Phường Tăng",
+    "district_code": "222"
+  },
+  {
+    "code": "07759",
+    "name": "Thượng Lan",
+    "full_name": "Xã Thượng Lan",
+    "type": "Xã Thượng",
+    "district_code": "222"
+  },
+  {
+    "code": "07786",
+    "name": "Tiên Sơn",
+    "full_name": "Xã Tiên Sơn",
+    "type": "Xã Tiên",
+    "district_code": "222"
+  },
+  {
+    "code": "07780",
+    "name": "Trung Sơn",
+    "full_name": "Xã Trung Sơn",
+    "type": "Xã Trung",
+    "district_code": "222"
+  },
+  {
+    "code": "07774",
+    "name": "Tự Lạn",
+    "full_name": "Phường Tự Lạn",
+    "type": "Phường Tự",
+    "district_code": "222"
+  },
+  {
+    "code": "07804",
+    "name": "Vân Hà",
+    "full_name": "Xã Vân Hà",
+    "type": "Xã Vân",
+    "district_code": "222"
+  },
+  {
+    "code": "07801",
+    "name": "Vân Trung",
+    "full_name": "Phường Vân Trung",
+    "type": "Phường Vân",
+    "district_code": "222"
+  },
+  {
+    "code": "07762",
+    "name": "Việt Tiến",
+    "full_name": "Xã Việt Tiến",
+    "type": "Xã Việt",
+    "district_code": "222"
+  }
+]

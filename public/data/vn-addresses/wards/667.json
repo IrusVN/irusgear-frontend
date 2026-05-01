@@ -1,0 +1,44 @@
+[
+  {
+    "code": "24740",
+    "name": "Quảng Tâm",
+    "full_name": "Xã Quảng Tâm",
+    "type": "Xã Quảng",
+    "district_code": "667"
+  },
+  {
+    "code": "24748",
+    "name": "Quảng Tân",
+    "full_name": "Xã Quảng Tân",
+    "type": "Xã Quảng",
+    "district_code": "667"
+  },
+  {
+    "code": "24736",
+    "name": "Quảng Trực",
+    "full_name": "Xã Quảng Trực",
+    "type": "Xã Quảng",
+    "district_code": "667"
+  },
+  {
+    "code": "24739",
+    "name": "Đắk Búk So",
+    "full_name": "Xã Đắk Búk So",
+    "type": "Xã Đắk Búk",
+    "district_code": "667"
+  },
+  {
+    "code": "24746",
+    "name": "Đắk Ngo",
+    "full_name": "Xã Đắk Ngo",
+    "type": "Xã Đắk",
+    "district_code": "667"
+  },
+  {
+    "code": "24742",
+    "name": "Đắk R'Tíh",
+    "full_name": "Xã Đắk R'Tíh",
+    "type": "Xã Đắk",
+    "district_code": "667"
+  }
+]

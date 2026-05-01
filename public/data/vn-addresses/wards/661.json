@@ -1,0 +1,51 @@
+[
+  {
+    "code": "24620",
+    "name": "Quảng Hoà",
+    "full_name": "Xã Quảng Hoà",
+    "type": "Xã Quảng",
+    "district_code": "661"
+  },
+  {
+    "code": "24631",
+    "name": "Quảng Khê",
+    "full_name": "Xã Quảng Khê",
+    "type": "Xã Quảng",
+    "district_code": "661"
+  },
+  {
+    "code": "24616",
+    "name": "Quảng Sơn",
+    "full_name": "Xã Quảng Sơn",
+    "type": "Xã Quảng",
+    "district_code": "661"
+  },
+  {
+    "code": "24622",
+    "name": "Đắk Ha",
+    "full_name": "Xã Đắk Ha",
+    "type": "Xã Đắk",
+    "district_code": "661"
+  },
+  {
+    "code": "24634",
+    "name": "Đắk Plao",
+    "full_name": "Xã Đắk Plao",
+    "type": "Xã Đắk",
+    "district_code": "661"
+  },
+  {
+    "code": "24625",
+    "name": "Đắk R'Măng",
+    "full_name": "Xã Đắk R'Măng",
+    "type": "Xã Đắk",
+    "district_code": "661"
+  },
+  {
+    "code": "24637",
+    "name": "Đắk Som",
+    "full_name": "Xã Đắk Som",
+    "type": "Xã Đắk",
+    "district_code": "661"
+  }
+]

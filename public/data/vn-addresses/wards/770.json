@@ -1,0 +1,86 @@
+[
+  {
+    "code": "27160",
+    "name": "01",
+    "full_name": "Phường 01",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27157",
+    "name": "02",
+    "full_name": "Phường 02",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27154",
+    "name": "03",
+    "full_name": "Phường 03",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27148",
+    "name": "04",
+    "full_name": "Phường 04",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27151",
+    "name": "05",
+    "full_name": "Phường 05",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27142",
+    "name": "09",
+    "full_name": "Phường 09",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27145",
+    "name": "10",
+    "full_name": "Phường 10",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27133",
+    "name": "11",
+    "full_name": "Phường 11",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27130",
+    "name": "12",
+    "full_name": "Phường 12",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27136",
+    "name": "13",
+    "full_name": "Phường 13",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27127",
+    "name": "14",
+    "full_name": "Phường 14",
+    "type": "Phường",
+    "district_code": "770"
+  },
+  {
+    "code": "27139",
+    "name": "Võ Thị Sáu",
+    "full_name": "Phường Võ Thị Sáu",
+    "type": "Phường Võ Thị",
+    "district_code": "770"
+  }
+]

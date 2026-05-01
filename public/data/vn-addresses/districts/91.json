@@ -1,0 +1,107 @@
+[
+  {
+    "code": "908",
+    "name": "An Biên",
+    "full_name": "Huyện An Biên",
+    "type": "Huyện An",
+    "province_code": "91"
+  },
+  {
+    "code": "909",
+    "name": "An Minh",
+    "full_name": "Huyện An Minh",
+    "type": "Huyện An",
+    "province_code": "91"
+  },
+  {
+    "code": "905",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "91"
+  },
+  {
+    "code": "914",
+    "name": "Giang Thành",
+    "full_name": "Huyện Giang Thành",
+    "type": "Huyện Giang",
+    "province_code": "91"
+  },
+  {
+    "code": "906",
+    "name": "Giồng Riềng",
+    "full_name": "Huyện Giồng Riềng",
+    "type": "Huyện Giồng",
+    "province_code": "91"
+  },
+  {
+    "code": "907",
+    "name": "Gò Quao",
+    "full_name": "Huyện Gò Quao",
+    "type": "Huyện Gò",
+    "province_code": "91"
+  },
+  {
+    "code": "900",
+    "name": "Hà Tiên",
+    "full_name": "Thành phố Hà Tiên",
+    "type": "Thành phố Hà",
+    "province_code": "91"
+  },
+  {
+    "code": "903",
+    "name": "Hòn Đất",
+    "full_name": "Huyện Hòn Đất",
+    "type": "Huyện Hòn",
+    "province_code": "91"
+  },
+  {
+    "code": "912",
+    "name": "Kiên Hải",
+    "full_name": "Huyện Kiên Hải",
+    "type": "Huyện Kiên",
+    "province_code": "91"
+  },
+  {
+    "code": "902",
+    "name": "Kiên Lương",
+    "full_name": "Huyện Kiên Lương",
+    "type": "Huyện Kiên",
+    "province_code": "91"
+  },
+  {
+    "code": "911",
+    "name": "Phú Quốc",
+    "full_name": "Thành phố Phú Quốc",
+    "type": "Thành phố Phú",
+    "province_code": "91"
+  },
+  {
+    "code": "899",
+    "name": "Rạch Giá",
+    "full_name": "Thành phố Rạch Giá",
+    "type": "Thành phố Rạch",
+    "province_code": "91"
+  },
+  {
+    "code": "904",
+    "name": "Tân Hiệp",
+    "full_name": "Huyện Tân Hiệp",
+    "type": "Huyện Tân",
+    "province_code": "91"
+  },
+  {
+    "code": "913",
+    "name": "U Minh Thượng",
+    "full_name": "Huyện U Minh Thượng",
+    "type": "Huyện U Minh",
+    "province_code": "91"
+  },
+  {
+    "code": "910",
+    "name": "Vĩnh Thuận",
+    "full_name": "Huyện Vĩnh Thuận",
+    "type": "Huyện Vĩnh",
+    "province_code": "91"
+  }
+]

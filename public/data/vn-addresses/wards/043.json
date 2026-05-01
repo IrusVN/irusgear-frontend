@@ -1,0 +1,121 @@
+[
+  {
+    "code": "01321",
+    "name": "Bảo Lạc",
+    "full_name": "Thị trấn Bảo Lạc",
+    "type": "Thị trấn Bảo",
+    "district_code": "043"
+  },
+  {
+    "code": "01333",
+    "name": "Bảo Toàn",
+    "full_name": "Xã Bảo Toàn",
+    "type": "Xã Bảo",
+    "district_code": "043"
+  },
+  {
+    "code": "01330",
+    "name": "Cô Ba",
+    "full_name": "Xã Cô Ba",
+    "type": "Xã Cô",
+    "district_code": "043"
+  },
+  {
+    "code": "01324",
+    "name": "Cốc Pàng",
+    "full_name": "Xã Cốc Pàng",
+    "type": "Xã Cốc",
+    "district_code": "043"
+  },
+  {
+    "code": "01348",
+    "name": "Hồng An",
+    "full_name": "Xã Hồng An",
+    "type": "Xã Hồng",
+    "district_code": "043"
+  },
+  {
+    "code": "01342",
+    "name": "Hồng Trị",
+    "full_name": "Xã Hồng Trị",
+    "type": "Xã Hồng",
+    "district_code": "043"
+  },
+  {
+    "code": "01352",
+    "name": "Hưng Thịnh",
+    "full_name": "Xã Hưng Thịnh",
+    "type": "Xã Hưng",
+    "district_code": "043"
+  },
+  {
+    "code": "01351",
+    "name": "Hưng Đạo",
+    "full_name": "Xã Hưng Đạo",
+    "type": "Xã Hưng",
+    "district_code": "043"
+  },
+  {
+    "code": "01354",
+    "name": "Huy Giáp",
+    "full_name": "Xã Huy Giáp",
+    "type": "Xã Huy",
+    "district_code": "043"
+  },
+  {
+    "code": "01336",
+    "name": "Khánh Xuân",
+    "full_name": "Xã Khánh Xuân",
+    "type": "Xã Khánh",
+    "district_code": "043"
+  },
+  {
+    "code": "01343",
+    "name": "Kim Cúc",
+    "full_name": "Xã Kim Cúc",
+    "type": "Xã Kim",
+    "district_code": "043"
+  },
+  {
+    "code": "01345",
+    "name": "Phan Thanh",
+    "full_name": "Xã Phan Thanh",
+    "type": "Xã Phan",
+    "district_code": "043"
+  },
+  {
+    "code": "01359",
+    "name": "Sơn Lập",
+    "full_name": "Xã Sơn Lập",
+    "type": "Xã Sơn",
+    "district_code": "043"
+  },
+  {
+    "code": "01360",
+    "name": "Sơn Lộ",
+    "full_name": "Xã Sơn Lộ",
+    "type": "Xã Sơn",
+    "district_code": "043"
+  },
+  {
+    "code": "01327",
+    "name": "Thượng Hà",
+    "full_name": "Xã Thượng Hà",
+    "type": "Xã Thượng",
+    "district_code": "043"
+  },
+  {
+    "code": "01339",
+    "name": "Xuân Trường",
+    "full_name": "Xã Xuân Trường",
+    "type": "Xã Xuân",
+    "district_code": "043"
+  },
+  {
+    "code": "01357",
+    "name": "Đình Phùng",
+    "full_name": "Xã Đình Phùng",
+    "type": "Xã Đình",
+    "district_code": "043"
+  }
+]

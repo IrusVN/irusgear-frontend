@@ -1,0 +1,79 @@
+[
+  {
+    "code": "25384",
+    "name": "Tân Hòa",
+    "full_name": "Xã Tân Hòa",
+    "type": "Xã Tân",
+    "district_code": "695"
+  },
+  {
+    "code": "25375",
+    "name": "Tân Hưng",
+    "full_name": "Xã Tân Hưng",
+    "type": "Xã Tân",
+    "district_code": "695"
+  },
+  {
+    "code": "25381",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "695"
+  },
+  {
+    "code": "25378",
+    "name": "Tân Lợi",
+    "full_name": "Xã Tân Lợi",
+    "type": "Xã Tân",
+    "district_code": "695"
+  },
+  {
+    "code": "25363",
+    "name": "Tân Phú",
+    "full_name": "Thị trấn Tân Phú",
+    "type": "Thị trấn Tân",
+    "district_code": "695"
+  },
+  {
+    "code": "25372",
+    "name": "Tân Phước",
+    "full_name": "Xã Tân Phước",
+    "type": "Xã Tân",
+    "district_code": "695"
+  },
+  {
+    "code": "25393",
+    "name": "Tân Tiến",
+    "full_name": "Xã Tân Tiến",
+    "type": "Xã Tân",
+    "district_code": "695"
+  },
+  {
+    "code": "25366",
+    "name": "Thuận Lợi",
+    "full_name": "Xã Thuận Lợi",
+    "type": "Xã Thuận",
+    "district_code": "695"
+  },
+  {
+    "code": "25387",
+    "name": "Thuận Phú",
+    "full_name": "Xã Thuận Phú",
+    "type": "Xã Thuận",
+    "district_code": "695"
+  },
+  {
+    "code": "25369",
+    "name": "Đồng Tâm",
+    "full_name": "Xã Đồng Tâm",
+    "type": "Xã Đồng",
+    "district_code": "695"
+  },
+  {
+    "code": "25390",
+    "name": "Đồng Tiến",
+    "full_name": "Xã Đồng Tiến",
+    "type": "Xã Đồng",
+    "district_code": "695"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "code": "03127",
+    "name": "Him Lam",
+    "full_name": "Phường Him Lam",
+    "type": "Phường Him",
+    "district_code": "094"
+  },
+  {
+    "code": "03325",
+    "name": "Mường Phăng",
+    "full_name": "Xã Mường Phăng",
+    "type": "Xã Mường",
+    "district_code": "094"
+  },
+  {
+    "code": "03136",
+    "name": "Mường Thanh",
+    "full_name": "Phường Mường Thanh",
+    "type": "Phường Mường",
+    "district_code": "094"
+  },
+  {
+    "code": "03317",
+    "name": "Nà Nhạn",
+    "full_name": "Xã Nà Nhạn",
+    "type": "Xã Nà",
+    "district_code": "094"
+  },
+  {
+    "code": "03316",
+    "name": "Nà Tấu",
+    "full_name": "Xã Nà Tấu",
+    "type": "Xã Nà",
+    "district_code": "094"
+  },
+  {
+    "code": "03139",
+    "name": "Nam Thanh",
+    "full_name": "Phường Nam Thanh",
+    "type": "Phường Nam",
+    "district_code": "094"
+  },
+  {
+    "code": "03124",
+    "name": "Noong Bua",
+    "full_name": "Phường Noong Bua",
+    "type": "Phường Noong",
+    "district_code": "094"
+  },
+  {
+    "code": "03326",
+    "name": "Pá Khoang",
+    "full_name": "Xã Pá Khoang",
+    "type": "Xã Pá",
+    "district_code": "094"
+  },
+  {
+    "code": "03133",
+    "name": "Tân Thanh",
+    "full_name": "Phường Tân Thanh",
+    "type": "Phường Tân",
+    "district_code": "094"
+  },
+  {
+    "code": "03130",
+    "name": "Thanh Bình",
+    "full_name": "Phường Thanh Bình",
+    "type": "Phường Thanh",
+    "district_code": "094"
+  },
+  {
+    "code": "03145",
+    "name": "Thanh Minh",
+    "full_name": "Xã Thanh Minh",
+    "type": "Xã Thanh",
+    "district_code": "094"
+  },
+  {
+    "code": "03142",
+    "name": "Thanh Trường",
+    "full_name": "Phường Thanh Trường",
+    "type": "Phường Thanh",
+    "district_code": "094"
+  }
+]

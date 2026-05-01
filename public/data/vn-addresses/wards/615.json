@@ -1,0 +1,79 @@
+[
+  {
+    "code": "23521",
+    "name": "Hà Mòn",
+    "full_name": "Xã Hà Mòn",
+    "type": "Xã Hà",
+    "district_code": "615"
+  },
+  {
+    "code": "23518",
+    "name": "Ngok Réo",
+    "full_name": "Xã Ngok Réo",
+    "type": "Xã Ngok",
+    "district_code": "615"
+  },
+  {
+    "code": "23515",
+    "name": "Ngok Wang",
+    "full_name": "Xã Ngok Wang",
+    "type": "Xã Ngok",
+    "district_code": "615"
+  },
+  {
+    "code": "23500",
+    "name": "Đắk Hà",
+    "full_name": "Thị trấn Đắk Hà",
+    "type": "Thị trấn Đắk",
+    "district_code": "615"
+  },
+  {
+    "code": "23506",
+    "name": "Đắk HRing",
+    "full_name": "Xã Đắk HRing",
+    "type": "Xã Đắk",
+    "district_code": "615"
+  },
+  {
+    "code": "23524",
+    "name": "Đắk La",
+    "full_name": "Xã Đắk La",
+    "type": "Xã Đắk",
+    "district_code": "615"
+  },
+  {
+    "code": "23504",
+    "name": "Đăk Long",
+    "full_name": "Xã Đăk Long",
+    "type": "Xã Đăk",
+    "district_code": "615"
+  },
+  {
+    "code": "23512",
+    "name": "Đắk Mar",
+    "full_name": "Xã Đắk Mar",
+    "type": "Xã Đắk",
+    "district_code": "615"
+  },
+  {
+    "code": "23510",
+    "name": "Đăk Ngọk",
+    "full_name": "Xã Đăk Ngọk",
+    "type": "Xã Đăk",
+    "district_code": "615"
+  },
+  {
+    "code": "23503",
+    "name": "Đắk PXi",
+    "full_name": "Xã Đắk PXi",
+    "type": "Xã Đắk",
+    "district_code": "615"
+  },
+  {
+    "code": "23509",
+    "name": "Đắk Ui",
+    "full_name": "Xã Đắk Ui",
+    "type": "Xã Đắk",
+    "district_code": "615"
+  }
+]

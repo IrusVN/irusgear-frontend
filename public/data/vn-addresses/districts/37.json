@@ -1,0 +1,58 @@
+[
+  {
+    "code": "373",
+    "name": "Gia Viễn",
+    "full_name": "Huyện Gia Viễn",
+    "type": "Huyện Gia",
+    "province_code": "37"
+  },
+  {
+    "code": "374",
+    "name": "Hoa Lư",
+    "full_name": "Huyện Hoa Lư",
+    "type": "Huyện Hoa",
+    "province_code": "37"
+  },
+  {
+    "code": "376",
+    "name": "Kim Sơn",
+    "full_name": "Huyện Kim Sơn",
+    "type": "Huyện Kim",
+    "province_code": "37"
+  },
+  {
+    "code": "372",
+    "name": "Nho Quan",
+    "full_name": "Huyện Nho Quan",
+    "type": "Huyện Nho",
+    "province_code": "37"
+  },
+  {
+    "code": "369",
+    "name": "Ninh Bình",
+    "full_name": "Thành phố Ninh Bình",
+    "type": "Thành phố Ninh",
+    "province_code": "37"
+  },
+  {
+    "code": "370",
+    "name": "Tam Điệp",
+    "full_name": "Thành phố Tam Điệp",
+    "type": "Thành phố Tam",
+    "province_code": "37"
+  },
+  {
+    "code": "375",
+    "name": "Yên Khánh",
+    "full_name": "Huyện Yên Khánh",
+    "type": "Huyện Yên",
+    "province_code": "37"
+  },
+  {
+    "code": "377",
+    "name": "Yên Mô",
+    "full_name": "Huyện Yên Mô",
+    "type": "Huyện Yên",
+    "province_code": "37"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "20224",
+    "name": "An Khê",
+    "full_name": "Phường An Khê",
+    "type": "Phường An",
+    "district_code": "491"
+  },
+  {
+    "code": "20215",
+    "name": "Chính Gián",
+    "full_name": "Phường Chính Gián",
+    "type": "Phường Chính",
+    "district_code": "491"
+  },
+  {
+    "code": "20225",
+    "name": "Hòa Khê",
+    "full_name": "Phường Hòa Khê",
+    "type": "Phường Hòa",
+    "district_code": "491"
+  },
+  {
+    "code": "20203",
+    "name": "Tam Thuận",
+    "full_name": "Phường Tam Thuận",
+    "type": "Phường Tam",
+    "district_code": "491"
+  },
+  {
+    "code": "20212",
+    "name": "Tân Chính",
+    "full_name": "Phường Tân Chính",
+    "type": "Phường Tân",
+    "district_code": "491"
+  },
+  {
+    "code": "20221",
+    "name": "Thạc Gián",
+    "full_name": "Phường Thạc Gián",
+    "type": "Phường Thạc",
+    "district_code": "491"
+  },
+  {
+    "code": "20206",
+    "name": "Thanh Khê Tây",
+    "full_name": "Phường Thanh Khê Tây",
+    "type": "Phường Thanh Khê",
+    "district_code": "491"
+  },
+  {
+    "code": "20207",
+    "name": "Thanh Khê Đông",
+    "full_name": "Phường Thanh Khê Đông",
+    "type": "Phường Thanh Khê",
+    "district_code": "491"
+  },
+  {
+    "code": "20218",
+    "name": "Vĩnh Trung",
+    "full_name": "Phường Vĩnh Trung",
+    "type": "Phường Vĩnh",
+    "district_code": "491"
+  },
+  {
+    "code": "20209",
+    "name": "Xuân Hà",
+    "full_name": "Phường Xuân Hà",
+    "type": "Phường Xuân",
+    "district_code": "491"
+  }
+]

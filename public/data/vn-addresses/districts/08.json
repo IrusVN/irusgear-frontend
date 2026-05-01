@@ -1,0 +1,51 @@
+[
+  {
+    "code": "073",
+    "name": "Chiêm Hóa",
+    "full_name": "Huyện Chiêm Hóa",
+    "type": "Huyện Chiêm",
+    "province_code": "08"
+  },
+  {
+    "code": "074",
+    "name": "Hàm Yên",
+    "full_name": "Huyện Hàm Yên",
+    "type": "Huyện Hàm",
+    "province_code": "08"
+  },
+  {
+    "code": "071",
+    "name": "Lâm Bình",
+    "full_name": "Huyện Lâm Bình",
+    "type": "Huyện Lâm",
+    "province_code": "08"
+  },
+  {
+    "code": "072",
+    "name": "Na Hang",
+    "full_name": "Huyện Na Hang",
+    "type": "Huyện Na",
+    "province_code": "08"
+  },
+  {
+    "code": "076",
+    "name": "Sơn Dương",
+    "full_name": "Huyện Sơn Dương",
+    "type": "Huyện Sơn",
+    "province_code": "08"
+  },
+  {
+    "code": "070",
+    "name": "Tuyên Quang",
+    "full_name": "Thành phố Tuyên Quang",
+    "type": "Thành phố Tuyên",
+    "province_code": "08"
+  },
+  {
+    "code": "075",
+    "name": "Yên Sơn",
+    "full_name": "Huyện Yên Sơn",
+    "type": "Huyện Yên",
+    "province_code": "08"
+  }
+]

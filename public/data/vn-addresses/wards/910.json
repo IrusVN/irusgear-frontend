@@ -1,0 +1,58 @@
+[
+  {
+    "code": "31064",
+    "name": "Bình Minh",
+    "full_name": "Xã Bình Minh",
+    "type": "Xã Bình",
+    "district_code": "910"
+  },
+  {
+    "code": "31074",
+    "name": "Phong Đông",
+    "full_name": "Xã Phong Đông",
+    "type": "Xã Phong",
+    "district_code": "910"
+  },
+  {
+    "code": "31072",
+    "name": "Tân Thuận",
+    "full_name": "Xã Tân Thuận",
+    "type": "Xã Tân",
+    "district_code": "910"
+  },
+  {
+    "code": "31060",
+    "name": "Vĩnh Bình Bắc",
+    "full_name": "Xã Vĩnh Bình Bắc",
+    "type": "Xã Vĩnh Bình",
+    "district_code": "910"
+  },
+  {
+    "code": "31063",
+    "name": "Vĩnh Bình Nam",
+    "full_name": "Xã Vĩnh Bình Nam",
+    "type": "Xã Vĩnh Bình",
+    "district_code": "910"
+  },
+  {
+    "code": "31075",
+    "name": "Vĩnh Phong",
+    "full_name": "Xã Vĩnh Phong",
+    "type": "Xã Vĩnh",
+    "district_code": "910"
+  },
+  {
+    "code": "31051",
+    "name": "Vĩnh Thuận",
+    "full_name": "Thị trấn Vĩnh Thuận",
+    "type": "Thị trấn Vĩnh",
+    "district_code": "910"
+  },
+  {
+    "code": "31069",
+    "name": "Vĩnh Thuận",
+    "full_name": "Xã Vĩnh Thuận",
+    "type": "Xã Vĩnh",
+    "district_code": "910"
+  }
+]

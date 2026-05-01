@@ -1,0 +1,72 @@
+[
+  {
+    "code": "31780",
+    "name": "Châu Hưng",
+    "full_name": "Xã Châu Hưng",
+    "type": "Xã Châu",
+    "district_code": "949"
+  },
+  {
+    "code": "31757",
+    "name": "Hưng Lợi",
+    "full_name": "Thị trấn Hưng Lợi",
+    "type": "Thị trấn Hưng",
+    "district_code": "949"
+  },
+  {
+    "code": "31765",
+    "name": "Lâm Kiết",
+    "full_name": "Xã Lâm Kiết",
+    "type": "Xã Lâm",
+    "district_code": "949"
+  },
+  {
+    "code": "31759",
+    "name": "Lâm Tân",
+    "full_name": "Xã Lâm Tân",
+    "type": "Xã Lâm",
+    "district_code": "949"
+  },
+  {
+    "code": "31756",
+    "name": "Phú Lộc",
+    "full_name": "Thị trấn Phú Lộc",
+    "type": "Thị trấn Phú",
+    "district_code": "949"
+  },
+  {
+    "code": "31762",
+    "name": "Thạnh Tân",
+    "full_name": "Xã Thạnh Tân",
+    "type": "Xã Thạnh",
+    "district_code": "949"
+  },
+  {
+    "code": "31774",
+    "name": "Thạnh Trị",
+    "full_name": "Xã Thạnh Trị",
+    "type": "Xã Thạnh",
+    "district_code": "949"
+  },
+  {
+    "code": "31768",
+    "name": "Tuân Tức",
+    "full_name": "Xã Tuân Tức",
+    "type": "Xã Tuân",
+    "district_code": "949"
+  },
+  {
+    "code": "31777",
+    "name": "Vĩnh Lợi",
+    "full_name": "Xã Vĩnh Lợi",
+    "type": "Xã Vĩnh",
+    "district_code": "949"
+  },
+  {
+    "code": "31771",
+    "name": "Vĩnh Thành",
+    "full_name": "Xã Vĩnh Thành",
+    "type": "Xã Vĩnh",
+    "district_code": "949"
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "code": "14812",
+    "name": "Ba Đình",
+    "full_name": "Phường Ba Đình",
+    "type": "Phường Ba",
+    "district_code": "381"
+  },
+  {
+    "code": "14809",
+    "name": "Bắc Sơn",
+    "full_name": "Phường Bắc Sơn",
+    "type": "Phường Bắc",
+    "district_code": "381"
+  },
+  {
+    "code": "14815",
+    "name": "Lam Sơn",
+    "full_name": "Phường Lam Sơn",
+    "type": "Phường Lam",
+    "district_code": "381"
+  },
+  {
+    "code": "14818",
+    "name": "Ngọc Trạo",
+    "full_name": "Phường Ngọc Trạo",
+    "type": "Phường Ngọc",
+    "district_code": "381"
+  },
+  {
+    "code": "14823",
+    "name": "Phú Sơn",
+    "full_name": "Phường Phú Sơn",
+    "type": "Phường Phú",
+    "district_code": "381"
+  },
+  {
+    "code": "14824",
+    "name": "Quang Trung",
+    "full_name": "Xã Quang Trung",
+    "type": "Xã Quang",
+    "district_code": "381"
+  },
+  {
+    "code": "14821",
+    "name": "Đông Sơn",
+    "full_name": "Phường Đông Sơn",
+    "type": "Phường Đông",
+    "district_code": "381"
+  }
+]

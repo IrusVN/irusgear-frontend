@@ -1,0 +1,163 @@
+[
+  {
+    "code": "10675",
+    "name": "An Lưu",
+    "full_name": "Phường An Lưu",
+    "type": "Phường An",
+    "district_code": "292"
+  },
+  {
+    "code": "10732",
+    "name": "An Phụ",
+    "full_name": "Phường An Phụ",
+    "type": "Phường An",
+    "district_code": "292"
+  },
+  {
+    "code": "10723",
+    "name": "An Sinh",
+    "full_name": "Phường An Sinh",
+    "type": "Phường An",
+    "district_code": "292"
+  },
+  {
+    "code": "10678",
+    "name": "Bạch Đằng",
+    "full_name": "Xã Bạch Đằng",
+    "type": "Xã Bạch",
+    "district_code": "292"
+  },
+  {
+    "code": "10696",
+    "name": "Duy Tân",
+    "full_name": "Phường Duy Tân",
+    "type": "Phường Duy",
+    "district_code": "292"
+  },
+  {
+    "code": "10744",
+    "name": "Hiến Thành",
+    "full_name": "Phường Hiến Thành",
+    "type": "Phường Hiến",
+    "district_code": "292"
+  },
+  {
+    "code": "10735",
+    "name": "Hiệp An",
+    "full_name": "Phường Hiệp An",
+    "type": "Phường Hiệp",
+    "district_code": "292"
+  },
+  {
+    "code": "10708",
+    "name": "Hiệp Hòa",
+    "full_name": "Xã Hiệp Hòa",
+    "type": "Xã Hiệp",
+    "district_code": "292"
+  },
+  {
+    "code": "10726",
+    "name": "Hiệp Sơn",
+    "full_name": "Phường Hiệp Sơn",
+    "type": "Phường Hiệp",
+    "district_code": "292"
+  },
+  {
+    "code": "10687",
+    "name": "Hoành Sơn",
+    "full_name": "Xã Hoành Sơn",
+    "type": "Xã Hoành",
+    "district_code": "292"
+  },
+  {
+    "code": "10720",
+    "name": "Lạc Long",
+    "full_name": "Xã Lạc Long",
+    "type": "Xã Lạc",
+    "district_code": "292"
+  },
+  {
+    "code": "10684",
+    "name": "Lê Ninh",
+    "full_name": "Xã Lê Ninh",
+    "type": "Xã Lê",
+    "district_code": "292"
+  },
+  {
+    "code": "10738",
+    "name": "Long Xuyên",
+    "full_name": "Phường Long Xuyên",
+    "type": "Phường Long",
+    "district_code": "292"
+  },
+  {
+    "code": "10747",
+    "name": "Minh Hòa",
+    "full_name": "Xã Minh Hòa",
+    "type": "Xã Minh",
+    "district_code": "292"
+  },
+  {
+    "code": "10702",
+    "name": "Minh Tân",
+    "full_name": "Phường Minh Tân",
+    "type": "Phường Minh",
+    "district_code": "292"
+  },
+  {
+    "code": "10693",
+    "name": "Phạm Thái",
+    "full_name": "Phường Phạm Thái",
+    "type": "Phường Phạm",
+    "district_code": "292"
+  },
+  {
+    "code": "10714",
+    "name": "Phú Thứ",
+    "full_name": "Phường Phú Thứ",
+    "type": "Phường Phú",
+    "district_code": "292"
+  },
+  {
+    "code": "10705",
+    "name": "Quang Thành",
+    "full_name": "Xã Quang Thành",
+    "type": "Xã Quang",
+    "district_code": "292"
+  },
+  {
+    "code": "10699",
+    "name": "Tân Dân",
+    "full_name": "Phường Tân Dân",
+    "type": "Phường Tân",
+    "district_code": "292"
+  },
+  {
+    "code": "10741",
+    "name": "Thái Thịnh",
+    "full_name": "Phường Thái Thịnh",
+    "type": "Phường Thái",
+    "district_code": "292"
+  },
+  {
+    "code": "10717",
+    "name": "Thăng Long",
+    "full_name": "Xã Thăng Long",
+    "type": "Xã Thăng",
+    "district_code": "292"
+  },
+  {
+    "code": "10681",
+    "name": "Thất Hùng",
+    "full_name": "Phường Thất Hùng",
+    "type": "Phường Thất",
+    "district_code": "292"
+  },
+  {
+    "code": "10729",
+    "name": "Thượng Quận",
+    "full_name": "Xã Thượng Quận",
+    "type": "Xã Thượng",
+    "district_code": "292"
+  }
+]

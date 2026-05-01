@@ -1,0 +1,86 @@
+[
+  {
+    "code": "30019",
+    "name": "An Hòa",
+    "full_name": "Xã An Hòa",
+    "type": "Xã An",
+    "district_code": "871"
+  },
+  {
+    "code": "30022",
+    "name": "An Long",
+    "full_name": "Xã An Long",
+    "type": "Xã An",
+    "district_code": "871"
+  },
+  {
+    "code": "30004",
+    "name": "Hoà Bình",
+    "full_name": "Xã Hoà Bình",
+    "type": "Xã Hoà",
+    "district_code": "871"
+  },
+  {
+    "code": "30025",
+    "name": "Phú Cường",
+    "full_name": "Xã Phú Cường",
+    "type": "Xã Phú",
+    "district_code": "871"
+  },
+  {
+    "code": "30010",
+    "name": "Phú Hiệp",
+    "full_name": "Xã Phú Hiệp",
+    "type": "Xã Phú",
+    "district_code": "871"
+  },
+  {
+    "code": "30028",
+    "name": "Phú Ninh",
+    "full_name": "Xã Phú Ninh",
+    "type": "Xã Phú",
+    "district_code": "871"
+  },
+  {
+    "code": "30034",
+    "name": "Phú Thành A",
+    "full_name": "Xã Phú Thành A",
+    "type": "Xã Phú Thành",
+    "district_code": "871"
+  },
+  {
+    "code": "30016",
+    "name": "Phú Thành B",
+    "full_name": "Xã Phú Thành B",
+    "type": "Xã Phú Thành",
+    "district_code": "871"
+  },
+  {
+    "code": "30031",
+    "name": "Phú Thọ",
+    "full_name": "Xã Phú Thọ",
+    "type": "Xã Phú",
+    "district_code": "871"
+  },
+  {
+    "code": "30013",
+    "name": "Phú Đức",
+    "full_name": "Xã Phú Đức",
+    "type": "Xã Phú",
+    "district_code": "871"
+  },
+  {
+    "code": "30007",
+    "name": "Tân Công Sính",
+    "full_name": "Xã Tân Công Sính",
+    "type": "Xã Tân Công",
+    "district_code": "871"
+  },
+  {
+    "code": "30001",
+    "name": "Tràm Chim",
+    "full_name": "Thị trấn Tràm Chim",
+    "type": "Thị trấn Tràm",
+    "district_code": "871"
+  }
+]

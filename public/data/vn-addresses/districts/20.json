@@ -1,0 +1,79 @@
+[
+  {
+    "code": "185",
+    "name": "Bắc Sơn",
+    "full_name": "Huyện Bắc Sơn",
+    "type": "Huyện Bắc",
+    "province_code": "20"
+  },
+  {
+    "code": "181",
+    "name": "Bình Gia",
+    "full_name": "Huyện Bình Gia",
+    "type": "Huyện Bình",
+    "province_code": "20"
+  },
+  {
+    "code": "183",
+    "name": "Cao Lộc",
+    "full_name": "Huyện Cao Lộc",
+    "type": "Huyện Cao",
+    "province_code": "20"
+  },
+  {
+    "code": "187",
+    "name": "Chi Lăng",
+    "full_name": "Huyện Chi Lăng",
+    "type": "Huyện Chi",
+    "province_code": "20"
+  },
+  {
+    "code": "186",
+    "name": "Hữu Lũng",
+    "full_name": "Huyện Hữu Lũng",
+    "type": "Huyện Hữu",
+    "province_code": "20"
+  },
+  {
+    "code": "178",
+    "name": "Lạng Sơn",
+    "full_name": "Thành phố Lạng Sơn",
+    "type": "Thành phố Lạng",
+    "province_code": "20"
+  },
+  {
+    "code": "188",
+    "name": "Lộc Bình",
+    "full_name": "Huyện Lộc Bình",
+    "type": "Huyện Lộc",
+    "province_code": "20"
+  },
+  {
+    "code": "180",
+    "name": "Tràng Định",
+    "full_name": "Huyện Tràng Định",
+    "type": "Huyện Tràng",
+    "province_code": "20"
+  },
+  {
+    "code": "182",
+    "name": "Văn Lãng",
+    "full_name": "Huyện Văn Lãng",
+    "type": "Huyện Văn",
+    "province_code": "20"
+  },
+  {
+    "code": "184",
+    "name": "Văn Quan",
+    "full_name": "Huyện Văn Quan",
+    "type": "Huyện Văn",
+    "province_code": "20"
+  },
+  {
+    "code": "189",
+    "name": "Đình Lập",
+    "full_name": "Huyện Đình Lập",
+    "type": "Huyện Đình",
+    "province_code": "20"
+  }
+]

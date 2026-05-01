@@ -1,0 +1,121 @@
+[
+  {
+    "code": "10123",
+    "name": "Biên Giang",
+    "full_name": "Phường Biên Giang",
+    "type": "Phường Biên",
+    "district_code": "268"
+  },
+  {
+    "code": "09886",
+    "name": "Dương Nội",
+    "full_name": "Phường Dương Nội",
+    "type": "Phường Dương",
+    "district_code": "268"
+  },
+  {
+    "code": "09556",
+    "name": "Hà Cầu",
+    "full_name": "Phường Hà Cầu",
+    "type": "Phường Hà",
+    "district_code": "268"
+  },
+  {
+    "code": "09565",
+    "name": "Kiến Hưng",
+    "full_name": "Phường Kiến Hưng",
+    "type": "Phường Kiến",
+    "district_code": "268"
+  },
+  {
+    "code": "09551",
+    "name": "La Khê",
+    "full_name": "Phường La Khê",
+    "type": "Phường La",
+    "district_code": "268"
+  },
+  {
+    "code": "09541",
+    "name": "Mộ Lao",
+    "full_name": "Phường Mộ Lao",
+    "type": "Phường Mộ",
+    "district_code": "268"
+  },
+  {
+    "code": "09538",
+    "name": "Nguyễn Trãi",
+    "full_name": "Phường Nguyễn Trãi",
+    "type": "Phường Nguyễn",
+    "district_code": "268"
+  },
+  {
+    "code": "09552",
+    "name": "Phú La",
+    "full_name": "Phường Phú La",
+    "type": "Phường Phú",
+    "district_code": "268"
+  },
+  {
+    "code": "09568",
+    "name": "Phú Lãm",
+    "full_name": "Phường Phú Lãm",
+    "type": "Phường Phú",
+    "district_code": "268"
+  },
+  {
+    "code": "09571",
+    "name": "Phú Lương",
+    "full_name": "Phường Phú Lương",
+    "type": "Phường Phú",
+    "district_code": "268"
+  },
+  {
+    "code": "09553",
+    "name": "Phúc La",
+    "full_name": "Phường Phúc La",
+    "type": "Phường Phúc",
+    "district_code": "268"
+  },
+  {
+    "code": "09550",
+    "name": "Quang Trung",
+    "full_name": "Phường Quang Trung",
+    "type": "Phường Quang",
+    "district_code": "268"
+  },
+  {
+    "code": "09544",
+    "name": "Vạn Phúc",
+    "full_name": "Phường Vạn Phúc",
+    "type": "Phường Vạn",
+    "district_code": "268"
+  },
+  {
+    "code": "09542",
+    "name": "Văn Quán",
+    "full_name": "Phường Văn Quán",
+    "type": "Phường Văn",
+    "district_code": "268"
+  },
+  {
+    "code": "09562",
+    "name": "Yên Nghĩa",
+    "full_name": "Phường Yên Nghĩa",
+    "type": "Phường Yên",
+    "district_code": "268"
+  },
+  {
+    "code": "09547",
+    "name": "Yết Kiêu",
+    "full_name": "Phường Yết Kiêu",
+    "type": "Phường Yết",
+    "district_code": "268"
+  },
+  {
+    "code": "10117",
+    "name": "Đồng Mai",
+    "full_name": "Phường Đồng Mai",
+    "type": "Phường Đồng",
+    "district_code": "268"
+  }
+]

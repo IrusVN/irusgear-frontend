@@ -1,0 +1,100 @@
+[
+  {
+    "code": "30526",
+    "name": "An Cư",
+    "full_name": "Xã An Cư",
+    "type": "Xã An",
+    "district_code": "890"
+  },
+  {
+    "code": "30538",
+    "name": "An Hảo",
+    "full_name": "Xã An Hảo",
+    "type": "Xã An",
+    "district_code": "890"
+  },
+  {
+    "code": "30529",
+    "name": "An Nông",
+    "full_name": "Xã An Nông",
+    "type": "Xã An",
+    "district_code": "890"
+  },
+  {
+    "code": "30514",
+    "name": "An Phú",
+    "full_name": "Phường An Phú",
+    "type": "Phường An",
+    "district_code": "890"
+  },
+  {
+    "code": "30505",
+    "name": "Chi Lăng",
+    "full_name": "Phường Chi Lăng",
+    "type": "Phường Chi",
+    "district_code": "890"
+  },
+  {
+    "code": "30502",
+    "name": "Nhà Bàng",
+    "full_name": "Phường Nhà Bàng",
+    "type": "Phường Nhà",
+    "district_code": "890"
+  },
+  {
+    "code": "30511",
+    "name": "Nhơn Hưng",
+    "full_name": "Phường Nhơn Hưng",
+    "type": "Phường Nhơn",
+    "district_code": "890"
+  },
+  {
+    "code": "30508",
+    "name": "Núi Voi",
+    "full_name": "Phường Núi Voi",
+    "type": "Phường Núi",
+    "district_code": "890"
+  },
+  {
+    "code": "30541",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "890"
+  },
+  {
+    "code": "30535",
+    "name": "Tân Lợi",
+    "full_name": "Xã Tân Lợi",
+    "type": "Xã Tân",
+    "district_code": "890"
+  },
+  {
+    "code": "30517",
+    "name": "Thới Sơn",
+    "full_name": "Phường Thới Sơn",
+    "type": "Phường Thới",
+    "district_code": "890"
+  },
+  {
+    "code": "30520",
+    "name": "Tịnh Biên",
+    "full_name": "Phường Tịnh Biên",
+    "type": "Phường Tịnh",
+    "district_code": "890"
+  },
+  {
+    "code": "30523",
+    "name": "Văn Giáo",
+    "full_name": "Xã Văn Giáo",
+    "type": "Xã Văn",
+    "district_code": "890"
+  },
+  {
+    "code": "30532",
+    "name": "Vĩnh Trung",
+    "full_name": "Xã Vĩnh Trung",
+    "type": "Xã Vĩnh",
+    "district_code": "890"
+  }
+]

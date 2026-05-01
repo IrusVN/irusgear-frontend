@@ -1,0 +1,107 @@
+[
+  {
+    "code": "22423",
+    "name": "Ba Ngòi",
+    "full_name": "Phường Ba Ngòi",
+    "type": "Phường Ba",
+    "district_code": "569"
+  },
+  {
+    "code": "22486",
+    "name": "Cam Bình",
+    "full_name": "Xã Cam Bình",
+    "type": "Xã Cam",
+    "district_code": "569"
+  },
+  {
+    "code": "22483",
+    "name": "Cam Lập",
+    "full_name": "Xã Cam Lập",
+    "type": "Xã Cam",
+    "district_code": "569"
+  },
+  {
+    "code": "22432",
+    "name": "Cam Linh",
+    "full_name": "Phường Cam Linh",
+    "type": "Phường Cam",
+    "district_code": "569"
+  },
+  {
+    "code": "22417",
+    "name": "Cam Lộc",
+    "full_name": "Phường Cam Lộc",
+    "type": "Phường Cam",
+    "district_code": "569"
+  },
+  {
+    "code": "22429",
+    "name": "Cam Lợi",
+    "full_name": "Phường Cam Lợi",
+    "type": "Phường Cam",
+    "district_code": "569"
+  },
+  {
+    "code": "22408",
+    "name": "Cam Nghĩa",
+    "full_name": "Phường Cam Nghĩa",
+    "type": "Phường Cam",
+    "district_code": "569"
+  },
+  {
+    "code": "22420",
+    "name": "Cam Phú",
+    "full_name": "Phường Cam Phú",
+    "type": "Phường Cam",
+    "district_code": "569"
+  },
+  {
+    "code": "22411",
+    "name": "Cam Phúc Bắc",
+    "full_name": "Phường Cam Phúc Bắc",
+    "type": "Phường Cam Phúc",
+    "district_code": "569"
+  },
+  {
+    "code": "22414",
+    "name": "Cam Phúc Nam",
+    "full_name": "Phường Cam Phúc Nam",
+    "type": "Phường Cam Phúc",
+    "district_code": "569"
+  },
+  {
+    "code": "22474",
+    "name": "Cam Phước Đông",
+    "full_name": "Xã Cam Phước Đông",
+    "type": "Xã Cam Phước",
+    "district_code": "569"
+  },
+  {
+    "code": "22468",
+    "name": "Cam Thành Nam",
+    "full_name": "Xã Cam Thành Nam",
+    "type": "Xã Cam Thành",
+    "district_code": "569"
+  },
+  {
+    "code": "22477",
+    "name": "Cam Thịnh Tây",
+    "full_name": "Xã Cam Thịnh Tây",
+    "type": "Xã Cam Thịnh",
+    "district_code": "569"
+  },
+  {
+    "code": "22480",
+    "name": "Cam Thịnh Đông",
+    "full_name": "Xã Cam Thịnh Đông",
+    "type": "Xã Cam Thịnh",
+    "district_code": "569"
+  },
+  {
+    "code": "22426",
+    "name": "Cam Thuận",
+    "full_name": "Phường Cam Thuận",
+    "type": "Phường Cam",
+    "district_code": "569"
+  }
+]

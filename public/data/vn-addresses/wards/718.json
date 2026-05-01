@@ -1,0 +1,100 @@
+[
+  {
+    "code": "25774",
+    "name": "Chánh Mỹ",
+    "full_name": "Phường Chánh Mỹ",
+    "type": "Phường Chánh",
+    "district_code": "718"
+  },
+  {
+    "code": "25756",
+    "name": "Chánh Nghĩa",
+    "full_name": "Phường Chánh Nghĩa",
+    "type": "Phường Chánh",
+    "district_code": "718"
+  },
+  {
+    "code": "25768",
+    "name": "Hiệp An",
+    "full_name": "Phường Hiệp An",
+    "type": "Phường Hiệp",
+    "district_code": "718"
+  },
+  {
+    "code": "25741",
+    "name": "Hiệp Thành",
+    "full_name": "Phường Hiệp Thành",
+    "type": "Phường Hiệp",
+    "district_code": "718"
+  },
+  {
+    "code": "25760",
+    "name": "Hoà Phú",
+    "full_name": "Phường Hoà Phú",
+    "type": "Phường Hoà",
+    "district_code": "718"
+  },
+  {
+    "code": "25747",
+    "name": "Phú Cường",
+    "full_name": "Phường Phú Cường",
+    "type": "Phường Phú",
+    "district_code": "718"
+  },
+  {
+    "code": "25750",
+    "name": "Phú Hòa",
+    "full_name": "Phường Phú Hòa",
+    "type": "Phường Phú",
+    "district_code": "718"
+  },
+  {
+    "code": "25744",
+    "name": "Phú Lợi",
+    "full_name": "Phường Phú Lợi",
+    "type": "Phường Phú",
+    "district_code": "718"
+  },
+  {
+    "code": "25762",
+    "name": "Phú Mỹ",
+    "full_name": "Phường Phú Mỹ",
+    "type": "Phường Phú",
+    "district_code": "718"
+  },
+  {
+    "code": "25763",
+    "name": "Phú Tân",
+    "full_name": "Phường Phú Tân",
+    "type": "Phường Phú",
+    "district_code": "718"
+  },
+  {
+    "code": "25753",
+    "name": "Phú Thọ",
+    "full_name": "Phường Phú Thọ",
+    "type": "Phường Phú",
+    "district_code": "718"
+  },
+  {
+    "code": "25765",
+    "name": "Tân An",
+    "full_name": "Phường Tân An",
+    "type": "Phường Tân",
+    "district_code": "718"
+  },
+  {
+    "code": "25771",
+    "name": "Tương Bình Hiệp",
+    "full_name": "Phường Tương Bình Hiệp",
+    "type": "Phường Tương Bình",
+    "district_code": "718"
+  },
+  {
+    "code": "25759",
+    "name": "Định Hoà",
+    "full_name": "Phường Định Hoà",
+    "type": "Phường Định",
+    "district_code": "718"
+  }
+]

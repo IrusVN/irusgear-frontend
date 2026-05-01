@@ -1,0 +1,93 @@
+[
+  {
+    "code": "30589",
+    "name": "An Châu",
+    "full_name": "Thị trấn An Châu",
+    "type": "Thị trấn An",
+    "district_code": "892"
+  },
+  {
+    "code": "30592",
+    "name": "An Hòa",
+    "full_name": "Xã An Hòa",
+    "type": "Xã An",
+    "district_code": "892"
+  },
+  {
+    "code": "30607",
+    "name": "Bình Hòa",
+    "full_name": "Xã Bình Hòa",
+    "type": "Xã Bình",
+    "district_code": "892"
+  },
+  {
+    "code": "30601",
+    "name": "Bình Thạnh",
+    "full_name": "Xã Bình Thạnh",
+    "type": "Xã Bình",
+    "district_code": "892"
+  },
+  {
+    "code": "30595",
+    "name": "Cần Đăng",
+    "full_name": "Xã Cần Đăng",
+    "type": "Xã Cần",
+    "district_code": "892"
+  },
+  {
+    "code": "30613",
+    "name": "Hòa Bình Thạnh",
+    "full_name": "Xã Hòa Bình Thạnh",
+    "type": "Xã Hòa Bình",
+    "district_code": "892"
+  },
+  {
+    "code": "30622",
+    "name": "Tân Phú",
+    "full_name": "Xã Tân Phú",
+    "type": "Xã Tân",
+    "district_code": "892"
+  },
+  {
+    "code": "30610",
+    "name": "Vĩnh An",
+    "full_name": "Xã Vĩnh An",
+    "type": "Xã Vĩnh",
+    "district_code": "892"
+  },
+  {
+    "code": "30604",
+    "name": "Vĩnh Bình",
+    "full_name": "Thị trấn Vĩnh Bình",
+    "type": "Thị trấn Vĩnh",
+    "district_code": "892"
+  },
+  {
+    "code": "30598",
+    "name": "Vĩnh Hanh",
+    "full_name": "Xã Vĩnh Hanh",
+    "type": "Xã Vĩnh",
+    "district_code": "892"
+  },
+  {
+    "code": "30616",
+    "name": "Vĩnh Lợi",
+    "full_name": "Xã Vĩnh Lợi",
+    "type": "Xã Vĩnh",
+    "district_code": "892"
+  },
+  {
+    "code": "30619",
+    "name": "Vĩnh Nhuận",
+    "full_name": "Xã Vĩnh Nhuận",
+    "type": "Xã Vĩnh",
+    "district_code": "892"
+  },
+  {
+    "code": "30625",
+    "name": "Vĩnh Thành",
+    "full_name": "Xã Vĩnh Thành",
+    "type": "Xã Vĩnh",
+    "district_code": "892"
+  }
+]

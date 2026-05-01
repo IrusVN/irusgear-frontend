@@ -1,0 +1,107 @@
+[
+  {
+    "code": "05689",
+    "name": "Cây Thị",
+    "full_name": "Xã Cây Thị",
+    "type": "Xã Cây",
+    "district_code": "169"
+  },
+  {
+    "code": "05671",
+    "name": "Hòa Bình",
+    "full_name": "Xã Hòa Bình",
+    "type": "Xã Hòa",
+    "district_code": "169"
+  },
+  {
+    "code": "05692",
+    "name": "Hóa Thượng",
+    "full_name": "Thị trấn Hóa Thượng",
+    "type": "Thị trấn Hóa",
+    "district_code": "169"
+  },
+  {
+    "code": "05683",
+    "name": "Hóa Trung",
+    "full_name": "Xã Hóa Trung",
+    "type": "Xã Hóa",
+    "district_code": "169"
+  },
+  {
+    "code": "05698",
+    "name": "Hợp Tiến",
+    "full_name": "Xã Hợp Tiến",
+    "type": "Xã Hợp",
+    "district_code": "169"
+  },
+  {
+    "code": "05686",
+    "name": "Khe Mo",
+    "full_name": "Xã Khe Mo",
+    "type": "Xã Khe",
+    "district_code": "169"
+  },
+  {
+    "code": "05677",
+    "name": "Minh Lập",
+    "full_name": "Xã Minh Lập",
+    "type": "Xã Minh",
+    "district_code": "169"
+  },
+  {
+    "code": "05707",
+    "name": "Nam Hòa",
+    "full_name": "Xã Nam Hòa",
+    "type": "Xã Nam",
+    "district_code": "169"
+  },
+  {
+    "code": "05674",
+    "name": "Quang Sơn",
+    "full_name": "Xã Quang Sơn",
+    "type": "Xã Quang",
+    "district_code": "169"
+  },
+  {
+    "code": "05656",
+    "name": "Sông Cầu",
+    "full_name": "Thị trấn Sông Cầu",
+    "type": "Thị trấn Sông",
+    "district_code": "169"
+  },
+  {
+    "code": "05704",
+    "name": "Tân Lợi",
+    "full_name": "Xã Tân Lợi",
+    "type": "Xã Tân",
+    "district_code": "169"
+  },
+  {
+    "code": "05668",
+    "name": "Tân Long",
+    "full_name": "Xã Tân Long",
+    "type": "Xã Tân",
+    "district_code": "169"
+  },
+  {
+    "code": "05662",
+    "name": "Trại Cau",
+    "full_name": "Thị trấn Trại Cau",
+    "type": "Thị trấn Trại",
+    "district_code": "169"
+  },
+  {
+    "code": "05680",
+    "name": "Văn Hán",
+    "full_name": "Xã Văn Hán",
+    "type": "Xã Văn",
+    "district_code": "169"
+  },
+  {
+    "code": "05665",
+    "name": "Văn Lăng",
+    "full_name": "Xã Văn Lăng",
+    "type": "Xã Văn",
+    "district_code": "169"
+  }
+]

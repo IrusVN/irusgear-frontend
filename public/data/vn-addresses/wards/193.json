@@ -1,0 +1,233 @@
+[
+  {
+    "code": "06694",
+    "name": "Bạch Đằng",
+    "full_name": "Phường Bạch Đằng",
+    "type": "Phường Bạch",
+    "district_code": "193"
+  },
+  {
+    "code": "06673",
+    "name": "Bãi Cháy",
+    "full_name": "Phường Bãi Cháy",
+    "type": "Phường Bãi",
+    "district_code": "193"
+  },
+  {
+    "code": "07057",
+    "name": "Bằng Cả",
+    "full_name": "Xã Bằng Cả",
+    "type": "Xã Bằng",
+    "district_code": "193"
+  },
+  {
+    "code": "06676",
+    "name": "Cao Thắng",
+    "full_name": "Phường Cao Thắng",
+    "type": "Phường Cao",
+    "district_code": "193"
+  },
+  {
+    "code": "06658",
+    "name": "Cao Xanh",
+    "full_name": "Phường Cao Xanh",
+    "type": "Phường Cao",
+    "district_code": "193"
+  },
+  {
+    "code": "07051",
+    "name": "Dân Chủ",
+    "full_name": "Xã Dân Chủ",
+    "type": "Xã Dân",
+    "district_code": "193"
+  },
+  {
+    "code": "06661",
+    "name": "Giếng Đáy",
+    "full_name": "Phường Giếng Đáy",
+    "type": "Phường Giếng",
+    "district_code": "193"
+  },
+  {
+    "code": "06649",
+    "name": "Hà Khánh",
+    "full_name": "Phường Hà Khánh",
+    "type": "Phường Hà",
+    "district_code": "193"
+  },
+  {
+    "code": "06655",
+    "name": "Hà Khẩu",
+    "full_name": "Phường Hà Khẩu",
+    "type": "Phường Hà",
+    "district_code": "193"
+  },
+  {
+    "code": "06670",
+    "name": "Hà Lầm",
+    "full_name": "Phường Hà Lầm",
+    "type": "Phường Hà",
+    "district_code": "193"
+  },
+  {
+    "code": "06652",
+    "name": "Hà Phong",
+    "full_name": "Phường Hà Phong",
+    "type": "Phường Hà",
+    "district_code": "193"
+  },
+  {
+    "code": "06667",
+    "name": "Hà Trung",
+    "full_name": "Phường Hà Trung",
+    "type": "Phường Hà",
+    "district_code": "193"
+  },
+  {
+    "code": "06664",
+    "name": "Hà Tu",
+    "full_name": "Phường Hà Tu",
+    "type": "Phường Hà",
+    "district_code": "193"
+  },
+  {
+    "code": "07045",
+    "name": "Hòa Bình",
+    "full_name": "Xã Hòa Bình",
+    "type": "Xã Hòa",
+    "district_code": "193"
+  },
+  {
+    "code": "07030",
+    "name": "Hoành Bồ",
+    "full_name": "Phường Hoành Bồ",
+    "type": "Phường Hoành",
+    "district_code": "193"
+  },
+  {
+    "code": "06691",
+    "name": "Hồng Gai",
+    "full_name": "Phường Hồng Gai",
+    "type": "Phường Hồng",
+    "district_code": "193"
+  },
+  {
+    "code": "06697",
+    "name": "Hồng Hà",
+    "full_name": "Phường Hồng Hà",
+    "type": "Phường Hồng",
+    "district_code": "193"
+  },
+  {
+    "code": "06688",
+    "name": "Hồng Hải",
+    "full_name": "Phường Hồng Hải",
+    "type": "Phường Hồng",
+    "district_code": "193"
+  },
+  {
+    "code": "06679",
+    "name": "Hùng Thắng",
+    "full_name": "Phường Hùng Thắng",
+    "type": "Phường Hùng",
+    "district_code": "193"
+  },
+  {
+    "code": "07033",
+    "name": "Kỳ Thượng",
+    "full_name": "Xã Kỳ Thượng",
+    "type": "Xã Kỳ",
+    "district_code": "193"
+  },
+  {
+    "code": "07066",
+    "name": "Lê Lợi",
+    "full_name": "Xã Lê Lợi",
+    "type": "Xã Lê",
+    "district_code": "193"
+  },
+  {
+    "code": "07054",
+    "name": "Quảng La",
+    "full_name": "Xã Quảng La",
+    "type": "Xã Quảng",
+    "district_code": "193"
+  },
+  {
+    "code": "07063",
+    "name": "Sơn Dương",
+    "full_name": "Xã Sơn Dương",
+    "type": "Xã Sơn",
+    "district_code": "193"
+  },
+  {
+    "code": "07039",
+    "name": "Tân Dân",
+    "full_name": "Xã Tân Dân",
+    "type": "Xã Tân",
+    "district_code": "193"
+  },
+  {
+    "code": "07060",
+    "name": "Thống Nhất",
+    "full_name": "Xã Thống Nhất",
+    "type": "Xã Thống",
+    "district_code": "193"
+  },
+  {
+    "code": "06685",
+    "name": "Trần Hưng Đạo",
+    "full_name": "Phường Trần Hưng Đạo",
+    "type": "Phường Trần Hưng",
+    "district_code": "193"
+  },
+  {
+    "code": "06700",
+    "name": "Tuần Châu",
+    "full_name": "Phường Tuần Châu",
+    "type": "Phường Tuần",
+    "district_code": "193"
+  },
+  {
+    "code": "06703",
+    "name": "Việt Hưng",
+    "full_name": "Phường Việt Hưng",
+    "type": "Phường Việt",
+    "district_code": "193"
+  },
+  {
+    "code": "07048",
+    "name": "Vũ Oai",
+    "full_name": "Xã Vũ Oai",
+    "type": "Xã Vũ",
+    "district_code": "193"
+  },
+  {
+    "code": "06682",
+    "name": "Yết Kiêu",
+    "full_name": "Phường Yết Kiêu",
+    "type": "Phường Yết",
+    "district_code": "193"
+  },
+  {
+    "code": "06706",
+    "name": "Đại Yên",
+    "full_name": "Phường Đại Yên",
+    "type": "Phường Đại",
+    "district_code": "193"
+  },
+  {
+    "code": "07042",
+    "name": "Đồng Lâm",
+    "full_name": "Xã Đồng Lâm",
+    "type": "Xã Đồng",
+    "district_code": "193"
+  },
+  {
+    "code": "07036",
+    "name": "Đồng Sơn",
+    "full_name": "Xã Đồng Sơn",
+    "type": "Xã Đồng",
+    "district_code": "193"
+  }
+]

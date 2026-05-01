@@ -1,0 +1,121 @@
+[
+  {
+    "code": "21640",
+    "name": "Bồng Sơn",
+    "full_name": "Phường Bồng Sơn",
+    "type": "Phường Bồng",
+    "district_code": "543"
+  },
+  {
+    "code": "21649",
+    "name": "Hoài Châu",
+    "full_name": "Xã Hoài Châu",
+    "type": "Xã Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21646",
+    "name": "Hoài Châu Bắc",
+    "full_name": "Xã Hoài Châu Bắc",
+    "type": "Xã Hoài Châu",
+    "district_code": "543"
+  },
+  {
+    "code": "21676",
+    "name": "Hoài Hải",
+    "full_name": "Xã Hoài Hải",
+    "type": "Xã Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21661",
+    "name": "Hoài Hảo",
+    "full_name": "Phường Hoài Hảo",
+    "type": "Phường Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21670",
+    "name": "Hoài Hương",
+    "full_name": "Phường Hoài Hương",
+    "type": "Phường Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21682",
+    "name": "Hoài Mỹ",
+    "full_name": "Xã Hoài Mỹ",
+    "type": "Xã Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21652",
+    "name": "Hoài Phú",
+    "full_name": "Xã Hoài Phú",
+    "type": "Xã Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21643",
+    "name": "Hoài Sơn",
+    "full_name": "Xã Hoài Sơn",
+    "type": "Xã Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21673",
+    "name": "Hoài Tân",
+    "full_name": "Phường Hoài Tân",
+    "type": "Phường Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21667",
+    "name": "Hoài Thanh",
+    "full_name": "Phường Hoài Thanh",
+    "type": "Phường Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21664",
+    "name": "Hoài Thanh Tây",
+    "full_name": "Phường Hoài Thanh Tây",
+    "type": "Phường Hoài Thanh",
+    "district_code": "543"
+  },
+  {
+    "code": "21679",
+    "name": "Hoài Xuân",
+    "full_name": "Phường Hoài Xuân",
+    "type": "Phường Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21685",
+    "name": "Hoài Đức",
+    "full_name": "Phường Hoài Đức",
+    "type": "Phường Hoài",
+    "district_code": "543"
+  },
+  {
+    "code": "21637",
+    "name": "Tam Quan",
+    "full_name": "Phường Tam Quan",
+    "type": "Phường Tam",
+    "district_code": "543"
+  },
+  {
+    "code": "21655",
+    "name": "Tam Quan Bắc",
+    "full_name": "Phường Tam Quan Bắc",
+    "type": "Phường Tam Quan",
+    "district_code": "543"
+  },
+  {
+    "code": "21658",
+    "name": "Tam Quan Nam",
+    "full_name": "Phường Tam Quan Nam",
+    "type": "Phường Tam Quan",
+    "district_code": "543"
+  }
+]

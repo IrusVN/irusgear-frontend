@@ -1,0 +1,93 @@
+[
+  {
+    "code": "235",
+    "name": "Cẩm Khê",
+    "full_name": "Huyện Cẩm Khê",
+    "type": "Huyện Cẩm",
+    "province_code": "25"
+  },
+  {
+    "code": "231",
+    "name": "Hạ Hoà",
+    "full_name": "Huyện Hạ Hoà",
+    "type": "Huyện Hạ",
+    "province_code": "25"
+  },
+  {
+    "code": "237",
+    "name": "Lâm Thao",
+    "full_name": "Huyện Lâm Thao",
+    "type": "Huyện Lâm",
+    "province_code": "25"
+  },
+  {
+    "code": "233",
+    "name": "Phù Ninh",
+    "full_name": "Huyện Phù Ninh",
+    "type": "Huyện Phù",
+    "province_code": "25"
+  },
+  {
+    "code": "228",
+    "name": "Phú Thọ",
+    "full_name": "Thị xã Phú Thọ",
+    "type": "Thị xã Phú",
+    "province_code": "25"
+  },
+  {
+    "code": "236",
+    "name": "Tam Nông",
+    "full_name": "Huyện Tam Nông",
+    "type": "Huyện Tam",
+    "province_code": "25"
+  },
+  {
+    "code": "240",
+    "name": "Tân Sơn",
+    "full_name": "Huyện Tân Sơn",
+    "type": "Huyện Tân",
+    "province_code": "25"
+  },
+  {
+    "code": "232",
+    "name": "Thanh Ba",
+    "full_name": "Huyện Thanh Ba",
+    "type": "Huyện Thanh",
+    "province_code": "25"
+  },
+  {
+    "code": "238",
+    "name": "Thanh Sơn",
+    "full_name": "Huyện Thanh Sơn",
+    "type": "Huyện Thanh",
+    "province_code": "25"
+  },
+  {
+    "code": "239",
+    "name": "Thanh Thuỷ",
+    "full_name": "Huyện Thanh Thuỷ",
+    "type": "Huyện Thanh",
+    "province_code": "25"
+  },
+  {
+    "code": "227",
+    "name": "Việt Trì",
+    "full_name": "Thành phố Việt Trì",
+    "type": "Thành phố Việt",
+    "province_code": "25"
+  },
+  {
+    "code": "234",
+    "name": "Yên Lập",
+    "full_name": "Huyện Yên Lập",
+    "type": "Huyện Yên",
+    "province_code": "25"
+  },
+  {
+    "code": "230",
+    "name": "Đoan Hùng",
+    "full_name": "Huyện Đoan Hùng",
+    "type": "Huyện Đoan",
+    "province_code": "25"
+  }
+]

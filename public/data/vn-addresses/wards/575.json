@@ -1,0 +1,58 @@
+[
+  {
+    "code": "22732",
+    "name": "Ba Cụm Bắc",
+    "full_name": "Xã Ba Cụm Bắc",
+    "type": "Xã Ba Cụm",
+    "district_code": "575"
+  },
+  {
+    "code": "22735",
+    "name": "Ba Cụm Nam",
+    "full_name": "Xã Ba Cụm Nam",
+    "type": "Xã Ba Cụm",
+    "district_code": "575"
+  },
+  {
+    "code": "22726",
+    "name": "Sơn Bình",
+    "full_name": "Xã Sơn Bình",
+    "type": "Xã Sơn",
+    "district_code": "575"
+  },
+  {
+    "code": "22723",
+    "name": "Sơn Hiệp",
+    "full_name": "Xã Sơn Hiệp",
+    "type": "Xã Sơn",
+    "district_code": "575"
+  },
+  {
+    "code": "22720",
+    "name": "Sơn Lâm",
+    "full_name": "Xã Sơn Lâm",
+    "type": "Xã Sơn",
+    "district_code": "575"
+  },
+  {
+    "code": "22729",
+    "name": "Sơn Trung",
+    "full_name": "Xã Sơn Trung",
+    "type": "Xã Sơn",
+    "district_code": "575"
+  },
+  {
+    "code": "22717",
+    "name": "Thành Sơn",
+    "full_name": "Xã Thành Sơn",
+    "type": "Xã Thành",
+    "district_code": "575"
+  },
+  {
+    "code": "22714",
+    "name": "Tô Hạp",
+    "full_name": "Thị trấn Tô Hạp",
+    "type": "Thị trấn Tô",
+    "district_code": "575"
+  }
+]

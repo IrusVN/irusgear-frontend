@@ -1,0 +1,93 @@
+[
+  {
+    "code": "30139",
+    "name": "An Phong",
+    "full_name": "Xã An Phong",
+    "type": "Xã An",
+    "district_code": "874"
+  },
+  {
+    "code": "30148",
+    "name": "Bình Tấn",
+    "full_name": "Xã Bình Tấn",
+    "type": "Xã Bình",
+    "district_code": "874"
+  },
+  {
+    "code": "30163",
+    "name": "Bình Thành",
+    "full_name": "Xã Bình Thành",
+    "type": "Xã Bình",
+    "district_code": "874"
+  },
+  {
+    "code": "30142",
+    "name": "Phú Lợi",
+    "full_name": "Xã Phú Lợi",
+    "type": "Xã Phú",
+    "district_code": "874"
+  },
+  {
+    "code": "30154",
+    "name": "Tân Bình",
+    "full_name": "Xã Tân Bình",
+    "type": "Xã Tân",
+    "district_code": "874"
+  },
+  {
+    "code": "30136",
+    "name": "Tân Hòa",
+    "full_name": "Xã Tân Hòa",
+    "type": "Xã Tân",
+    "district_code": "874"
+  },
+  {
+    "code": "30151",
+    "name": "Tân Huề",
+    "full_name": "Xã Tân Huề",
+    "type": "Xã Tân",
+    "district_code": "874"
+  },
+  {
+    "code": "30166",
+    "name": "Tân Long",
+    "full_name": "Xã Tân Long",
+    "type": "Xã Tân",
+    "district_code": "874"
+  },
+  {
+    "code": "30145",
+    "name": "Tân Mỹ",
+    "full_name": "Xã Tân Mỹ",
+    "type": "Xã Tân",
+    "district_code": "874"
+  },
+  {
+    "code": "30160",
+    "name": "Tân Phú",
+    "full_name": "Xã Tân Phú",
+    "type": "Xã Tân",
+    "district_code": "874"
+  },
+  {
+    "code": "30133",
+    "name": "Tân Quới",
+    "full_name": "Xã Tân Quới",
+    "type": "Xã Tân",
+    "district_code": "874"
+  },
+  {
+    "code": "30157",
+    "name": "Tân Thạnh",
+    "full_name": "Xã Tân Thạnh",
+    "type": "Xã Tân",
+    "district_code": "874"
+  },
+  {
+    "code": "30130",
+    "name": "Thanh Bình",
+    "full_name": "Thị trấn Thanh Bình",
+    "type": "Thị trấn Thanh",
+    "district_code": "874"
+  }
+]

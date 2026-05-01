@@ -1,0 +1,93 @@
+[
+  {
+    "code": "31540",
+    "name": "An Lạc Tây",
+    "full_name": "Xã An Lạc Tây",
+    "type": "Xã An Lạc",
+    "district_code": "943"
+  },
+  {
+    "code": "31531",
+    "name": "An Lạc Thôn",
+    "full_name": "Thị trấn An Lạc Thôn",
+    "type": "Thị trấn An Lạc",
+    "district_code": "943"
+  },
+  {
+    "code": "31564",
+    "name": "An Mỹ",
+    "full_name": "Xã An Mỹ",
+    "type": "Xã An",
+    "district_code": "943"
+  },
+  {
+    "code": "31546",
+    "name": "Ba Trinh",
+    "full_name": "Xã Ba Trinh",
+    "type": "Xã Ba",
+    "district_code": "943"
+  },
+  {
+    "code": "31558",
+    "name": "Kế An",
+    "full_name": "Xã Kế An",
+    "type": "Xã Kế",
+    "district_code": "943"
+  },
+  {
+    "code": "31528",
+    "name": "Kế Sách",
+    "full_name": "Thị trấn Kế Sách",
+    "type": "Thị trấn Kế",
+    "district_code": "943"
+  },
+  {
+    "code": "31555",
+    "name": "Kế Thành",
+    "full_name": "Xã Kế Thành",
+    "type": "Xã Kế",
+    "district_code": "943"
+  },
+  {
+    "code": "31552",
+    "name": "Nhơn Mỹ",
+    "full_name": "Xã Nhơn Mỹ",
+    "type": "Xã Nhơn",
+    "district_code": "943"
+  },
+  {
+    "code": "31537",
+    "name": "Phong Nẫm",
+    "full_name": "Xã Phong Nẫm",
+    "type": "Xã Phong",
+    "district_code": "943"
+  },
+  {
+    "code": "31549",
+    "name": "Thới An Hội",
+    "full_name": "Xã Thới An Hội",
+    "type": "Xã Thới An",
+    "district_code": "943"
+  },
+  {
+    "code": "31543",
+    "name": "Trinh Phú",
+    "full_name": "Xã Trinh Phú",
+    "type": "Xã Trinh",
+    "district_code": "943"
+  },
+  {
+    "code": "31534",
+    "name": "Xuân Hòa",
+    "full_name": "Xã Xuân Hòa",
+    "type": "Xã Xuân",
+    "district_code": "943"
+  },
+  {
+    "code": "31561",
+    "name": "Đại Hải",
+    "full_name": "Xã Đại Hải",
+    "type": "Xã Đại",
+    "district_code": "943"
+  }
+]

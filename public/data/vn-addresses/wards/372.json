@@ -1,0 +1,191 @@
+[
+  {
+    "code": "14404",
+    "name": "Cúc Phương",
+    "full_name": "Xã Cúc Phương",
+    "type": "Xã Cúc",
+    "district_code": "372"
+  },
+  {
+    "code": "14389",
+    "name": "Gia Lâm",
+    "full_name": "Xã Gia Lâm",
+    "type": "Xã Gia",
+    "district_code": "372"
+  },
+  {
+    "code": "14392",
+    "name": "Gia Sơn",
+    "full_name": "Xã Gia Sơn",
+    "type": "Xã Gia",
+    "district_code": "372"
+  },
+  {
+    "code": "14398",
+    "name": "Gia Thủy",
+    "full_name": "Xã Gia Thủy",
+    "type": "Xã Gia",
+    "district_code": "372"
+  },
+  {
+    "code": "14401",
+    "name": "Gia Tường",
+    "full_name": "Xã Gia Tường",
+    "type": "Xã Gia",
+    "district_code": "372"
+  },
+  {
+    "code": "14449",
+    "name": "Kỳ Phú",
+    "full_name": "Xã Kỳ Phú",
+    "type": "Xã Kỳ",
+    "district_code": "372"
+  },
+  {
+    "code": "14413",
+    "name": "Lạc Vân",
+    "full_name": "Xã Lạc Vân",
+    "type": "Xã Lạc",
+    "district_code": "372"
+  },
+  {
+    "code": "14422",
+    "name": "Lạng Phong",
+    "full_name": "Xã Lạng Phong",
+    "type": "Xã Lạng",
+    "district_code": "372"
+  },
+  {
+    "code": "14383",
+    "name": "Nho Quan",
+    "full_name": "Thị trấn Nho Quan",
+    "type": "Thị trấn Nho",
+    "district_code": "372"
+  },
+  {
+    "code": "14446",
+    "name": "Phú Lộc",
+    "full_name": "Xã Phú Lộc",
+    "type": "Xã Phú",
+    "district_code": "372"
+  },
+  {
+    "code": "14458",
+    "name": "Phú Long",
+    "full_name": "Xã Phú Long",
+    "type": "Xã Phú",
+    "district_code": "372"
+  },
+  {
+    "code": "14407",
+    "name": "Phú Sơn",
+    "full_name": "Xã Phú Sơn",
+    "type": "Xã Phú",
+    "district_code": "372"
+  },
+  {
+    "code": "14461",
+    "name": "Quảng Lạc",
+    "full_name": "Xã Quảng Lạc",
+    "type": "Xã Quảng",
+    "district_code": "372"
+  },
+  {
+    "code": "14452",
+    "name": "Quỳnh Lưu",
+    "full_name": "Xã Quỳnh Lưu",
+    "type": "Xã Quỳnh",
+    "district_code": "372"
+  },
+  {
+    "code": "14455",
+    "name": "Sơn Hà",
+    "full_name": "Xã Sơn Hà",
+    "type": "Xã Sơn",
+    "district_code": "372"
+  },
+  {
+    "code": "14437",
+    "name": "Sơn Lai",
+    "full_name": "Xã Sơn Lai",
+    "type": "Xã Sơn",
+    "district_code": "372"
+  },
+  {
+    "code": "14440",
+    "name": "Sơn Thành",
+    "full_name": "Xã Sơn Thành",
+    "type": "Xã Sơn",
+    "district_code": "372"
+  },
+  {
+    "code": "14395",
+    "name": "Thạch Bình",
+    "full_name": "Xã Thạch Bình",
+    "type": "Xã Thạch",
+    "district_code": "372"
+  },
+  {
+    "code": "14434",
+    "name": "Thanh Lạc",
+    "full_name": "Xã Thanh Lạc",
+    "type": "Xã Thanh",
+    "district_code": "372"
+  },
+  {
+    "code": "14425",
+    "name": "Thượng Hòa",
+    "full_name": "Xã Thượng Hòa",
+    "type": "Xã Thượng",
+    "district_code": "372"
+  },
+  {
+    "code": "14428",
+    "name": "Văn Phong",
+    "full_name": "Xã Văn Phong",
+    "type": "Xã Văn",
+    "district_code": "372"
+  },
+  {
+    "code": "14443",
+    "name": "Văn Phú",
+    "full_name": "Xã Văn Phú",
+    "type": "Xã Văn",
+    "district_code": "372"
+  },
+  {
+    "code": "14431",
+    "name": "Văn Phương",
+    "full_name": "Xã Văn Phương",
+    "type": "Xã Văn",
+    "district_code": "372"
+  },
+  {
+    "code": "14386",
+    "name": "Xích Thổ",
+    "full_name": "Xã Xích Thổ",
+    "type": "Xã Xích",
+    "district_code": "372"
+  },
+  {
+    "code": "14419",
+    "name": "Yên Quang",
+    "full_name": "Xã Yên Quang",
+    "type": "Xã Yên",
+    "district_code": "372"
+  },
+  {
+    "code": "14416",
+    "name": "Đồng Phong",
+    "full_name": "Xã Đồng Phong",
+    "type": "Xã Đồng",
+    "district_code": "372"
+  },
+  {
+    "code": "14410",
+    "name": "Đức Long",
+    "full_name": "Xã Đức Long",
+    "type": "Xã Đức",
+    "district_code": "372"
+  }
+]

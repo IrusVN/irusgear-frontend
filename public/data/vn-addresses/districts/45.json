@@ -1,0 +1,65 @@
+[
+  {
+    "code": "468",
+    "name": "Cam Lộ",
+    "full_name": "Huyện Cam Lộ",
+    "type": "Huyện Cam",
+    "province_code": "45"
+  },
+  {
+    "code": "466",
+    "name": "Gio Linh",
+    "full_name": "Huyện Gio Linh",
+    "type": "Huyện Gio",
+    "province_code": "45"
+  },
+  {
+    "code": "470",
+    "name": "Hải Lăng",
+    "full_name": "Huyện Hải Lăng",
+    "type": "Huyện Hải",
+    "province_code": "45"
+  },
+  {
+    "code": "465",
+    "name": "Hướng Hóa",
+    "full_name": "Huyện Hướng Hóa",
+    "type": "Huyện Hướng",
+    "province_code": "45"
+  },
+  {
+    "code": "462",
+    "name": "Quảng Trị",
+    "full_name": "Thị xã Quảng Trị",
+    "type": "Thị xã Quảng",
+    "province_code": "45"
+  },
+  {
+    "code": "469",
+    "name": "Triệu Phong",
+    "full_name": "Huyện Triệu Phong",
+    "type": "Huyện Triệu",
+    "province_code": "45"
+  },
+  {
+    "code": "464",
+    "name": "Vĩnh Linh",
+    "full_name": "Huyện Vĩnh Linh",
+    "type": "Huyện Vĩnh",
+    "province_code": "45"
+  },
+  {
+    "code": "467",
+    "name": "Đa Krông",
+    "full_name": "Huyện Đa Krông",
+    "type": "Huyện Đa",
+    "province_code": "45"
+  },
+  {
+    "code": "461",
+    "name": "Đông Hà",
+    "full_name": "Thành phố Đông Hà",
+    "type": "Thành phố Đông",
+    "province_code": "45"
+  }
+]

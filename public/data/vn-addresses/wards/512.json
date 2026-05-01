@@ -1,0 +1,79 @@
+[
+  {
+    "code": "20767",
+    "name": "Bình Lâm",
+    "full_name": "Xã Bình Lâm",
+    "type": "Xã Bình",
+    "district_code": "512"
+  },
+  {
+    "code": "20788",
+    "name": "Bình Sơn",
+    "full_name": "Xã Bình Sơn",
+    "type": "Xã Bình",
+    "district_code": "512"
+  },
+  {
+    "code": "20758",
+    "name": "Hiệp Hòa",
+    "full_name": "Xã Hiệp Hòa",
+    "type": "Xã Hiệp",
+    "district_code": "512"
+  },
+  {
+    "code": "20761",
+    "name": "Hiệp Thuận",
+    "full_name": "Xã Hiệp Thuận",
+    "type": "Xã Hiệp",
+    "district_code": "512"
+  },
+  {
+    "code": "20776",
+    "name": "Phước Gia",
+    "full_name": "Xã Phước Gia",
+    "type": "Xã Phước",
+    "district_code": "512"
+  },
+  {
+    "code": "20773",
+    "name": "Phước Trà",
+    "full_name": "Xã Phước Trà",
+    "type": "Xã Phước",
+    "district_code": "512"
+  },
+  {
+    "code": "20782",
+    "name": "Quế Lưu",
+    "full_name": "Xã Quế Lưu",
+    "type": "Xã Quế",
+    "district_code": "512"
+  },
+  {
+    "code": "20764",
+    "name": "Quế Thọ",
+    "full_name": "Xã Quế Thọ",
+    "type": "Xã Quế",
+    "district_code": "512"
+  },
+  {
+    "code": "20770",
+    "name": "Sông Trà",
+    "full_name": "Xã Sông Trà",
+    "type": "Xã Sông",
+    "district_code": "512"
+  },
+  {
+    "code": "20779",
+    "name": "Tân Bình",
+    "full_name": "Thị trấn Tân Bình",
+    "type": "Thị trấn Tân",
+    "district_code": "512"
+  },
+  {
+    "code": "20785",
+    "name": "Thăng Phước",
+    "full_name": "Xã Thăng Phước",
+    "type": "Xã Thăng",
+    "district_code": "512"
+  }
+]

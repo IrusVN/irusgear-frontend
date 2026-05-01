@@ -1,0 +1,58 @@
+[
+  {
+    "code": "14866",
+    "name": "Mường Chanh",
+    "full_name": "Xã Mường Chanh",
+    "type": "Xã Mường",
+    "district_code": "384"
+  },
+  {
+    "code": "14845",
+    "name": "Mường Lát",
+    "full_name": "Thị trấn Mường Lát",
+    "type": "Thị trấn Mường",
+    "district_code": "384"
+  },
+  {
+    "code": "14854",
+    "name": "Mường Lý",
+    "full_name": "Xã Mường Lý",
+    "type": "Xã Mường",
+    "district_code": "384"
+  },
+  {
+    "code": "14864",
+    "name": "Nhi Sơn",
+    "full_name": "Xã Nhi Sơn",
+    "type": "Xã Nhi",
+    "district_code": "384"
+  },
+  {
+    "code": "14863",
+    "name": "Pù Nhi",
+    "full_name": "Xã Pù Nhi",
+    "type": "Xã Pù",
+    "district_code": "384"
+  },
+  {
+    "code": "14860",
+    "name": "Quang Chiểu",
+    "full_name": "Xã Quang Chiểu",
+    "type": "Xã Quang",
+    "district_code": "384"
+  },
+  {
+    "code": "14848",
+    "name": "Tam Chung",
+    "full_name": "Xã Tam Chung",
+    "type": "Xã Tam",
+    "district_code": "384"
+  },
+  {
+    "code": "14857",
+    "name": "Trung Lý",
+    "full_name": "Xã Trung Lý",
+    "type": "Xã Trung",
+    "district_code": "384"
+  }
+]

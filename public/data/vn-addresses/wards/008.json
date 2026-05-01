@@ -1,0 +1,100 @@
+[
+  {
+    "code": "00325",
+    "name": "Giáp Bát",
+    "full_name": "Phường Giáp Bát",
+    "type": "Phường Giáp",
+    "district_code": "008"
+  },
+  {
+    "code": "00337",
+    "name": "Hoàng Liệt",
+    "full_name": "Phường Hoàng Liệt",
+    "type": "Phường Hoàng",
+    "district_code": "008"
+  },
+  {
+    "code": "00322",
+    "name": "Hoàng Văn Thụ",
+    "full_name": "Phường Hoàng Văn Thụ",
+    "type": "Phường Hoàng Văn",
+    "district_code": "008"
+  },
+  {
+    "code": "00328",
+    "name": "Lĩnh Nam",
+    "full_name": "Phường Lĩnh Nam",
+    "type": "Phường Lĩnh",
+    "district_code": "008"
+  },
+  {
+    "code": "00310",
+    "name": "Mai Động",
+    "full_name": "Phường Mai Động",
+    "type": "Phường Mai",
+    "district_code": "008"
+  },
+  {
+    "code": "00319",
+    "name": "Tân Mai",
+    "full_name": "Phường Tân Mai",
+    "type": "Phường Tân",
+    "district_code": "008"
+  },
+  {
+    "code": "00301",
+    "name": "Thanh Trì",
+    "full_name": "Phường Thanh Trì",
+    "type": "Phường Thanh",
+    "district_code": "008"
+  },
+  {
+    "code": "00331",
+    "name": "Thịnh Liệt",
+    "full_name": "Phường Thịnh Liệt",
+    "type": "Phường Thịnh",
+    "district_code": "008"
+  },
+  {
+    "code": "00334",
+    "name": "Trần Phú",
+    "full_name": "Phường Trần Phú",
+    "type": "Phường Trần",
+    "district_code": "008"
+  },
+  {
+    "code": "00313",
+    "name": "Tương Mai",
+    "full_name": "Phường Tương Mai",
+    "type": "Phường Tương",
+    "district_code": "008"
+  },
+  {
+    "code": "00304",
+    "name": "Vĩnh Hưng",
+    "full_name": "Phường Vĩnh Hưng",
+    "type": "Phường Vĩnh",
+    "district_code": "008"
+  },
+  {
+    "code": "00340",
+    "name": "Yên Sở",
+    "full_name": "Phường Yên Sở",
+    "type": "Phường Yên",
+    "district_code": "008"
+  },
+  {
+    "code": "00316",
+    "name": "Đại Kim",
+    "full_name": "Phường Đại Kim",
+    "type": "Phường Đại",
+    "district_code": "008"
+  },
+  {
+    "code": "00307",
+    "name": "Định Công",
+    "full_name": "Phường Định Công",
+    "type": "Phường Định",
+    "district_code": "008"
+  }
+]

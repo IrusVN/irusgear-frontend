@@ -1,0 +1,51 @@
+[
+  {
+    "code": "30772",
+    "name": "Bình San",
+    "full_name": "Phường Bình San",
+    "type": "Phường Bình",
+    "district_code": "900"
+  },
+  {
+    "code": "30778",
+    "name": "Mỹ Đức",
+    "full_name": "Phường Mỹ Đức",
+    "type": "Phường Mỹ",
+    "district_code": "900"
+  },
+  {
+    "code": "30775",
+    "name": "Pháo Đài",
+    "full_name": "Phường Pháo Đài",
+    "type": "Phường Pháo",
+    "district_code": "900"
+  },
+  {
+    "code": "30784",
+    "name": "Thuận Yên",
+    "full_name": "Xã Thuận Yên",
+    "type": "Xã Thuận",
+    "district_code": "900"
+  },
+  {
+    "code": "30781",
+    "name": "Tiên Hải",
+    "full_name": "Xã Tiên Hải",
+    "type": "Xã Tiên",
+    "district_code": "900"
+  },
+  {
+    "code": "30766",
+    "name": "Tô Châu",
+    "full_name": "Phường Tô Châu",
+    "type": "Phường Tô",
+    "district_code": "900"
+  },
+  {
+    "code": "30769",
+    "name": "Đông Hồ",
+    "full_name": "Phường Đông Hồ",
+    "type": "Phường Đông",
+    "district_code": "900"
+  }
+]

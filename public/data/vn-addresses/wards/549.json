@@ -1,0 +1,107 @@
+[
+  {
+    "code": "21907",
+    "name": "Bình Định",
+    "full_name": "Phường Bình Định",
+    "type": "Phường Bình",
+    "district_code": "549"
+  },
+  {
+    "code": "21928",
+    "name": "Nhơn An",
+    "full_name": "Xã Nhơn An",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21919",
+    "name": "Nhơn Hạnh",
+    "full_name": "Xã Nhơn Hạnh",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21922",
+    "name": "Nhơn Hậu",
+    "full_name": "Xã Nhơn Hậu",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21943",
+    "name": "Nhơn Hoà",
+    "full_name": "Phường Nhơn Hoà",
+    "type": "Phường Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21934",
+    "name": "Nhơn Hưng",
+    "full_name": "Phường Nhơn Hưng",
+    "type": "Phường Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21937",
+    "name": "Nhơn Khánh",
+    "full_name": "Xã Nhơn Khánh",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21940",
+    "name": "Nhơn Lộc",
+    "full_name": "Xã Nhơn Lộc",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21913",
+    "name": "Nhơn Mỹ",
+    "full_name": "Xã Nhơn Mỹ",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21925",
+    "name": "Nhơn Phong",
+    "full_name": "Xã Nhơn Phong",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21931",
+    "name": "Nhơn Phúc",
+    "full_name": "Xã Nhơn Phúc",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21946",
+    "name": "Nhơn Tân",
+    "full_name": "Xã Nhơn Tân",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21916",
+    "name": "Nhơn Thành",
+    "full_name": "Phường Nhơn Thành",
+    "type": "Phường Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21949",
+    "name": "Nhơn Thọ",
+    "full_name": "Xã Nhơn Thọ",
+    "type": "Xã Nhơn",
+    "district_code": "549"
+  },
+  {
+    "code": "21910",
+    "name": "Đập Đá",
+    "full_name": "Phường Đập Đá",
+    "type": "Phường Đập",
+    "district_code": "549"
+  }
+]

@@ -1,0 +1,121 @@
+[
+  {
+    "code": "08272",
+    "name": "An Đạo",
+    "full_name": "Xã An Đạo",
+    "type": "Xã An",
+    "district_code": "233"
+  },
+  {
+    "code": "08254",
+    "name": "Bảo Thanh",
+    "full_name": "Xã Bảo Thanh",
+    "type": "Xã Bảo",
+    "district_code": "233"
+  },
+  {
+    "code": "08275",
+    "name": "Bình Phú",
+    "full_name": "Xã Bình Phú",
+    "type": "Xã Bình",
+    "district_code": "233"
+  },
+  {
+    "code": "08260",
+    "name": "Gia Thanh",
+    "full_name": "Xã Gia Thanh",
+    "type": "Xã Gia",
+    "district_code": "233"
+  },
+  {
+    "code": "08251",
+    "name": "Hạ Giáp",
+    "full_name": "Xã Hạ Giáp",
+    "type": "Xã Hạ",
+    "district_code": "233"
+  },
+  {
+    "code": "08234",
+    "name": "Lệ Mỹ",
+    "full_name": "Xã Lệ Mỹ",
+    "type": "Xã Lệ",
+    "district_code": "233"
+  },
+  {
+    "code": "08236",
+    "name": "Liên Hoa",
+    "full_name": "Xã Liên Hoa",
+    "type": "Xã Liên",
+    "district_code": "233"
+  },
+  {
+    "code": "08230",
+    "name": "Phong Châu",
+    "full_name": "Thị trấn Phong Châu",
+    "type": "Thị trấn Phong",
+    "district_code": "233"
+  },
+  {
+    "code": "08257",
+    "name": "Phú Lộc",
+    "full_name": "Xã Phú Lộc",
+    "type": "Xã Phú",
+    "district_code": "233"
+  },
+  {
+    "code": "08233",
+    "name": "Phú Mỹ",
+    "full_name": "Xã Phú Mỹ",
+    "type": "Xã Phú",
+    "district_code": "233"
+  },
+  {
+    "code": "08266",
+    "name": "Phú Nham",
+    "full_name": "Xã Phú Nham",
+    "type": "Xã Phú",
+    "district_code": "233"
+  },
+  {
+    "code": "08278",
+    "name": "Phù Ninh",
+    "full_name": "Xã Phù Ninh",
+    "type": "Xã Phù",
+    "district_code": "233"
+  },
+  {
+    "code": "08263",
+    "name": "Tiên Du",
+    "full_name": "Xã Tiên Du",
+    "type": "Xã Tiên",
+    "district_code": "233"
+  },
+  {
+    "code": "08248",
+    "name": "Tiên Phú",
+    "full_name": "Xã Tiên Phú",
+    "type": "Xã Tiên",
+    "district_code": "233"
+  },
+  {
+    "code": "08239",
+    "name": "Trạm Thản",
+    "full_name": "Xã Trạm Thản",
+    "type": "Xã Trạm",
+    "district_code": "233"
+  },
+  {
+    "code": "08242",
+    "name": "Trị Quận",
+    "full_name": "Xã Trị Quận",
+    "type": "Xã Trị",
+    "district_code": "233"
+  },
+  {
+    "code": "08245",
+    "name": "Trung Giáp",
+    "full_name": "Xã Trung Giáp",
+    "type": "Xã Trung",
+    "district_code": "233"
+  }
+]

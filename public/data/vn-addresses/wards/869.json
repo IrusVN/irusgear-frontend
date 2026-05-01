@@ -1,0 +1,65 @@
+[
+  {
+    "code": "29950",
+    "name": "An Phước",
+    "full_name": "Xã An Phước",
+    "type": "Xã An",
+    "district_code": "869"
+  },
+  {
+    "code": "29935",
+    "name": "Bình Phú",
+    "full_name": "Xã Bình Phú",
+    "type": "Xã Bình",
+    "district_code": "869"
+  },
+  {
+    "code": "29926",
+    "name": "Sa Rài",
+    "full_name": "Thị trấn Sa Rài",
+    "type": "Thị trấn Sa",
+    "district_code": "869"
+  },
+  {
+    "code": "29947",
+    "name": "Tân Công Chí",
+    "full_name": "Xã Tân Công Chí",
+    "type": "Xã Tân Công",
+    "district_code": "869"
+  },
+  {
+    "code": "29929",
+    "name": "Tân Hộ Cơ",
+    "full_name": "Xã Tân Hộ Cơ",
+    "type": "Xã Tân Hộ",
+    "district_code": "869"
+  },
+  {
+    "code": "29944",
+    "name": "Tân Phước",
+    "full_name": "Xã Tân Phước",
+    "type": "Xã Tân",
+    "district_code": "869"
+  },
+  {
+    "code": "29938",
+    "name": "Tân Thành A",
+    "full_name": "Xã Tân Thành A",
+    "type": "Xã Tân Thành",
+    "district_code": "869"
+  },
+  {
+    "code": "29941",
+    "name": "Tân Thành B",
+    "full_name": "Xã Tân Thành B",
+    "type": "Xã Tân Thành",
+    "district_code": "869"
+  },
+  {
+    "code": "29932",
+    "name": "Thông Bình",
+    "full_name": "Xã Thông Bình",
+    "type": "Xã Thông",
+    "district_code": "869"
+  }
+]

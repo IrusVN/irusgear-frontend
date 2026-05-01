@@ -1,0 +1,65 @@
+[
+  {
+    "code": "25159",
+    "name": "Cát Tiên",
+    "full_name": "Thị trấn Cát Tiên",
+    "type": "Thị trấn Cát",
+    "district_code": "683"
+  },
+  {
+    "code": "25168",
+    "name": "Gia Viễn",
+    "full_name": "Xã Gia Viễn",
+    "type": "Xã Gia",
+    "district_code": "683"
+  },
+  {
+    "code": "25171",
+    "name": "Nam Ninh",
+    "full_name": "Xã Nam Ninh",
+    "type": "Xã Nam",
+    "district_code": "683"
+  },
+  {
+    "code": "25180",
+    "name": "Phước Cát",
+    "full_name": "Thị trấn Phước Cát",
+    "type": "Thị trấn Phước",
+    "district_code": "683"
+  },
+  {
+    "code": "25165",
+    "name": "Phước Cát 2",
+    "full_name": "Xã Phước Cát 2",
+    "type": "Xã Phước Cát",
+    "district_code": "683"
+  },
+  {
+    "code": "25189",
+    "name": "Quảng Ngãi",
+    "full_name": "Xã Quảng Ngãi",
+    "type": "Xã Quảng",
+    "district_code": "683"
+  },
+  {
+    "code": "25162",
+    "name": "Tiên Hoàng",
+    "full_name": "Xã Tiên Hoàng",
+    "type": "Xã Tiên",
+    "district_code": "683"
+  },
+  {
+    "code": "25192",
+    "name": "Đồng Nai Thượng",
+    "full_name": "Xã Đồng Nai Thượng",
+    "type": "Xã Đồng Nai",
+    "district_code": "683"
+  },
+  {
+    "code": "25183",
+    "name": "Đức Phổ",
+    "full_name": "Xã Đức Phổ",
+    "type": "Xã Đức",
+    "district_code": "683"
+  }
+]

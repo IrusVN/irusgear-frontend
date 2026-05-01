@@ -1,0 +1,121 @@
+[
+  {
+    "code": "28261",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28276",
+    "name": "10",
+    "full_name": "Phường 10",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28264",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28258",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28252",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28249",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28270",
+    "name": "6",
+    "full_name": "Phường 6",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28255",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28267",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28273",
+    "name": "9",
+    "full_name": "Phường 9",
+    "type": "Phường",
+    "district_code": "815"
+  },
+  {
+    "code": "28288",
+    "name": "Mỹ Phong",
+    "full_name": "Xã Mỹ Phong",
+    "type": "Xã Mỹ",
+    "district_code": "815"
+  },
+  {
+    "code": "28567",
+    "name": "Phước Thạnh",
+    "full_name": "Xã Phước Thạnh",
+    "type": "Xã Phước",
+    "district_code": "815"
+  },
+  {
+    "code": "28279",
+    "name": "Tân Long",
+    "full_name": "Phường Tân Long",
+    "type": "Phường Tân",
+    "district_code": "815"
+  },
+  {
+    "code": "28291",
+    "name": "Tân Mỹ Chánh",
+    "full_name": "Xã Tân Mỹ Chánh",
+    "type": "Xã Tân Mỹ",
+    "district_code": "815"
+  },
+  {
+    "code": "28591",
+    "name": "Thới Sơn",
+    "full_name": "Xã Thới Sơn",
+    "type": "Xã Thới",
+    "district_code": "815"
+  },
+  {
+    "code": "28285",
+    "name": "Trung An",
+    "full_name": "Xã Trung An",
+    "type": "Xã Trung",
+    "district_code": "815"
+  },
+  {
+    "code": "28282",
+    "name": "Đạo Thạnh",
+    "full_name": "Xã Đạo Thạnh",
+    "type": "Xã Đạo",
+    "district_code": "815"
+  }
+]

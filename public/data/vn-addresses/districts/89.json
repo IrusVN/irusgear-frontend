@@ -1,0 +1,79 @@
+[
+  {
+    "code": "886",
+    "name": "An Phú",
+    "full_name": "Huyện An Phú",
+    "type": "Huyện An",
+    "province_code": "89"
+  },
+  {
+    "code": "889",
+    "name": "Châu Phú",
+    "full_name": "Huyện Châu Phú",
+    "type": "Huyện Châu",
+    "province_code": "89"
+  },
+  {
+    "code": "892",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "89"
+  },
+  {
+    "code": "884",
+    "name": "Châu Đốc",
+    "full_name": "Thành phố Châu Đốc",
+    "type": "Thành phố Châu",
+    "province_code": "89"
+  },
+  {
+    "code": "893",
+    "name": "Chợ Mới",
+    "full_name": "Huyện Chợ Mới",
+    "type": "Huyện Chợ",
+    "province_code": "89"
+  },
+  {
+    "code": "883",
+    "name": "Long Xuyên",
+    "full_name": "Thành phố Long Xuyên",
+    "type": "Thành phố Long",
+    "province_code": "89"
+  },
+  {
+    "code": "888",
+    "name": "Phú Tân",
+    "full_name": "Huyện Phú Tân",
+    "type": "Huyện Phú",
+    "province_code": "89"
+  },
+  {
+    "code": "887",
+    "name": "Tân Châu",
+    "full_name": "Thị xã Tân Châu",
+    "type": "Thị xã Tân",
+    "province_code": "89"
+  },
+  {
+    "code": "894",
+    "name": "Thoại Sơn",
+    "full_name": "Huyện Thoại Sơn",
+    "type": "Huyện Thoại",
+    "province_code": "89"
+  },
+  {
+    "code": "890",
+    "name": "Tịnh Biên",
+    "full_name": "Thị xã Tịnh Biên",
+    "type": "Thị xã Tịnh",
+    "province_code": "89"
+  },
+  {
+    "code": "891",
+    "name": "Tri Tôn",
+    "full_name": "Huyện Tri Tôn",
+    "type": "Huyện Tri",
+    "province_code": "89"
+  }
+]

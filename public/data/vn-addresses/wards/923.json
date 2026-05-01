@@ -1,0 +1,65 @@
+[
+  {
+    "code": "31227",
+    "name": "Tân Hưng",
+    "full_name": "Phường Tân Hưng",
+    "type": "Phường Tân",
+    "district_code": "923"
+  },
+  {
+    "code": "31213",
+    "name": "Tân Lộc",
+    "full_name": "Phường Tân Lộc",
+    "type": "Phường Tân",
+    "district_code": "923"
+  },
+  {
+    "code": "31217",
+    "name": "Thạnh Hoà",
+    "full_name": "Phường Thạnh Hoà",
+    "type": "Phường Thạnh",
+    "district_code": "923"
+  },
+  {
+    "code": "31210",
+    "name": "Thới Thuận",
+    "full_name": "Phường Thới Thuận",
+    "type": "Phường Thới",
+    "district_code": "923"
+  },
+  {
+    "code": "31207",
+    "name": "Thốt Nốt",
+    "full_name": "Phường Thốt Nốt",
+    "type": "Phường Thốt",
+    "district_code": "923"
+  },
+  {
+    "code": "31212",
+    "name": "Thuận An",
+    "full_name": "Phường Thuận An",
+    "type": "Phường Thuận",
+    "district_code": "923"
+  },
+  {
+    "code": "31228",
+    "name": "Thuận Hưng",
+    "full_name": "Phường Thuận Hưng",
+    "type": "Phường Thuận",
+    "district_code": "923"
+  },
+  {
+    "code": "31219",
+    "name": "Trung Kiên",
+    "full_name": "Phường Trung Kiên",
+    "type": "Phường Trung",
+    "district_code": "923"
+  },
+  {
+    "code": "31216",
+    "name": "Trung Nhứt",
+    "full_name": "Phường Trung Nhứt",
+    "type": "Phường Trung",
+    "district_code": "923"
+  }
+]

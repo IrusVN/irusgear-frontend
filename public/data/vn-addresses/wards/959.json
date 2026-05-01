@@ -1,0 +1,72 @@
+[
+  {
+    "code": "31942",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "959"
+  },
+  {
+    "code": "31945",
+    "name": "Hộ Phòng",
+    "full_name": "Phường Hộ Phòng",
+    "type": "Phường Hộ",
+    "district_code": "959"
+  },
+  {
+    "code": "31951",
+    "name": "Láng Tròn",
+    "full_name": "Phường Láng Tròn",
+    "type": "Phường Láng",
+    "district_code": "959"
+  },
+  {
+    "code": "31954",
+    "name": "Phong Tân",
+    "full_name": "Xã Phong Tân",
+    "type": "Xã Phong",
+    "district_code": "959"
+  },
+  {
+    "code": "31960",
+    "name": "Phong Thạnh",
+    "full_name": "Xã Phong Thạnh",
+    "type": "Xã Phong",
+    "district_code": "959"
+  },
+  {
+    "code": "31963",
+    "name": "Phong Thạnh A",
+    "full_name": "Xã Phong Thạnh A",
+    "type": "Xã Phong Thạnh",
+    "district_code": "959"
+  },
+  {
+    "code": "31966",
+    "name": "Phong Thạnh Tây",
+    "full_name": "Xã Phong Thạnh Tây",
+    "type": "Xã Phong Thạnh",
+    "district_code": "959"
+  },
+  {
+    "code": "31948",
+    "name": "Phong Thạnh Đông",
+    "full_name": "Xã Phong Thạnh Đông",
+    "type": "Xã Phong Thạnh",
+    "district_code": "959"
+  },
+  {
+    "code": "31957",
+    "name": "Tân Phong",
+    "full_name": "Xã Tân Phong",
+    "type": "Xã Tân",
+    "district_code": "959"
+  },
+  {
+    "code": "31969",
+    "name": "Tân Thạnh",
+    "full_name": "Xã Tân Thạnh",
+    "type": "Xã Tân",
+    "district_code": "959"
+  }
+]

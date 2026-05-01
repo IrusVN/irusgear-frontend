@@ -1,0 +1,107 @@
+[
+  {
+    "code": "29416",
+    "name": "Cầu Ngang",
+    "full_name": "Thị trấn Cầu Ngang",
+    "type": "Thị trấn Cầu",
+    "district_code": "848"
+  },
+  {
+    "code": "29437",
+    "name": "Hiệp Hòa",
+    "full_name": "Xã Hiệp Hòa",
+    "type": "Xã Hiệp",
+    "district_code": "848"
+  },
+  {
+    "code": "29455",
+    "name": "Hiệp Mỹ Tây",
+    "full_name": "Xã Hiệp Mỹ Tây",
+    "type": "Xã Hiệp Mỹ",
+    "district_code": "848"
+  },
+  {
+    "code": "29452",
+    "name": "Hiệp Mỹ Đông",
+    "full_name": "Xã Hiệp Mỹ Đông",
+    "type": "Xã Hiệp Mỹ",
+    "district_code": "848"
+  },
+  {
+    "code": "29434",
+    "name": "Kim Hòa",
+    "full_name": "Xã Kim Hòa",
+    "type": "Xã Kim",
+    "district_code": "848"
+  },
+  {
+    "code": "29443",
+    "name": "Long Sơn",
+    "full_name": "Xã Long Sơn",
+    "type": "Xã Long",
+    "district_code": "848"
+  },
+  {
+    "code": "29428",
+    "name": "Mỹ Hòa",
+    "full_name": "Xã Mỹ Hòa",
+    "type": "Xã Mỹ",
+    "district_code": "848"
+  },
+  {
+    "code": "29419",
+    "name": "Mỹ Long",
+    "full_name": "Thị trấn Mỹ Long",
+    "type": "Thị trấn Mỹ",
+    "district_code": "848"
+  },
+  {
+    "code": "29422",
+    "name": "Mỹ Long Bắc",
+    "full_name": "Xã Mỹ Long Bắc",
+    "type": "Xã Mỹ Long",
+    "district_code": "848"
+  },
+  {
+    "code": "29425",
+    "name": "Mỹ Long Nam",
+    "full_name": "Xã Mỹ Long Nam",
+    "type": "Xã Mỹ Long",
+    "district_code": "848"
+  },
+  {
+    "code": "29446",
+    "name": "Nhị Trường",
+    "full_name": "Xã Nhị Trường",
+    "type": "Xã Nhị",
+    "district_code": "848"
+  },
+  {
+    "code": "29458",
+    "name": "Thạnh Hòa Sơn",
+    "full_name": "Xã Thạnh Hòa Sơn",
+    "type": "Xã Thạnh Hòa",
+    "district_code": "848"
+  },
+  {
+    "code": "29440",
+    "name": "Thuận Hòa",
+    "full_name": "Xã Thuận Hòa",
+    "type": "Xã Thuận",
+    "district_code": "848"
+  },
+  {
+    "code": "29449",
+    "name": "Trường Thọ",
+    "full_name": "Xã Trường Thọ",
+    "type": "Xã Trường",
+    "district_code": "848"
+  },
+  {
+    "code": "29431",
+    "name": "Vĩnh Kim",
+    "full_name": "Xã Vĩnh Kim",
+    "type": "Xã Vĩnh",
+    "district_code": "848"
+  }
+]

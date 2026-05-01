@@ -1,0 +1,65 @@
+[
+  {
+    "code": "836",
+    "name": "Ba Tri",
+    "full_name": "Huyện Ba Tri",
+    "type": "Huyện Ba",
+    "province_code": "83"
+  },
+  {
+    "code": "829",
+    "name": "Bến Tre",
+    "full_name": "Thành phố Bến Tre",
+    "type": "Thành phố Bến",
+    "province_code": "83"
+  },
+  {
+    "code": "835",
+    "name": "Bình Đại",
+    "full_name": "Huyện Bình Đại",
+    "type": "Huyện Bình",
+    "province_code": "83"
+  },
+  {
+    "code": "831",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "83"
+  },
+  {
+    "code": "832",
+    "name": "Chợ Lách",
+    "full_name": "Huyện Chợ Lách",
+    "type": "Huyện Chợ",
+    "province_code": "83"
+  },
+  {
+    "code": "834",
+    "name": "Giồng Trôm",
+    "full_name": "Huyện Giồng Trôm",
+    "type": "Huyện Giồng",
+    "province_code": "83"
+  },
+  {
+    "code": "838",
+    "name": "Mỏ Cày Bắc",
+    "full_name": "Huyện Mỏ Cày Bắc",
+    "type": "Huyện Mỏ Cày",
+    "province_code": "83"
+  },
+  {
+    "code": "833",
+    "name": "Mỏ Cày Nam",
+    "full_name": "Huyện Mỏ Cày Nam",
+    "type": "Huyện Mỏ Cày",
+    "province_code": "83"
+  },
+  {
+    "code": "837",
+    "name": "Thạnh Phú",
+    "full_name": "Huyện Thạnh Phú",
+    "type": "Huyện Thạnh",
+    "province_code": "83"
+  }
+]

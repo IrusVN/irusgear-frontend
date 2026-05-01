@@ -1,0 +1,44 @@
+[
+  {
+    "code": "31027",
+    "name": "An Minh Bắc",
+    "full_name": "Xã An Minh Bắc",
+    "type": "Xã An Minh",
+    "district_code": "913"
+  },
+  {
+    "code": "31057",
+    "name": "Hoà Chánh",
+    "full_name": "Xã Hoà Chánh",
+    "type": "Xã Hoà",
+    "district_code": "913"
+  },
+  {
+    "code": "31066",
+    "name": "Minh Thuận",
+    "full_name": "Xã Minh Thuận",
+    "type": "Xã Minh",
+    "district_code": "913"
+  },
+  {
+    "code": "31012",
+    "name": "Thạnh Yên",
+    "full_name": "Xã Thạnh Yên",
+    "type": "Xã Thạnh",
+    "district_code": "913"
+  },
+  {
+    "code": "31015",
+    "name": "Thạnh Yên A",
+    "full_name": "Xã Thạnh Yên A",
+    "type": "Xã Thạnh Yên",
+    "district_code": "913"
+  },
+  {
+    "code": "31054",
+    "name": "Vĩnh Hòa",
+    "full_name": "Xã Vĩnh Hòa",
+    "type": "Xã Vĩnh",
+    "district_code": "913"
+  }
+]

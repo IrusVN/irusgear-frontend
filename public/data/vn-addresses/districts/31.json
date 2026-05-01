@@ -1,0 +1,100 @@
+[
+  {
+    "code": "312",
+    "name": "An Dương",
+    "full_name": "Huyện An Dương",
+    "type": "Huyện An",
+    "province_code": "31"
+  },
+  {
+    "code": "313",
+    "name": "An Lão",
+    "full_name": "Huyện An Lão",
+    "type": "Huyện An",
+    "province_code": "31"
+  },
+  {
+    "code": "317",
+    "name": "Cát Hải",
+    "full_name": "Huyện Cát Hải",
+    "type": "Huyện Cát",
+    "province_code": "31"
+  },
+  {
+    "code": "309",
+    "name": "Dương Kinh",
+    "full_name": "Quận Dương Kinh",
+    "type": "Quận Dương",
+    "province_code": "31"
+  },
+  {
+    "code": "306",
+    "name": "Hải An",
+    "full_name": "Quận Hải An",
+    "type": "Quận Hải",
+    "province_code": "31"
+  },
+  {
+    "code": "303",
+    "name": "Hồng Bàng",
+    "full_name": "Quận Hồng Bàng",
+    "type": "Quận Hồng",
+    "province_code": "31"
+  },
+  {
+    "code": "307",
+    "name": "Kiến An",
+    "full_name": "Quận Kiến An",
+    "type": "Quận Kiến",
+    "province_code": "31"
+  },
+  {
+    "code": "314",
+    "name": "Kiến Thuỵ",
+    "full_name": "Huyện Kiến Thuỵ",
+    "type": "Huyện Kiến",
+    "province_code": "31"
+  },
+  {
+    "code": "305",
+    "name": "Lê Chân",
+    "full_name": "Quận Lê Chân",
+    "type": "Quận Lê",
+    "province_code": "31"
+  },
+  {
+    "code": "304",
+    "name": "Ngô Quyền",
+    "full_name": "Quận Ngô Quyền",
+    "type": "Quận Ngô",
+    "province_code": "31"
+  },
+  {
+    "code": "311",
+    "name": "Thuỷ Nguyên",
+    "full_name": "Huyện Thuỷ Nguyên",
+    "type": "Huyện Thuỷ",
+    "province_code": "31"
+  },
+  {
+    "code": "315",
+    "name": "Tiên Lãng",
+    "full_name": "Huyện Tiên Lãng",
+    "type": "Huyện Tiên",
+    "province_code": "31"
+  },
+  {
+    "code": "316",
+    "name": "Vĩnh Bảo",
+    "full_name": "Huyện Vĩnh Bảo",
+    "type": "Huyện Vĩnh",
+    "province_code": "31"
+  },
+  {
+    "code": "308",
+    "name": "Đồ Sơn",
+    "full_name": "Quận Đồ Sơn",
+    "type": "Quận Đồ",
+    "province_code": "31"
+  }
+]

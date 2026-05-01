@@ -61,7 +61,16 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
           auth.logout();
           return null;
         }
-        if (!res.ok) throw new Error("Fetch failed");
+
+        if (!res.ok) {
+          let errorBody = { message: "Lỗi không xác định" };
+          try {
+            errorBody = await res.json();
+          } catch (_) {}
+          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          err.data = errorBody;
+          throw err;
+        }
 
         const json = await res.json();
         items.value = json.data;
@@ -92,7 +101,16 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
           auth.logout();
           return null;
         }
-        if (!res.ok) throw new Error("Fetch failed");
+
+        if (!res.ok) {
+          let errorBody = { message: "Lỗi không xác định" };
+          try {
+            errorBody = await res.json();
+          } catch (_) {}
+          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          err.data = errorBody;
+          throw err;
+        }
 
         return await res.json();
       } catch (e) {
@@ -113,7 +131,15 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
           body: JSON.stringify(payload),
         });
 
-        if (!res.ok) throw new Error("Create failed");
+        if (!res.ok) {
+          let errorBody = { message: "Lỗi không xác định" };
+          try {
+            errorBody = await res.json();
+          } catch (_) {}
+          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          err.data = errorBody;
+          throw err;
+        }
         return await res.json();
       } finally {
         ui.isCreating = false;
@@ -130,7 +156,43 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
           body: JSON.stringify(payload),
         });
 
-        if (!res.ok) throw new Error("Update failed");
+        if (!res.ok) {
+          let errorBody = { message: "Lỗi không xác định" };
+          try {
+            errorBody = await res.json();
+          } catch (_) {}
+          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          err.data = errorBody;
+          throw err;
+        }
+        return await res.json();
+      } finally {
+        ui.isUpdating = false;
+      }
+    };
+
+    const putItem = async (subPath, payload = null) => {
+      ui.isUpdating = true;
+      try {
+        const url = payload === null
+          ? `${config.public.apiBaseUrl}/${subPath}`
+          : `${config.public.apiBaseUrl}/${subPath}`;
+        const res = await fetch(url, {
+          method: "PUT",
+          credentials: "include",
+          headers: buildHeaders(),
+          body: payload !== null ? JSON.stringify(payload) : undefined,
+        });
+
+        if (!res.ok) {
+          let errorBody = { message: "Lỗi không xác định" };
+          try {
+            errorBody = await res.json();
+          } catch (_) {}
+          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          err.data = errorBody;
+          throw err;
+        }
         return await res.json();
       } finally {
         ui.isUpdating = false;
@@ -152,7 +214,15 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
           body: JSON.stringify(requestPayload),
         });
 
-        if (!res.ok) throw new Error("Patch failed");
+        if (!res.ok) {
+          let errorBody = { message: "Lỗi không xác định" };
+          try {
+            errorBody = await res.json();
+          } catch (_) {}
+          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          err.data = errorBody;
+          throw err;
+        }
         return await res.json();
       } finally {
         ui.isUpdating = false;
@@ -170,7 +240,15 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
           headers: buildHeaders(),
         });
 
-        if (!res.ok) throw new Error("Delete failed");
+        if (!res.ok) {
+          let errorBody = { message: "Lỗi không xác định" };
+          try {
+            errorBody = await res.json();
+          } catch (_) {}
+          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          err.data = errorBody;
+          throw err;
+        }
         return await res.json();
       } finally {
         ui.isDeleting = false;
@@ -191,6 +269,7 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       fetchItem,
       createItem,
       updateItem,
+      putItem,
       patchItem,
       deleteItem,
       reset,
