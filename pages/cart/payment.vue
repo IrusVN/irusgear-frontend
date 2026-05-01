@@ -123,15 +123,18 @@
       :method="selectedMethod"
       :amount="checkoutStore.finalTotal?.value"
       :order-id="checkoutStore.preparedOrderId"
+      :expires-at="selectedExpiresAt"
       @close="showQrModal = false"
       @cancel="handleQrCancel"
       @expired="handleQrExpired"
+      @success="handleQrSuccess"
+      @failed="handleQrFailed"
     />
   </section>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useCartStore } from "@/stores/cartStore";
@@ -155,6 +158,12 @@ const loadingMethod = ref(false);
 const showQrModal = ref(false);
 const selectedPayUrl = ref("");
 const selectedPayData = ref(null);
+const selectedExpiresAt = ref(null);
+
+// Mobile: trạng thái chờ thanh toán khi quay lại từ gateway
+const mobileWaiting = ref(false);
+const mobilePollResult = ref(null);
+const mobilePollLoading = ref(false);
 
 const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
 
@@ -198,6 +207,7 @@ const handlePayment = async () => {
     const data = await checkoutStore.createPayment(selectedMethod.value);
     selectedPayData.value = data;
     selectedPayUrl.value = data.payUrl;
+    selectedExpiresAt.value = data.expiresAt || null;
 
     if (isMobile()) {
       window.location.href = data.payUrl;
@@ -216,6 +226,7 @@ const handleQrCancel = () => {
   showQrModal.value = false;
   selectedPayUrl.value = "";
   selectedPayData.value = null;
+  selectedExpiresAt.value = null;
 };
 
 const handleQrExpired = () => {
@@ -223,12 +234,71 @@ const handleQrExpired = () => {
   toast.warning("Mã thanh toán đã hết hạn. Vui lòng tạo mã mới.");
   selectedPayUrl.value = "";
   selectedPayData.value = null;
+  selectedExpiresAt.value = null;
   selectedMethod.value = null;
+};
+
+const handleQrSuccess = async (paymentData) => {
+  showQrModal.value = false;
+  selectedPayUrl.value = "";
+  selectedPayData.value = null;
+  selectedExpiresAt.value = null;
+  await navigateTo(`/cart/payment/success?order_id=${paymentData.orderId || checkoutStore.preparedOrderId}`);
+};
+
+const handleQrFailed = (reason) => {
+  showQrModal.value = false;
+  toast.error(reason || "Thanh toán không thành công");
+  selectedPayUrl.value = "";
+  selectedPayData.value = null;
+  selectedExpiresAt.value = null;
+};
+
+// Mobile: kiểm tra xem có query params thanh toán không (user quay lại từ gateway)
+const checkMobileReturn = async () => {
+  const params = new URLSearchParams(window.location.search);
+  const hasPaymentParams =
+    params.has("vnp_TxnRef") ||
+    params.has("orderId") ||
+    params.has("resultCode") ||
+    params.has("vnp_ResponseCode");
+
+  if (!hasPaymentParams || !checkoutStore.preparedOrderId) return;
+
+  mobileWaiting.value = true;
+  mobilePollLoading.value = true;
+
+  try {
+    const result = await checkoutStore.pollOrderPaymentStatus(checkoutStore.preparedOrderId, {
+      maxAttempts: 20,
+      intervalMs: 3000,
+    });
+
+    if (result) {
+      mobilePollResult.value = result;
+      const orderId = result.orderId || checkoutStore.preparedOrderId;
+      await navigateTo(`/cart/payment/success?order_id=${orderId}`);
+    } else {
+      mobilePollResult.value = { timeout: true };
+    }
+  } catch {
+    mobilePollResult.value = { error: true };
+  } finally {
+    mobilePollLoading.value = false;
+  }
 };
 
 const formatMoney = (value) => {
   return `${new Intl.NumberFormat("vi-VN").format(value)}đ`;
 };
+
+onMounted(() => {
+  if (isMobile()) {
+    checkMobileReturn();
+  }
+});
+
+onUnmounted(() => {});
 </script>
 
 <style scoped>
