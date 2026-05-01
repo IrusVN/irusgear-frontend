@@ -59,6 +59,8 @@ const checkoutStore = useCheckoutStore();
 
 .order-insurance__label {
   flex: 1;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .order-insurance__price {

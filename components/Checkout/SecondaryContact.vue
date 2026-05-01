@@ -3,7 +3,7 @@
     <label class="secondary-contact__checkbox-row">
       <input type="checkbox" v-model="checkoutStore.secondaryContact.enabled" />
       <i class="bi bi-person-plus"></i>
-      <span class="secondary-contact__label">{{ $t("checkout.deliverToOther") }}</span>
+      <span class="secondary-contact__label fw-semibold">{{ $t("checkout.deliverToOther") }}</span>
     </label>
 
     <div v-if="checkoutStore.secondaryContact.enabled" class="secondary-contact__body">
@@ -74,10 +74,6 @@ const checkoutStore = useCheckoutStore();
   color: #d70018;
 }
 
-.secondary-contact__label {
-  flex: 1;
-}
-
 .secondary-contact__body {
   border-top: 1px solid #f0f0f2;
   padding: 14px 20px;
@@ -120,9 +116,7 @@ const checkoutStore = useCheckoutStore();
 }
 
 .secondary-contact__label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #52525b;
+  font-size: 14px;
 }
 
 .secondary-contact__input {
