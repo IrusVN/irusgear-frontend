@@ -61,7 +61,7 @@
         <dd class="m-0 text-success">-{{ checkoutStore.savings?.formatted || "0đ" }}</dd>
       </div>
 
-      <div v-if="checkoutStore.appliedVouchers.length > 0" class="d-flex justify-content-between align-items-center">
+      <div v-if="checkoutStore.selectedVoucherCodes.length > 0" class="d-flex justify-content-between align-items-center">
         <dt class="text-secondary m-0">{{ $t("checkout.voucher") }}</dt>
         <dd class="m-0 checkout-summary__voucher">-{{ checkoutStore.voucherDiscount?.formatted || "0đ" }}</dd>
       </div>

@@ -14,6 +14,8 @@ const _addressCache = {
 
 // Single delivery options cache — same options apply to all addresses
 let _deliveryOptionsCache = null;
+let _voucherValidateTimer = null;
+let _voucherPendingValidate = false;
 
 const _loadAddressData = async () => {
   if (_addressCache.loaded) return;
@@ -125,8 +127,19 @@ export const useCheckoutStore = defineStore("checkout", () => {
   const savings = computed(() => cartStore.savings || formatMoney(0));
 
   const voucherDiscount = computed(() => {
-    if (!appliedVouchers.value.length) return formatMoney(0);
-    const discount = appliedVouchers.value.reduce((sum, v) => sum + (v.discount || 0), 0);
+    if (!selectedVoucherCodes.value.length) return formatMoney(0);
+    let discount = 0;
+    for (const code of selectedVoucherCodes.value) {
+      const applied = appliedVouchers.value.find((v) => v.code === code);
+      if (applied?.discount) {
+        discount += applied.discount;
+      } else {
+        const available = availableVouchers.value.find((v) => v.code === code);
+        if (available?.savingsPreview) {
+          discount += available.savingsPreview;
+        }
+      }
+    }
     return formatMoney(discount);
   });
 
@@ -242,7 +255,11 @@ export const useCheckoutStore = defineStore("checkout", () => {
   };
 
   const validateVouchers = async () => {
-    if (!selectedVoucherCodes.value.length) return;
+    if (!selectedVoucherCodes.value.length) {
+      appliedVouchers.value = [];
+      voucherError.value = null;
+      return;
+    }
     voucherValidateLoading.value = true;
     voucherError.value = null;
     try {
@@ -277,12 +294,40 @@ export const useCheckoutStore = defineStore("checkout", () => {
           isFreeship: v.discountType === "freeship",
         };
       });
+
+      // Tự động bỏ tick voucher bị rejected (không stackable)
+      const rejectedCodes = (response.data?.rejected || []).map((r) => r.code);
+      if (rejectedCodes.length > 0) {
+        selectedVoucherCodes.value = selectedVoucherCodes.value.filter(
+          (code) => !rejectedCodes.includes(code)
+        );
+      }
+
+      // Có request mới trong khi đang loading → gọi lại
+      if (_voucherPendingValidate) {
+        _voucherPendingValidate = false;
+        await validateVouchers();
+      }
     } catch (e) {
       const msg = e?.data?.message || "Mã giảm giá không hợp lệ";
       voucherError.value = msg;
+      // Vẫn re-validate nếu có pending
+      if (_voucherPendingValidate) {
+        _voucherPendingValidate = false;
+        await validateVouchers();
+      }
     } finally {
       voucherValidateLoading.value = false;
     }
+  };
+
+  const _debouncedValidate = () => {
+    if (voucherValidateLoading.value) {
+      _voucherPendingValidate = true;
+      return;
+    }
+    clearTimeout(_voucherValidateTimer);
+    _voucherValidateTimer = setTimeout(validateVouchers, 300);
   };
 
   const toggleVoucher = (code) => {
@@ -291,6 +336,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
     } else {
       selectedVoucherCodes.value = [...selectedVoucherCodes.value, code];
     }
+    _debouncedValidate();
   };
 
   const applyVoucherFromInput = () => {
@@ -300,6 +346,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
       selectedVoucherCodes.value = [...selectedVoucherCodes.value, code];
     }
     voucherInput.value = "";
+    _debouncedValidate();
   };
 
   const applyVouchers = async () => {
@@ -316,7 +363,10 @@ export const useCheckoutStore = defineStore("checkout", () => {
     voucherInput.value = "";
     if (code) {
       clearTimeout(_voucherValidateTimer);
-      _voucherValidateTimer = setTimeout(validateVouchers, 500);
+      _voucherValidateTimer = setTimeout(validateVouchers, 300);
+    } else {
+      appliedVouchers.value = [];
+      selectedVoucherCodes.value = [];
     }
   };
 
@@ -537,6 +587,20 @@ export const useCheckoutStore = defineStore("checkout", () => {
     throw new Error(response?.data?.message || "Tạo đơn hàng thất bại");
   };
 
+  const createPayment = async (method) => {
+    if (!preparedOrderId.value) {
+      throw new Error("Chưa chuẩn bị đơn hàng");
+    }
+    feGlobalStore.setApiUrl(`payment/${method}/create`);
+    const response = await feGlobalStore.createItem({
+      order_id: preparedOrderId.value,
+    });
+    if (response?.success && response?.data?.payUrl) {
+      return response.data;
+    }
+    throw new Error(response?.data?.message || "Tạo thanh toán thất bại");
+  };
+
   const prepareOrder = async () => {
     isSubmitting.value = true;
     submitError.value = null;
@@ -585,6 +649,9 @@ export const useCheckoutStore = defineStore("checkout", () => {
     voucherInput.value = "";
     voucherError.value = null;
     voucherValidateResult.value = null;
+    clearTimeout(_voucherValidateTimer);
+    _voucherValidateTimer = null;
+    _voucherPendingValidate = false;
     orderNote.value = "";
     agreedToTerms.value = false;
     isSubmitting.value = false;
@@ -681,6 +748,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
     setPreparedOrder,
     prepareOrder,
     createOrder,
+    createPayment,
     resetCheckout,
   };
 });

@@ -11,9 +11,9 @@
     </div>
 
     <!-- Applied vouchers banner -->
-    <div v-if="checkoutStore.appliedVouchers.length > 0" class="voucher-section__applied">
+    <div v-if="activeAppliedVouchers.length > 0" class="voucher-section__applied">
       <div
-        v-for="voucher in checkoutStore.appliedVouchers"
+        v-for="voucher in activeAppliedVouchers"
         :key="voucher.code"
         class="voucher-applied"
       >
@@ -96,29 +96,26 @@
       {{ $t("checkout.noVouchersAvailable") }}
     </div>
 
-    <!-- Apply button — triggers ONE API call -->
+    <!-- Status bar — auto-apply feedback -->
     <div
       v-if="checkoutStore.selectedVoucherCodes.length > 0"
       class="voucher-section__footer"
     >
-      <div v-if="checkoutStore.voucherError && checkoutStore.appliedVouchers.length === 0" class="voucher-section__footer-error">
+      <div v-if="checkoutStore.voucherValidateLoading" class="voucher-section__footer-loading">
+        <i class="bi bi-arrow-repeat spin"></i>
+        {{ $t("checkout.applyingVoucher") }}
+      </div>
+      <div v-else-if="checkoutStore.voucherError && activeAppliedVouchers.length === 0" class="voucher-section__footer-error">
         <i class="bi bi-exclamation-circle"></i>
         {{ checkoutStore.voucherError }}
       </div>
-      <button
-        type="button"
-        class="voucher-apply-btn"
-        :disabled="checkoutStore.voucherValidateLoading || checkoutStore.selectedVoucherCodes.length === 0"
-        @click="checkoutStore.applyVouchers()"
-      >
-        <span v-if="checkoutStore.voucherValidateLoading">
-          <i class="bi bi-arrow-repeat spin"></i>
-          {{ $t("checkout.applyingVoucher") }}
+      <div v-else class="voucher-section__footer-success">
+        <i class="bi bi-check-circle-fill"></i>
+        {{ $t("checkout.applyVouchers", { count: activeAppliedVouchers.length }) }}
+        <span class="voucher-section__footer-count">
+          ({{ checkoutStore.selectedVoucherCodes.length }})
         </span>
-        <span v-else>
-          {{ $t("checkout.applyVouchers", { count: checkoutStore.selectedVoucherCodes.length }) }}
-        </span>
-      </button>
+      </div>
     </div>
   </section>
 </template>
@@ -132,6 +129,12 @@ const checkoutStore = useCheckoutStore();
 
 const suggestedVoucherCode = computed(() => {
   return checkoutStore.availableVouchers.find((v) => v.isAlreadyApplied)?.code || null;
+});
+
+const activeAppliedVouchers = computed(() => {
+  return checkoutStore.appliedVouchers.filter((v) =>
+    checkoutStore.selectedVoucherCodes.includes(v.code)
+  );
 });
 
 const rejectedVouchers = computed(() => {
@@ -388,22 +391,35 @@ const formatMoney = (value) => {
   padding: 8px 12px;
 }
 
-.voucher-apply-btn {
-  background: #d70018;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 700;
-  min-height: 44px;
-  padding: 8px 20px;
-  transition: background 0.15s ease;
-  width: 100%;
+.voucher-section__footer-loading {
+  align-items: center;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  color: #0369a1;
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 6px;
+  padding: 8px 12px;
 }
 
-.voucher-apply-btn:hover:not(:disabled) {
-  background: #b80015;
+.voucher-section__footer-success {
+  align-items: center;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: #15803d;
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 6px;
+  padding: 8px 12px;
+}
+
+.voucher-section__footer-count {
+  color: #166534;
+  font-weight: 500;
 }
 
 .voucher-apply-btn:disabled {
