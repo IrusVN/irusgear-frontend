@@ -12,7 +12,7 @@ export function useCheckoutDraft() {
       selectedAddressId: checkoutStore.selectedAddressId,
       selectedDeliveryId: checkoutStore.selectedDeliveryId,
       selectedTimeSlot: checkoutStore.selectedTimeSlot,
-      appliedVoucher: checkoutStore.appliedVoucher,
+      appliedVouchers: checkoutStore.appliedVouchers,
       orderNote: checkoutStore.orderNote,
       orderInsurance: checkoutStore.orderInsurance,
       secondaryContact: checkoutStore.secondaryContact,

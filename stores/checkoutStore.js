@@ -72,12 +72,15 @@ export const useCheckoutStore = defineStore("checkout", () => {
   const deliveryLoading = ref(false);
 
   // Voucher state
-  const appliedVoucher = ref(null);
+  const appliedVouchers = ref([]);
   const availableVouchers = ref([]);
+  const selectedVoucherCodes = ref([]);
   const voucherInput = ref("");
   const voucherLoading = ref(false);
   const voucherError = ref(null);
   const voucherExpanded = ref(false);
+  const voucherValidateResult = ref(null); // { applied: [], rejected: [], totalDiscount: number }
+  const voucherValidateLoading = ref(false);
 
   // Order state
   const orderNote = ref("");
@@ -122,8 +125,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
   const savings = computed(() => cartStore.savings || formatMoney(0));
 
   const voucherDiscount = computed(() => {
-    if (!appliedVoucher.value) return formatMoney(0);
-    const discount = appliedVoucher.value.discount || 0;
+    if (!appliedVouchers.value.length) return formatMoney(0);
+    const discount = appliedVouchers.value.reduce((sum, v) => sum + (v.discount || 0), 0);
     return formatMoney(discount);
   });
 
@@ -238,58 +241,83 @@ export const useCheckoutStore = defineStore("checkout", () => {
     }
   };
 
-  const validateVoucher = async (code) => {
-    voucherLoading.value = true;
+  const validateVouchers = async () => {
+    if (!selectedVoucherCodes.value.length) return;
+    voucherValidateLoading.value = true;
     voucherError.value = null;
     try {
       feGlobalStore.setApiUrl("checkout/vouchers/validate");
       const response = await feGlobalStore.createItem({
-        codes: [code],
+        codes: selectedVoucherCodes.value,
         cart_total: subtotal.value?.value || 0,
+        items: cartStore.items.map((item) => ({
+          product_id: item.productId,
+          category_id: null,
+          quantity: item.quantity,
+          price: item.unitPrice?.value || 0,
+        })),
       });
 
-      if (!response?.success || !response?.data?.applied?.length) {
-        const msg = response?.data?.rejected?.[0]?.message || "Mã giảm giá không hợp lệ";
-        voucherError.value = msg;
-        return null;
+      voucherValidateResult.value = response?.data || null;
+
+      if (!response?.success) {
+        voucherError.value = response?.data?.rejected?.[0]?.message || "Mã giảm giá không hợp lệ";
+        return;
       }
 
-      const applied = response.data.applied[0];
-      return {
-        code: applied.code,
-        discountType: applied.discountType,
-        discount: applied.discount,
-        finalPrice: applied.finalPrice,
-      };
+      appliedVouchers.value = (response.data?.applied || []).map((v) => {
+        const info = availableVouchers.value.find((av) => av.code === v.code);
+        return {
+          code: v.code,
+          name: v.name || info?.name || v.code,
+          description: v.description || info?.description || "",
+          discountType: v.discountType,
+          discount: v.discount || 0,
+          finalPrice: v.finalPrice,
+          isFreeship: v.discountType === "freeship",
+        };
+      });
     } catch (e) {
       const msg = e?.data?.message || "Mã giảm giá không hợp lệ";
       voucherError.value = msg;
-      return null;
     } finally {
-      voucherLoading.value = false;
+      voucherValidateLoading.value = false;
     }
   };
 
-  const applyVoucher = async (code) => {
-    const data = await validateVoucher(code);
-    if (data) {
-      // Backend validate không trả name/description — lấy từ availableVouchers
-      const voucherInfo = availableVouchers.value.find((v) => v.code === code);
-      appliedVoucher.value = {
-        ...data,
-        name: voucherInfo?.name || code,
-        description: voucherInfo?.description || "",
-        isFreeship: data.discountType === "freeship",
-      };
-      voucherInput.value = "";
-      voucherError.value = null;
+  const toggleVoucher = (code) => {
+    if (selectedVoucherCodes.value.includes(code)) {
+      selectedVoucherCodes.value = selectedVoucherCodes.value.filter((c) => c !== code);
+    } else {
+      selectedVoucherCodes.value = [...selectedVoucherCodes.value, code];
     }
   };
 
-  const removeVoucher = () => {
-    appliedVoucher.value = null;
+  const applyVoucherFromInput = () => {
+    const code = voucherInput.value.trim().toUpperCase();
+    if (!code) return;
+    if (!selectedVoucherCodes.value.includes(code)) {
+      selectedVoucherCodes.value = [...selectedVoucherCodes.value, code];
+    }
     voucherInput.value = "";
-    voucherError.value = null;
+  };
+
+  const applyVouchers = async () => {
+    await validateVouchers();
+  };
+
+  const removeVoucher = async (code) => {
+    if (code) {
+      selectedVoucherCodes.value = selectedVoucherCodes.value.filter((c) => c !== code);
+    } else {
+      selectedVoucherCodes.value = [];
+    }
+    appliedVouchers.value = appliedVouchers.value.filter((v) => v.code !== code);
+    voucherInput.value = "";
+    if (code) {
+      clearTimeout(_voucherValidateTimer);
+      _voucherValidateTimer = setTimeout(validateVouchers, 500);
+    }
   };
 
   const saveAddress = async (addressData) => {
@@ -520,7 +548,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
           method: selectedDeliveryId.value,
           time_slot: selectedTimeSlot.value?.id || null,
         },
-        vouchers: appliedVoucher.value?.code ? [appliedVoucher.value.code] : [],
+        vouchers: appliedVouchers.value.map((v) => v.code),
         order_note: orderNote.value || null,
         secondary_contact: secondaryContact.value.enabled ? {
           name: secondaryContact.value.name,
@@ -551,10 +579,12 @@ export const useCheckoutStore = defineStore("checkout", () => {
     _deliveryOptionsCache = null;
     selectedDeliveryId.value = null;
     selectedTimeSlot.value = null;
-    appliedVoucher.value = null;
+    appliedVouchers.value = [];
     availableVouchers.value = [];
+    selectedVoucherCodes.value = [];
     voucherInput.value = "";
     voucherError.value = null;
+    voucherValidateResult.value = null;
     orderNote.value = "";
     agreedToTerms.value = false;
     isSubmitting.value = false;
@@ -590,12 +620,15 @@ export const useCheckoutStore = defineStore("checkout", () => {
     deliveryLoading,
 
     // Voucher state
-    appliedVoucher,
+    appliedVouchers,
     availableVouchers,
+    selectedVoucherCodes,
     voucherInput,
     voucherLoading,
     voucherError,
     voucherExpanded,
+    voucherValidateResult,
+    voucherValidateLoading,
 
     // Order state
     orderNote,
@@ -630,8 +663,10 @@ export const useCheckoutStore = defineStore("checkout", () => {
     fetchAddresses,
     fetchDeliveryOptions,
     fetchAvailableVouchers,
-    validateVoucher,
-    applyVoucher,
+    validateVouchers,
+    toggleVoucher,
+    applyVoucherFromInput,
+    applyVouchers,
     removeVoucher,
     saveAddress,
     updateAddress,

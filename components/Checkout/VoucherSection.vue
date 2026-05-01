@@ -8,37 +8,37 @@
       <span v-if="checkoutStore.availableVouchers.length > 0" class="voucher-section__count">
         ({{ checkoutStore.availableVouchers.length }})
       </span>
-      <button
-        v-if="checkoutStore.availableVouchers.length > 0"
-        type="button"
-        class="voucher-section__toggle"
-        @click="checkoutStore.voucherExpanded = !checkoutStore.voucherExpanded"
-      >
-        <i :class="checkoutStore.voucherExpanded ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
-      </button>
     </div>
 
-    <!-- Applied voucher -->
-    <div v-if="checkoutStore.appliedVoucher" class="voucher-section__applied">
-      <div class="voucher-applied">
+    <!-- Applied vouchers banner -->
+    <div v-if="checkoutStore.appliedVouchers.length > 0" class="voucher-section__applied">
+      <div
+        v-for="voucher in checkoutStore.appliedVouchers"
+        :key="voucher.code"
+        class="voucher-applied"
+      >
         <div class="voucher-applied__icon">
           <i class="bi bi-check-circle-fill"></i>
         </div>
         <div class="voucher-applied__content">
-          <strong>{{ checkoutStore.appliedVoucher.code }}</strong>
-          <span>{{ checkoutStore.appliedVoucher.description || checkoutStore.appliedVoucher.name }}</span>
-          <span v-if="checkoutStore.appliedVoucher.condition" class="voucher-applied__condition">
-            {{ checkoutStore.appliedVoucher.condition }}
+          <strong>{{ voucher.code }}</strong>
+          <span>{{ voucher.description || voucher.name }}</span>
+          <span class="voucher-applied__discount">
+            -{{ formatMoney(voucher.discount) }}
           </span>
         </div>
-        <button type="button" class="voucher-applied__remove" @click="checkoutStore.removeVoucher()">
+        <button
+          type="button"
+          class="voucher-applied__remove"
+          @click="checkoutStore.removeVoucher(voucher.code)"
+        >
           <i class="bi bi-x-lg"></i>
         </button>
       </div>
     </div>
 
-    <!-- Input row -->
-    <div v-else class="voucher-section__input-row">
+    <!-- Input row for manual code -->
+    <div class="voucher-section__input-row">
       <div class="voucher-input-wrapper">
         <i class="bi bi-ticket-perforated"></i>
         <input
@@ -46,71 +46,126 @@
           type="text"
           class="voucher-input"
           :placeholder="$t('checkout.enterVoucherCode')"
-          :disabled="checkoutStore.voucherLoading"
-          @keydown.enter="handleApply"
+          :disabled="checkoutStore.voucherValidateLoading"
+          @keydown.enter="checkoutStore.applyVoucherFromInput()"
         />
       </div>
-      <button
-        type="button"
-        class="voucher-apply-btn"
-        :disabled="!checkoutStore.voucherInput.trim() || checkoutStore.voucherLoading"
-        @click="handleApply"
-      >
-        <span v-if="checkoutStore.voucherLoading">
-          <i class="bi bi-arrow-repeat spin"></i>
-        </span>
-        <span v-else>{{ $t("checkout.apply") }}</span>
-      </button>
     </div>
 
     <!-- Error message -->
-    <div v-if="checkoutStore.voucherError" class="voucher-section__error" role="alert">
+    <div v-if="checkoutStore.voucherError && checkoutStore.appliedVouchers.length === 0" class="voucher-section__error" role="alert">
       <i class="bi bi-exclamation-circle"></i>
       {{ checkoutStore.voucherError }}
     </div>
 
-    <!-- Available vouchers list -->
+    <!-- Rejected vouchers -->
     <div
-      v-if="checkoutStore.voucherExpanded && checkoutStore.availableVouchers.length > 0"
-      class="voucher-section__list"
+      v-if="rejectedVouchers.length > 0"
+      class="voucher-section__rejected"
     >
+      <p class="voucher-section__rejected-title">
+        <i class="bi bi-x-circle"></i>
+        {{ $t("checkout.voucherRejected") }}
+      </p>
+      <div
+        v-for="rejected in rejectedVouchers"
+        :key="rejected.code"
+        class="voucher-rejected-item"
+      >
+        <strong>{{ rejected.code }}</strong>
+        <span>{{ rejected.message }}</span>
+      </div>
+    </div>
+
+    <!-- Available vouchers list -->
+    <div v-if="checkoutStore.availableVouchers.length > 0" class="voucher-section__list">
       <VoucherCard
-        v-for="voucher in checkoutStore.availableVouchers"
+        v-for="voucher in sortedAvailableVouchers"
         :key="voucher.code"
         :voucher="voucher"
-        :applied="checkoutStore.appliedVoucher?.code === voucher.code"
-        @use="handleApplyVoucher(voucher.code)"
+        :selected="checkoutStore.selectedVoucherCodes.includes(voucher.code)"
+        :suggested="voucher.code === suggestedVoucherCode"
+        :disabled="isVoucherDisabled(voucher) || checkoutStore.voucherValidateLoading"
+        :savings-preview="voucher.savingsPreview || 0"
+        :rejection-reason="getVoucherRejectionReason(voucher.code)"
+        @toggle="checkoutStore.toggleVoucher"
       />
+    </div>
+
+    <div v-else-if="checkoutStore.availableVouchers.length === 0" class="voucher-section__empty">
+      {{ $t("checkout.noVouchersAvailable") }}
+    </div>
+
+    <!-- Apply button — triggers ONE API call -->
+    <div
+      v-if="checkoutStore.selectedVoucherCodes.length > 0"
+      class="voucher-section__footer"
+    >
+      <div v-if="checkoutStore.voucherError && checkoutStore.appliedVouchers.length === 0" class="voucher-section__footer-error">
+        <i class="bi bi-exclamation-circle"></i>
+        {{ checkoutStore.voucherError }}
+      </div>
+      <button
+        type="button"
+        class="voucher-apply-btn"
+        :disabled="checkoutStore.voucherValidateLoading || checkoutStore.selectedVoucherCodes.length === 0"
+        @click="checkoutStore.applyVouchers()"
+      >
+        <span v-if="checkoutStore.voucherValidateLoading">
+          <i class="bi bi-arrow-repeat spin"></i>
+          {{ $t("checkout.applyingVoucher") }}
+        </span>
+        <span v-else>
+          {{ $t("checkout.applyVouchers", { count: checkoutStore.selectedVoucherCodes.length }) }}
+        </span>
+      </button>
     </div>
   </section>
 </template>
 
 <script setup>
+import { computed } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
-import { useGlobalToast } from "@/composables/useGlobalToast";
 import VoucherCard from "@/components/Checkout/VoucherCard.vue";
 
 const checkoutStore = useCheckoutStore();
-const toast = useGlobalToast();
-const { t } = useI18n();
 
-const handleApply = async () => {
-  const code = checkoutStore.voucherInput.trim();
-  if (!code) return;
-  await checkoutStore.applyVoucher(code);
-  if (checkoutStore.voucherError) {
-    toast.warning(checkoutStore.voucherError);
-  } else if (checkoutStore.appliedVoucher) {
-    toast.success(t("checkout.voucherApplied"));
-  }
+const suggestedVoucherCode = computed(() => {
+  return checkoutStore.availableVouchers.find((v) => v.isAlreadyApplied)?.code || null;
+});
+
+const rejectedVouchers = computed(() => {
+  if (!checkoutStore.voucherValidateResult) return [];
+  return checkoutStore.voucherValidateResult.rejected || [];
+});
+
+const getVoucherRejectionReason = (code) => {
+  const rejected = rejectedVouchers.value.find((r) => r.code === code);
+  return rejected?.message || null;
 };
 
-const handleApplyVoucher = async (code) => {
-  await checkoutStore.applyVoucher(code);
-  if (!checkoutStore.voucherError) {
-    checkoutStore.voucherExpanded = false;
-    toast.success(t("checkout.voucherApplied"));
-  }
+const isVoucherDisabled = (voucher) => {
+  if (voucher.usageCount >= voucher.usageLimit) return true;
+  if (voucher.expiredAt && new Date(voucher.expiredAt) < new Date()) return true;
+  if (voucher.isActive === false) return true;
+  return false;
+};
+
+const sortedAvailableVouchers = computed(() => {
+  const vouchers = [...checkoutStore.availableVouchers];
+  vouchers.sort((a, b) => {
+    const aSuggested = a.code === suggestedVoucherCode.value;
+    const bSuggested = b.code === suggestedVoucherCode.value;
+    if (aSuggested && !bSuggested) return -1;
+    if (!aSuggested && bSuggested) return 1;
+    return (b.savingsPreview || 0) - (a.savingsPreview || 0);
+  });
+  return vouchers;
+});
+
+const formatMoney = (value) => {
+  if (!value && value !== 0) return "0đ";
+  return `${new Intl.NumberFormat("vi-VN").format(value)}đ`;
 };
 </script>
 
@@ -150,32 +205,26 @@ const handleApplyVoucher = async (code) => {
   font-weight: 500;
 }
 
-.voucher-section__toggle {
-  background: none;
-  border: none;
-  color: #71717a;
-  cursor: pointer;
-  margin-left: auto;
-  padding: 0;
-}
-
 .voucher-section__applied {
-  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 20px 0;
 }
 
 .voucher-applied {
   align-items: flex-start;
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
-  gap: 10px;
-  padding: 12px 14px;
+  gap: 8px;
+  padding: 10px 12px;
 }
 
 .voucher-applied__icon {
   color: #15803d;
-  font-size: 20px;
+  font-size: 18px;
   flex-shrink: 0;
 }
 
@@ -183,12 +232,12 @@ const handleApplyVoucher = async (code) => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .voucher-applied__content strong {
   color: #15803d;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -197,9 +246,10 @@ const handleApplyVoucher = async (code) => {
   font-size: 12px;
 }
 
-.voucher-applied__condition {
-  color: #71717a !important;
-  font-size: 11px !important;
+.voucher-applied__discount {
+  color: #15803d !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
 }
 
 .voucher-applied__remove {
@@ -218,7 +268,7 @@ const handleApplyVoucher = async (code) => {
 .voucher-section__input-row {
   display: flex;
   gap: 10px;
-  padding: 14px 20px;
+  padding: 12px 20px;
 }
 
 .voucher-input-wrapper {
@@ -250,33 +300,11 @@ const handleApplyVoucher = async (code) => {
   min-height: 44px;
   outline: none;
   padding: 8px 0;
+  text-transform: uppercase;
 }
 
 .voucher-input:disabled {
   opacity: 0.6;
-}
-
-.voucher-apply-btn {
-  background: #d70018;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 700;
-  min-height: 44px;
-  padding: 8px 20px;
-  transition: background 0.15s ease;
-  white-space: nowrap;
-}
-
-.voucher-apply-btn:hover:not(:disabled) {
-  background: #b80015;
-}
-
-.voucher-apply-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .voucher-section__error {
@@ -290,12 +318,97 @@ const handleApplyVoucher = async (code) => {
   padding: 10px 20px;
 }
 
+.voucher-section__rejected {
+  background: #fff1f2;
+  border-top: 1px solid #fecdd3;
+  padding: 10px 20px;
+}
+
+.voucher-section__rejected-title {
+  align-items: center;
+  color: #be123c;
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 4px;
+  margin: 0 0 6px;
+}
+
+.voucher-section__rejected-title i {
+  font-size: 14px;
+}
+
+.voucher-rejected-item {
+  align-items: center;
+  color: #be123c;
+  display: flex;
+  font-size: 12px;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.voucher-rejected-item strong {
+  font-weight: 700;
+}
+
 .voucher-section__list {
   border-top: 1px solid #f0f0f2;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px 20px 14px;
+  padding: 12px 20px 8px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.voucher-section__empty {
+  border-top: 1px solid #f0f0f2;
+  color: #a1a1aa;
+  font-size: 13px;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.voucher-section__footer {
+  border-top: 1px solid #f0f0f2;
+  padding: 12px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.voucher-section__footer-error {
+  align-items: center;
+  background: #fff1f2;
+  border-radius: 8px;
+  color: #be123c;
+  display: flex;
+  font-size: 12px;
+  gap: 6px;
+  padding: 8px 12px;
+}
+
+.voucher-apply-btn {
+  background: #d70018;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 44px;
+  padding: 8px 20px;
+  transition: background 0.15s ease;
+  width: 100%;
+}
+
+.voucher-apply-btn:hover:not(:disabled) {
+  background: #b80015;
+}
+
+.voucher-apply-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @keyframes spin {
