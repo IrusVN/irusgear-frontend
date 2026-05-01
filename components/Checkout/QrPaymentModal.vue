@@ -50,6 +50,16 @@
             </div>
           </div>
 
+          <div v-if="pollingActive && !paymentConfirmed" class="qr-modal__polling-indicator">
+            <i class="bi bi-arrow-repeat spin"></i>
+            {{ $t("payment.pollingIndicator") }}
+          </div>
+
+          <div v-if="paymentConfirmed" class="qr-modal__confirmed-indicator">
+            <i class="bi bi-check-circle-fill"></i>
+            {{ $t("payment.confirmingPayment") }}
+          </div>
+
           <p class="qr-modal__tip">
             <i class="bi bi-lightbulb"></i>
             {{ $t("payment.qrTip", { method: methodName }) }}
@@ -67,6 +77,8 @@
 </template>
 
 <script setup>
+import { useCheckoutStore } from "@/stores/checkoutStore";
+
 const props = defineProps({
   show: {
     type: Boolean,
@@ -88,13 +100,20 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  expiresAt: {
+    type: String,
+    default: null,
+  },
 });
 
-const emit = defineEmits(["close", "cancel", "expired"]);
+const emit = defineEmits(["close", "cancel", "expired", "success", "failed"]);
 
+const checkoutStore = useCheckoutStore();
 const qrError = ref(false);
 const TOTAL_SECONDS = 300;
 const remainingSeconds = ref(TOTAL_SECONDS);
+const pollingActive = ref(false);
+const paymentConfirmed = ref(false);
 let timer = null;
 
 const progressPercent = computed(() =>
@@ -148,18 +167,54 @@ const clearTimer = () => {
 
 const startTimer = () => {
   clearTimer();
-  remainingSeconds.value = TOTAL_SECONDS;
   qrError.value = false;
+
+  if (props.expiresAt) {
+    const expires = new Date(props.expiresAt);
+    const diff = Math.floor((expires.getTime() - Date.now()) / 1000);
+    remainingSeconds.value = Math.max(0, diff);
+  } else {
+    remainingSeconds.value = TOTAL_SECONDS;
+  }
+
   timer = setInterval(() => {
     remainingSeconds.value--;
     if (remainingSeconds.value <= 0) {
       clearTimer();
+      pollingActive.value = false;
       emit("expired");
     }
   }, 1000);
 };
 
+const startPolling = async () => {
+  if (!props.orderId || pollingActive.value) return;
+  pollingActive.value = true;
+
+  try {
+    const result = await checkoutStore.pollOrderPaymentStatus(props.orderId, {
+      maxAttempts: Math.ceil(TOTAL_SECONDS / 5),
+      intervalMs: 5000,
+    });
+
+    if (!pollingActive.value) return;
+
+    if (result) {
+      paymentConfirmed.value = true;
+      pollingActive.value = false;
+      if (result.status === "completed" || result.status === "paid") {
+        emit("success", result);
+      } else {
+        emit("failed", "Thanh toán không thành công");
+      }
+    }
+  } catch {
+    // polling continues
+  }
+};
+
 const handleCancel = () => {
+  pollingActive.value = false;
   clearTimer();
   emit("cancel");
 };
@@ -168,14 +223,21 @@ watch(
   () => props.show,
   (val) => {
     if (val) {
+      paymentConfirmed.value = false;
+      pollingActive.value = false;
       startTimer();
+      startPolling();
     } else {
+      pollingActive.value = false;
       clearTimer();
     }
   }
 );
 
-onUnmounted(clearTimer);
+onUnmounted(() => {
+  pollingActive.value = false;
+  clearTimer();
+});
 </script>
 
 <style scoped>
@@ -375,5 +437,35 @@ onUnmounted(clearTimer);
 .qr-modal__cancel-btn:hover {
   border-color: #d70018;
   color: #d70018;
+}
+
+.qr-modal__polling-indicator {
+  align-items: center;
+  color: #71717a;
+  display: flex;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.qr-modal__polling-indicator .spin {
+  animation: spin 1s linear infinite;
+}
+
+.qr-modal__confirmed-indicator {
+  align-items: center;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: #15803d;
+  display: flex;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 6px;
+  padding: 8px 14px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 </style>

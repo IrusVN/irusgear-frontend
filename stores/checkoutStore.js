@@ -607,6 +607,38 @@ export const useCheckoutStore = defineStore("checkout", () => {
     return response?.data;
   };
 
+  /**
+   * Poll payment status for QR modal.
+   * Calls GET /api/v1/orders/{id}/payment every intervalMs, up to maxAttempts times.
+   * Returns payment data when status = completed/failed/cancelled, null on timeout.
+   */
+  const pollOrderPaymentStatus = async (orderId, options = {}) => {
+    const { maxAttempts = 20, intervalMs = 5000 } = options;
+    feGlobalStore.setApiUrl(`orders/${orderId}/payment`);
+    for (let i = 0; i < maxAttempts; i++) {
+      try {
+        const response = await feGlobalStore.fetchItem();
+        if (response?.data) {
+          const status = response.data.status;
+          if (
+            status === "completed" ||
+            status === "paid" ||
+            status === "failed" ||
+            status === "cancelled"
+          ) {
+            return response.data;
+          }
+        }
+      } catch {
+        // continue polling on error
+      }
+      if (i < maxAttempts - 1) {
+        await new Promise((resolve) => setTimeout(resolve, intervalMs));
+      }
+    }
+    return null;
+  };
+
   const prepareOrder = async () => {
     isSubmitting.value = true;
     submitError.value = null;
@@ -756,6 +788,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
     createOrder,
     createPayment,
     verifyPayment,
+    pollOrderPaymentStatus,
     resetCheckout,
   };
 });

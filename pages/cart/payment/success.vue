@@ -1,47 +1,180 @@
 <template>
   <section class="order-success-page">
     <div class="container">
-      <!-- Loading skeleton -->
-      <div v-if="verifyLoading" class="order-success-page__loading">
-        <div class="order-success-page__spinner">
+
+      <!-- ── Phase: confirming ── -->
+      <div v-if="paymentPhase === 'confirming'" class="order-success-page__card">
+        <div class="order-success-page__icon order-success-page__icon--confirming">
           <i class="bi bi-arrow-repeat spin"></i>
         </div>
-        <p>{{ $t("orderSuccess.verifying") }}</p>
+        <h1 class="order-success-page__title">{{ $t("payment.confirmingPayment") }}</h1>
+        <p class="order-success-page__message">{{ $t("payment.confirmingDesc") }}</p>
+
+        <div v-if="resolvedOrderId" class="order-success-page__order-number">
+          <span class="order-success-page__label">{{ $t("orderSuccess.orderNumber") }}</span>
+          <strong>{{ resolvedOrderId }}</strong>
+        </div>
+
+        <div class="order-success-page__polling-bar">
+          <div class="order-success-page__polling-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span>{{ $t("payment.pollingIndicator") }}</span>
+        </div>
       </div>
 
-      <!-- Main card -->
-      <div v-else class="order-success-page__card">
-        <!-- Header: icon + title + message -->
-        <div class="order-success-page__icon" :class="isSuccess ? 'order-success-page__icon--success' : 'order-success-page__icon--failed'">
-          <i :class="isSuccess ? 'bi bi-check-circle-fill' : 'bi bi-x-circle-fill'"></i>
+      <!-- ── Phase: no-info ── -->
+      <div v-else-if="paymentPhase === 'no-info'" class="order-success-page__card">
+        <div class="order-success-page__icon order-success-page__icon--failed">
+          <i class="bi bi-exclamation-triangle-fill"></i>
         </div>
+        <h1 class="order-success-page__title">{{ $t("payment.noPaymentInfo") }}</h1>
+        <p class="order-success-page__message">{{ $t("payment.noPaymentInfoDesc") }}</p>
+        <div class="order-success-page__actions">
+          <button
+            type="button"
+            class="order-success-page__btn order-success-page__btn--primary"
+            @click="navigateTo('/')"
+          >
+            <i class="bi bi-house"></i>
+            {{ $t("orderSuccess.gotoHome") }}
+          </button>
+          <button
+            type="button"
+            class="order-success-page__btn order-success-page__btn--secondary"
+            @click="navigateTo('/cart')"
+          >
+            <i class="bi bi-cart3"></i>
+            {{ $t("orderSuccess.backToCart") }}
+          </button>
+        </div>
+      </div>
 
-        <h1 class="order-success-page__title">
-          {{ isSuccess ? $t("orderSuccess.title") : $t("orderSuccess.titleFailed") }}
-        </h1>
-        <p class="order-success-page__message">
-          {{ isSuccess ? $t("orderSuccess.orderPlaced") : $t("orderSuccess.transactionFailed") }}
-        </p>
+      <!-- ── Phase: confirmed ── -->
+      <div v-else-if="paymentPhase === 'confirmed'" class="order-success-page__card">
+        <div class="order-success-page__icon order-success-page__icon--success">
+          <i class="bi bi-check-circle-fill"></i>
+        </div>
+        <h1 class="order-success-page__title">{{ $t("payment.confirmSuccess") }}</h1>
+        <p class="order-success-page__message">{{ $t("orderSuccess.orderPlaced") }}</p>
 
-        <!-- Order number -->
-        <div v-if="orderNumber" class="order-success-page__order-number">
+        <div v-if="order" class="order-success-page__order-number">
           <span class="order-success-page__label">{{ $t("orderSuccess.orderNumber") }}</span>
-          <strong>{{ orderNumber }}</strong>
+          <strong>{{ order.orderNumber }}</strong>
         </div>
 
-        <!-- Transaction details panel -->
-        <div v-if="paymentMethod !== 'cod' || !isSuccess" class="order-success-page__details">
-          <h2 class="order-success-page__details-title">
+        <!-- Payment badge -->
+        <div v-if="payment" class="order-success-page__payment-badge">
+          <i :class="paymentMethod === 'vnpay' ? 'bi bi-credit-card-2-front-fill' : paymentMethod === 'momo' ? 'bi bi-wallet2' : 'bi bi-cash-coin'"></i>
+          {{ paymentMethod === 'vnpay' ? 'VNPay' : paymentMethod === 'momo' ? 'MoMo' : 'COD' }}
+          <span class="order-success-page__payment-badge-status">
+            {{ payment.statusLabel || payment.status }}
+          </span>
+        </div>
+
+        <!-- Bill: Items -->
+        <div v-if="order?.items?.length" class="order-success-page__bill-section">
+          <h2 class="order-success-page__bill-title">
+            <i class="bi bi-box-seam"></i>
+            {{ $t("payment.billItems") }}
+          </h2>
+          <div class="order-success-page__bill-items">
+            <div
+              v-for="(item, idx) in order.items"
+              :key="idx"
+              class="order-success-page__bill-item"
+            >
+              <img
+                :src="item.thumbnail || fallbackImage"
+                :alt="item.productName"
+                class="order-success-page__bill-item-img"
+                loading="lazy"
+              />
+              <div class="order-success-page__bill-item-info">
+                <p class="order-success-page__bill-item-name">{{ item.productName }}</p>
+                <p class="order-success-page__bill-item-meta">
+                  {{ item.quantity }} × {{ formatMoney(item.price) }}
+                </p>
+              </div>
+              <span class="order-success-page__bill-item-total">
+                {{ formatMoney(item.price * item.quantity) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bill: Pricing -->
+        <div class="order-success-page__bill-section">
+          <h2 class="order-success-page__bill-title">
             <i class="bi bi-receipt"></i>
+            {{ $t("payment.billSummary") }}
+          </h2>
+          <dl class="order-success-page__bill-pricing">
+            <div class="order-success-page__bill-pricing-row">
+              <dt>{{ $t("checkout.subtotal") }}</dt>
+              <dd>{{ formatMoney(order?.subtotal || 0) }}</dd>
+            </div>
+            <div v-if="order?.deliveryFee > 0" class="order-success-page__bill-pricing-row">
+              <dt>{{ $t("checkout.deliveryFee") }}</dt>
+              <dd>{{ formatMoney(order.deliveryFee) }}</dd>
+            </div>
+            <div v-if="order?.voucherDiscount > 0" class="order-success-page__bill-pricing-row order-success-page__bill-pricing-row--discount">
+              <dt>{{ $t("checkout.voucher") }}</dt>
+              <dd>-{{ formatMoney(order.voucherDiscount) }}</dd>
+            </div>
+            <div v-if="order?.freeshipDiscount > 0" class="order-success-page__bill-pricing-row order-success-page__bill-pricing-row--discount">
+              <dt>{{ $t("checkout.freeship") }}</dt>
+              <dd>-{{ formatMoney(order.freeshipDiscount) }}</dd>
+            </div>
+            <div class="order-success-page__bill-pricing-total">
+              <dt>{{ $t("checkout.total") }}</dt>
+              <dd>{{ formatMoney(order?.total || 0) }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Bill: Shipping address -->
+        <div v-if="order?.shippingAddress" class="order-success-page__bill-section">
+          <h2 class="order-success-page__bill-title">
+            <i class="bi bi-geo-alt"></i>
+            {{ $t("payment.billShipping") }}
+          </h2>
+          <div class="order-success-page__bill-address">
+            <strong>{{ order.shippingAddress.name }}</strong>
+            <span>{{ order.shippingAddress.phone }}</span>
+            <p>{{ order.shippingAddress.address }}</p>
+          </div>
+        </div>
+
+        <!-- Bill: Payment info from API -->
+        <div v-if="payment" class="order-success-page__bill-section">
+          <h2 class="order-success-page__bill-title">
+            <i class="bi bi-credit-card"></i>
+            {{ $t("payment.billPayment") }}
+          </h2>
+          <dl class="order-success-page__bill-pricing">
+            <div class="order-success-page__bill-pricing-row">
+              <dt>{{ $t("orderSuccess.amount") }}</dt>
+              <dd class="order-success-page__bill-pricing-row--highlight">{{ formatMoney(payment.amount) }}</dd>
+            </div>
+            <div v-if="payment.gatewayTransactionId" class="order-success-page__bill-pricing-row">
+              <dt>{{ $t("orderSuccess.transactionNo") }}</dt>
+              <dd>{{ payment.gatewayTransactionId }}</dd>
+            </div>
+            <div v-if="payment.paidAt" class="order-success-page__bill-pricing-row">
+              <dt>{{ $t("orderSuccess.transactionDate") }}</dt>
+              <dd>{{ formatDate(payment.paidAt) }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Gateway redirect details (from query params) -->
+        <div v-if="(isVNPay && vnpayData) || (isMoMo && momoData)" class="order-success-page__bill-section">
+          <h2 class="order-success-page__bill-title">
+            <i class="bi bi-info-circle"></i>
             {{ $t("orderSuccess.transactionDetails") }}
           </h2>
-
-          <!-- VNPay details -->
           <template v-if="isVNPay && vnpayData">
-            <div class="order-success-page__detail-row">
-              <span class="order-success-page__detail-key">{{ $t("orderSuccess.amount") }}</span>
-              <span class="order-success-page__detail-val order-success-page__detail-val--highlight">{{ vnpayData.amount }}</span>
-            </div>
             <div class="order-success-page__detail-row">
               <span class="order-success-page__detail-key">{{ $t("orderSuccess.bank") }}</span>
               <span class="order-success-page__detail-val">{{ vnpayData.bankName }}</span>
@@ -50,7 +183,7 @@
               <span class="order-success-page__detail-key">{{ $t("orderSuccess.cardType") }}</span>
               <span class="order-success-page__detail-val">{{ vnpayData.cardType }}</span>
             </div>
-            <div class="order-success-page__detail-row">
+            <div v-if="vnpayData.transactionNo !== 'N/A'" class="order-success-page__detail-row">
               <span class="order-success-page__detail-key">{{ $t("orderSuccess.transactionNo") }}</span>
               <span class="order-success-page__detail-val">{{ vnpayData.transactionNo }}</span>
             </div>
@@ -59,70 +192,41 @@
               <span class="order-success-page__detail-val">{{ vnpayData.payDate }}</span>
             </div>
           </template>
-
-          <!-- MoMo details -->
           <template v-else-if="isMoMo && momoData">
-            <div class="order-success-page__detail-row">
-              <span class="order-success-page__detail-key">{{ $t("orderSuccess.amount") }}</span>
-              <span class="order-success-page__detail-val order-success-page__detail-val--highlight">{{ momoData.amount }}</span>
-            </div>
             <div class="order-success-page__detail-row">
               <span class="order-success-page__detail-key">{{ $t("orderSuccess.momoTransactionId") }}</span>
               <span class="order-success-page__detail-val">{{ momoData.transactionId }}</span>
             </div>
           </template>
-
-          <!-- COD note -->
-          <template v-else-if="paymentMethod === 'cod'">
-            <div class="order-success-page__cod-note">
-              <i class="bi bi-truck"></i>
-              {{ $t("orderSuccess.codNote") }}
-            </div>
-          </template>
         </div>
 
-        <!-- Failure reason banner -->
-        <div v-if="!isSuccess && failureReason" class="order-success-page__failure-banner">
-          <div class="order-success-page__failure-banner-icon">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-          </div>
-          <div class="order-success-page__failure-banner-content">
-            <strong>{{ $t("orderSuccess.errorReason") }}</strong>
-            <span>{{ failureReason }}</span>
-          </div>
-        </div>
-
-        <!-- Verify error warning -->
-        <div v-if="verifyError && !isSuccess" class="order-success-page__verify-warning">
-          <i class="bi bi-exclamation-circle"></i>
-          {{ $t("orderSuccess.verifyFailed") }}
-        </div>
-
-        <!-- Next steps (success only) -->
-        <div v-if="isSuccess" class="order-success-page__next-steps">
+        <!-- Next steps -->
+        <div class="order-success-page__next-steps">
           <h2 class="order-success-page__section-title">{{ $t("orderSuccess.nextSteps") }}</h2>
           <ul class="order-success-page__steps-list">
-            <li
-              v-for="(step, index) in nextSteps"
-              :key="index"
-              class="order-success-page__step"
-            >
-              <span class="order-success-page__step-num">{{ index + 1 }}</span>
-              <span>{{ step }}</span>
+            <li class="order-success-page__step">
+              <span class="order-success-page__step-num">1</span>
+              <span>{{ $t("orderSuccess.stepConfirm") }}</span>
+            </li>
+            <li class="order-success-page__step">
+              <span class="order-success-page__step-num">2</span>
+              <span>{{ $t("orderSuccess.stepDelivery") }}</span>
+            </li>
+            <li v-if="paymentMethod === 'cod'" class="order-success-page__step">
+              <span class="order-success-page__step-num">3</span>
+              <span>{{ $t("orderSuccess.stepCod") }}</span>
             </li>
           </ul>
         </div>
 
-        <!-- Action buttons -->
         <div class="order-success-page__actions">
           <button
-            v-if="!isSuccess"
             type="button"
             class="order-success-page__btn order-success-page__btn--secondary"
-            @click="navigateTo('/cart')"
+            @click="navigateTo('/account/orders')"
           >
-            <i class="bi bi-cart3"></i>
-            {{ $t("orderSuccess.backToCart") }}
+            <i class="bi bi-bag"></i>
+            {{ $t("payment.viewOrders") }}
           </button>
           <button
             type="button"
@@ -134,12 +238,125 @@
           </button>
         </div>
       </div>
+
+      <!-- ── Phase: failed ── -->
+      <div v-else-if="paymentPhase === 'failed'" class="order-success-page__card">
+        <div class="order-success-page__icon order-success-page__icon--failed">
+          <i class="bi bi-x-circle-fill"></i>
+        </div>
+        <h1 class="order-success-page__title">{{ $t("orderSuccess.titleFailed") }}</h1>
+        <p class="order-success-page__message">{{ $t("payment.confirmFailed") }}</p>
+
+        <div v-if="resolvedOrderId" class="order-success-page__order-number">
+          <span class="order-success-page__label">{{ $t("orderSuccess.orderNumber") }}</span>
+          <strong>{{ resolvedOrderId }}</strong>
+        </div>
+
+        <div v-if="failureReason" class="order-success-page__failure-banner">
+          <div class="order-success-page__failure-banner-icon">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+          </div>
+          <div class="order-success-page__failure-banner-content">
+            <strong>{{ $t("orderSuccess.errorReason") }}</strong>
+            <span>{{ failureReason }}</span>
+          </div>
+        </div>
+
+        <div v-if="(isVNPay && vnpayData) || (isMoMo && momoData)" class="order-success-page__details">
+          <h2 class="order-success-page__details-title">
+            <i class="bi bi-receipt"></i>
+            {{ $t("orderSuccess.transactionDetails") }}
+          </h2>
+          <template v-if="isVNPay && vnpayData">
+            <div class="order-success-page__detail-row">
+              <span class="order-success-page__detail-key">{{ $t("orderSuccess.amount") }}</span>
+              <span class="order-success-page__detail-val order-success-page__detail-val--highlight">{{ vnpayData.amount }}</span>
+            </div>
+            <div class="order-success-page__detail-row">
+              <span class="order-success-page__detail-key">{{ $t("orderSuccess.bank") }}</span>
+              <span class="order-success-page__detail-val">{{ vnpayData.bankName }}</span>
+            </div>
+            <div class="order-success-page__detail-row">
+              <span class="order-success-page__detail-key">{{ $t("orderSuccess.transactionNo") }}</span>
+              <span class="order-success-page__detail-val">{{ vnpayData.transactionNo }}</span>
+            </div>
+          </template>
+          <template v-else-if="isMoMo && momoData">
+            <div class="order-success-page__detail-row">
+              <span class="order-success-page__detail-key">{{ $t("orderSuccess.amount") }}</span>
+              <span class="order-success-page__detail-val order-success-page__detail-val--highlight">{{ momoData.amount }}</span>
+            </div>
+            <div class="order-success-page__detail-row">
+              <span class="order-success-page__detail-key">{{ $t("orderSuccess.momoTransactionId") }}</span>
+              <span class="order-success-page__detail-val">{{ momoData.transactionId }}</span>
+            </div>
+          </template>
+        </div>
+
+        <div v-if="verifyError" class="order-success-page__verify-warning">
+          <i class="bi bi-exclamation-circle"></i>
+          {{ $t("orderSuccess.verifyFailed") }}
+        </div>
+
+        <div class="order-success-page__actions">
+          <button
+            type="button"
+            class="order-success-page__btn order-success-page__btn--secondary"
+            @click="navigateTo('/cart')"
+          >
+            <i class="bi bi-cart3"></i>
+            {{ $t("orderSuccess.backToCart") }}
+          </button>
+          <button
+            type="button"
+            class="order-success-page__btn order-success-page__btn--primary"
+            @click="retryVerify"
+          >
+            <i class="bi bi-arrow-repeat"></i>
+            {{ $t("payment.retryConfirm") }}
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Phase: timeout ── -->
+      <div v-else-if="paymentPhase === 'timeout'" class="order-success-page__card">
+        <div class="order-success-page__icon order-success-page__icon--timeout">
+          <i class="bi bi-clock-fill"></i>
+        </div>
+        <h1 class="order-success-page__title">{{ $t("payment.confirmTimeout") }}</h1>
+        <p class="order-success-page__message">{{ $t("payment.confirmTimeoutDesc") }}</p>
+
+        <div v-if="resolvedOrderId" class="order-success-page__order-number">
+          <span class="order-success-page__label">{{ $t("orderSuccess.orderNumber") }}</span>
+          <strong>{{ resolvedOrderId }}</strong>
+        </div>
+
+        <div class="order-success-page__actions">
+          <button
+            type="button"
+            class="order-success-page__btn order-success-page__btn--secondary"
+            @click="navigateTo('/cart')"
+          >
+            <i class="bi bi-cart3"></i>
+            {{ $t("orderSuccess.backToCart") }}
+          </button>
+          <button
+            type="button"
+            class="order-success-page__btn order-success-page__btn--primary"
+            @click="retryVerify"
+          >
+            <i class="bi bi-arrow-repeat"></i>
+            {{ $t("payment.retryConfirm") }}
+          </button>
+        </div>
+      </div>
+
     </div>
   </section>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "#imports";
 import { useCheckoutStore } from "@/stores/checkoutStore";
@@ -149,10 +366,19 @@ definePageMeta({
   layout: "default",
 });
 
-const { t } = useI18n();
 const route = useRoute();
 const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
+
+// ── State machine: confirming | confirmed | failed | timeout | no-info ──
+const paymentPhase = ref("confirming");
+const verifiedData = ref(null);
+const verifyError = ref(false);
+let pollTimer = null;
+const MAX_POLLS = 20;
+let pollCount = 0;
+
+const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
 
 // ── Data maps ────────────────────────────────────────────────
 const bankNameMap = {
@@ -211,10 +437,31 @@ const formatVnpayDate = (dateStr) => {
   return `${d}/${m}/${y} ${h}:${min}:${s}`;
 };
 
+const formatMoney = (value = 0) => {
+  return `${new Intl.NumberFormat("vi-VN").format(Number(value))}đ`;
+};
+
+const formatDate = (isoStr) => {
+  if (!isoStr) return "";
+  try {
+    const d = new Date(isoStr);
+    return d.toLocaleString("vi-VN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } catch {
+    return isoStr;
+  }
+};
+
 // ── Gateway detection ────────────────────────────────────────
 const isVNPay = computed(() => !!route.query.vnp_TxnRef);
 const isMoMo = computed(() => !!route.query.orderId || !!route.query.resultCode);
-// ── Parsed gateway data ──────────────────────────────────────
+
+// ── Parsed gateway data from redirect query params ──────────────
 const vnpayData = computed(() => {
   if (!isVNPay.value) return null;
   const code = route.query.vnp_ResponseCode;
@@ -247,17 +494,11 @@ const momoData = computed(() => {
   };
 });
 
-// ── Unified status ───────────────────────────────────────────
-const isSuccess = computed(() => {
-  if (isVNPay.value) return vnpayData.value?.isSuccess;
-  if (isMoMo.value) return momoData.value?.isSuccess;
-  return route.query.status === "success" || route.query.status === "paid";
-});
-
-const orderNumber = computed(() => {
-  if (isVNPay.value) return route.query.vnp_TxnRef;
-  if (isMoMo.value) return route.query.orderId;
-  return route.query.order_id || checkoutStore.preparedOrderId || "";
+// ── Unified gateway status from query params ───────────────────
+const gatewayStatusFromQuery = computed(() => {
+  if (isVNPay.value) return vnpayData.value?.isSuccess ? "success" : "failed";
+  if (isMoMo.value) return momoData.value?.isSuccess ? "success" : "failed";
+  return route.query.status === "success" || route.query.status === "paid" ? "success" : null;
 });
 
 const paymentMethod = computed(() => {
@@ -266,6 +507,14 @@ const paymentMethod = computed(() => {
   return route.query.payment_method || "cod";
 });
 
+// ── Order number resolution ──────────────────────────────────
+const resolvedOrderId = computed(() => {
+  if (isVNPay.value) return route.query.vnp_TxnRef;
+  if (isMoMo.value) return route.query.orderId;
+  return route.query.order_id || checkoutStore.preparedOrderId || null;
+});
+
+// ── Failure reason ─────────────────────────────────────────────
 const failureReason = computed(() => {
   if (isVNPay.value && !vnpayData.value?.isSuccess) {
     return (
@@ -282,25 +531,19 @@ const failureReason = computed(() => {
   return route.query.message || route.query.error || null;
 });
 
-const nextSteps = computed(() => {
-  const steps = [
-    t("orderSuccess.stepConfirm"),
-    t("orderSuccess.stepDelivery"),
-  ];
-  if (paymentMethod.value === "cod") {
-    steps.push(t("orderSuccess.stepCod"));
-  }
-  return steps;
-});
+// ── Verified data helpers ────────────────────────────────────
+const order = computed(() => verifiedData.value?.order || null);
+const payment = computed(() => verifiedData.value?.payment || null);
 
-// ── Backend verify ───────────────────────────────────────────
-const verifyLoading = ref(true);
-const verifyError = ref(false);
+// ── Polling: verify payment status ───────────────────────────
+const doPoll = async () => {
+  const orderId = resolvedOrderId.value;
+  if (!orderId) return;
 
-onMounted(async () => {
-  verifyLoading.value = true;
+  pollCount++;
   try {
-    const params = { order_id: orderNumber.value, gateway: paymentMethod.value };
+    const params = { order_id: orderId, gateway: paymentMethod.value };
+
     if (isVNPay.value) {
       Object.entries(route.query).forEach(([k, v]) => {
         if (k.startsWith("vnp_")) params[k] = v;
@@ -310,18 +553,91 @@ onMounted(async () => {
         if (route.query[k]) params[k] = route.query[k];
       });
     }
-    await checkoutStore.verifyPayment(params);
+
+    const data = await checkoutStore.verifyPayment(params);
+
+    if (!data) {
+      if (pollCount >= MAX_POLLS) {
+        paymentPhase.value = "timeout";
+        stopPoll();
+      }
+      return;
+    }
+
+    verifiedData.value = data;
+    const pStatus = data.payment?.status?.toLowerCase();
+
+    if (pStatus === "completed" || pStatus === "paid" || pStatus === "confirmed") {
+      paymentPhase.value = "confirmed";
+      cartStore.clearCart();
+      checkoutStore.resetCheckout();
+      stopPoll();
+      return;
+    }
+
+    if (pStatus === "failed" || pStatus === "cancelled" || pStatus === "expired") {
+      paymentPhase.value = "failed";
+      stopPoll();
+      return;
+    }
+
+    if (pollCount >= MAX_POLLS) {
+      paymentPhase.value = "timeout";
+      stopPoll();
+    }
   } catch {
     verifyError.value = true;
-  } finally {
-    verifyLoading.value = false;
+    if (pollCount >= MAX_POLLS) {
+      paymentPhase.value = "timeout";
+      stopPoll();
+    }
+  }
+};
+
+const startPoll = () => {
+  pollTimer = setInterval(doPoll, 3000);
+};
+
+const stopPoll = () => {
+  if (pollTimer) {
+    clearInterval(pollTimer);
+    pollTimer = null;
+  }
+};
+
+const retryVerify = async () => {
+  pollCount = 0;
+  verifyError.value = false;
+  paymentPhase.value = "confirming";
+  await doPoll();
+  if (paymentPhase.value === "confirming") {
+    startPoll();
+  }
+};
+
+// ── Lifecycle ────────────────────────────────────────────────
+onMounted(async () => {
+  const orderId = resolvedOrderId.value;
+
+  if (!orderId) {
+    paymentPhase.value = "no-info";
+    return;
   }
 
-  if (isSuccess.value) {
-    cartStore.clearCart();
-    checkoutStore.resetCheckout();
+  if (gatewayStatusFromQuery.value === "failed") {
+    paymentPhase.value = "failed";
+    startPoll();
+    return;
+  }
+
+  paymentPhase.value = "confirming";
+  await doPoll();
+  if (paymentPhase.value === "confirming") {
+    startPoll();
   }
 });
+
+onUnmounted(stopPoll);
 </script>
 
 <style scoped>
@@ -635,5 +951,227 @@ onMounted(async () => {
 
 .order-success-page__btn--secondary:hover {
   background: #e4e4e7;
+}
+
+/* Icon states mới */
+.order-success-page__icon--confirming {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.order-success-page__icon--timeout {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+/* Polling bar */
+.order-success-page__polling-bar {
+  align-items: center;
+  background: #f9f9fb;
+  border-radius: 10px;
+  color: #71717a;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.order-success-page__polling-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.order-success-page__polling-dots span {
+  background: #d70018;
+  border-radius: 50%;
+  display: block;
+  height: 8px;
+  width: 8px;
+  animation: pollingPulse 1.4s ease-in-out infinite both;
+}
+
+.order-success-page__polling-dots span:nth-child(1) { animation-delay: -0.32s; }
+.order-success-page__polling-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes pollingPulse {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* Payment badge */
+.order-success-page__payment-badge {
+  align-items: center;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: #15803d;
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 8px 14px;
+}
+
+.order-success-page__payment-badge-status {
+  background: #dcfce7;
+  border-radius: 20px;
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: auto;
+  padding: 2px 8px;
+}
+
+/* Bill sections */
+.order-success-page__bill-section {
+  background: #f9f9fb;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  padding: 16px;
+  text-align: left;
+}
+
+.order-success-page__bill-title {
+  align-items: center;
+  color: #18181b;
+  display: flex;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 6px;
+  margin: 0 0 12px;
+}
+
+.order-success-page__bill-title i {
+  color: #d70018;
+}
+
+.order-success-page__bill-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-success-page__bill-item {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.order-success-page__bill-item-img {
+  border-radius: 8px;
+  flex-shrink: 0;
+  height: 48px;
+  object-fit: cover;
+  width: 48px;
+}
+
+.order-success-page__bill-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.order-success-page__bill-item-name {
+  color: #18181b;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-success-page__bill-item-meta {
+  color: #71717a;
+  font-size: 12px;
+  margin: 2px 0 0;
+}
+
+.order-success-page__bill-item-total {
+  color: #18181b;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.order-success-page__bill-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.order-success-page__bill-pricing-row {
+  align-items: center;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+}
+
+.order-success-page__bill-pricing-row dt {
+  color: #71717a;
+  margin: 0;
+}
+
+.order-success-page__bill-pricing-row dd {
+  color: #18181b;
+  font-weight: 600;
+  margin: 0;
+}
+
+.order-success-page__bill-pricing-row--discount dt,
+.order-success-page__bill-pricing-row--discount dd {
+  color: #15803d;
+}
+
+.order-success-page__bill-pricing-row--highlight {
+  color: #d70018 !important;
+  font-size: 15px !important;
+}
+
+.order-success-page__bill-pricing-total {
+  align-items: center;
+  border-top: 2px solid #18181b;
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding-top: 8px;
+}
+
+.order-success-page__bill-pricing-total dt {
+  color: #18181b;
+  margin: 0;
+}
+
+.order-success-page__bill-pricing-total dd {
+  color: #d70018 !important;
+  font-size: 18px !important;
+  margin: 0;
+}
+
+.order-success-page__bill-address {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.order-success-page__bill-address strong {
+  color: #18181b;
+  font-size: 14px;
+}
+
+.order-success-page__bill-address span {
+  color: #71717a;
+  font-size: 13px;
+}
+
+.order-success-page__bill-address p {
+  color: #52525b;
+  font-size: 13px;
+  margin: 4px 0 0;
 }
 </style>
