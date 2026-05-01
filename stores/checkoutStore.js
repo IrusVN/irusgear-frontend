@@ -601,6 +601,12 @@ export const useCheckoutStore = defineStore("checkout", () => {
     throw new Error(response?.data?.message || "Tạo thanh toán thất bại");
   };
 
+  const verifyPayment = async (params) => {
+    feGlobalStore.setApiUrl("payment/verify");
+    const response = await feGlobalStore.fetchItems(params);
+    return response?.data;
+  };
+
   const prepareOrder = async () => {
     isSubmitting.value = true;
     submitError.value = null;
@@ -749,6 +755,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
     prepareOrder,
     createOrder,
     createPayment,
+    verifyPayment,
     resetCheckout,
   };
 });

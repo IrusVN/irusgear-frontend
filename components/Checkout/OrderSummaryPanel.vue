@@ -189,6 +189,7 @@ onBeforeUnmount(() => {
   padding: 22px;
   position: sticky;
   top: calc(var(--customer-sidebar-offset, 90px) + var(--summary-offset-top, 16px));
+  width: 100%;
 }
 
 .checkout-summary__eyebrow {

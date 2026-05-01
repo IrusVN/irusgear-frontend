@@ -129,6 +129,11 @@ const handleConfirmOrder = async () => {
   100% { background-position: -200% 0; }
 }
 
+.checkout-page__summary-col {
+  flex-shrink: 0;
+  width: 380px;
+}
+
 @media (max-width: 991.98px) {
   .checkout-page {
     padding-bottom: 160px;

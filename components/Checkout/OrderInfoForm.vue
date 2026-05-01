@@ -1,6 +1,6 @@
 <template>
   <div class="order-info-form">
-    <ExpressCheckout />
+    <ExpressCheckout v-if="false"/>
 
     <AddressSection />
 
