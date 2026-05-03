@@ -3,7 +3,7 @@
     <div class="container-xl">
       <CheckoutProgress :current-step="3" />
 
-      <div v-if="!checkoutStore.preparedOrderId" class="payment-page__no-order">
+      <div v-if="!checkoutStore.preparedSessionId" class="payment-page__no-order">
         <i class="bi bi-exclamation-triangle"></i>
         <p>{{ $t("payment.noPreparedOrder") }}</p>
         <button type="button" class="btn-back" @click="navigateTo('/cart/checkout')">
@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    <div v-if="checkoutStore.preparedOrderId" class="payment-page__sticky-bar">
+    <div v-if="checkoutStore.preparedSessionId" class="payment-page__sticky-bar">
       <div class="container-xl">
         <button
           type="button"
@@ -122,8 +122,10 @@
       :pay-url="selectedPayUrl"
       :method="selectedMethod"
       :amount="checkoutStore.finalTotal?.value"
-      :order-id="checkoutStore.preparedOrderId"
+      :order-id="selectedPayData?.orderId || checkoutStore.preparedOrderId"
+      :session-id="checkoutStore.preparedSessionId"
       :expires-at="selectedExpiresAt"
+      :popup="paymentPopup"
       @close="showQrModal = false"
       @cancel="handleQrCancel"
       @expired="handleQrExpired"
@@ -159,11 +161,14 @@ const showQrModal = ref(false);
 const selectedPayUrl = ref("");
 const selectedPayData = ref(null);
 const selectedExpiresAt = ref(null);
+const paymentPopup = ref(null); // reference den popup window.open
+const popupCheckInterval = ref(null);
 
 // Mobile: trạng thái chờ thanh toán khi quay lại từ gateway
 const mobileWaiting = ref(false);
 const mobilePollResult = ref(null);
 const mobilePollLoading = ref(false);
+let mobilePollAbortController = null;
 
 const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
 
@@ -212,6 +217,9 @@ const handlePayment = async () => {
     if (isMobile()) {
       window.location.href = data.payUrl;
     } else {
+      // Mo desktop: mo popup VNPay + hien QR modal
+      // Popup cho phep redirect ve tab goc khi thanh toan xong
+      openPaymentPopup(data.payUrl);
       showQrModal.value = true;
     }
   } catch (e) {
@@ -222,11 +230,70 @@ const handlePayment = async () => {
   }
 };
 
+/**
+ * Mo VNPay/MoMo trong popup window.open.
+ * Popup se redirect ve return URL (cung la tab goc) khi thanh toan xong.
+ * Tab goc lien tuc poll de detect thanh toan thanh cong.
+ */
+const openPaymentPopup = (payUrl) => {
+  // Dong popup cu (neu co)
+  closePaymentPopup();
+
+  const popupWidth = 500;
+  const popupHeight = 700;
+  const left = window.screenX + (window.outerWidth - popupWidth) / 2;
+  const top = window.screenY + (window.outerHeight - popupHeight) / 2;
+
+  paymentPopup.value = window.open(
+    payUrl,
+    "paymentPopup",
+    `width=${popupWidth},height=${popupHeight},left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no`
+  );
+
+  // Neu popup bi block boi browser (tra ve null), khong lam gi ca
+  // User van co the quet QR tu modal
+  if (!paymentPopup.value) {
+    return;
+  }
+
+  // Bat dau interval kiem tra popup da dong chua
+  startPopupCheck();
+};
+
+const startPopupCheck = () => {
+  if (popupCheckInterval.value) {
+    clearInterval(popupCheckInterval.value);
+  }
+
+  popupCheckInterval.value = setInterval(() => {
+    if (!paymentPopup.value || paymentPopup.value.closed) {
+      // Popup da dong -> dung kiem tra
+      stopPopupCheck();
+    }
+  }, 1000);
+};
+
+const stopPopupCheck = () => {
+  if (popupCheckInterval.value) {
+    clearInterval(popupCheckInterval.value);
+    popupCheckInterval.value = null;
+  }
+};
+
+const closePaymentPopup = () => {
+  stopPopupCheck();
+  if (paymentPopup.value && !paymentPopup.value.closed) {
+    paymentPopup.value.close();
+    paymentPopup.value = null;
+  }
+};
+
 const handleQrCancel = () => {
   showQrModal.value = false;
   selectedPayUrl.value = "";
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
+  closePaymentPopup();
 };
 
 const handleQrExpired = () => {
@@ -236,9 +303,11 @@ const handleQrExpired = () => {
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
   selectedMethod.value = null;
+  closePaymentPopup();
 };
 
 const handleQrSuccess = async (paymentData) => {
+  closePaymentPopup();
   showQrModal.value = false;
   selectedPayUrl.value = "";
   selectedPayData.value = null;
@@ -263,20 +332,27 @@ const checkMobileReturn = async () => {
     params.has("resultCode") ||
     params.has("vnp_ResponseCode");
 
-  if (!hasPaymentParams || !checkoutStore.preparedOrderId) return;
+  // Backend tạo order từ session — dùng session_id (UUID) để poll.
+  // orderId từ query param là order đã được tạo khi user redirect về.
+  if (!hasPaymentParams || !checkoutStore.preparedSessionId) return;
 
   mobileWaiting.value = true;
   mobilePollLoading.value = true;
+  mobilePollAbortController = new AbortController();
 
   try {
-    const result = await checkoutStore.pollOrderPaymentStatus(checkoutStore.preparedOrderId, {
-      maxAttempts: 20,
-      intervalMs: 3000,
-    });
+    const result = await checkoutStore.pollOrderPaymentStatus(
+      checkoutStore.preparedSessionId,
+      {
+        maxAttempts: 20,
+        intervalMs: 3000,
+      },
+      mobilePollAbortController,
+    );
 
     if (result) {
       mobilePollResult.value = result;
-      const orderId = result.orderId || checkoutStore.preparedOrderId;
+      const orderId = result.orderId || checkoutStore.preparedOrderId || params.get("orderId");
       await navigateTo(`/cart/payment/success?order_id=${orderId}`);
     } else {
       mobilePollResult.value = { timeout: true };
@@ -298,7 +374,13 @@ onMounted(() => {
   }
 });
 
-onUnmounted(() => {});
+onUnmounted(() => {
+  closePaymentPopup();
+  if (mobilePollAbortController) {
+    mobilePollAbortController.abort();
+    mobilePollAbortController = null;
+  }
+});
 </script>
 
 <style scoped>

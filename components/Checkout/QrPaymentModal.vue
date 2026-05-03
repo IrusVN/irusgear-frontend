@@ -60,6 +60,11 @@
             {{ $t("payment.confirmingPayment") }}
           </div>
 
+          <div v-if="popup && !paymentConfirmed" class="qr-modal__popup-open">
+            <i class="bi bi-box-arrow-up-right"></i>
+            {{ $t("payment.popupOpen") }}
+          </div>
+
           <p class="qr-modal__tip">
             <i class="bi bi-lightbulb"></i>
             {{ $t("payment.qrTip", { method: methodName }) }}
@@ -100,8 +105,16 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  sessionId: {
+    type: String,
+    default: "",
+  },
   expiresAt: {
     type: String,
+    default: null,
+  },
+  popup: {
+    type: Object,
     default: null,
   },
 });
@@ -115,6 +128,7 @@ const remainingSeconds = ref(TOTAL_SECONDS);
 const pollingActive = ref(false);
 const paymentConfirmed = ref(false);
 let timer = null;
+let pollAbortController = null;
 
 const progressPercent = computed(() =>
   (remainingSeconds.value / TOTAL_SECONDS) * 100
@@ -188,14 +202,20 @@ const startTimer = () => {
 };
 
 const startPolling = async () => {
-  if (!props.orderId || pollingActive.value) return;
+  if (!props.sessionId || pollingActive.value) return;
   pollingActive.value = true;
 
+  pollAbortController = new AbortController();
+
   try {
-    const result = await checkoutStore.pollOrderPaymentStatus(props.orderId, {
-      maxAttempts: Math.ceil(TOTAL_SECONDS / 5),
-      intervalMs: 5000,
-    });
+    const result = await checkoutStore.pollOrderPaymentStatus(
+      props.sessionId,
+      {
+        maxAttempts: Math.ceil(TOTAL_SECONDS / 5),
+        intervalMs: 5000,
+      },
+      pollAbortController,
+    );
 
     if (!pollingActive.value) return;
 
@@ -216,6 +236,10 @@ const startPolling = async () => {
 const handleCancel = () => {
   pollingActive.value = false;
   clearTimer();
+  if (pollAbortController) {
+    pollAbortController.abort();
+    pollAbortController = null;
+  }
   emit("cancel");
 };
 
@@ -230,6 +254,10 @@ watch(
     } else {
       pollingActive.value = false;
       clearTimer();
+      if (pollAbortController) {
+        pollAbortController.abort();
+        pollAbortController = null;
+      }
     }
   }
 );
@@ -237,6 +265,10 @@ watch(
 onUnmounted(() => {
   pollingActive.value = false;
   clearTimer();
+  if (pollAbortController) {
+    pollAbortController.abort();
+    pollAbortController = null;
+  }
 });
 </script>
 
@@ -467,5 +499,18 @@ onUnmounted(() => {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.qr-modal__popup-open {
+  align-items: center;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  color: #1d4ed8;
+  display: flex;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 6px;
+  padding: 8px 14px;
 }
 </style>

@@ -34,6 +34,7 @@ onMounted(() => {
         authStore.fetchUser().catch(() => {})
     }
 
+    // fetchCart có guard hydrated/isFetchingCart bên trong — gọi nhiều lần vẫn an toàn.
     cartStore.fetchCart({ silent: true }).catch(() => {})
 })
 </script>
