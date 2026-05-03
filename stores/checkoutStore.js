@@ -100,6 +100,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
   const preparedOrderId = ref(null);
   const preparedSessionId = ref(null);
   const preparedPricing = ref(null);
+  const guestToken = ref(null);
+  const guestEmail = ref(null);
   const secondaryContact = ref({
     enabled: false,
     name: "",
@@ -566,10 +568,12 @@ export const useCheckoutStore = defineStore("checkout", () => {
     showOrderReview.value = false;
   };
 
-  const setPreparedOrder = ({ orderId, sessionId, pricing }) => {
+  const setPreparedOrder = ({ orderId, sessionId, pricing, guestToken: gt, guestEmail: ge }) => {
     preparedOrderId.value = orderId;
     preparedSessionId.value = sessionId;
     preparedPricing.value = pricing;
+    guestToken.value = gt ?? null;
+    guestEmail.value = ge ?? null;
   };
 
   const createOrder = async (paymentMethod = "cod") => {
@@ -610,6 +614,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
   /**
    * Poll payment status for QR modal.
    * Calls GET /api/v1/orders/{id}/payment every intervalMs, up to maxAttempts times.
+   * Works for both authenticated and guest orders (backend checks guest_token cookie).
    * Returns payment data when status = completed/failed/cancelled, null on timeout.
    */
   const pollOrderPaymentStatus = async (orderId, options = {}) => {
@@ -705,6 +710,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
     preparedOrderId.value = null;
     preparedSessionId.value = null;
     preparedPricing.value = null;
+    guestToken.value = null;
+    guestEmail.value = null;
   };
 
   return {
@@ -750,6 +757,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
     preparedOrderId,
     preparedSessionId,
     preparedPricing,
+    guestToken,
+    guestEmail,
 
     // Computed
     selectedAddress,
