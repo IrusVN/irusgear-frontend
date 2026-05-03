@@ -99,6 +99,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
   // Prepared order data (from /checkout/prepare)
   const preparedOrderId = ref(null);
   const preparedSessionId = ref(null);
+  const preparedIdemKey = ref(null); // idempotency key cho payment, thay đổi khi session mới
   const preparedPricing = ref(null);
   const guestToken = ref(null);
   const guestEmail = ref(null);
@@ -568,21 +569,21 @@ export const useCheckoutStore = defineStore("checkout", () => {
     showOrderReview.value = false;
   };
 
-  const setPreparedOrder = ({ orderId, sessionId, pricing, guestToken: gt, guestEmail: ge }) => {
-    preparedOrderId.value = orderId;
+  const setPreparedOrder = ({ sessionId, pricing, guestToken: gt, guestEmail: ge }) => {
     preparedSessionId.value = sessionId;
     preparedPricing.value = pricing;
+    preparedIdemKey.value = crypto.randomUUID(); // key mới cho mỗi lần prepare, đảm bảo duy nhất
     guestToken.value = gt ?? null;
     guestEmail.value = ge ?? null;
   };
 
   const createOrder = async (paymentMethod = "cod") => {
-    if (!preparedOrderId.value) {
+    if (!preparedSessionId.value) {
       throw new Error("Chưa chuẩn bị đơn hàng");
     }
     feGlobalStore.setApiUrl("orders");
     const response = await feGlobalStore.createItem({
-      order_id: preparedOrderId.value,
+      session_id: preparedSessionId.value,
       payment_method: paymentMethod,
     });
     if (response?.success && response?.data) {
@@ -592,12 +593,13 @@ export const useCheckoutStore = defineStore("checkout", () => {
   };
 
   const createPayment = async (method) => {
-    if (!preparedOrderId.value) {
+    if (!preparedSessionId.value) {
       throw new Error("Chưa chuẩn bị đơn hàng");
     }
     feGlobalStore.setApiUrl(`payment/${method}/create`);
     const response = await feGlobalStore.createItem({
-      order_id: preparedOrderId.value,
+      session_id: preparedSessionId.value,
+      idempotency_key: preparedIdemKey.value,
     });
     if (response?.success && response?.data?.payUrl) {
       return response.data;
@@ -613,16 +615,25 @@ export const useCheckoutStore = defineStore("checkout", () => {
 
   /**
    * Poll payment status for QR modal.
-   * Calls GET /api/v1/orders/{id}/payment every intervalMs, up to maxAttempts times.
-   * Works for both authenticated and guest orders (backend checks guest_token cookie).
-   * Returns payment data when status = completed/failed/cancelled, null on timeout.
+   * Backend tìm order từ session_id (UUID), KHÔNG tin orderId từ request.
+   * Trả về payment data khi status = completed/failed/cancelled, null on timeout.
+   * Nhận abortController để có thể hủy polling khi user navigate away.
    */
-  const pollOrderPaymentStatus = async (orderId, options = {}) => {
+  const pollOrderPaymentStatus = async (sessionIdOrOrderId, options = {}, abortController = null) => {
     const { maxAttempts = 20, intervalMs = 5000 } = options;
-    feGlobalStore.setApiUrl(`orders/${orderId}/payment`);
+    // Backend hỗ trợ cả orderId (để backward compat) và sessionId (UUID)
+    // Dùng GET /orders/payment/poll với sessionId trong query param
+    feGlobalStore.setApiUrl(`orders/payment/poll?session_id=${encodeURIComponent(sessionIdOrOrderId)}`);
     for (let i = 0; i < maxAttempts; i++) {
+      // Kiểm tra abort trước mỗi request
+      if (abortController?.signal.aborted) {
+        return null;
+      }
       try {
-        const response = await feGlobalStore.fetchItem();
+        const response = await feGlobalStore.fetchItem({}, { signal: abortController?.signal });
+        if (abortController?.signal.aborted) {
+          return null;
+        }
         if (response?.data) {
           const status = response.data.status;
           if (
@@ -666,7 +677,6 @@ export const useCheckoutStore = defineStore("checkout", () => {
       });
 
       if (response?.data) {
-        preparedOrderId.value = response.data.orderId;
         preparedSessionId.value = response.data.sessionId;
         preparedPricing.value = response.data.pricing;
       }
@@ -709,6 +719,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
     };
     preparedOrderId.value = null;
     preparedSessionId.value = null;
+    preparedIdemKey.value = null;
     preparedPricing.value = null;
     guestToken.value = null;
     guestEmail.value = null;
@@ -754,8 +765,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
     secondaryContact,
 
     // Prepared order data
-    preparedOrderId,
-    preparedSessionId,
+    preparedOrderId,   // order number từ backend response (ORD-YYYYMMDD-XXXX)
+    preparedSessionId, // UUID session key
     preparedPricing,
     guestToken,
     guestEmail,

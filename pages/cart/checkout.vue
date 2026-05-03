@@ -90,7 +90,6 @@ const handleConfirmOrder = async () => {
     const response = await checkoutStore.prepareOrder();
     if (response?.data?.nextStep === "payment") {
       checkoutStore.setPreparedOrder({
-        orderId: response.data.orderId,
         sessionId: response.data.sessionId,
         pricing: response.data.pricing,
       });

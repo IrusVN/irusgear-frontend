@@ -86,7 +86,7 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       }
     };
 
-    const fetchItem = async (params = {}) => {
+    const fetchItem = async (params = {}, { signal } = {}) => {
       ui.isLoading = true;
       try {
         const query = new URLSearchParams(params).toString();
@@ -95,6 +95,7 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         const res = await fetch(url, {
           credentials: "include",
           headers: buildHeaders(),
+          signal,
         });
 
         if (res.status === 401) {
@@ -114,6 +115,9 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
 
         return await res.json();
       } catch (e) {
+        if (e.name === "AbortError") {
+          return null;
+        }
         error.value = e.message;
         return null;
       } finally {
