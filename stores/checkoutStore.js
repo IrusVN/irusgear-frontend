@@ -121,7 +121,12 @@ export const useCheckoutStore = defineStore("checkout", () => {
 
   const timeSlotFee = computed(() => selectedTimeSlot.value?.extraFee || 0);
 
+  const hasFreeshipVoucher = computed(() =>
+    appliedVouchers.value.some((v) => v.isFreeship === true)
+  );
+
   const finalDeliveryFee = computed(() => {
+    if (hasFreeshipVoucher.value) return 0;
     const base = selectedDelivery.value?.fee || 0;
     return base + timeSlotFee.value;
   });
@@ -167,7 +172,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
       selectedAddressId.value &&
       selectedDeliveryId.value &&
       agreedToTerms.value &&
-      !isSubmitting.value
+      !isSubmitting.value &&
+      !voucherValidateLoading.value
     );
   });
 

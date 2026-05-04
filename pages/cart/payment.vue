@@ -131,13 +131,13 @@
       @expired="handleQrExpired"
       @success="handleQrSuccess"
       @failed="handleQrFailed"
+      @retry="handleQrRetry"
     />
   </section>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from "vue";
-import { storeToRefs } from "pinia";
+import { ref, computed, nextTick, onMounted, onUnmounted } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useCartStore } from "@/stores/cartStore";
 import { useDeviceDetection } from "@/composables/useDeviceDetection";
@@ -162,7 +162,6 @@ const selectedPayUrl = ref("");
 const selectedPayData = ref(null);
 const selectedExpiresAt = ref(null);
 const paymentPopup = ref(null); // reference den popup window.open
-const popupCheckInterval = ref(null);
 
 // Mobile: trạng thái chờ thanh toán khi quay lại từ gateway
 const mobileWaiting = ref(false);
@@ -232,8 +231,7 @@ const handlePayment = async () => {
 
 /**
  * Mo VNPay/MoMo trong popup window.open.
- * Popup se redirect ve return URL (cung la tab goc) khi thanh toan xong.
- * Tab goc lien tuc poll de detect thanh toan thanh cong.
+ * Modal component tu dong phat hien popup dong va hien thi trang thai.
  */
 const openPaymentPopup = (payUrl) => {
   // Dong popup cu (neu co)
@@ -251,37 +249,10 @@ const openPaymentPopup = (payUrl) => {
   );
 
   // Neu popup bi block boi browser (tra ve null), khong lam gi ca
-  // User van co the quet QR tu modal
-  if (!paymentPopup.value) {
-    return;
-  }
-
-  // Bat dau interval kiem tra popup da dong chua
-  startPopupCheck();
-};
-
-const startPopupCheck = () => {
-  if (popupCheckInterval.value) {
-    clearInterval(popupCheckInterval.value);
-  }
-
-  popupCheckInterval.value = setInterval(() => {
-    if (!paymentPopup.value || paymentPopup.value.closed) {
-      // Popup da dong -> dung kiem tra
-      stopPopupCheck();
-    }
-  }, 1000);
-};
-
-const stopPopupCheck = () => {
-  if (popupCheckInterval.value) {
-    clearInterval(popupCheckInterval.value);
-    popupCheckInterval.value = null;
-  }
+  // Modal van hien thi trang thai cho user
 };
 
 const closePaymentPopup = () => {
-  stopPopupCheck();
   if (paymentPopup.value && !paymentPopup.value.closed) {
     paymentPopup.value.close();
     paymentPopup.value = null;
@@ -321,6 +292,22 @@ const handleQrFailed = (reason) => {
   selectedPayUrl.value = "";
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
+};
+
+const handleQrRetry = async () => {
+  showQrModal.value = false;
+  closePaymentPopup();
+  // Defer viec mo modal de dam bao Vue xu ly unmount truoc khi remount
+  // Neu khong dung nextTick, Vue batches false->true trong cung 1 tick
+  // -> component khong thuc su unmount/remount -> watcher khong fire -> countdown khong khoi dong lai
+  await nextTick();
+  if (selectedPayUrl.value) {
+    openPaymentPopup(selectedPayUrl.value);
+    showQrModal.value = true;
+  } else {
+    // payUrl hết hạn → gọi lại API tạo payment
+    await handlePayment();
+  }
 };
 
 // Mobile: kiểm tra xem có query params thanh toán không (user quay lại từ gateway)
