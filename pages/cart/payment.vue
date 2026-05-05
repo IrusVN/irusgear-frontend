@@ -220,6 +220,7 @@ const handlePayment = async () => {
       // Popup cho phep redirect ve tab goc khi thanh toan xong
       openPaymentPopup(data.payUrl);
       showQrModal.value = true;
+      startFallbackPoll(); // Fallback: poll neu postMessage khong hoat dong
     }
   } catch (e) {
     toast.error(e?.data?.message || "Tạo thanh toán thất bại");
@@ -265,6 +266,7 @@ const handleQrCancel = () => {
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
   closePaymentPopup();
+  stopFallbackPoll();
 };
 
 const handleQrExpired = () => {
@@ -275,6 +277,7 @@ const handleQrExpired = () => {
   selectedExpiresAt.value = null;
   selectedMethod.value = null;
   closePaymentPopup();
+  stopFallbackPoll();
 };
 
 const handleQrSuccess = async (paymentData) => {
@@ -283,6 +286,7 @@ const handleQrSuccess = async (paymentData) => {
   selectedPayUrl.value = "";
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
+  stopFallbackPoll();
   await navigateTo(`/cart/payment/success?order_id=${paymentData.orderId || checkoutStore.preparedOrderId}`);
 };
 
@@ -292,22 +296,74 @@ const handleQrFailed = (reason) => {
   selectedPayUrl.value = "";
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
+  stopFallbackPoll();
 };
 
 const handleQrRetry = async () => {
   showQrModal.value = false;
   closePaymentPopup();
+  stopFallbackPoll();
   // Defer viec mo modal de dam bao Vue xu ly unmount truoc khi remount
-  // Neu khong dung nextTick, Vue batches false->true trong cung 1 tick
-  // -> component khong thuc su unmount/remount -> watcher khong fire -> countdown khong khoi dong lai
   await nextTick();
   if (selectedPayUrl.value) {
     openPaymentPopup(selectedPayUrl.value);
     showQrModal.value = true;
+    startFallbackPoll();
   } else {
     // payUrl hết hạn → gọi lại API tạo payment
     await handlePayment();
   }
+};
+
+// Nhận postMessage từ popup khi thanh toán thành công.
+// Success page trong popup sẽ gửi message rồi đóng popup.
+// Main tab nhận message → navigate sang success page trên tab chính.
+const handlePopupMessage = (event) => {
+  if (event.data?.type === "PAYMENT_DONE" && event.data?.queryString) {
+    showQrModal.value = false;
+    closePaymentPopup();
+    stopFallbackPoll();
+    // Navigate sang success page trên tab chính với đầy đủ query params
+    navigateTo("/cart/payment/success" + event.data.queryString);
+  }
+};
+
+// Fallback: neu postMessage khong hoat dong (window.opener bi null sau redirect cross-domain),
+// khi popup dong, poll backend de xac nhan thanh toan roi navigate sang success
+let fallbackPollInterval = null;
+const stopFallbackPoll = () => {
+  if (fallbackPollInterval) {
+    clearInterval(fallbackPollInterval);
+    fallbackPollInterval = null;
+  }
+};
+const startFallbackPoll = () => {
+  if (fallbackPollInterval) return;
+  fallbackPollInterval = setInterval(async () => {
+    if (!showQrModal.value) {
+      stopFallbackPoll();
+      return;
+    }
+    if (!paymentPopup.value || paymentPopup.value.closed) {
+      // Popup da dong -> poll de xac nhan thanh toan
+      try {
+        const result = await checkoutStore.pollOrderPaymentStatus(
+          checkoutStore.preparedSessionId,
+          { maxAttempts: 5, intervalMs: 2000 }
+        );
+        stopFallbackPoll();
+        showQrModal.value = false;
+        closePaymentPopup();
+        if (result?.status === "completed" || result?.status === "paid") {
+          await navigateTo(`/cart/payment/success?order_id=${result.orderId || checkoutStore.preparedOrderId}`);
+        } else {
+          selectedMethod.value = null;
+        }
+      } catch {
+        // cho phep continue poll
+      }
+    }
+  }, 1000);
 };
 
 // Mobile: kiểm tra xem có query params thanh toán không (user quay lại từ gateway)
@@ -359,14 +415,18 @@ onMounted(() => {
   if (isMobile()) {
     checkMobileReturn();
   }
+  // Lắng nghe postMessage từ popup success page
+  window.addEventListener("message", handlePopupMessage);
 });
 
 onUnmounted(() => {
   closePaymentPopup();
+  stopFallbackPoll();
   if (mobilePollAbortController) {
     mobilePollAbortController.abort();
     mobilePollAbortController = null;
   }
+  window.removeEventListener("message", handlePopupMessage);
 });
 </script>
 

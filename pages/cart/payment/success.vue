@@ -617,6 +617,19 @@ const retryVerify = async () => {
 
 // ── Lifecycle ────────────────────────────────────────────────
 onMounted(async () => {
+  // Neu page load trong popup (window.opener ton tai)
+  // -> gui message cho main tab roi dong popup
+  // Day la truong hop user thanh toan VNPay thanh cong tren desktop popup
+  if (window.opener) {
+    const queryString = window.location.search;
+    if (queryString) {
+      window.opener.postMessage({ type: "PAYMENT_DONE", queryString }, "*");
+    }
+    // Delay nho de message kip gui truoc khi dong
+    setTimeout(() => window.close(), 500);
+    return;
+  }
+
   const orderId = resolvedOrderId.value;
 
   if (!orderId) {
