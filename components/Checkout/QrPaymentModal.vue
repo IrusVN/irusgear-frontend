@@ -239,8 +239,10 @@ const startPolling = async () => {
         emit("failed", "Thanh toán không thành công");
       }
     }
-  } catch {
-    // polling continues
+  } catch (e) {
+    // Chi cho phep continue polling khi bi abort; cac loi khac thi dung lai
+    if (pollAbortController?.signal.aborted) return;
+    pollingActive.value = false;
   }
 };
 
@@ -300,6 +302,17 @@ watch(
       startTimer();
       startPolling();
       watchPopupClosed();
+    } else {
+      // Modal đóng (popup auto-close hoặc postMessage) — abort polling ngay
+      pollingActive.value = false;
+      if (pollAbortController) {
+        pollAbortController.abort();
+        pollAbortController = null;
+      }
+      if (popupWatchInterval) {
+        clearInterval(popupWatchInterval);
+        popupWatchInterval = null;
+      }
     }
   }
 );

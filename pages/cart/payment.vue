@@ -204,7 +204,7 @@ const handlePayment = async () => {
   try {
     if (selectedMethod.value === "cod") {
       await checkoutStore.createOrder("cod");
-      await navigateTo("/cart/payment/success");
+      await navigateTo("/cart/success");
       return;
     }
 
@@ -287,7 +287,7 @@ const handleQrSuccess = async (paymentData) => {
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
   stopFallbackPoll();
-  await navigateTo(`/cart/payment/success?order_id=${paymentData.orderId || checkoutStore.preparedOrderId}`);
+  await navigateTo(`/cart/success?order_id=${paymentData.orderId || checkoutStore.preparedOrderId}`);
 };
 
 const handleQrFailed = (reason) => {
@@ -316,22 +316,59 @@ const handleQrRetry = async () => {
 };
 
 // Nhận postMessage từ popup khi thanh toán thành công.
-// Success page trong popup sẽ gửi message rồi đóng popup.
-// Main tab nhận message → navigate sang success page trên tab chính.
-const handlePopupMessage = (event) => {
-  if (event.data?.type === "PAYMENT_DONE" && event.data?.queryString) {
-    showQrModal.value = false;
-    closePaymentPopup();
-    stopFallbackPoll();
-    // Navigate sang success page trên tab chính với đầy đủ query params
-    navigateTo("/cart/payment/success" + event.data.queryString);
+// Backend vnpayReturn trả HTML page gửi message rồi đóng popup.
+// Main tab nhận message → poll xác nhận payment đã confirmed → navigate.
+const handlePopupMessage = async (event) => {
+  const data = event.data;
+  if (data?.type !== "PAYMENT_DONE") return;
+  if (isNavigatingToSuccess) return;
+  isNavigatingToSuccess = true;
+
+  // Bước 1: Đóng modal và popup ngay (sync)
+  showQrModal.value = false;
+  closePaymentPopup();
+  stopFallbackPoll();
+
+  if (data.status === "failed") {
+    isNavigatingToSuccess = false;
+    selectedMethod.value = null;
+    return;
+  }
+
+  const orderId = data.orderId;
+  const sessionId = checkoutStore.preparedSessionId;
+  if (!orderId && !sessionId) {
+    isNavigatingToSuccess = false;
+    selectedMethod.value = null;
+    return;
+  }
+
+  // Bước 2: Poll 1 lần xác nhận payment đã confirmed
+  const result = sessionId
+    ? await checkoutStore.pollOrderPaymentStatus(sessionId, { maxAttempts: 1, intervalMs: 0 })
+    : null;
+
+  // Bước 3: Navigate sang success page
+  await nextTick();
+  const finalOrderId = result?.orderId || orderId || checkoutStore.preparedOrderId;
+  if (finalOrderId) {
+    await navigateTo(`/cart/success?order_id=${finalOrderId}&payment_method=vnpay`);
+  } else {
+    isNavigatingToSuccess = false;
+    selectedMethod.value = null;
   }
 };
 
 // Fallback: neu postMessage khong hoat dong (window.opener bi null sau redirect cross-domain),
 // khi popup dong, poll backend de xac nhan thanh toan roi navigate sang success
+let isNavigatingToSuccess = false;
 let fallbackPollInterval = null;
+let fallbackPollAbortController = null;
 const stopFallbackPoll = () => {
+  if (fallbackPollAbortController) {
+    fallbackPollAbortController.abort();
+    fallbackPollAbortController = null;
+  }
   if (fallbackPollInterval) {
     clearInterval(fallbackPollInterval);
     fallbackPollInterval = null;
@@ -340,28 +377,34 @@ const stopFallbackPoll = () => {
 const startFallbackPoll = () => {
   if (fallbackPollInterval) return;
   fallbackPollInterval = setInterval(async () => {
-    if (!showQrModal.value) {
+    if (!showQrModal.value || isNavigatingToSuccess) {
       stopFallbackPoll();
       return;
     }
     if (!paymentPopup.value || paymentPopup.value.closed) {
-      // Popup da dong -> poll de xac nhan thanh toan
-      try {
-        const result = await checkoutStore.pollOrderPaymentStatus(
-          checkoutStore.preparedSessionId,
-          { maxAttempts: 5, intervalMs: 2000 }
-        );
-        stopFallbackPoll();
-        showQrModal.value = false;
-        closePaymentPopup();
-        if (result?.status === "completed" || result?.status === "paid") {
-          await navigateTo(`/cart/payment/success?order_id=${result.orderId || checkoutStore.preparedOrderId}`);
-        } else {
-          selectedMethod.value = null;
+      // Popup đã đóng → poll để xác nhận thanh toán
+      stopFallbackPoll();
+      showQrModal.value = false;
+      closePaymentPopup();
+
+      fallbackPollAbortController = new AbortController();
+      const result = await checkoutStore.pollOrderPaymentStatus(
+        checkoutStore.preparedSessionId,
+        { maxAttempts: 5, intervalMs: 2000 },
+        fallbackPollAbortController,
+      );
+
+      if (result?.status === "completed" || result?.status === "paid") {
+        const orderId = result.orderId || checkoutStore.preparedOrderId;
+        if (orderId && !isNavigatingToSuccess) {
+          isNavigatingToSuccess = true;
+          await navigateTo(`/cart/success?order_id=${orderId}&payment_method=vnpay`);
         }
-      } catch {
-        // cho phep continue poll
+      } else if (!fallbackPollAbortController.signal.aborted) {
+        // Payment failed hoặc timeout → cho user chọn lại
+        selectedMethod.value = null;
       }
+      fallbackPollAbortController = null;
     }
   }, 1000);
 };
@@ -396,7 +439,7 @@ const checkMobileReturn = async () => {
     if (result) {
       mobilePollResult.value = result;
       const orderId = result.orderId || checkoutStore.preparedOrderId || params.get("orderId");
-      await navigateTo(`/cart/payment/success?order_id=${orderId}`);
+      await navigateTo(`/cart/success?order_id=${orderId}`);
     } else {
       mobilePollResult.value = { timeout: true };
     }

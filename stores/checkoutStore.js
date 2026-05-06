@@ -103,6 +103,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
   const preparedPricing = ref(null);
   const guestToken = ref(null);
   const guestEmail = ref(null);
+
   const secondaryContact = ref({
     enabled: false,
     name: "",
@@ -620,6 +621,18 @@ export const useCheckoutStore = defineStore("checkout", () => {
   };
 
   /**
+   * Fetch order details by orderId for the success page.
+   * Returns full order data including items, address, pricing.
+   */
+  const fetchOrderById = async (orderId) => {
+    if (!orderId) return null;
+    feGlobalStore.setApiUrl(`orders/${encodeURIComponent(orderId)}`);
+    const response = await feGlobalStore.fetchItem();
+    // API wraps in { success, data } — unwrap to get order object directly
+    return response?.data || response;
+  };
+
+  /**
    * Poll payment status for QR modal.
    * Backend tìm order từ session_id (UUID), KHÔNG tin orderId từ request.
    * Trả về payment data khi status = completed/failed/cancelled, null on timeout.
@@ -815,6 +828,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
     createPayment,
     verifyPayment,
     pollOrderPaymentStatus,
+    fetchOrderById,
     resetCheckout,
   };
 });
