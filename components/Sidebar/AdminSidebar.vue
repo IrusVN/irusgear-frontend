@@ -53,7 +53,7 @@
         </ul>
 
         <!-- User -->
-        <div class="d-flex align-items-center gap-3 p-3 rounded-3 bg-light">
+        <div class="d-flex align-items-center gap-3 p-3 rounded-3 bg-light position-relative">
           <i class="bi bi-person-circle fs-2 text-dark"></i>
           <div v-if="!isCollapsed" class="flex-grow-1 overflow-hidden">
             <div class="fw-semibold text-dark text-truncate small">
@@ -64,9 +64,37 @@
             </div>
           </div>
 
-          <button v-if="!isCollapsed" class="btn btn-sm p-0 text-muted">
-            <i class="bi bi-three-dots-vertical"></i>
-          </button>
+          <div v-if="!isCollapsed" class="dropdown">
+            <button 
+              class="btn btn-sm p-0 text-muted" 
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <i class="bi bi-person me-2"></i>
+                  Thông tin cá nhân
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  <i class="bi bi-gear me-2"></i>
+                  Cài đặt
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <button class="dropdown-item text-danger" @click="handleLogout">
+                  <i class="bi bi-box-arrow-right me-2"></i>
+                  Đăng xuất
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </aside>
@@ -109,6 +137,15 @@ const toggleSidebar = () => {
 const isActiveRoute = (itemRoute) => {
   if (itemRoute === '#') return false
   return route.path === itemRoute || route.path.startsWith(itemRoute + '/')
+}
+
+const handleLogout = () => {
+  // Clear auth token
+  const authToken = useCookie('auth_token')
+  authToken.value = null
+  
+  // Redirect to login
+  navigateTo('/auth/login')
 }
 </script>
 
