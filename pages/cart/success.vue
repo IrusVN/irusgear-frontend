@@ -67,7 +67,7 @@
       <div v-else-if="phase === 'confirmed'" class="order-success-page__confirmed">
 
         <!-- ══ DESKTOP UI (lg+) ══ -->
-        <div v-if="!isMobile()" class="order-success-page__confirmed-desktop">
+        <div v-if="!isMobileRef.value" class="order-success-page__confirmed-desktop">
           <!-- Header row -->
           <div class="order-success-page__desktop-header">
             <div class="order-success-page__desktop-header-left">
@@ -614,7 +614,7 @@ definePageMeta({
 const route = useRoute();
 const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
-const { isMobile } = useDeviceDetection();
+const { isMobile, isMobileRef } = useDeviceDetection();
 
 // ── State machine: confirming | confirmed | failed | timeout | no-info ──
 const phase = ref("confirming");
@@ -893,7 +893,14 @@ const retryVerify = async () => {
 };
 
 // ── Lifecycle ────────────────────────────────────────────────
+const handleResize = () => {
+  isMobileRef.value = window.innerWidth < 992;
+};
+
 onMounted(async () => {
+  isMobileRef.value = window.innerWidth < 992;
+  window.addEventListener("resize", handleResize);
+
   const orderId = resolvedOrderId.value;
 
   if (!orderId) {
@@ -930,11 +937,15 @@ onMounted(async () => {
   }
 });
 
-onUnmounted(stopPoll);
+onUnmounted(() => {
+  stopPoll();
+  window.removeEventListener("resize", handleResize);
+});
 </script>
 
 <style scoped>
 .order-success-page {
+  overflow-x: hidden;
   padding: 40px 0 80px;
 }
 
@@ -946,7 +957,7 @@ onUnmounted(stopPoll);
   border-radius: 20px;
   max-width: 960px;
   margin: 0 auto;
-  overflow: hidden;
+  overflow-x: hidden;
   padding: 32px;
 }
 
@@ -983,12 +994,323 @@ onUnmounted(stopPoll);
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 24px;
+  overflow-x: hidden;
+}
+
+/* ══ Responsive: iPad Pro 12.9" ══ */
+@media (max-width: 1199.98px) {
+  .order-success-page__desktop-body {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+/* ══ Responsive: iPad Pro 11" (834px) ══ */
+@media (max-width: 1023.98px) {
+  .order-success-page__desktop-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ══ Responsive: iPad Mini (768px) ══ */
+@media (max-width: 991.98px) {
+  .order-success-page__desktop-body {
+    grid-template-columns: 1fr;
+  }
+
+  .order-success-page__desktop-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-success-page__desktop-header-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .order-success-page__confirmed-desktop {
+    padding: 20px;
+  }
+}
+
+/* ══ Responsive: iPhone 14 Pro Max / 15 Plus (430px) ══ */
+@media (max-width: 767.98px) {
+  .order-success-page {
+    padding: 16px 0 80px;
+  }
+
+  .order-success-page__confirmed-desktop {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .order-success-page__desktop-header-left .order-success-page__icon {
+    height: 60px;
+    width: 60px;
+    font-size: 36px;
+  }
+
+  .order-success-page__desktop-col:last-child {
+    position: static;
+  }
+
+  .order-success-page__bill-section {
+    padding: 12px;
+  }
+
+  .order-success-page__title {
+    font-size: 22px;
+  }
+}
+
+/* ══ Responsive: iPhone 12/13/14/15 Pro (390px) ══ */
+@media (max-width: 575.98px) {
+  .order-success-page__desktop-header-left {
+    gap: 12px;
+  }
+
+  .order-success-page__desktop-header-left .order-success-page__icon {
+    height: 52px;
+    width: 52px;
+    font-size: 30px;
+  }
+
+  .order-success-page__title {
+    font-size: 20px;
+  }
+
+  .order-success-page__message {
+    font-size: 13px;
+  }
+
+  .order-success-page__next-steps {
+    padding: 14px;
+  }
+}
+
+/* ══ Responsive: iPhone SE (375px) ══ */
+@media (max-width: 480px) {
+  .order-success-page {
+    padding: 12px 0 80px;
+  }
+
+  .order-success-page__confirmed-desktop {
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .order-success-page__title {
+    font-size: 18px;
+  }
+
+  .order-success-page__message {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .order-success-page__bill-section {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .order-success-page__bill-title {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .order-success-page__bill-item {
+    gap: 8px;
+  }
+
+  .order-success-page__bill-item-img {
+    height: 40px;
+    width: 40px;
+  }
+
+  .order-success-page__bill-item-name {
+    font-size: 12px;
+  }
+
+  .order-success-page__bill-item-meta {
+    font-size: 11px;
+  }
+
+  .order-success-page__bill-item-total {
+    font-size: 13px;
+  }
+
+  .order-success-page__bill-pricing-row {
+    font-size: 12px;
+  }
+
+  .order-success-page__bill-pricing-total {
+    font-size: 14px;
+  }
+
+  .order-success-page__bill-pricing-total dd {
+    font-size: 16px !important;
+  }
+
+  .order-success-page__actions {
+    gap: 8px;
+  }
+
+  .order-success-page__btn {
+    font-size: 14px;
+    min-height: 44px;
+    padding: 10px 16px;
+    border-radius: 10px;
+  }
+}
+
+/* ══ Responsive: Ultra narrow (≤460px) ══ */
+@media (max-width: 460px) {
+  .order-success-page__confirmed-desktop {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .order-success-page__desktop-header-left .order-success-page__icon {
+    height: 48px;
+    width: 48px;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .order-success-page__title {
+    font-size: 17px;
+  }
+
+  .order-success-page__message {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .order-success-page__bill-section {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .order-success-page__bill-title {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .order-success-page__bill-item {
+    gap: 6px;
+  }
+
+  .order-success-page__bill-item-img {
+    height: 36px;
+    width: 36px;
+    flex-shrink: 0;
+  }
+
+  .order-success-page__bill-item-name {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .order-success-page__bill-item-meta {
+    font-size: 10px;
+  }
+
+  .order-success-page__bill-item-total {
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .order-success-page__bill-pricing-row {
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .order-success-page__bill-pricing-total {
+    font-size: 13px;
+  }
+
+  .order-success-page__bill-pricing-total dd {
+    font-size: 15px !important;
+  }
+
+  .order-success-page__detail-row {
+    font-size: 11px;
+  }
+
+  .order-success-page__next-steps {
+    padding: 12px;
+  }
+
+  .order-success-page__section-title {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .order-success-page__step {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .order-success-page__step-num {
+    height: 18px;
+    width: 18px;
+    font-size: 10px;
+  }
+
+  .order-success-page__actions {
+    gap: 6px;
+  }
+
+  .order-success-page__btn {
+    font-size: 13px;
+    min-height: 40px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    width: 100%;
+  }
+
+  .order-success-page__order-number {
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .order-success-page__label {
+    font-size: 10px;
+  }
+
+  .order-success-page__order-number strong {
+    font-size: 15px;
+  }
+
+  .order-success-page__payment-badge {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+
+  .order-success-page__payment-badge-status {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+
+  .order-success-page__skeleton--order-num {
+    width: 120px;
+    height: 36px;
+  }
+
+  .order-success-page__skeleton--badge {
+    width: 100px;
+    height: 28px;
+  }
 }
 
 .order-success-page__desktop-col {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
 }
 
 .order-success-page__desktop-col:last-child {
@@ -1067,6 +1389,18 @@ onUnmounted(stopPoll);
   flex-shrink: 0;
 }
 
+@media (max-width: 480px) {
+  .order-success-page__skeleton--img {
+    height: 40px;
+    width: 40px;
+  }
+
+  .order-success-page__skeleton--order-num {
+    width: 140px;
+    height: 40px;
+  }
+}
+
 .order-success-page__skeleton--total {
   height: 20px;
   width: 100%;
@@ -1099,6 +1433,13 @@ onUnmounted(stopPoll);
   overflow: hidden;
   padding: 40px 32px;
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  .order-success-page__card {
+    border-radius: 14px;
+    padding: 28px 16px;
+  }
 }
 
 /* Icon */
