@@ -1,6 +1,6 @@
 <template>
   <!-- Notice Banner: S-Business -->
-  <div class="profile-notice">
+  <div v-if="false" class="profile-notice">
     <div class="profile-notice__icon">
       <i class="bi bi-info-circle-fill"></i>
     </div>
@@ -90,7 +90,7 @@
   </div>
 
   <!-- Featured Banners -->
-  <div class="profile-card">
+  <div v-if="false" class="profile-card">
     <div class="profile-card__header">
       <h3 class="profile-card__title">Chương trình nổi bật</h3>
     </div>

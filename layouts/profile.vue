@@ -145,11 +145,11 @@
                     <i class="bi bi-star"></i>
                     <span>Hạng thành viên và ưu đãi</span>
                   </a>
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'sbusiness' }">
+                  <a v-if="false" href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'sbusiness' }">
                     <i class="bi bi-briefcase"></i>
                     <span>Ưu đãi và đơn hàng S-Business</span>
                   </a>
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'student' }">
+                  <a v-if="false" href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'student' }">
                     <i class="bi bi-mortarboard"></i>
                     <span>Ưu đãi S-Student và S-Teacher</span>
                   </a>
@@ -160,19 +160,19 @@
                     <i class="bi bi-gear"></i>
                     <span>Thông tin tài khoản</span>
                   </a>
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'store' }">
+                  <a v-if="false" href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'store' }">
                     <i class="bi bi-geo-alt"></i>
                     <span>Tìm kiếm cửa hàng</span>
                   </a>
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'policy' }">
+                  <a href="/policy" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'policy' }">
                     <i class="bi bi-journal-text"></i>
                     <span>Chính sách bảo hành</span>
                   </a>
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'feedback' }">
+                  <a v-if="false" href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'feedback' }">
                     <i class="bi bi-chat-left-text"></i>
                     <span>Góp ý - Phản hồi - Hỗ trợ</span>
                   </a>
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'terms' }">
+                  <a href="/tos" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tos' }">
                     <i class="bi bi-file-earmark-text"></i>
                     <span>Điều khoản sử dụng</span>
                   </a>
@@ -247,6 +247,8 @@ const activeSidebarItem = computed(() => {
   if (path.includes('/profile')) return 'overview'
   if (path.includes('/promotion')) return 'rank'
   if (path.includes('/user-info')) return 'user-info'
+  if (path.includes('/policy')) return 'policy'
+  if (path.includes('/tos')) return 'tos'
   return 'overview'
 })
 
