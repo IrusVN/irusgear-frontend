@@ -130,18 +130,18 @@
                     <i class="bi bi-bag-check"></i>
                     <span>Lịch sử mua hàng</span>
                   </a>
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'warranty' }">
+                  <a :href="localePath('/warranty')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'warranty' }">
                     <i class="bi bi-shield-check"></i>
                     <span>Tra cứu bảo hành</span>
                   </a>
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tradein' }">
+                  <a :href="localePath('/tradein')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tradein' }">
                     <i class="bi bi-arrow-left-right"></i>
                     <span>Lịch sử thu cũ</span>
                   </a>
 
                   <div class="profile-layout__sidebar-divider"></div>
 
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'rank' }">
+                  <a :href="localePath('/promotion')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'rank' }">
                     <i class="bi bi-star"></i>
                     <span>Hạng thành viên và ưu đãi</span>
                   </a>
@@ -156,7 +156,7 @@
 
                   <div class="profile-layout__sidebar-divider"></div>
 
-                  <a href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'account' }">
+                  <a href="/user-info" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'user-info' }">
                     <i class="bi bi-gear"></i>
                     <span>Thông tin tài khoản</span>
                   </a>
@@ -242,7 +242,11 @@ const isDesktop = ref(false)
 const activeSidebarItem = computed(() => {
   const path = route.path
   if (path.includes('/orders')) return 'orders'
+  if (path.includes('/warranty')) return 'warranty'
+  if (path.includes('/tradein')) return 'tradein'
   if (path.includes('/profile')) return 'overview'
+  if (path.includes('/promotion')) return 'rank'
+  if (path.includes('/user-info')) return 'user-info'
   return 'overview'
 })
 
