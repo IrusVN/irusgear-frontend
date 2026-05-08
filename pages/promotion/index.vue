@@ -1,5 +1,6 @@
 <template>
   <!-- Your Offers (Empty State) -->
+  <ProfileLayout>
   <div class="promotion-card">
     <div class="promotion-card__header">
       <h3 class="promotion-card__title">Ưu đãi của bạn</h3>
@@ -217,12 +218,14 @@
       </div>
     </div>
   </div>
+</ProfileLayout>
 </template>
 
 <script setup>
 import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
+import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
-definePageMeta({ layout: 'profile' })
+definePageMeta({ layout: 'default' })
 useHead({ title: 'Hạng thành viên và ưu đãi - IrusGear' })
 
 const carouselViewport = ref(null)

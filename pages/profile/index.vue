@@ -1,4 +1,5 @@
 <template>
+  <ProfileLayout>
   <div class="profile-page">
   <!-- Notice Banner: S-Business -->
   <div v-if="false" class="profile-notice">
@@ -143,15 +144,17 @@
     </div>
   </div>
   </div>
+</ProfileLayout>
 </template>
 
 <script setup>
 import { useLocalePath } from '#imports'
+import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
 const localePath = useLocalePath()
 
 definePageMeta({
-  layout: 'profile',
+  layout: 'default',
   middleware: ['auth-guard'],
 })
 

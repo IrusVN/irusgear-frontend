@@ -1,4 +1,5 @@
 <template>
+  <ProfileLayout>
   <div class="tradein-page">
   <!-- Title (mobile only) -->
   <div class="tradein-title d-md-none">
@@ -117,13 +118,15 @@
     </div>
   </div>
   </div>
+</ProfileLayout>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { useLocalePath } from '#imports'
+import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
-definePageMeta({ layout: 'profile' })
+definePageMeta({ layout: 'default' })
 useHead({ title: 'Lịch sử thu cũ - IrusGear' })
 
 const localePath = useLocalePath()

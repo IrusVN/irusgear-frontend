@@ -1,4 +1,5 @@
 <template>
+  <ProfileLayout>
   <div class="tos-layout">
     <!-- Sidebar -->
     <aside class="tos-sidebar">
@@ -472,12 +473,14 @@
 
     </main>
   </div>
+</ProfileLayout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
-definePageMeta({ layout: 'profile' })
+definePageMeta({ layout: 'default' })
 
 useHead({ title: 'Quy chế hoạt động - IrusGear' })
 

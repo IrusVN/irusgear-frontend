@@ -1,4 +1,5 @@
 <template>
+  <ProfileLayout>
   <div class="policy-layout">
     <!-- Sidebar -->
     <aside class="policy-sidebar">
@@ -395,12 +396,14 @@
 
     </main>
   </div>
+</ProfileLayout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
-definePageMeta({ layout: 'profile' })
+definePageMeta({ layout: 'default' })
 
 useHead({ title: 'Chính sách bảo hành - IrusGear' })
 

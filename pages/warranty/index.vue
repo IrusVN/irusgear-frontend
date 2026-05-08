@@ -1,4 +1,5 @@
 <template>
+  <ProfileLayout>
   <div class="warranty-page">
     <!-- Search Bar -->
     <div class="warranty-search">
@@ -127,13 +128,15 @@
       </div>
     </div>
   </div>
+</ProfileLayout>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { useLocalePath } from '#imports'
+import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
-definePageMeta({ layout: 'profile' })
+definePageMeta({ layout: 'default' })
 useHead({ title: 'Tra cứu bảo hành - IrusGear' })
 
 const localePath = useLocalePath()

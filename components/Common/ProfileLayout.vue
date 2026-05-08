@@ -1,219 +1,186 @@
 <template>
-  <div>
-    <div class="d-flex flex-column min-vh-100">
-      <ClientOnly>
-        <CustomerSidebar />
-        <template #fallback>
-          <div class="customer-sidebar-ssr-placeholder"></div>
-        </template>
-      </ClientOnly>
-
-      <main class="flex-grow-1 main-with-customer-sidebar">
-        <Breadcrumb />
-        <div class="profile-layout">
-          <div class="container-xl">
-            <!-- Member Info Card -->
-            <div class="profile-layout__member-card">
-              <div class="profile-layout__member-left">
-                <div class="profile-layout__avatar-wrap">
-                  <div class="profile-layout__avatar">
-                    <img :src="avatarUrl" alt="Avatar" class="profile-layout__avatar-img" loading="lazy" />
-                  </div>
-                </div>
-                <div class="profile-layout__member-info">
-                  <h2 class="profile-layout__member-name">{{ fullName }}</h2>
-                  <p class="profile-layout__member-phone">
-                    {{ maskedPhone }}
-                    <button type="button" class="profile-layout__toggle-phone">
-                      <i class="bi bi-eye-slash"></i>
-                    </button>
-                  </p>
-                  <div class="profile-layout__rank-badges">
-                    <span class="profile-layout__rank-badge profile-layout__rank-badge--null">S-NULL</span>
-                    <span class="profile-layout__rank-badge profile-layout__rank-badge--student">S-Student</span>
-                  </div>
-                  <div class="profile-layout__renew-hint">
-                    <i class="bi bi-clock"></i>
-                    Cập nhật lại sau 01/01/2027
-                  </div>
-                </div>
-              </div>
-              <div class="profile-layout__member-stats">
-                <div class="profile-layout__stat-group">
-                  <div class="profile-layout__stat-item">
-                    <div class="profile-layout__stat-icon">
-                      <img src="https://cdn-static.smember.com.vn/_next/static/media/cart-icon.3e4e1d83.svg" alt="Đơn hàng" loading="lazy" />
-                    </div>
-                    <div class="profile-layout__stat-content">
-                      <div class="profile-layout__stat-value">{{ totalOrders }}</div>
-                      <div class="profile-layout__stat-label">Tổng số đơn hàng{{ isDesktop ? ' đã mua' : '' }}</div>
-                    </div>
-                  </div>
-                  <div class="profile-layout__stat-divider"></div>
-                  <div class="profile-layout__stat-item">
-                    <div class="profile-layout__stat-icon">
-                      <img src="https://cdn-static.smember.com.vn/_next/static/media/money-icon.3e6b67af.svg" alt="Tổng tiền" loading="lazy" />
-                    </div>
-                    <div class="profile-layout__stat-content">
-                      <div class="profile-layout__stat-value">{{ totalSpend.formatted }}</div>
-                      <div class="profile-layout__stat-label">
-                        Tổng tiền tích lũy
-                        <span class="profile-layout__stat-dot"></span>
-                        Từ 01/01/2025
-                      </div>
-                      <div v-if="isDesktop" class="profile-layout__rank-progress">
-                        Cần chi tiêu thêm <strong>3.000.000</strong> để lên hạng <strong>S-NEW</strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="!isDesktop" class="profile-layout__rank-progress profile-layout__rank-progress--mobile">
-                  Cần chi tiêu thêm <strong>3.000.000đ</strong> để lên hạng <strong>S-NEW</strong>
-                </div>
-                <div v-if="isDesktop" class="profile-layout__channel-note">
-                  <i class="bi bi-info-circle"></i>
-                  Tổng tiền và số đơn hàng được tính chung từ IrusGear.
-                </div>
-              </div>
+  <div class="profile-layout">
+    <div class="container-xl">
+      <!-- Member Info Card -->
+      <div class="profile-layout__member-card">
+        <div class="profile-layout__member-left">
+          <div class="profile-layout__avatar-wrap">
+            <div class="profile-layout__avatar">
+              <img :src="avatarUrl" alt="Avatar" class="profile-layout__avatar-img" loading="lazy" />
             </div>
-
-            <!-- Quick Actions -->
-            <div class="profile-layout__quick-actions">
-              <a href="#" class="profile-layout__quick-action">
-                <div class="profile-layout__quick-action-icon">
-                  <img src="https://cdn-static.smember.com.vn/_next/static/media/rank-icon.d0f44c06.svg" alt="Hạng thành viên" loading="lazy" />
-                </div>
-                <span>Hạng thành viên</span>
-              </a>
-              <a href="#" class="profile-layout__quick-action">
-                <div class="profile-layout__quick-action-icon">
-                  <img src="https://cdn-static.smember.com.vn/_next/static/media/promotion-icon.99af272d.svg" alt="Mã giảm giá" loading="lazy" />
-                </div>
-                <span>Mã giảm giá</span>
-              </a>
-              <a :href="localePath('/orders')" class="profile-layout__quick-action">
-                <div class="profile-layout__quick-action-icon">
-                  <img src="https://cdn-static.smember.com.vn/_next/static/media/history-icon.2ebe1813.svg" alt="Lịch sử mua hàng" loading="lazy" />
-                </div>
-                <span>Lịch sử mua hàng</span>
-              </a>
-              <a href="#" class="profile-layout__quick-action">
-                <div class="profile-layout__quick-action-icon">
-                  <img src="https://cdn-static.smember.com.vn/_next/static/media/address-icon.169a4d95.svg" alt="Sổ địa chỉ" loading="lazy" />
-                </div>
-                <span>Sổ địa chỉ</span>
-              </a>
-              <a href="#" class="profile-layout__quick-action">
-                <div class="profile-layout__quick-action-icon">
-                  <img src="https://cdn-static.smember.com.vn/_next/static/media/edu-icon.76bd96ea.svg" alt="S-Student & S-Teacher" loading="lazy" />
-                </div>
-                <span>S-Student & S-Teacher</span>
-              </a>
-              <a href="#" class="profile-layout__quick-action">
-                <div class="profile-layout__quick-action-icon">
-                  <img src="https://cdn-static.smember.com.vn/_next/static/media/link-icon.1de266bc.svg" alt="Liên kết tài khoản" loading="lazy" />
-                </div>
-                <span>Liên kết tài khoản</span>
-              </a>
+          </div>
+          <div class="profile-layout__member-info">
+            <h2 class="profile-layout__member-name">{{ fullName }}</h2>
+            <p class="profile-layout__member-phone">
+              {{ displayPhone }}
+              <button type="button" class="profile-layout__toggle-phone" @click="phoneVisible = !phoneVisible">
+                <i :class="phoneVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+              </button>
+            </p>
+            <div class="profile-layout__rank-badges">
+              <span class="profile-layout__rank-badge profile-layout__rank-badge--null">S-NULL</span>
+              <span class="profile-layout__rank-badge profile-layout__rank-badge--student">S-Student</span>
             </div>
-
-            <!-- Body: Sidebar + Main -->
-            <div class="profile-layout__body">
-              <!-- Left Sidebar -->
-              <aside class="profile-layout__sidebar d-none d-md-block">
-                <nav class="profile-layout__sidebar-nav">
-                  <a :href="localePath('/profile')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'overview' }">
-                    <i class="bi bi-person"></i>
-                    <span>Tổng quan</span>
-                  </a>
-                  <a :href="localePath('/orders')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'orders' }">
-                    <i class="bi bi-bag-check"></i>
-                    <span>Lịch sử mua hàng</span>
-                  </a>
-                  <a :href="localePath('/warranty')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'warranty' }">
-                    <i class="bi bi-shield-check"></i>
-                    <span>Tra cứu bảo hành</span>
-                  </a>
-                  <a :href="localePath('/tradein')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tradein' }">
-                    <i class="bi bi-arrow-left-right"></i>
-                    <span>Lịch sử thu cũ</span>
-                  </a>
-
-                  <div class="profile-layout__sidebar-divider"></div>
-
-                  <a :href="localePath('/promotion')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'rank' }">
-                    <i class="bi bi-star"></i>
-                    <span>Hạng thành viên và ưu đãi</span>
-                  </a>
-                  <a v-if="false" href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'sbusiness' }">
-                    <i class="bi bi-briefcase"></i>
-                    <span>Ưu đãi và đơn hàng S-Business</span>
-                  </a>
-                  <a v-if="false" href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'student' }">
-                    <i class="bi bi-mortarboard"></i>
-                    <span>Ưu đãi S-Student và S-Teacher</span>
-                  </a>
-
-                  <div class="profile-layout__sidebar-divider"></div>
-
-                  <a href="/user-info" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'user-info' }">
-                    <i class="bi bi-gear"></i>
-                    <span>Thông tin tài khoản</span>
-                  </a>
-                  <a v-if="false" href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'store' }">
-                    <i class="bi bi-geo-alt"></i>
-                    <span>Tìm kiếm cửa hàng</span>
-                  </a>
-                  <a href="/policy" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'policy' }">
-                    <i class="bi bi-journal-text"></i>
-                    <span>Chính sách bảo hành</span>
-                  </a>
-                  <a v-if="false" href="#" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'feedback' }">
-                    <i class="bi bi-chat-left-text"></i>
-                    <span>Góp ý - Phản hồi - Hỗ trợ</span>
-                  </a>
-                  <a href="/tos" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tos' }">
-                    <i class="bi bi-file-earmark-text"></i>
-                    <span>Điều khoản sử dụng</span>
-                  </a>
-
-                  <div class="profile-layout__sidebar-divider"></div>
-
-                  <button type="button" class="profile-layout__sidebar-item profile-layout__sidebar-item--logout" @click="handleLogout">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <span>Đăng xuất</span>
-                  </button>
-                </nav>
-
-                <div class="profile-layout__app-cta">
-                  <p class="profile-layout__app-cta-text">Mua sắm dễ dàng - Ưu đãi ngập tràn cùng IrusGear</p>
-                  <div class="profile-layout__app-cta-content">
-                    <div class="profile-layout__qr-wrap">
-                      <img src="https://cdn2.cellphones.com.vn/400x,webp/media/wysiwyg/Web/Logo/QR_appGeneral-v2.png" alt="QR Code" loading="lazy" />
-                    </div>
-                    <div class="profile-layout__store-links">
-                      <a href="#" target="_blank" rel="nofollow">
-                        <img src="https://cdn2.cellphones.com.vn/200x,webp/media/wysiwyg/downloadANDROID.png" alt="Tải từ Google Play" loading="lazy" />
-                      </a>
-                      <a href="#" target="_blank" rel="nofollow">
-                        <img src="https://cdn2.cellphones.com.vn/200x,webp/media/wysiwyg/downloadiOS.png" alt="Tải từ App Store" loading="lazy" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </aside>
-
-              <!-- Main Content Slot -->
-              <div class="profile-layout__main">
-                <slot />
-              </div>
+            <div class="profile-layout__renew-hint">
+              <i class="bi bi-clock"></i>
+              Cập nhật lại sau 01/01/2027
             </div>
           </div>
         </div>
-      </main>
+        <div class="profile-layout__member-stats">
+          <div class="profile-layout__stat-group">
+            <div class="profile-layout__stat-item">
+              <div class="profile-layout__stat-icon">
+                <img src="https://cdn-static.smember.com.vn/_next/static/media/cart-icon.3e4e1d83.svg" alt="Đơn hàng" loading="lazy" />
+              </div>
+              <div class="profile-layout__stat-content">
+                <div class="profile-layout__stat-value">{{ totalOrders }}</div>
+                <div class="profile-layout__stat-label">Tổng số đơn hàng{{ isDesktop ? ' đã mua' : '' }}</div>
+              </div>
+            </div>
+            <div class="profile-layout__stat-divider"></div>
+            <div class="profile-layout__stat-item">
+              <div class="profile-layout__stat-icon">
+                <img src="https://cdn-static.smember.com.vn/_next/static/media/money-icon.3e6b67af.svg" alt="Tổng tiền" loading="lazy" />
+              </div>
+              <div class="profile-layout__stat-content">
+                <div class="profile-layout__stat-value">{{ totalSpend.formatted }}</div>
+                <div class="profile-layout__stat-label">
+                  Tổng tiền tích lũy
+                  <span class="profile-layout__stat-dot"></span>
+                  Từ 01/01/2025
+                </div>
+                <div v-if="isDesktop" class="profile-layout__rank-progress">
+                  Cần chi tiêu thêm <strong>3.000.000</strong> để lên hạng <strong>S-NEW</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="!isDesktop" class="profile-layout__rank-progress profile-layout__rank-progress--mobile">
+            Cần chi tiêu thêm <strong>3.000.000đ</strong> để lên hạng <strong>S-NEW</strong>
+          </div>
+          <div v-if="isDesktop" class="profile-layout__channel-note">
+            <i class="bi bi-info-circle"></i>
+            Tổng tiền và số đơn hàng được tính chung từ IrusGear.
+          </div>
+        </div>
+      </div>
 
-      <Footer />
-      <AddToCartSheet />
+      <!-- Quick Actions -->
+      <div class="profile-layout__quick-actions">
+        <a href="#" class="profile-layout__quick-action">
+          <div class="profile-layout__quick-action-icon">
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/rank-icon.d0f44c06.svg" alt="Hạng thành viên" loading="lazy" />
+          </div>
+          <span>Hạng thành viên</span>
+        </a>
+        <a href="#" class="profile-layout__quick-action">
+          <div class="profile-layout__quick-action-icon">
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/promotion-icon.99af272d.svg" alt="Mã giảm giá" loading="lazy" />
+          </div>
+          <span>Mã giảm giá</span>
+        </a>
+        <NuxtLink :to="localePath('/orders')" class="profile-layout__quick-action">
+          <div class="profile-layout__quick-action-icon">
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/history-icon.2ebe1813.svg" alt="Lịch sử mua hàng" loading="lazy" />
+          </div>
+          <span>Lịch sử mua hàng</span>
+        </NuxtLink>
+        <a href="#" class="profile-layout__quick-action">
+          <div class="profile-layout__quick-action-icon">
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/address-icon.169a4d95.svg" alt="Sổ địa chỉ" loading="lazy" />
+          </div>
+          <span>Sổ địa chỉ</span>
+        </a>
+        <a href="#" class="profile-layout__quick-action">
+          <div class="profile-layout__quick-action-icon">
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/edu-icon.76bd96ea.svg" alt="S-Student & S-Teacher" loading="lazy" />
+          </div>
+          <span>S-Student & S-Teacher</span>
+        </a>
+        <a href="#" class="profile-layout__quick-action">
+          <div class="profile-layout__quick-action-icon">
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/link-icon.1de266bc.svg" alt="Liên kết tài khoản" loading="lazy" />
+          </div>
+          <span>Liên kết tài khoản</span>
+        </a>
+      </div>
+
+      <!-- Body: Sidebar + Main -->
+      <div class="profile-layout__body">
+        <!-- Left Sidebar -->
+        <aside class="profile-layout__sidebar d-none d-md-block">
+          <nav class="profile-layout__sidebar-nav">
+            <NuxtLink :to="localePath('/profile')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'overview' }">
+              <i class="bi bi-person"></i>
+              <span>Tổng quan</span>
+            </NuxtLink>
+            <NuxtLink :to="localePath('/orders')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'orders' }">
+              <i class="bi bi-bag-check"></i>
+              <span>Lịch sử mua hàng</span>
+            </NuxtLink>
+            <NuxtLink :to="localePath('/warranty')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'warranty' }">
+              <i class="bi bi-shield-check"></i>
+              <span>Tra cứu bảo hành</span>
+            </NuxtLink>
+            <NuxtLink :to="localePath('/tradein')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tradein' }">
+              <i class="bi bi-arrow-left-right"></i>
+              <span>Lịch sử thu cũ</span>
+            </NuxtLink>
+
+            <div class="profile-layout__sidebar-divider"></div>
+
+            <NuxtLink :to="localePath('/promotion')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'rank' }">
+              <i class="bi bi-star"></i>
+              <span>Hạng thành viên và ưu đãi</span>
+            </NuxtLink>
+
+            <div class="profile-layout__sidebar-divider"></div>
+
+            <NuxtLink :to="localePath('/user-info')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'user-info' }">
+              <i class="bi bi-gear"></i>
+              <span>Thông tin tài khoản</span>
+            </NuxtLink>
+            <NuxtLink :to="localePath('/policy')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'policy' }">
+              <i class="bi bi-journal-text"></i>
+              <span>Chính sách bảo hành</span>
+            </NuxtLink>
+            <NuxtLink :to="localePath('/tos')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tos' }">
+              <i class="bi bi-file-earmark-text"></i>
+              <span>Điều khoản sử dụng</span>
+            </NuxtLink>
+
+            <div class="profile-layout__sidebar-divider"></div>
+
+            <button type="button" class="profile-layout__sidebar-item profile-layout__sidebar-item--logout" @click="handleLogout">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Đăng xuất</span>
+            </button>
+          </nav>
+
+          <div class="profile-layout__app-cta">
+            <p class="profile-layout__app-cta-text">Mua sắm dễ dàng - Ưu đãi ngập tràn cùng IrusGear</p>
+            <div class="profile-layout__app-cta-content">
+              <div class="profile-layout__qr-wrap">
+                <img src="https://cdn2.cellphones.com.vn/400x,webp/media/wysiwyg/Web/Logo/QR_appGeneral-v2.png" alt="QR Code" loading="lazy" />
+              </div>
+              <div class="profile-layout__store-links">
+                <a href="#" target="_blank" rel="nofollow">
+                  <img src="https://cdn2.cellphones.com.vn/200x,webp/media/wysiwyg/downloadANDROID.png" alt="Tải từ Google Play" loading="lazy" />
+                </a>
+                <a href="#" target="_blank" rel="nofollow">
+                  <img src="https://cdn2.cellphones.com.vn/200x,webp/media/wysiwyg/downloadiOS.png" alt="Tải từ App Store" loading="lazy" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Content Slot -->
+        <div class="profile-layout__main">
+          <slot />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -222,29 +189,24 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocalePath, useRoute } from '#imports'
-import CustomerSidebar from '@/components/Sidebar/CustomerSidebar.vue'
-import Footer from '@/components/Footer/Footer.vue'
-import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
-import AddToCartSheet from '@/components/Cart/AddToCartSheet.vue'
 import { useAuthStore } from '@/stores/authStore'
 import { useCartStore } from '@/stores/cartStore'
-import { useDeviceDetection } from '@/composables/useDeviceDetection'
 
 const localePath = useLocalePath()
 const route = useRoute()
 const authStore = useAuthStore()
 const cartStore = useCartStore()
 const { user } = storeToRefs(authStore)
-useDeviceDetection()
 
 const isDesktop = ref(false)
+const phoneVisible = ref(false)
 
 const activeSidebarItem = computed(() => {
   const path = route.path
   if (path.includes('/orders')) return 'orders'
   if (path.includes('/warranty')) return 'warranty'
   if (path.includes('/tradein')) return 'tradein'
-  if (path.includes('/profile')) return 'overview'
+  if (path.includes('/profile') && !path.includes('/promotion')) return 'overview'
   if (path.includes('/promotion')) return 'rank'
   if (path.includes('/user-info')) return 'user-info'
   if (path.includes('/policy')) return 'policy'
@@ -257,8 +219,9 @@ const fullName = computed(() => {
   return `${user.value.first_name || ''} ${user.value.last_name || ''}`.trim() || 'Khách'
 })
 
-const maskedPhone = computed(() => {
+const displayPhone = computed(() => {
   if (!user.value?.phone) return '097*****03'
+  if (phoneVisible.value) return user.value.phone
   const phone = String(user.value.phone)
   return phone.slice(0, 3) + '*****' + phone.slice(-2)
 })
@@ -298,11 +261,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* ── Layout Wrapper ─────────────────────── */
-.profile-layout {
-  padding: 156px 0 60px;
-}
-
 /* ── Member Card ───────────────────────── */
 .profile-layout__member-card {
   background: #fff;
@@ -501,12 +459,12 @@ onUnmounted(() => {
   color: #71717a;
 }
 
-.profile-layout__rank-progress--mobile {
-  display: block;
-}
-
 .profile-layout__rank-progress strong {
   color: #18181b;
+}
+
+.profile-layout__rank-progress--mobile {
+  display: block;
 }
 
 .profile-layout__channel-note {
@@ -745,10 +703,6 @@ onUnmounted(() => {
 
 /* ── Responsive ───────────────────────── */
 @media (max-width: 991.98px) {
-  .profile-layout {
-    padding: 16px 0 40px;
-  }
-
   .profile-layout__member-card {
     padding: 16px;
     border-radius: 14px;

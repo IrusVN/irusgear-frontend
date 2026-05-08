@@ -1,4 +1,5 @@
 <template>
+  <ProfileLayout>
   <div class="orders-page">
   <!-- Tab Bar -->
   <div class="orders-tabs">
@@ -95,13 +96,15 @@
     </div>
   </div>
   </div>
+</ProfileLayout>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { useLocalePath } from '#imports'
+import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
-definePageMeta({ layout: 'profile', middleware: ['auth-guard'] })
+definePageMeta({ layout: 'default', middleware: ['auth-guard'] })
 
 useHead({ title: 'Lịch sử mua hàng - IrusGear' })
 

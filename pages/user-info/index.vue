@@ -1,4 +1,5 @@
 <template>
+  <ProfileLayout>
   <div class="user-info-page">
   <!-- Gender Update Alert -->
   <div class="user-info-alert">
@@ -152,12 +153,14 @@
     </div>
   </div>
   </div>
+</ProfileLayout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
-definePageMeta({ layout: 'profile', middleware: ['auth-guard'] })
+definePageMeta({ layout: 'default', middleware: ['auth-guard'] })
 
 useHead({ title: 'Thông tin tài khoản - IrusGear' })
 
