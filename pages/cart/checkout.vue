@@ -142,4 +142,16 @@ const handleConfirmOrder = async () => {
     display: none;
   }
 }
+
+@media (max-width: 575.98px) {
+  .checkout-page {
+    padding-bottom: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-page {
+    padding: 14px 0 130px;
+  }
+}
 </style>

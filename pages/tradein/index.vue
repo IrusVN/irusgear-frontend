@@ -213,9 +213,378 @@ const filteredTradeins = computed(() => {
   display: none;
 }
 
+/* ── Responsive: Tablet (iPad Mini 767px) ─── */
 @media (min-width: 992px) {
   .tradein-filter__label {
     display: block;
+  }
+}
+
+/* ── Responsive: Tablet (iPad Mini 767px) ─── */
+@media (max-width: 991.98px) {
+  .tradein-card {
+    border-radius: 14px;
+  }
+
+  .tradein-card__header {
+    padding: 12px 14px;
+  }
+
+  .tradein-card__id {
+    font-size: 13px;
+  }
+
+  .tradein-card__date {
+    font-size: 12px;
+  }
+
+  .tradein-card__status {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .tradein-card__device {
+    padding: 14px;
+  }
+
+  .tradein-card__device-img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .tradein-card__device-name {
+    font-size: 13px;
+  }
+
+  .tradein-card__device-capacity {
+    font-size: 11px;
+  }
+
+  .tradein-card__arrow {
+    padding: 4px 14px;
+  }
+
+  .tradein-card__footer {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .tradein-card__pricing {
+    padding: 10px;
+  }
+
+  .tradein-card__price-row {
+    font-size: 12px;
+  }
+
+  .tradein-card__price-value--total {
+    font-size: 14px;
+  }
+
+  .tradein-card__actions .btn {
+    font-size: 12px;
+  }
+
+  .tradein-empty {
+    padding: 32px 16px;
+    border-radius: 14px;
+  }
+
+  .tradein-empty__img {
+    width: 80px;
+  }
+
+  .tradein-empty__text {
+    font-size: 13px;
+  }
+}
+
+/* ── Responsive: Large Phone (iPhone Pro 575px) ─── */
+@media (max-width: 767.98px) {
+  .tradein-title {
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+
+  .tradein-title__text {
+    font-size: 15px;
+  }
+
+  .tradein-filter {
+    margin-bottom: 10px;
+  }
+
+  .tradein-filter__date-range {
+    max-width: 100%;
+    padding: 7px 12px;
+  }
+
+  .tradein-list {
+    gap: 10px;
+  }
+
+  .tradein-card {
+    border-radius: 12px;
+  }
+
+  .tradein-card__header {
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .tradein-card__meta {
+    width: 100%;
+  }
+
+  .tradein-card__id {
+    font-size: 13px;
+  }
+
+  .tradein-card__date {
+    font-size: 11px;
+  }
+
+  .tradein-card__status {
+    font-size: 11px;
+    padding: 3px 8px;
+    align-self: flex-start;
+  }
+
+  .tradein-card__device {
+    padding: 12px;
+  }
+
+  .tradein-card__device-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .tradein-card__device-name {
+    font-size: 13px;
+  }
+
+  .tradein-card__device-capacity {
+    font-size: 11px;
+  }
+
+  .tradein-card__arrow {
+    padding: 2px 12px;
+    font-size: 14px;
+  }
+
+  .tradein-card__footer {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .tradein-card__pricing {
+    padding: 10px;
+  }
+
+  .tradein-card__price-row {
+    font-size: 12px;
+  }
+
+  .tradein-card__price-label {
+    font-size: 12px;
+  }
+
+  .tradein-card__price-value {
+    font-size: 12px;
+  }
+
+  .tradein-card__price-value--total {
+    font-size: 14px;
+  }
+
+  .tradein-card__actions {
+    justify-content: stretch;
+  }
+
+  .tradein-card__actions .btn {
+    flex: 1;
+  }
+
+  .tradein-empty {
+    padding: 28px 16px;
+    border-radius: 12px;
+    gap: 12px;
+  }
+
+  .tradein-empty__img {
+    width: 72px;
+  }
+
+  .tradein-empty__text {
+    font-size: 13px;
+  }
+
+  .tradein-empty .btn {
+    font-size: 13px;
+  }
+}
+
+/* ── Responsive: Small Phone (iPhone SE 375px) ─── */
+@media (max-width: 575.98px) {
+  .tradein-title {
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+
+  .tradein-title__text {
+    font-size: 14px;
+  }
+
+  .tradein-filter {
+    margin-bottom: 10px;
+  }
+
+  .tradein-filter__date-range {
+    padding: 6px 10px;
+    min-height: 36px;
+    gap: 6px;
+  }
+
+  .tradein-filter__date-range > i {
+    font-size: 14px;
+  }
+
+  .tradein-filter__date-input {
+    font-size: 12px;
+  }
+
+  .tradein-filter__calendar-btn {
+    font-size: 14px;
+  }
+
+  .tradein-list {
+    gap: 10px;
+  }
+
+  .tradein-card__header {
+    padding: 10px 12px;
+  }
+
+  .tradein-card__id {
+    font-size: 12px;
+  }
+
+  .tradein-card__date {
+    font-size: 11px;
+  }
+
+  .tradein-card__status {
+    font-size: 11px;
+    padding: 2px 7px;
+  }
+
+  .tradein-card__device {
+    padding: 10px 12px;
+  }
+
+  .tradein-card__device-label {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .tradein-card__device-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .tradein-card__device-name {
+    font-size: 12px;
+  }
+
+  .tradein-card__device-capacity {
+    font-size: 11px;
+  }
+
+  .tradein-card__arrow {
+    padding: 2px 12px;
+    font-size: 14px;
+  }
+
+  .tradein-card__footer {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .tradein-card__pricing {
+    padding: 8px 10px;
+  }
+
+  .tradein-card__price-row {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .tradein-card__price-label {
+    font-size: 12px;
+  }
+
+  .tradein-card__price-value {
+    font-size: 12px;
+  }
+
+  .tradein-card__price-value--total {
+    font-size: 14px;
+  }
+
+  .tradein-card__actions .btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .tradein-empty {
+    padding: 24px 12px;
+    border-radius: 12px;
+  }
+
+  .tradein-empty__img {
+    width: 68px;
+  }
+
+  .tradein-empty__text {
+    font-size: 12px;
+  }
+}
+
+/* ── Responsive: iPhone SE Extra Small ─── */
+@media (max-width: 480px) {
+  .tradein-filter__date-range {
+    padding: 6px 8px;
+    gap: 5px;
+  }
+
+  .tradein-filter__date-input {
+    font-size: 11px;
+  }
+
+  .tradein-card__device {
+    padding: 10px;
+  }
+
+  .tradein-card__device-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tradein-card__device-name {
+    font-size: 12px;
+  }
+
+  .tradein-card__footer {
+    padding: 8px 10px;
+  }
+
+  .tradein-card__actions .btn {
+    padding: 5px 8px;
+    font-size: 12px;
   }
 }
 

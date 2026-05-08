@@ -475,4 +475,369 @@ const filteredOrders = computed(() => {
   gap: 8px;
   flex-wrap: wrap;
 }
+
+/* ── Responsive: Tablet (iPad Mini 767px) ─── */
+@media (max-width: 991.98px) {
+  .orders-tabs {
+    border-radius: 14px;
+  }
+
+  .orders-tabs__item {
+    min-width: 85px;
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  .orders-filter {
+    margin-bottom: 10px;
+  }
+
+  .orders-filter__date-range {
+    max-width: 320px;
+  }
+
+  .orders-card {
+    border-radius: 14px;
+  }
+
+  .orders-card__header {
+    padding: 12px 14px;
+  }
+
+  .orders-card__id {
+    font-size: 13px;
+  }
+
+  .orders-card__date {
+    font-size: 12px;
+  }
+
+  .orders-card__status {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .orders-card__items {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .orders-card__item-img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .orders-card__item-name {
+    font-size: 13px;
+  }
+
+  .orders-card__item-price-current {
+    font-size: 13px;
+  }
+
+  .orders-card__footer {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .orders-card__total-label {
+    font-size: 12px;
+  }
+
+  .orders-card__total-value {
+    font-size: 14px;
+  }
+
+  .orders-empty {
+    padding: 32px 16px;
+    border-radius: 14px;
+  }
+
+  .orders-empty__img {
+    width: 80px;
+  }
+
+  .orders-empty__text {
+    font-size: 13px;
+  }
+}
+
+/* ── Responsive: Large Phone (iPhone Pro 575px) ─── */
+@media (max-width: 767.98px) {
+  .orders-tabs {
+    border-radius: 14px;
+    margin-bottom: 10px;
+  }
+
+  .orders-tabs__item {
+    min-width: 78px;
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+
+  .orders-filter {
+    margin-bottom: 10px;
+  }
+
+  .orders-filter__date-range {
+    max-width: 100%;
+    padding: 7px 12px;
+  }
+
+  .orders-list {
+    gap: 10px;
+  }
+
+  .orders-card {
+    border-radius: 12px;
+  }
+
+  .orders-card__header {
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .orders-card__meta {
+    width: 100%;
+  }
+
+  .orders-card__id {
+    font-size: 13px;
+  }
+
+  .orders-card__date {
+    font-size: 11px;
+  }
+
+  .orders-card__status {
+    font-size: 11px;
+    padding: 3px 8px;
+    align-self: flex-start;
+  }
+
+  .orders-card__items {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .orders-card__item-img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .orders-card__item-name {
+    font-size: 13px;
+  }
+
+  .orders-card__item-qty {
+    font-size: 11px;
+  }
+
+  .orders-card__item-price-current {
+    font-size: 13px;
+  }
+
+  .orders-card__item-price-original {
+    font-size: 10px;
+  }
+
+  .orders-card__footer {
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .orders-card__total {
+    justify-content: space-between;
+  }
+
+  .orders-card__total-label {
+    font-size: 13px;
+  }
+
+  .orders-card__total-value {
+    font-size: 15px;
+  }
+
+  .orders-card__actions {
+    justify-content: flex-end;
+  }
+
+  .orders-card__actions .btn {
+    flex: 1;
+  }
+
+  .orders-empty {
+    padding: 28px 16px;
+    border-radius: 12px;
+    gap: 12px;
+  }
+
+  .orders-empty__img {
+    width: 72px;
+  }
+
+  .orders-empty__text {
+    font-size: 13px;
+  }
+
+  .orders-empty .btn {
+    font-size: 13px;
+  }
+}
+
+/* ── Responsive: Small Phone (iPhone SE 375px) ─── */
+@media (max-width: 575.98px) {
+  .orders-tabs {
+    border-radius: 12px;
+    padding: 3px;
+  }
+
+  .orders-tabs__item {
+    min-width: 70px;
+    padding: 6px 8px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  .orders-filter {
+    margin-bottom: 10px;
+  }
+
+  .orders-filter__date-range {
+    padding: 6px 10px;
+    min-height: 36px;
+    gap: 6px;
+  }
+
+  .orders-filter__date-range > i {
+    font-size: 14px;
+  }
+
+  .orders-filter__date-input {
+    font-size: 12px;
+  }
+
+  .orders-list {
+    gap: 10px;
+  }
+
+  .orders-card__header {
+    padding: 10px 12px;
+  }
+
+  .orders-card__id {
+    font-size: 12px;
+  }
+
+  .orders-card__status {
+    font-size: 11px;
+    padding: 2px 7px;
+  }
+
+  .orders-card__items {
+    padding: 8px 12px;
+  }
+
+  .orders-card__item {
+    gap: 10px;
+  }
+
+  .orders-card__item-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+  }
+
+  .orders-card__item-name {
+    font-size: 12px;
+  }
+
+  .orders-card__item-price-current {
+    font-size: 12px;
+  }
+
+  .orders-card__footer {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .orders-card__total-label {
+    font-size: 12px;
+  }
+
+  .orders-card__total-value {
+    font-size: 14px;
+  }
+
+  .orders-card__actions .btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .orders-empty {
+    padding: 24px 12px;
+    border-radius: 12px;
+  }
+
+  .orders-empty__img {
+    width: 68px;
+  }
+
+  .orders-empty__text {
+    font-size: 12px;
+  }
+}
+
+/* ── Responsive: iPhone SE Extra Small ─── */
+@media (max-width: 480px) {
+  .orders-tabs__item {
+    min-width: 64px;
+    padding: 5px 7px;
+    font-size: 11px;
+    border-radius: 10px;
+  }
+
+  .orders-filter__date-range {
+    padding: 6px 8px;
+    gap: 5px;
+  }
+
+  .orders-filter__date-input {
+    font-size: 11px;
+  }
+
+  .orders-card__header {
+    padding: 10px;
+  }
+
+  .orders-card__items {
+    padding: 8px 10px;
+  }
+
+  .orders-card__item-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .orders-card__item-name {
+    font-size: 12px;
+  }
+
+  .orders-card__footer {
+    padding: 8px 10px;
+  }
+
+  .orders-card__actions .btn {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .orders-card__total-value {
+    font-size: 13px;
+  }
+}
 </style>

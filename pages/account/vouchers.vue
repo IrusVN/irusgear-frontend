@@ -329,6 +329,117 @@ onMounted(fetchHistory);
   font-size: 11px;
 }
 
+@media (max-width: 991.98px) {
+  .voucher-history-page {
+    padding: 20px 0 60px;
+  }
+
+  .voucher-history-page__header {
+    margin-bottom: 20px;
+  }
+
+  .voucher-history-page__title {
+    font-size: 22px;
+    gap: 8px;
+  }
+
+  .voucher-history-page__title i {
+    font-size: 20px;
+  }
+
+  .voucher-history-page__total {
+    font-size: 14px;
+  }
+
+  .voucher-history-page__total strong {
+    font-size: 16px;
+  }
+
+  .voucher-history-page__list {
+    gap: 10px;
+  }
+
+  .voucher-history-card {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .voucher-history-card__icon {
+    font-size: 24px;
+  }
+
+  .voucher-history-card__code {
+    font-size: 14px;
+  }
+
+  .voucher-history-card__desc {
+    font-size: 12px;
+  }
+
+  .voucher-history-card__savings-amount {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .voucher-history-page {
+    padding: 16px 0 60px;
+  }
+
+  .voucher-history-page__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .voucher-history-page__title {
+    font-size: 20px;
+  }
+
+  .voucher-history-page__total {
+    font-size: 14px;
+  }
+
+  .voucher-history-page__total strong {
+    font-size: 15px;
+  }
+
+  .voucher-history-page__list {
+    gap: 10px;
+  }
+
+  .voucher-history-card {
+    padding: 12px 14px;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .voucher-history-card__icon {
+    font-size: 22px;
+  }
+
+  .voucher-history-card__code {
+    font-size: 13px;
+  }
+
+  .voucher-history-card__desc {
+    font-size: 12px;
+  }
+
+  .voucher-history-card__meta {
+    font-size: 11px;
+  }
+
+  .voucher-history-card__savings-amount {
+    font-size: 14px;
+  }
+
+  .voucher-history-page__empty {
+    padding: 48px 0;
+  }
+}
+
 @media (max-width: 575.98px) {
   .voucher-history-card {
     flex-wrap: wrap;

@@ -392,6 +392,81 @@ const profile = ref({
 }
 
 /* ── Responsive ─────────────────────────── */
+@media (max-width: 575.98px) {
+  .user-info-alert {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .user-info-alert__text {
+    font-size: 13px;
+  }
+
+  .user-info-alert__btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .user-info-card__header {
+    padding: 12px 14px;
+  }
+
+  .user-info-card__title {
+    font-size: 14px;
+  }
+
+  .user-info-card__edit-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .user-info-card__edit-btn span {
+    display: none;
+  }
+
+  .user-info-card__row {
+    padding: 10px 14px;
+    gap: 12px;
+  }
+
+  .user-info-card__label,
+  .user-info-card__value {
+    font-size: 13px;
+  }
+
+  .user-info-linked__item {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .user-info-linked__brand-name {
+    font-size: 13px;
+  }
+
+  .user-info-linked__action {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .user-info-linked__action span {
+    display: none;
+  }
+
+  .user-info-address-empty {
+    padding: 24px 14px;
+  }
+
+  .user-info-address-empty__img {
+    width: 72px;
+  }
+
+  .user-info-address-empty__text {
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 767.98px) {
   .user-info-alert {
     padding: 12px;
@@ -479,6 +554,25 @@ const profile = ref({
 
   .user-info-linked__item {
     padding: 16px 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .user-info-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .user-info-card__header {
+    padding: 18px 22px;
+  }
+
+  .user-info-card__row {
+    padding: 16px 22px;
+  }
+
+  .user-info-linked__item {
+    padding: 16px 22px;
   }
 }
 

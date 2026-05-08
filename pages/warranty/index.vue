@@ -611,4 +611,371 @@ const filteredWarranties = computed(() => {
   gap: 8px;
   flex-wrap: wrap;
 }
+
+/* ── Responsive: Tablet (iPad Mini 767px) ─── */
+@media (max-width: 991.98px) {
+  .warranty-card {
+    border-radius: 14px;
+  }
+
+  .warranty-card__header {
+    padding: 12px 14px;
+  }
+
+  .warranty-card__body {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .warranty-card__product-img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .warranty-card__product-name {
+    font-size: 13px;
+  }
+
+  .warranty-card__details {
+    padding: 10px;
+  }
+
+  .warranty-card__detail-row .warranty-card__label {
+    min-width: 120px;
+    font-size: 12px;
+  }
+
+  .warranty-card__detail-row {
+    font-size: 12px;
+  }
+
+  .warranty-card__footer {
+    padding: 10px 14px;
+  }
+}
+
+/* ── Responsive: Large Phone (iPhone Pro 575px) ─── */
+@media (max-width: 767.98px) {
+  .warranty-card {
+    border-radius: 12px;
+  }
+
+  .warranty-card__header {
+    padding: 12px;
+  }
+
+  .warranty-card__id {
+    font-size: 13px;
+  }
+
+  .warranty-card__date {
+    font-size: 12px;
+  }
+
+  .warranty-card__status {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .warranty-card__body {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .warranty-card__product {
+    gap: 10px;
+  }
+
+  .warranty-card__product-img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .warranty-card__product-name {
+    font-size: 13px;
+  }
+
+  .warranty-card__product-serial,
+  .warranty-card__product-imei {
+    font-size: 11px;
+  }
+
+  .warranty-card__details {
+    padding: 10px;
+  }
+
+  .warranty-card__detail-row .warranty-card__label {
+    min-width: 110px;
+    font-size: 12px;
+  }
+
+  .warranty-card__detail-row {
+    font-size: 12px;
+  }
+
+  .warranty-card__detail-row .warranty-card__value {
+    font-size: 12px;
+  }
+
+  .warranty-card__footer {
+    padding: 10px 12px;
+    justify-content: center;
+  }
+
+  .warranty-card__footer .btn {
+    flex: 1;
+  }
+
+  .warranty-empty {
+    padding: 32px 16px;
+    border-radius: 14px;
+  }
+
+  .warranty-empty__img {
+    width: 76px;
+  }
+
+  .warranty-empty__text {
+    font-size: 13px;
+  }
+}
+
+/* ── Responsive: Small Phone (iPhone SE 375px) ─── */
+@media (max-width: 575.98px) {
+  .warranty-tabs {
+    border-radius: 14px;
+    margin-bottom: 10px;
+  }
+
+  .warranty-tabs__item {
+    min-width: 80px;
+    padding: 7px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+
+  .warranty-search {
+    margin-bottom: 10px;
+  }
+
+  .warranty-search__input-wrap {
+    padding: 7px 12px;
+    border-radius: 8px;
+  }
+
+  .warranty-search__btn {
+    padding: 7px 12px;
+    border-radius: 8px;
+  }
+
+  .warranty-list {
+    gap: 10px;
+  }
+
+  .warranty-card__header {
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .warranty-card__meta {
+    width: 100%;
+  }
+
+  .warranty-card__id {
+    font-size: 13px;
+  }
+
+  .warranty-card__date {
+    font-size: 11px;
+  }
+
+  .warranty-card__body {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .warranty-card__product {
+    gap: 8px;
+  }
+
+  .warranty-card__product-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+  }
+
+  .warranty-card__product-name {
+    font-size: 12px;
+    -webkit-line-clamp: 2;
+  }
+
+  .warranty-card__product-serial,
+  .warranty-card__product-imei {
+    font-size: 11px;
+  }
+
+  .warranty-card__details {
+    padding: 8px 10px;
+    gap: 4px;
+  }
+
+  .warranty-card__detail-row {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .warranty-card__detail-row .warranty-card__label {
+    min-width: 100px;
+    font-size: 12px;
+  }
+
+  .warranty-card__detail-row .warranty-card__value {
+    font-size: 12px;
+  }
+
+  .warranty-card__footer {
+    padding: 8px 12px;
+    justify-content: center;
+  }
+
+  .warranty-card__footer .btn {
+    flex: 1;
+    font-size: 12px;
+  }
+
+  .warranty-empty {
+    padding: 28px 16px;
+    border-radius: 12px;
+    gap: 12px;
+  }
+
+  .warranty-empty__img {
+    width: 72px;
+  }
+
+  .warranty-empty__text {
+    font-size: 13px;
+  }
+
+  .warranty-empty .btn {
+    font-size: 13px;
+  }
+
+  .warranty-timeline__step {
+    gap: 10px;
+    padding-bottom: 14px;
+  }
+
+  .warranty-timeline__dot {
+    width: 22px;
+    height: 22px;
+  }
+
+  .warranty-timeline__title {
+    font-size: 12px;
+  }
+
+  .warranty-timeline__time {
+    font-size: 11px;
+  }
+}
+
+/* ── Responsive: iPhone SE Extra Small ─── */
+@media (max-width: 480px) {
+  .warranty-tabs {
+    border-radius: 12px;
+    padding: 3px;
+  }
+
+  .warranty-tabs__item {
+    min-width: 72px;
+    padding: 6px 8px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  .warranty-search__input-wrap {
+    padding: 6px 10px;
+    border-radius: 8px;
+    min-height: 36px;
+    gap: 8px;
+  }
+
+  .warranty-search__input {
+    font-size: 13px;
+  }
+
+  .warranty-search__btn {
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .warranty-card__header {
+    padding: 10px;
+  }
+
+  .warranty-card__id {
+    font-size: 12px;
+  }
+
+  .warranty-card__status {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .warranty-card__body {
+    padding: 10px;
+  }
+
+  .warranty-card__product-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .warranty-card__product-name {
+    font-size: 12px;
+  }
+
+  .warranty-card__details {
+    padding: 8px;
+  }
+
+  .warranty-card__detail-row .warranty-card__label {
+    min-width: 90px;
+    font-size: 11px;
+  }
+
+  .warranty-card__detail-row {
+    font-size: 11px;
+  }
+
+  .warranty-card__detail-row .warranty-card__value {
+    font-size: 11px;
+  }
+
+  .warranty-card__footer {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .warranty-card__footer .btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .warranty-empty {
+    padding: 24px 12px;
+    border-radius: 12px;
+  }
+
+  .warranty-empty__img {
+    width: 68px;
+  }
+
+  .warranty-empty__text {
+    font-size: 12px;
+  }
+}
 </style>

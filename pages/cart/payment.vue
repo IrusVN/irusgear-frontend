@@ -572,4 +572,216 @@ onUnmounted(() => {
     width: 100%;
   }
 }
+
+@media (max-width: 767.98px) {
+  .payment-page__section {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .payment-page__title {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .payment-page__summary {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .payment-page__summary-eyebrow {
+    font-size: 11px;
+  }
+
+  .payment-page__summary-items {
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .payment-page__summary-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .payment-page__summary-name {
+    font-size: 12px;
+  }
+
+  .payment-page__summary-meta {
+    font-size: 11px;
+  }
+
+  .payment-page__summary-price {
+    font-size: 13px;
+  }
+
+  .payment-page__summary-row {
+    font-size: 13px;
+  }
+
+  .payment-page__summary-total {
+    font-size: 15px;
+  }
+
+  .payment-page__summary-total-value {
+    font-size: 18px !important;
+  }
+
+  .payment-page__sticky-bar {
+    padding: 12px 0;
+  }
+
+  .payment-page__submit-btn {
+    border-radius: 10px;
+    font-size: 15px;
+    min-height: 48px;
+    padding: 10px 20px;
+  }
+
+  .payment-page__no-order {
+    border-radius: 14px;
+    padding: 48px 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .payment-page {
+    padding-bottom: 100px;
+  }
+
+  .payment-page__section {
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .payment-page__title {
+    font-size: 15px;
+    gap: 8px;
+  }
+
+  .payment-page__title i {
+    font-size: 16px;
+  }
+
+  .payment-page__summary {
+    border-radius: 12px;
+    padding: 14px;
+    position: static;
+  }
+
+  .payment-page__summary-eyebrow {
+    font-size: 11px;
+  }
+
+  .payment-page__summary-items {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .payment-page__summary-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+  }
+
+  .payment-page__summary-name {
+    font-size: 12px;
+  }
+
+  .payment-page__summary-price {
+    font-size: 12px;
+  }
+
+  .payment-page__summary-divider {
+    margin: 10px 0;
+  }
+
+  .payment-page__summary-pricing {
+    gap: 6px;
+  }
+
+  .payment-page__summary-row {
+    font-size: 12px;
+  }
+
+  .payment-page__summary-total {
+    font-size: 14px;
+    padding-top: 8px;
+  }
+
+  .payment-page__summary-total-value {
+    font-size: 16px !important;
+  }
+
+  .payment-page__sticky-bar {
+    padding: 10px 0;
+  }
+
+  .payment-page__submit-btn {
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    gap: 6px;
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  .payment-page__submit-btn span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .payment-page__submit-btn i {
+    font-size: 14px;
+  }
+
+  .btn-back {
+    border-radius: 8px;
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .payment-page__no-order {
+    border-radius: 12px;
+    padding: 40px 14px;
+    font-size: 14px;
+  }
+
+  .payment-page__no-order i {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-page__section {
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .payment-page__title {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .payment-page__summary {
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .payment-page__summary-total-value {
+    font-size: 15px !important;
+  }
+
+  .payment-page__sticky-bar {
+    padding: 8px 0;
+  }
+
+  .payment-page__submit-btn {
+    border-radius: 8px;
+    font-size: 14px;
+    min-height: 42px;
+    padding: 8px 14px;
+  }
+}
 </style>
