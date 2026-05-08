@@ -41,6 +41,7 @@ export default {
         comboSelect: "Chọn combo",
         profile: "Tài khoản",
         orders: "Đơn hàng",
+        wishlist: "Yêu thích",
     },
     role: {
         default: "Mặc định",
@@ -53,6 +54,7 @@ export default {
     },
     sidebar: {
         brandName: "IrusGear",
+        search: "Tìm kiếm",
         searchPlaceholder: "Tìm kiếm...",
         sections: {
             main: "Chính",

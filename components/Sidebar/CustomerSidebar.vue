@@ -217,7 +217,7 @@
 
         <button type="button" class="mobile-nav-item" :aria-label="$t('sidebar.searchPlaceholder')">
           <i class="bi bi-search"></i>
-          <span>{{ $t('sidebar.search') || 'Tìm kiếm' }}</span>
+          <span>{{ $t('sidebar.search') }}</span>
         </button>
 
         <NuxtLink
@@ -844,8 +844,8 @@ const featuredNavItems = computed(() => [
   display: none;
   position: fixed;
   bottom: 16px;
-  left: 12px;
-  right: 12px;
+  left: 20px;
+  right: 6px;
   z-index: 1050;
   display: flex;
   align-items: center;

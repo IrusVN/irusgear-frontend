@@ -41,6 +41,7 @@ export default {
         comboSelect: "Select Combo",
         profile: "Account",
         orders: "Orders",
+        wishlist: "Wishlist",
     },
     role: {
         default: "DEFAULT",
@@ -53,6 +54,7 @@ export default {
     },
     sidebar: {
         brandName: "IrusGear",
+        search: "Search",
         searchPlaceholder: "Search for anything...",
         sections: {
             main: "Main",

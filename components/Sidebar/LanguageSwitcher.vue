@@ -59,8 +59,8 @@ const switchToLocale = async (targetLocale) => {
   const currentPath = window.location.pathname
   const pathWithoutLocale = currentPath.replace(/^\/(vi|en)/, '') || '/'
   const targetPath = targetLocale === 'en'
-    ? pathWithoutLocale
-    : `/${targetLocale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
+    ? `/en${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
+    : pathWithoutLocale
   await navigateTo(targetPath)
 }
 </script>
