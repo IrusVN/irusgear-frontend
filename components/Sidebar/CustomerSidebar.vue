@@ -301,7 +301,7 @@
           :aria-expanded="isMobileFabOpen ? 'true' : 'false'"
           @click="isMobileFabOpen = !isMobileFabOpen"
         >
-          <span class="mobile-fab-icon"></span>
+          <i class="bi" :class="isMobileFabOpen ? 'bi-x' : 'bi-plus'"></i>
         </button>
       </div>
     </div>
@@ -869,10 +869,11 @@ const featuredNavItems = computed(() => [
 .mobile-capsule-nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex: 1;
   overflow: hidden;
   max-width: calc(100% - 84px);
-  padding: 6px 8px;
+  padding: 6px 12px;
   background: rgba(255, 255, 255, 0.985);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -901,7 +902,6 @@ const featuredNavItems = computed(() => [
   -webkit-tap-highlight-color: transparent;
   flex: 1;
   min-width: 0;
-  max-width: 80px;
 }
 
 .mobile-nav-item:active {
@@ -976,7 +976,7 @@ const featuredNavItems = computed(() => [
   }
 
   .mobile-capsule-nav {
-    padding: 6px;
+    padding: 6px 8px;
   }
 }
 
@@ -1131,6 +1131,9 @@ const featuredNavItems = computed(() => [
 
 .mobile-fab-btn {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 65px;
   height: 65px;
   border-radius: 50%;
@@ -1149,32 +1152,11 @@ const featuredNavItems = computed(() => [
   box-shadow: 4px 4px 10px rgba(15, 23, 42, 0.08), -2px -2px 6px rgba(255, 255, 255, 0.9), inset 0 1px 1px rgba(255, 255, 255, 1);
 }
 
-.mobile-fab-icon {
-  position: relative;
-  width: 100%;
-  max-width: calc(100% - 84px);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mobile-fab-icon::before {
-  content: '+';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(48%, -50%);
-  font-size: 40px;
-  font-weight: 300;
+.mobile-fab-btn i {
+  font-size: 32px;
   line-height: 1;
   color: #16181d;
   transition: all 0.22s ease;
-}
-
-.mobile-fab-btn.is-open .mobile-fab-icon::before {
-  content: '\00D7';
-  font-size: 44px;
 }
 
 /* Animation capsule mở lên trên */
