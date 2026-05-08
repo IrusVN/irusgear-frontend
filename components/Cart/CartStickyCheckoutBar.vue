@@ -114,6 +114,7 @@ defineProps({
 @media (max-width: 991.98px) {
   .cart-sticky-checkout {
     display: flex;
+    bottom: 88px; /* Đẩy lên trên mobile bottom nav (88px) */
   }
 }
 </style>

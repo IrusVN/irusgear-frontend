@@ -286,4 +286,19 @@ const productLink = computed(() => {
     align-items: flex-start;
   }
 }
+
+@media (max-width: 480px) {
+  .prod-name {
+    font-size: 12px;
+    -webkit-line-clamp: 2;
+  }
+
+  .price-new {
+    font-size: 13px;
+  }
+
+  .bottom-row {
+    align-items: flex-start;
+  }
+}
 </style>

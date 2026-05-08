@@ -1,4 +1,5 @@
 <template>
+  <div class="user-info-page">
   <!-- Gender Update Alert -->
   <div class="user-info-alert">
     <div class="user-info-alert__icon">
@@ -149,6 +150,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -588,6 +590,31 @@ const profile = ref({
 
   .user-info-linked__item {
     padding: 18px 24px;
+  }
+}
+
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .user-info-page {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .user-info-page {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .user-info-page {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-info-page {
+    padding-bottom: 80px;
   }
 }
 </style>

@@ -565,11 +565,17 @@ onUnmounted(() => {
 
 @media (max-width: 991.98px) {
   .payment-page {
-    padding-bottom: 120px;
+    padding-bottom: 170px;
   }
 
   .payment-page__summary-col {
     width: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .payment-page {
+    padding-bottom: 160px;
   }
 }
 
@@ -628,6 +634,7 @@ onUnmounted(() => {
   }
 
   .payment-page__sticky-bar {
+    bottom: 88px;
     padding: 12px 0;
   }
 

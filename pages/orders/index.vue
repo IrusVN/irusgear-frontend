@@ -1,4 +1,5 @@
 <template>
+  <div class="orders-page">
   <!-- Tab Bar -->
   <div class="orders-tabs">
     <div
@@ -92,6 +93,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -838,6 +840,31 @@ const filteredOrders = computed(() => {
 
   .orders-card__total-value {
     font-size: 13px;
+  }
+}
+
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .orders-page {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .orders-page {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .orders-page {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .orders-page {
+    padding-bottom: 80px;
   }
 }
 </style>

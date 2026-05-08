@@ -17,13 +17,18 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL ?? 'http://localhost:8000/api/v1',
     },
   },
-  css: [ 'bootstrap/dist/css/bootstrap.min.css', '@/public/assets/css/toast.css' ],
+  css: [
+    'bootstrap/dist/css/bootstrap.min.css',
+    '@/public/assets/css/toast.css',
+    '@/public/assets/css/responsive.css',
+  ],
   app: {
     head: {
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon-light.svg', media: '(prefers-color-scheme: dark)' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon-dark.svg', media: '(prefers-color-scheme: light)' },
         { rel: "stylesheet", href: "/assets/css/custom.css" },
+        { rel: "stylesheet", href: "/assets/css/responsive.css" },
         // { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', },
         { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css' },
       ],

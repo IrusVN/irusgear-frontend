@@ -844,20 +844,35 @@ const featuredNavItems = computed(() => [
   display: none;
   position: fixed;
   bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 12px;
+  right: 12px;
   z-index: 1050;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767.98px) {
+  .mobile-bottom-nav {
+    display: flex !important;
+  }
+
+  body {
+    padding-bottom: 88px !important;
+  }
 }
 
 /* Capsule nav chứa 4 icon items */
 .mobile-capsule-nav {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
+  flex: 1;
+  overflow: hidden;
+  max-width: calc(100% - 84px);
+  padding: 6px 8px;
   background: rgba(255, 255, 255, 0.985);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -874,8 +889,8 @@ const featuredNavItems = computed(() => [
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  padding: 8px 10px;
+  gap: 2px;
+  padding: 6px 4px;
   border-radius: 36px;
   background: transparent;
   color: #8e8e93;
@@ -884,8 +899,9 @@ const featuredNavItems = computed(() => [
   transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
   border: none;
   -webkit-tap-highlight-color: transparent;
-  min-width: 52px;
   flex: 1;
+  min-width: 0;
+  max-width: 80px;
 }
 
 .mobile-nav-item:active {
@@ -893,15 +909,19 @@ const featuredNavItems = computed(() => [
 }
 
 .mobile-nav-item i {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
   transition: color 0.28s ease;
+  flex-shrink: 0;
 }
 
 .mobile-nav-item span {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
   transition: color 0.28s ease;
 }
 
@@ -924,28 +944,40 @@ const featuredNavItems = computed(() => [
 }
 
 .mobile-nav-avatar {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   object-fit: cover;
   border: 1.5px solid rgba(15, 23, 42, 0.15);
+  flex-shrink: 0;
 }
 
 .mobile-nav-badge {
   position: absolute;
-  top: 4px;
-  right: 6px;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 4px;
+  top: 2px;
+  right: 4px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
   background: #ff3b30;
   color: #fff;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
-  line-height: 16px;
+  line-height: 14px;
   text-align: center;
   border-radius: 10px;
   border: 1.5px solid #ffffff;
+}
+
+/* Ẩn text label trên màn hình cực nhỏ */
+@media (max-width: 360px) {
+  .mobile-nav-item span {
+    display: none;
+  }
+
+  .mobile-capsule-nav {
+    padding: 6px;
+  }
 }
 
 /* Nút Cart nổi bên ngoài capsule */
@@ -1120,6 +1152,7 @@ const featuredNavItems = computed(() => [
 .mobile-fab-icon {
   position: relative;
   width: 100%;
+  max-width: calc(100% - 84px);
   height: 100%;
   display: flex;
   align-items: center;
@@ -1128,18 +1161,20 @@ const featuredNavItems = computed(() => [
 
 .mobile-fab-icon::before {
   content: '+';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(48%, -50%);
   font-size: 40px;
   font-weight: 300;
   line-height: 1;
   color: #16181d;
   transition: all 0.22s ease;
-  margin-top: -5px;
 }
 
 .mobile-fab-btn.is-open .mobile-fab-icon::before {
   content: '\00D7';
   font-size: 44px;
-  margin-top: -9px;
 }
 
 /* Animation capsule mở lên trên */
@@ -1159,10 +1194,6 @@ const featuredNavItems = computed(() => [
   /* Ẩn top header trên mobile */
   .customer-sidebar-wrap {
     display: none !important;
-  }
-
-  .mobile-bottom-nav {
-    display: flex !important;
   }
 
   body {

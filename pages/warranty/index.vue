@@ -1,6 +1,7 @@
 <template>
-  <!-- Search Bar -->
-  <div class="warranty-search">
+  <div class="warranty-page">
+    <!-- Search Bar -->
+    <div class="warranty-search">
     <div class="warranty-search__input-wrap">
       <i class="bi bi-search"></i>
       <input
@@ -17,6 +18,7 @@
       <i class="bi bi-sliders"></i>
     </button>
   </div>
+</div>
 
   <!-- Tab Bar -->
   <div class="warranty-tabs">
@@ -976,6 +978,31 @@ const filteredWarranties = computed(() => {
 
   .warranty-empty__text {
     font-size: 12px;
+  }
+}
+
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .warranty-page {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .warranty-page {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .warranty-page {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .warranty-page {
+    padding-bottom: 80px;
   }
 }
 </style>

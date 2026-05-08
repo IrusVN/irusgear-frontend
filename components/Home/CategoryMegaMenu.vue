@@ -316,4 +316,22 @@ onMounted(() => {
     column-gap: 20px;
   }
 }
+
+@media (max-width: 991.98px) {
+  .mega-menu-panel {
+    width: min(720px, calc(100vw - 40px)) !important;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .mega-menu-columns {
+    column-gap: 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .mega-menu-panel {
+    width: calc(100vw - 32px) !important;
+  }
+}
 </style>

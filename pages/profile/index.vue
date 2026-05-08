@@ -1,4 +1,5 @@
 <template>
+  <div class="profile-page">
   <!-- Notice Banner: S-Business -->
   <div v-if="false" class="profile-notice">
     <div class="profile-notice__icon">
@@ -140,6 +141,7 @@
         </a>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -556,6 +558,31 @@ useHead({
 @media (min-width: 1200px) {
   .profile-banner-item img {
     height: 160px;
+  }
+}
+
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .profile-page {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .profile-page {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .profile-page {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-page {
+    padding-bottom: 80px;
   }
 }
 </style>

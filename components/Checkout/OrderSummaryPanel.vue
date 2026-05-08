@@ -123,6 +123,57 @@
       </span>
     </button>
   </aside>
+
+  <!-- Mobile sticky order summary bar -->
+  <div class="order-summary-mobile">
+    <div class="order-summary-mobile__toggle" @click="mobileExpanded = !mobileExpanded">
+      <div class="order-summary-mobile__preview">
+        <span>{{ $t("checkout.orderSummary") }}</span>
+        <strong class="text-danger">{{ checkoutStore.finalTotal?.formatted || "0đ" }}</strong>
+      </div>
+      <i :class="mobileExpanded ? 'bi bi-chevron-down' : 'bi bi-chevron-up'"></i>
+    </div>
+
+    <div v-if="mobileExpanded" class="order-summary-mobile__body">
+      <dl class="order-summary-mobile__pricing">
+        <div class="order-summary-mobile__row">
+          <dt>{{ $t("checkout.subtotal") }}</dt>
+          <dd>{{ checkoutStore.subtotal?.formatted || "0đ" }}</dd>
+        </div>
+        <div v-if="checkoutStore.savings?.value > 0" class="order-summary-mobile__row">
+          <dt>{{ $t("checkout.discount") }}</dt>
+          <dd class="text-success">-{{ checkoutStore.savings?.formatted || "0đ" }}</dd>
+        </div>
+        <div v-if="checkoutStore.selectedVoucherCodes.length > 0" class="order-summary-mobile__row">
+          <dt>{{ $t("checkout.voucher") }}</dt>
+          <dd class="text-success">-{{ checkoutStore.voucherDiscount?.formatted || "0đ" }}</dd>
+        </div>
+        <div class="order-summary-mobile__row">
+          <dt>{{ $t("checkout.deliveryFee") }}</dt>
+          <dd>{{ checkoutStore.finalDeliveryFee > 0 ? formatMoneyValue(checkoutStore.finalDeliveryFee) : $t("checkout.free") }}</dd>
+        </div>
+        <div class="order-summary-mobile__total">
+          <strong>{{ $t("checkout.total") }}</strong>
+          <strong class="text-danger">{{ checkoutStore.finalTotal?.formatted || "0đ" }}</strong>
+        </div>
+      </dl>
+      <button
+        type="button"
+        class="order-summary-mobile__cta"
+        :disabled="!checkoutStore.canSubmit || checkoutStore.isSubmitting"
+        @click="$emit('submit')"
+      >
+        <span v-if="checkoutStore.isSubmitting">
+          <i class="bi bi-arrow-repeat spin"></i>
+          {{ $t("checkout.processing") }}
+        </span>
+        <span v-else>
+          <i class="bi bi-credit-card-2-front"></i>
+          {{ $t("checkout.placeOrder") }}
+        </span>
+      </button>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -136,6 +187,7 @@ const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
 
 const expanded = ref(false);
+const mobileExpanded = ref(false);
 const progressExtraOffset = ref(0);
 
 const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
@@ -389,5 +441,102 @@ onBeforeUnmount(() => {
   .checkout-summary {
     display: none;
   }
+}
+
+/* ── Mobile Sticky Order Summary ─────────── */
+.order-summary-mobile {
+  display: none;
+  position: fixed;
+  bottom: 88px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #ececf1;
+  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+  z-index: 110;
+}
+
+@media (max-width: 991.98px) {
+  .order-summary-mobile {
+    display: block;
+  }
+}
+
+.order-summary-mobile__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.order-summary-mobile__preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #18181b;
+}
+
+.order-summary-mobile__body {
+  padding: 12px 16px 16px;
+  border-top: 1px solid #ececf1;
+}
+
+.order-summary-mobile__pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.order-summary-mobile__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #71717a;
+}
+
+.order-summary-mobile__row dd {
+  color: #18181b;
+  font-weight: 600;
+  margin: 0;
+}
+
+.order-summary-mobile__total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  border-top: 1px solid #ececf1;
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+.order-summary-mobile__cta {
+  width: 100%;
+  background: #d70018;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 48px;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.order-summary-mobile__cta:hover:not(:disabled) {
+  background: #b80015;
+}
+
+.order-summary-mobile__cta:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

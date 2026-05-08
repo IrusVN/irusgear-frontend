@@ -238,5 +238,22 @@ onUnmounted(() => {
     min-width: calc(100vw - 28px);
     max-width: calc(100vw - 28px);
   }
+
+  .delivery-swiper {
+    padding: 10px 14px;
+  }
+
+  .delivery-options__header {
+    padding: 14px 16px 12px;
+  }
+
+  .delivery-options__title {
+    font-size: 15px;
+  }
+
+  .delivery-options__empty,
+  .delivery-options__loading {
+    padding: 12px 16px;
+  }
 }
 </style>

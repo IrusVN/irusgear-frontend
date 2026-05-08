@@ -53,6 +53,25 @@ onMounted(() => {
 @media (max-width: 991.98px) {
     .main-with-customer-sidebar {
         padding-top: 6.5rem;
+        padding-bottom: 110px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .main-with-customer-sidebar {
+        padding-bottom: 100px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .main-with-customer-sidebar {
+        padding-bottom: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-with-customer-sidebar {
+        padding-bottom: 80px;
     }
 }
 

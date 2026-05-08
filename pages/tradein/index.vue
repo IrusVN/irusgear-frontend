@@ -1,4 +1,5 @@
 <template>
+  <div class="tradein-page">
   <!-- Title (mobile only) -->
   <div class="tradein-title d-md-none">
     <h1 class="tradein-title__text">Lịch sử thu cũ</h1>
@@ -114,6 +115,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -859,5 +861,30 @@ const filteredTradeins = computed(() => {
   gap: 8px;
   justify-content: flex-end;
   flex-wrap: wrap;
+}
+
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .tradein-page {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .tradein-page {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .tradein-page {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tradein-page {
+    padding-bottom: 80px;
+  }
 }
 </style>

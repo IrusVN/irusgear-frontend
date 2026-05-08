@@ -96,6 +96,7 @@ const formatMoneyValue = (value) => {
 @media (max-width: 991.98px) {
   .checkout-sticky-bar {
     display: block;
+    bottom: 88px; /* Đẩy lên trên mobile bottom nav (88px) */
   }
 }
 

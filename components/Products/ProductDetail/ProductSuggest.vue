@@ -752,4 +752,29 @@ onBeforeUnmount(() => {
     font-size: 14px;
   }
 }
+
+@media (max-width: 575.98px) {
+  .item-action .btn {
+    min-height: 36px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .upsell-item-wrapper,
+  .item-wrapper {
+    padding: 8px 10px;
+  }
+
+  .upsell-item-image,
+  .item-image {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .product__price--show {
+    font-size: 13px;
+  }
+}
 </style>

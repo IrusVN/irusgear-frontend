@@ -342,4 +342,22 @@ onBeforeUnmount(() => {
     font-size: 12px;
   }
 }
+
+@media (max-width: 480px) {
+  .checkout-progress__label {
+    font-size: 10px !important;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .checkout-progress__marker {
+    height: 24px !important;
+    width: 24px !important;
+    font-size: 10px !important;
+  }
+
+  .checkout-progress__connector {
+    height: 2px;
+  }
+}
 </style>

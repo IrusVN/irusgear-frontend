@@ -1401,6 +1401,13 @@ onBeforeUnmount(() => {
   transform: translateY(-8px);
 }
 
+@media screen and (max-width: 991.98px) {
+  .sticky-filter-bar {
+    top: 0;
+    z-index: 120;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .block-top-sliding-banner {
     flex-direction: column;

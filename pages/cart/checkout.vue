@@ -135,7 +135,7 @@ const handleConfirmOrder = async () => {
 
 @media (max-width: 991.98px) {
   .checkout-page {
-    padding-bottom: 160px;
+    padding-bottom: 170px;
   }
 
   .checkout-page__summary-col {
@@ -143,9 +143,15 @@ const handleConfirmOrder = async () => {
   }
 }
 
+@media (max-width: 767.98px) {
+  .checkout-page {
+    padding-bottom: 160px;
+  }
+}
+
 @media (max-width: 575.98px) {
   .checkout-page {
-    padding-bottom: 140px;
+    padding-bottom: 145px;
   }
 }
 

@@ -996,4 +996,29 @@ const sidebarItems = [
     font-size: 22px;
   }
 }
+
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .tos-layout {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .tos-layout {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .tos-layout {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tos-layout {
+    padding-bottom: 80px;
+  }
+}
 </style>

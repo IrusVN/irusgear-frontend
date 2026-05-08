@@ -192,4 +192,29 @@ useHead({
     font-size: 18px;
   }
 }
+
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .promotion-page {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .promotion-page {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .promotion-page {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .promotion-page {
+    padding-bottom: 80px;
+  }
+}
 </style>
