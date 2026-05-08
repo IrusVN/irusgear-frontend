@@ -25,33 +25,33 @@
   <!-- Tradein List -->
   <div class="tradein-list">
     <!-- Empty State -->
-    <div v-if="filteredTradeins.length === 0" class="tradein-empty">
+    <div v-if="!isLoading && tradeins.length === 0" class="tradein-empty">
       <img
         src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
         alt="empty"
         class="tradein-empty__img"
       />
-      <p class="tradein-empty__text">Bạn chưa có phiếu thu cũ nào</p>
+      <p class="tradein-empty__text">{{ $t('profile.tradein.empty') }}</p>
       <NuxtLink :to="localePath('/')" class="btn btn-dark rounded-pill px-4 py-2">
-        <i class="bi bi-house-door me-2"></i>Trang chủ
+        <i class="bi bi-house-door me-2"></i>{{ $t('profile.common.home') }}
       </NuxtLink>
     </div>
 
     <!-- Tradein Cards -->
     <div
-      v-for="t in filteredTradeins"
+      v-for="t in tradeins"
       :key="t.id"
       class="tradein-card"
     >
       <!-- Card Header -->
       <div class="tradein-card__header">
         <div class="tradein-card__meta">
-          <span class="tradein-card__id">Mã phiếu #{{ t.id }}</span>
-          <span class="tradein-card__date">{{ t.date }}</span>
+          <span class="tradein-card__id">#{{ t.id }}</span>
+          <span class="tradein-card__date">{{ formatDate(t.date) }}</span>
         </div>
-        <span class="tradein-card__status" :class="`tradein-card__status--${t.statusKey}`">
-          <i :class="t.statusIcon"></i>
-          {{ t.status }}
+        <span class="tradein-card__status" :class="`tradein-card__status--${t.status.key}`">
+          <i :class="t.status.icon"></i>
+          {{ t.status.label }}
         </span>
       </div>
 
@@ -59,7 +59,7 @@
       <div class="tradein-card__device">
         <div class="tradein-card__device-label">
           <i class="bi bi-phone"></i>
-          <span>Thiết bị cũ</span>
+          <span>{{ $t('profile.tradein.oldDevice') }}</span>
         </div>
         <div class="tradein-card__device-body">
           <img :src="t.oldDevice.image" :alt="t.oldDevice.name" class="tradein-card__device-img" />
@@ -79,7 +79,7 @@
       <div class="tradein-card__device">
         <div class="tradein-card__device-label tradein-card__device-label--new">
           <i class="bi bi-phone-fill"></i>
-          <span>Thiết bị mới</span>
+          <span>{{ $t('profile.tradein.newDevice') }}</span>
         </div>
         <div class="tradein-card__device-body">
           <img :src="t.newDevice.image" :alt="t.newDevice.name" class="tradein-card__device-img" />
@@ -94,24 +94,24 @@
       <div class="tradein-card__footer">
         <div class="tradein-card__pricing">
           <div class="tradein-card__price-row">
-            <span class="tradein-card__price-label">Giá trị thu cũ:</span>
+            <span class="tradein-card__price-label">{{ $t('profile.tradein.oldValue') }}</span>
             <span class="tradein-card__price-value tradein-card__price-value--old">{{ t.oldValue }}</span>
           </div>
           <div class="tradein-card__price-row">
-            <span class="tradein-card__price-label">Giá máy mới:</span>
+            <span class="tradein-card__price-label">{{ $t('profile.tradein.newPrice') }}</span>
             <span class="tradein-card__price-value">{{ t.newPrice }}</span>
           </div>
           <div class="tradein-card__price-row tradein-card__price-row--total">
-            <span class="tradein-card__price-label">Thanh toán thêm:</span>
+            <span class="tradein-card__price-label">{{ $t('profile.tradein.topUp') }}</span>
             <span class="tradein-card__price-value tradein-card__price-value--total">{{ t.topUp }}</span>
           </div>
         </div>
         <div class="tradein-card__actions">
           <button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3">
-            <i class="bi bi-chat-left-text me-1"></i>Nhắn tin
+            <i class="bi bi-chat-left-text me-1"></i>{{ $t('profile.common.message') }}
           </button>
           <button type="button" class="btn btn-dark btn-sm rounded-pill px-3">
-            <i class="bi bi-eye me-1"></i>Chi tiết
+            <i class="bi bi-eye me-1"></i>{{ $t('profile.common.detail') }}
           </button>
         </div>
       </div>
@@ -122,64 +122,34 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useLocalePath } from '#imports'
+import { ref, watch } from 'vue'
+import { useLocalePath, useI18n } from '#imports'
+import { storeToRefs } from 'pinia'
+import { useTradeinStore } from '@/stores/tradeinStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
+import { formatDate } from '@/utils/dateFormat'
 
 definePageMeta({ layout: 'default' })
 useHead({ title: 'Lịch sử thu cũ - IrusGear' })
 
 const localePath = useLocalePath()
+const { t } = useI18n()
+const tradeinStore = useTradeinStore()
+const { tradeins, isLoading } = storeToRefs(tradeinStore)
 
 const dateFrom = ref('')
 const dateTo = ref('')
 
-const mockTradeins = [
-  {
-    id: 'TC001234',
-    date: '28/04/2026',
-    status: 'Hoàn tất',
-    statusKey: 'done',
-    statusIcon: 'bi bi-check-circle',
-    oldDevice: {
-      name: 'iPhone 14 Pro 128GB - Deep Purple',
-      image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/i/p/iphone-14-pro-1.png',
-      capacity: '128GB',
-    },
-    newDevice: {
-      name: 'iPhone 16 Pro Max 256GB - Titan Tự Nhiên',
-      image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/i/p/iphone-16-pro-max_2_.png',
-      capacity: '256GB',
-    },
-    oldValue: '10.500.000đ',
-    newPrice: '27.990.000đ',
-    topUp: '17.490.000đ',
-  },
-  {
-    id: 'TC001235',
-    date: '15/03/2026',
-    status: 'Hoàn tất',
-    statusKey: 'done',
-    statusIcon: 'bi bi-check-circle',
-    oldDevice: {
-      name: 'Samsung Galaxy S23 Ultra 256GB',
-      image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/s/a/samsung-galaxy-s23-ultra-1.png',
-      capacity: '256GB',
-    },
-    newDevice: {
-      name: 'Samsung Galaxy S25 Ultra 256GB',
-      image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/s/2/s25-ultra_1.png',
-      capacity: '256GB',
-    },
-    oldValue: '12.000.000đ',
-    newPrice: '22.990.000đ',
-    topUp: '10.990.000đ',
-  },
-]
+const loadTradeins = async () => {
+  await tradeinStore.fetchTradeins({
+    date_from: dateFrom.value || undefined,
+    date_to: dateTo.value || undefined,
+  })
+}
 
-const filteredTradeins = computed(() => {
-  return mockTradeins
-})
+watch([dateFrom, dateTo], loadTradeins)
+
+loadTradeins()
 </script>
 
 <style scoped>

@@ -2,7 +2,7 @@
   <ProfileLayout>
   <div class="user-info-page">
   <!-- Gender Update Alert -->
-  <div class="user-info-alert">
+  <div v-if="showGenderAlert" class="user-info-alert">
     <div class="user-info-alert__icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"/>
@@ -10,8 +10,8 @@
         <line x1="12" y1="16" x2="12.01" y2="16"/>
       </svg>
     </div>
-    <p class="user-info-alert__text">Vui lòng cập nhật giới tính để có trải nghiệm tốt hơn.</p>
-    <button type="button" class="user-info-alert__btn" @click="handleUpdateGender">Cập nhật</button>
+    <p class="user-info-alert__text">{{ $t('profile.userInfo.alertGender') }}</p>
+    <button type="button" class="user-info-alert__btn" @click="handleUpdateGender">{{ $t('profile.userInfo.updateGender') }}</button>
   </div>
 
   <!-- Personal Information -->
@@ -30,30 +30,30 @@
     <div class="user-info-card__body">
       <div class="user-info-card__col">
         <div class="user-info-card__row">
-          <span class="user-info-card__label">Họ và tên:</span>
-          <span class="user-info-card__value">{{ profile.fullName }}</span>
+          <span class="user-info-card__label">{{ $t('profile.userInfo.fullName') }}</span>
+          <span class="user-info-card__value">{{ user?.full_name || '—' }}</span>
         </div>
         <div class="user-info-card__row">
-          <span class="user-info-card__label">Giới tính:</span>
-          <span class="user-info-card__value">{{ profile.gender || '—' }}</span>
+          <span class="user-info-card__label">{{ $t('profile.userInfo.gender') }}</span>
+          <span class="user-info-card__value">{{ user?.gender ? $t(`profile.userInfo.genderOptions.${user.gender}`) : '—' }}</span>
         </div>
         <div class="user-info-card__row user-info-card__row--last">
-          <span class="user-info-card__label">Ngày sinh:</span>
-          <span class="user-info-card__value">{{ profile.birthday || '—' }}</span>
+          <span class="user-info-card__label">{{ $t('profile.userInfo.birthday') }}</span>
+          <span class="user-info-card__value">{{ user?.birthday || '—' }}</span>
         </div>
       </div>
       <div class="user-info-card__col">
         <div class="user-info-card__row">
-          <span class="user-info-card__label">Số điện thoại:</span>
-          <span class="user-info-card__value">{{ profile.phone }}</span>
+          <span class="user-info-card__label">{{ $t('profile.userInfo.phone') }}</span>
+          <span class="user-info-card__value">{{ user?.phone || '—' }}</span>
         </div>
         <div class="user-info-card__row">
-          <span class="user-info-card__label">Email:</span>
-          <span class="user-info-card__value">{{ profile.email }}</span>
+          <span class="user-info-card__label">{{ $t('profile.userInfo.email') }}</span>
+          <span class="user-info-card__value">{{ user?.email || '—' }}</span>
         </div>
         <div class="user-info-card__row user-info-card__row--last">
-          <span class="user-info-card__label">Địa chỉ mặc định:</span>
-          <span class="user-info-card__value">{{ profile.address || '—' }}</span>
+          <span class="user-info-card__label">{{ $t('profile.userInfo.address') }}</span>
+          <span class="user-info-card__value">{{ user?.default_address || '—' }}</span>
         </div>
       </div>
     </div>
@@ -62,13 +62,13 @@
   <!-- Address Book -->
   <div class="user-info-card">
     <div class="user-info-card__header">
-      <h2 class="user-info-card__title">Sổ địa chỉ</h2>
+      <h2 class="user-info-card__title">{{ $t('profile.userInfo.addressBook') }}</h2>
       <button type="button" class="user-info-card__edit-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="5" x2="12" y2="19"/>
           <line x1="5" y1="12" x2="19" y2="12"/>
         </svg>
-        <span>Thêm địa chỉ</span>
+        <span>{{ $t('profile.userInfo.addAddress') }}</span>
       </button>
     </div>
 
@@ -78,7 +78,7 @@
         alt="empty"
         class="user-info-address-empty__img"
       />
-      <p class="user-info-address-empty__text">Bạn chưa có địa chỉ nào được tạo.</p>
+      <p class="user-info-address-empty__text">{{ $t('profile.userInfo.noAddress') }}</p>
     </div>
   </div>
 
@@ -87,20 +87,20 @@
     <!-- Password -->
     <div class="user-info-card">
       <div class="user-info-card__header">
-        <h2 class="user-info-card__title">Mật khẩu</h2>
+        <h2 class="user-info-card__title">{{ $t('profile.userInfo.password') }}</h2>
         <button type="button" class="user-info-card__edit-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          <span>Thay đổi mật khẩu</span>
+          <span>{{ $t('profile.userInfo.changePassword') }}</span>
         </button>
       </div>
 
       <div class="user-info-card__body">
         <div class="user-info-card__row user-info-card__row--plain">
-          <span class="user-info-card__label">Cập nhật lần cuối lúc:</span>
-          <span class="user-info-card__value">{{ profile.passwordUpdatedAt }}</span>
+          <span class="user-info-card__label">{{ $t('profile.userInfo.lastUpdated') }}</span>
+          <span class="user-info-card__value">{{ user?.password_updated_at || '—' }}</span>
         </div>
       </div>
     </div>
@@ -108,45 +108,40 @@
     <!-- Linked Accounts -->
     <div class="user-info-card">
       <div class="user-info-card__header">
-        <h2 class="user-info-card__title">Tài khoản liên kết</h2>
+        <h2 class="user-info-card__title">{{ $t('profile.userInfo.linkedAccounts') }}</h2>
       </div>
 
       <div class="user-info-linked">
-        <div class="user-info-linked__item">
-          <div class="user-info-linked__brand">
-            <img
-              src="https://cdn-static.smember.com.vn/_next/static/media/logo-google.b6f9570f.svg"
-              alt="Google"
-              class="user-info-linked__brand-icon"
-            />
-            <span class="user-info-linked__brand-name">Google</span>
-          </div>
-          <button type="button" class="user-info-linked__action">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-              <polyline points="10 17 15 12 10 7"/>
-              <line x1="15" y1="12" x2="3" y2="12"/>
-            </svg>
-            <span>Liên kết</span>
-          </button>
+        <div v-if="!isLoadingLinks && socialLinks.length === 0" class="user-info-linked__empty">
+          <p>{{ $t('profile.common.noData') }}</p>
         </div>
-
-        <div class="user-info-linked__item user-info-linked__item--last">
+        <div
+          v-for="(link, idx) in socialLinks"
+          :key="link.provider"
+          class="user-info-linked__item"
+          :class="{ 'user-info-linked__item--last': idx === socialLinks.length - 1 }"
+        >
           <div class="user-info-linked__brand">
             <img
-              src="https://cdn-static.smember.com.vn/_next/static/media/logo-zalo.120d889f.svg"
-              alt="Zalo"
+              :src="link.providerIconUrl"
+              :alt="link.providerName"
               class="user-info-linked__brand-icon"
             />
-            <span class="user-info-linked__brand-name">Zalo</span>
+            <span class="user-info-linked__brand-name">{{ link.providerName }}</span>
           </div>
           <button type="button" class="user-info-linked__action">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-              <polyline points="10 17 15 12 10 7"/>
-              <line x1="15" y1="12" x2="3" y2="12"/>
-            </svg>
-            <span>Liên kết</span>
+            <template v-if="link.isLinked">
+              <i class="bi bi-check-circle"></i>
+              <span>{{ $t('profile.userInfo.linked') }}</span>
+            </template>
+            <template v-else>
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <polyline points="10 17 15 12 10 7"/>
+                <line x1="15" y1="12" x2="3" y2="12"/>
+              </svg>
+              <span>{{ $t('profile.userInfo.link') }}</span>
+            </template>
           </button>
         </div>
       </div>
@@ -157,22 +152,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '@/stores/authStore'
+import { useUserInfoStore } from '@/stores/userInfoStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
 definePageMeta({ layout: 'default', middleware: ['auth-guard'] })
 
 useHead({ title: 'Thông tin tài khoản - IrusGear' })
 
-const profile = ref({
-  fullName: 'MAI LÊ HUY HOÀNG',
-  phone: '0971172603',
-  email: 'hoangmai020603@gmail.com',
-  birthday: '02/06/2003',
-  gender: '',
-  address: '',
-  passwordUpdatedAt: '02/02/2026 15:28',
-})
+const authStore = useAuthStore()
+const userInfoStore = useUserInfoStore()
+const { user } = storeToRefs(authStore)
+const { socialLinks, isLoadingLinks } = storeToRefs(userInfoStore)
+
+const showGenderAlert = computed(() => !user.value?.gender)
+
+// Fetch social links on mount
+userInfoStore.fetchSocialLinks()
+
+const handleUpdateGender = () => {
+  // TODO: open gender update modal
+}
 </script>
 
 <style scoped>

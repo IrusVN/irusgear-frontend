@@ -9,7 +9,7 @@
         v-model="searchQuery"
         type="text"
         class="warranty-search__input"
-        placeholder="Tìm kiếm theo mã đơn, tên sản phẩm..."
+        :placeholder="$t('profile.warranty.searchPlaceholder')"
       />
       <button v-if="searchQuery" type="button" class="warranty-search__clear" @click="searchQuery = ''">
         <i class="bi bi-x"></i>
@@ -37,62 +37,62 @@
   <!-- Warranty List -->
   <div class="warranty-list">
     <!-- Empty State -->
-    <div v-if="filteredWarranties.length === 0" class="warranty-empty">
+    <div v-if="!isLoading && warranties.length === 0" class="warranty-empty">
       <img
         src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
         alt="empty"
         class="warranty-empty__img"
       />
-      <p class="warranty-empty__text">Bạn chưa có đơn bảo hành nào</p>
+      <p class="warranty-empty__text">{{ $t('profile.warranty.empty') }}</p>
       <NuxtLink :to="localePath('/')" class="btn btn-dark rounded-pill px-4 py-2">
-        <i class="bi bi-house-door me-2"></i>Trang chủ
+        <i class="bi bi-house-door me-2"></i>{{ $t('profile.common.home') }}
       </NuxtLink>
     </div>
 
     <!-- Warranty Cards -->
     <div
-      v-for="w in filteredWarranties"
+      v-for="w in warranties"
       :key="w.id"
       class="warranty-card"
     >
       <!-- Card Header -->
       <div class="warranty-card__header">
         <div class="warranty-card__meta">
-          <span class="warranty-card__id">Mã bảo hành #{{ w.id }}</span>
-          <span class="warranty-card__date">{{ w.date }}</span>
+          <span class="warranty-card__id">#{{ w.id }}</span>
+          <span class="warranty-card__date">{{ formatDate(w.date) }}</span>
         </div>
-        <span class="warranty-card__status" :class="`warranty-card__status--${w.statusKey}`">
-          <i :class="w.statusIcon"></i>
-          {{ w.status }}
+        <span class="warranty-card__status" :class="`warranty-card__status--${w.status.key}`">
+          <i :class="w.status.icon"></i>
+          {{ w.status.label }}
         </span>
       </div>
 
       <!-- Card Body -->
       <div class="warranty-card__body">
         <div class="warranty-card__product">
-          <img :src="w.product.image" :alt="w.product.name" class="warranty-card__product-img" />
+          <img :src="w.product.image_url" :alt="w.product.name" class="warranty-card__product-img" />
           <div class="warranty-card__product-info">
             <p class="warranty-card__product-name">{{ w.product.name }}</p>
-            <p class="warranty-card__product-serial">
-              <span class="warranty-card__label">Số serial:</span> {{ w.product.serial }}
+            <p v-if="w.product.serial" class="warranty-card__product-serial">
+              <span class="warranty-card__label">{{ $t('profile.warranty.labels.serial') }}:</span> {{ w.product.serial }}
             </p>
-            <p class="warranty-card__product-imei">
-              <span class="warranty-card__label">IMEI:</span> {{ w.product.imei }}
+            <p v-if="w.product.imei && w.product.imei !== 'N/A'" class="warranty-card__product-imei">
+              <span class="warranty-card__label">{{ $t('profile.warranty.labels.imei') }}:</span> {{ w.product.imei }}
             </p>
           </div>
         </div>
 
         <div class="warranty-card__details">
           <div class="warranty-card__detail-row">
-            <span class="warranty-card__label">Ngày mua:</span>
-            <span class="warranty-card__value">{{ w.purchaseDate }}</span>
+            <span class="warranty-card__label">{{ $t('profile.warranty.labels.purchaseDate') }}:</span>
+            <span class="warranty-card__value">{{ formatDate(w.purchaseDate) }}</span>
           </div>
           <div class="warranty-card__detail-row">
-            <span class="warranty-card__label">Hạn bảo hành:</span>
-            <span class="warranty-card__value">{{ w.warrantyEnd }}</span>
+            <span class="warranty-card__label">{{ $t('profile.warranty.labels.warrantyEnd') }}:</span>
+            <span class="warranty-card__value">{{ formatDate(w.warrantyEnd) }}</span>
           </div>
-          <div class="warranty-card__detail-row">
-            <span class="warranty-card__label">Trung tâm bảo hành:</span>
+          <div v-if="w.serviceCenter" class="warranty-card__detail-row">
+            <span class="warranty-card__label">{{ $t('profile.warranty.labels.serviceCenter') }}:</span>
             <span class="warranty-card__value">{{ w.serviceCenter }}</span>
           </div>
         </div>
@@ -111,7 +111,7 @@
             </div>
             <div class="warranty-timeline__content">
               <p class="warranty-timeline__title">{{ step.title }}</p>
-              <p class="warranty-timeline__time">{{ step.time }}</p>
+              <p class="warranty-timeline__time">{{ step.time ? formatDateTime(step.time) : '' }}</p>
             </div>
           </div>
         </div>
@@ -120,10 +120,10 @@
       <!-- Card Footer -->
       <div class="warranty-card__footer">
         <button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3">
-          <i class="bi bi-chat-left-text me-1"></i>Nhắn tin
+          <i class="bi bi-chat-left-text me-1"></i>{{ $t('profile.common.message') }}
         </button>
         <button type="button" class="btn btn-dark btn-sm rounded-pill px-3">
-          <i class="bi bi-eye me-1"></i>Chi tiết
+          <i class="bi bi-eye me-1"></i>{{ $t('profile.common.detail') }}
         </button>
       </div>
     </div>
@@ -132,101 +132,45 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useLocalePath } from '#imports'
+import { ref, computed, watch } from 'vue'
+import { useLocalePath, useI18n } from '#imports'
+import { storeToRefs } from 'pinia'
+import { useWarrantyStore } from '@/stores/warrantyStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
+import { formatDate, formatDateTime } from '@/utils/dateFormat'
 
 definePageMeta({ layout: 'default' })
 useHead({ title: 'Tra cứu bảo hành - IrusGear' })
 
 const localePath = useLocalePath()
+const { t } = useI18n()
+const warrantyStore = useWarrantyStore()
+const { warranties, isLoading } = storeToRefs(warrantyStore)
 
-const tabs = [
-  { key: 'all', label: 'Tất cả' },
-  { key: 'received', label: 'Đã tiếp nhận' },
-  { key: 'coordinating', label: 'Đang điều phối' },
-  { key: 'repairing', label: 'Đang sửa' },
-  { key: 'done', label: 'Đã sửa xong' },
-  { key: 'returned', label: 'Đã trả máy' },
-]
+const tabs = computed(() => [
+  { key: 'all', label: t('profile.warranty.tabs.all') },
+  { key: 'received', label: t('profile.warranty.tabs.received') },
+  { key: 'coordinating', label: t('profile.warranty.tabs.coordinating') },
+  { key: 'repairing', label: t('profile.warranty.tabs.repairing') },
+  { key: 'done', label: t('profile.warranty.tabs.done') },
+  { key: 'returned', label: t('profile.warranty.tabs.returned') },
+])
 
 const activeTab = ref('all')
 const searchQuery = ref('')
 
-const mockWarranties = [
-  {
-    id: 'WBH001234',
-    date: '02/05/2026',
-    status: 'Đã tiếp nhận',
-    statusKey: 'received',
-    statusIcon: 'bi bi-check-circle',
-    product: {
-      name: 'iPhone 16 Pro Max 256GB - Titan Tự Nhiên',
-      image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/i/p/iphone-16-pro-max_2_.png',
-      serial: 'DGH7X1234',
-      imei: '352345678901234',
-    },
-    purchaseDate: '15/03/2026',
-    warrantyEnd: '15/03/2027',
-    serviceCenter: 'CellphoneS Nguyễn Trãi',
-    timeline: [
-      { title: 'Tiếp nhận yêu cầu bảo hành', time: '02/05/2026 - 10:30', done: true, current: false },
-      { title: 'Đang điều phối kỹ thuật viên', time: '', done: false, current: true },
-      { title: 'Tiến hành kiểm tra và sửa chữa', time: '', done: false, current: false },
-      { title: 'Hoàn tất bảo hành - Trả máy', time: '', done: false, current: false },
-    ],
-  },
-  {
-    id: 'WBH001235',
-    date: '28/04/2026',
-    status: 'Đang sửa',
-    statusKey: 'repairing',
-    statusIcon: 'bi bi-wrench',
-    product: {
-      name: 'MacBook Air M3 13 inch 256GB',
-      image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/m/a/macbook-air-m3-1.png',
-      serial: 'C02X1234ABCD',
-      imei: 'N/A',
-    },
-    purchaseDate: '10/02/2026',
-    warrantyEnd: '10/02/2027',
-    serviceCenter: 'CellphoneS Lý Thường Kiệt',
-    timeline: [
-      { title: 'Tiếp nhận yêu cầu bảo hành', time: '28/04/2026 - 09:00', done: true, current: false },
-      { title: 'Đang điều phối kỹ thuật viên', time: '28/04/2026 - 09:30', done: true, current: false },
-      { title: 'Tiến hành kiểm tra và sửa chữa', time: '', done: false, current: true },
-      { title: 'Hoàn tất bảo hành - Trả máy', time: '', done: false, current: false },
-    ],
-  },
-]
+const loadWarranties = async () => {
+  await warrantyStore.fetchWarranties({
+    status: activeTab.value,
+    q: searchQuery.value.trim(),
+  })
+}
 
-const filteredWarranties = computed(() => {
-  let result = mockWarranties
+watch([activeTab, searchQuery], () => {
+  loadWarranties()
+}, { immediate: false })
 
-  if (activeTab.value !== 'all') {
-    const tabMap = {
-      received: 'received',
-      coordinating: 'coordinating',
-      repairing: 'repairing',
-      done: 'done',
-      returned: 'returned',
-    }
-    const statusKey = tabMap[activeTab.value]
-    result = result.filter((w) => w.statusKey === statusKey)
-  }
-
-  if (searchQuery.value.trim()) {
-    const q = searchQuery.value.toLowerCase()
-    result = result.filter(
-      (w) =>
-        w.id.toLowerCase().includes(q) ||
-        w.product.name.toLowerCase().includes(q) ||
-        w.product.serial.toLowerCase().includes(q)
-    )
-  }
-
-  return result
-})
+loadWarranties()
 </script>
 
 <style scoped>

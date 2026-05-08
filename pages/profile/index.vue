@@ -14,13 +14,13 @@
   </div>
 
   <!-- Notice Banner: Address -->
-  <div class="profile-notice">
+  <div v-if="showAddressNotice" class="profile-notice">
     <div class="profile-notice__icon">
       <i class="bi bi-info-circle-fill"></i>
     </div>
-    <p class="profile-notice__text">Thêm địa chỉ để đặt đơn hàng nhanh hơn.</p>
-    <button type="button" class="profile-notice__btn">Thêm địa chỉ</button>
-    <button type="button" class="profile-notice__close" aria-label="Đóng">
+    <p class="profile-notice__text">{{ $t('profile.dashboard.noticeAddress') }}</p>
+    <button type="button" class="profile-notice__btn">{{ $t('profile.dashboard.addAddress') }}</button>
+    <button type="button" class="profile-notice__close" :aria-label="$t('profile.dashboard.closeNotice')" @click="showAddressNotice = false">
       <i class="bi bi-x-lg"></i>
     </button>
   </div>
@@ -30,17 +30,34 @@
     <!-- Recent Orders -->
     <div class="profile-card">
       <div class="profile-card__header">
-        <h3 class="profile-card__title">Đơn hàng gần đây</h3>
-        <a :href="localePath('/orders')" class="profile-card__link">Xem tất cả <i class="bi bi-chevron-right"></i></a>
+        <h3 class="profile-card__title">{{ $t('profile.dashboard.recentOrdersTitle') }}</h3>
+        <a :href="localePath('/orders')" class="profile-card__link">{{ $t('profile.common.seeAll') }} <i class="bi bi-chevron-right"></i></a>
       </div>
-      <div class="profile-card__body profile-card__body--empty">
+      <div v-if="recentOrders.orders.length === 0" class="profile-card__body profile-card__body--empty">
         <div class="profile-empty">
           <img
             src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
             alt="Không có đơn hàng"
             loading="lazy"
           />
-          <p>Bạn chưa có đơn hàng nào gần đây? Hãy bắt đầu mua sắm ngay nào! <a :href="localePath('/')">Mua sắm ngay</a></p>
+          <p>{{ $t('profile.dashboard.noOrders') }} <a :href="localePath('/')">{{ $t('profile.dashboard.shopNow') }}</a></p>
+        </div>
+      </div>
+      <div v-else class="profile-card__body">
+        <div v-for="order in recentOrders.orders" :key="order.id" class="profile-order-item">
+          <div class="profile-order-item__header">
+            <span class="profile-order-item__id">{{ $t('profile.orders.orderId') }}{{ order.id }}</span>
+            <span class="profile-order-item__status" :class="`profile-order-item__status--${order.status.key}`">
+              {{ order.status.label }}
+            </span>
+          </div>
+          <div v-for="item in order.items" :key="item.id" class="profile-order-item__product">
+            <img :src="item.image_url" :alt="item.name" class="profile-order-item__img" />
+            <div class="profile-order-item__info">
+              <p class="profile-order-item__name">{{ item.name }}</p>
+              <p class="profile-order-item__price">{{ item.price_formatted }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -48,17 +65,22 @@
     <!-- Your Offers -->
     <div class="profile-card">
       <div class="profile-card__header">
-        <h3 class="profile-card__title">Ưu đãi của bạn</h3>
-        <a href="#" class="profile-card__link">Xem tất cả <i class="bi bi-chevron-right"></i></a>
+        <h3 class="profile-card__title">{{ $t('profile.dashboard.yourOffersTitle') }}</h3>
+        <a href="#" class="profile-card__link">{{ $t('profile.common.seeAll') }} <i class="bi bi-chevron-right"></i></a>
       </div>
-      <div class="profile-card__body profile-card__body--empty">
+      <div v-if="offers.items.length === 0" class="profile-card__body profile-card__body--empty">
         <div class="profile-empty">
           <img
             src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
             alt="Không có ưu đãi"
             loading="lazy"
           />
-          <p>Bạn chưa có ưu đãi nào. <a :href="localePath('/')">Xem sản phẩm</a></p>
+          <p>{{ $t('profile.dashboard.noOffers') }} <a :href="localePath('/')">{{ $t('profile.dashboard.seeProducts') }}</a></p>
+        </div>
+      </div>
+      <div v-else class="profile-card__body">
+        <div v-for="item in offers.items" :key="item.id" class="profile-offer-item">
+          <!-- render offer items -->
         </div>
       </div>
     </div>
@@ -67,22 +89,29 @@
   <!-- Favorite Products -->
   <div class="profile-card">
     <div class="profile-card__header">
-      <h3 class="profile-card__title">Sản phẩm yêu thích</h3>
-      <button type="button" class="profile-card__link">Xem tất cả <i class="bi bi-chevron-right"></i></button>
+      <h3 class="profile-card__title">{{ $t('profile.dashboard.favoritesTitle') }}</h3>
+      <button type="button" class="profile-card__link">{{ $t('profile.common.seeAll') }} <i class="bi bi-chevron-right"></i></button>
     </div>
     <div class="profile-card__body">
-      <div class="profile-favorites">
-        <a href="https://cellphones.com.vn/iphone-17-pro-max.html" target="_blank" class="profile-favorite-item">
-          <img
-            src="https://cdn2.cellphones.com.vn/356x356/media/catalog/product/i/p/iphone-17-pro-max_3.jpg"
-            alt="iPhone 17 Pro Max 256GB"
-            loading="lazy"
-          />
+      <div v-if="favorites.items.length === 0" class="profile-card__body--empty" style="display:flex;justify-content:center;padding:24px 16px;">
+        <div class="profile-empty">
+          <img src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png" alt="empty" loading="lazy" />
+          <p>{{ $t('profile.dashboard.noOffers') }}</p>
+        </div>
+      </div>
+      <div v-else class="profile-favorites">
+        <a
+          v-for="item in favorites.items"
+          :key="item.id"
+          :href="item.url || localePath(`/products/${item.slug}`)"
+          class="profile-favorite-item"
+        >
+          <img :src="item.image_url" :alt="item.name" loading="lazy" />
           <div class="profile-favorite-info">
-            <div class="profile-favorite-name">iPhone 17 Pro Max 256GB | Chính hãng</div>
+            <div class="profile-favorite-name">{{ item.name }}</div>
             <div class="profile-favorite-price">
-              <span class="profile-favorite-price-current">37.590.000đ</span>
-              <span class="profile-favorite-price-old">37.990.000đ</span>
+              <span class="profile-favorite-price-current">{{ item.current_price_formatted }}</span>
+              <span v-if="item.original_price_formatted" class="profile-favorite-price-old">{{ item.original_price_formatted }}</span>
             </div>
           </div>
           <i class="bi bi-heart-fill profile-favorite-heart"></i>
@@ -148,10 +177,15 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useLocalePath } from '#imports'
+import { storeToRefs } from 'pinia'
+import { useProfileDashboardStore } from '@/stores/profileDashboardStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
 const localePath = useLocalePath()
+const dashboardStore = useProfileDashboardStore()
+const { recentOrders, offers, favorites, isLoading } = storeToRefs(dashboardStore)
 
 definePageMeta({
   layout: 'default',
@@ -161,6 +195,10 @@ definePageMeta({
 useHead({
   title: 'Tài khoản - IrusGear',
 })
+
+dashboardStore.fetchDashboard()
+
+const showAddressNotice = ref(true)
 </script>
 
 <style scoped>
@@ -319,6 +357,70 @@ useHead({
 
 .profile-empty p a:hover {
   text-decoration: underline;
+}
+
+/* ── Recent Order Item ───────────────── */
+.profile-order-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f4f4f5;
+}
+.profile-order-item:last-child {
+  border-bottom: none;
+}
+.profile-order-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.profile-order-item__id {
+  font-size: 13px;
+  font-weight: 700;
+  color: #18181b;
+}
+.profile-order-item__status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+.profile-order-item__status--pending { color: #d97706; background: #fffbeb; }
+.profile-order-item__status--processing { color: #3b82f6; background: #eff6ff; }
+.profile-order-item__status--shipped, .profile-order-item__status--delivering { color: #7c3aed; background: #f5f3ff; }
+.profile-order-item__status--delivered { color: #16a34a; background: #f0fdf4; }
+.profile-order-item__status--cancelled { color: #dc2626; background: #fef2f2; }
+.profile-order-item__product {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.profile-order-item__img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+.profile-order-item__info {
+  flex: 1;
+  min-width: 0;
+}
+.profile-order-item__name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin: 0 0 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.profile-order-item__price {
+  font-size: 12px;
+  color: #d70018;
+  font-weight: 600;
+  margin: 0;
 }
 
 /* ── Favorites ───────────────────────── */

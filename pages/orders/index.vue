@@ -29,33 +29,33 @@
   <!-- Order List -->
   <div class="orders-list">
     <!-- Empty State -->
-    <div v-if="filteredOrders.length === 0" class="orders-empty">
+    <div v-if="!isLoading && orders.length === 0" class="orders-empty">
       <img
         src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
         alt="empty"
         class="orders-empty__img"
       />
-      <p class="orders-empty__text">Bạn chưa có đơn hàng nào</p>
+      <p class="orders-empty__text">{{ $t('profile.orders.empty') }}</p>
       <NuxtLink :to="localePath('/')" class="btn btn-dark rounded-pill px-4 py-2">
-        <i class="bi bi-house-door me-2"></i>Trang chủ
+        <i class="bi bi-house-door me-2"></i>{{ $t('profile.orders.goHome') }}
       </NuxtLink>
     </div>
 
     <!-- Order Cards -->
     <div
-      v-for="order in filteredOrders"
+      v-for="order in orders"
       :key="order.id"
       class="orders-card"
     >
       <!-- Order Header -->
       <div class="orders-card__header">
         <div class="orders-card__meta">
-          <span class="orders-card__id">Mã đơn #{{ order.id }}</span>
-          <span class="orders-card__date">{{ order.date }}</span>
+          <span class="orders-card__id">{{ $t('profile.orders.orderId') }}{{ order.id }}</span>
+          <span class="orders-card__date">{{ formatDate(order.date) }}</span>
         </div>
-        <span class="orders-card__status" :class="`orders-card__status--${order.statusKey}`">
-          <i :class="order.statusIcon"></i>
-          {{ order.status }}
+        <span class="orders-card__status" :class="`orders-card__status--${order.status.key}`">
+          <i :class="order.status.icon"></i>
+          {{ order.status.label }}
         </span>
       </div>
 
@@ -66,14 +66,14 @@
           :key="item.id"
           class="orders-card__item"
         >
-          <img :src="item.image" :alt="item.name" class="orders-card__item-img" />
+          <img :src="item.image_url" :alt="item.name" class="orders-card__item-img" />
           <div class="orders-card__item-info">
             <p class="orders-card__item-name">{{ item.name }}</p>
             <p class="orders-card__item-qty">x{{ item.qty }}</p>
           </div>
           <div class="orders-card__item-price">
-            <span class="orders-card__item-price-current">{{ item.price }}</span>
-            <span v-if="item.originalPrice" class="orders-card__item-price-original">{{ item.originalPrice }}</span>
+            <span class="orders-card__item-price-current">{{ item.price_formatted }}</span>
+            <span v-if="item.original_price_formatted" class="orders-card__item-price-original">{{ item.original_price_formatted }}</span>
           </div>
         </div>
       </div>
@@ -81,15 +81,15 @@
       <!-- Order Footer -->
       <div class="orders-card__footer">
         <div class="orders-card__total">
-          <span class="orders-card__total-label">Tổng cộng:</span>
-          <span class="orders-card__total-value">{{ order.total }}</span>
+          <span class="orders-card__total-label">{{ $t('profile.orders.total') }}</span>
+          <span class="orders-card__total-value">{{ order.totalFormatted }}</span>
         </div>
         <div class="orders-card__actions">
           <button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3">
-            <i class="bi bi-chat-left-text me-1"></i>Nhắn tin
+            <i class="bi bi-chat-left-text me-1"></i>{{ $t('profile.orders.contact') }}
           </button>
           <button type="button" class="btn btn-dark btn-sm rounded-pill px-3">
-            <i class="bi bi-eye me-1"></i>Chi tiết
+            <i class="bi bi-eye me-1"></i>{{ $t('profile.orders.detail') }}
           </button>
         </div>
       </div>
@@ -100,110 +100,46 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useLocalePath } from '#imports'
+import { ref, computed, watch } from 'vue'
+import { useLocalePath, useI18n } from '#imports'
+import { storeToRefs } from 'pinia'
+import { useOrdersStore } from '@/stores/ordersStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
+import { formatDate } from '@/utils/dateFormat'
 
 definePageMeta({ layout: 'default', middleware: ['auth-guard'] })
 
 useHead({ title: 'Lịch sử mua hàng - IrusGear' })
 
 const localePath = useLocalePath()
+const { t } = useI18n()
+const ordersStore = useOrdersStore()
+const { orders, isLoading } = storeToRefs(ordersStore)
 
-const tabs = [
-  { key: 'all', label: 'Tất cả' },
-  { key: 'pending', label: 'Chờ xác nhận' },
-  { key: 'processing', label: 'Đang xử lý' },
-  { key: 'shipping', label: 'Đang vận chuyển' },
-  { key: 'delivered', label: 'Đã nhận hàng' },
-  { key: 'cancelled', label: 'Đã huỷ' },
-]
+const tabs = computed(() => [
+  { key: 'all', label: t('profile.orders.tabs.all') },
+  { key: 'pending', label: t('profile.orders.tabs.pending') },
+  { key: 'processing', label: t('profile.orders.tabs.processing') },
+  { key: 'shipping', label: t('profile.orders.tabs.shipping') },
+  { key: 'delivered', label: t('profile.orders.tabs.delivered') },
+  { key: 'cancelled', label: t('profile.orders.tabs.cancelled') },
+])
 
 const activeTab = ref('all')
 const dateFrom = ref('')
 const dateTo = ref('')
 
-const mockOrders = [
-  {
-    id: '100001',
-    date: '05/05/2026',
-    status: 'Chờ xác nhận',
-    statusKey: 'pending',
-    statusIcon: 'bi bi-clock',
-    total: '14.990.000đ',
-    items: [
-      {
-        id: 1,
-        name: 'iPhone 16 Pro Max 256GB - Titan Tự Nhiên',
-        image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/i/p/iphone-16-pro-max_2_.png',
-        qty: 1,
-        price: '14.990.000đ',
-        originalPrice: '16.990.000đ',
-      },
-    ],
-  },
-  {
-    id: '100002',
-    date: '02/05/2026',
-    status: 'Đang vận chuyển',
-    statusKey: 'shipping',
-    statusIcon: 'bi bi-truck',
-    total: '8.490.000đ',
-    items: [
-      {
-        id: 2,
-        name: 'Samsung Galaxy S25 Ultra 256GB',
-        image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/s/2/s25-ultra_1.png',
-        qty: 1,
-        price: '8.490.000đ',
-        originalPrice: '',
-      },
-    ],
-  },
-  {
-    id: '100003',
-    date: '28/04/2026',
-    status: 'Đã nhận hàng',
-    statusKey: 'delivered',
-    statusIcon: 'bi bi-check-circle',
-    total: '2.990.000đ',
-    items: [
-      {
-        id: 3,
-        name: 'Tai nghe Bluetooth AirPods Pro 2',
-        image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/a/r/airpods-pro-2-1.png',
-        qty: 2,
-        price: '2.990.000đ',
-        originalPrice: '',
-      },
-    ],
-  },
-  {
-    id: '100004',
-    date: '20/04/2026',
-    status: 'Đã huỷ',
-    statusKey: 'cancelled',
-    statusIcon: 'bi bi-x-circle',
-    total: '5.990.000đ',
-    items: [
-      {
-        id: 4,
-        name: 'iPad Air M3 11 inch WiFi 256GB',
-        image: 'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/i/p/ipad-air-11-inch-m3-1.png',
-        qty: 1,
-        price: '5.990.000đ',
-        originalPrice: '6.990.000đ',
-      },
-    ],
-  },
-]
+const loadOrders = async () => {
+  await ordersStore.fetchOrders({
+    status: activeTab.value,
+    date_from: dateFrom.value || undefined,
+    date_to: dateTo.value || undefined,
+  })
+}
 
-const filteredOrders = computed(() => {
-  if (activeTab.value !== 'all') {
-    return mockOrders.filter((o) => o.statusKey === activeTab.value)
-  }
-  return mockOrders
-})
+watch([activeTab, dateFrom, dateTo], loadOrders)
+
+loadOrders()
 </script>
 
 <style scoped>

@@ -17,13 +17,14 @@
                 <i :class="phoneVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
               </button>
             </p>
-            <div class="profile-layout__rank-badges">
-              <span class="profile-layout__rank-badge profile-layout__rank-badge--null">S-NULL</span>
-              <span class="profile-layout__rank-badge profile-layout__rank-badge--student">S-Student</span>
+            <div v-if="currentUser?.rankKey" class="profile-layout__rank-badges">
+              <span class="profile-layout__rank-badge" :class="`profile-layout__rank-badge--${currentUser.rankKey}`">
+                {{ $t(`profile.promotion.ranks.${currentUser.rankKey}`) }}
+              </span>
             </div>
-            <div class="profile-layout__renew-hint">
+            <div v-if="currentUser?.renewalDate" class="profile-layout__renew-hint">
               <i class="bi bi-clock"></i>
-              Cập nhật lại sau 01/01/2027
+              {{ $t('profile.layout.memberCard.renewHint', { date: currentUser.renewalDate }) }}
             </div>
           </div>
         </div>
@@ -35,7 +36,7 @@
               </div>
               <div class="profile-layout__stat-content">
                 <div class="profile-layout__stat-value">{{ totalOrders }}</div>
-                <div class="profile-layout__stat-label">Tổng số đơn hàng{{ isDesktop ? ' đã mua' : '' }}</div>
+                <div class="profile-layout__stat-label">{{ $t('profile.layout.memberCard.totalOrders') }}{{ isDesktop ? $t('profile.layout.memberCard.totalOrdersSuffix') : '' }}</div>
               </div>
             </div>
             <div class="profile-layout__stat-divider"></div>
@@ -44,66 +45,66 @@
                 <img src="https://cdn-static.smember.com.vn/_next/static/media/money-icon.3e6b67af.svg" alt="Tổng tiền" loading="lazy" />
               </div>
               <div class="profile-layout__stat-content">
-                <div class="profile-layout__stat-value">{{ totalSpend.formatted }}</div>
+                <div class="profile-layout__stat-value">{{ currentUser?.totalSpentFormatted || '0đ' }}</div>
                 <div class="profile-layout__stat-label">
-                  Tổng tiền tích lũy
+                  {{ $t('profile.layout.memberCard.totalSpent') }}
                   <span class="profile-layout__stat-dot"></span>
-                  Từ 01/01/2025
+                  {{ $t('profile.layout.memberCard.fromDate') }}
                 </div>
-                <div v-if="isDesktop" class="profile-layout__rank-progress">
-                  Cần chi tiêu thêm <strong>3.000.000</strong> để lên hạng <strong>S-NEW</strong>
+                <div v-if="isDesktop && currentUser?.amountToNextRankFormatted" class="profile-layout__rank-progress">
+                  {{ $t('profile.layout.memberCard.progressHint', { amount: currentUser.amountToNextRankFormatted, rank: currentUser.nextRankName }) }}
                 </div>
               </div>
             </div>
           </div>
-          <div v-if="!isDesktop" class="profile-layout__rank-progress profile-layout__rank-progress--mobile">
-            Cần chi tiêu thêm <strong>3.000.000đ</strong> để lên hạng <strong>S-NEW</strong>
+          <div v-if="!isDesktop && currentUser?.amountToNextRankFormatted" class="profile-layout__rank-progress profile-layout__rank-progress--mobile">
+            {{ $t('profile.layout.memberCard.progressHintMobile', { amount: currentUser.amountToNextRankFormatted, rank: currentUser.nextRankName }) }}
           </div>
           <div v-if="isDesktop" class="profile-layout__channel-note">
             <i class="bi bi-info-circle"></i>
-            Tổng tiền và số đơn hàng được tính chung từ IrusGear.
+            {{ $t('profile.layout.memberCard.channelNote') }}
           </div>
         </div>
       </div>
 
       <!-- Quick Actions -->
       <div class="profile-layout__quick-actions">
-        <a href="#" class="profile-layout__quick-action">
+        <NuxtLink :to="localePath('/promotion')" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/rank-icon.d0f44c06.svg" alt="Hạng thành viên" loading="lazy" />
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/rank-icon.d0f44c06.svg" :alt="$t('profile.layout.quickActions.memberRank')" loading="lazy" />
           </div>
-          <span>Hạng thành viên</span>
-        </a>
-        <a href="#" class="profile-layout__quick-action">
-          <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/promotion-icon.99af272d.svg" alt="Mã giảm giá" loading="lazy" />
-          </div>
-          <span>Mã giảm giá</span>
-        </a>
-        <NuxtLink :to="localePath('/orders')" class="profile-layout__quick-action">
-          <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/history-icon.2ebe1813.svg" alt="Lịch sử mua hàng" loading="lazy" />
-          </div>
-          <span>Lịch sử mua hàng</span>
+          <span>{{ $t('profile.layout.quickActions.memberRank') }}</span>
         </NuxtLink>
         <a href="#" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/address-icon.169a4d95.svg" alt="Sổ địa chỉ" loading="lazy" />
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/promotion-icon.99af272d.svg" :alt="$t('profile.layout.quickActions.discountCode')" loading="lazy" />
           </div>
-          <span>Sổ địa chỉ</span>
+          <span>{{ $t('profile.layout.quickActions.discountCode') }}</span>
         </a>
+        <NuxtLink :to="localePath('/orders')" class="profile-layout__quick-action">
+          <div class="profile-layout__quick-action-icon">
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/history-icon.2ebe1813.svg" :alt="$t('profile.layout.quickActions.orderHistory')" loading="lazy" />
+          </div>
+          <span>{{ $t('profile.layout.quickActions.orderHistory') }}</span>
+        </NuxtLink>
+        <NuxtLink :to="localePath('/user-info')" class="profile-layout__quick-action">
+          <div class="profile-layout__quick-action-icon">
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/address-icon.169a4d95.svg" :alt="$t('profile.layout.quickActions.addressBook')" loading="lazy" />
+          </div>
+          <span>{{ $t('profile.layout.quickActions.addressBook') }}</span>
+        </NuxtLink>
         <a href="#" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/edu-icon.76bd96ea.svg" alt="S-Student & S-Teacher" loading="lazy" />
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/edu-icon.76bd96ea.svg" :alt="$t('profile.promotion.student')" loading="lazy" />
           </div>
-          <span>S-Student & S-Teacher</span>
+          <span>{{ $t('profile.promotion.student') }}</span>
         </a>
-        <a href="#" class="profile-layout__quick-action">
+        <NuxtLink :to="localePath('/user-info')" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/link-icon.1de266bc.svg" alt="Liên kết tài khoản" loading="lazy" />
+            <img src="https://cdn-static.smember.com.vn/_next/static/media/link-icon.1de266bc.svg" :alt="$t('profile.layout.quickActions.linkedAccounts')" loading="lazy" />
           </div>
-          <span>Liên kết tài khoản</span>
-        </a>
+          <span>{{ $t('profile.layout.quickActions.linkedAccounts') }}</span>
+        </NuxtLink>
       </div>
 
       <!-- Body: Sidebar + Main -->
@@ -113,53 +114,53 @@
           <nav class="profile-layout__sidebar-nav">
             <NuxtLink :to="localePath('/profile')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'overview' }">
               <i class="bi bi-person"></i>
-              <span>Tổng quan</span>
+              <span>{{ $t('profile.layout.sidebar.overview') }}</span>
             </NuxtLink>
             <NuxtLink :to="localePath('/orders')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'orders' }">
               <i class="bi bi-bag-check"></i>
-              <span>Lịch sử mua hàng</span>
+              <span>{{ $t('profile.layout.sidebar.orders') }}</span>
             </NuxtLink>
             <NuxtLink :to="localePath('/warranty')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'warranty' }">
               <i class="bi bi-shield-check"></i>
-              <span>Tra cứu bảo hành</span>
+              <span>{{ $t('profile.layout.sidebar.warranty') }}</span>
             </NuxtLink>
             <NuxtLink :to="localePath('/tradein')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tradein' }">
               <i class="bi bi-arrow-left-right"></i>
-              <span>Lịch sử thu cũ</span>
+              <span>{{ $t('profile.layout.sidebar.tradein') }}</span>
             </NuxtLink>
 
             <div class="profile-layout__sidebar-divider"></div>
 
             <NuxtLink :to="localePath('/promotion')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'rank' }">
               <i class="bi bi-star"></i>
-              <span>Hạng thành viên và ưu đãi</span>
+              <span>{{ $t('profile.layout.sidebar.promotion') }}</span>
             </NuxtLink>
 
             <div class="profile-layout__sidebar-divider"></div>
 
             <NuxtLink :to="localePath('/user-info')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'user-info' }">
               <i class="bi bi-gear"></i>
-              <span>Thông tin tài khoản</span>
+              <span>{{ $t('profile.layout.sidebar.userInfo') }}</span>
             </NuxtLink>
             <NuxtLink :to="localePath('/policy')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'policy' }">
               <i class="bi bi-journal-text"></i>
-              <span>Chính sách bảo hành</span>
+              <span>{{ $t('profile.layout.sidebar.policy') }}</span>
             </NuxtLink>
             <NuxtLink :to="localePath('/tos')" class="profile-layout__sidebar-item" :class="{ 'profile-layout__sidebar-item--active': activeSidebarItem === 'tos' }">
               <i class="bi bi-file-earmark-text"></i>
-              <span>Điều khoản sử dụng</span>
+              <span>{{ $t('profile.layout.sidebar.terms') }}</span>
             </NuxtLink>
 
             <div class="profile-layout__sidebar-divider"></div>
 
             <button type="button" class="profile-layout__sidebar-item profile-layout__sidebar-item--logout" @click="handleLogout">
               <i class="bi bi-box-arrow-right"></i>
-              <span>Đăng xuất</span>
+              <span>{{ $t('profile.layout.sidebar.logout') }}</span>
             </button>
           </nav>
 
           <div class="profile-layout__app-cta">
-            <p class="profile-layout__app-cta-text">Mua sắm dễ dàng - Ưu đãi ngập tràn cùng IrusGear</p>
+            <p class="profile-layout__app-cta-text">{{ $t('profile.layout.appCta.title') }}</p>
             <div class="profile-layout__app-cta-content">
               <div class="profile-layout__qr-wrap">
                 <img src="https://cdn2.cellphones.com.vn/400x,webp/media/wysiwyg/Web/Logo/QR_appGeneral-v2.png" alt="QR Code" loading="lazy" />
@@ -191,12 +192,15 @@ import { storeToRefs } from 'pinia'
 import { useLocalePath, useRoute } from '#imports'
 import { useAuthStore } from '@/stores/authStore'
 import { useCartStore } from '@/stores/cartStore'
+import { useMemberRankStore } from '@/stores/memberRankStore'
 
 const localePath = useLocalePath()
 const route = useRoute()
 const authStore = useAuthStore()
 const cartStore = useCartStore()
+const memberRankStore = useMemberRankStore()
 const { user } = storeToRefs(authStore)
+const { currentUser } = storeToRefs(memberRankStore)
 
 const isDesktop = ref(false)
 const phoneVisible = ref(false)
@@ -216,7 +220,7 @@ const activeSidebarItem = computed(() => {
 
 const fullName = computed(() => {
   if (!user.value) return 'Khách'
-  return `${user.value.first_name || ''} ${user.value.last_name || ''}`.trim() || 'Khách'
+  return user.value.full_name || `${user.value.first_name || ''} ${user.value.last_name || ''}`.trim() || 'Khách'
 })
 
 const displayPhone = computed(() => {
@@ -234,7 +238,6 @@ const avatarUrl = computed(() => {
 })
 
 const totalOrders = ref(0)
-const totalSpend = ref({ formatted: '0đ', value: 0 })
 
 const handleLogout = () => {
   authStore.logout()
@@ -253,6 +256,7 @@ onMounted(() => {
     authStore.fetchUser().catch(() => {})
   }
   cartStore.fetchCart({ silent: true }).catch(() => {})
+  memberRankStore.fetchMemberRank().catch(() => {})
 })
 
 onUnmounted(() => {
@@ -356,6 +360,26 @@ onUnmounted(() => {
 .profile-layout__rank-badge--student {
   background: #ed0017;
   color: #fff;
+}
+
+.profile-layout__rank-badge--snew {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.profile-layout__rank-badge--smem {
+  background: #d97706;
+  color: #fff;
+}
+
+.profile-layout__rank-badge--svip {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+}
+
+.profile-layout__rank-badge--snull {
+  background: #f4f4f5;
+  color: #18181b;
 }
 
 .profile-layout__renew-hint {

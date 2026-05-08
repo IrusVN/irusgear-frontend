@@ -3,7 +3,7 @@
   <ProfileLayout>
   <div class="promotion-card">
     <div class="promotion-card__header">
-      <h3 class="promotion-card__title">Ưu đãi của bạn</h3>
+      <h3 class="promotion-card__title">{{ $t('profile.promotion.yourOffers') }}</h3>
     </div>
     <div class="promotion-card__body promotion-card__body--center">
       <img
@@ -11,14 +11,14 @@
         alt="empty"
         class="promotion-card__empty-img"
       />
-      <p class="promotion-card__empty-text">Bạn đang chưa có ưu đãi nào</p>
+      <p class="promotion-card__empty-text">{{ $t('profile.promotion.noOffers') }}</p>
     </div>
   </div>
 
   <!-- Rank Stepper: Carousel -->
   <div class="promotion-card">
     <div class="promotion-card__header">
-      <h3 class="promotion-card__title">Hạng thành viên</h3>
+      <h3 class="promotion-card__title">{{ $t('profile.promotion.rankTitle') }}</h3>
     </div>
     <div class="promotion-card__body promotion-card__body--rank">
 
@@ -54,49 +54,49 @@
                 'rank-card--active': idx === activeRankIndex,
                 'rank-card--done': idx < activeRankIndex,
                 'rank-card--locked': idx > activeRankIndex,
+                [`rank-card--${rank.key}`]: true,
               }"
               @click="setActiveRank(idx)"
             >
-              <img :src="rank.bgImage" alt="" class="rank-card__bg" />
               <div class="rank-card__content" :class="{ 'rank-card__content--center': idx !== activeRankIndex }">
 
-                <!-- Active Card: S-NULL -->
-                <template v-if="idx === activeRankIndex && rank.key === 'snull'">
+                <!-- Active Card: Current user's rank -->
+                <template v-if="idx === activeRankIndex && currentUser && rank.key === currentUser.rankKey">
                   <div class="rank-card__top">
-                    <span class="rank-card__name rank-card__name--null">S-NULL</span>
-                    <span class="rank-card__tag rank-card__tag--student">S-Student</span>
+                    <span class="rank-card__name" :class="`rank-card__name--${rank.key}`">{{ $t(`profile.promotion.ranks.${rank.key}`) }}</span>
+                    <span v-if="currentUser.isStudent" class="rank-card__tag rank-card__tag--student">{{ $t('profile.promotion.student') }}</span>
                   </div>
                   <div class="rank-card__user">
                     <i class="bi bi-person-fill"></i>
-                    <span>MAI LÊ HUY HOÀNG</span>
+                    <span>{{ currentUser.name }}</span>
                   </div>
                   <div class="rank-card__bottom">
-                    <p class="rank-card__spent">Đã mua <strong>0đ</strong>/3.000.000đ</p>
+                    <p class="rank-card__spent">{{ $t('profile.promotion.spent') }} <strong>{{ currentUser.totalSpentFormatted }}</strong>/{{ rank.spentThresholdFormatted }}</p>
                     <div class="rank-card__progress-bar">
-                      <div class="rank-card__progress-fill" style="width: 0%"></div>
+                      <div class="rank-card__progress-fill" :style="{ width: currentUser.progressPercent + '%' }"></div>
                     </div>
-                    <p class="rank-card__renew">Hạng thành viên được cập nhật lại sau 01/01/2027</p>
-                    <p class="rank-card__next">Cần chi tiêu thêm <strong>3.000.000đ</strong> để lên hạng <strong>S-NEW</strong></p>
+                    <p v-if="currentUser.renewalDate" class="rank-card__renew">{{ $t('profile.promotion.renewHint') }} {{ currentUser.renewalDate }}</p>
+                    <p v-if="currentUser.nextRankName" class="rank-card__next">{{ $t('profile.promotion.needSpend') }} <strong>{{ currentUser.amountToNextRankFormatted }}</strong> {{ $t('profile.promotion.toRank') }} <strong>{{ currentUser.nextRankName }}</strong></p>
                   </div>
                 </template>
 
-                <!-- Active Card: Other ranks -->
-                <template v-else-if="idx === activeRankIndex && rank.key !== 'snull'">
+                <!-- Active Card: Other ranks (not user's current) -->
+                <template v-else-if="idx === activeRankIndex">
                   <div class="rank-card__top">
-                    <span class="rank-card__name" :class="`rank-card__name--${rank.key}`">{{ rank.name }}</span>
+                    <span class="rank-card__name" :class="`rank-card__name--${rank.key}`">{{ $t(`profile.promotion.ranks.${rank.key}`) }}</span>
                   </div>
                   <div class="rank-card__unlock-info">
                     <i class="bi bi-lock-fill"></i>
-                    <span>Chưa mở khóa hạng thành viên</span>
+                    <span>{{ $t('profile.promotion.notUnlocked') }}</span>
                   </div>
                 </template>
 
                 <!-- Side Cards (non-active) -->
                 <template v-else>
-                  <div class="rank-card__name rank-card__name--side" :class="`rank-card__name--${rank.key}`">{{ rank.name }}</div>
+                  <div class="rank-card__name rank-card__name--side" :class="`rank-card__name--${rank.key}`">{{ $t(`profile.promotion.ranks.${rank.key}`) }}</div>
                   <div class="rank-card__lock-info">
                     <i class="bi bi-lock-fill"></i>
-                    <span>Chưa mở khóa</span>
+                    <span>{{ $t('profile.promotion.notUnlocked') }}</span>
                   </div>
                 </template>
 
@@ -148,18 +148,37 @@
   <!-- Benefits Section -->
   <div class="promotion-card">
     <div class="promotion-card__header">
-      <h3 class="promotion-card__title">Quyền lợi mua hàng</h3>
+      <h3 class="promotion-card__title">{{ $t('profile.promotion.shoppingBenefits') }}</h3>
     </div>
-    <div class="promotion-card__body promotion-card__body--benefits">
+    <div v-if="shoppingBenefits.length === 0 && !isLoadingBenefits" class="promotion-card__body promotion-card__body--benefits">
       <div class="benefit-item">
         <div class="benefit-item__icon benefit-item__icon--locked">
           <i class="bi bi-cart"></i>
         </div>
         <div class="benefit-item__content">
-          <div class="benefit-item__title">Ưu đãi mua hàng</div>
-          <div class="benefit-item__desc">Hiện chưa có ưu đãi mua hàng đặc biệt cho hạng thành viên S-NULL</div>
+          <div class="benefit-item__title">{{ $t('profile.promotion.yourOffers') }}</div>
+          <div class="benefit-item__desc">{{ $t('profile.promotion.noOffers') }}</div>
         </div>
         <div class="benefit-item__lock">
+          <i class="bi bi-lock-fill"></i>
+        </div>
+      </div>
+    </div>
+    <div v-else class="promotion-card__body promotion-card__body--benefits">
+      <div
+        v-for="benefit in shoppingBenefits"
+        :key="benefit.id"
+        class="benefit-item"
+        :class="{ 'benefit-item--locked': benefit.isLocked }"
+      >
+        <div class="benefit-item__icon" :class="benefit.isLocked ? 'benefit-item__icon--locked' : ''">
+          <i :class="benefit.icon || 'bi bi-star'"></i>
+        </div>
+        <div class="benefit-item__content">
+          <div class="benefit-item__title">{{ benefit.title }}</div>
+          <div class="benefit-item__desc">{{ benefit.description }}</div>
+        </div>
+        <div v-if="benefit.isLocked" class="benefit-item__lock">
           <i class="bi bi-lock-fill"></i>
         </div>
       </div>
@@ -169,12 +188,31 @@
   <!-- Service Policy -->
   <div class="promotion-card">
     <div class="promotion-card__header">
-      <h3 class="promotion-card__title">Chính sách phục vụ</h3>
+      <h3 class="promotion-card__title">{{ $t('profile.promotion.servicePolicy') }}</h3>
     </div>
-    <div class="promotion-card__body promotion-card__body--center promotion-card__body--benefits">
+    <div v-if="servicePolicies.length === 0 && !isLoadingBenefits" class="promotion-card__body promotion-card__body--center promotion-card__body--benefits">
       <div class="benefit-locked">
         <i class="bi bi-shield-lock"></i>
-        <p>Hiện chưa có chính sách ưu đãi phục vụ đặc biệt cho hạng thành viên S-NULL</p>
+        <p>{{ $t('profile.promotion.noOffers') }}</p>
+      </div>
+    </div>
+    <div v-else class="promotion-card__body promotion-card__body--benefits">
+      <div
+        v-for="policy in servicePolicies"
+        :key="policy.id"
+        class="benefit-item"
+        :class="{ 'benefit-item--locked': policy.isLocked }"
+      >
+        <div class="benefit-item__icon" :class="policy.isLocked ? 'benefit-item__icon--locked' : ''">
+          <i :class="policy.icon || 'bi bi-shield'"></i>
+        </div>
+        <div class="benefit-item__content">
+          <div class="benefit-item__title">{{ policy.title }}</div>
+          <div class="benefit-item__desc">{{ policy.description }}</div>
+        </div>
+        <div v-if="policy.isLocked" class="benefit-item__lock">
+          <i class="bi bi-lock-fill"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -182,38 +220,25 @@
   <!-- Upgrade Conditions -->
   <div class="promotion-card">
     <div class="promotion-card__header">
-      <h3 class="promotion-card__title">Điều kiện thăng cấp</h3>
+      <h3 class="promotion-card__title">{{ $t('profile.promotion.upgradeConditions') }}</h3>
     </div>
     <div class="promotion-card__body promotion-card__body--benefits">
-      <div class="condition-item">
-        <div class="condition-item__icon condition-item__icon--info">
-          <i class="bi bi-info-lg"></i>
-        </div>
-        <div class="condition-item__content">
-          <div class="condition-item__title">Điều kiện thăng hạng S-NULL</div>
-          <div class="condition-item__desc">
-            Tổng số tiền mua hàng tích lũy trong năm nay và năm liền trước đạt từ <strong>0đ</strong> đến
-            <strong>3.000.000đ</strong>, không tính đơn hàng doanh nghiệp B2B.
-          </div>
-        </div>
-      </div>
-
       <div class="condition-table">
         <div class="condition-table__header">
-          <span>Hạng</span>
-          <span>Tổng tiền tích lũy</span>
+          <span>{{ $t('profile.promotion.rankTitle') }}</span>
+          <span>{{ $t('profile.promotion.spent') }}</span>
         </div>
         <div
           v-for="rank in ranks"
           :key="rank.key"
           class="condition-table__row"
-          :class="{ 'condition-table__row--active': rank.status === 'current' }"
+          :class="{ 'condition-table__row--active': currentUser && rank.key === currentUser.rankKey }"
         >
           <span class="condition-table__rank">
             <i :class="rank.icon"></i>
-            {{ rank.name }}
+            {{ $t(`profile.promotion.ranks.${rank.key}`) }}
           </span>
-          <span class="condition-table__threshold">{{ rank.threshold }}</span>
+          <span class="condition-table__threshold">{{ rank.spentThresholdFormatted }}</span>
         </div>
       </div>
     </div>
@@ -223,10 +248,18 @@
 
 <script setup>
 import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useMemberRankStore } from '@/stores/memberRankStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
 definePageMeta({ layout: 'default' })
 useHead({ title: 'Hạng thành viên và ưu đãi - IrusGear' })
+
+const memberRankStore = useMemberRankStore()
+const { currentUser, ranks, shoppingBenefits, servicePolicies, isLoadingRank, isLoadingBenefits } = storeToRefs(memberRankStore)
+
+memberRankStore.fetchMemberRank()
+memberRankStore.fetchBenefits()
 
 const carouselViewport = ref(null)
 const activeRankIndex = ref(0)
@@ -391,41 +424,6 @@ const nextRank = () => {
     activeRankIndex.value++
   }
 }
-
-const ranks = [
-  {
-    key: 'snull',
-    name: 'S-NULL',
-    threshold: '0đ - 3.000.000đ',
-    status: 'current',
-    icon: 'bi bi-star',
-    bgImage: 'https://cdn-static.smember.com.vn/_next/static/media/snull-bg-card.7284811e.png',
-  },
-  {
-    key: 'snew',
-    name: 'S-NEW',
-    threshold: '3.000.000đ - 10.000.000đ',
-    status: 'locked',
-    icon: 'bi bi-star-fill',
-    bgImage: 'https://cdn-static.smember.com.vn/_next/static/media/snew-bg-card.f753cfbc.png',
-  },
-  {
-    key: 'smem',
-    name: 'S-MEM',
-    threshold: '10.000.000đ - 30.000.000đ',
-    status: 'locked',
-    icon: 'bi bi-star-fill',
-    bgImage: 'https://cdn-static.smember.com.vn/_next/static/media/smem-bg-card.1fa74fdc.png',
-  },
-  {
-    key: 'svip',
-    name: 'S-VIP',
-    threshold: '30.000.000đ+',
-    status: 'locked',
-    icon: 'bi bi-gem',
-    bgImage: 'https://cdn-static.smember.com.vn/_next/static/media/svip-bg-card.59d559cc.png',
-  },
-]
 </script>
 
 <style scoped>
@@ -586,6 +584,7 @@ const ranks = [
   transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, width 0.25s ease, height 0.25s ease;
   opacity: 0.5;
   transform: scale(0.88);
+  background: linear-gradient(135deg, #6b7280, #9ca3af);
 }
 
 .rank-card--active {
@@ -602,13 +601,18 @@ const ranks = [
   opacity: 0.7;
 }
 
-.rank-card__bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+.rank-card--snull { background: linear-gradient(135deg, #6b7280, #9ca3af); }
+.rank-card--snew { background: linear-gradient(135deg, #2563eb, #60a5fa); }
+.rank-card--smem { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+.rank-card--svip { background: linear-gradient(135deg, #d97706, #fbbf24); }
+
+.rank-card--active.rank-card--snull { background: linear-gradient(135deg, #4b5563, #6b7280); }
+.rank-card--active.rank-card--snew { background: linear-gradient(135deg, #1d4ed8, #2563eb); }
+.rank-card--active.rank-card--smem { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
+.rank-card--active.rank-card--svip { background: linear-gradient(135deg, #b45309, #d97706); }
+
+.rank-card--locked {
+  background: linear-gradient(135deg, #4b5563, #6b7280) !important;
 }
 
 .rank-card__content {
@@ -881,6 +885,10 @@ const ranks = [
   font-size: 13px;
   color: #71717a;
   line-height: 1.5;
+}
+
+.benefit-item--locked {
+  opacity: 0.8;
 }
 
 .benefit-item__lock {
