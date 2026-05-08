@@ -74,6 +74,7 @@ import { useFeGlobalStore } from "@/stores/feGlobalStore";
 
 definePageMeta({
   layout: "default",
+  middleware: ['auth-guard'],
 });
 
 const feGlobalStore = useFeGlobalStore();

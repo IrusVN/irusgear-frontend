@@ -609,6 +609,7 @@ import CheckoutProgress from "@/components/Checkout/CheckoutProgress.vue";
 
 definePageMeta({
   layout: "default",
+  middleware: ['auth-guard'],
 });
 
 const route = useRoute();

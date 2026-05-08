@@ -48,6 +48,7 @@ import OrderReviewDialog from "@/components/Checkout/OrderReviewDialog.vue";
 
 definePageMeta({
   layout: "default",
+  middleware: ['auth-guard'],
 });
 
 const { t } = useI18n();

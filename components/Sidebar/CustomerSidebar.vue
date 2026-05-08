@@ -284,7 +284,7 @@
               type="button"
               class="mobile-fab-item"
               :aria-label="$t('common.language')"
-              @click="toggleLanguage"
+              @click="toggleLanguage(); isMobileFabOpen = false"
             >
               <i class="bi bi-globe-americas"></i>
               <span class="mobile-fab-tooltip">{{ currentLangLabel }}</span>
@@ -310,7 +310,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useLocalePath, useRoute, useI18n } from '#imports'
+import { useLocalePath, useRoute, useI18n, navigateTo } from '#imports'
 import CategoryMegaMenu from '@/components/Home/CategoryMegaMenu.vue'
 import LanguageSwitcher from '@/components/Sidebar/LanguageSwitcher.vue'
 import { useHomeStore } from '@/stores/homeStore'
@@ -329,14 +329,13 @@ const { itemCount: wishlistCount } = storeToRefs(wishlistStore)
 const { heroMegaMenuOpen } = storeToRefs(homeStore)
 const localePath = useLocalePath()
 const route = useRoute()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const customerSidebarWrapRef = ref(null)
 const productsButtonRef = ref(null)
 const productsDropdownRef = ref(null)
 const isHeaderCategoryMenuOpen = ref(false)
 const isSecondaryNavHidden = ref(false)
 const isMobileFabOpen = ref(false)
-const currentLocale = ref('vi')
 let customerSidebarResizeObserver = null
 let customerSidebarOffsetFrame = null
 
@@ -585,10 +584,16 @@ const isMobileNavActive = (path) => {
   return normalizedCurrent === normalizePath(normalizedTarget)
 }
 
-const currentLangLabel = computed(() => currentLocale.value === 'vi' ? 'Tiếng Việt' : 'English')
+const currentLangLabel = computed(() => locale.value === 'vi' ? 'Tiếng Việt' : 'English')
 
-const toggleLanguage = () => {
-  currentLocale.value = currentLocale.value === 'vi' ? 'en' : 'vi'
+const toggleLanguage = async () => {
+  const currentPath = window.location.pathname
+  const pathWithoutLocale = currentPath.replace(/^\/(vi|en)/, '') || '/'
+  const targetLocale = locale.value === 'vi' ? 'en' : 'vi'
+  const targetPath = targetLocale === 'en'
+    ? `/en${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
+    : pathWithoutLocale
+  await navigateTo(targetPath)
 }
 
 const featuredNavItems = computed(() => [

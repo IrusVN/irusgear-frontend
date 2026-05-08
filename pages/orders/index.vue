@@ -101,7 +101,7 @@
 import { ref, computed } from 'vue'
 import { useLocalePath } from '#imports'
 
-definePageMeta({ layout: 'profile' })
+definePageMeta({ layout: 'profile', middleware: ['auth-guard'] })
 
 useHead({ title: 'Lịch sử mua hàng - IrusGear' })
 

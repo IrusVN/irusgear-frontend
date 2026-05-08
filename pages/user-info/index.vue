@@ -157,7 +157,7 @@
 <script setup>
 import { ref } from 'vue'
 
-definePageMeta({ layout: 'profile' })
+definePageMeta({ layout: 'profile', middleware: ['auth-guard'] })
 
 useHead({ title: 'Thông tin tài khoản - IrusGear' })
 

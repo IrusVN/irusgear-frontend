@@ -152,6 +152,7 @@ const localePath = useLocalePath()
 
 definePageMeta({
   layout: 'profile',
+  middleware: ['auth-guard'],
 })
 
 useHead({

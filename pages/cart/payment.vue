@@ -148,6 +148,7 @@ import QrPaymentModal from "@/components/Checkout/QrPaymentModal.vue";
 
 definePageMeta({
   layout: "default",
+  middleware: ['auth-guard'],
 });
 
 const checkoutStore = useCheckoutStore();
