@@ -131,13 +131,13 @@
       @expired="handleQrExpired"
       @success="handleQrSuccess"
       @failed="handleQrFailed"
+      @retry="handleQrRetry"
     />
   </section>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { storeToRefs } from "pinia";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useCartStore } from "@/stores/cartStore";
 import { useDeviceDetection } from "@/composables/useDeviceDetection";
@@ -161,14 +161,7 @@ const showQrModal = ref(false);
 const selectedPayUrl = ref("");
 const selectedPayData = ref(null);
 const selectedExpiresAt = ref(null);
-const paymentPopup = ref(null); // reference den popup window.open
-const popupCheckInterval = ref(null);
-
-// Mobile: trạng thái chờ thanh toán khi quay lại từ gateway
-const mobileWaiting = ref(false);
-const mobilePollResult = ref(null);
-const mobilePollLoading = ref(false);
-let mobilePollAbortController = null;
+const paymentPopup = ref(null);
 
 const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
 
@@ -205,7 +198,7 @@ const handlePayment = async () => {
   try {
     if (selectedMethod.value === "cod") {
       await checkoutStore.createOrder("cod");
-      await navigateTo("/cart/payment/success");
+      await navigateTo("/cart/success");
       return;
     }
 
@@ -217,8 +210,6 @@ const handlePayment = async () => {
     if (isMobile()) {
       window.location.href = data.payUrl;
     } else {
-      // Mo desktop: mo popup VNPay + hien QR modal
-      // Popup cho phep redirect ve tab goc khi thanh toan xong
       openPaymentPopup(data.payUrl);
       showQrModal.value = true;
     }
@@ -232,8 +223,7 @@ const handlePayment = async () => {
 
 /**
  * Mo VNPay/MoMo trong popup window.open.
- * Popup se redirect ve return URL (cung la tab goc) khi thanh toan xong.
- * Tab goc lien tuc poll de detect thanh toan thanh cong.
+ * Modal component tu dong phat hien popup dong va hien thi trang thai.
  */
 const openPaymentPopup = (payUrl) => {
   // Dong popup cu (neu co)
@@ -251,37 +241,10 @@ const openPaymentPopup = (payUrl) => {
   );
 
   // Neu popup bi block boi browser (tra ve null), khong lam gi ca
-  // User van co the quet QR tu modal
-  if (!paymentPopup.value) {
-    return;
-  }
-
-  // Bat dau interval kiem tra popup da dong chua
-  startPopupCheck();
-};
-
-const startPopupCheck = () => {
-  if (popupCheckInterval.value) {
-    clearInterval(popupCheckInterval.value);
-  }
-
-  popupCheckInterval.value = setInterval(() => {
-    if (!paymentPopup.value || paymentPopup.value.closed) {
-      // Popup da dong -> dung kiem tra
-      stopPopupCheck();
-    }
-  }, 1000);
-};
-
-const stopPopupCheck = () => {
-  if (popupCheckInterval.value) {
-    clearInterval(popupCheckInterval.value);
-    popupCheckInterval.value = null;
-  }
+  // Modal van hien thi trang thai cho user
 };
 
 const closePaymentPopup = () => {
-  stopPopupCheck();
   if (paymentPopup.value && !paymentPopup.value.closed) {
     paymentPopup.value.close();
     paymentPopup.value = null;
@@ -312,7 +275,7 @@ const handleQrSuccess = async (paymentData) => {
   selectedPayUrl.value = "";
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
-  await navigateTo(`/cart/payment/success?order_id=${paymentData.orderId || checkoutStore.preparedOrderId}`);
+  await navigateTo(`/cart/success?order_id=${paymentData.orderId || checkoutStore.preparedOrderId}`);
 };
 
 const handleQrFailed = (reason) => {
@@ -323,44 +286,37 @@ const handleQrFailed = (reason) => {
   selectedExpiresAt.value = null;
 };
 
-// Mobile: kiểm tra xem có query params thanh toán không (user quay lại từ gateway)
-const checkMobileReturn = async () => {
-  const params = new URLSearchParams(window.location.search);
-  const hasPaymentParams =
-    params.has("vnp_TxnRef") ||
-    params.has("orderId") ||
-    params.has("resultCode") ||
-    params.has("vnp_ResponseCode");
+const handleQrRetry = async () => {
+  showQrModal.value = false;
+  closePaymentPopup();
+  if (selectedPayUrl.value) {
+    openPaymentPopup(selectedPayUrl.value);
+    showQrModal.value = true;
+  } else {
+    await handlePayment();
+  }
+};
 
-  // Backend tạo order từ session — dùng session_id (UUID) để poll.
-  // orderId từ query param là order đã được tạo khi user redirect về.
-  if (!hasPaymentParams || !checkoutStore.preparedSessionId) return;
+// Nhận postMessage từ popup khi thanh toán thành công.
+// Backend vnpayReturn trả HTML page gửi message rồi đóng popup.
+// Gateway chỉ redirect khi payment đã confirmed → navigate ngay, không cần poll.
+const handlePopupMessage = async (event) => {
+  const data = event.data;
+  if (data?.type !== "PAYMENT_DONE") return;
 
-  mobileWaiting.value = true;
-  mobilePollLoading.value = true;
-  mobilePollAbortController = new AbortController();
+  showQrModal.value = false;
+  closePaymentPopup();
 
-  try {
-    const result = await checkoutStore.pollOrderPaymentStatus(
-      checkoutStore.preparedSessionId,
-      {
-        maxAttempts: 20,
-        intervalMs: 3000,
-      },
-      mobilePollAbortController,
-    );
+  if (data.status === "failed") {
+    selectedMethod.value = null;
+    return;
+  }
 
-    if (result) {
-      mobilePollResult.value = result;
-      const orderId = result.orderId || checkoutStore.preparedOrderId || params.get("orderId");
-      await navigateTo(`/cart/payment/success?order_id=${orderId}`);
-    } else {
-      mobilePollResult.value = { timeout: true };
-    }
-  } catch {
-    mobilePollResult.value = { error: true };
-  } finally {
-    mobilePollLoading.value = false;
+  const orderId = data.orderId || checkoutStore.preparedOrderId;
+  if (orderId) {
+    await navigateTo(`/cart/success?order_id=${orderId}&payment_method=vnpay`);
+  } else {
+    selectedMethod.value = null;
   }
 };
 
@@ -369,17 +325,12 @@ const formatMoney = (value) => {
 };
 
 onMounted(() => {
-  if (isMobile()) {
-    checkMobileReturn();
-  }
+  window.addEventListener("message", handlePopupMessage);
 });
 
 onUnmounted(() => {
   closePaymentPopup();
-  if (mobilePollAbortController) {
-    mobilePollAbortController.abort();
-    mobilePollAbortController = null;
-  }
+  window.removeEventListener("message", handlePopupMessage);
 });
 </script>
 
@@ -614,11 +565,230 @@ onUnmounted(() => {
 
 @media (max-width: 991.98px) {
   .payment-page {
-    padding-bottom: 120px;
+    padding-bottom: 170px;
   }
 
   .payment-page__summary-col {
     width: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .payment-page {
+    padding-bottom: 160px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .payment-page__section {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .payment-page__title {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .payment-page__summary {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .payment-page__summary-eyebrow {
+    font-size: 11px;
+  }
+
+  .payment-page__summary-items {
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .payment-page__summary-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .payment-page__summary-name {
+    font-size: 12px;
+  }
+
+  .payment-page__summary-meta {
+    font-size: 11px;
+  }
+
+  .payment-page__summary-price {
+    font-size: 13px;
+  }
+
+  .payment-page__summary-row {
+    font-size: 13px;
+  }
+
+  .payment-page__summary-total {
+    font-size: 15px;
+  }
+
+  .payment-page__summary-total-value {
+    font-size: 18px !important;
+  }
+
+  .payment-page__sticky-bar {
+    bottom: 88px;
+    padding: 12px 0;
+  }
+
+  .payment-page__submit-btn {
+    border-radius: 10px;
+    font-size: 15px;
+    min-height: 48px;
+    padding: 10px 20px;
+  }
+
+  .payment-page__no-order {
+    border-radius: 14px;
+    padding: 48px 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .payment-page {
+    padding-bottom: 100px;
+  }
+
+  .payment-page__section {
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .payment-page__title {
+    font-size: 15px;
+    gap: 8px;
+  }
+
+  .payment-page__title i {
+    font-size: 16px;
+  }
+
+  .payment-page__summary {
+    border-radius: 12px;
+    padding: 14px;
+    position: static;
+  }
+
+  .payment-page__summary-eyebrow {
+    font-size: 11px;
+  }
+
+  .payment-page__summary-items {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .payment-page__summary-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+  }
+
+  .payment-page__summary-name {
+    font-size: 12px;
+  }
+
+  .payment-page__summary-price {
+    font-size: 12px;
+  }
+
+  .payment-page__summary-divider {
+    margin: 10px 0;
+  }
+
+  .payment-page__summary-pricing {
+    gap: 6px;
+  }
+
+  .payment-page__summary-row {
+    font-size: 12px;
+  }
+
+  .payment-page__summary-total {
+    font-size: 14px;
+    padding-top: 8px;
+  }
+
+  .payment-page__summary-total-value {
+    font-size: 16px !important;
+  }
+
+  .payment-page__sticky-bar {
+    padding: 10px 0;
+  }
+
+  .payment-page__submit-btn {
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    gap: 6px;
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  .payment-page__submit-btn span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .payment-page__submit-btn i {
+    font-size: 14px;
+  }
+
+  .btn-back {
+    border-radius: 8px;
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .payment-page__no-order {
+    border-radius: 12px;
+    padding: 40px 14px;
+    font-size: 14px;
+  }
+
+  .payment-page__no-order i {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-page__section {
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .payment-page__title {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .payment-page__summary {
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .payment-page__summary-total-value {
+    font-size: 15px !important;
+  }
+
+  .payment-page__sticky-bar {
+    padding: 8px 0;
+  }
+
+  .payment-page__submit-btn {
+    border-radius: 8px;
+    font-size: 14px;
+    min-height: 42px;
+    padding: 8px 14px;
   }
 }
 </style>

@@ -14,66 +14,84 @@
         </div>
 
         <div class="qr-modal__body">
-          <div class="qr-modal__qr-wrapper">
-            <img
-              v-if="payUrl"
-              :src="qrCodeUrl"
-              :alt="`QR ${methodName}`"
-              class="qr-modal__qr"
-              @error="qrError = true"
-            />
-            <div v-if="qrError || !payUrl" class="qr-modal__qr-error">
-              <i class="bi bi-qr-code-scan"></i>
-              <span>{{ $t("payment.qrLoadError") }}</span>
+          <!-- Popup closed state -->
+          <div v-if="popupClosed" class="qr-modal__popup-closed">
+            <div class="qr-modal__popup-closed-icon">
+              <i class="bi bi-exclamation-triangle-fill"></i>
             </div>
+            <p class="qr-modal__popup-closed-title">Bạn đã đóng cửa sổ thanh toán</p>
+            <p class="qr-modal__popup-closed-desc">
+              Thanh toán có thể chưa hoàn tất. Bạn có muốn thử lại hoặc chọn phương thức khác?
+            </p>
           </div>
 
-          <p class="qr-modal__scan-hint">
-            {{ $t("payment.qrScanHint", { method: methodName }) }}
-          </p>
-
-          <div v-if="amount" class="qr-modal__amount">
-            {{ formatMoney(amount) }}
-          </div>
-
-          <div class="qr-modal__timer">
-            <span class="qr-modal__timer-label">
-              <i class="bi bi-hourglass-split"></i>
-              {{ $t("payment.qrWaiting") }}
-            </span>
-            <span class="qr-modal__timer-value">{{ formattedTime }}</span>
-            <div class="qr-modal__timer-bar">
-              <div
-                class="qr-modal__timer-progress"
-                :style="{ width: progressPercent + '%' }"
-              ></div>
+          <!-- Default: đang chờ thanh toán -->
+          <template v-else>
+            <div class="qr-modal__icon-wrapper">
+              <i :class="methodIcon" class="qr-modal__method-icon"></i>
             </div>
-          </div>
 
-          <div v-if="pollingActive && !paymentConfirmed" class="qr-modal__polling-indicator">
-            <i class="bi bi-arrow-repeat spin"></i>
-            {{ $t("payment.pollingIndicator") }}
-          </div>
+            <p class="qr-modal__amount-label">Số tiền thanh toán</p>
+            <div class="qr-modal__amount">
+              {{ formatMoney(amount) }}
+            </div>
 
-          <div v-if="paymentConfirmed" class="qr-modal__confirmed-indicator">
-            <i class="bi bi-check-circle-fill"></i>
-            {{ $t("payment.confirmingPayment") }}
-          </div>
+            <div class="qr-modal__timer">
+              <span class="qr-modal__timer-label">
+                <i class="bi bi-hourglass-split"></i>
+                Hết hạn sau
+              </span>
+              <span class="qr-modal__timer-value">{{ formattedTime }}</span>
+              <div class="qr-modal__timer-bar">
+                <div
+                  class="qr-modal__timer-progress"
+                  :style="{ width: progressPercent + '%' }"
+                ></div>
+              </div>
+            </div>
 
-          <div v-if="popup && !paymentConfirmed" class="qr-modal__popup-open">
-            <i class="bi bi-box-arrow-up-right"></i>
-            {{ $t("payment.popupOpen") }}
-          </div>
+            <div v-if="pollingActive && !paymentConfirmed" class="qr-modal__polling-indicator">
+              <i class="bi bi-arrow-repeat spin"></i>
+              {{ $t("payment.pollingIndicator") }}
+            </div>
 
-          <p class="qr-modal__tip">
-            <i class="bi bi-lightbulb"></i>
-            {{ $t("payment.qrTip", { method: methodName }) }}
-          </p>
+            <div v-if="paymentConfirmed" class="qr-modal__confirmed-indicator">
+              <i class="bi bi-check-circle-fill"></i>
+              {{ $t("payment.confirmingPayment") }}
+            </div>
+
+            <div v-if="popupOpen" class="qr-modal__popup-open">
+              <i class="bi bi-box-arrow-up-right"></i>
+              Cửa sổ thanh toán đang mở — vui lòng thanh toán trên cửa sổ đó
+            </div>
+          </template>
         </div>
 
         <div class="qr-modal__footer">
-          <button type="button" class="qr-modal__cancel-btn" @click="handleCancel">
-            {{ $t("payment.qrCancel") }}
+          <button
+            v-if="popupClosed"
+            type="button"
+            class="qr-modal__retry-btn"
+            @click="$emit('retry')"
+          >
+            <i class="bi bi-arrow-repeat"></i>
+            Thử lại
+          </button>
+          <button
+            v-if="popupClosed"
+            type="button"
+            class="qr-modal__cancel-btn"
+            @click="handleCancel"
+          >
+            Chọn phương thức khác
+          </button>
+          <button
+            v-else
+            type="button"
+            class="qr-modal__cancel-btn"
+            @click="handleCancel"
+          >
+            Hủy
           </button>
         </div>
       </div>
@@ -82,6 +100,7 @@
 </template>
 
 <script setup>
+import { ref, computed, watch, onUnmounted } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 
 const props = defineProps({
@@ -91,7 +110,7 @@ const props = defineProps({
   },
   payUrl: {
     type: String,
-    required: true,
+    default: "",
   },
   method: {
     type: String,
@@ -119,16 +138,18 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["close", "cancel", "expired", "success", "failed"]);
+const emit = defineEmits(["close", "cancel", "expired", "success", "failed", "retry"]);
 
 const checkoutStore = useCheckoutStore();
-const qrError = ref(false);
 const TOTAL_SECONDS = 300;
 const remainingSeconds = ref(TOTAL_SECONDS);
 const pollingActive = ref(false);
 const paymentConfirmed = ref(false);
+const popupClosed = ref(false);
+const popupOpen = ref(false);
 let timer = null;
 let pollAbortController = null;
+let popupWatchInterval = null;
 
 const progressPercent = computed(() =>
   (remainingSeconds.value / TOTAL_SECONDS) * 100
@@ -162,12 +183,6 @@ const methodIcon = computed(() => {
   }
 });
 
-const qrCodeUrl = computed(() => {
-  if (!props.payUrl) return "";
-  const encoded = encodeURIComponent(props.payUrl);
-  return `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=8&data=${encoded}`;
-});
-
 const formatMoney = (value) => {
   return `${new Intl.NumberFormat("vi-VN").format(value)}đ`;
 };
@@ -181,8 +196,6 @@ const clearTimer = () => {
 
 const startTimer = () => {
   clearTimer();
-  qrError.value = false;
-
   if (props.expiresAt) {
     const expires = new Date(props.expiresAt);
     const diff = Math.floor((expires.getTime() - Date.now()) / 1000);
@@ -190,13 +203,12 @@ const startTimer = () => {
   } else {
     remainingSeconds.value = TOTAL_SECONDS;
   }
-
   timer = setInterval(() => {
     remainingSeconds.value--;
     if (remainingSeconds.value <= 0) {
       clearTimer();
       pollingActive.value = false;
-      emit("expired");
+      popupClosed.value = true;
     }
   }, 1000);
 };
@@ -204,7 +216,6 @@ const startTimer = () => {
 const startPolling = async () => {
   if (!props.sessionId || pollingActive.value) return;
   pollingActive.value = true;
-
   pollAbortController = new AbortController();
 
   try {
@@ -228,17 +239,45 @@ const startPolling = async () => {
         emit("failed", "Thanh toán không thành công");
       }
     }
-  } catch {
-    // polling continues
+  } catch (e) {
+    // Chi cho phep continue polling khi bi abort; cac loi khac thi dung lai
+    if (pollAbortController?.signal.aborted) return;
+    pollingActive.value = false;
   }
+};
+
+const watchPopupClosed = () => {
+  if (popupWatchInterval) {
+    clearInterval(popupWatchInterval);
+    popupWatchInterval = null;
+  }
+  popupWatchInterval = setInterval(() => {
+    if (props.popup && props.popup.closed) {
+      clearInterval(popupWatchInterval);
+      popupWatchInterval = null;
+      popupOpen.value = false;
+      pollingActive.value = false;
+      popupClosed.value = true;
+      clearTimer();
+      if (pollAbortController) {
+        pollAbortController.abort();
+        pollAbortController = null;
+      }
+    }
+  }, 500);
 };
 
 const handleCancel = () => {
   pollingActive.value = false;
+  popupClosed.value = false;
   clearTimer();
   if (pollAbortController) {
     pollAbortController.abort();
     pollAbortController = null;
+  }
+  if (popupWatchInterval) {
+    clearInterval(popupWatchInterval);
+    popupWatchInterval = null;
   }
   emit("cancel");
 };
@@ -249,14 +288,30 @@ watch(
     if (val) {
       paymentConfirmed.value = false;
       pollingActive.value = false;
-      startTimer();
-      startPolling();
-    } else {
-      pollingActive.value = false;
-      clearTimer();
+      popupClosed.value = false;
+      popupOpen.value = !!props.popup;
+      // Clean up any stale intervals from previous session before starting fresh
       if (pollAbortController) {
         pollAbortController.abort();
         pollAbortController = null;
+      }
+      if (popupWatchInterval) {
+        clearInterval(popupWatchInterval);
+        popupWatchInterval = null;
+      }
+      startTimer();
+      startPolling();
+      watchPopupClosed();
+    } else {
+      // Modal đóng (popup auto-close hoặc postMessage) — abort polling ngay
+      pollingActive.value = false;
+      if (pollAbortController) {
+        pollAbortController.abort();
+        pollAbortController = null;
+      }
+      if (popupWatchInterval) {
+        clearInterval(popupWatchInterval);
+        popupWatchInterval = null;
       }
     }
   }
@@ -264,10 +319,15 @@ watch(
 
 onUnmounted(() => {
   pollingActive.value = false;
+  popupClosed.value = false;
   clearTimer();
   if (pollAbortController) {
     pollAbortController.abort();
     pollAbortController = null;
+  }
+  if (popupWatchInterval) {
+    clearInterval(popupWatchInterval);
+    popupWatchInterval = null;
   }
 });
 </script>
@@ -341,49 +401,31 @@ onUnmounted(() => {
   gap: 14px;
 }
 
-.qr-modal__qr-wrapper {
-  background: #fff;
-  border: 1px solid #f0f0f2;
-  border-radius: 16px;
-  padding: 16px;
+.qr-modal__icon-wrapper {
+  background: #f9f9fb;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 72px;
+  height: 72px;
 }
 
-.qr-modal__qr {
-  border-radius: 8px;
-  display: block;
-  height: 250px;
-  width: 250px;
+.qr-modal__method-icon {
+  font-size: 36px;
 }
 
-.qr-modal__qr-error {
-  align-items: center;
-  color: #a1a1aa;
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  gap: 8px;
-  height: 250px;
-  justify-content: center;
-  width: 250px;
-}
-
-.qr-modal__qr-error i {
-  font-size: 48px;
-}
-
-.qr-modal__scan-hint {
+.qr-modal__amount-label {
   color: #71717a;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
-  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .qr-modal__amount {
   color: #d70018;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 800;
 }
 
@@ -429,48 +471,6 @@ onUnmounted(() => {
   transition: width 1s linear;
 }
 
-.qr-modal__tip {
-  align-items: center;
-  background: #fffbeb;
-  border: 1px solid #fde68a;
-  border-radius: 10px;
-  color: #92400e;
-  display: flex;
-  font-size: 13px;
-  gap: 8px;
-  margin: 0;
-  padding: 10px 14px;
-  text-align: left;
-}
-
-.qr-modal__tip i {
-  flex-shrink: 0;
-}
-
-.qr-modal__footer {
-  border-top: 1px solid #f0f0f2;
-  padding: 12px 20px 16px;
-}
-
-.qr-modal__cancel-btn {
-  background: none;
-  border: 1px solid #e4e4e7;
-  border-radius: 10px;
-  color: #71717a;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  min-height: 44px;
-  padding: 8px 20px;
-  transition: border-color 0.15s ease, color 0.15s ease;
-  width: 100%;
-}
-
-.qr-modal__cancel-btn:hover {
-  border-color: #d70018;
-  color: #d70018;
-}
-
 .qr-modal__polling-indicator {
   align-items: center;
   color: #71717a;
@@ -496,11 +496,6 @@ onUnmounted(() => {
   padding: 8px 14px;
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .qr-modal__popup-open {
   align-items: center;
   background: #eff6ff;
@@ -512,5 +507,84 @@ onUnmounted(() => {
   font-weight: 600;
   gap: 6px;
   padding: 8px 14px;
+  text-align: center;
+}
+
+.qr-modal__popup-closed {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0;
+  text-align: center;
+}
+
+.qr-modal__popup-closed-icon {
+  font-size: 48px;
+  color: #d97706;
+}
+
+.qr-modal__popup-closed-title {
+  color: #18181b;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.qr-modal__popup-closed-desc {
+  color: #71717a;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.qr-modal__footer {
+  border-top: 1px solid #f0f0f2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 20px 16px;
+}
+
+.qr-modal__cancel-btn {
+  background: none;
+  border: 1px solid #e4e4e7;
+  border-radius: 10px;
+  color: #71717a;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 44px;
+  padding: 8px 20px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+  width: 100%;
+}
+
+.qr-modal__cancel-btn:hover {
+  border-color: #d70018;
+  color: #d70018;
+}
+
+.qr-modal__retry-btn {
+  background: #d70018;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 44px;
+  padding: 8px 20px;
+  transition: background 0.15s ease;
+  width: 100%;
+}
+
+.qr-modal__retry-btn:hover {
+  background: #b80015;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 </style>

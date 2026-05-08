@@ -55,7 +55,7 @@ const windowWidth = ref(
 
 const showMobileInfoButton = computed(() => {
   if (!process.client) return false;
-  return windowWidth.value <= 768 && productStore.productDetail;
+  return windowWidth.value <= 990 && productStore.productDetail;
 });
 
 const openMobileInfo = () => {
@@ -241,7 +241,7 @@ onBeforeUnmount(() => {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 990px) {
   .product-detail-page {
     max-width: 1200px !important;
     padding: 0 10px;
@@ -267,7 +267,7 @@ onBeforeUnmount(() => {
 .mobile-info-trigger {
   display: none;
   position: fixed;
-  bottom: 16px;
+  bottom: 96px;
   right: 16px;
   z-index: 102;
   align-items: center;
@@ -289,7 +289,7 @@ onBeforeUnmount(() => {
   box-shadow: 0 6px 20px rgba(215, 0, 24, 0.45);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 990px) {
   .mobile-info-trigger {
     display: flex;
   }

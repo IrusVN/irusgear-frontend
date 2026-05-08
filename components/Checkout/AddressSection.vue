@@ -365,6 +365,10 @@ const handleDeleteAddress = async (id) => {
     max-width: calc(100vw - 48px);
   }
 
+  .address-swiper {
+    padding: 10px 14px;
+  }
+
   .address-swiper .swiper-slide {
     width: calc(100vw - 48px);
     min-width: calc(100vw - 48px);

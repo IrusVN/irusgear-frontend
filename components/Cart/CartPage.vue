@@ -286,7 +286,7 @@ const handleClearCart = async () => {
 
 @media (max-width: 991.98px) {
   .cart-page {
-    padding-bottom: 110px;
+    padding-bottom: 170px;
   }
 
   .cart-page__layout {
@@ -295,6 +295,24 @@ const handleClearCart = async () => {
 
   .cart-page__items-head {
     padding: 18px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cart-page {
+    padding-bottom: 160px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cart-page {
+    padding-bottom: 145px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-page {
+    padding-bottom: 130px;
   }
 }
 </style>

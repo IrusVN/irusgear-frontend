@@ -199,10 +199,113 @@
         >
           <CategoryMegaMenu />
         </div>
+
       </nav>
     </div>
-  </div>
-</template>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="mobile-bottom-nav d-md-none">
+      <div class="mobile-capsule-nav">
+        <NuxtLink
+          to="/"
+          class="mobile-nav-item"
+          :class="{ active: isMobileNavActive('/') }"
+        >
+          <i class="bi" :class="isMobileNavActive('/') ? 'bi-house-door-fill' : 'bi-house-door'"></i>
+          <span>{{ $t('home.home') }}</span>
+        </NuxtLink>
+
+        <button type="button" class="mobile-nav-item" :aria-label="$t('sidebar.searchPlaceholder')">
+          <i class="bi bi-search"></i>
+          <span>{{ $t('sidebar.search') || 'Tìm kiếm' }}</span>
+        </button>
+
+        <NuxtLink
+          to="/wishlist"
+          class="mobile-nav-item position-relative"
+          :class="{ active: isMobileNavActive('/wishlist') }"
+          :aria-label="$t('common.wishlist')"
+        >
+          <i class="bi" :class="isMobileNavActive('/wishlist') ? 'bi-heart-fill' : 'bi-heart'"></i>
+          <span>{{ $t('common.wishlist') }}</span>
+          <span
+            v-if="wishlistCount > 0"
+            class="mobile-nav-badge"
+          >{{ wishlistCount }}</span>
+        </NuxtLink>
+
+        <NuxtLink
+          v-if="user"
+          to="/profile"
+          class="mobile-nav-item"
+          :class="{ active: isMobileNavActive('/profile') }"
+          :aria-label="$t('common.profile')"
+        >
+          <img
+            class="mobile-nav-avatar"
+            :src="avatarUrl"
+            :alt="fullName"
+          >
+          <span>{{ $t('common.profile') }}</span>
+        </NuxtLink>
+
+        <NuxtLink
+          v-else
+          to="/auth/login"
+          class="mobile-nav-item"
+          :class="{ active: isMobileNavActive('/auth/login') }"
+          :aria-label="$t('common.login')"
+        >
+          <i class="bi bi-person"></i>
+          <span>{{ $t('common.login') }}</span>
+        </NuxtLink>
+      </div>
+
+      <!-- FAB + nút mở capsule dọc -->
+      <div class="mobile-fab-wrapper">
+        <!-- Capsule dọc chứa Cart + Language -->
+        <Transition name="capsule-up">
+          <div v-if="isMobileFabOpen" class="mobile-vertical-capsule mb-1">
+            <NuxtLink
+              to="/cart"
+              class="mobile-fab-item"
+              :aria-label="$t('cart.cart')"
+              @click="isMobileFabOpen = false"
+            >
+              <i class="bi bi-cart3"></i>
+              <span class="mobile-fab-tooltip">{{ $t('cart.cart') }}</span>
+              <span
+                v-if="itemCount > 0"
+                class="mobile-fab-badge"
+              >{{ itemCount }}</span>
+            </NuxtLink>
+
+            <button
+              type="button"
+              class="mobile-fab-item"
+              :aria-label="$t('common.language')"
+              @click="toggleLanguage"
+            >
+              <i class="bi bi-globe-americas"></i>
+              <span class="mobile-fab-tooltip">{{ currentLangLabel }}</span>
+            </button>
+          </div>
+        </Transition>
+
+        <!-- Nút FAB + -->
+        <button
+          type="button"
+          class="mobile-fab-btn"
+          :class="{ 'is-open': isMobileFabOpen }"
+          aria-label="Mở menu"
+          :aria-expanded="isMobileFabOpen ? 'true' : 'false'"
+          @click="isMobileFabOpen = !isMobileFabOpen"
+        >
+          <span class="mobile-fab-icon"></span>
+        </button>
+      </div>
+    </div>
+  </div></template>
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
@@ -213,13 +316,16 @@ import LanguageSwitcher from '@/components/Sidebar/LanguageSwitcher.vue'
 import { useHomeStore } from '@/stores/homeStore'
 import { useAuthStore } from '@/stores/authStore'
 import { useCartStore } from '@/stores/cartStore'
+import { useWishlistStore } from '@/stores/wishlistStore'
 import { getUserRoleKey } from '@/utils/roleHelper'
 
 const auth = useAuthStore()
 const cartStore = useCartStore()
 const homeStore = useHomeStore()
+const wishlistStore = useWishlistStore()
 const { user } = storeToRefs(auth)
 const { itemCount } = storeToRefs(cartStore)
+const { itemCount: wishlistCount } = storeToRefs(wishlistStore)
 const { heroMegaMenuOpen } = storeToRefs(homeStore)
 const localePath = useLocalePath()
 const route = useRoute()
@@ -229,6 +335,8 @@ const productsButtonRef = ref(null)
 const productsDropdownRef = ref(null)
 const isHeaderCategoryMenuOpen = ref(false)
 const isSecondaryNavHidden = ref(false)
+const isMobileFabOpen = ref(false)
+const currentLocale = ref('vi')
 let customerSidebarResizeObserver = null
 let customerSidebarOffsetFrame = null
 
@@ -333,10 +441,18 @@ const handleProductsClick = async () => {
 }
 
 const handleDocumentPointerDown = (event) => {
-  if (!isHeaderCategoryMenuOpen.value) return
-
   const target = event.target
   if (!(target instanceof Node)) return
+
+  // Đóng FAB khi click bên ngoài
+  if (isMobileFabOpen.value) {
+    const fabWrapper = document.querySelector('.mobile-fab-wrapper')
+    if (fabWrapper && !fabWrapper.contains(target)) {
+      isMobileFabOpen.value = false
+    }
+  }
+
+  if (!isHeaderCategoryMenuOpen.value) return
 
   const clickedButton = productsButtonRef.value?.contains(target)
   const clickedDropdown = productsDropdownRef.value?.contains(target)
@@ -366,6 +482,7 @@ const syncSecondaryNavVisibility = () => {
 watch(
   () => route.fullPath,
   async () => {
+    isMobileFabOpen.value = false
     closeHeaderCategoryMenu()
     setSecondaryNavHidden(false)
     await nextTick()
@@ -460,6 +577,18 @@ const buildProductsCategoryLink = (category) => {
 const isFeaturedNavItemActive = (item) => {
   if (!isProductsRoute.value) return false
   return item?.category === activeFeaturedCategory.value
+}
+
+const isMobileNavActive = (path) => {
+  const normalizedCurrent = normalizePath(route.path)
+  const normalizedTarget = localePath(path)
+  return normalizedCurrent === normalizePath(normalizedTarget)
+}
+
+const currentLangLabel = computed(() => currentLocale.value === 'vi' ? 'Tiếng Việt' : 'English')
+
+const toggleLanguage = () => {
+  currentLocale.value = currentLocale.value === 'vi' ? 'en' : 'vi'
 }
 
 const featuredNavItems = computed(() => [
@@ -707,6 +836,368 @@ const featuredNavItems = computed(() => [
 @media (max-width: 991.98px) {
   .customer-shell {
     border-radius: 1.25rem;
+  }
+}
+
+/* ── Mobile Bottom Capsule Navigation ── */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  left: 12px;
+  right: 12px;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767.98px) {
+  .mobile-bottom-nav {
+    display: flex !important;
+  }
+
+  body {
+    padding-bottom: 88px !important;
+  }
+}
+
+/* Capsule nav chứa 4 icon items */
+.mobile-capsule-nav {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+  max-width: calc(100% - 84px);
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.985);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 50px;
+  box-shadow:
+    8px 8px 20px rgba(15, 23, 42, 0.1),
+    -4px -4px 12px rgba(255, 255, 255, 0.9),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.mobile-nav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 4px;
+  border-radius: 36px;
+  background: transparent;
+  color: #8e8e93;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  flex: 1;
+  min-width: 0;
+  max-width: 80px;
+}
+
+.mobile-nav-item:active {
+  transform: scale(0.94);
+}
+
+.mobile-nav-item i {
+  font-size: 20px;
+  line-height: 1;
+  transition: color 0.28s ease;
+  flex-shrink: 0;
+}
+
+.mobile-nav-item span {
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  transition: color 0.28s ease;
+}
+
+.mobile-nav-item.active {
+  background: #eceef1;
+  color: #16181d;
+  box-shadow:
+    4px 4px 10px rgba(15, 23, 42, 0.08),
+    -2px -2px 6px rgba(255, 255, 255, 0.9);
+}
+
+.mobile-nav-item.active i,
+.mobile-nav-item.active span {
+  color: #16181d;
+}
+
+.mobile-nav-item:not(.active):hover i,
+.mobile-nav-item:not(.active):hover span {
+  color: #5f6472;
+}
+
+.mobile-nav-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(15, 23, 42, 0.15);
+  flex-shrink: 0;
+}
+
+.mobile-nav-badge {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1.5px solid #ffffff;
+}
+
+/* Ẩn text label trên màn hình cực nhỏ */
+@media (max-width: 360px) {
+  .mobile-nav-item span {
+    display: none;
+  }
+
+  .mobile-capsule-nav {
+    padding: 6px;
+  }
+}
+
+/* Nút Cart nổi bên ngoài capsule */
+.mobile-cart-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.985);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #16181d;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+  box-shadow: 8px 8px 20px rgba(15, 23, 42, 0.1), -4px -4px 12px rgba(255, 255, 255, 0.9), inset 0 1px 1px rgba(255, 255, 255, 1);
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-cart-btn:active {
+  transform: scale(0.92);
+  box-shadow: 4px 4px 10px rgba(15, 23, 42, 0.08), -2px -2px 6px rgba(255, 255, 255, 0.9), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.mobile-cart-btn i {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.mobile-cart-badge {
+  position: absolute;
+  top: 2px;
+  right: -2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+}
+
+/* ── FAB + Capsule dọc ── */
+.mobile-fab-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.mobile-vertical-capsule {
+  position: absolute;
+  bottom: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.985);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 28px;
+  box-shadow: 8px 8px 20px rgba(15, 23, 42, 0.1), -4px -4px 12px rgba(255, 255, 255, 0.9), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.mobile-fab-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: transparent;
+  color: #16181d;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-fab-item:active {
+  transform: scale(0.9);
+  background: #eceef1;
+}
+
+.mobile-fab-item i {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.mobile-fab-tooltip {
+  position: absolute;
+  right: 100%;
+  margin-right: 10px;
+  white-space: nowrap;
+  padding: 4px 10px;
+  background: #16181d;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-fab-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: #16181d;
+}
+
+.mobile-fab-item:hover .mobile-fab-tooltip,
+.mobile-fab-item:active .mobile-fab-tooltip {
+  opacity: 1;
+}
+
+.mobile-fab-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1.5px solid #ffffff;
+}
+
+.mobile-fab-btn {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.985);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #16181d;
+  cursor: pointer;
+  border: none;
+  box-shadow: 8px 8px 20px rgba(15, 23, 42, 0.1), -4px -4px 12px rgba(255, 255, 255, 0.9), inset 0 1px 1px rgba(255, 255, 255, 1);
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-fab-btn:active {
+  box-shadow: 4px 4px 10px rgba(15, 23, 42, 0.08), -2px -2px 6px rgba(255, 255, 255, 0.9), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.mobile-fab-icon {
+  position: relative;
+  width: 100%;
+  max-width: calc(100% - 84px);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-fab-icon::before {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(48%, -50%);
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1;
+  color: #16181d;
+  transition: all 0.22s ease;
+}
+
+.mobile-fab-btn.is-open .mobile-fab-icon::before {
+  content: '\00D7';
+  font-size: 44px;
+}
+
+/* Animation capsule mở lên trên */
+.capsule-up-enter-active,
+.capsule-up-leave-active {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.capsule-up-enter-from,
+.capsule-up-leave-to {
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+}
+
+/* ── Push body content up so nav doesn't cover it ── */
+@media (max-width: 767.98px) {
+  /* Ẩn top header trên mobile */
+  .customer-sidebar-wrap {
+    display: none !important;
+  }
+
+  body {
+    padding-bottom: 88px !important;
   }
 }
 </style>

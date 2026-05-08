@@ -250,12 +250,12 @@ onBeforeUnmount(() => {
 .checkout-progress__list {
   display: grid;
   gap: 0;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   list-style: none;
   margin: 0;
-  min-width: 640px;
   padding: 0;
   position: relative;
+  width: 100%;
 }
 
 .checkout-progress__list::before {
@@ -274,6 +274,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   gap: 12px;
   min-width: 0;
+  padding: 0 4px;
   position: relative;
   text-align: center;
   z-index: 1;
@@ -298,8 +299,10 @@ onBeforeUnmount(() => {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.35;
-  max-width: 140px;
-  text-wrap: balance;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .checkout-progress__item--active .checkout-progress__marker {
@@ -325,16 +328,36 @@ onBeforeUnmount(() => {
 
   .checkout-progress__shell {
     border-radius: 16px;
-    padding: 16px 14px 12px;
-  }
-
-  .checkout-progress__list {
-    min-width: 600px;
+    padding: 14px 12px 12px;
   }
 
   .checkout-progress__label {
-    font-size: 15px;
-    max-width: 124px;
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .checkout-progress__marker {
+    height: 28px;
+    width: 28px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-progress__label {
+    font-size: 10px !important;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .checkout-progress__marker {
+    height: 24px !important;
+    width: 24px !important;
+    font-size: 10px !important;
+  }
+
+  .checkout-progress__connector {
+    height: 2px;
   }
 }
 </style>

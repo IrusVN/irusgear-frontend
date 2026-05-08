@@ -146,6 +146,77 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .cart-summary {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cart-summary {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cart-summary {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-summary {
+    padding-bottom: 80px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cart-summary {
+    padding: 14px;
+    border-radius: 14px;
+    gap: 14px;
+  }
+
+  .cart-summary__title {
+    font-size: 18px;
+  }
+
+  .cart-summary__total-value {
+    font-size: 18px;
+  }
+
+  .cart-summary__eyebrow {
+    font-size: 11px;
+  }
+
+  .cart-summary__rows {
+    gap: 10px;
+  }
+
+  .cart-summary__row--total dt,
+  .cart-summary__row--total dd {
+    font-size: 14px;
+  }
+
+  .cart-summary__row--total dd {
+    font-size: 20px;
+  }
+
+  .cart-summary__cta {
+    min-height: 46px;
+    font-size: 14px;
+  }
+
+  .cart-summary__trust {
+    gap: 6px;
+  }
+
+  .cart-summary__trust li {
+    font-size: 12px;
+  }
+}
+
 .cart-summary {
   background: #fff;
   border: 1px solid #ececf1;

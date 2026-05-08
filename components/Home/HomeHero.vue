@@ -875,4 +875,31 @@ onUnmounted(() => {
     height: 320px;
   }
 }
+
+@media (max-width: 767.98px) {
+  .hero-slide-image {
+    height: 280px !important;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .promo-banner-list {
+    gap: 8px;
+  }
+
+  .promo-banner-item {
+    min-height: 60px;
+  }
+
+  .promo-banner-item img {
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slide-image {
+    height: 220px !important;
+  }
+}
 </style>

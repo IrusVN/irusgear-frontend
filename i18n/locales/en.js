@@ -24,6 +24,7 @@ export default {
         welcomeTo: "Welcome to",
         loading: "Loading...",
         seeAll: "See all",
+        seeYourOffers: "See your offers",
         discount: "Save",
         installment: "Installment",
         qa: "Q&A",
@@ -38,6 +39,8 @@ export default {
         buyNowAction: "Buy Now",
         seeMore: "See More",
         comboSelect: "Select Combo",
+        profile: "Account",
+        orders: "Orders",
     },
     role: {
         default: "DEFAULT",

@@ -435,4 +435,57 @@ const formatMoney = (value) => {
 .spin {
   animation: spin 0.8s linear infinite;
 }
+
+@media (max-width: 991.98px) {
+  .voucher-section__list {
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .voucher-section__header {
+    padding: 12px 16px 10px;
+  }
+
+  .voucher-section__title {
+    font-size: 15px;
+  }
+
+  .voucher-section__applied {
+    padding: 10px 16px 0;
+  }
+
+  .voucher-section__input-row {
+    padding: 10px 16px;
+  }
+
+  .voucher-section__error,
+  .voucher-section__rejected,
+  .voucher-section__empty {
+    padding: 8px 16px;
+  }
+
+  .voucher-section__list {
+    padding: 10px 16px 8px;
+  }
+
+  .voucher-section__footer {
+    padding: 10px 16px 14px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .voucher-section__list {
+    max-height: 200px;
+  }
+
+  .voucher-input-wrapper {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .voucher-input-wrapper input {
+    width: 100%;
+  }
+}
 </style>

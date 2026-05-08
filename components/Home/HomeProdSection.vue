@@ -793,4 +793,44 @@ watch(
     min-height: 100%;
   }
 }
+
+@media (max-width: 991.98px) {
+  .product-swiper-button-prev,
+  .product-swiper-button-next {
+    top: auto;
+    bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .product-strip {
+    gap: 10px;
+  }
+
+  .feature-strip {
+    gap: 6px;
+  }
+
+  .feature-chip {
+    font-size: 12px;
+    padding: 6px 10px;
+    min-height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-strip-track {
+    gap: 6px;
+  }
+
+  .brand-pill {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  .view-all-btn {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+}
 </style>

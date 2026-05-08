@@ -404,4 +404,42 @@ const increment = () => {
     min-width: 0;
   }
 }
+
+@media (max-width: 575.98px) {
+  .cart-item__name {
+    font-size: 13px;
+  }
+
+  .cart-item__options,
+  .cart-item__chips {
+    gap: 4px;
+  }
+
+  .cart-item__option,
+  .cart-item__chip {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .cart-item__warnings li {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-item__quantity {
+    gap: 4px;
+  }
+
+  .cart-item__quantity-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .cart-item__quantity-value {
+    min-width: 28px;
+    font-size: 13px;
+  }
+}
 </style>

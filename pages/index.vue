@@ -88,4 +88,29 @@ onBeforeUnmount(() => {
   min-height: 420px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
+
+/* ── Bottom Clearance: Mobile Bottom Nav ─── */
+@media (max-width: 991.98px) {
+  .home-page {
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .home-page {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .home-page {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding-bottom: 80px;
+  }
+}
 </style>

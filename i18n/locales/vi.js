@@ -24,6 +24,7 @@ export default {
         welcomeTo: "Chào mừng đến",
         loading: "Đang tải...",
         seeAll: "Xem tất cả ",
+        seeYourOffers: "Xem ưu đãi của bạn",
         discount: "Giảm",
         installment: "Trả góp",
         qa: "Hỏi đáp",
@@ -38,6 +39,8 @@ export default {
         buyNowAction: "Mua ngay",
         seeMore: "Xem thêm",
         comboSelect: "Chọn combo",
+        profile: "Tài khoản",
+        orders: "Đơn hàng",
     },
     role: {
         default: "Mặc định",

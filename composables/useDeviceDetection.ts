@@ -1,4 +1,13 @@
+import { ref } from "vue";
+
 export const useDeviceDetection = () => {
+  const isMobileRef = ref(false);
+
+  const checkMobile = () => {
+    if (typeof window === "undefined") return false;
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  };
+
   const isMobile = () => {
     if (typeof window === "undefined") return false;
     return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -16,6 +25,7 @@ export const useDeviceDetection = () => {
 
   return {
     isMobile,
+    isMobileRef,
     isIOS,
     isAndroid,
   };
