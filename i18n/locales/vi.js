@@ -42,6 +42,8 @@ export default {
         profile: "Tài khoản",
         orders: "Đơn hàng",
         wishlist: "Yêu thích",
+        save: "Lưu",
+        cancel: "Huỷ"
     },
     role: {
         default: "Mặc định",
@@ -899,6 +901,8 @@ export default {
                 totalOrdersSuffix: " đã mua",
                 channelNote: "Tổng tiền và số đơn hàng được tính chung từ IrusGear.",
             },
+            addPhone: "Nhập số điện thoại",
+            phonePlaceholder: "Nhập số điện thoại",
             stats: {
                 orders: "Đơn hàng",
                 pending: "Chờ xử lý",
@@ -947,6 +951,13 @@ export default {
             noOffers: "Bạn chưa có ưu đãi nào.",
             shopNow: "Mua sắm ngay",
             seeProducts: "Xem sản phẩm",
+            copyCode: "Sao chép mã",
+            expires: "Hết hạn",
+            used: "Đã sử dụng",
+            addressesTitle: "Địa chỉ của bạn",
+            noAddresses: "Bạn chưa có địa chỉ nào.",
+            editAddress: "Sửa địa chỉ",
+            default: "Mặc định",
         },
 
         // === pages/orders/index.vue ===

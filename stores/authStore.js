@@ -262,6 +262,26 @@ const resetPassword = async (password, passwordConfirmation) => {
     }
   };
 
+  const updateProfile = async (payload) => {
+    loading.value = true;
+    try {
+      const data = await apiFetch("/user/profile", {
+        method: "PUT",
+        body: payload,
+      });
+      // Response: { success, message, data: { id, name, first_name, ..., phone } }
+      const updatedUser = data?.data ?? data?.user ?? data;
+      if (updatedUser && typeof updatedUser === 'object') {
+        user.value = { ...user.value, ...updatedUser };
+      }
+      return { status: true, data };
+    } catch (err) {
+      return { status: false, message: err.data?.message };
+    } finally {
+      loading.value = false;
+    }
+  };
+
   return {
     user,
     permissions,
@@ -290,5 +310,6 @@ const resetPassword = async (password, passwordConfirmation) => {
 
     verifyOtp,
     resendOtp,
+    updateProfile,
   };
 });

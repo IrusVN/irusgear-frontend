@@ -1,85 +1,62 @@
 # Kế Hoạch API Backend — Profile Layout Pages
 
 > **Ngày tạo:** 2026-05-08
-> **Cập nhật lần cuối:** 2026-05-08 (v2 — loại bỏ endpoints đã có sẵn)
-> **Người thực hiện:** Senior Frontend — IrusGear Frontend Review
-> **Mục đích:** Backend triển khai API endpoints còn thiếu cho 8 trang sử dụng layout `profile`
-> **Cơ sở:** Phân tích chi tiết code từng page tại `pages/*/index.vue` + kiểm tra stores hiện có
+> **Cập nhật lần cuối:** 2026-05-08 (v3 — reflects actual implementation)
+> **Người thực hiện:** Senior Backend — IrusGear Backend Implementation
+> **Mục đích:** Frontend team dùng tài liệu này để consume chính xác các API đã được backend triển khai
+> **Trạng thái:** ✅ **ĐÃ IMPLEMENT** — tất cả 11 endpoints + Frontend Integration đã hoàn thành
 
 ---
 
 ## Mục Lục
 
-1. [Tổng Quan — Đã Có vs Cần Triển Khai](#1-tổng-quan--đã-có-vs-cần-triển-khai)
-2. [API-01 — Profile Dashboard](#api-01--profile-dashboard)
-3. [API-02 — Orders List](#api-02--orders-list)
-4. [API-03 — Warranty Lookup](#api-03--warranty-lookup)
-5. [API-04 — Trade-in History](#api-04--trade-in-history)
-6. [API-05 — Member Ranks / Promotions](#api-05--member-ranks--promotions)
-7. [API-06 — Policy Pages](#api-06--policy-pages)
-8. [API-07 — Terms of Service Pages](#api-07--terms-of-service-pages)
-9. [Common Response Format & Pagination](#9-common-response-format--pagination)
+1. [Tổng Quan](#1-tổng-quan)
+2. [API-01 — Profile Dashboard](#2-api-01--profile-dashboard)
+3. [API-02 — Orders List](#3-api-02--orders-list)
+4. [API-03 — Warranty Lookup](#4-api-03--warranty-lookup)
+5. [API-04 — Trade-in History](#5-api-04--trade-in-history)
+6. [API-05 — Member Ranks / Promotions](#6-api-05--member-ranks--promotions)
+7. [API-06 — User Info (PUT Profile, Social Links, Password)](#7-api-06--user-info)
+8. [API-07 — Policy Pages](#8-api-07--policy-pages)
+9. [API-08 — Terms of Service Pages](#9-api-08--terms-of-service-pages)
 10. [Error Handling](#10-error-handling)
+11. [Tổng Hợp Endpoints](#11-tổng-hợp-endpoints)
 
 ---
 
-## 1. Tổng Quan — Đã Có vs Cần Triển Khai
+## 1. Tổng Quan
 
 ### 1.1 Base URL
 
 ```
 Base: {API_BASE_URL}/api/v1
-Auth: Bearer token hoặc cookie session (credentials: include)
+Auth: Bearer token (Cookie: Sanctum)
 Format: application/json
 ```
 
-### 1.2 Endpoints ĐÃ CÓ (không cần triển khai)
+### 1.2 Endpoints ĐÃ TRIỂN KHAI
 
-Dựa trên `stores/authStore.js`, `stores/checkoutStore.js`, `stores/wishlistStore.js`, và `pages/account/vouchers.vue`:
-
-| Method | Endpoint | Được dùng tại | Mục đích |
-|---|---|---|---|
-| GET | `/me` | `authStore.fetchUser()` | Lấy thông tin user hiện tại |
-| GET | `/addresses` | `checkoutStore.fetchAddresses()` | Danh sách địa chỉ giao hàng |
-| POST | `/addresses` | `checkoutStore.addAddress()` | Tạo địa chỉ mới |
-| PUT | `/addresses/{id}` | `checkoutStore.updateAddress()` | Cập nhật địa chỉ |
-| DELETE | `/addresses/{id}` | `checkoutStore.deleteAddress()` | Xóa địa chỉ |
-| GET | `/orders` | `checkoutStore` (payment polling) | Chi tiết đơn hàng |
-| POST | `/orders` | `checkoutStore.createOrder()` | Tạo đơn hàng |
-| GET | `/checkout/vouchers` | `checkoutStore.fetchAvailableVouchers()` | Voucher khả dụng |
-| POST | `/checkout/vouchers/validate` | `checkoutStore.applyVoucher()` | Validate voucher |
-| GET | `/checkout/vouchers/history` | `pages/account/vouchers.vue` | Lịch sử sử dụng voucher |
-| GET | `/checkout/delivery-options` | `checkoutStore.fetchDeliveryOptions()` | Phương thức giao hàng |
-| POST | `/checkout/prepare` | `checkoutStore.prepareCheckout()` | Chuẩn bị checkout |
-| POST | `/payment/{method}/create` | `checkoutStore.initPayment()` | Tạo payment |
-| GET | `/payment/verify` | `checkoutStore.verifyPayment()` | Xác thực thanh toán |
-| GET | `/products/{slug}` | `productStore.fetchProduct()` | Chi tiết sản phẩm |
-| GET | `/products/{id}/suggestions` | `productStore.fetchSuggestions()` | Gợi ý sản phẩm |
-| GET | `/wishlist` | `wishlistStore` | Sản phẩm yêu thích |
-
-### 1.3 Endpoints CẦN TRIỂN KHAI (chỉ phần còn thiếu)
-
-| # | Method | Endpoint | Page | Mục đích |
+| # | Method | Endpoint | Auth | Trạng thái |
 |---|---|---|---|---|
-| 1 | GET | `/profile/dashboard` | `pages/profile/index.vue` | Dashboard: orders, favorites, offers (KHÔNG có banner) |
-| 2 | GET | `/orders` (upgrade) | `pages/orders/index.vue` | Danh sách đơn hàng có filter (status, date) + pagination |
-| 3 | GET | `/warranties` | `pages/warranty/index.vue` | Danh sách bảo hành có filter (status, search) + pagination |
-| 4 | GET | `/tradeins` | `pages/tradein/index.vue` | Lịch sử thu cũ có filter date + pagination |
-| 5 | GET | `/member-rank` | `pages/promotion/index.vue` | Thông tin hạng thành viên + toàn bộ ranks |
-| 6 | GET | `/member-rank/benefits` | `pages/promotion/index.vue` | Quyền lợi của hạng hiện tại |
-| 7 | GET | `/social-links` | `pages/user-info/index.vue` | Trạng thái liên kết tài khoản mạng xã hội |
-| 8 | POST | `/profile` (update) | `pages/user-info/index.vue` | Cập nhật thông tin cá nhân (full_name, gender, birthday) |
-| 9 | POST | `/password/change` | `pages/user-info/index.vue` | Đổi mật khẩu |
-| 10 | GET | `/content/policies` | `pages/policy/index.vue` | Nội dung chính sách bảo hành (6 sections) |
-| 11 | GET | `/content/terms` | `pages/tos/index.vue` | Nội dung điều khoản sử dụng (7 sections) |
+| 1 | GET | `/profile/dashboard` | ✅ | ✅ Xong |
+| 2 | GET | `/orders` | ✅ | ✅ Xong |
+| 3 | GET | `/warranties` | ✅ | ✅ Xong |
+| 4 | GET | `/tradeins` | ✅ | ✅ Xong |
+| 5 | GET | `/member-rank` | ✅ | ✅ Xong |
+| 6 | GET | `/member-rank/benefits` | ✅ | ✅ Xong |
+| 7 | GET | `/social-links` | ✅ | ✅ Xong |
+| 8 | PUT | `/profile` | ✅ | ✅ Xong |
+| 9 | POST | `/password/change` | ✅ | ✅ Xong |
+| 10 | GET | `/content/policies` | ❌ | ✅ Xong |
+| 11 | GET | `/content/terms` | ❌ | ✅ Xong |
 
 ---
 
 ## 2. API-01 — Profile Dashboard
 
-**Page:** [pages/profile/index.vue](pages/profile/index.vue)
-**Endpoint:** `GET /api/v1/profile/dashboard`
-**Auth:** ✅ (cookie session)
+**Route:** `GET /api/v1/profile/dashboard`
+**Auth:** ✅ Required
+**Cache:** 5 phút
 
 ### 2.1 Request
 
@@ -90,7 +67,7 @@ Query params:
   favorites_limit: int (default: 6)
 ```
 
-### 2.2 Response — Success (200)
+### 2.2 Response — 200 OK
 
 ```json
 {
@@ -101,7 +78,7 @@ Query params:
       "see_all_url": "/orders",
       "orders": [
         {
-          "id": "100001",
+          "id": "1",
           "date": "2026-05-05T10:30:00+07:00",
           "status": {
             "key": "pending",
@@ -113,8 +90,8 @@ Query params:
           "items": [
             {
               "id": 1,
-              "name": "iPhone 16 Pro Max 256GB - Titan Tự Nhiên",
-              "image_url": "https://cdn2.cellphones.com.vn/358x358,webp,q100/...",
+              "name": "iPhone 16 Pro Max 256GB",
+              "image_url": "https://cdn.example.com/image.jpg",
               "qty": 1,
               "price_formatted": "14.990.000đ",
               "original_price_formatted": "16.990.000đ"
@@ -123,13 +100,11 @@ Query params:
         }
       ]
     },
-
     "offers": {
       "total": 0,
       "see_all_url": "/promotion",
       "items": []
     },
-
     "favorites": {
       "total": 1,
       "see_all_url": "/wishlist",
@@ -137,9 +112,9 @@ Query params:
         {
           "id": 1,
           "product_id": "iphone-17-pro-max-256gb",
-          "name": "iPhone 17 Pro Max 256GB | Chính hãng",
+          "name": "iPhone 17 Pro Max 256GB",
           "slug": "iphone-17-pro-max-256gb",
-          "image_url": "https://cdn2.cellphones.com.vn/356x356/...",
+          "image_url": "https://cdn.example.com/image.jpg",
           "current_price_formatted": "37.590.000đ",
           "original_price_formatted": "37.990.000đ",
           "discount_percent": 1,
@@ -153,34 +128,41 @@ Query params:
 
 ### 2.3 Ghi chú
 
-- **Không trả `notices` banner** — đã bỏ theo yêu cầu
-- **`recent_orders`**: chỉ trả `limit` đơn hàng gần nhất, không cần pagination
-- **`favorites`**: FE dùng endpoint `/wishlist` đã có → dashboard chỉ trả summary (total + vài items preview)
-- **`offers`**: FE dùng endpoint `/member-rank/benefits` + `/checkout/vouchers` đã có → dashboard chỉ trả summary
+- **`offers.items`** luôn trả `[]` (empty array) — cần FE tự fetch từ `/member-rank/benefits` + `/checkout/vouchers`
+- **`offers.see_all_url`** = `"/promotion"` — FE navigate đến trang khuyến mãi
+- **`recent_orders.orders[].items`** chỉ lấy tối đa 3 sản phẩm đầu tiên
+- **`favorites.items[].product_id`** = `product.slug` (dùng cho navigation)
+- **`order.status.icon`** mapping:
+  - `pending`, `awaiting_payment` → `bi bi-clock`
+  - `confirmed`, `processing` → `bi bi-hourglass-split`
+  - `ready_to_ship`, `shipped` → `bi bi-truck`
+  - `delivering` → `bi bi-geo-alt`
+  - `delivered` → `bi bi-check-circle`
+  - `cancelled` → `bi bi-x-circle`
+  - `refunding`, `refunded` → `bi bi-arrow-left-circle`
+  - default → `bi bi-info-circle`
 
 ---
 
 ## 3. API-02 — Orders List
 
-**Page:** [pages/orders/index.vue](pages/orders/index.vue)
-**Endpoint:** `GET /api/v1/orders`
-**Auth:** ✅
+**Route:** `GET /api/v1/orders`
+**Auth:** ✅ Required
+**Cache:** 1 phút
 
 ### 3.1 Request
 
 ```
 GET /api/v1/orders
 Query params:
-  status: string (optional) — pending|processing|shipping|delivered|cancelled|all (default: all)
+  status: string (optional) — pending|confirmed|processing|ready_to_ship|shipped|delivering|delivered|cancelled|refunding|refunded (default: all)
   date_from: string (optional) — ISO date: 2026-05-01
   date_to: string (optional) — ISO date: 2026-05-08
-  page: int (default: 1)
   limit: int (default: 10)
+  page: int (default: 1)
 ```
 
-> **Lưu ý:** Endpoint `/orders` đã có — backend chỉ cần thêm filter `status` và `date_from`/`date_to`.
-
-### 3.2 Response — Success (200)
+### 3.2 Response — 200 OK
 
 ```json
 {
@@ -188,7 +170,7 @@ Query params:
   "data": {
     "orders": [
       {
-        "id": "100001",
+        "id": "1",
         "date": "2026-05-05T10:30:00+07:00",
         "status": {
           "key": "pending",
@@ -199,8 +181,8 @@ Query params:
         "items": [
           {
             "id": 1,
-            "name": "iPhone 16 Pro Max 256GB - Titan Tự Nhiên",
-            "image_url": "https://cdn2.cellphones.com.vn/358x358,webp,q100/...",
+            "name": "iPhone 16 Pro Max 256GB",
+            "image_url": "https://cdn.example.com/image.jpg",
             "qty": 1,
             "price_formatted": "14.990.000đ",
             "original_price_formatted": "16.990.000đ"
@@ -212,7 +194,9 @@ Query params:
       "current_page": 1,
       "total_pages": 3,
       "total_items": 24,
-      "items_per_page": 10
+      "items_per_page": 10,
+      "has_next_page": true,
+      "has_prev_page": false
     }
   }
 }
@@ -220,30 +204,32 @@ Query params:
 
 ### 3.3 Ghi chú
 
-- **`status.key`** mapping: `pending` → "Chờ xác nhận", `processing` → "Đang xử lý", `shipping` → "Đang vận chuyển", `delivered` → "Đã nhận hàng", `cancelled` → "Đã huỷ"
-- **Date format**: trả về ISO 8601 với timezone `+07:00`
-- **`total_formatted`**: string đã format tiền VND (VD: "14.990.000đ")
+- **`orders[].id`** là string — cast từ `$order->id` (bigint → string)
+- **`date`** format: ISO 8601 with timezone `+07:00`
+- **`total_formatted`**: string VND đã format (VD: `"14.990.000đ"`)
+- **`pagination.has_next_page`** / **`has_prev_page`**: FE dùng để disable/enable pagination buttons
+- **Status labels** được lấy từ `OrderStatus::label()` enum method — FE nên hard-code theo map ở trên
 
 ---
 
 ## 4. API-03 — Warranty Lookup
 
-**Page:** [pages/warranty/index.vue](pages/warranty/index.vue)
-**Endpoint:** `GET /api/v1/warranties`
-**Auth:** ✅
+**Route:** `GET /api/v1/warranties`
+**Auth:** ✅ Required
+**Cache:** 1 phút
 
 ### 4.1 Request
 
 ```
 GET /api/v1/warranties
 Query params:
-  status: string (optional) — received|coordinating|repairing|done|returned|all (default: all)
-  q: string (optional) — search query (warranty_id, product_name, serial, imei)
+  status: string (optional) — received|coordinating|repairing|done|returned (default: all)
+  q: string (optional) — search query (warranty_code, product_name, serial, imei)
   page: int (default: 1)
   limit: int (default: 10)
 ```
 
-### 4.2 Response — Success (200)
+### 4.2 Response — 200 OK
 
 ```json
 {
@@ -259,8 +245,8 @@ Query params:
           "icon": "bi bi-check-circle"
         },
         "product": {
-          "name": "iPhone 16 Pro Max 256GB - Titan Tự Nhiên",
-          "image_url": "https://cdn2.cellphones.com.vn/358x358,webp,q100/...",
+          "name": "iPhone 16 Pro Max 256GB",
+          "image_url": "https://cdn.example.com/image.jpg",
           "serial": "DGH7X1234",
           "imei": "352345678901234"
         },
@@ -299,7 +285,9 @@ Query params:
       "current_page": 1,
       "total_pages": 1,
       "total_items": 2,
-      "items_per_page": 10
+      "items_per_page": 10,
+      "has_next_page": false,
+      "has_prev_page": false
     }
   }
 }
@@ -307,18 +295,27 @@ Query params:
 
 ### 4.3 Ghi chú
 
-- **`status.key`** mapping: `received` → "Đã tiếp nhận", `coordinating` → "Đang điều phối", `repairing` → "Đang sửa", `done` → "Đã sửa xong", `returned` → "Đã trả máy"
-- **`timeline`**: mảng bước tiến trình. `done=true` = hoàn thành, `current=true` = bước hiện tại (FE có animation pulse). `time` = null nếu chưa đến bước đó.
-- Search `q`: backend tìm trên `warranty_id`, `product.name`, `product.serial`, `product.imei`
-- `serial`/`imei`: có thể là `null` hoặc "N/A" (VD: MacBook không có IMEI)
+- **`id`** = `warranty_code` (string unique, VD: `"WBH001234"`)
+- **Timeline auto-generated**: nếu warranty không có stored timeline, backend tự generate dựa trên status position
+  - `received` → bước 1 active
+  - `coordinating` → bước 2 active
+  - `repairing` → bước 3 active
+  - `done` / `returned` → tất cả done
+- **`serial`/`imei`**: trả `"N/A"` nếu null trong DB
+- **Status icon mapping**:
+  - `received` → `bi bi-check-circle`
+  - `coordinating` → `bi bi-person-badge`
+  - `repairing` → `bi bi-tools`
+  - `done` → `bi bi-check2-all`
+  - `returned` → `bi bi-box-seam`
 
 ---
 
 ## 5. API-04 — Trade-in History
 
-**Page:** [pages/tradein/index.vue](pages/tradein/index.vue)
-**Endpoint:** `GET /api/v1/tradeins`
-**Auth:** ✅
+**Route:** `GET /api/v1/tradeins`
+**Auth:** ✅ Required
+**Cache:** 1 phút
 
 ### 5.1 Request
 
@@ -331,7 +328,7 @@ Query params:
   limit: int (default: 10)
 ```
 
-### 5.2 Response — Success (200)
+### 5.2 Response — 200 OK
 
 ```json
 {
@@ -347,13 +344,13 @@ Query params:
           "icon": "bi bi-check-circle"
         },
         "old_device": {
-          "name": "iPhone 14 Pro 128GB - Deep Purple",
-          "image_url": "https://cdn2.cellphones.com.vn/358x358,webp,q100/...",
+          "name": "iPhone 14 Pro 128GB",
+          "image_url": "https://cdn.example.com/image.jpg",
           "capacity": "128GB"
         },
         "new_device": {
-          "name": "iPhone 16 Pro Max 256GB - Titan Tự Nhiên",
-          "image_url": "https://cdn2.cellphones.com.vn/358x358,webp,q100/...",
+          "name": "iPhone 16 Pro Max 256GB",
+          "image_url": "https://cdn.example.com/image.jpg",
           "capacity": "256GB"
         },
         "old_value_formatted": "10.500.000đ",
@@ -365,7 +362,9 @@ Query params:
       "current_page": 1,
       "total_pages": 1,
       "total_items": 2,
-      "items_per_page": 10
+      "items_per_page": 10,
+      "has_next_page": false,
+      "has_prev_page": false
     }
   }
 }
@@ -373,41 +372,41 @@ Query params:
 
 ### 5.3 Ghi chú
 
-- **`status.key`** mapping: `pending` → "Đang xử lý", `done` → "Hoàn tất", `cancelled` → "Đã huỷ"
-- **`top_up`** = `new_price` - `old_value`
-- Tất cả giá trị tiền trả về dạng `*_formatted` đã format đầy đủ
+- **`id`** = `tradein_code` (string, VD: `"TC001234"`)
+- **Status mapping**:
+  - `pending` → `bi bi-hourglass-split` / "Đang xử lý"
+  - `done` → `bi bi-check-circle` / "Hoàn tất"
+  - `cancelled` → `bi bi-x-circle` / "Đã hủy"
 
 ---
 
 ## 6. API-05 — Member Ranks / Promotions
 
-**Page:** [pages/promotion/index.vue](pages/promotion/index.vue)
-**Auth:** ✅
-
 ### 6.1 GET /api/v1/member-rank
 
-**Mục đích:** Thông tin hạng thành viên + toàn bộ danh sách ranks.
+**Auth:** ✅ Required
+**Cache:** 15 phút
 
 ```json
 {
   "success": true,
   "data": {
     "current_user": {
-      "name": "MAI LÊ HUY HOÀNG",
+      "name": "NGUYEN VAN A",
       "rank_key": "snull",
       "total_spent": 0,
       "total_spent_formatted": "0đ",
-      "spent_threshold": 3000000,
-      "spent_threshold_formatted": "3.000.000đ",
+      "spent_threshold": 0,
+      "spent_threshold_formatted": "0đ",
       "progress_percent": 0,
       "next_rank_key": "snew",
       "next_rank_name": "S-NEW",
-      "next_rank_threshold": 10000000,
-      "next_rank_threshold_formatted": "10.000.000đ",
+      "next_rank_threshold": 3000000,
+      "next_rank_threshold_formatted": "3.000.000đ",
       "amount_to_next_rank_formatted": "3.000.000đ",
       "renewal_date": "2027-01-01",
-      "is_student": true,
-      "student_tag": "S-Student"
+      "is_student": false,
+      "student_tag": null
     },
     "ranks": [
       {
@@ -426,7 +425,7 @@ Query params:
         "status": "locked",
         "icon": "bi bi-star-fill",
         "bg_image_url": "https://cdn-static.smember.com.vn/_next/static/media/snew-bg-card.f753cfbc.png",
-        "is_active": false
+        "is_active": true
       },
       {
         "key": "smem",
@@ -435,7 +434,7 @@ Query params:
         "status": "locked",
         "icon": "bi bi-star-fill",
         "bg_image_url": "https://cdn-static.smember.com.vn/_next/static/media/smem-bg-card.1fa74fdc.png",
-        "is_active": false
+        "is_active": true
       },
       {
         "key": "svip",
@@ -444,7 +443,7 @@ Query params:
         "status": "locked",
         "icon": "bi bi-gem",
         "bg_image_url": "https://cdn-static.smember.com.vn/_next/static/media/svip-bg-card.59d559cc.png",
-        "is_active": false
+        "is_active": true
       }
     ]
   }
@@ -453,7 +452,8 @@ Query params:
 
 ### 6.2 GET /api/v1/member-rank/benefits
 
-**Mục đích:** Quyền lợi của hạng hiện tại.
+**Auth:** ✅ Required
+**Cache:** no-cache (dynamic per user)
 
 ```json
 {
@@ -472,6 +472,7 @@ Query params:
     "service_policies": [
       {
         "id": "policy_001",
+        "type": "service",
         "title": "Chính sách phục vụ",
         "description": "Hiện chưa có chính sách ưu đãi phục vụ đặc biệt cho hạng thành viên S-NULL",
         "is_locked": true,
@@ -484,53 +485,94 @@ Query params:
 
 ### 6.3 Ghi chú
 
-- **Luôn trả đầy đủ 4 ranks** để FE render carousel stepper
-- **`progress_percent`**: số 0-100, FE fill progress bar
-- **`is_student`**: boolean — nếu true hiện tag "S-Student"
-- **`ranks[].status`**: "current" | "locked" | "done"
-- `bg_image_url` + `icon` có thể hard-code phía FE nếu backend trả null
+- **`ranks[].status`**: `"current"` | `"locked"` | `"done"`
+- **`ranks[].is_active`**: luôn `true` (4 ranks đều active trong DB)
+- **`current_user.progress_percent`**: 0-100, dùng cho progress bar
+- **`current_user.spent_threshold`**: threshold của rank HIỆN TẠI (not next)
+- **`amount_to_next_rank_formatted`**: `max(0, next_threshold - total_spent)`, trả `"0đ"` nếu đã max rank
+- **`is_student`** = `true` khi user có tag sinh viên, **`student_tag`** = string tag (VD: `"S-Student"`)
+- **`benefits`** hiện tại là static arrays — nếu rank != `snull` thì `is_locked: false` và mô tả khác
+
+### 6.4 GET /api/v1/checkout/vouchers
+
+**Auth:** ✅ Required
+**Cache:** no-cache (dynamic per user)
+
+```json
+{
+  "success": true,
+  "data": {
+    "vouchers": [
+      {
+        "id": "voucher_001",
+        "code": "GIAM10K",
+        "type": "percentage",
+        "value": 10,
+        "value_formatted": "10%",
+        "min_order_amount": 200000,
+        "max_discount_amount": 50000,
+        "expired_at": "2026-06-30T23:59:59+07:00",
+        "is_used": false,
+        "applicable_categories": ["Điện thoại", "Tablet"]
+      }
+    ]
+  }
+}
+```
+
+### 6.5 Ghi chú vouchers
+
+- **`type`**: `"percentage"` | `"fixed"` | `"shipping"`
+- **`is_used`**: `true` = đã dùng / hết hạn → FE hiển thị mờ + badge "Đã sử dụng"
+- **`applicable_categories`**: mảng string, có thể `[]` (áp dụng toàn bộ)
+- Nếu không có vouchers: `{ "success": true, "data": { "vouchers": [] } }`
+- FE gộp kết quả với `member-rank/benefits` để render "Your Offers"
 
 ---
 
-## 7. API-06 — User Info Cần Triển Khai
-
-**Page:** [pages/user-info/index.vue](pages/user-info/index.vue)
-**Auth:** ✅
+## 7. API-06 — User Info
 
 ### 7.1 PUT /api/v1/profile
 
-> **Lưu ý:** `GET /me` đã có — chỉ cần thêm PUT để cập nhật.
-
-**Mục đích:** Cập nhật thông tin cá nhân (full_name, gender, birthday).
+**Auth:** ✅ Required
 
 **Request body:**
 ```json
 {
   "full_name": "Mai Le Huy Hoang",
-  "gender": "male|female|other|null",
+  "gender": "male",
   "birthday": "2003-06-02"
 }
 ```
 
-**Response (200):**
+> **Validation:**
+> - `full_name`: required, string, max 255
+> - `gender`: nullable, in: `male`, `female`, `other`
+> - `birthday`: nullable, date format `Y-m-d`
+
+**Response — 200 OK:**
 ```json
 {
   "success": true,
+  "message": "Cập nhật thông tin thành công",
   "data": {
-    "id": "user_123",
+    "id": 1,
+    "name": "Mai Le Huy Hoang",
+    "first_name": "Mai",
+    "last_name": "Le Huy Hoang",
     "full_name": "Mai Le Huy Hoang",
-    "phone": "0971172603",
-    "email": "hoangmai020603@gmail.com",
+    "email": "user@example.com",
+    "email_verified_at": "2026-01-15T10:00:00+07:00",
     "birthday": "2003-06-02",
-    "gender": "male",
-    "password_updated_at": "2026-02-02T15:28:00+07:00"
+    "created_at": "2025-01-01T00:00:00+07:00",
+    "updated_at": "2026-05-08T12:00:00+07:00"
   }
 }
 ```
 
 ### 7.2 GET /api/v1/social-links
 
-**Mục đích:** Trạng thái liên kết tài khoản Google / Zalo.
+**Auth:** ✅ Required
 
 ```json
 {
@@ -562,7 +604,8 @@ Query params:
 
 ### 7.3 POST /api/v1/password/change
 
-**Mục đích:** Thay đổi mật khẩu.
+**Auth:** ✅ Required
+**Rate Limit:** 5 requests / 60 minutes
 
 **Request body:**
 ```json
@@ -573,13 +616,29 @@ Query params:
 }
 ```
 
+**Response — 200 OK:**
+```json
+{
+  "success": true,
+  "message": "Đổi mật khẩu thành công"
+}
+```
+
+**Response — 422 (sai mật khẩu cũ):**
+```json
+{
+  "success": false,
+  "message": "Mật khẩu hiện tại không chính xác"
+}
+```
+
 ---
 
 ## 8. API-07 — Policy Pages
 
-**Page:** [pages/policy/index.vue](pages/policy/index.vue)
-**Endpoint:** `GET /api/v1/content/policies`
-**Auth:** ❌ (public)
+**Route:** `GET /api/v1/content/policies`
+**Auth:** ❌ Public
+**Cache:** 24 giờ
 
 ### 8.1 Request
 
@@ -590,7 +649,7 @@ Query params:
   locale: string (default: vi)
 ```
 
-### 8.2 Response — Success (200)
+### 8.2 Response — 200 OK
 
 ```json
 {
@@ -627,55 +686,35 @@ Query params:
             "id": "return_notice_1",
             "content": "<strong>Lưu ý về dữ liệu:</strong> Khách hàng vui lòng tự sao lưu dữ liệu. Cửa hàng không chịu trách nhiệm về việc mất dữ liệu trong mọi trường hợp."
           }
-        ]
+        ],
+        "highlights": [],
+        "hotlines": []
       },
       {
         "key": "standard",
         "label": "II. Bảo hành tiêu chuẩn",
         "title": "II. Bảo hành tiêu chuẩn",
         "description": null,
-        "tables": [...],
-        "lists": [...],
-        "notices": [...]
-      },
-      {
-        "key": "components",
-        "label": "III. Linh kiện máy tính",
-        "title": "III. Bảo hành linh kiện máy tính",
-        "tables": [...],
-        "lists": [...],
-        "notices": [...]
-      },
-      {
-        "key": "vip",
-        "label": "IV. Bảo hành 1 đổi 1 VIP",
-        "title": "IV. Bảo hành 1 đổi 1 VIP",
-        "tables": [...],
-        "lists": [...],
-        "notices": [...]
+        "tables": [],
+        "lists": [],
+        "notices": [],
+        "highlights": [],
+        "hotlines": []
       },
       {
         "key": "accidental",
         "label": "V. Bảo hành rơi vỡ, ngấm nước",
         "title": "V. Bảo hành rơi vỡ, ngấm nước",
-        "tables": [...],
-        "lists": [...],
-        "notices": [...],
+        "tables": [],
+        "lists": [],
+        "notices": [],
         "highlights": [
           {
             "id": "accidental_highlight_1",
             "content": "Khách hàng sử dụng dịch vụ này có đặc quyền <strong>+3% tổng giá trị máy thu cũ</strong> khi lên đời trong thời gian bảo hành của thiết bị."
           }
-        ]
-      },
-      {
-        "key": "s24plus",
-        "label": "VI. Bảo hành mở rộng S24+",
-        "title": "VI. Bảo hành mở rộng S24+",
-        "tables": [...],
-        "lists": [...],
-        "notices": [...],
-        "highlights": [...]
+        ],
+        "hotlines": []
       }
     ]
   }
@@ -684,18 +723,20 @@ Query params:
 
 ### 8.3 Ghi chú
 
-- **Cacheable**: nên cache CDN/Redis 1-24h
-- **Rich text**: tables và lists chứa HTML (`<strong>`, `<br>`) → FE dùng `v-html`, cần sanitize
-- **`highlights`**: container đặc biệt (background #fef2f2), dùng cho formula/trích dẫn quan trọng
-- Backend có thể trả JSON static file từ CDN
+- **Fallback**: nếu DB không có data, backend trả hardcoded defaults (đảm bảo FE luôn có content)
+- **6 sections**: `return`, `standard`, `components`, `vip`, `accidental`, `s24plus`
+- **Rich HTML**: `tables`, `lists`, `notices` chứa HTML (`<strong>`, `<br>`) → FE dùng `v-html`
+- **Sanitize**: CẦN FE sử dụng `v-html` với sanitize (VD: `dompurify` hoặc Vue `v-html` + CSP)
+- **`highlights`**: chỉ có ở section `accidental`
+- **`hotlines`**: luôn trả empty array ở policy (có ở terms section `sforum`)
 
 ---
 
 ## 9. API-08 — Terms of Service Pages
 
-**Page:** [pages/tos/index.vue](pages/tos/index.vue)
-**Endpoint:** `GET /api/v1/content/terms`
-**Auth:** ❌ (public)
+**Route:** `GET /api/v1/content/terms`
+**Auth:** ❌ Public
+**Cache:** 24 giờ
 
 ### 9.1 Request
 
@@ -706,7 +747,7 @@ Query params:
   locale: string (default: vi)
 ```
 
-### 9.2 Response — Success (200)
+### 9.2 Response — 200 OK
 
 ```json
 {
@@ -722,66 +763,21 @@ Query params:
             "id": "general_1",
             "title": "1. Nguyên tắc chung",
             "items": [
-              "Website thương mại điện tử <strong>cellphones.com.vn</strong> là sở hữu của Công ty TNHH...",
-              "Sản phẩm được kinh doanh tại Cellphones.com.vn..."
-            ]
-          },
-          {
-            "id": "general_2",
-            "title": "2. Định nghĩa",
-            "items": [
-              "<strong>Người bán</strong>: là Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc."
+              "Website thương mại điện tử <strong>cellphones.com.vn</strong> là sở hữu của Công ty TNHH..."
             ]
           }
         ],
-        "notices": []
-      },
-      {
-        "key": "transaction",
-        "label": "II. Quy trình giao dịch",
-        "title": "II. Quy trình giao dịch",
-        "lists": [...],
-        "tables": [...],
-        "notices": [
-          {
-            "id": "transaction_notice_1",
-            "content": "<strong>Lưu ý quan trọng:</strong> Với giao dịch có giá trị từ <strong>10 triệu đồng trở lên</strong>..."
-          }
-        ]
-      },
-      {
-        "key": "warranty",
-        "label": "III. Chính sách bảo hành sản phẩm",
-        "title": "III. Chính sách bảo hành sản phẩm",
-        "lists": [...],
-        "tables": [...]
-      },
-      {
-        "key": "cancellation",
-        "label": "IV. Chính sách hủy đơn, đổi trả",
-        "title": "IV. Chính sách hủy giao dịch, đổi trả hàng",
-        "lists": [...],
-        "tables": [...]
-      },
-      {
-        "key": "privacy-cellphones",
-        "label": "V. Bảo mật thông tin Cellphones",
-        "title": "V. Chính sách bảo mật thông tin khách hàng Cellphones",
-        "lists": [...],
-        "notices": []
-      },
-      {
-        "key": "privacy-sforum",
-        "label": "VI. Bảo mật thông tin Sforum",
-        "title": "VI. Chính sách bảo mật thông tin khách hàng Sforum",
-        "lists": [...],
-        "notices": []
+        "notices": [],
+        "highlights": [],
+        "hotlines": []
       },
       {
         "key": "sforum",
         "label": "VII. Thỏa thuận Sforum",
         "title": "VII. Thỏa thuận cung cấp và sử dụng dịch vụ trên Sforum",
-        "lists": [...],
+        "lists": [],
+        "notices": [],
+        "highlights": [],
         "hotlines": [
           { "label": "Gọi mua hàng", "value": "1800.2097 (8h00 – 22h00)" },
           { "label": "Gọi khiếu nại", "value": "1800.2063 (8h00 – 21h30)" },
@@ -795,134 +791,129 @@ Query params:
 
 ### 9.3 Ghi chú
 
-- **Cacheable**: cache 24-48h
-- **`hotlines`**: chỉ có trong section `sforum`
-- **`title`** = tiêu đề `<h1>`, **`label`** = text sidebar navigation
-- Rich text chứa HTML → FE dùng `v-html`, cần sanitize
+- **7 sections**: `general`, `transaction`, `warranty`, `cancellation`, `privacy-cellphones`, `privacy-sforum`, `sforum`
+- **`hotlines`** chỉ có ở section `sforum`, các section khác trả `[]`
+- **Rich HTML**: tương tự policy — cần sanitize
+- **Fallback**: nếu DB trống trả hardcoded defaults
 
 ---
 
-## 10. Common Response Format & Pagination
+## 10. Error Handling
 
-### 10.1 Success Response Wrapper
-
-```json
-{
-  "success": true,
-  "data": { ... },
-  "meta": {
-    "request_id": "req_abc123",
-    "timestamp": "2026-05-08T12:00:00+07:00"
-  }
-}
-```
-
-### 10.2 Pagination Object
-
-```json
-{
-  "pagination": {
-    "current_page": 1,
-    "total_pages": 5,
-    "total_items": 47,
-    "items_per_page": 10,
-    "has_next_page": true,
-    "has_prev_page": false
-  }
-}
-```
-
----
-
-## 11. Error Handling
-
-### 11.1 Error Response Format
+### 10.1 Error Response Format
 
 ```json
 {
   "success": false,
-  "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "Dữ liệu không hợp lệ",
-    "details": [
-      { "field": "phone", "message": "Số điện thoại không hợp lệ" }
-    ]
-  },
-  "meta": { "request_id": "req_abc123" }
+  "message": "Mật khẩu hiện tại không chính xác"
 }
 ```
 
-### 11.2 HTTP Status Codes
+hoặc với validation errors (422):
 
-| Status | Ý nghĩa |
-|---|---|
-| 200 | Success |
-| 400 | Bad Request |
-| 401 | Unauthorized — chưa đăng nhập |
-| 403 | Forbidden |
-| 404 | Not Found |
-| 422 | Validation error |
-| 500 | Internal Server Error |
-
----
-
-## 12. Tổng Hợp Endpoints CẦN Triển Khai
-
-| Method | Endpoint | Mục đích | Auth |
-|---|---|---|---|
-| GET | `/profile/dashboard` | Dashboard summary (no banner) | ✅ |
-| PUT | `/profile` | Cập nhật thông tin cá nhân | ✅ |
-| GET | `/social-links` | Tài khoản liên kết mạng xã hội | ✅ |
-| POST | `/password/change` | Đổi mật khẩu | ✅ |
-| GET | `/orders` (upgrade) | Danh sách đơn hàng có filter + pagination | ✅ |
-| GET | `/warranties` | Danh sách bảo hành có filter + pagination | ✅ |
-| GET | `/tradeins` | Lịch sử thu cũ có filter + pagination | ✅ |
-| GET | `/member-rank` | Thông tin hạng thành viên + ranks | ✅ |
-| GET | `/member-rank/benefits` | Quyền lợi hạng thành viên | ✅ |
-| GET | `/content/policies` | Nội dung chính sách bảo hành | ❌ |
-| GET | `/content/terms` | Nội dung điều khoản sử dụng | ❌ |
-
----
-
-## 13. Ghi Chú Triển Khai
-
-### 13.1 Caching Strategy
-
-| Endpoint | Cache TTL | Cache Key |
-|---|---|---|
-| `/profile/dashboard` | 5 phút | `profile:dashboard:{user_id}` |
-| `/orders` (filtered) | 1 phút | `profile:orders:{user_id}:{status}:{page}` |
-| `/warranties` | 1 phút | `profile:warranties:{user_id}:{status}:{q}:{page}` |
-| `/tradeins` | 1 phút | `profile:tradeins:{user_id}:{page}` |
-| `/member-rank` | 15 phút | `profile:rank:{user_id}` |
-| `/content/policies` | 24 giờ | `content:policies:{locale}` |
-| `/content/terms` | 24 giờ | `content:terms:{locale}` |
-
-### 13.2 Rate Limiting
-
-- Authenticated endpoints: **60 req/min/user**
-- Content endpoints (Policy/TOS): **100 req/min/user**
-- Password change: **5 req/hour/user**
-
-### 13.3 DB Indexes
-
-```sql
--- Orders
-CREATE INDEX idx_orders_user_status_created ON orders(user_id, status, created_at DESC);
-
--- Warranties
-CREATE INDEX idx_warranties_user_status ON warranties(user_id, status);
-CREATE INDEX idx_warranties_user_search ON warranties(user_id, warranty_id, product_name);
-
--- Trade-ins
-CREATE INDEX idx_tradeins_user_created ON tradeins(user_id, created_at DESC);
+```json
+{
+  "success": false,
+  "message": "Validation failed",
+  "errors": {
+    "new_password": ["Mật khẩu mới phải có ít nhất 8 ký tự."]
+  }
+}
 ```
 
-### 13.4 Integration Notes
+### 10.2 HTTP Status Codes
 
-- **Price formatting**: backend trả string đã format (VD: `"14.990.000đ"`) — FE không format lại
-- **Date formatting**: backend trả ISO 8601, FE format sang `DD/MM/YYYY`
-- **HTML in content**: Policy/TOS dùng `v-html`, cần sanitize
-- **Images**: backend trả `image_url` đầy đủ (CDN + transforms)
-- **Pagination**: backend trả đầy đủ metadata cho FE pagination/infinite scroll
-- **401 handling**: FE redirect login + lưu URL để quay lại
+| Status | Khi nào |
+|---|---|
+| 200 | Success |
+| 401 | Unauthorized — chưa đăng nhập |
+| 403 | Forbidden — không có quyền |
+| 404 | Not Found |
+| 422 | Validation error |
+| 429 | Too Many Requests — rate limit exceeded |
+| 500 | Internal Server Error |
+
+### 10.3 401 Handling (Frontend)
+
+```js
+// Interceptor example
+if (response.status === 401) {
+  // Redirect to login, save current URL
+  const currentPath = window.location.pathname
+  localStorage.setItem('redirect_after_login', currentPath)
+  window.location.href = '/login'
+}
+```
+
+---
+
+## 11. Tổng Hợp Endpoints
+
+| Method | Endpoint | Auth | Cache | Rate Limit |
+|---|---|---|---|---|
+| GET | `/profile/dashboard` | ✅ | 5 phút | 60/min |
+| GET | `/orders` | ✅ | 1 phút | 5/min |
+| GET | `/warranties` | ✅ | 1 phút | 60/min |
+| GET | `/tradeins` | ✅ | 1 phút | 60/min |
+| GET | `/member-rank` | ✅ | 15 phút | 60/min |
+| GET | `/member-rank/benefits` | ✅ | no-cache | 60/min |
+| GET | `/checkout/vouchers` | ✅ | no-cache | 60/min |
+| GET | `/social-links` | ✅ | no-cache | 60/min |
+| PUT | `/profile` | ✅ | no-cache | no-limit |
+| POST | `/password/change` | ✅ | no-cache | 5/giờ |
+| GET | `/content/policies` | ❌ | 24 giờ | 100/min |
+| GET | `/content/terms` | ❌ | 24 giờ | 100/min |
+
+### 11.1 Pagination Object (Common)
+
+Tất cả endpoints có pagination đều trả:
+
+```json
+"pagination": {
+  "current_page": 1,
+  "total_pages": 5,
+  "total_items": 47,
+  "items_per_page": 10,
+  "has_next_page": true,
+  "has_prev_page": false
+}
+```
+
+### 11.2 Common Field Notes
+
+| Field | Format | Ví dụ |
+|---|---|---|
+| Tiền VND | String đã format | `"14.990.000đ"` |
+| Ngày giờ | ISO 8601 +07:00 | `"2026-05-08T10:30:00+07:00"` |
+| Ngày đơn lẻ | Y-m-d | `"2026-05-08"` |
+| Icons | Bootstrap Icons class | `"bi bi-clock"` |
+
+### 11.3 File Backend Liên Quan
+
+| File | Mục đích |
+|---|---|
+| `app/Http/Controllers/Api/ProfileController.php` | dashboard, socialLinks |
+| `app/Http/Controllers/Api/OrderController.php` | orders list |
+| `app/Http/Controllers/Api/WarrantyController.php` | warranties list |
+| `app/Http/Controllers/Api/TradeInController.php` | tradeins list |
+| `app/Http/Controllers/Api/MemberRankController.php` | member-rank, benefits |
+| `app/Http/Controllers/Api/VoucherController.php` | checkout/vouchers |
+| `app/Http/Controllers/Api/ContentController.php` | policies, terms |
+| `app/Http/Controllers/User/UserController.php` | updateProfile, changePassword |
+| `routes/api.php` | tất cả routes |
+| `database/migrations/*_create_warranties_table.php` | warranties schema |
+| `database/migrations/*_create_tradeins_table.php` | tradeins schema |
+| `database/migrations/*_create_member_ranks_table.php` | member_ranks + pivot |
+| `database/migrations/*_create_user_social_links_table.php` | social links schema |
+| `database/migrations/*_create_static_contents_table.php` | policies/terms schema |
+
+### 11.4 Đã Hoàn Thành
+
+- ✅ **MemberRankSeeder** — 4 ranks (S-NULL, S-NEW, S-MEM, S-VIP) + 11 benefits
+- ✅ **StaticContentSeeder** — 6 policy sections + 7 terms sections
+
+### 11.5 Đã Hoàn Thành (Frontend)
+
+- ✅ **profileDashboardStore.js** — `fetchOffers()` gọi song song `/checkout/vouchers` + `/member-rank/benefits`, merge vào `offers.items`
+- ✅ **pages/profile/index.vue** — render voucher cards (red gradient, code, copy button, expiry) + benefit cards (icon, title, lock state) + loading skeleton
+- ✅ **i18n/vi.js + en.js** — thêm keys: `copyCode`, `expires`, `used`

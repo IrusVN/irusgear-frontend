@@ -39,6 +39,7 @@ export const useCartStore = defineStore("cart", () => {
   const isLoading = ref(false);
   const isMutating = ref(false);
   const hydrated = ref(false);
+  let fetchingPromise = null;
   const lastAddedItem = ref(null);
   const lastRemovedItem = ref(null);
   const isAddToCartSheetOpen = ref(false);
@@ -125,22 +126,32 @@ export const useCartStore = defineStore("cart", () => {
       return cart.value;
     }
 
+    if (fetchingPromise && !force) {
+      return fetchingPromise;
+    }
+
     if (!silent) {
       isLoading.value = true;
     }
 
-    try {
-      const response = await requestCart("cart");
-      return applyCartPayload(response);
-    } catch (error) {
-      cart.value = createEmptyCart();
-      hydrated.value = true;
-      return cart.value;
-    } finally {
-      if (!silent) {
-        isLoading.value = false;
+    fetchingPromise = (async () => {
+      try {
+        const response = await requestCart("cart");
+        applyCartPayload(response);
+        return cart.value;
+      } catch (error) {
+        cart.value = createEmptyCart();
+        hydrated.value = true;
+        return cart.value;
+      } finally {
+        if (!silent) {
+          isLoading.value = false;
+        }
+        fetchingPromise = null;
       }
-    }
+    })();
+
+    return fetchingPromise;
   };
 
   const addItem = async (payload, { showSheet = true } = {}) => {
@@ -286,6 +297,7 @@ export const useCartStore = defineStore("cart", () => {
     isLoading.value = false;
     isMutating.value = false;
     hydrated.value = false;
+    fetchingPromise = null;
     lastAddedItem.value = null;
     lastRemovedItem.value = null;
     isAddToCartSheetOpen.value = false;

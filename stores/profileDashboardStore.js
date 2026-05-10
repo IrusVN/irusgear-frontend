@@ -10,7 +10,61 @@ export const useProfileDashboardStore = defineStore("profileDashboard", () => {
   const offers = ref({ total: 0, seeAllUrl: "", items: [] });
   const favorites = ref({ total: 0, seeAllUrl: "", items: [] });
   const isLoading = ref(false);
+  const offersLoading = ref(false);
   const hydrated = ref(false);
+
+  const normalizeVoucherItem = (raw) => ({
+    id: raw.id || raw.code,
+    itemType: "voucher",
+    code: raw.code || null,
+    title: raw.code ? `Mã ${raw.code}` : raw.title || "",
+    description: buildVoucherDescription(raw),
+    value: raw.value || null,
+    formattedValue: buildVoucherValue(raw),
+    type: raw.type || null,
+    minOrderAmount: raw.min_order_amount || null,
+    expiredAt: raw.expired_at || null,
+    isUsed: Boolean(raw.is_used),
+    isLocked: false,
+    icon: raw.icon || "bi bi-ticket-perforated",
+    original: raw,
+  });
+
+  const buildVoucherValue = (v) => {
+    if (!v.value && v.value !== 0) return null;
+    if (v.type === "percentage") return `${v.value}%`;
+    if (v.type === "fixed") return v.value_formatted || `${new Intl.NumberFormat("vi-VN").format(v.value)}đ`;
+    return v.value_formatted || `${new Intl.NumberFormat("vi-VN").format(v.value)}đ`;
+  };
+
+  const buildVoucherDescription = (v) => {
+    const parts = [];
+    if (v.min_order_amount) {
+      const minFormatted = `${new Intl.NumberFormat("vi-VN").format(v.min_order_amount)}đ`;
+      parts.push(`Đơn tối thiểu ${minFormatted}`);
+    }
+    if (v.max_discount_amount) {
+      const maxFormatted = `${new Intl.NumberFormat("vi-VN").format(v.max_discount_amount)}đ`;
+      parts.push(`Giảm tối đa ${maxFormatted}`);
+    }
+    if (v.applicable_categories?.length) {
+      parts.push(`Áp dụng: ${v.applicable_categories.join(", ")}`);
+    }
+    return parts.join(" · ") || null;
+  };
+
+  const normalizeBenefitItem = (raw) => ({
+    id: raw.id,
+    itemType: "benefit",
+    title: raw.title || "",
+    description: raw.description || null,
+    value: null,
+    formattedValue: null,
+    type: raw.type || null,
+    isLocked: Boolean(raw.is_locked),
+    icon: raw.icon || "bi bi-gift",
+    original: raw,
+  });
 
   const normalizeOrder = (raw) => ({
     id: raw.id,
@@ -46,6 +100,8 @@ export const useProfileDashboardStore = defineStore("profileDashboard", () => {
         };
         hydrated.value = true;
       }
+      // Fetch offers from vouchers + member-rank/benefits in parallel
+      fetchOffers();
       return { recentOrders: recentOrders.value, offers: offers.value, favorites: favorites.value };
     } catch (e) {
       recentOrders.value = { total: 0, seeAllUrl: "/orders", orders: [] };
@@ -57,11 +113,54 @@ export const useProfileDashboardStore = defineStore("profileDashboard", () => {
     }
   };
 
+  const fetchOffers = async () => {
+    offersLoading.value = true;
+    try {
+      const [vouchersRes, benefitsRes] = await Promise.allSettled([
+        (() => {
+          feGlobalStore.setApiUrl("checkout/vouchers");
+          return feGlobalStore.fetchItem();
+        })(),
+        (() => {
+          feGlobalStore.setApiUrl("member-rank/benefits");
+          return feGlobalStore.fetchItem();
+        })(),
+      ]);
+
+      const normalizedItems = [];
+
+      // Normalize vouchers
+      if (vouchersRes.status === "fulfilled" && vouchersRes.value?.success !== false) {
+        const vouchers = vouchersRes.value?.data?.vouchers || vouchersRes.value?.data || [];
+        vouchers.forEach((v) => normalizedItems.push(normalizeVoucherItem(v)));
+      }
+
+      // Normalize member-rank benefits (shopping_benefits + service_policies)
+      if (benefitsRes.status === "fulfilled" && benefitsRes.value?.success !== false) {
+        const benefitsData = benefitsRes.value?.data || {};
+        const shopping = benefitsData.shopping_benefits || [];
+        const services = benefitsData.service_policies || [];
+        [...shopping, ...services].forEach((b) => normalizedItems.push(normalizeBenefitItem(b)));
+      }
+
+      offers.value = {
+        total: normalizedItems.length,
+        seeAllUrl: offers.value.seeAllUrl || "/promotion",
+        items: normalizedItems,
+      };
+    } catch (e) {
+      // Silently fail — offers will show empty state
+    } finally {
+      offersLoading.value = false;
+    }
+  };
+
   const reset = () => {
     recentOrders.value = { total: 0, seeAllUrl: "", orders: [] };
     offers.value = { total: 0, seeAllUrl: "", items: [] };
     favorites.value = { total: 0, seeAllUrl: "", items: [] };
     isLoading.value = false;
+    offersLoading.value = false;
     hydrated.value = false;
   };
 
@@ -72,8 +171,10 @@ export const useProfileDashboardStore = defineStore("profileDashboard", () => {
     offers,
     favorites,
     isLoading,
+    offersLoading,
     hydrated,
     fetchDashboard,
+    fetchOffers,
     reset,
   };
 });

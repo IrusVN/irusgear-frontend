@@ -11,7 +11,57 @@
           </div>
           <div class="profile-layout__member-info">
             <h2 class="profile-layout__member-name">{{ fullName }}</h2>
-            <p class="profile-layout__member-phone">
+
+            <!-- No phone → show add button -->
+            <button
+              v-if="!user?.phone && !phoneEditing"
+              type="button"
+              class="profile-layout__add-phone-btn"
+              @click="startPhoneEdit"
+            >
+              <i class="bi bi-phone"></i>
+              {{ $t('profile.layout.addPhone') }}
+            </button>
+
+            <!-- Phone edit mode -->
+            <div v-if="phoneEditing" class="profile-layout__phone-edit">
+              <input
+                v-model="phoneInput"
+                type="tel"
+                class="profile-layout__phone-input"
+                :placeholder="$t('profile.layout.phonePlaceholder')"
+                maxlength="15"
+                @input="phoneError = ''"
+                @keyup.enter="handlePhoneSave"
+                @keyup.esc="handlePhoneCancel"
+              />
+              <div class="profile-layout__phone-actions">
+                <button
+                  type="button"
+                  class="profile-layout__phone-save"
+                  :disabled="phoneSaving || !phoneInput.trim() || !!phoneError"
+                  @click="handlePhoneSave"
+                >
+                  <span v-if="phoneSaving" class="spinner-border spinner-border-sm"></span>
+                  <span v-else>{{ $t('common.save') }}</span>
+                </button>
+                <button
+                  type="button"
+                  class="profile-layout__phone-cancel"
+                  :disabled="phoneSaving"
+                  @click="handlePhoneCancel"
+                >
+                  {{ $t('common.cancel') }}
+                </button>
+              </div>
+              <p v-if="phoneError" class="profile-layout__phone-error">
+                <i class="bi bi-exclamation-circle"></i>
+                {{ phoneError }}
+              </p>
+            </div>
+
+            <!-- Has phone → show display -->
+            <p v-else-if="user?.phone" class="profile-layout__member-phone">
               {{ displayPhone }}
               <button type="button" class="profile-layout__toggle-phone" @click="phoneVisible = !phoneVisible">
                 <i :class="phoneVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
@@ -30,6 +80,7 @@
         </div>
         <div class="profile-layout__member-stats">
           <div class="profile-layout__stat-group">
+            <div class="profile-layout__stat-divider"></div>
             <div class="profile-layout__stat-item">
               <div class="profile-layout__stat-icon">
                 <img src="https://cdn-static.smember.com.vn/_next/static/media/cart-icon.3e4e1d83.svg" alt="Đơn hàng" loading="lazy" />
@@ -191,19 +242,23 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocalePath, useRoute } from '#imports'
 import { useAuthStore } from '@/stores/authStore'
-import { useCartStore } from '@/stores/cartStore'
 import { useMemberRankStore } from '@/stores/memberRankStore'
 
 const localePath = useLocalePath()
 const route = useRoute()
 const authStore = useAuthStore()
-const cartStore = useCartStore()
 const memberRankStore = useMemberRankStore()
 const { user } = storeToRefs(authStore)
 const { currentUser } = storeToRefs(memberRankStore)
 
 const isDesktop = ref(false)
 const phoneVisible = ref(false)
+const phoneEditing = ref(false)
+const phoneInput = ref('')
+const phoneSaving = ref(false)
+const phoneError = ref('')
+
+const PHONE_REGEX = /^(\+84|0)(3[2-9]|5[689]|7[06-9]|8[1-689]|9[0-46-9])[0-9]{7}$|^(\+84|0)(2[0-9])[0-9]{8}$/
 
 const activeSidebarItem = computed(() => {
   const path = route.path
@@ -244,6 +299,43 @@ const handleLogout = () => {
   navigateTo('/auth/login')
 }
 
+const startPhoneEdit = () => {
+  phoneInput.value = user.value?.phone || ''
+  phoneEditing.value = true
+}
+
+const handlePhoneCancel = () => {
+  phoneEditing.value = false
+  phoneInput.value = ''
+  phoneError.value = ''
+}
+
+const handlePhoneSave = async () => {
+  const phone = phoneInput.value.trim()
+  if (!phone) return
+
+  phoneError.value = ''
+
+  if (!PHONE_REGEX.test(phone)) {
+    phoneError.value = 'Số điện thoại không hợp lệ'
+    return
+  }
+
+  phoneSaving.value = true
+  try {
+    const result = await authStore.updateProfile({ phone })
+    if (result.status) {
+      phoneEditing.value = false
+      phoneInput.value = ''
+      phoneError.value = ''
+    } else {
+      phoneError.value = result.message || 'Cập nhật thất bại'
+    }
+  } finally {
+    phoneSaving.value = false
+  }
+}
+
 const handleResize = () => {
   isDesktop.value = window.innerWidth >= 992
 }
@@ -255,7 +347,6 @@ onMounted(() => {
   if (!authStore.sessionResolved && !authStore.sessionLoading) {
     authStore.fetchUser().catch(() => {})
   }
-  cartStore.fetchCart({ silent: true }).catch(() => {})
   memberRankStore.fetchMemberRank().catch(() => {})
 })
 
@@ -335,6 +426,121 @@ onUnmounted(() => {
   align-items: center;
   font-size: 14px;
   line-height: 1;
+}
+
+.profile-layout__add-phone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #fff5f5;
+  border: 1px dashed #ed0017;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ed0017;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  margin-top: 2px;
+  width: fit-content;
+}
+
+.profile-layout__add-phone-btn:hover {
+  background: #fee2e2;
+}
+
+.profile-layout__add-phone-btn i {
+  font-size: 14px;
+}
+
+.profile-layout__phone-edit {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.profile-layout__phone-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-layout__phone-input {
+  flex: 1;
+  min-width: 140px;
+  padding: 5px 10px;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #18181b;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.profile-layout__phone-input:focus {
+  border-color: #ed0017;
+}
+
+.profile-layout__phone-save {
+  padding: 5px 12px;
+  background: #ed0017;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+
+.profile-layout__phone-save:hover:not(:disabled) {
+  background: #c80015;
+}
+
+.profile-layout__phone-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.profile-layout__phone-cancel {
+  padding: 5px 12px;
+  background: #f4f4f5;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #71717a;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.profile-layout__phone-cancel:hover:not(:disabled) {
+  background: #e4e4e7;
+}
+
+.profile-layout__phone-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.profile-layout__phone-error {
+  width: 100%;
+  margin: 4px 0 0;
+  padding: 4px 8px;
+  background: #fff5f5;
+  border: 1px solid #fee2e2;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .profile-layout__rank-badges {

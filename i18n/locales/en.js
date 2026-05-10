@@ -42,6 +42,8 @@ export default {
         profile: "Account",
         orders: "Orders",
         wishlist: "Wishlist",
+        save: "Save",
+        cancel: "Cancel"
     },
     role: {
         default: "DEFAULT",
@@ -899,6 +901,8 @@ export default {
                 totalOrdersSuffix: " purchased",
                 channelNote: "Total spent and order count are calculated across IrusGear.",
             },
+            addPhone: "Add phone number",
+            phonePlaceholder: "Enter phone number",
             stats: {
                 orders: "Orders",
                 pending: "Pending",
@@ -947,6 +951,13 @@ export default {
             noOffers: "You don't have any offers yet.",
             shopNow: "Shop now",
             seeProducts: "View Products",
+            copyCode: "Copy code",
+            expires: "Expires",
+            used: "Used",
+            addressesTitle: "Your Addresses",
+            noAddresses: "You don't have any addresses yet.",
+            editAddress: "Edit address",
+            default: "Default",
         },
 
         // === pages/orders/index.vue ===

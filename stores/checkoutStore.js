@@ -183,7 +183,6 @@ export const useCheckoutStore = defineStore("checkout", () => {
     return true;
   });
 
-  // Actions
   const fetchAddresses = async () => {
     addressesLoading.value = true;
     try {
@@ -192,10 +191,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
       if (response?.data) {
         savedAddresses.value = response.data.map((a) => ({
           ...a,
-          // Normalize: backend may return isDefault (camelCase) or is_default
           is_default: a.is_default ?? a.isDefault ?? false,
         }));
-        // Sort: default address first, then by creation order
         savedAddresses.value.sort((a, b) => {
           if (a.is_default && !b.is_default) return -1;
           if (!a.is_default && b.is_default) return 1;
@@ -207,8 +204,6 @@ export const useCheckoutStore = defineStore("checkout", () => {
         } else if (savedAddresses.value.length > 0) {
           selectedAddressId.value = String(savedAddresses.value[0].id);
         }
-        // Fetch delivery options once (same options for all addresses)
-        await fetchDeliveryOptions();
       }
     } catch (e) {
       console.error("fetchAddresses error:", e);

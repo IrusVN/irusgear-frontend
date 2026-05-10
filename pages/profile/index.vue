@@ -14,7 +14,7 @@
   </div>
 
   <!-- Notice Banner: Address -->
-  <div v-if="showAddressNotice" class="profile-notice">
+  <!-- <div v-if="showAddressNotice" class="profile-notice">
     <div class="profile-notice__icon">
       <i class="bi bi-info-circle-fill"></i>
     </div>
@@ -23,6 +23,66 @@
     <button type="button" class="profile-notice__close" :aria-label="$t('profile.dashboard.closeNotice')" @click="showAddressNotice = false">
       <i class="bi bi-x-lg"></i>
     </button>
+  </div> -->
+
+  <!-- Address Card -->
+  <div class="profile-card profile-card--address">
+    <div class="profile-card__header">
+      <h3 class="profile-card__title">
+        <i class="bi bi-geo-alt"></i>
+        {{ $t('profile.dashboard.addressesTitle') }}
+      </h3>
+      <button
+        v-if="checkoutStore.savedAddresses.length > 0"
+        type="button"
+        class="profile-card__add-btn"
+        @click="checkoutStore.openAddressForm()"
+      >
+        <i class="bi bi-plus-lg"></i>
+        {{ $t('profile.dashboard.addAddress') }}
+      </button>
+    </div>
+
+    <!-- Loading skeleton -->
+    <div v-if="checkoutStore.addressesLoading" class="profile-card__body profile-card__body--addresses">
+      <div v-for="n in 2" :key="n" class="profile-address-skeleton"></div>
+    </div>
+
+    <!-- Empty state -->
+    <div v-else-if="checkoutStore.savedAddresses.length === 0" class="profile-card__body profile-card__body--empty">
+      <div class="profile-empty">
+        <i class="bi bi-map"></i>
+        <p>{{ $t('profile.dashboard.noAddresses') }}</p>
+        <button type="button" class="profile-card__add-btn" @click="checkoutStore.openAddressForm()">
+          <i class="bi bi-plus-lg"></i>
+          {{ $t('profile.dashboard.addAddress') }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Address list -->
+    <div v-else class="profile-card__body profile-card__body--addresses">
+      <AddressCard
+        v-for="addr in checkoutStore.savedAddresses.slice(0, 3)"
+        :key="addr.id"
+        :address="addr"
+        :selected="String(addr.id) === String(checkoutStore.selectedAddressId)"
+        @edit="checkoutStore.openAddressForm(addr)"
+        @delete="handleDeleteAddress(addr.id)"
+        @set-default="checkoutStore.setDefaultAddress(addr.id)"
+      />
+
+      <!-- Add more button -->
+      <button
+        v-if="checkoutStore.savedAddresses.length > 0"
+        type="button"
+        class="profile-address-add-more"
+        @click="checkoutStore.openAddressForm()"
+      >
+        <i class="bi bi-plus-lg"></i>
+        {{ $t('profile.dashboard.addAddress') }}
+      </button>
+    </div>
   </div>
 
   <!-- Content Grid -->
@@ -68,7 +128,20 @@
         <h3 class="profile-card__title">{{ $t('profile.dashboard.yourOffersTitle') }}</h3>
         <a href="#" class="profile-card__link">{{ $t('profile.common.seeAll') }} <i class="bi bi-chevron-right"></i></a>
       </div>
-      <div v-if="offers.items.length === 0" class="profile-card__body profile-card__body--empty">
+
+      <!-- Loading skeleton -->
+      <div v-if="offersLoading" class="profile-card__body">
+        <div v-for="n in 3" :key="n" class="profile-offer-skeleton">
+          <div class="profile-offer-skeleton__icon"></div>
+          <div class="profile-offer-skeleton__content">
+            <div class="profile-offer-skeleton__line profile-offer-skeleton__line--title"></div>
+            <div class="profile-offer-skeleton__line"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div v-else-if="offers.items.length === 0" class="profile-card__body profile-card__body--empty">
         <div class="profile-empty">
           <img
             src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
@@ -78,9 +151,60 @@
           <p>{{ $t('profile.dashboard.noOffers') }} <a :href="localePath('/')">{{ $t('profile.dashboard.seeProducts') }}</a></p>
         </div>
       </div>
-      <div v-else class="profile-card__body">
-        <div v-for="item in offers.items" :key="item.id" class="profile-offer-item">
-          <!-- render offer items -->
+
+      <!-- Offer items -->
+      <div v-else class="profile-card__body profile-card__body--offers">
+        <!-- Voucher items -->
+        <div
+          v-for="item in offers.items.filter(i => i.itemType === 'voucher')"
+          :key="item.id"
+          class="profile-offer-voucher"
+          :class="{ 'profile-offer-voucher--used': item.isUsed }"
+        >
+          <div class="profile-offer-voucher__value">
+            <span class="profile-offer-voucher__value-text">{{ item.formattedValue }}</span>
+            <span v-if="item.type === 'percentage'" class="profile-offer-voucher__value-label">GIẢM</span>
+            <span v-else class="profile-offer-voucher__value-label">VOUCHER</span>
+          </div>
+          <div class="profile-offer-voucher__info">
+            <div class="profile-offer-voucher__code-row">
+              <span class="profile-offer-voucher__code">{{ item.code }}</span>
+              <button
+                v-if="item.code && !item.isUsed"
+                type="button"
+                class="profile-offer-voucher__copy"
+                @click="copyVoucherCode(item.code)"
+                :title="$t('profile.dashboard.copyCode')"
+              >
+                <i class="bi bi-copy"></i>
+              </button>
+            </div>
+            <p v-if="item.description" class="profile-offer-voucher__desc">{{ item.description }}</p>
+            <p v-if="item.expiredAt" class="profile-offer-voucher__expiry">
+              <i class="bi bi-clock"></i>
+              {{ $t('profile.dashboard.expires') }}: {{ formatExpiry(item.expiredAt) }}
+            </p>
+            <span v-if="item.isUsed" class="profile-offer-voucher__used-badge">{{ $t('profile.dashboard.used') }}</span>
+          </div>
+        </div>
+
+        <!-- Benefit items -->
+        <div
+          v-for="item in offers.items.filter(i => i.itemType === 'benefit')"
+          :key="item.id"
+          class="profile-offer-benefit"
+          :class="{ 'profile-offer-benefit--locked': item.isLocked }"
+        >
+          <div class="profile-offer-benefit__icon">
+            <i :class="item.icon || 'bi bi-gift'"></i>
+          </div>
+          <div class="profile-offer-benefit__info">
+            <p class="profile-offer-benefit__title">{{ item.title }}</p>
+            <p v-if="item.description" class="profile-offer-benefit__desc">{{ item.description }}</p>
+          </div>
+          <div v-if="item.isLocked" class="profile-offer-benefit__lock">
+            <i class="bi bi-lock-fill"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -178,14 +302,20 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useLocalePath } from '#imports'
+import { useLocalePath, useI18n } from '#imports'
 import { storeToRefs } from 'pinia'
+import { useGlobalToast } from '@/composables/useGlobalToast'
 import { useProfileDashboardStore } from '@/stores/profileDashboardStore'
+import { useCheckoutStore } from '@/stores/checkoutStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
+import AddressCard from '@/components/Checkout/AddressCard.vue'
 
 const localePath = useLocalePath()
+const { t } = useI18n()
+const toast = useGlobalToast()
 const dashboardStore = useProfileDashboardStore()
-const { recentOrders, offers, favorites, isLoading } = storeToRefs(dashboardStore)
+const checkoutStore = useCheckoutStore()
+const { recentOrders, offers, favorites, isLoading, offersLoading } = storeToRefs(dashboardStore)
 
 definePageMeta({
   layout: 'default',
@@ -197,11 +327,57 @@ useHead({
 })
 
 dashboardStore.fetchDashboard()
+checkoutStore.fetchAddresses()
+
+const handleDeleteAddress = async (id) => {
+  try {
+    await checkoutStore.deleteAddress(id)
+    toast.success(t('checkout.addressDeleted'))
+  } catch (e) {
+    toast.error(e?.data?.message || t('checkout.deleteError'))
+  }
+}
 
 const showAddressNotice = ref(true)
+
+const copyVoucherCode = (code) => {
+  if (!code) return
+  navigator.clipboard.writeText(code).then(() => {
+    // Could show a toast here
+  }).catch(() => {
+    // Fallback
+    const el = document.createElement("textarea")
+    el.value = code
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand("copy")
+    document.body.removeChild(el)
+  })
+}
+
+const formatExpiry = (isoDate) => {
+  if (!isoDate) return ""
+  try {
+    const date = new Date(isoDate)
+    return new Intl.DateTimeFormat("vi-VN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }).format(date)
+  } catch {
+    return isoDate
+  }
+}
 </script>
 
 <style scoped>
+/* ── Page wrapper ─────────────────────── */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 /* ── Notice Banner ─────────────────────── */
 .profile-notice {
   display: flex;
@@ -270,6 +446,7 @@ const showAddressNotice = ref(true)
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
+  padding: 0;
 }
 
 /* ── Card ─────────────────────────────── */
@@ -292,6 +469,33 @@ const showAddressNotice = ref(true)
   font-weight: 700;
   color: #18181b;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-card__title i {
+  color: #d70018;
+  font-size: 18px;
+}
+
+.profile-card__add-btn {
+  align-items: center;
+  background: #d70018;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 4px;
+  padding: 6px 12px;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+.profile-card__add-btn:hover {
+  background: #b80015;
 }
 
 .profile-card__link {
@@ -340,6 +544,11 @@ const showAddressNotice = ref(true)
   width: 88px;
   height: auto;
   object-fit: contain;
+}
+
+.profile-empty i {
+  font-size: 48px;
+  color: #d4d4d8;
 }
 
 .profile-empty p {
@@ -507,6 +716,219 @@ const showAddressNotice = ref(true)
   color: #3b82f6;
 }
 
+/* ── Offers ─────────────────────────── */
+.profile-card__body--offers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Voucher */
+.profile-offer-voucher {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+.profile-offer-voucher:hover {
+  border-color: #d70018;
+}
+.profile-offer-voucher--used {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.profile-offer-voucher__value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  background: linear-gradient(135deg, #d70018, #ff4757);
+  border-radius: 8px;
+  padding: 8px 6px;
+  gap: 2px;
+}
+.profile-offer-voucher__value-text {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+.profile-offer-voucher__value-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.profile-offer-voucher__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.profile-offer-voucher__code-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.profile-offer-voucher__code {
+  font-size: 13px;
+  font-weight: 700;
+  color: #18181b;
+  letter-spacing: 0.5px;
+}
+.profile-offer-voucher__copy {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #3b82f6;
+  padding: 2px 4px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease;
+}
+.profile-offer-voucher__copy:hover {
+  color: #1d4ed8;
+}
+.profile-offer-voucher__desc {
+  font-size: 12px;
+  color: #71717a;
+  margin: 0;
+  line-height: 1.5;
+}
+.profile-offer-voucher__expiry {
+  font-size: 11px;
+  color: #a1a1aa;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.profile-offer-voucher__expiry i {
+  font-size: 11px;
+}
+.profile-offer-voucher__used-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #a1a1aa;
+  background: #f4f4f5;
+  border-radius: 6px;
+  padding: 1px 6px;
+  width: fit-content;
+}
+
+/* Benefit */
+.profile-offer-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  transition: border-color 0.15s ease;
+  position: relative;
+}
+.profile-offer-benefit:hover {
+  border-color: #d70018;
+}
+.profile-offer-benefit--locked {
+  opacity: 0.6;
+}
+.profile-offer-benefit__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #fff1f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+  color: #d70018;
+}
+.profile-offer-benefit__info {
+  flex: 1;
+  min-width: 0;
+}
+.profile-offer-benefit__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #18181b;
+  margin: 0 0 2px;
+}
+.profile-offer-benefit__desc {
+  font-size: 12px;
+  color: #71717a;
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.profile-offer-benefit__lock {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #a1a1aa;
+  font-size: 12px;
+}
+
+/* Loading skeleton */
+.profile-offer-skeleton {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #f4f4f5;
+  border-radius: 12px;
+}
+.profile-offer-skeleton__icon {
+  width: 72px;
+  min-width: 72px;
+  height: 56px;
+  border-radius: 8px;
+  background: #f4f4f5;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+.profile-offer-skeleton__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+.profile-offer-skeleton__line {
+  height: 10px;
+  border-radius: 4px;
+  background: #f4f4f5;
+  width: 70%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+.profile-offer-skeleton__line--title {
+  height: 13px;
+  width: 50%;
+}
+.profile-offer-skeleton__line:last-child {
+  width: 85%;
+}
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* ── Banner Carousel ──────────────────── */
 .profile-banner-carousel {
   position: relative;
@@ -593,8 +1015,60 @@ const showAddressNotice = ref(true)
   width: auto;
 }
 
+/* ── Addresses ───────────────────────── */
+.profile-card__body--addresses {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* AddressCard inside profile — full width instead of fixed 300px */
+.profile-card__body--addresses :deep(.address-card) {
+  min-width: 100%;
+  max-width: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+
+.profile-address-add-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed #d4d4d8;
+  border-radius: 10px;
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: #71717a;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.profile-address-add-more:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+.profile-address-add-more i {
+  font-size: 12px;
+}
+
+/* Address skeleton — matches AddressSection shimmer */
+.profile-address-skeleton {
+  background: linear-gradient(90deg, #f4f4f5 25%, #e4e4e7 50%, #f4f4f5 75%);
+  background-size: 200% 100%;
+  border-radius: 12px;
+  height: 90px;
+  animation: shimmer 1.5s infinite;
+}
+
 /* ── Responsive ──────────────────────── */
 @media (max-width: 575.98px) {
+  .profile-page {
+    gap: 8px;
+  }
+
   .profile-notice {
     flex-wrap: wrap;
     gap: 8px;
@@ -652,8 +1126,13 @@ const showAddressNotice = ref(true)
 }
 
 @media (min-width: 992px) {
+  .profile-page {
+    gap: 16px;
+  }
+
   .profile-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
 
   .profile-banner-item img {
