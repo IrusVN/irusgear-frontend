@@ -4,31 +4,10 @@ import { useFeGlobalStore } from "@/stores/feGlobalStore";
 import { useCartStore } from "@/stores/cartStore";
 import { vietnamAddressApi } from "@/composables/useVietnamAddressApi";
 
-// Cache provinces/districts/wards data for resolving address codes to names
-const _addressCache = {
-  provinces: [],
-  districts: {},
-  wards: {},
-  loaded: false,
-};
-
 // Single delivery options cache — same options apply to all addresses
 let _deliveryOptionsCache = null;
 let _voucherValidateTimer = null;
 let _voucherPendingValidate = false;
-
-const _loadAddressData = async () => {
-  if (_addressCache.loaded) return;
-  _addressCache.provinces = await vietnamAddressApi.getProvinces();
-  _addressCache.loaded = true;
-};
-
-const _resolveProvince = (code) => {
-  const p = _addressCache.provinces.find(
-    (pr) => String(pr.value) === String(code)
-  );
-  return p ? { value: String(code), label: p.label } : { value: String(code), label: String(code) };
-};
 
 const formatMoney = (value = 0) => {
   const normalizedValue = Number(value) || 0;
@@ -189,15 +168,31 @@ export const useCheckoutStore = defineStore("checkout", () => {
       feGlobalStore.setApiUrl("addresses");
       const response = await feGlobalStore.fetchItem();
       if (response?.data) {
-        savedAddresses.value = response.data.map((a) => ({
-          ...a,
-          is_default: a.is_default ?? a.isDefault ?? false,
-        }));
-        savedAddresses.value.sort((a, b) => {
+        // Resolve province/district/ward codes → names so AddressCard displays correctly
+        const resolvedAddresses = await Promise.all(
+          response.data.map(async (addr) => {
+            const resolved = await vietnamAddressApi.resolveAddressCode({
+              province_code: addr.province_code || addr.province,
+              district_code: addr.district_code || addr.district,
+              ward_code: addr.ward_code || addr.ward,
+            });
+
+            return {
+              ...addr,
+              province: resolved.province || addr.province,
+              district: resolved.district || addr.district,
+              ward: resolved.ward || addr.ward,
+              is_default: addr.is_default ?? addr.isDefault ?? false,
+            };
+          }),
+        );
+
+        savedAddresses.value = resolvedAddresses.sort((a, b) => {
           if (a.is_default && !b.is_default) return -1;
           if (!a.is_default && b.is_default) return 1;
           return 0;
         });
+
         const defaultAddr = savedAddresses.value.find((a) => a.is_default);
         if (defaultAddr) {
           selectedAddressId.value = String(defaultAddr.id);
@@ -509,43 +504,31 @@ export const useCheckoutStore = defineStore("checkout", () => {
     if (address) {
       editingAddressId.value = String(address.id);
 
-      // Backend trả province_code/district_code/ward_code là string codes
-      // AddressSearchSelect dùng format {value, label} — resolve ra tên
-      await _loadAddressData();
+      // Extract string codes — support both raw codes ("01") and resolved objects ({value, label})
+      const extractCode = (code) => {
+        if (!code) return null;
+        if (typeof code === "string") return code.trim() || null;
+        return String(code.value || code.code || "").trim() || null;
+      };
 
-      const provinceCode = address.province_code || address.province;
-      const districtCode = address.district_code || address.district;
-      const wardCode = address.ward_code || address.ward;
+      const provinceCode = extractCode(address.province_code) || extractCode(address.province);
+      const districtCode = extractCode(address.district_code) || extractCode(address.district);
+      const wardCode = extractCode(address.ward_code) || extractCode(address.ward);
 
-      // Province — resolve từ cache
-      const provinceOpt = _resolveProvince(provinceCode);
-
-      // District — load từ API
-      let districtOpt = null;
-      if (districtCode && provinceCode) {
-        const districts = await vietnamAddressApi.getDistricts(provinceCode);
-        const d = districts.find((dr) => String(dr.value) === String(districtCode));
-        districtOpt = d
-          ? { value: String(districtCode), label: d.label }
-          : { value: String(districtCode), label: String(districtCode) };
-      }
-
-      // Ward — load từ API
-      let wardOpt = null;
-      if (wardCode && districtCode) {
-        const wards = await vietnamAddressApi.getWards(districtCode);
-        const w = wards.find((wr) => String(wr.value) === String(wardCode));
-        wardOpt = w
-          ? { value: String(wardCode), label: w.label }
-          : { value: String(wardCode), label: String(wardCode) };
-      }
+      // Single call: resolve all codes → {value, label} objects
+      // Uses esgoo API (with 7-day cache) as primary, static files as fallback
+      const resolved = await vietnamAddressApi.resolveAddressCode({
+        province_code: provinceCode,
+        district_code: districtCode,
+        ward_code: wardCode,
+      });
 
       addressForm.value = {
         name: address.name || "",
         phone: address.phone || "",
-        province: provinceOpt,
-        district: districtOpt,
-        ward: wardOpt,
+        province: resolved.province || null,
+        district: resolved.district || null,
+        ward: resolved.ward || null,
         detail: address.detail || address.addressLine1 || "",
         label: address.label || "home",
         isDefault: address.is_default || false,

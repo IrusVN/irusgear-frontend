@@ -118,4 +118,59 @@ export const vietnamAddressApi = {
       .filter((k) => k.startsWith("vna_"))
       .forEach((k) => localStorage.removeItem(k));
   },
+
+  /**
+   * Normalize a code value that might be a string code or a {value, label} object.
+   * Returns the string code, or null if invalid.
+   */
+  _normalizeCode(code) {
+    if (!code) return null;
+    if (typeof code === "string") return code.trim() || null;
+    if (typeof code === "object" && code !== null) {
+      return String(code.value || code.code || "").trim() || null;
+    }
+    return String(code).trim() || null;
+  },
+
+  /**
+   * Resolve address codes to full {value, label} objects.
+   * Priority: esgoo API cache → esgoo API call → static files fallback.
+   * Accepts codes as strings ("01") or as {value, label} objects (from resolved addresses).
+   * Returns { province, district, ward } where each is {value, label} or null.
+   */
+  async resolveAddressCode({ province_code, district_code, ward_code }) {
+    const result = { province: null, district: null, ward: null };
+
+    const pCode = this._normalizeCode(province_code);
+    if (!pCode) return result;
+
+    // ── Province ────────────────────────────────────────────────
+    const provinces = await this.getProvinces();
+    const province = provinces.find((p) => String(p.value) === String(pCode));
+    if (province) {
+      result.province = { value: pCode, label: province.label };
+    }
+
+    const dCode = this._normalizeCode(district_code);
+    if (!dCode) return result;
+
+    // ── District ────────────────────────────────────────────────
+    const districts = await this.getDistricts(pCode);
+    const district = districts.find((d) => String(d.value) === String(dCode));
+    if (district) {
+      result.district = { value: dCode, label: district.label };
+    }
+
+    const wCode = this._normalizeCode(ward_code);
+    if (!wCode) return result;
+
+    // ── Ward ──────────────────────────────────────────────────
+    const wards = await this.getWards(dCode);
+    const ward = wards.find((w) => String(w.value) === String(wCode));
+    if (ward) {
+      result.ward = { value: wCode, label: ward.label };
+    }
+
+    return result;
+  },
 };

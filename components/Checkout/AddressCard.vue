@@ -84,10 +84,11 @@ const isDefault = computed(() => !!props.address.is_default);
 const showSetDefault = computed(() => !props.address.is_default);
 
 const fullAddress = computed(() => {
-  // Backend trả province/district/ward là object {code, name}
-  const ward = props.address.ward?.name || props.address.ward;
-  const district = props.address.district?.name || props.address.district;
-  const province = props.address.province?.name || props.address.province;
+  // Data lưu dạng {value, label} từ resolveAddressCode()
+  // Fallback về string code gốc nếu chưa resolve
+  const ward = props.address.ward?.label || props.address.ward;
+  const district = props.address.district?.label || props.address.district;
+  const province = props.address.province?.label || props.address.province;
   const parts = [
     props.address.detail,
     ward,

@@ -66,7 +66,6 @@
         v-for="addr in checkoutStore.savedAddresses.slice(0, 3)"
         :key="addr.id"
         :address="addr"
-        :selected="String(addr.id) === String(checkoutStore.selectedAddressId)"
         @edit="checkoutStore.openAddressForm(addr)"
         @delete="handleDeleteAddress(addr.id)"
         @set-default="checkoutStore.setDefaultAddress(addr.id)"

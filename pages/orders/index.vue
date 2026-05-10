@@ -143,17 +143,24 @@ loadOrders()
 </script>
 
 <style scoped>
+/* ── Page ─── */
+.orders-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /* ── Tabs ─── */
 .orders-tabs {
   display: flex;
   overflow-x: auto;
-  gap: 0;
   background: #fff;
   border: 1px solid #ececf1;
   border-radius: 18px;
   padding: 4px;
   gap: 2px;
   scrollbar-width: none;
+  flex-shrink: 0;
 }
 .orders-tabs::-webkit-scrollbar {
   display: none;
@@ -430,7 +437,7 @@ loadOrders()
   }
 
   .orders-filter {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .orders-filter__date-range {
@@ -507,7 +514,7 @@ loadOrders()
 @media (max-width: 767.98px) {
   .orders-tabs {
     border-radius: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .orders-tabs__item {
@@ -518,7 +525,7 @@ loadOrders()
   }
 
   .orders-filter {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .orders-filter__date-range {
@@ -645,7 +652,7 @@ loadOrders()
   }
 
   .orders-filter {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .orders-filter__date-range {
