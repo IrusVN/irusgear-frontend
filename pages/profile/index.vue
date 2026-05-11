@@ -60,16 +60,26 @@
       </div>
     </div>
 
+    <!-- Address form -->
+    <AddressForm
+      v-if="checkoutStore.isEditingAddress"
+      :saving="checkoutStore.addressSaving"
+      @save="handleSaveAddress"
+      @cancel="checkoutStore.closeAddressForm()"
+    />
+
     <!-- Address list -->
     <div v-else class="profile-card__body profile-card__body--addresses">
-      <AddressCard
-        v-for="addr in checkoutStore.savedAddresses.slice(0, 3)"
-        :key="addr.id"
-        :address="addr"
-        @edit="checkoutStore.openAddressForm(addr)"
-        @delete="handleDeleteAddress(addr.id)"
-        @set-default="checkoutStore.setDefaultAddress(addr.id)"
-      />
+      <div class="profile-address-list pt-1">
+        <AddressCard
+          v-for="addr in checkoutStore.savedAddresses"
+          :key="addr.id"
+          :address="addr"
+          @edit="checkoutStore.openAddressForm(addr)"
+          @delete="handleDeleteAddress(addr.id)"
+          @set-default="checkoutStore.setDefaultAddress(addr.id)"
+        />
+      </div>
 
       <!-- Add more button -->
       <button
@@ -308,6 +318,7 @@ import { useProfileDashboardStore } from '@/stores/profileDashboardStore'
 import { useCheckoutStore } from '@/stores/checkoutStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 import AddressCard from '@/components/Checkout/AddressCard.vue'
+import AddressForm from '@/components/Checkout/AddressForm.vue'
 
 const localePath = useLocalePath()
 const { t } = useI18n()
@@ -334,6 +345,22 @@ const handleDeleteAddress = async (id) => {
     toast.success(t('checkout.addressDeleted'))
   } catch (e) {
     toast.error(e?.data?.message || t('checkout.deleteError'))
+  }
+}
+
+const handleSaveAddress = async (addressData) => {
+  try {
+    if (checkoutStore.editingAddressId) {
+      await checkoutStore.updateAddress(checkoutStore.editingAddressId, addressData)
+      toast.success(t('checkout.addressUpdated'))
+    } else {
+      await checkoutStore.saveAddress(addressData)
+      toast.success(t('checkout.addressAdded'))
+    }
+  } catch (e) {
+    // Backend trả { code, message } ở root level, không phải trong data
+    const message = e?.message || e?.data?.message || t('checkout.addressError')
+    toast.error(message)
   }
 }
 
@@ -1027,6 +1054,14 @@ const formatExpiry = (isoDate) => {
   max-width: 100%;
   flex-shrink: 1;
   flex-grow: 1;
+}
+
+.profile-address-list {
+  max-height: 360px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .profile-address-add-more {

@@ -221,12 +221,12 @@
         </button>
 
         <NuxtLink
-          to="/wishlist"
+          to="/profile"
           class="mobile-nav-item position-relative"
-          :class="{ active: isMobileNavActive('/wishlist') }"
+          :class="{ active: isMobileNavActive('/profile') }"
           :aria-label="$t('common.wishlist')"
         >
-          <i class="bi" :class="isMobileNavActive('/wishlist') ? 'bi-heart-fill' : 'bi-heart'"></i>
+          <i class="bi" :class="isMobileNavActive('/profile') ? 'bi-heart-fill' : 'bi-heart'"></i>
           <span>{{ $t('common.wishlist') }}</span>
           <span
             v-if="wishlistCount > 0"

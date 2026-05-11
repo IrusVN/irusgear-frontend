@@ -3,11 +3,12 @@ import { defineStore } from "pinia";
 import { useRuntimeConfig, useRequestHeaders } from "#imports";
 import { useAuthStore } from "@/stores/authStore";
 import { registerStore } from "@/utils/storeRegistry";
-import { useToast } from "vue-toastification";
+import { useGlobalToast } from '@/composables/useGlobalToast';
 
 export const useUserInfoStore = defineStore("userInfo", () => {
   const config = useRuntimeConfig();
   const authStore = useAuthStore();
+  const { success, error } = useGlobalToast();
 
   const socialLinks = ref([]);
   const isLoadingLinks = ref(false);
@@ -27,7 +28,6 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   };
 
   const updateProfile = async (payload) => {
-    const toast = useToast();
     try {
       const res = await apiFetch("profile", {
         method: "PUT",
@@ -38,30 +38,29 @@ export const useUserInfoStore = defineStore("userInfo", () => {
         if (authStore.user && res?.data) {
           Object.assign(authStore.user, res.data);
         }
-        toast.success(res?.message || "Cập nhật thông tin thành công");
+        success(res?.message || "Cập nhật thông tin thành công");
         return { success: true, data: res?.data };
       }
       throw new Error(res?.message || "Cập nhật thất bại");
     } catch (e) {
-      toast.error(e?.data?.message || e.message || "Cập nhật thất bại");
+      error(e?.data?.message || e.message || "Cập nhật thất bại");
       return { success: false, error: e };
     }
   };
 
   const changePassword = async (payload) => {
-    const toast = useToast();
     try {
       const res = await apiFetch("password/change", {
         method: "POST",
         body: payload,
       });
       if (res?.success !== false) {
-        toast.success(res?.message || "Đổi mật khẩu thành công");
+        success(res?.message || "Đổi mật khẩu thành công");
         return { success: true };
       }
       throw new Error(res?.message || "Đổi mật khẩu thất bại");
     } catch (e) {
-      toast.error(e?.data?.message || e.message || "Đổi mật khẩu thất bại");
+      error(e?.data?.message || e.message || "Đổi mật khẩu thất bại");
       return { success: false, error: e };
     }
   };

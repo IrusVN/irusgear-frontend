@@ -18,7 +18,7 @@
       <div class="box-header__bottom">
         <div class="box-bottom-item">
           <button id="wishListBtn" type="button" @click="toggleWishlist">
-            <div class="btn__effect button__add-wishlist inactive">
+            <div class="btn__effect button__add-wishlist" :class="{ inactive: !isInWishlist, active: isInWishlist }">
               <svg viewBox="20 18 29 28" aria-hidden="true" focusable="false"
                 class="heart-border icon-svg icon-svg--color-cps">
                 <path
@@ -375,9 +375,17 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useProductStore } from '@/stores/productStore';
+import { useWishlistStore } from '@/stores/wishlistStore';
+import { useAuthStore } from '@/stores/authStore';
 import ArrowIcon from '@/components/Icons/ArrowIcon.vue';
+import { useGlobalToast } from '@/composables/useGlobalToast';
+import { useI18n } from "#imports";
 
+const { t } = useI18n();
+const { success, error } = useGlobalToast();
 const productStore = useProductStore();
+const wishlistStore = useWishlistStore();
+const authStore = useAuthStore();
 
 // Dynamic specs & article state
 const showAllSpecs = ref(false);
@@ -391,6 +399,25 @@ const productSpecs = computed(() => {
 // Reset expand state when product changes
 watch(() => productStore.productDetail?.id, () => {
   showAllSpecs.value = false;
+});
+
+// Wishlist state
+const wishlistItemId = computed(() => {
+  const productId = productStore.productDetail?.id;
+  if (!productId) return null;
+  const item = wishlistStore.items.find(
+    (i) => String(i.product_id) === String(productId)
+  );
+  return item?.id || null;
+});
+
+const isInWishlist = computed(() => !!wishlistItemId.value);
+
+// Load wishlist on mount
+onMounted(async () => {
+  if (authStore.isLoggedIn) {
+    await wishlistStore.fetchWishlist();
+  }
 });
 
 import "swiper/css";
@@ -407,7 +434,7 @@ const isVideoPlaying = ref(false);
 let galleryTopSwiper = null;
 let galleryThumbsSwiper = null;
 let warrantySwiper = null;
-let resetWishlistTimer = null;
+
 
 const toggleFaq = (index) => {
   openFaqIndex.value = openFaqIndex.value === index ? null : index;
@@ -417,32 +444,34 @@ const playVideo = () => {
   isVideoPlaying.value = true;
 };
 
-const toggleWishlist = () => {
-  const effectEl = rootEl.value?.querySelector("#wishListBtn .btn__effect");
-
-  if (!effectEl) return;
-
-  const isActive = effectEl.classList.contains("active");
-
-  if (resetWishlistTimer) {
-    clearTimeout(resetWishlistTimer);
-    resetWishlistTimer = null;
-  }
-
-  effectEl.classList.remove("active", "inactive", "deactivate");
-
-  if (!isActive) {
-    effectEl.classList.add("active");
+const toggleWishlist = async () => {
+  if (!authStore.isLoggedIn) {
+    navigateTo("/login");
     return;
   }
 
-  effectEl.classList.add("deactivate");
+  const productId = productStore.productDetail?.id;
+  if (!productId) return;
 
-  resetWishlistTimer = window.setTimeout(() => {
-    effectEl.classList.remove("deactivate");
-    effectEl.classList.add("inactive");
-    resetWishlistTimer = null;
-  }, 700);
+  const item = wishlistStore.items.find(
+    (i) => String(i.product_id) === String(productId)
+  );
+
+  try {
+    if (item) {
+      await wishlistStore.removeItem(item.id);
+      success(t("product.removedFromWishlist") || "Đã xóa khỏi yêu thích");
+    } else {
+      await wishlistStore.addItem({
+        product_id: Number(productId),
+        variant_id: productStore.selectedVariant?.id || null,
+        quantity: 1,
+      });
+      success(t("product.addedToWishlist") || "Đã thêm vào yêu thích");
+    }
+  } catch (e) {
+    error(e?.message || t("product.wishlistError") || "Không thể cập nhật yêu thích");
+  }
 };
 
 const initSwipers = async () => {
@@ -575,10 +604,6 @@ onBeforeUnmount(() => {
     window.removeEventListener('color-variant-selected', handleColorSelected);
   }
   destroySwipers();
-
-  if (resetWishlistTimer) {
-    clearTimeout(resetWishlistTimer);
-  }
 });
 </script>
 

@@ -32,8 +32,8 @@
 
       <div class="bottom-row">
         <span class="rating"><i class="bi bi-star-fill"></i> {{ normalizedRating }}</span>
-        <button type="button" class="fav-btn" :aria-label="$t('product.favorite')">
-          <i class="bi bi-heart"></i>
+        <button type="button" class="fav-btn" :aria-label="$t('product.favorite')" @click="toggleWishlist">
+          <i :class="isInWishlist ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
           <span class="d-none d-sm-inline">{{ $t('product.favorite') }}</span>
         </button>
       </div>
@@ -43,8 +43,57 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useWishlistStore } from '@/stores/wishlistStore';
+import { useAuthStore } from '@/stores/authStore';
+import { useGlobalToast } from '@/composables/useGlobalToast';
+import { useI18n } from "#imports";
+import { useRouter } from "#imports";
+
+const { t } = useI18n();
+const { success, error } = useGlobalToast();
+const wishlistStore = useWishlistStore();
+const authStore = useAuthStore();
+const router = useRouter();
 
 const props = defineProps({ product: { type: Object, required: true } });
+
+const isInWishlist = computed(() => {
+  const productId = props.product?.id;
+  if (!productId) return false;
+  return wishlistStore.items.some(
+    (i) => String(i.product_id) === String(productId)
+  );
+});
+
+const toggleWishlist = async () => {
+  if (!authStore.isLoggedIn) {
+    router.push("auth/login");
+    return;
+  }
+
+  const productId = props.product?.id;
+  if (!productId) return;
+
+  const item = wishlistStore.items.find(
+    (i) => String(i.product_id) === String(productId)
+  );
+
+  try {
+    if (item) {
+      await wishlistStore.removeItem(item.id);
+      success(t("product.removedFromWishlist"));
+    } else {
+      await wishlistStore.addItem({
+        product_id: Number(productId),
+        variant_id: null,
+        quantity: 1,
+      });
+      success(t("product.addedToWishlist"));
+    }
+  } catch (e) {
+    error(e?.message || t("product.wishlistError"));
+  }
+};
 
 const fmt = (v) => {
   const value = Number(v) || 0;

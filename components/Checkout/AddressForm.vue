@@ -134,9 +134,14 @@
         {{ $t("checkout.cancel") }}
       </button>
       <button type="submit" class="address-form__btn address-form__btn--save" :disabled="saving">
-        <i v-if="saving" class="bi bi-arrow-repeat spin"></i>
-        <i v-else class="bi bi-check-lg"></i>
-        {{ saving ? $t("checkout.saving") : $t("checkout.saveAddress") }}
+        <template v-if="saving">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ $t("checkout.saving") }}
+        </template>
+        <template v-else>
+          <i class="bi bi-check-lg"></i>
+          {{ $t("checkout.saveAddress") }}
+        </template>
       </button>
     </div>
   </form>

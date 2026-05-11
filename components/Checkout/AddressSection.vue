@@ -156,7 +156,8 @@ const handleSaveAddress = async (addressData) => {
       toast.success(t("checkout.addressAdded"));
     }
   } catch (e) {
-    toast.error(e?.data?.message || t("checkout.addressError"));
+    const message = e?.message || e?.data?.message || t("checkout.addressError");
+    toast.error(message);
   }
 };
 

@@ -63,11 +63,12 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         }
 
         if (!res.ok) {
-          let errorBody = { message: "Lỗi không xác định" };
+          let errorBody = {};
           try {
             errorBody = await res.json();
           } catch (_) {}
-          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
           err.data = errorBody;
           throw err;
         }
@@ -104,11 +105,12 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         }
 
         if (!res.ok) {
-          let errorBody = { message: "Lỗi không xác định" };
+          let errorBody = {};
           try {
             errorBody = await res.json();
           } catch (_) {}
-          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
           err.data = errorBody;
           throw err;
         }
@@ -136,11 +138,12 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         });
 
         if (!res.ok) {
-          let errorBody = { message: "Lỗi không xác định" };
+          let errorBody = {};
           try {
             errorBody = await res.json();
           } catch (_) {}
-          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
           err.data = errorBody;
           throw err;
         }
@@ -161,11 +164,12 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         });
 
         if (!res.ok) {
-          let errorBody = { message: "Lỗi không xác định" };
+          let errorBody = {};
           try {
             errorBody = await res.json();
           } catch (_) {}
-          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
           err.data = errorBody;
           throw err;
         }
@@ -189,11 +193,12 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         });
 
         if (!res.ok) {
-          let errorBody = { message: "Lỗi không xác định" };
+          let errorBody = {};
           try {
             errorBody = await res.json();
           } catch (_) {}
-          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
           err.data = errorBody;
           throw err;
         }
@@ -219,11 +224,12 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         });
 
         if (!res.ok) {
-          let errorBody = { message: "Lỗi không xác định" };
+          let errorBody = {};
           try {
             errorBody = await res.json();
           } catch (_) {}
-          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
           err.data = errorBody;
           throw err;
         }
@@ -245,11 +251,12 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
         });
 
         if (!res.ok) {
-          let errorBody = { message: "Lỗi không xác định" };
+          let errorBody = {};
           try {
             errorBody = await res.json();
           } catch (_) {}
-          const err = new Error(errorBody?.message || `HTTP ${res.status}`);
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
           err.data = errorBody;
           throw err;
         }

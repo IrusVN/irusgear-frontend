@@ -26,6 +26,7 @@ export const useAuthStore = defineStore("auth", () => {
   const resetToken = ref("");
 
   const isAuthenticated = computed(() => !!user.value);
+const isLoggedIn = computed(() => !!user.value);
 
   const apiFetch = async (endpoint, options = {}) => {
     return await $fetch(`${config.public.apiBaseUrl}${endpoint}`, {
@@ -288,6 +289,7 @@ const resetPassword = async (password, passwordConfirmation) => {
     loading,
     sessionLoading,
     isAuthenticated,
+    isLoggedIn,
     sessionResolved,
     registerStep,
     resetToRegister,

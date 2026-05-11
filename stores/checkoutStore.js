@@ -387,20 +387,10 @@ export const useCheckoutStore = defineStore("checkout", () => {
       feGlobalStore.setApiUrl("addresses");
       const response = await feGlobalStore.createItem(payload);
       if (response?.data) {
-        const newAddr = {
-          ...response.data,
-          is_default: response.data.is_default ?? response.data.isDefault ?? false,
-        };
-        savedAddresses.value.unshift(newAddr);
         selectedAddressId.value = String(response.data.id);
-        if (newAddr.is_default) {
-          savedAddresses.value.sort((a, b) => {
-            if (a.is_default && !b.is_default) return -1;
-            if (!a.is_default && b.is_default) return 1;
-            return 0;
-          });
-        }
       }
+      // Re-fetch all addresses to sync is_default and resolve codes → names
+      await fetchAddresses();
       isEditingAddress.value = false;
       editingAddressId.value = null;
       resetAddressForm();
@@ -426,15 +416,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
       };
       feGlobalStore.setApiUrl("addresses");
       const response = await feGlobalStore.updateItem(id, payload);
-      if (response?.data) {
-        const idx = savedAddresses.value.findIndex((a) => String(a.id) === String(id));
-        if (idx !== -1) {
-          savedAddresses.value[idx] = {
-            ...response.data,
-            is_default: response.data.is_default ?? response.data.isDefault ?? savedAddresses.value[idx].is_default,
-          };
-        }
-      }
+      // Re-fetch all addresses to sync is_default and resolve codes → names
+      await fetchAddresses();
       isEditingAddress.value = false;
       editingAddressId.value = null;
       resetAddressForm();
@@ -459,16 +442,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
     setDefaultLoading.value = true;
     try {
       await feGlobalStore.putItem(`addresses/${id}/default`);
-      // Optimistic update: set is_default locally, no refetch needed
-      savedAddresses.value.forEach((a) => {
-        a.is_default = String(a.id) === String(id);
-      });
-      // Sort: default address first
-      savedAddresses.value.sort((a, b) => {
-        if (a.is_default && !b.is_default) return -1;
-        if (!a.is_default && b.is_default) return 1;
-        return 0;
-      });
+      // Re-fetch all to sync is_default across all addresses
+      await fetchAddresses();
     } finally {
       setDefaultLoading.value = false;
     }
