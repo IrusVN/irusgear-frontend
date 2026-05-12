@@ -27,6 +27,8 @@ export default {
         seeYourOffers: "See your offers",
         discount: "Save",
         installment: "Installment",
+        productFilter: "Filter",
+        sortBy: "Sort by",
         qa: "Q&A",
         productCommitment: "Product Commitment",
         authenticApple: "Genuine Apple",

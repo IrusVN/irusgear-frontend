@@ -27,6 +27,8 @@ export default {
         seeYourOffers: "Xem ưu đãi của bạn",
         discount: "Giảm",
         installment: "Trả góp",
+        productFilter: "Bộ lọc",
+        sortBy: "Sắp xếp",
         qa: "Hỏi đáp",
         productCommitment: "Cam kết sản phẩm",
         authenticApple: "Chính hãng Apple",
