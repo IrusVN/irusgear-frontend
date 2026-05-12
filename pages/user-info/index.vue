@@ -53,7 +53,7 @@
         </div>
         <div class="user-info-card__row user-info-card__row--last">
           <span class="user-info-card__label">{{ $t('profile.userInfo.address') }}</span>
-          <span class="user-info-card__value">{{ user?.default_address || '—' }}</span>
+          <span class="user-info-card__value">{{ defaultAddressText }}</span>
         </div>
       </div>
     </div>
@@ -72,7 +72,42 @@
       </button>
     </div>
 
-    <div class="user-info-address-empty">
+    <div v-if="addressesLoading" class="user-info-address-empty">
+      <span class="user-info-address-empty__loader" aria-hidden="true"></span>
+      <p class="user-info-address-empty__text">Đang tải địa chỉ...</p>
+    </div>
+
+    <div v-else-if="mappedAddresses.length" class="user-info-address-list">
+      <article
+        v-for="address in mappedAddresses"
+        :key="address.id"
+        class="user-info-address-item"
+      >
+        <div class="user-info-address-item__icon" aria-hidden="true">
+          <i :class="address.label === 'office' ? 'bi bi-building' : 'bi bi-house-door'"></i>
+        </div>
+
+        <div class="user-info-address-item__content">
+          <div class="user-info-address-item__top">
+            <div class="user-info-address-item__type">
+              <span>{{ address.typeLabel }}</span>
+              <span v-if="address.isDefault" class="user-info-address-item__badge">
+                Mặc định
+              </span>
+            </div>
+            <div class="user-info-address-item__contact">
+              <strong>{{ address.nameText }}</strong>
+              <span v-if="address.phoneText">•</span>
+              <span v-if="address.phoneText">{{ address.phoneText }}</span>
+            </div>
+          </div>
+
+          <p class="user-info-address-item__address">{{ address.formattedAddress }}</p>
+        </div>
+      </article>
+    </div>
+
+    <div v-else class="user-info-address-empty">
       <img
         src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
         alt="empty"
@@ -88,7 +123,7 @@
     <div class="user-info-card">
       <div class="user-info-card__header">
         <h2 class="user-info-card__title">{{ $t('profile.userInfo.password') }}</h2>
-        <button type="button" class="user-info-card__edit-btn">
+        <button type="button" class="user-info-card__edit-btn" @click="openUpdatePassword">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -150,18 +185,22 @@
   </div>
 
   <UpdateProfile v-model="showUpdateProfileModal" />
-  <UpdateAddress v-model="showUpdateAddressModal" />
+  <UpdateAddress v-model="showUpdateAddressModal" @saved="checkoutStore.fetchAddresses()" />
+  <UpdatePassword v-model="showUpdatePasswordModal" />
 </ProfileLayout>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/authStore'
 import { useUserInfoStore } from '@/stores/userInfoStore'
+import { useCheckoutStore } from '@/stores/checkoutStore'
+import { vietnamAddressApi } from '@/composables/useVietnamAddressApi'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 import UpdateProfile from '@/components/Profile/UpdateProfile.vue'
 import UpdateAddress from '@/components/Profile/UpdateAddress.vue'
+import UpdatePassword from '@/components/Profile/UpdatePassword.vue'
 
 definePageMeta({ layout: 'default', middleware: ['auth-guard'] })
 
@@ -169,15 +208,148 @@ useHead({ title: 'Thông tin tài khoản - IrusGear' })
 
 const authStore = useAuthStore()
 const userInfoStore = useUserInfoStore()
+const checkoutStore = useCheckoutStore()
 const { user } = storeToRefs(authStore)
 const { socialLinks, isLoadingLinks } = storeToRefs(userInfoStore)
+const { savedAddresses, addressesLoading } = storeToRefs(checkoutStore)
 
 const showUpdateProfileModal = ref(false)
 const showUpdateAddressModal = ref(false)
+const showUpdatePasswordModal = ref(false)
+const resolvedDefaultAddress = ref('')
 const showGenderAlert = computed(() => !user.value?.gender)
 
-// Fetch social links on mount
-userInfoStore.fetchSocialLinks()
+const getAddressLabel = (value) => {
+  if (!value) return ''
+  if (typeof value === 'object') return value.label || value.name || value.value || ''
+  return String(value).trim()
+}
+
+const formatAddress = (address) => {
+  if (!address) return ''
+
+  return [
+    address.address_line1 || address.addressLine1 || address.detail || address.address || address.street,
+    getAddressLabel(address.ward),
+    getAddressLabel(address.district),
+    getAddressLabel(address.province) || address.city,
+  ]
+    .filter(Boolean)
+    .join(', ')
+}
+
+const formatPhone = (phone) => {
+  if (!phone) return ''
+  const rawPhone = String(phone).trim()
+  const digits = rawPhone.replace(/\D/g, '')
+  if (digits.length === 10) {
+    return digits.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')
+  }
+  return rawPhone
+}
+
+const getAddressDefault = (address) => Boolean(address?.is_default ?? address?.isDefault)
+
+const getAddressTypeLabel = (label) => {
+  if (label === 'office') return 'Văn phòng'
+  return 'Nhà'
+}
+
+const mappedAddresses = computed(() =>
+  savedAddresses.value.map((address) => ({
+    ...address,
+    isDefault: getAddressDefault(address),
+    typeLabel: getAddressTypeLabel(address.label),
+    nameText: address.name || user.value?.full_name || '—',
+    phoneText: formatPhone(address.phone || user.value?.phone),
+    formattedAddress: formatAddress(address) || '—',
+  }))
+)
+
+const defaultAddressFromApi = computed(() => {
+  const defaultAddress = savedAddresses.value.find((address) => address.is_default)
+  return formatAddress(defaultAddress)
+})
+
+const defaultAddressText = computed(() => (
+  defaultAddressFromApi.value ||
+  resolvedDefaultAddress.value ||
+  (parseDefaultAddressCodes(user.value?.default_address) ? '' : user.value?.default_address) ||
+  '—'
+))
+
+const parseDefaultAddressCodes = (rawAddress) => {
+  if (!rawAddress || typeof rawAddress !== 'string') return null
+
+  const parts = rawAddress
+    .split(',')
+    .map((part) => part.trim())
+    .filter(Boolean)
+
+  if (parts.length < 4) return null
+
+  const provinceCode = parts.at(-1)
+  const districtCode = parts.at(-2)
+  const wardCode = parts.at(-3)
+  const detail = parts.slice(0, -3).join(', ')
+
+  if (![provinceCode, districtCode, wardCode].every((code) => /^\d+$/.test(code))) {
+    return null
+  }
+
+  return {
+    detail,
+    provinceCode,
+    districtCode,
+    wardCode,
+  }
+}
+
+let defaultAddressResolveId = 0
+
+const resolveUserDefaultAddress = async () => {
+  const currentResolveId = ++defaultAddressResolveId
+  const parsedAddress = parseDefaultAddressCodes(user.value?.default_address)
+
+  if (!parsedAddress) {
+    resolvedDefaultAddress.value = ''
+    return
+  }
+
+  try {
+    const resolved = await vietnamAddressApi.resolveAddressCode({
+      province_code: parsedAddress.provinceCode,
+      district_code: parsedAddress.districtCode,
+      ward_code: parsedAddress.wardCode,
+    })
+
+    if (currentResolveId !== defaultAddressResolveId) return
+
+    resolvedDefaultAddress.value = formatAddress({
+      detail: parsedAddress.detail,
+      ward: resolved.ward || parsedAddress.wardCode,
+      district: resolved.district || parsedAddress.districtCode,
+      province: resolved.province || parsedAddress.provinceCode,
+    })
+  } catch {
+    if (currentResolveId === defaultAddressResolveId) {
+      resolvedDefaultAddress.value = ''
+    }
+  }
+}
+
+onMounted(() => {
+  userInfoStore.fetchSocialLinks()
+  checkoutStore.fetchAddresses()
+  resolveUserDefaultAddress()
+})
+
+watch(
+  () => user.value?.default_address,
+  () => {
+    resolveUserDefaultAddress()
+  }
+)
 
 const openUpdateProfile = () => {
   showUpdateProfileModal.value = true
@@ -185,6 +357,10 @@ const openUpdateProfile = () => {
 
 const openUpdateAddress = () => {
   showUpdateAddressModal.value = true
+}
+
+const openUpdatePassword = () => {
+  showUpdatePasswordModal.value = true
 }
 
 const handleUpdateGender = openUpdateProfile
@@ -356,6 +532,112 @@ const handleUpdateGender = openUpdateProfile
 }
 
 /* ── Two-column bottom row ──────────────── */
+.user-info-address-empty__loader {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #f1f1f4;
+  border-top-color: #d70018;
+  border-radius: 50%;
+  animation: user-info-spin 0.8s linear infinite;
+}
+
+.user-info-address-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info-address-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f4f4f5;
+}
+
+.user-info-address-item:last-child {
+  border-bottom: none;
+}
+
+.user-info-address-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: #d70018;
+  background: #fff1f2;
+  border-radius: 10px;
+  font-size: 17px;
+}
+
+.user-info-address-item__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.user-info-address-item__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.user-info-address-item__type,
+.user-info-address-item__contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: #18181b;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.user-info-address-item__type {
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.user-info-address-item__contact {
+  justify-content: flex-end;
+  text-align: right;
+  color: #52525b;
+  overflow-wrap: anywhere;
+}
+
+.user-info-address-item__contact strong {
+  color: #18181b;
+  font-weight: 700;
+}
+
+.user-info-address-item__badge {
+  padding: 2px 8px;
+  color: #fff;
+  background: #d70018;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.user-info-address-item__address {
+  margin: 0;
+  color: #71717a;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+@keyframes user-info-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .user-info-row {
   display: grid;
   grid-template-columns: 1fr;
