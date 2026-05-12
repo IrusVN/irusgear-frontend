@@ -1109,7 +1109,571 @@ export default {
             },
         },
 
-        // === pages/policy/index.vue & pages/tos/index.vue ===
+        // === pages/policy/index.vue ===
+        policy: {
+            pageTitle: "Chính sách bảo hành - IrusGear",
+            sidebarTitle: "Bảo hành",
+
+            // Sidebar nav
+            nav: {
+                return30days: "I. Đổi mới 30 ngày miễn phí",
+                standard: "II. Bảo hành tiêu chuẩn",
+                components: "III. Linh kiện máy tính",
+                vip: "IV. Bảo hành 1 đổi 1 VIP",
+                accidental: "V. Bảo hành rơi vỡ, ngấm nước",
+                s24plus: "VI. Bảo hành mở rộng S24+",
+            },
+
+            // Section I - Return 30 days
+            return: {
+                title: "I. Đổi mới 30 ngày miễn phí",
+                desc: "Áp dụng khi máy có lỗi phần cứng từ phía nhà sản xuất.",
+                tableHeaders: {
+                    product: "Sản phẩm",
+                    freeExchange: "Đổi mới miễn phí",
+                    returnPolicy: "Quy định nhập lại, trả lại (thu cũ)",
+                },
+                rows: [
+                    {
+                        product: "Điện thoại, Máy tính bảng, Macbook, Apple Watch",
+                        freeExchange: "30 ngày",
+                        returnPolicy: "Trong 30 ngày đầu: trừ phí 20% trên giá hiện tại. Sau 30 ngày: Nhập lại theo giá thỏa thuận.",
+                    },
+                    {
+                        product: "Samsung Watch",
+                        freeExchange: "30 ngày",
+                        returnPolicy: "Trong 30 ngày đầu: trừ phí 30% trên giá hiện tại. Sau 30 ngày: Nhập lại theo giá thỏa thuận.",
+                    },
+                    {
+                        product: "Laptop",
+                        freeExchange: "30 ngày",
+                        returnPolicy: "Trong 30 ngày đầu: trừ phí 20% trên giá hiện tại. Sau 30 ngày: Nhập lại theo giá thỏa thuận.",
+                    },
+                    {
+                        product: "Màn hình máy tính",
+                        freeExchange: "15 ngày",
+                        returnPolicy: "Trong 15 ngày đầu: trừ phí 20% trên giá hiện tại. Sau 15 ngày: Nhập lại theo giá thỏa thuận.",
+                    },
+                    {
+                        product: "Loa - Tai nghe cao cấp",
+                        freeExchange: "15 ngày",
+                        returnPolicy: "Trong 30 ngày đầu: trừ phí 40% trên giá mua ban đầu. Từ 31-60 ngày: trừ phí 50% trên giá mua ban đầu.",
+                    },
+                    {
+                        product: "Hàng cũ",
+                        freeExchange: "30 ngày",
+                        returnPolicy: "Trong 30 ngày đầu: trừ phí 15% trên giá hiện tại. Sau 30 ngày: Nhập lại theo giá thỏa thuận.",
+                    },
+                    {
+                        product: "Tivi / Đồ gia dụng",
+                        freeExchange: "30 ngày / 15 ngày",
+                        returnPolicy: "Không áp dụng nhập lại.",
+                    },
+                    {
+                        product: "Phụ kiện > 1 triệu",
+                        freeExchange: "15 ngày",
+                        returnPolicy: "Không áp dụng nhập lại. (Riêng Airpods: trừ phí 20% trong 30 ngày đầu.)",
+                    },
+                ],
+                conditionsTitle: "Điều kiện đổi trả",
+                conditions: [
+                    { text: "Máy mới: Như mới, không trầy xước, không dán decal, hình trang trí." },
+                    { text: "Máy cũ: Có tình trạng sản phẩm như lúc mới mua." },
+                    { text: "Hộp: Như mới, không móp méo, rách, viết vẽ, quấn băng dính... Số Serial/IMEI trên hộp phải trùng với thân máy." },
+                    { text: "Phụ kiện và quà tặng: Còn đầy đủ, nguyên vẹn, không móp méo hoặc hư hại trong quá trình sử dụng." },
+                    { text: "Tài khoản: Máy đã được đăng xuất khỏi tất cả các tài khoản (iCloud, Google, Mi Account...)." },
+                ],
+                screenDefectTitle: "Quy định về lỗi màn hình",
+                screenDefects: [
+                    { text: "Màn hình có từ 3 điểm chết trở lên." },
+                    { text: "Hoặc 1 điểm chết có kích thước lớn hơn 1mm (điện thoại) và 5 điểm chết trở lên (laptop, màn hình rời)." },
+                ],
+            },
+
+            // Section II - Standard warranty
+            standard: {
+                title: "II. Bảo hành tiêu chuẩn",
+                phoneLaptopTitle: "Điện thoại, Laptop",
+                phoneLaptopTableHeaders: {
+                    product: "Sản phẩm",
+                    warrantyTime: "Thời gian bảo hành",
+                    warrantyRights: "Quyền lợi bảo hành",
+                    warrantyAddress: "Địa chỉ bảo hành",
+                },
+                phoneLaptopRows: [
+                    {
+                        product: "Hàng mới",
+                        warrantyTime: "12 tháng (hoặc dài hơn theo quy định hãng)",
+                        warrantyRights: "Quyền lợi bảo hành của hãng",
+                        warrantyAddress: "TTBH chính hãng",
+                    },
+                    {
+                        product: "Hàng đã kích hoạt bảo hành chính hãng",
+                        warrantyTime: "12 tháng = Thời gian BH còn lại tại hãng + BH tại CellphoneS",
+                        warrantyRights: "Theo quyền lợi BH của hãng trong thời gian được hãng BH; Sửa chữa, thay thế linh kiện trong thời gian BH còn lại tại CellphoneS",
+                        warrantyAddress: "TTBH chính hãng & CellphoneS / Điện Thoại Vui",
+                    },
+                    {
+                        product: "Hàng cũ",
+                        warrantyTime: "6 tháng",
+                        warrantyRights: "Sửa chữa, thay thế linh kiện, bao gồm cả nguồn và màn hình.",
+                        warrantyAddress: "CellphoneS / Điện Thoại Vui",
+                    },
+                ],
+                phoneLaptopNote: "Trong thời gian đợi bảo hành – sửa chữa, khách hàng sẽ được hỗ trợ miễn phí một điện thoại khác để sử dụng tạm thời. Khách hàng trả lại máy đã mượn sau khi nhận lại máy của mình.",
+                accessoryTitle: "Phụ kiện đi kèm máy",
+                accessoryTableHeaders: {
+                    brand: "Hãng",
+                    warrantyTime: "Thời gian BH",
+                    rights: "Quyền lợi",
+                    address: "Địa chỉ",
+                },
+                accessoryRows: [
+                    { brand: "Vsmart", warrantyTime: "6 tháng", rights: "1 đổi tất cả các lỗi", address: "TTBH chính hãng" },
+                    { brand: "Asus", warrantyTime: "6 tháng", rights: "1 đổi tất cả các lỗi", address: "TTBH chính hãng" },
+                    { brand: "Nokia", warrantyTime: "6 tháng", rights: "1 đổi tất cả các lỗi", address: "TTBH chính hãng" },
+                ],
+            },
+
+            // Section III - Computer components
+            components: {
+                title: "III. Bảo hành linh kiện máy tính",
+                tableHeaders: {
+                    product: "Sản phẩm",
+                    warrantyTime: "Thời gian BH",
+                    warrantyRights: "Quyền lợi BH (lỗi nhà sản xuất)",
+                    location: "Địa điểm",
+                },
+                rows: [
+                    { product: "Bộ vi xử lý – CPU", warrantyTime: "36 tháng", rights: "Đổi mới sau khi có xác nhận lỗi từ hãng", location: "TTBH hãng" },
+                    { product: "Vỏ máy tính – Case", warrantyTime: "12 tháng", rights: "Sửa chữa hoặc đổi tương đương", location: "TTBH hãng" },
+                    { product: "Bo mạch chủ – Mainboard", warrantyTime: "36 tháng", rights: "Sửa chữa hoặc đổi tương đương", location: "TTBH hãng" },
+                    { product: "Nguồn – PSU", warrantyTime: "36 tháng", rights: "Sửa chữa hoặc đổi tương đương", location: "TTBH hãng" },
+                    { product: "RAM PC/Laptop", warrantyTime: "36 tháng", rights: "Sửa chữa hoặc đổi tương đương", location: "TTBH hãng" },
+                    { product: "Ổ cứng – SSD/HDD", warrantyTime: "36 tháng", rights: "Sửa chữa hoặc đổi tương đương", location: "TTBH hãng" },
+                    { product: "Card màn hình – VGA", warrantyTime: "36 tháng", rights: "Sửa chữa hoặc đổi tương đương", location: "TTBH hãng" },
+                    { product: "Tản nhiệt – Fan/Cooling", warrantyTime: "12 tháng", rights: "Sửa chữa hoặc đổi tương đương", location: "TTBH hãng" },
+                ],
+                conditionsTitle: "Điều kiện bảo hành",
+                eligibleTitle: "Đủ điều kiện",
+                notEligibleTitle: "Không đủ điều kiện (Từ chối bảo hành)",
+                eligible: [
+                    { text: "Hư hỏng được xác định do lỗi kỹ thuật hoặc lỗi của nhà sản xuất." },
+                    { text: "Sản phẩm còn trong thời hạn bảo hành, có tem bảo hành của nhà phân phối hoặc hãng sản xuất." },
+                    { text: "Với sản phẩm cần số serial hoặc hộp, sản phẩm phải còn đầy đủ những thứ này." },
+                    { text: "Sản phẩm không trầy xước, cấn móp, bể, vỡ, biến dạng so với ban đầu." },
+                    { text: "Dùng đúng nguồn điện, không bị mối mọt, không nằm trong môi trường cháy nổ, phòng tủ không bị rỉ oxy hóa do đặt trong môi trường ẩm ướt." },
+                    { text: "Chưa có sự can thiệp vào phần cứng (tự ý tháo dỡ, sửa chữa...)." },
+                    { text: "CPU Intel: Khách hàng cần giữ hộp nhựa đựng sản phẩm trong suốt thời gian bảo hành." },
+                    { text: "Ổ cứng SSD: Bảo hành theo số tháng quy định hoặc theo chỉ số TBW của nhà sản xuất, tùy điều kiện nào đến trước." },
+                ],
+                notEligible: [
+                    { text: "Hết thời hạn bảo hành." },
+                    { text: "CPU bị mẻ, nứt hoặc cong chân." },
+                    { text: "Không có tem bảo hành của Công ty/nhà phân phối/hãng hoặc tem bảo hành bị rách, tẩy xóa, sửa chống, không đọc được, bong tróc." },
+                    { text: "Tác động vật lý làm trầy xước, cong vênh, rạn nứt, bể, vỡ trong quá trình sử dụng." },
+                    { text: "Tự ý tháo mở, sửa chữa, thay đổi cấu trúc sản phẩm bên trong." },
+                    { text: "Hư hỏng, cháy, nổ do sử dụng sai mục đích, tự ý tháo lắp đặt không tuân theo hướng dẫn." },
+                    { text: "Hư hỏng do côn trùng xâm nhập (chuột, gián, kiến, mối...)." },
+                    { text: "Hư hỏng do thiên tai, hỏa hoạn, lũ lụt, sét đánh, rỉ sét, hao mòn do môi trường." },
+                    { text: "Sản phẩm sử dụng với mục đích sản xuất, khai thác tiền điện tử (đào coin)." },
+                ],
+            },
+
+            // Section IV - VIP 1-to-1
+            vip: {
+                title: "IV. Bảo hành 1 đổi 1 VIP",
+                desc: "Áp dụng cho điện thoại, máy tính bảng (mới/cũ), tai nghe cao cấp mới, đồng hồ thông minh (không bao gồm Apple/Samsung mới). Thời gian: 06 – 12 tháng tùy dòng máy.",
+                tableHeaders: {
+                    scope: "Phạm vi bảo hành",
+                    standard: "Bảo hành tiêu chuẩn",
+                    vip: "Bảo hành 1 đổi 1 – VIP",
+                },
+                rows: [
+                    { scope: "Mainboard (nguồn, ổ cứng)", standard: "Sửa chữa / Thay thế linh kiện", vip: "1 đổi 1 máy tương đương" },
+                    { scope: "Màn hình, cảm ứng (điểm chết >3, điểm đen >1mm)", standard: "Sửa chữa / Thay thế", vip: "1 đổi 1 máy tương đương" },
+                    { scope: "Linh kiện khác (camera, loa, wifi, chân sạc...)", standard: "Sửa chữa", vip: "1 đổi 1 máy tương đương" },
+                    { scope: "Pin và phím vật lý", standard: "Bảo hành 6 tháng (iPhone cũ: 3 tháng)", vip: "1 đổi 1 trong 12 tháng" },
+                ],
+                batteryNote: "* Pin được xác định lỗi khi hao trên 20% sau 1 giờ xem Youtube (wifi, độ sáng/âm lượng 50%) hoặc bị phồng.",
+                processingTimeTitle: "Thời gian xử lý",
+                processingTime: [
+                    { text: "Điện thoại, máy tính bảng, laptop (trừ Apple): 03 – 05 ngày làm việc." },
+                    { text: "Sản phẩm Apple: 03 – 05 ngày (tại CareS) hoặc 07 – 10 ngày (tại TTBH ủy quyền)." },
+                    { text: "Phụ kiện và Tivi: 07 – 10 ngày làm việc." },
+                    { text: "Tổng thời gian thông thường: 07 – 14 ngày làm việc." },
+                ],
+                upgradeTitle: "Đổi sang máy giá trị cao hơn",
+                upgradeFormula: "Giá nhập lại = Giá bán hiện tại của máy cũ × 90%",
+                outOfStockTitle: "Trường hợp hết hàng để đổi",
+                outOfStockDesc: "Nếu quá 07 ngày mà không có máy đổi, cửa hàng sẽ nhập lại máy theo công thức:",
+                outOfStockFormula: "Giá trị nhập lại = Giá mua ban đầu × [100% − (5% × số tháng sử dụng)]",
+                outOfStockNote: "* Thiếu hộp/phụ kiện sẽ trừ phí thêm khoảng 5% giá trị máy.",
+                privilegeTitle: "Đặc quyền",
+                privileges: [
+                    { text: "Khách hàng có thể chuyển nhượng quyền sở hữu máy và gói bảo hành VIP trong thời gian bảo hành." },
+                    { text: "Được tặng thêm +5% giá trị thu mua khi có nhu cầu lên đời máy mới." },
+                ],
+            },
+
+            // Section V - Accidental damage
+            accidental: {
+                title: "V. Bảo hành rơi vỡ, ngấm nước",
+                desc: "Áp dụng cho điện thoại, máy tính bảng mới/cũ (có giới hạn đối tượng sản phẩm áp dụng). Thời gian bảo hành: 12 tháng.",
+                conditionsTitle: "Điều kiện bảo hành",
+                conditions: [
+                    { text: "Sản phẩm bị tác động của ngoại lực, gây vỡ hoặc bị ngấm nước, ngấm các chất lỏng khác dẫn đến sản phẩm không hoạt động bình thường." },
+                    { text: "Sản phẩm phải còn trong tình trạng có thể xác định được mã số IMEI/Serial định danh sản phẩm. Trường hợp không thể xác định được, CellphoneS từ chối bảo hành." },
+                ],
+                rightsTitle: "Quyền lợi bảo hành",
+                rights: [
+                    { text: "Sản phẩm được sửa chữa/thay thế linh kiện tại các TTBH ủy quyền." },
+                    { text: "Chi phí dịch vụ: Khách hàng chịu phí 10% chi phí sửa chữa/thay thế linh kiện." },
+                    { text: "Giới hạn chi phí: Tổng chi phí cho các lần sửa chữa không vượt quá giá niêm yết của sản phẩm tại thời điểm mua. Nếu vượt quá, khách hàng chịu phần chênh lệch." },
+                ],
+                cannotRepairTitle: "Trường hợp không thể sửa chữa",
+                cannotRepair: [
+                    { text: "CellphoneS sẽ đổi cho khách hàng một sản phẩm cũ có chất lượng tương đương." },
+                    { text: "Khách hàng chịu phí dịch vụ 10% giá trị của sản phẩm được đổi." },
+                    { text: "Sau khi đổi, gói bảo hành này hết hiệu lực và sản phẩm được đổi sẽ được bảo hành 06 tháng theo chính sách của CellphoneS." },
+                    { text: "Chỉ áp dụng đổi máy, không đổi hộp và phụ kiện kèm theo (sạc, cáp...)." },
+                ],
+                extraPrivilegeTitle: "Đặc quyền thêm",
+                extraPrivilege: "Khách hàng sử dụng dịch vụ này có đặc quyền +3% tổng giá trị máy thu cũ khi lên đời trong thời gian bảo hành của thiết bị.",
+            },
+
+            // Section VI - S24+
+            s24plus: {
+                title: "VI. Bảo hành mở rộng S24+",
+                desc: "Áp dụng cho Macbook, Điện thoại. Thời gian tổng cộng: 24 – 36 tháng (đã bao gồm 12 tháng bảo hành tiêu chuẩn từ nhà sản xuất). Gói bảo hành có hiệu lực ngay sau khi thời hạn bảo hành của nhà sản xuất kết thúc.",
+                rightsTitle: "Quyền lợi bảo hành",
+                rights: [
+                    { text: "Sửa chữa miễn phí 100%: Miễn phí chi phí sửa chữa và thay thế linh kiện nếu sản phẩm gặp lỗi từ nhà sản xuất." },
+                    { text: "Thời gian xử lý: 07 – 14 ngày làm việc. Riêng Macbook có thể kéo dài 03 tuần đến 01 tháng." },
+                    { text: "Chuyển nhượng: Khách hàng có thể chuyển nhượng quyền sở hữu sản phẩm kèm gói bảo hành S24+ cho người khác." },
+                    { text: "Đặc quyền lên đời: Được cộng thêm +3% tổng giá trị máy thu cũ khi thu cũ đổi mới." },
+                ],
+                cannotRepairTitle: "Không thể sửa chữa được",
+                cannotRepairDesc: "Nếu máy bị lỗi nhà sản xuất nhưng không thể sửa chữa, CellphoneS giải quyết theo thứ tự:",
+                cannotRepairSteps: [
+                    { text: "Bước 1: Đổi sản phẩm tương đương cùng thương hiệu, dòng sản phẩm, có chất lượng tương đương tại thời điểm bảo hành." },
+                    { text: "Bước 2: Nếu không có sản phẩm để đổi, nhập lại (hoàn tiền) theo công thức:" },
+                ],
+                cannotRepairFormula: "Giá nhập lại = Giá mua sản phẩm × (100% − 3% × Số tháng đã sử dụng)",
+                notCoveredTitle: "Các trường hợp KHÔNG được bảo hành S24+",
+                notCovered: [
+                    { text: "Các hư hỏng do người dùng gây ra như: rơi vỡ, vào nước..." },
+                    { text: "Các vấn đề liên quan đến pin và phím vật lý." },
+                ],
+                exampleTitle: "Ví dụ minh họa",
+                exampleContent: "Nếu bạn mua tai nghe giá 4.800.000đ kèm gói S24+, sau 15 tháng sử dụng nếu bị lỗi nhà sản xuất mà không sửa được:",
+                exampleBullets: [
+                    { text: "Bạn có thể được đổi một tai nghe cũ tương đương." },
+                    { text: "Hoặc được nhập lại với giá 2.640.000đ (tức 4.800.000 × 55%) để đổi sang sản phẩm khác hoặc nhận lại tiền." },
+                ],
+            },
+
+            // Shared notice
+            notice: {
+                dataLoss: "Lưu ý về dữ liệu: Khách hàng vui lòng tự sao lưu dữ liệu. Cửa hàng không chịu trách nhiệm về việc mất dữ liệu trong mọi trường hợp.",
+                dataLossAlt: "Lưu ý về dữ liệu: Quý khách vui lòng chủ động sao lưu dữ liệu cá nhân trước khi gửi bảo hành. CellphoneS và TTBH không chịu trách nhiệm về mất mát dữ liệu trong mọi trường hợp.",
+                important: "Lưu ý quan trọng: CellphoneS không chịu trách nhiệm về việc mất dữ liệu trong mọi trường hợp. Khách hàng nên chủ động sao lưu dữ liệu trước khi mang đi bảo hành.",
+                importantAlt: "Lưu ý quan trọng: Khách hàng nên chủ động sao lưu dữ liệu cá nhân trước khi mang máy đi bảo hành vì cửa hàng không chịu trách nhiệm về mất mát dữ liệu.",
+            },
+        },
+
+        // === pages/tos/index.vue ===
+        tos: {
+            pageTitle: "Quy chế hoạt động - IrusGear",
+            sidebarTitle: "Quy chế",
+
+            nav: {
+                general: "I. Quy định chung",
+                transaction: "II. Quy trình giao dịch",
+                warranty: "III. Chính sách bảo hành sản phẩm",
+                cancellation: "IV. Chính sách hủy đơn, đổi trả",
+                privacyCellphones: "V. Bảo mật thông tin Cellphones",
+                privacySforum: "VI. Bảo mật thông tin Sforum",
+                sforum: "VII. Thỏa thuận Sforum",
+            },
+
+            // I - General
+            general: {
+                title: "I. Quy định chung",
+                principlesTitle: "1. Nguyên tắc chung",
+                principles: [
+                    { text: "Website thương mại điện tử cellphones.com.vn là sở hữu của Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc (\"Công ty\") do Công ty phát triển, hoạt động và vận hành với tên miền giao dịch là www.cellphones.com.vn (sau đây gọi là Website). Đối tượng phục vụ là tất cả các khách hàng có nhu cầu mua hàng, đặt hàng thông qua Website." },
+                    { text: "Sản phẩm được kinh doanh tại Cellphones.com.vn phải đáp ứng đầy đủ các quy định của nhà nước về nguồn gốc, xuất xứ hàng hóa, chất lượng sản phẩm." },
+                    { text: "Hoạt động mua bán tại Cellphones.com.vn phải được thực hiện công khai, minh bạch, đảm bảo quyền lợi của người tiêu dùng." },
+                ],
+                definitionsTitle: "2. Định nghĩa",
+                definitions: [
+                    { text: "Người bán: là Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc." },
+                    { text: "Người mua: là mọi công dân sinh sống trong lãnh thổ Việt Nam." },
+                    { text: "Thành viên: là bao gồm cả người mua và người tham gia tham khảo thông tin, thảo luận tại Website." },
+                    { text: "Thành viên khi tham gia Website phải tự tìm hiểu trách nhiệm pháp lý của mình đối với luật pháp hiện hành của Việt Nam và cam kết thực hiện đúng những nội dung trong Quy chế này." },
+                ],
+            },
+
+            // II - Transaction
+            transaction: {
+                title: "II. Quy trình giao dịch",
+                purchaseTitle: "1. Quy trình mua hàng trên Website",
+                purchase: [
+                    { text: "Bước 1: Khách hàng tìm kiếm sản phẩm, đọc và đồng ý với các quy định trong \"Quy chế hoạt động website cung cấp dịch vụ TMĐT Cellphones.com.vn\"." },
+                    { text: "Bước 2: Xem giá và thông tin chi tiết sản phẩm. Nếu đồng ý mua, tùy theo nhu cầu và sản phẩm cụ thể, bấm một trong các nút: \"Mua ngay (giao hàng tận nơi hoặc nhận tại cửa hàng)\", \"Trả góp (duyệt qua điện thoại)\", hoặc \"Trả góp qua thẻ (Visa, Master, JCB)\"." },
+                    { text: "Bước 3: Khách hàng nhập thông tin đặt hàng theo hướng dẫn tại mỗi mục mua hàng đã chọn ở trên. Nếu có mã khuyến mãi, nhập trực tiếp vào phiếu đặt hàng." },
+                    { text: "Bước 4: Sau khi nhận được đơn đặt hàng của khách, Cellphones.com.vn sẽ liên hệ qua số điện thoại đã cung cấp qua tổng đài 1800.2063 để xác nhận thông tin đơn hàng." },
+                    { text: "Bước 5: Cellphones.com.vn giao hàng tận nơi hoặc khách hàng đến các cửa hàng CellphoneS toàn quốc để nhận hàng." },
+                ],
+                deliveryTitle: "2. Quy trình giao hàng và vận chuyển",
+                deliveryDesc: "Cellphones.com.vn miễn phí giao hàng toàn quốc. Sau khi tiếp nhận đơn đặt hàng của người mua và xác nhận thông tin mua hàng qua điện thoại, Cellphones.com.vn sẽ tiến hành giao hàng theo yêu cầu của khách.",
+                noticeImportant: "Lưu ý quan trọng: Với giao dịch có giá trị từ 10 triệu đồng trở lên, khách hàng vui lòng xuất trình THẺ GỐC và CCCD/CMND GỐC của CHỦ THẺ để CellphoneS đối chiếu trước khi giao hàng nhằm phòng tránh trường hợp gian lận. Trường hợp người nhận hàng không phải là CHỦ THẺ hoặc phát hiện có vấn đề về giao dịch, CellphoneS có quyền hủy giao dịch và hoàn tiền cho CHỦ THẺ. Thời gian xử lý hoàn tiền từ 7 – 14 ngày (không tính thứ 7, CN).",
+            },
+
+            // III - Warranty policy
+            warranty: {
+                title: "III. Chính sách bảo hành sản phẩm",
+                return30Title: "1. Chính sách đổi mới 30 ngày miễn phí",
+                return30Desc: "Khách hàng được đổi mới miễn phí 1 đổi 1 hoặc hoàn tiền 100% trong 30 ngày đầu tiên đối với lỗi phần cứng từ nhà sản xuất.",
+                returnTableHeaders: {
+                    productGroup: "Nhóm sản phẩm",
+                    exchangeTime: "Thời gian đổi mới",
+                    returnPolicy: "Quy định nhập lại / Hoàn tiền",
+                },
+                returnRows: [
+                    { productGroup: "Điện thoại, Máy tính bảng, Macbook, Apple Watch", exchangeTime: "30 ngày", returnPolicy: "Trong 30 ngày: hoàn tiền 80% giá hiện tại hoặc giá mua (lấy mức thấp hơn). Sau 30 ngày: theo giá thỏa thuận." },
+                    { productGroup: "Samsung Watch", exchangeTime: "30 ngày", returnPolicy: "Trong 30 ngày: hoàn tiền 80% giá hiện tại hoặc giá mua (lấy mức thấp hơn). Sau 30 ngày: theo giá thỏa thuận." },
+                    { productGroup: "Laptop", exchangeTime: "30 ngày", returnPolicy: "Trong 30 ngày: hoàn tiền 80% giá hiện tại. Sau 30 ngày: không nhập lại." },
+                    { productGroup: "Phụ kiện dưới 1 triệu", exchangeTime: "1 năm (mới) / 1 tháng (đã sử dụng)", returnPolicy: "Không nhập lại / hoàn tiền." },
+                    { productGroup: "Phụ kiện từ 1 triệu trở lên", exchangeTime: "15 ngày", returnPolicy: "Trong 30 ngày: hoàn tiền 80% giá. Sau 30 ngày: theo giá thỏa thuận." },
+                    { productGroup: "Gói bảo hành mở rộng", exchangeTime: "Không đổi", returnPolicy: "Trong 7 ngày (không lỗi): nhập lại 50% giá gói." },
+                ],
+                conditionsTitle: "2. Điều kiện đổi mới / Hoàn tiền",
+                conditions: [
+                    { text: "Máy mới: Như mới, không trầy xước, không dán decal, hình trang trí." },
+                    { text: "Hộp: Như mới, không móp méo, rách, viết vẽ. Số Serial/IMEI trên hộp trùng với thân máy." },
+                    { text: "Phụ kiện và quà tặng: Còn đầy đủ, nguyên vẹn, không móp méo hoặc hư hại." },
+                    { text: "Tài khoản: Máy đã đăng xuất khỏi tất cả tài khoản (iCloud, Google, Mi Account...)." },
+                    { text: "Lỗi màn hình: Từ 3 điểm chết trở lên, hoặc 1 điểm chết kích thước lớn hơn 1mm (điện thoại) và từ 5 điểm chết trở lên (laptop, màn hình rời)." },
+                ],
+                standardTitle: "3. Bảo hành tiêu chuẩn",
+                standardTableHeaders: {
+                    product: "Sản phẩm",
+                    warrantyTime: "Thời gian bảo hành",
+                    warrantyAddress: "Nơi bảo hành",
+                },
+                standardRows: [
+                    { product: "Hàng mới", warrantyTime: "12 tháng theo chính sách hãng", warrantyAddress: "TTBH chính hãng" },
+                    { product: "Hàng đã kích hoạt bảo hành chính hãng", warrantyTime: "12 tháng (BH còn lại tại hãng + BH tại CellphoneS)", warrantyAddress: "TTBH chính hãng & CellphoneS / Điện Thoại Vui" },
+                    { product: "Hàng đã sử dụng", warrantyTime: "6 tháng", warrantyAddress: "CellphoneS / Điện Thoại Vui" },
+                ],
+                standardNote: "Phụ kiện đi kèm Vsmart, Asus, Nokia có thời gian bảo hành 6 tháng. Khách hàng có thể được hỗ trợ một điện thoại khác để sử dụng tạm trong thời gian chờ bảo hành.",
+            },
+
+            // IV - Cancellation
+            cancellation: {
+                title: "IV. Chính sách hủy giao dịch, đổi trả hàng",
+                cancelOrderTitle: "1. Chính sách hủy đơn hàng",
+                cancelOrderDesc: "Khách hàng có thể hủy đơn từ lúc \"Đặt hàng\" đến trước khi nhận hàng thành công.",
+                cancelWays: [
+                    { text: "Gọi tổng đài: 1800.2097 (miền Nam) hoặc 1800.2044 (miền Bắc)." },
+                    { text: "Gửi email: cskh\\u0040cellphones.com.vn." },
+                    { text: "Nhắn tin Fanpage CellphoneS." },
+                    { text: "Từ chối nhận hàng và xác nhận hủy với đơn vị giao hàng." },
+                ],
+                returnPolicyTitle: "2. Chính sách đổi trả",
+                returnTableHeaders: {
+                    productGroup: "Nhóm sản phẩm",
+                    returnTime: "Thời gian đổi trả (Mới / Đã sử dụng)",
+                    returnFee: "Phí hoàn (nếu có)",
+                },
+                returnRows: [
+                    { productGroup: "Điện thoại, Máy tính bảng, Macbook", returnTime: "30 ngày / 30 ngày", returnFee: "20% giá trị (mới) / 15% giá trị (đã sử dụng)" },
+                    { productGroup: "Apple Watch", returnTime: "30 ngày / 30 ngày", returnFee: "20% / 20%" },
+                    { productGroup: "Samsung Watch", returnTime: "30 ngày / 30 ngày", returnFee: "30% / 30%" },
+                    { productGroup: "Laptop", returnTime: "30 ngày / 30 ngày", returnFee: "20% (mới) / Không áp dụng" },
+                    { productGroup: "Phụ kiện dưới 1 triệu", returnTime: "1 năm / 30 ngày", returnFee: "Không áp dụng" },
+                    { productGroup: "Phụ kiện từ 1 triệu trở lên", returnTime: "15 ngày / 15 ngày", returnFee: "Không áp dụng" },
+                    { productGroup: "Gói bảo hành mở rộng", returnTime: "Không đổi / Không trả", returnFee: "Phí 50% (trả trong 7 ngày)" },
+                ],
+                returnNote1: "* Riêng AirPods: phí hoàn 20%.",
+                returnNote2: "* Đơn hàng online: thời gian tính từ ngày nhận hàng, không quá 7 ngày kể từ ngày xuất hóa đơn.",
+                conditionsTitle: "3. Điều kiện đổi trả",
+                conditions: [
+                    { text: "Máy: Như mới, không trầy xước, không móp méo, không bong tróc, không dính nước." },
+                    { text: "Hộp: Nguyên vẹn, không rách, không ố vàng, Serial/IMEI trùng khớp." },
+                    { text: "Phụ kiện & quà tặng: Còn đầy đủ, nguyên vẹn." },
+                    { text: "Tài khoản: Đã đăng xuất khỏi iCloud, Google, Mi Account..." },
+                ],
+                refundTitle: "4. Chính sách hoàn tiền",
+                refundTableHeaders: {
+                    paymentMethod: "Phương thức thanh toán",
+                    processingTime: "Thời gian xử lý hoàn tiền",
+                },
+                refundRows: [
+                    { paymentMethod: "Tiền mặt", processingTime: "Hoàn ngay tại cửa hàng" },
+                    { paymentMethod: "Chuyển khoản ngân hàng", processingTime: "2 ngày làm việc" },
+                    { paymentMethod: "Thẻ ATM", processingTime: "7 – 10 ngày làm việc" },
+                    { paymentMethod: "Visa / Master / JCB", processingTime: "7 – 15 ngày làm việc" },
+                    { paymentMethod: "MPOS / ALEPAY", processingTime: "7 – 10 ngày làm việc" },
+                    { paymentMethod: "VNPAY", processingTime: "3 – 8 ngày làm việc" },
+                    { paymentMethod: "MOCA", processingTime: "3 – 5 ngày làm việc" },
+                ],
+                refundNote: "* Ngày làm việc: thứ 2 đến thứ 6 hàng tuần (không tính T7, CN, ngày lễ).",
+            },
+
+            // V - Privacy Cellphones
+            privacyCellphones: {
+                title: "V. Chính sách bảo mật thông tin khách hàng Cellphones",
+                collectPurposeTitle: "1. Mục đích thu thập thông tin",
+                collectPurpose: [
+                    { text: "Xử lý đơn hàng và cung cấp dịch vụ cho khách hàng." },
+                    { text: "Gửi thông báo về tình trạng đơn hàng, khuyến mãi và sản phẩm mới (khi có sự đồng ý)." },
+                    { text: "Hỗ trợ khách hàng, giải quyết khiếu nại và các vấn đề liên quan." },
+                    { text: "Giám sát an ninh, phòng chống gian lận và hoạt động bất hợp pháp." },
+                    { text: "Thực hiện các nghĩa vụ pháp lý theo yêu cầu của cơ quan nhà nước có thẩm quyền." },
+                ],
+                scopeTitle: "2. Phạm vi sử dụng thông tin",
+                scope: [
+                    { text: "Thông tin được sử dụng nội bộ bởi Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc." },
+                    { text: "Không cung cấp thông tin cá nhân cho bên thứ ba khi chưa có sự đồng ý của khách hàng, trừ các trường hợp pháp luật yêu cầu." },
+                ],
+                storageTitle: "3. Thời gian lưu trữ",
+                storageDesc: "Thông tin được lưu trữ cho đến khi khách hàng yêu cầu xóa, tài khoản đóng hoặc theo quy định pháp luật.",
+                rightsTitle: "4. Quyền của khách hàng",
+                rights: [
+                    { text: "Truy cập, chỉnh sửa hoặc yêu cầu xóa thông tin cá nhân của mình." },
+                    { text: "Rút lại sự đồng ý thu thập dữ liệu bất kỳ lúc nào." },
+                    { text: "Khiếu nại về việc xử lý thông tin cá nhân." },
+                ],
+                contactTitle: "5. Thông tin liên hệ",
+                contact: [
+                    { text: "Công ty: Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc." },
+                    { text: "Địa chỉ: 350-352 Võ Văn Kiệt, Phường Cô Giang, Quận 1, TP. Hồ Chí Minh." },
+                    { text: "Điện thoại: 1800.2097." },
+                    { text: "Email: cskh\\u0040cellphones.com.vn." },
+                ],
+            },
+
+            // VI - Privacy Sforum
+            privacySforum: {
+                title: "VI. Chính sách bảo mật thông tin khách hàng Sforum",
+                infoTypesTitle: "1. Loại thông tin thu thập",
+                infoTypes: [
+                    { text: "Thông tin cá nhân: Họ tên, số điện thoại, email, địa chỉ giao hàng, số CCCD (đối với một số giao dịch)." },
+                    { text: "Thông tin kỹ thuật: Địa chỉ IP, loại trình duyệt, thời gian truy cập, cookie để theo dõi sở thích và cải thiện hiệu suất Website." },
+                    { text: "Thông tin giao dịch: Thông tin liên quan đến việc sử dụng dịch vụ và lịch sử trên Sforum." },
+                ],
+                usagePurposeTitle: "2. Mục đích sử dụng dữ liệu",
+                usagePurpose: [
+                    { text: "Quản lý tài khoản người dùng và cung cấp dịch vụ trên Sforum." },
+                    { text: "Gửi thông báo về hoạt động tài khoản, khuyến mãi và sản phẩm mới (khi có sự đồng ý)." },
+                    { text: "Hỗ trợ khách hàng, xử lý sự cố và giải quyết khiếu nại." },
+                    { text: "Giám sát an ninh, phòng chống gian lận và hoạt động bất hợp pháp." },
+                    { text: "Tuân thủ các yêu cầu pháp lý từ cơ quan nhà nước có thẩm quyền." },
+                ],
+                storageTitle: "3. Thời gian lưu trữ",
+                storageDesc: "Thông tin được lưu trữ cho đến khi người dùng yêu cầu xóa, tài khoản đóng hoặc theo quy định pháp luật.",
+                managerTitle: "4. Đơn vị quản lý dữ liệu",
+                manager: [
+                    { text: "Công ty: Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc." },
+                    { text: "Địa chỉ: 350-352 Võ Văn Kiệt, Phường Cô Giang, Quận 1, TP. Hồ Chí Minh." },
+                    { text: "Điện thoại: 1800.2063." },
+                ],
+                rightsObligationsTitle: "5. Quyền và nghĩa vụ của người dùng",
+                rightsObligations: [
+                    { text: "Quyền: Truy cập, chỉnh sửa, xóa hoặc hạn chế xử lý dữ liệu cá nhân. Rút lại sự đồng ý thu thập dữ liệu bất kỳ lúc nào." },
+                    { text: "Nghĩa vụ: Cung cấp thông tin chính xác và chịu trách nhiệm bảo mật thông tin tài khoản (mật khẩu...)." },
+                ],
+                securityTitle: "6. Biện pháp bảo mật",
+                security: [
+                    { text: "Sforum sử dụng mã hóa (SSL/TLS) và máy chủ bảo mật để bảo vệ dữ liệu người dùng." },
+                    { text: "Việc truy cập dữ liệu cá nhân được giới hạn đối với nhân viên được ủy quyền." },
+                ],
+                complaintTitle: "7. Khiếu nại và thông tin liên hệ",
+                complaint: [
+                    { text: "Người dùng có thể liên hệ bộ phận hỗ trợ để được giải đáp hoặc thực hiện yêu cầu liên quan đến dữ liệu cá nhân." },
+                    { text: "Email: nhattruong.bui\\u0040cellphones.com.vn" },
+                    { text: "Điện thoại: 0824111196" },
+                    { text: "Chính sách có hiệu lực từ ngày 01/01/2024. Sforum có quyền cập nhật chính sách và sẽ thông báo trên Website." },
+                ],
+            },
+
+            // VII - Sforum agreement
+            sforum: {
+                title: "VII. Thỏa thuận cung cấp và sử dụng dịch vụ trên Sforum",
+                article1Title: "Điều 1. Định nghĩa",
+                article1: [
+                    { text: "Nhà cung cấp: Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc, hoạt động hợp pháp theo quy định pháp luật Việt Nam." },
+                    { text: "Sforum: Phần của hệ thống trang thông tin điện tử, cung cấp dịch vụ mạng xã hội cho cộng đồng trao đổi, chia sẻ thông tin về công nghệ dưới các hình thức bình luận, chia sẻ bài viết." },
+                    { text: "Người sử dụng: Cá nhân, tổ chức có tài khoản hợp lệ trên Sforum." },
+                    { text: "Ban Quản trị: Bộ phận thuộc Nhà cung cấp, chịu trách nhiệm quản lý hoạt động Sforum và giải quyết vi phạm, khiếu nại." },
+                ],
+                article2Title: "Điều 2. Đăng ký và ngừng sử dụng dịch vụ",
+                article2: [
+                    { text: "Trước khi đăng ký, Người sử dụng xác nhận đã đọc, hiểu và đồng ý với Thỏa thuận này." },
+                    { text: "Người sử dụng cam kết cung cấp thông tin chính xác, đầy đủ và trung thực. Vi phạm có thể dẫn đến tạm dừng hoặc chấm dứt cung cấp dịch vụ." },
+                    { text: "Người sử dụng tự chịu trách nhiệm bảo mật mật khẩu. Nhà cung cấp không chịu trách nhiệm về thiệt hại phát sinh từ việc không bảo mật mật khẩu." },
+                    { text: "Ban quản trị có quyền xóa tài khoản không sử dụng trong thời gian dài hoặc vi phạm nghiêm trọng Thỏa thuận." },
+                ],
+                article3Title: "Điều 3. Nội dung cấm trao đổi, chia sẻ",
+                article3: [
+                    { text: "Chống lại Nhà nước CHXHCN Việt Nam, gây phương hại an ninh quốc gia, trật tự an toàn xã hội." },
+                    { text: "Kích động bạo lực, dâm ô, đồi trụy, tội ác, tệ nạn xã hội, mê tín dị đoan." },
+                    { text: "Tiết lộ bí mật nhà nước, bí mật quân sự, an ninh, kinh tế, đối ngoại." },
+                    { text: "Xuyên tạc, vu khống, xúc phạm uy tín tổ chức, danh dự và nhân phẩm cá nhân." },
+                    { text: "Quảng cáo, tuyên truyền mua bán hàng hóa/dịch vụ bị cấm; truyền bá tác phẩm bị cấm." },
+                    { text: "Đưa thông tin giả mạo, thông tin sai sự thật gây hoang mang dư luận." },
+                    { text: "Vi phạm bản quyền sản phẩm, âm nhạc, video, phim ảnh, phần mềm." },
+                    { text: "Nội dung kỳ thị dân tộc, giới tính, tôn giáo, chính trị, chia rẽ vùng miền." },
+                    { text: "Các nội dung khác vi phạm pháp luật Việt Nam." },
+                ],
+                article4Title: "Điều 4. Quyền và nghĩa vụ của Người sử dụng",
+                article4: [
+                    { text: "Quyền: Sử dụng dịch vụ, tính năng của Sforum; được bảo mật thông tin cá nhân; góp ý, phản ánh, khiếu nại." },
+                    { text: "Nghĩa vụ: Tuân thủ Thỏa thuận và pháp luật; cung cấp thông tin chính xác; tự bảo mật tài khoản; chịu trách nhiệm nội dung bài viết, bình luận; không phá hoại hệ thống; không đăng tải nội dung cấm." },
+                ],
+                article5Title: "Điều 5. Quyền của Nhà cung cấp",
+                article5: [
+                    { text: "Thiết lập, thay đổi, nâng cấp, bảo trì hệ thống Sforum bất kỳ lúc nào mà không cần thông báo trước." },
+                    { text: "Tạm ngừng hoặc chấm dứt cung cấp dịch vụ trong trường hợp bảo trì, sự cố kỹ thuật hoặc theo yêu cầu cơ quan nhà nước." },
+                    { text: "Kiểm duyệt, chỉnh sửa hoặc xóa nội dung vi phạm; sử dụng nội dung người dùng cho mục đích truyền thông, quảng bá." },
+                    { text: "Từ chối cung cấp dịch vụ hoặc xóa tài khoản vi phạm Thỏa thuận." },
+                ],
+                article6Title: "Điều 6. Xử lý vi phạm",
+                article6: [
+                    { text: "Xử lý dựa trên Thỏa thuận và pháp luật, đảm bảo công bằng, minh bạch." },
+                    { text: "Các biện pháp xử lý: cảnh báo, khóa tài khoản tạm thời hoặc vĩnh viễn, xóa nội dung vi phạm tùy mức độ." },
+                    { text: "Thông báo cho người dùng về vi phạm và hình thức xử lý qua email hoặc thông báo trên hệ thống." },
+                ],
+                article7Title: "Điều 7. Cảnh báo rủi ro",
+                article7: "Người sử dụng cần ý thức rằng việc chia sẻ thông tin trên môi trường mạng luôn tiềm ẩn rủi ro về bảo mật. Nhà cung cấp không chịu trách nhiệm về rủi ro phát sinh từ việc người dùng tự ý chia sẻ thông tin cá nhân. Người dùng nên cân nhắc kỹ trước khi đăng tải thông tin quan trọng hoặc mang tính riêng tư.",
+                article8Title: "Điều 8. Giải quyết khiếu nại, tranh chấp",
+                article8: [
+                    { text: "Mọi khiếu nại được giải quyết trên tinh thần hợp tác và thỏa thuận giữa các bên." },
+                    { text: "Trường hợp không thỏa thuận được, các bên có quyền đưa ra cơ quan nhà nước có thẩm quyền." },
+                    { text: "Hotline: 1800.2097, Email: cskh\\u0040cellphones.com.vn" },
+                ],
+                article9Title: "Điều 9. Miễn trừ trách nhiệm pháp lý",
+                article9: [
+                    { text: "Nhà cung cấp không chịu trách nhiệm về bất kỳ thiệt hại trực tiếp hoặc gián tiếp nào phát sinh từ việc sử dụng dịch vụ." },
+                    { text: "Nhà cung cấp không chịu trách nhiệm về tính chính xác, tính đầy đủ của thông tin do người dùng đăng tải." },
+                ],
+                article10Title: "Điều 10. Sửa đổi Thỏa thuận",
+                article10: "Nhà cung cấp có quyền sửa đổi, bổ sung Thỏa thuận này bất kỳ lúc nào. Các thay đổi có hiệu lực kể từ thời điểm được đăng tải trên Sforum. Người dùng tiếp tục sử dụng dịch vụ sau khi có thay đổi đồng nghĩa với việc chấp nhận các điều khoản mới.",
+                hotline: {
+                    purchaseLabel: "Gọi mua hàng",
+                    purchaseValue: "1800.2097 (8h00 – 22h00)",
+                    complaintLabel: "Gọi khiếu nại",
+                    complaintValue: "1800.2063 (8h00 – 21h30)",
+                    warrantyLabel: "Gọi bảo hành",
+                    warrantyValue: "1800.2064 (8h00 – 21h00)",
+                },
+            },
+        },
+
+        // === Shared / page content ===
         content: {
             sidebarTitle: "Hỗ trợ",
             loading: "Đang tải nội dung...",

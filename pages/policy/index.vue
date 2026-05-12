@@ -1,10 +1,9 @@
 <template>
   <ProfileLayout>
     <div class="policy-layout">
-      <!-- Sidebar -->
       <aside class="policy-sidebar">
         <div class="policy-sidebar__section">
-          <div class="policy-sidebar__title">Bảo hành</div>
+          <div class="policy-sidebar__title">{{ $t('profile.policy.sidebarTitle') }}</div>
           <button
             v-for="item in sidebarItems"
             :key="item.key"
@@ -18,379 +17,258 @@
         </div>
       </aside>
 
-      <!-- Content -->
       <main class="policy-content">
 
-        <!-- I. Đổi mới 30 ngày -->
+        <!-- I. Return 30 days -->
         <section v-if="activeSection === 'return'" class="policy-section">
-          <h1 class="policy-section__title">I. Đổi mới 30 ngày miễn phí</h1>
-          <p class="policy-section__desc">Áp dụng khi máy có lỗi phần cứng từ phía nhà sản xuất.</p>
+          <h1 class="policy-section__title">{{ $t('profile.policy.return.title') }}</h1>
+          <p class="policy-section__desc">{{ $t('profile.policy.return.desc') }}</p>
 
           <div class="policy-table-wrap">
             <table class="policy-table">
               <thead>
                 <tr>
-                  <th>Sản phẩm</th>
-                  <th>Đổi mới miễn phí</th>
-                  <th>Quy định nhập lại, trả lại (thu cũ)</th>
+                  <th>{{ $t('profile.policy.return.tableHeaders.product') }}</th>
+                  <th>{{ $t('profile.policy.return.tableHeaders.freeExchange') }}</th>
+                  <th>{{ $t('profile.policy.return.tableHeaders.returnPolicy') }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Điện thoại, Máy tính bảng, Macbook, Apple Watch</td>
-                  <td>30 ngày</td>
-                  <td>Trong 30 ngày đầu: trừ phí <strong>20%</strong> trên giá hiện tại.<br> Sau 30 ngày: Nhập lại theo giá thỏa thuận.</td>
-                </tr>
-                <tr>
-                  <td>Samsung Watch</td>
-                  <td>30 ngày</td>
-                  <td>Trong 30 ngày đầu: trừ phí <strong>30%</strong> trên giá hiện tại.<br> Sau 30 ngày: Nhập lại theo giá thỏa thuận.</td>
-                </tr>
-                <tr>
-                  <td>Laptop</td>
-                  <td>30 ngày</td>
-                  <td>Trong 30 ngày đầu: trừ phí <strong>20%</strong> trên giá hiện tại.<br> Sau 30 ngày: Nhập lại theo giá thỏa thuận.</td>
-                </tr>
-                <tr>
-                  <td>Màn hình máy tính</td>
-                  <td>15 ngày</td>
-                  <td>Trong 15 ngày đầu: trừ phí <strong>20%</strong> trên giá hiện tại.<br> Sau 15 ngày: Nhập lại theo giá thỏa thuận.</td>
-                </tr>
-                <tr>
-                  <td>Loa - Tai nghe cao cấp</td>
-                  <td>15 ngày</td>
-                  <td>Trong 30 ngày đầu: trừ phí <strong>40%</strong> trên giá mua ban đầu.<br> Từ 31–60 ngày: trừ phí <strong>50%</strong> trên giá mua ban đầu.</td>
-                </tr>
-                <tr>
-                  <td>Hàng cũ</td>
-                  <td>30 ngày</td>
-                  <td>Trong 30 ngày đầu: trừ phí <strong>15%</strong> trên giá hiện tại.<br> Sau 30 ngày: Nhập lại theo giá thỏa thuận.</td>
-                </tr>
-                <tr>
-                  <td>Tivi / Đồ gia dụng</td>
-                  <td>30 ngày / 15 ngày</td>
-                  <td>Không áp dụng nhập lại.</td>
-                </tr>
-                <tr>
-                  <td>Phụ kiện &gt; 1 triệu</td>
-                  <td>15 ngày</td>
-                  <td>Không áp dụng nhập lại. <em>(Riêng Airpods: trừ phí 20% trong 30 ngày đầu.)</em></td>
+                <tr v-for="(row, i) in $tm('profile.policy.return.rows')" :key="i">
+                  <td>{{ $rt(row.product) }}</td>
+                  <td>{{ $rt(row.freeExchange) }}</td>
+                  <td>{{ $rt(row.returnPolicy) }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <h3 class="policy-section__subtitle">Điều kiện đổi trả</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.return.conditionsTitle') }}</h3>
           <ul class="policy-list">
-            <li><strong>Máy mới:</strong> Như mới, không trầy xước, không dán decal, hình trang trí.</li>
-            <li><strong>Máy cũ:</strong> Có tình trạng sản phẩm như lúc mới mua.</li>
-            <li><strong>Hộp:</strong> Như mới, không móp méo, rách, viết vẽ, quấn băng dính... Số Serial/IMEI trên hộp phải trùng với thân máy.</li>
-            <li><strong>Phụ kiện và quà tặng:</strong> Còn đầy đủ, nguyên vẹn, không móp méo hoặc hư hại trong quá trình sử dụng.</li>
-            <li><strong>Tài khoản:</strong> Máy đã được đăng xuất khỏi tất cả các tài khoản (iCloud, Google, Mi Account...).</li>
+            <li v-for="(item, i) in $tm('profile.policy.return.conditions')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
-          <h3 class="policy-section__subtitle">Quy định về lỗi màn hình</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.return.screenDefectTitle') }}</h3>
           <ul class="policy-list">
-            <li>Màn hình có từ <strong>3 điểm chết</strong> trở lên.</li>
-            <li>Hoặc <strong>1 điểm chết</strong> có kích thước lớn hơn 1mm (điện thoại) và <strong>5 điểm chết</strong> trở lên (laptop, màn hình rời).</li>
+            <li v-for="(item, i) in $tm('profile.policy.return.screenDefects')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
           <div class="policy-notice">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div>
-              <strong>Lưu ý về dữ liệu:</strong> Khách hàng vui lòng tự sao lưu dữ liệu. Cửa hàng không chịu trách nhiệm về việc mất dữ liệu trong mọi trường hợp.
-            </div>
+            <div>{{ $t('profile.policy.notice.dataLoss') }}</div>
           </div>
         </section>
 
-        <!-- II. Bảo hành tiêu chuẩn -->
+        <!-- II. Standard warranty -->
         <section v-if="activeSection === 'standard'" class="policy-section">
-          <h1 class="policy-section__title">II. Bảo hành tiêu chuẩn</h1>
+          <h1 class="policy-section__title">{{ $t('profile.policy.standard.title') }}</h1>
 
-          <h3 class="policy-section__subtitle">Điện thoại, Laptop</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.standard.phoneLaptopTitle') }}</h3>
           <div class="policy-table-wrap">
             <table class="policy-table">
               <thead>
                 <tr>
-                  <th>Sản phẩm</th>
-                  <th>Thời gian bảo hành</th>
-                  <th>Quyền lợi bảo hành</th>
-                  <th>Địa chỉ bảo hành</th>
+                  <th>{{ $t('profile.policy.standard.phoneLaptopTableHeaders.product') }}</th>
+                  <th>{{ $t('profile.policy.standard.phoneLaptopTableHeaders.warrantyTime') }}</th>
+                  <th>{{ $t('profile.policy.standard.phoneLaptopTableHeaders.warrantyRights') }}</th>
+                  <th>{{ $t('profile.policy.standard.phoneLaptopTableHeaders.warrantyAddress') }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Hàng mới</td>
-                  <td>12 tháng (hoặc dài hơn theo quy định hãng)</td>
-                  <td>Quyền lợi bảo hành của hãng</td>
-                  <td>TTBH chính hãng</td>
-                </tr>
-                <tr>
-                  <td>Hàng đã kích hoạt bảo hành chính hãng</td>
-                  <td>12 tháng = Thời gian BH còn lại tại hãng + BH tại CellphoneS</td>
-                  <td>Theo quyền lợi BH của hãng trong thời gian được hãng BH; Sửa chữa, thay thế linh kiện trong thời gian BH còn lại tại CellphoneS</td>
-                  <td>TTBH chính hãng &amp; CellphoneS / Điện Thoại Vui</td>
-                </tr>
-                <tr>
-                  <td>Hàng cũ</td>
-                  <td><strong>6 tháng</strong></td>
-                  <td>Sửa chữa, thay thế linh kiện, bao gồm cả nguồn và màn hình.</td>
-                  <td>CellphoneS / Điện Thoại Vui</td>
+                <tr v-for="(row, i) in $tm('profile.policy.standard.phoneLaptopRows')" :key="i">
+                  <td>{{ $rt(row.product) }}</td>
+                  <td>{{ $rt(row.warrantyTime) }}</td>
+                  <td>{{ $rt(row.warrantyRights) }}</td>
+                  <td>{{ $rt(row.warrantyAddress) }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <ul class="policy-list">
-            <li>Trong thời gian đợi bảo hành – sửa chữa, khách hàng sẽ được hỗ trợ miễn phí một điện thoại khác để sử dụng tạm thời.</li>
-            <li>Khách hàng trả lại máy đã mượn sau khi nhận lại máy của mình.</li>
-          </ul>
+          <p class="policy-section__desc" style="margin-top: 0;">{{ $t('profile.policy.standard.phoneLaptopNote') }}</p>
 
-          <h3 class="policy-section__subtitle">Phụ kiện đi kèm máy</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.standard.accessoryTitle') }}</h3>
           <div class="policy-table-wrap">
             <table class="policy-table">
               <thead>
                 <tr>
-                  <th>Hãng</th>
-                  <th>Thời gian BH</th>
-                  <th>Quyền lợi</th>
-                  <th>Địa chỉ</th>
+                  <th>{{ $t('profile.policy.standard.accessoryTableHeaders.brand') }}</th>
+                  <th>{{ $t('profile.policy.standard.accessoryTableHeaders.warrantyTime') }}</th>
+                  <th>{{ $t('profile.policy.standard.accessoryTableHeaders.rights') }}</th>
+                  <th>{{ $t('profile.policy.standard.accessoryTableHeaders.address') }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td>Vsmart</td><td>6 tháng</td><td>1 đổi tất cả các lỗi</td><td>TTBH chính hãng</td></tr>
-                <tr><td>Asus</td><td>6 tháng</td><td>1 đổi tất cả các lỗi</td><td>TTBH chính hãng</td></tr>
-                <tr><td>Nokia</td><td>6 tháng</td><td>1 đổi tất cả các lỗi</td><td>TTBH chính hãng</td></tr>
+                <tr v-for="(row, i) in $tm('profile.policy.standard.accessoryRows')" :key="i">
+                  <td>{{ $rt(row.brand) }}</td>
+                  <td>{{ $rt(row.warrantyTime) }}</td>
+                  <td>{{ $rt(row.rights) }}</td>
+                  <td>{{ $rt(row.address) }}</td>
+                </tr>
               </tbody>
             </table>
           </div>
 
           <div class="policy-notice">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div>
-              <strong>Lưu ý về dữ liệu:</strong> Khách hàng vui lòng tự sao lưu dữ liệu. Cửa hàng không chịu trách nhiệm về việc mất bất cứ dữ liệu nào trong mọi trường hợp.
-            </div>
+            <div>{{ $t('profile.policy.notice.dataLossAlt') }}</div>
           </div>
         </section>
 
-        <!-- III. Linh kiện máy tính -->
+        <!-- III. Components -->
         <section v-if="activeSection === 'components'" class="policy-section">
-          <h1 class="policy-section__title">III. Bảo hành linh kiện máy tính</h1>
+          <h1 class="policy-section__title">{{ $t('profile.policy.components.title') }}</h1>
 
           <div class="policy-table-wrap">
             <table class="policy-table">
               <thead>
                 <tr>
-                  <th>Sản phẩm</th>
-                  <th>Thời gian BH</th>
-                  <th>Quyền lợi BH (lỗi nhà sản xuất)</th>
-                  <th>Địa điểm</th>
+                  <th>{{ $t('profile.policy.components.tableHeaders.product') }}</th>
+                  <th>{{ $t('profile.policy.components.tableHeaders.warrantyTime') }}</th>
+                  <th>{{ $t('profile.policy.components.tableHeaders.warrantyRights') }}</th>
+                  <th>{{ $t('profile.policy.components.tableHeaders.location') }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td>Bộ vi xử lý – CPU</td><td><strong>36 tháng</strong></td><td>Đổi mới sau khi có xác nhận lỗi từ hãng</td><td>TTBH hãng</td></tr>
-                <tr><td>Vỏ máy tính – Case</td><td>12 tháng</td><td>Sửa chữa hoặc đổi tương đương</td><td>TTBH hãng</td></tr>
-                <tr><td>Bo mạch chủ – Mainboard</td><td><strong>36 tháng</strong></td><td>Sửa chữa hoặc đổi tương đương</td><td>TTBH hãng</td></tr>
-                <tr><td>Nguồn – PSU</td><td><strong>36 tháng</strong></td><td>Sửa chữa hoặc đổi tương đương</td><td>TTBH hãng</td></tr>
-                <tr><td>RAM PC/Laptop</td><td><strong>36 tháng</strong></td><td>Sửa chữa hoặc đổi tương đương</td><td>TTBH hãng</td></tr>
-                <tr><td>Ổ cứng – SSD/HDD</td><td><strong>36 tháng</strong></td><td>Sửa chữa hoặc đổi tương đương</td><td>TTBH hãng</td></tr>
-                <tr><td>Card màn hình – VGA</td><td><strong>36 tháng</strong></td><td>Sửa chữa hoặc đổi tương đương</td><td>TTBH hãng</td></tr>
-                <tr><td>Tản nhiệt – Fan/Cooling</td><td>12 tháng</td><td>Sửa chữa hoặc đổi tương đương</td><td>TTBH hãng</td></tr>
+                <tr v-for="(row, i) in $tm('profile.policy.components.rows')" :key="i">
+                  <td>{{ $rt(row.product) }}</td>
+                  <td>{{ $rt(row.warrantyTime) }}</td>
+                  <td>{{ $rt(row.rights) }}</td>
+                  <td>{{ $rt(row.location) }}</td>
+                </tr>
               </tbody>
             </table>
           </div>
 
-          <h3 class="policy-section__subtitle">Điều kiện bảo hành</h3>
-          <h4 class="policy-section__sub-subtitle">Đủ điều kiện</h4>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.components.conditionsTitle') }}</h3>
+          <h4 class="policy-section__sub-subtitle">{{ $t('profile.policy.components.eligibleTitle') }}</h4>
           <ul class="policy-list">
-            <li>Hư hỏng được xác định do lỗi kỹ thuật hoặc lỗi của nhà sản xuất.</li>
-            <li>Sản phẩm còn trong thời hạn bảo hành, có tem bảo hành của nhà phân phối hoặc hãng sản xuất.</li>
-            <li>Với sản phẩm cần số serial hoặc hộp, sản phẩm phải còn đầy đủ những thứ này.</li>
-            <li>Sản phẩm không trầy xước, cấn móp, bể, vỡ, biến dạng so với ban đầu.</li>
-            <li>Dùng đúng nguồn điện, không bị mối mọt, không nằm trong môi trường cháy nổ, phòng tủ không bị rỉ oxy hóa do đặt trong môi trường ẩm ướt.</li>
-            <li>Chưa có sự can thiệp vào phần cứng (tự ý tháo dỡ, sửa chữa...).</li>
-            <li><strong>CPU Intel:</strong> Khách hàng cần giữ hộp nhựa đựng sản phẩm trong suốt thời gian bảo hành.</li>
-            <li><strong>Ổ cứng SSD:</strong> Bảo hành theo số tháng quy định hoặc theo chỉ số TBW của nhà sản xuất, tùy điều kiện nào đến trước.</li>
+            <li v-for="(item, i) in $tm('profile.policy.components.eligible')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
-          <h4 class="policy-section__sub-subtitle">Không đủ điều kiện (Từ chối bảo hành)</h4>
+          <h4 class="policy-section__sub-subtitle">{{ $t('profile.policy.components.notEligibleTitle') }}</h4>
           <ul class="policy-list">
-            <li>Hết thời hạn bảo hành.</li>
-            <li>CPU bị mẻ, nứt hoặc cong chân.</li>
-            <li>Không có tem bảo hành của Công ty/nhà phân phối/hãng hoặc tem bảo hành bị rách, tẩy xóa, sửa chống, không đọc được, bong tróc.</li>
-            <li>Tác động vật lý làm trầy xước, cong vênh, rạn nứt, bể, vỡ trong quá trình sử dụng.</li>
-            <li>Tự ý tháo mở, sửa chữa, thay đổi cấu trúc sản phẩm bên trong.</li>
-            <li>Hư hỏng, cháy, nổ do sử dụng sai mục đích, tự ý tháo lắp đặt không tuân theo hướng dẫn.</li>
-            <li>Hư hỏng do côn trùng xâm nhập (chuột, gián, kiến, mối...).</li>
-            <li>Hư hỏng do thiên tai, hỏa hoạn, lũ lụt, sét đánh, rỉ sét, hao mòn do môi trường.</li>
-            <li>Sản phẩm sử dụng với mục đích sản xuất, khai thác tiền điện tử (đào coin).</li>
+            <li v-for="(item, i) in $tm('profile.policy.components.notEligible')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
           <div class="policy-notice">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div>
-              <strong>Lưu ý về dữ liệu:</strong> Quý khách vui lòng chủ động sao lưu dữ liệu cá nhân trước khi gửi bảo hành. CellphoneS và TTBH không chịu trách nhiệm về mất mát dữ liệu trong mọi trường hợp.
-            </div>
+            <div>{{ $t('profile.policy.notice.dataLossAlt') }}</div>
           </div>
         </section>
 
-        <!-- IV. Bảo hành 1 đổi 1 VIP -->
+        <!-- IV. VIP 1-to-1 -->
         <section v-if="activeSection === 'vip'" class="policy-section">
-          <h1 class="policy-section__title">IV. Bảo hành 1 đổi 1 VIP</h1>
-          <p class="policy-section__desc">Áp dụng cho điện thoại, máy tính bảng (mới/cũ), tai nghe cao cấp mới, đồng hồ thông minh (không bao gồm Apple/Samsung mới). Thời gian: <strong>06 – 12 tháng</strong> tùy dòng máy.</p>
+          <h1 class="policy-section__title">{{ $t('profile.policy.vip.title') }}</h1>
+          <p class="policy-section__desc">{{ $t('profile.policy.vip.desc') }}</p>
 
           <div class="policy-table-wrap">
             <table class="policy-table">
               <thead>
                 <tr>
-                  <th>Phạm vi bảo hành</th>
-                  <th>Bảo hành tiêu chuẩn</th>
-                  <th>Bảo hành 1 đổi 1 – VIP</th>
+                  <th>{{ $t('profile.policy.vip.tableHeaders.scope') }}</th>
+                  <th>{{ $t('profile.policy.vip.tableHeaders.standard') }}</th>
+                  <th>{{ $t('profile.policy.vip.tableHeaders.vip') }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><strong>Mainboard</strong> (nguồn, ổ cứng)</td>
-                  <td>Sửa chữa / Thay thế linh kiện</td>
-                  <td><strong>1 đổi 1</strong> máy tương đương</td>
-                </tr>
-                <tr>
-                  <td><strong>Màn hình, cảm ứng</strong> (điểm chết &gt;3, điểm đen &gt;1mm)</td>
-                  <td>Sửa chữa / Thay thế</td>
-                  <td><strong>1 đổi 1</strong> máy tương đương</td>
-                </tr>
-                <tr>
-                  <td><strong>Linh kiện khác</strong> (camera, loa, wifi, chân sạc...)</td>
-                  <td>Sửa chữa</td>
-                  <td><strong>1 đổi 1</strong> máy tương đương</td>
-                </tr>
-                <tr>
-                  <td><strong>Pin và phím vật lý</strong></td>
-                  <td>Bảo hành 6 tháng (iPhone cũ: 3 tháng)</td>
-                  <td><strong>1 đổi 1 trong 12 tháng</strong></td>
+                <tr v-for="(row, i) in $tm('profile.policy.vip.rows')" :key="i">
+                  <td>{{ $rt(row.scope) }}</td>
+                  <td>{{ $rt(row.standard) }}</td>
+                  <td>{{ $rt(row.vip) }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <p class="policy-section__note"><em>* Pin được xác định lỗi khi hao trên 20% sau 1 giờ xem Youtube (wifi, độ sáng/âm lượng 50%) hoặc bị phồng.</em></p>
+          <p class="policy-section__note"><em>{{ $t('profile.policy.vip.batteryNote') }}</em></p>
 
-          <h3 class="policy-section__subtitle">Thời gian xử lý</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.vip.processingTimeTitle') }}</h3>
           <ul class="policy-list">
-            <li><strong>Điện thoại, máy tính bảng, laptop (trừ Apple):</strong> 03 – 05 ngày làm việc.</li>
-            <li><strong>Sản phẩm Apple:</strong> 03 – 05 ngày (tại CareS) hoặc 07 – 10 ngày (tại TTBH ủy quyền).</li>
-            <li><strong>Phụ kiện và Tivi:</strong> 07 – 10 ngày làm việc.</li>
-            <li><strong>Tổng thời gian thông thường:</strong> 07 – 14 ngày làm việc.</li>
+            <li v-for="(item, i) in $tm('profile.policy.vip.processingTime')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
-          <h3 class="policy-section__subtitle">Đổi sang máy giá trị cao hơn</h3>
-          <div class="policy-highlight">
-            Giá nhập lại = <strong>Giá bán hiện tại của máy cũ × 90%</strong>
-          </div>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.vip.upgradeTitle') }}</h3>
+          <div class="policy-highlight">{{ $t('profile.policy.vip.upgradeFormula') }}</div>
 
-          <h3 class="policy-section__subtitle">Trường hợp hết hàng để đổi</h3>
-          <p>Nếu quá <strong>07 ngày</strong> mà không có máy đổi, cửa hàng sẽ nhập lại máy theo công thức:</p>
-          <div class="policy-highlight">
-            Giá trị nhập lại = <strong>Giá mua ban đầu × [100% − (5% × số tháng sử dụng)]</strong>
-          </div>
-          <p class="policy-section__note"><em>* Thiếu hộp/phụ kiện sẽ trừ phí thêm khoảng 5% giá trị máy.</em></p>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.vip.outOfStockTitle') }}</h3>
+          <p>{{ $t('profile.policy.vip.outOfStockDesc') }}</p>
+          <div class="policy-highlight">{{ $t('profile.policy.vip.outOfStockFormula') }}</div>
+          <p class="policy-section__note"><em>{{ $t('profile.policy.vip.outOfStockNote') }}</em></p>
 
-          <h3 class="policy-section__subtitle">Đặc quyền</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.vip.privilegeTitle') }}</h3>
           <ul class="policy-list">
-            <li>Khách hàng có thể chuyển nhượng quyền sở hữu máy và gói bảo hành VIP trong thời gian bảo hành.</li>
-            <li>Được tặng thêm <strong>+5% giá trị thu mua</strong> khi có nhu cầu lên đời máy mới.</li>
+            <li v-for="(item, i) in $tm('profile.policy.vip.privileges')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
           <div class="policy-notice">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div>
-              <strong>Lưu ý về dữ liệu:</strong> Khách hàng cần tự sao lưu dữ liệu trước khi bảo hành. Cửa hàng không chịu trách nhiệm về mất mát dữ liệu.
-            </div>
+            <div>{{ $t('profile.policy.notice.dataLoss') }}</div>
           </div>
         </section>
 
-        <!-- V. Bảo hành rơi vỡ, ngấm nước -->
+        <!-- V. Accidental damage -->
         <section v-if="activeSection === 'accidental'" class="policy-section">
-          <h1 class="policy-section__title">V. Bảo hành rơi vỡ, ngấm nước</h1>
-          <p class="policy-section__desc">Áp dụng cho điện thoại, máy tính bảng mới/cũ (có giới hạn đối tượng sản phẩm áp dụng). Thời gian bảo hành: <strong>12 tháng</strong>.</p>
+          <h1 class="policy-section__title">{{ $t('profile.policy.accidental.title') }}</h1>
+          <p class="policy-section__desc">{{ $t('profile.policy.accidental.desc') }}</p>
 
-          <h3 class="policy-section__subtitle">Điều kiện bảo hành</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.accidental.conditionsTitle') }}</h3>
           <ul class="policy-list">
-            <li>Sản phẩm bị tác động của ngoại lực, gây vỡ hoặc bị ngấm nước, ngấm các chất lỏng khác dẫn đến sản phẩm không hoạt động bình thường.</li>
-            <li>Sản phẩm phải còn trong tình trạng có thể xác định được mã số IMEI/Serial định danh sản phẩm. Trường hợp không thể xác định được, CellphoneS từ chối bảo hành.</li>
+            <li v-for="(item, i) in $tm('profile.policy.accidental.conditions')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
-          <h3 class="policy-section__subtitle">Quyền lợi bảo hành</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.accidental.rightsTitle') }}</h3>
           <ul class="policy-list">
-            <li>Sản phẩm được sửa chữa/thay thế linh kiện tại các TTBH ủy quyền.</li>
-            <li><strong>Chi phí dịch vụ:</strong> Khách hàng chịu phí <strong>10% chi phí sửa chữa/thay thế linh kiện</strong>.</li>
-            <li><strong>Giới hạn chi phí:</strong> Tổng chi phí cho các lần sửa chữa không vượt quá giá niêm yết của sản phẩm tại thời điểm mua. Nếu vượt quá, khách hàng chịu phần chênh lệch.</li>
+            <li v-for="(item, i) in $tm('profile.policy.accidental.rights')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
-          <h3 class="policy-section__subtitle">Trường hợp không thể sửa chữa</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.accidental.cannotRepairTitle') }}</h3>
           <ul class="policy-list">
-            <li>CellphoneS sẽ đổi cho khách hàng một sản phẩm cũ có chất lượng tương đương.</li>
-            <li>Khách hàng chịu phí dịch vụ <strong>10% giá trị của sản phẩm được đổi</strong>.</li>
-            <li>Sau khi đổi, gói bảo hành này hết hiệu lực và sản phẩm được đổi sẽ được bảo hành <strong>06 tháng</strong> theo chính sách của CellphoneS.</li>
-            <li>Chỉ áp dụng đổi máy, không đổi hộp và phụ kiện kèm theo (sạc, cáp...).</li>
+            <li v-for="(item, i) in $tm('profile.policy.accidental.cannotRepair')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
-          <h3 class="policy-section__subtitle">Đặc quyền thêm</h3>
-          <div class="policy-highlight">
-            Khách hàng sử dụng dịch vụ này có đặc quyền <strong>+3% tổng giá trị máy thu cũ</strong> khi lên đời trong thời gian bảo hành của thiết bị.
-          </div>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.accidental.extraPrivilegeTitle') }}</h3>
+          <div class="policy-highlight">{{ $t('profile.policy.accidental.extraPrivilege') }}</div>
 
           <div class="policy-notice">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div>
-              <strong>Lưu ý quan trọng:</strong> CellphoneS không chịu trách nhiệm về việc mất dữ liệu trong mọi trường hợp. Khách hàng nên chủ động sao lưu dữ liệu trước khi mang đi bảo hành.
-            </div>
+            <div>{{ $t('profile.policy.notice.important') }}</div>
           </div>
         </section>
 
-        <!-- VI. Bảo hành mở rộng S24+ -->
+        <!-- VI. S24+ -->
         <section v-if="activeSection === 's24plus'" class="policy-section">
-          <h1 class="policy-section__title">VI. Bảo hành mở rộng S24+</h1>
-          <p class="policy-section__desc">Áp dụng cho Macbook, Điện thoại. Thời gian tổng cộng: <strong>24 – 36 tháng</strong> (đã bao gồm 12 tháng bảo hành tiêu chuẩn từ nhà sản xuất). Gói bảo hành có hiệu lực ngay sau khi thời hạn bảo hành của nhà sản xuất kết thúc.</p>
+          <h1 class="policy-section__title">{{ $t('profile.policy.s24plus.title') }}</h1>
+          <p class="policy-section__desc">{{ $t('profile.policy.s24plus.desc') }}</p>
 
-          <h3 class="policy-section__subtitle">Quyền lợi bảo hành</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.s24plus.rightsTitle') }}</h3>
           <ul class="policy-list">
-            <li><strong>Sửa chữa miễn phí 100%:</strong> Miễn phí chi phí sửa chữa và thay thế linh kiện nếu sản phẩm gặp lỗi từ nhà sản xuất.</li>
-            <li><strong>Thời gian xử lý:</strong> 07 – 14 ngày làm việc. Riêng Macbook có thể kéo dài 03 tuần đến 01 tháng.</li>
-            <li><strong>Chuyển nhượng:</strong> Khách hàng có thể chuyển nhượng quyền sở hữu sản phẩm kèm gói bảo hành S24+ cho người khác.</li>
-            <li><strong>Đặc quyền lên đời:</strong> Được cộng thêm <strong>+3% tổng giá trị máy thu cũ</strong> khi thu cũ đổi mới.</li>
+            <li v-for="(item, i) in $tm('profile.policy.s24plus.rights')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
-          <h3 class="policy-section__subtitle">Không thể sửa chữa được</h3>
-          <p>Nếu máy bị lỗi nhà sản xuất nhưng không thể sửa chữa, CellphoneS giải quyết theo thứ tự:</p>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.s24plus.cannotRepairTitle') }}</h3>
+          <p>{{ $t('profile.policy.s24plus.cannotRepairDesc') }}</p>
           <ul class="policy-list">
-            <li><strong>Bước 1:</strong> Đổi sản phẩm tương đương cùng thương hiệu, dòng sản phẩm, có chất lượng tương đương tại thời điểm bảo hành.</li>
-            <li><strong>Bước 2:</strong> Nếu không có sản phẩm để đổi, nhập lại (hoàn tiền) theo công thức:</li>
+            <li v-for="(item, i) in $tm('profile.policy.s24plus.cannotRepairSteps')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
-          <div class="policy-highlight">
-            Giá nhập lại = <strong>Giá mua sản phẩm × (100% − 3% × Số tháng đã sử dụng)</strong>
-          </div>
+          <div class="policy-highlight">{{ $t('profile.policy.s24plus.cannotRepairFormula') }}</div>
 
-          <h3 class="policy-section__subtitle">Các trường hợp KHÔNG được bảo hành S24+</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.s24plus.notCoveredTitle') }}</h3>
           <ul class="policy-list">
-            <li>Các hư hỏng do người dùng gây ra như: rơi vỡ, vào nước...</li>
-            <li>Các vấn đề liên quan đến <strong>pin</strong> và <strong>phím vật lý</strong>.</li>
+            <li v-for="(item, i) in $tm('profile.policy.s24plus.notCovered')" :key="i">{{ $rt(item.text) }}</li>
           </ul>
 
-          <h3 class="policy-section__subtitle">Ví dụ minh họa</h3>
+          <h3 class="policy-section__subtitle">{{ $t('profile.policy.s24plus.exampleTitle') }}</h3>
           <div class="policy-example">
-            <p>Nếu bạn mua tai nghe giá <strong>4.800.000đ</strong> kèm gói S24+, sau <strong>15 tháng</strong> sử dụng nếu bị lỗi nhà sản xuất mà không sửa được:</p>
+            <p>{{ $t('profile.policy.s24plus.exampleContent') }}</p>
             <ul class="policy-list" style="margin-top: 8px;">
-              <li>Bạn có thể được đổi một tai nghe cũ tương đương.</li>
-              <li>Hoặc được nhập lại với giá <strong>2.640.000đ</strong> (tức 4.800.000 × 55%) để đổi sang sản phẩm khác hoặc nhận lại tiền.</li>
+              <li v-for="(item, i) in $tm('profile.policy.s24plus.exampleBullets')" :key="i">{{ $rt(item.text) }}</li>
             </ul>
           </div>
 
           <div class="policy-notice">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div>
-              <strong>Lưu ý quan trọng:</strong> Khách hàng nên chủ động sao lưu dữ liệu cá nhân trước khi mang máy đi bảo hành vì cửa hàng không chịu trách nhiệm về mất mát dữ liệu.
-            </div>
+            <div>{{ $t('profile.policy.notice.importantAlt') }}</div>
           </div>
         </section>
 
@@ -400,23 +278,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 
 definePageMeta({ layout: 'default' })
 
-useHead({ title: 'Chính sách bảo hành - IrusGear' })
+const { t, tm } = useI18n()
+
+useHead({ title: computed(() => t('profile.policy.pageTitle')) })
 
 const activeSection = ref('return')
 
-const sidebarItems = [
-  { key: 'return', label: 'I. Đổi mới 30 ngày miễn phí' },
-  { key: 'standard', label: 'II. Bảo hành tiêu chuẩn' },
-  { key: 'components', label: 'III. Linh kiện máy tính' },
-  { key: 'vip', label: 'IV. Bảo hành 1 đổi 1 VIP' },
-  { key: 'accidental', label: 'V. Bảo hành rơi vỡ, ngấm nước' },
-  { key: 's24plus', label: 'VI. Bảo hành mở rộng S24+' },
-]
+const sidebarItems = computed(() => [
+  { key: 'return', label: t('profile.policy.nav.return30days') },
+  { key: 'standard', label: t('profile.policy.nav.standard') },
+  { key: 'components', label: t('profile.policy.nav.components') },
+  { key: 'vip', label: t('profile.policy.nav.vip') },
+  { key: 'accidental', label: t('profile.policy.nav.accidental') },
+  { key: 's24plus', label: t('profile.policy.nav.s24plus') },
+])
 </script>
 
 <style scoped>
@@ -757,6 +638,11 @@ const sidebarItems = [
 
   .policy-section__subtitle {
     font-size: 14px;
+    margin: 20px 0 10px;
+  }
+
+  .policy-list li {
+    font-size: 13px;
   }
 
   .policy-notice {
@@ -794,7 +680,7 @@ const sidebarItems = [
 
   .policy-section__subtitle {
     font-size: 13px;
-    margin: 20px 0 10px;
+    margin: 16px 0 10px;
   }
 
   .policy-section__desc {
@@ -823,7 +709,7 @@ const sidebarItems = [
 
   .policy-notice {
     padding: 10px 12px;
-    margin-top: 20px;
+    margin-top: 16px;
     gap: 8px;
   }
 
@@ -869,7 +755,7 @@ const sidebarItems = [
 
   .policy-section__subtitle {
     font-size: 13px;
-    margin: 16px 0 8px;
+    margin: 14px 0 8px;
   }
 
   .policy-section__desc {
@@ -895,7 +781,7 @@ const sidebarItems = [
 
   .policy-notice {
     padding: 8px 10px;
-    margin-top: 16px;
+    margin-top: 14px;
   }
 
   .policy-notice svg {
