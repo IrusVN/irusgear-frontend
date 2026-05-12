@@ -1,14 +1,13 @@
 import { computed } from "vue";
 import { navigateTo, useLocalePath } from "#imports";
+import { toast } from "vue-sonner";
 import { useCartStore } from "@/stores/cartStore";
 import { useProductStore } from "@/stores/productStore";
-import { useGlobalToast } from "@/composables/useGlobalToast";
 
 export const useCartActions = () => {
   const cartStore = useCartStore();
   const productStore = useProductStore();
   const localePath = useLocalePath();
-  const toast = useGlobalToast();
 
   const cartBusy = computed(() => cartStore.isMutating);
 

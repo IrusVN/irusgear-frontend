@@ -138,10 +138,10 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import { toast } from "vue-sonner";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useCartStore } from "@/stores/cartStore";
 import { useDeviceDetection } from "@/composables/useDeviceDetection";
-import { useGlobalToast } from "@/composables/useGlobalToast";
 import CheckoutProgress from "@/components/Checkout/CheckoutProgress.vue";
 import PaymentMethodList from "@/components/Checkout/PaymentMethodList.vue";
 import QrPaymentModal from "@/components/Checkout/QrPaymentModal.vue";
@@ -153,7 +153,6 @@ definePageMeta({
 
 const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
-const toast = useGlobalToast();
 const { isMobile } = useDeviceDetection();
 
 const selectedMethod = ref(null);

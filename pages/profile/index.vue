@@ -53,8 +53,11 @@
       <div class="profile-empty">
         <i class="bi bi-map"></i>
         <p>{{ $t('profile.dashboard.noAddresses') }}</p>
-        <button type="button" class="profile-card__add-btn" @click="checkoutStore.openAddressForm()">
-          <i class="bi bi-plus-lg"></i>
+        <button
+          type="button"
+          class="profile-card__add-btn profile-card__add-btn--empty"
+          @click="checkoutStore.openAddressForm()"
+        >
           {{ $t('profile.dashboard.addAddress') }}
         </button>
       </div>
@@ -233,22 +236,35 @@
         </div>
       </div>
       <div v-else class="profile-favorites">
-        <a
+        <article
           v-for="item in favorites.items"
           :key="item.id"
-          :href="item.url || localePath(`/products/${item.slug}`)"
           class="profile-favorite-item"
         >
-          <img :src="item.image_url" :alt="item.name" loading="lazy" />
-          <div class="profile-favorite-info">
-            <div class="profile-favorite-name">{{ item.name }}</div>
-            <div class="profile-favorite-price">
-              <span class="profile-favorite-price-current">{{ item.current_price_formatted }}</span>
-              <span v-if="item.original_price_formatted" class="profile-favorite-price-old">{{ item.original_price_formatted }}</span>
+          <NuxtLink
+            :to="getFavoriteProductUrl(item)"
+            class="profile-favorite-link"
+          >
+            <img :src="item.image_url" :alt="item.name" loading="lazy" />
+            <div class="profile-favorite-info">
+              <div class="profile-favorite-name">{{ item.name }}</div>
+              <div class="profile-favorite-price">
+                <span class="profile-favorite-price-current">{{ item.current_price_formatted }}</span>
+                <span v-if="item.original_price_formatted" class="profile-favorite-price-old">{{ item.original_price_formatted }}</span>
+              </div>
             </div>
-          </div>
-          <i class="bi bi-heart-fill profile-favorite-heart"></i>
-        </a>
+          </NuxtLink>
+          <button
+            type="button"
+            class="profile-favorite-heart"
+            :class="{ 'profile-favorite-heart--removing': isRemovingFavorite(item.id) }"
+            :disabled="isRemovingFavorite(item.id)"
+            :aria-label="$t('wishlist.remove')"
+            @click="handleRemoveFavorite(item)"
+          >
+            <i class="bi bi-heart-fill"></i>
+          </button>
+        </article>
       </div>
     </div>
   </div>
@@ -313,18 +329,19 @@
 import { ref } from 'vue'
 import { useLocalePath, useI18n } from '#imports'
 import { storeToRefs } from 'pinia'
-import { useGlobalToast } from '@/composables/useGlobalToast'
+import { toast } from 'vue-sonner'
 import { useProfileDashboardStore } from '@/stores/profileDashboardStore'
 import { useCheckoutStore } from '@/stores/checkoutStore'
+import { useWishlistStore } from '@/stores/wishlistStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
 import AddressCard from '@/components/Checkout/AddressCard.vue'
 import AddressForm from '@/components/Checkout/AddressForm.vue'
 
 const localePath = useLocalePath()
 const { t } = useI18n()
-const toast = useGlobalToast()
 const dashboardStore = useProfileDashboardStore()
 const checkoutStore = useCheckoutStore()
+const wishlistStore = useWishlistStore()
 const { recentOrders, offers, favorites, isLoading, offersLoading } = storeToRefs(dashboardStore)
 
 definePageMeta({
@@ -365,6 +382,34 @@ const handleSaveAddress = async (addressData) => {
 }
 
 const showAddressNotice = ref(true)
+const removingFavoriteIds = ref(new Set())
+
+const getFavoriteProductUrl = (item) => {
+  if (item?.url) return item.url
+  if (item?.slug) return localePath(`/products/${item.slug}`)
+  return localePath("/")
+}
+
+const isRemovingFavorite = (itemId) => removingFavoriteIds.value.has(String(itemId))
+
+const handleRemoveFavorite = async (item) => {
+  if (!item?.id || isRemovingFavorite(item.id)) return
+
+  const itemId = String(item.id)
+  removingFavoriteIds.value = new Set([...removingFavoriteIds.value, itemId])
+
+  try {
+    await wishlistStore.removeItem(item.id)
+    dashboardStore.removeFavoriteItem(item.id)
+    toast.success(t("wishlist.removed"))
+  } catch (e) {
+    toast.error(e?.data?.message || e?.message || t("wishlist.removeError"))
+  } finally {
+    const nextIds = new Set(removingFavoriteIds.value)
+    nextIds.delete(itemId)
+    removingFavoriteIds.value = nextIds
+  }
+}
 
 const copyVoucherCode = (code) => {
   if (!code) return
@@ -522,6 +567,30 @@ const formatExpiry = (isoDate) => {
 }
 .profile-card__add-btn:hover {
   background: #b80015;
+}
+
+.profile-card__add-btn i {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.profile-card__add-btn--empty {
+  background: #fff;
+  border: 1px solid #f3c4cc;
+  border-radius: 10px;
+  color: #d70018;
+  min-height: 36px;
+  padding: 0 14px;
+}
+
+.profile-card__add-btn--empty:hover {
+  background: #fff1f3;
+  border-color: #e85a6a;
+  color: #b80015;
+}
+
+.profile-card__add-btn--empty i {
+  font-size: 13px;
 }
 
 .profile-card__link {
@@ -682,7 +751,6 @@ const formatExpiry = (isoDate) => {
   padding: 10px;
   border: 1px solid #e4e4e7;
   border-radius: 10px;
-  text-decoration: none;
   flex-shrink: 0;
   min-width: 240px;
   position: relative;
@@ -698,6 +766,17 @@ const formatExpiry = (isoDate) => {
   height: 48px;
   object-fit: contain;
   flex-shrink: 0;
+}
+
+.profile-favorite-link {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  min-width: 0;
+  padding-right: 24px;
+  text-decoration: none;
 }
 
 .profile-favorite-info {
@@ -735,11 +814,39 @@ const formatExpiry = (isoDate) => {
 }
 
 .profile-favorite-heart {
+  align-items: center;
+  background: none;
+  border: none;
   position: absolute;
   bottom: 8px;
   right: 8px;
-  font-size: 14px;
   color: #3b82f6;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  height: auto;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.15s ease;
+  width: auto;
+}
+
+.profile-favorite-heart:hover:not(:disabled) {
+  color: #1d4ed8;
+}
+
+.profile-favorite-heart:disabled {
+  cursor: wait;
+  opacity: 1;
+}
+
+.profile-favorite-heart--removing {
+  color: #a1a1aa;
+}
+
+.profile-favorite-heart i {
+  color: inherit;
+  line-height: 1;
 }
 
 /* ── Offers ─────────────────────────── */

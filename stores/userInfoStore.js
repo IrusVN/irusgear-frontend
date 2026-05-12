@@ -1,14 +1,13 @@
 import { ref } from "vue";
+import { toast } from "vue-sonner";
 import { defineStore } from "pinia";
 import { useRuntimeConfig, useRequestHeaders } from "#imports";
 import { useAuthStore } from "@/stores/authStore";
 import { registerStore } from "@/utils/storeRegistry";
-import { useGlobalToast } from '@/composables/useGlobalToast';
 
 export const useUserInfoStore = defineStore("userInfo", () => {
   const config = useRuntimeConfig();
   const authStore = useAuthStore();
-  const { success, error } = useGlobalToast();
 
   const socialLinks = ref([]);
   const isLoadingLinks = ref(false);
@@ -38,12 +37,12 @@ export const useUserInfoStore = defineStore("userInfo", () => {
         if (authStore.user && res?.data) {
           Object.assign(authStore.user, res.data);
         }
-        success(res?.message || "Cập nhật thông tin thành công");
+        toast.success(res?.message || "Cập nhật thông tin thành công");
         return { success: true, data: res?.data };
       }
       throw new Error(res?.message || "Cập nhật thất bại");
     } catch (e) {
-      error(e?.data?.message || e.message || "Cập nhật thất bại");
+      toast.error(e?.data?.message || e.message || "Cập nhật thất bại");
       return { success: false, error: e };
     }
   };
@@ -55,12 +54,12 @@ export const useUserInfoStore = defineStore("userInfo", () => {
         body: payload,
       });
       if (res?.success !== false) {
-        success(res?.message || "Đổi mật khẩu thành công");
+        toast.success(res?.message || "Đổi mật khẩu thành công");
         return { success: true };
       }
       throw new Error(res?.message || "Đổi mật khẩu thất bại");
     } catch (e) {
-      error(e?.data?.message || e.message || "Đổi mật khẩu thất bại");
+      toast.error(e?.data?.message || e.message || "Đổi mật khẩu thất bại");
       return { success: false, error: e };
     }
   };

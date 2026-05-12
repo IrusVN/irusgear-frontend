@@ -37,9 +37,9 @@
 import { onMounted, ref } from "vue";
 import { useI18n } from "#imports";
 import { storeToRefs } from "pinia";
+import { toast } from "vue-sonner";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useCartStore } from "@/stores/cartStore";
-import { useGlobalToast } from "@/composables/useGlobalToast";
 import CheckoutProgress from "@/components/Checkout/CheckoutProgress.vue";
 import OrderInfoForm from "@/components/Checkout/OrderInfoForm.vue";
 import OrderSummaryPanel from "@/components/Checkout/OrderSummaryPanel.vue";
@@ -54,7 +54,6 @@ definePageMeta({
 const { t } = useI18n();
 const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
-const toast = useGlobalToast();
 
 const checkoutLoading = ref(true);
 

@@ -378,11 +378,10 @@ import { useProductStore } from '@/stores/productStore';
 import { useWishlistStore } from '@/stores/wishlistStore';
 import { useAuthStore } from '@/stores/authStore';
 import ArrowIcon from '@/components/Icons/ArrowIcon.vue';
-import { useGlobalToast } from '@/composables/useGlobalToast';
+import { toast } from 'vue-sonner';
 import { useI18n } from "#imports";
 
 const { t } = useI18n();
-const { success, error } = useGlobalToast();
 const productStore = useProductStore();
 const wishlistStore = useWishlistStore();
 const authStore = useAuthStore();
@@ -460,17 +459,17 @@ const toggleWishlist = async () => {
   try {
     if (item) {
       await wishlistStore.removeItem(item.id);
-      success(t("product.removedFromWishlist") || "Đã xóa khỏi yêu thích");
+      toast.success(t("product.removedFromWishlist") || "Đã xóa khỏi yêu thích");
     } else {
       await wishlistStore.addItem({
         product_id: Number(productId),
         variant_id: productStore.selectedVariant?.id || null,
         quantity: 1,
       });
-      success(t("product.addedToWishlist") || "Đã thêm vào yêu thích");
+      toast.success(t("product.addedToWishlist") || "Đã thêm vào yêu thích");
     }
   } catch (e) {
-    error(e?.message || t("product.wishlistError") || "Không thể cập nhật yêu thích");
+    toast.error(e?.message || t("product.wishlistError") || "Không thể cập nhật yêu thích");
   }
 };
 

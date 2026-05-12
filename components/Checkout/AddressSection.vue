@@ -102,14 +102,13 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import { toast } from "vue-sonner";
 import { useCheckoutStore } from "@/stores/checkoutStore";
-import { useGlobalToast } from "@/composables/useGlobalToast";
 import AddressCard from "@/components/Checkout/AddressCard.vue";
 import AddressForm from "@/components/Checkout/AddressForm.vue";
 import ArrowIcon from "@/components/Icons/ArrowIcon.vue";
 
 const checkoutStore = useCheckoutStore();
-const toast = useGlobalToast();
 const { t } = useI18n();
 
 const swiperEl = ref(null);

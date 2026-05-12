@@ -43,14 +43,13 @@
 
 <script setup>
 import { computed } from 'vue';
+import { toast } from 'vue-sonner';
 import { useWishlistStore } from '@/stores/wishlistStore';
 import { useAuthStore } from '@/stores/authStore';
-import { useGlobalToast } from '@/composables/useGlobalToast';
 import { useI18n } from "#imports";
 import { useRouter } from "#imports";
 
 const { t } = useI18n();
-const { success, error } = useGlobalToast();
 const wishlistStore = useWishlistStore();
 const authStore = useAuthStore();
 const router = useRouter();
@@ -81,17 +80,17 @@ const toggleWishlist = async () => {
   try {
     if (item) {
       await wishlistStore.removeItem(item.id);
-      success(t("product.removedFromWishlist"));
+      toast.success(t("product.removedFromWishlist"));
     } else {
       await wishlistStore.addItem({
         product_id: Number(productId),
         variant_id: null,
         quantity: 1,
       });
-      success(t("product.addedToWishlist"));
+      toast.success(t("product.addedToWishlist"));
     }
   } catch (e) {
-    error(e?.message || t("product.wishlistError"));
+    toast.error(e?.message || t("product.wishlistError"));
   }
 };
 

@@ -155,6 +155,16 @@ export const useProfileDashboardStore = defineStore("profileDashboard", () => {
     }
   };
 
+  const removeFavoriteItem = (itemId) => {
+    const currentItems = favorites.value.items || [];
+
+    favorites.value = {
+      ...favorites.value,
+      total: Math.max(0, Number(favorites.value.total || currentItems.length) - 1),
+      items: currentItems.filter((item) => String(item.id) !== String(itemId)),
+    };
+  };
+
   const reset = () => {
     recentOrders.value = { total: 0, seeAllUrl: "", orders: [] };
     offers.value = { total: 0, seeAllUrl: "", items: [] };
@@ -175,6 +185,7 @@ export const useProfileDashboardStore = defineStore("profileDashboard", () => {
     hydrated,
     fetchDashboard,
     fetchOffers,
+    removeFavoriteItem,
     reset,
   };
 });

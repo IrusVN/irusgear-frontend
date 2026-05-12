@@ -244,11 +244,10 @@ import HideEye from '@/components/Icons/HideEye.vue'
 import { useLocalePath } from '#imports'
 import { useAuthStore } from "@/stores/authStore";
 import { useI18n } from '#imports'
-import { useGlobalToast } from '@/composables/useGlobalToast.js'
+import { toast } from 'vue-sonner'
 import { useMobileSheet } from '@/composables/useMobileSheet'
 
 const { t } = useI18n();
-const toast = useGlobalToast()
 const auth = useAuthStore();
 const localePath = useLocalePath()
 

@@ -81,6 +81,7 @@
 import { computed } from "vue";
 import { useI18n, useLocalePath, navigateTo } from "#imports";
 import { storeToRefs } from "pinia";
+import { toast } from "vue-sonner";
 import CartAlertBanner from "@/components/Cart/CartAlertBanner.vue";
 import CartEmptyState from "@/components/Cart/CartEmptyState.vue";
 import CartItemRow from "@/components/Cart/CartItemRow.vue";
@@ -89,7 +90,6 @@ import CartRecommendations from "@/components/Cart/CartRecommendations.vue";
 import CartStickyCheckoutBar from "@/components/Cart/CartStickyCheckoutBar.vue";
 import CartSummary from "@/components/Cart/CartSummary.vue";
 import { useCartStore } from "@/stores/cartStore";
-import { useGlobalToast } from "@/composables/useGlobalToast";
 
 const createFallbackSummary = () => ({
   itemCount: 0,
@@ -106,7 +106,6 @@ const createFallbackSummary = () => ({
 });
 
 const cartStore = useCartStore();
-const toast = useGlobalToast();
 const { t } = useI18n();
 const localePath = useLocalePath();
 const {

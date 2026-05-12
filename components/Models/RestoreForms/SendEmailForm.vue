@@ -36,8 +36,8 @@
 
 <script setup>
 import { ref, inject } from 'vue'
+import { toast } from 'vue-sonner'
 import { useAuthStore } from '@/stores/authStore.js'
-import { useGlobalToast } from '@/composables/useGlobalToast.js'
 import { navigateTo, useLocalePath } from '#imports'
 import EmailIcon from '@/components/Icons/EmailIcon.vue'
 import * as yup from 'yup'
@@ -46,7 +46,6 @@ const email = ref('')
 const errorMessage = ref('')
 const loading = ref(false)
 const authStore = useAuthStore()
-const toast = useGlobalToast()
 const localePath = useLocalePath()
 const closeSheet = inject('closeSheet', null)
 
