@@ -9,16 +9,28 @@
   <!-- Filter Bar -->
   <div class="tradein-filter">
     <span class="tradein-filter__label">Lịch sử thu cũ</span>
-    <div class="tradein-filter__date-range">
-      <i class="bi bi-calendar3"></i>
-      <input type="date" v-model="dateFrom" class="tradein-filter__date-input" />
-      <span class="tradein-filter__date-sep">
+    <div class="tradein-filter__date-range" role="group" aria-label="Lọc theo khoảng ngày">
+      <div class="tradein-filter__date-field">
+        <span class="tradein-filter__date-label">Từ</span>
+        <input
+          type="date"
+          v-model="dateFrom"
+          class="tradein-filter__date-input"
+          aria-label="Từ ngày"
+        />
+      </div>
+      <span class="tradein-filter__date-sep" aria-hidden="true">
         <i class="bi bi-arrow-right-short"></i>
       </span>
-      <input type="date" v-model="dateTo" class="tradein-filter__date-input" />
-      <button type="button" class="tradein-filter__calendar-btn" title="Chọn ngày">
-        <i class="bi bi-calendar-event"></i>
-      </button>
+      <div class="tradein-filter__date-field">
+        <span class="tradein-filter__date-label">Đến</span>
+        <input
+          type="date"
+          v-model="dateTo"
+          class="tradein-filter__date-input"
+          aria-label="Đến ngày"
+        />
+      </div>
     </div>
   </div>
 
@@ -290,11 +302,6 @@ loadTradeins()
     margin-bottom: 10px;
   }
 
-  .tradein-filter__date-range {
-    max-width: 100%;
-    padding: 7px 12px;
-  }
-
   .tradein-list {
     gap: 10px;
   }
@@ -418,24 +425,6 @@ loadTradeins()
     margin-bottom: 10px;
   }
 
-  .tradein-filter__date-range {
-    padding: 6px 10px;
-    min-height: 36px;
-    gap: 6px;
-  }
-
-  .tradein-filter__date-range > i {
-    font-size: 14px;
-  }
-
-  .tradein-filter__date-input {
-    font-size: 12px;
-  }
-
-  .tradein-filter__calendar-btn {
-    font-size: 14px;
-  }
-
   .tradein-list {
     gap: 10px;
   }
@@ -531,15 +520,6 @@ loadTradeins()
 
 /* ── Responsive: iPhone SE Extra Small ─── */
 @media (max-width: 480px) {
-  .tradein-filter__date-range {
-    padding: 6px 8px;
-    gap: 5px;
-  }
-
-  .tradein-filter__date-input {
-    font-size: 11px;
-  }
-
   .tradein-card__device {
     padding: 10px;
   }
@@ -564,57 +544,101 @@ loadTradeins()
 }
 
 .tradein-filter__date-range {
-  display: flex;
   align-items: center;
-  gap: 8px;
   background: #fff;
-  border: 1px solid #e4e4e7;
-  border-radius: 10px;
-  padding: 8px 14px;
-  min-height: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  display: grid;
   flex: 1;
-  max-width: 360px;
+  gap: 4px;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  max-width: 420px;
+  min-height: 48px;
+  padding: 4px;
 }
 
-.tradein-filter__date-range > i {
+.tradein-filter__date-field {
+  align-items: center;
+  border-radius: 10px;
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+  padding: 6px 10px;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tradein-filter__date-field:focus-within {
+  background: #fafafa;
+  box-shadow: inset 0 0 0 1px #ef9aa5;
+}
+
+.tradein-filter__date-label {
   color: #71717a;
-  font-size: 15px;
-  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .tradein-filter__date-input {
-  border: none;
-  outline: none;
   background: transparent;
-  font-size: 13px;
-  color: #333;
-  flex: 1;
-  min-width: 0;
+  border: none;
+  color: #18181b;
   cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  min-width: 0;
+  outline: none;
+  width: 100%;
+}
+
+.tradein-filter__date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+.tradein-filter__date-input:focus::-webkit-calendar-picker-indicator,
+.tradein-filter__date-input:hover::-webkit-calendar-picker-indicator {
+  opacity: 0.9;
 }
 
 .tradein-filter__date-sep {
   display: flex;
   align-items: center;
   color: #a1a1aa;
-  flex-shrink: 0;
+  font-size: 18px;
+  justify-content: center;
+  width: 24px;
 }
 
-.tradein-filter__calendar-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #52525b;
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  border-radius: 4px;
-  transition: background 0.15s, color 0.15s;
+@media (max-width: 767.98px) {
+  .tradein-filter__date-range {
+    max-width: none;
+    width: 100%;
+  }
 }
-.tradein-filter__calendar-btn:hover {
-  background: #f4f4f5;
-  color: #18181b;
+
+@media (max-width: 480px) {
+  .tradein-filter__date-range {
+    min-height: 44px;
+  }
+
+  .tradein-filter__date-field {
+    padding: 6px 8px;
+  }
+
+  .tradein-filter__date-label {
+    font-size: 10px;
+  }
+
+  .tradein-filter__date-input {
+    font-size: 12px;
+  }
+
+  .tradein-filter__date-sep {
+    width: 18px;
+  }
 }
 
 /* ── Tradein List ─── */

@@ -48,6 +48,14 @@
       <div v-for="n in 2" :key="n" class="profile-address-skeleton"></div>
     </div>
 
+    <!-- Address form -->
+    <AddressForm
+      v-else-if="checkoutStore.isEditingAddress"
+      :saving="checkoutStore.addressSaving"
+      @save="handleSaveAddress"
+      @cancel="checkoutStore.closeAddressForm()"
+    />
+
     <!-- Empty state -->
     <div v-else-if="checkoutStore.savedAddresses.length === 0" class="profile-card__body profile-card__body--empty">
       <div class="profile-empty">
@@ -62,14 +70,6 @@
         </button>
       </div>
     </div>
-
-    <!-- Address form -->
-    <AddressForm
-      v-if="checkoutStore.isEditingAddress"
-      :saving="checkoutStore.addressSaving"
-      @save="handleSaveAddress"
-      @cancel="checkoutStore.closeAddressForm()"
-    />
 
     <!-- Address list -->
     <div v-else class="profile-card__body profile-card__body--addresses">
@@ -226,13 +226,13 @@
   <div class="profile-card">
     <div class="profile-card__header">
       <h3 class="profile-card__title">{{ $t('profile.dashboard.favoritesTitle') }}</h3>
-      <button type="button" class="profile-card__link">{{ $t('profile.common.seeAll') }} <i class="bi bi-chevron-right"></i></button>
+      <button v-if="false" type="button" class="profile-card__link">{{ $t('profile.common.seeAll') }} <i class="bi bi-chevron-right"></i></button>
     </div>
     <div class="profile-card__body">
       <div v-if="favorites.items.length === 0" class="profile-card__body--empty" style="display:flex;justify-content:center;padding:24px 16px;">
         <div class="profile-empty">
           <img src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png" alt="empty" loading="lazy" />
-          <p>{{ $t('profile.dashboard.noOffers') }}</p>
+          <p>{{ $t('profile.dashboard.noFavorites') }}</p>
         </div>
       </div>
       <div v-else class="profile-favorites">
@@ -257,8 +257,8 @@
           <button
             type="button"
             class="profile-favorite-heart"
-            :class="{ 'profile-favorite-heart--removing': isRemovingFavorite(item.id) }"
-            :disabled="isRemovingFavorite(item.id)"
+            :class="{ 'profile-favorite-heart--removing': isRemovingFavorite(item) }"
+            :disabled="isRemovingFavorite(item)"
             :aria-label="$t('wishlist.remove')"
             @click="handleRemoveFavorite(item)"
           >
@@ -390,23 +390,31 @@ const getFavoriteProductUrl = (item) => {
   return localePath("/")
 }
 
-const isRemovingFavorite = (itemId) => removingFavoriteIds.value.has(String(itemId))
+const getFavoriteId = (item) => {
+  if (item?.id == null || item.id === "") return null
+  return String(item.id)
+}
+
+const isRemovingFavorite = (item) => {
+  const favoriteId = typeof item === "object" ? getFavoriteId(item) : String(item || "")
+  return favoriteId ? removingFavoriteIds.value.has(favoriteId) : false
+}
 
 const handleRemoveFavorite = async (item) => {
-  if (!item?.id || isRemovingFavorite(item.id)) return
+  const favoriteId = getFavoriteId(item)
+  if (!favoriteId || isRemovingFavorite(item)) return
 
-  const itemId = String(item.id)
-  removingFavoriteIds.value = new Set([...removingFavoriteIds.value, itemId])
+  removingFavoriteIds.value = new Set([...removingFavoriteIds.value, favoriteId])
 
   try {
-    await wishlistStore.removeItem(item.id)
-    dashboardStore.removeFavoriteItem(item.id)
+    await wishlistStore.removeItem(favoriteId)
+    dashboardStore.removeFavoriteItem(favoriteId)
     toast.success(t("wishlist.removed"))
   } catch (e) {
     toast.error(e?.data?.message || e?.message || t("wishlist.removeError"))
   } finally {
     const nextIds = new Set(removingFavoriteIds.value)
-    nextIds.delete(itemId)
+    nextIds.delete(favoriteId)
     removingFavoriteIds.value = nextIds
   }
 }

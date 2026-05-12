@@ -18,16 +18,26 @@ export const useMemberRankStore = defineStore("memberRank", () => {
   const isLoadingBenefits = ref(false);
   const hydratedBenefits = ref(false);
 
-  const normalizeRank = (raw) => ({
-    key: raw.rank_key,
-    name: raw.rank_name,
-    icon: raw.icon,
-    spentThreshold: raw.spent_threshold,
-    spentThresholdFormatted: raw.spent_threshold_formatted,
-    benefits: Array.isArray(raw.benefits) ? raw.benefits : [],
-    upgradeConditions: raw.upgrade_conditions,
-    isLocked: raw.is_locked,
-  });
+  const normalizeRankKey = (value) => {
+    const key = String(value || "").trim().toLowerCase();
+    if (!key) return "";
+    return key.replace(/[^a-z0-9]/g, "");
+  };
+
+  const normalizeRank = (raw = {}) => {
+    const key = normalizeRankKey(raw.key || raw.rank_key || raw.rankKey || raw.code || raw.name || raw.rank_name);
+
+    return {
+      key,
+      name: raw.name || raw.rank_name || "",
+      icon: raw.icon || "bi bi-star",
+      spentThreshold: raw.spent_threshold || raw.threshold || null,
+      spentThresholdFormatted: raw.spent_threshold_formatted || raw.threshold_display || "",
+      benefits: Array.isArray(raw.benefits) ? raw.benefits : [],
+      upgradeConditions: raw.upgrade_conditions || null,
+      isLocked: raw.is_locked ?? raw.status === "locked",
+    };
+  };
 
   const normalizeBenefit = (raw) => ({
     id: raw.id,
@@ -46,22 +56,23 @@ export const useMemberRankStore = defineStore("memberRank", () => {
       const res = await feGlobalStore.fetchItem();
       if (res?.success !== false) {
         const data = res?.data || {};
+        const user = data.current_user || data;
         currentUser.value = {
-          name: data.name,
-          rankKey: data.rank_key,
-          totalSpent: data.total_spent,
-          totalSpentFormatted: data.total_spent_formatted,
-          spentThreshold: data.spent_threshold,
-          progressPercent: data.progress_percent,
-          nextRankKey: data.next_rank_key,
-          nextRankName: data.next_rank_name,
-          nextRankThreshold: data.next_rank_threshold,
-          amountToNextRankFormatted: data.amount_to_next_rank_formatted,
-          renewalDate: data.renewal_date,
-          isStudent: data.is_student,
-          studentTag: data.student_tag,
+          name: user.name,
+          rankKey: normalizeRankKey(user.rank_key || user.rankKey),
+          totalSpent: user.total_spent,
+          totalSpentFormatted: user.total_spent_formatted,
+          spentThreshold: user.spent_threshold,
+          progressPercent: Number(user.progress_percent || 0),
+          nextRankKey: normalizeRankKey(user.next_rank_key || user.nextRankKey),
+          nextRankName: user.next_rank_name,
+          nextRankThreshold: user.next_rank_threshold,
+          amountToNextRankFormatted: user.amount_to_next_rank_formatted,
+          renewalDate: user.renewal_date,
+          isStudent: user.is_student,
+          studentTag: user.student_tag,
         };
-        ranks.value = (data.ranks || []).map(normalizeRank);
+        ranks.value = (data.ranks || []).map(normalizeRank).filter((rank) => rank.key);
         hydratedRank.value = true;
       }
       return { currentUser: currentUser.value, ranks: ranks.value };
