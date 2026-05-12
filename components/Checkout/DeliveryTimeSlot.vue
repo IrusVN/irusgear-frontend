@@ -84,8 +84,8 @@ const formatMoney = (value) => {
 }
 
 .delivery-timeslot__option--selected {
-  border-color: #d70018;
-  background: #fff7f7;
+  border-color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
 }
 
 .delivery-timeslot__input {
@@ -108,7 +108,7 @@ const formatMoney = (value) => {
 }
 
 .delivery-timeslot__fee {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 11px;
   font-weight: 700;
 }

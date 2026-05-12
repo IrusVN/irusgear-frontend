@@ -836,8 +836,8 @@ const submitAddress = async () => {
 
 .profile-address__select-option:hover,
 .profile-address__select-option.is-selected {
-  color: #d70018;
-  background: #fff1f2;
+  color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
 }
 
 .profile-address__select-option.is-muted {
@@ -881,8 +881,8 @@ const submitAddress = async () => {
 
 .profile-address__type-btn:hover,
 .profile-address__type-btn.is-active {
-  color: #d70018;
-  background: #fff5f6;
+  color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
   border-color: #f2a8b1;
 }
 
@@ -930,7 +930,7 @@ const submitAddress = async () => {
 }
 
 .profile-address__switch-input:checked + .profile-address__switch {
-  background: #d70018;
+  background: var(--irus-color-accent);
 }
 
 .profile-address__switch-input:checked + .profile-address__switch::after {
@@ -952,7 +952,7 @@ const submitAddress = async () => {
   gap: 8px;
   color: #fff;
   cursor: pointer;
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: 0;
   border-radius: 5px;
   font-size: 14px;

@@ -1,3 +1,36 @@
+/* ============================
+   IrusGear Brand Design Tokens
+   ============================ */
+:root {
+  --irus-color-bg: #ffffff;
+  --irus-color-surface: #ffffff;
+  --irus-color-surface-muted: #f7f7f7;
+  --irus-color-surface-strong: #111111;
+  --irus-color-text: #111111;
+  --irus-color-text-muted: #666666;
+  --irus-color-text-subtle: #8a8a8a;
+  --irus-color-border: #e5e5e5;
+  --irus-color-border-strong: #111111;
+  --irus-color-accent: #111111;
+  --irus-color-accent-hover: #2a2a2a;
+  --irus-color-accent-soft: #f1f1f1;
+  --irus-color-focus-ring: rgba(17, 17, 17, 0.16);
+  --irus-color-danger: #b42318;
+  --irus-color-danger-soft: #fff1f0;
+}
+
+/* Utility classes */
+.irus-text-accent { color: var(--irus-color-accent); }
+.irus-text-danger { color: var(--irus-color-danger); }
+.irus-bg-accent { background-color: var(--irus-color-accent); color: #fff; }
+.irus-bg-accent-soft { background-color: var(--irus-color-accent-soft); }
+.irus-border-accent { border-color: var(--irus-color-accent) !important; }
+.irus-border-strong { border-color: var(--irus-color-border-strong) !important; }
+.irus-focus-ring:focus { box-shadow: 0 0 0 3px var(--irus-color-focus-ring); }
+
+/* ============================
+   Existing Component Styles
+   ============================ */
 .irus-card {
   background: #fff;
   border-radius: 24px;

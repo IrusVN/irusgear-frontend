@@ -56,7 +56,7 @@ const checkoutStore = useCheckoutStore();
 }
 
 .order-notes__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .order-notes__optional {
@@ -81,8 +81,8 @@ const checkoutStore = useCheckoutStore();
 }
 
 .order-notes__textarea:focus {
-  border-color: #d70018;
-  box-shadow: 0 0 0 3px rgba(215, 0, 24, 0.1);
+  border-color: var(--irus-color-accent);
+  box-shadow: 0 0 0 3px var(--irus-color-accent-soft);
   outline: none;
 }
 

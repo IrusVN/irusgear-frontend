@@ -451,9 +451,9 @@ watch(
 }
 
 .section-main-tab.active {
-  border-bottom: 2px solid #d70018;
-  color: #d70018;
-  background: linear-gradient(to top, rgba(215, 0, 24, 0.05), rgba(255, 255, 255, 0));
+  border-bottom: 2px solid var(--irus-color-accent);
+  color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
 }
 
 .section-tab-divider {

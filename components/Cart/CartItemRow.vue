@@ -296,10 +296,10 @@ const increment = () => {
 
 .cart-item__remove {
   align-items: center;
-  background: #fff1f2;
+  background: var(--irus-color-accent-soft);
   border: 0;
   border-radius: 14px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: inline-flex;
   flex-shrink: 0;
   height: 42px;
@@ -320,7 +320,7 @@ const increment = () => {
 
 .cart-item__price strong,
 .cart-item__line-total strong {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 18px;
   font-weight: 800;
 }

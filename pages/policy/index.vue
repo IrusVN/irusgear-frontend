@@ -361,15 +361,15 @@ const sidebarItems = computed(() => [
 }
 
 .policy-sidebar__item--active {
-  background: #fef2f2;
-  color: #d70018;
+  background: var(--irus-color-accent-soft);
+  color: var(--irus-color-accent);
   font-weight: 600;
-  border-left-color: #d70018;
+  border-left-color: var(--irus-color-accent);
 }
 
 .policy-sidebar__item--active:hover {
-  background: #fef2f2;
-  color: #d70018;
+  background: var(--irus-color-accent-soft);
+  color: var(--irus-color-accent);
 }
 
 /* ── Content ──────────────────────────────── */
@@ -530,7 +530,7 @@ const sidebarItems = computed(() => [
 }
 
 .policy-highlight strong {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 /* ── Example Box ─────────────────────────── */
@@ -592,13 +592,13 @@ const sidebarItems = computed(() => [
   }
 
   .policy-sidebar__item--active {
-    background: #d70018;
+    background: var(--irus-color-surface-strong);
     color: #fff;
-    border-color: #d70018;
+    border-color: var(--irus-color-surface-strong);
   }
 
   .policy-sidebar__item--active:hover {
-    background: #b80015;
+    background: var(--irus-color-surface-dark);
     color: #fff;
   }
 

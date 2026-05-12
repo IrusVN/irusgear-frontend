@@ -2,7 +2,7 @@
   <div ref="rootEl" class="box-detail-product__box-center column">
     <div class="box-product-price">
       <div class="box-product-price-wrapper">
-        <div class="smember-price-label">
+        <div class="price-label-container">
           <div class="d-flex align-items-center">
             <div class="sale-price">{{ productStore.productDetail?.pricing?.salePrice?.formatted || '' }}</div>
             <del
@@ -37,15 +37,14 @@
                   background-position: top;">
           <div class="promotion-row member-row">
             <p class="promotion-row__icon">
-              <img src="https://cdn2.cellphones.com.vn/x/media/wysiwyg/Web/Logo/promotion-icon02.png" alt=""
-                loading="lazy" />
+              <i class="bi bi-tag-fill" style="font-size:1.5rem;color:var(--irus-color-accent)"></i>
             </p>
             <div class="promotion-row__ct is-member">
               <div class="txt">
                 {{ $t('product.memberSaving') }}
                 <strong class="bold">{{ productStore.productDetail?.pricing?.memberSaving?.formatted || '' }}</strong>
                 {{ $t('product.forSmember') }}
-                <a class="dang_nhap_xem_gia link"> {{ $t('product.checkNow') }} </a>
+                <a class="dang_nhap_xem_gia link text-decoration-none"> {{ $t('product.checkNow') }} </a>
               </div>
             </div>
           </div>
@@ -73,7 +72,7 @@
             :data-product-id="color.productId" class="item-variant"
             :class="{ active: color.active, disable: color.disabled }">
             <img v-if="color.flashSale?.enabled"
-              :src="color.flashSale?.badgeImage || 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:30/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/flash_sale/pdp-flashsale-badge.png'"
+              :src="color.flashSale?.badgeImage || ''"
               height="30" alt="Flash Sale" loading="lazy" class="sticker-flash-sale" />
             <a :href="buildColorHref(color)" @click.prevent="handleChangeColor(color)" :title="color.name"
               class="button__change-color d-flex align-items-center" :class="{ disabled: color.disabled }"><img
@@ -139,7 +138,7 @@
                 <span>{{ $t('product.tradeInFrom') }} <strong> {{ productStore.productDetail?.pricing?.tradeInPrice?.formatted || '' }}
                   </strong></span>
               </div>
-              <div class="smember-discount">
+              <div class="member-discount">
                 {{ $t('product.tradeInIncluded') }}&nbsp;<b>{{ productStore.productDetail?.pricing?.tradeInSupport?.formatted || ''
                 }}</b>
               </div>
@@ -148,11 +147,11 @@
           <button class="btn-submit-search desktop">
             <span>{{ $t('product.checkNow') }}</span>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12.5H19" stroke="#D70018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12.5H19" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               </path>
-              <path d="M13 18.5L19 12.5" stroke="#D70018" stroke-width="1.5" stroke-linecap="round"
+              <path d="M13 18.5L19 12.5" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round"
                 stroke-linejoin="round"></path>
-              <path d="M13 6.5L19 12.5" stroke="#D70018" stroke-width="1.5" stroke-linecap="round"
+              <path d="M13 6.5L19 12.5" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round"
                 stroke-linejoin="round"></path>
             </svg>
           </button>
@@ -183,7 +182,7 @@
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
               {{ $t('product.tradeInPrivilege') }}
-              <a target="_blank" href="https://cellphones.com.vn/chuong-trinh-thu-cu-len-doi-iphone">&nbsp; {{ $t('product.details') }}</a>
+              <a target="_blank" href="">&nbsp; {{ $t('product.details') }}</a>
             </p>
           </div>
           <div class="promotion-pack_item is-flex is-align-content-center">
@@ -193,7 +192,7 @@
             <p class="box-product-promotion-detail has-text-black button__promotion">
               {{ $t('product.simOffer') }}
               {{ $t('product.simOfferDetail') }}
-              <a target="_blank" href="https://cellphones.com.vn/sim-5g-vnsky-5g89c-3gb-ngay-free-1-thang.html">&nbsp;
+              <a target="_blank" href="">&nbsp;
                 {{ $t('product.details') }}</a>
             </p>
           </div>
@@ -203,7 +202,7 @@
             </div>
             <p class="box-product-promotion-detail has-text-black button__promotion">
               {{ $t('product.accessoryDiscount') }}
-              <a target="_blank" href="https://cellphones.com.vn/qua-tang-tri-an-khach-hang">&nbsp; {{ $t('product.details') }}</a>
+              <a target="_blank" href="">&nbsp; {{ $t('product.details') }}</a>
             </p>
           </div>
         </div>
@@ -211,12 +210,12 @@
         <div></div>
       </div>
     </div>
-    <div class="block-special-promotion-banner my-3">
+    <div v-if="false" class="block-special-promotion-banner my-3">
       <div class="swiper-container banner-slide">
         <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px)">
           <div class="swiper-slide" style="width: 592px; margin-right: 10px">
             <a class="button__special-promotion-banner"><img
-                src="https://media-asset.cellphones.com.vn/banner_items/01KMZ33CTZCKSAT7T1BNSNV1JM.webp" height="120"
+                src="" height="120"
                 alt="Banner Trả góp" loading="lazy" /></a>
           </div>
         </div>
@@ -301,7 +300,7 @@
         </div>
       </div>
     </div>
-    <div class="box-more-promotion my-3">
+    <div v-if="false" class="box-more-promotion my-3">
       <div class="box-more-promotion-title has-text-black has-text-weight-semibold">
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -322,7 +321,7 @@
           <div class="box-more-promotion-slide swiper-slide" style="width: 232px; margin-right: 8px">
             <div class="box-more-promotion-item">
               <div class="box-more-promotion-item__head">
-                <img src="https://cdn2.cellphones.com.vn/x/media/wysiwyg/image_1815.png" alt="" loading="lazy"
+                <img src="" alt="" loading="lazy"
                   class="icon" />
               </div>
               <div class="box-more-promotion-item__content">
@@ -333,7 +332,7 @@
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
                     {{ $t('product.ongoing') }}
                   </p>
-                  <a href="https://cellphones.com.vn/uu-dai-doi-tac/techcombank" target="_blank"
+                  <a href="" target="_blank"
                     rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
@@ -353,7 +352,7 @@
           <div class="box-more-promotion-slide swiper-slide" style="width: 232px; margin-right: 8px">
             <div class="box-more-promotion-item">
               <div class="box-more-promotion-item__head">
-                <img src="https://cdn2.cellphones.com.vn/x/media/wysiwyg/image_1814.png" alt="" loading="lazy"
+                <img src="" alt="" loading="lazy"
                   class="icon" />
               </div>
               <div class="box-more-promotion-item__content">
@@ -364,7 +363,7 @@
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
                     {{ $t('product.ongoing') }}
                   </p>
-                  <a href="https://cellphones.com.vn/uu-dai-doi-tac/ocb" target="_blank" rel="noopener noreferrer"
+                  <a href="" target="_blank" rel="noopener noreferrer"
                     class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
@@ -385,7 +384,7 @@
             <div class="box-more-promotion-item">
               <div class="box-more-promotion-item__head">
                 <img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:100/plain/https://cellphones.com.vn/media/wysiwyg/Icon/hsbc_icon.png"
+                  src=""
                   alt="" loading="lazy" class="icon" />
               </div>
               <div class="box-more-promotion-item__content">
@@ -396,7 +395,7 @@
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
                     {{ $t('product.ongoing') }}
                   </p>
-                  <a href="https://cellphones.com.vn/uu-dai-doi-tac/mo-the-tin-dung-hsbc" target="_blank"
+                  <a href="" target="_blank"
                     rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
@@ -417,7 +416,7 @@
             <div class="box-more-promotion-item">
               <div class="box-more-promotion-item__head">
                 <img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:100/plain/https://cellphones.com.vn/media/wysiwyg/DUMT_ZV0.png"
+                  src=""
                   alt="" loading="lazy" class="icon" />
               </div>
               <div class="box-more-promotion-item__content">
@@ -428,7 +427,7 @@
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
                     {{ $t('product.ongoing') }}
                   </p>
-                  <a href="https://cellphones.com.vn/uu-dai-doi-tac/kredivo" target="_blank" rel="noopener noreferrer"
+                  <a href="" target="_blank" rel="noopener noreferrer"
                     class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
@@ -449,7 +448,7 @@
             <div class="box-more-promotion-item">
               <div class="box-more-promotion-item__head">
                 <img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:100/plain/https://cellphones.com.vn/media/wysiwyg/Icon/vibb_bank.png"
+                  src=""
                   alt="" loading="lazy" class="icon" />
               </div>
               <div class="box-more-promotion-item__content">
@@ -460,7 +459,7 @@
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
                     {{ $t('product.ongoing') }}
                   </p>
-                  <a href="https://cellphones.com.vn/uu-dai-mo-the-vib-cash-back" target="_blank"
+                  <a href="" target="_blank"
                     rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
@@ -481,7 +480,7 @@
             <div class="box-more-promotion-item">
               <div class="box-more-promotion-item__head">
                 <img
-                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:100/plain/https://cellphones.com.vn/media/wysiwyg/Icon/image_1747.png"
+                  src=""
                   alt="" loading="lazy" class="icon" />
               </div>
               <div class="box-more-promotion-item__content">
@@ -492,7 +491,7 @@
                   <p class="box-more-promotion-item__date box-more-promotion-item__date--ongoing">
                     {{ $t('product.ongoing') }}
                   </p>
-                  <a href="https://cellphones.com.vn/uu-dai-doi-tac/tpbank-evo" target="_blank"
+                  <a href="" target="_blank"
                     rel="noopener noreferrer" class="box-more-promotion-item__link"><span>{{ $t('product.details') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <g clip-path="url(#clip0_13879_97176)">
@@ -533,7 +532,7 @@
         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
       </div>
     </div>
-    <div class="box-on-stock-stores">
+    <div v-if="false" class="box-on-stock-stores">
       <div class="box-on-stock-option-location">
         <div class="box-on-stock-count">
           <strong>{{ $t('product.viewBranches') }}</strong>
@@ -623,12 +622,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871083355</span></a>
                   <a title="55B Trần Quang Khải, P. Tân Định, Q. 1, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -655,12 +654,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000132</span></a>
                   <a title="134 Nguyễn Thái Học, P. Phạm Ngũ Lão, Q.1, TP HCM" target="_blank" rel="noopener nofollow"
@@ -687,12 +686,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000218</span></a>
                   <a title="218-220 Trần Quang Khải, P. Tân Định, Q.1, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -719,12 +718,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871066159</span></a>
                   <a title="157-159 Nguyễn Thị Minh Khai, P. Phạm Ngũ Lão, Q. 1, TP. HCM" target="_blank"
@@ -751,12 +750,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000139</span></a>
                   <a title="139 Trần Não, P. Bình An, Q.2, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -783,12 +782,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871010190</span></a>
                   <a title="190 Nguyễn Thị Định, khu phố 2, P. An Phú, Q.2, TP. HCM" target="_blank"
@@ -815,12 +814,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871067171</span></a>
                   <a title="177 Khánh Hội, P. 3, Q. 4, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -847,12 +846,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871011785</span></a>
                   <a title="785 Trần Hưng Đạo, P.1, Q.5, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -879,12 +878,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871088075</span></a>
                   <a title="1075B Hậu Giang, P. 11, Q. 6, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -911,12 +910,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000460</span></a>
                   <a title="458 - 460 Hậu Giang, P.12, Q.6, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -943,12 +942,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871088248</span></a>
                   <a title="248 Nguyễn Thị Thập, P. Tân Quy, Q.7, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -975,12 +974,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000571</span></a>
                   <a title="571 Huỳnh Tấn Phát, P. Tân Thuận Đông, Q.7, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1007,12 +1006,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000435</span></a>
                   <a title="435 Nguyễn Thị Thập, P. Tân Phong, Q.7, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1039,12 +1038,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871001579</span></a>
                   <a title="579 Dương Bá Trạc, P.1, Q.8, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1071,12 +1070,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871061125</span></a>
                   <a title="125 Lê Văn Việt, P. Hiệp Phú, Q. 9, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1103,12 +1102,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000241</span></a>
                   <a title="241 Lê Văn Việt, P. Hiệp Phú, Q.9, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1135,12 +1134,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871088241</span></a>
                   <a title="241-243, Đỗ Xuân Hợp, P. Phước Long B, Q.9, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1167,12 +1166,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000347</span></a>
                   <a title="347 Nguyễn Tri Phương, Phường 5, Quận 10, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1199,12 +1198,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871066288</span></a>
                   <a title="288 Đường 3/2, P. 12, Q. 10, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1231,12 +1230,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000457</span></a>
                   <a title="457B Lê Đại Hành, P.11, Q.11, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1263,12 +1262,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871012017</span></a>
                   <a title="17 Phan Văn Hớn, P. Tân Thới Nhất, Q.12, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1295,12 +1294,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000093</span></a>
                   <a title="93/8C Nguyễn Ảnh Thủ, P. Trung Mỹ Tây, Q.12, TP. HCM" target="_blank"
@@ -1327,12 +1326,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871088001</span></a>
                   <a title="1A Nguyễn Ảnh Thủ, khu phố 1, P. Hiệp Thành, Q.12, TP. HCM" target="_blank"
@@ -1359,12 +1358,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000632</span></a>
                   <a title="632A Kha Vạn Cân, P. Linh Đông, TP. Thủ Đức, TP. HCM" target="_blank"
@@ -1391,12 +1390,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000943</span></a>
                   <a title="943 Kha Vạn Cân, P. Linh Trung, Thủ Đức, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1423,12 +1422,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871097939</span></a>
                   <a title="18 Võ Văn Ngân, P. Trường Thọ, Q. Thủ Đức, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1455,12 +1454,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871088439</span></a>
                   <a title="4/39 Quang Trung, Thới Tam Thôn, H. Hóc Môn, TP. HCM" target="_blank"
@@ -1487,12 +1486,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000312</span></a>
                   <a title="C3/1A Phạm Hùng, X. Bình Hưng, H. Bình Chánh, TP. HCM" target="_blank"
@@ -1519,12 +1518,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871061716</span></a>
                   <a title="1716/1 Huỳnh Tấn Phát, thị trấn Nhà Bè, Huyện Nhà Bè, TP. HCM" target="_blank"
@@ -1551,12 +1550,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000193</span></a>
                   <a title="193 Tỉnh Lộ 8, Khu phố 3, Thị trấn Củ Chi, H. Củ Chi, TP. HCM" target="_blank"
@@ -1583,12 +1582,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871200058</span></a>
                   <a title="58 Tỉnh Lộ 8, Ấp 1, Xã Tân Thạnh Tây, Huyện Củ Chi, TP. HCM" target="_blank"
@@ -1615,12 +1614,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871015359</span></a>
                   <a title="359 Cộng Hòa, P.13, Q. Tân Bình, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1647,12 +1646,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000190</span></a>
                   <a title="190B Hoàng Văn Thụ, P4, Q. Tân Bình, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1679,12 +1678,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871088672</span></a>
                   <a title="672-674 Âu Cơ, P. 14, Q. Tân Bình, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1711,12 +1710,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000956</span></a>
                   <a title="956 Âu Cơ, P.14, Q. Tân Bình, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1743,12 +1742,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871077377</span></a>
                   <a title="377-379 Điện Biên Phủ, P. 25, Q. Bình Thạnh, TP. HCM" target="_blank"
@@ -1775,12 +1774,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871065536</span></a>
                   <a title="536 Xô Viết Nghệ Tĩnh, P. 25, Q. Bình Thạnh, TP. HCM" target="_blank"
@@ -1807,12 +1806,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871088059</span></a>
                   <a title="59 Quang Trung, P. 10, Q. Gò Vấp, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1839,12 +1838,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000272</span></a>
                   <a title="272 Nguyễn Oanh, P.17, Q. Gò Vấp, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1871,12 +1870,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000567</span></a>
                   <a title="567 Lê Quang Định, P.1, Q. Gò Vấp, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1903,12 +1902,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000525</span></a>
                   <a title="525 Quang Trung, P.10, Q. Gò Vấp, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -1935,12 +1934,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871068880</span></a>
                   <a title="888 Tỉnh Lộ 10, P. Bình Trị Đông A, Q. Bình Tân, TP. HCM" target="_blank"
@@ -1967,12 +1966,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000229</span></a>
                   <a title="127 Nguyễn Thị Tú, P. Bình Hưng Hoà B, Q. Bình Tân, TP. HCM" target="_blank"
@@ -2000,12 +1999,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871087386</span></a>
                   <a title="386 Hương Lộ 2, P. Bình Trị Đông, Q. Bình Tân (Ngã Tư Bốn Xã), TP. HCM" target="_blank"
@@ -2032,12 +2031,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871016161</span></a>
                   <a title="161 Nguyễn Sơn, P. Phú Thạnh, Q. Tân Phú, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -2064,12 +2063,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000449</span></a>
                   <a title="449 - 451 Tân Kỳ Tân Quý, P. Tân Quý, Q. Tân Phú, TP. HCM" target="_blank"
@@ -2096,12 +2095,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871000472</span></a>
                   <a title="472 - 474 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP. HCM" target="_blank"
@@ -2128,12 +2127,12 @@
                       fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M3.33333 2.66675H6L7.33333 6.00008L5.66667 7.00008C6.38064 8.44777 7.55231 9.61944 9 10.3334L10 8.66675L13.3333 10.0001V12.6667C13.3333 13.0204 13.1929 13.3595 12.9428 13.6096C12.6928 13.8596 12.3536 14.0001 12 14.0001C9.39951 13.842 6.94677 12.7377 5.10455 10.8955C3.26234 9.05331 2.15803 6.60057 2 4.00008C2 3.64646 2.14048 3.30732 2.39052 3.05727C2.64057 2.80722 2.97971 2.66675 3.33333 2.66675Z"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path
                         d="M10 4.66675C10.3536 4.66675 10.6928 4.80722 10.9428 5.05727C11.1929 5.30732 11.3333 5.64646 11.3333 6.00008"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M10 2C11.0609 2 12.0783 2.42143 12.8284 3.17157C13.5786 3.92172 14 4.93913 14 6"
-                        stroke="#D70018" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        stroke="var(--irus-color-accent)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>02871097020</span></a>
                   <a title="114 Phan Đăng Lưu, P. 3, Q. Phú Nhuận, TP. HCM" target="_blank" rel="noopener nofollow"
@@ -2226,18 +2225,18 @@
               @click="addCurrentProductToCart()"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
-                <circle cx="6" cy="19" r="2" stroke="#D70018" stroke-width="2" stroke-linecap="round"
+                <circle cx="6" cy="19" r="2" stroke="var(--irus-color-accent)" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round"></circle>
-                <circle cx="17" cy="19" r="2" stroke="#D70018" stroke-width="2" stroke-linecap="round"
+                <circle cx="17" cy="19" r="2" stroke="var(--irus-color-accent)" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round"></circle>
-                <path d="M17 17H6V3H4" stroke="#D70018" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 17H6V3H4" stroke="var(--irus-color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 </path>
                 <path
                   d="M6.07126 4.00254C5.52038 3.96319 5.0419 4.37786 5.00254 4.92874C4.96319 5.47962 5.37786 5.9581 5.92874 5.99746L6.07126 4.00254ZM11.9337 6.42646C12.4846 6.46581 12.9631 6.05114 13.0025 5.50026C13.0418 4.94938 12.6271 4.4709 12.0763 4.43154L11.9337 6.42646ZM20.1329 12.1438C20.2112 11.5971 19.8315 11.0904 19.2848 11.0121C18.7381 10.9338 18.2314 11.3135 18.1531 11.8602L20.1329 12.1438ZM19 13V14C19.4975 14 19.9193 13.6343 19.9899 13.1418L19 13ZM6 12C5.44772 12 5 12.4477 5 13C5 13.5523 5.44772 14 6 14V12ZM5.92874 5.99746L11.9337 6.42646L12.0763 4.43154L6.07126 4.00254L5.92874 5.99746ZM18.1531 11.8602L18.0101 12.8582L19.9899 13.1418L20.1329 12.1438L18.1531 11.8602ZM19 12H6V14H19V12Z"
-                  fill="#D70018"></path>
+                  fill="var(--irus-color-accent)"></path>
                 <path
                   d="M15 5C14.4477 5 14 5.44772 14 6C14 6.55228 14.4477 7 15 7V5ZM21 7C21.5523 7 22 6.55228 22 6C22 5.44772 21.5523 5 21 5V7ZM19 3C19 2.44772 18.5523 2 18 2C17.4477 2 17 2.44772 17 3H19ZM17 9C17 9.55228 17.4477 10 18 10C18.5523 10 19 9.55228 19 9H17ZM15 7H21V5H15V7ZM17 3V9H19V3H17Z"
-                  fill="#D70018"></path>
+                  fill="var(--irus-color-accent)"></path>
               </svg>
               <strong class="">{{ $t('product.addToCart') }}</strong>
             </button>
@@ -2572,7 +2571,7 @@ onBeforeUnmount(() => {
 }
 
 .box-delivery-address .btn-change-address .label-new {
-  background: #d70018;
+  background: var(--irus-color-accent);
   border-radius: 999px;
   color: #fff;
   font-size: 10px;
@@ -2619,8 +2618,8 @@ onBeforeUnmount(() => {
 }
 
 .box-order-button-container .order-button.button--large {
-  background: linear-gradient(180deg, #eb3349 0%, #d70018 100%);
-  border-color: #d70018;
+  background: var(--irus-color-surface-strong);
+  border-color: var(--irus-color-accent);
   color: #fff;
   flex: 1;
   flex-direction: column;
@@ -2646,8 +2645,8 @@ onBeforeUnmount(() => {
 
 .box-order-button-container .add-to-cart-button {
   background: #fff;
-  border-color: #ef4444;
-  color: #d70018;
+  border-color: var(--irus-color-accent);
+  color: var(--irus-color-accent);
   flex: 0 0 22%;
   gap: 6px;
   white-space: nowrap;
@@ -2660,7 +2659,7 @@ onBeforeUnmount(() => {
 }
 
 .box-order-button-container .add-to-cart-button strong {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 14px;
   font-weight: 700;
 }
@@ -2751,12 +2750,12 @@ onBeforeUnmount(() => {
   width: 1px;
 }
 
-.box-product-price .smember-price-label,
+.box-product-price .price-label-container,
 .box-product-price .trade-price-label {
   flex: 1;
 }
 
-.box-product-price .smember-price-label .d-flex,
+.box-product-price .price-label-container .d-flex,
 .box-product-price .trade-price-label .d-flex {
   flex-direction: column;
   flex-wrap: wrap;
@@ -2764,7 +2763,7 @@ onBeforeUnmount(() => {
   justify-content: center;
 }
 
-.box-product-price .smember-price-label .d-flex .sale-price,
+.box-product-price .price-label-container .d-flex .sale-price,
 .box-product-price .trade-price-label .d-flex .sale-price {
   color: #1d1d20;
   font-size: 20px;
@@ -2772,7 +2771,7 @@ onBeforeUnmount(() => {
   line-height: 100%;
 }
 
-.box-product-price .smember-price-label .d-flex .base-price,
+.box-product-price .price-label-container .d-flex .base-price,
 .box-product-price .trade-price-label .d-flex .base-price {
   color: #a1a1aa;
   font-size: 14px;
@@ -2780,7 +2779,7 @@ onBeforeUnmount(() => {
   line-height: 150%;
 }
 
-.box-product-price .smember-price-label .price-label,
+.box-product-price .price-label-container .price-label,
 .box-product-price .trade-price-label .price-label {
   align-items: center;
   color: #1d1d20;
@@ -2830,7 +2829,7 @@ onBeforeUnmount(() => {
 
 .box-product-price .trade-price-label .trade-price-info>span>a {
   align-items: center;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: inline-flex;
   font-size: 12px;
   font-weight: 500;
@@ -2882,13 +2881,13 @@ onBeforeUnmount(() => {
 }
 
 .box-linked .list-linked .item-linked.active {
-  outline: 2px solid #d70018;
+  outline: 2px solid var(--irus-color-accent);
   outline-offset: -2px;
 }
 
 .box-linked .list-linked .item-linked.active:after {
   align-content: center;
-  background-color: #d70018;
+  background-color: var(--irus-color-accent);
   border-radius: 0 4px 0 8px;
   color: #fff;
   content: "✓";
@@ -2976,13 +2975,13 @@ onBeforeUnmount(() => {
 }
 
 .box-product-variants .list-variants .item-variant.active {
-  outline: 2px solid #d70018;
+  outline: 2px solid var(--irus-color-accent);
   outline-offset: -2px;
 }
 
 .box-product-variants .list-variants .item-variant.active:after {
   align-content: center;
-  background-color: #d70018;
+  background-color: var(--irus-color-accent);
   border-radius: 0 4px 0 8px;
   color: #fff;
   content: "✓";
@@ -3058,7 +3057,7 @@ onBeforeUnmount(() => {
   width: 1px;
 }
 
-.box-thu-cu-len-doi-v2 .box-price .smember-discount {
+.box-thu-cu-len-doi-v2 .box-price .member-discount {
   font-size: 14px;
   font-weight: 400;
 }
@@ -3068,7 +3067,7 @@ onBeforeUnmount(() => {
   background-color: #fbe6e8;
   border: none;
   border-radius: 8px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: flex;
   flex-wrap: wrap;
   font-size: 14px;
@@ -3245,7 +3244,7 @@ onBeforeUnmount(() => {
 }
 
 .block-special-promotion-banner #modalVoucher footer.modal-card-foot .button {
-  background-color: #d70018;
+  background-color: var(--irus-color-accent);
   color: #fff;
   font-weight: 600;
   transition: 0.3s;
@@ -3325,7 +3324,7 @@ onBeforeUnmount(() => {
 }
 
 #modalLuckyWheel .modal-card-body button.button.submit-phone:not([disabled]) {
-  background: #d70018;
+  background: var(--irus-color-accent);
   color: #fff;
 }
 
@@ -3357,7 +3356,7 @@ onBeforeUnmount(() => {
 }
 
 .box-more-promotion .box-more-promotion-swiper.swiper-container {
-  --swiper-theme-color: #d70018;
+  --swiper-theme-color: var(--irus-color-accent);
   cursor: grabbing;
   padding-bottom: 0;
   position: static;
@@ -3378,7 +3377,7 @@ onBeforeUnmount(() => {
 }
 
 .box-more-promotion .box-more-promotion-swiper :deep(.swiper-pagination .swiper-pagination-bullet-active) {
-  background: #d70018;
+  background: var(--irus-color-accent);
   border-radius: 50px;
   width: 16px;
 }
@@ -3634,8 +3633,8 @@ onBeforeUnmount(() => {
 .box-on-stock-stores .box-on-stock-address .box-on-stock-item .phone {
   background-color: #fbe6e8;
   border: 1px solid #fbe6e8;
-  color: #d70018;
-  fill: #d70018;
+  color: var(--irus-color-accent);
+  fill: var(--irus-color-accent);
   margin-right: 8px;
 }
 
@@ -3713,7 +3712,7 @@ onBeforeUnmount(() => {
 }
 
 .swiper-container.swiper-pdp .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background: #d70018;
+  background: var(--irus-color-accent);
   width: 16px;
 }
 

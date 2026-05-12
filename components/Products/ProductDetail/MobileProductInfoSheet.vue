@@ -191,7 +191,7 @@ defineExpose({
 }
 
 .sale-price {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 16px;
   font-weight: 700;
 }
@@ -234,9 +234,9 @@ defineExpose({
 }
 
 .option-btn.active {
-  border-color: #d70018;
-  color: #d70018;
-  background: #fff5f5;
+  border-color: var(--irus-color-accent);
+  color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
 }
 
 .option-btn:hover:not(.active) {
@@ -276,11 +276,11 @@ defineExpose({
 }
 
 .color-btn.active {
-  border-color: #d70018;
+  border-color: var(--irus-color-accent);
 }
 
 .color-btn.active .color-name {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .color-btn.disabled {
@@ -317,12 +317,12 @@ defineExpose({
 
 .action-btn--outline {
   background: #fff;
-  border: 1px solid #d70018;
-  color: #d70018;
+  border: 1px solid var(--irus-color-accent);
+  color: var(--irus-color-accent);
 }
 
 .action-btn--primary {
-  background: #d70018;
+  background: var(--irus-color-accent);
   color: #fff;
 }
 </style>

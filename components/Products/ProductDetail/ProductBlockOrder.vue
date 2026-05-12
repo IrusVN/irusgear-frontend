@@ -53,7 +53,7 @@
                 cy="15.8334"
                 rx="1.66667"
                 ry="1.66667"
-                stroke="#D70018"
+                stroke="var(--irus-color-accent)"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -62,25 +62,25 @@
                 cx="14.1667"
                 cy="15.8334"
                 r="1.66667"
-                stroke="#D70018"
+                stroke="var(--irus-color-accent)"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
               <path
                 d="M14.1666 14.1667H4.99992V2.5H3.33325"
-                stroke="#D70018"
+                stroke="var(--irus-color-accent)"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
               <path
                 d="M5.05344 3.41865C4.64028 3.38914 4.28142 3.70014 4.25191 4.1133C4.22239 4.52646 4.5334 4.88533 4.94656 4.91484L5.05344 3.41865ZM9.95072 5.27234C10.3639 5.30186 10.7227 4.99085 10.7523 4.57769C10.7818 4.16453 10.4708 3.80567 10.0576 3.77615L9.95072 5.27234ZM16.6949 10.1081C16.7537 9.6981 16.4689 9.31808 16.0589 9.25933C15.6489 9.20058 15.2688 9.48534 15.2101 9.89537L16.6949 10.1081ZM15.8333 10.8334V11.5834C16.2065 11.5834 16.5228 11.3091 16.5758 10.9398L15.8333 10.8334ZM5 10.0834C4.58579 10.0834 4.25 10.4192 4.25 10.8334C4.25 11.2476 4.58579 11.5834 5 11.5834V10.0834ZM4.94656 4.91484L9.95072 5.27234L10.0576 3.77615L5.05344 3.41865L4.94656 4.91484ZM15.2101 9.89537L15.0909 10.727L16.5758 10.9398L16.6949 10.1081L15.2101 9.89537ZM15.8333 10.0834H5V11.5834H15.8333V10.0834Z"
-                fill="#D70018"
+                fill="var(--irus-color-accent)"
               />
               <path
                 d="M12.5 4.25C12.0858 4.25 11.75 4.58579 11.75 5C11.75 5.41421 12.0858 5.75 12.5 5.75V4.25ZM17.5 5.75C17.9142 5.75 18.25 5.41421 18.25 5C18.25 4.58579 17.9142 4.25 17.5 4.25V5.75ZM15.75 2.5C15.75 2.08579 15.4142 1.75 15 1.75C14.5858 1.75 14.25 2.08579 14.25 2.5H15.75ZM14.25 7.5C14.25 7.91421 14.5858 8.25 15 8.25C15.4142 8.25 15.75 7.91421 15.75 7.5H14.25ZM12.5 5.75H17.5V4.25H12.5V5.75ZM14.25 2.5V7.5H15.75V2.5H14.25Z"
-                fill="#D70018"
+                fill="var(--irus-color-accent)"
               />
             </svg>
           </button>
@@ -221,7 +221,7 @@ const showBasePrice = computed(() => {
 }
 
 .sale-price {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
@@ -274,7 +274,7 @@ const showBasePrice = computed(() => {
 }
 
 .button-desktop-order {
-  background-color: #d70018;
+  background-color: var(--irus-color-accent);
   color: #fff;
   min-width: 100px;
 }
@@ -282,7 +282,7 @@ const showBasePrice = computed(() => {
 .button-add-to-cart {
   align-items: center;
   background-color: #fff;
-  border: 1px solid #d70018;
+  border: 1px solid var(--irus-color-accent);
   border-radius: 10px;
   display: inline-flex;
   height: 40px;

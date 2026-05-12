@@ -134,14 +134,14 @@ const handleDelete = () => {
 }
 
 .address-card--selected {
-  border-color: #d70018;
+  border-color: var(--irus-color-accent);
   border-width: 2px;
-  background: #fff7f7;
+  background: var(--irus-color-accent-soft);
 }
 
 .address-card__check {
   align-items: center;
-  background: #d70018;
+  background: var(--irus-color-accent);
   border-radius: 999px;
   color: #fff;
   display: inline-flex;
@@ -163,7 +163,7 @@ const handleDelete = () => {
 }
 
 .address-card__badge {
-  background: #d70018;
+  background: var(--irus-color-accent);
   border-radius: 999px;
   color: #fff;
   font-size: 10px;
@@ -252,12 +252,12 @@ const handleDelete = () => {
 }
 
 .address-card__action--primary {
-  background: #f7f7f8;
-  color: #d70018;
+  background: var(--irus-color-accent-soft);
+  color: var(--irus-color-accent);
 }
 
 .address-card__action--primary:hover {
-  background: #fff7f7;
+  background: var(--irus-color-accent-soft);
 }
 
 .address-card__action--danger {

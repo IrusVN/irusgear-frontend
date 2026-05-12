@@ -83,7 +83,7 @@
             <div class="profile-layout__stat-divider"></div>
             <div class="profile-layout__stat-item">
               <div class="profile-layout__stat-icon">
-                <img src="https://cdn-static.smember.com.vn/_next/static/media/cart-icon.3e4e1d83.svg" alt="Đơn hàng" loading="lazy" />
+                <i class="bi bi-cart3"></i>
               </div>
               <div class="profile-layout__stat-content">
                 <div class="profile-layout__stat-value">{{ totalOrders }}</div>
@@ -93,7 +93,7 @@
             <div class="profile-layout__stat-divider"></div>
             <div class="profile-layout__stat-item">
               <div class="profile-layout__stat-icon">
-                <img src="https://cdn-static.smember.com.vn/_next/static/media/money-icon.3e6b67af.svg" alt="Tổng tiền" loading="lazy" />
+                <i class="bi bi-wallet2"></i>
               </div>
               <div class="profile-layout__stat-content">
                 <div class="profile-layout__stat-value">{{ currentUser?.totalSpentFormatted || '0đ' }}</div>
@@ -122,37 +122,37 @@
       <div class="profile-layout__quick-actions">
         <NuxtLink :to="localePath('/promotion')" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/rank-icon.d0f44c06.svg" :alt="$t('profile.layout.quickActions.memberRank')" loading="lazy" />
+            <i class="bi bi-star"></i>
           </div>
           <span>{{ $t('profile.layout.quickActions.memberRank') }}</span>
         </NuxtLink>
         <a href="#" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/promotion-icon.99af272d.svg" :alt="$t('profile.layout.quickActions.discountCode')" loading="lazy" />
+            <i class="bi bi-ticket-perforated"></i>
           </div>
           <span>{{ $t('profile.layout.quickActions.discountCode') }}</span>
         </a>
         <NuxtLink :to="localePath('/orders')" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/history-icon.2ebe1813.svg" :alt="$t('profile.layout.quickActions.orderHistory')" loading="lazy" />
+            <i class="bi bi-clock-history"></i>
           </div>
           <span>{{ $t('profile.layout.quickActions.orderHistory') }}</span>
         </NuxtLink>
         <NuxtLink :to="localePath('/user-info')" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/address-icon.169a4d95.svg" :alt="$t('profile.layout.quickActions.addressBook')" loading="lazy" />
+            <i class="bi bi-geo-alt"></i>
           </div>
           <span>{{ $t('profile.layout.quickActions.addressBook') }}</span>
         </NuxtLink>
         <a href="#" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/edu-icon.76bd96ea.svg" :alt="$t('profile.promotion.student')" loading="lazy" />
+            <i class="bi bi-mortarboard"></i>
           </div>
           <span>{{ $t('profile.promotion.student') }}</span>
         </a>
         <NuxtLink :to="localePath('/user-info')" class="profile-layout__quick-action">
           <div class="profile-layout__quick-action-icon">
-            <img src="https://cdn-static.smember.com.vn/_next/static/media/link-icon.1de266bc.svg" :alt="$t('profile.layout.quickActions.linkedAccounts')" loading="lazy" />
+            <i class="bi bi-link-45deg"></i>
           </div>
           <span>{{ $t('profile.layout.quickActions.linkedAccounts') }}</span>
         </NuxtLink>
@@ -214,14 +214,14 @@
             <p class="profile-layout__app-cta-text">{{ $t('profile.layout.appCta.title') }}</p>
             <div class="profile-layout__app-cta-content">
               <div class="profile-layout__qr-wrap">
-                <img src="https://cdn2.cellphones.com.vn/400x,webp/media/wysiwyg/Web/Logo/QR_appGeneral-v2.png" alt="QR Code" loading="lazy" />
+                <i class="bi bi-qr-code" style="font-size:48px;color:#d4d4d8;display:flex;align-items:center;justify-content:center;width:100%;height:100%"></i>
               </div>
               <div class="profile-layout__store-links">
-                <a href="#" target="_blank" rel="nofollow">
-                  <img src="https://cdn2.cellphones.com.vn/200x,webp/media/wysiwyg/downloadANDROID.png" alt="Tải từ Google Play" loading="lazy" />
+                <a href="#" target="_blank" rel="nofollow" class="profile-layout__store-btn">
+                  <i class="bi bi-google-play"></i> Google Play
                 </a>
-                <a href="#" target="_blank" rel="nofollow">
-                  <img src="https://cdn2.cellphones.com.vn/200x,webp/media/wysiwyg/downloadiOS.png" alt="Tải từ App Store" loading="lazy" />
+                <a href="#" target="_blank" rel="nofollow" class="profile-layout__store-btn">
+                  <i class="bi bi-apple"></i> App Store
                 </a>
               </div>
             </div>
@@ -289,7 +289,7 @@ const avatarUrl = computed(() => {
   if (!user.value) {
     return 'https://ui-avatars.com/api/?name=KH&background=f4f4f5&color=71717a&size=88'
   }
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName.value)}&background=ed0017&color=fff&size=88`
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName.value)}&background=1a1a1a&color=fff&size=88`
 })
 
 const totalOrders = ref(0)
@@ -433,12 +433,12 @@ onUnmounted(() => {
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  background: #fff5f5;
-  border: 1px dashed #ed0017;
+  background: var(--irus-color-accent-soft);
+  border: 1px dashed var(--irus-color-accent);
   border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
-  color: #ed0017;
+  color: var(--irus-color-accent);
   cursor: pointer;
   transition: background 0.15s ease;
   margin-top: 2px;
@@ -446,7 +446,7 @@ onUnmounted(() => {
 }
 
 .profile-layout__add-phone-btn:hover {
-  background: #fee2e2;
+  background: var(--irus-color-danger-soft);
 }
 
 .profile-layout__add-phone-btn i {
@@ -480,12 +480,12 @@ onUnmounted(() => {
 }
 
 .profile-layout__phone-input:focus {
-  border-color: #ed0017;
+  border-color: var(--irus-color-accent);
 }
 
 .profile-layout__phone-save {
   padding: 5px 12px;
-  background: #ed0017;
+  background: var(--irus-color-accent);
   border: none;
   border-radius: 8px;
   font-size: 13px;
@@ -500,7 +500,7 @@ onUnmounted(() => {
 }
 
 .profile-layout__phone-save:hover:not(:disabled) {
-  background: #c80015;
+  background: var(--irus-color-accent-hover);
 }
 
 .profile-layout__phone-save:disabled {
@@ -564,7 +564,7 @@ onUnmounted(() => {
 }
 
 .profile-layout__rank-badge--student {
-  background: #ed0017;
+  background: var(--irus-color-accent);
   color: #fff;
 }
 
@@ -627,7 +627,7 @@ onUnmounted(() => {
 
 .profile-layout__stat-divider {
   width: 1px;
-  background: #ed0017;
+  background: var(--irus-color-border-strong);
   flex-shrink: 0;
   margin: 4px 0;
 }
@@ -647,6 +647,11 @@ onUnmounted(() => {
   width: 20px;
   height: 19px;
   object-fit: contain;
+}
+
+.profile-layout__stat-icon i {
+  font-size: 18px;
+  color: #18181b;
 }
 
 .profile-layout__stat-content {
@@ -749,6 +754,11 @@ onUnmounted(() => {
   object-fit: contain;
 }
 
+.profile-layout__quick-action-icon i {
+  font-size: 22px;
+  color: #18181b;
+}
+
 .profile-layout__quick-action span {
   font-size: 11px;
   font-weight: 500;
@@ -829,7 +839,7 @@ onUnmounted(() => {
 }
 
 .profile-layout__sidebar-item:hover::before {
-  background: #d70018;
+  background: var(--irus-color-accent);
 }
 
 .profile-layout__sidebar-item i {
@@ -843,16 +853,16 @@ onUnmounted(() => {
 
 .profile-layout__sidebar-item--active {
   background: #f4f4f5;
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-weight: 600;
 }
 
 .profile-layout__sidebar-item--active::before {
-  background: #d70018;
+  background: var(--irus-color-accent);
 }
 
 .profile-layout__sidebar-item--active:hover {
-  color: #b80015;
+  color: var(--irus-color-accent-hover);
 }
 
 .profile-layout__sidebar-divider {
@@ -866,7 +876,7 @@ onUnmounted(() => {
 }
 
 .profile-layout__sidebar-item--logout:hover {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .profile-layout__sidebar-item--logout::before {
@@ -874,7 +884,7 @@ onUnmounted(() => {
 }
 
 .profile-layout__sidebar-item--logout:hover::before {
-  background: #d70018;
+  background: var(--irus-color-accent);
 }
 
 /* ── App CTA ───────────────────────────── */
@@ -920,6 +930,24 @@ onUnmounted(() => {
 .profile-layout__store-links a img {
   height: 36px;
   width: auto;
+}
+
+.profile-layout__store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--irus-color-surface-strong);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.profile-layout__store-btn:hover {
+  background: var(--irus-color-accent-hover);
+  color: #fff;
 }
 
 /* ── Main Content ──────────────────────── */

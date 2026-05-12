@@ -208,7 +208,7 @@ const handleDeleteAddress = async (id) => {
 }
 
 .address-section__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 18px;
 }
 
@@ -307,7 +307,7 @@ const handleDeleteAddress = async (id) => {
 
 .address-section__add-btn {
   align-items: center;
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -322,7 +322,7 @@ const handleDeleteAddress = async (id) => {
 }
 
 .address-section__add-btn:hover {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
 }
 
 @keyframes shimmer {

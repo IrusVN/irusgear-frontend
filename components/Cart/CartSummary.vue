@@ -235,7 +235,7 @@ onBeforeUnmount(() => {
 }
 
 .cart-summary__eyebrow {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -251,7 +251,7 @@ onBeforeUnmount(() => {
 }
 
 .cart-summary__saving-pill {
-  background: linear-gradient(135deg, #fff7ed, #fff1f2);
+  background: linear-gradient(135deg, #fff7ed, var(--irus-color-accent-soft));
   border: 1px solid #fed7aa;
   border-radius: 18px;
   color: #9a3412;
@@ -261,7 +261,7 @@ onBeforeUnmount(() => {
 }
 
 .cart-summary__saving-pill strong {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .cart-summary__rows {
@@ -309,7 +309,7 @@ onBeforeUnmount(() => {
 }
 
 .cart-summary__row--total dd {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 24px;
 }
 
@@ -355,8 +355,8 @@ onBeforeUnmount(() => {
 }
 
 .cart-summary__cta--primary {
-  background: #d70018;
-  border: 1px solid #d70018;
+  background: var(--irus-color-surface-strong);
+  border: 1px solid var(--irus-color-surface-strong);
   color: #fff;
 }
 

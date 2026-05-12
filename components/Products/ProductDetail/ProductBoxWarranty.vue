@@ -489,9 +489,9 @@ onBeforeUnmount(() => {
 }
 
 .button__choose-warranty.active {
-  background: linear-gradient(180deg, #fff 0%, #fff5f6 100%);
-  border-color: #d70018;
-  box-shadow: 0 0 0 1px rgba(215, 0, 24, 0.06);
+  background: linear-gradient(180deg, #fff 0%, var(--irus-color-accent-soft) 100%);
+  border-color: var(--irus-color-accent);
+  box-shadow: 0 0 0 1px var(--irus-color-focus-ring);
 }
 
 .button__choose-warranty-input {
@@ -518,7 +518,7 @@ onBeforeUnmount(() => {
 }
 
 .price {
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: block;
   font-size: 15px;
   font-weight: 700;
@@ -573,7 +573,7 @@ onBeforeUnmount(() => {
 }
 
 .swiper-pdp :deep(.swiper-pagination-bullet-active) {
-  background: #d70018;
+  background: var(--irus-color-accent);
   width: 16px;
 }
 

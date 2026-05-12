@@ -162,9 +162,9 @@ const formatDate = (dateStr) => {
 
 .voucher-card__icon {
   align-items: center;
-  background: #fff7f7;
+  background: var(--irus-color-accent-soft);
   border-radius: 10px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: inline-flex;
   font-size: 24px;
   height: 44px;
@@ -207,7 +207,7 @@ const formatDate = (dateStr) => {
   font-size: 11px;
   font-weight: 700;
   padding: 2px 6px;
-  background: #d70018;
+  background: var(--irus-color-accent);
 }
 
 .voucher-card__badge--percent {

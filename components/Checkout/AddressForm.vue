@@ -231,19 +231,19 @@ const handleSubmit = () => {
 <style scoped>
 .address-form {
   background: #fff;
-  border: 1.5px solid #d70018;
+  border: 1.5px solid var(--irus-color-accent);
   border-radius: 14px;
   overflow: hidden;
 }
 
 .address-form__header {
-  background: #fff7f7;
-  border-bottom: 1px solid #f0e0e0;
+  background: var(--irus-color-accent-soft);
+  border-bottom: 1px solid var(--irus-color-accent-soft);
   padding: 14px 18px;
 }
 
 .address-form__title {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 15px;
   font-weight: 700;
   margin: 0;
@@ -275,7 +275,7 @@ const handleSubmit = () => {
 }
 
 .required {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .address-form__input {
@@ -289,8 +289,8 @@ const handleSubmit = () => {
 }
 
 .address-form__input:focus {
-  border-color: #d70018;
-  box-shadow: 0 0 0 3px rgba(215, 0, 24, 0.1);
+  border-color: var(--irus-color-accent);
+  box-shadow: 0 0 0 3px var(--irus-color-accent-soft);
   outline: none;
 }
 
@@ -326,9 +326,9 @@ const handleSubmit = () => {
 }
 
 .address-form__radio-card--active {
-  border-color: #d70018;
-  background: #fff7f7;
-  color: #d70018;
+  border-color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
+  color: var(--irus-color-accent);
 }
 
 .address-form__checkbox-row {
@@ -375,14 +375,14 @@ const handleSubmit = () => {
 }
 
 .address-form__btn--save {
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   color: #fff;
   flex: 2;
 }
 
 .address-form__btn--save:hover {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
 }
 
 .address-form__btn--save:disabled {

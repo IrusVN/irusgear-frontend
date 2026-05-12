@@ -107,11 +107,7 @@
       </div>
       <div v-if="recentOrders.orders.length === 0" class="profile-card__body profile-card__body--empty">
         <div class="profile-empty">
-          <img
-            src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
-            alt="Không có đơn hàng"
-            loading="lazy"
-          />
+          <i class="bi bi-inbox"></i>
           <p>{{ $t('profile.dashboard.noOrders') }} <a :href="localePath('/')">{{ $t('profile.dashboard.shopNow') }}</a></p>
         </div>
       </div>
@@ -155,11 +151,7 @@
       <!-- Empty state -->
       <div v-else-if="offers.items.length === 0" class="profile-card__body profile-card__body--empty">
         <div class="profile-empty">
-          <img
-            src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
-            alt="Không có ưu đãi"
-            loading="lazy"
-          />
+          <i class="bi bi-inbox"></i>
           <p>{{ $t('profile.dashboard.noOffers') }} <a :href="localePath('/')">{{ $t('profile.dashboard.seeProducts') }}</a></p>
         </div>
       </div>
@@ -231,7 +223,7 @@
     <div class="profile-card__body">
       <div v-if="favorites.items.length === 0" class="profile-card__body--empty" style="display:flex;justify-content:center;padding:24px 16px;">
         <div class="profile-empty">
-          <img src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png" alt="empty" loading="lazy" />
+          <i class="bi bi-inbox"></i>
           <p>{{ $t('profile.dashboard.noFavorites') }}</p>
         </div>
       </div>
@@ -297,26 +289,14 @@
     <p class="profile-mobile-app-text">Mua sắm dễ dàng - Ưu đãi ngập tràn cùng IrusGear</p>
     <div class="profile-mobile-app-content">
       <div class="profile-qr-wrap">
-        <img
-          src="https://cdn2.cellphones.com.vn/400x,webp/media/wysiwyg/Web/Logo/QR_appGeneral-v2.png"
-          alt="QR Code"
-          loading="lazy"
-        />
+        <i class="bi bi-qr-code" style="font-size:36px;color:#a1a1aa;display:flex;align-items:center;justify-content:center;width:100%;height:100%"></i>
       </div>
-      <div class="profile-store-links">
-        <a href="#" target="_blank" rel="nofollow">
-          <img
-            src="https://cdn2.cellphones.com.vn/200x,webp/media/wysiwyg/downloadANDROID.png"
-            alt="Tải từ Google Play"
-            loading="lazy"
-          />
+      <div class="profile-store-links" style="flex-direction:row;gap:8px;">
+        <a href="#" target="_blank" rel="nofollow" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#111;color:#fff;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">
+          <i class="bi bi-google-play"></i> Google Play
         </a>
-        <a href="#" target="_blank" rel="nofollow">
-          <img
-            src="https://cdn2.cellphones.com.vn/200x,webp/media/wysiwyg/downloadiOS.png"
-            alt="Tải từ App Store"
-            loading="lazy"
-          />
+        <a href="#" target="_blank" rel="nofollow" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#111;color:#fff;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">
+          <i class="bi bi-apple"></i> App Store
         </a>
       </div>
     </div>
@@ -554,13 +534,13 @@ const formatExpiry = (isoDate) => {
 }
 
 .profile-card__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 18px;
 }
 
 .profile-card__add-btn {
   align-items: center;
-  background: #d70018;
+  background: var(--irus-color-accent);
   border: none;
   border-radius: 8px;
   color: #fff;
@@ -574,7 +554,7 @@ const formatExpiry = (isoDate) => {
   white-space: nowrap;
 }
 .profile-card__add-btn:hover {
-  background: #b80015;
+  background: var(--irus-color-accent-hover);
 }
 
 .profile-card__add-btn i {
@@ -584,17 +564,17 @@ const formatExpiry = (isoDate) => {
 
 .profile-card__add-btn--empty {
   background: #fff;
-  border: 1px solid #f3c4cc;
+  border: 1px solid var(--irus-color-border);
   border-radius: 10px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   min-height: 36px;
   padding: 0 14px;
 }
 
 .profile-card__add-btn--empty:hover {
-  background: #fff1f3;
-  border-color: #e85a6a;
-  color: #b80015;
+  background: var(--irus-color-accent-soft);
+  border-color: var(--irus-color-border-strong);
+  color: var(--irus-color-accent-hover);
 }
 
 .profile-card__add-btn--empty i {
@@ -662,7 +642,7 @@ const formatExpiry = (isoDate) => {
 }
 
 .profile-empty p a {
-  color: #d70018;
+  color: var(--irus-color-accent);
   text-decoration: none;
   font-weight: 500;
 }
@@ -730,7 +710,7 @@ const formatExpiry = (isoDate) => {
 }
 .profile-order-item__price {
   font-size: 12px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-weight: 600;
   margin: 0;
 }
@@ -766,7 +746,7 @@ const formatExpiry = (isoDate) => {
 }
 
 .profile-favorite-item:hover {
-  border-color: #d70018;
+  border-color: var(--irus-color-border-strong);
 }
 
 .profile-favorite-item img {
@@ -812,7 +792,7 @@ const formatExpiry = (isoDate) => {
 .profile-favorite-price-current {
   font-size: 13px;
   font-weight: 700;
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .profile-favorite-price-old {
@@ -876,7 +856,7 @@ const formatExpiry = (isoDate) => {
   transition: border-color 0.15s ease;
 }
 .profile-offer-voucher:hover {
-  border-color: #d70018;
+  border-color: var(--irus-color-border-strong);
 }
 .profile-offer-voucher--used {
   opacity: 0.5;
@@ -888,7 +868,7 @@ const formatExpiry = (isoDate) => {
   align-items: center;
   justify-content: center;
   min-width: 72px;
-  background: linear-gradient(135deg, #d70018, #ff4757);
+  background: var(--irus-color-surface-strong);
   border-radius: 8px;
   padding: 8px 6px;
   gap: 2px;
@@ -978,7 +958,7 @@ const formatExpiry = (isoDate) => {
   position: relative;
 }
 .profile-offer-benefit:hover {
-  border-color: #d70018;
+  border-color: var(--irus-color-border-strong);
 }
 .profile-offer-benefit--locked {
   opacity: 0.6;
@@ -987,13 +967,13 @@ const formatExpiry = (isoDate) => {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: #fff1f2;
+  background: var(--irus-color-accent-soft);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   font-size: 16px;
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 .profile-offer-benefit__info {
   flex: 1;
@@ -1099,7 +1079,7 @@ const formatExpiry = (isoDate) => {
   width: 20px;
   height: 4px;
   border-radius: 999px;
-  background: #d70018;
+  background: var(--irus-color-accent);
   border: none;
   cursor: pointer;
   padding: 0;

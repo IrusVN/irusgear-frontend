@@ -81,8 +81,8 @@ const formatMoney = (value) => {
 }
 
 .delivery-option--selected {
-  border-color: #d70018;
-  background: #fff7f7;
+  border-color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
 }
 
 .delivery-option__input {
@@ -110,8 +110,8 @@ const formatMoney = (value) => {
 }
 
 .delivery-option--selected .delivery-option__check {
-  background: #d70018;
-  border-color: #d70018;
+  background: var(--irus-color-accent);
+  border-color: var(--irus-color-accent);
   color: #fff;
 }
 

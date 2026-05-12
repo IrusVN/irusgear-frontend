@@ -78,7 +78,7 @@ const { productSameProducts } = storeToRefs(productStore);
 const { t } = useI18n();
 
 const TAB_LABELS = {
-  similar: t('common.similarProducts'),
+  similar: t('product.similarProducts'),
   used: t('product.usedRef'),
 };
 
@@ -281,8 +281,8 @@ onBeforeUnmount(() => {
 }
 
 .product-options-tabs .item.active {
-  border-bottom-color: #d70018;
-  color: #d70018;
+  border-bottom-color: var(--irus-color-accent);
+  color: var(--irus-color-accent);
   font-weight: 600;
 }
 

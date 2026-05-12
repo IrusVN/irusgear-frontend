@@ -244,9 +244,8 @@ onBeforeUnmount(() => {
 }
 
 .cart-progress__shell {
-  background: linear-gradient(180deg, #fff1f2, #fff7f7);
+  background: #f8f8f8;
   border-radius: 18px;
-  overflow-x: auto;
   padding: 18px 20px 14px;
 }
 
@@ -254,28 +253,18 @@ onBeforeUnmount(() => {
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
 }
 
-.cart-progress__shell::-webkit-scrollbar {
-  height: 6px;
-}
-
-.cart-progress__shell::-webkit-scrollbar-thumb {
-  background: rgba(113, 113, 122, 0.28);
-  border-radius: 999px;
-}
-
 .cart-progress__list {
   display: grid;
   gap: 0;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   list-style: none;
   margin: 0;
-  min-width: 640px;
   padding: 0;
   position: relative;
 }
 
 .cart-progress__list::before {
-  border-top: 1px dashed #8f878d;
+  border-top: 1px dashed #b0b0b0;
   content: "";
   left: 40px;
   position: absolute;
@@ -297,10 +286,10 @@ onBeforeUnmount(() => {
 
 .cart-progress__marker {
   align-items: center;
-  background: #fff1f2;
-  border: 2px solid #66606a;
+  background: #fff;
+  border: 2px solid #c0c0c0;
   border-radius: 999px;
-  color: #4b4650;
+  color: #888;
   display: inline-flex;
   font-size: 14px;
   height: 32px;
@@ -310,32 +299,33 @@ onBeforeUnmount(() => {
 }
 
 .cart-progress__label {
-  color: #534c54;
+  color: #888;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.35;
-  max-width: 140px;
-  text-wrap: balance;
+  text-align: center;
+  word-break: break-word;
 }
 
 .cart-progress__item--active .cart-progress__marker {
-  background: #ed0017;
-  border-color: #ed0017;
+  background: #111;
+  border-color: #111;
   color: #fff;
 }
 
 .cart-progress__item--active .cart-progress__label {
-  color: #ed0017;
+  color: #111;
+  font-weight: 700;
 }
 
 .cart-progress__item--completed .cart-progress__marker {
-  background: #ed0017;
-  border-color: #ed0017;
+  background: #111;
+  border-color: #111;
   color: #fff;
 }
 
 .cart-progress__item--completed .cart-progress__label {
-  color: #534c54;
+  color: #111;
 }
 
 @media (max-width: 767.98px) {
@@ -345,16 +335,82 @@ onBeforeUnmount(() => {
 
   .cart-progress__shell {
     border-radius: 16px;
-    padding: 16px 14px 12px;
+    padding: 14px 8px 10px;
   }
 
-  .cart-progress__list {
-    min-width: 600px;
+  .cart-progress__list::before {
+    left: 8px;
+    right: 8px;
+    top: 14px;
+  }
+
+  .cart-progress__marker {
+    font-size: 12px;
+    height: 28px;
+    width: 28px;
   }
 
   .cart-progress__label {
-    font-size: 15px;
-    max-width: 124px;
+    font-size: 12px;
+    max-width: 100%;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .cart-progress__item {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-progress__shell {
+    padding: 12px 6px 8px;
+  }
+
+  .cart-progress__list::before {
+    left: 6px;
+    right: 6px;
+    top: 12px;
+  }
+
+  .cart-progress__marker {
+    font-size: 11px;
+    height: 24px;
+    width: 24px;
+  }
+
+  .cart-progress__label {
+    font-size: 11px;
+  }
+
+  .cart-progress__item {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 375px) {
+  .cart-progress__shell {
+    padding: 10px 4px 8px;
+  }
+
+  .cart-progress__list::before {
+    left: 4px;
+    right: 4px;
+    top: 10px;
+  }
+
+  .cart-progress__marker {
+    font-size: 10px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .cart-progress__label {
+    font-size: 10px;
+  }
+
+  .cart-progress__item {
+    gap: 4px;
   }
 }
 </style>

@@ -964,7 +964,7 @@ const featuredNavItems = computed(() => [
   min-width: 14px;
   height: 14px;
   padding: 0 3px;
-  background: #ff3b30;
+  background: var(--irus-color-accent);
   color: #fff;
   font-size: 8px;
   font-weight: 700;
@@ -1024,7 +1024,7 @@ const featuredNavItems = computed(() => [
   min-width: 18px;
   height: 18px;
   padding: 0 4px;
-  background: #ff3b30;
+  background: var(--irus-color-accent);
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -1124,7 +1124,7 @@ const featuredNavItems = computed(() => [
   min-width: 16px;
   height: 16px;
   padding: 0 4px;
-  background: #ff3b30;
+  background: var(--irus-color-accent);
   color: #fff;
   font-size: 9px;
   font-weight: 700;

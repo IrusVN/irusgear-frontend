@@ -244,7 +244,7 @@ onBeforeUnmount(() => {
 }
 
 .checkout-progress__back:hover {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .checkout-progress__list {
@@ -306,18 +306,18 @@ onBeforeUnmount(() => {
 }
 
 .checkout-progress__item--active .checkout-progress__marker {
-  background: #ed0017;
-  border-color: #ed0017;
+  background: var(--irus-color-accent);
+  border-color: var(--irus-color-accent);
   color: #fff;
 }
 
 .checkout-progress__item--active .checkout-progress__label {
-  color: #ed0017;
+  color: var(--irus-color-accent);
 }
 
 .checkout-progress__item--completed .checkout-progress__marker {
-  background: #ed0017;
-  border-color: #ed0017;
+  background: var(--irus-color-accent);
+  border-color: var(--irus-color-accent);
   color: #fff;
 }
 

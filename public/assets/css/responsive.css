@@ -131,7 +131,7 @@
 }
 .sheet-list-item:last-child { border-bottom: none; }
 .sheet-list-item:active { background: #f4f4f5; }
-.sheet-list-item--selected { background: #fff5f5; border-color: #d70018; }
+.sheet-list-item--selected { background: var(--irus-color-accent-soft); border-color: var(--irus-color-accent); }
 
 .sheet-empty {
   display: flex;

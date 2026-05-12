@@ -4,12 +4,7 @@
       <section class="promotion-offers" aria-labelledby="promotion-offers-title">
         <h1 id="promotion-offers-title" class="promotion-offers__title">Ưu đãi của bạn</h1>
         <div class="promotion-offers__empty">
-          <img
-            class="promotion-offers__empty-img"
-            src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
-            alt="empty"
-            loading="lazy"
-          />
+          <i class="bi bi-tag" style="font-size:48px;color:#d4d4d8"></i>
           <p>Bạn đang chưa có ưu đãi nào</p>
         </div>
       </section>
@@ -50,11 +45,11 @@
                       'member-rank-card--locked': index > currentRankIndex,
                     },
                   ]"
-                  :style="{ backgroundImage: `url(${item.background})` }"
+                  :style="{ background: item.background }"
                   @click="setActiveRank(index)"
                 >
                   <span v-if="index === currentRankIndex && currentUser?.isStudent" class="member-rank-card__student">
-                    S-Student
+                    I-Student
                   </span>
 
                   <span class="member-rank-card__tier">{{ item.name }}</span>
@@ -203,54 +198,54 @@ const carouselViewport = ref(null)
 const activeRankIndex = ref(0)
 
 const rankAssets = {
-  snull: {
-    name: 'S-NULL',
-    background: 'https://cdn-static.smember.com.vn/_next/static/media/snull-bg-card.7284811e.png',
+  inull: {
+    name: 'I-NULL',
+    background: '#f0f0f0',
     threshold: '3.000.000đ',
   },
-  snew: {
-    name: 'S-NEW',
-    background: 'https://cdn-static.smember.com.vn/_next/static/media/snew-bg-card.f753cfbc.png',
+  inew: {
+    name: 'I-NEW',
+    background: '#e8e8f0',
     threshold: '15.000.000đ',
   },
-  smem: {
-    name: 'S-MEM',
-    background: 'https://cdn-static.smember.com.vn/_next/static/media/smem-bg-card.1fa74fdc.png',
+  imem: {
+    name: 'I-MEM',
+    background: '#ddd8e8',
     threshold: '50.000.000đ',
   },
-  svip: {
-    name: 'S-VIP',
-    background: 'https://cdn-static.smember.com.vn/_next/static/media/svip-bg-card.59d559cc.png',
+  ivip: {
+    name: 'I-VIP',
+    background: '#1a1a1a',
     threshold: '50.000.000đ',
   },
 }
 
 const defaultRanks = [
-  { key: 'snull', name: 'S-NULL' },
-  { key: 'snew', name: 'S-NEW' },
-  { key: 'smem', name: 'S-MEM' },
-  { key: 'svip', name: 'S-VIP' },
+  { key: 'inull', name: 'I-NULL' },
+  { key: 'inew', name: 'I-NEW' },
+  { key: 'imem', name: 'I-MEM' },
+  { key: 'ivip', name: 'I-VIP' },
 ]
 
 const rankContent = {
-  snull: {
+  inull: {
     condition:
       'Tổng số tiền mua hàng tích luỹ trong năm nay và năm liền trước đạt từ 0 đến 3 triệu đồng, không tính đơn hàng doanh nghiệp B2B',
     shoppingBenefits: [
       {
         icon: 'bi bi-gift',
-        html: 'Hiện chưa có ưu đãi mua hàng đặc biệt cho hạng thành viên S-Null',
+        html: 'Hiện chưa có ưu đãi mua hàng đặc biệt cho hạng thành viên I-Null',
       },
     ],
     servicePolicies: [],
   },
-  snew: {
+  inew: {
     condition:
       'Tổng số tiền mua hàng tích luỹ trong năm nay và năm liền trước đạt từ 3 đến 15 triệu đồng, không tính đơn hàng doanh nghiệp B2B',
     shoppingBenefits: [
       {
         icon: 'bi bi-gift',
-        html: '<strong>Tặng voucher 50K</strong> khi lên hạng (từ SNULL lên SNEW)',
+        html: '<strong>Tặng voucher 50K</strong> khi lên hạng (từ INULL lên INEW)',
       },
       {
         icon: 'bi bi-gift',
@@ -262,7 +257,7 @@ const rankContent = {
       },
       {
         icon: 'bi bi-wallet2',
-        html: '<strong>Giảm thêm 5% (tối đa 100.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại Điện Thoại Vui',
+        html: '<strong>Giảm thêm 5% (tối đa 100.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại IrusGear',
       },
       {
         icon: 'bi bi-cart3',
@@ -275,15 +270,15 @@ const rankContent = {
     ],
     servicePolicies: [],
   },
-  smem: {
+  imem: {
     condition:
       'Tổng số tiền mua hàng tích luỹ trong năm nay và năm liền trước đạt từ 15 đến 50 triệu đồng, không tính đơn hàng doanh nghiệp B2B',
     familyVoucher:
-      '<strong>Nhận voucher trị giá 10% tối đa 150K</strong> tặng cho người thân, bạn bè (Voucher chỉ áp dụng cho khách hàng chưa có tài khoản Smember và chưa từng mua hàng tại CellphoneS)',
+      '<strong>Nhận voucher trị giá 10% tối đa 150K</strong> tặng cho người thân, bạn bè (Voucher chỉ áp dụng cho khách hàng chưa có tài khoản IrusGear và chưa từng mua hàng tại IrusGear)',
     shoppingBenefits: [
       {
         icon: 'bi bi-wallet2',
-        html: '<strong>Ưu đãi thu cũ 5% lên đến 300K</strong> cho các sản phẩm mua tại CellphoneS',
+        html: '<strong>Ưu đãi thu cũ 5% lên đến 300K</strong> cho các sản phẩm mua tại IrusGear',
       },
       {
         icon: 'bi bi-truck',
@@ -291,7 +286,7 @@ const rankContent = {
       },
       {
         icon: 'bi bi-cart3',
-        html: '<strong>Tặng voucher 100K</strong> khi lên hạng (từ SNEW lên SMEM)',
+        html: '<strong>Tặng voucher 100K</strong> khi lên hạng (từ INEW lên IMEM)',
       },
       {
         icon: 'bi bi-gift',
@@ -307,7 +302,7 @@ const rankContent = {
       },
       {
         icon: 'bi bi-wallet2',
-        html: '<strong>Giảm thêm 5% (tối đa 200.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại Điện Thoại Vui',
+        html: '<strong>Giảm thêm 5% (tối đa 200.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại IrusGear',
       },
       {
         icon: 'bi bi-cart3',
@@ -320,15 +315,15 @@ const rankContent = {
     ],
     servicePolicies: [],
   },
-  svip: {
+  ivip: {
     condition:
       'Tổng số tiền mua hàng tích luỹ trong năm nay và năm liền trước đạt từ 50 triệu đồng trở lên, không tính đơn hàng doanh nghiệp B2B',
     familyVoucher:
-      '<strong>Nhận voucher trị giá 10% tối đa 150K</strong> tặng cho người thân, bạn bè (Voucher chỉ áp dụng cho khách hàng chưa có tài khoản Smember và chưa từng mua hàng tại CellphoneS)',
+      '<strong>Nhận voucher trị giá 10% tối đa 150K</strong> tặng cho người thân, bạn bè (Voucher chỉ áp dụng cho khách hàng chưa có tài khoản IrusGear và chưa từng mua hàng tại IrusGear)',
     shoppingBenefits: [
       {
         icon: 'bi bi-wallet2',
-        html: '<strong>Ưu đãi thu cũ 5% lên đến 500K</strong> cho các sản phẩm mua tại CellphoneS',
+        html: '<strong>Ưu đãi thu cũ 5% lên đến 500K</strong> cho các sản phẩm mua tại IrusGear',
       },
       {
         icon: 'bi bi-truck',
@@ -336,7 +331,7 @@ const rankContent = {
       },
       {
         icon: 'bi bi-cart3',
-        html: '<strong>Tặng voucher 300K</strong> khi lên hạng (từ SMEM lên SVIP)',
+        html: '<strong>Tặng voucher 300K</strong> khi lên hạng (từ IMEM lên IVIP)',
       },
       {
         icon: 'bi bi-gift',
@@ -352,7 +347,7 @@ const rankContent = {
       },
       {
         icon: 'bi bi-wallet2',
-        html: '<strong>Giảm thêm 5% (tối đa 300.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại Điện Thoại Vui',
+        html: '<strong>Giảm thêm 5% (tối đa 300.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại IrusGear',
       },
       {
         icon: 'bi bi-cart3',
@@ -383,7 +378,7 @@ const rankCards = computed(() => {
 
   return sourceRanks
     .map((rank) => {
-      const key = normalizeRankKey(rank.key || rank.rank_key || rank.name)
+      const key = normalizeRankKey(rank.key || rank.rank_key || rank.name).replace(/^s/, 'i')
       const asset = rankAssets[key]
       if (!asset) return null
 
@@ -406,16 +401,16 @@ const carouselItems = computed(() => [
 ])
 
 const currentRankIndex = computed(() => {
-  const currentKey = normalizeRankKey(currentUser.value?.rankKey || 'snull')
+  const currentKey = normalizeRankKey(currentUser.value?.rankKey || 'inull').replace(/^s/, 'i')
   const index = rankCards.value.findIndex((rank) => rank.key === currentKey)
   return index >= 0 ? index : 0
 })
 
-const activeRank = computed(() => rankCards.value[activeRankIndex.value] || rankCards.value[0] || rankAssets.snull)
+const activeRank = computed(() => rankCards.value[activeRankIndex.value] || rankCards.value[0] || rankAssets.inull)
 
-const activeRankName = computed(() => activeRank.value?.name || 'S-NULL')
+const activeRankName = computed(() => activeRank.value?.name || 'I-NULL')
 
-const activeRankContent = computed(() => rankContent[activeRank.value?.key] || rankContent.snull)
+const activeRankContent = computed(() => rankContent[activeRank.value?.key] || rankContent.inull)
 
 const displayName = computed(() => (currentUser.value?.name || 'Khách hàng').toUpperCase())
 
@@ -596,8 +591,8 @@ onMounted(() => {
 }
 
 .member-ranks__nav:hover:not(:disabled) {
-  background: #fbe6e8;
-  color: #d70018;
+  background: var(--irus-color-accent-soft);
+  color: var(--irus-color-accent);
 }
 
 .member-ranks__nav:disabled {
@@ -647,7 +642,7 @@ onMounted(() => {
   height: 150px;
 }
 
-.member-rank-card--svip {
+.member-rank-card--ivip {
   color: #fff;
 }
 
@@ -807,11 +802,11 @@ onMounted(() => {
   line-height: 1.4;
 }
 
-.member-rank-card--smem .member-rank-card__locked-body {
+.member-rank-card--imem .member-rank-card__locked-body {
   color: #c0904a;
 }
 
-.member-rank-card--svip .member-rank-card__locked-body {
+.member-rank-card--ivip .member-rank-card__locked-body {
   color: rgba(255, 255, 255, 0.56);
 }
 
@@ -837,7 +832,7 @@ onMounted(() => {
 }
 
 .member-ranks__line--done {
-  background: #d70018;
+  background: var(--irus-color-accent);
 }
 
 .member-ranks__slide--max .member-ranks__line {
@@ -877,7 +872,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   border-radius: 999px;
-  background: #d70018;
+  background: var(--irus-color-accent);
   color: #fff;
   font-size: 13px;
   line-height: 20px;
@@ -947,7 +942,7 @@ onMounted(() => {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: linear-gradient(231deg, #ed8a95 -68.73%, #c40016 91.14%);
+  background: var(--irus-color-surface-strong);
   color: #fff;
   display: inline-flex;
   align-items: center;
@@ -961,7 +956,7 @@ onMounted(() => {
   min-width: 36px;
   padding: 2px 9px;
   border-radius: 999px;
-  background: #d70018;
+  background: var(--irus-color-accent);
   color: #fff;
   font-size: 10px;
   font-weight: 700;

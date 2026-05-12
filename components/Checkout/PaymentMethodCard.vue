@@ -88,8 +88,8 @@ const iconClass = computed(() => {
 }
 
 .payment-card--selected {
-  border-color: #d70018;
-  box-shadow: 0 0 0 3px rgba(215, 0, 24, 0.1);
+  border-color: var(--irus-color-accent);
+  box-shadow: 0 0 0 3px var(--irus-color-accent-soft);
 }
 
 .payment-card__icon {
@@ -151,6 +151,6 @@ const iconClass = computed(() => {
 }
 
 .payment-card--selected .payment-card__check {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 </style>

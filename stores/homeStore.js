@@ -36,7 +36,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/dien-thoai?sort=newest&limit=20",
       iconClass: "bi bi-phone",
       discounts: [5, 1, 1, 0, 4, 12],
-      gifts: ["Smember giảm đến 500.000đ", "S-Student giảm thêm 300.000đ"],
+      gifts: ["Thành viên giảm đến 500.000đ", "Sinh viên giảm thêm 300.000đ"],
       needIconMap: {
         "dien-thoai-choi-game": "bi bi-controller",
         "dien-thoai-pin-trau": "bi bi-battery-charging",
@@ -53,7 +53,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/may-tinh-bang?sort=newest&limit=20",
       iconClass: "bi bi-tablet",
       discounts: [12, 8, 6, 5, 10, 7],
-      gifts: ["Smember giảm đến 230.000đ", "S-Student giảm thêm 500.000đ", "Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn 3-6 tháng"],
+      gifts: ["Thành viên giảm đến 230.000đ", "Sinh viên giảm thêm 500.000đ", "Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn 3-6 tháng"],
     },
     laptop: {
       slug: "laptop",
@@ -61,7 +61,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/laptop?sort=newest&limit=20",
       iconClass: "bi bi-laptop",
       discounts: [9, 7, 6, 10, 8, 5],
-      gifts: ["Smember giảm đến 500.000đ", "S-Student giảm thêm 300.000đ", "Trả góp 0% lãi suất qua thẻ tín dụng"],
+      gifts: ["Thành viên giảm đến 500.000đ", "Sinh viên giảm thêm 300.000đ", "Trả góp 0% lãi suất qua thẻ tín dụng"],
     },
     monitor: {
       slug: "man-hinh-may-tinh",
@@ -69,7 +69,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/man-hinh-may-tinh?sort=newest&limit=20",
       iconClass: "bi bi-display",
       discounts: [6, 5, 9, 7, 8, 4],
-      gifts: ["Smember giảm đến 300.000đ", "S-Student giảm thêm 200.000đ", "Trả góp 0% lãi suất qua thẻ tín dụng"],
+      gifts: ["Thành viên giảm đến 300.000đ", "Sinh viên giảm thêm 200.000đ", "Trả góp 0% lãi suất qua thẻ tín dụng"],
     },
     pc: {
       slug: "pc",
@@ -77,7 +77,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/pc?sort=newest&limit=20",
       iconClass: "bi bi-pc-display",
       discounts: [7, 10, 8, 6, 9, 5],
-      gifts: ["Smember giảm đến 400.000đ", "S-Student giảm thêm 300.000đ", "Ưu đãi lắp đặt và giao hàng nhanh"],
+      gifts: ["Thành viên giảm đến 400.000đ", "Sinh viên giảm thêm 300.000đ", "Ưu đãi lắp đặt và giao hàng nhanh"],
     },
     computerAccessory: {
       slug: "phu-kien-may-tinh",
@@ -85,7 +85,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/phu-kien-may-tinh?sort=newest&limit=20",
       iconClass: "bi bi-mouse2",
       discounts: [6, 8, 5, 7, 9, 4],
-      gifts: ["Smember giảm đến 200.000đ", "S-Student giảm thêm 150.000đ", "Giao hàng nhanh toàn quốc"],
+      gifts: ["Thành viên giảm đến 200.000đ", "Sinh viên giảm thêm 150.000đ", "Giao hàng nhanh toàn quốc"],
     },
     watch: {
       slug: "dong-ho",
@@ -93,7 +93,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/dong-ho?sort=newest&limit=20",
       iconClass: "bi bi-smartwatch",
       discounts: [8, 6, 5, 9, 7, 4],
-      gifts: ["Smember giảm đến 300.000đ", "S-Student giảm thêm 200.000đ", "Bảo hành chính hãng toàn quốc"],
+      gifts: ["Thành viên giảm đến 300.000đ", "Sinh viên giảm thêm 200.000đ", "Bảo hành chính hãng toàn quốc"],
     },
     audio: {
       slug: "am-thanh",
@@ -101,7 +101,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/am-thanh?sort=newest&limit=20",
       iconClass: "bi bi-headphones",
       discounts: [10, 8, 12, 7, 9, 6],
-      gifts: ["Smember giảm đến 200.000đ", "S-Student giảm thêm 150.000đ", "Giao hàng nhanh toàn quốc"],
+      gifts: ["Thành viên giảm đến 200.000đ", "Sinh viên giảm thêm 150.000đ", "Giao hàng nhanh toàn quốc"],
     },
     tv: {
       slug: "tivi",
@@ -109,7 +109,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/tivi?sort=newest&limit=20",
       iconClass: "bi bi-tv",
       discounts: [11, 9, 8, 10, 7, 6],
-      gifts: ["Smember giảm đến 600.000đ", "S-Student giảm thêm 300.000đ", "Giao hàng lắp đặt nhanh toàn quốc"],
+      gifts: ["Thành viên giảm đến 600.000đ", "Sinh viên giảm thêm 300.000đ", "Giao hàng lắp đặt nhanh toàn quốc"],
     },
     homeAppliance: {
       slug: "do-gia-dung",
@@ -117,7 +117,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/do-gia-dung?sort=newest&limit=20",
       iconClass: "bi bi-house",
       discounts: [12, 10, 8, 11, 9, 7],
-      gifts: ["Smember giảm đến 300.000đ", "S-Student giảm thêm 200.000đ", "Giao nhanh toàn quốc"],
+      gifts: ["Thành viên giảm đến 300.000đ", "Sinh viên giảm thêm 200.000đ", "Giao nhanh toàn quốc"],
     },
     beautyHealth: {
       slug: "suc-khoe-lam-dep",
@@ -125,7 +125,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/suc-khoe-lam-dep?sort=newest&limit=20",
       iconClass: "bi bi-heart-pulse",
       discounts: [9, 7, 8, 10, 6, 11],
-      gifts: ["Smember giảm đến 250.000đ", "S-Student giảm thêm 150.000đ", "Sản phẩm chính hãng"],
+      gifts: ["Thành viên giảm đến 250.000đ", "Sinh viên giảm thêm 150.000đ", "Sản phẩm chính hãng"],
     },
     fridgeFreezer: {
       slug: "tu-lanh-tu-dong",
@@ -133,7 +133,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/tu-lanh-tu-dong?sort=newest&limit=20",
       iconClass: "bi bi-snow",
       discounts: [9, 7, 8, 10, 6, 11],
-      gifts: ["Smember giảm đến 500.000đ", "S-Student giảm thêm 300.000đ", "Hỗ trợ giao lắp nhanh"],
+      gifts: ["Thành viên giảm đến 500.000đ", "Sinh viên giảm thêm 300.000đ", "Hỗ trợ giao lắp nhanh"],
     },
     washingMachine: {
       slug: "may-giat",
@@ -141,7 +141,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/may-giat?sort=newest&limit=20",
       iconClass: "bi bi-badge-wc",
       discounts: [8, 10, 7, 9, 6, 11],
-      gifts: ["Smember giảm đến 500.000đ", "S-Student giảm thêm 300.000đ", "Giao lắp nhanh toàn quốc"],
+      gifts: ["Thành viên giảm đến 500.000đ", "Sinh viên giảm thêm 300.000đ", "Giao lắp nhanh toàn quốc"],
     },
     dryer: {
       slug: "may-say-quan-ao",
@@ -149,7 +149,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/may-say-quan-ao?sort=newest&limit=20",
       iconClass: "bi bi-wind",
       discounts: [7, 9, 8, 10, 6, 11],
-      gifts: ["Smember giảm đến 400.000đ", "S-Student giảm thêm 250.000đ", "Hỗ trợ giao lắp nhanh"],
+      gifts: ["Thành viên giảm đến 400.000đ", "Sinh viên giảm thêm 250.000đ", "Hỗ trợ giao lắp nhanh"],
     },
     airConditioner: {
       slug: "dieu-hoa-may-lanh",
@@ -157,7 +157,7 @@ export const useHomeStore = defineStore("home", () => {
       viewAllUrl: "/category/dieu-hoa-may-lanh?sort=newest&limit=20",
       iconClass: "bi bi-snow2",
       discounts: [10, 8, 7, 9, 6, 11],
-      gifts: ["Smember giảm đến 600.000đ", "S-Student giảm thêm 300.000đ", "Lắp đặt nhanh toàn quốc"],
+      gifts: ["Thành viên giảm đến 600.000đ", "Sinh viên giảm thêm 300.000đ", "Lắp đặt nhanh toàn quốc"],
     },
   };
 

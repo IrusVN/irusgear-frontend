@@ -393,7 +393,7 @@ export default {
         addToCart: "Thêm vào giỏ",
         bundleDeal: "Ưu đãi mua kèm",
         suggestedAccessory: "Phụ kiện gợi ý",
-        smemberDiscount: "Smember giảm thêm đến {amount}",
+        memberDiscount: "Thành viên giảm thêm đến {amount}",
         suggestionAdded: "Đã thêm gợi ý vào giỏ hàng.",
         productLines: "Dòng hàng",
         hintSave: "Tiết kiệm {amount}",
@@ -415,7 +415,7 @@ export default {
         tradeInSupport: "Trợ giá đến",
         rateNow: "Định giá ngay",
         memberSaving: "Tiết kiệm lên đến",
-        forSmember: "cho Smember",
+        forSmember: "cho Thành viên",
         checkNow: "Kiểm tra ngay",
         or: "Hoặc",
         promotionIncluded: "Khuyến mãi đi kèm",
@@ -447,6 +447,7 @@ export default {
         sending: "Đang gửi",
         seeMoreQuestions: "Xem thêm câu hỏi",
         similarProducts: "Sản phẩm tương tự",
+        usedRef: "Hàng secondhand",
         mayAlsoLike: "Có thể bạn cũng thích",
         seeAll: "Xem tất cả",
         newsProduct: "Tin tức sản phẩm",
@@ -479,7 +480,7 @@ export default {
         selectAddressForOffer: "Chọn địa chỉ giao hàng để nhận ưu đãi",
         newLabel: "Mới",
         fastDeliveryNote: "Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng",
-        tradeInIncluded: "(Bao gồm cả Smember)",
+        tradeInIncluded: "(Bao gồm Thành viên)",
         tradeInPrivilege: "Đặc quyền trợ giá lên đến 3 triệu khi thu cũ lên đời iPhone",
         simOffer: "Tặng Sim/Esim 5G VNSKY, có ngay 3GB data/ngày+500 phút gọi",
         simOfferDetail: "Mobifone & VNSKY, miễn phí 30 ngày đầu - chỉ áp dụng tại cửa hàng",
@@ -537,7 +538,7 @@ export default {
         warrantyFull12mDesc: "Kết hợp bảo hành lỗi từ nhà sản xuất và hỗ trợ một phần chi phí khi có sự cố ngoài ý muốn.",
         selectWarrantyPlan: "Chọn gói dịch vụ bảo hành",
         warrantyInfo: "Thông tin chi tiết về các gói bảo hành mở rộng.",
-        questionReplyInfo: "CellphoneS sẽ phản hồi trong vòng 1 giờ. Nếu Quý khách gửi câu hỏi sau 22h, chúng tôi sẽ trả lời vào sáng hôm sau.",
+        questionReplyInfo: "IrusGear sẽ phản hồi trong vòng 1 giờ. Nếu Quý khách gửi câu hỏi sau 22h, chúng tôi sẽ trả lời vào sáng hôm sau.",
         questionNote: "Thông tin có thể thay đổi theo thời gian, vui lòng đặt câu hỏi để nhận được cập nhật mới nhất!",
         reply: "Phản hồi",
         collapseReplies: "Thu gọn phản hồi",
@@ -572,7 +573,7 @@ export default {
         productNews: "Tin tức sản phẩm",
         loading: "Đang tải...",
         memberPromoNote: "Nhập hội thành viên để không bỏ lỡ các ưu đãi hấp dẫn.",
-        viewSmemberOffers: "Xem ưu đãi Smember",
+        viewSmemberOffers: "Xem ưu đãi Thành viên",
         catPhoneTablet: "Điện thoại, Tablet",
         catAudioMic: "Âm thanh, Mic thu âm",
         catWatchCamera: "Đồng hồ",
@@ -1209,15 +1210,15 @@ export default {
                     },
                     {
                         product: "Hàng đã kích hoạt bảo hành chính hãng",
-                        warrantyTime: "12 tháng = Thời gian BH còn lại tại hãng + BH tại CellphoneS",
-                        warrantyRights: "Theo quyền lợi BH của hãng trong thời gian được hãng BH; Sửa chữa, thay thế linh kiện trong thời gian BH còn lại tại CellphoneS",
-                        warrantyAddress: "TTBH chính hãng & CellphoneS / Điện Thoại Vui",
+                        warrantyTime: "12 tháng = Thời gian BH còn lại tại hãng + BH tại IrusGear",
+                        warrantyRights: "Theo quyền lợi BH của hãng trong thời gian được hãng BH; Sửa chữa, thay thế linh kiện trong thời gian BH còn lại tại IrusGear",
+                        warrantyAddress: "TTBH chính hãng & IrusGear / Điện Thoại Vui",
                     },
                     {
                         product: "Hàng cũ",
                         warrantyTime: "6 tháng",
                         warrantyRights: "Sửa chữa, thay thế linh kiện, bao gồm cả nguồn và màn hình.",
-                        warrantyAddress: "CellphoneS / Điện Thoại Vui",
+                        warrantyAddress: "IrusGear / Điện Thoại Vui",
                     },
                 ],
                 phoneLaptopNote: "Trong thời gian đợi bảo hành – sửa chữa, khách hàng sẽ được hỗ trợ miễn phí một điện thoại khác để sử dụng tạm thời. Khách hàng trả lại máy đã mượn sau khi nhận lại máy của mình.",
@@ -1323,7 +1324,7 @@ export default {
                 conditionsTitle: "Điều kiện bảo hành",
                 conditions: [
                     { text: "Sản phẩm bị tác động của ngoại lực, gây vỡ hoặc bị ngấm nước, ngấm các chất lỏng khác dẫn đến sản phẩm không hoạt động bình thường." },
-                    { text: "Sản phẩm phải còn trong tình trạng có thể xác định được mã số IMEI/Serial định danh sản phẩm. Trường hợp không thể xác định được, CellphoneS từ chối bảo hành." },
+                    { text: "Sản phẩm phải còn trong tình trạng có thể xác định được mã số IMEI/Serial định danh sản phẩm. Trường hợp không thể xác định được, IrusGear từ chối bảo hành." },
                 ],
                 rightsTitle: "Quyền lợi bảo hành",
                 rights: [
@@ -1333,9 +1334,9 @@ export default {
                 ],
                 cannotRepairTitle: "Trường hợp không thể sửa chữa",
                 cannotRepair: [
-                    { text: "CellphoneS sẽ đổi cho khách hàng một sản phẩm cũ có chất lượng tương đương." },
+                    { text: "IrusGear sẽ đổi cho khách hàng một sản phẩm cũ có chất lượng tương đương." },
                     { text: "Khách hàng chịu phí dịch vụ 10% giá trị của sản phẩm được đổi." },
-                    { text: "Sau khi đổi, gói bảo hành này hết hiệu lực và sản phẩm được đổi sẽ được bảo hành 06 tháng theo chính sách của CellphoneS." },
+                    { text: "Sau khi đổi, gói bảo hành này hết hiệu lực và sản phẩm được đổi sẽ được bảo hành 06 tháng theo chính sách của IrusGear." },
                     { text: "Chỉ áp dụng đổi máy, không đổi hộp và phụ kiện kèm theo (sạc, cáp...)." },
                 ],
                 extraPrivilegeTitle: "Đặc quyền thêm",
@@ -1354,7 +1355,7 @@ export default {
                     { text: "Đặc quyền lên đời: Được cộng thêm +3% tổng giá trị máy thu cũ khi thu cũ đổi mới." },
                 ],
                 cannotRepairTitle: "Không thể sửa chữa được",
-                cannotRepairDesc: "Nếu máy bị lỗi nhà sản xuất nhưng không thể sửa chữa, CellphoneS giải quyết theo thứ tự:",
+                cannotRepairDesc: "Nếu máy bị lỗi nhà sản xuất nhưng không thể sửa chữa, IrusGear giải quyết theo thứ tự:",
                 cannotRepairSteps: [
                     { text: "Bước 1: Đổi sản phẩm tương đương cùng thương hiệu, dòng sản phẩm, có chất lượng tương đương tại thời điểm bảo hành." },
                     { text: "Bước 2: Nếu không có sản phẩm để đổi, nhập lại (hoàn tiền) theo công thức:" },
@@ -1376,8 +1377,8 @@ export default {
             // Shared notice
             notice: {
                 dataLoss: "Lưu ý về dữ liệu: Khách hàng vui lòng tự sao lưu dữ liệu. Cửa hàng không chịu trách nhiệm về việc mất dữ liệu trong mọi trường hợp.",
-                dataLossAlt: "Lưu ý về dữ liệu: Quý khách vui lòng chủ động sao lưu dữ liệu cá nhân trước khi gửi bảo hành. CellphoneS và TTBH không chịu trách nhiệm về mất mát dữ liệu trong mọi trường hợp.",
-                important: "Lưu ý quan trọng: CellphoneS không chịu trách nhiệm về việc mất dữ liệu trong mọi trường hợp. Khách hàng nên chủ động sao lưu dữ liệu trước khi mang đi bảo hành.",
+                dataLossAlt: "Lưu ý về dữ liệu: Quý khách vui lòng chủ động sao lưu dữ liệu cá nhân trước khi gửi bảo hành. IrusGear và TTBH không chịu trách nhiệm về mất mát dữ liệu trong mọi trường hợp.",
+                important: "Lưu ý quan trọng: IrusGear không chịu trách nhiệm về việc mất dữ liệu trong mọi trường hợp. Khách hàng nên chủ động sao lưu dữ liệu trước khi mang đi bảo hành.",
                 importantAlt: "Lưu ý quan trọng: Khách hàng nên chủ động sao lưu dữ liệu cá nhân trước khi mang máy đi bảo hành vì cửa hàng không chịu trách nhiệm về mất mát dữ liệu.",
             },
         },
@@ -1392,9 +1393,7 @@ export default {
                 transaction: "II. Quy trình giao dịch",
                 warranty: "III. Chính sách bảo hành sản phẩm",
                 cancellation: "IV. Chính sách hủy đơn, đổi trả",
-                privacyCellphones: "V. Bảo mật thông tin Cellphones",
-                privacySforum: "VI. Bảo mật thông tin Sforum",
-                sforum: "VII. Thỏa thuận Sforum",
+                privacyIrusgear: "V. Bảo mật thông tin IrusGear",
             },
 
             // I - General
@@ -1402,13 +1401,13 @@ export default {
                 title: "I. Quy định chung",
                 principlesTitle: "1. Nguyên tắc chung",
                 principles: [
-                    { text: "Website thương mại điện tử cellphones.com.vn là sở hữu của Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc (\"Công ty\") do Công ty phát triển, hoạt động và vận hành với tên miền giao dịch là www.cellphones.com.vn (sau đây gọi là Website). Đối tượng phục vụ là tất cả các khách hàng có nhu cầu mua hàng, đặt hàng thông qua Website." },
-                    { text: "Sản phẩm được kinh doanh tại Cellphones.com.vn phải đáp ứng đầy đủ các quy định của nhà nước về nguồn gốc, xuất xứ hàng hóa, chất lượng sản phẩm." },
-                    { text: "Hoạt động mua bán tại Cellphones.com.vn phải được thực hiện công khai, minh bạch, đảm bảo quyền lợi của người tiêu dùng." },
+                    { text: "Website thương mại điện tử IrusGear.com.vn là sở hữu của Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc (\"Công ty\") do Công ty phát triển, hoạt động và vận hành với tên miền giao dịch là www.irusgear.com.vn (sau đây gọi là Website). Đối tượng phục vụ là tất cả các khách hàng có nhu cầu mua hàng, đặt hàng thông qua Website." },
+                    { text: "Sản phẩm được kinh doanh tại IrusGear.com.vn phải đáp ứng đầy đủ các quy định của nhà nước về nguồn gốc, xuất xứ hàng hóa, chất lượng sản phẩm." },
+                    { text: "Hoạt động mua bán tại IrusGear.com.vn phải được thực hiện công khai, minh bạch, đảm bảo quyền lợi của người tiêu dùng." },
                 ],
                 definitionsTitle: "2. Định nghĩa",
                 definitions: [
-                    { text: "Người bán: là Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc." },
+                    { text: "Người bán: là IrusGear." },
                     { text: "Người mua: là mọi công dân sinh sống trong lãnh thổ Việt Nam." },
                     { text: "Thành viên: là bao gồm cả người mua và người tham gia tham khảo thông tin, thảo luận tại Website." },
                     { text: "Thành viên khi tham gia Website phải tự tìm hiểu trách nhiệm pháp lý của mình đối với luật pháp hiện hành của Việt Nam và cam kết thực hiện đúng những nội dung trong Quy chế này." },
@@ -1420,15 +1419,15 @@ export default {
                 title: "II. Quy trình giao dịch",
                 purchaseTitle: "1. Quy trình mua hàng trên Website",
                 purchase: [
-                    { text: "Bước 1: Khách hàng tìm kiếm sản phẩm, đọc và đồng ý với các quy định trong \"Quy chế hoạt động website cung cấp dịch vụ TMĐT Cellphones.com.vn\"." },
+                    { text: "Bước 1: Khách hàng tìm kiếm sản phẩm, đọc và đồng ý với các quy định trong \"Quy chế hoạt động website cung cấp dịch vụ TMĐT IrusGear.com.vn\"." },
                     { text: "Bước 2: Xem giá và thông tin chi tiết sản phẩm. Nếu đồng ý mua, tùy theo nhu cầu và sản phẩm cụ thể, bấm một trong các nút: \"Mua ngay (giao hàng tận nơi hoặc nhận tại cửa hàng)\", \"Trả góp (duyệt qua điện thoại)\", hoặc \"Trả góp qua thẻ (Visa, Master, JCB)\"." },
                     { text: "Bước 3: Khách hàng nhập thông tin đặt hàng theo hướng dẫn tại mỗi mục mua hàng đã chọn ở trên. Nếu có mã khuyến mãi, nhập trực tiếp vào phiếu đặt hàng." },
-                    { text: "Bước 4: Sau khi nhận được đơn đặt hàng của khách, Cellphones.com.vn sẽ liên hệ qua số điện thoại đã cung cấp qua tổng đài 1800.2063 để xác nhận thông tin đơn hàng." },
-                    { text: "Bước 5: Cellphones.com.vn giao hàng tận nơi hoặc khách hàng đến các cửa hàng CellphoneS toàn quốc để nhận hàng." },
+                    { text: "Bước 4: Sau khi nhận được đơn đặt hàng của khách, IrusGear sẽ liên hệ qua số điện thoại đã cung cấp qua tổng đài 1800.2063 để xác nhận thông tin đơn hàng." },
+                    { text: "Bước 5: IrusGear giao hàng tận nơi hoặc khách hàng đến các cửa hàng IrusGear toàn quốc để nhận hàng." },
                 ],
                 deliveryTitle: "2. Quy trình giao hàng và vận chuyển",
-                deliveryDesc: "Cellphones.com.vn miễn phí giao hàng toàn quốc. Sau khi tiếp nhận đơn đặt hàng của người mua và xác nhận thông tin mua hàng qua điện thoại, Cellphones.com.vn sẽ tiến hành giao hàng theo yêu cầu của khách.",
-                noticeImportant: "Lưu ý quan trọng: Với giao dịch có giá trị từ 10 triệu đồng trở lên, khách hàng vui lòng xuất trình THẺ GỐC và CCCD/CMND GỐC của CHỦ THẺ để CellphoneS đối chiếu trước khi giao hàng nhằm phòng tránh trường hợp gian lận. Trường hợp người nhận hàng không phải là CHỦ THẺ hoặc phát hiện có vấn đề về giao dịch, CellphoneS có quyền hủy giao dịch và hoàn tiền cho CHỦ THẺ. Thời gian xử lý hoàn tiền từ 7 – 14 ngày (không tính thứ 7, CN).",
+                deliveryDesc: "IrusGear miễn phí giao hàng toàn quốc. Sau khi tiếp nhận đơn đặt hàng của người mua và xác nhận thông tin mua hàng qua điện thoại, IrusGear sẽ tiến hành giao hàng theo yêu cầu của khách.",
+                noticeImportant: "Lưu ý quan trọng: Với giao dịch có giá trị từ 10 triệu đồng trở lên, khách hàng vui lòng xuất trình THẺ GỐC và CCCD/CMND GỐC của CHỦ THẺ để IrusGear đối chiếu trước khi giao hàng nhằm phòng tránh trường hợp gian lận. Trường hợp người nhận hàng không phải là CHỦ THẺ hoặc phát hiện có vấn đề về giao dịch, IrusGear có quyền hủy giao dịch và hoàn tiền cho CHỦ THẺ. Thời gian xử lý hoàn tiền từ 7 – 14 ngày (không tính thứ 7, CN).",
             },
 
             // III - Warranty policy
@@ -1465,8 +1464,8 @@ export default {
                 },
                 standardRows: [
                     { product: "Hàng mới", warrantyTime: "12 tháng theo chính sách hãng", warrantyAddress: "TTBH chính hãng" },
-                    { product: "Hàng đã kích hoạt bảo hành chính hãng", warrantyTime: "12 tháng (BH còn lại tại hãng + BH tại CellphoneS)", warrantyAddress: "TTBH chính hãng & CellphoneS / Điện Thoại Vui" },
-                    { product: "Hàng đã sử dụng", warrantyTime: "6 tháng", warrantyAddress: "CellphoneS / Điện Thoại Vui" },
+                    { product: "Hàng đã kích hoạt bảo hành chính hãng", warrantyTime: "12 tháng (BH còn lại tại hãng + BH tại IrusGear)", warrantyAddress: "TTBH chính hãng & IrusGear / Điện Thoại Vui" },
+                    { product: "Hàng đã sử dụng", warrantyTime: "6 tháng", warrantyAddress: "IrusGear / Điện Thoại Vui" },
                 ],
                 standardNote: "Phụ kiện đi kèm Vsmart, Asus, Nokia có thời gian bảo hành 6 tháng. Khách hàng có thể được hỗ trợ một điện thoại khác để sử dụng tạm trong thời gian chờ bảo hành.",
             },
@@ -1478,8 +1477,7 @@ export default {
                 cancelOrderDesc: "Khách hàng có thể hủy đơn từ lúc \"Đặt hàng\" đến trước khi nhận hàng thành công.",
                 cancelWays: [
                     { text: "Gọi tổng đài: 1800.2097 (miền Nam) hoặc 1800.2044 (miền Bắc)." },
-                    { text: "Gửi email: cskh\\u0040cellphones.com.vn." },
-                    { text: "Nhắn tin Fanpage CellphoneS." },
+                    { text: "Gửi email: support\\u0040irusgear.com." },
                     { text: "Từ chối nhận hàng và xác nhận hủy với đơn vị giao hàng." },
                 ],
                 returnPolicyTitle: "2. Chính sách đổi trả",
@@ -1523,9 +1521,9 @@ export default {
                 refundNote: "* Ngày làm việc: thứ 2 đến thứ 6 hàng tuần (không tính T7, CN, ngày lễ).",
             },
 
-            // V - Privacy Cellphones
-            privacyCellphones: {
-                title: "V. Chính sách bảo mật thông tin khách hàng Cellphones",
+            // V - Privacy IrusGear
+            privacyIrusgear: {
+                title: "V. Chính sách bảo mật thông tin khách hàng IrusGear",
                 collectPurposeTitle: "1. Mục đích thu thập thông tin",
                 collectPurpose: [
                     { text: "Xử lý đơn hàng và cung cấp dịch vụ cho khách hàng." },
@@ -1536,7 +1534,7 @@ export default {
                 ],
                 scopeTitle: "2. Phạm vi sử dụng thông tin",
                 scope: [
-                    { text: "Thông tin được sử dụng nội bộ bởi Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc." },
+                    { text: "Thông tin được sử dụng nội bộ bởi IrusGear." },
                     { text: "Không cung cấp thông tin cá nhân cho bên thứ ba khi chưa có sự đồng ý của khách hàng, trừ các trường hợp pháp luật yêu cầu." },
                 ],
                 storageTitle: "3. Thời gian lưu trữ",
@@ -1549,25 +1547,25 @@ export default {
                 ],
                 contactTitle: "5. Thông tin liên hệ",
                 contact: [
-                    { text: "Công ty: Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc." },
+                    { text: "Công ty: IrusGear." },
                     { text: "Địa chỉ: 350-352 Võ Văn Kiệt, Phường Cô Giang, Quận 1, TP. Hồ Chí Minh." },
                     { text: "Điện thoại: 1800.2097." },
-                    { text: "Email: cskh\\u0040cellphones.com.vn." },
+                    { text: "Email: support\\u0040irusgear.com." },
                 ],
             },
 
-            // VI - Privacy Sforum
+            // VI - Privacy IrusGear Community
             privacySforum: {
-                title: "VI. Chính sách bảo mật thông tin khách hàng Sforum",
+                title: "VI. Chính sách bảo mật thông tin khách hàng IrusGear Community",
                 infoTypesTitle: "1. Loại thông tin thu thập",
                 infoTypes: [
                     { text: "Thông tin cá nhân: Họ tên, số điện thoại, email, địa chỉ giao hàng, số CCCD (đối với một số giao dịch)." },
                     { text: "Thông tin kỹ thuật: Địa chỉ IP, loại trình duyệt, thời gian truy cập, cookie để theo dõi sở thích và cải thiện hiệu suất Website." },
-                    { text: "Thông tin giao dịch: Thông tin liên quan đến việc sử dụng dịch vụ và lịch sử trên Sforum." },
+                    { text: "Thông tin giao dịch: Thông tin liên quan đến việc sử dụng dịch vụ và lịch sử trên Cộng đồng IrusGear." },
                 ],
                 usagePurposeTitle: "2. Mục đích sử dụng dữ liệu",
                 usagePurpose: [
-                    { text: "Quản lý tài khoản người dùng và cung cấp dịch vụ trên Sforum." },
+                    { text: "Quản lý tài khoản người dùng và cung cấp dịch vụ trên Cộng đồng IrusGear." },
                     { text: "Gửi thông báo về hoạt động tài khoản, khuyến mãi và sản phẩm mới (khi có sự đồng ý)." },
                     { text: "Hỗ trợ khách hàng, xử lý sự cố và giải quyết khiếu nại." },
                     { text: "Giám sát an ninh, phòng chống gian lận và hoạt động bất hợp pháp." },
@@ -1577,7 +1575,7 @@ export default {
                 storageDesc: "Thông tin được lưu trữ cho đến khi người dùng yêu cầu xóa, tài khoản đóng hoặc theo quy định pháp luật.",
                 managerTitle: "4. Đơn vị quản lý dữ liệu",
                 manager: [
-                    { text: "Công ty: Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc." },
+                    { text: "Công ty: IrusGear." },
                     { text: "Địa chỉ: 350-352 Võ Văn Kiệt, Phường Cô Giang, Quận 1, TP. Hồ Chí Minh." },
                     { text: "Điện thoại: 1800.2063." },
                 ],
@@ -1588,27 +1586,27 @@ export default {
                 ],
                 securityTitle: "6. Biện pháp bảo mật",
                 security: [
-                    { text: "Sforum sử dụng mã hóa (SSL/TLS) và máy chủ bảo mật để bảo vệ dữ liệu người dùng." },
+                    { text: "IrusGear sử dụng mã hóa (SSL/TLS) và máy chủ bảo mật để bảo vệ dữ liệu người dùng." },
                     { text: "Việc truy cập dữ liệu cá nhân được giới hạn đối với nhân viên được ủy quyền." },
                 ],
                 complaintTitle: "7. Khiếu nại và thông tin liên hệ",
                 complaint: [
                     { text: "Người dùng có thể liên hệ bộ phận hỗ trợ để được giải đáp hoặc thực hiện yêu cầu liên quan đến dữ liệu cá nhân." },
-                    { text: "Email: nhattruong.bui\\u0040cellphones.com.vn" },
+                    { text: "Email: support\\u0040irusgear.com" },
                     { text: "Điện thoại: 0824111196" },
-                    { text: "Chính sách có hiệu lực từ ngày 01/01/2024. Sforum có quyền cập nhật chính sách và sẽ thông báo trên Website." },
+                    { text: "Chính sách có hiệu lực từ ngày 01/01/2024. IrusGear có quyền cập nhật chính sách và sẽ thông báo trên Website." },
                 ],
             },
 
-            // VII - Sforum agreement
+            // VII - IrusGear Community agreement
             sforum: {
-                title: "VII. Thỏa thuận cung cấp và sử dụng dịch vụ trên Sforum",
+                title: "VII. Thỏa thuận cung cấp và sử dụng dịch vụ trên Cộng đồng IrusGear",
                 article1Title: "Điều 1. Định nghĩa",
                 article1: [
-                    { text: "Nhà cung cấp: Công ty TNHH Thương mại và Dịch vụ Kỹ thuật Diệu Phúc, hoạt động hợp pháp theo quy định pháp luật Việt Nam." },
-                    { text: "Sforum: Phần của hệ thống trang thông tin điện tử, cung cấp dịch vụ mạng xã hội cho cộng đồng trao đổi, chia sẻ thông tin về công nghệ dưới các hình thức bình luận, chia sẻ bài viết." },
-                    { text: "Người sử dụng: Cá nhân, tổ chức có tài khoản hợp lệ trên Sforum." },
-                    { text: "Ban Quản trị: Bộ phận thuộc Nhà cung cấp, chịu trách nhiệm quản lý hoạt động Sforum và giải quyết vi phạm, khiếu nại." },
+                    { text: "Nhà cung cấp: IrusGear, hoạt động hợp pháp theo quy định pháp luật Việt Nam." },
+                    { text: "Cộng đồng IrusGear: Phần của hệ thống trang thông tin điện tử, cung cấp dịch vụ mạng xã hội cho cộng đồng trao đổi, chia sẻ thông tin về công nghệ dưới các hình thức bình luận, chia sẻ bài viết." },
+                    { text: "Người sử dụng: Cá nhân, tổ chức có tài khoản hợp lệ trên Cộng đồng IrusGear." },
+                    { text: "Ban Quản trị: Bộ phận thuộc Nhà cung cấp, chịu trách nhiệm quản lý hoạt động Cộng đồng IrusGear và giải quyết vi phạm, khiếu nại." },
                 ],
                 article2Title: "Điều 2. Đăng ký và ngừng sử dụng dịch vụ",
                 article2: [
@@ -1631,12 +1629,12 @@ export default {
                 ],
                 article4Title: "Điều 4. Quyền và nghĩa vụ của Người sử dụng",
                 article4: [
-                    { text: "Quyền: Sử dụng dịch vụ, tính năng của Sforum; được bảo mật thông tin cá nhân; góp ý, phản ánh, khiếu nại." },
+                    { text: "Quyền: Sử dụng dịch vụ, tính năng của Cộng đồng IrusGear; được bảo mật thông tin cá nhân; góp ý, phản ánh, khiếu nại." },
                     { text: "Nghĩa vụ: Tuân thủ Thỏa thuận và pháp luật; cung cấp thông tin chính xác; tự bảo mật tài khoản; chịu trách nhiệm nội dung bài viết, bình luận; không phá hoại hệ thống; không đăng tải nội dung cấm." },
                 ],
                 article5Title: "Điều 5. Quyền của Nhà cung cấp",
                 article5: [
-                    { text: "Thiết lập, thay đổi, nâng cấp, bảo trì hệ thống Sforum bất kỳ lúc nào mà không cần thông báo trước." },
+                    { text: "Thiết lập, thay đổi, nâng cấp, bảo trì hệ thống Cộng đồng IrusGear bất kỳ lúc nào mà không cần thông báo trước." },
                     { text: "Tạm ngừng hoặc chấm dứt cung cấp dịch vụ trong trường hợp bảo trì, sự cố kỹ thuật hoặc theo yêu cầu cơ quan nhà nước." },
                     { text: "Kiểm duyệt, chỉnh sửa hoặc xóa nội dung vi phạm; sử dụng nội dung người dùng cho mục đích truyền thông, quảng bá." },
                     { text: "Từ chối cung cấp dịch vụ hoặc xóa tài khoản vi phạm Thỏa thuận." },
@@ -1653,7 +1651,7 @@ export default {
                 article8: [
                     { text: "Mọi khiếu nại được giải quyết trên tinh thần hợp tác và thỏa thuận giữa các bên." },
                     { text: "Trường hợp không thỏa thuận được, các bên có quyền đưa ra cơ quan nhà nước có thẩm quyền." },
-                    { text: "Hotline: 1800.2097, Email: cskh\\u0040cellphones.com.vn" },
+                    { text: "Hotline: 1800.2097, Email: support\\u0040irusgear.com" },
                 ],
                 article9Title: "Điều 9. Miễn trừ trách nhiệm pháp lý",
                 article9: [
@@ -1661,7 +1659,7 @@ export default {
                     { text: "Nhà cung cấp không chịu trách nhiệm về tính chính xác, tính đầy đủ của thông tin do người dùng đăng tải." },
                 ],
                 article10Title: "Điều 10. Sửa đổi Thỏa thuận",
-                article10: "Nhà cung cấp có quyền sửa đổi, bổ sung Thỏa thuận này bất kỳ lúc nào. Các thay đổi có hiệu lực kể từ thời điểm được đăng tải trên Sforum. Người dùng tiếp tục sử dụng dịch vụ sau khi có thay đổi đồng nghĩa với việc chấp nhận các điều khoản mới.",
+                article10: "Nhà cung cấp có quyền sửa đổi, bổ sung Thỏa thuận này bất kỳ lúc nào. Các thay đổi có hiệu lực kể từ thời điểm được đăng tải trên Website. Người dùng tiếp tục sử dụng dịch vụ sau khi có thay đổi đồng nghĩa với việc chấp nhận các điều khoản mới.",
                 hotline: {
                     purchaseLabel: "Gọi mua hàng",
                     purchaseValue: "1800.2097 (8h00 – 22h00)",

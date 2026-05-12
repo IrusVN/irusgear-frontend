@@ -38,11 +38,7 @@
   <div class="tradein-list">
     <!-- Empty State -->
     <div v-if="!isLoading && tradeins.length === 0" class="tradein-empty">
-      <img
-        src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
-        alt="empty"
-        class="tradein-empty__img"
-      />
+      <i class="bi bi-arrow-left-right tradein-empty__img" style="font-size:48px;color:#d4d4d8"></i>
       <p class="tradein-empty__text">{{ $t('profile.tradein.empty') }}</p>
       <NuxtLink :to="localePath('/')" class="btn btn-dark rounded-pill px-4 py-2">
         <i class="bi bi-house-door me-2"></i>{{ $t('profile.common.home') }}
@@ -749,7 +745,7 @@ loadTradeins()
 }
 
 .tradein-card__device-label--new {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .tradein-card__device-body {
@@ -795,7 +791,7 @@ loadTradeins()
   display: flex;
   justify-content: center;
   padding: 4px 16px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 16px;
 }
 
@@ -838,7 +834,7 @@ loadTradeins()
 }
 
 .tradein-card__price-value--total {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 15px;
 }
 

@@ -356,7 +356,7 @@ const reviewRatingLabel = (rating) => {
 }
 
 .button {
-  background: #d70018;
+  background: var(--irus-color-accent);
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -507,9 +507,9 @@ const reviewRatingLabel = (rating) => {
 }
 
 .filter-chip.active {
-  background: #fff1f2;
-  border-color: #fda4af;
-  color: #d70018;
+  background: var(--irus-color-accent-soft);
+  border-color: var(--irus-color-accent);
+  color: var(--irus-color-accent);
 }
 
 .boxReview-comment {
@@ -525,9 +525,9 @@ const reviewRatingLabel = (rating) => {
 
 .boxReview-comment-item-avatar {
   align-items: center;
-  background: #fee2e2;
+  background: var(--irus-color-accent-soft);
   border-radius: 999px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: flex;
   font-weight: 700;
   height: 36px;
@@ -575,7 +575,7 @@ const reviewRatingLabel = (rating) => {
 }
 
 .rating-label {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 13px;
   font-weight: 600;
 }

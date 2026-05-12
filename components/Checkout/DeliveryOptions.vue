@@ -129,7 +129,7 @@ onUnmounted(() => {
 }
 
 .delivery-options__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .delivery-options__empty {

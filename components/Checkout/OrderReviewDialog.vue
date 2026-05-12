@@ -232,7 +232,7 @@ const getSelectedOptionsText = (item) => {
 
 .order-review-dialog__title {
   align-items: center;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: flex;
   font-size: 17px;
   font-weight: 700;
@@ -277,7 +277,7 @@ const getSelectedOptionsText = (item) => {
 .review-section__edit {
   background: none;
   border: none;
-  color: #d70018;
+  color: var(--irus-color-accent);
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
@@ -415,7 +415,7 @@ const getSelectedOptionsText = (item) => {
 }
 
 .review-pricing__total-value {
-  color: #d70018 !important;
+  color: var(--irus-color-accent) !important;
   font-size: 22px;
 }
 
@@ -436,7 +436,7 @@ const getSelectedOptionsText = (item) => {
 }
 
 .order-review-dialog__terms a {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .order-review-dialog__footer {
@@ -472,14 +472,14 @@ const getSelectedOptionsText = (item) => {
 }
 
 .order-review-dialog__btn--confirm {
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   color: #fff;
   flex: 2;
 }
 
 .order-review-dialog__btn--confirm:hover:not(:disabled) {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
 }
 
 .order-review-dialog__btn--confirm:disabled {

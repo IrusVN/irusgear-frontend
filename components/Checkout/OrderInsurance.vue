@@ -54,7 +54,7 @@ const checkoutStore = useCheckoutStore();
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: #d70018;
+  accent-color: var(--irus-color-accent);
 }
 
 .order-insurance__label {
@@ -64,9 +64,9 @@ const checkoutStore = useCheckoutStore();
 }
 
 .order-insurance__price {
-  background: #fff7f7;
+  background: var(--irus-color-accent-soft);
   border-radius: 6px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 12px;
   padding: 2px 8px;
 }

@@ -97,9 +97,9 @@ const quickLinks = computed(() => [
 
 .cart-empty__icon {
   align-items: center;
-  background: linear-gradient(135deg, #fff2f2, #fff8f8);
+  background: var(--irus-color-accent-soft);
   border-radius: 50%;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: flex;
   font-size: 32px;
   height: 84px;
@@ -124,7 +124,7 @@ const quickLinks = computed(() => [
 
 .cart-empty__cta {
   align-items: center;
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border-radius: 999px;
   color: #fff;
   display: inline-flex;

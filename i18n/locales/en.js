@@ -393,7 +393,7 @@ export default {
         addToCart: "Add to Cart",
         bundleDeal: "Bundle Deal",
         suggestedAccessory: "Suggested Accessory",
-        smemberDiscount: "Smember extra discount up to {amount}",
+        memberDiscount: "IrusGear Member extra discount up to {amount}",
         suggestionAdded: "Suggestion added to cart.",
         productLines: "Product Lines",
         hintSave: "Save {amount}",
@@ -415,7 +415,7 @@ export default {
         tradeInSupport: "Support price up to",
         rateNow: "Get rate now",
         memberSaving: "Save up to",
-        forSmember: "for Smember",
+        forSmember: "for Member",
         checkNow: "Check now",
         or: "Or",
         promotionIncluded: "Included Promotions",
@@ -447,6 +447,7 @@ export default {
         sending: "Sending",
         seeMoreQuestions: "See more questions",
         similarProducts: "Similar Products",
+        usedRef: "Secondhand",
         mayAlsoLike: "You may also like",
         seeAll: "See all",
         newsProduct: "Product News",
@@ -479,7 +480,7 @@ export default {
         selectAddressForOffer: "Select delivery address to receive offers",
         newLabel: "New",
         fastDeliveryNote: "Fast delivery from 2 hours or pick up at store",
-        tradeInIncluded: "(Including Smember)",
+        tradeInIncluded: "(Including Member)",
         tradeInPrivilege: "Exclusive trade-in benefit up to 3 million when trading in iPhone",
         simOffer: "Free Sim/Esim 5G VNSKY with 3GB data/day + 500 mins",
         simOfferDetail: "Mobifone & VNSKY, free first 30 days - available at store only",
@@ -537,7 +538,7 @@ export default {
         warrantyFull12mDesc: "Combines manufacturer defect warranty with partial coverage for unexpected incidents.",
         selectWarrantyPlan: "Select warranty plan",
         warrantyInfo: "Detailed information about extended warranty packages.",
-        questionReplyInfo: "CellphoneS will respond within 1 hour. If you send questions after 22h, we will reply the next morning.",
+        questionReplyInfo: "IrusGear will respond within 1 hour. If you send questions after 22h, we will reply the next morning.",
         questionNote: "Information may change over time, please ask questions to receive the latest updates!",
         reply: "Reply",
         collapseReplies: "Collapse replies",
@@ -572,7 +573,7 @@ export default {
         productNews: "Product News",
         loading: "Loading...",
         memberPromoNote: "Join the member program to not miss out on great offers.",
-        viewSmemberOffers: "View Smember offers",
+        viewSmemberOffers: "View Member offers",
         catPhoneTablet: "Phone, Tablet",
         catAudioMic: "Audio, Microphone",
         catWatchCamera: "Watch",
@@ -1206,15 +1207,15 @@ export default {
                     },
                     {
                         product: "Already activated with manufacturer warranty",
-                        warrantyTime: "12 months = Remaining manufacturer warranty + CellphoneS warranty",
-                        warrantyRights: "Manufacturer warranty during covered period; Repair/replace parts during remaining CellphoneS warranty",
-                        warrantyAddress: "Official service center & CellphoneS / DienThoaiVui",
+                        warrantyTime: "12 months = Remaining manufacturer warranty + IrusGear warranty",
+                        warrantyRights: "Manufacturer warranty during covered period; Repair/replace parts during remaining IrusGear warranty",
+                        warrantyAddress: "Official service center & IrusGear / DienThoaiVui",
                     },
                     {
                         product: "Used",
                         warrantyTime: "6 months",
                         warrantyRights: "Repair, part replacement including power and screen.",
-                        warrantyAddress: "CellphoneS / DienThoaiVui",
+                        warrantyAddress: "IrusGear / DienThoaiVui",
                     },
                 ],
                 phoneLaptopNote: "During warranty waiting/repair, customers will receive a free temporary replacement phone. Return the borrowed device after receiving your repaired device.",
@@ -1317,7 +1318,7 @@ export default {
                 conditionsTitle: "Warranty Conditions",
                 conditions: [
                     { text: "Product damaged by external force causing breakage or water/liquid intrusion resulting in abnormal operation." },
-                    { text: "Product must still have identifiable IMEI/Serial number. If unidentifiable, CellphoneS reserves the right to deny warranty." },
+                    { text: "Product must still have identifiable IMEI/Serial number. If unidentifiable, IrusGear reserves the right to deny warranty." },
                 ],
                 rightsTitle: "Warranty Coverage",
                 rights: [
@@ -1327,9 +1328,9 @@ export default {
                 ],
                 cannotRepairTitle: "When Repair Is Not Possible",
                 cannotRepair: [
-                    { text: "CellphoneS will replace with an equivalent quality used product." },
+                    { text: "IrusGear will replace with an equivalent quality used product." },
                     { text: "Customer pays service fee of 10% of the replaced product's value." },
-                    { text: "After replacement, this warranty package is void and the replacement product is covered by 6 months under CellphoneS policy." },
+                    { text: "After replacement, this warranty package is void and the replacement product is covered by 6 months under IrusGear policy." },
                     { text: "Only device exchange applies; box and accessories (charger, cable...) are not exchanged." },
                 ],
                 extraPrivilegeTitle: "Additional Privilege",
@@ -1347,7 +1348,7 @@ export default {
                     { text: "Upgrade privilege: Get additional +3% of total old device trade-in value when trading in for a new device." },
                 ],
                 cannotRepairTitle: "When Repair Is Not Possible",
-                cannotRepairDesc: "If the device has manufacturer defects but cannot be repaired, CellphoneS resolves in order:",
+                cannotRepairDesc: "If the device has manufacturer defects but cannot be repaired, IrusGear resolves in order:",
                 cannotRepairSteps: [
                     { text: "Step 1: Exchange for equivalent product of the same brand, product line, and equivalent quality at warranty time." },
                     { text: "Step 2: If no product available for exchange, buyback (refund) at:" },
@@ -1368,8 +1369,8 @@ export default {
 
             notice: {
                 dataLoss: "Data notice: Please backup your data yourself. The store is not responsible for data loss under any circumstances.",
-                dataLossAlt: "Data notice: Please proactively backup your personal data before sending for warranty. CellphoneS and service centers are not responsible for data loss under any circumstances.",
-                important: "Important note: CellphoneS is not responsible for data loss under any circumstances. Customers should proactively backup data before sending for warranty.",
+                dataLossAlt: "Data notice: Please proactively backup your personal data before sending for warranty. IrusGear and service centers are not responsible for data loss under any circumstances.",
+                important: "Important note: IrusGear is not responsible for data loss under any circumstances. Customers should proactively backup data before sending for warranty.",
                 importantAlt: "Important note: Customers should proactively backup personal data before sending the device for warranty as the store is not responsible for data loss.",
             },
         },
@@ -1384,22 +1385,20 @@ export default {
                 transaction: "II. Transaction Process",
                 warranty: "III. Product Warranty Policy",
                 cancellation: "IV. Order Cancellation & Return Policy",
-                privacyCellphones: "V. Cellphones Privacy Policy",
-                privacySforum: "VI. Sforum Privacy Policy",
-                sforum: "VII. Sforum Service Agreement",
+                privacyIrusgear: "V. IrusGear Privacy Policy",
             },
 
             general: {
                 title: "I. General Regulations",
                 principlesTitle: "1. General Principles",
                 principles: [
-                    { text: "E-commerce website cellphones.com.vn is owned by Dieu Phuc Trading and Technical Services Company Limited (\"Company\"), developed, operated and managed with the domain www.cellphones.com.vn (hereinafter referred to as Website). The target audience is all customers who wish to purchase or order through the Website." },
-                    { text: "Products sold at Cellphones.com.vn must fully meet state regulations on origin, quality, and product standards." },
-                    { text: "Sales activities at Cellphones.com.vn must be conducted publicly, transparently, and ensure consumer rights." },
+                    { text: "E-commerce website IrusGear.com.vn is owned by Dieu Phuc Trading and Technical Services Company Limited (\"Company\"), developed, operated and managed with the domain www.irusgear.com.vn (hereinafter referred to as Website). The target audience is all customers who wish to purchase or order through the Website." },
+                    { text: "Products sold at IrusGear.com.vn must fully meet state regulations on origin, quality, and product standards." },
+                    { text: "Sales activities at IrusGear.com.vn must be conducted publicly, transparently, and ensure consumer rights." },
                 ],
                 definitionsTitle: "2. Definitions",
                 definitions: [
-                    { text: "Seller: Dieu Phuc Trading and Technical Services Company Limited." },
+                    { text: "Seller: IrusGear." },
                     { text: "Buyer: All citizens residing in Vietnam." },
                     { text: "Member: Includes both buyers and those who participate in browsing information and discussions on the Website." },
                     { text: "Members, when participating on the Website, must understand their legal responsibilities under current Vietnamese law and commit to complying with the contents of these Terms." },
@@ -1410,15 +1409,15 @@ export default {
                 title: "II. Transaction Process",
                 purchaseTitle: "1. Purchase Process on Website",
                 purchase: [
-                    { text: "Step 1: Customer searches for products, reads and agrees to the regulations in \"Cellphones.com.vn E-Commerce Website Operating Terms\"." },
+                    { text: "Step 1: Customer searches for products, reads and agrees to the regulations in \"IrusGear.com.vn E-Commerce Website Operating Terms\"." },
                     { text: "Step 2: View price and detailed product information. If agreeing to purchase, depending on needs and specific products, click one of: \"Buy Now (deliver to doorstep or pick up at store)\", \"Installment (phone approval)\", or \"Installment via card (Visa, Master, JCB)\"." },
                     { text: "Step 3: Customer enters order information as guided in each selected purchase section. If there is a promo code, enter it directly in the order form." },
-                    { text: "Step 4: After receiving the customer's order, Cellphones.com.vn will contact via the provided phone number through hotline 1800.2063 to confirm order details." },
-                    { text: "Step 5: Cellphones.com.vn delivers to the doorstep or customer picks up at any CellphoneS store nationwide." },
+                    { text: "Step 4: After receiving the customer's order, IrusGear will contact via the provided phone number through hotline 1800.2063 to confirm order details." },
+                    { text: "Step 5: IrusGear delivers to the doorstep or customer picks up at any IrusGear store nationwide." },
                 ],
                 deliveryTitle: "2. Delivery and Shipping Process",
-                deliveryDesc: "Cellphones.com.vn offers free nationwide delivery. After receiving the buyer's order and confirming purchase details by phone, Cellphones.com.vn will proceed with delivery as requested.",
-                noticeImportant: "Important note: For transactions valued at 10 million VND or more, customers must present the ORIGINAL CARD and ORIGINAL CCCD/ID of the CARDHOLDER for CellphoneS to verify before delivery to prevent fraud. If the recipient is not the CARDHOLDER or any issues are detected, CellphoneS has the right to cancel the transaction and refund the CARDHOLDER. Refund processing time is 7 – 14 days (excluding Saturdays and Sundays).",
+                deliveryDesc: "IrusGear offers free nationwide delivery. After receiving the buyer's order and confirming purchase details by phone, IrusGear will proceed with delivery as requested.",
+                noticeImportant: "Important note: For transactions valued at 10 million VND or more, customers must present the ORIGINAL CARD and ORIGINAL CCCD/ID of the CARDHOLDER for IrusGear to verify before delivery to prevent fraud. If the recipient is not the CARDHOLDER or any issues are detected, IrusGear has the right to cancel the transaction and refund the CARDHOLDER. Refund processing time is 7 – 14 days (excluding Saturdays and Sundays).",
             },
 
             warranty: {
@@ -1454,8 +1453,8 @@ export default {
                 },
                 standardRows: [
                     { product: "New", warrantyTime: "12 months per brand policy", warrantyAddress: "Official service center" },
-                    { product: "Activated with manufacturer warranty", warrantyTime: "12 months (remaining manufacturer + CellphoneS warranty)", warrantyAddress: "Official service center & CellphoneS / DienThoaiVui" },
-                    { product: "Used", warrantyTime: "6 months", warrantyAddress: "CellphoneS / DienThoaiVui" },
+                    { product: "Activated with manufacturer warranty", warrantyTime: "12 months (remaining manufacturer + IrusGear warranty)", warrantyAddress: "Official service center & IrusGear / DienThoaiVui" },
+                    { product: "Used", warrantyTime: "6 months", warrantyAddress: "IrusGear / DienThoaiVui" },
                 ],
                 standardNote: "Accessories included with Vsmart, Asus, Nokia have a 6-month warranty period. Customers may receive a temporary replacement phone during warranty service.",
             },
@@ -1466,8 +1465,7 @@ export default {
                 cancelOrderDesc: "Customers may cancel orders from the time of \"placing order\" until before successfully receiving the order.",
                 cancelWays: [
                     { text: "Call hotline: 1800.2097 (South) or 1800.2044 (North)." },
-                    { text: "Send email: cskh\\u0040cellphones.com.vn." },
-                    { text: "Message CellphoneS Fanpage." },
+                    { text: "Send email: support\\u0040irusgear.com." },
                     { text: "Refuse to receive the order and confirm cancellation with the delivery partner." },
                 ],
                 returnPolicyTitle: "2. Return Policy",
@@ -1511,8 +1509,8 @@ export default {
                 refundNote: "* Business days: Monday to Friday (excluding Saturdays, Sundays, holidays).",
             },
 
-            privacyCellphones: {
-                title: "V. Cellphones Customer Information Privacy Policy",
+            privacyIrusgear: {
+                title: "V. IrusGear Customer Information Privacy Policy",
                 collectPurposeTitle: "1. Information Collection Purpose",
                 collectPurpose: [
                     { text: "Process orders and provide services to customers." },
@@ -1523,7 +1521,7 @@ export default {
                 ],
                 scopeTitle: "2. Information Use Scope",
                 scope: [
-                    { text: "Information is used internally by Dieu Phuc Trading and Technical Services Company Limited." },
+                    { text: "Information is used internally by IrusGear." },
                     { text: "Personal information is not provided to third parties without customer consent, except where required by law." },
                 ],
                 storageTitle: "3. Storage Duration",
@@ -1536,24 +1534,24 @@ export default {
                 ],
                 contactTitle: "5. Contact Information",
                 contact: [
-                    { text: "Company: Dieu Phuc Trading and Technical Services Company Limited." },
+                    { text: "Company: IrusGear." },
                     { text: "Address: 350-352 Vo Van Kiets, Co Giang Ward, District 1, Ho Chi Minh City." },
                     { text: "Phone: 1800.2097." },
-                    { text: "Email: cskh\\u0040cellphones.com.vn." },
+                    { text: "Email: support\\u0040irusgear.com." },
                 ],
             },
 
             privacySforum: {
-                title: "VI. Sforum Customer Information Privacy Policy",
+                title: "VI. IrusGear Community Customer Information Privacy Policy",
                 infoTypesTitle: "1. Types of Information Collected",
                 infoTypes: [
                     { text: "Personal information: Full name, phone number, email, delivery address, CCCD number (for certain transactions)." },
                     { text: "Technical information: IP address, browser type, access time, cookies to track preferences and improve Website performance." },
-                    { text: "Transaction information: Information related to service usage and history on Sforum." },
+                    { text: "Transaction information: Information related to service usage and history on IrusGear Community." },
                 ],
                 usagePurposeTitle: "2. Data Use Purpose",
                 usagePurpose: [
-                    { text: "Manage user accounts and provide services on Sforum." },
+                    { text: "Manage user accounts and provide services on IrusGear Community." },
                     { text: "Send notifications about account activity, promotions, and new products (with consent)." },
                     { text: "Support customers, resolve issues, and handle complaints." },
                     { text: "Monitor security, prevent fraud and illegal activities." },
@@ -1563,7 +1561,7 @@ export default {
                 storageDesc: "Information is stored until the user requests deletion, the account is closed, or as required by law.",
                 managerTitle: "4. Data Controller",
                 manager: [
-                    { text: "Company: Dieu Phuc Trading and Technical Services Company Limited." },
+                    { text: "Company: IrusGear." },
                     { text: "Address: 350-352 Vo Van Kiets, Co Giang Ward, District 1, Ho Chi Minh City." },
                     { text: "Phone: 1800.2063." },
                 ],
@@ -1574,26 +1572,26 @@ export default {
                 ],
                 securityTitle: "6. Security Measures",
                 security: [
-                    { text: "Sforum uses encryption (SSL/TLS) and secure servers to protect user data." },
+                    { text: "IrusGear uses encryption (SSL/TLS) and secure servers to protect user data." },
                     { text: "Access to personal data is restricted to authorized personnel." },
                 ],
                 complaintTitle: "7. Complaints and Contact",
                 complaint: [
                     { text: "Users may contact support to get answers or make requests related to personal data." },
-                    { text: "Email: nhattruong.bui\\u0040cellphones.com.vn" },
+                    { text: "Email: support\\u0040irusgear.com" },
                     { text: "Phone: 0824111196" },
-                    { text: "This policy is effective from 01/01/2024. Sforum reserves the right to update the policy and will notify on the Website." },
+                    { text: "This policy is effective from 01/01/2024. IrusGear reserves the right to update the policy and will notify on the Website." },
                 ],
             },
 
             sforum: {
-                title: "VII. Sforum Service Provision and Use Agreement",
+                title: "VII. IrusGear Community Service Provision and Use Agreement",
                 article1Title: "Article 1. Definitions",
                 article1: [
-                    { text: "Provider: Dieu Phuc Trading and Technical Services Company Limited, operating legally under Vietnamese law." },
-                    { text: "Sforum: Part of the electronic information portal system, providing social networking services for the community to exchange and share technology information in the form of comments and article sharing." },
-                    { text: "User: Individuals or organizations with valid accounts on Sforum." },
-                    { text: "Administrators: Department under the Provider, responsible for managing Sforum operations and resolving violations and complaints." },
+                    { text: "Provider: IrusGear, operating legally under Vietnamese law." },
+                    { text: "IrusGear Community: Part of the electronic information portal system, providing social networking services for the community to exchange and share technology information in the form of comments and article sharing." },
+                    { text: "User: Individuals or organizations with valid accounts on IrusGear Community." },
+                    { text: "Administrators: Department under the Provider, responsible for managing IrusGear Community operations and resolving violations and complaints." },
                 ],
                 article2Title: "Article 2. Registration and Service Discontinuation",
                 article2: [
@@ -1616,12 +1614,12 @@ export default {
                 ],
                 article4Title: "Article 4. User Rights and Obligations",
                 article4: [
-                    { text: "Rights: Use Sforum services and features; have personal information protected; provide feedback and complaints." },
+                    { text: "Rights: Use IrusGear Community services and features; have personal information protected; provide feedback and complaints." },
                     { text: "Obligations: Comply with the Agreement and law; provide accurate information; keep account secure; take responsibility for post and comment content; not damage the system; not post prohibited content." },
                 ],
                 article5Title: "Article 5. Provider Rights",
                 article5: [
-                    { text: "Establish, change, upgrade, or maintain the Sforum system at any time without prior notice." },
+                    { text: "Establish, change, upgrade, or maintain the IrusGear Community system at any time without prior notice." },
                     { text: "Temporarily suspend or terminate services in cases of maintenance, technical issues, or per state authority requests." },
                     { text: "Moderate, edit, or delete violating content; use user content for communication and promotion purposes." },
                     { text: "Refuse to provide service or delete accounts violating the Agreement." },
@@ -1638,7 +1636,7 @@ export default {
                 article8: [
                     { text: "All complaints are resolved through cooperation and mutual agreement between parties." },
                     { text: "If agreement cannot be reached, parties may bring the matter to competent state authorities." },
-                    { text: "Hotline: 1800.2097, Email: cskh\\u0040cellphones.com.vn" },
+                    { text: "Hotline: 1800.2097, Email: support\\u0040irusgear.com" },
                 ],
                 article9Title: "Article 9. Legal Disclaimer",
                 article9: [
@@ -1646,7 +1644,7 @@ export default {
                     { text: "Provider is not responsible for the accuracy or completeness of information posted by users." },
                 ],
                 article10Title: "Article 10. Agreement Amendments",
-                article10: "Provider reserves the right to amend or supplement this Agreement at any time. Changes take effect from the time they are posted on Sforum. Continued use of the service after changes constitutes acceptance of the new terms.",
+                article10: "Provider reserves the right to amend or supplement this Agreement at any time. Changes take effect from the time they are posted on the Website. Continued use of the service after changes constitutes acceptance of the new terms.",
                 hotline: {
                     purchaseLabel: "Purchase",
                     purchaseValue: "1800.2097 (8:00 AM – 10:00 PM)",

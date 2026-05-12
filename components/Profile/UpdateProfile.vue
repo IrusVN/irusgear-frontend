@@ -552,12 +552,12 @@ onBeforeUnmount(() => {
 }
 
 .profile-update__dropdown-item--active {
-  background: #fff1f2;
-  color: #d70018;
+  background: var(--irus-color-accent-soft);
+  color: var(--irus-color-accent);
 }
 
 .profile-update__dropdown-check {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 14px;
 }
 
@@ -643,8 +643,8 @@ onBeforeUnmount(() => {
 }
 
 .profile-update__button--submit {
-  background: #d70018;
-  border: 1px solid #d70018;
+  background: var(--irus-color-surface-strong);
+  border: 1px solid var(--irus-color-surface-strong);
   color: #fff;
 }
 

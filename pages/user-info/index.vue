@@ -108,11 +108,7 @@
     </div>
 
     <div v-else class="user-info-address-empty">
-      <img
-        src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
-        alt="empty"
-        class="user-info-address-empty__img"
-      />
+      <i class="bi bi-geo-alt user-info-address-empty__img" style="font-size:48px;color:#d4d4d8"></i>
       <p class="user-info-address-empty__text">{{ $t('profile.userInfo.noAddress') }}</p>
     </div>
   </div>
@@ -483,7 +479,7 @@ const handleUpdateGender = openUpdateProfile
   background: transparent;
   font-size: 13px;
   font-weight: 500;
-  color: #d70018;
+  color: var(--irus-color-accent);
   cursor: pointer;
   border-radius: 8px;
   transition: background 0.15s;
@@ -491,7 +487,7 @@ const handleUpdateGender = openUpdateProfile
 }
 
 .user-info-card__edit-btn:hover {
-  background: #fef2f2;
+  background: var(--irus-color-accent-soft);
 }
 
 /* ── Personal Info Body ──────────────────── */
@@ -563,7 +559,7 @@ const handleUpdateGender = openUpdateProfile
   width: 28px;
   height: 28px;
   border: 3px solid #f1f1f4;
-  border-top-color: #d70018;
+  border-top-color: var(--irus-color-accent);
   border-radius: 50%;
   animation: user-info-spin 0.8s linear infinite;
 }
@@ -592,8 +588,8 @@ const handleUpdateGender = openUpdateProfile
   width: 34px;
   height: 34px;
   flex-shrink: 0;
-  color: #d70018;
-  background: #fff1f2;
+  color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
   border-radius: 10px;
   font-size: 17px;
 }
@@ -644,7 +640,7 @@ const handleUpdateGender = openUpdateProfile
 .user-info-address-item__badge {
   padding: 2px 8px;
   color: #fff;
-  background: #d70018;
+  background: var(--irus-color-accent);
   border-radius: 999px;
   font-size: 11px;
   font-weight: 700;
@@ -717,7 +713,7 @@ const handleUpdateGender = openUpdateProfile
   background: transparent;
   font-size: 13px;
   font-weight: 500;
-  color: #d70018;
+  color: var(--irus-color-accent);
   cursor: pointer;
   border-radius: 8px;
   transition: background 0.15s;

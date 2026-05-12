@@ -17,12 +17,7 @@
           <div class="title is-6 mb-0 px-4">{{ $t('modalReview.title') }}</div>
 
           <div class="modal-review-title is-flex is-align-items-center">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:100:100/q:90/plain/https://cellphones.com.vn/media/wysiwyg/cps-ant.png"
-              width="100"
-              height="100"
-              alt="Review mascot"
-            />
+            <i class="bi bi-star-fill" style="font-size:48px;color:var(--irus-color-accent);"></i>
             <p class="title-logged">{{ productName }}</p>
           </div>
 
@@ -665,7 +660,7 @@ onBeforeUnmount(() => {
 }
 
 .feedback-text.error {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .feedback-text.success {
@@ -683,7 +678,7 @@ onBeforeUnmount(() => {
 }
 
 .button-container .button {
-  background: #d70018;
+  background: var(--irus-color-accent);
   border: 0;
   border-radius: 9px;
   color: #fff;

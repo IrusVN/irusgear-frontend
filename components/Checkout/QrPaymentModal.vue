@@ -424,7 +424,7 @@ onUnmounted(() => {
 }
 
 .qr-modal__amount {
-  color: #d70018;
+  color: var(--irus-color-surface-strong);
   font-size: 28px;
   font-weight: 800;
 }
@@ -465,7 +465,7 @@ onUnmounted(() => {
 }
 
 .qr-modal__timer-progress {
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border-radius: 4px;
   height: 100%;
   transition: width 1s linear;
@@ -561,12 +561,12 @@ onUnmounted(() => {
 }
 
 .qr-modal__cancel-btn:hover {
-  border-color: #d70018;
-  color: #d70018;
+  border-color: var(--irus-color-accent);
+  color: var(--irus-color-accent);
 }
 
 .qr-modal__retry-btn {
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -580,7 +580,7 @@ onUnmounted(() => {
 }
 
 .qr-modal__retry-btn:hover {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
 }
 
 @keyframes spin {

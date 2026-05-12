@@ -24,7 +24,7 @@
               class="used-item text-decoration-none text-dark"
             >
               <span class="used-image-wrap">
-                <img :src="item.image" :alt="item.title" class="used-image" loading="lazy" />
+                <i :class="item.iconClass || 'bi bi-phone'" class="used-image bi" role="img" :aria-label="item.title"></i>
               </span>
               <p class="mb-0 used-name">{{ item.title }}</p>
             </a>
@@ -45,62 +45,62 @@ const usedItems = [
   {
     title: "Điện thoại cũ",
     href: "/hang-cu/dien-thoai.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHN1CX574BKJDSX3XTV0Z.png",
+    iconClass: "bi bi-phone",
   },
   {
     title: "Máy tính bảng cũ",
     href: "/hang-cu/may-tinh-bang.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNEN2HYY96910SE6P5CX.png",
+    iconClass: "bi bi-tablet",
   },
   {
     title: "MacBook cũ",
     href: "/hang-cu/mac.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNKVTJ1GTEQVKXBVPHVK.png",
+    iconClass: "bi bi-laptop",
   },
   {
     title: "Laptop cũ",
     href: "/hang-cu/laptop.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNPGC65TPCJ4WCMBMWFQ.png",
+    iconClass: "bi bi-pc-display",
   },
   {
     title: "Tai nghe cũ",
     href: "/hang-cu/tai-nghe.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNSHME314PFV4CS149PF.png",
+    iconClass: "bi bi-headphones",
   },
   {
     title: "Loa cũ",
     href: "/hang-cu/loa.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNWWHR58EFPQMW478WE8.png",
+    iconClass: "bi bi-speaker",
   },
   {
     title: "Đồng hồ thông minh cũ",
     href: "/hang-cu/dong-ho-thong-minh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP0S6KFMG1WQC3ATY7W9.png",
+    iconClass: "bi bi-smartwatch",
   },
   {
     title: "Đồ gia dụng cũ",
     href: "/hang-cu/do-gia-dung.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6F9S2R1MRJKN8S46YXGE197.png",
+    iconClass: "bi bi-house-gear",
   },
   {
     title: "Phụ kiện cũ",
     href: "/hang-cu/phu-kien.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP4WXYP5MVQ0RN85RND2.png",
+    iconClass: "bi bi-mouse2",
   },
   {
     title: "Màn hình cũ",
     href: "/hang-cu/man-hinh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP91VN84H4GS1KNY86KA.png",
+    iconClass: "bi bi-display",
   },
   {
     title: "Tivi cũ",
     href: "/hang-cu/tivi.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6F9S3JQH0CMJDFZAR5C1589.png",
+    iconClass: "bi bi-tv",
   },
   {
     title: "Cáp sạc cũ",
     href: "/hang-cu/phu-kien/cap-sac.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHPE4CGXKHP6ZD2MBVYZ4.png",
+    iconClass: "bi bi-usb-symbol",
   },
 ];
 </script>
@@ -176,7 +176,11 @@ const usedItems = [
 .used-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: var(--irus-color-accent);
 }
 
 .used-name {

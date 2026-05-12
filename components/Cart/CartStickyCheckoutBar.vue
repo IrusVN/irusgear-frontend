@@ -85,7 +85,7 @@ defineProps({
 }
 
 .cart-sticky-checkout__value {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 18px;
   font-weight: 800;
   line-height: 1.2;
@@ -93,8 +93,8 @@ defineProps({
 
 .cart-sticky-checkout__cta {
   align-items: center;
-  background: #d70018;
-  border: 1px solid #d70018;
+  background: var(--irus-color-surface-strong);
+  border: 1px solid var(--irus-color-surface-strong);
   border-radius: 16px;
   color: #fff;
   display: inline-flex;

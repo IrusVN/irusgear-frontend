@@ -1533,7 +1533,7 @@ onUnmounted(() => {
 }
 
 .order-success-page__polling-dots span {
-  background: #d70018;
+  background: var(--irus-color-accent);
   border-radius: 50%;
   display: block;
   height: 8px;
@@ -1621,7 +1621,7 @@ onUnmounted(() => {
 }
 
 .order-success-page__bill-title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .order-success-page__bill-items {
@@ -1703,7 +1703,7 @@ onUnmounted(() => {
 }
 
 .order-success-page__bill-pricing-row--highlight {
-  color: #d70018 !important;
+  color: var(--irus-color-accent) !important;
   font-size: 15px !important;
 }
 
@@ -1724,7 +1724,7 @@ onUnmounted(() => {
 }
 
 .order-success-page__bill-pricing-total dd {
-  color: #d70018 !important;
+  color: var(--irus-color-accent) !important;
   font-size: 18px !important;
   margin: 0;
 }
@@ -1778,7 +1778,7 @@ onUnmounted(() => {
 }
 
 .order-success-page__detail-val--highlight {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 14px;
 }
 
@@ -1802,7 +1802,7 @@ onUnmounted(() => {
 }
 
 .order-success-page__details-title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 /* Failure banner */
@@ -1890,7 +1890,7 @@ onUnmounted(() => {
 
 .order-success-page__step-num {
   align-items: center;
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border-radius: 50%;
   color: #fff;
   display: flex;
@@ -1924,13 +1924,13 @@ onUnmounted(() => {
 }
 
 .order-success-page__btn--primary {
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   color: #fff;
 }
 
 .order-success-page__btn--primary:hover {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
 }
 
 .order-success-page__btn--secondary {

@@ -355,7 +355,7 @@ onUnmounted(() => {
 
 .payment-page__no-order i {
   font-size: 48px;
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .btn-back {
@@ -392,7 +392,7 @@ onUnmounted(() => {
 }
 
 .payment-page__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .payment-page__summary-col {
@@ -512,7 +512,7 @@ onUnmounted(() => {
 }
 
 .payment-page__summary-total-value {
-  color: #d70018 !important;
+  color: var(--irus-color-accent) !important;
   font-size: 20px !important;
 }
 
@@ -528,7 +528,7 @@ onUnmounted(() => {
 }
 
 .payment-page__submit-btn {
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   border-radius: 12px;
   color: #fff;
@@ -546,7 +546,7 @@ onUnmounted(() => {
 }
 
 .payment-page__submit-btn:hover:not(:disabled) {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
 }
 
 .payment-page__submit-btn:disabled {

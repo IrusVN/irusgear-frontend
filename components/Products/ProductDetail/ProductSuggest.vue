@@ -131,9 +131,9 @@
                         <button type="button" class="button button-add-cart" :disabled="cartBusy" @click="handleAccessoryAdd(item)">
                           <span>{{ $t('product.addToCart') }}</span>
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M8 3.33325V12.6666" stroke="#D70018" stroke-width="1.5" stroke-linecap="round"
+                            <path d="M8 3.33325V12.6666" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round"
                               stroke-linejoin="round" />
-                            <path d="M3.3335 8H12.6668" stroke="#D70018" stroke-width="1.5" stroke-linecap="round"
+                            <path d="M3.3335 8H12.6668" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round"
                               stroke-linejoin="round" />
                           </svg>
                         </button>
@@ -511,7 +511,7 @@ onBeforeUnmount(() => {
 
 .upsell-item-member,
 .info__percent {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 13px;
   font-weight: 700;
   line-height: 1.35;
@@ -525,7 +525,7 @@ onBeforeUnmount(() => {
 }
 
 .upsell-item-member span {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-weight: 700;
 }
 
@@ -555,7 +555,7 @@ onBeforeUnmount(() => {
 }
 
 .product__price--show {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 15px;
   font-weight: 700;
   line-height: 1.3;
@@ -604,7 +604,7 @@ onBeforeUnmount(() => {
 
 .button-add-cart {
   border: 1px solid #fecaca;
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .button-add-cart:hover {
@@ -629,7 +629,7 @@ onBeforeUnmount(() => {
 
 .combo-swiper :deep(.swiper-pagination-bullet-active),
 .accessory-swiper :deep(.swiper-pagination-bullet-active) {
-  background: #d70018;
+  background: var(--irus-color-accent);
   width: 18px;
 }
 

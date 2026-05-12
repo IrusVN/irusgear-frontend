@@ -162,8 +162,8 @@
           <p class="tos-section__text"><em>{{ $t('profile.tos.cancellation.refundNote') }}</em></p>
         </section>
 
-        <!-- V. Privacy Cellphones -->
-        <section v-if="activeSection === 'privacy-cellphones'" class="tos-section">
+        <!-- V. Privacy IrusGear -->
+        <section v-if="activeSection === 'privacy-irusgear'" class="tos-section">
           <h1 class="tos-section__title">{{ $t('profile.tos.privacyCellphones.title') }}</h1>
 
           <h3 class="tos-section__subtitle">{{ $t('profile.tos.privacyCellphones.collectPurposeTitle') }}</h3>
@@ -190,110 +190,6 @@
           </ul>
         </section>
 
-        <!-- VI. Privacy Sforum -->
-        <section v-if="activeSection === 'privacy-sforum'" class="tos-section">
-          <h1 class="tos-section__title">{{ $t('profile.tos.privacySforum.title') }}</h1>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.privacySforum.infoTypesTitle') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.privacySforum.infoTypes')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.privacySforum.usagePurposeTitle') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.privacySforum.usagePurpose')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.privacySforum.storageTitle') }}</h3>
-          <p class="tos-section__text">{{ $t('profile.tos.privacySforum.storageDesc') }}</p>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.privacySforum.managerTitle') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.privacySforum.manager')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.privacySforum.rightsObligationsTitle') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.privacySforum.rightsObligations')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.privacySforum.securityTitle') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.privacySforum.security')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.privacySforum.complaintTitle') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.privacySforum.complaint')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-        </section>
-
-        <!-- VII. Sforum -->
-        <section v-if="activeSection === 'sforum'" class="tos-section">
-          <h1 class="tos-section__title">{{ $t('profile.tos.sforum.title') }}</h1>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article1Title') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.sforum.article1')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article2Title') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.sforum.article2')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article3Title') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.sforum.article3')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article4Title') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.sforum.article4')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article5Title') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.sforum.article5')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article6Title') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.sforum.article6')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article7Title') }}</h3>
-          <p class="tos-section__text">{{ $t('profile.tos.sforum.article7') }}</p>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article8Title') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.sforum.article8')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article9Title') }}</h3>
-          <ul class="tos-list">
-            <li v-for="(item, i) in $tm('profile.tos.sforum.article9')" :key="i">{{ $rt(item.text) }}</li>
-          </ul>
-
-          <h3 class="tos-section__subtitle">{{ $t('profile.tos.sforum.article10Title') }}</h3>
-          <p class="tos-section__text">{{ $t('profile.tos.sforum.article10') }}</p>
-
-          <div class="tos-hotline">
-            <div class="tos-hotline__item">
-              <span class="tos-hotline__label">{{ $t('profile.tos.sforum.hotline.purchaseLabel') }}</span>
-              <span class="tos-hotline__value">{{ $t('profile.tos.sforum.hotline.purchaseValue') }}</span>
-            </div>
-            <div class="tos-hotline__item">
-              <span class="tos-hotline__label">{{ $t('profile.tos.sforum.hotline.complaintLabel') }}</span>
-              <span class="tos-hotline__value">{{ $t('profile.tos.sforum.hotline.complaintValue') }}</span>
-            </div>
-            <div class="tos-hotline__item tos-hotline__item--last">
-              <span class="tos-hotline__label">{{ $t('profile.tos.sforum.hotline.warrantyLabel') }}</span>
-              <span class="tos-hotline__value">{{ $t('profile.tos.sforum.hotline.warrantyValue') }}</span>
-            </div>
-          </div>
-        </section>
-
       </main>
     </div>
   </ProfileLayout>
@@ -317,9 +213,7 @@ const sidebarItems = computed(() => [
   { key: 'transaction', label: t('profile.tos.nav.transaction') },
   { key: 'warranty', label: t('profile.tos.nav.warranty') },
   { key: 'cancellation', label: t('profile.tos.nav.cancellation') },
-  { key: 'privacy-cellphones', label: t('profile.tos.nav.privacyCellphones') },
-  { key: 'privacy-sforum', label: t('profile.tos.nav.privacySforum') },
-  { key: 'sforum', label: t('profile.tos.nav.sforum') },
+  { key: 'privacy-irusgear', label: t('profile.tos.nav.privacyCellphones') },
 ])
 </script>
 
@@ -385,14 +279,14 @@ const sidebarItems = computed(() => [
 
 .tos-sidebar__item--active {
   background: #fef2f2;
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-weight: 600;
-  border-left-color: #d70018;
+  border-left-color: var(--irus-color-accent);
 }
 
 .tos-sidebar__item--active:hover {
   background: #fef2f2;
-  color: #d70018;
+  color: var(--irus-color-accent-hover);
 }
 
 /* ── Content ──────────────────────────────── */
@@ -607,13 +501,13 @@ const sidebarItems = computed(() => [
   }
 
   .tos-sidebar__item--active {
-    background: #d70018;
+    background: var(--irus-color-accent);
     color: #fff;
-    border-color: #d70018;
+    border-color: var(--irus-color-accent);
   }
 
   .tos-sidebar__item--active:hover {
-    background: #b80015;
+    background: var(--irus-color-accent-hover);
     color: #fff;
   }
 

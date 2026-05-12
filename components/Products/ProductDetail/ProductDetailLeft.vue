@@ -101,7 +101,7 @@
             <path d="M12 9V15" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             </path>
           </svg>
-          <a class="label"> {{ $t('product.compare') }}</a>
+          <a class="label text-decoration-none"> {{ $t('product.compare') }}</a>
         </div>
       </div>
     </div>
@@ -1057,7 +1057,7 @@ onBeforeUnmount(() => {
 }
 
 .gallery-product-detail .thumbnail-slide.swiper-container .swiper-wrapper .swiper-slide.swiper-slide-thumb-active {
-  box-shadow: 0 0 0 1px #d70018;
+  box-shadow: 0 0 0 1px var(--irus-color-accent);
 }
 
 .gallery-product-detail .thumbnail-slide.swiper-container .swiper-button-next {
@@ -1221,7 +1221,7 @@ onBeforeUnmount(() => {
 }
 
 .swiper-container.swiper-pdp .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background: #d70018;
+  background: var(--irus-color-accent);
   width: 16px;
 }
 

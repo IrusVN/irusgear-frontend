@@ -3,19 +3,13 @@
     <div class="comment-form">
       <p id="total_comment" class="comment-form-title">{{ $t('product.qaTitle') }}</p>
       <div class="comment-form-content">
-        <img
-          src="https://cdn2.cellphones.com.vn/insecure/rs:fill:160:0/q:90/plain/https://cellphones.com.vn/media/wysiwyg/ant-hello-2025.png"
-          width="160"
-          alt="cps ant icon"
-          quantity="auto"
-          class="cps-ant-cmt"
-        />
+        <i class="bi bi-chat-dots" style="font-size:48px;color:var(--irus-color-accent);"></i>
         <div class="question">
           <div class="d-flex align-items-center">
             <p class="question-title">{{ $t('product.askQuestion') }}</p>
           </div>
           <p class="question-content">
-            CellphoneS sẽ phản hồi trong vòng 1 giờ. Nếu Quý khách gửi câu hỏi sau 22h, chúng tôi sẽ trả lời vào sáng hôm sau.<br />
+            IrusGear sẽ phản hồi trong vòng 1 giờ. Nếu Quý khách gửi câu hỏi sau 22h, chúng tôi sẽ trả lời vào sáng hôm sau.<br />
             Thông tin có thể thay đổi theo thời gian, vui lòng đặt câu hỏi để nhận được cập nhật mới nhất!
           </p>
           <div class="textarea-wrapper">
@@ -76,11 +70,11 @@
               <button class="btn-rep-cmt respondent button__cmt-rep" @click="toggleReplyForm(item.id)">
                 <div>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.3335 6H10.6668" stroke="#D70018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M5.3335 8.6665H9.3335" stroke="#D70018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M5.3335 6H10.6668" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M5.3335 8.6665H9.3335" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     <path
                       d="M6 11.9998H4C3.46957 11.9998 2.96086 11.7891 2.58579 11.4141C2.21071 11.039 2 10.5303 2 9.99984V4.6665C2 4.13607 2.21071 3.62736 2.58579 3.25229C2.96086 2.87722 3.46957 2.6665 4 2.6665H12C12.5304 2.6665 13.0391 2.87722 13.4142 3.25229C13.7893 3.62736 14 4.13607 14 4.6665V9.99984C14 10.5303 13.7893 11.039 13.4142 11.4141C13.0391 11.7891 12.5304 11.9998 12 11.9998H10L8 13.9998L6 11.9998Z"
-                      stroke="#D70018"
+                      stroke="var(--irus-color-accent)"
                       stroke-width="1.5"
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -152,11 +146,11 @@
                     <button class="btn-rep-cmt respondent button__cmt-rep" @click="toggleReplyForm(item.id)">
                       <div>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5.3335 6H10.6668" stroke="#D70018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                          <path d="M5.3335 8.6665H9.3335" stroke="#D70018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M5.3335 6H10.6668" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M5.3335 8.6665H9.3335" stroke="var(--irus-color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                           <path
                             d="M6 11.9998H4C3.46957 11.9998 2.96086 11.7891 2.58579 11.4141C2.21071 11.039 2 10.5303 2 9.99984V4.6665C2 4.13607 2.21071 3.62736 2.58579 3.25229C2.96086 2.87722 3.46957 2.6665 4 2.6665H12C12.5304 2.6665 13.0391 2.87722 13.4142 3.25229C13.7893 3.62736 14 4.13607 14 4.6665V9.99984C14 10.5303 13.7893 11.039 13.4142 11.4141C13.0391 11.7891 12.5304 11.9998 12 11.9998H10L8 13.9998L6 11.9998Z"
-                            stroke="#D70018"
+                            stroke="var(--irus-color-accent)"
                             stroke-width="1.5"
                             stroke-linecap="round"
                             stroke-linejoin="round"
@@ -355,10 +349,6 @@ const loadMoreQuestions = async () => {
   padding: 16px;
 }
 
-.cps-ant-cmt {
-  flex-shrink: 0;
-}
-
 .question {
   flex: 1;
 }
@@ -401,7 +391,7 @@ const loadMoreQuestions = async () => {
 
 .button__cmt-send {
   align-items: center;
-  background: #d70018;
+  background: var(--irus-color-accent);
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -427,7 +417,7 @@ const loadMoreQuestions = async () => {
 }
 
 .feedback-text.error {
-  color: #d70018;
+  color: var(--irus-color-danger);
 }
 
 .feedback-text.success {
@@ -467,9 +457,9 @@ const loadMoreQuestions = async () => {
 
 .box-info__avatar span {
   align-items: center;
-  background: #fee2e2;
+  background: var(--irus-color-accent-soft);
   border-radius: 999px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: flex;
   font-size: 14px;
   font-weight: 700;
@@ -479,7 +469,7 @@ const loadMoreQuestions = async () => {
 }
 
 .box-info__avatar .icon-cps {
-  background: #d70018;
+  background: var(--irus-color-accent);
   color: #fff;
   font-size: 11px;
 }
@@ -492,7 +482,7 @@ const loadMoreQuestions = async () => {
 }
 
 .box-info__tag {
-  background: #d70018;
+  background: var(--irus-color-accent);
   border-radius: 999px;
   color: #fff;
   font-size: 11px;
@@ -523,7 +513,7 @@ const loadMoreQuestions = async () => {
   align-items: center;
   background: transparent;
   border: 0;
-  color: #d70018;
+  color: var(--irus-color-accent);
   cursor: pointer;
   display: flex;
   font-size: 14px;
@@ -587,10 +577,6 @@ const loadMoreQuestions = async () => {
   {
     flex-direction: column;
     grid-template-columns: 1fr;
-  }
-
-  .cps-ant-cmt {
-    display: none;
   }
 
   .box-cmt__box-info {

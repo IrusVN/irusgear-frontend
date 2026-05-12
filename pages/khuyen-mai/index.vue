@@ -57,7 +57,7 @@ useHead({
 }
 
 .promotion-page__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .promotion-page__coming-soon {
@@ -83,7 +83,7 @@ useHead({
 
 .promotion-page__placeholder i {
   font-size: 64px;
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .promotion-page__placeholder h2 {

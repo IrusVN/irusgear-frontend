@@ -61,7 +61,7 @@
 }
 
 .express-checkout__method:hover {
-  border-color: #d70018;
+  border-color: var(--irus-color-accent);
 }
 
 .express-checkout__method-icon {

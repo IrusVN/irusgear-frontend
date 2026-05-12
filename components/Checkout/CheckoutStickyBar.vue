@@ -136,7 +136,7 @@ const formatMoneyValue = (value) => {
 }
 
 .checkout-sticky-bar__total {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-weight: 700;
 }
 
@@ -178,12 +178,12 @@ const formatMoneyValue = (value) => {
 }
 
 .checkout-sticky-bar__total-row strong:last-child {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .checkout-sticky-bar__cta {
   align-items: center;
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   border-radius: 16px;
   color: #fff;
@@ -199,7 +199,7 @@ const formatMoneyValue = (value) => {
 }
 
 .checkout-sticky-bar__cta:hover:not(:disabled) {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
 }
 
 .checkout-sticky-bar__cta:disabled {

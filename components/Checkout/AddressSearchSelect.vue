@@ -237,8 +237,8 @@ onMounted(() => {
 }
 
 .address-search-select--open .address-search-select__trigger {
-  border-color: #d70018;
-  box-shadow: 0 0 0 3px rgba(215, 0, 24, 0.1);
+  border-color: var(--irus-color-accent);
+  box-shadow: 0 0 0 3px var(--irus-color-accent-soft);
 }
 
 .address-search-select__placeholder {
@@ -326,7 +326,7 @@ onMounted(() => {
 }
 
 .address-search-select__option--selected {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-weight: 600;
 }
 

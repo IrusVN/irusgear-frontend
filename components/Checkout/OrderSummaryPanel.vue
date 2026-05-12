@@ -245,7 +245,7 @@ onBeforeUnmount(() => {
 }
 
 .checkout-summary__eyebrow {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -359,13 +359,13 @@ onBeforeUnmount(() => {
 }
 
 .checkout-summary__total-value {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 24px;
   font-weight: 700;
 }
 
 .checkout-summary__voucher {
-  color: #d70018 !important;
+  color: var(--irus-color-accent) !important;
 }
 
 .checkout-summary__checkbox {
@@ -383,7 +383,7 @@ onBeforeUnmount(() => {
 }
 
 .checkout-summary__agreement-text a {
-  color: #d70018;
+  color: var(--irus-color-accent);
   text-decoration: none;
 }
 
@@ -399,7 +399,7 @@ onBeforeUnmount(() => {
 
 .checkout-summary__cta {
   align-items: center;
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   border-radius: 16px;
   color: #fff;
@@ -415,7 +415,7 @@ onBeforeUnmount(() => {
 }
 
 .checkout-summary__cta:hover:not(:disabled) {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
   transform: scale(1.02);
 }
 
@@ -516,7 +516,7 @@ onBeforeUnmount(() => {
 
 .order-summary-mobile__cta {
   width: 100%;
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: none;
   border-radius: 12px;
   color: #fff;
@@ -532,7 +532,7 @@ onBeforeUnmount(() => {
 }
 
 .order-summary-mobile__cta:hover:not(:disabled) {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
 }
 
 .order-summary-mobile__cta:disabled {

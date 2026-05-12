@@ -57,7 +57,7 @@ useHead({
 }
 
 .news-page__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .news-page__coming-soon {
@@ -83,7 +83,7 @@ useHead({
 
 .news-page__placeholder i {
   font-size: 64px;
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .news-page__placeholder h2 {

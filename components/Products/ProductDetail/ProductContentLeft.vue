@@ -156,7 +156,7 @@ const cleanedDescription = computed(() => {
 }
 
 :deep(.content-card) a {
-  color: #d70018;
+  color: var(--irus-color-accent);
   -webkit-text-decoration: none;
   text-decoration: none;
 }

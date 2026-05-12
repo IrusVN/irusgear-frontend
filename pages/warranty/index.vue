@@ -38,11 +38,7 @@
   <div class="warranty-list">
     <!-- Empty State -->
     <div v-if="!isLoading && warranties.length === 0" class="warranty-empty">
-      <img
-        src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
-        alt="empty"
-        class="warranty-empty__img"
-      />
+      <i class="bi bi-shield-check warranty-empty__img" style="font-size:48px;color:#d4d4d8"></i>
       <p class="warranty-empty__text">{{ $t('profile.warranty.empty') }}</p>
       <NuxtLink :to="localePath('/')" class="btn btn-dark rounded-pill px-4 py-2">
         <i class="bi bi-house-door me-2"></i>{{ $t('profile.common.home') }}
@@ -276,12 +272,12 @@ loadWarranties()
   color: #333;
 }
 .warranty-tabs__item--active {
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   color: #fff;
   font-weight: 600;
 }
 .warranty-tabs__item--active:hover {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
   color: #fff;
 }
 
@@ -488,7 +484,7 @@ loadWarranties()
 }
 
 .warranty-timeline__step--done::before {
-  background: #d70018;
+  background: var(--irus-color-accent);
 }
 
 .warranty-timeline__dot {
@@ -506,14 +502,14 @@ loadWarranties()
 }
 
 .warranty-timeline__step--done .warranty-timeline__dot {
-  background: #d70018;
-  border-color: #d70018;
+  background: var(--irus-color-accent);
+  border-color: var(--irus-color-accent);
   color: #fff;
 }
 
 .warranty-timeline__step--current .warranty-timeline__dot {
-  background: #d70018;
-  border-color: #d70018;
+  background: var(--irus-color-accent);
+  border-color: var(--irus-color-accent);
   color: #fff;
   animation: pulse-dot 1.5s ease-in-out infinite;
 }
@@ -540,7 +536,7 @@ loadWarranties()
 }
 
 .warranty-timeline__step--current .warranty-timeline__title {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-weight: 600;
 }
 

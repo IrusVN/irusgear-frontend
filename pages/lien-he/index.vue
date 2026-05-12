@@ -72,7 +72,7 @@ useHead({
 }
 
 .contact-page__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .contact-page__info-card {
@@ -111,7 +111,7 @@ useHead({
 
 .contact-page__contact-item > i {
   font-size: 20px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   flex-shrink: 0;
   margin-top: 2px;
 }

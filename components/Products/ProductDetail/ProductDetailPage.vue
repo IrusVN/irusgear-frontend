@@ -273,7 +273,7 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 6px;
   padding: 10px 20px;
-  background: #d70018;
+  background: var(--irus-color-accent);
   color: #fff;
   border: none;
   border-radius: 100px;

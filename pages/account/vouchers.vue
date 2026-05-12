@@ -157,7 +157,7 @@ onMounted(fetchHistory);
 }
 
 .voucher-history-page__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .voucher-history-page__total {
@@ -280,7 +280,7 @@ onMounted(fetchHistory);
   font-size: 11px;
   font-weight: 700;
   padding: 2px 7px;
-  background: #d70018;
+  background: var(--irus-color-accent);
 }
 
 .voucher-history-card__badge--percent {

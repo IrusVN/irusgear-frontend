@@ -67,11 +67,11 @@ const checkoutStore = useCheckoutStore();
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: #d70018;
+  accent-color: var(--irus-color-accent);
 }
 
 .secondary-contact__checkbox-row i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .secondary-contact__body {
@@ -130,7 +130,7 @@ const checkoutStore = useCheckoutStore();
 }
 
 .secondary-contact__input:focus {
-  border-color: #d70018;
+  border-color: var(--irus-color-accent);
   outline: none;
 }
 

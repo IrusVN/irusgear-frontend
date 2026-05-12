@@ -117,7 +117,7 @@ const handleGoToCart = () => {
 }
 
 .cart-sheet__eyebrow {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -200,7 +200,7 @@ const handleGoToCart = () => {
 
 .cart-sheet__meta strong,
 .cart-sheet__summary-row strong {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 16px;
 }
 
@@ -241,8 +241,8 @@ const handleGoToCart = () => {
 }
 
 .cart-sheet__btn--primary {
-  background: #d70018;
-  border: 1px solid #d70018;
+  background: var(--irus-color-surface-strong);
+  border: 1px solid var(--irus-color-surface-strong);
   color: #fff;
 }
 </style>

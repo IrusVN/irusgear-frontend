@@ -922,7 +922,7 @@ onBeforeUnmount(() => {
 }
 
 .block-sliding .banner-slide .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #d70018;
+  background-color: var(--irus-color-accent);
   border-radius: 50px;
   width: 20px;
 }
@@ -1028,9 +1028,9 @@ onBeforeUnmount(() => {
 
 .product-series-chip--active {
   background: #fff;
-  border-color: #ef4444;
-  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.12);
-  color: #ef4444;
+  border-color: var(--irus-color-accent);
+  box-shadow: 0 8px 18px var(--irus-color-focus-ring);
+  color: var(--irus-color-accent);
 }
 
 .product-filter-block {
@@ -1193,16 +1193,16 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-chip--primary {
-  background: #fff5f5;
-  border-color: #ef4444;
-  color: #ef4444;
+  background: var(--irus-color-accent-soft);
+  border-color: var(--irus-color-accent);
+  color: var(--irus-color-accent);
 }
 
 .product-filter-chip--active {
   background: #fff;
-  border-color: #ef4444;
+  border-color: var(--irus-color-accent);
   box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
-  color: #ef4444;
+  color: var(--irus-color-accent);
 }
 
 .product-filter-chip__icon,
@@ -1229,7 +1229,7 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-chip--active .product-filter-chip__meta--info {
-  color: #ef4444;
+  color: var(--irus-color-accent);
 }
 
 .product-filter-chip__meta-group {
@@ -1379,13 +1379,13 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-dropdown__button--primary {
-  background: #d70018;
+  background: var(--irus-color-accent);
   border: 1px solid transparent;
   color: #fff;
 }
 
 .product-filter-dropdown__button--primary:hover {
-  background: #bf0015;
+  background: var(--irus-color-accent);
 }
 
 .filter-dropdown-enter-active,

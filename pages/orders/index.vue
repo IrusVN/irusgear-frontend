@@ -30,11 +30,7 @@
   <div class="orders-list">
     <!-- Empty State -->
     <div v-if="!isLoading && orders.length === 0" class="orders-empty">
-      <img
-        src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
-        alt="empty"
-        class="orders-empty__img"
-      />
+      <i class="bi bi-bag orders-empty__img" style="font-size:48px;color:#d4d4d8"></i>
       <p class="orders-empty__text">{{ $t('profile.orders.empty') }}</p>
       <NuxtLink :to="localePath('/')" class="btn btn-dark rounded-pill px-4 py-2">
         <i class="bi bi-house-door me-2"></i>{{ $t('profile.orders.goHome') }}
@@ -185,12 +181,12 @@ loadOrders()
   color: #333;
 }
 .orders-tabs__item--active {
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   color: #fff;
   font-weight: 600;
 }
 .orders-tabs__item--active:hover {
-  background: #b80015;
+  background: var(--irus-color-surface-dark);
   color: #fff;
 }
 
@@ -415,7 +411,7 @@ loadOrders()
 .orders-card__total-value {
   font-size: 15px;
   font-weight: 700;
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .orders-card__actions {

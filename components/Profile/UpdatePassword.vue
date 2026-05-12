@@ -476,7 +476,7 @@ onBeforeUnmount(() => {
 }
 
 .profile-password__error {
-  color: #d70018;
+  color: var(--irus-color-danger, #d70018);
   font-size: 11px;
   font-weight: 500;
   line-height: 1.35;
@@ -497,7 +497,7 @@ onBeforeUnmount(() => {
   gap: 8px;
   color: #fff;
   cursor: pointer;
-  background: #d70018;
+  background: var(--irus-color-surface-strong);
   border: 0;
   border-radius: 5px;
   font-size: 14px;

@@ -94,7 +94,7 @@
               </div>
 
               <p v-if="product.memberDiscount?.value > 0" class="cart-recommendations__member">
-                {{ $t('cart.smemberDiscount', { amount: product.memberDiscount.formatted }) }}
+                {{ $t('cart.memberDiscount', { amount: product.memberDiscount.formatted }) }}
               </p>
             </div>
           </NuxtLink>
@@ -309,7 +309,7 @@ watch(
 }
 
 .cart-recommendations__eyebrow {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -449,7 +449,7 @@ watch(
 }
 
 .cart-recommendations__price strong {
-  color: #d70018;
+  color: var(--irus-color-accent);
   font-size: 16px;
   font-weight: 800;
 }
@@ -471,9 +471,9 @@ watch(
   align-items: center;
   align-self: flex-start;
   background: #fff;
-  border: 1px solid #fecaca;
+  border: 1px solid var(--irus-color-accent-soft);
   border-radius: 999px;
-  color: #d70018;
+  color: var(--irus-color-accent);
   display: inline-flex;
   font-size: 13px;
   font-weight: 700;

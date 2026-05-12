@@ -298,7 +298,7 @@ onMounted(() => {
   right: 10px;
   padding: 2px 6px;
   border-radius: 0 0 8px 8px;
-  background: #d70018;
+  background: var(--irus-color-accent);
   color: #fff;
   font-size: 0.62rem;
   font-weight: 700;

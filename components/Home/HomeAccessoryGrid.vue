@@ -20,7 +20,7 @@
               class="accessory-item text-decoration-none text-dark"
             >
               <span class="accessory-image-wrap">
-                <img :src="item.image" :alt="t(item.titleKey)" class="accessory-image" loading="lazy" />
+                <i :class="item.iconClass || 'bi bi-phone'" class="accessory-image bi" role="img" :aria-label="t(item.titleKey)"></i>
               </span>
               <p class="mb-0 accessory-name">{{ t(item.titleKey) }}</p>
             </a>
@@ -42,92 +42,92 @@ const accessoryItems = [
   {
     titleKey: "home.accessoryApple",
     href: "/phu-kien/apple.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9G05VYEFVX2VCHYZY1R7.png",
+    iconClass: "bi bi-apple",
   },
   {
     titleKey: "home.accessoryCable",
     href: "/phu-kien/sac-dien-thoai.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GEB6TV510FK9GJPJK4N.png",
+    iconClass: "bi bi-usb-symbol",
   },
   {
     titleKey: "home.accessoryBattery",
     href: "/phu-kien/pin-du-phong.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GHJ4RRYBDS2Y2WEKRZV.png",
+    iconClass: "bi bi-battery-charging",
   },
   {
     titleKey: "home.accessoryCase",
     href: "/phu-kien/bao-da-op-lung.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GMV76QGJDAPAAJ9M26V.png",
+    iconClass: "bi bi-phone",
   },
   {
     titleKey: "home.accessoryScreen",
     href: "/phu-kien/dan-man-hinh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GSARTJ2C2XKJSJZB85Z.png",
+    iconClass: "bi bi-display",
   },
   {
     titleKey: "home.accessoryStorage",
     href: "/phu-kien/the-nho-usb-otg.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GX3JKD0AHHSWBBK44TP.png",
+    iconClass: "bi bi-sd-card",
   },
   {
     titleKey: "home.gamingGear",
     href: "/phu-kien/gaming-gear.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H0DYE4E1791SFPXEMY7.png",
+    iconClass: "bi bi-controller",
   },
   {
     titleKey: "home.sim4g5g",
     href: "/sim-3g-4g-nghe-goi.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H3ZX03AZB1CNX48DG80.png",
+    iconClass: "bi bi-sim",
   },
   {
     titleKey: "home.accessoryNetwork",
     href: "/phu-kien/thiet-bi-mang.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H7Y53763DEK7J2A2TKP.png",
+    iconClass: "bi bi-router",
   },
   {
     titleKey: "home.camera",
     href: "/phu-kien/camera.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9HBE3PQPJEBJNS1ZZDZQ.png",
+    iconClass: "bi bi-camera",
   },
   {
     titleKey: "home.gimbal",
     href: "/phu-kien/camera/gimbal.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG655JQDK9DBG3DW9ARDT.png",
+    iconClass: "bi bi-camera-video",
   },
   {
     titleKey: "home.flycam",
     href: "/flycam.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6G9DFQVSS6CYZA2YAFQ.png",
+    iconClass: "bi bi-airplane",
   },
   {
     titleKey: "home.camera",
     href: "/may-anh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6KJ98DW8KHNXKFWARYF.png",
+    iconClass: "bi bi-camera2",
   },
   {
     titleKey: "home.accessoryKeyboard",
     href: "/phu-kien/chuot-ban-phim-may-tinh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6Q4JA1NNV2BFRPWFDGY.png",
+    iconClass: "bi bi-keyboard",
   },
   {
     titleKey: "home.accessoryBag",
     href: "/phu-kien/balo-tui-chong-soc-laptop.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6T4966NR0Z7ZSFXW5WD.png",
+    iconClass: "bi bi-bag",
   },
   {
     titleKey: "home.accessoryHub",
     href: "/phu-kien/sac-dien-thoai/cap-chuyen-doi-dau-chuyen-doi-macbook.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6WZJ9RRA8H9VTQP9CHS.png",
+    iconClass: "bi bi-hdd",
   },
   {
     titleKey: "home.accessoryPhone",
     href: "/phu-kien/phu-kien-tien-ich.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6ZTGEC28FWZRJX0TBWS.png",
+    iconClass: "bi bi-phone-flip",
   },
   {
     titleKey: "home.accessoryLaptop",
     href: "/phu-kien/may-tinh-laptop.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG72ZEC79BAJY70V3ESD0.png",
+    iconClass: "bi bi-laptop",
   },
 ];
 </script>
@@ -198,7 +198,11 @@ const accessoryItems = [
 .accessory-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: var(--irus-color-accent);
 }
 
 .accessory-name {

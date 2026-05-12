@@ -199,7 +199,7 @@ const formatMoney = (value) => {
 }
 
 .voucher-section__title i {
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .voucher-section__count {
@@ -287,7 +287,7 @@ const formatMoney = (value) => {
 }
 
 .voucher-input-wrapper:focus-within {
-  border-color: #d70018;
+  border-color: var(--irus-color-accent);
 }
 
 .voucher-input-wrapper > i {
