@@ -1,253 +1,194 @@
 <template>
-  <!-- Your Offers (Empty State) -->
   <ProfileLayout>
-  <div class="promotion-card">
-    <div class="promotion-card__header">
-      <h3 class="promotion-card__title">{{ $t('profile.promotion.yourOffers') }}</h3>
-    </div>
-    <div class="promotion-card__body promotion-card__body--center">
-      <img
-        src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
-        alt="empty"
-        class="promotion-card__empty-img"
-      />
-      <p class="promotion-card__empty-text">{{ $t('profile.promotion.noOffers') }}</p>
-    </div>
-  </div>
+    <div class="promotion-page">
+      <section class="promotion-offers" aria-labelledby="promotion-offers-title">
+        <h1 id="promotion-offers-title" class="promotion-offers__title">Ưu đãi của bạn</h1>
+        <div class="promotion-offers__empty">
+          <img
+            class="promotion-offers__empty-img"
+            src="https://cdn-static.smember.com.vn/_next/static/media/empty.f8088c4d.png"
+            alt="empty"
+            loading="lazy"
+          />
+          <p>Bạn đang chưa có ưu đãi nào</p>
+        </div>
+      </section>
 
-  <!-- Rank Stepper: Carousel -->
-  <div class="promotion-card">
-    <div class="promotion-card__header">
-      <h3 class="promotion-card__title">{{ $t('profile.promotion.rankTitle') }}</h3>
-    </div>
-    <div class="promotion-card__body promotion-card__body--rank">
-
-      <!-- Carousel -->
-      <div class="rank-carousel">
-        <!-- Prev Arrow -->
-        <button
-          type="button"
-          class="rank-carousel__arrow rank-carousel__arrow--prev"
-          :class="{ 'rank-carousel__arrow--disabled': activeRankIndex === 0 }"
-          :disabled="activeRankIndex === 0"
-          @click="prevRank"
-        >
-          <i class="bi bi-chevron-left"></i>
-        </button>
-
-        <!-- Overflow wrapper -->
-        <div class="rank-carousel__viewport" ref="carouselViewport">
-          <!-- Track: positioned absolutely, moved by transform -->
-          <div
-            class="rank-carousel__track"
-            :style="{ transform: `translateX(${-trackOffset}px)` }"
-            @mousedown.prevent="startDrag"
-            @mousemove="onDrag"
-            @mouseup="endDrag"
-            @mouseleave="endDrag"
+      <section class="member-ranks" aria-label="Hạng thành viên">
+        <div class="member-ranks__carousel">
+          <button
+            type="button"
+            class="member-ranks__nav member-ranks__nav--prev"
+            :disabled="activeRankIndex === 0"
+            aria-label="Hạng trước"
+            @click="goToPrevRank"
           >
-            <div
-              v-for="(rank, idx) in ranks"
-              :key="rank.key"
-              class="rank-card"
-              :class="{
-                'rank-card--active': idx === activeRankIndex,
-                'rank-card--done': idx < activeRankIndex,
-                'rank-card--locked': idx > activeRankIndex,
-                [`rank-card--${rank.key}`]: true,
-              }"
-              @click="setActiveRank(idx)"
-            >
-              <div class="rank-card__content" :class="{ 'rank-card__content--center': idx !== activeRankIndex }">
+            <i class="bi bi-chevron-left"></i>
+          </button>
 
-                <!-- Active Card: Current user's rank -->
-                <template v-if="idx === activeRankIndex && currentUser && rank.key === currentUser.rankKey">
-                  <div class="rank-card__top">
-                    <span class="rank-card__name" :class="`rank-card__name--${rank.key}`">{{ $t(`profile.promotion.ranks.${rank.key}`) }}</span>
-                    <span v-if="currentUser.isStudent" class="rank-card__tag rank-card__tag--student">{{ $t('profile.promotion.student') }}</span>
-                  </div>
-                  <div class="rank-card__user">
-                    <i class="bi bi-person-fill"></i>
-                    <span>{{ currentUser.name }}</span>
-                  </div>
-                  <div class="rank-card__bottom">
-                    <p class="rank-card__spent">{{ $t('profile.promotion.spent') }} <strong>{{ currentUser.totalSpentFormatted }}</strong>/{{ rank.spentThresholdFormatted }}</p>
-                    <div class="rank-card__progress-bar">
-                      <div class="rank-card__progress-fill" :style="{ width: currentUser.progressPercent + '%' }"></div>
+          <div ref="carouselViewport" class="member-ranks__viewport">
+            <div class="member-ranks__track">
+              <div
+                v-for="(item, index) in carouselItems"
+                :key="item.key"
+                class="member-ranks__slide"
+                :class="{
+                  'member-ranks__slide--active': index === activeRankIndex && !item.isMax,
+                  'member-ranks__slide--max': item.isMax,
+                }"
+                :data-rank-index="index"
+              >
+                <button
+                  v-if="!item.isMax"
+                  type="button"
+                  class="member-rank-card"
+                  :class="[
+                    `member-rank-card--${item.key}`,
+                    {
+                      'member-rank-card--active': index === activeRankIndex,
+                      'member-rank-card--current': index === currentRankIndex,
+                      'member-rank-card--locked': index > currentRankIndex,
+                    },
+                  ]"
+                  :style="{ backgroundImage: `url(${item.background})` }"
+                  @click="setActiveRank(index)"
+                >
+                  <span v-if="index === currentRankIndex && currentUser?.isStudent" class="member-rank-card__student">
+                    S-Student
+                  </span>
+
+                  <span class="member-rank-card__tier">{{ item.name }}</span>
+
+                  <div v-if="index === currentRankIndex" class="member-rank-card__current-body">
+                    <div class="member-rank-card__customer">
+                      <span class="member-rank-card__avatar" aria-hidden="true">
+                        <i class="bi bi-person-fill"></i>
+                      </span>
+                      <strong>{{ displayName }}</strong>
                     </div>
-                    <p v-if="currentUser.renewalDate" class="rank-card__renew">{{ $t('profile.promotion.renewHint') }} {{ currentUser.renewalDate }}</p>
-                    <p v-if="currentUser.nextRankName" class="rank-card__next">{{ $t('profile.promotion.needSpend') }} <strong>{{ currentUser.amountToNextRankFormatted }}</strong> {{ $t('profile.promotion.toRank') }} <strong>{{ currentUser.nextRankName }}</strong></p>
-                  </div>
-                </template>
 
-                <!-- Active Card: Other ranks (not user's current) -->
-                <template v-else-if="idx === activeRankIndex">
-                  <div class="rank-card__top">
-                    <span class="rank-card__name" :class="`rank-card__name--${rank.key}`">{{ $t(`profile.promotion.ranks.${rank.key}`) }}</span>
+                    <div class="member-rank-card__spend">
+                      <span>
+                        Đã mua
+                        <strong>{{ totalSpentText }}</strong>/<span>{{ thresholdText(item.key) }}</span>
+                      </span>
+                      <div class="member-rank-card__progress" aria-hidden="true">
+                        <span :style="{ width: `${progressPercent}%` }"></span>
+                      </div>
+                      <small v-if="currentUser?.renewalDate">
+                        Hạng thành viên được cập nhật lại sau {{ currentUser.renewalDate }}
+                      </small>
+                      <small v-if="currentUser?.amountToNextRankFormatted">
+                        Cần chi tiêu thêm <strong>{{ currentUser.amountToNextRankFormatted }}</strong>
+                        để lên hạng <strong>{{ currentUser.nextRankName || nextRankName }}</strong>
+                      </small>
+                    </div>
                   </div>
-                  <div class="rank-card__unlock-info">
+
+                  <div v-else class="member-rank-card__locked-body">
                     <i class="bi bi-lock-fill"></i>
-                    <span>{{ $t('profile.promotion.notUnlocked') }}</span>
+                    <span>Chưa mở khóa hạng thành viên</span>
                   </div>
-                </template>
+                </button>
 
-                <!-- Side Cards (non-active) -->
-                <template v-else>
-                  <div class="rank-card__name rank-card__name--side" :class="`rank-card__name--${rank.key}`">{{ $t(`profile.promotion.ranks.${rank.key}`) }}</div>
-                  <div class="rank-card__lock-info">
-                    <i class="bi bi-lock-fill"></i>
-                    <span>{{ $t('profile.promotion.notUnlocked') }}</span>
-                  </div>
-                </template>
+                <div v-else class="member-rank-card member-rank-card--max">
+                  <span>Đang xem hạng cao nhất</span>
+                  <i class="bi bi-chevron-right"></i>
+                </div>
 
+                <div class="member-ranks__timeline" aria-hidden="true">
+                  <span class="member-ranks__line" :class="{ 'member-ranks__line--done': index <= activeRankIndex }"></span>
+                  <span class="member-ranks__line" :class="{ 'member-ranks__line--done': index < activeRankIndex }"></span>
+                  <span
+                    v-if="!item.isMax"
+                    class="member-ranks__marker"
+                    :class="{
+                      'member-ranks__marker--done': index <= currentRankIndex,
+                      'member-ranks__marker--active': index === activeRankIndex,
+                    }"
+                  >
+                    <i v-if="index <= currentRankIndex" class="bi bi-check-lg"></i>
+                    <span v-else></span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Next Arrow -->
-        <button
-          type="button"
-          class="rank-carousel__arrow rank-carousel__arrow--next"
-          :class="{ 'rank-carousel__arrow--disabled': activeRankIndex === ranks.length - 1 }"
-          :disabled="activeRankIndex === ranks.length - 1"
-          @click="nextRank"
-        >
-          <i class="bi bi-chevron-right"></i>
-        </button>
-      </div>
-
-      <!-- Stepper Bar -->
-      <div class="rank-stepper-bar">
-        <div class="rank-stepper-bar__track">
-          <div
-            class="rank-stepper-bar__fill"
-            :style="{ width: (activeRankIndex / (ranks.length - 1) * 100) + '%' }"
-          ></div>
-        </div>
-        <div class="rank-stepper-bar__dots">
-          <div
-            v-for="(rank, idx) in ranks"
-            :key="rank.key"
-            class="rank-stepper-bar__dot"
-            :class="{
-              'rank-stepper-bar__dot--done': idx < activeRankIndex,
-              'rank-stepper-bar__dot--active': idx === activeRankIndex,
-            }"
+          <button
+            type="button"
+            class="member-ranks__nav member-ranks__nav--next"
+            :disabled="activeRankIndex >= rankCards.length - 1"
+            aria-label="Hạng tiếp theo"
+            @click="goToNextRank"
           >
-            <i v-if="idx < activeRankIndex" class="bi bi-check"></i>
-            <i v-else-if="idx === activeRankIndex" class="bi bi-circle-fill"></i>
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="member-rank-detail">
+          <div class="member-rank-detail__section">
+            <h2>Điều kiện thăng cấp</h2>
+            <div class="member-rank-detail__item">
+              <span class="member-rank-detail__icon">
+                <i class="bi bi-gem"></i>
+              </span>
+              <p>{{ activeRankContent.condition }}</p>
+            </div>
+          </div>
+
+          <div v-if="activeRankContent.familyVoucher" class="member-rank-detail__section">
+            <h2>Đặc quyền tặng voucher cho người thân</h2>
+            <div class="member-rank-detail__item">
+              <span class="member-rank-detail__icon">
+                <i class="bi bi-gift"></i>
+              </span>
+              <p v-html="activeRankContent.familyVoucher"></p>
+              <span class="member-rank-detail__new">Mới</span>
+            </div>
+          </div>
+
+          <div class="member-rank-detail__section">
+            <h2>Ưu đãi mua hàng</h2>
+            <div
+              v-for="(benefit, index) in activeRankContent.shoppingBenefits"
+              :key="`shopping-${index}`"
+              class="member-rank-detail__item"
+            >
+              <span class="member-rank-detail__icon">
+                <i :class="benefit.icon"></i>
+              </span>
+              <p v-html="benefit.html"></p>
+            </div>
+          </div>
+
+          <div class="member-rank-detail__section member-rank-detail__section--last">
+            <h2>Chính sách phục vụ</h2>
+            <template v-if="activeRankContent.servicePolicies.length">
+              <div
+                v-for="(policy, index) in activeRankContent.servicePolicies"
+                :key="`policy-${index}`"
+                class="member-rank-detail__item"
+              >
+                <span class="member-rank-detail__icon">
+                  <i :class="policy.icon"></i>
+                </span>
+                <p v-html="policy.html"></p>
+              </div>
+            </template>
+            <div v-else class="member-rank-detail__locked">
+              <i class="bi bi-lock-fill"></i>
+              <span>Hiện chưa có chính sách ưu đãi phục vụ đặc biệt cho hạng thành viên {{ activeRankName }}</span>
+            </div>
           </div>
         </div>
-      </div>
-
+      </section>
     </div>
-  </div>
-
-
-  <!-- Benefits Section -->
-  <div class="promotion-card">
-    <div class="promotion-card__header">
-      <h3 class="promotion-card__title">{{ $t('profile.promotion.shoppingBenefits') }}</h3>
-    </div>
-    <div v-if="shoppingBenefits.length === 0 && !isLoadingBenefits" class="promotion-card__body promotion-card__body--benefits">
-      <div class="benefit-item">
-        <div class="benefit-item__icon benefit-item__icon--locked">
-          <i class="bi bi-cart"></i>
-        </div>
-        <div class="benefit-item__content">
-          <div class="benefit-item__title">{{ $t('profile.promotion.yourOffers') }}</div>
-          <div class="benefit-item__desc">{{ $t('profile.promotion.noOffers') }}</div>
-        </div>
-        <div class="benefit-item__lock">
-          <i class="bi bi-lock-fill"></i>
-        </div>
-      </div>
-    </div>
-    <div v-else class="promotion-card__body promotion-card__body--benefits">
-      <div
-        v-for="benefit in shoppingBenefits"
-        :key="benefit.id"
-        class="benefit-item"
-        :class="{ 'benefit-item--locked': benefit.isLocked }"
-      >
-        <div class="benefit-item__icon" :class="benefit.isLocked ? 'benefit-item__icon--locked' : ''">
-          <i :class="benefit.icon || 'bi bi-star'"></i>
-        </div>
-        <div class="benefit-item__content">
-          <div class="benefit-item__title">{{ benefit.title }}</div>
-          <div class="benefit-item__desc">{{ benefit.description }}</div>
-        </div>
-        <div v-if="benefit.isLocked" class="benefit-item__lock">
-          <i class="bi bi-lock-fill"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Service Policy -->
-  <div class="promotion-card">
-    <div class="promotion-card__header">
-      <h3 class="promotion-card__title">{{ $t('profile.promotion.servicePolicy') }}</h3>
-    </div>
-    <div v-if="servicePolicies.length === 0 && !isLoadingBenefits" class="promotion-card__body promotion-card__body--center promotion-card__body--benefits">
-      <div class="benefit-locked">
-        <i class="bi bi-shield-lock"></i>
-        <p>{{ $t('profile.promotion.noOffers') }}</p>
-      </div>
-    </div>
-    <div v-else class="promotion-card__body promotion-card__body--benefits">
-      <div
-        v-for="policy in servicePolicies"
-        :key="policy.id"
-        class="benefit-item"
-        :class="{ 'benefit-item--locked': policy.isLocked }"
-      >
-        <div class="benefit-item__icon" :class="policy.isLocked ? 'benefit-item__icon--locked' : ''">
-          <i :class="policy.icon || 'bi bi-shield'"></i>
-        </div>
-        <div class="benefit-item__content">
-          <div class="benefit-item__title">{{ policy.title }}</div>
-          <div class="benefit-item__desc">{{ policy.description }}</div>
-        </div>
-        <div v-if="policy.isLocked" class="benefit-item__lock">
-          <i class="bi bi-lock-fill"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Upgrade Conditions -->
-  <div class="promotion-card">
-    <div class="promotion-card__header">
-      <h3 class="promotion-card__title">{{ $t('profile.promotion.upgradeConditions') }}</h3>
-    </div>
-    <div class="promotion-card__body promotion-card__body--benefits">
-      <div class="condition-table">
-        <div class="condition-table__header">
-          <span>{{ $t('profile.promotion.rankTitle') }}</span>
-          <span>{{ $t('profile.promotion.spent') }}</span>
-        </div>
-        <div
-          v-for="rank in ranks"
-          :key="rank.key"
-          class="condition-table__row"
-          :class="{ 'condition-table__row--active': currentUser && rank.key === currentUser.rankKey }"
-        >
-          <span class="condition-table__rank">
-            <i :class="rank.icon"></i>
-            {{ $t(`profile.promotion.ranks.${rank.key}`) }}
-          </span>
-          <span class="condition-table__threshold">{{ rank.spentThresholdFormatted }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</ProfileLayout>
+  </ProfileLayout>
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMemberRankStore } from '@/stores/memberRankStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
@@ -256,782 +197,886 @@ definePageMeta({ layout: 'default' })
 useHead({ title: 'Hạng thành viên và ưu đãi - IrusGear' })
 
 const memberRankStore = useMemberRankStore()
-const { currentUser, ranks, shoppingBenefits, servicePolicies, isLoadingRank, isLoadingBenefits } = storeToRefs(memberRankStore)
-
-memberRankStore.fetchMemberRank()
-memberRankStore.fetchBenefits()
+const { currentUser, ranks } = storeToRefs(memberRankStore)
 
 const carouselViewport = ref(null)
 const activeRankIndex = ref(0)
-const trackOffset = ref(0)
-const isDragging = ref(false)
 
-let dragStartX = 0
-let dragStartOffset = 0
-let lastDragX = 0
-let lastDragTime = 0
-let velocity = 0 // pixels per ms, positive = swiping left
-
-// Fixed card dimensions (must match CSS)
-const CARD_GAP = 10
-const CARD_WIDTH_NORMAL = 240
-const CARD_WIDTH_ACTIVE = 300
-const CARD_STEP = CARD_WIDTH_NORMAL + CARD_GAP  // 250px per card
-
-// Velocity threshold (px/ms) to trigger directional snap
-// 0.4 px/ms ≈ 240px/s ≈ fast swipe
-const VELOCITY_THRESHOLD = 0.3
-// Distance threshold (px) to trigger directional snap even with low velocity
-const DIST_THRESHOLD = 80
-
-const setActiveRank = (idx) => {
-  if (isDragging.value) return
-  activeRankIndex.value = idx
+const rankAssets = {
+  snull: {
+    name: 'S-NULL',
+    background: 'https://cdn-static.smember.com.vn/_next/static/media/snull-bg-card.7284811e.png',
+    threshold: '3.000.000đ',
+  },
+  snew: {
+    name: 'S-NEW',
+    background: 'https://cdn-static.smember.com.vn/_next/static/media/snew-bg-card.f753cfbc.png',
+    threshold: '15.000.000đ',
+  },
+  smem: {
+    name: 'S-MEM',
+    background: 'https://cdn-static.smember.com.vn/_next/static/media/smem-bg-card.1fa74fdc.png',
+    threshold: '50.000.000đ',
+  },
+  svip: {
+    name: 'S-VIP',
+    background: 'https://cdn-static.smember.com.vn/_next/static/media/svip-bg-card.59d559cc.png',
+    threshold: '50.000.000đ',
+  },
 }
 
-// Move track so that activeRankIndex card is centered in viewport
-const centerActiveCard = () => {
-  nextTick(() => {
-    const viewport = carouselViewport.value
-    if (!viewport) return
+const defaultRanks = [
+  { key: 'snull', name: 'S-NULL' },
+  { key: 'snew', name: 'S-NEW' },
+  { key: 'smem', name: 'S-MEM' },
+  { key: 'svip', name: 'S-VIP' },
+]
 
-    const vw = viewport.offsetWidth
-    const idx = activeRankIndex.value
-
-    let cardStartX = 0
-    for (let i = 0; i < idx; i++) {
-      cardStartX += CARD_STEP
-    }
-
-    const cardCenterX = cardStartX + CARD_WIDTH_ACTIVE / 2
-    trackOffset.value = cardCenterX - vw / 2
-  })
+const rankContent = {
+  snull: {
+    condition:
+      'Tổng số tiền mua hàng tích luỹ trong năm nay và năm liền trước đạt từ 0 đến 3 triệu đồng, không tính đơn hàng doanh nghiệp B2B',
+    shoppingBenefits: [
+      {
+        icon: 'bi bi-gift',
+        html: 'Hiện chưa có ưu đãi mua hàng đặc biệt cho hạng thành viên S-Null',
+      },
+    ],
+    servicePolicies: [],
+  },
+  snew: {
+    condition:
+      'Tổng số tiền mua hàng tích luỹ trong năm nay và năm liền trước đạt từ 3 đến 15 triệu đồng, không tính đơn hàng doanh nghiệp B2B',
+    shoppingBenefits: [
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Tặng voucher 50K</strong> khi lên hạng (từ SNULL lên SNEW)',
+      },
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Giảm thêm 0.5%</strong> khi mua các sản phẩm thuộc nhóm hàng linh kiện PC, phụ kiện IT - Thiết bị văn phòng, phụ kiện Apple, ốp - bao da Apple/Samsung, đồng hồ, camera giám sát',
+      },
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Giảm thêm 2%</strong> khi mua các sản phẩm thuộc nhóm hàng sim thẻ, bao túi xách, ốp dán còn lại, cáp, sạc dự phòng,...',
+      },
+      {
+        icon: 'bi bi-wallet2',
+        html: '<strong>Giảm thêm 5% (tối đa 100.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại Điện Thoại Vui',
+      },
+      {
+        icon: 'bi bi-cart3',
+        html: '<strong>Giảm thêm 5% (tối đa 200.000đ)</strong> khi thực hiện thu cũ lên đời',
+      },
+      {
+        icon: 'bi bi-calendar-heart',
+        html: 'Ưu đãi sinh nhật: Tặng phiếu mua hàng trị giá <strong>50.000đ</strong> (Code chỉ sử dụng 1 lần, áp dụng cho các đơn hàng Trừ thẻ cào, sim, phi thu hộ, gói BHMR có giá trị lớn gấp đôi giá trị code)',
+      },
+    ],
+    servicePolicies: [],
+  },
+  smem: {
+    condition:
+      'Tổng số tiền mua hàng tích luỹ trong năm nay và năm liền trước đạt từ 15 đến 50 triệu đồng, không tính đơn hàng doanh nghiệp B2B',
+    familyVoucher:
+      '<strong>Nhận voucher trị giá 10% tối đa 150K</strong> tặng cho người thân, bạn bè (Voucher chỉ áp dụng cho khách hàng chưa có tài khoản Smember và chưa từng mua hàng tại CellphoneS)',
+    shoppingBenefits: [
+      {
+        icon: 'bi bi-wallet2',
+        html: '<strong>Ưu đãi thu cũ 5% lên đến 300K</strong> cho các sản phẩm mua tại CellphoneS',
+      },
+      {
+        icon: 'bi bi-truck',
+        html: '<strong>Miễn phí giao hàng</strong> áp dụng cho mọi đơn hàng',
+      },
+      {
+        icon: 'bi bi-cart3',
+        html: '<strong>Tặng voucher 100K</strong> khi lên hạng (từ SNEW lên SMEM)',
+      },
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Giảm thêm 0.5%</strong> khi mua các sản phẩm máy (điện thoại, máy tính, máy tính bảng, Apple Watch), loa - tai nghe, điện máy, gia dụng, máy ảnh, hàng cũ',
+      },
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Giảm thêm 1%</strong> khi mua các sản phẩm phụ kiện IT, thiết bị văn phòng, đồng hồ, camera giám sát, phụ kiện Apple, ốp bao da Samsung - Apple',
+      },
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Giảm thêm 3%</strong> khi mua các sản phẩm thuộc nhóm hàng sạc dự phòng, củ cáp, phụ kiện tiện ích, ốp bao da (trừ Apple, Samsung), balo, túi xách',
+      },
+      {
+        icon: 'bi bi-wallet2',
+        html: '<strong>Giảm thêm 5% (tối đa 200.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại Điện Thoại Vui',
+      },
+      {
+        icon: 'bi bi-cart3',
+        html: '<strong>Giảm thêm 5% (tối đa 300.000đ)</strong> khi thực hiện thu cũ lên đời',
+      },
+      {
+        icon: 'bi bi-calendar-heart',
+        html: 'Ưu đãi sinh nhật: Tặng phiếu mua hàng trị giá <strong>200.000đ</strong> (Code chỉ sử dụng 1 lần, áp dụng cho các đơn hàng Trừ thẻ cào, sim, phi thu hộ, gói BHMR có giá trị lớn gấp đôi giá trị code)',
+      },
+    ],
+    servicePolicies: [],
+  },
+  svip: {
+    condition:
+      'Tổng số tiền mua hàng tích luỹ trong năm nay và năm liền trước đạt từ 50 triệu đồng trở lên, không tính đơn hàng doanh nghiệp B2B',
+    familyVoucher:
+      '<strong>Nhận voucher trị giá 10% tối đa 150K</strong> tặng cho người thân, bạn bè (Voucher chỉ áp dụng cho khách hàng chưa có tài khoản Smember và chưa từng mua hàng tại CellphoneS)',
+    shoppingBenefits: [
+      {
+        icon: 'bi bi-wallet2',
+        html: '<strong>Ưu đãi thu cũ 5% lên đến 500K</strong> cho các sản phẩm mua tại CellphoneS',
+      },
+      {
+        icon: 'bi bi-truck',
+        html: '<strong>Miễn phí giao hàng</strong> áp dụng cho mọi đơn hàng',
+      },
+      {
+        icon: 'bi bi-cart3',
+        html: '<strong>Tặng voucher 300K</strong> khi lên hạng (từ SMEM lên SVIP)',
+      },
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Giảm thêm 1%</strong> khi mua các sản phẩm máy (điện thoại, máy tính, máy tính bảng, Apple Watch), loa - tai nghe, điện máy, gia dụng, máy ảnh, hàng cũ',
+      },
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Giảm thêm 2%</strong> khi mua các sản phẩm phụ kiện IT, thiết bị văn phòng, đồng hồ, ốp bao da Samsung - Apple, camera giám sát, phụ kiện Apple',
+      },
+      {
+        icon: 'bi bi-gift',
+        html: '<strong>Giảm thêm 5%</strong> khi mua các sản phẩm thuộc nhóm hàng phụ kiện sim thẻ, pin dự phòng, sạc cáp, phụ kiện tiện ích, ốp bao da, balo túi xách',
+      },
+      {
+        icon: 'bi bi-wallet2',
+        html: '<strong>Giảm thêm 5% (tối đa 300.000đ)</strong> khi sử dụng các dịch vụ sửa chữa tại Điện Thoại Vui',
+      },
+      {
+        icon: 'bi bi-cart3',
+        html: '<strong>Giảm thêm 5% (tối đa 500.000đ)</strong> khi thực hiện thu cũ lên đời',
+      },
+      {
+        icon: 'bi bi-calendar-heart',
+        html: 'Ưu đãi sinh nhật: Tặng phiếu mua hàng trị giá <strong>500.000đ</strong> (Code chỉ sử dụng 1 lần, áp dụng cho các đơn hàng Trừ thẻ cào, sim, phi thu hộ, gói BHMR có giá trị lớn gấp đôi giá trị code)',
+      },
+    ],
+    servicePolicies: [
+      {
+        icon: 'bi bi-gift',
+        html: 'Tham gia chương trình đặt trước sản phẩm không cần đặt cọc tiền',
+      },
+      {
+        icon: 'bi bi-wallet2',
+        html: 'Tổng đài hỗ trợ và chăm sóc đặc biệt <strong>1800.2097</strong>',
+      },
+    ],
+  },
 }
 
-watch(activeRankIndex, centerActiveCard)
+const normalizeRankKey = (value) => String(value || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '')
 
-onMounted(() => {
-  centerActiveCard()
-})
+const rankCards = computed(() => {
+  const sourceRanks = ranks.value?.length ? ranks.value : defaultRanks
 
-const startDrag = (e) => {
-  isDragging.value = true
-  dragStartX = e.pageX
-  dragStartOffset = trackOffset.value
-  lastDragX = e.pageX
-  lastDragTime = Date.now()
-  velocity = 0
-}
+  return sourceRanks
+    .map((rank) => {
+      const key = normalizeRankKey(rank.key || rank.rank_key || rank.name)
+      const asset = rankAssets[key]
+      if (!asset) return null
 
-const onDrag = (e) => {
-  if (!isDragging.value) return
-
-  const now = Date.now()
-  const dt = now - lastDragTime
-  const dx = lastDragX - e.pageX
-
-  // Calculate velocity (px per ms)
-  if (dt > 0) {
-    velocity = dx / dt
-  }
-
-  lastDragX = e.pageX
-  lastDragTime = now
-
-  const delta = dragStartX - e.pageX
-  trackOffset.value = dragStartOffset + delta
-}
-
-const endDrag = () => {
-  if (!isDragging.value) return
-  isDragging.value = false
-
-  nextTick(() => {
-    const viewport = carouselViewport.value
-    if (!viewport) return
-
-    const vw = viewport.offsetWidth
-    const viewportCenterX = vw / 2
-    const totalCards = ranks.length
-
-    // Find all card centers using fixed-width math
-    const cardCenters = []
-    let cardX = 0
-    for (let i = 0; i < totalCards; i++) {
-      cardCenters.push(cardX + CARD_WIDTH_ACTIVE / 2)
-      cardX += CARD_STEP
-    }
-
-    // ── 1. Velocity-based snap ──────────────────────────────
-    // If swiping fast enough, jump in swipe direction
-    const swipeLeft = velocity > VELOCITY_THRESHOLD      // dragging left → want next card
-    const swipeRight = velocity < -VELOCITY_THRESHOLD     // dragging right → want prev card
-
-    if (swipeLeft || swipeRight) {
-      const suggestedIdx = activeRankIndex.value + (swipeLeft ? 1 : -1)
-      activeRankIndex.value = Math.max(0, Math.min(suggestedIdx, totalCards - 1))
-      return
-    }
-
-    // ── 2. Distance-threshold snap ──────────────────────────
-    // If dragged far enough past a card boundary, snap to next/prev
-    const currentOffset = dragStartOffset + (lastDragX - dragStartX)
-    // Distance the current active card's center has moved from viewport center
-    let currentCardStartX = 0
-    for (let i = 0; i < activeRankIndex.value; i++) {
-      currentCardStartX += CARD_STEP
-    }
-    const currentCardCenterX = currentCardStartX + CARD_WIDTH_ACTIVE / 2
-    const offsetFromCenter = currentOffset - (currentCardCenterX - vw / 2)
-
-    if (offsetFromCenter < -DIST_THRESHOLD && activeRankIndex.value < totalCards - 1) {
-      // Dragged left enough → next card
-      activeRankIndex.value++
-      return
-    }
-    if (offsetFromCenter > DIST_THRESHOLD && activeRankIndex.value > 0) {
-      // Dragged right enough → prev card
-      activeRankIndex.value--
-      return
-    }
-
-    // ── 3. Nearest-center snap (fallback) ───────────────────
-    let nearestIdx = 0
-    let nearestDist = Infinity
-    cardCenters.forEach((centerX, i) => {
-      const dist = Math.abs(centerX - viewportCenterX)
-      if (dist < nearestDist) {
-        nearestDist = dist
-        nearestIdx = i
+      return {
+        key,
+        name: rank.name || asset.name,
+        background: asset.background,
+        threshold: rank.spentThresholdFormatted || asset.threshold,
       }
     })
-    activeRankIndex.value = nearestIdx
+    .filter(Boolean)
+})
+
+const carouselItems = computed(() => [
+  ...rankCards.value,
+  {
+    key: 'highest-rank-placeholder',
+    isMax: true,
+  },
+])
+
+const currentRankIndex = computed(() => {
+  const currentKey = normalizeRankKey(currentUser.value?.rankKey || 'snull')
+  const index = rankCards.value.findIndex((rank) => rank.key === currentKey)
+  return index >= 0 ? index : 0
+})
+
+const activeRank = computed(() => rankCards.value[activeRankIndex.value] || rankCards.value[0] || rankAssets.snull)
+
+const activeRankName = computed(() => activeRank.value?.name || 'S-NULL')
+
+const activeRankContent = computed(() => rankContent[activeRank.value?.key] || rankContent.snull)
+
+const displayName = computed(() => (currentUser.value?.name || 'Khách hàng').toUpperCase())
+
+const progressPercent = computed(() => {
+  const value = Number(currentUser.value?.progressPercent || 0)
+  return Math.max(0, Math.min(100, value))
+})
+
+const totalSpentText = computed(() => currentUser.value?.totalSpentFormatted || '0đ')
+
+const nextRankName = computed(() => {
+  const nextRank = rankCards.value[currentRankIndex.value + 1]
+  return nextRank?.name || ''
+})
+
+const thresholdText = (rankKey) => {
+  const rank = rankCards.value.find((item) => item.key === rankKey)
+  return rank?.threshold || rankAssets[rankKey]?.threshold || '0đ'
+}
+
+const scrollActiveRankIntoView = (behavior = 'smooth') => {
+  const viewport = carouselViewport.value
+  if (!viewport) return
+
+  const activeSlide = viewport.querySelector(`[data-rank-index="${activeRankIndex.value}"]`)
+  activeSlide?.scrollIntoView({
+    behavior,
+    block: 'nearest',
+    inline: 'center',
   })
 }
 
-onUnmounted(() => {
-  isDragging.value = false
+const setActiveRank = (index) => {
+  if (index < 0 || index >= rankCards.value.length) return
+  activeRankIndex.value = index
+}
+
+const goToPrevRank = () => setActiveRank(activeRankIndex.value - 1)
+
+const goToNextRank = () => setActiveRank(activeRankIndex.value + 1)
+
+watch(
+  () => currentRankIndex.value,
+  (index) => {
+    activeRankIndex.value = index
+    nextTick(() => scrollActiveRankIntoView('auto'))
+  },
+  { immediate: true },
+)
+
+watch(activeRankIndex, () => {
+  nextTick(() => scrollActiveRankIntoView())
 })
 
-const prevRank = () => {
-  if (activeRankIndex.value > 0) {
-    activeRankIndex.value--
-  }
-}
-
-const nextRank = () => {
-  if (activeRankIndex.value < ranks.length - 1) {
-    activeRankIndex.value++
-  }
-}
+onMounted(() => {
+  memberRankStore.fetchMemberRank().catch(() => {})
+  memberRankStore.fetchBenefits().catch(() => {})
+  nextTick(() => scrollActiveRankIntoView('auto'))
+})
 </script>
 
 <style scoped>
-/* ── Card ─── */
-.promotion-card {
+.promotion-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  color: #121214;
+}
+
+.promotion-offers,
+.member-ranks {
   background: #fff;
   border: 1px solid #ececf1;
-  border-radius: 18px;
-  overflow: hidden;
+  border-radius: 12px;
 }
 
-.promotion-card__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px;
-  border-bottom: 1px solid #f4f4f5;
-  gap: 12px;
-  flex-wrap: wrap;
+.promotion-offers {
+  min-height: 232px;
+  padding: 12px;
 }
 
-.promotion-card__title {
-  font-size: 15px;
-  font-weight: 700;
-  color: #18181b;
+.promotion-offers__title {
   margin: 0;
-}
-
-.promotion-card__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
+  line-height: 1.4;
 }
 
-.promotion-card__badge--student {
-  background: #ed0017;
-  color: #fff;
-}
-
-.promotion-card__body {
-  padding: 16px;
-}
-
-.promotion-card__body--center {
+.promotion-offers__empty {
+  min-height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 32px 16px;
+  justify-content: center;
+  gap: 8px;
 }
 
-.promotion-card__body--benefits {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.promotion-card__body--rank {
-  padding: 0;
-}
-
-/* ── Empty State ─── */
-.promotion-card__empty-img {
-  width: 88px;
-  height: auto;
+.promotion-offers__empty-img {
+  width: 140px;
+  height: 104px;
   object-fit: contain;
 }
 
-.promotion-card__empty-text {
-  font-size: 14px;
-  color: #a1a1aa;
+.promotion-offers__empty p {
   margin: 0;
-  text-align: center;
+  color: #a1a1aa;
+  font-size: 11px;
 }
 
-/* ── Rank Carousel ─── */
-.rank-carousel {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.rank-carousel__viewport {
+.member-ranks {
+  padding: 12px;
   overflow: hidden;
+}
+
+.member-ranks__carousel {
+  position: relative;
   width: 100%;
-}
-
-.rank-carousel__arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid #e4e4e7;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #52525b;
-  font-size: 18px;
-  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
-  flex-shrink: 0;
-}
-
-.rank-carousel__arrow:hover:not(:disabled) {
-  background: #f4f4f5;
-  color: #18181b;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-.rank-carousel__arrow--disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.rank-carousel__arrow--prev {
-  left: 8px;
-}
-
-.rank-carousel__arrow--next {
-  right: 8px;
-}
-
-.rank-carousel__track {
-  display: flex;
-  gap: 10px;
-  cursor: grab;
   user-select: none;
-  padding: 8px 0;
-  /* No overflow-x: auto — uses transform instead */
-  will-change: transform;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.rank-carousel__track--dragging {
-  cursor: grabbing;
-  /* Disable transition during drag for real-time response */
-  transition: none;
+.member-ranks__viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 42px;
+  scrollbar-width: none;
+  padding-inline: 30px;
 }
 
-/* ── Rank Card ─── */
-.rank-card {
-  flex-shrink: 0;
-  width: 240px;
-  height: 150px;
-  border-radius: 14px;
-  overflow: hidden;
+.member-ranks__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.member-ranks__track {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  min-height: 195px;
+}
+
+.member-ranks__slide {
   position: relative;
+  flex: 0 0 268px;
+  min-height: 195px;
+  padding-bottom: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  transition: flex-basis 0.2s ease;
+}
+
+.member-ranks__slide--active {
+  flex-basis: 338px;
+}
+
+.member-ranks__slide--max {
+  flex-basis: 268px;
+}
+
+.member-ranks__nav {
+  position: absolute;
+  top: 76px;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: #f7f7f8;
+  box-shadow: 0 1px 8px rgba(18, 18, 20, 0.08);
+  color: #52525b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, width 0.25s ease, height 0.25s ease;
-  opacity: 0.5;
-  transform: scale(0.88);
-  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
 }
 
-.rank-card--active {
-  opacity: 1;
-  transform: scale(1);
-  width: 300px;
-  height: 160px;
-  box-shadow: 0 4px 20px rgba(215, 0, 24, 0.15), 0 0 32px rgba(0, 0, 0, 0.06);
-  z-index: 2;
-  border: 2px solid rgba(215, 0, 24, 0.25);
-}
-
-.rank-card--done {
-  opacity: 0.7;
-}
-
-.rank-card--snull { background: linear-gradient(135deg, #6b7280, #9ca3af); }
-.rank-card--snew { background: linear-gradient(135deg, #2563eb, #60a5fa); }
-.rank-card--smem { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
-.rank-card--svip { background: linear-gradient(135deg, #d97706, #fbbf24); }
-
-.rank-card--active.rank-card--snull { background: linear-gradient(135deg, #4b5563, #6b7280); }
-.rank-card--active.rank-card--snew { background: linear-gradient(135deg, #1d4ed8, #2563eb); }
-.rank-card--active.rank-card--smem { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
-.rank-card--active.rank-card--svip { background: linear-gradient(135deg, #b45309, #d97706); }
-
-.rank-card--locked {
-  background: linear-gradient(135deg, #4b5563, #6b7280) !important;
-}
-
-.rank-card__content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-}
-
-.rank-card__content--center {
-  align-items: center;
-  justify-content: center;
-}
-
-/* Card Name */
-.rank-card__name {
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background: linear-gradient(135deg, #85878D 6.52%, #B3B3B3 76.27%, #AEAFAF 94.99%, #A2A3A4 113.7%, #979899 127.31%, #858588 152.83%, #6F6F73 166.44%, #5D5C62 176.65%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.rank-card__name--side {
-  font-size: 11px;
-}
-
-.rank-card__tag {
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 999px;
-}
-
-.rank-card__tag--student {
-  background: #ed0017;
-  color: #fff;
-  -webkit-text-fill-color: #fff;
-}
-
-/* Active Card content layout */
-.rank-card__top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: auto;
-}
-
-.rank-card__user {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #18181b;
-  margin-bottom: 6px;
-}
-
-.rank-card__user i {
-  font-size: 16px;
-  color: #71717a;
-  flex-shrink: 0;
-}
-
-.rank-card__bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.rank-card__spent {
-  font-size: 12px;
-  color: #18181b;
-  margin: 0;
-}
-
-.rank-card__spent strong {
-  font-weight: 800;
-}
-
-.rank-card__progress-bar {
-  height: 4px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 999px;
-  overflow: hidden;
-  margin: 2px 0;
-}
-
-.rank-card__progress-fill {
-  height: 100%;
-  background: #d70018;
-  border-radius: 999px;
-  transition: width 0.4s ease;
-}
-
-.rank-card__renew {
-  font-size: 10px;
-  color: #71717a;
-  margin: 0;
-}
-
-.rank-card__next {
-  font-size: 10px;
-  color: #52525b;
-  margin: 0;
-}
-
-.rank-card__next strong {
-  font-weight: 700;
-  color: #18181b;
-}
-
-/* Unlock info (active locked cards) */
-.rank-card__unlock-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  color: #b88a6e;
-  font-size: 11px;
-  text-align: center;
-  margin-top: auto;
-}
-
-.rank-card__unlock-info i {
-  font-size: 24px;
-}
-
-/* Side card lock */
-.rank-card__lock-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: #b88a6e;
-  font-size: 10px;
-  text-align: center;
-}
-
-.rank-card__lock-info i {
-  font-size: 18px;
-}
-
-.rank-card__name--svip {
-  background: linear-gradient(135deg, #fff 6.52%, #f0f0f0 50%, #d0d0d0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.rank-card--svip .rank-card__lock-info {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* ── Stepper Bar ─── */
-.rank-stepper-bar {
-  position: relative;
-  padding: 20px 0 24px;
-}
-
-.rank-stepper-bar__track {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 4px;
-  background: #e4e4e7;
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.rank-stepper-bar__fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: #d70018;
-  border-radius: 999px;
-  transition: width 0.35s ease;
-}
-
-.rank-stepper-bar__dots {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.rank-stepper-bar__dot {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid #e4e4e7;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  color: #a1a1aa;
-  flex-shrink: 0;
-  transition: all 0.25s ease;
-  position: relative;
-  z-index: 1;
-}
-
-.rank-stepper-bar__dot--done {
-  background: #d70018;
-  border-color: #d70018;
-  color: #fff;
-}
-
-.rank-stepper-bar__dot--active {
-  background: #d70018;
-  border-color: #d70018;
-  color: #fff;
-  animation: pulse-dot 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-/* ── Benefit Item ─── */
-.benefit-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px;
-  background: #f9fafb;
-  border-radius: 10px;
-}
-
-.benefit-item__icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 16px;
-}
-
-.benefit-item__icon--locked {
-  background: #f4f4f5;
-  color: #a1a1aa;
-}
-
-.benefit-item__content {
-  flex: 1;
-  min-width: 0;
-}
-
-.benefit-item__title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #18181b;
-  margin-bottom: 4px;
-}
-
-.benefit-item__desc {
-  font-size: 13px;
-  color: #71717a;
-  line-height: 1.5;
-}
-
-.benefit-item--locked {
-  opacity: 0.8;
-}
-
-.benefit-item__lock {
-  font-size: 16px;
-  color: #a1a1aa;
-  flex-shrink: 0;
-}
-
-/* ── Benefit Locked ─── */
-.benefit-locked {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 16px;
-  color: #a1a1aa;
-  text-align: center;
-}
-
-.benefit-locked i {
-  font-size: 32px;
-  opacity: 0.5;
-}
-
-.benefit-locked p {
-  font-size: 13px;
-  color: #a1a1aa;
-  margin: 0;
-  line-height: 1.5;
-}
-
-/* ── Condition Table ─── */
-.condition-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px;
-  background: #f9fafb;
-  border-radius: 10px;
-}
-
-.condition-item__icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 16px;
-}
-
-.condition-item__icon--info {
-  background: #d70018;
-  color: #fff;
-}
-
-.condition-item__content {
-  flex: 1;
-  min-width: 0;
-}
-
-.condition-item__title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #18181b;
-  margin-bottom: 4px;
-}
-
-.condition-item__desc {
-  font-size: 13px;
-  color: #71717a;
-  line-height: 1.5;
-}
-
-.condition-item__desc strong {
-  color: #18181b;
-  font-weight: 700;
-}
-
-.condition-table {
-  border: 1px solid #e4e4e7;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.condition-table__header {
-  display: flex;
-  padding: 10px 14px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e4e4e7;
-  font-size: 12px;
-  font-weight: 700;
-  color: #71717a;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  gap: 16px;
-}
-
-.condition-table__header span:last-child {
-  margin-left: auto;
-}
-
-.condition-table__row {
-  display: flex;
-  align-items: center;
-  padding: 10px 14px;
-  border-bottom: 1px solid #f0f0f2;
-  font-size: 13px;
-  gap: 16px;
-}
-
-.condition-table__row:last-child {
-  border-bottom: none;
-}
-
-.condition-table__row--active {
-  background: rgba(215, 0, 24, 0.04);
-}
-
-.condition-table__rank {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  color: #52525b;
-}
-
-.condition-table__row--active .condition-table__rank {
+.member-ranks__nav:hover:not(:disabled) {
+  background: #fbe6e8;
   color: #d70018;
 }
 
-.condition-table__rank i {
+.member-ranks__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.member-ranks__nav--prev {
+  left: 0;
+}
+
+.member-ranks__nav--next {
+  right: 0;
+}
+
+.member-rank-card {
+  position: relative;
+  width: 260px;
+  height: 100px;
+  overflow: hidden;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  background-color: #f7f7f8;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.06), 0 4px 20px -8px rgba(0, 0, 0, 0.11);
+  color: #1d1d20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  transition: width 0.2s ease, height 0.2s ease, transform 0.2s ease;
+}
+
+.member-rank-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.member-rank-card--active {
+  width: 324px;
+  height: 150px;
+}
+
+.member-rank-card--svip {
+  color: #fff;
+}
+
+.member-rank-card--max {
+  cursor: default;
+  background: #f7f7f8;
+  color: #a1a1aa;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-direction: row;
+  filter: drop-shadow(0 8px 16px rgba(18, 18, 20, 0.04));
+}
+
+.member-rank-card--max i {
+  font-size: 12px;
+  color: #52525b;
+}
+
+.member-rank-card__student {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  z-index: 2;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: linear-gradient(122deg, #31b47e 4.7%, #2eaf79 99.03%, #20ab71 193.35%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.06), 0 4px 20px -8px rgba(0, 0, 0, 0.11);
+}
+
+.member-rank-card__tier {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  min-width: 90px;
+  margin-left: 16px;
+  padding: 6px 18px 6px 14px;
+  border: 1px solid rgba(228, 228, 231, 0.85);
+  border-radius: 999px;
+  background: linear-gradient(
+    17deg,
+    #85878d 6.52%,
+    #b3b3b3 76.27%,
+    #aeafaf 94.99%,
+    #a2a3a4 113.7%,
+    #979899 127.31%,
+    #929394 139.22%,
+    #858588 152.83%,
+    #6f6f73 166.44%,
+    #5d5c62 176.65%
+  );
+  background-blend-mode: soft-light;
+  mix-blend-mode: hard-light;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.member-rank-card--current.member-rank-card--active .member-rank-card__tier {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 130px;
+  margin: 0;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0 0 999px 0;
+  padding: 10px 24px 10px 16px;
+}
+
+.member-rank-card__current-body {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding: 0 14px 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.member-rank-card__customer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: #2b2b30;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.member-rank-card__customer strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.member-rank-card__avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(173, 156, 157, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  color: #ad9c9d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.member-rank-card__spend {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #2b2b30;
+  font-size: 10px;
+}
+
+.member-rank-card__spend small {
+  color: #ad9c9d;
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.member-rank-card__progress {
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.member-rank-card__progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #c6c0c0 -43.17%, #c6c0c0 100%);
+}
+
+.member-rank-card__locked-body {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  padding-inline: 16px;
+  color: #b88a6e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.member-rank-card--smem .member-rank-card__locked-body {
+  color: #c0904a;
+}
+
+.member-rank-card--svip .member-rank-card__locked-body {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.member-rank-card__locked-body i {
+  font-size: 18px;
+}
+
+.member-ranks__timeline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-ranks__line {
+  flex: 1;
+  height: 4px;
+  background: #e4e4e7;
+}
+
+.member-ranks__line--done {
+  background: #d70018;
+}
+
+.member-ranks__slide--max .member-ranks__line {
+  background: #e4e4e7;
+}
+
+.member-ranks__marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 20px;
+  padding: 0 5px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.member-ranks__marker > span {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: #e4e4e7;
+  border: 3px solid #fff;
+  outline: 3px solid #e4e4e7;
+}
+
+.member-ranks__marker--done {
+  background: #fff;
+}
+
+.member-ranks__marker--done i {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: #d70018;
+  color: #fff;
+  font-size: 13px;
+  line-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-ranks__marker--active {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.member-rank-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 12px 0;
+}
+
+.member-rank-detail__section {
+  padding: 20px 0;
+  border-top: 1px dashed #cfcfd3;
+}
+
+.member-rank-detail__section:first-child {
+  border-top: 0;
+  padding-top: 12px;
+}
+
+.member-rank-detail__section--last {
+  padding-bottom: 10px;
+}
+
+.member-rank-detail__section h2 {
+  margin: 0 0 18px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.member-rank-detail__item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-height: 28px;
+  margin-top: 14px;
+  color: #121214;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.member-rank-detail__item:first-of-type {
+  margin-top: 0;
+}
+
+.member-rank-detail__item p {
+  flex: 1;
+  margin: 0;
+}
+
+.member-rank-detail__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(231deg, #ed8a95 -68.73%, #c40016 91.14%);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   font-size: 14px;
 }
 
-.condition-table__threshold {
-  margin-left: auto;
-  font-weight: 500;
-  color: #71717a;
+.member-rank-detail__new {
+  align-self: center;
+  min-width: 36px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #d70018;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
 }
 
-.condition-table__row--active .condition-table__threshold {
-  color: #18181b;
+.member-rank-detail__locked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #d4d4d8;
+  text-align: center;
+}
+
+.member-rank-detail__locked i {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.member-rank-detail__locked span {
+  color: #d4d4d8;
+  font-size: 12px;
+}
+
+@media (max-width: 991.98px) {
+  .promotion-offers {
+    min-height: 190px;
+  }
+
+  .promotion-offers__empty {
+    min-height: 140px;
+  }
+
+  .promotion-offers__empty-img {
+    width: 104px;
+    height: 78px;
+  }
+
+  .member-ranks {
+    padding: 10px 8px;
+  }
+
+  .member-ranks__viewport {
+    padding-inline: 22px;
+  }
+
+  .member-ranks__track {
+    gap: 24px;
+  }
+
+  .member-ranks__slide {
+    flex-basis: 232px;
+  }
+
+  .member-ranks__slide--active {
+    flex-basis: 292px;
+  }
+
+  .member-rank-card {
+    width: 220px;
+  }
+
+  .member-rank-card--active {
+    width: 280px;
+    height: 132px;
+  }
+
+  .member-ranks__nav {
+    width: 28px;
+    height: 28px;
+    top: 82px;
+  }
+
+  .member-rank-detail {
+    padding-inline: 6px;
+  }
+
+  .member-rank-detail__section h2 {
+    font-size: 13px;
+  }
+
+  .member-rank-detail__item {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .member-ranks__viewport {
+    padding-inline: 14px;
+  }
+
+  .member-ranks__track {
+    gap: 18px;
+  }
+
+  .member-ranks__slide,
+  .member-ranks__slide--active,
+  .member-ranks__slide--max {
+    flex-basis: 268px;
+  }
+
+  .member-rank-card,
+  .member-rank-card--active {
+    width: 248px;
+  }
+
+  .member-rank-card--active {
+    height: 132px;
+  }
+
+  .member-rank-card--current.member-rank-card--active .member-rank-card__tier {
+    min-width: 118px;
+    padding: 9px 20px 9px 14px;
+  }
 }
 </style>

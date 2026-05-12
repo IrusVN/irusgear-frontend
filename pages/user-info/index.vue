@@ -15,10 +15,10 @@
   </div>
 
   <!-- Personal Information -->
-  <div class="user-info-card">
+  <div class="user-info-card user-info-card--personal">
     <div class="user-info-card__header">
       <h2 class="user-info-card__title">Thông tin cá nhân</h2>
-      <button type="button" class="user-info-card__edit-btn">
+      <button type="button" class="user-info-card__edit-btn" @click="openUpdateProfile">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
@@ -63,7 +63,7 @@
   <div class="user-info-card">
     <div class="user-info-card__header">
       <h2 class="user-info-card__title">{{ $t('profile.userInfo.addressBook') }}</h2>
-      <button type="button" class="user-info-card__edit-btn">
+      <button type="button" class="user-info-card__edit-btn" @click="openUpdateAddress">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="5" x2="12" y2="19"/>
           <line x1="5" y1="12" x2="19" y2="12"/>
@@ -148,6 +148,9 @@
     </div>
   </div>
   </div>
+
+  <UpdateProfile v-model="showUpdateProfileModal" />
+  <UpdateAddress v-model="showUpdateAddressModal" />
 </ProfileLayout>
 </template>
 
@@ -157,6 +160,8 @@ import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/authStore'
 import { useUserInfoStore } from '@/stores/userInfoStore'
 import ProfileLayout from '@/components/Common/ProfileLayout.vue'
+import UpdateProfile from '@/components/Profile/UpdateProfile.vue'
+import UpdateAddress from '@/components/Profile/UpdateAddress.vue'
 
 definePageMeta({ layout: 'default', middleware: ['auth-guard'] })
 
@@ -167,17 +172,33 @@ const userInfoStore = useUserInfoStore()
 const { user } = storeToRefs(authStore)
 const { socialLinks, isLoadingLinks } = storeToRefs(userInfoStore)
 
+const showUpdateProfileModal = ref(false)
+const showUpdateAddressModal = ref(false)
 const showGenderAlert = computed(() => !user.value?.gender)
 
 // Fetch social links on mount
 userInfoStore.fetchSocialLinks()
 
-const handleUpdateGender = () => {
-  // TODO: open gender update modal
+const openUpdateProfile = () => {
+  showUpdateProfileModal.value = true
 }
+
+const openUpdateAddress = () => {
+  showUpdateAddressModal.value = true
+}
+
+const handleUpdateGender = openUpdateProfile
 </script>
 
 <style scoped>
+/* ── Page ───────────────────────── */
+.user-info-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
 /* ── Alert Banner ───────────────────────── */
 .user-info-alert {
   display: flex;
@@ -520,6 +541,10 @@ const handleUpdateGender = () => {
 }
 
 @media (min-width: 768px) {
+  .user-info-page {
+    gap: 14px;
+  }
+
   .user-info-row {
     grid-template-columns: 1fr 1fr;
     gap: 16px;
@@ -565,6 +590,10 @@ const handleUpdateGender = () => {
 }
 
 @media (min-width: 992px) {
+  .user-info-page {
+    gap: 16px;
+  }
+
   .user-info-row {
     grid-template-columns: 1fr 1fr;
     gap: 16px;
