@@ -135,7 +135,7 @@
       <div class="user-info-card__body">
         <div class="user-info-card__row user-info-card__row--plain">
           <span class="user-info-card__label">{{ $t('profile.userInfo.lastUpdated') }}</span>
-          <span class="user-info-card__value">{{ user?.password_updated_at || '—' }}</span>
+          <span class="user-info-card__value">{{ passwordLastUpdatedText }}</span>
         </div>
       </div>
     </div>
@@ -186,7 +186,7 @@
 
   <UpdateProfile v-model="showUpdateProfileModal" />
   <UpdateAddress v-model="showUpdateAddressModal" @saved="checkoutStore.fetchAddresses()" />
-  <UpdatePassword v-model="showUpdatePasswordModal" />
+  <UpdatePassword v-model="showUpdatePasswordModal" @updated="userInfoStore.fetchPasswordInfo()" />
 </ProfileLayout>
 </template>
 
@@ -210,7 +210,7 @@ const authStore = useAuthStore()
 const userInfoStore = useUserInfoStore()
 const checkoutStore = useCheckoutStore()
 const { user } = storeToRefs(authStore)
-const { socialLinks, isLoadingLinks } = storeToRefs(userInfoStore)
+const { socialLinks, isLoadingLinks, passwordInfo, isLoadingPasswordInfo } = storeToRefs(userInfoStore)
 const { savedAddresses, addressesLoading } = storeToRefs(checkoutStore)
 
 const showUpdateProfileModal = ref(false)
@@ -265,6 +265,32 @@ const mappedAddresses = computed(() =>
     formattedAddress: formatAddress(address) || '—',
   }))
 )
+
+const formatDateTime = (value) => {
+  if (!value) return ''
+
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return String(value)
+
+  return new Intl.DateTimeFormat('vi-VN', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date)
+}
+
+const passwordLastUpdatedText = computed(() => {
+  if (isLoadingPasswordInfo.value) return 'Đang tải...'
+  if (passwordInfo.value?.hasNeverChanged) return '—'
+
+  return (
+    formatDateTime(passwordInfo.value?.passwordChangedAt) ||
+    formatDateTime(user.value?.password_updated_at) ||
+    '—'
+  )
+})
 
 const defaultAddressFromApi = computed(() => {
   const defaultAddress = savedAddresses.value.find((address) => address.is_default)
@@ -340,6 +366,7 @@ const resolveUserDefaultAddress = async () => {
 
 onMounted(() => {
   userInfoStore.fetchSocialLinks()
+  userInfoStore.fetchPasswordInfo()
   checkoutStore.fetchAddresses()
   resolveUserDefaultAddress()
 })

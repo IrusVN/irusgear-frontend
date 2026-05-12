@@ -84,7 +84,7 @@
                 </span>
                 <span class="profile-password__hint">
                   <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
-                  <span>Mật khẩu tối thiểu 6 ký tự, có ít nhất 1 chữ số và 1 số</span>
+                  <span>Mật khẩu tối thiểu 8 ký tự, có ít nhất chữ hoa và chữ thường, số</span>
                 </span>
                 <span v-if="errors.newPassword" class="profile-password__error">
                   {{ errors.newPassword }}

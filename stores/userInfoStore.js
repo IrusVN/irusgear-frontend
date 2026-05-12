@@ -11,6 +11,8 @@ export const useUserInfoStore = defineStore("userInfo", () => {
 
   const socialLinks = ref([]);
   const isLoadingLinks = ref(false);
+  const passwordInfo = ref(null);
+  const isLoadingPasswordInfo = ref(false);
 
   const apiFetch = async (endpoint, options = {}) => {
     const headers = import.meta.server ? useRequestHeaders(["cookie"]) : {};
@@ -64,6 +66,23 @@ export const useUserInfoStore = defineStore("userInfo", () => {
     }
   };
 
+  const fetchPasswordInfo = async () => {
+    isLoadingPasswordInfo.value = true;
+    try {
+      const res = await apiFetch("password/info");
+      passwordInfo.value = {
+        passwordChangedAt: res?.data?.password_changed_at || null,
+        hasNeverChanged: Boolean(res?.data?.has_never_changed),
+      };
+      return passwordInfo.value;
+    } catch (e) {
+      passwordInfo.value = null;
+      return null;
+    } finally {
+      isLoadingPasswordInfo.value = false;
+    }
+  };
+
   const fetchSocialLinks = async () => {
     if (socialLinks.value.length > 0) return socialLinks.value;
     isLoadingLinks.value = true;
@@ -90,6 +109,8 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   const reset = () => {
     socialLinks.value = [];
     isLoadingLinks.value = false;
+    passwordInfo.value = null;
+    isLoadingPasswordInfo.value = false;
   };
 
   registerStore({ reset });
@@ -97,8 +118,11 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   return {
     socialLinks,
     isLoadingLinks,
+    passwordInfo,
+    isLoadingPasswordInfo,
     updateProfile,
     changePassword,
+    fetchPasswordInfo,
     fetchSocialLinks,
     reset,
   };
