@@ -1,0 +1,72 @@
+[
+  {
+    "code": "06814",
+    "name": "Bắc Sơn",
+    "full_name": "Phường Bắc Sơn",
+    "type": "Phường Bắc",
+    "district_code": "196"
+  },
+  {
+    "code": "06823",
+    "name": "Nam Khê",
+    "full_name": "Phường Nam Khê",
+    "type": "Phường Nam",
+    "district_code": "196"
+  },
+  {
+    "code": "06835",
+    "name": "Phương Nam",
+    "full_name": "Phường Phương Nam",
+    "type": "Phường Phương",
+    "district_code": "196"
+  },
+  {
+    "code": "06832",
+    "name": "Phương Đông",
+    "full_name": "Phường Phương Đông",
+    "type": "Phường Phương",
+    "district_code": "196"
+  },
+  {
+    "code": "06817",
+    "name": "Quang Trung",
+    "full_name": "Phường Quang Trung",
+    "type": "Phường Quang",
+    "district_code": "196"
+  },
+  {
+    "code": "06811",
+    "name": "Thanh Sơn",
+    "full_name": "Phường Thanh Sơn",
+    "type": "Phường Thanh",
+    "district_code": "196"
+  },
+  {
+    "code": "06829",
+    "name": "Thượng Yên Công",
+    "full_name": "Xã Thượng Yên Công",
+    "type": "Xã Thượng Yên",
+    "district_code": "196"
+  },
+  {
+    "code": "06820",
+    "name": "Trưng Vương",
+    "full_name": "Phường Trưng Vương",
+    "type": "Phường Trưng",
+    "district_code": "196"
+  },
+  {
+    "code": "06808",
+    "name": "Vàng Danh",
+    "full_name": "Phường Vàng Danh",
+    "type": "Phường Vàng",
+    "district_code": "196"
+  },
+  {
+    "code": "06826",
+    "name": "Yên Thanh",
+    "full_name": "Phường Yên Thanh",
+    "type": "Phường Yên",
+    "district_code": "196"
+  }
+]

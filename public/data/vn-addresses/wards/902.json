@@ -1,0 +1,58 @@
+[
+  {
+    "code": "30808",
+    "name": "Bình An",
+    "full_name": "Xã Bình An",
+    "type": "Xã Bình",
+    "district_code": "902"
+  },
+  {
+    "code": "30809",
+    "name": "Bình Trị",
+    "full_name": "Xã Bình Trị",
+    "type": "Xã Bình",
+    "district_code": "902"
+  },
+  {
+    "code": "30805",
+    "name": "Dương Hòa",
+    "full_name": "Xã Dương Hòa",
+    "type": "Xã Dương",
+    "district_code": "902"
+  },
+  {
+    "code": "30802",
+    "name": "Hòa Điền",
+    "full_name": "Xã Hòa Điền",
+    "type": "Xã Hòa",
+    "district_code": "902"
+  },
+  {
+    "code": "30814",
+    "name": "Hòn Nghệ",
+    "full_name": "Xã Hòn Nghệ",
+    "type": "Xã Hòn",
+    "district_code": "902"
+  },
+  {
+    "code": "30790",
+    "name": "Kiên Bình",
+    "full_name": "Xã Kiên Bình",
+    "type": "Xã Kiên",
+    "district_code": "902"
+  },
+  {
+    "code": "30787",
+    "name": "Kiên Lương",
+    "full_name": "Thị trấn Kiên Lương",
+    "type": "Thị trấn Kiên",
+    "district_code": "902"
+  },
+  {
+    "code": "30811",
+    "name": "Sơn Hải",
+    "full_name": "Xã Sơn Hải",
+    "type": "Xã Sơn",
+    "district_code": "902"
+  }
+]

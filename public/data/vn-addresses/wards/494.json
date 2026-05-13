@@ -1,0 +1,30 @@
+[
+  {
+    "code": "20290",
+    "name": "Hoà Hải",
+    "full_name": "Phường Hoà Hải",
+    "type": "Phường Hoà",
+    "district_code": "494"
+  },
+  {
+    "code": "20287",
+    "name": "Hoà Quý",
+    "full_name": "Phường Hoà Quý",
+    "type": "Phường Hoà",
+    "district_code": "494"
+  },
+  {
+    "code": "20285",
+    "name": "Khuê Mỹ",
+    "full_name": "Phường Khuê Mỹ",
+    "type": "Phường Khuê",
+    "district_code": "494"
+  },
+  {
+    "code": "20284",
+    "name": "Mỹ An",
+    "full_name": "Phường Mỹ An",
+    "type": "Phường Mỹ",
+    "district_code": "494"
+  }
+]

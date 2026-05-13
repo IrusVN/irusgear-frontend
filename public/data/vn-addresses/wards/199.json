@@ -1,0 +1,79 @@
+[
+  {
+    "code": "06865",
+    "name": "Hà Lâu",
+    "full_name": "Xã Hà Lâu",
+    "type": "Xã Hà",
+    "district_code": "199"
+  },
+  {
+    "code": "06886",
+    "name": "Hải Lạng",
+    "full_name": "Xã Hải Lạng",
+    "type": "Xã Hải",
+    "district_code": "199"
+  },
+  {
+    "code": "06871",
+    "name": "Phong Dụ",
+    "full_name": "Xã Phong Dụ",
+    "type": "Xã Phong",
+    "district_code": "199"
+  },
+  {
+    "code": "06889",
+    "name": "Tiên Lãng",
+    "full_name": "Xã Tiên Lãng",
+    "type": "Xã Tiên",
+    "district_code": "199"
+  },
+  {
+    "code": "06862",
+    "name": "Tiên Yên",
+    "full_name": "Thị trấn Tiên Yên",
+    "type": "Thị trấn Tiên",
+    "district_code": "199"
+  },
+  {
+    "code": "06880",
+    "name": "Yên Than",
+    "full_name": "Xã Yên Than",
+    "type": "Xã Yên",
+    "district_code": "199"
+  },
+  {
+    "code": "06868",
+    "name": "Đại Dực",
+    "full_name": "Xã Đại Dực",
+    "type": "Xã Đại",
+    "district_code": "199"
+  },
+  {
+    "code": "06874",
+    "name": "Điền Xá",
+    "full_name": "Xã Điền Xá",
+    "type": "Xã Điền",
+    "district_code": "199"
+  },
+  {
+    "code": "06883",
+    "name": "Đông Hải",
+    "full_name": "Xã Đông Hải",
+    "type": "Xã Đông",
+    "district_code": "199"
+  },
+  {
+    "code": "06877",
+    "name": "Đông Ngũ",
+    "full_name": "Xã Đông Ngũ",
+    "type": "Xã Đông",
+    "district_code": "199"
+  },
+  {
+    "code": "06892",
+    "name": "Đồng Rui",
+    "full_name": "Xã Đồng Rui",
+    "type": "Xã Đồng",
+    "district_code": "199"
+  }
+]

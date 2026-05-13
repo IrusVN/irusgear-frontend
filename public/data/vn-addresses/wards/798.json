@@ -1,0 +1,51 @@
+[
+  {
+    "code": "27796",
+    "name": "Bình Hòa Tây",
+    "full_name": "Xã Bình Hòa Tây",
+    "type": "Xã Bình Hòa",
+    "district_code": "798"
+  },
+  {
+    "code": "27808",
+    "name": "Bình Hòa Trung",
+    "full_name": "Xã Bình Hòa Trung",
+    "type": "Xã Bình Hòa",
+    "district_code": "798"
+  },
+  {
+    "code": "27811",
+    "name": "Bình Hòa Đông",
+    "full_name": "Xã Bình Hòa Đông",
+    "type": "Xã Bình Hòa",
+    "district_code": "798"
+  },
+  {
+    "code": "27814",
+    "name": "Bình Phong Thạnh",
+    "full_name": "Thị trấn Bình Phong Thạnh",
+    "type": "Thị trấn Bình Phong",
+    "district_code": "798"
+  },
+  {
+    "code": "27802",
+    "name": "Bình Thạnh",
+    "full_name": "Xã Bình Thạnh",
+    "type": "Xã Bình",
+    "district_code": "798"
+  },
+  {
+    "code": "27820",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "798"
+  },
+  {
+    "code": "27823",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "798"
+  }
+]

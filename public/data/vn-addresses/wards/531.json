@@ -1,0 +1,37 @@
+[
+  {
+    "code": "21361",
+    "name": "Long Hiệp",
+    "full_name": "Xã Long Hiệp",
+    "type": "Xã Long",
+    "district_code": "531"
+  },
+  {
+    "code": "21352",
+    "name": "Long Mai",
+    "full_name": "Xã Long Mai",
+    "type": "Xã Long",
+    "district_code": "531"
+  },
+  {
+    "code": "21358",
+    "name": "Long Môn",
+    "full_name": "Xã Long Môn",
+    "type": "Xã Long",
+    "district_code": "531"
+  },
+  {
+    "code": "21349",
+    "name": "Long Sơn",
+    "full_name": "Xã Long Sơn",
+    "type": "Xã Long",
+    "district_code": "531"
+  },
+  {
+    "code": "21355",
+    "name": "Thanh An",
+    "full_name": "Xã Thanh An",
+    "type": "Xã Thanh",
+    "district_code": "531"
+  }
+]

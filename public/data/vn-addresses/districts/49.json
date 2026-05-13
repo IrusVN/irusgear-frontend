@@ -1,0 +1,128 @@
+[
+  {
+    "code": "515",
+    "name": "Bắc Trà My",
+    "full_name": "Huyện Bắc Trà My",
+    "type": "Huyện Bắc Trà",
+    "province_code": "49"
+  },
+  {
+    "code": "508",
+    "name": "Duy Xuyên",
+    "full_name": "Huyện Duy Xuyên",
+    "type": "Huyện Duy",
+    "province_code": "49"
+  },
+  {
+    "code": "512",
+    "name": "Hiệp Đức",
+    "full_name": "Huyện Hiệp Đức",
+    "type": "Huyện Hiệp",
+    "province_code": "49"
+  },
+  {
+    "code": "503",
+    "name": "Hội An",
+    "full_name": "Thành phố Hội An",
+    "type": "Thành phố Hội",
+    "province_code": "49"
+  },
+  {
+    "code": "510",
+    "name": "Nam Giang",
+    "full_name": "Huyện Nam Giang",
+    "type": "Huyện Nam",
+    "province_code": "49"
+  },
+  {
+    "code": "516",
+    "name": "Nam Trà My",
+    "full_name": "Huyện Nam Trà My",
+    "type": "Huyện Nam Trà",
+    "province_code": "49"
+  },
+  {
+    "code": "519",
+    "name": "Nông Sơn",
+    "full_name": "Huyện Nông Sơn",
+    "type": "Huyện Nông",
+    "province_code": "49"
+  },
+  {
+    "code": "517",
+    "name": "Núi Thành",
+    "full_name": "Huyện Núi Thành",
+    "type": "Huyện Núi",
+    "province_code": "49"
+  },
+  {
+    "code": "518",
+    "name": "Phú Ninh",
+    "full_name": "Huyện Phú Ninh",
+    "type": "Huyện Phú",
+    "province_code": "49"
+  },
+  {
+    "code": "511",
+    "name": "Phước Sơn",
+    "full_name": "Huyện Phước Sơn",
+    "type": "Huyện Phước",
+    "province_code": "49"
+  },
+  {
+    "code": "509",
+    "name": "Quế Sơn",
+    "full_name": "Huyện Quế Sơn",
+    "type": "Huyện Quế",
+    "province_code": "49"
+  },
+  {
+    "code": "502",
+    "name": "Tam Kỳ",
+    "full_name": "Thành phố Tam Kỳ",
+    "type": "Thành phố Tam",
+    "province_code": "49"
+  },
+  {
+    "code": "504",
+    "name": "Tây Giang",
+    "full_name": "Huyện Tây Giang",
+    "type": "Huyện Tây",
+    "province_code": "49"
+  },
+  {
+    "code": "513",
+    "name": "Thăng Bình",
+    "full_name": "Huyện Thăng Bình",
+    "type": "Huyện Thăng",
+    "province_code": "49"
+  },
+  {
+    "code": "514",
+    "name": "Tiên Phước",
+    "full_name": "Huyện Tiên Phước",
+    "type": "Huyện Tiên",
+    "province_code": "49"
+  },
+  {
+    "code": "506",
+    "name": "Đại Lộc",
+    "full_name": "Huyện Đại Lộc",
+    "type": "Huyện Đại",
+    "province_code": "49"
+  },
+  {
+    "code": "507",
+    "name": "Điện Bàn",
+    "full_name": "Thị xã Điện Bàn",
+    "type": "Thị xã Điện",
+    "province_code": "49"
+  },
+  {
+    "code": "505",
+    "name": "Đông Giang",
+    "full_name": "Huyện Đông Giang",
+    "type": "Huyện Đông",
+    "province_code": "49"
+  }
+]

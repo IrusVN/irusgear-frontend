@@ -1,0 +1,107 @@
+[
+  {
+    "code": "04540",
+    "name": "Âu Lâu",
+    "full_name": "Xã Âu Lâu",
+    "type": "Xã Âu",
+    "district_code": "132"
+  },
+  {
+    "code": "04543",
+    "name": "Giới Phiên",
+    "full_name": "Xã Giới Phiên",
+    "type": "Xã Giới",
+    "district_code": "132"
+  },
+  {
+    "code": "04267",
+    "name": "Hồng Hà",
+    "full_name": "Phường Hồng Hà",
+    "type": "Phường Hồng",
+    "district_code": "132"
+  },
+  {
+    "code": "04546",
+    "name": "Hợp Minh",
+    "full_name": "Phường Hợp Minh",
+    "type": "Phường Hợp",
+    "district_code": "132"
+  },
+  {
+    "code": "04270",
+    "name": "Minh Bảo",
+    "full_name": "Xã Minh Bảo",
+    "type": "Xã Minh",
+    "district_code": "132"
+  },
+  {
+    "code": "04255",
+    "name": "Minh Tân",
+    "full_name": "Phường Minh Tân",
+    "type": "Phường Minh",
+    "district_code": "132"
+  },
+  {
+    "code": "04273",
+    "name": "Nam Cường",
+    "full_name": "Phường Nam Cường",
+    "type": "Phường Nam",
+    "district_code": "132"
+  },
+  {
+    "code": "04264",
+    "name": "Nguyễn Phúc",
+    "full_name": "Phường Nguyễn Phúc",
+    "type": "Phường Nguyễn",
+    "district_code": "132"
+  },
+  {
+    "code": "04258",
+    "name": "Nguyễn Thái Học",
+    "full_name": "Phường Nguyễn Thái Học",
+    "type": "Phường Nguyễn Thái",
+    "district_code": "132"
+  },
+  {
+    "code": "04279",
+    "name": "Tân Thịnh",
+    "full_name": "Xã Tân Thịnh",
+    "type": "Xã Tân",
+    "district_code": "132"
+  },
+  {
+    "code": "04276",
+    "name": "Tuy Lộc",
+    "full_name": "Xã Tuy Lộc",
+    "type": "Xã Tuy",
+    "district_code": "132"
+  },
+  {
+    "code": "04558",
+    "name": "Văn Phú",
+    "full_name": "Xã Văn Phú",
+    "type": "Xã Văn",
+    "district_code": "132"
+  },
+  {
+    "code": "04252",
+    "name": "Yên Ninh",
+    "full_name": "Phường Yên Ninh",
+    "type": "Phường Yên",
+    "district_code": "132"
+  },
+  {
+    "code": "04249",
+    "name": "Yên Thịnh",
+    "full_name": "Phường Yên Thịnh",
+    "type": "Phường Yên",
+    "district_code": "132"
+  },
+  {
+    "code": "04261",
+    "name": "Đồng Tâm",
+    "full_name": "Phường Đồng Tâm",
+    "type": "Phường Đồng",
+    "district_code": "132"
+  }
+]

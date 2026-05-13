@@ -1,0 +1,142 @@
+[
+  {
+    "code": "09877",
+    "name": "An Khánh",
+    "full_name": "Xã An Khánh",
+    "type": "Xã An",
+    "district_code": "274"
+  },
+  {
+    "code": "09880",
+    "name": "An Thượng",
+    "full_name": "Xã An Thượng",
+    "type": "Xã An",
+    "district_code": "274"
+  },
+  {
+    "code": "09850",
+    "name": "Cát Quế",
+    "full_name": "Xã Cát Quế",
+    "type": "Xã Cát",
+    "district_code": "274"
+  },
+  {
+    "code": "09844",
+    "name": "Di Trạch",
+    "full_name": "Xã Di Trạch",
+    "type": "Xã Di",
+    "district_code": "274"
+  },
+  {
+    "code": "09841",
+    "name": "Dương Liễu",
+    "full_name": "Xã Dương Liễu",
+    "type": "Xã Dương",
+    "district_code": "274"
+  },
+  {
+    "code": "09853",
+    "name": "Kim Chung",
+    "full_name": "Xã Kim Chung",
+    "type": "Xã Kim",
+    "district_code": "274"
+  },
+  {
+    "code": "09889",
+    "name": "La Phù",
+    "full_name": "Xã La Phù",
+    "type": "Xã La",
+    "district_code": "274"
+  },
+  {
+    "code": "09868",
+    "name": "Lại Yên",
+    "full_name": "Xã Lại Yên",
+    "type": "Xã Lại",
+    "district_code": "274"
+  },
+  {
+    "code": "09838",
+    "name": "Minh Khai",
+    "full_name": "Xã Minh Khai",
+    "type": "Xã Minh",
+    "district_code": "274"
+  },
+  {
+    "code": "09859",
+    "name": "Sơn Đồng",
+    "full_name": "Xã Sơn Đồng",
+    "type": "Xã Sơn",
+    "district_code": "274"
+  },
+  {
+    "code": "09874",
+    "name": "Song Phương",
+    "full_name": "Xã Song Phương",
+    "type": "Xã Song",
+    "district_code": "274"
+  },
+  {
+    "code": "09871",
+    "name": "Tiền Yên",
+    "full_name": "Xã Tiền Yên",
+    "type": "Xã Tiền",
+    "district_code": "274"
+  },
+  {
+    "code": "09832",
+    "name": "Trạm Trôi",
+    "full_name": "Thị trấn Trạm Trôi",
+    "type": "Thị trấn Trạm",
+    "district_code": "274"
+  },
+  {
+    "code": "09862",
+    "name": "Vân Canh",
+    "full_name": "Xã Vân Canh",
+    "type": "Xã Vân",
+    "district_code": "274"
+  },
+  {
+    "code": "09883",
+    "name": "Vân Côn",
+    "full_name": "Xã Vân Côn",
+    "type": "Xã Vân",
+    "district_code": "274"
+  },
+  {
+    "code": "09856",
+    "name": "Yên Sở",
+    "full_name": "Xã Yên Sở",
+    "type": "Xã Yên",
+    "district_code": "274"
+  },
+  {
+    "code": "09865",
+    "name": "Đắc Sở",
+    "full_name": "Xã Đắc Sở",
+    "type": "Xã Đắc",
+    "district_code": "274"
+  },
+  {
+    "code": "09892",
+    "name": "Đông La",
+    "full_name": "Xã Đông La",
+    "type": "Xã Đông",
+    "district_code": "274"
+  },
+  {
+    "code": "09847",
+    "name": "Đức Giang",
+    "full_name": "Xã Đức Giang",
+    "type": "Xã Đức",
+    "district_code": "274"
+  },
+  {
+    "code": "09835",
+    "name": "Đức Thượng",
+    "full_name": "Xã Đức Thượng",
+    "type": "Xã Đức",
+    "district_code": "274"
+  }
+]

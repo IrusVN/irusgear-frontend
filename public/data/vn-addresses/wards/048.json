@@ -1,0 +1,93 @@
+[
+  {
+    "code": "01555",
+    "name": "An Lạc",
+    "full_name": "Xã An Lạc",
+    "type": "Xã An",
+    "district_code": "048"
+  },
+  {
+    "code": "01567",
+    "name": "Cô Ngân",
+    "full_name": "Xã Cô Ngân",
+    "type": "Xã Cô",
+    "district_code": "048"
+  },
+  {
+    "code": "01549",
+    "name": "Kim Loan",
+    "full_name": "Xã Kim Loan",
+    "type": "Xã Kim",
+    "district_code": "048"
+  },
+  {
+    "code": "01537",
+    "name": "Lý Quốc",
+    "full_name": "Xã Lý Quốc",
+    "type": "Xã Lý",
+    "district_code": "048"
+  },
+  {
+    "code": "01534",
+    "name": "Minh Long",
+    "full_name": "Xã Minh Long",
+    "type": "Xã Minh",
+    "district_code": "048"
+  },
+  {
+    "code": "01552",
+    "name": "Quang Long",
+    "full_name": "Xã Quang Long",
+    "type": "Xã Quang",
+    "district_code": "048"
+  },
+  {
+    "code": "01540",
+    "name": "Thắng Lợi",
+    "full_name": "Xã Thắng Lợi",
+    "type": "Xã Thắng",
+    "district_code": "048"
+  },
+  {
+    "code": "01558",
+    "name": "Thanh Nhật",
+    "full_name": "Thị trấn Thanh Nhật",
+    "type": "Thị trấn Thanh",
+    "district_code": "048"
+  },
+  {
+    "code": "01573",
+    "name": "Thị Hoa",
+    "full_name": "Xã Thị Hoa",
+    "type": "Xã Thị",
+    "district_code": "048"
+  },
+  {
+    "code": "01564",
+    "name": "Thống Nhất",
+    "full_name": "Xã Thống Nhất",
+    "type": "Xã Thống",
+    "district_code": "048"
+  },
+  {
+    "code": "01561",
+    "name": "Vinh Quý",
+    "full_name": "Xã Vinh Quý",
+    "type": "Xã Vinh",
+    "district_code": "048"
+  },
+  {
+    "code": "01543",
+    "name": "Đồng Loan",
+    "full_name": "Xã Đồng Loan",
+    "type": "Xã Đồng",
+    "district_code": "048"
+  },
+  {
+    "code": "01546",
+    "name": "Đức Quang",
+    "full_name": "Xã Đức Quang",
+    "type": "Xã Đức",
+    "district_code": "048"
+  }
+]

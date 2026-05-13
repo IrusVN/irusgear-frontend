@@ -1,0 +1,79 @@
+[
+  {
+    "code": "03157",
+    "name": "Chung Chải",
+    "full_name": "Xã Chung Chải",
+    "type": "Xã Chung",
+    "district_code": "096"
+  },
+  {
+    "code": "03177",
+    "name": "Huổi Lếnh",
+    "full_name": "Xã Huổi Lếnh",
+    "type": "Xã Huổi",
+    "district_code": "096"
+  },
+  {
+    "code": "03158",
+    "name": "Leng Su Sìn",
+    "full_name": "Xã Leng Su Sìn",
+    "type": "Xã Leng Su",
+    "district_code": "096"
+  },
+  {
+    "code": "03160",
+    "name": "Mường Nhé",
+    "full_name": "Xã Mường Nhé",
+    "type": "Xã Mường",
+    "district_code": "096"
+  },
+  {
+    "code": "03163",
+    "name": "Mường Toong",
+    "full_name": "Xã Mường Toong",
+    "type": "Xã Mường",
+    "district_code": "096"
+  },
+  {
+    "code": "03162",
+    "name": "Nậm Kè",
+    "full_name": "Xã Nậm Kè",
+    "type": "Xã Nậm",
+    "district_code": "096"
+  },
+  {
+    "code": "03161",
+    "name": "Nậm Vì",
+    "full_name": "Xã Nậm Vì",
+    "type": "Xã Nậm",
+    "district_code": "096"
+  },
+  {
+    "code": "03159",
+    "name": "Pá Mỳ",
+    "full_name": "Xã Pá Mỳ",
+    "type": "Xã Pá",
+    "district_code": "096"
+  },
+  {
+    "code": "03164",
+    "name": "Quảng Lâm",
+    "full_name": "Xã Quảng Lâm",
+    "type": "Xã Quảng",
+    "district_code": "096"
+  },
+  {
+    "code": "03155",
+    "name": "Sen Thượng",
+    "full_name": "Xã Sen Thượng",
+    "type": "Xã Sen",
+    "district_code": "096"
+  },
+  {
+    "code": "03154",
+    "name": "Sín Thầu",
+    "full_name": "Xã Sín Thầu",
+    "type": "Xã Sín",
+    "district_code": "096"
+  }
+]

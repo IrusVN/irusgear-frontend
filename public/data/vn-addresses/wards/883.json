@@ -1,0 +1,93 @@
+[
+  {
+    "code": "30292",
+    "name": "Bình Khánh",
+    "full_name": "Phường Bình Khánh",
+    "type": "Phường Bình",
+    "district_code": "883"
+  },
+  {
+    "code": "30289",
+    "name": "Bình Đức",
+    "full_name": "Phường Bình Đức",
+    "type": "Phường Bình",
+    "district_code": "883"
+  },
+  {
+    "code": "30280",
+    "name": "Mỹ Bình",
+    "full_name": "Phường Mỹ Bình",
+    "type": "Phường Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30307",
+    "name": "Mỹ Hòa",
+    "full_name": "Phường Mỹ Hòa",
+    "type": "Phường Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30313",
+    "name": "Mỹ Hoà Hưng",
+    "full_name": "Xã Mỹ Hoà Hưng",
+    "type": "Xã Mỹ Hoà",
+    "district_code": "883"
+  },
+  {
+    "code": "30310",
+    "name": "Mỹ Khánh",
+    "full_name": "Xã Mỹ Khánh",
+    "type": "Xã Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30283",
+    "name": "Mỹ Long",
+    "full_name": "Phường Mỹ Long",
+    "type": "Phường Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30295",
+    "name": "Mỹ Phước",
+    "full_name": "Phường Mỹ Phước",
+    "type": "Phường Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30298",
+    "name": "Mỹ Quý",
+    "full_name": "Phường Mỹ Quý",
+    "type": "Phường Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30304",
+    "name": "Mỹ Thạnh",
+    "full_name": "Phường Mỹ Thạnh",
+    "type": "Phường Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30301",
+    "name": "Mỹ Thới",
+    "full_name": "Phường Mỹ Thới",
+    "type": "Phường Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30286",
+    "name": "Mỹ Xuyên",
+    "full_name": "Phường Mỹ Xuyên",
+    "type": "Phường Mỹ",
+    "district_code": "883"
+  },
+  {
+    "code": "30285",
+    "name": "Đông Xuyên",
+    "full_name": "Phường Đông Xuyên",
+    "type": "Phường Đông",
+    "district_code": "883"
+  }
+]

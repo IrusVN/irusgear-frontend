@@ -1,0 +1,44 @@
+[
+  {
+    "code": "25324",
+    "name": "An Lộc",
+    "full_name": "Phường An Lộc",
+    "type": "Phường An",
+    "district_code": "690"
+  },
+  {
+    "code": "25320",
+    "name": "Hưng Chiến",
+    "full_name": "Phường Hưng Chiến",
+    "type": "Phường Hưng",
+    "district_code": "690"
+  },
+  {
+    "code": "25325",
+    "name": "Phú Thịnh",
+    "full_name": "Phường Phú Thịnh",
+    "type": "Phường Phú",
+    "district_code": "690"
+  },
+  {
+    "code": "25326",
+    "name": "Phú Đức",
+    "full_name": "Phường Phú Đức",
+    "type": "Phường Phú",
+    "district_code": "690"
+  },
+  {
+    "code": "25333",
+    "name": "Thanh Lương",
+    "full_name": "Xã Thanh Lương",
+    "type": "Xã Thanh",
+    "district_code": "690"
+  },
+  {
+    "code": "25336",
+    "name": "Thanh Phú",
+    "full_name": "Xã Thanh Phú",
+    "type": "Xã Thanh",
+    "district_code": "690"
+  }
+]

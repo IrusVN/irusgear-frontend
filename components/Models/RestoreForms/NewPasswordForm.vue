@@ -51,8 +51,8 @@
 
 <script setup>
 import { ref, reactive, inject } from 'vue'
+import { toast } from 'vue-sonner'
 import { useAuthStore } from '@/stores/authStore.js'
-import { useGlobalToast } from '@/composables/useGlobalToast.js'
 import { navigateTo, useLocalePath, useI18n } from '#imports'
 import LockIcon from '@/components/Icons/LockIcon.vue'
 import ShowEye from '@/components/Icons/ShowEye.vue'
@@ -60,7 +60,6 @@ import HideEye from '@/components/Icons/HideEye.vue'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
-const toast = useGlobalToast()
 const localePath = useLocalePath()
 const closeSheet = inject('closeSheet', null)
 

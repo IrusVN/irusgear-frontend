@@ -1,0 +1,100 @@
+[
+  {
+    "code": "30397",
+    "name": "Châu Phong",
+    "full_name": "Xã Châu Phong",
+    "type": "Xã Châu",
+    "district_code": "887"
+  },
+  {
+    "code": "30403",
+    "name": "Lê Chánh",
+    "full_name": "Xã Lê Chánh",
+    "type": "Xã Lê",
+    "district_code": "887"
+  },
+  {
+    "code": "30391",
+    "name": "Long An",
+    "full_name": "Xã Long An",
+    "type": "Xã Long",
+    "district_code": "887"
+  },
+  {
+    "code": "30378",
+    "name": "Long Châu",
+    "full_name": "Phường Long Châu",
+    "type": "Phường Long",
+    "district_code": "887"
+  },
+  {
+    "code": "30377",
+    "name": "Long Hưng",
+    "full_name": "Phường Long Hưng",
+    "type": "Phường Long",
+    "district_code": "887"
+  },
+  {
+    "code": "30394",
+    "name": "Long Phú",
+    "full_name": "Phường Long Phú",
+    "type": "Phường Long",
+    "district_code": "887"
+  },
+  {
+    "code": "30412",
+    "name": "Long Sơn",
+    "full_name": "Phường Long Sơn",
+    "type": "Phường Long",
+    "district_code": "887"
+  },
+  {
+    "code": "30376",
+    "name": "Long Thạnh",
+    "full_name": "Phường Long Thạnh",
+    "type": "Phường Long",
+    "district_code": "887"
+  },
+  {
+    "code": "30379",
+    "name": "Phú Lộc",
+    "full_name": "Xã Phú Lộc",
+    "type": "Xã Phú",
+    "district_code": "887"
+  },
+  {
+    "code": "30400",
+    "name": "Phú Vĩnh",
+    "full_name": "Xã Phú Vĩnh",
+    "type": "Xã Phú",
+    "district_code": "887"
+  },
+  {
+    "code": "30388",
+    "name": "Tân An",
+    "full_name": "Xã Tân An",
+    "type": "Xã Tân",
+    "district_code": "887"
+  },
+  {
+    "code": "30387",
+    "name": "Tân Thạnh",
+    "full_name": "Xã Tân Thạnh",
+    "type": "Xã Tân",
+    "district_code": "887"
+  },
+  {
+    "code": "30385",
+    "name": "Vĩnh Hòa",
+    "full_name": "Xã Vĩnh Hòa",
+    "type": "Xã Vĩnh",
+    "district_code": "887"
+  },
+  {
+    "code": "30382",
+    "name": "Vĩnh Xương",
+    "full_name": "Xã Vĩnh Xương",
+    "type": "Xã Vĩnh",
+    "district_code": "887"
+  }
+]

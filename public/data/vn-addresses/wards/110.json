@@ -1,0 +1,86 @@
+[
+  {
+    "code": "03632",
+    "name": "Hua Nà",
+    "full_name": "Xã Hua Nà",
+    "type": "Xã Hua",
+    "district_code": "110"
+  },
+  {
+    "code": "03643",
+    "name": "Khoen On",
+    "full_name": "Xã Khoen On",
+    "type": "Xã Khoen",
+    "district_code": "110"
+  },
+  {
+    "code": "03631",
+    "name": "Mường Cang",
+    "full_name": "Xã Mường Cang",
+    "type": "Xã Mường",
+    "district_code": "110"
+  },
+  {
+    "code": "03637",
+    "name": "Mường Kim",
+    "full_name": "Xã Mường Kim",
+    "type": "Xã Mường",
+    "district_code": "110"
+  },
+  {
+    "code": "03625",
+    "name": "Mường Mít",
+    "full_name": "Xã Mường Mít",
+    "type": "Xã Mường",
+    "district_code": "110"
+  },
+  {
+    "code": "03619",
+    "name": "Mường Than",
+    "full_name": "Xã Mường Than",
+    "type": "Xã Mường",
+    "district_code": "110"
+  },
+  {
+    "code": "03628",
+    "name": "Pha Mu",
+    "full_name": "Xã Pha Mu",
+    "type": "Xã Pha",
+    "district_code": "110"
+  },
+  {
+    "code": "03618",
+    "name": "Phúc Than",
+    "full_name": "Xã Phúc Than",
+    "type": "Xã Phúc",
+    "district_code": "110"
+  },
+  {
+    "code": "03640",
+    "name": "Tà Gia",
+    "full_name": "Xã Tà Gia",
+    "type": "Xã Tà",
+    "district_code": "110"
+  },
+  {
+    "code": "03634",
+    "name": "Tà Hừa",
+    "full_name": "Xã Tà Hừa",
+    "type": "Xã Tà",
+    "district_code": "110"
+  },
+  {
+    "code": "03638",
+    "name": "Tà Mung",
+    "full_name": "Xã Tà Mung",
+    "type": "Xã Tà",
+    "district_code": "110"
+  },
+  {
+    "code": "03595",
+    "name": "Than Uyên",
+    "full_name": "Thị trấn Than Uyên",
+    "type": "Thị trấn Than",
+    "district_code": "110"
+  }
+]

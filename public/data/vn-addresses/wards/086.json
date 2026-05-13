@@ -1,0 +1,100 @@
+[
+  {
+    "code": "02914",
+    "name": "Bản Cầm",
+    "full_name": "Xã Bản Cầm",
+    "type": "Xã Bản",
+    "district_code": "086"
+  },
+  {
+    "code": "02911",
+    "name": "Bản Phiệt",
+    "full_name": "Xã Bản Phiệt",
+    "type": "Xã Bản",
+    "district_code": "086"
+  },
+  {
+    "code": "02923",
+    "name": "Gia Phú",
+    "full_name": "Xã Gia Phú",
+    "type": "Xã Gia",
+    "district_code": "086"
+  },
+  {
+    "code": "02902",
+    "name": "N.T Phong Hải",
+    "full_name": "Thị trấn N.T Phong Hải",
+    "type": "Thị trấn N.T Phong",
+    "district_code": "086"
+  },
+  {
+    "code": "02905",
+    "name": "Phố Lu",
+    "full_name": "Thị trấn Phố Lu",
+    "type": "Thị trấn Phố",
+    "district_code": "086"
+  },
+  {
+    "code": "02920",
+    "name": "Phong Niên",
+    "full_name": "Xã Phong Niên",
+    "type": "Xã Phong",
+    "district_code": "086"
+  },
+  {
+    "code": "02944",
+    "name": "Phú Nhuận",
+    "full_name": "Xã Phú Nhuận",
+    "type": "Xã Phú",
+    "district_code": "086"
+  },
+  {
+    "code": "02938",
+    "name": "Sơn Hà",
+    "full_name": "Xã Sơn Hà",
+    "type": "Xã Sơn",
+    "district_code": "086"
+  },
+  {
+    "code": "02929",
+    "name": "Sơn Hải",
+    "full_name": "Xã Sơn Hải",
+    "type": "Xã Sơn",
+    "district_code": "086"
+  },
+  {
+    "code": "02908",
+    "name": "Tằng Loỏng",
+    "full_name": "Thị trấn Tằng Loỏng",
+    "type": "Thị trấn Tằng",
+    "district_code": "086"
+  },
+  {
+    "code": "02917",
+    "name": "Thái Niên",
+    "full_name": "Xã Thái Niên",
+    "type": "Xã Thái",
+    "district_code": "086"
+  },
+  {
+    "code": "02935",
+    "name": "Trì Quang",
+    "full_name": "Xã Trì Quang",
+    "type": "Xã Trì",
+    "district_code": "086"
+  },
+  {
+    "code": "02932",
+    "name": "Xuân Giao",
+    "full_name": "Xã Xuân Giao",
+    "type": "Xã Xuân",
+    "district_code": "086"
+  },
+  {
+    "code": "02926",
+    "name": "Xuân Quang",
+    "full_name": "Xã Xuân Quang",
+    "type": "Xã Xuân",
+    "district_code": "086"
+  }
+]

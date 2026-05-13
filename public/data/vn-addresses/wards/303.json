@@ -1,0 +1,65 @@
+[
+  {
+    "code": "11308",
+    "name": "Hạ Lý",
+    "full_name": "Phường Hạ Lý",
+    "type": "Phường Hạ",
+    "district_code": "303"
+  },
+  {
+    "code": "11320",
+    "name": "Hoàng Văn Thụ",
+    "full_name": "Phường Hoàng Văn Thụ",
+    "type": "Phường Hoàng Văn",
+    "district_code": "303"
+  },
+  {
+    "code": "11299",
+    "name": "Hùng Vương",
+    "full_name": "Phường Hùng Vương",
+    "type": "Phường Hùng",
+    "district_code": "303"
+  },
+  {
+    "code": "11311",
+    "name": "Minh Khai",
+    "full_name": "Phường Minh Khai",
+    "type": "Phường Minh",
+    "district_code": "303"
+  },
+  {
+    "code": "11323",
+    "name": "Phan Bội Châu",
+    "full_name": "Phường Phan Bội Châu",
+    "type": "Phường Phan Bội",
+    "district_code": "303"
+  },
+  {
+    "code": "11296",
+    "name": "Quán Toan",
+    "full_name": "Phường Quán Toan",
+    "type": "Phường Quán",
+    "district_code": "303"
+  },
+  {
+    "code": "11302",
+    "name": "Sở Dầu",
+    "full_name": "Phường Sở Dầu",
+    "type": "Phường Sở",
+    "district_code": "303"
+  },
+  {
+    "code": "11305",
+    "name": "Thượng Lý",
+    "full_name": "Phường Thượng Lý",
+    "type": "Phường Thượng",
+    "district_code": "303"
+  },
+  {
+    "code": "11314",
+    "name": "Trại Chuối",
+    "full_name": "Phường Trại Chuối",
+    "type": "Phường Trại",
+    "district_code": "303"
+  }
+]

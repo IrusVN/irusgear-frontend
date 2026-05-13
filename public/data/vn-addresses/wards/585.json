@@ -1,0 +1,58 @@
+[
+  {
+    "code": "22825",
+    "name": "Hòa Sơn",
+    "full_name": "Xã Hòa Sơn",
+    "type": "Xã Hòa",
+    "district_code": "585"
+  },
+  {
+    "code": "22813",
+    "name": "Lâm Sơn",
+    "full_name": "Xã Lâm Sơn",
+    "type": "Xã Lâm",
+    "district_code": "585"
+  },
+  {
+    "code": "22816",
+    "name": "Lương Sơn",
+    "full_name": "Xã Lương Sơn",
+    "type": "Xã Lương",
+    "district_code": "585"
+  },
+  {
+    "code": "22828",
+    "name": "Ma Nới",
+    "full_name": "Xã Ma Nới",
+    "type": "Xã Ma",
+    "district_code": "585"
+  },
+  {
+    "code": "22822",
+    "name": "Mỹ Sơn",
+    "full_name": "Xã Mỹ Sơn",
+    "type": "Xã Mỹ",
+    "district_code": "585"
+  },
+  {
+    "code": "22831",
+    "name": "Nhơn Sơn",
+    "full_name": "Xã Nhơn Sơn",
+    "type": "Xã Nhơn",
+    "district_code": "585"
+  },
+  {
+    "code": "22819",
+    "name": "Quảng Sơn",
+    "full_name": "Xã Quảng Sơn",
+    "type": "Xã Quảng",
+    "district_code": "585"
+  },
+  {
+    "code": "22810",
+    "name": "Tân Sơn",
+    "full_name": "Thị trấn Tân Sơn",
+    "type": "Thị trấn Tân",
+    "district_code": "585"
+  }
+]

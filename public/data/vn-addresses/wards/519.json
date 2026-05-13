@@ -1,0 +1,44 @@
+[
+  {
+    "code": "20668",
+    "name": "Ninh Phước",
+    "full_name": "Xã Ninh Phước",
+    "type": "Xã Ninh",
+    "district_code": "519"
+  },
+  {
+    "code": "20669",
+    "name": "Phước Ninh",
+    "full_name": "Xã Phước Ninh",
+    "type": "Xã Phước",
+    "district_code": "519"
+  },
+  {
+    "code": "20692",
+    "name": "Quế Lâm",
+    "full_name": "Xã Quế Lâm",
+    "type": "Xã Quế",
+    "district_code": "519"
+  },
+  {
+    "code": "20671",
+    "name": "Quế Lộc",
+    "full_name": "Xã Quế Lộc",
+    "type": "Xã Quế",
+    "district_code": "519"
+  },
+  {
+    "code": "20672",
+    "name": "Sơn Viên",
+    "full_name": "Xã Sơn Viên",
+    "type": "Xã Sơn",
+    "district_code": "519"
+  },
+  {
+    "code": "20656",
+    "name": "Trung Phước",
+    "full_name": "Thị trấn Trung Phước",
+    "type": "Thị trấn Trung",
+    "district_code": "519"
+  }
+]

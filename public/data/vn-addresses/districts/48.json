@@ -1,0 +1,51 @@
+[
+  {
+    "code": "495",
+    "name": "Cẩm Lệ",
+    "full_name": "Quận Cẩm Lệ",
+    "type": "Quận Cẩm",
+    "province_code": "48"
+  },
+  {
+    "code": "492",
+    "name": "Hải Châu",
+    "full_name": "Quận Hải Châu",
+    "type": "Quận Hải",
+    "province_code": "48"
+  },
+  {
+    "code": "497",
+    "name": "Hòa Vang",
+    "full_name": "Huyện Hòa Vang",
+    "type": "Huyện Hòa",
+    "province_code": "48"
+  },
+  {
+    "code": "490",
+    "name": "Liên Chiểu",
+    "full_name": "Quận Liên Chiểu",
+    "type": "Quận Liên",
+    "province_code": "48"
+  },
+  {
+    "code": "494",
+    "name": "Ngũ Hành Sơn",
+    "full_name": "Quận Ngũ Hành Sơn",
+    "type": "Quận Ngũ Hành",
+    "province_code": "48"
+  },
+  {
+    "code": "493",
+    "name": "Sơn Trà",
+    "full_name": "Quận Sơn Trà",
+    "type": "Quận Sơn",
+    "province_code": "48"
+  },
+  {
+    "code": "491",
+    "name": "Thanh Khê",
+    "full_name": "Quận Thanh Khê",
+    "type": "Quận Thanh",
+    "province_code": "48"
+  }
+]

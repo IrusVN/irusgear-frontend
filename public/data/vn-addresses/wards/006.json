@@ -1,0 +1,149 @@
+[
+  {
+    "code": "00178",
+    "name": "Cát Linh",
+    "full_name": "Phường Cát Linh",
+    "type": "Phường Cát",
+    "district_code": "006"
+  },
+  {
+    "code": "00196",
+    "name": "Hàng Bột",
+    "full_name": "Phường Hàng Bột",
+    "type": "Phường Hàng",
+    "district_code": "006"
+  },
+  {
+    "code": "00202",
+    "name": "Khâm Thiên",
+    "full_name": "Phường Khâm Thiên",
+    "type": "Phường Khâm",
+    "district_code": "006"
+  },
+  {
+    "code": "00238",
+    "name": "Khương Thượng",
+    "full_name": "Phường Khương Thượng",
+    "type": "Phường Khương",
+    "district_code": "006"
+  },
+  {
+    "code": "00229",
+    "name": "Kim Liên",
+    "full_name": "Phường Kim Liên",
+    "type": "Phường Kim",
+    "district_code": "006"
+  },
+  {
+    "code": "00199",
+    "name": "Láng Hạ",
+    "full_name": "Phường Láng Hạ",
+    "type": "Phường Láng",
+    "district_code": "006"
+  },
+  {
+    "code": "00187",
+    "name": "Láng Thượng",
+    "full_name": "Phường Láng Thượng",
+    "type": "Phường Láng",
+    "district_code": "006"
+  },
+  {
+    "code": "00208",
+    "name": "Nam Đồng",
+    "full_name": "Phường Nam Đồng",
+    "type": "Phường Nam",
+    "district_code": "006"
+  },
+  {
+    "code": "00235",
+    "name": "Ngã Tư Sở",
+    "full_name": "Phường Ngã Tư Sở",
+    "type": "Phường Ngã Tư",
+    "district_code": "006"
+  },
+  {
+    "code": "00190",
+    "name": "Ô Chợ Dừa",
+    "full_name": "Phường Ô Chợ Dừa",
+    "type": "Phường Ô Chợ",
+    "district_code": "006"
+  },
+  {
+    "code": "00220",
+    "name": "Phương Liên",
+    "full_name": "Phường Phương Liên",
+    "type": "Phường Phương",
+    "district_code": "006"
+  },
+  {
+    "code": "00232",
+    "name": "Phương Mai",
+    "full_name": "Phường Phương Mai",
+    "type": "Phường Phương",
+    "district_code": "006"
+  },
+  {
+    "code": "00214",
+    "name": "Quang Trung",
+    "full_name": "Phường Quang Trung",
+    "type": "Phường Quang",
+    "district_code": "006"
+  },
+  {
+    "code": "00184",
+    "name": "Quốc Tử Giám",
+    "full_name": "Phường Quốc Tử Giám",
+    "type": "Phường Quốc Tử",
+    "district_code": "006"
+  },
+  {
+    "code": "00223",
+    "name": "Thịnh Quang",
+    "full_name": "Phường Thịnh Quang",
+    "type": "Phường Thịnh",
+    "district_code": "006"
+  },
+  {
+    "code": "00205",
+    "name": "Thổ Quan",
+    "full_name": "Phường Thổ Quan",
+    "type": "Phường Thổ",
+    "district_code": "006"
+  },
+  {
+    "code": "00217",
+    "name": "Trung Liệt",
+    "full_name": "Phường Trung Liệt",
+    "type": "Phường Trung",
+    "district_code": "006"
+  },
+  {
+    "code": "00211",
+    "name": "Trung Phụng",
+    "full_name": "Phường Trung Phụng",
+    "type": "Phường Trung",
+    "district_code": "006"
+  },
+  {
+    "code": "00226",
+    "name": "Trung Tự",
+    "full_name": "Phường Trung Tự",
+    "type": "Phường Trung",
+    "district_code": "006"
+  },
+  {
+    "code": "00193",
+    "name": "Văn Chương",
+    "full_name": "Phường Văn Chương",
+    "type": "Phường Văn",
+    "district_code": "006"
+  },
+  {
+    "code": "00181",
+    "name": "Văn Miếu",
+    "full_name": "Phường Văn Miếu",
+    "type": "Phường Văn",
+    "district_code": "006"
+  }
+]

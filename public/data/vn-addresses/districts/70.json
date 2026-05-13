@@ -1,0 +1,79 @@
+[
+  {
+    "code": "690",
+    "name": "Bình Long",
+    "full_name": "Thị xã Bình Long",
+    "type": "Thị xã Bình",
+    "province_code": "70"
+  },
+  {
+    "code": "691",
+    "name": "Bù Gia Mập",
+    "full_name": "Huyện Bù Gia Mập",
+    "type": "Huyện Bù Gia",
+    "province_code": "70"
+  },
+  {
+    "code": "696",
+    "name": "Bù Đăng",
+    "full_name": "Huyện Bù Đăng",
+    "type": "Huyện Bù",
+    "province_code": "70"
+  },
+  {
+    "code": "693",
+    "name": "Bù Đốp",
+    "full_name": "Huyện Bù Đốp",
+    "type": "Huyện Bù",
+    "province_code": "70"
+  },
+  {
+    "code": "697",
+    "name": "Chơn Thành",
+    "full_name": "Thị xã Chơn Thành",
+    "type": "Thị xã Chơn",
+    "province_code": "70"
+  },
+  {
+    "code": "694",
+    "name": "Hớn Quản",
+    "full_name": "Huyện Hớn Quản",
+    "type": "Huyện Hớn",
+    "province_code": "70"
+  },
+  {
+    "code": "692",
+    "name": "Lộc Ninh",
+    "full_name": "Huyện Lộc Ninh",
+    "type": "Huyện Lộc",
+    "province_code": "70"
+  },
+  {
+    "code": "698",
+    "name": "Phú Riềng",
+    "full_name": "Huyện Phú Riềng",
+    "type": "Huyện Phú",
+    "province_code": "70"
+  },
+  {
+    "code": "688",
+    "name": "Phước Long",
+    "full_name": "Thị xã Phước Long",
+    "type": "Thị xã Phước",
+    "province_code": "70"
+  },
+  {
+    "code": "695",
+    "name": "Đồng Phú",
+    "full_name": "Huyện Đồng Phú",
+    "type": "Huyện Đồng",
+    "province_code": "70"
+  },
+  {
+    "code": "689",
+    "name": "Đồng Xoài",
+    "full_name": "Thành phố Đồng Xoài",
+    "type": "Thành phố Đồng",
+    "province_code": "70"
+  }
+]

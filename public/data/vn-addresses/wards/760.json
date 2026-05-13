@@ -1,0 +1,72 @@
+[
+  {
+    "code": "26740",
+    "name": "Bến Nghé",
+    "full_name": "Phường Bến Nghé",
+    "type": "Phường Bến",
+    "district_code": "760"
+  },
+  {
+    "code": "26743",
+    "name": "Bến Thành",
+    "full_name": "Phường Bến Thành",
+    "type": "Phường Bến",
+    "district_code": "760"
+  },
+  {
+    "code": "26761",
+    "name": "Cầu Kho",
+    "full_name": "Phường Cầu Kho",
+    "type": "Phường Cầu",
+    "district_code": "760"
+  },
+  {
+    "code": "26752",
+    "name": "Cầu Ông Lãnh",
+    "full_name": "Phường Cầu Ông Lãnh",
+    "type": "Phường Cầu Ông",
+    "district_code": "760"
+  },
+  {
+    "code": "26755",
+    "name": "Cô Giang",
+    "full_name": "Phường Cô Giang",
+    "type": "Phường Cô",
+    "district_code": "760"
+  },
+  {
+    "code": "26758",
+    "name": "Nguyễn Cư Trinh",
+    "full_name": "Phường Nguyễn Cư Trinh",
+    "type": "Phường Nguyễn Cư",
+    "district_code": "760"
+  },
+  {
+    "code": "26746",
+    "name": "Nguyễn Thái Bình",
+    "full_name": "Phường Nguyễn Thái Bình",
+    "type": "Phường Nguyễn Thái",
+    "district_code": "760"
+  },
+  {
+    "code": "26749",
+    "name": "Phạm Ngũ Lão",
+    "full_name": "Phường Phạm Ngũ Lão",
+    "type": "Phường Phạm Ngũ",
+    "district_code": "760"
+  },
+  {
+    "code": "26734",
+    "name": "Tân Định",
+    "full_name": "Phường Tân Định",
+    "type": "Phường Tân",
+    "district_code": "760"
+  },
+  {
+    "code": "26737",
+    "name": "Đa Kao",
+    "full_name": "Phường Đa Kao",
+    "type": "Phường Đa",
+    "district_code": "760"
+  }
+]

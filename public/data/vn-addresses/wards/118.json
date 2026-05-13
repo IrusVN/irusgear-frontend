@@ -1,0 +1,79 @@
+[
+  {
+    "code": "03685",
+    "name": "Cà Nàng",
+    "full_name": "Xã Cà Nàng",
+    "type": "Xã Cà",
+    "district_code": "118"
+  },
+  {
+    "code": "03706",
+    "name": "Chiềng Bằng",
+    "full_name": "Xã Chiềng Bằng",
+    "type": "Xã Chiềng",
+    "district_code": "118"
+  },
+  {
+    "code": "03688",
+    "name": "Chiềng Khay",
+    "full_name": "Xã Chiềng Khay",
+    "type": "Xã Chiềng",
+    "district_code": "118"
+  },
+  {
+    "code": "03718",
+    "name": "Chiềng Khoang",
+    "full_name": "Xã Chiềng Khoang",
+    "type": "Xã Chiềng",
+    "district_code": "118"
+  },
+  {
+    "code": "03700",
+    "name": "Chiềng Ơn",
+    "full_name": "Xã Chiềng Ơn",
+    "type": "Xã Chiềng",
+    "district_code": "118"
+  },
+  {
+    "code": "03682",
+    "name": "Mường Chiên",
+    "full_name": "Xã Mường Chiên",
+    "type": "Xã Mường",
+    "district_code": "118"
+  },
+  {
+    "code": "03703",
+    "name": "Mường Giàng",
+    "full_name": "Xã Mường Giàng",
+    "type": "Xã Mường",
+    "district_code": "118"
+  },
+  {
+    "code": "03694",
+    "name": "Mường Giôn",
+    "full_name": "Xã Mường Giôn",
+    "type": "Xã Mường",
+    "district_code": "118"
+  },
+  {
+    "code": "03709",
+    "name": "Mường Sại",
+    "full_name": "Xã Mường Sại",
+    "type": "Xã Mường",
+    "district_code": "118"
+  },
+  {
+    "code": "03712",
+    "name": "Nậm ét",
+    "full_name": "Xã Nậm ét",
+    "type": "Xã Nậm",
+    "district_code": "118"
+  },
+  {
+    "code": "03697",
+    "name": "Pá Ma Pha Khinh",
+    "full_name": "Xã Pá Ma Pha Khinh",
+    "type": "Xã Pá Ma Pha",
+    "district_code": "118"
+  }
+]

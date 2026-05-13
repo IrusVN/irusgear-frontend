@@ -1,0 +1,100 @@
+[
+  {
+    "code": "09193",
+    "name": "Chờ",
+    "full_name": "Thị trấn Chờ",
+    "type": "Thị trấn",
+    "district_code": "258"
+  },
+  {
+    "code": "09196",
+    "name": "Dũng Liệt",
+    "full_name": "Xã Dũng Liệt",
+    "type": "Xã Dũng",
+    "district_code": "258"
+  },
+  {
+    "code": "09211",
+    "name": "Hòa Tiến",
+    "full_name": "Xã Hòa Tiến",
+    "type": "Xã Hòa",
+    "district_code": "258"
+  },
+  {
+    "code": "09232",
+    "name": "Long Châu",
+    "full_name": "Xã Long Châu",
+    "type": "Xã Long",
+    "district_code": "258"
+  },
+  {
+    "code": "09202",
+    "name": "Tam Giang",
+    "full_name": "Xã Tam Giang",
+    "type": "Xã Tam",
+    "district_code": "258"
+  },
+  {
+    "code": "09199",
+    "name": "Tam Đa",
+    "full_name": "Xã Tam Đa",
+    "type": "Xã Tam",
+    "district_code": "258"
+  },
+  {
+    "code": "09208",
+    "name": "Thụy Hòa",
+    "full_name": "Xã Thụy Hòa",
+    "type": "Xã Thụy",
+    "district_code": "258"
+  },
+  {
+    "code": "09223",
+    "name": "Trung Nghĩa",
+    "full_name": "Xã Trung Nghĩa",
+    "type": "Xã Trung",
+    "district_code": "258"
+  },
+  {
+    "code": "09238",
+    "name": "Văn Môn",
+    "full_name": "Xã Văn Môn",
+    "type": "Xã Văn",
+    "district_code": "258"
+  },
+  {
+    "code": "09220",
+    "name": "Yên Phụ",
+    "full_name": "Xã Yên Phụ",
+    "type": "Xã Yên",
+    "district_code": "258"
+  },
+  {
+    "code": "09205",
+    "name": "Yên Trung",
+    "full_name": "Xã Yên Trung",
+    "type": "Xã Yên",
+    "district_code": "258"
+  },
+  {
+    "code": "09229",
+    "name": "Đông Phong",
+    "full_name": "Xã Đông Phong",
+    "type": "Xã Đông",
+    "district_code": "258"
+  },
+  {
+    "code": "09241",
+    "name": "Đông Thọ",
+    "full_name": "Xã Đông Thọ",
+    "type": "Xã Đông",
+    "district_code": "258"
+  },
+  {
+    "code": "09217",
+    "name": "Đông Tiến",
+    "full_name": "Xã Đông Tiến",
+    "type": "Xã Đông",
+    "district_code": "258"
+  }
+]

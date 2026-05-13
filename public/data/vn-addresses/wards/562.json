@@ -1,0 +1,79 @@
+[
+  {
+    "code": "22252",
+    "name": "Hòa Bình 1",
+    "full_name": "Xã Hòa Bình 1",
+    "type": "Xã Hòa Bình",
+    "district_code": "562"
+  },
+  {
+    "code": "22288",
+    "name": "Hòa Mỹ Tây",
+    "full_name": "Xã Hòa Mỹ Tây",
+    "type": "Xã Hòa Mỹ",
+    "district_code": "562"
+  },
+  {
+    "code": "22285",
+    "name": "Hòa Mỹ Đông",
+    "full_name": "Xã Hòa Mỹ Đông",
+    "type": "Xã Hòa Mỹ",
+    "district_code": "562"
+  },
+  {
+    "code": "22264",
+    "name": "Hòa Phong",
+    "full_name": "Xã Hòa Phong",
+    "type": "Xã Hòa",
+    "district_code": "562"
+  },
+  {
+    "code": "22270",
+    "name": "Hòa Phú",
+    "full_name": "Xã Hòa Phú",
+    "type": "Xã Hòa",
+    "district_code": "562"
+  },
+  {
+    "code": "22273",
+    "name": "Hòa Tân Tây",
+    "full_name": "Xã Hòa Tân Tây",
+    "type": "Xã Hòa Tân",
+    "district_code": "562"
+  },
+  {
+    "code": "22294",
+    "name": "Hòa Thịnh",
+    "full_name": "Xã Hòa Thịnh",
+    "type": "Xã Hòa",
+    "district_code": "562"
+  },
+  {
+    "code": "22276",
+    "name": "Hòa Đồng",
+    "full_name": "Xã Hòa Đồng",
+    "type": "Xã Hòa",
+    "district_code": "562"
+  },
+  {
+    "code": "22255",
+    "name": "Phú Thứ",
+    "full_name": "Thị trấn Phú Thứ",
+    "type": "Thị trấn Phú",
+    "district_code": "562"
+  },
+  {
+    "code": "22249",
+    "name": "Sơn Thành Tây",
+    "full_name": "Xã Sơn Thành Tây",
+    "type": "Xã Sơn Thành",
+    "district_code": "562"
+  },
+  {
+    "code": "22250",
+    "name": "Sơn Thành Đông",
+    "full_name": "Xã Sơn Thành Đông",
+    "type": "Xã Sơn Thành",
+    "district_code": "562"
+  }
+]

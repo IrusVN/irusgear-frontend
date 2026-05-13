@@ -1,0 +1,58 @@
+[
+  {
+    "code": "25201",
+    "name": "Tân Bình",
+    "full_name": "Phường Tân Bình",
+    "type": "Phường Tân",
+    "district_code": "689"
+  },
+  {
+    "code": "25195",
+    "name": "Tân Phú",
+    "full_name": "Phường Tân Phú",
+    "type": "Phường Tân",
+    "district_code": "689"
+  },
+  {
+    "code": "25207",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "689"
+  },
+  {
+    "code": "25205",
+    "name": "Tân Thiện",
+    "full_name": "Phường Tân Thiện",
+    "type": "Phường Tân",
+    "district_code": "689"
+  },
+  {
+    "code": "25204",
+    "name": "Tân Xuân",
+    "full_name": "Phường Tân Xuân",
+    "type": "Phường Tân",
+    "district_code": "689"
+  },
+  {
+    "code": "25198",
+    "name": "Tân Đồng",
+    "full_name": "Phường Tân Đồng",
+    "type": "Phường Tân",
+    "district_code": "689"
+  },
+  {
+    "code": "25213",
+    "name": "Tiến Hưng",
+    "full_name": "Xã Tiến Hưng",
+    "type": "Xã Tiến",
+    "district_code": "689"
+  },
+  {
+    "code": "25210",
+    "name": "Tiến Thành",
+    "full_name": "Phường Tiến Thành",
+    "type": "Phường Tiến",
+    "district_code": "689"
+  }
+]

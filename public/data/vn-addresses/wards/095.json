@@ -1,0 +1,23 @@
+[
+  {
+    "code": "03184",
+    "name": "Lay Nưa",
+    "full_name": "Xã Lay Nưa",
+    "type": "Xã Lay",
+    "district_code": "095"
+  },
+  {
+    "code": "03151",
+    "name": "Na Lay",
+    "full_name": "Phường Na Lay",
+    "type": "Phường Na",
+    "district_code": "095"
+  },
+  {
+    "code": "03148",
+    "name": "Sông Đà",
+    "full_name": "Phường Sông Đà",
+    "type": "Phường Sông",
+    "district_code": "095"
+  }
+]

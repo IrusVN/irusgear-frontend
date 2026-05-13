@@ -1,0 +1,156 @@
+[
+  {
+    "code": "760",
+    "name": "1",
+    "full_name": "Quận 1",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "771",
+    "name": "10",
+    "full_name": "Quận 10",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "772",
+    "name": "11",
+    "full_name": "Quận 11",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "761",
+    "name": "12",
+    "full_name": "Quận 12",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "770",
+    "name": "3",
+    "full_name": "Quận 3",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "773",
+    "name": "4",
+    "full_name": "Quận 4",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "774",
+    "name": "5",
+    "full_name": "Quận 5",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "775",
+    "name": "6",
+    "full_name": "Quận 6",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "778",
+    "name": "7",
+    "full_name": "Quận 7",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "776",
+    "name": "8",
+    "full_name": "Quận 8",
+    "type": "Quận",
+    "province_code": "79"
+  },
+  {
+    "code": "785",
+    "name": "Bình Chánh",
+    "full_name": "Huyện Bình Chánh",
+    "type": "Huyện Bình",
+    "province_code": "79"
+  },
+  {
+    "code": "777",
+    "name": "Bình Tân",
+    "full_name": "Quận Bình Tân",
+    "type": "Quận Bình",
+    "province_code": "79"
+  },
+  {
+    "code": "765",
+    "name": "Bình Thạnh",
+    "full_name": "Quận Bình Thạnh",
+    "type": "Quận Bình",
+    "province_code": "79"
+  },
+  {
+    "code": "787",
+    "name": "Cần Giờ",
+    "full_name": "Huyện Cần Giờ",
+    "type": "Huyện Cần",
+    "province_code": "79"
+  },
+  {
+    "code": "783",
+    "name": "Củ Chi",
+    "full_name": "Huyện Củ Chi",
+    "type": "Huyện Củ",
+    "province_code": "79"
+  },
+  {
+    "code": "764",
+    "name": "Gò Vấp",
+    "full_name": "Quận Gò Vấp",
+    "type": "Quận Gò",
+    "province_code": "79"
+  },
+  {
+    "code": "784",
+    "name": "Hóc Môn",
+    "full_name": "Huyện Hóc Môn",
+    "type": "Huyện Hóc",
+    "province_code": "79"
+  },
+  {
+    "code": "786",
+    "name": "Nhà Bè",
+    "full_name": "Huyện Nhà Bè",
+    "type": "Huyện Nhà",
+    "province_code": "79"
+  },
+  {
+    "code": "768",
+    "name": "Phú Nhuận",
+    "full_name": "Quận Phú Nhuận",
+    "type": "Quận Phú",
+    "province_code": "79"
+  },
+  {
+    "code": "766",
+    "name": "Tân Bình",
+    "full_name": "Quận Tân Bình",
+    "type": "Quận Tân",
+    "province_code": "79"
+  },
+  {
+    "code": "767",
+    "name": "Tân Phú",
+    "full_name": "Quận Tân Phú",
+    "type": "Quận Tân",
+    "province_code": "79"
+  },
+  {
+    "code": "769",
+    "name": "Thủ Đức",
+    "full_name": "Thành phố Thủ Đức",
+    "type": "Thành phố Thủ",
+    "province_code": "79"
+  }
+]

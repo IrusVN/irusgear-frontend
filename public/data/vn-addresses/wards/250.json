@@ -1,0 +1,128 @@
+[
+  {
+    "code": "08973",
+    "name": "Chi Đông",
+    "full_name": "Thị trấn Chi Đông",
+    "type": "Thị trấn Chi",
+    "district_code": "250"
+  },
+  {
+    "code": "09004",
+    "name": "Chu Phan",
+    "full_name": "Xã Chu Phan",
+    "type": "Xã Chu",
+    "district_code": "250"
+  },
+  {
+    "code": "09016",
+    "name": "Hoàng Kim",
+    "full_name": "Xã Hoàng Kim",
+    "type": "Xã Hoàng",
+    "district_code": "250"
+  },
+  {
+    "code": "08977",
+    "name": "Kim Hoa",
+    "full_name": "Xã Kim Hoa",
+    "type": "Xã Kim",
+    "district_code": "250"
+  },
+  {
+    "code": "08998",
+    "name": "Liên Mạc",
+    "full_name": "Xã Liên Mạc",
+    "type": "Xã Liên",
+    "district_code": "250"
+  },
+  {
+    "code": "09010",
+    "name": "Mê Linh",
+    "full_name": "Xã Mê Linh",
+    "type": "Xã Mê",
+    "district_code": "250"
+  },
+  {
+    "code": "08989",
+    "name": "Quang Minh",
+    "full_name": "Thị trấn Quang Minh",
+    "type": "Thị trấn Quang",
+    "district_code": "250"
+  },
+  {
+    "code": "08995",
+    "name": "Tam Đồng",
+    "full_name": "Xã Tam Đồng",
+    "type": "Xã Tam",
+    "district_code": "250"
+  },
+  {
+    "code": "08980",
+    "name": "Thạch Đà",
+    "full_name": "Xã Thạch Đà",
+    "type": "Xã Thạch",
+    "district_code": "250"
+  },
+  {
+    "code": "08992",
+    "name": "Thanh Lâm",
+    "full_name": "Xã Thanh Lâm",
+    "type": "Xã Thanh",
+    "district_code": "250"
+  },
+  {
+    "code": "09019",
+    "name": "Tiền Phong",
+    "full_name": "Xã Tiền Phong",
+    "type": "Xã Tiền",
+    "district_code": "250"
+  },
+  {
+    "code": "08983",
+    "name": "Tiến Thắng",
+    "full_name": "Xã Tiến Thắng",
+    "type": "Xã Tiến",
+    "district_code": "250"
+  },
+  {
+    "code": "09007",
+    "name": "Tiến Thịnh",
+    "full_name": "Xã Tiến Thịnh",
+    "type": "Xã Tiến",
+    "district_code": "250"
+  },
+  {
+    "code": "09022",
+    "name": "Tráng Việt",
+    "full_name": "Xã Tráng Việt",
+    "type": "Xã Tráng",
+    "district_code": "250"
+  },
+  {
+    "code": "08986",
+    "name": "Tự Lập",
+    "full_name": "Xã Tự Lập",
+    "type": "Xã Tự",
+    "district_code": "250"
+  },
+  {
+    "code": "09013",
+    "name": "Văn Khê",
+    "full_name": "Xã Văn Khê",
+    "type": "Xã Văn",
+    "district_code": "250"
+  },
+  {
+    "code": "09001",
+    "name": "Vạn Yên",
+    "full_name": "Xã Vạn Yên",
+    "type": "Xã Vạn",
+    "district_code": "250"
+  },
+  {
+    "code": "08974",
+    "name": "Đại Thịnh",
+    "full_name": "Xã Đại Thịnh",
+    "type": "Xã Đại",
+    "district_code": "250"
+  }
+]

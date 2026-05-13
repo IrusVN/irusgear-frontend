@@ -1,0 +1,79 @@
+[
+  {
+    "code": "26572",
+    "name": "Hoà Long",
+    "full_name": "Xã Hoà Long",
+    "type": "Xã Hoà",
+    "district_code": "748"
+  },
+  {
+    "code": "26566",
+    "name": "Kim Dinh",
+    "full_name": "Phường Kim Dinh",
+    "type": "Phường Kim",
+    "district_code": "748"
+  },
+  {
+    "code": "26563",
+    "name": "Long Hương",
+    "full_name": "Phường Long Hương",
+    "type": "Phường Long",
+    "district_code": "748"
+  },
+  {
+    "code": "26569",
+    "name": "Long Phước",
+    "full_name": "Xã Long Phước",
+    "type": "Xã Long",
+    "district_code": "748"
+  },
+  {
+    "code": "26558",
+    "name": "Long Tâm",
+    "full_name": "Phường Long Tâm",
+    "type": "Phường Long",
+    "district_code": "748"
+  },
+  {
+    "code": "26557",
+    "name": "Long Toàn",
+    "full_name": "Phường Long Toàn",
+    "type": "Phường Long",
+    "district_code": "748"
+  },
+  {
+    "code": "26551",
+    "name": "Phước Hiệp",
+    "full_name": "Phường Phước Hiệp",
+    "type": "Phường Phước",
+    "district_code": "748"
+  },
+  {
+    "code": "26548",
+    "name": "Phước Hưng",
+    "full_name": "Phường Phước Hưng",
+    "type": "Phường Phước",
+    "district_code": "748"
+  },
+  {
+    "code": "26554",
+    "name": "Phước Nguyên",
+    "full_name": "Phường Phước Nguyên",
+    "type": "Phường Phước",
+    "district_code": "748"
+  },
+  {
+    "code": "26560",
+    "name": "Phước Trung",
+    "full_name": "Phường Phước Trung",
+    "type": "Phường Phước",
+    "district_code": "748"
+  },
+  {
+    "code": "26567",
+    "name": "Tân Hưng",
+    "full_name": "Xã Tân Hưng",
+    "type": "Xã Tân",
+    "district_code": "748"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "31261",
+    "name": "Cờ Đỏ",
+    "full_name": "Thị trấn Cờ Đỏ",
+    "type": "Thị trấn Cờ",
+    "district_code": "925"
+  },
+  {
+    "code": "31249",
+    "name": "Thạnh Phú",
+    "full_name": "Xã Thạnh Phú",
+    "type": "Xã Thạnh",
+    "district_code": "925"
+  },
+  {
+    "code": "31264",
+    "name": "Thới Hưng",
+    "full_name": "Xã Thới Hưng",
+    "type": "Xã Thới",
+    "district_code": "925"
+  },
+  {
+    "code": "31277",
+    "name": "Thới Xuân",
+    "full_name": "Xã Thới Xuân",
+    "type": "Xã Thới",
+    "district_code": "925"
+  },
+  {
+    "code": "31276",
+    "name": "Thới Đông",
+    "full_name": "Xã Thới Đông",
+    "type": "Xã Thới",
+    "district_code": "925"
+  },
+  {
+    "code": "31222",
+    "name": "Trung An",
+    "full_name": "Xã Trung An",
+    "type": "Xã Trung",
+    "district_code": "925"
+  },
+  {
+    "code": "31255",
+    "name": "Trung Hưng",
+    "full_name": "Xã Trung Hưng",
+    "type": "Xã Trung",
+    "district_code": "925"
+  },
+  {
+    "code": "31225",
+    "name": "Trung Thạnh",
+    "full_name": "Xã Trung Thạnh",
+    "type": "Xã Trung",
+    "district_code": "925"
+  },
+  {
+    "code": "31273",
+    "name": "Đông Hiệp",
+    "full_name": "Xã Đông Hiệp",
+    "type": "Xã Đông",
+    "district_code": "925"
+  },
+  {
+    "code": "31274",
+    "name": "Đông Thắng",
+    "full_name": "Xã Đông Thắng",
+    "type": "Xã Đông",
+    "district_code": "925"
+  }
+]

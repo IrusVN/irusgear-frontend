@@ -1,0 +1,93 @@
+[
+  {
+    "code": "20251",
+    "name": "Bình Hiên",
+    "full_name": "Phường Bình Hiên",
+    "type": "Phường Bình",
+    "district_code": "492"
+  },
+  {
+    "code": "20254",
+    "name": "Bình Thuận",
+    "full_name": "Phường Bình Thuận",
+    "type": "Phường Bình",
+    "district_code": "492"
+  },
+  {
+    "code": "20236",
+    "name": "Hải Châu I",
+    "full_name": "Phường Hải Châu I",
+    "type": "Phường Hải Châu",
+    "district_code": "492"
+  },
+  {
+    "code": "20239",
+    "name": "Hải Châu II",
+    "full_name": "Phường Hải Châu II",
+    "type": "Phường Hải Châu",
+    "district_code": "492"
+  },
+  {
+    "code": "20257",
+    "name": "Hòa Cường Bắc",
+    "full_name": "Phường Hòa Cường Bắc",
+    "type": "Phường Hòa Cường",
+    "district_code": "492"
+  },
+  {
+    "code": "20258",
+    "name": "Hòa Cường Nam",
+    "full_name": "Phường Hòa Cường Nam",
+    "type": "Phường Hòa Cường",
+    "district_code": "492"
+  },
+  {
+    "code": "20245",
+    "name": "Hòa Thuận Tây",
+    "full_name": "Phường Hòa Thuận Tây",
+    "type": "Phường Hòa Thuận",
+    "district_code": "492"
+  },
+  {
+    "code": "20246",
+    "name": "Hòa Thuận Đông",
+    "full_name": "Phường Hòa Thuận Đông",
+    "type": "Phường Hòa Thuận",
+    "district_code": "492"
+  },
+  {
+    "code": "20248",
+    "name": "Nam Dương",
+    "full_name": "Phường Nam Dương",
+    "type": "Phường Nam",
+    "district_code": "492"
+  },
+  {
+    "code": "20242",
+    "name": "Phước Ninh",
+    "full_name": "Phường Phước Ninh",
+    "type": "Phường Phước",
+    "district_code": "492"
+  },
+  {
+    "code": "20233",
+    "name": "Thạch Thang",
+    "full_name": "Phường Thạch Thang",
+    "type": "Phường Thạch",
+    "district_code": "492"
+  },
+  {
+    "code": "20227",
+    "name": "Thanh Bình",
+    "full_name": "Phường Thanh Bình",
+    "type": "Phường Thanh",
+    "district_code": "492"
+  },
+  {
+    "code": "20230",
+    "name": "Thuận Phước",
+    "full_name": "Phường Thuận Phước",
+    "type": "Phường Thuận",
+    "district_code": "492"
+  }
+]

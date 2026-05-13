@@ -1,0 +1,93 @@
+[
+  {
+    "code": "28735",
+    "name": "Bình Ân",
+    "full_name": "Xã Bình Ân",
+    "type": "Xã Bình",
+    "district_code": "824"
+  },
+  {
+    "code": "28741",
+    "name": "Bình Nghị",
+    "full_name": "Xã Bình Nghị",
+    "type": "Xã Bình",
+    "district_code": "824"
+  },
+  {
+    "code": "28714",
+    "name": "Gia Thuận",
+    "full_name": "Xã Gia Thuận",
+    "type": "Xã Gia",
+    "district_code": "824"
+  },
+  {
+    "code": "28726",
+    "name": "Kiểng Phước",
+    "full_name": "Xã Kiểng Phước",
+    "type": "Xã Kiểng",
+    "district_code": "824"
+  },
+  {
+    "code": "28744",
+    "name": "Phước Trung",
+    "full_name": "Xã Phước Trung",
+    "type": "Xã Phước",
+    "district_code": "824"
+  },
+  {
+    "code": "28702",
+    "name": "Tân Hòa",
+    "full_name": "Thị trấn Tân Hòa",
+    "type": "Thị trấn Tân",
+    "district_code": "824"
+  },
+  {
+    "code": "28711",
+    "name": "Tân Phước",
+    "full_name": "Xã Tân Phước",
+    "type": "Xã Tân",
+    "district_code": "824"
+  },
+  {
+    "code": "28723",
+    "name": "Tân Tây",
+    "full_name": "Xã Tân Tây",
+    "type": "Xã Tân",
+    "district_code": "824"
+  },
+  {
+    "code": "28747",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "824"
+  },
+  {
+    "code": "28738",
+    "name": "Tân Điền",
+    "full_name": "Xã Tân Điền",
+    "type": "Xã Tân",
+    "district_code": "824"
+  },
+  {
+    "code": "28732",
+    "name": "Tân Đông",
+    "full_name": "Xã Tân Đông",
+    "type": "Xã Tân",
+    "district_code": "824"
+  },
+  {
+    "code": "28705",
+    "name": "Tăng Hoà",
+    "full_name": "Xã Tăng Hoà",
+    "type": "Xã Tăng",
+    "district_code": "824"
+  },
+  {
+    "code": "28720",
+    "name": "Vàm Láng",
+    "full_name": "Thị trấn Vàm Láng",
+    "type": "Thị trấn Vàm",
+    "district_code": "824"
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "code": "02380",
+    "name": "Bạch Xa",
+    "full_name": "Xã Bạch Xa",
+    "type": "Xã Bạch",
+    "district_code": "074"
+  },
+  {
+    "code": "02416",
+    "name": "Bằng Cốc",
+    "full_name": "Xã Bằng Cốc",
+    "type": "Xã Bằng",
+    "district_code": "074"
+  },
+  {
+    "code": "02404",
+    "name": "Bình Xa",
+    "full_name": "Xã Bình Xa",
+    "type": "Xã Bình",
+    "district_code": "074"
+  },
+  {
+    "code": "02425",
+    "name": "Hùng Đức",
+    "full_name": "Xã Hùng Đức",
+    "type": "Xã Hùng",
+    "district_code": "074"
+  },
+  {
+    "code": "02389",
+    "name": "Minh Dân",
+    "full_name": "Xã Minh Dân",
+    "type": "Xã Minh",
+    "district_code": "074"
+  },
+  {
+    "code": "02395",
+    "name": "Minh Hương",
+    "full_name": "Xã Minh Hương",
+    "type": "Xã Minh",
+    "district_code": "074"
+  },
+  {
+    "code": "02383",
+    "name": "Minh Khương",
+    "full_name": "Xã Minh Khương",
+    "type": "Xã Minh",
+    "district_code": "074"
+  },
+  {
+    "code": "02410",
+    "name": "Nhân Mục",
+    "full_name": "Xã Nhân Mục",
+    "type": "Xã Nhân",
+    "district_code": "074"
+  },
+  {
+    "code": "02392",
+    "name": "Phù Lưu",
+    "full_name": "Xã Phù Lưu",
+    "type": "Xã Phù",
+    "district_code": "074"
+  },
+  {
+    "code": "02401",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "074"
+  },
+  {
+    "code": "02374",
+    "name": "Tân Yên",
+    "full_name": "Thị trấn Tân Yên",
+    "type": "Thị trấn Tân",
+    "district_code": "074"
+  },
+  {
+    "code": "02419",
+    "name": "Thái Hòa",
+    "full_name": "Xã Thái Hòa",
+    "type": "Xã Thái",
+    "district_code": "074"
+  },
+  {
+    "code": "02407",
+    "name": "Thái Sơn",
+    "full_name": "Xã Thái Sơn",
+    "type": "Xã Thái",
+    "district_code": "074"
+  },
+  {
+    "code": "02413",
+    "name": "Thành Long",
+    "full_name": "Xã Thành Long",
+    "type": "Xã Thành",
+    "district_code": "074"
+  },
+  {
+    "code": "02386",
+    "name": "Yên Lâm",
+    "full_name": "Xã Yên Lâm",
+    "type": "Xã Yên",
+    "district_code": "074"
+  },
+  {
+    "code": "02398",
+    "name": "Yên Phú",
+    "full_name": "Xã Yên Phú",
+    "type": "Xã Yên",
+    "district_code": "074"
+  },
+  {
+    "code": "02377",
+    "name": "Yên Thuận",
+    "full_name": "Xã Yên Thuận",
+    "type": "Xã Yên",
+    "district_code": "074"
+  },
+  {
+    "code": "02422",
+    "name": "Đức Ninh",
+    "full_name": "Xã Đức Ninh",
+    "type": "Xã Đức",
+    "district_code": "074"
+  }
+]

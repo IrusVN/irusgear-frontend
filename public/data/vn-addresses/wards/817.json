@@ -1,0 +1,114 @@
+[
+  {
+    "code": "28435",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "817"
+  },
+  {
+    "code": "28436",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "817"
+  },
+  {
+    "code": "28437",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "817"
+  },
+  {
+    "code": "28439",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "817"
+  },
+  {
+    "code": "28440",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "817"
+  },
+  {
+    "code": "28486",
+    "name": "Long Khánh",
+    "full_name": "Xã Long Khánh",
+    "type": "Xã Long",
+    "district_code": "817"
+  },
+  {
+    "code": "28453",
+    "name": "Mỹ Hạnh Trung",
+    "full_name": "Xã Mỹ Hạnh Trung",
+    "type": "Xã Mỹ Hạnh",
+    "district_code": "817"
+  },
+  {
+    "code": "28450",
+    "name": "Mỹ Hạnh Đông",
+    "full_name": "Xã Mỹ Hạnh Đông",
+    "type": "Xã Mỹ Hạnh",
+    "district_code": "817"
+  },
+  {
+    "code": "28447",
+    "name": "Mỹ Phước Tây",
+    "full_name": "Xã Mỹ Phước Tây",
+    "type": "Xã Mỹ Phước",
+    "district_code": "817"
+  },
+  {
+    "code": "28474",
+    "name": "Nhị Mỹ",
+    "full_name": "Phường Nhị Mỹ",
+    "type": "Phường Nhị",
+    "district_code": "817"
+  },
+  {
+    "code": "28477",
+    "name": "Nhị Quý",
+    "full_name": "Xã Nhị Quý",
+    "type": "Xã Nhị",
+    "district_code": "817"
+  },
+  {
+    "code": "28483",
+    "name": "Phú Quý",
+    "full_name": "Xã Phú Quý",
+    "type": "Xã Phú",
+    "district_code": "817"
+  },
+  {
+    "code": "28462",
+    "name": "Tân Bình",
+    "full_name": "Xã Tân Bình",
+    "type": "Xã Tân",
+    "district_code": "817"
+  },
+  {
+    "code": "28468",
+    "name": "Tân Hội",
+    "full_name": "Xã Tân Hội",
+    "type": "Xã Tân",
+    "district_code": "817"
+  },
+  {
+    "code": "28459",
+    "name": "Tân Phú",
+    "full_name": "Xã Tân Phú",
+    "type": "Xã Tân",
+    "district_code": "817"
+  },
+  {
+    "code": "28480",
+    "name": "Thanh Hòa",
+    "full_name": "Xã Thanh Hòa",
+    "type": "Xã Thanh",
+    "district_code": "817"
+  }
+]

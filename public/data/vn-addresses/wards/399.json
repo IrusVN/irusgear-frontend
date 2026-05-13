@@ -1,0 +1,261 @@
+[
+  {
+    "code": "15865",
+    "name": "Bút Sơn",
+    "full_name": "Thị trấn Bút Sơn",
+    "type": "Thị trấn Bút",
+    "district_code": "399"
+  },
+  {
+    "code": "15907",
+    "name": "Hoằng Cát",
+    "full_name": "Xã Hoằng Cát",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15979",
+    "name": "Hoằng Châu",
+    "full_name": "Xã Hoằng Châu",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15871",
+    "name": "Hoằng Giang",
+    "full_name": "Xã Hoằng Giang",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15937",
+    "name": "Hoằng Hà",
+    "full_name": "Xã Hoằng Hà",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15991",
+    "name": "Hoằng Hải",
+    "full_name": "Xã Hoằng Hải",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15919",
+    "name": "Hoằng Hợp",
+    "full_name": "Xã Hoằng Hợp",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15889",
+    "name": "Hoằng Kim",
+    "full_name": "Xã Hoằng Kim",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15964",
+    "name": "Hoằng Lộc",
+    "full_name": "Xã Hoằng Lộc",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15976",
+    "name": "Hoằng Lưu",
+    "full_name": "Xã Hoằng Lưu",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15994",
+    "name": "Hoằng Ngọc",
+    "full_name": "Xã Hoằng Ngọc",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15973",
+    "name": "Hoằng Phong",
+    "full_name": "Xã Hoằng Phong",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15883",
+    "name": "Hoằng Phú",
+    "full_name": "Xã Hoằng Phú",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "16003",
+    "name": "Hoằng Phụ",
+    "full_name": "Xã Hoằng Phụ",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15880",
+    "name": "Hoằng Phượng",
+    "full_name": "Xã Hoằng Phượng",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15886",
+    "name": "Hoằng Quỳ",
+    "full_name": "Xã Hoằng Quỳ",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15916",
+    "name": "Hoằng Quý",
+    "full_name": "Xã Hoằng Quý",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15901",
+    "name": "Hoằng Sơn",
+    "full_name": "Xã Hoằng Sơn",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15982",
+    "name": "Hoằng Tân",
+    "full_name": "Xã Hoằng Tân",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15955",
+    "name": "Hoằng Thái",
+    "full_name": "Xã Hoằng Thái",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15949",
+    "name": "Hoằng Thắng",
+    "full_name": "Xã Hoằng Thắng",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15961",
+    "name": "Hoằng Thành",
+    "full_name": "Xã Hoằng Thành",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "16000",
+    "name": "Hoằng Thanh",
+    "full_name": "Xã Hoằng Thanh",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15958",
+    "name": "Hoằng Thịnh",
+    "full_name": "Xã Hoằng Thịnh",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15988",
+    "name": "Hoằng Tiến",
+    "full_name": "Xã Hoằng Tiến",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15967",
+    "name": "Hoằng Trạch",
+    "full_name": "Xã Hoằng Trạch",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15895",
+    "name": "Hoằng Trinh",
+    "full_name": "Xã Hoằng Trinh",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15892",
+    "name": "Hoằng Trung",
+    "full_name": "Xã Hoằng Trung",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "16006",
+    "name": "Hoằng Trường",
+    "full_name": "Xã Hoằng Trường",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15877",
+    "name": "Hoằng Xuân",
+    "full_name": "Xã Hoằng Xuân",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15910",
+    "name": "Hoằng Xuyên",
+    "full_name": "Xã Hoằng Xuyên",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15985",
+    "name": "Hoằng Yến",
+    "full_name": "Xã Hoằng Yến",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15946",
+    "name": "Hoằng Đạo",
+    "full_name": "Xã Hoằng Đạo",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15940",
+    "name": "Hoằng Đạt",
+    "full_name": "Xã Hoằng Đạt",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15952",
+    "name": "Hoằng Đồng",
+    "full_name": "Xã Hoằng Đồng",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15997",
+    "name": "Hoằng Đông",
+    "full_name": "Xã Hoằng Đông",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  },
+  {
+    "code": "15928",
+    "name": "Hoằng Đức",
+    "full_name": "Xã Hoằng Đức",
+    "type": "Xã Hoằng",
+    "district_code": "399"
+  }
+]

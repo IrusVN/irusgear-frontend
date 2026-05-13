@@ -1,0 +1,86 @@
+[
+  {
+    "code": "27724",
+    "name": "Hưng Hà",
+    "full_name": "Xã Hưng Hà",
+    "type": "Xã Hưng",
+    "district_code": "796"
+  },
+  {
+    "code": "27736",
+    "name": "Hưng Thạnh",
+    "full_name": "Xã Hưng Thạnh",
+    "type": "Xã Hưng",
+    "district_code": "796"
+  },
+  {
+    "code": "27730",
+    "name": "Hưng Điền",
+    "full_name": "Xã Hưng Điền",
+    "type": "Xã Hưng",
+    "district_code": "796"
+  },
+  {
+    "code": "27727",
+    "name": "Hưng Điền B",
+    "full_name": "Xã Hưng Điền B",
+    "type": "Xã Hưng Điền",
+    "district_code": "796"
+  },
+  {
+    "code": "27721",
+    "name": "Tân Hưng",
+    "full_name": "Thị trấn Tân Hưng",
+    "type": "Thị trấn Tân",
+    "district_code": "796"
+  },
+  {
+    "code": "27733",
+    "name": "Thạnh Hưng",
+    "full_name": "Xã Thạnh Hưng",
+    "type": "Xã Thạnh",
+    "district_code": "796"
+  },
+  {
+    "code": "27754",
+    "name": "Vĩnh Bửu",
+    "full_name": "Xã Vĩnh Bửu",
+    "type": "Xã Vĩnh",
+    "district_code": "796"
+  },
+  {
+    "code": "27751",
+    "name": "Vĩnh Châu A",
+    "full_name": "Xã Vĩnh Châu A",
+    "type": "Xã Vĩnh Châu",
+    "district_code": "796"
+  },
+  {
+    "code": "27742",
+    "name": "Vĩnh Châu B",
+    "full_name": "Xã Vĩnh Châu B",
+    "type": "Xã Vĩnh Châu",
+    "district_code": "796"
+  },
+  {
+    "code": "27745",
+    "name": "Vĩnh Lợi",
+    "full_name": "Xã Vĩnh Lợi",
+    "type": "Xã Vĩnh",
+    "district_code": "796"
+  },
+  {
+    "code": "27739",
+    "name": "Vĩnh Thạnh",
+    "full_name": "Xã Vĩnh Thạnh",
+    "type": "Xã Vĩnh",
+    "district_code": "796"
+  },
+  {
+    "code": "27748",
+    "name": "Vĩnh Đại",
+    "full_name": "Xã Vĩnh Đại",
+    "type": "Xã Vĩnh",
+    "district_code": "796"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "29317",
+    "name": "An Phú Tân",
+    "full_name": "Xã An Phú Tân",
+    "type": "Xã An Phú",
+    "district_code": "845"
+  },
+  {
+    "code": "29308",
+    "name": "Cầu Kè",
+    "full_name": "Thị trấn Cầu Kè",
+    "type": "Thị trấn Cầu",
+    "district_code": "845"
+  },
+  {
+    "code": "29314",
+    "name": "Châu Điền",
+    "full_name": "Xã Châu Điền",
+    "type": "Xã Châu",
+    "district_code": "845"
+  },
+  {
+    "code": "29311",
+    "name": "Hòa Ân",
+    "full_name": "Xã Hòa Ân",
+    "type": "Xã Hòa",
+    "district_code": "845"
+  },
+  {
+    "code": "29320",
+    "name": "Hoà Tân",
+    "full_name": "Xã Hoà Tân",
+    "type": "Xã Hoà",
+    "district_code": "845"
+  },
+  {
+    "code": "29323",
+    "name": "Ninh Thới",
+    "full_name": "Xã Ninh Thới",
+    "type": "Xã Ninh",
+    "district_code": "845"
+  },
+  {
+    "code": "29326",
+    "name": "Phong Phú",
+    "full_name": "Xã Phong Phú",
+    "type": "Xã Phong",
+    "district_code": "845"
+  },
+  {
+    "code": "29329",
+    "name": "Phong Thạnh",
+    "full_name": "Xã Phong Thạnh",
+    "type": "Xã Phong",
+    "district_code": "845"
+  },
+  {
+    "code": "29332",
+    "name": "Tam Ngãi",
+    "full_name": "Xã Tam Ngãi",
+    "type": "Xã Tam",
+    "district_code": "845"
+  },
+  {
+    "code": "29338",
+    "name": "Thạnh Phú",
+    "full_name": "Xã Thạnh Phú",
+    "type": "Xã Thạnh",
+    "district_code": "845"
+  },
+  {
+    "code": "29335",
+    "name": "Thông Hòa",
+    "full_name": "Xã Thông Hòa",
+    "type": "Xã Thông",
+    "district_code": "845"
+  }
+]

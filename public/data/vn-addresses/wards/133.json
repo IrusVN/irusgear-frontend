@@ -1,0 +1,100 @@
+[
+  {
+    "code": "04291",
+    "name": "Cầu Thia",
+    "full_name": "Phường Cầu Thia",
+    "type": "Phường Cầu",
+    "district_code": "133"
+  },
+  {
+    "code": "04678",
+    "name": "Hạnh Sơn",
+    "full_name": "Xã Hạnh Sơn",
+    "type": "Xã Hạnh",
+    "district_code": "133"
+  },
+  {
+    "code": "04300",
+    "name": "Nghĩa An",
+    "full_name": "Xã Nghĩa An",
+    "type": "Xã Nghĩa",
+    "district_code": "133"
+  },
+  {
+    "code": "04624",
+    "name": "Nghĩa Lộ",
+    "full_name": "Xã Nghĩa Lộ",
+    "type": "Xã Nghĩa",
+    "district_code": "133"
+  },
+  {
+    "code": "04294",
+    "name": "Nghĩa Lợi",
+    "full_name": "Xã Nghĩa Lợi",
+    "type": "Xã Nghĩa",
+    "district_code": "133"
+  },
+  {
+    "code": "04297",
+    "name": "Nghĩa Phúc",
+    "full_name": "Xã Nghĩa Phúc",
+    "type": "Xã Nghĩa",
+    "district_code": "133"
+  },
+  {
+    "code": "04663",
+    "name": "Phù Nham",
+    "full_name": "Xã Phù Nham",
+    "type": "Xã Phù",
+    "district_code": "133"
+  },
+  {
+    "code": "04681",
+    "name": "Phúc Sơn",
+    "full_name": "Xã Phúc Sơn",
+    "type": "Xã Phúc",
+    "district_code": "133"
+  },
+  {
+    "code": "04282",
+    "name": "Pú Trạng",
+    "full_name": "Phường Pú Trạng",
+    "type": "Phường Pú",
+    "district_code": "133"
+  },
+  {
+    "code": "04660",
+    "name": "Sơn A",
+    "full_name": "Xã Sơn A",
+    "type": "Xã Sơn",
+    "district_code": "133"
+  },
+  {
+    "code": "04288",
+    "name": "Tân An",
+    "full_name": "Phường Tân An",
+    "type": "Phường Tân",
+    "district_code": "133"
+  },
+  {
+    "code": "04684",
+    "name": "Thạch Lương",
+    "full_name": "Xã Thạch Lương",
+    "type": "Xã Thạch",
+    "district_code": "133"
+  },
+  {
+    "code": "04675",
+    "name": "Thanh Lương",
+    "full_name": "Xã Thanh Lương",
+    "type": "Xã Thanh",
+    "district_code": "133"
+  },
+  {
+    "code": "04285",
+    "name": "Trung Tâm",
+    "full_name": "Phường Trung Tâm",
+    "type": "Phường Trung",
+    "district_code": "133"
+  }
+]

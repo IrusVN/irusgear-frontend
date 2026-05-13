@@ -1,0 +1,121 @@
+[
+  {
+    "code": "32005",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "964"
+  },
+  {
+    "code": "32011",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "964"
+  },
+  {
+    "code": "32002",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "964"
+  },
+  {
+    "code": "32008",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "964"
+  },
+  {
+    "code": "32017",
+    "name": "6",
+    "full_name": "Phường 6",
+    "type": "Phường",
+    "district_code": "964"
+  },
+  {
+    "code": "32020",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "964"
+  },
+  {
+    "code": "32014",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "964"
+  },
+  {
+    "code": "31999",
+    "name": "9",
+    "full_name": "Phường 9",
+    "type": "Phường",
+    "district_code": "964"
+  },
+  {
+    "code": "32023",
+    "name": "An Xuyên",
+    "full_name": "Xã An Xuyên",
+    "type": "Xã An",
+    "district_code": "964"
+  },
+  {
+    "code": "32041",
+    "name": "Hòa Tân",
+    "full_name": "Xã Hòa Tân",
+    "type": "Xã Hòa",
+    "district_code": "964"
+  },
+  {
+    "code": "32038",
+    "name": "Hòa Thành",
+    "full_name": "Xã Hòa Thành",
+    "type": "Xã Hòa",
+    "district_code": "964"
+  },
+  {
+    "code": "32032",
+    "name": "Lý Văn Lâm",
+    "full_name": "Xã Lý Văn Lâm",
+    "type": "Xã Lý Văn",
+    "district_code": "964"
+  },
+  {
+    "code": "32029",
+    "name": "Tắc Vân",
+    "full_name": "Xã Tắc Vân",
+    "type": "Xã Tắc",
+    "district_code": "964"
+  },
+  {
+    "code": "32025",
+    "name": "Tân Thành",
+    "full_name": "Phường Tân Thành",
+    "type": "Phường Tân",
+    "district_code": "964"
+  },
+  {
+    "code": "32026",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "964"
+  },
+  {
+    "code": "32022",
+    "name": "Tân Xuyên",
+    "full_name": "Phường Tân Xuyên",
+    "type": "Phường Tân",
+    "district_code": "964"
+  },
+  {
+    "code": "32035",
+    "name": "Định Bình",
+    "full_name": "Xã Định Bình",
+    "type": "Xã Định",
+    "district_code": "964"
+  }
+]

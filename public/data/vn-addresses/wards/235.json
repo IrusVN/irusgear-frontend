@@ -1,0 +1,170 @@
+[
+  {
+    "code": "08341",
+    "name": "Cẩm Khê",
+    "full_name": "Thị trấn Cẩm Khê",
+    "type": "Thị trấn Cẩm",
+    "district_code": "235"
+  },
+  {
+    "code": "08383",
+    "name": "Cấp Dẫn",
+    "full_name": "Xã Cấp Dẫn",
+    "type": "Xã Cấp",
+    "district_code": "235"
+  },
+  {
+    "code": "08413",
+    "name": "Chương Xá",
+    "full_name": "Xã Chương Xá",
+    "type": "Xã Chương",
+    "district_code": "235"
+  },
+  {
+    "code": "08416",
+    "name": "Hùng Việt",
+    "full_name": "Xã Hùng Việt",
+    "type": "Xã Hùng",
+    "district_code": "235"
+  },
+  {
+    "code": "08401",
+    "name": "Hương Lung",
+    "full_name": "Xã Hương Lung",
+    "type": "Xã Hương",
+    "district_code": "235"
+  },
+  {
+    "code": "08353",
+    "name": "Minh Tân",
+    "full_name": "Xã Minh Tân",
+    "type": "Xã Minh",
+    "district_code": "235"
+  },
+  {
+    "code": "08350",
+    "name": "Ngô Xá",
+    "full_name": "Xã Ngô Xá",
+    "type": "Xã Ngô",
+    "district_code": "235"
+  },
+  {
+    "code": "08392",
+    "name": "Phú Khê",
+    "full_name": "Xã Phú Khê",
+    "type": "Xã Phú",
+    "district_code": "235"
+  },
+  {
+    "code": "08407",
+    "name": "Phú Lạc",
+    "full_name": "Xã Phú Lạc",
+    "type": "Xã Phú",
+    "district_code": "235"
+  },
+  {
+    "code": "08356",
+    "name": "Phượng Vĩ",
+    "full_name": "Xã Phượng Vĩ",
+    "type": "Xã Phượng",
+    "district_code": "235"
+  },
+  {
+    "code": "08395",
+    "name": "Sơn Tình",
+    "full_name": "Xã Sơn Tình",
+    "type": "Xã Sơn",
+    "district_code": "235"
+  },
+  {
+    "code": "08404",
+    "name": "Tạ Xá",
+    "full_name": "Xã Tạ Xá",
+    "type": "Xã Tạ",
+    "district_code": "235"
+  },
+  {
+    "code": "08377",
+    "name": "Tam Sơn",
+    "full_name": "Xã Tam Sơn",
+    "type": "Xã Tam",
+    "district_code": "235"
+  },
+  {
+    "code": "08362",
+    "name": "Thụy Liễu",
+    "full_name": "Xã Thụy Liễu",
+    "type": "Xã Thụy",
+    "district_code": "235"
+  },
+  {
+    "code": "08344",
+    "name": "Tiên Lương",
+    "full_name": "Xã Tiên Lương",
+    "type": "Xã Tiên",
+    "district_code": "235"
+  },
+  {
+    "code": "08374",
+    "name": "Tùng Khê",
+    "full_name": "Xã Tùng Khê",
+    "type": "Xã Tùng",
+    "district_code": "235"
+  },
+  {
+    "code": "08347",
+    "name": "Tuy Lộc",
+    "full_name": "Xã Tuy Lộc",
+    "type": "Xã Tuy",
+    "district_code": "235"
+  },
+  {
+    "code": "08380",
+    "name": "Văn Bán",
+    "full_name": "Xã Văn Bán",
+    "type": "Xã Văn",
+    "district_code": "235"
+  },
+  {
+    "code": "08419",
+    "name": "Văn Khúc",
+    "full_name": "Xã Văn Khúc",
+    "type": "Xã Văn",
+    "district_code": "235"
+  },
+  {
+    "code": "08389",
+    "name": "Xương Thịnh",
+    "full_name": "Xã Xương Thịnh",
+    "type": "Xã Xương",
+    "district_code": "235"
+  },
+  {
+    "code": "08422",
+    "name": "Yên Dưỡng",
+    "full_name": "Xã Yên Dưỡng",
+    "type": "Xã Yên",
+    "district_code": "235"
+  },
+  {
+    "code": "08398",
+    "name": "Yên Tập",
+    "full_name": "Xã Yên Tập",
+    "type": "Xã Yên",
+    "district_code": "235"
+  },
+  {
+    "code": "08428",
+    "name": "Điêu Lương",
+    "full_name": "Xã Điêu Lương",
+    "type": "Xã Điêu",
+    "district_code": "235"
+  },
+  {
+    "code": "08431",
+    "name": "Đồng Lương",
+    "full_name": "Xã Đồng Lương",
+    "type": "Xã Đồng",
+    "district_code": "235"
+  }
+]

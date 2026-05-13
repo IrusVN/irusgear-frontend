@@ -40,8 +40,9 @@
         </div>
 
         <div class="px-2 px-md-3 pt-2">
-          <div v-if="hasNeedItems" class="feature-strip-wrap position-relative">
+          <div class="feature-strip-wrap position-relative">
             <button
+              v-if="!section.loading && hasNeedItems"
               title="Previous"
               class="swiper-button-prev"
               type="button"
@@ -51,22 +52,32 @@
               <i class="bi bi-chevron-left"></i>
             </button>
 
-            <div ref="featureStripRef" class="feature-strip d-flex gap-2 overflow-auto no-scrollbar pe-4 pt-1" @scroll="updateStripNavState">
-              <a
-                v-for="(item, i) in featureChips"
-                :key="`${item.title}-${i}`"
-                :href="item.href || '#'"
-                class="feature-chip text-decoration-none text-dark"
-              >
-                <img v-if="item.image" :src="item.image" :alt="item.title" class="feature-chip-image" loading="lazy" />
-                <span v-else class="feature-chip-icon-wrap">
-                  <i :class="item.iconClass || 'bi bi-phone'" aria-hidden="true"></i>
-                </span>
-                <span class="feature-chip-title">{{ item.title }}</span>
-              </a>
+            <div
+              ref="featureStripRef"
+              class="feature-strip d-flex gap-2 overflow-auto no-scrollbar pe-4 pt-1"
+              @scroll="updateStripNavState"
+            >
+              <template v-if="section.loading || !hasNeedItems">
+                <SkeletonFeatureChip v-for="n in 10" :key="n" />
+              </template>
+              <template v-else>
+                <a
+                  v-for="(item, i) in featureChips"
+                  :key="`${item.title}-${i}`"
+                  :href="item.href || '#'"
+                  class="feature-chip text-decoration-none text-dark"
+                >
+                  <img v-if="item.image" :src="item.image" :alt="item.title" class="feature-chip-image" loading="lazy" />
+                  <span v-else class="feature-chip-icon-wrap">
+                    <i :class="item.iconClass || 'bi bi-phone'" aria-hidden="true"></i>
+                  </span>
+                  <span class="feature-chip-title">{{ item.title }}</span>
+                </a>
+              </template>
             </div>
 
             <button
+              v-if="!section.loading && hasNeedItems"
               title="Next"
               class="swiper-button-next"
               type="button"
@@ -119,9 +130,11 @@
           </div>
         </div>
 
-        <div v-if="section.loading" class="d-flex justify-content-center py-5">
-          <div class="spinner-border text-secondary" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div v-if="section.loading" class="px-2 px-md-3 pb-2 pb-md-3 section-products-body">
+          <div class="skeleton-product-strip no-scrollbar" :style="productStripStyle">
+            <div v-for="n in skeletonCount" :key="n" class="skeleton-grid-item">
+              <SkeletonCard />
+            </div>
           </div>
         </div>
 
@@ -154,7 +167,11 @@
             </button>
           </div>
 
-          <div v-else class="text-center py-5 text-muted small">Không có sản phẩm nào</div>
+          <div v-else class="skeleton-product-strip">
+            <div v-for="n in skeletonCount" :key="n" class="skeleton-grid-item">
+              <SkeletonCard />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -164,6 +181,8 @@
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { useHomeSectionsStore } from "~/stores/homeSectionsStore";
+import SkeletonCard from "~/components/Common/SkeletonCard.vue";
+import SkeletonFeatureChip from "~/components/Common/SkeletonFeatureChip.vue";
 
 const props = defineProps({
   sectionKey: { type: String, required: true },
@@ -191,6 +210,12 @@ const productStripStyle = computed(() => {
   return {
     "--desktop-product-rows": String(safeRows),
   };
+});
+
+const skeletonCount = computed(() => {
+  const rows = Number(props.desktopProductRows);
+  const safeRows = Number.isFinite(rows) && rows > 0 ? Math.floor(rows) : 2;
+  return safeRows * 8;
 });
 
 const recalcAllNavStates = () => {
@@ -426,9 +451,9 @@ watch(
 }
 
 .section-main-tab.active {
-  border-bottom: 2px solid #d70018;
-  color: #d70018;
-  background: linear-gradient(to top, rgba(215, 0, 24, 0.05), rgba(255, 255, 255, 0));
+  border-bottom: 2px solid var(--irus-color-accent);
+  color: var(--irus-color-accent);
+  background: var(--irus-color-accent-soft);
 }
 
 .section-tab-divider {
@@ -588,7 +613,7 @@ watch(
 .swiper-button-prev,
 .swiper-button-next {
   position: absolute;
-  top: 54%;
+  top: 102%;
   z-index: 3;
   width: 24px;
   height: 39px;
@@ -733,6 +758,79 @@ watch(
   .product-swiper-button-next {
     height: 72px;
     width: 34px;
+  }
+}
+
+.skeleton-product-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+  grid-auto-columns: calc((100% - 8px) / 2);
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 18px;
+  height: 100%;
+  align-items: stretch;
+}
+
+.skeleton-grid-item {
+  min-width: 0;
+  height: 100%;
+}
+
+.skeleton-grid-item .skeleton-card-shell {
+  height: 100%;
+  min-height: 280px;
+}
+
+@media (min-width: 768px) {
+  .skeleton-product-strip {
+    grid-template-rows: repeat(var(--desktop-product-rows, 2), minmax(0, 1fr));
+    grid-auto-columns: 222px;
+  }
+
+  .skeleton-grid-item {
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .product-swiper-button-prev,
+  .product-swiper-button-next {
+    top: auto;
+    bottom: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .product-strip {
+    gap: 10px;
+  }
+
+  .feature-strip {
+    gap: 6px;
+  }
+
+  .feature-chip {
+    font-size: 12px;
+    padding: 6px 10px;
+    min-height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-strip-track {
+    gap: 6px;
+  }
+
+  .brand-pill {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  .view-all-btn {
+    font-size: 12px;
+    padding: 8px 14px;
   }
 }
 </style>

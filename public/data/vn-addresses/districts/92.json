@@ -1,0 +1,65 @@
+[
+  {
+    "code": "918",
+    "name": "Bình Thuỷ",
+    "full_name": "Quận Bình Thuỷ",
+    "type": "Quận Bình",
+    "province_code": "92"
+  },
+  {
+    "code": "919",
+    "name": "Cái Răng",
+    "full_name": "Quận Cái Răng",
+    "type": "Quận Cái",
+    "province_code": "92"
+  },
+  {
+    "code": "925",
+    "name": "Cờ Đỏ",
+    "full_name": "Huyện Cờ Đỏ",
+    "type": "Huyện Cờ",
+    "province_code": "92"
+  },
+  {
+    "code": "916",
+    "name": "Ninh Kiều",
+    "full_name": "Quận Ninh Kiều",
+    "type": "Quận Ninh",
+    "province_code": "92"
+  },
+  {
+    "code": "917",
+    "name": "Ô Môn",
+    "full_name": "Quận Ô Môn",
+    "type": "Quận Ô",
+    "province_code": "92"
+  },
+  {
+    "code": "926",
+    "name": "Phong Điền",
+    "full_name": "Huyện Phong Điền",
+    "type": "Huyện Phong",
+    "province_code": "92"
+  },
+  {
+    "code": "927",
+    "name": "Thới Lai",
+    "full_name": "Huyện Thới Lai",
+    "type": "Huyện Thới",
+    "province_code": "92"
+  },
+  {
+    "code": "923",
+    "name": "Thốt Nốt",
+    "full_name": "Quận Thốt Nốt",
+    "type": "Quận Thốt",
+    "province_code": "92"
+  },
+  {
+    "code": "924",
+    "name": "Vĩnh Thạnh",
+    "full_name": "Huyện Vĩnh Thạnh",
+    "type": "Huyện Vĩnh",
+    "province_code": "92"
+  }
+]

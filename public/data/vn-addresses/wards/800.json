@@ -1,0 +1,79 @@
+[
+  {
+    "code": "27868",
+    "name": "Tân Hiệp",
+    "full_name": "Xã Tân Hiệp",
+    "type": "Xã Tân",
+    "district_code": "800"
+  },
+  {
+    "code": "27889",
+    "name": "Tân Tây",
+    "full_name": "Xã Tân Tây",
+    "type": "Xã Tân",
+    "district_code": "800"
+  },
+  {
+    "code": "27892",
+    "name": "Tân Đông",
+    "full_name": "Xã Tân Đông",
+    "type": "Xã Tân",
+    "district_code": "800"
+  },
+  {
+    "code": "27895",
+    "name": "Thạnh An",
+    "full_name": "Xã Thạnh An",
+    "type": "Xã Thạnh",
+    "district_code": "800"
+  },
+  {
+    "code": "27865",
+    "name": "Thạnh Hóa",
+    "full_name": "Thị trấn Thạnh Hóa",
+    "type": "Thị trấn Thạnh",
+    "district_code": "800"
+  },
+  {
+    "code": "27877",
+    "name": "Thạnh Phú",
+    "full_name": "Xã Thạnh Phú",
+    "type": "Xã Thạnh",
+    "district_code": "800"
+  },
+  {
+    "code": "27874",
+    "name": "Thạnh Phước",
+    "full_name": "Xã Thạnh Phước",
+    "type": "Xã Thạnh",
+    "district_code": "800"
+  },
+  {
+    "code": "27871",
+    "name": "Thuận Bình",
+    "full_name": "Xã Thuận Bình",
+    "type": "Xã Thuận",
+    "district_code": "800"
+  },
+  {
+    "code": "27880",
+    "name": "Thuận Nghĩa Hòa",
+    "full_name": "Xã Thuận Nghĩa Hòa",
+    "type": "Xã Thuận Nghĩa",
+    "district_code": "800"
+  },
+  {
+    "code": "27886",
+    "name": "Thủy Tây",
+    "full_name": "Xã Thủy Tây",
+    "type": "Xã Thủy",
+    "district_code": "800"
+  },
+  {
+    "code": "27883",
+    "name": "Thủy Đông",
+    "full_name": "Xã Thủy Đông",
+    "type": "Xã Thủy",
+    "district_code": "800"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "24928",
+    "name": "D'Ran",
+    "full_name": "Thị trấn D'Ran",
+    "type": "Thị trấn",
+    "district_code": "677"
+  },
+  {
+    "code": "24943",
+    "name": "Ka Đô",
+    "full_name": "Xã Ka Đô",
+    "type": "Xã Ka",
+    "district_code": "677"
+  },
+  {
+    "code": "24949",
+    "name": "Ka Đơn",
+    "full_name": "Xã Ka Đơn",
+    "type": "Xã Ka",
+    "district_code": "677"
+  },
+  {
+    "code": "24940",
+    "name": "Lạc Lâm",
+    "full_name": "Xã Lạc Lâm",
+    "type": "Xã Lạc",
+    "district_code": "677"
+  },
+  {
+    "code": "24934",
+    "name": "Lạc Xuân",
+    "full_name": "Xã Lạc Xuân",
+    "type": "Xã Lạc",
+    "district_code": "677"
+  },
+  {
+    "code": "24955",
+    "name": "Pró",
+    "full_name": "Xã Pró",
+    "type": "Xã",
+    "district_code": "677"
+  },
+  {
+    "code": "24946",
+    "name": "Quảng Lập",
+    "full_name": "Xã Quảng Lập",
+    "type": "Xã Quảng",
+    "district_code": "677"
+  },
+  {
+    "code": "24931",
+    "name": "Thạnh Mỹ",
+    "full_name": "Thị trấn Thạnh Mỹ",
+    "type": "Thị trấn Thạnh",
+    "district_code": "677"
+  },
+  {
+    "code": "24952",
+    "name": "Tu Tra",
+    "full_name": "Xã Tu Tra",
+    "type": "Xã Tu",
+    "district_code": "677"
+  },
+  {
+    "code": "24937",
+    "name": "Đạ Ròn",
+    "full_name": "Xã Đạ Ròn",
+    "type": "Xã Đạ",
+    "district_code": "677"
+  }
+]

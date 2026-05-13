@@ -1,0 +1,23 @@
+[
+  {
+    "code": "22739",
+    "name": "Sinh Tồn",
+    "full_name": "Xã Sinh Tồn",
+    "type": "Xã Sinh",
+    "district_code": "576"
+  },
+  {
+    "code": "22737",
+    "name": "Song Tử Tây",
+    "full_name": "Xã Song Tử Tây",
+    "type": "Xã Song Tử",
+    "district_code": "576"
+  },
+  {
+    "code": "22736",
+    "name": "Trường Sa",
+    "full_name": "Thị trấn Trường Sa",
+    "type": "Thị trấn Trường",
+    "district_code": "576"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "code": "04612",
+    "name": "Bản Công",
+    "full_name": "Xã Bản Công",
+    "type": "Xã Bản",
+    "district_code": "139"
+  },
+  {
+    "code": "04615",
+    "name": "Bản Mù",
+    "full_name": "Xã Bản Mù",
+    "type": "Xã Bản",
+    "district_code": "139"
+  },
+  {
+    "code": "04618",
+    "name": "Hát Lìu",
+    "full_name": "Xã Hát Lìu",
+    "type": "Xã Hát",
+    "district_code": "139"
+  },
+  {
+    "code": "04609",
+    "name": "Làng Nhì",
+    "full_name": "Xã Làng Nhì",
+    "type": "Xã Làng",
+    "district_code": "139"
+  },
+  {
+    "code": "04606",
+    "name": "Pá Hu",
+    "full_name": "Xã Pá Hu",
+    "type": "Xã Pá",
+    "district_code": "139"
+  },
+  {
+    "code": "04591",
+    "name": "Pá Lau",
+    "full_name": "Xã Pá Lau",
+    "type": "Xã Pá",
+    "district_code": "139"
+  },
+  {
+    "code": "04597",
+    "name": "Phình Hồ",
+    "full_name": "Xã Phình Hồ",
+    "type": "Xã Phình",
+    "district_code": "139"
+  },
+  {
+    "code": "04603",
+    "name": "Tà Si Láng",
+    "full_name": "Xã Tà Si Láng",
+    "type": "Xã Tà Si",
+    "district_code": "139"
+  },
+  {
+    "code": "04585",
+    "name": "Trạm Tấu",
+    "full_name": "Thị trấn Trạm Tấu",
+    "type": "Thị trấn Trạm",
+    "district_code": "139"
+  },
+  {
+    "code": "04600",
+    "name": "Trạm Tấu",
+    "full_name": "Xã Trạm Tấu",
+    "type": "Xã Trạm",
+    "district_code": "139"
+  },
+  {
+    "code": "04588",
+    "name": "Túc Đán",
+    "full_name": "Xã Túc Đán",
+    "type": "Xã Túc",
+    "district_code": "139"
+  },
+  {
+    "code": "04594",
+    "name": "Xà Hồ",
+    "full_name": "Xã Xà Hồ",
+    "type": "Xã Xà",
+    "district_code": "139"
+  }
+]

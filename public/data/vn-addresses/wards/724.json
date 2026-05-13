@@ -1,0 +1,51 @@
+[
+  {
+    "code": "25960",
+    "name": "An Bình",
+    "full_name": "Phường An Bình",
+    "type": "Phường An",
+    "district_code": "724"
+  },
+  {
+    "code": "25951",
+    "name": "Bình An",
+    "full_name": "Phường Bình An",
+    "type": "Phường Bình",
+    "district_code": "724"
+  },
+  {
+    "code": "25954",
+    "name": "Bình Thắng",
+    "full_name": "Phường Bình Thắng",
+    "type": "Phường Bình",
+    "district_code": "724"
+  },
+  {
+    "code": "25942",
+    "name": "Dĩ An",
+    "full_name": "Phường Dĩ An",
+    "type": "Phường Dĩ",
+    "district_code": "724"
+  },
+  {
+    "code": "25945",
+    "name": "Tân Bình",
+    "full_name": "Phường Tân Bình",
+    "type": "Phường Tân",
+    "district_code": "724"
+  },
+  {
+    "code": "25948",
+    "name": "Tân Đông Hiệp",
+    "full_name": "Phường Tân Đông Hiệp",
+    "type": "Phường Tân Đông",
+    "district_code": "724"
+  },
+  {
+    "code": "25957",
+    "name": "Đông Hòa",
+    "full_name": "Phường Đông Hòa",
+    "type": "Phường Đông",
+    "district_code": "724"
+  }
+]

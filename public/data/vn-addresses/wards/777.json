@@ -1,0 +1,72 @@
+[
+  {
+    "code": "27460",
+    "name": "An Lạc",
+    "full_name": "Phường An Lạc",
+    "type": "Phường An",
+    "district_code": "777"
+  },
+  {
+    "code": "27463",
+    "name": "An Lạc A",
+    "full_name": "Phường An Lạc A",
+    "type": "Phường An Lạc",
+    "district_code": "777"
+  },
+  {
+    "code": "27436",
+    "name": "Bình Hưng Hòa",
+    "full_name": "Phường Bình Hưng Hòa",
+    "type": "Phường Bình Hưng",
+    "district_code": "777"
+  },
+  {
+    "code": "27439",
+    "name": "Bình Hưng Hoà A",
+    "full_name": "Phường Bình Hưng Hoà A",
+    "type": "Phường Bình Hưng Hoà",
+    "district_code": "777"
+  },
+  {
+    "code": "27442",
+    "name": "Bình Hưng Hoà B",
+    "full_name": "Phường Bình Hưng Hoà B",
+    "type": "Phường Bình Hưng Hoà",
+    "district_code": "777"
+  },
+  {
+    "code": "27445",
+    "name": "Bình Trị Đông",
+    "full_name": "Phường Bình Trị Đông",
+    "type": "Phường Bình Trị",
+    "district_code": "777"
+  },
+  {
+    "code": "27448",
+    "name": "Bình Trị Đông A",
+    "full_name": "Phường Bình Trị Đông A",
+    "type": "Phường Bình Trị Đông",
+    "district_code": "777"
+  },
+  {
+    "code": "27451",
+    "name": "Bình Trị Đông B",
+    "full_name": "Phường Bình Trị Đông B",
+    "type": "Phường Bình Trị Đông",
+    "district_code": "777"
+  },
+  {
+    "code": "27454",
+    "name": "Tân Tạo",
+    "full_name": "Phường Tân Tạo",
+    "type": "Phường Tân",
+    "district_code": "777"
+  },
+  {
+    "code": "27457",
+    "name": "Tân Tạo A",
+    "full_name": "Phường Tân Tạo A",
+    "type": "Phường Tân Tạo",
+    "district_code": "777"
+  }
+]

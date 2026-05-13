@@ -1,0 +1,30 @@
+[
+  {
+    "code": "31114",
+    "name": "An Sơn",
+    "full_name": "Xã An Sơn",
+    "type": "Xã An",
+    "district_code": "912"
+  },
+  {
+    "code": "31108",
+    "name": "Hòn Tre",
+    "full_name": "Xã Hòn Tre",
+    "type": "Xã Hòn",
+    "district_code": "912"
+  },
+  {
+    "code": "31111",
+    "name": "Lại Sơn",
+    "full_name": "Xã Lại Sơn",
+    "type": "Xã Lại",
+    "district_code": "912"
+  },
+  {
+    "code": "31115",
+    "name": "Nam Du",
+    "full_name": "Xã Nam Du",
+    "type": "Xã Nam",
+    "district_code": "912"
+  }
+]

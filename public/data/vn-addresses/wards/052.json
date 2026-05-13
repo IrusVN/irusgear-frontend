@@ -1,0 +1,121 @@
+[
+  {
+    "code": "01738",
+    "name": "Ca Thành",
+    "full_name": "Xã Ca Thành",
+    "type": "Xã Ca",
+    "district_code": "052"
+  },
+  {
+    "code": "01765",
+    "name": "Hoa Thám",
+    "full_name": "Xã Hoa Thám",
+    "type": "Xã Hoa",
+    "district_code": "052"
+  },
+  {
+    "code": "01783",
+    "name": "Hưng Đạo",
+    "full_name": "Xã Hưng Đạo",
+    "type": "Xã Hưng",
+    "district_code": "052"
+  },
+  {
+    "code": "01756",
+    "name": "Mai Long",
+    "full_name": "Xã Mai Long",
+    "type": "Xã Mai",
+    "district_code": "052"
+  },
+  {
+    "code": "01747",
+    "name": "Minh Tâm",
+    "full_name": "Xã Minh Tâm",
+    "type": "Xã Minh",
+    "district_code": "052"
+  },
+  {
+    "code": "01726",
+    "name": "Nguyên Bình",
+    "full_name": "Thị trấn Nguyên Bình",
+    "type": "Thị trấn Nguyên",
+    "district_code": "052"
+  },
+  {
+    "code": "01768",
+    "name": "Phan Thanh",
+    "full_name": "Xã Phan Thanh",
+    "type": "Xã Phan",
+    "district_code": "052"
+  },
+  {
+    "code": "01771",
+    "name": "Quang Thành",
+    "full_name": "Xã Quang Thành",
+    "type": "Xã Quang",
+    "district_code": "052"
+  },
+  {
+    "code": "01774",
+    "name": "Tam Kim",
+    "full_name": "Xã Tam Kim",
+    "type": "Xã Tam",
+    "district_code": "052"
+  },
+  {
+    "code": "01777",
+    "name": "Thành Công",
+    "full_name": "Xã Thành Công",
+    "type": "Xã Thành",
+    "district_code": "052"
+  },
+  {
+    "code": "01750",
+    "name": "Thể Dục",
+    "full_name": "Xã Thể Dục",
+    "type": "Xã Thể",
+    "district_code": "052"
+  },
+  {
+    "code": "01780",
+    "name": "Thịnh Vượng",
+    "full_name": "Xã Thịnh Vượng",
+    "type": "Xã Thịnh",
+    "district_code": "052"
+  },
+  {
+    "code": "01729",
+    "name": "Tĩnh Túc",
+    "full_name": "Thị trấn Tĩnh Túc",
+    "type": "Thị trấn Tĩnh",
+    "district_code": "052"
+  },
+  {
+    "code": "01735",
+    "name": "Triệu Nguyên",
+    "full_name": "Xã Triệu Nguyên",
+    "type": "Xã Triệu",
+    "district_code": "052"
+  },
+  {
+    "code": "01762",
+    "name": "Vũ Minh",
+    "full_name": "Xã Vũ Minh",
+    "type": "Xã Vũ",
+    "district_code": "052"
+  },
+  {
+    "code": "01744",
+    "name": "Vũ Nông",
+    "full_name": "Xã Vũ Nông",
+    "type": "Xã Vũ",
+    "district_code": "052"
+  },
+  {
+    "code": "01732",
+    "name": "Yên Lạc",
+    "full_name": "Xã Yên Lạc",
+    "type": "Xã Yên",
+    "district_code": "052"
+  }
+]

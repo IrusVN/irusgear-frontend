@@ -1,0 +1,107 @@
+[
+  {
+    "code": "04078",
+    "name": "Chiềng Hặc",
+    "full_name": "Xã Chiềng Hặc",
+    "type": "Xã Chiềng",
+    "district_code": "124"
+  },
+  {
+    "code": "04090",
+    "name": "Chiềng Khoi",
+    "full_name": "Xã Chiềng Khoi",
+    "type": "Xã Chiềng",
+    "district_code": "124"
+  },
+  {
+    "code": "04084",
+    "name": "Chiềng On",
+    "full_name": "Xã Chiềng On",
+    "type": "Xã Chiềng",
+    "district_code": "124"
+  },
+  {
+    "code": "04072",
+    "name": "Chiềng Pằn",
+    "full_name": "Xã Chiềng Pằn",
+    "type": "Xã Chiềng",
+    "district_code": "124"
+  },
+  {
+    "code": "04069",
+    "name": "Chiềng Sàng",
+    "full_name": "Xã Chiềng Sàng",
+    "type": "Xã Chiềng",
+    "district_code": "124"
+  },
+  {
+    "code": "04102",
+    "name": "Chiềng Tương",
+    "full_name": "Xã Chiềng Tương",
+    "type": "Xã Chiềng",
+    "district_code": "124"
+  },
+  {
+    "code": "04063",
+    "name": "Chiềng Đông",
+    "full_name": "Xã Chiềng Đông",
+    "type": "Xã Chiềng",
+    "district_code": "124"
+  },
+  {
+    "code": "04096",
+    "name": "Lóng Phiêng",
+    "full_name": "Xã Lóng Phiêng",
+    "type": "Xã Lóng",
+    "district_code": "124"
+  },
+  {
+    "code": "04081",
+    "name": "Mường Lựm",
+    "full_name": "Xã Mường Lựm",
+    "type": "Xã Mường",
+    "district_code": "124"
+  },
+  {
+    "code": "04099",
+    "name": "Phiêng Khoài",
+    "full_name": "Xã Phiêng Khoài",
+    "type": "Xã Phiêng",
+    "district_code": "124"
+  },
+  {
+    "code": "04066",
+    "name": "Sập Vạt",
+    "full_name": "Xã Sập Vạt",
+    "type": "Xã Sập",
+    "district_code": "124"
+  },
+  {
+    "code": "04093",
+    "name": "Tú Nang",
+    "full_name": "Xã Tú Nang",
+    "type": "Xã Tú",
+    "district_code": "124"
+  },
+  {
+    "code": "04075",
+    "name": "Viêng Lán",
+    "full_name": "Xã Viêng Lán",
+    "type": "Xã Viêng",
+    "district_code": "124"
+  },
+  {
+    "code": "04060",
+    "name": "Yên Châu",
+    "full_name": "Thị trấn Yên Châu",
+    "type": "Thị trấn Yên",
+    "district_code": "124"
+  },
+  {
+    "code": "04087",
+    "name": "Yên Sơn",
+    "full_name": "Xã Yên Sơn",
+    "type": "Xã Yên",
+    "district_code": "124"
+  }
+]

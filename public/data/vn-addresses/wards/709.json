@@ -1,0 +1,58 @@
+[
+  {
+    "code": "25633",
+    "name": "Hiệp Tân",
+    "full_name": "Phường Hiệp Tân",
+    "type": "Phường Hiệp",
+    "district_code": "709"
+  },
+  {
+    "code": "25630",
+    "name": "Long Hoa",
+    "full_name": "Phường Long Hoa",
+    "type": "Phường Long",
+    "district_code": "709"
+  },
+  {
+    "code": "25636",
+    "name": "Long Thành Bắc",
+    "full_name": "Phường Long Thành Bắc",
+    "type": "Phường Long Thành",
+    "district_code": "709"
+  },
+  {
+    "code": "25651",
+    "name": "Long Thành Nam",
+    "full_name": "Xã Long Thành Nam",
+    "type": "Xã Long Thành",
+    "district_code": "709"
+  },
+  {
+    "code": "25645",
+    "name": "Long Thành Trung",
+    "full_name": "Phường Long Thành Trung",
+    "type": "Phường Long Thành",
+    "district_code": "709"
+  },
+  {
+    "code": "25639",
+    "name": "Trường Hòa",
+    "full_name": "Xã Trường Hòa",
+    "type": "Xã Trường",
+    "district_code": "709"
+  },
+  {
+    "code": "25648",
+    "name": "Trường Tây",
+    "full_name": "Xã Trường Tây",
+    "type": "Xã Trường",
+    "district_code": "709"
+  },
+  {
+    "code": "25642",
+    "name": "Trường Đông",
+    "full_name": "Xã Trường Đông",
+    "type": "Xã Trường",
+    "district_code": "709"
+  }
+]

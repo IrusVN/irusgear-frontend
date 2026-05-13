@@ -1,0 +1,72 @@
+[
+  {
+    "code": "05533",
+    "name": "Bá Xuyên",
+    "full_name": "Xã Bá Xuyên",
+    "type": "Xã Bá",
+    "district_code": "165"
+  },
+  {
+    "code": "05528",
+    "name": "Bách Quang",
+    "full_name": "Phường Bách Quang",
+    "type": "Phường Bách",
+    "district_code": "165"
+  },
+  {
+    "code": "05530",
+    "name": "Bình Sơn",
+    "full_name": "Xã Bình Sơn",
+    "type": "Xã Bình",
+    "district_code": "165"
+  },
+  {
+    "code": "05515",
+    "name": "Cải Đan",
+    "full_name": "Phường Cải Đan",
+    "type": "Phường Cải",
+    "district_code": "165"
+  },
+  {
+    "code": "05509",
+    "name": "Châu Sơn",
+    "full_name": "Phường Châu Sơn",
+    "type": "Phường Châu",
+    "district_code": "165"
+  },
+  {
+    "code": "05506",
+    "name": "Lương Sơn",
+    "full_name": "Phường Lương Sơn",
+    "type": "Phường Lương",
+    "district_code": "165"
+  },
+  {
+    "code": "05512",
+    "name": "Mỏ Chè",
+    "full_name": "Phường Mỏ Chè",
+    "type": "Phường Mỏ",
+    "district_code": "165"
+  },
+  {
+    "code": "05521",
+    "name": "Phố Cò",
+    "full_name": "Phường Phố Cò",
+    "type": "Phường Phố",
+    "district_code": "165"
+  },
+  {
+    "code": "05527",
+    "name": "Tân Quang",
+    "full_name": "Xã Tân Quang",
+    "type": "Xã Tân",
+    "district_code": "165"
+  },
+  {
+    "code": "05518",
+    "name": "Thắng Lợi",
+    "full_name": "Phường Thắng Lợi",
+    "type": "Phường Thắng",
+    "district_code": "165"
+  }
+]

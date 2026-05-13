@@ -1,0 +1,58 @@
+[
+  {
+    "code": "19618",
+    "name": "Cam Chính",
+    "full_name": "Xã Cam Chính",
+    "type": "Xã Cam",
+    "district_code": "468"
+  },
+  {
+    "code": "19615",
+    "name": "Cam Hiếu",
+    "full_name": "Xã Cam Hiếu",
+    "type": "Xã Cam",
+    "district_code": "468"
+  },
+  {
+    "code": "19597",
+    "name": "Cam Lộ",
+    "full_name": "Thị trấn Cam Lộ",
+    "type": "Thị trấn Cam",
+    "district_code": "468"
+  },
+  {
+    "code": "19621",
+    "name": "Cam Nghĩa",
+    "full_name": "Xã Cam Nghĩa",
+    "type": "Xã Cam",
+    "district_code": "468"
+  },
+  {
+    "code": "19612",
+    "name": "Cam Thành",
+    "full_name": "Xã Cam Thành",
+    "type": "Xã Cam",
+    "district_code": "468"
+  },
+  {
+    "code": "19606",
+    "name": "Cam Thủy",
+    "full_name": "Xã Cam Thủy",
+    "type": "Xã Cam",
+    "district_code": "468"
+  },
+  {
+    "code": "19600",
+    "name": "Cam Tuyền",
+    "full_name": "Xã Cam Tuyền",
+    "type": "Xã Cam",
+    "district_code": "468"
+  },
+  {
+    "code": "19603",
+    "name": "Thanh An",
+    "full_name": "Xã Thanh An",
+    "type": "Xã Thanh",
+    "district_code": "468"
+  }
+]

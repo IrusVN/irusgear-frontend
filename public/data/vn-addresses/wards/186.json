@@ -1,0 +1,170 @@
+[
+  {
+    "code": "06427",
+    "name": "Cai Kinh",
+    "full_name": "Xã Cai Kinh",
+    "type": "Xã Cai",
+    "district_code": "186"
+  },
+  {
+    "code": "06451",
+    "name": "Hồ Sơn",
+    "full_name": "Xã Hồ Sơn",
+    "type": "Xã Hồ",
+    "district_code": "186"
+  },
+  {
+    "code": "06397",
+    "name": "Hòa Bình",
+    "full_name": "Xã Hòa Bình",
+    "type": "Xã Hòa",
+    "district_code": "186"
+  },
+  {
+    "code": "06430",
+    "name": "Hòa Lạc",
+    "full_name": "Xã Hòa Lạc",
+    "type": "Xã Hòa",
+    "district_code": "186"
+  },
+  {
+    "code": "06445",
+    "name": "Hòa Sơn",
+    "full_name": "Xã Hòa Sơn",
+    "type": "Xã Hòa",
+    "district_code": "186"
+  },
+  {
+    "code": "06460",
+    "name": "Hòa Thắng",
+    "full_name": "Xã Hòa Thắng",
+    "type": "Xã Hòa",
+    "district_code": "186"
+  },
+  {
+    "code": "06388",
+    "name": "Hữu Liên",
+    "full_name": "Xã Hữu Liên",
+    "type": "Xã Hữu",
+    "district_code": "186"
+  },
+  {
+    "code": "06385",
+    "name": "Hữu Lũng",
+    "full_name": "Thị trấn Hữu Lũng",
+    "type": "Thị trấn Hữu",
+    "district_code": "186"
+  },
+  {
+    "code": "06457",
+    "name": "Minh Hòa",
+    "full_name": "Xã Minh Hòa",
+    "type": "Xã Minh",
+    "district_code": "186"
+  },
+  {
+    "code": "06448",
+    "name": "Minh Sơn",
+    "full_name": "Xã Minh Sơn",
+    "type": "Xã Minh",
+    "district_code": "186"
+  },
+  {
+    "code": "06415",
+    "name": "Minh Tiến",
+    "full_name": "Xã Minh Tiến",
+    "type": "Xã Minh",
+    "district_code": "186"
+  },
+  {
+    "code": "06418",
+    "name": "Nhật Tiến",
+    "full_name": "Xã Nhật Tiến",
+    "type": "Xã Nhật",
+    "district_code": "186"
+  },
+  {
+    "code": "06394",
+    "name": "Quyết Thắng",
+    "full_name": "Xã Quyết Thắng",
+    "type": "Xã Quyết",
+    "district_code": "186"
+  },
+  {
+    "code": "06454",
+    "name": "Sơn Hà",
+    "full_name": "Xã Sơn Hà",
+    "type": "Xã Sơn",
+    "district_code": "186"
+  },
+  {
+    "code": "06442",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "186"
+  },
+  {
+    "code": "06421",
+    "name": "Thanh Sơn",
+    "full_name": "Xã Thanh Sơn",
+    "type": "Xã Thanh",
+    "district_code": "186"
+  },
+  {
+    "code": "06406",
+    "name": "Thiện Tân",
+    "full_name": "Xã Thiện Tân",
+    "type": "Xã Thiện",
+    "district_code": "186"
+  },
+  {
+    "code": "06433",
+    "name": "Vân Nham",
+    "full_name": "Xã Vân Nham",
+    "type": "Xã Vân",
+    "district_code": "186"
+  },
+  {
+    "code": "06391",
+    "name": "Yên Bình",
+    "full_name": "Xã Yên Bình",
+    "type": "Xã Yên",
+    "district_code": "186"
+  },
+  {
+    "code": "06403",
+    "name": "Yên Sơn",
+    "full_name": "Xã Yên Sơn",
+    "type": "Xã Yên",
+    "district_code": "186"
+  },
+  {
+    "code": "06400",
+    "name": "Yên Thịnh",
+    "full_name": "Xã Yên Thịnh",
+    "type": "Xã Yên",
+    "district_code": "186"
+  },
+  {
+    "code": "06412",
+    "name": "Yên Vượng",
+    "full_name": "Xã Yên Vượng",
+    "type": "Xã Yên",
+    "district_code": "186"
+  },
+  {
+    "code": "06424",
+    "name": "Đồng Tân",
+    "full_name": "Xã Đồng Tân",
+    "type": "Xã Đồng",
+    "district_code": "186"
+  },
+  {
+    "code": "06436",
+    "name": "Đồng Tiến",
+    "full_name": "Xã Đồng Tiến",
+    "type": "Xã Đồng",
+    "district_code": "186"
+  }
+]

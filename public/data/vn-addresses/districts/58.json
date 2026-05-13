@@ -1,0 +1,51 @@
+[
+  {
+    "code": "584",
+    "name": "Bác Ái",
+    "full_name": "Huyện Bác Ái",
+    "type": "Huyện Bác",
+    "province_code": "58"
+  },
+  {
+    "code": "586",
+    "name": "Ninh Hải",
+    "full_name": "Huyện Ninh Hải",
+    "type": "Huyện Ninh",
+    "province_code": "58"
+  },
+  {
+    "code": "587",
+    "name": "Ninh Phước",
+    "full_name": "Huyện Ninh Phước",
+    "type": "Huyện Ninh",
+    "province_code": "58"
+  },
+  {
+    "code": "585",
+    "name": "Ninh Sơn",
+    "full_name": "Huyện Ninh Sơn",
+    "type": "Huyện Ninh",
+    "province_code": "58"
+  },
+  {
+    "code": "582",
+    "name": "Phan Rang-Tháp Chàm",
+    "full_name": "Thành phố Phan Rang-Tháp Chàm",
+    "type": "Thành phố Phan Rang-Tháp",
+    "province_code": "58"
+  },
+  {
+    "code": "588",
+    "name": "Thuận Bắc",
+    "full_name": "Huyện Thuận Bắc",
+    "type": "Huyện Thuận",
+    "province_code": "58"
+  },
+  {
+    "code": "589",
+    "name": "Thuận Nam",
+    "full_name": "Huyện Thuận Nam",
+    "type": "Huyện Thuận",
+    "province_code": "58"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "code": "249",
+    "name": "Bình Xuyên",
+    "full_name": "Huyện Bình Xuyên",
+    "type": "Huyện Bình",
+    "province_code": "26"
+  },
+  {
+    "code": "246",
+    "name": "Lập Thạch",
+    "full_name": "Huyện Lập Thạch",
+    "type": "Huyện Lập",
+    "province_code": "26"
+  },
+  {
+    "code": "244",
+    "name": "Phúc Yên",
+    "full_name": "Thành phố Phúc Yên",
+    "type": "Thành phố Phúc",
+    "province_code": "26"
+  },
+  {
+    "code": "253",
+    "name": "Sông Lô",
+    "full_name": "Huyện Sông Lô",
+    "type": "Huyện Sông",
+    "province_code": "26"
+  },
+  {
+    "code": "247",
+    "name": "Tam Dương",
+    "full_name": "Huyện Tam Dương",
+    "type": "Huyện Tam",
+    "province_code": "26"
+  },
+  {
+    "code": "248",
+    "name": "Tam Đảo",
+    "full_name": "Huyện Tam Đảo",
+    "type": "Huyện Tam",
+    "province_code": "26"
+  },
+  {
+    "code": "252",
+    "name": "Vĩnh Tường",
+    "full_name": "Huyện Vĩnh Tường",
+    "type": "Huyện Vĩnh",
+    "province_code": "26"
+  },
+  {
+    "code": "243",
+    "name": "Vĩnh Yên",
+    "full_name": "Thành phố Vĩnh Yên",
+    "type": "Thành phố Vĩnh",
+    "province_code": "26"
+  },
+  {
+    "code": "251",
+    "name": "Yên Lạc",
+    "full_name": "Huyện Yên Lạc",
+    "type": "Huyện Yên",
+    "province_code": "26"
+  }
+]

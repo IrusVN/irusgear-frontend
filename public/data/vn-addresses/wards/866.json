@@ -1,0 +1,107 @@
+[
+  {
+    "code": "29866",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "866"
+  },
+  {
+    "code": "29863",
+    "name": "11",
+    "full_name": "Phường 11",
+    "type": "Phường",
+    "district_code": "866"
+  },
+  {
+    "code": "29869",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "866"
+  },
+  {
+    "code": "29875",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "866"
+  },
+  {
+    "code": "29872",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "866"
+  },
+  {
+    "code": "29878",
+    "name": "6",
+    "full_name": "Phường 6",
+    "type": "Phường",
+    "district_code": "866"
+  },
+  {
+    "code": "29893",
+    "name": "Hòa An",
+    "full_name": "Xã Hòa An",
+    "type": "Xã Hòa",
+    "district_code": "866"
+  },
+  {
+    "code": "29892",
+    "name": "Hoà Thuận",
+    "full_name": "Phường Hoà Thuận",
+    "type": "Phường Hoà",
+    "district_code": "866"
+  },
+  {
+    "code": "29881",
+    "name": "Mỹ Ngãi",
+    "full_name": "Xã Mỹ Ngãi",
+    "type": "Xã Mỹ",
+    "district_code": "866"
+  },
+  {
+    "code": "29888",
+    "name": "Mỹ Phú",
+    "full_name": "Phường Mỹ Phú",
+    "type": "Phường Mỹ",
+    "district_code": "866"
+  },
+  {
+    "code": "29884",
+    "name": "Mỹ Tân",
+    "full_name": "Xã Mỹ Tân",
+    "type": "Xã Mỹ",
+    "district_code": "866"
+  },
+  {
+    "code": "29887",
+    "name": "Mỹ Trà",
+    "full_name": "Xã Mỹ Trà",
+    "type": "Xã Mỹ",
+    "district_code": "866"
+  },
+  {
+    "code": "29890",
+    "name": "Tân Thuận Tây",
+    "full_name": "Xã Tân Thuận Tây",
+    "type": "Xã Tân Thuận",
+    "district_code": "866"
+  },
+  {
+    "code": "29896",
+    "name": "Tân Thuận Đông",
+    "full_name": "Xã Tân Thuận Đông",
+    "type": "Xã Tân Thuận",
+    "district_code": "866"
+  },
+  {
+    "code": "29899",
+    "name": "Tịnh Thới",
+    "full_name": "Xã Tịnh Thới",
+    "type": "Xã Tịnh",
+    "district_code": "866"
+  }
+]

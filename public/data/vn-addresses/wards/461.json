@@ -1,0 +1,65 @@
+[
+  {
+    "code": "19333",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "461"
+  },
+  {
+    "code": "19342",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "461"
+  },
+  {
+    "code": "19354",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "461"
+  },
+  {
+    "code": "19345",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "461"
+  },
+  {
+    "code": "19348",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "461"
+  },
+  {
+    "code": "19330",
+    "name": "Đông Giang",
+    "full_name": "Phường Đông Giang",
+    "type": "Phường Đông",
+    "district_code": "461"
+  },
+  {
+    "code": "19336",
+    "name": "Đông Lễ",
+    "full_name": "Phường Đông Lễ",
+    "type": "Phường Đông",
+    "district_code": "461"
+  },
+  {
+    "code": "19351",
+    "name": "Đông Lương",
+    "full_name": "Phường Đông Lương",
+    "type": "Phường Đông",
+    "district_code": "461"
+  },
+  {
+    "code": "19339",
+    "name": "Đông Thanh",
+    "full_name": "Phường Đông Thanh",
+    "type": "Phường Đông",
+    "district_code": "461"
+  }
+]

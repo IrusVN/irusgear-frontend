@@ -1,0 +1,212 @@
+[
+  {
+    "code": "15502",
+    "name": "Bắc Lương",
+    "full_name": "Xã Bắc Lương",
+    "type": "Xã Bắc",
+    "district_code": "395"
+  },
+  {
+    "code": "15556",
+    "name": "Lam Sơn",
+    "full_name": "Thị trấn Lam Sơn",
+    "type": "Thị trấn Lam",
+    "district_code": "395"
+  },
+  {
+    "code": "15505",
+    "name": "Nam Giang",
+    "full_name": "Xã Nam Giang",
+    "type": "Xã Nam",
+    "district_code": "395"
+  },
+  {
+    "code": "15577",
+    "name": "Phú Xuân",
+    "full_name": "Xã Phú Xuân",
+    "type": "Xã Phú",
+    "district_code": "395"
+  },
+  {
+    "code": "15571",
+    "name": "Quảng Phú",
+    "full_name": "Xã Quảng Phú",
+    "type": "Xã Quảng",
+    "district_code": "395"
+  },
+  {
+    "code": "15553",
+    "name": "Sao Vàng",
+    "full_name": "Thị trấn Sao Vàng",
+    "type": "Thị trấn Sao",
+    "district_code": "395"
+  },
+  {
+    "code": "15523",
+    "name": "Tây Hồ",
+    "full_name": "Xã Tây Hồ",
+    "type": "Xã Tây",
+    "district_code": "395"
+  },
+  {
+    "code": "15538",
+    "name": "Thọ Diên",
+    "full_name": "Xã Thọ Diên",
+    "type": "Xã Thọ",
+    "district_code": "395"
+  },
+  {
+    "code": "15520",
+    "name": "Thọ Hải",
+    "full_name": "Xã Thọ Hải",
+    "type": "Xã Thọ",
+    "district_code": "395"
+  },
+  {
+    "code": "15541",
+    "name": "Thọ Lâm",
+    "full_name": "Xã Thọ Lâm",
+    "type": "Xã Thọ",
+    "district_code": "395"
+  },
+  {
+    "code": "15568",
+    "name": "Thọ Lập",
+    "full_name": "Xã Thọ Lập",
+    "type": "Xã Thọ",
+    "district_code": "395"
+  },
+  {
+    "code": "15511",
+    "name": "Thọ Lộc",
+    "full_name": "Xã Thọ Lộc",
+    "type": "Xã Thọ",
+    "district_code": "395"
+  },
+  {
+    "code": "15499",
+    "name": "Thọ Xuân",
+    "full_name": "Thị trấn Thọ Xuân",
+    "type": "Thị trấn Thọ",
+    "district_code": "395"
+  },
+  {
+    "code": "15544",
+    "name": "Thọ Xương",
+    "full_name": "Xã Thọ Xương",
+    "type": "Xã Thọ",
+    "district_code": "395"
+  },
+  {
+    "code": "15565",
+    "name": "Thuận Minh",
+    "full_name": "Xã Thuận Minh",
+    "type": "Xã Thuận",
+    "district_code": "395"
+  },
+  {
+    "code": "15598",
+    "name": "Trường Xuân",
+    "full_name": "Xã Trường Xuân",
+    "type": "Xã Trường",
+    "district_code": "395"
+  },
+  {
+    "code": "15547",
+    "name": "Xuân Bái",
+    "full_name": "Xã Xuân Bái",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15526",
+    "name": "Xuân Giang",
+    "full_name": "Xã Xuân Giang",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15517",
+    "name": "Xuân Hòa",
+    "full_name": "Xã Xuân Hòa",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15493",
+    "name": "Xuân Hồng",
+    "full_name": "Xã Xuân Hồng",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15535",
+    "name": "Xuân Hưng",
+    "full_name": "Xã Xuân Hưng",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15583",
+    "name": "Xuân Lai",
+    "full_name": "Xã Xuân Lai",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15586",
+    "name": "Xuân Lập",
+    "full_name": "Xã Xuân Lập",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15592",
+    "name": "Xuân Minh",
+    "full_name": "Xã Xuân Minh",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15508",
+    "name": "Xuân Phong",
+    "full_name": "Xã Xuân Phong",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15550",
+    "name": "Xuân Phú",
+    "full_name": "Xã Xuân Phú",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15532",
+    "name": "Xuân Sinh",
+    "full_name": "Xã Xuân Sinh",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15559",
+    "name": "Xuân Thiên",
+    "full_name": "Xã Xuân Thiên",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15574",
+    "name": "Xuân Tín",
+    "full_name": "Xã Xuân Tín",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  },
+  {
+    "code": "15514",
+    "name": "Xuân Trường",
+    "full_name": "Xã Xuân Trường",
+    "type": "Xã Xuân",
+    "district_code": "395"
+  }
+]

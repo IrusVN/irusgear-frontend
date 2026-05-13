@@ -2,12 +2,17 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useRuntimeConfig, navigateTo, useRequestHeaders } from "#imports";
 import { resetAllStores } from "@/utils/storeRegistry";
+import { useCartStore } from "@/stores/cartStore";
 
 export const useAuthStore = defineStore("auth", () => {
   const config = useRuntimeConfig();
+  const cartStore = useCartStore();
   const user = ref(null);
   const permissions = ref([]);
   const loading = ref(false);
+  const sessionLoading = ref(false);
+  const sessionResolved = ref(false);
+  let sessionPromise = null;
 
   // state đăng ký
   const verifyEmail = ref("");
@@ -21,6 +26,7 @@ export const useAuthStore = defineStore("auth", () => {
   const resetToken = ref("");
 
   const isAuthenticated = computed(() => !!user.value);
+const isLoggedIn = computed(() => !!user.value);
 
   const apiFetch = async (endpoint, options = {}) => {
     return await $fetch(`${config.public.apiBaseUrl}${endpoint}`, {
@@ -34,36 +40,65 @@ export const useAuthStore = defineStore("auth", () => {
     });
   };
 
-  const fetchUser = async () => {
-    try {
-      const headers = useRequestHeaders(["cookie"]);
-      const data = await apiFetch("/me", {
-        headers: headers,
-      });
-      user.value = data.user ?? data;
-      permissions.value = data.permissions || [];
-    } catch (error) {
-      user.value = null;
-      permissions.value = [];
+  const fetchUser = async ({ force = false } = {}) => {
+    if (sessionResolved.value && !force) {
+      return user.value;
     }
+
+    if (sessionLoading.value && sessionPromise) {
+      return sessionPromise;
+    }
+
+    sessionLoading.value = true;
+
+    sessionPromise = (async () => {
+      try {
+        const headers = import.meta.server ? useRequestHeaders(["cookie"]) : {};
+        const data = await apiFetch("/me", {
+          headers: headers,
+        });
+        user.value = data.user ?? data;
+        permissions.value = data.permissions || [];
+        return user.value;
+      } catch (error) {
+        user.value = null;
+        permissions.value = [];
+        return null;
+      } finally {
+        sessionResolved.value = true;
+        sessionLoading.value = false;
+        sessionPromise = null;
+      }
+    })();
+
+    return sessionPromise;
   };
 
   const login = async (credentials) => {
     loading.value = true;
     try {
+      const payload = { ...(credentials || {}) };
+      const remember = Boolean(payload.remember ?? payload.rememberMe);
+      payload.remember = remember;
+      payload.rememberMe = remember;
+
       const data = await apiFetch("/login", {
         method: "POST",
-        body: credentials,
+        body: payload,
       });
+      sessionResolved.value = true;
       if (data.user) {
         user.value = data.user;
         permissions.value = data.permissions || [];
       } else {
         await fetchUser();
       }
+      await cartStore.fetchCart({ force: true, silent: true });
       return data;
     } catch (error) {
       user.value = null;
+      permissions.value = [];
+      sessionResolved.value = true;
       throw error;
     } finally {
       loading.value = false;
@@ -78,6 +113,7 @@ export const useAuthStore = defineStore("auth", () => {
     } finally {
       user.value = null;
       permissions.value = [];
+      sessionResolved.value = true;
       resetAllStores();
       navigateTo("/auth/login");
     }
@@ -135,7 +171,7 @@ export const useAuthStore = defineStore("auth", () => {
       });
       return true;
     } catch (err) {
-      const msg = error.message;
+      console.error('Resend OTP failed:', err?.data?.message || err.message);
       return false;
     }
   };
@@ -227,11 +263,34 @@ const resetPassword = async (password, passwordConfirmation) => {
     }
   };
 
+  const updateProfile = async (payload) => {
+    loading.value = true;
+    try {
+      const data = await apiFetch("/user/profile", {
+        method: "PUT",
+        body: payload,
+      });
+      // Response: { success, message, data: { id, name, first_name, ..., phone } }
+      const updatedUser = data?.data ?? data?.user ?? data;
+      if (updatedUser && typeof updatedUser === 'object') {
+        user.value = { ...user.value, ...updatedUser };
+      }
+      return { status: true, data };
+    } catch (err) {
+      return { status: false, message: err.data?.message };
+    } finally {
+      loading.value = false;
+    }
+  };
+
   return {
     user,
     permissions,
     loading,
+    sessionLoading,
     isAuthenticated,
+    isLoggedIn,
+    sessionResolved,
     registerStep,
     resetToRegister,
 
@@ -253,5 +312,6 @@ const resetPassword = async (password, passwordConfirmation) => {
 
     verifyOtp,
     resendOtp,
+    updateProfile,
   };
 });

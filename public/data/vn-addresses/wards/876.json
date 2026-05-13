@@ -1,0 +1,86 @@
+[
+  {
+    "code": "30223",
+    "name": "Hòa Long",
+    "full_name": "Xã Hòa Long",
+    "type": "Xã Hòa",
+    "district_code": "876"
+  },
+  {
+    "code": "30214",
+    "name": "Hòa Thành",
+    "full_name": "Xã Hòa Thành",
+    "type": "Xã Hòa",
+    "district_code": "876"
+  },
+  {
+    "code": "30208",
+    "name": "Lai Vung",
+    "full_name": "Thị trấn Lai Vung",
+    "type": "Thị trấn Lai",
+    "district_code": "876"
+  },
+  {
+    "code": "30217",
+    "name": "Long Hậu",
+    "full_name": "Xã Long Hậu",
+    "type": "Xã Long",
+    "district_code": "876"
+  },
+  {
+    "code": "30229",
+    "name": "Long Thắng",
+    "full_name": "Xã Long Thắng",
+    "type": "Xã Long",
+    "district_code": "876"
+  },
+  {
+    "code": "30241",
+    "name": "Phong Hòa",
+    "full_name": "Xã Phong Hòa",
+    "type": "Xã Phong",
+    "district_code": "876"
+  },
+  {
+    "code": "30211",
+    "name": "Tân Dương",
+    "full_name": "Xã Tân Dương",
+    "type": "Xã Tân",
+    "district_code": "876"
+  },
+  {
+    "code": "30235",
+    "name": "Tân Hòa",
+    "full_name": "Xã Tân Hòa",
+    "type": "Xã Tân",
+    "district_code": "876"
+  },
+  {
+    "code": "30220",
+    "name": "Tân Phước",
+    "full_name": "Xã Tân Phước",
+    "type": "Xã Tân",
+    "district_code": "876"
+  },
+  {
+    "code": "30226",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "876"
+  },
+  {
+    "code": "30232",
+    "name": "Vĩnh Thới",
+    "full_name": "Xã Vĩnh Thới",
+    "type": "Xã Vĩnh",
+    "district_code": "876"
+  },
+  {
+    "code": "30238",
+    "name": "Định Hòa",
+    "full_name": "Xã Định Hòa",
+    "type": "Xã Định",
+    "district_code": "876"
+  }
+]

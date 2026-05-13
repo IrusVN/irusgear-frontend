@@ -1,0 +1,44 @@
+[
+  {
+    "code": "31344",
+    "name": "Hiệp Lợi",
+    "full_name": "Phường Hiệp Lợi",
+    "type": "Phường Hiệp",
+    "district_code": "931"
+  },
+  {
+    "code": "31343",
+    "name": "Hiệp Thành",
+    "full_name": "Phường Hiệp Thành",
+    "type": "Phường Hiệp",
+    "district_code": "931"
+  },
+  {
+    "code": "31341",
+    "name": "Lái Hiếu",
+    "full_name": "Phường Lái Hiếu",
+    "type": "Phường Lái",
+    "district_code": "931"
+  },
+  {
+    "code": "31340",
+    "name": "Ngã Bảy",
+    "full_name": "Phường Ngã Bảy",
+    "type": "Phường Ngã",
+    "district_code": "931"
+  },
+  {
+    "code": "31414",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "931"
+  },
+  {
+    "code": "31411",
+    "name": "Đại Thành",
+    "full_name": "Xã Đại Thành",
+    "type": "Xã Đại",
+    "district_code": "931"
+  }
+]

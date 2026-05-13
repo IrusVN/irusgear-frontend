@@ -1,0 +1,72 @@
+[
+  {
+    "code": "05428",
+    "name": "An Bình",
+    "full_name": "Xã An Bình",
+    "type": "Xã An",
+    "district_code": "159"
+  },
+  {
+    "code": "04981",
+    "name": "Ba Hàng Đồi",
+    "full_name": "Thị trấn Ba Hàng Đồi",
+    "type": "Thị trấn Ba Hàng",
+    "district_code": "159"
+  },
+  {
+    "code": "05392",
+    "name": "Chi Nê",
+    "full_name": "Thị trấn Chi Nê",
+    "type": "Thị trấn Chi",
+    "district_code": "159"
+  },
+  {
+    "code": "05404",
+    "name": "Hưng Thi",
+    "full_name": "Xã Hưng Thi",
+    "type": "Xã Hưng",
+    "district_code": "159"
+  },
+  {
+    "code": "05413",
+    "name": "Khoan Dụ",
+    "full_name": "Xã Khoan Dụ",
+    "type": "Xã Khoan",
+    "district_code": "159"
+  },
+  {
+    "code": "05395",
+    "name": "Phú Nghĩa",
+    "full_name": "Xã Phú Nghĩa",
+    "type": "Xã Phú",
+    "district_code": "159"
+  },
+  {
+    "code": "05398",
+    "name": "Phú Thành",
+    "full_name": "Xã Phú Thành",
+    "type": "Xã Phú",
+    "district_code": "159"
+  },
+  {
+    "code": "05425",
+    "name": "Thống Nhất",
+    "full_name": "Xã Thống Nhất",
+    "type": "Xã Thống",
+    "district_code": "159"
+  },
+  {
+    "code": "05422",
+    "name": "Yên Bồng",
+    "full_name": "Xã Yên Bồng",
+    "type": "Xã Yên",
+    "district_code": "159"
+  },
+  {
+    "code": "05419",
+    "name": "Đồng Tâm",
+    "full_name": "Xã Đồng Tâm",
+    "type": "Xã Đồng",
+    "district_code": "159"
+  }
+]

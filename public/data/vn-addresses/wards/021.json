@@ -1,0 +1,93 @@
+[
+  {
+    "code": "00616",
+    "name": "Cổ Nhuế 1",
+    "full_name": "Phường Cổ Nhuế 1",
+    "type": "Phường Cổ Nhuế",
+    "district_code": "021"
+  },
+  {
+    "code": "00617",
+    "name": "Cổ Nhuế 2",
+    "full_name": "Phường Cổ Nhuế 2",
+    "type": "Phường Cổ Nhuế",
+    "district_code": "021"
+  },
+  {
+    "code": "00598",
+    "name": "Liên Mạc",
+    "full_name": "Phường Liên Mạc",
+    "type": "Phường Liên",
+    "district_code": "021"
+  },
+  {
+    "code": "00613",
+    "name": "Minh Khai",
+    "full_name": "Phường Minh Khai",
+    "type": "Phường Minh",
+    "district_code": "021"
+  },
+  {
+    "code": "00619",
+    "name": "Phú Diễn",
+    "full_name": "Phường Phú Diễn",
+    "type": "Phường Phú",
+    "district_code": "021"
+  },
+  {
+    "code": "00620",
+    "name": "Phúc Diễn",
+    "full_name": "Phường Phúc Diễn",
+    "type": "Phường Phúc",
+    "district_code": "021"
+  },
+  {
+    "code": "00607",
+    "name": "Tây Tựu",
+    "full_name": "Phường Tây Tựu",
+    "type": "Phường Tây",
+    "district_code": "021"
+  },
+  {
+    "code": "00595",
+    "name": "Thượng Cát",
+    "full_name": "Phường Thượng Cát",
+    "type": "Phường Thượng",
+    "district_code": "021"
+  },
+  {
+    "code": "00604",
+    "name": "Thụy Phương",
+    "full_name": "Phường Thụy Phương",
+    "type": "Phường Thụy",
+    "district_code": "021"
+  },
+  {
+    "code": "00611",
+    "name": "Xuân Tảo",
+    "full_name": "Phường Xuân Tảo",
+    "type": "Phường Xuân",
+    "district_code": "021"
+  },
+  {
+    "code": "00610",
+    "name": "Xuân Đỉnh",
+    "full_name": "Phường Xuân Đỉnh",
+    "type": "Phường Xuân",
+    "district_code": "021"
+  },
+  {
+    "code": "00601",
+    "name": "Đông Ngạc",
+    "full_name": "Phường Đông Ngạc",
+    "type": "Phường Đông",
+    "district_code": "021"
+  },
+  {
+    "code": "00602",
+    "name": "Đức Thắng",
+    "full_name": "Phường Đức Thắng",
+    "type": "Phường Đức",
+    "district_code": "021"
+  }
+]

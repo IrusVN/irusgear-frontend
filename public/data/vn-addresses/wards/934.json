@@ -1,0 +1,107 @@
+[
+  {
+    "code": "31402",
+    "name": "Bình Thành",
+    "full_name": "Xã Bình Thành",
+    "type": "Xã Bình",
+    "district_code": "934"
+  },
+  {
+    "code": "31433",
+    "name": "Búng Tàu",
+    "full_name": "Thị trấn Búng Tàu",
+    "type": "Thị trấn Búng",
+    "district_code": "934"
+  },
+  {
+    "code": "31396",
+    "name": "Cây Dương",
+    "full_name": "Thị trấn Cây Dương",
+    "type": "Thị trấn Cây",
+    "district_code": "934"
+  },
+  {
+    "code": "31429",
+    "name": "Hiệp Hưng",
+    "full_name": "Xã Hiệp Hưng",
+    "type": "Xã Hiệp",
+    "district_code": "934"
+  },
+  {
+    "code": "31423",
+    "name": "Hòa An",
+    "full_name": "Xã Hòa An",
+    "type": "Xã Hòa",
+    "district_code": "934"
+  },
+  {
+    "code": "31420",
+    "name": "Hòa Mỹ",
+    "full_name": "Xã Hòa Mỹ",
+    "type": "Xã Hòa",
+    "district_code": "934"
+  },
+  {
+    "code": "31393",
+    "name": "Kinh Cùng",
+    "full_name": "Thị trấn Kinh Cùng",
+    "type": "Thị trấn Kinh",
+    "district_code": "934"
+  },
+  {
+    "code": "31408",
+    "name": "Long Thạnh",
+    "full_name": "Xã Long Thạnh",
+    "type": "Xã Long",
+    "district_code": "934"
+  },
+  {
+    "code": "31417",
+    "name": "Phụng Hiệp",
+    "full_name": "Xã Phụng Hiệp",
+    "type": "Xã Phụng",
+    "district_code": "934"
+  },
+  {
+    "code": "31426",
+    "name": "Phương Bình",
+    "full_name": "Xã Phương Bình",
+    "type": "Xã Phương",
+    "district_code": "934"
+  },
+  {
+    "code": "31435",
+    "name": "Phương Phú",
+    "full_name": "Xã Phương Phú",
+    "type": "Xã Phương",
+    "district_code": "934"
+  },
+  {
+    "code": "31399",
+    "name": "Tân Bình",
+    "full_name": "Xã Tân Bình",
+    "type": "Xã Tân",
+    "district_code": "934"
+  },
+  {
+    "code": "31438",
+    "name": "Tân Long",
+    "full_name": "Xã Tân Long",
+    "type": "Xã Tân",
+    "district_code": "934"
+  },
+  {
+    "code": "31432",
+    "name": "Tân Phước Hưng",
+    "full_name": "Xã Tân Phước Hưng",
+    "type": "Xã Tân Phước",
+    "district_code": "934"
+  },
+  {
+    "code": "31405",
+    "name": "Thạnh Hòa",
+    "full_name": "Xã Thạnh Hòa",
+    "type": "Xã Thạnh",
+    "district_code": "934"
+  }
+]

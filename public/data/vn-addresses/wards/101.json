@@ -1,0 +1,100 @@
+[
+  {
+    "code": "03211",
+    "name": "Chiềng Sơ",
+    "full_name": "Xã Chiềng Sơ",
+    "type": "Xã Chiềng",
+    "district_code": "101"
+  },
+  {
+    "code": "03385",
+    "name": "Háng Lìa",
+    "full_name": "Xã Háng Lìa",
+    "type": "Xã Háng",
+    "district_code": "101"
+  },
+  {
+    "code": "03376",
+    "name": "Keo Lôm",
+    "full_name": "Xã Keo Lôm",
+    "type": "Xã Keo",
+    "district_code": "101"
+  },
+  {
+    "code": "03379",
+    "name": "Luân Giới",
+    "full_name": "Xã Luân Giới",
+    "type": "Xã Luân",
+    "district_code": "101"
+  },
+  {
+    "code": "03214",
+    "name": "Mường Luân",
+    "full_name": "Xã Mường Luân",
+    "type": "Xã Mường",
+    "district_code": "101"
+  },
+  {
+    "code": "03205",
+    "name": "Na Son",
+    "full_name": "Xã Na Son",
+    "type": "Xã Na",
+    "district_code": "101"
+  },
+  {
+    "code": "03371",
+    "name": "Nong U",
+    "full_name": "Xã Nong U",
+    "type": "Xã Nong",
+    "district_code": "101"
+  },
+  {
+    "code": "03208",
+    "name": "Phì Nhừ",
+    "full_name": "Xã Phì Nhừ",
+    "type": "Xã Phì",
+    "district_code": "101"
+  },
+  {
+    "code": "03382",
+    "name": "Phình Giàng",
+    "full_name": "Xã Phình Giàng",
+    "type": "Xã Phình",
+    "district_code": "101"
+  },
+  {
+    "code": "03383",
+    "name": "Pú Hồng",
+    "full_name": "Xã Pú Hồng",
+    "type": "Xã Pú",
+    "district_code": "101"
+  },
+  {
+    "code": "03370",
+    "name": "Pú Nhi",
+    "full_name": "Xã Pú Nhi",
+    "type": "Xã Pú",
+    "district_code": "101"
+  },
+  {
+    "code": "03384",
+    "name": "Tìa Dình",
+    "full_name": "Xã Tìa Dình",
+    "type": "Xã Tìa",
+    "district_code": "101"
+  },
+  {
+    "code": "03373",
+    "name": "Xa Dung",
+    "full_name": "Xã Xa Dung",
+    "type": "Xã Xa",
+    "district_code": "101"
+  },
+  {
+    "code": "03203",
+    "name": "Điện Biên Đông",
+    "full_name": "Thị trấn Điện Biên Đông",
+    "type": "Thị trấn Điện Biên",
+    "district_code": "101"
+  }
+]

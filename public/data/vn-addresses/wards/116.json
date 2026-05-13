@@ -1,0 +1,86 @@
+[
+  {
+    "code": "03667",
+    "name": "Chiềng An",
+    "full_name": "Phường Chiềng An",
+    "type": "Phường Chiềng",
+    "district_code": "116"
+  },
+  {
+    "code": "03658",
+    "name": "Chiềng Cọ",
+    "full_name": "Xã Chiềng Cọ",
+    "type": "Xã Chiềng",
+    "district_code": "116"
+  },
+  {
+    "code": "03670",
+    "name": "Chiềng Cơi",
+    "full_name": "Phường Chiềng Cơi",
+    "type": "Phường Chiềng",
+    "district_code": "116"
+  },
+  {
+    "code": "03646",
+    "name": "Chiềng Lề",
+    "full_name": "Phường Chiềng Lề",
+    "type": "Phường Chiềng",
+    "district_code": "116"
+  },
+  {
+    "code": "03673",
+    "name": "Chiềng Ngần",
+    "full_name": "Xã Chiềng Ngần",
+    "type": "Xã Chiềng",
+    "district_code": "116"
+  },
+  {
+    "code": "03679",
+    "name": "Chiềng Sinh",
+    "full_name": "Phường Chiềng Sinh",
+    "type": "Phường Chiềng",
+    "district_code": "116"
+  },
+  {
+    "code": "03664",
+    "name": "Chiềng Xôm",
+    "full_name": "Xã Chiềng Xôm",
+    "type": "Xã Chiềng",
+    "district_code": "116"
+  },
+  {
+    "code": "03661",
+    "name": "Chiềng Đen",
+    "full_name": "Xã Chiềng Đen",
+    "type": "Xã Chiềng",
+    "district_code": "116"
+  },
+  {
+    "code": "03676",
+    "name": "Hua La",
+    "full_name": "Xã Hua La",
+    "type": "Xã Hua",
+    "district_code": "116"
+  },
+  {
+    "code": "03655",
+    "name": "Quyết Tâm",
+    "full_name": "Phường Quyết Tâm",
+    "type": "Phường Quyết",
+    "district_code": "116"
+  },
+  {
+    "code": "03652",
+    "name": "Quyết Thắng",
+    "full_name": "Phường Quyết Thắng",
+    "type": "Phường Quyết",
+    "district_code": "116"
+  },
+  {
+    "code": "03649",
+    "name": "Tô Hiệu",
+    "full_name": "Phường Tô Hiệu",
+    "type": "Phường Tô",
+    "district_code": "116"
+  }
+]

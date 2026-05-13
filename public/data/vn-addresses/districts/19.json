@@ -1,0 +1,65 @@
+[
+  {
+    "code": "172",
+    "name": "Phổ Yên",
+    "full_name": "Thành phố Phổ Yên",
+    "type": "Thành phố Phổ",
+    "province_code": "19"
+  },
+  {
+    "code": "173",
+    "name": "Phú Bình",
+    "full_name": "Huyện Phú Bình",
+    "type": "Huyện Phú",
+    "province_code": "19"
+  },
+  {
+    "code": "168",
+    "name": "Phú Lương",
+    "full_name": "Huyện Phú Lương",
+    "type": "Huyện Phú",
+    "province_code": "19"
+  },
+  {
+    "code": "165",
+    "name": "Sông Công",
+    "full_name": "Thành phố Sông Công",
+    "type": "Thành phố Sông",
+    "province_code": "19"
+  },
+  {
+    "code": "164",
+    "name": "Thái Nguyên",
+    "full_name": "Thành phố Thái Nguyên",
+    "type": "Thành phố Thái",
+    "province_code": "19"
+  },
+  {
+    "code": "170",
+    "name": "Võ Nhai",
+    "full_name": "Huyện Võ Nhai",
+    "type": "Huyện Võ",
+    "province_code": "19"
+  },
+  {
+    "code": "171",
+    "name": "Đại Từ",
+    "full_name": "Huyện Đại Từ",
+    "type": "Huyện Đại",
+    "province_code": "19"
+  },
+  {
+    "code": "167",
+    "name": "Định Hóa",
+    "full_name": "Huyện Định Hóa",
+    "type": "Huyện Định",
+    "province_code": "19"
+  },
+  {
+    "code": "169",
+    "name": "Đồng Hỷ",
+    "full_name": "Huyện Đồng Hỷ",
+    "type": "Huyện Đồng",
+    "province_code": "19"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "code": "16939",
+    "name": "Hoà Hiếu",
+    "full_name": "Phường Hoà Hiếu",
+    "type": "Phường Hoà",
+    "district_code": "414"
+  },
+  {
+    "code": "17003",
+    "name": "Long Sơn",
+    "full_name": "Phường Long Sơn",
+    "type": "Phường Long",
+    "district_code": "414"
+  },
+  {
+    "code": "17008",
+    "name": "Nghĩa Mỹ",
+    "full_name": "Xã Nghĩa Mỹ",
+    "type": "Xã Nghĩa",
+    "district_code": "414"
+  },
+  {
+    "code": "17014",
+    "name": "Nghĩa Thuận",
+    "full_name": "Xã Nghĩa Thuận",
+    "type": "Xã Nghĩa",
+    "district_code": "414"
+  },
+  {
+    "code": "17005",
+    "name": "Nghĩa Tiến",
+    "full_name": "Xã Nghĩa Tiến",
+    "type": "Xã Nghĩa",
+    "district_code": "414"
+  },
+  {
+    "code": "16993",
+    "name": "Quang Phong",
+    "full_name": "Phường Quang Phong",
+    "type": "Phường Quang",
+    "district_code": "414"
+  },
+  {
+    "code": "16994",
+    "name": "Quang Tiến",
+    "full_name": "Phường Quang Tiến",
+    "type": "Phường Quang",
+    "district_code": "414"
+  },
+  {
+    "code": "17011",
+    "name": "Tây Hiếu",
+    "full_name": "Xã Tây Hiếu",
+    "type": "Xã Tây",
+    "district_code": "414"
+  },
+  {
+    "code": "17017",
+    "name": "Đông Hiếu",
+    "full_name": "Xã Đông Hiếu",
+    "type": "Xã Đông",
+    "district_code": "414"
+  }
+]

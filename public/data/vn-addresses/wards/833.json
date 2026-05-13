@@ -1,0 +1,114 @@
+[
+  {
+    "code": "28951",
+    "name": "An Thạnh",
+    "full_name": "Xã An Thạnh",
+    "type": "Xã An",
+    "district_code": "833"
+  },
+  {
+    "code": "28966",
+    "name": "An Thới",
+    "full_name": "Xã An Thới",
+    "type": "Xã An",
+    "district_code": "833"
+  },
+  {
+    "code": "28957",
+    "name": "An Định",
+    "full_name": "Xã An Định",
+    "type": "Xã An",
+    "district_code": "833"
+  },
+  {
+    "code": "28945",
+    "name": "Bình Khánh",
+    "full_name": "Xã Bình Khánh",
+    "type": "Xã Bình",
+    "district_code": "833"
+  },
+  {
+    "code": "28978",
+    "name": "Cẩm Sơn",
+    "full_name": "Xã Cẩm Sơn",
+    "type": "Xã Cẩm",
+    "district_code": "833"
+  },
+  {
+    "code": "28981",
+    "name": "Hương Mỹ",
+    "full_name": "Xã Hương Mỹ",
+    "type": "Xã Hương",
+    "district_code": "833"
+  },
+  {
+    "code": "28972",
+    "name": "Minh Đức",
+    "full_name": "Xã Minh Đức",
+    "type": "Xã Minh",
+    "district_code": "833"
+  },
+  {
+    "code": "28903",
+    "name": "Mỏ Cày",
+    "full_name": "Thị trấn Mỏ Cày",
+    "type": "Thị trấn Mỏ",
+    "district_code": "833"
+  },
+  {
+    "code": "28975",
+    "name": "Ngãi Đăng",
+    "full_name": "Xã Ngãi Đăng",
+    "type": "Xã Ngãi",
+    "district_code": "833"
+  },
+  {
+    "code": "28942",
+    "name": "Phước Hiệp",
+    "full_name": "Xã Phước Hiệp",
+    "type": "Xã Phước",
+    "district_code": "833"
+  },
+  {
+    "code": "28940",
+    "name": "Tân Hội",
+    "full_name": "Xã Tân Hội",
+    "type": "Xã Tân",
+    "district_code": "833"
+  },
+  {
+    "code": "28963",
+    "name": "Tân Trung",
+    "full_name": "Xã Tân Trung",
+    "type": "Xã Tân",
+    "district_code": "833"
+  },
+  {
+    "code": "28969",
+    "name": "Thành Thới A",
+    "full_name": "Xã Thành Thới A",
+    "type": "Xã Thành Thới",
+    "district_code": "833"
+  },
+  {
+    "code": "28960",
+    "name": "Thành Thới B",
+    "full_name": "Xã Thành Thới B",
+    "type": "Xã Thành Thới",
+    "district_code": "833"
+  },
+  {
+    "code": "28939",
+    "name": "Đa Phước Hội",
+    "full_name": "Xã Đa Phước Hội",
+    "type": "Xã Đa Phước",
+    "district_code": "833"
+  },
+  {
+    "code": "28930",
+    "name": "Định Thủy",
+    "full_name": "Xã Định Thủy",
+    "type": "Xã Định",
+    "district_code": "833"
+  }
+]

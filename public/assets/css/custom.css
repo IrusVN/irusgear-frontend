@@ -1,3 +1,36 @@
+/* ============================
+   IrusGear Brand Design Tokens
+   ============================ */
+:root {
+  --irus-color-bg: #ffffff;
+  --irus-color-surface: #ffffff;
+  --irus-color-surface-muted: #f7f7f7;
+  --irus-color-surface-strong: #111111;
+  --irus-color-text: #111111;
+  --irus-color-text-muted: #666666;
+  --irus-color-text-subtle: #8a8a8a;
+  --irus-color-border: #e5e5e5;
+  --irus-color-border-strong: #111111;
+  --irus-color-accent: #111111;
+  --irus-color-accent-hover: #2a2a2a;
+  --irus-color-accent-soft: #f1f1f1;
+  --irus-color-focus-ring: rgba(17, 17, 17, 0.16);
+  --irus-color-danger: #b42318;
+  --irus-color-danger-soft: #fff1f0;
+}
+
+/* Utility classes */
+.irus-text-accent { color: var(--irus-color-accent); }
+.irus-text-danger { color: var(--irus-color-danger); }
+.irus-bg-accent { background-color: var(--irus-color-accent); color: #fff; }
+.irus-bg-accent-soft { background-color: var(--irus-color-accent-soft); }
+.irus-border-accent { border-color: var(--irus-color-accent) !important; }
+.irus-border-strong { border-color: var(--irus-color-border-strong) !important; }
+.irus-focus-ring:focus { box-shadow: 0 0 0 3px var(--irus-color-focus-ring); }
+
+/* ============================
+   Existing Component Styles
+   ============================ */
 .irus-card {
   background: #fff;
   border-radius: 24px;
@@ -46,4 +79,77 @@
 .irus-btn--secondary {
   background: transparent;
   border: 1px solid #1a1a1a;
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sidebar Width */
+.sidebar-wrapper {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  width: 260px;
+  transition: width 0.3s ease;
+}
+
+.sidebar-wrapper:has(.sidebar-collapsed) {
+  width: 80px;
+}
+
+.admin-main {
+  margin-left: 260px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar-wrapper:has(.sidebar-collapsed) ~ .admin-main {
+  margin-left: 80px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar-wrapper {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar-wrapper.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .admin-main {
+    margin-left: 0 !important;
+  }
+}
+
+/* Custom scrollbar for dashboard */
+.admin-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-main::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.admin-main::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.admin-main::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

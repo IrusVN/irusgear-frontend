@@ -1,0 +1,72 @@
+[
+  {
+    "code": "26728",
+    "name": "Châu Pha",
+    "full_name": "Xã Châu Pha",
+    "type": "Xã Châu",
+    "district_code": "754"
+  },
+  {
+    "code": "26725",
+    "name": "Hắc Dịch",
+    "full_name": "Phường Hắc Dịch",
+    "type": "Phường Hắc",
+    "district_code": "754"
+  },
+  {
+    "code": "26719",
+    "name": "Mỹ Xuân",
+    "full_name": "Phường Mỹ Xuân",
+    "type": "Phường Mỹ",
+    "district_code": "754"
+  },
+  {
+    "code": "26704",
+    "name": "Phú Mỹ",
+    "full_name": "Phường Phú Mỹ",
+    "type": "Phường Phú",
+    "district_code": "754"
+  },
+  {
+    "code": "26713",
+    "name": "Phước Hoà",
+    "full_name": "Phường Phước Hoà",
+    "type": "Phường Phước",
+    "district_code": "754"
+  },
+  {
+    "code": "26722",
+    "name": "Sông Xoài",
+    "full_name": "Xã Sông Xoài",
+    "type": "Xã Sông",
+    "district_code": "754"
+  },
+  {
+    "code": "26710",
+    "name": "Tân Hải",
+    "full_name": "Xã Tân Hải",
+    "type": "Xã Tân",
+    "district_code": "754"
+  },
+  {
+    "code": "26707",
+    "name": "Tân Hoà",
+    "full_name": "Xã Tân Hoà",
+    "type": "Xã Tân",
+    "district_code": "754"
+  },
+  {
+    "code": "26716",
+    "name": "Tân Phước",
+    "full_name": "Phường Tân Phước",
+    "type": "Phường Tân",
+    "district_code": "754"
+  },
+  {
+    "code": "26731",
+    "name": "Tóc Tiên",
+    "full_name": "Xã Tóc Tiên",
+    "type": "Xã Tóc",
+    "district_code": "754"
+  }
+]

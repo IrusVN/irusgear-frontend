@@ -1,0 +1,65 @@
+[
+  {
+    "code": "23440",
+    "name": "Diên Bình",
+    "full_name": "Xã Diên Bình",
+    "type": "Xã Diên",
+    "district_code": "612"
+  },
+  {
+    "code": "23434",
+    "name": "Kon Đào",
+    "full_name": "Xã Kon Đào",
+    "type": "Xã Kon",
+    "district_code": "612"
+  },
+  {
+    "code": "23428",
+    "name": "Ngọk Tụ",
+    "full_name": "Xã Ngọk Tụ",
+    "type": "Xã Ngọk",
+    "district_code": "612"
+  },
+  {
+    "code": "23443",
+    "name": "Pô Kô",
+    "full_name": "Xã Pô Kô",
+    "type": "Xã Pô",
+    "district_code": "612"
+  },
+  {
+    "code": "23437",
+    "name": "Tân Cảnh",
+    "full_name": "Xã Tân Cảnh",
+    "type": "Xã Tân",
+    "district_code": "612"
+  },
+  {
+    "code": "23431",
+    "name": "Văn Lem",
+    "full_name": "Xã Văn Lem",
+    "type": "Xã Văn",
+    "district_code": "612"
+  },
+  {
+    "code": "23427",
+    "name": "Đắk Rơ Nga",
+    "full_name": "Xã Đắk Rơ Nga",
+    "type": "Xã Đắk Rơ",
+    "district_code": "612"
+  },
+  {
+    "code": "23401",
+    "name": "Đắk Tô",
+    "full_name": "Thị trấn Đắk Tô",
+    "type": "Thị trấn Đắk",
+    "district_code": "612"
+  },
+  {
+    "code": "23430",
+    "name": "Đắk Trăm",
+    "full_name": "Xã Đắk Trăm",
+    "type": "Xã Đắk",
+    "district_code": "612"
+  }
+]

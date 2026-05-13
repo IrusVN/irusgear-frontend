@@ -1,0 +1,58 @@
+[
+  {
+    "code": "25843",
+    "name": "An Tây",
+    "full_name": "Xã An Tây",
+    "type": "Xã An",
+    "district_code": "721"
+  },
+  {
+    "code": "25840",
+    "name": "An Điền",
+    "full_name": "Xã An Điền",
+    "type": "Xã An",
+    "district_code": "721"
+  },
+  {
+    "code": "25837",
+    "name": "Chánh Phú Hòa",
+    "full_name": "Phường Chánh Phú Hòa",
+    "type": "Phường Chánh Phú",
+    "district_code": "721"
+  },
+  {
+    "code": "25849",
+    "name": "Hòa Lợi",
+    "full_name": "Phường Hòa Lợi",
+    "type": "Phường Hòa",
+    "district_code": "721"
+  },
+  {
+    "code": "25813",
+    "name": "Mỹ Phước",
+    "full_name": "Phường Mỹ Phước",
+    "type": "Phường Mỹ",
+    "district_code": "721"
+  },
+  {
+    "code": "25855",
+    "name": "Phú An",
+    "full_name": "Xã Phú An",
+    "type": "Xã Phú",
+    "district_code": "721"
+  },
+  {
+    "code": "25852",
+    "name": "Tân Định",
+    "full_name": "Phường Tân Định",
+    "type": "Phường Tân",
+    "district_code": "721"
+  },
+  {
+    "code": "25846",
+    "name": "Thới Hòa",
+    "full_name": "Phường Thới Hòa",
+    "type": "Phường Thới",
+    "district_code": "721"
+  }
+]

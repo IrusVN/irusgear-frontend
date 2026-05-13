@@ -1,0 +1,79 @@
+[
+  {
+    "code": "25567",
+    "name": "Bàu Năng",
+    "full_name": "Xã Bàu Năng",
+    "type": "Xã Bàu",
+    "district_code": "707"
+  },
+  {
+    "code": "25576",
+    "name": "Bến Củi",
+    "full_name": "Xã Bến Củi",
+    "type": "Xã Bến",
+    "district_code": "707"
+  },
+  {
+    "code": "25573",
+    "name": "Cầu Khởi",
+    "full_name": "Xã Cầu Khởi",
+    "type": "Xã Cầu",
+    "district_code": "707"
+  },
+  {
+    "code": "25570",
+    "name": "Chà Là",
+    "full_name": "Xã Chà Là",
+    "type": "Xã Chà",
+    "district_code": "707"
+  },
+  {
+    "code": "25552",
+    "name": "Dương Minh Châu",
+    "full_name": "Thị trấn Dương Minh Châu",
+    "type": "Thị trấn Dương Minh",
+    "district_code": "707"
+  },
+  {
+    "code": "25579",
+    "name": "Lộc Ninh",
+    "full_name": "Xã Lộc Ninh",
+    "type": "Xã Lộc",
+    "district_code": "707"
+  },
+  {
+    "code": "25558",
+    "name": "Phan",
+    "full_name": "Xã Phan",
+    "type": "Xã",
+    "district_code": "707"
+  },
+  {
+    "code": "25564",
+    "name": "Phước Minh",
+    "full_name": "Xã Phước Minh",
+    "type": "Xã Phước",
+    "district_code": "707"
+  },
+  {
+    "code": "25561",
+    "name": "Phước Ninh",
+    "full_name": "Xã Phước Ninh",
+    "type": "Xã Phước",
+    "district_code": "707"
+  },
+  {
+    "code": "25555",
+    "name": "Suối Đá",
+    "full_name": "Xã Suối Đá",
+    "type": "Xã Suối",
+    "district_code": "707"
+  },
+  {
+    "code": "25582",
+    "name": "Truông Mít",
+    "full_name": "Xã Truông Mít",
+    "type": "Xã Truông",
+    "district_code": "707"
+  }
+]
