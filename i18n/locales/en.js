@@ -45,7 +45,12 @@ export default {
         orders: "Orders",
         wishlist: "Wishlist",
         save: "Save",
-        cancel: "Cancel"
+        cancel: "Cancel",
+        confirmNo: "No",
+        confirmYes: "Delete"
+    },
+    search: {
+        confirmClearHistory: "Clear all search history?",
     },
     wishlist: {
         title: "My Wishlist",
@@ -54,7 +59,7 @@ export default {
         shopNow: "Shop Now",
         addToCart: "Add to Cart",
         remove: "Remove",
-        confirmRemove: "Remove this item from your wishlist?",
+        confirmRemove: "Remove \"{name}\" from wishlist?",
         removed: "Removed from wishlist",
         removeError: "Could not remove item",
         addedToCart: "Added to cart",
@@ -367,6 +372,8 @@ export default {
         someItemsNotReady: "Some items are not ready. I'll take you to the exact spot to check in the cart.",
         nextStepNote: "Delivery and payment information will flow to the next step.",
         updateQuantityError: "Cannot update product quantity.",
+        confirmRemoveItem: "Remove \"{name}\" from cart?",
+        confirmClearCart: "Remove all products from cart?",
         removeFromCartError: "Cannot remove product from cart.",
         restoreToCart: "Product restored to cart.",
         restoreError: "Cannot restore the removed product.",
@@ -407,6 +414,7 @@ export default {
         addedToWishlist: "Added to wishlist",
         removedFromWishlist: "Removed from wishlist",
         wishlistError: "Unable to update wishlist",
+        confirmRemoveFromWishlist: "Remove \"{name}\" from wishlist?",
         compare: "Compare",
         specs: "Specs",
         color: "Color",
@@ -673,6 +681,7 @@ export default {
         reviewPlaceholder: "Please share your thoughts about the product (minimum 15 characters)",
         addImages: "Add images",
         deleteImage: "Delete image",
+        confirmRemoveImage: "Remove image \"{name}\"?",
         sending: "SENDING...",
         sendReview: "SEND REVIEW",
         ratingVeryBad: "Very Bad",
@@ -860,6 +869,7 @@ export default {
         billShipping: "Shipping Address",
         billPayment: "Payment Information",
         viewOrders: "View Orders",
+        confirmRemoveVoucher: "Remove voucher \"{code}\"?",
     },
     orderSuccess: {
         title: "Order Placed Successfully",

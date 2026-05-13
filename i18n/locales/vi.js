@@ -45,7 +45,12 @@ export default {
         orders: "Đơn hàng",
         wishlist: "Yêu thích",
         save: "Lưu",
-        cancel: "Huỷ"
+        cancel: "Huỷ",
+        confirmNo: "Không",
+        confirmYes: "Xoá"
+    },
+    search: {
+        confirmClearHistory: "Xoá toàn bộ lịch sử tìm kiếm?",
     },
     wishlist: {
         title: "Sản phẩm yêu thích",
@@ -54,7 +59,7 @@ export default {
         shopNow: "Mua sắm ngay",
         addToCart: "Thêm vào giỏ",
         remove: "Xóa",
-        confirmRemove: "Xóa sản phẩm khỏi danh sách yêu thích?",
+        confirmRemove: "Xoá \"{name}\" khỏi yêu thích?",
         removed: "Đã xóa khỏi yêu thích",
         removeError: "Không thể xóa sản phẩm",
         addedToCart: "Đã thêm vào giỏ hàng",
@@ -367,6 +372,8 @@ export default {
         someItemsNotReady: "Một số sản phẩm chưa sẵn sàng. Mình sẽ đưa bạn tới đúng vị trí cần kiểm tra trong giỏ.",
         nextStepNote: "Luồng thông tin nhận hàng và thanh toán sẽ được nối sang bước tiếp theo của dự án.",
         updateQuantityError: "Không thể cập nhật số lượng sản phẩm.",
+        confirmRemoveItem: "Xoá \"{name}\" khỏi giỏ hàng?",
+        confirmClearCart: "Xoá tất cả sản phẩm khỏi giỏ hàng?",
         removeFromCartError: "Không thể xóa sản phẩm khỏi giỏ hàng.",
         restoreToCart: "Đã khôi phục sản phẩm vào giỏ hàng.",
         restoreError: "Không thể khôi phục sản phẩm vừa xóa.",
@@ -407,6 +414,7 @@ export default {
         addedToWishlist: "Đã thêm vào yêu thích",
         removedFromWishlist: "Đã xóa khỏi yêu thích",
         wishlistError: "Không thể cập nhật yêu thích",
+        confirmRemoveFromWishlist: "Xoá \"{name}\" khỏi yêu thích?",
         compare: "So sánh",
         specs: "Thông số",
         color: "Màu sắc",
@@ -673,6 +681,7 @@ export default {
         reviewPlaceholder: "Xin mời chia sẻ một số cảm nhận về sản phẩm (nhập tối thiểu 15 kí tự)",
         addImages: "Thêm hình ảnh",
         deleteImage: "Xóa ảnh",
+        confirmRemoveImage: "Xoá ảnh \"{name}\"?",
         sending: "ĐANG GỬI...",
         sendReview: "GỬI ĐÁNH GIÁ",
         ratingVeryBad: "Rất Tệ",
@@ -860,6 +869,7 @@ export default {
         billShipping: "Địa chỉ giao hàng",
         billPayment: "Thông tin thanh toán",
         viewOrders: "Xem đơn hàng",
+        confirmRemoveVoucher: "Gỡ mã voucher \"{code}\"?",
     },
     orderSuccess: {
         title: "Đặt hàng thành công",

@@ -23,7 +23,7 @@
               type="button"
               class="dropdown-search-clear"
               :disabled="historyItems.length === 0"
-              @click="clearHistory"
+              @click="confirmClearHistory"
             >
               <span>{{ labels.clearAll }}</span>
               <i class="bi bi-trash3" aria-hidden="true"></i>
@@ -144,7 +144,7 @@
             type="button"
             class="dropdown-search-mobile-link"
             :disabled="historyItems.length === 0"
-            @click="clearHistory"
+            @click="confirmClearHistory"
           >
             {{ labels.clearAll }}
           </button>
@@ -212,6 +212,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { navigateTo, useLocalePath, useI18n } from "#imports";
+import { toast } from "vue-sonner";
 import BottomSheet from "@/components/Common/BottomSheet.vue";
 
 const props = defineProps({
@@ -371,8 +372,11 @@ const handleMobileSheetClose = () => {
   }
 };
 
-const clearHistory = () => {
-  historyItems.value = [];
+const confirmClearHistory = () => {
+  toast(t('search.confirmClearHistory'), {
+    cancel: { label: t('common.confirmNo'), onClick: () => {} },
+    action: { label: t('common.confirmYes'), onClick: () => { historyItems.value = []; } },
+  });
 };
 
 const buildSearchTo = (keyword) => ({

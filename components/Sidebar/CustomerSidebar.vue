@@ -928,13 +928,13 @@ const removeNotification = (id) => {
 }
 
 const confirmRemoveCartItem = (item) => {
-  toast(`Xoá "${item.productName}" khỏi giỏ hàng?`, {
+  toast(t('cart.confirmRemoveItem', { name: item.productName }), {
     cancel: {
-      label: 'Không',
+      label: t('common.confirmNo'),
       onClick: () => {},
     },
     action: {
-      label: 'Xoá',
+      label: t('common.confirmYes'),
       onClick: () => cartStore.removeItem(item.id),
     },
   })

@@ -386,17 +386,25 @@ const handleRemoveFavorite = async (item) => {
 
   removingFavoriteIds.value = new Set([...removingFavoriteIds.value, favoriteId])
 
-  try {
-    await wishlistStore.removeItem(favoriteId)
-    dashboardStore.removeFavoriteItem(favoriteId)
-    toast.success(t("wishlist.removed"))
-  } catch (e) {
-    toast.error(e?.data?.message || e?.message || t("wishlist.removeError"))
-  } finally {
-    const nextIds = new Set(removingFavoriteIds.value)
-    nextIds.delete(favoriteId)
-    removingFavoriteIds.value = nextIds
-  }
+  toast(t("wishlist.confirmRemove", { name: item?.name }), {
+    cancel: { label: t("common.confirmNo"), onClick: () => {} },
+    action: {
+      label: t("common.confirmYes"),
+      onClick: async () => {
+        try {
+          await wishlistStore.removeItem(favoriteId)
+          dashboardStore.removeFavoriteItem(favoriteId)
+          toast.success(t("wishlist.removed"))
+        } catch (e) {
+          toast.error(e?.data?.message || e?.message || t("wishlist.removeError"))
+        } finally {
+          const nextIds = new Set(removingFavoriteIds.value)
+          nextIds.delete(favoriteId)
+          removingFavoriteIds.value = nextIds
+        }
+      },
+    },
+  });
 }
 
 const copyVoucherCode = (code) => {

@@ -30,7 +30,7 @@
         <button
           type="button"
           class="voucher-applied__remove"
-          @click="checkoutStore.removeVoucher(voucher.code)"
+          @click="confirmRemoveVoucher(voucher.code)"
         >
           <i class="bi bi-x-lg"></i>
         </button>
@@ -123,9 +123,12 @@
 <script setup>
 import { computed } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
+import { useI18n } from "vue-i18n";
+import { toast } from "vue-sonner";
 import VoucherCard from "@/components/Checkout/VoucherCard.vue";
 
 const checkoutStore = useCheckoutStore();
+const { t } = useI18n();
 
 const suggestedVoucherCode = computed(() => {
   return checkoutStore.availableVouchers.find((v) => v.isAlreadyApplied)?.code || null;
@@ -169,6 +172,13 @@ const sortedAvailableVouchers = computed(() => {
 const formatMoney = (value) => {
   if (!value && value !== 0) return "0đ";
   return `${new Intl.NumberFormat("vi-VN").format(value)}đ`;
+};
+
+const confirmRemoveVoucher = (code) => {
+  toast(t('checkout.confirmRemoveVoucher', { code }), {
+    cancel: { label: t('common.confirmNo'), onClick: () => {} },
+    action: { label: t('common.confirmYes'), onClick: () => checkoutStore.removeVoucher(code) },
+  });
 };
 </script>
 

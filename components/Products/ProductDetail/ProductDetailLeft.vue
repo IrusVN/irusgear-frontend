@@ -458,8 +458,10 @@ const toggleWishlist = async () => {
 
   try {
     if (item) {
-      await wishlistStore.removeItem(item.id);
-      toast.success(t("product.removedFromWishlist") || "Đã xóa khỏi yêu thích");
+      toast(t("product.confirmRemoveFromWishlist", { name: productStore.productDetail?.name }), {
+        cancel: { label: t("common.confirmNo"), onClick: () => {} },
+        action: { label: t("common.confirmYes"), onClick: () => wishlistStore.removeItem(item.id) },
+      });
     } else {
       await wishlistStore.addItem({
         product_id: Number(productId),

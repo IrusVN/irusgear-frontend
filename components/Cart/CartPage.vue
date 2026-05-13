@@ -192,11 +192,20 @@ const handleUpdateQuantity = async ({ itemId, quantity }) => {
 };
 
 const handleRemoveItem = async (itemId) => {
-  try {
-    await cartStore.removeItem(itemId);
-  } catch (error) {
-    toast.error(error?.data?.message || t('cart.removeFromCartError'));
-  }
+  const item = items.value.find((i) => i.id === itemId);
+  toast(t('cart.confirmRemoveItem', { name: item?.productName }), {
+    cancel: { label: t('common.confirmNo'), onClick: () => {} },
+    action: {
+      label: t('common.confirmYes'),
+      onClick: async () => {
+        try {
+          await cartStore.removeItem(itemId);
+        } catch (error) {
+          toast.error(error?.data?.message || t('cart.removeFromCartError'));
+        }
+      },
+    },
+  });
 };
 
 const handleUndoRemove = async () => {
@@ -221,13 +230,21 @@ const handlePrimaryAction = () => {
   navigateTo(localePath("/cart/checkout"));
 };
 
-const handleClearCart = async () => {
-  try {
-    await cartStore.clearCart();
-    toast.success(t('cart.clearCart'));
-  } catch (error) {
-    toast.error(error?.data?.message || t('cart.clearCartError'));
-  }
+const handleClearCart = () => {
+  toast(t('cart.confirmClearCart'), {
+    cancel: { label: t('common.confirmNo'), onClick: () => {} },
+    action: {
+      label: t('common.confirmYes'),
+      onClick: async () => {
+        try {
+          await cartStore.clearCart();
+          toast.success(t('cart.clearCart'));
+        } catch (error) {
+          toast.error(error?.data?.message || t('cart.clearCartError'));
+        }
+      },
+    },
+  });
 };
 </script>
 

@@ -140,6 +140,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue";
+import { toast } from "vue-sonner";
 import { storeToRefs } from "pinia";
 import { useProductStore } from "@/stores/productStore";
 import { useI18n } from "vue-i18n";
@@ -241,11 +242,19 @@ const handleFileChange = (event) => {
 
 const removeSelectedFile = (id) => {
   const target = selectedFiles.value.find((item) => item.id === id);
-  if (target?.preview) {
-    URL.revokeObjectURL(target.preview);
-  }
-
-  selectedFiles.value = selectedFiles.value.filter((item) => item.id !== id);
+  const fileName = target?.file?.name || 'ảnh này';
+  toast(t('modalReview.confirmRemoveImage', { name: fileName }), {
+    cancel: { label: t('common.confirmNo'), onClick: () => {} },
+    action: {
+      label: t('common.confirmYes'),
+      onClick: () => {
+        if (target?.preview) {
+          URL.revokeObjectURL(target.preview);
+        }
+        selectedFiles.value = selectedFiles.value.filter((item) => item.id !== id);
+      },
+    },
+  });
 };
 
 const cleanupSelectedFiles = () => {
