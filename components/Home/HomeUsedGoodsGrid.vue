@@ -8,26 +8,26 @@
 
         <div class="d-none d-md-flex gap-2"></div>
 
-        <a :href="viewAllUrl" class="view-all-link text-decoration-none">
+        <NuxtLink :to="viewAllUrl" class="view-all-link text-decoration-none">
           Xem tất cả
           <i class="bi bi-chevron-right ms-1"></i>
-        </a>
+        </NuxtLink>
       </div>
 
       <div class="mt-2">
         <div class="used-surface animate-fade-in">
           <div class="used-grid-wrap position-relative bg-white">
-            <a
+            <NuxtLink
               v-for="item in usedItems"
-              :key="item.href"
-              :href="item.href"
+              :key="item.category"
+              :to="localePath(`/products?category=${item.category}`)"
               class="used-item text-decoration-none text-dark"
             >
               <span class="used-image-wrap">
                 <i :class="item.iconClass || 'bi bi-phone'" class="used-image bi" role="img" :aria-label="item.title"></i>
               </span>
               <p class="mb-0 used-name">{{ item.title }}</p>
-            </a>
+            </NuxtLink>
 
             <div class="grid-edge-right"></div>
             <div class="grid-edge-bottom"></div>
@@ -39,67 +39,70 @@
 </template>
 
 <script setup>
-const viewAllUrl = "/hang-cu.html";
+import { useLocalePath } from '#imports'
+
+const localePath = useLocalePath()
+const viewAllUrl = localePath('/products?category=hang-cu')
 
 const usedItems = [
   {
     title: "Điện thoại cũ",
-    href: "/hang-cu/dien-thoai.html",
+    category: "dien-thoai-cu",
     iconClass: "bi bi-phone",
   },
   {
     title: "Máy tính bảng cũ",
-    href: "/hang-cu/may-tinh-bang.html",
+    category: "may-tinh-bang-cu",
     iconClass: "bi bi-tablet",
   },
   {
     title: "MacBook cũ",
-    href: "/hang-cu/mac.html",
+    category: "mac-cu",
     iconClass: "bi bi-laptop",
   },
   {
     title: "Laptop cũ",
-    href: "/hang-cu/laptop.html",
+    category: "laptop-cu",
     iconClass: "bi bi-pc-display",
   },
   {
     title: "Tai nghe cũ",
-    href: "/hang-cu/tai-nghe.html",
+    category: "tai-nghe-cu",
     iconClass: "bi bi-headphones",
   },
   {
     title: "Loa cũ",
-    href: "/hang-cu/loa.html",
+    category: "loa-cu",
     iconClass: "bi bi-speaker",
   },
   {
     title: "Đồng hồ thông minh cũ",
-    href: "/hang-cu/dong-ho-thong-minh.html",
+    category: "dong-ho-thong-minh-cu",
     iconClass: "bi bi-smartwatch",
   },
   {
     title: "Đồ gia dụng cũ",
-    href: "/hang-cu/do-gia-dung.html",
+    category: "do-gia-dung-cu",
     iconClass: "bi bi-house-gear",
   },
   {
     title: "Phụ kiện cũ",
-    href: "/hang-cu/phu-kien.html",
+    category: "phu-kien-cu",
     iconClass: "bi bi-mouse2",
   },
   {
     title: "Màn hình cũ",
-    href: "/hang-cu/man-hinh.html",
+    category: "man-hinh-cu",
     iconClass: "bi bi-display",
   },
   {
     title: "Tivi cũ",
-    href: "/hang-cu/tivi.html",
+    category: "tivi-cu",
     iconClass: "bi bi-tv",
   },
   {
     title: "Cáp sạc cũ",
-    href: "/hang-cu/phu-kien/cap-sac.html",
+    category: "cap-sac-cu",
     iconClass: "bi bi-usb-symbol",
   },
 ];

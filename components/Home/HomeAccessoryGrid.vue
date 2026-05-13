@@ -4,26 +4,26 @@
       <div class="d-flex align-items-center gap-3 accessory-header">
         <h2 class="mb-0 accessory-title">{{ $t('home.accessoryTitle') }}</h2>
 
-        <a :href="viewAllUrl" class="view-all-link text-decoration-none">
+        <NuxtLink :to="viewAllUrl" class="view-all-link text-decoration-none">
           {{ $t('common.seeAll') }}
           <i class="bi bi-chevron-right ms-1"></i>
-        </a>
+        </NuxtLink>
       </div>
 
       <div class="mt-2">
         <div class="accessory-surface animate-fade-in">
           <div class="accessory-grid-wrap position-relative bg-white">
-            <a
+            <NuxtLink
               v-for="item in accessoryItems"
-              :key="item.href"
-              :href="item.href"
+              :key="item.category"
+              :to="localePath(`/products?category=${item.category}`)"
               class="accessory-item text-decoration-none text-dark"
             >
               <span class="accessory-image-wrap">
                 <i :class="item.iconClass || 'bi bi-phone'" class="accessory-image bi" role="img" :aria-label="t(item.titleKey)"></i>
               </span>
               <p class="mb-0 accessory-name">{{ t(item.titleKey) }}</p>
-            </a>
+            </NuxtLink>
 
             <div class="grid-edge-right"></div>
             <div class="grid-edge-bottom"></div>
@@ -36,97 +36,98 @@
 
 <script setup>
 const { t } = useI18n()
-const viewAllUrl = "/phu-kien.html";
+const localePath = useLocalePath()
+const viewAllUrl = localePath('/products?category=phu-kien')
 
 const accessoryItems = [
   {
     titleKey: "home.accessoryApple",
-    href: "/phu-kien/apple.html",
+    category: "apple",
     iconClass: "bi bi-apple",
   },
   {
     titleKey: "home.accessoryCable",
-    href: "/phu-kien/sac-dien-thoai.html",
+    category: "sac-dien-thoai",
     iconClass: "bi bi-usb-symbol",
   },
   {
     titleKey: "home.accessoryBattery",
-    href: "/phu-kien/pin-du-phong.html",
+    category: "pin-du-phong",
     iconClass: "bi bi-battery-charging",
   },
   {
     titleKey: "home.accessoryCase",
-    href: "/phu-kien/bao-da-op-lung.html",
+    category: "bao-da-op-lung",
     iconClass: "bi bi-phone",
   },
   {
     titleKey: "home.accessoryScreen",
-    href: "/phu-kien/dan-man-hinh.html",
+    category: "dan-man-hinh",
     iconClass: "bi bi-display",
   },
   {
     titleKey: "home.accessoryStorage",
-    href: "/phu-kien/the-nho-usb-otg.html",
+    category: "the-nho-usb-otg",
     iconClass: "bi bi-sd-card",
   },
   {
     titleKey: "home.gamingGear",
-    href: "/phu-kien/gaming-gear.html",
+    category: "gaming-gear",
     iconClass: "bi bi-controller",
   },
   {
     titleKey: "home.sim4g5g",
-    href: "/sim-3g-4g-nghe-goi.html",
+    category: "sim-4g-5g",
     iconClass: "bi bi-sim",
   },
   {
     titleKey: "home.accessoryNetwork",
-    href: "/phu-kien/thiet-bi-mang.html",
+    category: "thiet-bi-mang",
     iconClass: "bi bi-router",
   },
   {
     titleKey: "home.camera",
-    href: "/phu-kien/camera.html",
+    category: "camera",
     iconClass: "bi bi-camera",
   },
   {
     titleKey: "home.gimbal",
-    href: "/phu-kien/camera/gimbal.html",
+    category: "gimbal",
     iconClass: "bi bi-camera-video",
   },
   {
     titleKey: "home.flycam",
-    href: "/flycam.html",
+    category: "flycam",
     iconClass: "bi bi-airplane",
   },
   {
     titleKey: "home.camera",
-    href: "/may-anh.html",
+    category: "may-anh",
     iconClass: "bi bi-camera2",
   },
   {
     titleKey: "home.accessoryKeyboard",
-    href: "/phu-kien/chuot-ban-phim-may-tinh.html",
+    category: "chuot-ban-phim-may-tinh",
     iconClass: "bi bi-keyboard",
   },
   {
     titleKey: "home.accessoryBag",
-    href: "/phu-kien/balo-tui-chong-soc-laptop.html",
+    category: "balo-tui-chong-soc-laptop",
     iconClass: "bi bi-bag",
   },
   {
     titleKey: "home.accessoryHub",
-    href: "/phu-kien/sac-dien-thoai/cap-chuyen-doi-dau-chuyen-doi-macbook.html",
+    category: "cap-chuyen-doi-macbook",
     iconClass: "bi bi-hdd",
   },
   {
     titleKey: "home.accessoryPhone",
-    href: "/phu-kien/phu-kien-tien-ich.html",
+    category: "phu-kien-tien-ich",
     iconClass: "bi bi-phone-flip",
   },
   {
     titleKey: "home.accessoryLaptop",
-    href: "/phu-kien/may-tinh-laptop.html",
+    category: "may-tinh-laptop",
     iconClass: "bi bi-laptop",
   },
 ];

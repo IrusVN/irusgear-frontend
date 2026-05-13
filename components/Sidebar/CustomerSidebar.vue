@@ -67,23 +67,175 @@
                 <i class="bi bi-search"></i>
               </button>
 
-              <NuxtLink
-                :to="localePath('/cart')"
-                class="btn header-icon-btn position-relative"
-                :aria-label="$t('cart.cart')"
+              <!-- Cart Dropdown -->
+              <div
+                ref="cartDropdownRef"
+                class="header-icon-dropdown-wrapper position-relative"
+                @mouseenter="isCartDropdownOpen = true"
+                @mouseleave="isCartDropdownOpen = false"
               >
-                <i class="bi bi-cart3"></i>
-                <span
-                  v-if="itemCount > 0"
-                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                <NuxtLink
+                  :to="localePath('/cart')"
+                  class="btn header-icon-btn position-relative"
+                  :aria-label="$t('cart.cart')"
                 >
-                  {{ itemCount }}
-                </span>
-              </NuxtLink>
+                  <i class="bi bi-cart3"></i>
+                  <span
+                    v-if="itemCount > 0"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                  >
+                    {{ itemCount }}
+                  </span>
+                </NuxtLink>
 
-              <button type="button" class="btn header-icon-btn d-none d-xl-inline-flex" :aria-label="$t('common.notification')">
-                <i class="bi bi-bell"></i>
-              </button>
+                <Transition name="dropdown-fade">
+                  <div v-if="isCartDropdownOpen" class="header-dropdown header-dropdown--cart">
+                    <div class="header-dropdown__header">
+                      <span class="header-dropdown__title">Giỏ hàng</span>
+                      <span v-if="itemCount > 0" class="header-dropdown__count">{{ itemCount }} sản phẩm</span>
+                    </div>
+
+                    <div v-if="cartStore.items.length === 0" class="header-dropdown__empty">
+                      <i class="bi bi-cart3"></i>
+                      <p>Giỏ hàng trống</p>
+                      <NuxtLink :to="localePath('/products')" class="header-dropdown__empty-link">
+                        Khám phá sản phẩm
+                      </NuxtLink>
+                    </div>
+
+                    <div v-else class="header-dropdown__body">
+                      <div class="header-dropdown__scroll">
+                        <div
+                          v-for="item in cartStore.items.slice(0, 3)"
+                          :key="item.id"
+                          class="cart-item"
+                        >
+                          <NuxtLink :to="item.productUrl || localePath('/cart')" class="cart-item__image">
+                            <img
+                              :src="item.thumbnail || 'https://placehold.co/80x80/f5f5f5/999?text=IMG'"
+                              :alt="item.productName || 'Sản phẩm'"
+                              loading="lazy"
+                            >
+                          </NuxtLink>
+                          <div class="cart-item__info">
+                            <NuxtLink :to="item.productUrl || localePath('/cart')" class="cart-item__name">
+                              {{ item.productName || 'Sản phẩm' }}
+                            </NuxtLink>
+                            <div class="cart-item__meta">
+                              <span v-if="item.selectedOptions && Object.keys(item.selectedOptions).length" class="cart-item__variant">
+                                {{ formatCartVariant(item.selectedOptions) }}
+                              </span>
+                              <span class="cart-item__qty">x{{ item.quantity }}</span>
+                            </div>
+                            <span class="cart-item__price">{{ item.currentLineTotal?.formatted || item.lineTotal?.formatted || '0đ' }}</span>
+                          </div>
+                          <button
+                            type="button"
+                            class="cart-item__remove"
+                            :aria-label="$t('common.remove')"
+                            @click="confirmRemoveCartItem(item)"
+                          >
+                            <i class="bi bi-x"></i>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div v-if="cartStore.items.length > 3" class="header-dropdown__more">
+                        <NuxtLink :to="localePath('/cart')" class="header-dropdown__more-link">
+                          +{{ cartStore.items.length - 3 }} sản phẩm khác
+                        </NuxtLink>
+                      </div>
+
+                      <div class="header-dropdown__footer">
+                        <div class="header-dropdown__subtotal">
+                          <span>Tạm tính</span>
+                          <strong>{{ cartStore.subtotal?.formatted || '0đ' }}</strong>
+                        </div>
+                        <NuxtLink
+                          :to="localePath('/cart')"
+                          class="header-dropdown__checkout-btn"
+                        >
+                          Xem giỏ hàng
+                          <i class="bi bi-arrow-right"></i>
+                        </NuxtLink>
+                      </div>
+                    </div>
+                  </div>
+                </Transition>
+              </div>
+
+              <!-- Notification Dropdown -->
+              <div
+                class="header-icon-dropdown-wrapper position-relative d-none d-xl-inline-flex"
+                @mouseenter="isNotiDropdownOpen = true"
+                @mouseleave="isNotiDropdownOpen = false"
+              >
+                <button
+                  type="button"
+                  class="btn header-icon-btn"
+                  :aria-label="$t('common.notification')"
+                >
+                  <i class="bi bi-bell"></i>
+                  <span
+                    v-if="unreadNotiCount > 0"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;"
+                  >
+                    {{ unreadNotiCount > 9 ? '9+' : unreadNotiCount }}
+                  </span>
+                </button>
+
+                <Transition name="dropdown-fade">
+                  <div v-if="isNotiDropdownOpen" class="header-dropdown header-dropdown--noti">
+                    <div class="header-dropdown__header">
+                      <span class="header-dropdown__title">Thông báo</span>
+                      <button
+                        v-if="unreadNotiCount > 0"
+                        type="button"
+                        class="header-dropdown__mark-read"
+                        @click="markAllRead"
+                      >
+                        Đánh dấu đã đọc
+                      </button>
+                    </div>
+
+                    <div v-if="mockNotifications.length === 0" class="header-dropdown__empty">
+                      <i class="bi bi-bell-slash"></i>
+                      <p>Không có thông báo</p>
+                    </div>
+
+                    <div v-else class="header-dropdown__body">
+                      <div class="header-dropdown__scroll">
+                        <div
+                          v-for="noti in mockNotifications"
+                          :key="noti.id"
+                          class="noti-item"
+                          :class="{ 'noti-item--unread': !noti.isRead }"
+                        >
+                          <div class="noti-item__icon" :class="`noti-item__icon--${noti.type}`">
+                            <i :class="noti.icon"></i>
+                          </div>
+                          <div class="noti-item__content">
+                            <p class="noti-item__text">{{ noti.text }}</p>
+                            <span class="noti-item__time">{{ noti.time }}</span>
+                          </div>
+                          <div class="noti-item__actions">
+                            <span v-if="!noti.isRead" class="noti-item__dot"></span>
+                            <button
+                              type="button"
+                              class="noti-item__close"
+                              :aria-label="'Xoá thông báo'"
+                              @click="removeNotification(noti.id)"
+                            >
+                              <i class="bi bi-x"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Transition>
+              </div>
 
               <LanguageSwitcher />
 
@@ -339,6 +491,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocalePath, useRoute, useI18n, navigateTo } from '#imports'
+import { toast } from 'vue-sonner'
 import DropdownSearch from '@/components/Common/DropdownSearch.vue'
 import CategoryMegaMenu from '@/components/Home/CategoryMegaMenu.vue'
 import LanguageSwitcher from '@/components/Sidebar/LanguageSwitcher.vue'
@@ -370,6 +523,8 @@ const isSearchDropdownOpen = ref(false)
 const searchDropdownMode = ref('desktop')
 const headerSearchKeyword = ref('')
 const searchAnchorRect = ref(null)
+const isCartDropdownOpen = ref(false)
+const isNotiDropdownOpen = ref(false)
 let customerSidebarResizeObserver = null
 let customerSidebarOffsetFrame = null
 
@@ -710,6 +865,79 @@ const toggleLanguage = async () => {
     ? `/en${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
     : pathWithoutLocale
   await navigateTo(targetPath)
+}
+
+// Cart dropdown helpers
+const formatCartVariant = (options) => {
+  if (!options || typeof options !== 'object') return ''
+  return Object.values(options).filter(Boolean).join(' · ')
+}
+
+// Notification mock data
+const mockNotifications = ref([
+  {
+    id: 1,
+    type: 'order',
+    icon: 'bi bi-box-seam',
+    text: 'Đơn hàng #DH-28471 đã được giao thành công',
+    time: '2 phút trước',
+    isRead: false,
+  },
+  {
+    id: 2,
+    type: 'promo',
+    icon: 'bi bi-tag',
+    text: 'Flash Sale 50% — Kết thúc trong 3 giờ!',
+    time: '15 phút trước',
+    isRead: false,
+  },
+  {
+    id: 3,
+    type: 'review',
+    icon: 'bi bi-star',
+    text: 'Đánh giá sản phẩm iPhone 16 Pro Max nhận ưu đãi 200k',
+    time: '1 giờ trước',
+    isRead: true,
+  },
+  {
+    id: 4,
+    type: 'system',
+    icon: 'bi bi-shield-check',
+    text: 'Cập nhật bảo mật: Đổi mật khẩu định kỳ',
+    time: 'Hôm qua',
+    isRead: true,
+  },
+  {
+    id: 5,
+    type: 'order',
+    icon: 'bi bi-truck',
+    text: 'Đơn hàng #DH-28450 đang được vận chuyển',
+    time: 'Hôm qua',
+    isRead: true,
+  },
+])
+
+const unreadNotiCount = computed(() => mockNotifications.value.filter(n => !n.isRead).length)
+
+const markAllRead = () => {
+  mockNotifications.value = mockNotifications.value.map(n => ({ ...n, isRead: true }))
+}
+
+const removeNotification = (id) => {
+  mockNotifications.value = mockNotifications.value.filter(n => n.id !== id)
+}
+
+const confirmRemoveCartItem = (item) => {
+  toast(`Xoá "${item.productName}" khỏi giỏ hàng?`, {
+    cancel: {
+      label: 'Không',
+      onClick: () => {},
+    },
+    action: {
+      label: 'Xoá',
+      onClick: () => cartStore.removeItem(item.id),
+    },
+  })
 }
 
 const featuredNavItems = computed(() => [
@@ -1321,5 +1549,463 @@ const featuredNavItems = computed(() => [
   body {
     padding-bottom: 88px !important;
   }
+}
+
+/* ── Icon Dropdown Wrappers ── */
+.header-icon-dropdown-wrapper {
+  position: relative;
+}
+
+.header-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1070;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1), 0 2px 8px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  min-width: 360px;
+}
+
+.header-dropdown--noti {
+  min-width: 340px;
+}
+
+.header-dropdown__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.header-dropdown__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+
+.header-dropdown__count {
+  font-size: 0.78rem;
+  color: #8e8e93;
+  font-weight: 500;
+}
+
+.header-dropdown__mark-read {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #111827;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+
+.header-dropdown__mark-read:hover {
+  opacity: 1;
+}
+
+.header-dropdown__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-dropdown__scroll {
+  max-height: 360px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 23, 42, 0.12) transparent;
+}
+
+.header-dropdown__scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.header-dropdown__scroll::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.12);
+  border-radius: 4px;
+}
+
+.header-dropdown__more {
+  padding: 10px 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  text-align: center;
+}
+
+.header-dropdown__more-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.header-dropdown__more-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Empty state */
+.header-dropdown__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 40px 20px;
+  color: #8e8e93;
+}
+
+.header-dropdown__empty i {
+  font-size: 2.2rem;
+  opacity: 0.35;
+  line-height: 1;
+}
+
+.header-dropdown__empty p {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0;
+  color: #6b7280;
+}
+
+.header-dropdown__empty-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.3);
+  padding-bottom: 1px;
+  transition: border-color 0.15s ease;
+}
+
+.header-dropdown__empty-link:hover {
+  border-color: #111827;
+}
+
+/* ── Cart Item ── */
+.cart-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+  transition: background-color 0.15s ease;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item:hover {
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.cart-item__image {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  background: #f8f9fa;
+  display: block;
+}
+
+.cart-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cart-item__name {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.15s ease;
+}
+
+.cart-item__name:hover {
+  color: #111;
+}
+
+.cart-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #8e8e93;
+}
+
+.cart-item__variant {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-item__qty {
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.cart-item__price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 2px;
+}
+
+.cart-item__remove {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: #8e8e93;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.cart-item__remove:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+}
+
+/* Cart Footer */
+.header-dropdown__footer {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  background: rgba(15, 23, 42, 0.015);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header-dropdown__subtotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+.header-dropdown__subtotal strong {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.header-dropdown__checkout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 10px;
+  border: none;
+  transition: background-color 0.18s ease, transform 0.15s ease;
+  letter-spacing: 0.01em;
+}
+
+.header-dropdown__checkout-btn:hover {
+  background: #000000;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.header-dropdown__checkout-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Notification Item ── */
+.noti-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+  transition: background-color 0.15s ease;
+  cursor: default;
+}
+
+.noti-item:last-child {
+  border-bottom: none;
+}
+
+.noti-item:hover {
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.noti-item--unread {
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.noti-item--unread:hover {
+  background: rgba(15, 23, 42, 0.035);
+}
+
+.noti-item__icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.noti-item__icon i {
+  line-height: 1;
+}
+
+.noti-item__icon--order {
+  background: rgba(15, 23, 42, 0.06);
+  color: #111827;
+}
+
+.noti-item__icon--promo {
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+}
+
+.noti-item__icon--review {
+  background: rgba(234, 179, 8, 0.1);
+  color: #ca8a04;
+}
+
+.noti-item__icon--system {
+  background: rgba(59, 130, 246, 0.08);
+  color: #2563eb;
+}
+
+.noti-item__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.noti-item__text {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #374151;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.noti-item__time {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.noti-item__dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #111827;
+  border: none;
+  padding: 0;
+  cursor: default;
+  align-self: center;
+}
+
+.noti-item__actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  padding-top: 2px;
+}
+
+.noti-item__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  padding: 0;
+  font-size: 0.8rem;
+  opacity: 0;
+}
+
+.noti-item:hover .noti-item__close {
+  opacity: 1;
+}
+
+.noti-item__close:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+}
+
+/* Dropdown transition */
+.dropdown-fade-enter-active,
+.dropdown-fade-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dropdown-fade-enter-from,
+.dropdown-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+}
+
+.dropdown-fade-enter-to,
+.dropdown-fade-leave-from {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 </style>
