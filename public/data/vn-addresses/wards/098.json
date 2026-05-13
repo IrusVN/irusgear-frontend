@@ -1,0 +1,86 @@
+[
+  {
+    "code": "03220",
+    "name": "Huổi Só",
+    "full_name": "Xã Huổi Só",
+    "type": "Xã Huổi",
+    "district_code": "098"
+  },
+  {
+    "code": "03229",
+    "name": "Lao Xả Phình",
+    "full_name": "Xã Lao Xả Phình",
+    "type": "Xã Lao Xả",
+    "district_code": "098"
+  },
+  {
+    "code": "03250",
+    "name": "Mường Báng",
+    "full_name": "Xã Mường Báng",
+    "type": "Xã Mường",
+    "district_code": "098"
+  },
+  {
+    "code": "03247",
+    "name": "Mường Đun",
+    "full_name": "Xã Mường Đun",
+    "type": "Xã Mường",
+    "district_code": "098"
+  },
+  {
+    "code": "03244",
+    "name": "Sáng Nhè",
+    "full_name": "Xã Sáng Nhè",
+    "type": "Xã Sáng",
+    "district_code": "098"
+  },
+  {
+    "code": "03241",
+    "name": "Sính Phình",
+    "full_name": "Xã Sính Phình",
+    "type": "Xã Sính",
+    "district_code": "098"
+  },
+  {
+    "code": "03232",
+    "name": "Tả Phìn",
+    "full_name": "Xã Tả Phìn",
+    "type": "Xã Tả",
+    "district_code": "098"
+  },
+  {
+    "code": "03226",
+    "name": "Tả Sìn Thàng",
+    "full_name": "Xã Tả Sìn Thàng",
+    "type": "Xã Tả Sìn",
+    "district_code": "098"
+  },
+  {
+    "code": "03238",
+    "name": "Trung Thu",
+    "full_name": "Xã Trung Thu",
+    "type": "Xã Trung",
+    "district_code": "098"
+  },
+  {
+    "code": "03217",
+    "name": "Tủa Chùa",
+    "full_name": "Thị trấn Tủa Chùa",
+    "type": "Thị trấn Tủa",
+    "district_code": "098"
+  },
+  {
+    "code": "03235",
+    "name": "Tủa Thàng",
+    "full_name": "Xã Tủa Thàng",
+    "type": "Xã Tủa",
+    "district_code": "098"
+  },
+  {
+    "code": "03223",
+    "name": "Xín Chải",
+    "full_name": "Xã Xín Chải",
+    "type": "Xã Xín",
+    "district_code": "098"
+  }
+]

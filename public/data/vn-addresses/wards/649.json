@@ -1,0 +1,51 @@
+[
+  {
+    "code": "24310",
+    "name": "Chư KBô",
+    "full_name": "Xã Chư KBô",
+    "type": "Xã Chư",
+    "district_code": "649"
+  },
+  {
+    "code": "24307",
+    "name": "Cư Né",
+    "full_name": "Xã Cư Né",
+    "type": "Xã Cư",
+    "district_code": "649"
+  },
+  {
+    "code": "24313",
+    "name": "Cư Pơng",
+    "full_name": "Xã Cư Pơng",
+    "type": "Xã Cư",
+    "district_code": "649"
+  },
+  {
+    "code": "24319",
+    "name": "Ea Ngai",
+    "full_name": "Xã Ea Ngai",
+    "type": "Xã Ea",
+    "district_code": "649"
+  },
+  {
+    "code": "24314",
+    "name": "Ea Sin",
+    "full_name": "Xã Ea Sin",
+    "type": "Xã Ea",
+    "district_code": "649"
+  },
+  {
+    "code": "24316",
+    "name": "Pơng Drang",
+    "full_name": "Thị trấn Pơng Drang",
+    "type": "Thị trấn Pơng",
+    "district_code": "649"
+  },
+  {
+    "code": "24317",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "649"
+  }
+]

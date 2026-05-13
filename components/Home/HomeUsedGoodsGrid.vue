@@ -2,32 +2,32 @@
   <div class="my-3 my-md-4">
     <section class="used-section text-neutral-800">
       <div class="d-flex align-items-center gap-3 used-header">
-        <h2 class="mb-0 used-title">Hàng cũ</h2>
+        <h2 class="mb-0 used-title">{{ $t('home.usedGoodsTitle') }}</h2>
 
         <div class="d-none d-md-block used-divider"></div>
 
         <div class="d-none d-md-flex gap-2"></div>
 
-        <a :href="viewAllUrl" class="view-all-link text-decoration-none">
+        <NuxtLink :to="viewAllUrl" class="view-all-link text-decoration-none">
           Xem tất cả
           <i class="bi bi-chevron-right ms-1"></i>
-        </a>
+        </NuxtLink>
       </div>
 
       <div class="mt-2">
         <div class="used-surface animate-fade-in">
           <div class="used-grid-wrap position-relative bg-white">
-            <a
+            <NuxtLink
               v-for="item in usedItems"
-              :key="item.href"
-              :href="item.href"
+              :key="item.category"
+              :to="localePath(`/products?category=${item.category}`)"
               class="used-item text-decoration-none text-dark"
             >
               <span class="used-image-wrap">
-                <img :src="item.image" :alt="item.title" class="used-image" loading="lazy" />
+                <i :class="item.iconClass || 'bi bi-phone'" class="used-image bi" role="img" :aria-label="item.title"></i>
               </span>
               <p class="mb-0 used-name">{{ item.title }}</p>
-            </a>
+            </NuxtLink>
 
             <div class="grid-edge-right"></div>
             <div class="grid-edge-bottom"></div>
@@ -39,68 +39,71 @@
 </template>
 
 <script setup>
-const viewAllUrl = "/hang-cu.html";
+import { useLocalePath } from '#imports'
+
+const localePath = useLocalePath()
+const viewAllUrl = localePath('/products?category=hang-cu')
 
 const usedItems = [
   {
     title: "Điện thoại cũ",
-    href: "/hang-cu/dien-thoai.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHN1CX574BKJDSX3XTV0Z.png",
+    category: "dien-thoai-cu",
+    iconClass: "bi bi-phone",
   },
   {
     title: "Máy tính bảng cũ",
-    href: "/hang-cu/may-tinh-bang.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNEN2HYY96910SE6P5CX.png",
+    category: "may-tinh-bang-cu",
+    iconClass: "bi bi-tablet",
   },
   {
     title: "MacBook cũ",
-    href: "/hang-cu/mac.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNKVTJ1GTEQVKXBVPHVK.png",
+    category: "mac-cu",
+    iconClass: "bi bi-laptop",
   },
   {
     title: "Laptop cũ",
-    href: "/hang-cu/laptop.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNPGC65TPCJ4WCMBMWFQ.png",
+    category: "laptop-cu",
+    iconClass: "bi bi-pc-display",
   },
   {
     title: "Tai nghe cũ",
-    href: "/hang-cu/tai-nghe.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNSHME314PFV4CS149PF.png",
+    category: "tai-nghe-cu",
+    iconClass: "bi bi-headphones",
   },
   {
     title: "Loa cũ",
-    href: "/hang-cu/loa.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHNWWHR58EFPQMW478WE8.png",
+    category: "loa-cu",
+    iconClass: "bi bi-speaker",
   },
   {
     title: "Đồng hồ thông minh cũ",
-    href: "/hang-cu/dong-ho-thong-minh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP0S6KFMG1WQC3ATY7W9.png",
+    category: "dong-ho-thong-minh-cu",
+    iconClass: "bi bi-smartwatch",
   },
   {
     title: "Đồ gia dụng cũ",
-    href: "/hang-cu/do-gia-dung.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6F9S2R1MRJKN8S46YXGE197.png",
+    category: "do-gia-dung-cu",
+    iconClass: "bi bi-house-gear",
   },
   {
     title: "Phụ kiện cũ",
-    href: "/hang-cu/phu-kien.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP4WXYP5MVQ0RN85RND2.png",
+    category: "phu-kien-cu",
+    iconClass: "bi bi-mouse2",
   },
   {
     title: "Màn hình cũ",
-    href: "/hang-cu/man-hinh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHP91VN84H4GS1KNY86KA.png",
+    category: "man-hinh-cu",
+    iconClass: "bi bi-display",
   },
   {
     title: "Tivi cũ",
-    href: "/hang-cu/tivi.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6F9S3JQH0CMJDFZAR5C1589.png",
+    category: "tivi-cu",
+    iconClass: "bi bi-tv",
   },
   {
     title: "Cáp sạc cũ",
-    href: "/hang-cu/phu-kien/cap-sac.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FCHPE4CGXKHP6ZD2MBVYZ4.png",
+    category: "cap-sac-cu",
+    iconClass: "bi bi-usb-symbol",
   },
 ];
 </script>
@@ -176,7 +179,11 @@ const usedItems = [
 .used-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: var(--irus-color-accent);
 }
 
 .used-name {

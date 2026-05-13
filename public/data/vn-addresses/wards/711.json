@@ -1,0 +1,65 @@
+[
+  {
+    "code": "25705",
+    "name": "An Thạnh",
+    "full_name": "Xã An Thạnh",
+    "type": "Xã An",
+    "district_code": "711"
+  },
+  {
+    "code": "25681",
+    "name": "Bến Cầu",
+    "full_name": "Thị trấn Bến Cầu",
+    "type": "Thị trấn Bến",
+    "district_code": "711"
+  },
+  {
+    "code": "25699",
+    "name": "Lợi Thuận",
+    "full_name": "Xã Lợi Thuận",
+    "type": "Xã Lợi",
+    "district_code": "711"
+  },
+  {
+    "code": "25684",
+    "name": "Long Chữ",
+    "full_name": "Xã Long Chữ",
+    "type": "Xã Long",
+    "district_code": "711"
+  },
+  {
+    "code": "25690",
+    "name": "Long Giang",
+    "full_name": "Xã Long Giang",
+    "type": "Xã Long",
+    "district_code": "711"
+  },
+  {
+    "code": "25696",
+    "name": "Long Khánh",
+    "full_name": "Xã Long Khánh",
+    "type": "Xã Long",
+    "district_code": "711"
+  },
+  {
+    "code": "25687",
+    "name": "Long Phước",
+    "full_name": "Xã Long Phước",
+    "type": "Xã Long",
+    "district_code": "711"
+  },
+  {
+    "code": "25702",
+    "name": "Long Thuận",
+    "full_name": "Xã Long Thuận",
+    "type": "Xã Long",
+    "district_code": "711"
+  },
+  {
+    "code": "25693",
+    "name": "Tiên Thuận",
+    "full_name": "Xã Tiên Thuận",
+    "type": "Xã Tiên",
+    "district_code": "711"
+  }
+]

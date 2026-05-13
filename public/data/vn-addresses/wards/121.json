@@ -1,0 +1,114 @@
+[
+  {
+    "code": "03856",
+    "name": "Bắc Yên",
+    "full_name": "Thị trấn Bắc Yên",
+    "type": "Thị trấn Bắc",
+    "district_code": "121"
+  },
+  {
+    "code": "03895",
+    "name": "Chiềng Sại",
+    "full_name": "Xã Chiềng Sại",
+    "type": "Xã Chiềng",
+    "district_code": "121"
+  },
+  {
+    "code": "03877",
+    "name": "Chim Vàn",
+    "full_name": "Xã Chim Vàn",
+    "type": "Xã Chim",
+    "district_code": "121"
+  },
+  {
+    "code": "03862",
+    "name": "Hang Chú",
+    "full_name": "Xã Hang Chú",
+    "type": "Xã Hang",
+    "district_code": "121"
+  },
+  {
+    "code": "03869",
+    "name": "Háng Đồng",
+    "full_name": "Xã Háng Đồng",
+    "type": "Xã Háng",
+    "district_code": "121"
+  },
+  {
+    "code": "03886",
+    "name": "Hồng Ngài",
+    "full_name": "Xã Hồng Ngài",
+    "type": "Xã Hồng",
+    "district_code": "121"
+  },
+  {
+    "code": "03890",
+    "name": "Hua Nhàn",
+    "full_name": "Xã Hua Nhàn",
+    "type": "Xã Hua",
+    "district_code": "121"
+  },
+  {
+    "code": "03874",
+    "name": "Làng Chếu",
+    "full_name": "Xã Làng Chếu",
+    "type": "Xã Làng",
+    "district_code": "121"
+  },
+  {
+    "code": "03880",
+    "name": "Mường Khoa",
+    "full_name": "Xã Mường Khoa",
+    "type": "Xã Mường",
+    "district_code": "121"
+  },
+  {
+    "code": "03871",
+    "name": "Pắc Ngà",
+    "full_name": "Xã Pắc Ngà",
+    "type": "Xã Pắc",
+    "district_code": "121"
+  },
+  {
+    "code": "03859",
+    "name": "Phiêng Ban",
+    "full_name": "Xã Phiêng Ban",
+    "type": "Xã Phiêng",
+    "district_code": "121"
+  },
+  {
+    "code": "03892",
+    "name": "Phiêng Côn",
+    "full_name": "Xã Phiêng Côn",
+    "type": "Xã Phiêng",
+    "district_code": "121"
+  },
+  {
+    "code": "03883",
+    "name": "Song Pe",
+    "full_name": "Xã Song Pe",
+    "type": "Xã Song",
+    "district_code": "121"
+  },
+  {
+    "code": "03889",
+    "name": "Tạ Khoa",
+    "full_name": "Xã Tạ Khoa",
+    "type": "Xã Tạ",
+    "district_code": "121"
+  },
+  {
+    "code": "03868",
+    "name": "Tà Xùa",
+    "full_name": "Xã Tà Xùa",
+    "type": "Xã Tà",
+    "district_code": "121"
+  },
+  {
+    "code": "03865",
+    "name": "Xím Vàng",
+    "full_name": "Xã Xím Vàng",
+    "type": "Xã Xím",
+    "district_code": "121"
+  }
+]

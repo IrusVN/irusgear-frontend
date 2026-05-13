@@ -1,0 +1,72 @@
+[
+  {
+    "code": "00592",
+    "name": "Cầu Diễn",
+    "full_name": "Phường Cầu Diễn",
+    "type": "Phường Cầu",
+    "district_code": "019"
+  },
+  {
+    "code": "00631",
+    "name": "Mễ Trì",
+    "full_name": "Phường Mễ Trì",
+    "type": "Phường Mễ",
+    "district_code": "019"
+  },
+  {
+    "code": "00625",
+    "name": "Mỹ Đình 1",
+    "full_name": "Phường Mỹ Đình 1",
+    "type": "Phường Mỹ Đình",
+    "district_code": "019"
+  },
+  {
+    "code": "00626",
+    "name": "Mỹ Đình 2",
+    "full_name": "Phường Mỹ Đình 2",
+    "type": "Phường Mỹ Đình",
+    "district_code": "019"
+  },
+  {
+    "code": "00632",
+    "name": "Phú Đô",
+    "full_name": "Phường Phú Đô",
+    "type": "Phường Phú",
+    "district_code": "019"
+  },
+  {
+    "code": "00623",
+    "name": "Phương Canh",
+    "full_name": "Phường Phương Canh",
+    "type": "Phường Phương",
+    "district_code": "019"
+  },
+  {
+    "code": "00628",
+    "name": "Tây Mỗ",
+    "full_name": "Phường Tây Mỗ",
+    "type": "Phường Tây",
+    "district_code": "019"
+  },
+  {
+    "code": "00637",
+    "name": "Trung Văn",
+    "full_name": "Phường Trung Văn",
+    "type": "Phường Trung",
+    "district_code": "019"
+  },
+  {
+    "code": "00622",
+    "name": "Xuân Phương",
+    "full_name": "Phường Xuân Phương",
+    "type": "Phường Xuân",
+    "district_code": "019"
+  },
+  {
+    "code": "00634",
+    "name": "Đại Mỗ",
+    "full_name": "Phường Đại Mỗ",
+    "type": "Phường Đại",
+    "district_code": "019"
+  }
+]

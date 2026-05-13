@@ -1,0 +1,58 @@
+[
+  {
+    "code": "933",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "93"
+  },
+  {
+    "code": "932",
+    "name": "Châu Thành A",
+    "full_name": "Huyện Châu Thành A",
+    "type": "Huyện Châu Thành",
+    "province_code": "93"
+  },
+  {
+    "code": "936",
+    "name": "Long Mỹ",
+    "full_name": "Huyện Long Mỹ",
+    "type": "Huyện Long",
+    "province_code": "93"
+  },
+  {
+    "code": "937",
+    "name": "Long Mỹ",
+    "full_name": "Thị xã Long Mỹ",
+    "type": "Thị xã Long",
+    "province_code": "93"
+  },
+  {
+    "code": "931",
+    "name": "Ngã Bảy",
+    "full_name": "Thành phố Ngã Bảy",
+    "type": "Thành phố Ngã",
+    "province_code": "93"
+  },
+  {
+    "code": "934",
+    "name": "Phụng Hiệp",
+    "full_name": "Huyện Phụng Hiệp",
+    "type": "Huyện Phụng",
+    "province_code": "93"
+  },
+  {
+    "code": "930",
+    "name": "Vị Thanh",
+    "full_name": "Thành phố Vị Thanh",
+    "type": "Thành phố Vị",
+    "province_code": "93"
+  },
+  {
+    "code": "935",
+    "name": "Vị Thuỷ",
+    "full_name": "Huyện Vị Thuỷ",
+    "type": "Huyện Vị",
+    "province_code": "93"
+  }
+]

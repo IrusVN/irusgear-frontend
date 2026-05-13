@@ -1,0 +1,79 @@
+[
+  {
+    "code": "22999",
+    "name": "Bình Thạnh",
+    "full_name": "Xã Bình Thạnh",
+    "type": "Xã Bình",
+    "district_code": "595"
+  },
+  {
+    "code": "22996",
+    "name": "Chí Công",
+    "full_name": "Xã Chí Công",
+    "type": "Xã Chí",
+    "district_code": "595"
+  },
+  {
+    "code": "22993",
+    "name": "Hòa Minh",
+    "full_name": "Xã Hòa Minh",
+    "type": "Xã Hòa",
+    "district_code": "595"
+  },
+  {
+    "code": "22969",
+    "name": "Liên Hương",
+    "full_name": "Thị trấn Liên Hương",
+    "type": "Thị trấn Liên",
+    "district_code": "595"
+  },
+  {
+    "code": "22975",
+    "name": "Phan Dũng",
+    "full_name": "Xã Phan Dũng",
+    "type": "Xã Phan",
+    "district_code": "595"
+  },
+  {
+    "code": "22972",
+    "name": "Phan Rí Cửa",
+    "full_name": "Thị trấn Phan Rí Cửa",
+    "type": "Thị trấn Phan Rí",
+    "district_code": "595"
+  },
+  {
+    "code": "22978",
+    "name": "Phong Phú",
+    "full_name": "Xã Phong Phú",
+    "type": "Xã Phong",
+    "district_code": "595"
+  },
+  {
+    "code": "22987",
+    "name": "Phú Lạc",
+    "full_name": "Xã Phú Lạc",
+    "type": "Xã Phú",
+    "district_code": "595"
+  },
+  {
+    "code": "22990",
+    "name": "Phước Thể",
+    "full_name": "Xã Phước Thể",
+    "type": "Xã Phước",
+    "district_code": "595"
+  },
+  {
+    "code": "22981",
+    "name": "Vĩnh Hảo",
+    "full_name": "Xã Vĩnh Hảo",
+    "type": "Xã Vĩnh",
+    "district_code": "595"
+  },
+  {
+    "code": "22984",
+    "name": "Vĩnh Tân",
+    "full_name": "Xã Vĩnh Tân",
+    "type": "Xã Vĩnh",
+    "district_code": "595"
+  }
+]

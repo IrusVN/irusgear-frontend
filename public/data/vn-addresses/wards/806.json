@@ -1,0 +1,121 @@
+[
+  {
+    "code": "28108",
+    "name": "Cần Đước",
+    "full_name": "Thị trấn Cần Đước",
+    "type": "Thị trấn Cần",
+    "district_code": "806"
+  },
+  {
+    "code": "28126",
+    "name": "Long Cang",
+    "full_name": "Xã Long Cang",
+    "type": "Xã Long",
+    "district_code": "806"
+  },
+  {
+    "code": "28123",
+    "name": "Long Hòa",
+    "full_name": "Xã Long Hòa",
+    "type": "Xã Long",
+    "district_code": "806"
+  },
+  {
+    "code": "28153",
+    "name": "Long Hựu Tây",
+    "full_name": "Xã Long Hựu Tây",
+    "type": "Xã Long Hựu",
+    "district_code": "806"
+  },
+  {
+    "code": "28144",
+    "name": "Long Hựu Đông",
+    "full_name": "Xã Long Hựu Đông",
+    "type": "Xã Long Hựu",
+    "district_code": "806"
+  },
+  {
+    "code": "28114",
+    "name": "Long Khê",
+    "full_name": "Xã Long Khê",
+    "type": "Xã Long",
+    "district_code": "806"
+  },
+  {
+    "code": "28129",
+    "name": "Long Sơn",
+    "full_name": "Xã Long Sơn",
+    "type": "Xã Long",
+    "district_code": "806"
+  },
+  {
+    "code": "28111",
+    "name": "Long Trạch",
+    "full_name": "Xã Long Trạch",
+    "type": "Xã Long",
+    "district_code": "806"
+  },
+  {
+    "code": "28117",
+    "name": "Long Định",
+    "full_name": "Xã Long Định",
+    "type": "Xã Long",
+    "district_code": "806"
+  },
+  {
+    "code": "28135",
+    "name": "Mỹ Lệ",
+    "full_name": "Xã Mỹ Lệ",
+    "type": "Xã Mỹ",
+    "district_code": "806"
+  },
+  {
+    "code": "28141",
+    "name": "Phước Tuy",
+    "full_name": "Xã Phước Tuy",
+    "type": "Xã Phước",
+    "district_code": "806"
+  },
+  {
+    "code": "28120",
+    "name": "Phước Vân",
+    "full_name": "Xã Phước Vân",
+    "type": "Xã Phước",
+    "district_code": "806"
+  },
+  {
+    "code": "28150",
+    "name": "Phước Đông",
+    "full_name": "Xã Phước Đông",
+    "type": "Xã Phước",
+    "district_code": "806"
+  },
+  {
+    "code": "28147",
+    "name": "Tân Ân",
+    "full_name": "Xã Tân Ân",
+    "type": "Xã Tân",
+    "district_code": "806"
+  },
+  {
+    "code": "28156",
+    "name": "Tân Chánh",
+    "full_name": "Xã Tân Chánh",
+    "type": "Xã Tân",
+    "district_code": "806"
+  },
+  {
+    "code": "28138",
+    "name": "Tân Lân",
+    "full_name": "Xã Tân Lân",
+    "type": "Xã Tân",
+    "district_code": "806"
+  },
+  {
+    "code": "28132",
+    "name": "Tân Trạch",
+    "full_name": "Xã Tân Trạch",
+    "type": "Xã Tân",
+    "district_code": "806"
+  }
+]

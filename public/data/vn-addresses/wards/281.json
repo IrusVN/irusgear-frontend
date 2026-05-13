@@ -1,0 +1,205 @@
+[
+  {
+    "code": "10372",
+    "name": "Cao Thành",
+    "full_name": "Xã Cao Thành",
+    "type": "Xã Cao",
+    "district_code": "281"
+  },
+  {
+    "code": "10402",
+    "name": "Hòa Lâm",
+    "full_name": "Xã Hòa Lâm",
+    "type": "Xã Hòa",
+    "district_code": "281"
+  },
+  {
+    "code": "10414",
+    "name": "Hòa Nam",
+    "full_name": "Xã Hòa Nam",
+    "type": "Xã Hòa",
+    "district_code": "281"
+  },
+  {
+    "code": "10417",
+    "name": "Hòa Phú",
+    "full_name": "Xã Hòa Phú",
+    "type": "Xã Hòa",
+    "district_code": "281"
+  },
+  {
+    "code": "10363",
+    "name": "Hoa Sơn",
+    "full_name": "Xã Hoa Sơn",
+    "type": "Xã Hoa",
+    "district_code": "281"
+  },
+  {
+    "code": "10405",
+    "name": "Hòa Xá",
+    "full_name": "Xã Hòa Xá",
+    "type": "Xã Hòa",
+    "district_code": "281"
+  },
+  {
+    "code": "10438",
+    "name": "Hồng Quang",
+    "full_name": "Xã Hồng Quang",
+    "type": "Xã Hồng",
+    "district_code": "281"
+  },
+  {
+    "code": "10411",
+    "name": "Kim Đường",
+    "full_name": "Xã Kim Đường",
+    "type": "Xã Kim",
+    "district_code": "281"
+  },
+  {
+    "code": "10375",
+    "name": "Liên Bạt",
+    "full_name": "Xã Liên Bạt",
+    "type": "Xã Liên",
+    "district_code": "281"
+  },
+  {
+    "code": "10435",
+    "name": "Lưu Hoàng",
+    "full_name": "Xã Lưu Hoàng",
+    "type": "Xã Lưu",
+    "district_code": "281"
+  },
+  {
+    "code": "10399",
+    "name": "Minh Đức",
+    "full_name": "Xã Minh Đức",
+    "type": "Xã Minh",
+    "district_code": "281"
+  },
+  {
+    "code": "10429",
+    "name": "Phù Lưu",
+    "full_name": "Xã Phù Lưu",
+    "type": "Xã Phù",
+    "district_code": "281"
+  },
+  {
+    "code": "10384",
+    "name": "Phương Tú",
+    "full_name": "Xã Phương Tú",
+    "type": "Xã Phương",
+    "district_code": "281"
+  },
+  {
+    "code": "10366",
+    "name": "Quảng Phú Cầu",
+    "full_name": "Xã Quảng Phú Cầu",
+    "type": "Xã Quảng Phú",
+    "district_code": "281"
+  },
+  {
+    "code": "10378",
+    "name": "Sơn Công",
+    "full_name": "Xã Sơn Công",
+    "type": "Xã Sơn",
+    "district_code": "281"
+  },
+  {
+    "code": "10393",
+    "name": "Tảo Dương Văn",
+    "full_name": "Xã Tảo Dương Văn",
+    "type": "Xã Tảo Dương",
+    "district_code": "281"
+  },
+  {
+    "code": "10408",
+    "name": "Trầm Lộng",
+    "full_name": "Xã Trầm Lộng",
+    "type": "Xã Trầm",
+    "district_code": "281"
+  },
+  {
+    "code": "10387",
+    "name": "Trung Tú",
+    "full_name": "Xã Trung Tú",
+    "type": "Xã Trung",
+    "district_code": "281"
+  },
+  {
+    "code": "10369",
+    "name": "Trường Thịnh",
+    "full_name": "Xã Trường Thịnh",
+    "type": "Xã Trường",
+    "district_code": "281"
+  },
+  {
+    "code": "10396",
+    "name": "Vạn Thái",
+    "full_name": "Xã Vạn Thái",
+    "type": "Xã Vạn",
+    "district_code": "281"
+  },
+  {
+    "code": "10354",
+    "name": "Vân Đình",
+    "full_name": "Thị trấn Vân Đình",
+    "type": "Thị trấn Vân",
+    "district_code": "281"
+  },
+  {
+    "code": "10357",
+    "name": "Viên An",
+    "full_name": "Xã Viên An",
+    "type": "Xã Viên",
+    "district_code": "281"
+  },
+  {
+    "code": "10360",
+    "name": "Viên Nội",
+    "full_name": "Xã Viên Nội",
+    "type": "Xã Viên",
+    "district_code": "281"
+  },
+  {
+    "code": "10432",
+    "name": "Đại Cường",
+    "full_name": "Xã Đại Cường",
+    "type": "Xã Đại",
+    "district_code": "281"
+  },
+  {
+    "code": "10423",
+    "name": "Đại Hùng",
+    "full_name": "Xã Đại Hùng",
+    "type": "Xã Đại",
+    "district_code": "281"
+  },
+  {
+    "code": "10420",
+    "name": "Đội Bình",
+    "full_name": "Xã Đội Bình",
+    "type": "Xã Đội",
+    "district_code": "281"
+  },
+  {
+    "code": "10426",
+    "name": "Đông Lỗ",
+    "full_name": "Xã Đông Lỗ",
+    "type": "Xã Đông",
+    "district_code": "281"
+  },
+  {
+    "code": "10390",
+    "name": "Đồng Tân",
+    "full_name": "Xã Đồng Tân",
+    "type": "Xã Đồng",
+    "district_code": "281"
+  },
+  {
+    "code": "10381",
+    "name": "Đồng Tiến",
+    "full_name": "Xã Đồng Tiến",
+    "type": "Xã Đồng",
+    "district_code": "281"
+  }
+]

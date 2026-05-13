@@ -1,0 +1,79 @@
+[
+  {
+    "code": "28870",
+    "name": "Chợ Lách",
+    "full_name": "Thị trấn Chợ Lách",
+    "type": "Thị trấn Chợ",
+    "district_code": "832"
+  },
+  {
+    "code": "28882",
+    "name": "Hòa Nghĩa",
+    "full_name": "Xã Hòa Nghĩa",
+    "type": "Xã Hòa",
+    "district_code": "832"
+  },
+  {
+    "code": "28900",
+    "name": "Hưng Khánh Trung B",
+    "full_name": "Xã Hưng Khánh Trung B",
+    "type": "Xã Hưng Khánh Trung",
+    "district_code": "832"
+  },
+  {
+    "code": "28885",
+    "name": "Long Thới",
+    "full_name": "Xã Long Thới",
+    "type": "Xã Long",
+    "district_code": "832"
+  },
+  {
+    "code": "28873",
+    "name": "Phú Phụng",
+    "full_name": "Xã Phú Phụng",
+    "type": "Xã Phú",
+    "district_code": "832"
+  },
+  {
+    "code": "28888",
+    "name": "Phú Sơn",
+    "full_name": "Xã Phú Sơn",
+    "type": "Xã Phú",
+    "district_code": "832"
+  },
+  {
+    "code": "28876",
+    "name": "Sơn Định",
+    "full_name": "Xã Sơn Định",
+    "type": "Xã Sơn",
+    "district_code": "832"
+  },
+  {
+    "code": "28891",
+    "name": "Tân Thiềng",
+    "full_name": "Xã Tân Thiềng",
+    "type": "Xã Tân",
+    "district_code": "832"
+  },
+  {
+    "code": "28879",
+    "name": "Vĩnh Bình",
+    "full_name": "Xã Vĩnh Bình",
+    "type": "Xã Vĩnh",
+    "district_code": "832"
+  },
+  {
+    "code": "28897",
+    "name": "Vĩnh Hòa",
+    "full_name": "Xã Vĩnh Hòa",
+    "type": "Xã Vĩnh",
+    "district_code": "832"
+  },
+  {
+    "code": "28894",
+    "name": "Vĩnh Thành",
+    "full_name": "Xã Vĩnh Thành",
+    "type": "Xã Vĩnh",
+    "district_code": "832"
+  }
+]

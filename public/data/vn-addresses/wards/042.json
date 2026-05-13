@@ -1,0 +1,93 @@
+[
+  {
+    "code": "01294",
+    "name": "Lý Bôn",
+    "full_name": "Xã Lý Bôn",
+    "type": "Xã Lý",
+    "district_code": "042"
+  },
+  {
+    "code": "01312",
+    "name": "Mông Ân",
+    "full_name": "Xã Mông Ân",
+    "type": "Xã Mông",
+    "district_code": "042"
+  },
+  {
+    "code": "01296",
+    "name": "Nam Cao",
+    "full_name": "Xã Nam Cao",
+    "type": "Xã Nam",
+    "district_code": "042"
+  },
+  {
+    "code": "01297",
+    "name": "Nam Quang",
+    "full_name": "Xã Nam Quang",
+    "type": "Xã Nam",
+    "district_code": "042"
+  },
+  {
+    "code": "01290",
+    "name": "Pác Miầu",
+    "full_name": "Thị trấn Pác Miầu",
+    "type": "Thị trấn Pác",
+    "district_code": "042"
+  },
+  {
+    "code": "01303",
+    "name": "Quảng Lâm",
+    "full_name": "Xã Quảng Lâm",
+    "type": "Xã Quảng",
+    "district_code": "042"
+  },
+  {
+    "code": "01304",
+    "name": "Thạch Lâm",
+    "full_name": "Xã Thạch Lâm",
+    "type": "Xã Thạch",
+    "district_code": "042"
+  },
+  {
+    "code": "01315",
+    "name": "Thái Học",
+    "full_name": "Xã Thái Học",
+    "type": "Xã Thái",
+    "district_code": "042"
+  },
+  {
+    "code": "01316",
+    "name": "Thái Sơn",
+    "full_name": "Xã Thái Sơn",
+    "type": "Xã Thái",
+    "district_code": "042"
+  },
+  {
+    "code": "01309",
+    "name": "Vĩnh Phong",
+    "full_name": "Xã Vĩnh Phong",
+    "type": "Xã Vĩnh",
+    "district_code": "042"
+  },
+  {
+    "code": "01300",
+    "name": "Vĩnh Quang",
+    "full_name": "Xã Vĩnh Quang",
+    "type": "Xã Vĩnh",
+    "district_code": "042"
+  },
+  {
+    "code": "01318",
+    "name": "Yên Thổ",
+    "full_name": "Xã Yên Thổ",
+    "type": "Xã Yên",
+    "district_code": "042"
+  },
+  {
+    "code": "01291",
+    "name": "Đức Hạnh",
+    "full_name": "Xã Đức Hạnh",
+    "type": "Xã Đức",
+    "district_code": "042"
+  }
+]

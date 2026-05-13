@@ -1,0 +1,79 @@
+[
+  {
+    "code": "22216",
+    "name": "Ea Bá",
+    "full_name": "Xã Ea Bá",
+    "type": "Xã Ea",
+    "district_code": "561"
+  },
+  {
+    "code": "22210",
+    "name": "Ea Lâm",
+    "full_name": "Xã Ea Lâm",
+    "type": "Xã Ea",
+    "district_code": "561"
+  },
+  {
+    "code": "22225",
+    "name": "EaBar",
+    "full_name": "Xã EaBar",
+    "type": "Xã",
+    "district_code": "561"
+  },
+  {
+    "code": "22228",
+    "name": "EaBia",
+    "full_name": "Xã EaBia",
+    "type": "Xã",
+    "district_code": "561"
+  },
+  {
+    "code": "22237",
+    "name": "Ealy",
+    "full_name": "Xã Ealy",
+    "type": "Xã",
+    "district_code": "561"
+  },
+  {
+    "code": "22231",
+    "name": "EaTrol",
+    "full_name": "Xã EaTrol",
+    "type": "Xã",
+    "district_code": "561"
+  },
+  {
+    "code": "22207",
+    "name": "Hai Riêng",
+    "full_name": "Thị trấn Hai Riêng",
+    "type": "Thị trấn Hai",
+    "district_code": "561"
+  },
+  {
+    "code": "22219",
+    "name": "Sơn Giang",
+    "full_name": "Xã Sơn Giang",
+    "type": "Xã Sơn",
+    "district_code": "561"
+  },
+  {
+    "code": "22234",
+    "name": "Sông Hinh",
+    "full_name": "Xã Sông Hinh",
+    "type": "Xã Sông",
+    "district_code": "561"
+  },
+  {
+    "code": "22213",
+    "name": "Đức Bình Tây",
+    "full_name": "Xã Đức Bình Tây",
+    "type": "Xã Đức Bình",
+    "district_code": "561"
+  },
+  {
+    "code": "22222",
+    "name": "Đức Bình Đông",
+    "full_name": "Xã Đức Bình Đông",
+    "type": "Xã Đức Bình",
+    "district_code": "561"
+  }
+]

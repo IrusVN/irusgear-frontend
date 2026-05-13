@@ -1,0 +1,100 @@
+[
+  {
+    "code": "14332",
+    "name": "Bích Đào",
+    "full_name": "Phường Bích Đào",
+    "type": "Phường Bích",
+    "district_code": "369"
+  },
+  {
+    "code": "14338",
+    "name": "Nam Bình",
+    "full_name": "Phường Nam Bình",
+    "type": "Phường Nam",
+    "district_code": "369"
+  },
+  {
+    "code": "14341",
+    "name": "Nam Thành",
+    "full_name": "Phường Nam Thành",
+    "type": "Phường Nam",
+    "district_code": "369"
+  },
+  {
+    "code": "14344",
+    "name": "Ninh Khánh",
+    "full_name": "Phường Ninh Khánh",
+    "type": "Phường Ninh",
+    "district_code": "369"
+  },
+  {
+    "code": "14347",
+    "name": "Ninh Nhất",
+    "full_name": "Xã Ninh Nhất",
+    "type": "Xã Ninh",
+    "district_code": "369"
+  },
+  {
+    "code": "14359",
+    "name": "Ninh Phong",
+    "full_name": "Phường Ninh Phong",
+    "type": "Phường Ninh",
+    "district_code": "369"
+  },
+  {
+    "code": "14353",
+    "name": "Ninh Phúc",
+    "full_name": "Xã Ninh Phúc",
+    "type": "Xã Ninh",
+    "district_code": "369"
+  },
+  {
+    "code": "14356",
+    "name": "Ninh Sơn",
+    "full_name": "Phường Ninh Sơn",
+    "type": "Phường Ninh",
+    "district_code": "369"
+  },
+  {
+    "code": "14350",
+    "name": "Ninh Tiến",
+    "full_name": "Xã Ninh Tiến",
+    "type": "Xã Ninh",
+    "district_code": "369"
+  },
+  {
+    "code": "14335",
+    "name": "Phúc Thành",
+    "full_name": "Phường Phúc Thành",
+    "type": "Phường Phúc",
+    "district_code": "369"
+  },
+  {
+    "code": "14323",
+    "name": "Tân Thành",
+    "full_name": "Phường Tân Thành",
+    "type": "Phường Tân",
+    "district_code": "369"
+  },
+  {
+    "code": "14326",
+    "name": "Thanh Bình",
+    "full_name": "Phường Thanh Bình",
+    "type": "Phường Thanh",
+    "district_code": "369"
+  },
+  {
+    "code": "14329",
+    "name": "Vân Giang",
+    "full_name": "Phường Vân Giang",
+    "type": "Phường Vân",
+    "district_code": "369"
+  },
+  {
+    "code": "14320",
+    "name": "Đông Thành",
+    "full_name": "Phường Đông Thành",
+    "type": "Phường Đông",
+    "district_code": "369"
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "code": "04012",
+    "name": "Chiềng Hắc",
+    "full_name": "Xã Chiềng Hắc",
+    "type": "Xã Chiềng",
+    "district_code": "123"
+  },
+  {
+    "code": "04024",
+    "name": "Chiềng Khừa",
+    "full_name": "Xã Chiềng Khừa",
+    "type": "Xã Chiềng",
+    "district_code": "123"
+  },
+  {
+    "code": "03985",
+    "name": "Chiềng Sơn",
+    "full_name": "Xã Chiềng Sơn",
+    "type": "Xã Chiềng",
+    "district_code": "123"
+  },
+  {
+    "code": "04015",
+    "name": "Hua Păng",
+    "full_name": "Xã Hua Păng",
+    "type": "Xã Hua",
+    "district_code": "123"
+  },
+  {
+    "code": "04045",
+    "name": "Lóng Sập",
+    "full_name": "Xã Lóng Sập",
+    "type": "Xã Lóng",
+    "district_code": "123"
+  },
+  {
+    "code": "03979",
+    "name": "Mộc Châu",
+    "full_name": "Thị trấn Mộc Châu",
+    "type": "Thị trấn Mộc",
+    "district_code": "123"
+  },
+  {
+    "code": "04027",
+    "name": "Mường Sang",
+    "full_name": "Xã Mường Sang",
+    "type": "Xã Mường",
+    "district_code": "123"
+  },
+  {
+    "code": "04000",
+    "name": "Nà Mường",
+    "full_name": "Xã Nà Mường",
+    "type": "Xã Nà",
+    "district_code": "123"
+  },
+  {
+    "code": "03982",
+    "name": "NT Mộc Châu",
+    "full_name": "Thị trấn NT Mộc Châu",
+    "type": "Thị trấn NT Mộc",
+    "district_code": "123"
+  },
+  {
+    "code": "04033",
+    "name": "Phiêng Luông",
+    "full_name": "Xã Phiêng Luông",
+    "type": "Xã Phiêng",
+    "district_code": "123"
+  },
+  {
+    "code": "03991",
+    "name": "Qui Hướng",
+    "full_name": "Xã Qui Hướng",
+    "type": "Xã Qui",
+    "district_code": "123"
+  },
+  {
+    "code": "04003",
+    "name": "Tà Lai",
+    "full_name": "Xã Tà Lai",
+    "type": "Xã Tà",
+    "district_code": "123"
+  },
+  {
+    "code": "03988",
+    "name": "Tân Hợp",
+    "full_name": "Xã Tân Hợp",
+    "type": "Xã Tân",
+    "district_code": "123"
+  },
+  {
+    "code": "03997",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "123"
+  },
+  {
+    "code": "04030",
+    "name": "Đông Sang",
+    "full_name": "Xã Đông Sang",
+    "type": "Xã Đông",
+    "district_code": "123"
+  }
+]

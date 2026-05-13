@@ -1,0 +1,100 @@
+[
+  {
+    "code": "16228",
+    "name": "Bến Sung",
+    "full_name": "Thị trấn Bến Sung",
+    "type": "Thị trấn Bến",
+    "district_code": "403"
+  },
+  {
+    "code": "16231",
+    "name": "Cán Khê",
+    "full_name": "Xã Cán Khê",
+    "type": "Xã Cán",
+    "district_code": "403"
+  },
+  {
+    "code": "16252",
+    "name": "Hải Long",
+    "full_name": "Xã Hải Long",
+    "type": "Xã Hải",
+    "district_code": "403"
+  },
+  {
+    "code": "16243",
+    "name": "Mậu Lâm",
+    "full_name": "Xã Mậu Lâm",
+    "type": "Xã Mậu",
+    "district_code": "403"
+  },
+  {
+    "code": "16249",
+    "name": "Phú Nhuận",
+    "full_name": "Xã Phú Nhuận",
+    "type": "Xã Phú",
+    "district_code": "403"
+  },
+  {
+    "code": "16240",
+    "name": "Phượng Nghi",
+    "full_name": "Xã Phượng Nghi",
+    "type": "Xã Phượng",
+    "district_code": "403"
+  },
+  {
+    "code": "16276",
+    "name": "Thanh Kỳ",
+    "full_name": "Xã Thanh Kỳ",
+    "type": "Xã Thanh",
+    "district_code": "403"
+  },
+  {
+    "code": "16273",
+    "name": "Thanh Tân",
+    "full_name": "Xã Thanh Tân",
+    "type": "Xã Thanh",
+    "district_code": "403"
+  },
+  {
+    "code": "16234",
+    "name": "Xuân Du",
+    "full_name": "Xã Xuân Du",
+    "type": "Xã Xuân",
+    "district_code": "403"
+  },
+  {
+    "code": "16246",
+    "name": "Xuân Khang",
+    "full_name": "Xã Xuân Khang",
+    "type": "Xã Xuân",
+    "district_code": "403"
+  },
+  {
+    "code": "16261",
+    "name": "Xuân Phúc",
+    "full_name": "Xã Xuân Phúc",
+    "type": "Xã Xuân",
+    "district_code": "403"
+  },
+  {
+    "code": "16258",
+    "name": "Xuân Thái",
+    "full_name": "Xã Xuân Thái",
+    "type": "Xã Xuân",
+    "district_code": "403"
+  },
+  {
+    "code": "16267",
+    "name": "Yên Lạc",
+    "full_name": "Xã Yên Lạc",
+    "type": "Xã Yên",
+    "district_code": "403"
+  },
+  {
+    "code": "16264",
+    "name": "Yên Thọ",
+    "full_name": "Xã Yên Thọ",
+    "type": "Xã Yên",
+    "district_code": "403"
+  }
+]

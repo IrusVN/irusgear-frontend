@@ -1,0 +1,149 @@
+[
+  {
+    "code": "07075",
+    "name": "An Sinh",
+    "full_name": "Xã An Sinh",
+    "type": "Xã An",
+    "district_code": "205"
+  },
+  {
+    "code": "07090",
+    "name": "Bình Dương",
+    "full_name": "Xã Bình Dương",
+    "type": "Xã Bình",
+    "district_code": "205"
+  },
+  {
+    "code": "07081",
+    "name": "Bình Khê",
+    "full_name": "Xã Bình Khê",
+    "type": "Xã Bình",
+    "district_code": "205"
+  },
+  {
+    "code": "07114",
+    "name": "Hoàng Quế",
+    "full_name": "Phường Hoàng Quế",
+    "type": "Phường Hoàng",
+    "district_code": "205"
+  },
+  {
+    "code": "07120",
+    "name": "Hồng Phong",
+    "full_name": "Phường Hồng Phong",
+    "type": "Phường Hồng",
+    "district_code": "205"
+  },
+  {
+    "code": "07108",
+    "name": "Hồng Thái Tây",
+    "full_name": "Xã Hồng Thái Tây",
+    "type": "Xã Hồng Thái",
+    "district_code": "205"
+  },
+  {
+    "code": "07111",
+    "name": "Hồng Thái Đông",
+    "full_name": "Xã Hồng Thái Đông",
+    "type": "Xã Hồng Thái",
+    "district_code": "205"
+  },
+  {
+    "code": "07126",
+    "name": "Hưng Đạo",
+    "full_name": "Phường Hưng Đạo",
+    "type": "Phường Hưng",
+    "district_code": "205"
+  },
+  {
+    "code": "07123",
+    "name": "Kim Sơn",
+    "full_name": "Phường Kim Sơn",
+    "type": "Phường Kim",
+    "district_code": "205"
+  },
+  {
+    "code": "07069",
+    "name": "Mạo Khê",
+    "full_name": "Phường Mạo Khê",
+    "type": "Phường Mạo",
+    "district_code": "205"
+  },
+  {
+    "code": "07099",
+    "name": "Nguyễn Huệ",
+    "full_name": "Xã Nguyễn Huệ",
+    "type": "Xã Nguyễn",
+    "district_code": "205"
+  },
+  {
+    "code": "07087",
+    "name": "Tân Việt",
+    "full_name": "Xã Tân Việt",
+    "type": "Xã Tân",
+    "district_code": "205"
+  },
+  {
+    "code": "07102",
+    "name": "Thủy An",
+    "full_name": "Xã Thủy An",
+    "type": "Xã Thủy",
+    "district_code": "205"
+  },
+  {
+    "code": "07096",
+    "name": "Tràng An",
+    "full_name": "Phường Tràng An",
+    "type": "Phường Tràng",
+    "district_code": "205"
+  },
+  {
+    "code": "07078",
+    "name": "Tràng Lương",
+    "full_name": "Xã Tràng Lương",
+    "type": "Xã Tràng",
+    "district_code": "205"
+  },
+  {
+    "code": "07084",
+    "name": "Việt Dân",
+    "full_name": "Xã Việt Dân",
+    "type": "Xã Việt",
+    "district_code": "205"
+  },
+  {
+    "code": "07105",
+    "name": "Xuân Sơn",
+    "full_name": "Phường Xuân Sơn",
+    "type": "Phường Xuân",
+    "district_code": "205"
+  },
+  {
+    "code": "07117",
+    "name": "Yên Thọ",
+    "full_name": "Phường Yên Thọ",
+    "type": "Phường Yên",
+    "district_code": "205"
+  },
+  {
+    "code": "07129",
+    "name": "Yên Đức",
+    "full_name": "Xã Yên Đức",
+    "type": "Xã Yên",
+    "district_code": "205"
+  },
+  {
+    "code": "07072",
+    "name": "Đông Triều",
+    "full_name": "Phường Đông Triều",
+    "type": "Phường Đông",
+    "district_code": "205"
+  },
+  {
+    "code": "07093",
+    "name": "Đức Chính",
+    "full_name": "Phường Đức Chính",
+    "type": "Phường Đức",
+    "district_code": "205"
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "code": "22744",
+    "name": "Bảo An",
+    "full_name": "Phường Bảo An",
+    "type": "Phường Bảo",
+    "district_code": "582"
+  },
+  {
+    "code": "22759",
+    "name": "Kinh Dinh",
+    "full_name": "Phường Kinh Dinh",
+    "type": "Phường Kinh",
+    "district_code": "582"
+  },
+  {
+    "code": "22779",
+    "name": "Mỹ Bình",
+    "full_name": "Phường Mỹ Bình",
+    "type": "Phường Mỹ",
+    "district_code": "582"
+  },
+  {
+    "code": "22780",
+    "name": "Mỹ Hải",
+    "full_name": "Phường Mỹ Hải",
+    "type": "Phường Mỹ",
+    "district_code": "582"
+  },
+  {
+    "code": "22753",
+    "name": "Mỹ Hương",
+    "full_name": "Phường Mỹ Hương",
+    "type": "Phường Mỹ",
+    "district_code": "582"
+  },
+  {
+    "code": "22771",
+    "name": "Mỹ Đông",
+    "full_name": "Phường Mỹ Đông",
+    "type": "Phường Mỹ",
+    "district_code": "582"
+  },
+  {
+    "code": "22747",
+    "name": "Phủ Hà",
+    "full_name": "Phường Phủ Hà",
+    "type": "Phường Phủ",
+    "district_code": "582"
+  },
+  {
+    "code": "22741",
+    "name": "Phước Mỹ",
+    "full_name": "Phường Phước Mỹ",
+    "type": "Phường Phước",
+    "district_code": "582"
+  },
+  {
+    "code": "22756",
+    "name": "Tấn Tài",
+    "full_name": "Phường Tấn Tài",
+    "type": "Phường Tấn",
+    "district_code": "582"
+  },
+  {
+    "code": "22774",
+    "name": "Thành Hải",
+    "full_name": "Xã Thành Hải",
+    "type": "Xã Thành",
+    "district_code": "582"
+  },
+  {
+    "code": "22750",
+    "name": "Thanh Sơn",
+    "full_name": "Phường Thanh Sơn",
+    "type": "Phường Thanh",
+    "district_code": "582"
+  },
+  {
+    "code": "22777",
+    "name": "Văn Hải",
+    "full_name": "Phường Văn Hải",
+    "type": "Phường Văn",
+    "district_code": "582"
+  },
+  {
+    "code": "22765",
+    "name": "Đài Sơn",
+    "full_name": "Phường Đài Sơn",
+    "type": "Phường Đài",
+    "district_code": "582"
+  },
+  {
+    "code": "22762",
+    "name": "Đạo Long",
+    "full_name": "Phường Đạo Long",
+    "type": "Phường Đạo",
+    "district_code": "582"
+  },
+  {
+    "code": "22738",
+    "name": "Đô Vinh",
+    "full_name": "Phường Đô Vinh",
+    "type": "Phường Đô",
+    "district_code": "582"
+  },
+  {
+    "code": "22768",
+    "name": "Đông Hải",
+    "full_name": "Phường Đông Hải",
+    "type": "Phường Đông",
+    "district_code": "582"
+  }
+]

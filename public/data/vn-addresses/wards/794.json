@@ -1,0 +1,100 @@
+[
+  {
+    "code": "27694",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "794"
+  },
+  {
+    "code": "27688",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "794"
+  },
+  {
+    "code": "27697",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "794"
+  },
+  {
+    "code": "27691",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "794"
+  },
+  {
+    "code": "27685",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "794"
+  },
+  {
+    "code": "27700",
+    "name": "6",
+    "full_name": "Phường 6",
+    "type": "Phường",
+    "district_code": "794"
+  },
+  {
+    "code": "27698",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "794"
+  },
+  {
+    "code": "27718",
+    "name": "An Vĩnh Ngãi",
+    "full_name": "Xã An Vĩnh Ngãi",
+    "type": "Xã An Vĩnh",
+    "district_code": "794"
+  },
+  {
+    "code": "27712",
+    "name": "Bình Tâm",
+    "full_name": "Xã Bình Tâm",
+    "type": "Xã Bình",
+    "district_code": "794"
+  },
+  {
+    "code": "27703",
+    "name": "Hướng Thọ Phú",
+    "full_name": "Xã Hướng Thọ Phú",
+    "type": "Xã Hướng Thọ",
+    "district_code": "794"
+  },
+  {
+    "code": "27715",
+    "name": "Khánh Hậu",
+    "full_name": "Phường Khánh Hậu",
+    "type": "Phường Khánh",
+    "district_code": "794"
+  },
+  {
+    "code": "27709",
+    "name": "Lợi Bình Nhơn",
+    "full_name": "Xã Lợi Bình Nhơn",
+    "type": "Xã Lợi Bình",
+    "district_code": "794"
+  },
+  {
+    "code": "27706",
+    "name": "Nhơn Thạnh Trung",
+    "full_name": "Xã Nhơn Thạnh Trung",
+    "type": "Xã Nhơn Thạnh",
+    "district_code": "794"
+  },
+  {
+    "code": "27692",
+    "name": "Tân Khánh",
+    "full_name": "Phường Tân Khánh",
+    "type": "Phường Tân",
+    "district_code": "794"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "code": "08539",
+    "name": "Bản Nguyên",
+    "full_name": "Xã Bản Nguyên",
+    "type": "Xã Bản",
+    "district_code": "237"
+  },
+  {
+    "code": "08527",
+    "name": "Cao Xá",
+    "full_name": "Xã Cao Xá",
+    "type": "Xã Cao",
+    "district_code": "237"
+  },
+  {
+    "code": "08498",
+    "name": "Hùng Sơn",
+    "full_name": "Thị trấn Hùng Sơn",
+    "type": "Thị trấn Hùng",
+    "district_code": "237"
+  },
+  {
+    "code": "08494",
+    "name": "Lâm Thao",
+    "full_name": "Thị trấn Lâm Thao",
+    "type": "Thị trấn Lâm",
+    "district_code": "237"
+  },
+  {
+    "code": "08521",
+    "name": "Phùng Nguyên",
+    "full_name": "Xã Phùng Nguyên",
+    "type": "Xã Phùng",
+    "district_code": "237"
+  },
+  {
+    "code": "08518",
+    "name": "Sơn Vi",
+    "full_name": "Xã Sơn Vi",
+    "type": "Xã Sơn",
+    "district_code": "237"
+  },
+  {
+    "code": "08512",
+    "name": "Thạch Sơn",
+    "full_name": "Xã Thạch Sơn",
+    "type": "Xã Thạch",
+    "district_code": "237"
+  },
+  {
+    "code": "08497",
+    "name": "Tiên Kiên",
+    "full_name": "Xã Tiên Kiên",
+    "type": "Xã Tiên",
+    "district_code": "237"
+  },
+  {
+    "code": "08536",
+    "name": "Tứ Xã",
+    "full_name": "Xã Tứ Xã",
+    "type": "Xã Tứ",
+    "district_code": "237"
+  },
+  {
+    "code": "08533",
+    "name": "Vĩnh Lại",
+    "full_name": "Xã Vĩnh Lại",
+    "type": "Xã Vĩnh",
+    "district_code": "237"
+  },
+  {
+    "code": "08509",
+    "name": "Xuân Huy",
+    "full_name": "Xã Xuân Huy",
+    "type": "Xã Xuân",
+    "district_code": "237"
+  },
+  {
+    "code": "08500",
+    "name": "Xuân Lũng",
+    "full_name": "Xã Xuân Lũng",
+    "type": "Xã Xuân",
+    "district_code": "237"
+  }
+]

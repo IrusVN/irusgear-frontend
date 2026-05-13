@@ -1,0 +1,121 @@
+[
+  {
+    "code": "12055",
+    "name": "Giai Phạm",
+    "full_name": "Xã Giai Phạm",
+    "type": "Xã Giai",
+    "district_code": "327"
+  },
+  {
+    "code": "12070",
+    "name": "Hoàn Long",
+    "full_name": "Xã Hoàn Long",
+    "type": "Xã Hoàn",
+    "district_code": "327"
+  },
+  {
+    "code": "12067",
+    "name": "Liêu Xá",
+    "full_name": "Xã Liêu Xá",
+    "type": "Xã Liêu",
+    "district_code": "327"
+  },
+  {
+    "code": "12097",
+    "name": "Lý Thường Kiệt",
+    "full_name": "Xã Lý Thường Kiệt",
+    "type": "Xã Lý Thường",
+    "district_code": "327"
+  },
+  {
+    "code": "12091",
+    "name": "Minh Châu",
+    "full_name": "Xã Minh Châu",
+    "type": "Xã Minh",
+    "district_code": "327"
+  },
+  {
+    "code": "12058",
+    "name": "Nghĩa Hiệp",
+    "full_name": "Xã Nghĩa Hiệp",
+    "type": "Xã Nghĩa",
+    "district_code": "327"
+  },
+  {
+    "code": "12064",
+    "name": "Ngọc Long",
+    "full_name": "Xã Ngọc Long",
+    "type": "Xã Ngọc",
+    "district_code": "327"
+  },
+  {
+    "code": "12073",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "327"
+  },
+  {
+    "code": "12100",
+    "name": "Tân Việt",
+    "full_name": "Xã Tân Việt",
+    "type": "Xã Tân",
+    "district_code": "327"
+  },
+  {
+    "code": "12076",
+    "name": "Thanh Long",
+    "full_name": "Xã Thanh Long",
+    "type": "Xã Thanh",
+    "district_code": "327"
+  },
+  {
+    "code": "12085",
+    "name": "Trung Hòa",
+    "full_name": "Xã Trung Hòa",
+    "type": "Xã Trung",
+    "district_code": "327"
+  },
+  {
+    "code": "12094",
+    "name": "Trung Hưng",
+    "full_name": "Xã Trung Hưng",
+    "type": "Xã Trung",
+    "district_code": "327"
+  },
+  {
+    "code": "12082",
+    "name": "Việt Cường",
+    "full_name": "Xã Việt Cường",
+    "type": "Xã Việt",
+    "district_code": "327"
+  },
+  {
+    "code": "12088",
+    "name": "Yên Hòa",
+    "full_name": "Xã Yên Hòa",
+    "type": "Xã Yên",
+    "district_code": "327"
+  },
+  {
+    "code": "12052",
+    "name": "Yên Mỹ",
+    "full_name": "Thị trấn Yên Mỹ",
+    "type": "Thị trấn Yên",
+    "district_code": "327"
+  },
+  {
+    "code": "12079",
+    "name": "Yên Phú",
+    "full_name": "Xã Yên Phú",
+    "type": "Xã Yên",
+    "district_code": "327"
+  },
+  {
+    "code": "12061",
+    "name": "Đồng Than",
+    "full_name": "Xã Đồng Than",
+    "type": "Xã Đồng",
+    "district_code": "327"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "code": "24025",
+    "name": "Chư Mố",
+    "full_name": "Xã Chư Mố",
+    "type": "Xã Chư",
+    "district_code": "635"
+  },
+  {
+    "code": "24016",
+    "name": "Chư Răng",
+    "full_name": "Xã Chư Răng",
+    "type": "Xã Chư",
+    "district_code": "635"
+  },
+  {
+    "code": "24034",
+    "name": "Ia Broăi",
+    "full_name": "Xã Ia Broăi",
+    "type": "Xã Ia",
+    "district_code": "635"
+  },
+  {
+    "code": "24019",
+    "name": "Ia KDăm",
+    "full_name": "Xã Ia KDăm",
+    "type": "Xã Ia",
+    "district_code": "635"
+  },
+  {
+    "code": "24031",
+    "name": "Ia Ma Rơn",
+    "full_name": "Xã Ia Ma Rơn",
+    "type": "Xã Ia Ma",
+    "district_code": "635"
+  },
+  {
+    "code": "24037",
+    "name": "Ia Trok",
+    "full_name": "Xã Ia Trok",
+    "type": "Xã Ia",
+    "district_code": "635"
+  },
+  {
+    "code": "24028",
+    "name": "Ia Tul",
+    "full_name": "Xã Ia Tul",
+    "type": "Xã Ia",
+    "district_code": "635"
+  },
+  {
+    "code": "24022",
+    "name": "Kim Tân",
+    "full_name": "Xã Kim Tân",
+    "type": "Xã Kim",
+    "district_code": "635"
+  },
+  {
+    "code": "24013",
+    "name": "Pờ Tó",
+    "full_name": "Xã Pờ Tó",
+    "type": "Xã Pờ",
+    "district_code": "635"
+  }
+]

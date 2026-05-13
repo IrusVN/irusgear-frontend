@@ -1,0 +1,100 @@
+[
+  {
+    "code": "04036",
+    "name": "Chiềng Khoa",
+    "full_name": "Xã Chiềng Khoa",
+    "type": "Xã Chiềng",
+    "district_code": "128"
+  },
+  {
+    "code": "04056",
+    "name": "Chiềng Xuân",
+    "full_name": "Xã Chiềng Xuân",
+    "type": "Xã Chiềng",
+    "district_code": "128"
+  },
+  {
+    "code": "04054",
+    "name": "Chiềng Yên",
+    "full_name": "Xã Chiềng Yên",
+    "type": "Xã Chiềng",
+    "district_code": "128"
+  },
+  {
+    "code": "04009",
+    "name": "Liên Hoà",
+    "full_name": "Xã Liên Hoà",
+    "type": "Xã Liên",
+    "district_code": "128"
+  },
+  {
+    "code": "04051",
+    "name": "Lóng Luông",
+    "full_name": "Xã Lóng Luông",
+    "type": "Xã Lóng",
+    "district_code": "128"
+  },
+  {
+    "code": "04039",
+    "name": "Mường Men",
+    "full_name": "Xã Mường Men",
+    "type": "Xã Mường",
+    "district_code": "128"
+  },
+  {
+    "code": "04021",
+    "name": "Mường Tè",
+    "full_name": "Xã Mường Tè",
+    "type": "Xã Mường",
+    "district_code": "128"
+  },
+  {
+    "code": "04042",
+    "name": "Quang Minh",
+    "full_name": "Xã Quang Minh",
+    "type": "Xã Quang",
+    "district_code": "128"
+  },
+  {
+    "code": "04006",
+    "name": "Song Khủa",
+    "full_name": "Xã Song Khủa",
+    "type": "Xã Song",
+    "district_code": "128"
+  },
+  {
+    "code": "03994",
+    "name": "Suối Bàng",
+    "full_name": "Xã Suối Bàng",
+    "type": "Xã Suối",
+    "district_code": "128"
+  },
+  {
+    "code": "04058",
+    "name": "Tân Xuân",
+    "full_name": "Xã Tân Xuân",
+    "type": "Xã Tân",
+    "district_code": "128"
+  },
+  {
+    "code": "04018",
+    "name": "Tô Múa",
+    "full_name": "Xã Tô Múa",
+    "type": "Xã Tô",
+    "district_code": "128"
+  },
+  {
+    "code": "04048",
+    "name": "Vân Hồ",
+    "full_name": "Xã Vân Hồ",
+    "type": "Xã Vân",
+    "district_code": "128"
+  },
+  {
+    "code": "04057",
+    "name": "Xuân Nha",
+    "full_name": "Xã Xuân Nha",
+    "type": "Xã Xuân",
+    "district_code": "128"
+  }
+]

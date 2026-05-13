@@ -1,0 +1,86 @@
+[
+  {
+    "code": "28054",
+    "name": "Bình An",
+    "full_name": "Xã Bình An",
+    "type": "Xã Bình",
+    "district_code": "804"
+  },
+  {
+    "code": "28063",
+    "name": "Bình Thạnh",
+    "full_name": "Xã Bình Thạnh",
+    "type": "Xã Bình",
+    "district_code": "804"
+  },
+  {
+    "code": "28039",
+    "name": "Long Thạnh",
+    "full_name": "Xã Long Thạnh",
+    "type": "Xã Long",
+    "district_code": "804"
+  },
+  {
+    "code": "28045",
+    "name": "Long Thuận",
+    "full_name": "Xã Long Thuận",
+    "type": "Xã Long",
+    "district_code": "804"
+  },
+  {
+    "code": "28060",
+    "name": "Mỹ An",
+    "full_name": "Xã Mỹ An",
+    "type": "Xã Mỹ",
+    "district_code": "804"
+  },
+  {
+    "code": "28048",
+    "name": "Mỹ Lạc",
+    "full_name": "Xã Mỹ Lạc",
+    "type": "Xã Mỹ",
+    "district_code": "804"
+  },
+  {
+    "code": "28066",
+    "name": "Mỹ Phú",
+    "full_name": "Xã Mỹ Phú",
+    "type": "Xã Mỹ",
+    "district_code": "804"
+  },
+  {
+    "code": "28051",
+    "name": "Mỹ Thạnh",
+    "full_name": "Xã Mỹ Thạnh",
+    "type": "Xã Mỹ",
+    "district_code": "804"
+  },
+  {
+    "code": "28057",
+    "name": "Nhị Thành",
+    "full_name": "Xã Nhị Thành",
+    "type": "Xã Nhị",
+    "district_code": "804"
+  },
+  {
+    "code": "28072",
+    "name": "Tân Long",
+    "full_name": "Xã Tân Long",
+    "type": "Xã Tân",
+    "district_code": "804"
+  },
+  {
+    "code": "28042",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "804"
+  },
+  {
+    "code": "28036",
+    "name": "Thủ Thừa",
+    "full_name": "Thị trấn Thủ Thừa",
+    "type": "Thị trấn Thủ",
+    "district_code": "804"
+  }
+]

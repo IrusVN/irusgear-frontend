@@ -1,0 +1,72 @@
+[
+  {
+    "code": "24226",
+    "name": "Cư KBang",
+    "full_name": "Xã Cư KBang",
+    "type": "Xã Cư",
+    "district_code": "646"
+  },
+  {
+    "code": "24232",
+    "name": "Cư M'Lan",
+    "full_name": "Xã Cư M'Lan",
+    "type": "Xã Cư",
+    "district_code": "646"
+  },
+  {
+    "code": "24229",
+    "name": "Ea Bung",
+    "full_name": "Xã Ea Bung",
+    "type": "Xã Ea",
+    "district_code": "646"
+  },
+  {
+    "code": "24223",
+    "name": "Ea Lê",
+    "full_name": "Xã Ea Lê",
+    "type": "Xã Ea",
+    "district_code": "646"
+  },
+  {
+    "code": "24217",
+    "name": "Ea Rốk",
+    "full_name": "Xã Ea Rốk",
+    "type": "Xã Ea",
+    "district_code": "646"
+  },
+  {
+    "code": "24211",
+    "name": "Ea Súp",
+    "full_name": "Thị trấn Ea Súp",
+    "type": "Thị trấn Ea",
+    "district_code": "646"
+  },
+  {
+    "code": "24215",
+    "name": "Ia JLơi",
+    "full_name": "Xã Ia JLơi",
+    "type": "Xã Ia",
+    "district_code": "646"
+  },
+  {
+    "code": "24214",
+    "name": "Ia Lốp",
+    "full_name": "Xã Ia Lốp",
+    "type": "Xã Ia",
+    "district_code": "646"
+  },
+  {
+    "code": "24221",
+    "name": "Ia RVê",
+    "full_name": "Xã Ia RVê",
+    "type": "Xã Ia",
+    "district_code": "646"
+  },
+  {
+    "code": "24220",
+    "name": "Ya Tờ Mốt",
+    "full_name": "Xã Ya Tờ Mốt",
+    "type": "Xã Ya Tờ",
+    "district_code": "646"
+  }
+]

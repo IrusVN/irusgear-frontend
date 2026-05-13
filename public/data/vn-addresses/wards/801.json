@@ -1,0 +1,79 @@
+[
+  {
+    "code": "27919",
+    "name": "Bình Hòa Bắc",
+    "full_name": "Xã Bình Hòa Bắc",
+    "type": "Xã Bình Hòa",
+    "district_code": "801"
+  },
+  {
+    "code": "27922",
+    "name": "Bình Hòa Hưng",
+    "full_name": "Xã Bình Hòa Hưng",
+    "type": "Xã Bình Hòa",
+    "district_code": "801"
+  },
+  {
+    "code": "27925",
+    "name": "Bình Hòa Nam",
+    "full_name": "Xã Bình Hòa Nam",
+    "type": "Xã Bình Hòa",
+    "district_code": "801"
+  },
+  {
+    "code": "27916",
+    "name": "Bình Thành",
+    "full_name": "Xã Bình Thành",
+    "type": "Xã Bình",
+    "district_code": "801"
+  },
+  {
+    "code": "27928",
+    "name": "Mỹ Bình",
+    "full_name": "Xã Mỹ Bình",
+    "type": "Xã Mỹ",
+    "district_code": "801"
+  },
+  {
+    "code": "27907",
+    "name": "Mỹ Quý Tây",
+    "full_name": "Xã Mỹ Quý Tây",
+    "type": "Xã Mỹ Quý",
+    "district_code": "801"
+  },
+  {
+    "code": "27901",
+    "name": "Mỹ Quý Đông",
+    "full_name": "Xã Mỹ Quý Đông",
+    "type": "Xã Mỹ Quý",
+    "district_code": "801"
+  },
+  {
+    "code": "27904",
+    "name": "Mỹ Thạnh Bắc",
+    "full_name": "Xã Mỹ Thạnh Bắc",
+    "type": "Xã Mỹ Thạnh",
+    "district_code": "801"
+  },
+  {
+    "code": "27910",
+    "name": "Mỹ Thạnh Tây",
+    "full_name": "Xã Mỹ Thạnh Tây",
+    "type": "Xã Mỹ Thạnh",
+    "district_code": "801"
+  },
+  {
+    "code": "27913",
+    "name": "Mỹ Thạnh Đông",
+    "full_name": "Xã Mỹ Thạnh Đông",
+    "type": "Xã Mỹ Thạnh",
+    "district_code": "801"
+  },
+  {
+    "code": "27898",
+    "name": "Đông Thành",
+    "full_name": "Thị trấn Đông Thành",
+    "type": "Thị trấn Đông",
+    "district_code": "801"
+  }
+]

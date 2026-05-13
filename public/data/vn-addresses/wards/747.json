@@ -1,0 +1,121 @@
+[
+  {
+    "code": "26506",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26536",
+    "name": "10",
+    "full_name": "Phường 10",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26539",
+    "name": "11",
+    "full_name": "Phường 11",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26542",
+    "name": "12",
+    "full_name": "Phường 12",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26509",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26512",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26515",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26518",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26524",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26527",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26530",
+    "name": "9",
+    "full_name": "Phường 9",
+    "type": "Phường",
+    "district_code": "747"
+  },
+  {
+    "code": "26545",
+    "name": "Long Sơn",
+    "full_name": "Xã Long Sơn",
+    "type": "Xã Long",
+    "district_code": "747"
+  },
+  {
+    "code": "26526",
+    "name": "Nguyễn An Ninh",
+    "full_name": "Phường Nguyễn An Ninh",
+    "type": "Phường Nguyễn An",
+    "district_code": "747"
+  },
+  {
+    "code": "26535",
+    "name": "Rạch Dừa",
+    "full_name": "Phường Rạch Dừa",
+    "type": "Phường Rạch",
+    "district_code": "747"
+  },
+  {
+    "code": "26533",
+    "name": "Thắng Nhất",
+    "full_name": "Phường Thắng Nhất",
+    "type": "Phường Thắng",
+    "district_code": "747"
+  },
+  {
+    "code": "26521",
+    "name": "Thắng Nhì",
+    "full_name": "Phường Thắng Nhì",
+    "type": "Phường Thắng",
+    "district_code": "747"
+  },
+  {
+    "code": "26508",
+    "name": "Thắng Tam",
+    "full_name": "Phường Thắng Tam",
+    "type": "Phường Thắng",
+    "district_code": "747"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "code": "24614",
+    "name": "Nghĩa Phú",
+    "full_name": "Phường Nghĩa Phú",
+    "type": "Phường Nghĩa",
+    "district_code": "660"
+  },
+  {
+    "code": "24615",
+    "name": "Nghĩa Tân",
+    "full_name": "Phường Nghĩa Tân",
+    "type": "Phường Nghĩa",
+    "district_code": "660"
+  },
+  {
+    "code": "24612",
+    "name": "Nghĩa Thành",
+    "full_name": "Phường Nghĩa Thành",
+    "type": "Phường Nghĩa",
+    "district_code": "660"
+  },
+  {
+    "code": "24617",
+    "name": "Nghĩa Trung",
+    "full_name": "Phường Nghĩa Trung",
+    "type": "Phường Nghĩa",
+    "district_code": "660"
+  },
+  {
+    "code": "24611",
+    "name": "Nghĩa Đức",
+    "full_name": "Phường Nghĩa Đức",
+    "type": "Phường Nghĩa",
+    "district_code": "660"
+  },
+  {
+    "code": "24619",
+    "name": "Quảng Thành",
+    "full_name": "Phường Quảng Thành",
+    "type": "Phường Quảng",
+    "district_code": "660"
+  },
+  {
+    "code": "24628",
+    "name": "Đắk Nia",
+    "full_name": "Xã Đắk Nia",
+    "type": "Xã Đắk",
+    "district_code": "660"
+  },
+  {
+    "code": "24618",
+    "name": "Đăk R'Moan",
+    "full_name": "Xã Đăk R'Moan",
+    "type": "Xã Đăk",
+    "district_code": "660"
+  }
+]

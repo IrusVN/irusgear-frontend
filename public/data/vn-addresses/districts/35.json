@@ -1,0 +1,44 @@
+[
+  {
+    "code": "352",
+    "name": "Bình Lục",
+    "full_name": "Huyện Bình Lục",
+    "type": "Huyện Bình",
+    "province_code": "35"
+  },
+  {
+    "code": "349",
+    "name": "Duy Tiên",
+    "full_name": "Thị xã Duy Tiên",
+    "type": "Thị xã Duy",
+    "province_code": "35"
+  },
+  {
+    "code": "350",
+    "name": "Kim Bảng",
+    "full_name": "Huyện Kim Bảng",
+    "type": "Huyện Kim",
+    "province_code": "35"
+  },
+  {
+    "code": "353",
+    "name": "Lý Nhân",
+    "full_name": "Huyện Lý Nhân",
+    "type": "Huyện Lý",
+    "province_code": "35"
+  },
+  {
+    "code": "347",
+    "name": "Phủ Lý",
+    "full_name": "Thành phố Phủ Lý",
+    "type": "Thành phố Phủ",
+    "province_code": "35"
+  },
+  {
+    "code": "351",
+    "name": "Thanh Liêm",
+    "full_name": "Huyện Thanh Liêm",
+    "type": "Huyện Thanh",
+    "province_code": "35"
+  }
+]

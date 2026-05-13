@@ -1,0 +1,93 @@
+[
+  {
+    "code": "27829",
+    "name": "Bắc Hòa",
+    "full_name": "Xã Bắc Hòa",
+    "type": "Xã Bắc",
+    "district_code": "799"
+  },
+  {
+    "code": "27832",
+    "name": "Hậu Thạnh Tây",
+    "full_name": "Xã Hậu Thạnh Tây",
+    "type": "Xã Hậu Thạnh",
+    "district_code": "799"
+  },
+  {
+    "code": "27841",
+    "name": "Hậu Thạnh Đông",
+    "full_name": "Xã Hậu Thạnh Đông",
+    "type": "Xã Hậu Thạnh",
+    "district_code": "799"
+  },
+  {
+    "code": "27847",
+    "name": "Kiến Bình",
+    "full_name": "Xã Kiến Bình",
+    "type": "Xã Kiến",
+    "district_code": "799"
+  },
+  {
+    "code": "27844",
+    "name": "Nhơn Hoà",
+    "full_name": "Xã Nhơn Hoà",
+    "type": "Xã Nhơn",
+    "district_code": "799"
+  },
+  {
+    "code": "27835",
+    "name": "Nhơn Hòa Lập",
+    "full_name": "Xã Nhơn Hòa Lập",
+    "type": "Xã Nhơn Hòa",
+    "district_code": "799"
+  },
+  {
+    "code": "27859",
+    "name": "Nhơn Ninh",
+    "full_name": "Xã Nhơn Ninh",
+    "type": "Xã Nhơn",
+    "district_code": "799"
+  },
+  {
+    "code": "27853",
+    "name": "Tân Bình",
+    "full_name": "Xã Tân Bình",
+    "type": "Xã Tân",
+    "district_code": "799"
+  },
+  {
+    "code": "27862",
+    "name": "Tân Hòa",
+    "full_name": "Xã Tân Hòa",
+    "type": "Xã Tân",
+    "district_code": "799"
+  },
+  {
+    "code": "27838",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "799"
+  },
+  {
+    "code": "27856",
+    "name": "Tân Ninh",
+    "full_name": "Xã Tân Ninh",
+    "type": "Xã Tân",
+    "district_code": "799"
+  },
+  {
+    "code": "27826",
+    "name": "Tân Thạnh",
+    "full_name": "Thị trấn Tân Thạnh",
+    "type": "Thị trấn Tân",
+    "district_code": "799"
+  },
+  {
+    "code": "27850",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "799"
+  }
+]

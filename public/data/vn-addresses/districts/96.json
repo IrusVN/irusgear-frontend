@@ -1,0 +1,65 @@
+[
+  {
+    "code": "964",
+    "name": "Cà Mau",
+    "full_name": "Thành phố Cà Mau",
+    "type": "Thành phố Cà",
+    "province_code": "96"
+  },
+  {
+    "code": "969",
+    "name": "Cái Nước",
+    "full_name": "Huyện Cái Nước",
+    "type": "Huyện Cái",
+    "province_code": "96"
+  },
+  {
+    "code": "971",
+    "name": "Năm Căn",
+    "full_name": "Huyện Năm Căn",
+    "type": "Huyện Năm",
+    "province_code": "96"
+  },
+  {
+    "code": "973",
+    "name": "Ngọc Hiển",
+    "full_name": "Huyện Ngọc Hiển",
+    "type": "Huyện Ngọc",
+    "province_code": "96"
+  },
+  {
+    "code": "972",
+    "name": "Phú Tân",
+    "full_name": "Huyện Phú Tân",
+    "type": "Huyện Phú",
+    "province_code": "96"
+  },
+  {
+    "code": "967",
+    "name": "Thới Bình",
+    "full_name": "Huyện Thới Bình",
+    "type": "Huyện Thới",
+    "province_code": "96"
+  },
+  {
+    "code": "968",
+    "name": "Trần Văn Thời",
+    "full_name": "Huyện Trần Văn Thời",
+    "type": "Huyện Trần Văn",
+    "province_code": "96"
+  },
+  {
+    "code": "966",
+    "name": "U Minh",
+    "full_name": "Huyện U Minh",
+    "type": "Huyện U",
+    "province_code": "96"
+  },
+  {
+    "code": "970",
+    "name": "Đầm Dơi",
+    "full_name": "Huyện Đầm Dơi",
+    "type": "Huyện Đầm",
+    "province_code": "96"
+  }
+]

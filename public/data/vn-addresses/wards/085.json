@@ -1,0 +1,135 @@
+[
+  {
+    "code": "02839",
+    "name": "Bắc Hà",
+    "full_name": "Thị trấn Bắc Hà",
+    "type": "Thị trấn Bắc",
+    "district_code": "085"
+  },
+  {
+    "code": "02899",
+    "name": "Bản Cái",
+    "full_name": "Xã Bản Cái",
+    "type": "Xã Bản",
+    "district_code": "085"
+  },
+  {
+    "code": "02869",
+    "name": "Bản Liền",
+    "full_name": "Xã Bản Liền",
+    "type": "Xã Bản",
+    "district_code": "085"
+  },
+  {
+    "code": "02866",
+    "name": "Bản Phố",
+    "full_name": "Xã Bản Phố",
+    "type": "Xã Bản",
+    "district_code": "085"
+  },
+  {
+    "code": "02890",
+    "name": "Bảo Nhai",
+    "full_name": "Xã Bảo Nhai",
+    "type": "Xã Bảo",
+    "district_code": "085"
+  },
+  {
+    "code": "02896",
+    "name": "Cốc Lầu",
+    "full_name": "Xã Cốc Lầu",
+    "type": "Xã Cốc",
+    "district_code": "085"
+  },
+  {
+    "code": "02878",
+    "name": "Cốc Ly",
+    "full_name": "Xã Cốc Ly",
+    "type": "Xã Cốc",
+    "district_code": "085"
+  },
+  {
+    "code": "02863",
+    "name": "Hoàng Thu Phố",
+    "full_name": "Xã Hoàng Thu Phố",
+    "type": "Xã Hoàng Thu",
+    "district_code": "085"
+  },
+  {
+    "code": "02842",
+    "name": "Lùng Cải",
+    "full_name": "Xã Lùng Cải",
+    "type": "Xã Lùng",
+    "district_code": "085"
+  },
+  {
+    "code": "02848",
+    "name": "Lùng Phình",
+    "full_name": "Xã Lùng Phình",
+    "type": "Xã Lùng",
+    "district_code": "085"
+  },
+  {
+    "code": "02875",
+    "name": "Na Hối",
+    "full_name": "Xã Na Hối",
+    "type": "Xã Na",
+    "district_code": "085"
+  },
+  {
+    "code": "02887",
+    "name": "Nậm Khánh",
+    "full_name": "Xã Nậm Khánh",
+    "type": "Xã Nậm",
+    "district_code": "085"
+  },
+  {
+    "code": "02893",
+    "name": "Nậm Lúc",
+    "full_name": "Xã Nậm Lúc",
+    "type": "Xã Nậm",
+    "district_code": "085"
+  },
+  {
+    "code": "02881",
+    "name": "Nậm Mòn",
+    "full_name": "Xã Nậm Mòn",
+    "type": "Xã Nậm",
+    "district_code": "085"
+  },
+  {
+    "code": "02884",
+    "name": "Nậm Đét",
+    "full_name": "Xã Nậm Đét",
+    "type": "Xã Nậm",
+    "district_code": "085"
+  },
+  {
+    "code": "02872",
+    "name": "Tà Chải",
+    "full_name": "Xã Tà Chải",
+    "type": "Xã Tà",
+    "district_code": "085"
+  },
+  {
+    "code": "02854",
+    "name": "Tả Củ Tỷ",
+    "full_name": "Xã Tả Củ Tỷ",
+    "type": "Xã Tả Củ",
+    "district_code": "085"
+  },
+  {
+    "code": "02851",
+    "name": "Tả Van Chư",
+    "full_name": "Xã Tả Van Chư",
+    "type": "Xã Tả Van",
+    "district_code": "085"
+  },
+  {
+    "code": "02857",
+    "name": "Thải Giàng Phố",
+    "full_name": "Xã Thải Giàng Phố",
+    "type": "Xã Thải Giàng",
+    "district_code": "085"
+  }
+]

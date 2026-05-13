@@ -1,0 +1,58 @@
+[
+  {
+    "code": "27787",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "795"
+  },
+  {
+    "code": "27788",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "795"
+  },
+  {
+    "code": "27806",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "795"
+  },
+  {
+    "code": "27793",
+    "name": "Bình Hiệp",
+    "full_name": "Xã Bình Hiệp",
+    "type": "Xã Bình",
+    "district_code": "795"
+  },
+  {
+    "code": "27799",
+    "name": "Bình Tân",
+    "full_name": "Xã Bình Tân",
+    "type": "Xã Bình",
+    "district_code": "795"
+  },
+  {
+    "code": "27817",
+    "name": "Thạnh Hưng",
+    "full_name": "Xã Thạnh Hưng",
+    "type": "Xã Thạnh",
+    "district_code": "795"
+  },
+  {
+    "code": "27790",
+    "name": "Thạnh Trị",
+    "full_name": "Xã Thạnh Trị",
+    "type": "Xã Thạnh",
+    "district_code": "795"
+  },
+  {
+    "code": "27805",
+    "name": "Tuyên Thạnh",
+    "full_name": "Xã Tuyên Thạnh",
+    "type": "Xã Tuyên",
+    "district_code": "795"
+  }
+]

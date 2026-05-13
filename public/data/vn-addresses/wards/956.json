@@ -1,0 +1,65 @@
+[
+  {
+    "code": "31855",
+    "name": "Lộc Ninh",
+    "full_name": "Xã Lộc Ninh",
+    "type": "Xã Lộc",
+    "district_code": "956"
+  },
+  {
+    "code": "31843",
+    "name": "Ngan Dừa",
+    "full_name": "Thị trấn Ngan Dừa",
+    "type": "Thị trấn Ngan",
+    "district_code": "956"
+  },
+  {
+    "code": "31852",
+    "name": "Ninh Hòa",
+    "full_name": "Xã Ninh Hòa",
+    "type": "Xã Ninh",
+    "district_code": "956"
+  },
+  {
+    "code": "31846",
+    "name": "Ninh Quới",
+    "full_name": "Xã Ninh Quới",
+    "type": "Xã Ninh",
+    "district_code": "956"
+  },
+  {
+    "code": "31849",
+    "name": "Ninh Quới A",
+    "full_name": "Xã Ninh Quới A",
+    "type": "Xã Ninh Quới",
+    "district_code": "956"
+  },
+  {
+    "code": "31864",
+    "name": "Ninh Thạnh Lợi",
+    "full_name": "Xã Ninh Thạnh Lợi",
+    "type": "Xã Ninh Thạnh",
+    "district_code": "956"
+  },
+  {
+    "code": "31863",
+    "name": "Ninh Thạnh Lợi A",
+    "full_name": "Xã Ninh Thạnh Lợi A",
+    "type": "Xã Ninh Thạnh Lợi",
+    "district_code": "956"
+  },
+  {
+    "code": "31858",
+    "name": "Vĩnh Lộc",
+    "full_name": "Xã Vĩnh Lộc",
+    "type": "Xã Vĩnh",
+    "district_code": "956"
+  },
+  {
+    "code": "31861",
+    "name": "Vĩnh Lộc A",
+    "full_name": "Xã Vĩnh Lộc A",
+    "type": "Xã Vĩnh Lộc",
+    "district_code": "956"
+  }
+]

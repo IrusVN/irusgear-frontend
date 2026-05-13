@@ -1,0 +1,79 @@
+[
+  {
+    "code": "731",
+    "name": "Biên Hòa",
+    "full_name": "Thành phố Biên Hòa",
+    "type": "Thành phố Biên",
+    "province_code": "75"
+  },
+  {
+    "code": "739",
+    "name": "Cẩm Mỹ",
+    "full_name": "Huyện Cẩm Mỹ",
+    "type": "Huyện Cẩm",
+    "province_code": "75"
+  },
+  {
+    "code": "732",
+    "name": "Long Khánh",
+    "full_name": "Thành phố Long Khánh",
+    "type": "Thành phố Long",
+    "province_code": "75"
+  },
+  {
+    "code": "740",
+    "name": "Long Thành",
+    "full_name": "Huyện Long Thành",
+    "type": "Huyện Long",
+    "province_code": "75"
+  },
+  {
+    "code": "742",
+    "name": "Nhơn Trạch",
+    "full_name": "Huyện Nhơn Trạch",
+    "type": "Huyện Nhơn",
+    "province_code": "75"
+  },
+  {
+    "code": "734",
+    "name": "Tân Phú",
+    "full_name": "Huyện Tân Phú",
+    "type": "Huyện Tân",
+    "province_code": "75"
+  },
+  {
+    "code": "738",
+    "name": "Thống Nhất",
+    "full_name": "Huyện Thống Nhất",
+    "type": "Huyện Thống",
+    "province_code": "75"
+  },
+  {
+    "code": "737",
+    "name": "Trảng Bom",
+    "full_name": "Huyện Trảng Bom",
+    "type": "Huyện Trảng",
+    "province_code": "75"
+  },
+  {
+    "code": "735",
+    "name": "Vĩnh Cửu",
+    "full_name": "Huyện Vĩnh Cửu",
+    "type": "Huyện Vĩnh",
+    "province_code": "75"
+  },
+  {
+    "code": "741",
+    "name": "Xuân Lộc",
+    "full_name": "Huyện Xuân Lộc",
+    "type": "Huyện Xuân",
+    "province_code": "75"
+  },
+  {
+    "code": "736",
+    "name": "Định Quán",
+    "full_name": "Huyện Định Quán",
+    "type": "Huyện Định",
+    "province_code": "75"
+  }
+]

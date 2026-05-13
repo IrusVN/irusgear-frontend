@@ -1,0 +1,107 @@
+[
+  {
+    "code": "803",
+    "name": "Bến Lức",
+    "full_name": "Huyện Bến Lức",
+    "type": "Huyện Bến",
+    "province_code": "80"
+  },
+  {
+    "code": "807",
+    "name": "Cần Giuộc",
+    "full_name": "Huyện Cần Giuộc",
+    "type": "Huyện Cần",
+    "province_code": "80"
+  },
+  {
+    "code": "806",
+    "name": "Cần Đước",
+    "full_name": "Huyện Cần Đước",
+    "type": "Huyện Cần",
+    "province_code": "80"
+  },
+  {
+    "code": "808",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "80"
+  },
+  {
+    "code": "795",
+    "name": "Kiến Tường",
+    "full_name": "Thị xã Kiến Tường",
+    "type": "Thị xã Kiến",
+    "province_code": "80"
+  },
+  {
+    "code": "798",
+    "name": "Mộc Hóa",
+    "full_name": "Huyện Mộc Hóa",
+    "type": "Huyện Mộc",
+    "province_code": "80"
+  },
+  {
+    "code": "794",
+    "name": "Tân An",
+    "full_name": "Thành phố Tân An",
+    "type": "Thành phố Tân",
+    "province_code": "80"
+  },
+  {
+    "code": "796",
+    "name": "Tân Hưng",
+    "full_name": "Huyện Tân Hưng",
+    "type": "Huyện Tân",
+    "province_code": "80"
+  },
+  {
+    "code": "799",
+    "name": "Tân Thạnh",
+    "full_name": "Huyện Tân Thạnh",
+    "type": "Huyện Tân",
+    "province_code": "80"
+  },
+  {
+    "code": "805",
+    "name": "Tân Trụ",
+    "full_name": "Huyện Tân Trụ",
+    "type": "Huyện Tân",
+    "province_code": "80"
+  },
+  {
+    "code": "800",
+    "name": "Thạnh Hóa",
+    "full_name": "Huyện Thạnh Hóa",
+    "type": "Huyện Thạnh",
+    "province_code": "80"
+  },
+  {
+    "code": "804",
+    "name": "Thủ Thừa",
+    "full_name": "Huyện Thủ Thừa",
+    "type": "Huyện Thủ",
+    "province_code": "80"
+  },
+  {
+    "code": "797",
+    "name": "Vĩnh Hưng",
+    "full_name": "Huyện Vĩnh Hưng",
+    "type": "Huyện Vĩnh",
+    "province_code": "80"
+  },
+  {
+    "code": "802",
+    "name": "Đức Hòa",
+    "full_name": "Huyện Đức Hòa",
+    "type": "Huyện Đức",
+    "province_code": "80"
+  },
+  {
+    "code": "801",
+    "name": "Đức Huệ",
+    "full_name": "Huyện Đức Huệ",
+    "type": "Huyện Đức",
+    "province_code": "80"
+  }
+]

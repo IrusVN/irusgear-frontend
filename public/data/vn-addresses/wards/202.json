@@ -1,0 +1,58 @@
+[
+  {
+    "code": "06970",
+    "name": "Ba Chẽ",
+    "full_name": "Thị trấn Ba Chẽ",
+    "type": "Thị trấn Ba",
+    "district_code": "202"
+  },
+  {
+    "code": "06985",
+    "name": "Lương Mông",
+    "full_name": "Xã Lương Mông",
+    "type": "Xã Lương",
+    "district_code": "202"
+  },
+  {
+    "code": "06991",
+    "name": "Minh Cầm",
+    "full_name": "Xã Minh Cầm",
+    "type": "Xã Minh",
+    "district_code": "202"
+  },
+  {
+    "code": "06982",
+    "name": "Nam Sơn",
+    "full_name": "Xã Nam Sơn",
+    "type": "Xã Nam",
+    "district_code": "202"
+  },
+  {
+    "code": "06976",
+    "name": "Thanh Lâm",
+    "full_name": "Xã Thanh Lâm",
+    "type": "Xã Thanh",
+    "district_code": "202"
+  },
+  {
+    "code": "06973",
+    "name": "Thanh Sơn",
+    "full_name": "Xã Thanh Sơn",
+    "type": "Xã Thanh",
+    "district_code": "202"
+  },
+  {
+    "code": "06979",
+    "name": "Đạp Thanh",
+    "full_name": "Xã Đạp Thanh",
+    "type": "Xã Đạp",
+    "district_code": "202"
+  },
+  {
+    "code": "06988",
+    "name": "Đồn Đạc",
+    "full_name": "Xã Đồn Đạc",
+    "type": "Xã Đồn",
+    "district_code": "202"
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "code": "07231",
+    "name": "Dĩnh Kế",
+    "full_name": "Phường Dĩnh Kế",
+    "type": "Phường Dĩnh",
+    "district_code": "213"
+  },
+  {
+    "code": "07441",
+    "name": "Dĩnh Trì",
+    "full_name": "Xã Dĩnh Trì",
+    "type": "Xã Dĩnh",
+    "district_code": "213"
+  },
+  {
+    "code": "07210",
+    "name": "Hoàng Văn Thụ",
+    "full_name": "Phường Hoàng Văn Thụ",
+    "type": "Phường Hoàng Văn",
+    "district_code": "213"
+  },
+  {
+    "code": "07219",
+    "name": "Lê Lợi",
+    "full_name": "Phường Lê Lợi",
+    "type": "Phường Lê",
+    "district_code": "213"
+  },
+  {
+    "code": "07216",
+    "name": "Mỹ Độ",
+    "full_name": "Phường Mỹ Độ",
+    "type": "Phường Mỹ",
+    "district_code": "213"
+  },
+  {
+    "code": "07207",
+    "name": "Ngô Quyền",
+    "full_name": "Phường Ngô Quyền",
+    "type": "Phường Ngô",
+    "district_code": "213"
+  },
+  {
+    "code": "07705",
+    "name": "Song Khê",
+    "full_name": "Xã Song Khê",
+    "type": "Xã Song",
+    "district_code": "213"
+  },
+  {
+    "code": "07222",
+    "name": "Song Mai",
+    "full_name": "Xã Song Mai",
+    "type": "Xã Song",
+    "district_code": "213"
+  },
+  {
+    "code": "07687",
+    "name": "Tân Mỹ",
+    "full_name": "Xã Tân Mỹ",
+    "type": "Xã Tân",
+    "district_code": "213"
+  },
+  {
+    "code": "07699",
+    "name": "Tân Tiến",
+    "full_name": "Xã Tân Tiến",
+    "type": "Xã Tân",
+    "district_code": "213"
+  },
+  {
+    "code": "07201",
+    "name": "Thọ Xương",
+    "full_name": "Phường Thọ Xương",
+    "type": "Phường Thọ",
+    "district_code": "213"
+  },
+  {
+    "code": "07204",
+    "name": "Trần Nguyên Hãn",
+    "full_name": "Phường Trần Nguyên Hãn",
+    "type": "Phường Trần Nguyên",
+    "district_code": "213"
+  },
+  {
+    "code": "07213",
+    "name": "Trần Phú",
+    "full_name": "Phường Trần Phú",
+    "type": "Phường Trần",
+    "district_code": "213"
+  },
+  {
+    "code": "07225",
+    "name": "Xương Giang",
+    "full_name": "Phường Xương Giang",
+    "type": "Phường Xương",
+    "district_code": "213"
+  },
+  {
+    "code": "07228",
+    "name": "Đa Mai",
+    "full_name": "Phường Đa Mai",
+    "type": "Phường Đa",
+    "district_code": "213"
+  },
+  {
+    "code": "07696",
+    "name": "Đồng Sơn",
+    "full_name": "Xã Đồng Sơn",
+    "type": "Xã Đồng",
+    "district_code": "213"
+  }
+]

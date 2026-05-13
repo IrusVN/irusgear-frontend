@@ -1,0 +1,198 @@
+[
+  {
+    "code": "09151",
+    "name": "An Tường",
+    "full_name": "Xã An Tường",
+    "type": "Xã An",
+    "district_code": "252"
+  },
+  {
+    "code": "09118",
+    "name": "Bình Dương",
+    "full_name": "Xã Bình Dương",
+    "type": "Xã Bình",
+    "district_code": "252"
+  },
+  {
+    "code": "09097",
+    "name": "Bồ Sao",
+    "full_name": "Xã Bồ Sao",
+    "type": "Xã Bồ",
+    "district_code": "252"
+  },
+  {
+    "code": "09109",
+    "name": "Cao Đại",
+    "full_name": "Xã Cao Đại",
+    "type": "Xã Cao",
+    "district_code": "252"
+  },
+  {
+    "code": "09085",
+    "name": "Chấn Hưng",
+    "full_name": "Xã Chấn Hưng",
+    "type": "Xã Chấn",
+    "district_code": "252"
+  },
+  {
+    "code": "09079",
+    "name": "Kim Xá",
+    "full_name": "Xã Kim Xá",
+    "type": "Xã Kim",
+    "district_code": "252"
+  },
+  {
+    "code": "09106",
+    "name": "Lũng Hoà",
+    "full_name": "Xã Lũng Hoà",
+    "type": "Xã Lũng",
+    "district_code": "252"
+  },
+  {
+    "code": "09133",
+    "name": "Lý Nhân",
+    "full_name": "Xã Lý Nhân",
+    "type": "Xã Lý",
+    "district_code": "252"
+  },
+  {
+    "code": "09088",
+    "name": "Nghĩa Hưng",
+    "full_name": "Xã Nghĩa Hưng",
+    "type": "Xã Nghĩa",
+    "district_code": "252"
+  },
+  {
+    "code": "09148",
+    "name": "Ngũ Kiên",
+    "full_name": "Xã Ngũ Kiên",
+    "type": "Xã Ngũ",
+    "district_code": "252"
+  },
+  {
+    "code": "09157",
+    "name": "Phú Đa",
+    "full_name": "Xã Phú Đa",
+    "type": "Xã Phú",
+    "district_code": "252"
+  },
+  {
+    "code": "09142",
+    "name": "Tam Phúc",
+    "full_name": "Xã Tam Phúc",
+    "type": "Xã Tam",
+    "district_code": "252"
+  },
+  {
+    "code": "09124",
+    "name": "Tân Phú",
+    "full_name": "Xã Tân Phú",
+    "type": "Xã Tân",
+    "district_code": "252"
+  },
+  {
+    "code": "09103",
+    "name": "Tân Tiến",
+    "full_name": "Xã Tân Tiến",
+    "type": "Xã Tân",
+    "district_code": "252"
+  },
+  {
+    "code": "09112",
+    "name": "Thổ Tang",
+    "full_name": "Thị trấn Thổ Tang",
+    "type": "Thị trấn Thổ",
+    "district_code": "252"
+  },
+  {
+    "code": "09127",
+    "name": "Thượng Trưng",
+    "full_name": "Xã Thượng Trưng",
+    "type": "Xã Thượng",
+    "district_code": "252"
+  },
+  {
+    "code": "09145",
+    "name": "Tứ Trưng",
+    "full_name": "Thị trấn Tứ Trưng",
+    "type": "Thị trấn Tứ",
+    "district_code": "252"
+  },
+  {
+    "code": "09136",
+    "name": "Tuân Chính",
+    "full_name": "Xã Tuân Chính",
+    "type": "Xã Tuân",
+    "district_code": "252"
+  },
+  {
+    "code": "09139",
+    "name": "Vân Xuân",
+    "full_name": "Xã Vân Xuân",
+    "type": "Xã Vân",
+    "district_code": "252"
+  },
+  {
+    "code": "09094",
+    "name": "Việt Xuân",
+    "full_name": "Xã Việt Xuân",
+    "type": "Xã Việt",
+    "district_code": "252"
+  },
+  {
+    "code": "09160",
+    "name": "Vĩnh Ninh",
+    "full_name": "Xã Vĩnh Ninh",
+    "type": "Xã Vĩnh",
+    "district_code": "252"
+  },
+  {
+    "code": "09115",
+    "name": "Vĩnh Sơn",
+    "full_name": "Xã Vĩnh Sơn",
+    "type": "Xã Vĩnh",
+    "district_code": "252"
+  },
+  {
+    "code": "09154",
+    "name": "Vĩnh Thịnh",
+    "full_name": "Xã Vĩnh Thịnh",
+    "type": "Xã Vĩnh",
+    "district_code": "252"
+  },
+  {
+    "code": "09076",
+    "name": "Vĩnh Tường",
+    "full_name": "Thị trấn Vĩnh Tường",
+    "type": "Thị trấn Vĩnh",
+    "district_code": "252"
+  },
+  {
+    "code": "09130",
+    "name": "Vũ Di",
+    "full_name": "Xã Vũ Di",
+    "type": "Xã Vũ",
+    "district_code": "252"
+  },
+  {
+    "code": "09082",
+    "name": "Yên Bình",
+    "full_name": "Xã Yên Bình",
+    "type": "Xã Yên",
+    "district_code": "252"
+  },
+  {
+    "code": "09091",
+    "name": "Yên Lập",
+    "full_name": "Xã Yên Lập",
+    "type": "Xã Yên",
+    "district_code": "252"
+  },
+  {
+    "code": "09100",
+    "name": "Đại Đồng",
+    "full_name": "Xã Đại Đồng",
+    "type": "Xã Đại",
+    "district_code": "252"
+  }
+]

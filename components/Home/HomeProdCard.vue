@@ -1,14 +1,18 @@
 <template>
   <div class="card-shell h-100 px-1 py-1 position-relative">
     <span v-if="product.badge" class="pos-badge">
-      Giảm <span class="badge-strong">{{ product.discount }}%</span>
+      <span class="badge-discount">
+        <span class="badge-discount__text">{{ $t('common.discount') }} {{ product.discount }}%</span>
+      </span>
     </span>
     <span v-if="product.installmentText" class="pos-installment">
-      Trả góp <span class="badge-strong">0%</span>
+      <span class="badge-installment pb-1">
+        <span class="badge-installment__text">{{ $t('common.installment') }} 0%</span>
+      </span>
     </span>
 
     <div class="prod-card h-100 position-relative">
-      <a :href="product.url || '#'" class="prod-main group d-flex flex-column flex-grow-1 text-decoration-none">
+      <NuxtLink :to="productLink" class="prod-main group d-flex flex-column flex-grow-1 text-decoration-none">
         <div class="img-box d-flex align-items-center justify-content-center px-2">
           <img :src="product.img" :alt="product.name" class="prod-img">
         </div>
@@ -28,13 +32,13 @@
             <div v-if="product.gifts[2]" class="promo-row">{{ product.gifts[2] }}</div>
           </div>
         </div>
-      </a>
+      </NuxtLink>
 
       <div class="bottom-row">
         <span class="rating"><i class="bi bi-star-fill"></i> {{ normalizedRating }}</span>
-        <button type="button" class="fav-btn" aria-label="Yeu thich">
-          <i class="bi bi-heart"></i>
-          <span class="d-none d-sm-inline">Yêu thích</span>
+        <button type="button" class="fav-btn" :aria-label="$t('product.favorite')" @click="toggleWishlist">
+          <i :class="isInWishlist ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
+          <span class="d-none d-sm-inline">{{ $t('product.favorite') }}</span>
         </button>
       </div>
     </div>
@@ -43,16 +47,80 @@
 
 <script setup>
 import { computed } from 'vue';
+import { toast } from 'vue-sonner';
+import { useWishlistStore } from '@/stores/wishlistStore';
+import { useAuthStore } from '@/stores/authStore';
+import { useI18n } from "#imports";
+import { useRouter } from "#imports";
+
+const { t } = useI18n();
+const wishlistStore = useWishlistStore();
+const authStore = useAuthStore();
+const router = useRouter();
 
 const props = defineProps({ product: { type: Object, required: true } });
+
+const isInWishlist = computed(() => {
+  const productId = props.product?.id;
+  if (!productId) return false;
+  return wishlistStore.items.some(
+    (i) => String(i.product_id) === String(productId)
+  );
+});
+
+const toggleWishlist = async () => {
+  if (!authStore.isLoggedIn) {
+    router.push("auth/login");
+    return;
+  }
+
+  const productId = props.product?.id;
+  if (!productId) return;
+
+  const item = wishlistStore.items.find(
+    (i) => String(i.product_id) === String(productId)
+  );
+
+  try {
+    if (item) {
+      toast(t("product.confirmRemoveFromWishlist", { name: props.product?.name }), {
+        cancel: { label: t("common.confirmNo"), onClick: () => {} },
+        action: { label: t("common.confirmYes"), onClick: () => wishlistStore.removeItem(item.id) },
+      });
+    } else {
+      await wishlistStore.addItem({
+        product_id: Number(productId),
+        variant_id: null,
+        quantity: 1,
+      });
+      toast.success(t("product.addedToWishlist"));
+    }
+  } catch (e) {
+    toast.error(e?.message || t("product.wishlistError"));
+  }
+};
+
 const fmt = (v) => {
   const value = Number(v) || 0;
   return `${new Intl.NumberFormat('vi-VN').format(value)} đ`;
 };
+
 const normalizedRating = computed(() => {
   const value = Number(props.product?.rating);
   if (Number.isFinite(value) && value > 0) return value.toFixed(1);
   return '5.0';
+});
+
+const productLink = computed(() => {
+  if (props.product?.slug) {
+    return `/products/${props.product.slug}`;
+  }
+
+  if (typeof props.product?.url === 'string' && props.product.url.trim()) {
+    return props.product.url;
+  }
+
+  return '/';
 });
 </script>
 
@@ -85,45 +153,65 @@ const normalizedRating = computed(() => {
 
 .pos-badge {
   position: absolute;
-  top: 14px;
+  top: 4px;
   left: 12px;
   z-index: 4;
-  min-width: 80px;
-  height: 22px;
-  padding: 0 8px;
-  display: inline-flex;
+}
+
+.badge-discount {
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background: url('https://cdn2.cellphones.com.vn/x/media/wysiwyg/discount-badge-ui-2025.png') center/100% 100% no-repeat;
+  width: 80px;
+  height: 22px;
+}
+
+.badge-discount::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://cdn2.cellphones.com.vn/x/media/wysiwyg/discount-badge-ui-2025.png') center / 100% 100% no-repeat;
+  filter: hue-rotate(160deg) saturate(0.4) brightness(0.35);
+}
+
+.badge-discount__text {
+  position: relative;
+  z-index: 1;
+  font-size: 9px;
+  font-weight: 700;
   color: #fff;
-  font-size: 0.6rem;
-  font-weight: 500;
-  transform: translateY(-48%);
+  font-family: system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  line-height: 1;
 }
 
 .pos-installment {
   position: absolute;
   top: 19px;
-  right: 4px;
+  right: 0px;
   z-index: 4;
-  min-width: 76px;
-  height: 28px;
-  padding: 0 8px 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  background: url('https://cdn2.cellphones.com.vn/x/media/wysiwyg/zero-ins-badge-ui-2025.png') center/100% 100% no-repeat;
-  color: #3b82f6;
-  font-size: 0.6rem;
-  font-weight: 400;
-  transform: translate(6%, -40%);
 }
 
-.badge-strong {
-  margin-left: 2px;
-  font-size: 0.72rem;
+.badge-installment {
+  background: url('https://cdn2.cellphones.com.vn/x/media/wysiwyg/zero-ins-badge-ui-2025.png') center / 100% 100% no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 28px;
+}
+
+.badge-installment__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  font-size: 10px;
   font-weight: 600;
+  color: #1d4ed8;
+  font-family: system-ui, sans-serif;
+  letter-spacing: 0.01em;
   line-height: 1;
 }
 
@@ -163,7 +251,7 @@ const normalizedRating = computed(() => {
 .price-new {
   font-size: 1.12rem;
   font-weight: 700;
-  color: #d70018;
+  color: var(--irus-color-accent);
 }
 
 .price-old {
@@ -269,6 +357,21 @@ const normalizedRating = computed(() => {
 @media (max-width: 359.98px) {
   .bottom-row {
     flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .prod-name {
+    font-size: 12px;
+    -webkit-line-clamp: 2;
+  }
+
+  .price-new {
+    font-size: 13px;
+  }
+
+  .bottom-row {
     align-items: flex-start;
   }
 }

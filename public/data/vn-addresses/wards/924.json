@@ -1,0 +1,79 @@
+[
+  {
+    "code": "31231",
+    "name": "Thanh An",
+    "full_name": "Thị trấn Thanh An",
+    "type": "Thị trấn Thanh",
+    "district_code": "924"
+  },
+  {
+    "code": "31240",
+    "name": "Thạnh An",
+    "full_name": "Xã Thạnh An",
+    "type": "Xã Thạnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31252",
+    "name": "Thạnh Lộc",
+    "full_name": "Xã Thạnh Lộc",
+    "type": "Xã Thạnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31244",
+    "name": "Thạnh Lợi",
+    "full_name": "Xã Thạnh Lợi",
+    "type": "Xã Thạnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31234",
+    "name": "Thạnh Mỹ",
+    "full_name": "Xã Thạnh Mỹ",
+    "type": "Xã Thạnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31246",
+    "name": "Thạnh Qưới",
+    "full_name": "Xã Thạnh Qưới",
+    "type": "Xã Thạnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31243",
+    "name": "Thạnh Thắng",
+    "full_name": "Xã Thạnh Thắng",
+    "type": "Xã Thạnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31241",
+    "name": "Thạnh Tiến",
+    "full_name": "Xã Thạnh Tiến",
+    "type": "Xã Thạnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31211",
+    "name": "Vĩnh Bình",
+    "full_name": "Xã Vĩnh Bình",
+    "type": "Xã Vĩnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31232",
+    "name": "Vĩnh Thạnh",
+    "full_name": "Thị trấn Vĩnh Thạnh",
+    "type": "Thị trấn Vĩnh",
+    "district_code": "924"
+  },
+  {
+    "code": "31237",
+    "name": "Vĩnh Trinh",
+    "full_name": "Xã Vĩnh Trinh",
+    "type": "Xã Vĩnh",
+    "district_code": "924"
+  }
+]

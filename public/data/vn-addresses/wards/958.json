@@ -1,0 +1,58 @@
+[
+  {
+    "code": "31900",
+    "name": "Châu Hưng",
+    "full_name": "Thị trấn Châu Hưng",
+    "type": "Thị trấn Châu",
+    "district_code": "958"
+  },
+  {
+    "code": "31903",
+    "name": "Châu Hưng A",
+    "full_name": "Xã Châu Hưng A",
+    "type": "Xã Châu Hưng",
+    "district_code": "958"
+  },
+  {
+    "code": "31912",
+    "name": "Châu Thới",
+    "full_name": "Xã Châu Thới",
+    "type": "Xã Châu",
+    "district_code": "958"
+  },
+  {
+    "code": "31909",
+    "name": "Hưng Hội",
+    "full_name": "Xã Hưng Hội",
+    "type": "Xã Hưng",
+    "district_code": "958"
+  },
+  {
+    "code": "31906",
+    "name": "Hưng Thành",
+    "full_name": "Xã Hưng Thành",
+    "type": "Xã Hưng",
+    "district_code": "958"
+  },
+  {
+    "code": "31921",
+    "name": "Long Thạnh",
+    "full_name": "Xã Long Thạnh",
+    "type": "Xã Long",
+    "district_code": "958"
+  },
+  {
+    "code": "31894",
+    "name": "Vĩnh Hưng",
+    "full_name": "Xã Vĩnh Hưng",
+    "type": "Xã Vĩnh",
+    "district_code": "958"
+  },
+  {
+    "code": "31897",
+    "name": "Vĩnh Hưng A",
+    "full_name": "Xã Vĩnh Hưng A",
+    "type": "Xã Vĩnh Hưng",
+    "district_code": "958"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "542",
+    "name": "An Lão",
+    "full_name": "Huyện An Lão",
+    "type": "Huyện An",
+    "province_code": "52"
+  },
+  {
+    "code": "549",
+    "name": "An Nhơn",
+    "full_name": "Thị xã An Nhơn",
+    "type": "Thị xã An",
+    "province_code": "52"
+  },
+  {
+    "code": "544",
+    "name": "Hoài Ân",
+    "full_name": "Huyện Hoài Ân",
+    "type": "Huyện Hoài",
+    "province_code": "52"
+  },
+  {
+    "code": "543",
+    "name": "Hoài Nhơn",
+    "full_name": "Thị xã Hoài Nhơn",
+    "type": "Thị xã Hoài",
+    "province_code": "52"
+  },
+  {
+    "code": "548",
+    "name": "Phù Cát",
+    "full_name": "Huyện Phù Cát",
+    "type": "Huyện Phù",
+    "province_code": "52"
+  },
+  {
+    "code": "545",
+    "name": "Phù Mỹ",
+    "full_name": "Huyện Phù Mỹ",
+    "type": "Huyện Phù",
+    "province_code": "52"
+  },
+  {
+    "code": "540",
+    "name": "Quy Nhơn",
+    "full_name": "Thành phố Quy Nhơn",
+    "type": "Thành phố Quy",
+    "province_code": "52"
+  },
+  {
+    "code": "547",
+    "name": "Tây Sơn",
+    "full_name": "Huyện Tây Sơn",
+    "type": "Huyện Tây",
+    "province_code": "52"
+  },
+  {
+    "code": "550",
+    "name": "Tuy Phước",
+    "full_name": "Huyện Tuy Phước",
+    "type": "Huyện Tuy",
+    "province_code": "52"
+  },
+  {
+    "code": "551",
+    "name": "Vân Canh",
+    "full_name": "Huyện Vân Canh",
+    "type": "Huyện Vân",
+    "province_code": "52"
+  },
+  {
+    "code": "546",
+    "name": "Vĩnh Thạnh",
+    "full_name": "Huyện Vĩnh Thạnh",
+    "type": "Huyện Vĩnh",
+    "province_code": "52"
+  }
+]

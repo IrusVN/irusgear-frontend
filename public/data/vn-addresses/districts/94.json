@@ -1,0 +1,79 @@
+[
+  {
+    "code": "942",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "94"
+  },
+  {
+    "code": "945",
+    "name": "Cù Lao Dung",
+    "full_name": "Huyện Cù Lao Dung",
+    "type": "Huyện Cù Lao",
+    "province_code": "94"
+  },
+  {
+    "code": "943",
+    "name": "Kế Sách",
+    "full_name": "Huyện Kế Sách",
+    "type": "Huyện Kế",
+    "province_code": "94"
+  },
+  {
+    "code": "946",
+    "name": "Long Phú",
+    "full_name": "Huyện Long Phú",
+    "type": "Huyện Long",
+    "province_code": "94"
+  },
+  {
+    "code": "944",
+    "name": "Mỹ Tú",
+    "full_name": "Huyện Mỹ Tú",
+    "type": "Huyện Mỹ",
+    "province_code": "94"
+  },
+  {
+    "code": "947",
+    "name": "Mỹ Xuyên",
+    "full_name": "Huyện Mỹ Xuyên",
+    "type": "Huyện Mỹ",
+    "province_code": "94"
+  },
+  {
+    "code": "948",
+    "name": "Ngã Năm",
+    "full_name": "Thị xã Ngã Năm",
+    "type": "Thị xã Ngã",
+    "province_code": "94"
+  },
+  {
+    "code": "941",
+    "name": "Sóc Trăng",
+    "full_name": "Thành phố Sóc Trăng",
+    "type": "Thành phố Sóc",
+    "province_code": "94"
+  },
+  {
+    "code": "949",
+    "name": "Thạnh Trị",
+    "full_name": "Huyện Thạnh Trị",
+    "type": "Huyện Thạnh",
+    "province_code": "94"
+  },
+  {
+    "code": "951",
+    "name": "Trần Đề",
+    "full_name": "Huyện Trần Đề",
+    "type": "Huyện Trần",
+    "province_code": "94"
+  },
+  {
+    "code": "950",
+    "name": "Vĩnh Châu",
+    "full_name": "Thị xã Vĩnh Châu",
+    "type": "Thị xã Vĩnh",
+    "province_code": "94"
+  }
+]

@@ -1,0 +1,226 @@
+[
+  {
+    "code": "05467",
+    "name": "Cam Giá",
+    "full_name": "Phường Cam Giá",
+    "type": "Phường Cam",
+    "district_code": "164"
+  },
+  {
+    "code": "05695",
+    "name": "Cao Ngạn",
+    "full_name": "Xã Cao Ngạn",
+    "type": "Xã Cao",
+    "district_code": "164"
+  },
+  {
+    "code": "05659",
+    "name": "Chùa Hang",
+    "full_name": "Phường Chùa Hang",
+    "type": "Phường Chùa",
+    "district_code": "164"
+  },
+  {
+    "code": "05461",
+    "name": "Gia Sàng",
+    "full_name": "Phường Gia Sàng",
+    "type": "Phường Gia",
+    "district_code": "164"
+  },
+  {
+    "code": "05440",
+    "name": "Hoàng Văn Thụ",
+    "full_name": "Phường Hoàng Văn Thụ",
+    "type": "Phường Hoàng Văn",
+    "district_code": "164"
+  },
+  {
+    "code": "05473",
+    "name": "Hương Sơn",
+    "full_name": "Phường Hương Sơn",
+    "type": "Phường Hương",
+    "district_code": "164"
+  },
+  {
+    "code": "05713",
+    "name": "Huống Thượng",
+    "full_name": "Xã Huống Thượng",
+    "type": "Xã Huống",
+    "district_code": "164"
+  },
+  {
+    "code": "05701",
+    "name": "Linh Sơn",
+    "full_name": "Xã Linh Sơn",
+    "type": "Xã Linh",
+    "district_code": "164"
+  },
+  {
+    "code": "05449",
+    "name": "Phan Đình Phùng",
+    "full_name": "Phường Phan Đình Phùng",
+    "type": "Phường Phan Đình",
+    "district_code": "164"
+  },
+  {
+    "code": "05470",
+    "name": "Phú Xá",
+    "full_name": "Phường Phú Xá",
+    "type": "Phường Phú",
+    "district_code": "164"
+  },
+  {
+    "code": "05485",
+    "name": "Phúc Hà",
+    "full_name": "Xã Phúc Hà",
+    "type": "Xã Phúc",
+    "district_code": "164"
+  },
+  {
+    "code": "05494",
+    "name": "Phúc Trìu",
+    "full_name": "Xã Phúc Trìu",
+    "type": "Xã Phúc",
+    "district_code": "164"
+  },
+  {
+    "code": "05488",
+    "name": "Phúc Xuân",
+    "full_name": "Xã Phúc Xuân",
+    "type": "Xã Phúc",
+    "district_code": "164"
+  },
+  {
+    "code": "05431",
+    "name": "Quán Triều",
+    "full_name": "Phường Quán Triều",
+    "type": "Phường Quán",
+    "district_code": "164"
+  },
+  {
+    "code": "05446",
+    "name": "Quang Trung",
+    "full_name": "Phường Quang Trung",
+    "type": "Phường Quang",
+    "district_code": "164"
+  },
+  {
+    "code": "05434",
+    "name": "Quang Vinh",
+    "full_name": "Phường Quang Vinh",
+    "type": "Phường Quang",
+    "district_code": "164"
+  },
+  {
+    "code": "05491",
+    "name": "Quyết Thắng",
+    "full_name": "Xã Quyết Thắng",
+    "type": "Xã Quyết",
+    "district_code": "164"
+  },
+  {
+    "code": "05653",
+    "name": "Sơn Cẩm",
+    "full_name": "Xã Sơn Cẩm",
+    "type": "Xã Sơn",
+    "district_code": "164"
+  },
+  {
+    "code": "05503",
+    "name": "Tân Cương",
+    "full_name": "Xã Tân Cương",
+    "type": "Xã Tân",
+    "district_code": "164"
+  },
+  {
+    "code": "05464",
+    "name": "Tân Lập",
+    "full_name": "Phường Tân Lập",
+    "type": "Phường Tân",
+    "district_code": "164"
+  },
+  {
+    "code": "05482",
+    "name": "Tân Long",
+    "full_name": "Phường Tân Long",
+    "type": "Phường Tân",
+    "district_code": "164"
+  },
+  {
+    "code": "05479",
+    "name": "Tân Thành",
+    "full_name": "Phường Tân Thành",
+    "type": "Phường Tân",
+    "district_code": "164"
+  },
+  {
+    "code": "05452",
+    "name": "Tân Thịnh",
+    "full_name": "Phường Tân Thịnh",
+    "type": "Phường Tân",
+    "district_code": "164"
+  },
+  {
+    "code": "05455",
+    "name": "Thịnh Đán",
+    "full_name": "Phường Thịnh Đán",
+    "type": "Phường Thịnh",
+    "district_code": "164"
+  },
+  {
+    "code": "05497",
+    "name": "Thịnh Đức",
+    "full_name": "Xã Thịnh Đức",
+    "type": "Xã Thịnh",
+    "district_code": "164"
+  },
+  {
+    "code": "05500",
+    "name": "Tích Lương",
+    "full_name": "Phường Tích Lương",
+    "type": "Phường Tích",
+    "district_code": "164"
+  },
+  {
+    "code": "05476",
+    "name": "Trung Thành",
+    "full_name": "Phường Trung Thành",
+    "type": "Phường Trung",
+    "district_code": "164"
+  },
+  {
+    "code": "05443",
+    "name": "Trưng Vương",
+    "full_name": "Phường Trưng Vương",
+    "type": "Phường Trưng",
+    "district_code": "164"
+  },
+  {
+    "code": "05437",
+    "name": "Túc Duyên",
+    "full_name": "Phường Túc Duyên",
+    "type": "Phường Túc",
+    "district_code": "164"
+  },
+  {
+    "code": "05710",
+    "name": "Đồng Bẩm",
+    "full_name": "Phường Đồng Bẩm",
+    "type": "Phường Đồng",
+    "district_code": "164"
+  },
+  {
+    "code": "05914",
+    "name": "Đồng Liên",
+    "full_name": "Xã Đồng Liên",
+    "type": "Xã Đồng",
+    "district_code": "164"
+  },
+  {
+    "code": "05458",
+    "name": "Đồng Quang",
+    "full_name": "Phường Đồng Quang",
+    "type": "Phường Đồng",
+    "district_code": "164"
+  }
+]

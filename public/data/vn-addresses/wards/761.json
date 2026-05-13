@@ -1,0 +1,79 @@
+[
+  {
+    "code": "26779",
+    "name": "An Phú Đông",
+    "full_name": "Phường An Phú Đông",
+    "type": "Phường An Phú",
+    "district_code": "761"
+  },
+  {
+    "code": "26770",
+    "name": "Hiệp Thành",
+    "full_name": "Phường Hiệp Thành",
+    "type": "Phường Hiệp",
+    "district_code": "761"
+  },
+  {
+    "code": "26776",
+    "name": "Tân Chánh Hiệp",
+    "full_name": "Phường Tân Chánh Hiệp",
+    "type": "Phường Tân Chánh",
+    "district_code": "761"
+  },
+  {
+    "code": "26787",
+    "name": "Tân Hưng Thuận",
+    "full_name": "Phường Tân Hưng Thuận",
+    "type": "Phường Tân Hưng",
+    "district_code": "761"
+  },
+  {
+    "code": "26782",
+    "name": "Tân Thới Hiệp",
+    "full_name": "Phường Tân Thới Hiệp",
+    "type": "Phường Tân Thới",
+    "district_code": "761"
+  },
+  {
+    "code": "26791",
+    "name": "Tân Thới Nhất",
+    "full_name": "Phường Tân Thới Nhất",
+    "type": "Phường Tân Thới",
+    "district_code": "761"
+  },
+  {
+    "code": "26767",
+    "name": "Thạnh Lộc",
+    "full_name": "Phường Thạnh Lộc",
+    "type": "Phường Thạnh",
+    "district_code": "761"
+  },
+  {
+    "code": "26764",
+    "name": "Thạnh Xuân",
+    "full_name": "Phường Thạnh Xuân",
+    "type": "Phường Thạnh",
+    "district_code": "761"
+  },
+  {
+    "code": "26773",
+    "name": "Thới An",
+    "full_name": "Phường Thới An",
+    "type": "Phường Thới",
+    "district_code": "761"
+  },
+  {
+    "code": "26785",
+    "name": "Trung Mỹ Tây",
+    "full_name": "Phường Trung Mỹ Tây",
+    "type": "Phường Trung Mỹ",
+    "district_code": "761"
+  },
+  {
+    "code": "26788",
+    "name": "Đông Hưng Thuận",
+    "full_name": "Phường Đông Hưng Thuận",
+    "type": "Phường Đông Hưng",
+    "district_code": "761"
+  }
+]

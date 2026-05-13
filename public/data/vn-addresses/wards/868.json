@@ -1,0 +1,51 @@
+[
+  {
+    "code": "29989",
+    "name": "An Bình A",
+    "full_name": "Phường An Bình A",
+    "type": "Phường An Bình",
+    "district_code": "868"
+  },
+  {
+    "code": "29986",
+    "name": "An Bình B",
+    "full_name": "Phường An Bình B",
+    "type": "Phường An Bình",
+    "district_code": "868"
+  },
+  {
+    "code": "29978",
+    "name": "An Lạc",
+    "full_name": "Phường An Lạc",
+    "type": "Phường An",
+    "district_code": "868"
+  },
+  {
+    "code": "29954",
+    "name": "An Lộc",
+    "full_name": "Phường An Lộc",
+    "type": "Phường An",
+    "district_code": "868"
+  },
+  {
+    "code": "29955",
+    "name": "An Thạnh",
+    "full_name": "Phường An Thạnh",
+    "type": "Phường An",
+    "district_code": "868"
+  },
+  {
+    "code": "29959",
+    "name": "Bình Thạnh",
+    "full_name": "Xã Bình Thạnh",
+    "type": "Xã Bình",
+    "district_code": "868"
+  },
+  {
+    "code": "29965",
+    "name": "Tân Hội",
+    "full_name": "Xã Tân Hội",
+    "type": "Xã Tân",
+    "district_code": "868"
+  }
+]

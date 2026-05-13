@@ -1,0 +1,240 @@
+[
+  {
+    "code": "16435",
+    "name": "An Hưng",
+    "full_name": "Phường An Hưng",
+    "type": "Phường An",
+    "district_code": "380"
+  },
+  {
+    "code": "14776",
+    "name": "Ba Đình",
+    "full_name": "Phường Ba Đình",
+    "type": "Phường Ba",
+    "district_code": "380"
+  },
+  {
+    "code": "14755",
+    "name": "Hàm Rồng",
+    "full_name": "Phường Hàm Rồng",
+    "type": "Phường Hàm",
+    "district_code": "380"
+  },
+  {
+    "code": "15925",
+    "name": "Hoằng Quang",
+    "full_name": "Xã Hoằng Quang",
+    "type": "Xã Hoằng",
+    "district_code": "380"
+  },
+  {
+    "code": "15970",
+    "name": "Hoằng Đại",
+    "full_name": "Xã Hoằng Đại",
+    "type": "Xã Hoằng",
+    "district_code": "380"
+  },
+  {
+    "code": "14773",
+    "name": "Lam Sơn",
+    "full_name": "Phường Lam Sơn",
+    "type": "Phường Lam",
+    "district_code": "380"
+  },
+  {
+    "code": "15922",
+    "name": "Long Anh",
+    "full_name": "Phường Long Anh",
+    "type": "Phường Long",
+    "district_code": "380"
+  },
+  {
+    "code": "14761",
+    "name": "Nam Ngạn",
+    "full_name": "Phường Nam Ngạn",
+    "type": "Phường Nam",
+    "district_code": "380"
+  },
+  {
+    "code": "14779",
+    "name": "Ngọc Trạo",
+    "full_name": "Phường Ngọc Trạo",
+    "type": "Phường Ngọc",
+    "district_code": "380"
+  },
+  {
+    "code": "14770",
+    "name": "Phú Sơn",
+    "full_name": "Phường Phú Sơn",
+    "type": "Phường Phú",
+    "district_code": "380"
+  },
+  {
+    "code": "16507",
+    "name": "Quảng Cát",
+    "full_name": "Phường Quảng Cát",
+    "type": "Phường Quảng",
+    "district_code": "380"
+  },
+  {
+    "code": "14800",
+    "name": "Quảng Hưng",
+    "full_name": "Phường Quảng Hưng",
+    "type": "Phường Quảng",
+    "district_code": "380"
+  },
+  {
+    "code": "16522",
+    "name": "Quảng Phú",
+    "full_name": "Phường Quảng Phú",
+    "type": "Phường Quảng",
+    "district_code": "380"
+  },
+  {
+    "code": "16525",
+    "name": "Quảng Tâm",
+    "full_name": "Phường Quảng Tâm",
+    "type": "Phường Quảng",
+    "district_code": "380"
+  },
+  {
+    "code": "14803",
+    "name": "Quảng Thắng",
+    "full_name": "Phường Quảng Thắng",
+    "type": "Phường Quảng",
+    "district_code": "380"
+  },
+  {
+    "code": "14806",
+    "name": "Quảng Thành",
+    "full_name": "Phường Quảng Thành",
+    "type": "Phường Quảng",
+    "district_code": "380"
+  },
+  {
+    "code": "16441",
+    "name": "Quảng Thịnh",
+    "full_name": "Phường Quảng Thịnh",
+    "type": "Phường Quảng",
+    "district_code": "380"
+  },
+  {
+    "code": "16459",
+    "name": "Quảng Đông",
+    "full_name": "Phường Quảng Đông",
+    "type": "Phường Quảng",
+    "district_code": "380"
+  },
+  {
+    "code": "14788",
+    "name": "Tân Sơn",
+    "full_name": "Phường Tân Sơn",
+    "type": "Phường Tân",
+    "district_code": "380"
+  },
+  {
+    "code": "15913",
+    "name": "Tào Xuyên",
+    "full_name": "Phường Tào Xuyên",
+    "type": "Phường Tào",
+    "district_code": "380"
+  },
+  {
+    "code": "15859",
+    "name": "Thiệu Dương",
+    "full_name": "Phường Thiệu Dương",
+    "type": "Phường Thiệu",
+    "district_code": "380"
+  },
+  {
+    "code": "15856",
+    "name": "Thiệu Khánh",
+    "full_name": "Phường Thiệu Khánh",
+    "type": "Phường Thiệu",
+    "district_code": "380"
+  },
+  {
+    "code": "15850",
+    "name": "Thiệu Vân",
+    "full_name": "Xã Thiệu Vân",
+    "type": "Xã Thiệu",
+    "district_code": "380"
+  },
+  {
+    "code": "14764",
+    "name": "Trường Thi",
+    "full_name": "Phường Trường Thi",
+    "type": "Phường Trường",
+    "district_code": "380"
+  },
+  {
+    "code": "14767",
+    "name": "Điện Biên",
+    "full_name": "Phường Điện Biên",
+    "type": "Phường Điện",
+    "district_code": "380"
+  },
+  {
+    "code": "14791",
+    "name": "Đông Cương",
+    "full_name": "Phường Đông Cương",
+    "type": "Phường Đông",
+    "district_code": "380"
+  },
+  {
+    "code": "14797",
+    "name": "Đông Hải",
+    "full_name": "Phường Đông Hải",
+    "type": "Phường Đông",
+    "district_code": "380"
+  },
+  {
+    "code": "14794",
+    "name": "Đông Hương",
+    "full_name": "Phường Đông Hương",
+    "type": "Phường Đông",
+    "district_code": "380"
+  },
+  {
+    "code": "16396",
+    "name": "Đông Lĩnh",
+    "full_name": "Phường Đông Lĩnh",
+    "type": "Phường Đông",
+    "district_code": "380"
+  },
+  {
+    "code": "14785",
+    "name": "Đông Sơn",
+    "full_name": "Phường Đông Sơn",
+    "type": "Phường Đông",
+    "district_code": "380"
+  },
+  {
+    "code": "16432",
+    "name": "Đông Tân",
+    "full_name": "Phường Đông Tân",
+    "type": "Phường Đông",
+    "district_code": "380"
+  },
+  {
+    "code": "14758",
+    "name": "Đông Thọ",
+    "full_name": "Phường Đông Thọ",
+    "type": "Phường Đông",
+    "district_code": "380"
+  },
+  {
+    "code": "14782",
+    "name": "Đông Vệ",
+    "full_name": "Phường Đông Vệ",
+    "type": "Phường Đông",
+    "district_code": "380"
+  },
+  {
+    "code": "16429",
+    "name": "Đông Vinh",
+    "full_name": "Xã Đông Vinh",
+    "type": "Xã Đông",
+    "district_code": "380"
+  }
+]

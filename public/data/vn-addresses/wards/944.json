@@ -1,0 +1,65 @@
+[
+  {
+    "code": "31588",
+    "name": "Hưng Phú",
+    "full_name": "Xã Hưng Phú",
+    "type": "Xã Hưng",
+    "district_code": "944"
+  },
+  {
+    "code": "31567",
+    "name": "Huỳnh Hữu Nghĩa",
+    "full_name": "Thị trấn Huỳnh Hữu Nghĩa",
+    "type": "Thị trấn Huỳnh Hữu",
+    "district_code": "944"
+  },
+  {
+    "code": "31579",
+    "name": "Long Hưng",
+    "full_name": "Xã Long Hưng",
+    "type": "Xã Long",
+    "district_code": "944"
+  },
+  {
+    "code": "31591",
+    "name": "Mỹ Hương",
+    "full_name": "Xã Mỹ Hương",
+    "type": "Xã Mỹ",
+    "district_code": "944"
+  },
+  {
+    "code": "31603",
+    "name": "Mỹ Phước",
+    "full_name": "Xã Mỹ Phước",
+    "type": "Xã Mỹ",
+    "district_code": "944"
+  },
+  {
+    "code": "31609",
+    "name": "Mỹ Thuận",
+    "full_name": "Xã Mỹ Thuận",
+    "type": "Xã Mỹ",
+    "district_code": "944"
+  },
+  {
+    "code": "31597",
+    "name": "Mỹ Tú",
+    "full_name": "Xã Mỹ Tú",
+    "type": "Xã Mỹ",
+    "district_code": "944"
+  },
+  {
+    "code": "31612",
+    "name": "Phú Mỹ",
+    "full_name": "Xã Phú Mỹ",
+    "type": "Xã Phú",
+    "district_code": "944"
+  },
+  {
+    "code": "31606",
+    "name": "Thuận Hưng",
+    "full_name": "Xã Thuận Hưng",
+    "type": "Xã Thuận",
+    "district_code": "944"
+  }
+]

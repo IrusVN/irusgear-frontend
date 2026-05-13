@@ -1,0 +1,79 @@
+[
+  {
+    "code": "20488",
+    "name": "A Rooi",
+    "full_name": "Xã A Rooi",
+    "type": "Xã A",
+    "district_code": "505"
+  },
+  {
+    "code": "20479",
+    "name": "A Ting",
+    "full_name": "Xã A Ting",
+    "type": "Xã A",
+    "district_code": "505"
+  },
+  {
+    "code": "20485",
+    "name": "Ba",
+    "full_name": "Xã Ba",
+    "type": "Xã",
+    "district_code": "505"
+  },
+  {
+    "code": "20476",
+    "name": "Jơ Ngây",
+    "full_name": "Xã Jơ Ngây",
+    "type": "Xã Jơ",
+    "district_code": "505"
+  },
+  {
+    "code": "20497",
+    "name": "Ka Dăng",
+    "full_name": "Xã Ka Dăng",
+    "type": "Xã Ka",
+    "district_code": "505"
+  },
+  {
+    "code": "20494",
+    "name": "Mà Cooi",
+    "full_name": "Xã Mà Cooi",
+    "type": "Xã Mà",
+    "district_code": "505"
+  },
+  {
+    "code": "20467",
+    "name": "P Rao",
+    "full_name": "Thị trấn P Rao",
+    "type": "Thị trấn P",
+    "district_code": "505"
+  },
+  {
+    "code": "20473",
+    "name": "Sông Kôn",
+    "full_name": "Xã Sông Kôn",
+    "type": "Xã Sông",
+    "district_code": "505"
+  },
+  {
+    "code": "20470",
+    "name": "Tà Lu",
+    "full_name": "Xã Tà Lu",
+    "type": "Xã Tà",
+    "district_code": "505"
+  },
+  {
+    "code": "20482",
+    "name": "Tư",
+    "full_name": "Xã Tư",
+    "type": "Xã",
+    "district_code": "505"
+  },
+  {
+    "code": "20491",
+    "name": "Za Hung",
+    "full_name": "Xã Za Hung",
+    "type": "Xã Za",
+    "district_code": "505"
+  }
+]

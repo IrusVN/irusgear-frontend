@@ -2,28 +2,28 @@
   <div class="my-3 my-md-4">
     <section class="accessory-section text-neutral-800">
       <div class="d-flex align-items-center gap-3 accessory-header">
-        <h2 class="mb-0 accessory-title">Sắm thêm phụ kiện chất lượng</h2>
+        <h2 class="mb-0 accessory-title">{{ $t('home.accessoryTitle') }}</h2>
 
-        <a :href="viewAllUrl" class="view-all-link text-decoration-none">
-          Xem tất cả
+        <NuxtLink :to="viewAllUrl" class="view-all-link text-decoration-none">
+          {{ $t('common.seeAll') }}
           <i class="bi bi-chevron-right ms-1"></i>
-        </a>
+        </NuxtLink>
       </div>
 
       <div class="mt-2">
         <div class="accessory-surface animate-fade-in">
           <div class="accessory-grid-wrap position-relative bg-white">
-            <a
+            <NuxtLink
               v-for="item in accessoryItems"
-              :key="item.href"
-              :href="item.href"
+              :key="item.category"
+              :to="localePath(`/products?category=${item.category}`)"
               class="accessory-item text-decoration-none text-dark"
             >
               <span class="accessory-image-wrap">
-                <img :src="item.image" :alt="item.title" class="accessory-image" loading="lazy" />
+                <i :class="item.iconClass || 'bi bi-phone'" class="accessory-image bi" role="img" :aria-label="t(item.titleKey)"></i>
               </span>
-              <p class="mb-0 accessory-name">{{ item.title }}</p>
-            </a>
+              <p class="mb-0 accessory-name">{{ t(item.titleKey) }}</p>
+            </NuxtLink>
 
             <div class="grid-edge-right"></div>
             <div class="grid-edge-bottom"></div>
@@ -35,98 +35,100 @@
 </template>
 
 <script setup>
-const viewAllUrl = "/phu-kien.html";
+const { t } = useI18n()
+const localePath = useLocalePath()
+const viewAllUrl = localePath('/products?category=phu-kien')
 
 const accessoryItems = [
   {
-    title: "Phụ kiện Apple",
-    href: "/phu-kien/apple.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9G05VYEFVX2VCHYZY1R7.png",
+    titleKey: "home.accessoryApple",
+    category: "apple",
+    iconClass: "bi bi-apple",
   },
   {
-    title: "Cáp, sạc",
-    href: "/phu-kien/sac-dien-thoai.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GEB6TV510FK9GJPJK4N.png",
+    titleKey: "home.accessoryCable",
+    category: "sac-dien-thoai",
+    iconClass: "bi bi-usb-symbol",
   },
   {
-    title: "Pin sạc dự phòng",
-    href: "/phu-kien/pin-du-phong.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GHJ4RRYBDS2Y2WEKRZV.png",
+    titleKey: "home.accessoryBattery",
+    category: "pin-du-phong",
+    iconClass: "bi bi-battery-charging",
   },
   {
-    title: "Ốp lưng - Bao da",
-    href: "/phu-kien/bao-da-op-lung.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GMV76QGJDAPAAJ9M26V.png",
+    titleKey: "home.accessoryCase",
+    category: "bao-da-op-lung",
+    iconClass: "bi bi-phone",
   },
   {
-    title: "Dán màn hình",
-    href: "/phu-kien/dan-man-hinh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GSARTJ2C2XKJSJZB85Z.png",
+    titleKey: "home.accessoryScreen",
+    category: "dan-man-hinh",
+    iconClass: "bi bi-display",
   },
   {
-    title: "Thẻ nhớ, USB",
-    href: "/phu-kien/the-nho-usb-otg.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9GX3JKD0AHHSWBBK44TP.png",
+    titleKey: "home.accessoryStorage",
+    category: "the-nho-usb-otg",
+    iconClass: "bi bi-sd-card",
   },
   {
-    title: "Gaming Gear, Playstation",
-    href: "/phu-kien/gaming-gear.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H0DYE4E1791SFPXEMY7.png",
+    titleKey: "home.gamingGear",
+    category: "gaming-gear",
+    iconClass: "bi bi-controller",
   },
   {
-    title: "Sim 4G - 5G",
-    href: "/sim-3g-4g-nghe-goi.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H3ZX03AZB1CNX48DG80.png",
+    titleKey: "home.sim4g5g",
+    category: "sim-4g-5g",
+    iconClass: "bi bi-sim",
   },
   {
-    title: "Thiết bị mạng",
-    href: "/phu-kien/thiet-bi-mang.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9H7Y53763DEK7J2A2TKP.png",
+    titleKey: "home.accessoryNetwork",
+    category: "thiet-bi-mang",
+    iconClass: "bi bi-router",
   },
   {
-    title: "Camera",
-    href: "/phu-kien/camera.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FA9HBE3PQPJEBJNS1ZZDZQ.png",
+    titleKey: "home.camera",
+    category: "camera",
+    iconClass: "bi bi-camera",
   },
   {
-    title: "Gimbal",
-    href: "/phu-kien/camera/gimbal.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG655JQDK9DBG3DW9ARDT.png",
+    titleKey: "home.gimbal",
+    category: "gimbal",
+    iconClass: "bi bi-camera-video",
   },
   {
-    title: "Flycam",
-    href: "/flycam.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6G9DFQVSS6CYZA2YAFQ.png",
+    titleKey: "home.flycam",
+    category: "flycam",
+    iconClass: "bi bi-airplane",
   },
   {
-    title: "Máy ảnh",
-    href: "/may-anh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6KJ98DW8KHNXKFWARYF.png",
+    titleKey: "home.camera",
+    category: "may-anh",
+    iconClass: "bi bi-camera2",
   },
   {
-    title: "Chuột, bàn phím",
-    href: "/phu-kien/chuot-ban-phim-may-tinh.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6Q4JA1NNV2BFRPWFDGY.png",
+    titleKey: "home.accessoryKeyboard",
+    category: "chuot-ban-phim-may-tinh",
+    iconClass: "bi bi-keyboard",
   },
   {
-    title: "Balo, túi xách",
-    href: "/phu-kien/balo-tui-chong-soc-laptop.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6T4966NR0Z7ZSFXW5WD.png",
+    titleKey: "home.accessoryBag",
+    category: "balo-tui-chong-soc-laptop",
+    iconClass: "bi bi-bag",
   },
   {
-    title: "Hub chuyển đổi",
-    href: "/phu-kien/sac-dien-thoai/cap-chuyen-doi-dau-chuyen-doi-macbook.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6WZJ9RRA8H9VTQP9CHS.png",
+    titleKey: "home.accessoryHub",
+    category: "cap-chuyen-doi-macbook",
+    iconClass: "bi bi-hdd",
   },
   {
-    title: "Phụ kiện điện thoại",
-    href: "/phu-kien/phu-kien-tien-ich.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG6ZTGEC28FWZRJX0TBWS.png",
+    titleKey: "home.accessoryPhone",
+    category: "phu-kien-tien-ich",
+    iconClass: "bi bi-phone-flip",
   },
   {
-    title: "Phụ kiện Laptop",
-    href: "/phu-kien/may-tinh-laptop.html",
-    image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://media-asset.cellphones.com.vn/page_configs/01K6FAG72ZEC79BAJY70V3ESD0.png",
+    titleKey: "home.accessoryLaptop",
+    category: "may-tinh-laptop",
+    iconClass: "bi bi-laptop",
   },
 ];
 </script>
@@ -197,7 +199,11 @@ const accessoryItems = [
 .accessory-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: var(--irus-color-accent);
 }
 
 .accessory-name {

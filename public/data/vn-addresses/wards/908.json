@@ -1,0 +1,65 @@
+[
+  {
+    "code": "30997",
+    "name": "Hưng Yên",
+    "full_name": "Xã Hưng Yên",
+    "type": "Xã Hưng",
+    "district_code": "908"
+  },
+  {
+    "code": "31000",
+    "name": "Nam Thái",
+    "full_name": "Xã Nam Thái",
+    "type": "Xã Nam",
+    "district_code": "908"
+  },
+  {
+    "code": "31003",
+    "name": "Nam Thái A",
+    "full_name": "Xã Nam Thái A",
+    "type": "Xã Nam Thái",
+    "district_code": "908"
+  },
+  {
+    "code": "30994",
+    "name": "Nam Yên",
+    "full_name": "Xã Nam Yên",
+    "type": "Xã Nam",
+    "district_code": "908"
+  },
+  {
+    "code": "30988",
+    "name": "Tây Yên",
+    "full_name": "Xã Tây Yên",
+    "type": "Xã Tây",
+    "district_code": "908"
+  },
+  {
+    "code": "30991",
+    "name": "Tây Yên A",
+    "full_name": "Xã Tây Yên A",
+    "type": "Xã Tây Yên",
+    "district_code": "908"
+  },
+  {
+    "code": "30985",
+    "name": "Thứ Ba",
+    "full_name": "Thị trấn Thứ Ba",
+    "type": "Thị trấn Thứ",
+    "district_code": "908"
+  },
+  {
+    "code": "31006",
+    "name": "Đông Thái",
+    "full_name": "Xã Đông Thái",
+    "type": "Xã Đông",
+    "district_code": "908"
+  },
+  {
+    "code": "31009",
+    "name": "Đông Yên",
+    "full_name": "Xã Đông Yên",
+    "type": "Xã Đông",
+    "district_code": "908"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "23534",
+    "name": "Hơ Moong",
+    "full_name": "Xã Hơ Moong",
+    "type": "Xã Hơ",
+    "district_code": "616"
+  },
+  {
+    "code": "23536",
+    "name": "Mô Rai",
+    "full_name": "Xã Mô Rai",
+    "type": "Xã Mô",
+    "district_code": "616"
+  },
+  {
+    "code": "23530",
+    "name": "Rơ Kơi",
+    "full_name": "Xã Rơ Kơi",
+    "type": "Xã Rơ",
+    "district_code": "616"
+  },
+  {
+    "code": "23545",
+    "name": "Sa Bình",
+    "full_name": "Xã Sa Bình",
+    "type": "Xã Sa",
+    "district_code": "616"
+  },
+  {
+    "code": "23542",
+    "name": "Sa Nghĩa",
+    "full_name": "Xã Sa Nghĩa",
+    "type": "Xã Sa",
+    "district_code": "616"
+  },
+  {
+    "code": "23533",
+    "name": "Sa Nhơn",
+    "full_name": "Xã Sa Nhơn",
+    "type": "Xã Sa",
+    "district_code": "616"
+  },
+  {
+    "code": "23539",
+    "name": "Sa Sơn",
+    "full_name": "Xã Sa Sơn",
+    "type": "Xã Sa",
+    "district_code": "616"
+  },
+  {
+    "code": "23527",
+    "name": "Sa Thầy",
+    "full_name": "Thị trấn Sa Thầy",
+    "type": "Thị trấn Sa",
+    "district_code": "616"
+  },
+  {
+    "code": "23554",
+    "name": "Ya ly",
+    "full_name": "Xã Ya ly",
+    "type": "Xã Ya",
+    "district_code": "616"
+  },
+  {
+    "code": "23551",
+    "name": "Ya Tăng",
+    "full_name": "Xã Ya Tăng",
+    "type": "Xã Ya",
+    "district_code": "616"
+  },
+  {
+    "code": "23548",
+    "name": "Ya Xiêr",
+    "full_name": "Xã Ya Xiêr",
+    "type": "Xã Ya",
+    "district_code": "616"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "code": "866",
+    "name": "Cao Lãnh",
+    "full_name": "Thành phố Cao Lãnh",
+    "type": "Thành phố Cao",
+    "province_code": "87"
+  },
+  {
+    "code": "873",
+    "name": "Cao Lãnh",
+    "full_name": "Huyện Cao Lãnh",
+    "type": "Huyện Cao",
+    "province_code": "87"
+  },
+  {
+    "code": "877",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "87"
+  },
+  {
+    "code": "868",
+    "name": "Hồng Ngự",
+    "full_name": "Thành phố Hồng Ngự",
+    "type": "Thành phố Hồng",
+    "province_code": "87"
+  },
+  {
+    "code": "870",
+    "name": "Hồng Ngự",
+    "full_name": "Huyện Hồng Ngự",
+    "type": "Huyện Hồng",
+    "province_code": "87"
+  },
+  {
+    "code": "876",
+    "name": "Lai Vung",
+    "full_name": "Huyện Lai Vung",
+    "type": "Huyện Lai",
+    "province_code": "87"
+  },
+  {
+    "code": "875",
+    "name": "Lấp Vò",
+    "full_name": "Huyện Lấp Vò",
+    "type": "Huyện Lấp",
+    "province_code": "87"
+  },
+  {
+    "code": "867",
+    "name": "Sa Đéc",
+    "full_name": "Thành phố Sa Đéc",
+    "type": "Thành phố Sa",
+    "province_code": "87"
+  },
+  {
+    "code": "871",
+    "name": "Tam Nông",
+    "full_name": "Huyện Tam Nông",
+    "type": "Huyện Tam",
+    "province_code": "87"
+  },
+  {
+    "code": "869",
+    "name": "Tân Hồng",
+    "full_name": "Huyện Tân Hồng",
+    "type": "Huyện Tân",
+    "province_code": "87"
+  },
+  {
+    "code": "874",
+    "name": "Thanh Bình",
+    "full_name": "Huyện Thanh Bình",
+    "type": "Huyện Thanh",
+    "province_code": "87"
+  },
+  {
+    "code": "872",
+    "name": "Tháp Mười",
+    "full_name": "Huyện Tháp Mười",
+    "type": "Huyện Tháp",
+    "province_code": "87"
+  }
+]

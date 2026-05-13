@@ -1,0 +1,58 @@
+[
+  {
+    "code": "23992",
+    "name": "An Thành",
+    "full_name": "Xã An Thành",
+    "type": "Xã An",
+    "district_code": "634"
+  },
+  {
+    "code": "24001",
+    "name": "Cư An",
+    "full_name": "Xã Cư An",
+    "type": "Xã Cư",
+    "district_code": "634"
+  },
+  {
+    "code": "23989",
+    "name": "Hà Tam",
+    "full_name": "Xã Hà Tam",
+    "type": "Xã Hà",
+    "district_code": "634"
+  },
+  {
+    "code": "24007",
+    "name": "Phú An",
+    "full_name": "Xã Phú An",
+    "type": "Xã Phú",
+    "district_code": "634"
+  },
+  {
+    "code": "24004",
+    "name": "Tân An",
+    "full_name": "Xã Tân An",
+    "type": "Xã Tân",
+    "district_code": "634"
+  },
+  {
+    "code": "24010",
+    "name": "Ya Hội",
+    "full_name": "Xã Ya Hội",
+    "type": "Xã Ya",
+    "district_code": "634"
+  },
+  {
+    "code": "23998",
+    "name": "Yang Bắc",
+    "full_name": "Xã Yang Bắc",
+    "type": "Xã Yang",
+    "district_code": "634"
+  },
+  {
+    "code": "23995",
+    "name": "Đak Pơ",
+    "full_name": "Thị trấn Đak Pơ",
+    "type": "Thị trấn Đak",
+    "district_code": "634"
+  }
+]

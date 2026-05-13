@@ -1,0 +1,93 @@
+[
+  {
+    "code": "17230",
+    "name": "Bình Chuẩn",
+    "full_name": "Xã Bình Chuẩn",
+    "type": "Xã Bình",
+    "district_code": "422"
+  },
+  {
+    "code": "17254",
+    "name": "Bồng Khê",
+    "full_name": "Xã Bồng Khê",
+    "type": "Xã Bồng",
+    "district_code": "422"
+  },
+  {
+    "code": "17236",
+    "name": "Cam Lâm",
+    "full_name": "Xã Cam Lâm",
+    "type": "Xã Cam",
+    "district_code": "422"
+  },
+  {
+    "code": "17248",
+    "name": "Châu Khê",
+    "full_name": "Xã Châu Khê",
+    "type": "Xã Châu",
+    "district_code": "422"
+  },
+  {
+    "code": "17251",
+    "name": "Chi Khê",
+    "full_name": "Xã Chi Khê",
+    "type": "Xã Chi",
+    "district_code": "422"
+  },
+  {
+    "code": "17227",
+    "name": "Con Cuông",
+    "full_name": "Thị trấn Con Cuông",
+    "type": "Thị trấn Con",
+    "district_code": "422"
+  },
+  {
+    "code": "17233",
+    "name": "Lạng Khê",
+    "full_name": "Xã Lạng Khê",
+    "type": "Xã Lạng",
+    "district_code": "422"
+  },
+  {
+    "code": "17260",
+    "name": "Lục Dạ",
+    "full_name": "Xã Lục Dạ",
+    "type": "Xã Lục",
+    "district_code": "422"
+  },
+  {
+    "code": "17245",
+    "name": "Mậu Đức",
+    "full_name": "Xã Mậu Đức",
+    "type": "Xã Mậu",
+    "district_code": "422"
+  },
+  {
+    "code": "17263",
+    "name": "Môn Sơn",
+    "full_name": "Xã Môn Sơn",
+    "type": "Xã Môn",
+    "district_code": "422"
+  },
+  {
+    "code": "17239",
+    "name": "Thạch Ngàn",
+    "full_name": "Xã Thạch Ngàn",
+    "type": "Xã Thạch",
+    "district_code": "422"
+  },
+  {
+    "code": "17257",
+    "name": "Yên Khê",
+    "full_name": "Xã Yên Khê",
+    "type": "Xã Yên",
+    "district_code": "422"
+  },
+  {
+    "code": "17242",
+    "name": "Đôn Phục",
+    "full_name": "Xã Đôn Phục",
+    "type": "Xã Đôn",
+    "district_code": "422"
+  }
+]

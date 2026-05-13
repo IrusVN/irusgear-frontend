@@ -1,0 +1,44 @@
+[
+  {
+    "code": "18115",
+    "name": "Bắc Hồng",
+    "full_name": "Phường Bắc Hồng",
+    "type": "Phường Bắc",
+    "district_code": "437"
+  },
+  {
+    "code": "18118",
+    "name": "Nam Hồng",
+    "full_name": "Phường Nam Hồng",
+    "type": "Phường Nam",
+    "district_code": "437"
+  },
+  {
+    "code": "18130",
+    "name": "Thuận Lộc",
+    "full_name": "Xã Thuận Lộc",
+    "type": "Xã Thuận",
+    "district_code": "437"
+  },
+  {
+    "code": "18121",
+    "name": "Trung Lương",
+    "full_name": "Phường Trung Lương",
+    "type": "Phường Trung",
+    "district_code": "437"
+  },
+  {
+    "code": "18127",
+    "name": "Đậu Liêu",
+    "full_name": "Phường Đậu Liêu",
+    "type": "Phường Đậu",
+    "district_code": "437"
+  },
+  {
+    "code": "18124",
+    "name": "Đức Thuận",
+    "full_name": "Phường Đức Thuận",
+    "type": "Phường Đức",
+    "district_code": "437"
+  }
+]

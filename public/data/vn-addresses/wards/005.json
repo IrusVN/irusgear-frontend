@@ -1,0 +1,58 @@
+[
+  {
+    "code": "00166",
+    "name": "Dịch Vọng",
+    "full_name": "Phường Dịch Vọng",
+    "type": "Phường Dịch",
+    "district_code": "005"
+  },
+  {
+    "code": "00167",
+    "name": "Dịch Vọng Hậu",
+    "full_name": "Phường Dịch Vọng Hậu",
+    "type": "Phường Dịch Vọng",
+    "district_code": "005"
+  },
+  {
+    "code": "00163",
+    "name": "Mai Dịch",
+    "full_name": "Phường Mai Dịch",
+    "type": "Phường Mai",
+    "district_code": "005"
+  },
+  {
+    "code": "00160",
+    "name": "Nghĩa Tân",
+    "full_name": "Phường Nghĩa Tân",
+    "type": "Phường Nghĩa",
+    "district_code": "005"
+  },
+  {
+    "code": "00157",
+    "name": "Nghĩa Đô",
+    "full_name": "Phường Nghĩa Đô",
+    "type": "Phường Nghĩa",
+    "district_code": "005"
+  },
+  {
+    "code": "00169",
+    "name": "Quan Hoa",
+    "full_name": "Phường Quan Hoa",
+    "type": "Phường Quan",
+    "district_code": "005"
+  },
+  {
+    "code": "00175",
+    "name": "Trung Hoà",
+    "full_name": "Phường Trung Hoà",
+    "type": "Phường Trung",
+    "district_code": "005"
+  },
+  {
+    "code": "00172",
+    "name": "Yên Hoà",
+    "full_name": "Phường Yên Hoà",
+    "type": "Phường Yên",
+    "district_code": "005"
+  }
+]

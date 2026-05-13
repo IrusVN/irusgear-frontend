@@ -1,0 +1,100 @@
+[
+  {
+    "code": "28765",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "829"
+  },
+  {
+    "code": "28768",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "829"
+  },
+  {
+    "code": "28762",
+    "name": "6",
+    "full_name": "Phường 6",
+    "type": "Phường",
+    "district_code": "829"
+  },
+  {
+    "code": "28780",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "829"
+  },
+  {
+    "code": "28759",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "829"
+  },
+  {
+    "code": "28777",
+    "name": "An Hội",
+    "full_name": "Phường An Hội",
+    "type": "Phường An",
+    "district_code": "829"
+  },
+  {
+    "code": "28789",
+    "name": "Bình Phú",
+    "full_name": "Xã Bình Phú",
+    "type": "Xã Bình",
+    "district_code": "829"
+  },
+  {
+    "code": "28792",
+    "name": "Mỹ Thạnh An",
+    "full_name": "Xã Mỹ Thạnh An",
+    "type": "Xã Mỹ Thạnh",
+    "district_code": "829"
+  },
+  {
+    "code": "28795",
+    "name": "Nhơn Thạnh",
+    "full_name": "Xã Nhơn Thạnh",
+    "type": "Xã Nhơn",
+    "district_code": "829"
+  },
+  {
+    "code": "28786",
+    "name": "Phú Hưng",
+    "full_name": "Xã Phú Hưng",
+    "type": "Xã Phú",
+    "district_code": "829"
+  },
+  {
+    "code": "28756",
+    "name": "Phú Khương",
+    "full_name": "Phường Phú Khương",
+    "type": "Phường Phú",
+    "district_code": "829"
+  },
+  {
+    "code": "28798",
+    "name": "Phú Nhuận",
+    "full_name": "Xã Phú Nhuận",
+    "type": "Xã Phú",
+    "district_code": "829"
+  },
+  {
+    "code": "28757",
+    "name": "Phú Tân",
+    "full_name": "Phường Phú Tân",
+    "type": "Phường Phú",
+    "district_code": "829"
+  },
+  {
+    "code": "28783",
+    "name": "Sơn Đông",
+    "full_name": "Xã Sơn Đông",
+    "type": "Xã Sơn",
+    "district_code": "829"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "31150",
+    "name": "An Bình",
+    "full_name": "Phường An Bình",
+    "type": "Phường An",
+    "district_code": "916"
+  },
+  {
+    "code": "31129",
+    "name": "An Cư",
+    "full_name": "Phường An Cư",
+    "type": "Phường An",
+    "district_code": "916"
+  },
+  {
+    "code": "31120",
+    "name": "An Hòa",
+    "full_name": "Phường An Hòa",
+    "type": "Phường An",
+    "district_code": "916"
+  },
+  {
+    "code": "31149",
+    "name": "An Khánh",
+    "full_name": "Phường An Khánh",
+    "type": "Phường An",
+    "district_code": "916"
+  },
+  {
+    "code": "31126",
+    "name": "An Nghiệp",
+    "full_name": "Phường An Nghiệp",
+    "type": "Phường An",
+    "district_code": "916"
+  },
+  {
+    "code": "31141",
+    "name": "An Phú",
+    "full_name": "Phường An Phú",
+    "type": "Phường An",
+    "district_code": "916"
+  },
+  {
+    "code": "31117",
+    "name": "Cái Khế",
+    "full_name": "Phường Cái Khế",
+    "type": "Phường Cái",
+    "district_code": "916"
+  },
+  {
+    "code": "31147",
+    "name": "Hưng Lợi",
+    "full_name": "Phường Hưng Lợi",
+    "type": "Phường Hưng",
+    "district_code": "916"
+  },
+  {
+    "code": "31135",
+    "name": "Tân An",
+    "full_name": "Phường Tân An",
+    "type": "Phường Tân",
+    "district_code": "916"
+  },
+  {
+    "code": "31123",
+    "name": "Thới Bình",
+    "full_name": "Phường Thới Bình",
+    "type": "Phường Thới",
+    "district_code": "916"
+  },
+  {
+    "code": "31144",
+    "name": "Xuân Khánh",
+    "full_name": "Phường Xuân Khánh",
+    "type": "Phường Xuân",
+    "district_code": "916"
+  }
+]

@@ -1,0 +1,121 @@
+[
+  {
+    "code": "19496",
+    "name": "Cửa Việt",
+    "full_name": "Thị trấn Cửa Việt",
+    "type": "Thị trấn Cửa",
+    "district_code": "466"
+  },
+  {
+    "code": "19522",
+    "name": "Gio An",
+    "full_name": "Xã Gio An",
+    "type": "Xã Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19525",
+    "name": "Gio Châu",
+    "full_name": "Xã Gio Châu",
+    "type": "Xã Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19519",
+    "name": "Gio Hải",
+    "full_name": "Xã Gio Hải",
+    "type": "Xã Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19495",
+    "name": "Gio Linh",
+    "full_name": "Thị trấn Gio Linh",
+    "type": "Thị trấn Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19543",
+    "name": "Gio Mai",
+    "full_name": "Xã Gio Mai",
+    "type": "Xã Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19510",
+    "name": "Gio Mỹ",
+    "full_name": "Xã Gio Mỹ",
+    "type": "Xã Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19552",
+    "name": "Gio Quang",
+    "full_name": "Xã Gio Quang",
+    "type": "Xã Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19537",
+    "name": "Gio Sơn",
+    "full_name": "Xã Gio Sơn",
+    "type": "Xã Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19531",
+    "name": "Gio Việt",
+    "full_name": "Xã Gio Việt",
+    "type": "Xã Gio",
+    "district_code": "466"
+  },
+  {
+    "code": "19546",
+    "name": "Hải Thái",
+    "full_name": "Xã Hải Thái",
+    "type": "Xã Hải",
+    "district_code": "466"
+  },
+  {
+    "code": "19549",
+    "name": "Linh Hải",
+    "full_name": "Xã Linh Hải",
+    "type": "Xã Linh",
+    "district_code": "466"
+  },
+  {
+    "code": "19534",
+    "name": "Linh Trường",
+    "full_name": "Xã Linh Trường",
+    "type": "Xã Linh",
+    "district_code": "466"
+  },
+  {
+    "code": "19507",
+    "name": "Phong Bình",
+    "full_name": "Xã Phong Bình",
+    "type": "Xã Phong",
+    "district_code": "466"
+  },
+  {
+    "code": "19498",
+    "name": "Trung Giang",
+    "full_name": "Xã Trung Giang",
+    "type": "Xã Trung",
+    "district_code": "466"
+  },
+  {
+    "code": "19501",
+    "name": "Trung Hải",
+    "full_name": "Xã Trung Hải",
+    "type": "Xã Trung",
+    "district_code": "466"
+  },
+  {
+    "code": "19504",
+    "name": "Trung Sơn",
+    "full_name": "Xã Trung Sơn",
+    "type": "Xã Trung",
+    "district_code": "466"
+  }
+]

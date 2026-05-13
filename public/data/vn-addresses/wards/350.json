@@ -1,0 +1,128 @@
+[
+  {
+    "code": "13429",
+    "name": "Ba Sao",
+    "full_name": "Thị trấn Ba Sao",
+    "type": "Thị trấn Ba",
+    "district_code": "350"
+  },
+  {
+    "code": "13408",
+    "name": "Hoàng Tây",
+    "full_name": "Xã Hoàng Tây",
+    "type": "Xã Hoàng",
+    "district_code": "350"
+  },
+  {
+    "code": "13420",
+    "name": "Khả Phong",
+    "full_name": "Xã Khả Phong",
+    "type": "Xã Khả",
+    "district_code": "350"
+  },
+  {
+    "code": "13393",
+    "name": "Lê Hồ",
+    "full_name": "Xã Lê Hồ",
+    "type": "Xã Lê",
+    "district_code": "350"
+  },
+  {
+    "code": "13432",
+    "name": "Liên Sơn",
+    "full_name": "Xã Liên Sơn",
+    "type": "Xã Liên",
+    "district_code": "350"
+  },
+  {
+    "code": "13423",
+    "name": "Ngọc Sơn",
+    "full_name": "Xã Ngọc Sơn",
+    "type": "Xã Ngọc",
+    "district_code": "350"
+  },
+  {
+    "code": "13387",
+    "name": "Nguyễn Úy",
+    "full_name": "Xã Nguyễn Úy",
+    "type": "Xã Nguyễn",
+    "district_code": "350"
+  },
+  {
+    "code": "13402",
+    "name": "Nhật Tân",
+    "full_name": "Xã Nhật Tân",
+    "type": "Xã Nhật",
+    "district_code": "350"
+  },
+  {
+    "code": "13399",
+    "name": "Nhật Tựu",
+    "full_name": "Xã Nhật Tựu",
+    "type": "Xã Nhật",
+    "district_code": "350"
+  },
+  {
+    "code": "13384",
+    "name": "Quế",
+    "full_name": "Thị trấn Quế",
+    "type": "Thị trấn",
+    "district_code": "350"
+  },
+  {
+    "code": "13411",
+    "name": "Tân Sơn",
+    "full_name": "Xã Tân Sơn",
+    "type": "Xã Tân",
+    "district_code": "350"
+  },
+  {
+    "code": "13438",
+    "name": "Thanh Sơn",
+    "full_name": "Xã Thanh Sơn",
+    "type": "Xã Thanh",
+    "district_code": "350"
+  },
+  {
+    "code": "13435",
+    "name": "Thi Sơn",
+    "full_name": "Xã Thi Sơn",
+    "type": "Xã Thi",
+    "district_code": "350"
+  },
+  {
+    "code": "13414",
+    "name": "Thụy Lôi",
+    "full_name": "Xã Thụy Lôi",
+    "type": "Xã Thụy",
+    "district_code": "350"
+  },
+  {
+    "code": "13396",
+    "name": "Tượng Lĩnh",
+    "full_name": "Xã Tượng Lĩnh",
+    "type": "Xã Tượng",
+    "district_code": "350"
+  },
+  {
+    "code": "13417",
+    "name": "Văn Xá",
+    "full_name": "Xã Văn Xá",
+    "type": "Xã Văn",
+    "district_code": "350"
+  },
+  {
+    "code": "13390",
+    "name": "Đại Cương",
+    "full_name": "Xã Đại Cương",
+    "type": "Xã Đại",
+    "district_code": "350"
+  },
+  {
+    "code": "13405",
+    "name": "Đồng Hóa",
+    "full_name": "Xã Đồng Hóa",
+    "type": "Xã Đồng",
+    "district_code": "350"
+  }
+]

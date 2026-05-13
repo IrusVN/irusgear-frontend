@@ -1,0 +1,65 @@
+[
+  {
+    "code": "135",
+    "name": "Lục Yên",
+    "full_name": "Huyện Lục Yên",
+    "type": "Huyện Lục",
+    "province_code": "15"
+  },
+  {
+    "code": "137",
+    "name": "Mù Căng Chải",
+    "full_name": "Huyện Mù Căng Chải",
+    "type": "Huyện Mù Căng",
+    "province_code": "15"
+  },
+  {
+    "code": "133",
+    "name": "Nghĩa Lộ",
+    "full_name": "Thị xã Nghĩa Lộ",
+    "type": "Thị xã Nghĩa",
+    "province_code": "15"
+  },
+  {
+    "code": "139",
+    "name": "Trạm Tấu",
+    "full_name": "Huyện Trạm Tấu",
+    "type": "Huyện Trạm",
+    "province_code": "15"
+  },
+  {
+    "code": "138",
+    "name": "Trấn Yên",
+    "full_name": "Huyện Trấn Yên",
+    "type": "Huyện Trấn",
+    "province_code": "15"
+  },
+  {
+    "code": "140",
+    "name": "Văn Chấn",
+    "full_name": "Huyện Văn Chấn",
+    "type": "Huyện Văn",
+    "province_code": "15"
+  },
+  {
+    "code": "136",
+    "name": "Văn Yên",
+    "full_name": "Huyện Văn Yên",
+    "type": "Huyện Văn",
+    "province_code": "15"
+  },
+  {
+    "code": "132",
+    "name": "Yên Bái",
+    "full_name": "Thành phố Yên Bái",
+    "type": "Thành phố Yên",
+    "province_code": "15"
+  },
+  {
+    "code": "141",
+    "name": "Yên Bình",
+    "full_name": "Huyện Yên Bình",
+    "type": "Huyện Yên",
+    "province_code": "15"
+  }
+]

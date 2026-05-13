@@ -215,9 +215,9 @@
 
 <script setup>
 import { ref, reactive, computed, watch, inject } from 'vue'
+import { toast } from 'vue-sonner'
 import { registerSchema } from '@/utils/validation/registerSchema'
 import { useAuthStore } from '@/stores/authStore.js'
-import { useGlobalToast } from '@/composables/useGlobalToast.js'
 import { navigateTo, useLocalePath } from '#imports'
 
 const form = reactive({
@@ -300,7 +300,6 @@ fieldsToWatch.forEach(field => {
 })
 
 const authStore = useAuthStore()
-const toast = useGlobalToast()
 
 const handleRegister = async () => {
     if (loading.value) return;

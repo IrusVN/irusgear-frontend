@@ -1,0 +1,72 @@
+[
+  {
+    "code": "30898",
+    "name": "Bình An",
+    "full_name": "Xã Bình An",
+    "type": "Xã Bình",
+    "district_code": "905"
+  },
+  {
+    "code": "30889",
+    "name": "Giục Tượng",
+    "full_name": "Xã Giục Tượng",
+    "type": "Xã Giục",
+    "district_code": "905"
+  },
+  {
+    "code": "30895",
+    "name": "Minh Hòa",
+    "full_name": "Xã Minh Hòa",
+    "type": "Xã Minh",
+    "district_code": "905"
+  },
+  {
+    "code": "30880",
+    "name": "Minh Lương",
+    "full_name": "Thị trấn Minh Lương",
+    "type": "Thị trấn Minh",
+    "district_code": "905"
+  },
+  {
+    "code": "30887",
+    "name": "Mong Thọ",
+    "full_name": "Xã Mong Thọ",
+    "type": "Xã Mong",
+    "district_code": "905"
+  },
+  {
+    "code": "30883",
+    "name": "Mong Thọ A",
+    "full_name": "Xã Mong Thọ A",
+    "type": "Xã Mong Thọ",
+    "district_code": "905"
+  },
+  {
+    "code": "30886",
+    "name": "Mong Thọ B",
+    "full_name": "Xã Mong Thọ B",
+    "type": "Xã Mong Thọ",
+    "district_code": "905"
+  },
+  {
+    "code": "30901",
+    "name": "Thạnh Lộc",
+    "full_name": "Xã Thạnh Lộc",
+    "type": "Xã Thạnh",
+    "district_code": "905"
+  },
+  {
+    "code": "30892",
+    "name": "Vĩnh Hòa Hiệp",
+    "full_name": "Xã Vĩnh Hòa Hiệp",
+    "type": "Xã Vĩnh Hòa",
+    "district_code": "905"
+  },
+  {
+    "code": "30893",
+    "name": "Vĩnh Hoà Phú",
+    "full_name": "Xã Vĩnh Hoà Phú",
+    "type": "Xã Vĩnh Hoà",
+    "district_code": "905"
+  }
+]

@@ -1,0 +1,121 @@
+[
+  {
+    "code": "02668",
+    "name": "Bắc Cường",
+    "full_name": "Phường Bắc Cường",
+    "type": "Phường Bắc",
+    "district_code": "080"
+  },
+  {
+    "code": "02650",
+    "name": "Bắc Lệnh",
+    "full_name": "Phường Bắc Lệnh",
+    "type": "Phường Bắc",
+    "district_code": "080"
+  },
+  {
+    "code": "02658",
+    "name": "Bình Minh",
+    "full_name": "Phường Bình Minh",
+    "type": "Phường Bình",
+    "district_code": "080"
+  },
+  {
+    "code": "02674",
+    "name": "Cam Đường",
+    "full_name": "Xã Cam Đường",
+    "type": "Xã Cam",
+    "district_code": "080"
+  },
+  {
+    "code": "02644",
+    "name": "Cốc Lếu",
+    "full_name": "Phường Cốc Lếu",
+    "type": "Phường Cốc",
+    "district_code": "080"
+  },
+  {
+    "code": "02746",
+    "name": "Cốc San",
+    "full_name": "Xã Cốc San",
+    "type": "Xã Cốc",
+    "district_code": "080"
+  },
+  {
+    "code": "02635",
+    "name": "Duyên Hải",
+    "full_name": "Phường Duyên Hải",
+    "type": "Phường Duyên",
+    "district_code": "080"
+  },
+  {
+    "code": "02680",
+    "name": "Hợp Thành",
+    "full_name": "Xã Hợp Thành",
+    "type": "Xã Hợp",
+    "district_code": "080"
+  },
+  {
+    "code": "02647",
+    "name": "Kim Tân",
+    "full_name": "Phường Kim Tân",
+    "type": "Phường Kim",
+    "district_code": "080"
+  },
+  {
+    "code": "02641",
+    "name": "Lào Cai",
+    "full_name": "Phường Lào Cai",
+    "type": "Phường Lào",
+    "district_code": "080"
+  },
+  {
+    "code": "02671",
+    "name": "Nam Cường",
+    "full_name": "Phường Nam Cường",
+    "type": "Phường Nam",
+    "district_code": "080"
+  },
+  {
+    "code": "02653",
+    "name": "Pom Hán",
+    "full_name": "Phường Pom Hán",
+    "type": "Phường Pom",
+    "district_code": "080"
+  },
+  {
+    "code": "02677",
+    "name": "Tả Phời",
+    "full_name": "Xã Tả Phời",
+    "type": "Xã Tả",
+    "district_code": "080"
+  },
+  {
+    "code": "02659",
+    "name": "Thống Nhất",
+    "full_name": "Xã Thống Nhất",
+    "type": "Xã Thống",
+    "district_code": "080"
+  },
+  {
+    "code": "02665",
+    "name": "Vạn Hoà",
+    "full_name": "Xã Vạn Hoà",
+    "type": "Xã Vạn",
+    "district_code": "080"
+  },
+  {
+    "code": "02656",
+    "name": "Xuân Tăng",
+    "full_name": "Phường Xuân Tăng",
+    "type": "Phường Xuân",
+    "district_code": "080"
+  },
+  {
+    "code": "02662",
+    "name": "Đồng Tuyển",
+    "full_name": "Xã Đồng Tuyển",
+    "type": "Xã Đồng",
+    "district_code": "080"
+  }
+]

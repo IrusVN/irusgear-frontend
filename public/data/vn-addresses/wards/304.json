@@ -1,0 +1,86 @@
+[
+  {
+    "code": "11338",
+    "name": "Cầu Tre",
+    "full_name": "Phường Cầu Tre",
+    "type": "Phường Cầu",
+    "district_code": "304"
+  },
+  {
+    "code": "11344",
+    "name": "Cầu Đất",
+    "full_name": "Phường Cầu Đất",
+    "type": "Phường Cầu",
+    "district_code": "304"
+  },
+  {
+    "code": "11347",
+    "name": "Gia Viên",
+    "full_name": "Phường Gia Viên",
+    "type": "Phường Gia",
+    "district_code": "304"
+  },
+  {
+    "code": "11341",
+    "name": "Lạc Viên",
+    "full_name": "Phường Lạc Viên",
+    "type": "Phường Lạc",
+    "district_code": "304"
+  },
+  {
+    "code": "11362",
+    "name": "Lạch Tray",
+    "full_name": "Phường Lạch Tray",
+    "type": "Phường Lạch",
+    "district_code": "304"
+  },
+  {
+    "code": "11356",
+    "name": "Lê Lợi",
+    "full_name": "Phường Lê Lợi",
+    "type": "Phường Lê",
+    "district_code": "304"
+  },
+  {
+    "code": "11329",
+    "name": "Máy Chai",
+    "full_name": "Phường Máy Chai",
+    "type": "Phường Máy",
+    "district_code": "304"
+  },
+  {
+    "code": "11332",
+    "name": "Máy Tơ",
+    "full_name": "Phường Máy Tơ",
+    "type": "Phường Máy",
+    "district_code": "304"
+  },
+  {
+    "code": "11335",
+    "name": "Vạn Mỹ",
+    "full_name": "Phường Vạn Mỹ",
+    "type": "Phường Vạn",
+    "district_code": "304"
+  },
+  {
+    "code": "11359",
+    "name": "Đằng Giang",
+    "full_name": "Phường Đằng Giang",
+    "type": "Phường Đằng",
+    "district_code": "304"
+  },
+  {
+    "code": "11350",
+    "name": "Đông Khê",
+    "full_name": "Phường Đông Khê",
+    "type": "Phường Đông",
+    "district_code": "304"
+  },
+  {
+    "code": "11365",
+    "name": "Đổng Quốc Bình",
+    "full_name": "Phường Đổng Quốc Bình",
+    "type": "Phường Đổng Quốc",
+    "district_code": "304"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "24761",
+    "name": "Hưng Bình",
+    "full_name": "Xã Hưng Bình",
+    "type": "Xã Hưng",
+    "district_code": "666"
+  },
+  {
+    "code": "24754",
+    "name": "Kiến Thành",
+    "full_name": "Xã Kiến Thành",
+    "type": "Xã Kiến",
+    "district_code": "666"
+  },
+  {
+    "code": "24733",
+    "name": "Kiến Đức",
+    "full_name": "Thị trấn Kiến Đức",
+    "type": "Thị trấn Kiến",
+    "district_code": "666"
+  },
+  {
+    "code": "24756",
+    "name": "Nghĩa Thắng",
+    "full_name": "Xã Nghĩa Thắng",
+    "type": "Xã Nghĩa",
+    "district_code": "666"
+  },
+  {
+    "code": "24751",
+    "name": "Nhân Cơ",
+    "full_name": "Xã Nhân Cơ",
+    "type": "Xã Nhân",
+    "district_code": "666"
+  },
+  {
+    "code": "24766",
+    "name": "Nhân Đạo",
+    "full_name": "Xã Nhân Đạo",
+    "type": "Xã Nhân",
+    "district_code": "666"
+  },
+  {
+    "code": "24745",
+    "name": "Quảng Tín",
+    "full_name": "Xã Quảng Tín",
+    "type": "Xã Quảng",
+    "district_code": "666"
+  },
+  {
+    "code": "24763",
+    "name": "Đắk Ru",
+    "full_name": "Xã Đắk Ru",
+    "type": "Xã Đắk",
+    "district_code": "666"
+  },
+  {
+    "code": "24760",
+    "name": "Đắk Sin",
+    "full_name": "Xã Đắk Sin",
+    "type": "Xã Đắk",
+    "district_code": "666"
+  },
+  {
+    "code": "24750",
+    "name": "Đắk Wer",
+    "full_name": "Xã Đắk Wer",
+    "type": "Xã Đắk",
+    "district_code": "666"
+  },
+  {
+    "code": "24757",
+    "name": "Đạo Nghĩa",
+    "full_name": "Xã Đạo Nghĩa",
+    "type": "Xã Đạo",
+    "district_code": "666"
+  }
+]

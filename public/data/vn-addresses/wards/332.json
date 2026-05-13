@@ -1,0 +1,107 @@
+[
+  {
+    "code": "12355",
+    "name": "An Viên",
+    "full_name": "Xã An Viên",
+    "type": "Xã An",
+    "district_code": "332"
+  },
+  {
+    "code": "12376",
+    "name": "Cương Chính",
+    "full_name": "Xã Cương Chính",
+    "type": "Xã Cương",
+    "district_code": "332"
+  },
+  {
+    "code": "12349",
+    "name": "Dị Chế",
+    "full_name": "Xã Dị Chế",
+    "type": "Xã Dị",
+    "district_code": "332"
+  },
+  {
+    "code": "12364",
+    "name": "Hải Triều",
+    "full_name": "Xã Hải Triều",
+    "type": "Xã Hải",
+    "district_code": "332"
+  },
+  {
+    "code": "12340",
+    "name": "Hưng Đạo",
+    "full_name": "Xã Hưng Đạo",
+    "type": "Xã Hưng",
+    "district_code": "332"
+  },
+  {
+    "code": "12352",
+    "name": "Lệ Xá",
+    "full_name": "Xã Lệ Xá",
+    "type": "Xã Lệ",
+    "district_code": "332"
+  },
+  {
+    "code": "12379",
+    "name": "Minh Phượng",
+    "full_name": "Xã Minh Phượng",
+    "type": "Xã Minh",
+    "district_code": "332"
+  },
+  {
+    "code": "12343",
+    "name": "Ngô Quyền",
+    "full_name": "Xã Ngô Quyền",
+    "type": "Xã Ngô",
+    "district_code": "332"
+  },
+  {
+    "code": "12346",
+    "name": "Nhật Tân",
+    "full_name": "Xã Nhật Tân",
+    "type": "Xã Nhật",
+    "district_code": "332"
+  },
+  {
+    "code": "12370",
+    "name": "Thiện Phiến",
+    "full_name": "Xã Thiện Phiến",
+    "type": "Xã Thiện",
+    "district_code": "332"
+  },
+  {
+    "code": "12367",
+    "name": "Thủ Sỹ",
+    "full_name": "Xã Thủ Sỹ",
+    "type": "Xã Thủ",
+    "district_code": "332"
+  },
+  {
+    "code": "12373",
+    "name": "Thụy Lôi",
+    "full_name": "Xã Thụy Lôi",
+    "type": "Xã Thụy",
+    "district_code": "332"
+  },
+  {
+    "code": "12361",
+    "name": "Trung Dũng",
+    "full_name": "Xã Trung Dũng",
+    "type": "Xã Trung",
+    "district_code": "332"
+  },
+  {
+    "code": "12337",
+    "name": "Vương",
+    "full_name": "Thị trấn Vương",
+    "type": "Thị trấn",
+    "district_code": "332"
+  },
+  {
+    "code": "12358",
+    "name": "Đức Thắng",
+    "full_name": "Xã Đức Thắng",
+    "type": "Xã Đức",
+    "district_code": "332"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "329",
+    "name": "Ân Thi",
+    "full_name": "Huyện Ân Thi",
+    "type": "Huyện Ân",
+    "province_code": "33"
+  },
+  {
+    "code": "323",
+    "name": "Hưng Yên",
+    "full_name": "Thành phố Hưng Yên",
+    "type": "Thành phố Hưng",
+    "province_code": "33"
+  },
+  {
+    "code": "330",
+    "name": "Khoái Châu",
+    "full_name": "Huyện Khoái Châu",
+    "type": "Huyện Khoái",
+    "province_code": "33"
+  },
+  {
+    "code": "331",
+    "name": "Kim Động",
+    "full_name": "Huyện Kim Động",
+    "type": "Huyện Kim",
+    "province_code": "33"
+  },
+  {
+    "code": "328",
+    "name": "Mỹ Hào",
+    "full_name": "Thị xã Mỹ Hào",
+    "type": "Thị xã Mỹ",
+    "province_code": "33"
+  },
+  {
+    "code": "333",
+    "name": "Phù Cừ",
+    "full_name": "Huyện Phù Cừ",
+    "type": "Huyện Phù",
+    "province_code": "33"
+  },
+  {
+    "code": "332",
+    "name": "Tiên Lữ",
+    "full_name": "Huyện Tiên Lữ",
+    "type": "Huyện Tiên",
+    "province_code": "33"
+  },
+  {
+    "code": "326",
+    "name": "Văn Giang",
+    "full_name": "Huyện Văn Giang",
+    "type": "Huyện Văn",
+    "province_code": "33"
+  },
+  {
+    "code": "325",
+    "name": "Văn Lâm",
+    "full_name": "Huyện Văn Lâm",
+    "type": "Huyện Văn",
+    "province_code": "33"
+  },
+  {
+    "code": "327",
+    "name": "Yên Mỹ",
+    "full_name": "Huyện Yên Mỹ",
+    "type": "Huyện Yên",
+    "province_code": "33"
+  }
+]

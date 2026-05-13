@@ -1,0 +1,128 @@
+[
+  {
+    "code": "10798",
+    "name": "Bình Dân",
+    "full_name": "Xã Bình Dân",
+    "type": "Xã Bình",
+    "district_code": "293"
+  },
+  {
+    "code": "10762",
+    "name": "Cổ Dũng",
+    "full_name": "Xã Cổ Dũng",
+    "type": "Xã Cổ",
+    "district_code": "293"
+  },
+  {
+    "code": "10756",
+    "name": "Cộng Hòa",
+    "full_name": "Xã Cộng Hòa",
+    "type": "Xã Cộng",
+    "district_code": "293"
+  },
+  {
+    "code": "10780",
+    "name": "Kim Anh",
+    "full_name": "Xã Kim Anh",
+    "type": "Xã Kim",
+    "district_code": "293"
+  },
+  {
+    "code": "10783",
+    "name": "Kim Liên",
+    "full_name": "Xã Kim Liên",
+    "type": "Xã Kim",
+    "district_code": "293"
+  },
+  {
+    "code": "10786",
+    "name": "Kim Tân",
+    "full_name": "Xã Kim Tân",
+    "type": "Xã Kim",
+    "district_code": "293"
+  },
+  {
+    "code": "10771",
+    "name": "Kim Xuyên",
+    "full_name": "Xã Kim Xuyên",
+    "type": "Xã Kim",
+    "district_code": "293"
+  },
+  {
+    "code": "10792",
+    "name": "Kim Đính",
+    "full_name": "Xã Kim Đính",
+    "type": "Xã Kim",
+    "district_code": "293"
+  },
+  {
+    "code": "10753",
+    "name": "Lai Vu",
+    "full_name": "Xã Lai Vu",
+    "type": "Xã Lai",
+    "district_code": "293"
+  },
+  {
+    "code": "10807",
+    "name": "Liên Hòa",
+    "full_name": "Xã Liên Hòa",
+    "type": "Xã Liên",
+    "district_code": "293"
+  },
+  {
+    "code": "10777",
+    "name": "Ngũ Phúc",
+    "full_name": "Xã Ngũ Phúc",
+    "type": "Xã Ngũ",
+    "district_code": "293"
+  },
+  {
+    "code": "10750",
+    "name": "Phú Thái",
+    "full_name": "Thị trấn Phú Thái",
+    "type": "Thị trấn Phú",
+    "district_code": "293"
+  },
+  {
+    "code": "10774",
+    "name": "Phúc Thành A",
+    "full_name": "Xã Phúc Thành A",
+    "type": "Xã Phúc Thành",
+    "district_code": "293"
+  },
+  {
+    "code": "10801",
+    "name": "Tam Kỳ",
+    "full_name": "Xã Tam Kỳ",
+    "type": "Xã Tam",
+    "district_code": "293"
+  },
+  {
+    "code": "10759",
+    "name": "Thượng Vũ",
+    "full_name": "Xã Thượng Vũ",
+    "type": "Xã Thượng",
+    "district_code": "293"
+  },
+  {
+    "code": "10768",
+    "name": "Tuấn Việt",
+    "full_name": "Xã Tuấn Việt",
+    "type": "Xã Tuấn",
+    "district_code": "293"
+  },
+  {
+    "code": "10810",
+    "name": "Đại Đức",
+    "full_name": "Xã Đại Đức",
+    "type": "Xã Đại",
+    "district_code": "293"
+  },
+  {
+    "code": "10804",
+    "name": "Đồng Cẩm",
+    "full_name": "Xã Đồng Cẩm",
+    "type": "Xã Đồng",
+    "district_code": "293"
+  }
+]

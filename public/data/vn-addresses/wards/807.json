@@ -1,0 +1,107 @@
+[
+  {
+    "code": "28159",
+    "name": "Cần Giuộc",
+    "full_name": "Thị trấn Cần Giuộc",
+    "type": "Thị trấn Cần",
+    "district_code": "807"
+  },
+  {
+    "code": "28198",
+    "name": "Long An",
+    "full_name": "Xã Long An",
+    "type": "Xã Long",
+    "district_code": "807"
+  },
+  {
+    "code": "28168",
+    "name": "Long Hậu",
+    "full_name": "Xã Long Hậu",
+    "type": "Xã Long",
+    "district_code": "807"
+  },
+  {
+    "code": "28201",
+    "name": "Long Phụng",
+    "full_name": "Xã Long Phụng",
+    "type": "Xã Long",
+    "district_code": "807"
+  },
+  {
+    "code": "28165",
+    "name": "Long Thượng",
+    "full_name": "Xã Long Thượng",
+    "type": "Xã Long",
+    "district_code": "807"
+  },
+  {
+    "code": "28177",
+    "name": "Mỹ Lộc",
+    "full_name": "Xã Mỹ Lộc",
+    "type": "Xã Mỹ",
+    "district_code": "807"
+  },
+  {
+    "code": "28174",
+    "name": "Phước Hậu",
+    "full_name": "Xã Phước Hậu",
+    "type": "Xã Phước",
+    "district_code": "807"
+  },
+  {
+    "code": "28180",
+    "name": "Phước Lại",
+    "full_name": "Xã Phước Lại",
+    "type": "Xã Phước",
+    "district_code": "807"
+  },
+  {
+    "code": "28183",
+    "name": "Phước Lâm",
+    "full_name": "Xã Phước Lâm",
+    "type": "Xã Phước",
+    "district_code": "807"
+  },
+  {
+    "code": "28162",
+    "name": "Phước Lý",
+    "full_name": "Xã Phước Lý",
+    "type": "Xã Phước",
+    "district_code": "807"
+  },
+  {
+    "code": "28192",
+    "name": "Phước Vĩnh Tây",
+    "full_name": "Xã Phước Vĩnh Tây",
+    "type": "Xã Phước Vĩnh",
+    "district_code": "807"
+  },
+  {
+    "code": "28195",
+    "name": "Phước Vĩnh Đông",
+    "full_name": "Xã Phước Vĩnh Đông",
+    "type": "Xã Phước Vĩnh",
+    "district_code": "807"
+  },
+  {
+    "code": "28207",
+    "name": "Tân Tập",
+    "full_name": "Xã Tân Tập",
+    "type": "Xã Tân",
+    "district_code": "807"
+  },
+  {
+    "code": "28189",
+    "name": "Thuận Thành",
+    "full_name": "Xã Thuận Thành",
+    "type": "Xã Thuận",
+    "district_code": "807"
+  },
+  {
+    "code": "28204",
+    "name": "Đông Thạnh",
+    "full_name": "Xã Đông Thạnh",
+    "type": "Xã Đông",
+    "district_code": "807"
+  }
+]

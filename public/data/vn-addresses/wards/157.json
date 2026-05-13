@@ -1,0 +1,170 @@
+[
+  {
+    "code": "05347",
+    "name": "Ân Nghĩa",
+    "full_name": "Xã Ân Nghĩa",
+    "type": "Xã Ân",
+    "district_code": "157"
+  },
+  {
+    "code": "05308",
+    "name": "Bình Hẻm",
+    "full_name": "Xã Bình Hẻm",
+    "type": "Xã Bình",
+    "district_code": "157"
+  },
+  {
+    "code": "05323",
+    "name": "Chí Đạo",
+    "full_name": "Xã Chí Đạo",
+    "type": "Xã Chí",
+    "district_code": "157"
+  },
+  {
+    "code": "05332",
+    "name": "Hương Nhượng",
+    "full_name": "Xã Hương Nhượng",
+    "type": "Xã Hương",
+    "district_code": "157"
+  },
+  {
+    "code": "05272",
+    "name": "Miền Đồi",
+    "full_name": "Xã Miền Đồi",
+    "type": "Xã Miền",
+    "district_code": "157"
+  },
+  {
+    "code": "05275",
+    "name": "Mỹ Thành",
+    "full_name": "Xã Mỹ Thành",
+    "type": "Xã Mỹ",
+    "district_code": "157"
+  },
+  {
+    "code": "05350",
+    "name": "Ngọc Lâu",
+    "full_name": "Xã Ngọc Lâu",
+    "type": "Xã Ngọc",
+    "district_code": "157"
+  },
+  {
+    "code": "05329",
+    "name": "Ngọc Sơn",
+    "full_name": "Xã Ngọc Sơn",
+    "type": "Xã Ngọc",
+    "district_code": "157"
+  },
+  {
+    "code": "05290",
+    "name": "Nhân Nghĩa",
+    "full_name": "Xã Nhân Nghĩa",
+    "type": "Xã Nhân",
+    "district_code": "157"
+  },
+  {
+    "code": "05269",
+    "name": "Quý Hòa",
+    "full_name": "Xã Quý Hòa",
+    "type": "Xã Quý",
+    "district_code": "157"
+  },
+  {
+    "code": "05299",
+    "name": "Quyết Thắng",
+    "full_name": "Xã Quyết Thắng",
+    "type": "Xã Quyết",
+    "district_code": "157"
+  },
+  {
+    "code": "05287",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "157"
+  },
+  {
+    "code": "05344",
+    "name": "Tân Mỹ",
+    "full_name": "Xã Tân Mỹ",
+    "type": "Xã Tân",
+    "district_code": "157"
+  },
+  {
+    "code": "05293",
+    "name": "Thượng Cốc",
+    "full_name": "Xã Thượng Cốc",
+    "type": "Xã Thượng",
+    "district_code": "157"
+  },
+  {
+    "code": "05338",
+    "name": "Tự Do",
+    "full_name": "Xã Tự Do",
+    "type": "Xã Tự",
+    "district_code": "157"
+  },
+  {
+    "code": "05278",
+    "name": "Tuân Đạo",
+    "full_name": "Xã Tuân Đạo",
+    "type": "Xã Tuân",
+    "district_code": "157"
+  },
+  {
+    "code": "05281",
+    "name": "Văn Nghĩa",
+    "full_name": "Xã Văn Nghĩa",
+    "type": "Xã Văn",
+    "district_code": "157"
+  },
+  {
+    "code": "05284",
+    "name": "Văn Sơn",
+    "full_name": "Xã Văn Sơn",
+    "type": "Xã Văn",
+    "district_code": "157"
+  },
+  {
+    "code": "05266",
+    "name": "Vụ Bản",
+    "full_name": "Thị trấn Vụ Bản",
+    "type": "Thị trấn Vụ",
+    "district_code": "157"
+  },
+  {
+    "code": "05335",
+    "name": "Vũ Bình",
+    "full_name": "Xã Vũ Bình",
+    "type": "Xã Vũ",
+    "district_code": "157"
+  },
+  {
+    "code": "05302",
+    "name": "Xuất Hóa",
+    "full_name": "Xã Xuất Hóa",
+    "type": "Xã Xuất",
+    "district_code": "157"
+  },
+  {
+    "code": "05341",
+    "name": "Yên Nghiệp",
+    "full_name": "Xã Yên Nghiệp",
+    "type": "Xã Yên",
+    "district_code": "157"
+  },
+  {
+    "code": "05305",
+    "name": "Yên Phú",
+    "full_name": "Xã Yên Phú",
+    "type": "Xã Yên",
+    "district_code": "157"
+  },
+  {
+    "code": "05320",
+    "name": "Định Cư",
+    "full_name": "Xã Định Cư",
+    "type": "Xã Định",
+    "district_code": "157"
+  }
+]

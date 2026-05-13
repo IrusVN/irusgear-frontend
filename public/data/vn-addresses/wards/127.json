@@ -1,0 +1,58 @@
+[
+  {
+    "code": "04234",
+    "name": "Dồm Cang",
+    "full_name": "Xã Dồm Cang",
+    "type": "Xã Dồm",
+    "district_code": "127"
+  },
+  {
+    "code": "04246",
+    "name": "Mường Lạn",
+    "full_name": "Xã Mường Lạn",
+    "type": "Xã Mường",
+    "district_code": "127"
+  },
+  {
+    "code": "04240",
+    "name": "Mường Lèo",
+    "full_name": "Xã Mường Lèo",
+    "type": "Xã Mường",
+    "district_code": "127"
+  },
+  {
+    "code": "04243",
+    "name": "Mường Và",
+    "full_name": "Xã Mường Và",
+    "type": "Xã Mường",
+    "district_code": "127"
+  },
+  {
+    "code": "04237",
+    "name": "Nậm Lạnh",
+    "full_name": "Xã Nậm Lạnh",
+    "type": "Xã Nậm",
+    "district_code": "127"
+  },
+  {
+    "code": "04228",
+    "name": "Púng Bánh",
+    "full_name": "Xã Púng Bánh",
+    "type": "Xã Púng",
+    "district_code": "127"
+  },
+  {
+    "code": "04225",
+    "name": "Sam Kha",
+    "full_name": "Xã Sam Kha",
+    "type": "Xã Sam",
+    "district_code": "127"
+  },
+  {
+    "code": "04231",
+    "name": "Sốp Cộp",
+    "full_name": "Xã Sốp Cộp",
+    "type": "Xã Sốp",
+    "district_code": "127"
+  }
+]

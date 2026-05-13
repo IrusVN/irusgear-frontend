@@ -1,0 +1,114 @@
+[
+  {
+    "code": "28471",
+    "name": "Bình Phú",
+    "full_name": "Thị trấn Bình Phú",
+    "type": "Thị trấn Bình",
+    "district_code": "820"
+  },
+  {
+    "code": "28489",
+    "name": "Cẩm Sơn",
+    "full_name": "Xã Cẩm Sơn",
+    "type": "Xã Cẩm",
+    "district_code": "820"
+  },
+  {
+    "code": "28501",
+    "name": "Hiệp Đức",
+    "full_name": "Xã Hiệp Đức",
+    "type": "Xã Hiệp",
+    "district_code": "820"
+  },
+  {
+    "code": "28507",
+    "name": "Hội Xuân",
+    "full_name": "Xã Hội Xuân",
+    "type": "Xã Hội",
+    "district_code": "820"
+  },
+  {
+    "code": "28498",
+    "name": "Long Tiên",
+    "full_name": "Xã Long Tiên",
+    "type": "Xã Long",
+    "district_code": "820"
+  },
+  {
+    "code": "28504",
+    "name": "Long Trung",
+    "full_name": "Xã Long Trung",
+    "type": "Xã Long",
+    "district_code": "820"
+  },
+  {
+    "code": "28495",
+    "name": "Mỹ Long",
+    "full_name": "Xã Mỹ Long",
+    "type": "Xã Mỹ",
+    "district_code": "820"
+  },
+  {
+    "code": "28441",
+    "name": "Mỹ Thành Bắc",
+    "full_name": "Xã Mỹ Thành Bắc",
+    "type": "Xã Mỹ Thành",
+    "district_code": "820"
+  },
+  {
+    "code": "28456",
+    "name": "Mỹ Thành Nam",
+    "full_name": "Xã Mỹ Thành Nam",
+    "type": "Xã Mỹ Thành",
+    "district_code": "820"
+  },
+  {
+    "code": "28516",
+    "name": "Ngũ Hiệp",
+    "full_name": "Xã Ngũ Hiệp",
+    "type": "Xã Ngũ",
+    "district_code": "820"
+  },
+  {
+    "code": "28492",
+    "name": "Phú An",
+    "full_name": "Xã Phú An",
+    "type": "Xã Phú",
+    "district_code": "820"
+  },
+  {
+    "code": "28444",
+    "name": "Phú Cường",
+    "full_name": "Xã Phú Cường",
+    "type": "Xã Phú",
+    "district_code": "820"
+  },
+  {
+    "code": "28465",
+    "name": "Phú Nhuận",
+    "full_name": "Xã Phú Nhuận",
+    "type": "Xã Phú",
+    "district_code": "820"
+  },
+  {
+    "code": "28513",
+    "name": "Tam Bình",
+    "full_name": "Xã Tam Bình",
+    "type": "Xã Tam",
+    "district_code": "820"
+  },
+  {
+    "code": "28510",
+    "name": "Tân Phong",
+    "full_name": "Xã Tân Phong",
+    "type": "Xã Tân",
+    "district_code": "820"
+  },
+  {
+    "code": "28438",
+    "name": "Thạnh Lộc",
+    "full_name": "Xã Thạnh Lộc",
+    "type": "Xã Thạnh",
+    "district_code": "820"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "code": "25234",
+    "name": "Bình Thắng",
+    "full_name": "Xã Bình Thắng",
+    "type": "Xã Bình",
+    "district_code": "691"
+  },
+  {
+    "code": "25222",
+    "name": "Bù Gia Mập",
+    "full_name": "Xã Bù Gia Mập",
+    "type": "Xã Bù Gia",
+    "district_code": "691"
+  },
+  {
+    "code": "25267",
+    "name": "Phú Nghĩa",
+    "full_name": "Xã Phú Nghĩa",
+    "type": "Xã Phú",
+    "district_code": "691"
+  },
+  {
+    "code": "25229",
+    "name": "Phú Văn",
+    "full_name": "Xã Phú Văn",
+    "type": "Xã Phú",
+    "district_code": "691"
+  },
+  {
+    "code": "25232",
+    "name": "Phước Minh",
+    "full_name": "Xã Phước Minh",
+    "type": "Xã Phước",
+    "district_code": "691"
+  },
+  {
+    "code": "25231",
+    "name": "Đa Kia",
+    "full_name": "Xã Đa Kia",
+    "type": "Xã Đa",
+    "district_code": "691"
+  },
+  {
+    "code": "25225",
+    "name": "Đak Ơ",
+    "full_name": "Xã Đak Ơ",
+    "type": "Xã Đak",
+    "district_code": "691"
+  },
+  {
+    "code": "25228",
+    "name": "Đức Hạnh",
+    "full_name": "Xã Đức Hạnh",
+    "type": "Xã Đức",
+    "district_code": "691"
+  }
+]

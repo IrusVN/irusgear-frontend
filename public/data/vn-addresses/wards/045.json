@@ -1,0 +1,149 @@
+[
+  {
+    "code": "01402",
+    "name": "Cải Viên",
+    "full_name": "Xã Cải Viên",
+    "type": "Xã Cải",
+    "district_code": "045"
+  },
+  {
+    "code": "01367",
+    "name": "Cần Nông",
+    "full_name": "Xã Cần Nông",
+    "type": "Xã Cần",
+    "district_code": "045"
+  },
+  {
+    "code": "01366",
+    "name": "Cần Yên",
+    "full_name": "Xã Cần Yên",
+    "type": "Xã Cần",
+    "district_code": "045"
+  },
+  {
+    "code": "01429",
+    "name": "Hồng Sỹ",
+    "full_name": "Xã Hồng Sỹ",
+    "type": "Xã Hồng",
+    "district_code": "045"
+  },
+  {
+    "code": "01393",
+    "name": "Lũng Nặm",
+    "full_name": "Xã Lũng Nặm",
+    "type": "Xã Lũng",
+    "district_code": "045"
+  },
+  {
+    "code": "01384",
+    "name": "Lương Can",
+    "full_name": "Xã Lương Can",
+    "type": "Xã Lương",
+    "district_code": "045"
+  },
+  {
+    "code": "01372",
+    "name": "Lương Thông",
+    "full_name": "Xã Lương Thông",
+    "type": "Xã Lương",
+    "district_code": "045"
+  },
+  {
+    "code": "01435",
+    "name": "Mã Ba",
+    "full_name": "Xã Mã Ba",
+    "type": "Xã Mã",
+    "district_code": "045"
+  },
+  {
+    "code": "01438",
+    "name": "Ngọc Đào",
+    "full_name": "Xã Ngọc Đào",
+    "type": "Xã Ngọc",
+    "district_code": "045"
+  },
+  {
+    "code": "01378",
+    "name": "Ngọc Động",
+    "full_name": "Xã Ngọc Động",
+    "type": "Xã Ngọc",
+    "district_code": "045"
+  },
+  {
+    "code": "01411",
+    "name": "Nội Thôn",
+    "full_name": "Xã Nội Thôn",
+    "type": "Xã Nội",
+    "district_code": "045"
+  },
+  {
+    "code": "01432",
+    "name": "Quý Quân",
+    "full_name": "Xã Quý Quân",
+    "type": "Xã Quý",
+    "district_code": "045"
+  },
+  {
+    "code": "01417",
+    "name": "Sóc Hà",
+    "full_name": "Xã Sóc Hà",
+    "type": "Xã Sóc",
+    "district_code": "045"
+  },
+  {
+    "code": "01387",
+    "name": "Thanh Long",
+    "full_name": "Xã Thanh Long",
+    "type": "Xã Thanh",
+    "district_code": "045"
+  },
+  {
+    "code": "01363",
+    "name": "Thông Nông",
+    "full_name": "Thị trấn Thông Nông",
+    "type": "Thị trấn Thông",
+    "district_code": "045"
+  },
+  {
+    "code": "01420",
+    "name": "Thượng Thôn",
+    "full_name": "Xã Thượng Thôn",
+    "type": "Xã Thượng",
+    "district_code": "045"
+  },
+  {
+    "code": "01414",
+    "name": "Tổng Cọt",
+    "full_name": "Xã Tổng Cọt",
+    "type": "Xã Tổng",
+    "district_code": "045"
+  },
+  {
+    "code": "01399",
+    "name": "Trường Hà",
+    "full_name": "Xã Trường Hà",
+    "type": "Xã Trường",
+    "district_code": "045"
+  },
+  {
+    "code": "01392",
+    "name": "Xuân Hòa",
+    "full_name": "Thị trấn Xuân Hòa",
+    "type": "Thị trấn Xuân",
+    "district_code": "045"
+  },
+  {
+    "code": "01381",
+    "name": "Yên Sơn",
+    "full_name": "Xã Yên Sơn",
+    "type": "Xã Yên",
+    "district_code": "045"
+  },
+  {
+    "code": "01375",
+    "name": "Đa Thông",
+    "full_name": "Xã Đa Thông",
+    "type": "Xã Đa",
+    "district_code": "045"
+  }
+]

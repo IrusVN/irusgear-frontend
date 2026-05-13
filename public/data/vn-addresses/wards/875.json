@@ -1,0 +1,93 @@
+[
+  {
+    "code": "30193",
+    "name": "Bình Thành",
+    "full_name": "Xã Bình Thành",
+    "type": "Xã Bình",
+    "district_code": "875"
+  },
+  {
+    "code": "30205",
+    "name": "Bình Thạnh Trung",
+    "full_name": "Xã Bình Thạnh Trung",
+    "type": "Xã Bình Thạnh",
+    "district_code": "875"
+  },
+  {
+    "code": "30202",
+    "name": "Hội An Đông",
+    "full_name": "Xã Hội An Đông",
+    "type": "Xã Hội An",
+    "district_code": "875"
+  },
+  {
+    "code": "30169",
+    "name": "Lấp Vò",
+    "full_name": "Thị trấn Lấp Vò",
+    "type": "Thị trấn Lấp",
+    "district_code": "875"
+  },
+  {
+    "code": "30184",
+    "name": "Long Hưng A",
+    "full_name": "Xã Long Hưng A",
+    "type": "Xã Long Hưng",
+    "district_code": "875"
+  },
+  {
+    "code": "30190",
+    "name": "Long Hưng B",
+    "full_name": "Xã Long Hưng B",
+    "type": "Xã Long Hưng",
+    "district_code": "875"
+  },
+  {
+    "code": "30172",
+    "name": "Mỹ An Hưng A",
+    "full_name": "Xã Mỹ An Hưng A",
+    "type": "Xã Mỹ An Hưng",
+    "district_code": "875"
+  },
+  {
+    "code": "30178",
+    "name": "Mỹ An Hưng B",
+    "full_name": "Xã Mỹ An Hưng B",
+    "type": "Xã Mỹ An Hưng",
+    "district_code": "875"
+  },
+  {
+    "code": "30181",
+    "name": "Tân Khánh Trung",
+    "full_name": "Xã Tân Khánh Trung",
+    "type": "Xã Tân Khánh",
+    "district_code": "875"
+  },
+  {
+    "code": "30175",
+    "name": "Tân Mỹ",
+    "full_name": "Xã Tân Mỹ",
+    "type": "Xã Tân",
+    "district_code": "875"
+  },
+  {
+    "code": "30187",
+    "name": "Vĩnh Thạnh",
+    "full_name": "Xã Vĩnh Thạnh",
+    "type": "Xã Vĩnh",
+    "district_code": "875"
+  },
+  {
+    "code": "30196",
+    "name": "Định An",
+    "full_name": "Xã Định An",
+    "type": "Xã Định",
+    "district_code": "875"
+  },
+  {
+    "code": "30199",
+    "name": "Định Yên",
+    "full_name": "Xã Định Yên",
+    "type": "Xã Định",
+    "district_code": "875"
+  }
+]

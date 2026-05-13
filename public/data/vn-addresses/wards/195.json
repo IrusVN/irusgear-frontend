@@ -1,0 +1,114 @@
+[
+  {
+    "code": "06796",
+    "name": "Cẩm Bình",
+    "full_name": "Phường Cẩm Bình",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06802",
+    "name": "Cẩm Hải",
+    "full_name": "Xã Cẩm Hải",
+    "type": "Xã Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06772",
+    "name": "Cẩm Phú",
+    "full_name": "Phường Cẩm Phú",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06766",
+    "name": "Cẩm Sơn",
+    "full_name": "Phường Cẩm Sơn",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06775",
+    "name": "Cẩm Tây",
+    "full_name": "Phường Cẩm Tây",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06787",
+    "name": "Cẩm Thạch",
+    "full_name": "Phường Cẩm Thạch",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06790",
+    "name": "Cẩm Thành",
+    "full_name": "Phường Cẩm Thành",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06781",
+    "name": "Cẩm Thịnh",
+    "full_name": "Phường Cẩm Thịnh",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06784",
+    "name": "Cẩm Thủy",
+    "full_name": "Phường Cẩm Thủy",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06793",
+    "name": "Cẩm Trung",
+    "full_name": "Phường Cẩm Trung",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06769",
+    "name": "Cẩm Đông",
+    "full_name": "Phường Cẩm Đông",
+    "type": "Phường Cẩm",
+    "district_code": "195"
+  },
+  {
+    "code": "06799",
+    "name": "Cộng Hòa",
+    "full_name": "Xã Cộng Hòa",
+    "type": "Xã Cộng",
+    "district_code": "195"
+  },
+  {
+    "code": "06763",
+    "name": "Cửa Ông",
+    "full_name": "Phường Cửa Ông",
+    "type": "Phường Cửa",
+    "district_code": "195"
+  },
+  {
+    "code": "06805",
+    "name": "Dương Huy",
+    "full_name": "Xã Dương Huy",
+    "type": "Xã Dương",
+    "district_code": "195"
+  },
+  {
+    "code": "06760",
+    "name": "Mông Dương",
+    "full_name": "Phường Mông Dương",
+    "type": "Phường Mông",
+    "district_code": "195"
+  },
+  {
+    "code": "06778",
+    "name": "Quang Hanh",
+    "full_name": "Phường Quang Hanh",
+    "type": "Phường Quang",
+    "district_code": "195"
+  }
+]

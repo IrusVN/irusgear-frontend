@@ -1,0 +1,58 @@
+[
+  {
+    "code": "31177",
+    "name": "An Thới",
+    "full_name": "Phường An Thới",
+    "type": "Phường An",
+    "district_code": "918"
+  },
+  {
+    "code": "31168",
+    "name": "Bình Thủy",
+    "full_name": "Phường Bình Thủy",
+    "type": "Phường Bình",
+    "district_code": "918"
+  },
+  {
+    "code": "31178",
+    "name": "Bùi Hữu Nghĩa",
+    "full_name": "Phường Bùi Hữu Nghĩa",
+    "type": "Phường Bùi Hữu",
+    "district_code": "918"
+  },
+  {
+    "code": "31180",
+    "name": "Long Hòa",
+    "full_name": "Phường Long Hòa",
+    "type": "Phường Long",
+    "district_code": "918"
+  },
+  {
+    "code": "31183",
+    "name": "Long Tuyền",
+    "full_name": "Phường Long Tuyền",
+    "type": "Phường Long",
+    "district_code": "918"
+  },
+  {
+    "code": "31174",
+    "name": "Thới An Đông",
+    "full_name": "Phường Thới An Đông",
+    "type": "Phường Thới An",
+    "district_code": "918"
+  },
+  {
+    "code": "31169",
+    "name": "Trà An",
+    "full_name": "Phường Trà An",
+    "type": "Phường Trà",
+    "district_code": "918"
+  },
+  {
+    "code": "31171",
+    "name": "Trà Nóc",
+    "full_name": "Phường Trà Nóc",
+    "type": "Phường Trà",
+    "district_code": "918"
+  }
+]

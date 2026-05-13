@@ -1,0 +1,93 @@
+[
+  {
+    "code": "23116",
+    "name": "Hàm Cần",
+    "full_name": "Xã Hàm Cần",
+    "type": "Xã Hàm",
+    "district_code": "598"
+  },
+  {
+    "code": "23128",
+    "name": "Hàm Cường",
+    "full_name": "Xã Hàm Cường",
+    "type": "Xã Hàm",
+    "district_code": "598"
+  },
+  {
+    "code": "23125",
+    "name": "Hàm Kiệm",
+    "full_name": "Xã Hàm Kiệm",
+    "type": "Xã Hàm",
+    "district_code": "598"
+  },
+  {
+    "code": "23137",
+    "name": "Hàm Minh",
+    "full_name": "Xã Hàm Minh",
+    "type": "Xã Hàm",
+    "district_code": "598"
+  },
+  {
+    "code": "23131",
+    "name": "Hàm Mỹ",
+    "full_name": "Xã Hàm Mỹ",
+    "type": "Xã Hàm",
+    "district_code": "598"
+  },
+  {
+    "code": "23122",
+    "name": "Hàm Thạnh",
+    "full_name": "Xã Hàm Thạnh",
+    "type": "Xã Hàm",
+    "district_code": "598"
+  },
+  {
+    "code": "23119",
+    "name": "Mương Mán",
+    "full_name": "Xã Mương Mán",
+    "type": "Xã Mương",
+    "district_code": "598"
+  },
+  {
+    "code": "23113",
+    "name": "Mỹ Thạnh",
+    "full_name": "Xã Mỹ Thạnh",
+    "type": "Xã Mỹ",
+    "district_code": "598"
+  },
+  {
+    "code": "23134",
+    "name": "Tân Lập",
+    "full_name": "Xã Tân Lập",
+    "type": "Xã Tân",
+    "district_code": "598"
+  },
+  {
+    "code": "23146",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "598"
+  },
+  {
+    "code": "23143",
+    "name": "Tân Thuận",
+    "full_name": "Xã Tân Thuận",
+    "type": "Xã Tân",
+    "district_code": "598"
+  },
+  {
+    "code": "23110",
+    "name": "Thuận Nam",
+    "full_name": "Thị trấn Thuận Nam",
+    "type": "Thị trấn Thuận",
+    "district_code": "598"
+  },
+  {
+    "code": "23140",
+    "name": "Thuận Quí",
+    "full_name": "Xã Thuận Quí",
+    "type": "Xã Thuận",
+    "district_code": "598"
+  }
+]

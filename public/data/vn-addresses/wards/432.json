@@ -1,0 +1,72 @@
+[
+  {
+    "code": "17125",
+    "name": "Mai Hùng",
+    "full_name": "Phường Mai Hùng",
+    "type": "Phường Mai",
+    "district_code": "432"
+  },
+  {
+    "code": "17128",
+    "name": "Quỳnh Dị",
+    "full_name": "Phường Quỳnh Dị",
+    "type": "Phường Quỳnh",
+    "district_code": "432"
+  },
+  {
+    "code": "17113",
+    "name": "Quỳnh Lập",
+    "full_name": "Xã Quỳnh Lập",
+    "type": "Xã Quỳnh",
+    "district_code": "432"
+  },
+  {
+    "code": "17137",
+    "name": "Quỳnh Liên",
+    "full_name": "Xã Quỳnh Liên",
+    "type": "Xã Quỳnh",
+    "district_code": "432"
+  },
+  {
+    "code": "17107",
+    "name": "Quỳnh Lộc",
+    "full_name": "Xã Quỳnh Lộc",
+    "type": "Xã Quỳnh",
+    "district_code": "432"
+  },
+  {
+    "code": "17134",
+    "name": "Quỳnh Phương",
+    "full_name": "Phường Quỳnh Phương",
+    "type": "Phường Quỳnh",
+    "district_code": "432"
+  },
+  {
+    "code": "17110",
+    "name": "Quỳnh Thiện",
+    "full_name": "Phường Quỳnh Thiện",
+    "type": "Phường Quỳnh",
+    "district_code": "432"
+  },
+  {
+    "code": "17116",
+    "name": "Quỳnh Trang",
+    "full_name": "Xã Quỳnh Trang",
+    "type": "Xã Quỳnh",
+    "district_code": "432"
+  },
+  {
+    "code": "17104",
+    "name": "Quỳnh Vinh",
+    "full_name": "Xã Quỳnh Vinh",
+    "type": "Xã Quỳnh",
+    "district_code": "432"
+  },
+  {
+    "code": "17131",
+    "name": "Quỳnh Xuân",
+    "full_name": "Phường Quỳnh Xuân",
+    "type": "Phường Quỳnh",
+    "district_code": "432"
+  }
+]

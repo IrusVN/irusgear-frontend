@@ -1,0 +1,114 @@
+[
+  {
+    "code": "19009",
+    "name": "Ba Đồn",
+    "full_name": "Phường Ba Đồn",
+    "type": "Phường Ba",
+    "district_code": "458"
+  },
+  {
+    "code": "19087",
+    "name": "Quảng Hải",
+    "full_name": "Xã Quảng Hải",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19105",
+    "name": "Quảng Hòa",
+    "full_name": "Xã Quảng Hòa",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19093",
+    "name": "Quảng Lộc",
+    "full_name": "Xã Quảng Lộc",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19060",
+    "name": "Quảng Long",
+    "full_name": "Phường Quảng Long",
+    "type": "Phường Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19108",
+    "name": "Quảng Minh",
+    "full_name": "Xã Quảng Minh",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19078",
+    "name": "Quảng Phong",
+    "full_name": "Phường Quảng Phong",
+    "type": "Phường Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19102",
+    "name": "Quảng Phúc",
+    "full_name": "Phường Quảng Phúc",
+    "type": "Phường Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19090",
+    "name": "Quảng Sơn",
+    "full_name": "Xã Quảng Sơn",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19084",
+    "name": "Quảng Tân",
+    "full_name": "Xã Quảng Tân",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19066",
+    "name": "Quảng Thọ",
+    "full_name": "Phường Quảng Thọ",
+    "type": "Phường Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19081",
+    "name": "Quảng Thuận",
+    "full_name": "Phường Quảng Thuận",
+    "type": "Phường Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19096",
+    "name": "Quảng Thủy",
+    "full_name": "Xã Quảng Thủy",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19069",
+    "name": "Quảng Tiên",
+    "full_name": "Xã Quảng Tiên",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19075",
+    "name": "Quảng Trung",
+    "full_name": "Xã Quảng Trung",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  },
+  {
+    "code": "19099",
+    "name": "Quảng Văn",
+    "full_name": "Xã Quảng Văn",
+    "type": "Xã Quảng",
+    "district_code": "458"
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "code": "18859",
+    "name": "Bắc Lý",
+    "full_name": "Phường Bắc Lý",
+    "type": "Phường Bắc",
+    "district_code": "450"
+  },
+  {
+    "code": "18877",
+    "name": "Bắc Nghĩa",
+    "full_name": "Phường Bắc Nghĩa",
+    "type": "Phường Bắc",
+    "district_code": "450"
+  },
+  {
+    "code": "18889",
+    "name": "Bảo Ninh",
+    "full_name": "Xã Bảo Ninh",
+    "type": "Xã Bảo",
+    "district_code": "450"
+  },
+  {
+    "code": "18853",
+    "name": "Hải Thành",
+    "full_name": "Phường Hải Thành",
+    "type": "Phường Hải",
+    "district_code": "450"
+  },
+  {
+    "code": "18886",
+    "name": "Lộc Ninh",
+    "full_name": "Xã Lộc Ninh",
+    "type": "Xã Lộc",
+    "district_code": "450"
+  },
+  {
+    "code": "18865",
+    "name": "Nam Lý",
+    "full_name": "Phường Nam Lý",
+    "type": "Phường Nam",
+    "district_code": "450"
+  },
+  {
+    "code": "18892",
+    "name": "Nghĩa Ninh",
+    "full_name": "Xã Nghĩa Ninh",
+    "type": "Xã Nghĩa",
+    "district_code": "450"
+  },
+  {
+    "code": "18874",
+    "name": "Phú Hải",
+    "full_name": "Phường Phú Hải",
+    "type": "Phường Phú",
+    "district_code": "450"
+  },
+  {
+    "code": "18883",
+    "name": "Quang Phú",
+    "full_name": "Xã Quang Phú",
+    "type": "Xã Quang",
+    "district_code": "450"
+  },
+  {
+    "code": "18895",
+    "name": "Thuận Đức",
+    "full_name": "Xã Thuận Đức",
+    "type": "Xã Thuận",
+    "district_code": "450"
+  },
+  {
+    "code": "18868",
+    "name": "Đồng Hải",
+    "full_name": "Phường Đồng Hải",
+    "type": "Phường Đồng",
+    "district_code": "450"
+  },
+  {
+    "code": "18856",
+    "name": "Đồng Phú",
+    "full_name": "Phường Đồng Phú",
+    "type": "Phường Đồng",
+    "district_code": "450"
+  },
+  {
+    "code": "18871",
+    "name": "Đồng Sơn",
+    "full_name": "Phường Đồng Sơn",
+    "type": "Phường Đồng",
+    "district_code": "450"
+  },
+  {
+    "code": "18898",
+    "name": "Đức Ninh",
+    "full_name": "Xã Đức Ninh",
+    "type": "Xã Đức",
+    "district_code": "450"
+  },
+  {
+    "code": "18880",
+    "name": "Đức Ninh Đông",
+    "full_name": "Phường Đức Ninh Đông",
+    "type": "Phường Đức Ninh",
+    "district_code": "450"
+  }
+]

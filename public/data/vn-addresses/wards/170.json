@@ -1,0 +1,107 @@
+[
+  {
+    "code": "05758",
+    "name": "Bình Long",
+    "full_name": "Xã Bình Long",
+    "type": "Xã Bình",
+    "district_code": "170"
+  },
+  {
+    "code": "05737",
+    "name": "Cúc Đường",
+    "full_name": "Xã Cúc Đường",
+    "type": "Xã Cúc",
+    "district_code": "170"
+  },
+  {
+    "code": "05755",
+    "name": "Dân Tiến",
+    "full_name": "Xã Dân Tiến",
+    "type": "Xã Dân",
+    "district_code": "170"
+  },
+  {
+    "code": "05740",
+    "name": "La Hiên",
+    "full_name": "Xã La Hiên",
+    "type": "Xã La",
+    "district_code": "170"
+  },
+  {
+    "code": "05743",
+    "name": "Lâu Thượng",
+    "full_name": "Xã Lâu Thượng",
+    "type": "Xã Lâu",
+    "district_code": "170"
+  },
+  {
+    "code": "05752",
+    "name": "Liên Minh",
+    "full_name": "Xã Liên Minh",
+    "type": "Xã Liên",
+    "district_code": "170"
+  },
+  {
+    "code": "05722",
+    "name": "Nghinh Tường",
+    "full_name": "Xã Nghinh Tường",
+    "type": "Xã Nghinh",
+    "district_code": "170"
+  },
+  {
+    "code": "05734",
+    "name": "Phú Thượng",
+    "full_name": "Xã Phú Thượng",
+    "type": "Xã Phú",
+    "district_code": "170"
+  },
+  {
+    "code": "05749",
+    "name": "Phương Giao",
+    "full_name": "Xã Phương Giao",
+    "type": "Xã Phương",
+    "district_code": "170"
+  },
+  {
+    "code": "05719",
+    "name": "Sảng Mộc",
+    "full_name": "Xã Sảng Mộc",
+    "type": "Xã Sảng",
+    "district_code": "170"
+  },
+  {
+    "code": "05725",
+    "name": "Thần Xa",
+    "full_name": "Xã Thần Xa",
+    "type": "Xã Thần",
+    "district_code": "170"
+  },
+  {
+    "code": "05731",
+    "name": "Thượng Nung",
+    "full_name": "Xã Thượng Nung",
+    "type": "Xã Thượng",
+    "district_code": "170"
+  },
+  {
+    "code": "05746",
+    "name": "Tràng Xá",
+    "full_name": "Xã Tràng Xá",
+    "type": "Xã Tràng",
+    "district_code": "170"
+  },
+  {
+    "code": "05728",
+    "name": "Vũ Chấn",
+    "full_name": "Xã Vũ Chấn",
+    "type": "Xã Vũ",
+    "district_code": "170"
+  },
+  {
+    "code": "05716",
+    "name": "Đình Cả",
+    "full_name": "Thị trấn Đình Cả",
+    "type": "Thị trấn Đình",
+    "district_code": "170"
+  }
+]

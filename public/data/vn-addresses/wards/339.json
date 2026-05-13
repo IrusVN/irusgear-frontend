@@ -1,0 +1,247 @@
+[
+  {
+    "code": "12628",
+    "name": "Bắc Sơn",
+    "full_name": "Xã Bắc Sơn",
+    "type": "Xã Bắc",
+    "district_code": "339"
+  },
+  {
+    "code": "12601",
+    "name": "Canh Tân",
+    "full_name": "Xã Canh Tân",
+    "type": "Xã Canh",
+    "district_code": "339"
+  },
+  {
+    "code": "12679",
+    "name": "Chí Hòa",
+    "full_name": "Xã Chí Hòa",
+    "type": "Xã Chí",
+    "district_code": "339"
+  },
+  {
+    "code": "12656",
+    "name": "Chi Lăng",
+    "full_name": "Xã Chi Lăng",
+    "type": "Xã Chi",
+    "district_code": "339"
+  },
+  {
+    "code": "12595",
+    "name": "Cộng Hòa",
+    "full_name": "Xã Cộng Hòa",
+    "type": "Xã Cộng",
+    "district_code": "339"
+  },
+  {
+    "code": "12598",
+    "name": "Dân Chủ",
+    "full_name": "Xã Dân Chủ",
+    "type": "Xã Dân",
+    "district_code": "339"
+  },
+  {
+    "code": "12619",
+    "name": "Duyên Hải",
+    "full_name": "Xã Duyên Hải",
+    "type": "Xã Duyên",
+    "district_code": "339"
+  },
+  {
+    "code": "12655",
+    "name": "Hòa Bình",
+    "full_name": "Xã Hòa Bình",
+    "type": "Xã Hòa",
+    "district_code": "339"
+  },
+  {
+    "code": "12604",
+    "name": "Hòa Tiến",
+    "full_name": "Xã Hòa Tiến",
+    "type": "Xã Hòa",
+    "district_code": "339"
+  },
+  {
+    "code": "12661",
+    "name": "Hồng An",
+    "full_name": "Xã Hồng An",
+    "type": "Xã Hồng",
+    "district_code": "339"
+  },
+  {
+    "code": "12667",
+    "name": "Hồng Lĩnh",
+    "full_name": "Xã Hồng Lĩnh",
+    "type": "Xã Hồng",
+    "district_code": "339"
+  },
+  {
+    "code": "12685",
+    "name": "Hồng Minh",
+    "full_name": "Xã Hồng Minh",
+    "type": "Xã Hồng",
+    "district_code": "339"
+  },
+  {
+    "code": "12607",
+    "name": "Hùng Dũng",
+    "full_name": "Xã Hùng Dũng",
+    "type": "Xã Hùng",
+    "district_code": "339"
+  },
+  {
+    "code": "12586",
+    "name": "Hưng Hà",
+    "full_name": "Thị trấn Hưng Hà",
+    "type": "Thị trấn Hưng",
+    "district_code": "339"
+  },
+  {
+    "code": "12613",
+    "name": "Hưng Nhân",
+    "full_name": "Thị trấn Hưng Nhân",
+    "type": "Thị trấn Hưng",
+    "district_code": "339"
+  },
+  {
+    "code": "12664",
+    "name": "Kim Chung",
+    "full_name": "Xã Kim Chung",
+    "type": "Xã Kim",
+    "district_code": "339"
+  },
+  {
+    "code": "12637",
+    "name": "Liên Hiệp",
+    "full_name": "Xã Liên Hiệp",
+    "type": "Xã Liên",
+    "district_code": "339"
+  },
+  {
+    "code": "12682",
+    "name": "Minh Hòa",
+    "full_name": "Xã Minh Hòa",
+    "type": "Xã Minh",
+    "district_code": "339"
+  },
+  {
+    "code": "12658",
+    "name": "Minh Khai",
+    "full_name": "Xã Minh Khai",
+    "type": "Xã Minh",
+    "district_code": "339"
+  },
+  {
+    "code": "12670",
+    "name": "Minh Tân",
+    "full_name": "Xã Minh Tân",
+    "type": "Xã Minh",
+    "district_code": "339"
+  },
+  {
+    "code": "12634",
+    "name": "Phúc Khánh",
+    "full_name": "Xã Phúc Khánh",
+    "type": "Xã Phúc",
+    "district_code": "339"
+  },
+  {
+    "code": "12622",
+    "name": "Tân Hòa",
+    "full_name": "Xã Tân Hòa",
+    "type": "Xã Tân",
+    "district_code": "339"
+  },
+  {
+    "code": "12592",
+    "name": "Tân Lễ",
+    "full_name": "Xã Tân Lễ",
+    "type": "Xã Tân",
+    "district_code": "339"
+  },
+  {
+    "code": "12610",
+    "name": "Tân Tiến",
+    "full_name": "Xã Tân Tiến",
+    "type": "Xã Tân",
+    "district_code": "339"
+  },
+  {
+    "code": "12640",
+    "name": "Tây Đô",
+    "full_name": "Xã Tây Đô",
+    "type": "Xã Tây",
+    "district_code": "339"
+  },
+  {
+    "code": "12649",
+    "name": "Thái Hưng",
+    "full_name": "Xã Thái Hưng",
+    "type": "Xã Thái",
+    "district_code": "339"
+  },
+  {
+    "code": "12652",
+    "name": "Thái Phương",
+    "full_name": "Xã Thái Phương",
+    "type": "Xã Thái",
+    "district_code": "339"
+  },
+  {
+    "code": "12643",
+    "name": "Thống Nhất",
+    "full_name": "Xã Thống Nhất",
+    "type": "Xã Thống",
+    "district_code": "339"
+  },
+  {
+    "code": "12646",
+    "name": "Tiến Đức",
+    "full_name": "Xã Tiến Đức",
+    "type": "Xã Tiến",
+    "district_code": "339"
+  },
+  {
+    "code": "12625",
+    "name": "Văn Cẩm",
+    "full_name": "Xã Văn Cẩm",
+    "type": "Xã Văn",
+    "district_code": "339"
+  },
+  {
+    "code": "12673",
+    "name": "Văn Lang",
+    "full_name": "Xã Văn Lang",
+    "type": "Xã Văn",
+    "district_code": "339"
+  },
+  {
+    "code": "12589",
+    "name": "Điệp Nông",
+    "full_name": "Xã Điệp Nông",
+    "type": "Xã Điệp",
+    "district_code": "339"
+  },
+  {
+    "code": "12616",
+    "name": "Đoan Hùng",
+    "full_name": "Xã Đoan Hùng",
+    "type": "Xã Đoan",
+    "district_code": "339"
+  },
+  {
+    "code": "12676",
+    "name": "Độc Lập",
+    "full_name": "Xã Độc Lập",
+    "type": "Xã Độc",
+    "district_code": "339"
+  },
+  {
+    "code": "12631",
+    "name": "Đông Đô",
+    "full_name": "Xã Đông Đô",
+    "type": "Xã Đông",
+    "district_code": "339"
+  }
+]

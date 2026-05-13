@@ -1,0 +1,86 @@
+[
+  {
+    "code": "32068",
+    "name": "Biển Bạch",
+    "full_name": "Xã Biển Bạch",
+    "type": "Xã Biển",
+    "district_code": "967"
+  },
+  {
+    "code": "32074",
+    "name": "Biển Bạch Đông",
+    "full_name": "Xã Biển Bạch Đông",
+    "type": "Xã Biển Bạch",
+    "district_code": "967"
+  },
+  {
+    "code": "32092",
+    "name": "Hồ Thị Kỷ",
+    "full_name": "Xã Hồ Thị Kỷ",
+    "type": "Xã Hồ Thị",
+    "district_code": "967"
+  },
+  {
+    "code": "32069",
+    "name": "Tân Bằng",
+    "full_name": "Xã Tân Bằng",
+    "type": "Xã Tân",
+    "district_code": "967"
+  },
+  {
+    "code": "32086",
+    "name": "Tân Lộc",
+    "full_name": "Xã Tân Lộc",
+    "type": "Xã Tân",
+    "district_code": "967"
+  },
+  {
+    "code": "32083",
+    "name": "Tân Lộc Bắc",
+    "full_name": "Xã Tân Lộc Bắc",
+    "type": "Xã Tân Lộc",
+    "district_code": "967"
+  },
+  {
+    "code": "32089",
+    "name": "Tân Lộc Đông",
+    "full_name": "Xã Tân Lộc Đông",
+    "type": "Xã Tân Lộc",
+    "district_code": "967"
+  },
+  {
+    "code": "32080",
+    "name": "Tân Phú",
+    "full_name": "Xã Tân Phú",
+    "type": "Xã Tân",
+    "district_code": "967"
+  },
+  {
+    "code": "32065",
+    "name": "Thới Bình",
+    "full_name": "Thị trấn Thới Bình",
+    "type": "Thị trấn Thới",
+    "district_code": "967"
+  },
+  {
+    "code": "32077",
+    "name": "Thới Bình",
+    "full_name": "Xã Thới Bình",
+    "type": "Xã Thới",
+    "district_code": "967"
+  },
+  {
+    "code": "32072",
+    "name": "Trí Lực",
+    "full_name": "Xã Trí Lực",
+    "type": "Xã Trí",
+    "district_code": "967"
+  },
+  {
+    "code": "32071",
+    "name": "Trí Phải",
+    "full_name": "Xã Trí Phải",
+    "type": "Xã Trí",
+    "district_code": "967"
+  }
+]

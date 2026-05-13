@@ -1,0 +1,51 @@
+[
+  {
+    "code": "25245",
+    "name": "Long Giang",
+    "full_name": "Xã Long Giang",
+    "type": "Xã Long",
+    "district_code": "688"
+  },
+  {
+    "code": "25220",
+    "name": "Long Phước",
+    "full_name": "Phường Long Phước",
+    "type": "Phường Long",
+    "district_code": "688"
+  },
+  {
+    "code": "25217",
+    "name": "Long Thủy",
+    "full_name": "Phường Long Thủy",
+    "type": "Phường Long",
+    "district_code": "688"
+  },
+  {
+    "code": "25219",
+    "name": "Phước Bình",
+    "full_name": "Phường Phước Bình",
+    "type": "Phường Phước",
+    "district_code": "688"
+  },
+  {
+    "code": "25249",
+    "name": "Phước Tín",
+    "full_name": "Xã Phước Tín",
+    "type": "Xã Phước",
+    "district_code": "688"
+  },
+  {
+    "code": "25237",
+    "name": "Sơn Giang",
+    "full_name": "Phường Sơn Giang",
+    "type": "Phường Sơn",
+    "district_code": "688"
+  },
+  {
+    "code": "25216",
+    "name": "Thác Mơ",
+    "full_name": "Phường Thác Mơ",
+    "type": "Phường Thác",
+    "district_code": "688"
+  }
+]

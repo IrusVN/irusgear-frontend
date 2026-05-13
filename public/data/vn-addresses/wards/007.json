@@ -1,0 +1,128 @@
+[
+  {
+    "code": "00277",
+    "name": "Bách Khoa",
+    "full_name": "Phường Bách Khoa",
+    "type": "Phường Bách",
+    "district_code": "007"
+  },
+  {
+    "code": "00286",
+    "name": "Bạch Mai",
+    "full_name": "Phường Bạch Mai",
+    "type": "Phường Bạch",
+    "district_code": "007"
+  },
+  {
+    "code": "00244",
+    "name": "Bạch Đằng",
+    "full_name": "Phường Bạch Đằng",
+    "type": "Phường Bạch",
+    "district_code": "007"
+  },
+  {
+    "code": "00274",
+    "name": "Cầu Dền",
+    "full_name": "Phường Cầu Dền",
+    "type": "Phường Cầu",
+    "district_code": "007"
+  },
+  {
+    "code": "00256",
+    "name": "Lê Đại Hành",
+    "full_name": "Phường Lê Đại Hành",
+    "type": "Phường Lê Đại",
+    "district_code": "007"
+  },
+  {
+    "code": "00295",
+    "name": "Minh Khai",
+    "full_name": "Phường Minh Khai",
+    "type": "Phường Minh",
+    "district_code": "007"
+  },
+  {
+    "code": "00241",
+    "name": "Nguyễn Du",
+    "full_name": "Phường Nguyễn Du",
+    "type": "Phường Nguyễn",
+    "district_code": "007"
+  },
+  {
+    "code": "00247",
+    "name": "Phạm Đình Hổ",
+    "full_name": "Phường Phạm Đình Hổ",
+    "type": "Phường Phạm Đình",
+    "district_code": "007"
+  },
+  {
+    "code": "00262",
+    "name": "Phố Huế",
+    "full_name": "Phường Phố Huế",
+    "type": "Phường Phố",
+    "district_code": "007"
+  },
+  {
+    "code": "00292",
+    "name": "Quỳnh Lôi",
+    "full_name": "Phường Quỳnh Lôi",
+    "type": "Phường Quỳnh",
+    "district_code": "007"
+  },
+  {
+    "code": "00289",
+    "name": "Quỳnh Mai",
+    "full_name": "Phường Quỳnh Mai",
+    "type": "Phường Quỳnh",
+    "district_code": "007"
+  },
+  {
+    "code": "00268",
+    "name": "Thanh Lương",
+    "full_name": "Phường Thanh Lương",
+    "type": "Phường Thanh",
+    "district_code": "007"
+  },
+  {
+    "code": "00271",
+    "name": "Thanh Nhàn",
+    "full_name": "Phường Thanh Nhàn",
+    "type": "Phường Thanh",
+    "district_code": "007"
+  },
+  {
+    "code": "00298",
+    "name": "Trương Định",
+    "full_name": "Phường Trương Định",
+    "type": "Phường Trương",
+    "district_code": "007"
+  },
+  {
+    "code": "00283",
+    "name": "Vĩnh Tuy",
+    "full_name": "Phường Vĩnh Tuy",
+    "type": "Phường Vĩnh",
+    "district_code": "007"
+  },
+  {
+    "code": "00265",
+    "name": "Đống Mác",
+    "full_name": "Phường Đống Mác",
+    "type": "Phường Đống",
+    "district_code": "007"
+  },
+  {
+    "code": "00259",
+    "name": "Đồng Nhân",
+    "full_name": "Phường Đồng Nhân",
+    "type": "Phường Đồng",
+    "district_code": "007"
+  },
+  {
+    "code": "00280",
+    "name": "Đồng Tâm",
+    "full_name": "Phường Đồng Tâm",
+    "type": "Phường Đồng",
+    "district_code": "007"
+  }
+]

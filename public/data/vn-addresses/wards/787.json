@@ -1,0 +1,51 @@
+[
+  {
+    "code": "27673",
+    "name": "An Thới Đông",
+    "full_name": "Xã An Thới Đông",
+    "type": "Xã An Thới",
+    "district_code": "787"
+  },
+  {
+    "code": "27667",
+    "name": "Bình Khánh",
+    "full_name": "Xã Bình Khánh",
+    "type": "Xã Bình",
+    "district_code": "787"
+  },
+  {
+    "code": "27664",
+    "name": "Cần Thạnh",
+    "full_name": "Thị trấn Cần Thạnh",
+    "type": "Thị trấn Cần",
+    "district_code": "787"
+  },
+  {
+    "code": "27679",
+    "name": "Long Hòa",
+    "full_name": "Xã Long Hòa",
+    "type": "Xã Long",
+    "district_code": "787"
+  },
+  {
+    "code": "27682",
+    "name": "Lý Nhơn",
+    "full_name": "Xã Lý Nhơn",
+    "type": "Xã Lý",
+    "district_code": "787"
+  },
+  {
+    "code": "27670",
+    "name": "Tam Thôn Hiệp",
+    "full_name": "Xã Tam Thôn Hiệp",
+    "type": "Xã Tam Thôn",
+    "district_code": "787"
+  },
+  {
+    "code": "27676",
+    "name": "Thạnh An",
+    "full_name": "Xã Thạnh An",
+    "type": "Xã Thạnh",
+    "district_code": "787"
+  }
+]

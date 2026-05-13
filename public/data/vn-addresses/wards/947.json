@@ -1,0 +1,79 @@
+[
+  {
+    "code": "31720",
+    "name": "Gia Hòa 1",
+    "full_name": "Xã Gia Hòa 1",
+    "type": "Xã Gia Hòa",
+    "district_code": "947"
+  },
+  {
+    "code": "31726",
+    "name": "Gia Hòa 2",
+    "full_name": "Xã Gia Hòa 2",
+    "type": "Xã Gia Hòa",
+    "district_code": "947"
+  },
+  {
+    "code": "31717",
+    "name": "Hòa Tú 1",
+    "full_name": "Xã Hòa Tú 1",
+    "type": "Xã Hòa Tú",
+    "district_code": "947"
+  },
+  {
+    "code": "31729",
+    "name": "Hòa Tú II",
+    "full_name": "Xã Hòa Tú II",
+    "type": "Xã Hòa Tú",
+    "district_code": "947"
+  },
+  {
+    "code": "31684",
+    "name": "Mỹ Xuyên",
+    "full_name": "Thị trấn Mỹ Xuyên",
+    "type": "Thị trấn Mỹ",
+    "district_code": "947"
+  },
+  {
+    "code": "31723",
+    "name": "Ngọc Tố",
+    "full_name": "Xã Ngọc Tố",
+    "type": "Xã Ngọc",
+    "district_code": "947"
+  },
+  {
+    "code": "31711",
+    "name": "Ngọc Đông",
+    "full_name": "Xã Ngọc Đông",
+    "type": "Xã Ngọc",
+    "district_code": "947"
+  },
+  {
+    "code": "31693",
+    "name": "Tham Đôn",
+    "full_name": "Xã Tham Đôn",
+    "type": "Xã Tham",
+    "district_code": "947"
+  },
+  {
+    "code": "31708",
+    "name": "Thạnh Phú",
+    "full_name": "Xã Thạnh Phú",
+    "type": "Xã Thạnh",
+    "district_code": "947"
+  },
+  {
+    "code": "31714",
+    "name": "Thạnh Quới",
+    "full_name": "Xã Thạnh Quới",
+    "type": "Xã Thạnh",
+    "district_code": "947"
+  },
+  {
+    "code": "31690",
+    "name": "Đại Tâm",
+    "full_name": "Xã Đại Tâm",
+    "type": "Xã Đại",
+    "district_code": "947"
+  }
+]

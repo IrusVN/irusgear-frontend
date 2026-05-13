@@ -1,0 +1,86 @@
+[
+  {
+    "code": "07018",
+    "name": "Bản Sen",
+    "full_name": "Xã Bản Sen",
+    "type": "Xã Bản",
+    "district_code": "203"
+  },
+  {
+    "code": "07000",
+    "name": "Bình Dân",
+    "full_name": "Xã Bình Dân",
+    "type": "Xã Bình",
+    "district_code": "203"
+  },
+  {
+    "code": "06994",
+    "name": "Cái Rồng",
+    "full_name": "Thị trấn Cái Rồng",
+    "type": "Thị trấn Cái",
+    "district_code": "203"
+  },
+  {
+    "code": "07012",
+    "name": "Hạ Long",
+    "full_name": "Xã Hạ Long",
+    "type": "Xã Hạ",
+    "district_code": "203"
+  },
+  {
+    "code": "07006",
+    "name": "Minh Châu",
+    "full_name": "Xã Minh Châu",
+    "type": "Xã Minh",
+    "district_code": "203"
+  },
+  {
+    "code": "07027",
+    "name": "Ngọc Vừng",
+    "full_name": "Xã Ngọc Vừng",
+    "type": "Xã Ngọc",
+    "district_code": "203"
+  },
+  {
+    "code": "07024",
+    "name": "Quan Lạn",
+    "full_name": "Xã Quan Lạn",
+    "type": "Xã Quan",
+    "district_code": "203"
+  },
+  {
+    "code": "07021",
+    "name": "Thắng Lợi",
+    "full_name": "Xã Thắng Lợi",
+    "type": "Xã Thắng",
+    "district_code": "203"
+  },
+  {
+    "code": "07003",
+    "name": "Vạn Yên",
+    "full_name": "Xã Vạn Yên",
+    "type": "Xã Vạn",
+    "district_code": "203"
+  },
+  {
+    "code": "06997",
+    "name": "Đài Xuyên",
+    "full_name": "Xã Đài Xuyên",
+    "type": "Xã Đài",
+    "district_code": "203"
+  },
+  {
+    "code": "07009",
+    "name": "Đoàn Kết",
+    "full_name": "Xã Đoàn Kết",
+    "type": "Xã Đoàn",
+    "district_code": "203"
+  },
+  {
+    "code": "07015",
+    "name": "Đông Xá",
+    "full_name": "Xã Đông Xá",
+    "type": "Xã Đông",
+    "district_code": "203"
+  }
+]

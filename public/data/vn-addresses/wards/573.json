@@ -1,0 +1,100 @@
+[
+  {
+    "code": "22636",
+    "name": "Cầu Bà",
+    "full_name": "Xã Cầu Bà",
+    "type": "Xã Cầu",
+    "district_code": "573"
+  },
+  {
+    "code": "22633",
+    "name": "Giang Ly",
+    "full_name": "Xã Giang Ly",
+    "type": "Xã Giang",
+    "district_code": "573"
+  },
+  {
+    "code": "22615",
+    "name": "Khánh Bình",
+    "full_name": "Xã Khánh Bình",
+    "type": "Xã Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22612",
+    "name": "Khánh Hiệp",
+    "full_name": "Xã Khánh Hiệp",
+    "type": "Xã Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22627",
+    "name": "Khánh Nam",
+    "full_name": "Xã Khánh Nam",
+    "type": "Xã Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22645",
+    "name": "Khánh Phú",
+    "full_name": "Xã Khánh Phú",
+    "type": "Xã Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22642",
+    "name": "Khánh Thành",
+    "full_name": "Xã Khánh Thành",
+    "type": "Xã Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22624",
+    "name": "Khánh Thượng",
+    "full_name": "Xã Khánh Thượng",
+    "type": "Xã Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22618",
+    "name": "Khánh Trung",
+    "full_name": "Xã Khánh Trung",
+    "type": "Xã Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22609",
+    "name": "Khánh Vĩnh",
+    "full_name": "Thị trấn Khánh Vĩnh",
+    "type": "Thị trấn Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22621",
+    "name": "Khánh Đông",
+    "full_name": "Xã Khánh Đông",
+    "type": "Xã Khánh",
+    "district_code": "573"
+  },
+  {
+    "code": "22639",
+    "name": "Liên Sang",
+    "full_name": "Xã Liên Sang",
+    "type": "Xã Liên",
+    "district_code": "573"
+  },
+  {
+    "code": "22648",
+    "name": "Sơn Thái",
+    "full_name": "Xã Sơn Thái",
+    "type": "Xã Sơn",
+    "district_code": "573"
+  },
+  {
+    "code": "22630",
+    "name": "Sông Cầu",
+    "full_name": "Xã Sông Cầu",
+    "type": "Xã Sông",
+    "district_code": "573"
+  }
+]

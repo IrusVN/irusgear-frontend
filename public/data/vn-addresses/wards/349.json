@@ -1,0 +1,114 @@
+[
+  {
+    "code": "13333",
+    "name": "Bạch Thượng",
+    "full_name": "Phường Bạch Thượng",
+    "type": "Phường Bạch",
+    "district_code": "349"
+  },
+  {
+    "code": "13330",
+    "name": "Châu Giang",
+    "full_name": "Phường Châu Giang",
+    "type": "Phường Châu",
+    "district_code": "349"
+  },
+  {
+    "code": "13345",
+    "name": "Chuyên Ngoại",
+    "full_name": "Xã Chuyên Ngoại",
+    "type": "Xã Chuyên",
+    "district_code": "349"
+  },
+  {
+    "code": "13342",
+    "name": "Duy Hải",
+    "full_name": "Phường Duy Hải",
+    "type": "Phường Duy",
+    "district_code": "349"
+  },
+  {
+    "code": "13336",
+    "name": "Duy Minh",
+    "full_name": "Phường Duy Minh",
+    "type": "Phường Duy",
+    "district_code": "349"
+  },
+  {
+    "code": "13324",
+    "name": "Hòa Mạc",
+    "full_name": "Phường Hòa Mạc",
+    "type": "Phường Hòa",
+    "district_code": "349"
+  },
+  {
+    "code": "13357",
+    "name": "Hoàng Đông",
+    "full_name": "Phường Hoàng Đông",
+    "type": "Phường Hoàng",
+    "district_code": "349"
+  },
+  {
+    "code": "13327",
+    "name": "Mộc Bắc",
+    "full_name": "Xã Mộc Bắc",
+    "type": "Xã Mộc",
+    "district_code": "349"
+  },
+  {
+    "code": "13339",
+    "name": "Mộc Nam",
+    "full_name": "Xã Mộc Nam",
+    "type": "Xã Mộc",
+    "district_code": "349"
+  },
+  {
+    "code": "13363",
+    "name": "Tiên Ngoại",
+    "full_name": "Xã Tiên Ngoại",
+    "type": "Xã Tiên",
+    "district_code": "349"
+  },
+  {
+    "code": "13354",
+    "name": "Tiên Nội",
+    "full_name": "Phường Tiên Nội",
+    "type": "Phường Tiên",
+    "district_code": "349"
+  },
+  {
+    "code": "13369",
+    "name": "Tiên Sơn",
+    "full_name": "Xã Tiên Sơn",
+    "type": "Xã Tiên",
+    "district_code": "349"
+  },
+  {
+    "code": "13351",
+    "name": "Trác Văn",
+    "full_name": "Xã Trác Văn",
+    "type": "Xã Trác",
+    "district_code": "349"
+  },
+  {
+    "code": "13348",
+    "name": "Yên Bắc",
+    "full_name": "Phường Yên Bắc",
+    "type": "Phường Yên",
+    "district_code": "349"
+  },
+  {
+    "code": "13360",
+    "name": "Yên Nam",
+    "full_name": "Xã Yên Nam",
+    "type": "Xã Yên",
+    "district_code": "349"
+  },
+  {
+    "code": "13321",
+    "name": "Đồng Văn",
+    "full_name": "Phường Đồng Văn",
+    "type": "Phường Đồng",
+    "district_code": "349"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "code": "01849",
+    "name": "Dương Quang",
+    "full_name": "Xã Dương Quang",
+    "type": "Xã Dương",
+    "district_code": "058"
+  },
+  {
+    "code": "01846",
+    "name": "Huyền Tụng",
+    "full_name": "Phường Huyền Tụng",
+    "type": "Phường Huyền",
+    "district_code": "058"
+  },
+  {
+    "code": "01834",
+    "name": "Nguyễn Thị Minh Khai",
+    "full_name": "Phường Nguyễn Thị Minh Khai",
+    "type": "Phường Nguyễn Thị Minh",
+    "district_code": "058"
+  },
+  {
+    "code": "01852",
+    "name": "Nông Thượng",
+    "full_name": "Xã Nông Thượng",
+    "type": "Xã Nông",
+    "district_code": "058"
+  },
+  {
+    "code": "01843",
+    "name": "Phùng Chí Kiên",
+    "full_name": "Phường Phùng Chí Kiên",
+    "type": "Phường Phùng Chí",
+    "district_code": "058"
+  },
+  {
+    "code": "01837",
+    "name": "Sông Cầu",
+    "full_name": "Phường Sông Cầu",
+    "type": "Phường Sông",
+    "district_code": "058"
+  },
+  {
+    "code": "01855",
+    "name": "Xuất Hóa",
+    "full_name": "Phường Xuất Hóa",
+    "type": "Phường Xuất",
+    "district_code": "058"
+  },
+  {
+    "code": "01840",
+    "name": "Đức Xuân",
+    "full_name": "Phường Đức Xuân",
+    "type": "Phường Đức",
+    "district_code": "058"
+  }
+]
