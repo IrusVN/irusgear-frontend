@@ -12,6 +12,7 @@
                 <slot />
             </main>
             <Footer />
+            <ChatbotWidget />
             <AddToCartSheet />
         </div>
     </div>
@@ -21,6 +22,7 @@
 import { onMounted } from 'vue'
 import CustomerSidebar from '@/components/Sidebar/CustomerSidebar.vue'
 import Footer from '@/components/Footer/Footer.vue'
+import ChatbotWidget from '@/components/Chatbot/ChatbotWidget.vue'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 import AddToCartSheet from '@/components/Cart/AddToCartSheet.vue'
 import { useCartStore } from '@/stores/cartStore'

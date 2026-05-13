@@ -15,6 +15,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL ?? 'http://localhost:8000/api/v1',
+      aiApiUrl: process.env.NUXT_PUBLIC_AI_API_URL ?? 'https://ai-user-6f5c.onrender.com/api/v1',
     },
   },
   css: [
@@ -27,6 +28,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon-light.svg', media: '(prefers-color-scheme: dark)' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon-dark.svg', media: '(prefers-color-scheme: light)' },
         { rel: "stylesheet", href: "/assets/css/custom.css" },
+        { rel: "stylesheet", href: "/assets/css/chatbot.css" },
         { rel: "stylesheet", href: "/assets/css/responsive.css" },
         // { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', },
         { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css' },
