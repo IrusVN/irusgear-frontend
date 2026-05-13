@@ -83,6 +83,7 @@
                   <span
                     v-if="itemCount > 0"
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;"
                   >
                     {{ itemCount }}
                   </span>
