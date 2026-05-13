@@ -1,5 +1,5 @@
 <template>
-  <div class="container-xl py-3 px-3 mx-auto">
+  <div class="container-xl py-3 px-3 mx-auto home-hero-shell">
     <div class="hero-layout">
       <div class="hero-category-wrap d-none d-lg-flex flex-shrink-0" @mouseenter="openMegaMenu"
         @mouseleave="closeMegaMenu">
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="d-flex flex-column gap-2 min-w-0 overflow-hidden">
+      <div class="d-flex flex-column gap-2 min-w-0 overflow-hidden hero-main-column">
         <div id="heroCarousel" ref="carouselRef" class="carousel slide rounded-3 shadow-sm overflow-hidden bg-white"
           data-bs-ride="carousel" data-bs-interval="4000">
           <div ref="tabScrollerRef" :class="[
@@ -434,11 +434,22 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.home-hero-shell {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
 .hero-layout {
   display: grid;
-  grid-template-columns: 258px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   align-items: stretch;
+}
+
+@media (min-width: 992px) {
+  .hero-layout {
+    grid-template-columns: 258px minmax(0, 1fr);
+  }
 }
 
 @media (min-width: 1200px) {
@@ -460,6 +471,10 @@ onUnmounted(() => {
   .service-panel {
     width: 286px;
   }
+}
+
+.hero-main-column {
+  min-width: 0;
 }
 
 .cat-item {
@@ -576,9 +591,11 @@ onUnmounted(() => {
   display: flex;
   align-items: stretch;
   overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-width: none;
   background: #fff;
   margin-bottom: -6px;
+  scroll-snap-type: x proximity;
 }
 
 .hero-carousel-tabs::-webkit-scrollbar {
@@ -596,11 +613,13 @@ onUnmounted(() => {
 .hero-carousel-tab {
   position: relative;
   flex: 0 0 auto;
+  min-width: 148px;
   padding: 0.55rem 1.75rem;
   border: 0;
   background: #fff;
   color: #6b7280;
   white-space: nowrap;
+  scroll-snap-align: center;
   z-index: 0;
 }
 
@@ -664,8 +683,9 @@ onUnmounted(() => {
 .hero-slide-image {
   display: block;
   width: 100%;
-  height: 414px;
-  object-fit: contain;
+  height: auto;
+  max-height: 414px;
+  object-fit: cover;
   object-position: center;
   background: #fff;
 }
@@ -673,6 +693,7 @@ onUnmounted(() => {
 .hero-carousel-image-area {
   position: relative;
   overflow: hidden;
+  border-radius: 0 0 1rem 1rem;
 }
 
 .hero-carousel-nav {
@@ -728,6 +749,7 @@ onUnmounted(() => {
 .promo-banner-list {
   gap: 0.5rem;
   flex-wrap: nowrap;
+  min-width: 0;
 }
 
 .promo-banner-item {
@@ -866,30 +888,147 @@ onUnmounted(() => {
   }
 
   .hero-slide-image {
-    height: 340px;
+    max-height: 340px;
   }
 }
 
 @media (max-width: 991.98px) {
+  .home-hero-shell {
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
+  }
+
+  .hero-layout {
+    gap: 10px;
+  }
+
+  .hero-carousel-tabs {
+    margin-bottom: 0;
+  }
+
+  .hero-carousel-tab {
+    min-width: 136px;
+    padding: 0.55rem 1rem;
+  }
+
   .hero-slide-image {
-    height: 320px;
+    max-height: 320px;
+  }
+
+  .promo-banner-list {
+    gap: 10px;
+  }
+
+  .promo-banner-item {
+    flex: 0 0 calc((100% - 20px) / 3);
   }
 }
 
 @media (max-width: 767.98px) {
+  .home-hero-shell {
+    padding-top: 0.75rem !important;
+    padding-right: 0.75rem;
+    padding-bottom: 0.75rem !important;
+    padding-left: 0.75rem;
+  }
+
+  .hero-layout {
+    gap: 8px;
+  }
+
+  .hero-carousel-tabs {
+    gap: 8px;
+    margin: 0;
+    padding: 8px 8px 0;
+    background: transparent;
+  }
+
+  .hero-carousel-tabs-left-wing,
+  .hero-carousel-tabs-right-wing {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .hero-carousel-tab {
+    min-width: 128px;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #ececf1;
+    border-radius: 14px 14px 0 0;
+    background: #ffffff;
+    white-space: normal;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+  }
+
+  .hero-carousel-tab.active {
+    background: #f5f5f5;
+    border-color: #d4d4d8;
+  }
+
+  .hero-tab-wing {
+    display: none;
+  }
+
+  .hero-tab-label {
+    font-size: 0.72rem;
+  }
+
+  .hero-tab-label b {
+    font-size: 0.8rem;
+  }
+
   .hero-slide-image {
-    height: 280px !important;
-    object-fit: cover;
+    max-height: none;
+    min-height: 188px;
+  }
+
+  .hero-carousel-nav {
+    display: none;
+  }
+
+  .promo-banner-list {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .promo-banner-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .promo-banner-item {
+    flex: 0 0 min(78vw, 280px);
+    scroll-snap-align: start;
   }
 }
 
 @media (max-width: 575.98px) {
+  .home-hero-shell {
+    padding-right: 0.6rem;
+    padding-left: 0.6rem;
+  }
+
+  .hero-carousel-tab {
+    min-width: 118px;
+    padding: 0.65rem 0.8rem;
+  }
+
+  .hero-tab-label {
+    font-size: 0.69rem;
+    line-height: 1.15;
+  }
+
+  .hero-tab-label b {
+    font-size: 0.76rem;
+  }
+
   .promo-banner-list {
     gap: 8px;
   }
 
   .promo-banner-item {
-    min-height: 60px;
+    min-height: 64px;
   }
 
   .promo-banner-item img {
@@ -898,8 +1037,66 @@ onUnmounted(() => {
 }
 
 @media (max-width: 480px) {
+  .home-hero-shell {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .hero-carousel-tab {
+    min-width: 110px;
+    padding: 0.6rem 0.7rem;
+  }
+
+  .hero-tab-label b {
+    font-size: 0.74rem;
+  }
+
   .hero-slide-image {
-    height: 220px !important;
+    min-height: 168px;
+  }
+}
+
+@media (max-width: 359.98px) {
+  .hero-carousel-tabs {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .hero-carousel-tab {
+    min-width: 102px;
+    padding: 0.55rem 0.65rem;
+  }
+
+  .hero-tab-label {
+    font-size: 0.66rem;
+  }
+
+  .hero-tab-label b {
+    font-size: 0.71rem;
+  }
+
+  .promo-banner-item {
+    flex-basis: min(82vw, 250px);
+  }
+}
+
+@media (max-height: 820px) and (min-width: 992px) {
+  .cat-item {
+    min-height: 42px;
+  }
+
+  .hero-slide-image {
+    max-height: 300px;
+  }
+
+  .hero-mega-menu-panel {
+    max-height: 390px;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .hero-carousel-nav {
+    display: none;
   }
 }
 </style>

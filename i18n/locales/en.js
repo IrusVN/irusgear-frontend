@@ -557,7 +557,7 @@ export default {
         tradeInTitle: "Trade-in",
     },
     home: {
-        searchProducts: "Search products, categories...",
+        searchProducts: "What would you like to buy today?",
         searchShortcut: "Ctrl K",
         dealHot: "Deal Hot",
         home: "Home",

@@ -15,21 +15,29 @@
               >
             </NuxtLink>
 
-            <button
-              type="button"
-              class="btn header-search d-none d-md-flex align-items-center gap-2 gap-lg-3 flex-grow-1 text-start px-3 px-lg-4 py-2"
+            <form
+              ref="desktopSearchRef"
+              class="header-search d-none d-md-flex align-items-center gap-2 px-3"
               :title="$t('sidebar.searchPlaceholder')"
+              role="search"
+              @submit.prevent="submitHeaderSearch"
             >
-              <i class="bi bi-search fs-6 text-secondary"></i>
-              <span class="search-text small text-secondary-emphasis text-truncate">
-                {{ $t('home.searchProducts') }}
-              </span>
-              <span class="search-shortcut d-none d-xl-inline-flex align-items-center justify-content-center">
-                {{ $t('home.searchShortcut') }}
-              </span>
-            </button>
+              <i class="bi bi-search fs-5 header-search-icon" aria-hidden="true"></i>
+              <input
+                v-model="headerSearchKeyword"
+                type="search"
+                class="header-search-input"
+                :placeholder="$t('home.searchProducts')"
+                autocomplete="off"
+                aria-haspopup="dialog"
+                :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'"
+                @focus="openSearchDropdown"
+                @click="openSearchDropdown"
+                @keydown.esc.prevent="isSearchDropdownOpen = false"
+              >
+            </form>
 
-            <div class="d-flex align-items-center gap-1 gap-xl-2 ms-auto flex-shrink-0 flex-nowrap">
+            <div class="d-flex align-items-center gap-1 gap-xl-2 flex-shrink-0 flex-nowrap">
               <NuxtLink
                 v-for="link in utilityLinks"
                 :key="link.label"
@@ -48,7 +56,14 @@
                 <span>{{ ctaLink.label }}</span>
               </NuxtLink>
 
-              <button type="button" class="btn header-icon-btn d-md-none" :aria-label="$t('sidebar.searchPlaceholder')">
+              <button
+                type="button"
+                class="btn header-icon-btn d-md-none"
+                :aria-label="$t('sidebar.searchPlaceholder')"
+                aria-haspopup="dialog"
+                :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'"
+                @click="openSearchDropdown"
+              >
                 <i class="bi bi-search"></i>
               </button>
 
@@ -192,6 +207,12 @@
           </div>
         </div>
 
+        <DropdownSearch
+          v-model:open="isSearchDropdownOpen"
+          :anchor-rect="searchAnchorRect"
+          :mode="searchDropdownMode"
+        />
+
         <div
           v-if="!isHomeRoute && isHeaderCategoryMenuOpen"
           ref="productsDropdownRef"
@@ -215,7 +236,14 @@
           <span>{{ $t('home.home') }}</span>
         </NuxtLink>
 
-        <button type="button" class="mobile-nav-item" :aria-label="$t('sidebar.searchPlaceholder')">
+        <button
+          type="button"
+          class="mobile-nav-item"
+          :aria-label="$t('sidebar.searchPlaceholder')"
+          aria-haspopup="dialog"
+          :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'"
+          @click="openSearchDropdown"
+        >
           <i class="bi bi-search"></i>
           <span>{{ $t('sidebar.search') }}</span>
         </button>
@@ -311,6 +339,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocalePath, useRoute, useI18n, navigateTo } from '#imports'
+import DropdownSearch from '@/components/Common/DropdownSearch.vue'
 import CategoryMegaMenu from '@/components/Home/CategoryMegaMenu.vue'
 import LanguageSwitcher from '@/components/Sidebar/LanguageSwitcher.vue'
 import { useHomeStore } from '@/stores/homeStore'
@@ -331,11 +360,16 @@ const localePath = useLocalePath()
 const route = useRoute()
 const { t, locale } = useI18n()
 const customerSidebarWrapRef = ref(null)
+const desktopSearchRef = ref(null)
 const productsButtonRef = ref(null)
 const productsDropdownRef = ref(null)
 const isHeaderCategoryMenuOpen = ref(false)
 const isSecondaryNavHidden = ref(false)
 const isMobileFabOpen = ref(false)
+const isSearchDropdownOpen = ref(false)
+const searchDropdownMode = ref('desktop')
+const headerSearchKeyword = ref('')
+const searchAnchorRect = ref(null)
 let customerSidebarResizeObserver = null
 let customerSidebarOffsetFrame = null
 
@@ -411,6 +445,62 @@ const setSecondaryNavHidden = (value) => {
   }
 }
 
+const syncSearchAnchorRect = () => {
+  if (typeof window === 'undefined') return
+
+  const searchEl = desktopSearchRef.value
+  if (!(searchEl instanceof HTMLElement)) {
+    searchAnchorRect.value = null
+    return
+  }
+
+  const rect = searchEl.getBoundingClientRect()
+  searchAnchorRect.value = {
+    top: Math.round(rect.top),
+    right: Math.round(rect.right),
+    bottom: Math.round(rect.bottom),
+    left: Math.round(rect.left),
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+  }
+}
+
+const openSearchDropdown = () => {
+  closeHeaderCategoryMenu()
+  homeStore.closeHeroMegaMenu()
+  isMobileFabOpen.value = false
+
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    searchDropdownMode.value = 'mobile'
+    searchAnchorRect.value = null
+  } else {
+    searchDropdownMode.value = 'desktop'
+    syncSearchAnchorRect()
+  }
+
+  isSearchDropdownOpen.value = true
+}
+
+const submitHeaderSearch = async () => {
+  const keyword = headerSearchKeyword.value.trim()
+
+  if (!keyword) {
+    openSearchDropdown()
+    return
+  }
+
+  isSearchDropdownOpen.value = false
+
+  await navigateTo({
+    path: localePath('/products'),
+    query: {
+      search: keyword,
+      sort: 'newest',
+      limit: '20',
+    },
+  })
+}
+
 const handleProductsClick = async () => {
   await homeStore.fetchMegaMenuLeaves().catch(() => {})
 
@@ -442,6 +532,21 @@ const handleProductsClick = async () => {
 const handleDocumentPointerDown = (event) => {
   const target = event.target
   if (!(target instanceof Node)) return
+
+  if (isSearchDropdownOpen.value) {
+    const clickedSearch = desktopSearchRef.value?.contains(target)
+    const clickedSearchPanel = target instanceof Element
+      ? Boolean(
+        target.closest('.dropdown-search-panel')
+        || target.closest('.dropdown-search-mobile-sheet')
+        || target.closest('.sheet-panel'),
+      )
+      : false
+
+    if (!clickedSearch && !clickedSearchPanel) {
+      isSearchDropdownOpen.value = false
+    }
+  }
 
   // Đóng FAB khi click bên ngoài
   if (isMobileFabOpen.value) {
@@ -478,10 +583,17 @@ const syncSecondaryNavVisibility = () => {
   setSecondaryNavHidden(true)
 }
 
+const syncOpenSearchDropdownPosition = () => {
+  if (!isSearchDropdownOpen.value || searchDropdownMode.value !== 'desktop') return
+  syncSearchAnchorRect()
+}
+
 watch(
   () => route.fullPath,
   async () => {
     isMobileFabOpen.value = false
+    isSearchDropdownOpen.value = false
+    searchDropdownMode.value = 'desktop'
     closeHeaderCategoryMenu()
     setSecondaryNavHidden(false)
     await nextTick()
@@ -494,7 +606,9 @@ onMounted(() => {
   if (typeof document === 'undefined' || typeof window === 'undefined') return
   document.addEventListener('pointerdown', handleDocumentPointerDown)
   window.addEventListener('scroll', syncSecondaryNavVisibility, { passive: true })
+  window.addEventListener('scroll', syncOpenSearchDropdownPosition, { passive: true })
   window.addEventListener('resize', syncSecondaryNavVisibility, { passive: true })
+  window.addEventListener('resize', syncOpenSearchDropdownPosition, { passive: true })
 
   if (typeof ResizeObserver !== 'undefined' && customerSidebarWrapRef.value instanceof HTMLElement) {
     customerSidebarResizeObserver = new ResizeObserver(() => {
@@ -513,7 +627,9 @@ onBeforeUnmount(() => {
   if (typeof document === 'undefined' || typeof window === 'undefined') return
   document.removeEventListener('pointerdown', handleDocumentPointerDown)
   window.removeEventListener('scroll', syncSecondaryNavVisibility)
+  window.removeEventListener('scroll', syncOpenSearchDropdownPosition)
   window.removeEventListener('resize', syncSecondaryNavVisibility)
+  window.removeEventListener('resize', syncOpenSearchDropdownPosition)
 
   if (customerSidebarResizeObserver) {
     customerSidebarResizeObserver.disconnect()
@@ -656,19 +772,50 @@ const featuredNavItems = computed(() => [
 }
 
 .header-search {
+  flex: 1 1 0;
+  margin: 0;
   min-width: 0;
-  min-height: 46px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 1rem;
-  background: #f6f7f9;
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid rgba(17, 17, 17, 0.2);
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: text;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.search-text {
+.header-search-icon {
+  color: #111111;
+  line-height: 1;
+}
+
+.header-search-input {
   min-width: 0;
   flex: 1 1 auto;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #111827;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
-.header-search:hover,
+.header-search-input::placeholder {
+  color: #b8bec8;
+  opacity: 1;
+}
+
+.header-search:hover {
+  border-color: rgba(17, 17, 17, 0.38);
+  background: #ffffff;
+}
+
+.header-search:focus-within {
+  border-color: rgba(17, 17, 17, 0.72);
+  box-shadow: 0 0 0 0.16rem rgba(17, 17, 17, 0.1);
+}
+
 .header-text-btn:hover,
 .header-icon-btn:hover,
 .header-nav-link:hover,
@@ -683,18 +830,6 @@ const featuredNavItems = computed(() => [
   color: #111827;
   background: #ffffff;
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
-}
-
-.search-shortcut {
-  min-width: 58px;
-  padding: 0.25rem 0.55rem;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 0.7rem;
-  background: #fff;
-  color: #8a8f9c;
-  font-size: 0.7rem;
-  font-weight: 700;
-  line-height: 1;
 }
 
 .header-text-btn,

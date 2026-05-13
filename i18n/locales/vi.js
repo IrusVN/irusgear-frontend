@@ -557,7 +557,7 @@ export default {
         tradeInTitle: "Thu cũ lên đời",
     },
     home: {
-        searchProducts: "Tìm kiếm sản phẩm, danh mục...",
+        searchProducts: "Bạn muốn mua gì hôm nay?",
         searchShortcut: "Ctrl K",
         dealHot: "Deal Hot",
         home: "Trang chủ",
