@@ -625,12 +625,25 @@ const openSearchDropdown = () => {
   homeStore.closeHeroMegaMenu()
   isMobileFabOpen.value = false
 
-  if (typeof window !== 'undefined' && window.innerWidth < 768) {
-    searchDropdownMode.value = 'mobile'
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+  searchDropdownMode.value = isMobile ? 'mobile' : 'desktop'
+
+  if (isMobile) {
     searchAnchorRect.value = null
   } else {
-    searchDropdownMode.value = 'desktop'
-    syncSearchAnchorRect()
+    // Ensure anchorRect is set before opening so panel positions correctly
+    const el = desktopSearchRef.value
+    if (el instanceof HTMLElement) {
+      const rect = el.getBoundingClientRect()
+      searchAnchorRect.value = {
+        top: Math.round(rect.top),
+        right: Math.round(rect.right),
+        bottom: Math.round(rect.bottom),
+        left: Math.round(rect.left),
+        width: Math.round(rect.width),
+        height: Math.round(rect.height),
+      }
+    }
   }
 
   isSearchDropdownOpen.value = true
@@ -692,7 +705,8 @@ const handleDocumentPointerDown = (event) => {
     const clickedSearch = desktopSearchRef.value?.contains(target)
     const clickedSearchPanel = target instanceof Element
       ? Boolean(
-        target.closest('.dropdown-search-panel')
+        target.closest('.dropdown-search-desktop-layer')
+        || target.closest('.dropdown-search-desktop-panel')
         || target.closest('.dropdown-search-mobile-sheet')
         || target.closest('.sheet-panel'),
       )

@@ -1,7 +1,7 @@
 <template>
     <Teleport to="body">
         <Transition name="sheet-fade">
-            <div v-if="isVisible" class="sheet-backdrop" @click="close">
+            <div v-if="isVisible" class="sheet-backdrop" @click="handleBackdropClick">
 
                 <div class="sheet-panel" @click.stop :style="panelStyle">
 
@@ -21,8 +21,19 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+
+const props = defineProps({
+    open: {
+        type: Boolean,
+        default: false,
+    },
+})
+
 const emit = defineEmits(['open', 'close'])
 const isVisible = ref(false)
+const startY = ref(0)
+const currentY = ref(0)
+const isDragging = ref(false)
 
 const open = () => {
     isVisible.value = true
@@ -34,11 +45,21 @@ const close = () => {
     emit('close')
 }
 
-defineExpose({ open, close })
+const handleBackdropClick = () => {
+    close()
+}
 
-const startY = ref(0)
-const currentY = ref(0)
-const isDragging = ref(false)
+// Sync với controlled prop
+watch(() => props.open, (val) => {
+    if (val) {
+        isVisible.value = true
+    } else {
+        isVisible.value = false
+        currentY.value = 0
+    }
+}, { immediate: true })
+
+defineExpose({ open, close })
 
 const startDrag = (e) => { startY.value = e.touches[0].clientY; isDragging.value = true }
 
