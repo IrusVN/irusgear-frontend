@@ -2670,6 +2670,7 @@ onBeforeUnmount(() => {
     linear-gradient(to top right, #dbe8fe, #609afa) border-box;
   border: 1px solid transparent;
   border-radius: 16px;
+  box-sizing: border-box;
   margin-bottom: 16px;
   max-width: 584px;
   padding: 6px 8px;
@@ -2753,6 +2754,7 @@ onBeforeUnmount(() => {
 .box-product-price .price-label-container,
 .box-product-price .trade-price-label {
   flex: 1;
+  min-width: 0;
 }
 
 .box-product-price .price-label-container .d-flex,
@@ -3772,7 +3774,38 @@ onBeforeUnmount(() => {
 
 @media only screen and (max-width: 990px) {
   .box-detail-product__box-center {
-    width: 50%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .box-product-price {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .box-product-price-wrapper {
+    gap: clamp(8px, 2vw, 16px);
+  }
+
+  .box-product-price .price-label-container .d-flex .sale-price,
+  .box-product-price .trade-price-label .d-flex .sale-price {
+    font-size: clamp(18px, 2.6vw, 20px);
+    overflow-wrap: anywhere;
+  }
+
+  .box-product-price .price-label-container .d-flex .base-price,
+  .box-product-price .trade-price-label .d-flex .base-price {
+    font-size: clamp(12px, 1.8vw, 14px);
+  }
+
+  .box-product-price .exclusive-price-block .promotion-row__ct {
+    padding-right: 0;
+  }
+
+  .box-product-price .exclusive-price-block .promotion-row__ct,
+  .box-product-price .trade-price-label .trade-price-info>span>span,
+  .box-product-price .trade-price-label .trade-price-info>span>a {
+    font-size: clamp(11px, 1.8vw, 12px);
   }
 
   .box-product-variants .list-variants {
@@ -3805,6 +3838,86 @@ onBeforeUnmount(() => {
   .box-product-price {
     border-radius: 12px;
     margin-top: 6px;
+    padding: 10px;
+  }
+
+  .box-product-price-wrapper {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .box-product-price .price-label-container,
+  .box-product-price .trade-price-label {
+    width: 100%;
+  }
+
+  .box-product-price .price-label-container .d-flex,
+  .box-product-price .trade-price-label .d-flex {
+    align-items: flex-start !important;
+    text-align: left;
+  }
+
+  .box-product-price .price-label-container .d-flex .sale-price,
+  .box-product-price .trade-price-label .d-flex .sale-price {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .box-product-price .devide-price-label {
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .box-product-price .devide-price-label .divide {
+    border-right: 0;
+    border-top: 1px solid #bfd7fe;
+    flex: 1;
+    height: 1px;
+    width: auto;
+  }
+
+  .box-product-price .devide-price-label p {
+    margin: 0;
+  }
+
+  .box-product-price .trade-price-label {
+    text-align: left;
+  }
+
+  .box-product-price .trade-price-label .price-label {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+  }
+
+  .box-product-price .trade-price-label .trade-price-info>span {
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .box-product-price .trade-price-label .trade-price-info>span>span,
+  .box-product-price .trade-price-label .trade-price-info>span>a {
+    white-space: normal;
+  }
+
+  .box-product-price .exclusive-price-block .promotion-row {
+    align-items: flex-start;
+  }
+
+  .box-product-price .exclusive-price-block .promotion-row__icon {
+    flex: 0 0 28px;
+    max-width: 28px;
+  }
+
+  .box-product-price .exclusive-price-block .promotion-row__icon i {
+    font-size: 1.25rem !important;
+  }
+
+  .box-product-price .exclusive-price-block .promotion-row__ct,
+  .box-product-price .exclusive-price-block .promotion-row__ct .bold {
+    font-size: 12px;
   }
 
   .box-product-promotion {
