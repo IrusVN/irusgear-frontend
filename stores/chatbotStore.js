@@ -1,11 +1,15 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { useRuntimeConfig } from "#imports";
+import { useRuntimeConfig, useRouter, useRoute } from "#imports";
 import { useAuthStore } from "~/stores/authStore";
+import { useCartStore } from "~/stores/cartStore";
+import { useProductStore } from "~/stores/productStore";
 
 export const useChatbotStore = defineStore("chatbot", () => {
   const config = useRuntimeConfig();
   const authStore = useAuthStore();
+  const router = useRouter();
+  const route = useRoute();
 
   // --- State ---
   const messages = ref([]);
@@ -70,10 +74,15 @@ export const useChatbotStore = defineStore("chatbot", () => {
   const sendMessage = async (question) => {
     if (!question.trim() || isLoading.value) return;
 
-    // Add user message
+    const trimmedQuestion = question.trim();
+
+    // Snapshot chat history BEFORE adding the new user message
+    const historySnapshot = chatHistory.value.slice();
+
+    // Add user message to UI
     messages.value.push({
       role: "user",
-      content: question.trim(),
+      content: trimmedQuestion,
       timestamp: new Date(),
     });
 
@@ -82,13 +91,26 @@ export const useChatbotStore = defineStore("chatbot", () => {
     const aiApiUrl = config.public.aiApiUrl || "https://ai-user-6f5c.onrender.com/api/v1";
 
     const body = {
-      question: question.trim(),
-      chat_history: chatHistory.value.slice(0, -1), // Exclude the message we just added
+      question: trimmedQuestion,
+      chat_history: historySnapshot, // History before this message
     };
 
     // If user is logged in, send user_id
     if (authStore.isAuthenticated && authStore.user?.id) {
       body.user_id = authStore.user.id;
+    }
+
+    // If user is on a product page, send the current product ID as context
+    if (route.path.startsWith("/products/")) {
+      const productStore = useProductStore();
+      const currentProductId = productStore.productDetail?.id;
+      console.log("[Chatbot] product page detected, productDetail:", productStore.productDetail?.id, "route:", route.path);
+      if (currentProductId) {
+        body.current_product_id = currentProductId;
+        console.log("[Chatbot] sending current_product_id:", currentProductId);
+      } else {
+        console.warn("[Chatbot] on product page but productDetail.id is missing");
+      }
     }
 
     // Helper: single API call with timeout
@@ -117,7 +139,7 @@ export const useChatbotStore = defineStore("chatbot", () => {
       try {
         response = await callApi();
       } catch (firstError) {
-        // Retry once on server error (500)
+        // Retry once on server error (500/502/503) — do NOT push another user message
         const status = firstError?.response?.status || firstError?.status || firstError?.statusCode;
         if (status === 500 || status === 502 || status === 503) {
           console.warn("Chatbot API: Retrying after server error...");
@@ -174,6 +196,12 @@ export const useChatbotStore = defineStore("chatbot", () => {
         hasNewMessage.value = true;
       }
 
+      // Execute UI actions from AI (REDIRECT, ADD_TO_CART, etc.)
+      const uiActions = response.ui_actions || [];
+      if (uiActions.length > 0) {
+        executeUiActions(uiActions);
+      }
+
       // Fetch product details asynchronously (fallback if AI didn't return hydrated products)
       if (displayProducts.length === 0 && productIds.length > 0) {
         fetchProductsByIds(productIds).then((products) => {
@@ -206,6 +234,49 @@ export const useChatbotStore = defineStore("chatbot", () => {
   const clearChat = () => {
     messages.value = [];
     initChat();
+  };
+
+  // Execute UI action commands sent by the AI backend
+  const executeUiActions = async (actions) => {
+    const cartStore = useCartStore();
+
+    for (const action of actions) {
+      try {
+        if (action.type === "REDIRECT") {
+          const url = action.url || action.path;
+          if (url) {
+            // Internal URLs (same origin): navigate in current tab
+            // External URLs: open in new tab
+            const isExternal = url.startsWith("http://") || url.startsWith("https://");
+            if (isExternal) {
+              const a = document.createElement("a");
+              a.href = url;
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            } else {
+              await router.push(url);
+            }
+          }
+        } else if (action.type === "ADD_TO_CART") {
+          // Add product to cart
+          const payload = {
+            product_id: Number(action.product_id),
+            quantity: Number(action.quantity) || 1,
+          };
+          if (action.product_variant_id) {
+            payload.product_variant_id = Number(action.product_variant_id);
+          }
+          await cartStore.addItem(payload, { showSheet: true });
+        } else {
+          console.warn("Chatbot: unknown ui_action type:", action.type);
+        }
+      } catch (err) {
+        console.error("Chatbot: failed to execute ui_action:", action, err);
+      }
+    }
   };
 
   return {

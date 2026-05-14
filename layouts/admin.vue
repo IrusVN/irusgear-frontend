@@ -24,14 +24,14 @@
     </main>
     
     <!-- Chatbot Widget -->
-    <ChatbotWidget />
+    <AdminChatbotWidget />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import AdminSidebar from '@/components/Sidebar/AdminSidebar.vue'
-import ChatbotWidget from '@/components/Chatbot/ChatbotWidget.vue'
+import AdminChatbotWidget from '@/components/Chatbot/AdminChatbotWidget.vue'
 
 const isMobileSidebarOpen = ref(false)
 

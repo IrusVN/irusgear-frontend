@@ -470,6 +470,17 @@
               <i class="bi bi-globe-americas"></i>
               <span class="mobile-fab-tooltip">{{ currentLangLabel }}</span>
             </button>
+
+            <button
+              type="button"
+              class="mobile-fab-item"
+              aria-label="Chat với AI"
+              @click="chatbotStore.toggleChat(); isMobileFabOpen = false"
+            >
+              <i class="bi bi-chat-dots-fill"></i>
+              <span v-if="chatbotStore.hasNewMessage" class="mobile-fab-badge">!</span>
+              <span class="mobile-fab-tooltip">Trợ lý AI</span>
+            </button>
           </div>
         </Transition>
 
@@ -501,11 +512,13 @@ import { useAuthStore } from '@/stores/authStore'
 import { useCartStore } from '@/stores/cartStore'
 import { useWishlistStore } from '@/stores/wishlistStore'
 import { getUserRoleKey } from '@/utils/roleHelper'
+import { useChatbotStore } from '@/stores/chatbotStore'
 
 const auth = useAuthStore()
 const cartStore = useCartStore()
 const homeStore = useHomeStore()
 const wishlistStore = useWishlistStore()
+const chatbotStore = useChatbotStore()
 const { user } = storeToRefs(auth)
 const { itemCount } = storeToRefs(cartStore)
 const { itemCount: wishlistCount } = storeToRefs(wishlistStore)

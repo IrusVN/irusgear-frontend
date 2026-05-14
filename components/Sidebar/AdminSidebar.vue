@@ -120,13 +120,10 @@ const userEmail = ref('thang@gmail.com')
 const mainMenuItems = [
   { key: 'home', label: 'sidebar.menu.home', icon: 'bi-house-door', route: '/admin/dashboard' },
   { key: 'orders', label: 'sidebar.menu.orders', icon: 'bi-cart3', route: '/admin/orders' },
-<<<<<<< thang/admin/order
   { key: 'documentation', label: 'sidebar.menu.documentation', icon: 'bi-file-earmark-text', route: '#' },
   { key: 'map', label: 'sidebar.menu.mapOverview', icon: 'bi-grid-1x2', route: '#' },
   { key: 'stats', label: 'sidebar.menu.statistics', icon: 'bi-pie-chart', route: '#' },
-=======
   { key: 'products', label: 'sidebar.menu.products', icon: 'bi-box-seam', route: '/admin/products' },
->>>>>>> test
 ]
 
 const bottomMenuItems = [

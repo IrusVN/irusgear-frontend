@@ -1692,7 +1692,6 @@ export default {
             backToTop: " Quay lại đầu trang",
         },
     },
-}
     dashboard: {
         welcome: "Chào mừng trở lại",
         overview: "Tổng quan",
@@ -1751,3 +1750,4 @@ export default {
             actions: "Thao tác",
         },
     },
+}

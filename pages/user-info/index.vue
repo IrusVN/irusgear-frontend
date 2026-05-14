@@ -365,6 +365,17 @@ onMounted(() => {
   userInfoStore.fetchPasswordInfo()
   checkoutStore.fetchAddresses()
   resolveUserDefaultAddress()
+
+  // Handle action query param from chatbot REDIRECT
+  // e.g. /user-info?action=change-password
+  const route = useRoute()
+  if (route.query.action === 'change-password') {
+    showUpdatePasswordModal.value = true
+  } else if (route.query.action === 'edit-profile') {
+    showUpdateProfileModal.value = true
+  } else if (route.query.action === 'edit-address') {
+    showUpdateAddressModal.value = true
+  }
 })
 
 watch(

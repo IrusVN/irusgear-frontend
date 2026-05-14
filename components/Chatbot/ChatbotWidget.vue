@@ -2,7 +2,7 @@
   <div class="chatbot-widget">
     <!-- Chat Window -->
     <Transition name="slide-up">
-      <div v-if="isOpen" class="chat-window bg-white rounded-4 shadow-lg">
+      <div v-if="chatbotStore.isOpen" class="chat-window bg-white rounded-4 shadow-lg">
         <!-- Header -->
         <div class="chat-header bg-dark text-white p-3 rounded-top-4 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center gap-2">
@@ -15,10 +15,10 @@
             </div>
           </div>
           <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-link text-white p-1" @click="clearConversation" title="Xóa lịch sử">
+            <button class="btn btn-sm btn-link text-white p-1" @click="chatbotStore.clearChat" title="Xóa lịch sử">
               <i class="bi bi-trash"></i>
             </button>
-            <button class="btn btn-sm btn-link text-white p-1" @click="close">
+            <button class="btn btn-sm btn-link text-white p-1" @click="chatbotStore.closeChat">
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
@@ -26,15 +26,46 @@
 
         <!-- Messages -->
         <div class="chat-messages p-3" ref="messagesContainer">
-          <div v-for="message in messages" :key="message.id" class="message-wrapper mb-3" :class="message.role === 'user' ? 'text-end' : ''">
+          <div
+            v-for="(message, index) in chatbotStore.messages"
+            :key="index"
+            class="message-wrapper mb-3"
+            :class="message.role === 'user' ? 'text-end' : ''"
+          >
             <div class="message" :class="message.role === 'user' ? 'message-user' : 'message-bot'">
-              <div class="message-content">{{ message.content }}</div>
+              <div class="message-content" v-html="renderMarkdown(message.content)"></div>
               <small class="message-time text-muted">{{ formatTime(message.timestamp) }}</small>
+            </div>
+
+            <!-- Product Cards -->
+            <div v-if="message.role === 'assistant' && message.productsLoading" class="mt-2 text-muted small">
+              <i class="bi bi-hourglass-split me-1"></i> Đang tải sản phẩm...
+            </div>
+            <div v-else-if="message.role === 'assistant' && message.products && message.products.length > 0" class="product-cards mt-2 d-flex flex-wrap gap-2">
+              <a
+                v-for="product in message.products"
+                :key="product.id"
+                :href="`/products/${product.slug || product.id}`"
+                class="product-card text-decoration-none"
+                target="_blank"
+              >
+                <img
+                  :src="product.image || product.image_url || '/placeholder.png'"
+                  :alt="product.name"
+                  class="product-card-img"
+                />
+                <div class="product-card-body">
+                  <div class="product-card-name">{{ product.name }}</div>
+                  <div class="product-card-price text-danger fw-semibold">
+                    {{ formatPrice(product.price) }}
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
 
           <!-- Loading indicator -->
-          <div v-if="loading" class="message-wrapper mb-3">
+          <div v-if="chatbotStore.isLoading" class="message-wrapper mb-3">
             <div class="message message-bot">
               <div class="typing-indicator">
                 <span></span>
@@ -48,14 +79,14 @@
         <!-- Input -->
         <div class="chat-input p-3 border-top">
           <form @submit.prevent="handleSend" class="d-flex gap-2">
-            <input 
-              type="text" 
-              class="form-control" 
+            <input
+              type="text"
+              class="form-control"
               placeholder="Nhập tin nhắn..."
               v-model="inputMessage"
-              :disabled="loading"
+              :disabled="chatbotStore.isLoading"
             />
-            <button type="submit" class="btn btn-dark" :disabled="loading || !inputMessage.trim()">
+            <button type="submit" class="btn btn-dark" :disabled="chatbotStore.isLoading || !inputMessage.trim()">
               <i class="bi bi-send-fill"></i>
             </button>
           </form>
@@ -63,33 +94,35 @@
       </div>
     </Transition>
 
-    <!-- Floating Button -->
-    <button 
-      class="chat-button btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center"
-      @click="toggle"
-      :class="{ 'rotate': isOpen }"
+    <!-- Floating Button — hidden on mobile (integrated into mobile FAB) -->
+    <button
+      class="chat-button btn rounded-circle shadow-lg d-none d-md-flex align-items-center justify-content-center"
+      @click="chatbotStore.toggleChat"
+      :class="{ 'rotate': chatbotStore.isOpen }"
     >
-      <i class="bi fs-4" :class="isOpen ? 'bi-x-lg' : 'bi-chat-dots-fill'"></i>
+      <!-- New message badge -->
+      <span v-if="chatbotStore.hasNewMessage && !chatbotStore.isOpen" class="badge-dot"></span>
+      <i class="bi fs-4" :class="chatbotStore.isOpen ? 'bi-x-lg' : 'bi-chat-dots-fill'"></i>
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, nextTick, watch } from 'vue'
-import { useChatbot } from '~/composables/useChatbot'
+import { useChatbotStore } from '~/stores/chatbotStore'
 
-const { messages, isOpen, loading, sendMessage, toggle, close, clearConversation } = useChatbot()
+const chatbotStore = useChatbotStore()
 
 const inputMessage = ref('')
 const messagesContainer = ref<HTMLElement | null>(null)
 
 const handleSend = async () => {
-  if (!inputMessage.value.trim() || loading.value) return
-  
+  if (!inputMessage.value.trim() || chatbotStore.isLoading) return
+
   const message = inputMessage.value
   inputMessage.value = ''
-  
-  await sendMessage(message)
+
+  await chatbotStore.sendMessage(message)
   scrollToBottom()
 }
 
@@ -100,15 +133,32 @@ const scrollToBottom = async () => {
   }
 }
 
-const formatTime = (date: Date) => {
+const formatTime = (date: Date | string) => {
   return new Date(date).toLocaleTimeString('vi-VN', {
     hour: '2-digit',
     minute: '2-digit'
   })
 }
 
+const formatPrice = (price: number) => {
+  if (!price) return ''
+  return new Intl.NumberFormat('vi-VN').format(price) + 'đ'
+}
+
+// Simple markdown renderer: bold, newlines
+const renderMarkdown = (text: string) => {
+  if (!text) return ''
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>')
+}
+
 // Auto scroll when new message
-watch(() => messages.value.length, () => {
+watch(() => chatbotStore.messages.length, () => {
   scrollToBottom()
 })
 </script>
@@ -197,11 +247,61 @@ watch(() => messages.value.length, () => {
   color: rgba(255, 255, 255, 0.8);
 }
 
+/* Product cards */
+.product-cards {
+  max-width: 340px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  transition: box-shadow 0.2s;
+}
+
+.product-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.product-card-img {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+  background: #f8f9fa;
+  padding: 4px;
+}
+
+.product-card-body {
+  padding: 4px 6px 6px;
+}
+
+.product-card-name {
+  font-size: 0.7rem;
+  color: #333;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+.product-card-price {
+  font-size: 0.7rem;
+}
+
+/* Floating button */
 .chat-button {
   width: 60px;
   height: 60px;
   transition: all 0.3s ease;
   background: #1a1a1a !important;
+  color: white;
+  position: relative;
 }
 
 .chat-button:hover {
@@ -215,6 +315,18 @@ watch(() => messages.value.length, () => {
 
 .chat-button.rotate:hover {
   transform: rotate(90deg) scale(1.1);
+}
+
+/* New message badge */
+.badge-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  background: #dc3545;
+  border-radius: 50%;
+  border: 2px solid white;
 }
 
 /* Typing indicator */
