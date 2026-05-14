@@ -1,12 +1,17 @@
 import { useAuthStore } from "@/stores/authStore";
 import { ADMIN_ROLES } from "@/constants/userConstants";
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(async (to) => {
     const authStore = useAuthStore();
     const publicRoutes = ['/auth/login', '/auth/register', '/auth/forgot-password'];
 
     if (!authStore.isAuthenticated || !authStore.user) {
-        return;
+        if (!authStore.sessionResolved) {
+            await authStore.fetchUser();
+        }
+        if (!authStore.isAuthenticated || !authStore.user) {
+            return;
+        }
     }
 
     const userRoleId = String(authStore.user.role_id);
