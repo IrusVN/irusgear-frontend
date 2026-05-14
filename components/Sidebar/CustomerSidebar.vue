@@ -33,7 +33,8 @@
                 :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'"
                 @focus="openSearchDropdown"
                 @click="openSearchDropdown"
-                @keydown.esc.prevent="isSearchDropdownOpen = false"
+                @input="onSearchInput"
+                @keydown.esc.prevent="isSearchDropdownOpen = false; searchQuery = ''; headerSearchKeyword = ''"
               >
             </form>
 
@@ -364,6 +365,7 @@
           v-model:open="isSearchDropdownOpen"
           :anchor-rect="searchAnchorRect"
           :mode="searchDropdownMode"
+          :search-query="searchQuery"
         />
 
         <div
@@ -376,6 +378,25 @@
 
       </nav>
     </div>
+
+    <!-- Mobile Top Navigation -->
+    <header
+      ref="mobileTopNavRef"
+      class="mobile-top-nav d-md-none"
+      :class="{ 'is-scrolled': isMobileTopNavScrolled }"
+    >
+      <NuxtLink
+        :to="localePath('/')"
+        class="mobile-top-nav__brand"
+        aria-label="IrusGear"
+      >
+        <img
+          src="@/public/image/logo-irusgear-white.png"
+          alt="IrusGear"
+          class="mobile-top-nav__logo"
+        >
+      </NuxtLink>
+    </header>
 
     <!-- Mobile Bottom Navigation -->
     <div class="mobile-bottom-nav d-md-none">
@@ -511,6 +532,7 @@ import { useHomeStore } from '@/stores/homeStore'
 import { useAuthStore } from '@/stores/authStore'
 import { useCartStore } from '@/stores/cartStore'
 import { useWishlistStore } from '@/stores/wishlistStore'
+import { useSearchStore } from '@/stores/searchStore'
 import { getUserRoleKey } from '@/utils/roleHelper'
 import { useChatbotStore } from '@/stores/chatbotStore'
 
@@ -519,6 +541,7 @@ const cartStore = useCartStore()
 const homeStore = useHomeStore()
 const wishlistStore = useWishlistStore()
 const chatbotStore = useChatbotStore()
+const searchStore = useSearchStore()
 const { user } = storeToRefs(auth)
 const { itemCount } = storeToRefs(cartStore)
 const { itemCount: wishlistCount } = storeToRefs(wishlistStore)
@@ -527,11 +550,13 @@ const localePath = useLocalePath()
 const route = useRoute()
 const { t, locale } = useI18n()
 const customerSidebarWrapRef = ref(null)
+const mobileTopNavRef = ref(null)
 const desktopSearchRef = ref(null)
 const productsButtonRef = ref(null)
 const productsDropdownRef = ref(null)
 const isHeaderCategoryMenuOpen = ref(false)
 const isSecondaryNavHidden = ref(false)
+const isMobileTopNavScrolled = ref(false)
 const isMobileFabOpen = ref(false)
 const isSearchDropdownOpen = ref(false)
 const searchDropdownMode = ref('desktop')
@@ -539,8 +564,10 @@ const headerSearchKeyword = ref('')
 const searchAnchorRect = ref(null)
 const isCartDropdownOpen = ref(false)
 const isNotiDropdownOpen = ref(false)
+const searchQuery = ref('')
 let customerSidebarResizeObserver = null
 let customerSidebarOffsetFrame = null
+let _searchDebounceTimer = null
 
 const normalizePath = (value) => String(value || '').replace(/\/+$/, '') || '/'
 const homePath = computed(() => localePath('/'))
@@ -576,10 +603,25 @@ const closeHeaderCategoryMenu = () => {
 const syncCustomerSidebarOffset = () => {
   if (typeof document === 'undefined') return
 
-  const sidebarWrapEl = customerSidebarWrapRef.value
-  const nextOffset = sidebarWrapEl instanceof HTMLElement
-    ? Math.ceil(sidebarWrapEl.getBoundingClientRect().bottom + 2)
-    : 0
+  const getVisibleElementOffset = (element) => {
+    if (!(element instanceof HTMLElement)) return 0
+
+    const styles = typeof window !== 'undefined'
+      ? window.getComputedStyle(element)
+      : null
+
+    if (styles?.display === 'none' || styles?.visibility === 'hidden') {
+      return 0
+    }
+
+    const rect = element.getBoundingClientRect()
+    if (rect.width === 0 && rect.height === 0) return 0
+
+    return Math.ceil(rect.bottom + 2)
+  }
+
+  const nextOffset = getVisibleElementOffset(mobileTopNavRef.value)
+    || getVisibleElementOffset(customerSidebarWrapRef.value)
 
   document.documentElement.style.setProperty('--customer-sidebar-offset', `${nextOffset}px`)
 
@@ -663,6 +705,24 @@ const openSearchDropdown = () => {
   isSearchDropdownOpen.value = true
 }
 
+const onSearchInput = (e) => {
+  const query = e.target.value
+  searchQuery.value = query
+
+  clearTimeout(_searchDebounceTimer)
+  _searchDebounceTimer = setTimeout(() => {
+    if (query.length >= 1) {
+      if (!isSearchDropdownOpen.value) {
+        isSearchDropdownOpen.value = true
+        searchDropdownMode.value = 'desktop'
+      }
+      searchStore.fetchSuggestions(query)
+    } else {
+      searchStore.clearSuggestions()
+    }
+  }, 300)
+}
+
 const submitHeaderSearch = async () => {
   const keyword = headerSearchKeyword.value.trim()
 
@@ -671,7 +731,11 @@ const submitHeaderSearch = async () => {
     return
   }
 
+  await searchStore.saveKeyword(keyword)
+
   isSearchDropdownOpen.value = false
+  searchQuery.value = ''
+  headerSearchKeyword.value = ''
 
   await navigateTo({
     path: localePath('/products'),
@@ -728,6 +792,8 @@ const handleDocumentPointerDown = (event) => {
 
     if (!clickedSearch && !clickedSearchPanel) {
       isSearchDropdownOpen.value = false
+      searchQuery.value = ''
+      headerSearchKeyword.value = ''
     }
   }
 
@@ -766,6 +832,11 @@ const syncSecondaryNavVisibility = () => {
   setSecondaryNavHidden(true)
 }
 
+const syncMobileTopNavState = () => {
+  if (typeof window === 'undefined') return
+  isMobileTopNavScrolled.value = window.scrollY > 8
+}
+
 const syncOpenSearchDropdownPosition = () => {
   if (!isSearchDropdownOpen.value || searchDropdownMode.value !== 'desktop') return
   syncSearchAnchorRect()
@@ -781,6 +852,7 @@ watch(
     setSecondaryNavHidden(false)
     await nextTick()
     syncSecondaryNavVisibility()
+    syncMobileTopNavState()
     scheduleCustomerSidebarOffsetSync()
   }
 )
@@ -789,19 +861,27 @@ onMounted(() => {
   if (typeof document === 'undefined' || typeof window === 'undefined') return
   document.addEventListener('pointerdown', handleDocumentPointerDown)
   window.addEventListener('scroll', syncSecondaryNavVisibility, { passive: true })
+  window.addEventListener('scroll', syncMobileTopNavState, { passive: true })
   window.addEventListener('scroll', syncOpenSearchDropdownPosition, { passive: true })
   window.addEventListener('resize', syncSecondaryNavVisibility, { passive: true })
+  window.addEventListener('resize', syncMobileTopNavState, { passive: true })
   window.addEventListener('resize', syncOpenSearchDropdownPosition, { passive: true })
+  window.addEventListener('resize', scheduleCustomerSidebarOffsetSync, { passive: true })
 
   if (typeof ResizeObserver !== 'undefined' && customerSidebarWrapRef.value instanceof HTMLElement) {
     customerSidebarResizeObserver = new ResizeObserver(() => {
       scheduleCustomerSidebarOffsetSync()
     })
     customerSidebarResizeObserver.observe(customerSidebarWrapRef.value)
+
+    if (mobileTopNavRef.value instanceof HTMLElement) {
+      customerSidebarResizeObserver.observe(mobileTopNavRef.value)
+    }
   }
 
   nextTick(() => {
     syncSecondaryNavVisibility()
+    syncMobileTopNavState()
     syncCustomerSidebarOffset()
   })
 })
@@ -810,9 +890,12 @@ onBeforeUnmount(() => {
   if (typeof document === 'undefined' || typeof window === 'undefined') return
   document.removeEventListener('pointerdown', handleDocumentPointerDown)
   window.removeEventListener('scroll', syncSecondaryNavVisibility)
+  window.removeEventListener('scroll', syncMobileTopNavState)
   window.removeEventListener('scroll', syncOpenSearchDropdownPosition)
   window.removeEventListener('resize', syncSecondaryNavVisibility)
+  window.removeEventListener('resize', syncMobileTopNavState)
   window.removeEventListener('resize', syncOpenSearchDropdownPosition)
+  window.removeEventListener('resize', scheduleCustomerSidebarOffsetSync)
 
   if (customerSidebarResizeObserver) {
     customerSidebarResizeObserver.disconnect()
@@ -823,6 +906,8 @@ onBeforeUnmount(() => {
     window.cancelAnimationFrame(customerSidebarOffsetFrame)
     customerSidebarOffsetFrame = null
   }
+
+  clearTimeout(_searchDebounceTimer)
 })
 
 const utilityLinks = computed(() => [
@@ -1235,6 +1320,53 @@ const featuredNavItems = computed(() => [
   }
 }
 
+/* Mobile Top Navigation */
+.mobile-top-nav {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .mobile-top-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1052;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: var(--irus-mobile-top-nav-total-height, calc(64px + env(safe-area-inset-top, 0px)));
+    padding: calc(env(safe-area-inset-top, 0px) + 11px) 20px 12px;
+    background: var(--irus-mobile-top-nav-bg, #000000);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition: border-color 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  .mobile-top-nav.is-scrolled {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  }
+
+  .mobile-top-nav__brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-top-nav__logo {
+    display: block;
+    width: auto;
+    height: 28px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 4px rgba(255, 255, 255, 0.08));
+  }
+}
+
 /* ── Mobile Bottom Capsule Navigation ── */
 .mobile-bottom-nav {
   display: none;
@@ -1243,7 +1375,6 @@ const featuredNavItems = computed(() => [
   left: 20px;
   right: 6px;
   z-index: 1050;
-  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;

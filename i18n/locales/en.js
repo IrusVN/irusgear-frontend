@@ -51,6 +51,11 @@ export default {
     },
     search: {
         confirmClearHistory: "Clear all search history?",
+        suggestionsTitle: "Did you mean",
+        suggestedProducts: "Suggested products",
+        noHistory: "No recent searches yet.",
+        searchHistory: "Search history",
+        trendingSearch: "Trending searches",
     },
     wishlist: {
         title: "My Wishlist",

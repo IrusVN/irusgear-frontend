@@ -17,6 +17,9 @@
   --irus-color-focus-ring: rgba(17, 17, 17, 0.16);
   --irus-color-danger: #b42318;
   --irus-color-danger-soft: #fff1f0;
+  --irus-mobile-top-nav-bg: #000000;
+  --irus-mobile-top-nav-height: 64px;
+  --irus-mobile-top-nav-total-height: calc(var(--irus-mobile-top-nav-height) + env(safe-area-inset-top, 0px));
 }
 
 /* Utility classes */

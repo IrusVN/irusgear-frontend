@@ -7,56 +7,132 @@
       @pointerdown.self="emit('update:open', false)"
     >
       <div class="dropdown-search-desktop-panel" :style="panelStyle">
-        <header class="dropdown-search-header">
-          <h2 id="dropdown-search-title" class="dropdown-search-title">
-            <i class="bi bi-clock-history" aria-hidden="true"></i>
-            <span>{{ labels.historyTitle }}</span>
-          </h2>
-          <button
-            type="button"
-            class="dropdown-search-clear"
-            :disabled="historyItems.length === 0"
-            @click="confirmClearHistory"
-          >
-            <span>{{ labels.clearAll }}</span>
-            <i class="bi bi-trash3" aria-hidden="true"></i>
-          </button>
-        </header>
 
-        <div class="dropdown-search-history" :aria-label="labels.historyTitle">
-          <NuxtLink
-            v-for="item in historyItems"
-            :key="item"
-            :to="buildSearchTo(item)"
-            class="dropdown-search-history-item"
-          >
-            <i class="bi bi-clock-history" aria-hidden="true"></i>
-            <span>{{ item }}</span>
-          </NuxtLink>
-        </div>
-
-        <div class="dropdown-search-trending-title">
-          <span class="dropdown-search-flame" aria-hidden="true">🔥</span>
-          <span>{{ labels.trendingTitle }}</span>
-        </div>
-
-        <div class="dropdown-search-trending" :aria-label="labels.trendingTitle">
-          <NuxtLink
-            v-for="item in trendingItems"
-            :key="item.name"
-            :to="buildSearchTo(item.name)"
-            class="dropdown-search-trending-item"
-          >
-            <span
-              class="dropdown-search-thumb"
-              :class="`dropdown-search-thumb--${item.variant}`"
-              aria-hidden="true"
+        <!-- ── Empty state: history + trending ── -->
+        <template v-if="inputMode === 'empty'">
+          <header class="dropdown-search-header">
+            <h2 id="dropdown-search-title" class="dropdown-search-title">
+              <i class="bi bi-clock-history" aria-hidden="true"></i>
+              <span>{{ labels.historyTitle }}</span>
+            </h2>
+            <button
+              type="button"
+              class="dropdown-search-clear"
+              :disabled="searchStore.history.length === 0"
+              @click="confirmClearHistory"
             >
-              <img v-if="item.image" :src="item.image" :alt="item.name" loading="lazy">
-            </span>
-            <span class="dropdown-search-trending-name">{{ item.name }}</span>
-          </NuxtLink>
-        </div>
+              <span>{{ labels.clearAll }}</span>
+              <i class="bi bi-trash3" aria-hidden="true"></i>
+            </button>
+          </header>
+
+          <div class="dropdown-search-history" :aria-label="labels.historyTitle">
+            <NuxtLink
+              v-for="item in historyItems"
+              :key="item"
+              :to="buildSearchTo(item)"
+              class="dropdown-search-history-item"
+            >
+              <i class="bi bi-clock-history" aria-hidden="true"></i>
+              <span>{{ item }}</span>
+            </NuxtLink>
+            <p v-if="historyItems.length === 0" class="dropdown-search-empty">
+              {{ labels.emptyHistory }}
+            </p>
+          </div>
+
+          <div class="dropdown-search-trending-title">
+            <span class="dropdown-search-flame" aria-hidden="true">🔥</span>
+            <span>{{ labels.trendingTitle }}</span>
+          </div>
+
+          <div class="dropdown-search-trending" :aria-label="labels.trendingTitle">
+            <NuxtLink
+              v-for="item in trendingItems"
+              :key="item.name"
+              :to="buildSearchTo(item.name)"
+              class="dropdown-search-trending-item"
+            >
+              <span
+                class="dropdown-search-thumb"
+                :class="`dropdown-search-thumb--${item.variant}`"
+                aria-hidden="true"
+              >
+                <img v-if="item.image" :src="item.image" :alt="item.name" loading="lazy">
+              </span>
+              <span class="dropdown-search-trending-name">{{ item.name }}</span>
+            </NuxtLink>
+          </div>
+        </template>
+
+        <!-- ── Typing state: suggestions + products ── -->
+        <template v-else>
+          <!-- "Có phải bạn muốn tìm" -->
+          <div v-if="searchStore.suggestions.length > 0" class="dropdown-search-section">
+            <div class="dropdown-search-section-title">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <span>{{ labels.suggestionsTitle }}</span>
+            </div>
+            <div class="dropdown-search-suggestions" :aria-label="labels.suggestionsTitle">
+              <NuxtLink
+                v-for="s in searchStore.suggestions"
+                :key="s.id"
+                :to="s.url || (localePath('/products') + '?search=' + encodeURIComponent(s.label || s.keyword))"
+                class="dropdown-search-suggestion-item"
+                @click="emit('update:open', false)"
+              >
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <span class="dropdown-search-suggestion-label">{{ s.label || s.keyword }}</span>
+                <img
+                  v-if="s.image || s.img"
+                  :src="s.image || s.img"
+                  :alt="s.label"
+                  class="dropdown-search-suggestion-img"
+                  loading="lazy"
+                >
+              </NuxtLink>
+            </div>
+          </div>
+
+          <!-- "Sản phẩm gợi ý" -->
+          <div v-if="searchStore.products.length > 0" class="dropdown-search-section">
+            <div class="dropdown-search-section-title">
+              <span class="dropdown-search-flame" aria-hidden="true">🔥</span>
+              <span>{{ labels.suggestedProducts }}</span>
+            </div>
+            <div class="dropdown-search-products" :aria-label="labels.suggestedProducts">
+              <NuxtLink
+                v-for="p in searchStore.products"
+                :key="p.id"
+                :to="p.url || localePath('/products/' + p.slug)"
+                class="dropdown-search-product-item"
+                @click="emit('update:open', false)"
+              >
+                <img
+                  :src="p.image || p.img || 'https://placehold.co/80x80/f5f5f5/999?text=IMG'"
+                  :alt="p.name"
+                  class="dropdown-search-product-img"
+                  loading="lazy"
+                >
+                <div class="dropdown-search-product-info">
+                  <span class="dropdown-search-product-name">{{ p.name }}</span>
+                  <div class="dropdown-search-product-prices">
+                    <span class="dropdown-search-price-sale">{{ formatPrice(p.price) }}đ</span>
+                    <span v-if="p.original_price && p.original_price > p.price" class="dropdown-search-price-original">
+                      {{ formatPrice(p.original_price) }}đ
+                    </span>
+                  </div>
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+
+          <!-- No results -->
+          <p v-if="searchStore.suggestions.length === 0 && searchStore.products.length === 0 && !searchStore.suggestionsLoading" class="dropdown-search-empty">
+            {{ labels.emptyHistory }}
+          </p>
+        </template>
+
       </div>
     </div>
 
@@ -114,62 +190,123 @@
 
         <p class="dropdown-search-mobile-hint">{{ labels.mobileHint }}</p>
 
-        <section class="dropdown-search-mobile-section">
-          <header class="dropdown-search-mobile-section-header">
-            <h3 class="dropdown-search-mobile-section-title">
-              <i class="bi bi-clock-history" aria-hidden="true"></i>
-              <span>{{ labels.historyTitle }}</span>
-            </h3>
-            <button
-              type="button"
-              class="dropdown-search-mobile-link"
-              :disabled="historyItems.length === 0"
-              @click="confirmClearHistory"
-            >
-              {{ labels.clearAll }}
-            </button>
-          </header>
-
-          <div v-if="historyItems.length" class="dropdown-search-mobile-history" :aria-label="labels.historyTitle">
-            <NuxtLink
-              v-for="item in historyItems"
-              :key="`mobile-${item}`"
-              :to="buildSearchTo(item)"
-              class="dropdown-search-mobile-history-item"
-            >
-              <i class="bi bi-arrow-up-left" aria-hidden="true"></i>
-              <span>{{ item }}</span>
-            </NuxtLink>
-          </div>
-          <p v-else class="dropdown-search-mobile-empty">{{ labels.emptyHistory }}</p>
-        </section>
-
-        <section class="dropdown-search-mobile-section">
-          <header class="dropdown-search-mobile-section-header">
-            <h3 class="dropdown-search-mobile-section-title">
-              <span class="dropdown-search-flame" aria-hidden="true">🔥</span>
-              <span>{{ labels.trendingTitle }}</span>
-            </h3>
-          </header>
-
-          <div class="dropdown-search-mobile-grid" :aria-label="labels.trendingTitle">
-            <NuxtLink
-              v-for="item in trendingItems"
-              :key="`mobile-card-${item.name}`"
-              :to="buildSearchTo(item.name)"
-              class="dropdown-search-mobile-card"
-            >
-              <span
-                class="dropdown-search-thumb"
-                :class="`dropdown-search-thumb--${item.variant}`"
-                aria-hidden="true"
+        <!-- Mobile: typing state → suggestions + products -->
+        <template v-if="mobileInputMode === 'typing'">
+          <div v-if="searchStore.suggestions.length > 0" class="dropdown-search-mobile-section">
+            <div class="dropdown-search-mobile-section-header">
+              <h3 class="dropdown-search-mobile-section-title">
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <span>{{ labels.suggestionsTitle }}</span>
+              </h3>
+            </div>
+            <div class="dropdown-search-mobile-suggestions">
+              <NuxtLink
+                v-for="s in searchStore.suggestions"
+                :key="`mob-s-${s.id}`"
+                :to="s.url || (localePath('/products') + '?search=' + encodeURIComponent(s.label || s.keyword))"
+                class="dropdown-search-mobile-suggestion-item"
+                @click="emit('update:open', false)"
               >
-                <img v-if="item.image" :src="item.image" :alt="item.name" loading="lazy">
-              </span>
-              <span class="dropdown-search-mobile-card-name">{{ item.name }}</span>
-            </NuxtLink>
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <span>{{ s.label || s.keyword }}</span>
+              </NuxtLink>
+            </div>
           </div>
-        </section>
+
+          <div v-if="searchStore.products.length > 0" class="dropdown-search-mobile-section">
+            <div class="dropdown-search-mobile-section-header">
+              <h3 class="dropdown-search-mobile-section-title">
+                <span class="dropdown-search-flame" aria-hidden="true">🔥</span>
+                <span>{{ labels.suggestedProducts }}</span>
+              </h3>
+            </div>
+            <div class="dropdown-search-mobile-grid">
+              <NuxtLink
+                v-for="p in searchStore.products"
+                :key="`mob-p-${p.id}`"
+                :to="p.url || localePath('/products/' + p.slug)"
+                class="dropdown-search-mobile-card"
+                @click="emit('update:open', false)"
+              >
+                <img
+                  :src="p.image || p.img || 'https://placehold.co/80x80/f5f5f5/999?text=IMG'"
+                  :alt="p.name"
+                  class="dropdown-search-mobile-card-img"
+                  loading="lazy"
+                >
+                <div class="dropdown-search-mobile-card-info">
+                  <span class="dropdown-search-mobile-card-name">{{ p.name }}</span>
+                  <div class="dropdown-search-mobile-card-prices">
+                    <span class="dropdown-search-price-sale">{{ formatPrice(p.price) }}đ</span>
+                    <span v-if="p.original_price && p.original_price > p.price" class="dropdown-search-price-original">
+                      {{ formatPrice(p.original_price) }}đ
+                    </span>
+                  </div>
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+        </template>
+
+        <!-- Mobile: empty state -->
+        <template v-else>
+          <section class="dropdown-search-mobile-section">
+            <header class="dropdown-search-mobile-section-header">
+              <h3 class="dropdown-search-mobile-section-title">
+                <i class="bi bi-clock-history" aria-hidden="true"></i>
+                <span>{{ labels.historyTitle }}</span>
+              </h3>
+              <button
+                type="button"
+                class="dropdown-search-mobile-link"
+                :disabled="searchStore.history.length === 0"
+                @click="confirmClearHistory"
+              >
+                {{ labels.clearAll }}
+              </button>
+            </header>
+
+            <div v-if="historyItems.length" class="dropdown-search-mobile-history" :aria-label="labels.historyTitle">
+              <NuxtLink
+                v-for="item in historyItems"
+                :key="`mobile-${item}`"
+                :to="buildSearchTo(item)"
+                class="dropdown-search-mobile-history-item"
+              >
+                <i class="bi bi-arrow-up-left" aria-hidden="true"></i>
+                <span>{{ item }}</span>
+              </NuxtLink>
+            </div>
+            <p v-else class="dropdown-search-mobile-empty">{{ labels.emptyHistory }}</p>
+          </section>
+
+          <section class="dropdown-search-mobile-section">
+            <header class="dropdown-search-mobile-section-header">
+              <h3 class="dropdown-search-mobile-section-title">
+                <span class="dropdown-search-flame" aria-hidden="true">🔥</span>
+                <span>{{ labels.trendingTitle }}</span>
+              </h3>
+            </header>
+
+            <div class="dropdown-search-mobile-grid" :aria-label="labels.trendingTitle">
+              <NuxtLink
+                v-for="item in trendingItems"
+                :key="`mobile-card-${item.name}`"
+                :to="buildSearchTo(item.name)"
+                class="dropdown-search-mobile-card"
+              >
+                <span
+                  class="dropdown-search-thumb"
+                  :class="`dropdown-search-thumb--${item.variant}`"
+                  aria-hidden="true"
+                >
+                  <img v-if="item.image" :src="item.image" :alt="item.name" loading="lazy">
+                </span>
+                <span class="dropdown-search-mobile-card-name">{{ item.name }}</span>
+              </NuxtLink>
+            </div>
+          </section>
+        </template>
       </div>
     </BottomSheet>
   </Teleport>
@@ -180,27 +317,33 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { navigateTo, useLocalePath, useI18n } from "#imports";
 import { toast } from "vue-sonner";
 import BottomSheet from "@/components/Common/BottomSheet.vue";
+import { useSearchStore } from "@/stores/searchStore";
 
 const props = defineProps({
   open: { type: Boolean, default: false },
   anchorRect: { type: Object, default: null },
   mode: { type: String, default: "desktop" },
+  searchQuery: { type: String, default: "" },
 });
 
 const emit = defineEmits(["update:open"]);
 
 const localePath = useLocalePath();
 const { locale, t } = useI18n();
+const searchStore = useSearchStore();
 const mobileSearchInputRef = ref(null);
 const mobileSearchKeyword = ref("");
 const searchPlaceholder = computed(() => t("home.searchProducts"));
 
-const historyItems = ref([
-  "iPhone 17 Series",
-  "legion loq",
-  "legion R7000",
-  "Lenovo Legion",
-]);
+// 'empty' = history + trending; 'typing' = suggestions + products
+const inputMode = computed(() =>
+  props.searchQuery?.length >= 1 ? 'typing' : 'empty'
+);
+
+// History items from API — empty string keyword = fallback empty
+const historyItems = computed(() =>
+  searchStore.history.map(h => h.keyword)
+);
 
 const labels = computed(() => locale.value === "en" ? {
   historyTitle: "Search history",
@@ -213,6 +356,8 @@ const labels = computed(() => locale.value === "en" ? {
   closeLabel: "Close search",
   clearKeyword: "Clear keyword",
   emptyHistory: "No recent searches yet.",
+  suggestionsTitle: "Did you mean",
+  suggestedProducts: "Suggested products",
 } : {
   historyTitle: "Lịch sử tìm kiếm",
   clearAll: "Xoá tất cả",
@@ -224,6 +369,8 @@ const labels = computed(() => locale.value === "en" ? {
   closeLabel: "Đóng tìm kiếm",
   clearKeyword: "Xoá từ khoá",
   emptyHistory: "Bạn chưa có lượt tìm kiếm gần đây.",
+  suggestionsTitle: "Có phải bạn muốn tìm",
+  suggestedProducts: "Sản phẩm gợi ý",
 });
 
 const panelStyle = computed(() => {
@@ -249,18 +396,9 @@ const panelStyle = computed(() => {
   };
 });
 
-const trendingItems = [
-  { name: "iPhone 17 Series", variant: "iphone-series", image: "/image/dashboard/homehero/swiperslide/690x300_open_iPhone 17e.png" },
-  { name: "Galaxy S26 Ultra", variant: "galaxy", image: "/image/dashboard/homehero/swiperslide/Home(3).png" },
-  { name: "MacBook Pro M5 Pro", variant: "macbook-pro", image: "/image/dashboard/homehero/swiperslide/mbam5homepae.png" },
-  { name: "MacBook Neo", variant: "macbook-neo", image: "/image/dashboard/homehero/swiperslide/690x300_ROI_MacBookNeo.png" },
-  { name: "OPPO Find X9 Ultra", variant: "oppo", image: "/image/dashboard/homehero/swiperslide/oppofingn6.png" },
-  { name: "iPad Air M4", variant: "ipad" },
-  { name: "Samsung Galaxy Watch8", variant: "watch" },
-  { name: "MacBook Air M5", variant: "macbook-air", image: "/image/dashboard/homehero/swiperslide/mbam5homepae.png" },
-  { name: "iPhone 17e", variant: "iphone-17e", image: "/image/dashboard/homehero/swiperslide/690x300_open_iPhone 17e.png" },
-  { name: "Kính thông minh Xiaomi", variant: "glasses" },
-];
+const trendingItems = computed(() =>
+  searchStore.trending.map(keyword => ({ name: keyword }))
+);
 
 const buildSearchTo = (keyword) => ({
   path: localePath("/products"),
@@ -270,13 +408,21 @@ const buildSearchTo = (keyword) => ({
 const confirmClearHistory = () => {
   toast(t('search.confirmClearHistory'), {
     cancel: { label: t('common.confirmNo'), onClick: () => {} },
-    action: { label: t('common.confirmYes'), onClick: () => { historyItems.value = []; } },
+    action: { label: t('common.confirmYes'), onClick: () => searchStore.clearHistory() },
   });
+};
+
+// Format VND price from raw integer
+const formatPrice = (price) => {
+  if (price == null) return ''
+  return new Intl.NumberFormat('vi-VN').format(price)
 };
 
 const submitMobileSearch = async () => {
   const keyword = mobileSearchKeyword.value.trim();
   if (!keyword) return;
+  await searchStore.saveKeyword(keyword);
+  mobileSearchKeyword.value = "";
   emit("update:open", false);
   await navigateTo(buildSearchTo(keyword));
 };
@@ -290,8 +436,27 @@ watch([() => props.mode, () => props.open], async ([nextMode, isOpen]) => {
   }
 });
 
+// Mobile autocomplete — debounced
+const mobileInputMode = computed(() =>
+  mobileSearchKeyword.value.length >= 1 ? 'typing' : 'empty'
+)
+
+let _mobileSearchTimer = null
+watch(mobileSearchKeyword, (query) => {
+  clearTimeout(_mobileSearchTimer)
+  _mobileSearchTimer = setTimeout(() => {
+    if (query.length >= 1) {
+      searchStore.fetchSuggestions(query)
+    } else {
+      searchStore.clearSuggestions()
+    }
+  }, 300)
+})
+
 onBeforeUnmount(() => {
   mobileSearchKeyword.value = "";
+  searchStore.clearSuggestions();
+  clearTimeout(_mobileSearchTimer);
 });
 </script>
 
@@ -753,7 +918,189 @@ onBeforeUnmount(() => {
   .dropdown-search-mobile-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 380px) {
-  .dropdown-search-mobile-grid { grid-template-columns: 1fr; }
+/* ── New: section titles ── */
+.dropdown-search-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
+
+.dropdown-search-section-title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  color: #111111;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dropdown-search-section-title i { color: #d70018; font-size: 13px; }
+
+/* ── New: empty state ── */
+.dropdown-search-empty {
+  margin: 0;
+  padding: 12px 4px;
+  color: #70747d;
+  font-size: 13px;
+}
+
+/* ── New: suggestions (typing state) ── */
+.dropdown-search-suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  padding: 1px 6px 0 8px;
+}
+
+.dropdown-search-suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 36px;
+  padding: 4px 4px;
+  border-radius: 4px;
+  color: #30343a;
+  font-size: 14px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.dropdown-search-suggestion-item:hover { background: #f7f7f7; color: #222222; }
+.dropdown-search-suggestion-item i { color: #c7cbd1; font-size: 14px; flex-shrink: 0; }
+.dropdown-search-suggestion-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dropdown-search-suggestion-img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 3px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+/* ── New: products (typing state) ── */
+.dropdown-search-products {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown-search-product-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.dropdown-search-product-item:hover { background: #f7f7f7; }
+.dropdown-search-product-img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,.06);
+  flex-shrink: 0;
+}
+
+.dropdown-search-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.dropdown-search-product-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #202124;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.dropdown-search-product-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.dropdown-search-price-sale {
+  font-size: 14px;
+  font-weight: 700;
+  color: #d70018;
+}
+
+.dropdown-search-price-original {
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* ── Mobile suggestions ── */
+.dropdown-search-mobile-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dropdown-search-mobile-suggestion-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e4e4e7;
+  border-radius: 999px;
+  background: #fff;
+  color: #52525b;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.dropdown-search-mobile-suggestion-item i { color: #a1a1aa; font-size: 13px; }
+
+/* ── Mobile product card in grid ── */
+.dropdown-search-mobile-card-img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #ececf1;
+  flex-shrink: 0;
+}
+
+.dropdown-search-mobile-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.dropdown-search-mobile-card-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.dropdown-search-mobile-card .dropdown-search-price-sale {
+  font-size: 13px;
+}
+
+.dropdown-search-mobile-card .dropdown-search-price-original {
+  font-size: 11px;
+}
+
+/* (duplicate removed) */
 </style>

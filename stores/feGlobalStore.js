@@ -271,6 +271,91 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       error.value = null;
     };
 
+    // POST với subPath riêng (cho POST /search/history)
+    const createItemWithPath = async (subPath, payload) => {
+      ui.isCreating = true;
+      try {
+        const url = `${config.public.apiBaseUrl}/${subPath}`;
+        const res = await fetch(url, {
+          method: "POST",
+          credentials: "include",
+          headers: buildHeaders(),
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          let errorBody = {};
+          try { errorBody = await res.json(); } catch (_) {}
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
+          err.data = errorBody;
+          throw err;
+        }
+        return await res.json();
+      } finally {
+        ui.isCreating = false;
+      }
+    };
+
+    // GET với custom headers (cho GET /search/history với X-Device-Id)
+    const fetchWithHeaders = async (subPath, params = {}, extraHeaders = {}) => {
+      ui.isLoading = true;
+      try {
+        const query = new URLSearchParams(params).toString();
+        const url = `${config.public.apiBaseUrl}/${subPath}${query ? `?${query}` : ''}`;
+        const res = await fetch(url, {
+          credentials: "include",
+          headers: buildHeaders(extraHeaders),
+        });
+
+        if (res.status === 401) {
+          auth.logout();
+          return null;
+        }
+
+        if (!res.ok) {
+          let errorBody = {};
+          try { errorBody = await res.json(); } catch (_) {}
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
+          err.data = errorBody;
+          throw err;
+        }
+
+        return await res.json();
+      } catch (e) {
+        error.value = e.message;
+        return null;
+      } finally {
+        ui.isLoading = false;
+      }
+    };
+
+    // DELETE với custom headers (cho DELETE /search/history/{id})
+    const deleteWithHeaders = async (subPath, extraHeaders = {}) => {
+      ui.isDeleting = true;
+      try {
+        const url = `${config.public.apiBaseUrl}/${subPath}`;
+        const res = await fetch(url, {
+          method: "DELETE",
+          credentials: "include",
+          headers: buildHeaders(extraHeaders),
+        });
+
+        if (!res.ok) {
+          let errorBody = {};
+          try { errorBody = await res.json(); } catch (_) {}
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
+          err.data = errorBody;
+          throw err;
+        }
+        return await res.json();
+      } finally {
+        ui.isDeleting = false;
+      }
+    };
+
     return {
       items,
       error,
@@ -284,5 +369,8 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       patchItem,
       deleteItem,
       reset,
+      createItemWithPath,
+      fetchWithHeaders,
+      deleteWithHeaders,
     };
 });

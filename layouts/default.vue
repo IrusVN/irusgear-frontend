@@ -27,9 +27,11 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 import AddToCartSheet from '@/components/Cart/AddToCartSheet.vue'
 import { useCartStore } from '@/stores/cartStore'
 import { useAuthStore } from '@/stores/authStore'
+import { useSearchStore } from '@/stores/searchStore'
 
 const cartStore = useCartStore()
 const authStore = useAuthStore()
+const searchStore = useSearchStore()
 
 onMounted(() => {
     if (!authStore.sessionResolved && !authStore.sessionLoading) {
@@ -38,6 +40,10 @@ onMounted(() => {
 
     // fetchCart có guard hydrated/isFetchingCart bên trong — gọi nhiều lần vẫn an toàn.
     cartStore.fetchCart({ silent: true }).catch(() => {})
+
+    // Fetch search history + trending once on app load (like /me and /cart)
+    searchStore.fetchHistory()
+    searchStore.fetchTrending()
 })
 </script>
 
@@ -61,6 +67,7 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
     .main-with-customer-sidebar {
+        padding-top: var(--irus-mobile-top-nav-total-height, calc(64px + env(safe-area-inset-top, 0px)));
         padding-bottom: 100px;
     }
 }
