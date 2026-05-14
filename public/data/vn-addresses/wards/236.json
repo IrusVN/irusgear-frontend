@@ -1,0 +1,86 @@
+[
+  {
+    "code": "08443",
+    "name": "Bắc Sơn",
+    "full_name": "Xã Bắc Sơn",
+    "type": "Xã Bắc",
+    "district_code": "236"
+  },
+  {
+    "code": "08491",
+    "name": "Dân Quyền",
+    "full_name": "Xã Dân Quyền",
+    "type": "Xã Dân",
+    "district_code": "236"
+  },
+  {
+    "code": "08482",
+    "name": "Dị Nậu",
+    "full_name": "Xã Dị Nậu",
+    "type": "Xã Dị",
+    "district_code": "236"
+  },
+  {
+    "code": "08440",
+    "name": "Hiền Quan",
+    "full_name": "Xã Hiền Quan",
+    "type": "Xã Hiền",
+    "district_code": "236"
+  },
+  {
+    "code": "08434",
+    "name": "Hưng Hoá",
+    "full_name": "Thị trấn Hưng Hoá",
+    "type": "Thị trấn Hưng",
+    "district_code": "236"
+  },
+  {
+    "code": "08473",
+    "name": "Hương Nộn",
+    "full_name": "Xã Hương Nộn",
+    "type": "Xã Hương",
+    "district_code": "236"
+  },
+  {
+    "code": "08461",
+    "name": "Lam Sơn",
+    "full_name": "Xã Lam Sơn",
+    "type": "Xã Lam",
+    "district_code": "236"
+  },
+  {
+    "code": "08470",
+    "name": "Quang Húc",
+    "full_name": "Xã Quang Húc",
+    "type": "Xã Quang",
+    "district_code": "236"
+  },
+  {
+    "code": "08476",
+    "name": "Tề Lễ",
+    "full_name": "Xã Tề Lễ",
+    "type": "Xã Tề",
+    "district_code": "236"
+  },
+  {
+    "code": "08446",
+    "name": "Thanh Uyên",
+    "full_name": "Xã Thanh Uyên",
+    "type": "Xã Thanh",
+    "district_code": "236"
+  },
+  {
+    "code": "08479",
+    "name": "Thọ Văn",
+    "full_name": "Xã Thọ Văn",
+    "type": "Xã Thọ",
+    "district_code": "236"
+  },
+  {
+    "code": "08467",
+    "name": "Vạn Xuân",
+    "full_name": "Xã Vạn Xuân",
+    "type": "Xã Vạn",
+    "district_code": "236"
+  }
+]

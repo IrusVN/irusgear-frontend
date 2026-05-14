@@ -1,0 +1,100 @@
+[
+  {
+    "code": "00007",
+    "name": "Cống Vị",
+    "full_name": "Phường Cống Vị",
+    "type": "Phường Cống",
+    "district_code": "001"
+  },
+  {
+    "code": "00031",
+    "name": "Giảng Võ",
+    "full_name": "Phường Giảng Võ",
+    "type": "Phường Giảng",
+    "district_code": "001"
+  },
+  {
+    "code": "00028",
+    "name": "Kim Mã",
+    "full_name": "Phường Kim Mã",
+    "type": "Phường Kim",
+    "district_code": "001"
+  },
+  {
+    "code": "00008",
+    "name": "Liễu Giai",
+    "full_name": "Phường Liễu Giai",
+    "type": "Phường Liễu",
+    "district_code": "001"
+  },
+  {
+    "code": "00016",
+    "name": "Ngọc Hà",
+    "full_name": "Phường Ngọc Hà",
+    "type": "Phường Ngọc",
+    "district_code": "001"
+  },
+  {
+    "code": "00025",
+    "name": "Ngọc Khánh",
+    "full_name": "Phường Ngọc Khánh",
+    "type": "Phường Ngọc",
+    "district_code": "001"
+  },
+  {
+    "code": "00010",
+    "name": "Nguyễn Trung Trực",
+    "full_name": "Phường Nguyễn Trung Trực",
+    "type": "Phường Nguyễn Trung",
+    "district_code": "001"
+  },
+  {
+    "code": "00001",
+    "name": "Phúc Xá",
+    "full_name": "Phường Phúc Xá",
+    "type": "Phường Phúc",
+    "district_code": "001"
+  },
+  {
+    "code": "00013",
+    "name": "Quán Thánh",
+    "full_name": "Phường Quán Thánh",
+    "type": "Phường Quán",
+    "district_code": "001"
+  },
+  {
+    "code": "00034",
+    "name": "Thành Công",
+    "full_name": "Phường Thành Công",
+    "type": "Phường Thành",
+    "district_code": "001"
+  },
+  {
+    "code": "00004",
+    "name": "Trúc Bạch",
+    "full_name": "Phường Trúc Bạch",
+    "type": "Phường Trúc",
+    "district_code": "001"
+  },
+  {
+    "code": "00006",
+    "name": "Vĩnh Phúc",
+    "full_name": "Phường Vĩnh Phúc",
+    "type": "Phường Vĩnh",
+    "district_code": "001"
+  },
+  {
+    "code": "00019",
+    "name": "Điện Biên",
+    "full_name": "Phường Điện Biên",
+    "type": "Phường Điện",
+    "district_code": "001"
+  },
+  {
+    "code": "00022",
+    "name": "Đội Cấn",
+    "full_name": "Phường Đội Cấn",
+    "type": "Phường Đội",
+    "district_code": "001"
+  }
+]

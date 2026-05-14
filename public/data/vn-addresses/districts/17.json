@@ -1,0 +1,72 @@
+[
+  {
+    "code": "154",
+    "name": "Cao Phong",
+    "full_name": "Huyện Cao Phong",
+    "type": "Huyện Cao",
+    "province_code": "17"
+  },
+  {
+    "code": "148",
+    "name": "Hòa Bình",
+    "full_name": "Thành phố Hòa Bình",
+    "type": "Thành phố Hòa",
+    "province_code": "17"
+  },
+  {
+    "code": "153",
+    "name": "Kim Bôi",
+    "full_name": "Huyện Kim Bôi",
+    "type": "Huyện Kim",
+    "province_code": "17"
+  },
+  {
+    "code": "157",
+    "name": "Lạc Sơn",
+    "full_name": "Huyện Lạc Sơn",
+    "type": "Huyện Lạc",
+    "province_code": "17"
+  },
+  {
+    "code": "159",
+    "name": "Lạc Thủy",
+    "full_name": "Huyện Lạc Thủy",
+    "type": "Huyện Lạc",
+    "province_code": "17"
+  },
+  {
+    "code": "152",
+    "name": "Lương Sơn",
+    "full_name": "Huyện Lương Sơn",
+    "type": "Huyện Lương",
+    "province_code": "17"
+  },
+  {
+    "code": "156",
+    "name": "Mai Châu",
+    "full_name": "Huyện Mai Châu",
+    "type": "Huyện Mai",
+    "province_code": "17"
+  },
+  {
+    "code": "155",
+    "name": "Tân Lạc",
+    "full_name": "Huyện Tân Lạc",
+    "type": "Huyện Tân",
+    "province_code": "17"
+  },
+  {
+    "code": "158",
+    "name": "Yên Thủy",
+    "full_name": "Huyện Yên Thủy",
+    "type": "Huyện Yên",
+    "province_code": "17"
+  },
+  {
+    "code": "150",
+    "name": "Đà Bắc",
+    "full_name": "Huyện Đà Bắc",
+    "type": "Huyện Đà",
+    "province_code": "17"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "20364",
+    "name": "Phú Thịnh",
+    "full_name": "Thị trấn Phú Thịnh",
+    "type": "Thị trấn Phú",
+    "district_code": "518"
+  },
+  {
+    "code": "20368",
+    "name": "Tam An",
+    "full_name": "Xã Tam An",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20392",
+    "name": "Tam Dân",
+    "full_name": "Xã Tam Dân",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20395",
+    "name": "Tam Lãnh",
+    "full_name": "Xã Tam Lãnh",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20377",
+    "name": "Tam Lộc",
+    "full_name": "Xã Tam Lộc",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20380",
+    "name": "Tam Phước",
+    "full_name": "Xã Tam Phước",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20386",
+    "name": "Tam Thái",
+    "full_name": "Xã Tam Thái",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20365",
+    "name": "Tam Thành",
+    "full_name": "Xã Tam Thành",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20383",
+    "name": "Tam Vinh",
+    "full_name": "Xã Tam Vinh",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20387",
+    "name": "Tam Đại",
+    "full_name": "Xã Tam Đại",
+    "type": "Xã Tam",
+    "district_code": "518"
+  },
+  {
+    "code": "20374",
+    "name": "Tam Đàn",
+    "full_name": "Xã Tam Đàn",
+    "type": "Xã Tam",
+    "district_code": "518"
+  }
+]

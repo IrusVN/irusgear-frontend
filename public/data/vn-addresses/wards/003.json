@@ -1,0 +1,58 @@
+[
+  {
+    "code": "00109",
+    "name": "Bưởi",
+    "full_name": "Phường Bưởi",
+    "type": "Phường",
+    "district_code": "003"
+  },
+  {
+    "code": "00094",
+    "name": "Nhật Tân",
+    "full_name": "Phường Nhật Tân",
+    "type": "Phường Nhật",
+    "district_code": "003"
+  },
+  {
+    "code": "00091",
+    "name": "Phú Thượng",
+    "full_name": "Phường Phú Thượng",
+    "type": "Phường Phú",
+    "district_code": "003"
+  },
+  {
+    "code": "00100",
+    "name": "Quảng An",
+    "full_name": "Phường Quảng An",
+    "type": "Phường Quảng",
+    "district_code": "003"
+  },
+  {
+    "code": "00112",
+    "name": "Thụy Khuê",
+    "full_name": "Phường Thụy Khuê",
+    "type": "Phường Thụy",
+    "district_code": "003"
+  },
+  {
+    "code": "00097",
+    "name": "Tứ Liên",
+    "full_name": "Phường Tứ Liên",
+    "type": "Phường Tứ",
+    "district_code": "003"
+  },
+  {
+    "code": "00103",
+    "name": "Xuân La",
+    "full_name": "Phường Xuân La",
+    "type": "Phường Xuân",
+    "district_code": "003"
+  },
+  {
+    "code": "00106",
+    "name": "Yên Phụ",
+    "full_name": "Phường Yên Phụ",
+    "type": "Phường Yên",
+    "district_code": "003"
+  }
+]

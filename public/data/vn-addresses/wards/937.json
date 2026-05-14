@@ -1,0 +1,65 @@
+[
+  {
+    "code": "31473",
+    "name": "Bình Thạnh",
+    "full_name": "Phường Bình Thạnh",
+    "type": "Phường Bình",
+    "district_code": "937"
+  },
+  {
+    "code": "31474",
+    "name": "Long Bình",
+    "full_name": "Xã Long Bình",
+    "type": "Xã Long",
+    "district_code": "937"
+  },
+  {
+    "code": "31480",
+    "name": "Long Phú",
+    "full_name": "Xã Long Phú",
+    "type": "Xã Long",
+    "district_code": "937"
+  },
+  {
+    "code": "31477",
+    "name": "Long Trị",
+    "full_name": "Xã Long Trị",
+    "type": "Xã Long",
+    "district_code": "937"
+  },
+  {
+    "code": "31478",
+    "name": "Long Trị A",
+    "full_name": "Xã Long Trị A",
+    "type": "Xã Long Trị",
+    "district_code": "937"
+  },
+  {
+    "code": "31481",
+    "name": "Tân Phú",
+    "full_name": "Xã Tân Phú",
+    "type": "Xã Tân",
+    "district_code": "937"
+  },
+  {
+    "code": "31471",
+    "name": "Thuận An",
+    "full_name": "Phường Thuận An",
+    "type": "Phường Thuận",
+    "district_code": "937"
+  },
+  {
+    "code": "31472",
+    "name": "Trà Lồng",
+    "full_name": "Phường Trà Lồng",
+    "type": "Phường Trà",
+    "district_code": "937"
+  },
+  {
+    "code": "31475",
+    "name": "Vĩnh Tường",
+    "full_name": "Phường Vĩnh Tường",
+    "type": "Phường Vĩnh",
+    "district_code": "937"
+  }
+]

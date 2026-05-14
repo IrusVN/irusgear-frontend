@@ -1,0 +1,170 @@
+[
+  {
+    "code": "04645",
+    "name": "An Lương",
+    "full_name": "Xã An Lương",
+    "type": "Xã An",
+    "district_code": "140"
+  },
+  {
+    "code": "04702",
+    "name": "Bình Thuận",
+    "full_name": "Xã Bình Thuận",
+    "type": "Xã Bình",
+    "district_code": "140"
+  },
+  {
+    "code": "04693",
+    "name": "Cát Thịnh",
+    "full_name": "Xã Cát Thịnh",
+    "type": "Xã Cát",
+    "district_code": "140"
+  },
+  {
+    "code": "04699",
+    "name": "Chấn Thịnh",
+    "full_name": "Xã Chấn Thịnh",
+    "type": "Xã Chấn",
+    "district_code": "140"
+  },
+  {
+    "code": "04636",
+    "name": "Gia Hội",
+    "full_name": "Xã Gia Hội",
+    "type": "Xã Gia",
+    "district_code": "140"
+  },
+  {
+    "code": "04708",
+    "name": "Minh An",
+    "full_name": "Xã Minh An",
+    "type": "Xã Minh",
+    "district_code": "140"
+  },
+  {
+    "code": "04633",
+    "name": "Nậm Búng",
+    "full_name": "Xã Nậm Búng",
+    "type": "Xã Nậm",
+    "district_code": "140"
+  },
+  {
+    "code": "04648",
+    "name": "Nậm Lành",
+    "full_name": "Xã Nậm Lành",
+    "type": "Xã Nậm",
+    "district_code": "140"
+  },
+  {
+    "code": "04642",
+    "name": "Nậm Mười",
+    "full_name": "Xã Nậm Mười",
+    "type": "Xã Nậm",
+    "district_code": "140"
+  },
+  {
+    "code": "04666",
+    "name": "Nghĩa Sơn",
+    "full_name": "Xã Nghĩa Sơn",
+    "type": "Xã Nghĩa",
+    "district_code": "140"
+  },
+  {
+    "code": "04711",
+    "name": "Nghĩa Tâm",
+    "full_name": "Xã Nghĩa Tâm",
+    "type": "Xã Nghĩa",
+    "district_code": "140"
+  },
+  {
+    "code": "04621",
+    "name": "NT Liên Sơn",
+    "full_name": "Thị trấn NT Liên Sơn",
+    "type": "Thị trấn NT Liên",
+    "district_code": "140"
+  },
+  {
+    "code": "04627",
+    "name": "NT Trần Phú",
+    "full_name": "Thị trấn NT Trần Phú",
+    "type": "Thị trấn NT Trần",
+    "district_code": "140"
+  },
+  {
+    "code": "04651",
+    "name": "Sơn Lương",
+    "full_name": "Xã Sơn Lương",
+    "type": "Xã Sơn",
+    "district_code": "140"
+  },
+  {
+    "code": "04672",
+    "name": "Sơn Thịnh",
+    "full_name": "Thị trấn Sơn Thịnh",
+    "type": "Thị trấn Sơn",
+    "district_code": "140"
+  },
+  {
+    "code": "04639",
+    "name": "Sùng Đô",
+    "full_name": "Xã Sùng Đô",
+    "type": "Xã Sùng",
+    "district_code": "140"
+  },
+  {
+    "code": "04669",
+    "name": "Suối Bu",
+    "full_name": "Xã Suối Bu",
+    "type": "Xã Suối",
+    "district_code": "140"
+  },
+  {
+    "code": "04657",
+    "name": "Suối Giàng",
+    "full_name": "Xã Suối Giàng",
+    "type": "Xã Suối",
+    "district_code": "140"
+  },
+  {
+    "code": "04654",
+    "name": "Suối Quyền",
+    "full_name": "Xã Suối Quyền",
+    "type": "Xã Suối",
+    "district_code": "140"
+  },
+  {
+    "code": "04696",
+    "name": "Tân Thịnh",
+    "full_name": "Xã Tân Thịnh",
+    "type": "Xã Tân",
+    "district_code": "140"
+  },
+  {
+    "code": "04705",
+    "name": "Thượng Bằng La",
+    "full_name": "Xã Thượng Bằng La",
+    "type": "Xã Thượng Bằng",
+    "district_code": "140"
+  },
+  {
+    "code": "04630",
+    "name": "Tú Lệ",
+    "full_name": "Xã Tú Lệ",
+    "type": "Xã Tú",
+    "district_code": "140"
+  },
+  {
+    "code": "04687",
+    "name": "Đại Lịch",
+    "full_name": "Xã Đại Lịch",
+    "type": "Xã Đại",
+    "district_code": "140"
+  },
+  {
+    "code": "04690",
+    "name": "Đồng Khê",
+    "full_name": "Xã Đồng Khê",
+    "type": "Xã Đồng",
+    "district_code": "140"
+  }
+]

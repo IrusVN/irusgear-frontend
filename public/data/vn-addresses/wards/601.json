@@ -1,0 +1,72 @@
+[
+  {
+    "code": "23266",
+    "name": "Sơn Mỹ",
+    "full_name": "Xã Sơn Mỹ",
+    "type": "Xã Sơn",
+    "district_code": "601"
+  },
+  {
+    "code": "23239",
+    "name": "Sông Phan",
+    "full_name": "Xã Sông Phan",
+    "type": "Xã Sông",
+    "district_code": "601"
+  },
+  {
+    "code": "23257",
+    "name": "Tân Hà",
+    "full_name": "Xã Tân Hà",
+    "type": "Xã Tân",
+    "district_code": "601"
+  },
+  {
+    "code": "23230",
+    "name": "Tân Minh",
+    "full_name": "Thị trấn Tân Minh",
+    "type": "Thị trấn Tân",
+    "district_code": "601"
+  },
+  {
+    "code": "23236",
+    "name": "Tân Nghĩa",
+    "full_name": "Thị trấn Tân Nghĩa",
+    "type": "Thị trấn Tân",
+    "district_code": "601"
+  },
+  {
+    "code": "23242",
+    "name": "Tân Phúc",
+    "full_name": "Xã Tân Phúc",
+    "type": "Xã Tân",
+    "district_code": "601"
+  },
+  {
+    "code": "23254",
+    "name": "Tân Thắng",
+    "full_name": "Xã Tân Thắng",
+    "type": "Xã Tân",
+    "district_code": "601"
+  },
+  {
+    "code": "23260",
+    "name": "Tân Xuân",
+    "full_name": "Xã Tân Xuân",
+    "type": "Xã Tân",
+    "district_code": "601"
+  },
+  {
+    "code": "23251",
+    "name": "Tân Đức",
+    "full_name": "Xã Tân Đức",
+    "type": "Xã Tân",
+    "district_code": "601"
+  },
+  {
+    "code": "23255",
+    "name": "Thắng Hải",
+    "full_name": "Xã Thắng Hải",
+    "type": "Xã Thắng",
+    "district_code": "601"
+  }
+]

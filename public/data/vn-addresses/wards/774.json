@@ -1,0 +1,100 @@
+[
+  {
+    "code": "27325",
+    "name": "01",
+    "full_name": "Phường 01",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27313",
+    "name": "02",
+    "full_name": "Phường 02",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27307",
+    "name": "03",
+    "full_name": "Phường 03",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27301",
+    "name": "04",
+    "full_name": "Phường 04",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27334",
+    "name": "05",
+    "full_name": "Phường 05",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27337",
+    "name": "06",
+    "full_name": "Phường 06",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27322",
+    "name": "07",
+    "full_name": "Phường 07",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27316",
+    "name": "08",
+    "full_name": "Phường 08",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27304",
+    "name": "09",
+    "full_name": "Phường 09",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27340",
+    "name": "10",
+    "full_name": "Phường 10",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27328",
+    "name": "11",
+    "full_name": "Phường 11",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27310",
+    "name": "12",
+    "full_name": "Phường 12",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27343",
+    "name": "13",
+    "full_name": "Phường 13",
+    "type": "Phường",
+    "district_code": "774"
+  },
+  {
+    "code": "27331",
+    "name": "14",
+    "full_name": "Phường 14",
+    "type": "Phường",
+    "district_code": "774"
+  }
+]

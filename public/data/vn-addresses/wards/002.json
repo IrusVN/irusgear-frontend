@@ -1,0 +1,128 @@
+[
+  {
+    "code": "00067",
+    "name": "Chương Dương",
+    "full_name": "Phường Chương Dương",
+    "type": "Phường Chương",
+    "district_code": "002"
+  },
+  {
+    "code": "00073",
+    "name": "Cửa Nam",
+    "full_name": "Phường Cửa Nam",
+    "type": "Phường Cửa",
+    "district_code": "002"
+  },
+  {
+    "code": "00055",
+    "name": "Cửa Đông",
+    "full_name": "Phường Cửa Đông",
+    "type": "Phường Cửa",
+    "district_code": "002"
+  },
+  {
+    "code": "00061",
+    "name": "Hàng Bạc",
+    "full_name": "Phường Hàng Bạc",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00088",
+    "name": "Hàng Bài",
+    "full_name": "Phường Hàng Bài",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00052",
+    "name": "Hàng Bồ",
+    "full_name": "Phường Hàng Bồ",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00076",
+    "name": "Hàng Bông",
+    "full_name": "Phường Hàng Bông",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00046",
+    "name": "Hàng Buồm",
+    "full_name": "Phường Hàng Buồm",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00064",
+    "name": "Hàng Gai",
+    "full_name": "Phường Hàng Gai",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00043",
+    "name": "Hàng Mã",
+    "full_name": "Phường Hàng Mã",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00070",
+    "name": "Hàng Trống",
+    "full_name": "Phường Hàng Trống",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00049",
+    "name": "Hàng Đào",
+    "full_name": "Phường Hàng Đào",
+    "type": "Phường Hàng",
+    "district_code": "002"
+  },
+  {
+    "code": "00058",
+    "name": "Lý Thái Tổ",
+    "full_name": "Phường Lý Thái Tổ",
+    "type": "Phường Lý Thái",
+    "district_code": "002"
+  },
+  {
+    "code": "00085",
+    "name": "Phan Chu Trinh",
+    "full_name": "Phường Phan Chu Trinh",
+    "type": "Phường Phan Chu",
+    "district_code": "002"
+  },
+  {
+    "code": "00037",
+    "name": "Phúc Tân",
+    "full_name": "Phường Phúc Tân",
+    "type": "Phường Phúc",
+    "district_code": "002"
+  },
+  {
+    "code": "00082",
+    "name": "Trần Hưng Đạo",
+    "full_name": "Phường Trần Hưng Đạo",
+    "type": "Phường Trần Hưng",
+    "district_code": "002"
+  },
+  {
+    "code": "00079",
+    "name": "Tràng Tiền",
+    "full_name": "Phường Tràng Tiền",
+    "type": "Phường Tràng",
+    "district_code": "002"
+  },
+  {
+    "code": "00040",
+    "name": "Đồng Xuân",
+    "full_name": "Phường Đồng Xuân",
+    "type": "Phường Đồng",
+    "district_code": "002"
+  }
+]

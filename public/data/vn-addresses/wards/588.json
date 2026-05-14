@@ -1,0 +1,44 @@
+[
+  {
+    "code": "22856",
+    "name": "Bắc Phong",
+    "full_name": "Xã Bắc Phong",
+    "type": "Xã Bắc",
+    "district_code": "588"
+  },
+  {
+    "code": "22853",
+    "name": "Bắc Sơn",
+    "full_name": "Xã Bắc Sơn",
+    "type": "Xã Bắc",
+    "district_code": "588"
+  },
+  {
+    "code": "22840",
+    "name": "Công Hải",
+    "full_name": "Xã Công Hải",
+    "type": "Xã Công",
+    "district_code": "588"
+  },
+  {
+    "code": "22849",
+    "name": "Lợi Hải",
+    "full_name": "Xã Lợi Hải",
+    "type": "Xã Lợi",
+    "district_code": "588"
+  },
+  {
+    "code": "22837",
+    "name": "Phước Chiến",
+    "full_name": "Xã Phước Chiến",
+    "type": "Xã Phước",
+    "district_code": "588"
+  },
+  {
+    "code": "22843",
+    "name": "Phước Kháng",
+    "full_name": "Xã Phước Kháng",
+    "type": "Xã Phước",
+    "district_code": "588"
+  }
+]

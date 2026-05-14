@@ -1,0 +1,65 @@
+[
+  {
+    "code": "844",
+    "name": "Càng Long",
+    "full_name": "Huyện Càng Long",
+    "type": "Huyện Càng",
+    "province_code": "84"
+  },
+  {
+    "code": "845",
+    "name": "Cầu Kè",
+    "full_name": "Huyện Cầu Kè",
+    "type": "Huyện Cầu",
+    "province_code": "84"
+  },
+  {
+    "code": "848",
+    "name": "Cầu Ngang",
+    "full_name": "Huyện Cầu Ngang",
+    "type": "Huyện Cầu",
+    "province_code": "84"
+  },
+  {
+    "code": "847",
+    "name": "Châu Thành",
+    "full_name": "Huyện Châu Thành",
+    "type": "Huyện Châu",
+    "province_code": "84"
+  },
+  {
+    "code": "850",
+    "name": "Duyên Hải",
+    "full_name": "Huyện Duyên Hải",
+    "type": "Huyện Duyên",
+    "province_code": "84"
+  },
+  {
+    "code": "851",
+    "name": "Duyên Hải",
+    "full_name": "Thị xã Duyên Hải",
+    "type": "Thị xã Duyên",
+    "province_code": "84"
+  },
+  {
+    "code": "846",
+    "name": "Tiểu Cần",
+    "full_name": "Huyện Tiểu Cần",
+    "type": "Huyện Tiểu",
+    "province_code": "84"
+  },
+  {
+    "code": "849",
+    "name": "Trà Cú",
+    "full_name": "Huyện Trà Cú",
+    "type": "Huyện Trà",
+    "province_code": "84"
+  },
+  {
+    "code": "842",
+    "name": "Trà Vinh",
+    "full_name": "Thành phố Trà Vinh",
+    "type": "Thành phố Trà",
+    "province_code": "84"
+  }
+]

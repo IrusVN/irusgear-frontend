@@ -1,0 +1,100 @@
+[
+  {
+    "code": "02125",
+    "name": "Bình Văn",
+    "full_name": "Xã Bình Văn",
+    "type": "Xã Bình",
+    "district_code": "065"
+  },
+  {
+    "code": "02104",
+    "name": "Cao Kỳ",
+    "full_name": "Xã Cao Kỳ",
+    "type": "Xã Cao",
+    "district_code": "065"
+  },
+  {
+    "code": "02098",
+    "name": "Hoà Mục",
+    "full_name": "Xã Hoà Mục",
+    "type": "Xã Hoà",
+    "district_code": "065"
+  },
+  {
+    "code": "02095",
+    "name": "Mai Lạp",
+    "full_name": "Xã Mai Lạp",
+    "type": "Xã Mai",
+    "district_code": "065"
+  },
+  {
+    "code": "02122",
+    "name": "Như Cố",
+    "full_name": "Xã Như Cố",
+    "type": "Xã Như",
+    "district_code": "065"
+  },
+  {
+    "code": "02107",
+    "name": "Nông Hạ",
+    "full_name": "Xã Nông Hạ",
+    "type": "Xã Nông",
+    "district_code": "065"
+  },
+  {
+    "code": "02131",
+    "name": "Quảng Chu",
+    "full_name": "Xã Quảng Chu",
+    "type": "Xã Quảng",
+    "district_code": "065"
+  },
+  {
+    "code": "02089",
+    "name": "Tân Sơn",
+    "full_name": "Xã Tân Sơn",
+    "type": "Xã Tân",
+    "district_code": "065"
+  },
+  {
+    "code": "02101",
+    "name": "Thanh Mai",
+    "full_name": "Xã Thanh Mai",
+    "type": "Xã Thanh",
+    "district_code": "065"
+  },
+  {
+    "code": "02113",
+    "name": "Thanh Thịnh",
+    "full_name": "Xã Thanh Thịnh",
+    "type": "Xã Thanh",
+    "district_code": "065"
+  },
+  {
+    "code": "02092",
+    "name": "Thanh Vận",
+    "full_name": "Xã Thanh Vận",
+    "type": "Xã Thanh",
+    "district_code": "065"
+  },
+  {
+    "code": "02110",
+    "name": "Yên Cư",
+    "full_name": "Xã Yên Cư",
+    "type": "Xã Yên",
+    "district_code": "065"
+  },
+  {
+    "code": "02116",
+    "name": "Yên Hân",
+    "full_name": "Xã Yên Hân",
+    "type": "Xã Yên",
+    "district_code": "065"
+  },
+  {
+    "code": "02086",
+    "name": "Đồng Tâm",
+    "full_name": "Thị trấn Đồng Tâm",
+    "type": "Thị trấn Đồng",
+    "district_code": "065"
+  }
+]

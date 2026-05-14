@@ -1,0 +1,79 @@
+[
+  {
+    "code": "23614",
+    "name": "An Bình",
+    "full_name": "Phường An Bình",
+    "type": "Phường An",
+    "district_code": "623"
+  },
+  {
+    "code": "23620",
+    "name": "An Phú",
+    "full_name": "Phường An Phú",
+    "type": "Phường An",
+    "district_code": "623"
+  },
+  {
+    "code": "23630",
+    "name": "An Phước",
+    "full_name": "Phường An Phước",
+    "type": "Phường An",
+    "district_code": "623"
+  },
+  {
+    "code": "23623",
+    "name": "An Tân",
+    "full_name": "Phường An Tân",
+    "type": "Phường An",
+    "district_code": "623"
+  },
+  {
+    "code": "23629",
+    "name": "Cửu An",
+    "full_name": "Xã Cửu An",
+    "type": "Xã Cửu",
+    "district_code": "623"
+  },
+  {
+    "code": "23633",
+    "name": "Ngô Mây",
+    "full_name": "Phường Ngô Mây",
+    "type": "Phường Ngô",
+    "district_code": "623"
+  },
+  {
+    "code": "23632",
+    "name": "Song An",
+    "full_name": "Xã Song An",
+    "type": "Xã Song",
+    "district_code": "623"
+  },
+  {
+    "code": "23617",
+    "name": "Tây Sơn",
+    "full_name": "Phường Tây Sơn",
+    "type": "Phường Tây",
+    "district_code": "623"
+  },
+  {
+    "code": "23635",
+    "name": "Thành An",
+    "full_name": "Xã Thành An",
+    "type": "Xã Thành",
+    "district_code": "623"
+  },
+  {
+    "code": "23626",
+    "name": "Tú An",
+    "full_name": "Xã Tú An",
+    "type": "Xã Tú",
+    "district_code": "623"
+  },
+  {
+    "code": "23627",
+    "name": "Xuân An",
+    "full_name": "Xã Xuân An",
+    "type": "Xã Xuân",
+    "district_code": "623"
+  }
+]

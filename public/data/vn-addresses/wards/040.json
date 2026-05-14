@@ -1,0 +1,79 @@
+[
+  {
+    "code": "01720",
+    "name": "Chu Trinh",
+    "full_name": "Xã Chu Trinh",
+    "type": "Xã Chu",
+    "district_code": "040"
+  },
+  {
+    "code": "01288",
+    "name": "Duyệt Trung",
+    "full_name": "Phường Duyệt Trung",
+    "type": "Phường Duyệt",
+    "district_code": "040"
+  },
+  {
+    "code": "01285",
+    "name": "Hoà Chung",
+    "full_name": "Phường Hoà Chung",
+    "type": "Phường Hoà",
+    "district_code": "040"
+  },
+  {
+    "code": "01273",
+    "name": "Hợp Giang",
+    "full_name": "Phường Hợp Giang",
+    "type": "Phường Hợp",
+    "district_code": "040"
+  },
+  {
+    "code": "01705",
+    "name": "Hưng Đạo",
+    "full_name": "Xã Hưng Đạo",
+    "type": "Xã Hưng",
+    "district_code": "040"
+  },
+  {
+    "code": "01279",
+    "name": "Ngọc Xuân",
+    "full_name": "Phường Ngọc Xuân",
+    "type": "Phường Ngọc",
+    "district_code": "040"
+  },
+  {
+    "code": "01270",
+    "name": "Sông Bằng",
+    "full_name": "Phường Sông Bằng",
+    "type": "Phường Sông",
+    "district_code": "040"
+  },
+  {
+    "code": "01267",
+    "name": "Sông Hiến",
+    "full_name": "Phường Sông Hiến",
+    "type": "Phường Sông",
+    "district_code": "040"
+  },
+  {
+    "code": "01276",
+    "name": "Tân Giang",
+    "full_name": "Phường Tân Giang",
+    "type": "Phường Tân",
+    "district_code": "040"
+  },
+  {
+    "code": "01693",
+    "name": "Vĩnh Quang",
+    "full_name": "Xã Vĩnh Quang",
+    "type": "Xã Vĩnh",
+    "district_code": "040"
+  },
+  {
+    "code": "01282",
+    "name": "Đề Thám",
+    "full_name": "Phường Đề Thám",
+    "type": "Phường Đề",
+    "district_code": "040"
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "code": "25330",
+    "name": "An Khương",
+    "full_name": "Xã An Khương",
+    "type": "Xã An",
+    "district_code": "694"
+  },
+  {
+    "code": "25339",
+    "name": "An Phú",
+    "full_name": "Xã An Phú",
+    "type": "Xã An",
+    "district_code": "694"
+  },
+  {
+    "code": "25349",
+    "name": "Minh Tâm",
+    "full_name": "Xã Minh Tâm",
+    "type": "Xã Minh",
+    "district_code": "694"
+  },
+  {
+    "code": "25348",
+    "name": "Minh Đức",
+    "full_name": "Xã Minh Đức",
+    "type": "Xã Minh",
+    "district_code": "694"
+  },
+  {
+    "code": "25351",
+    "name": "Phước An",
+    "full_name": "Xã Phước An",
+    "type": "Xã Phước",
+    "district_code": "694"
+  },
+  {
+    "code": "25361",
+    "name": "Tân Hiệp",
+    "full_name": "Xã Tân Hiệp",
+    "type": "Xã Tân",
+    "district_code": "694"
+  },
+  {
+    "code": "25345",
+    "name": "Tân Hưng",
+    "full_name": "Xã Tân Hưng",
+    "type": "Xã Tân",
+    "district_code": "694"
+  },
+  {
+    "code": "25357",
+    "name": "Tân Khai",
+    "full_name": "Thị trấn Tân Khai",
+    "type": "Thị trấn Tân",
+    "district_code": "694"
+  },
+  {
+    "code": "25342",
+    "name": "Tân Lợi",
+    "full_name": "Xã Tân Lợi",
+    "type": "Xã Tân",
+    "district_code": "694"
+  },
+  {
+    "code": "25438",
+    "name": "Tân Quan",
+    "full_name": "Xã Tân Quan",
+    "type": "Xã Tân",
+    "district_code": "694"
+  },
+  {
+    "code": "25327",
+    "name": "Thanh An",
+    "full_name": "Xã Thanh An",
+    "type": "Xã Thanh",
+    "district_code": "694"
+  },
+  {
+    "code": "25354",
+    "name": "Thanh Bình",
+    "full_name": "Xã Thanh Bình",
+    "type": "Xã Thanh",
+    "district_code": "694"
+  },
+  {
+    "code": "25360",
+    "name": "Đồng Nơ",
+    "full_name": "Xã Đồng Nơ",
+    "type": "Xã Đồng",
+    "district_code": "694"
+  }
+]

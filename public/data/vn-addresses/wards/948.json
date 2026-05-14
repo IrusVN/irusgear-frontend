@@ -1,0 +1,58 @@
+[
+  {
+    "code": "31732",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "948"
+  },
+  {
+    "code": "31735",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "948"
+  },
+  {
+    "code": "31747",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "948"
+  },
+  {
+    "code": "31744",
+    "name": "Long Bình",
+    "full_name": "Xã Long Bình",
+    "type": "Xã Long",
+    "district_code": "948"
+  },
+  {
+    "code": "31750",
+    "name": "Mỹ Bình",
+    "full_name": "Xã Mỹ Bình",
+    "type": "Xã Mỹ",
+    "district_code": "948"
+  },
+  {
+    "code": "31753",
+    "name": "Mỹ Quới",
+    "full_name": "Xã Mỹ Quới",
+    "type": "Xã Mỹ",
+    "district_code": "948"
+  },
+  {
+    "code": "31741",
+    "name": "Tân Long",
+    "full_name": "Xã Tân Long",
+    "type": "Xã Tân",
+    "district_code": "948"
+  },
+  {
+    "code": "31738",
+    "name": "Vĩnh Quới",
+    "full_name": "Xã Vĩnh Quới",
+    "type": "Xã Vĩnh",
+    "district_code": "948"
+  }
+]

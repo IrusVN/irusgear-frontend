@@ -1,0 +1,86 @@
+[
+  {
+    "code": "02245",
+    "name": "Côn Lôn",
+    "full_name": "Xã Côn Lôn",
+    "type": "Xã Côn",
+    "district_code": "072"
+  },
+  {
+    "code": "02254",
+    "name": "Hồng Thái",
+    "full_name": "Xã Hồng Thái",
+    "type": "Xã Hồng",
+    "district_code": "072"
+  },
+  {
+    "code": "02263",
+    "name": "Khau Tinh",
+    "full_name": "Xã Khau Tinh",
+    "type": "Xã Khau",
+    "district_code": "072"
+  },
+  {
+    "code": "02221",
+    "name": "Na Hang",
+    "full_name": "Thị trấn Na Hang",
+    "type": "Thị trấn Na",
+    "district_code": "072"
+  },
+  {
+    "code": "02281",
+    "name": "Năng Khả",
+    "full_name": "Xã Năng Khả",
+    "type": "Xã Năng",
+    "district_code": "072"
+  },
+  {
+    "code": "02227",
+    "name": "Sinh Long",
+    "full_name": "Xã Sinh Long",
+    "type": "Xã Sinh",
+    "district_code": "072"
+  },
+  {
+    "code": "02275",
+    "name": "Sơn Phú",
+    "full_name": "Xã Sơn Phú",
+    "type": "Xã Sơn",
+    "district_code": "072"
+  },
+  {
+    "code": "02284",
+    "name": "Thanh Tương",
+    "full_name": "Xã Thanh Tương",
+    "type": "Xã Thanh",
+    "district_code": "072"
+  },
+  {
+    "code": "02230",
+    "name": "Thượng Giáp",
+    "full_name": "Xã Thượng Giáp",
+    "type": "Xã Thượng",
+    "district_code": "072"
+  },
+  {
+    "code": "02239",
+    "name": "Thượng Nông",
+    "full_name": "Xã Thượng Nông",
+    "type": "Xã Thượng",
+    "district_code": "072"
+  },
+  {
+    "code": "02248",
+    "name": "Yên Hoa",
+    "full_name": "Xã Yên Hoa",
+    "type": "Xã Yên",
+    "district_code": "072"
+  },
+  {
+    "code": "02260",
+    "name": "Đà Vị",
+    "full_name": "Xã Đà Vị",
+    "type": "Xã Đà",
+    "district_code": "072"
+  }
+]

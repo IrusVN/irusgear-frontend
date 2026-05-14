@@ -1,0 +1,107 @@
+[
+  {
+    "code": "644",
+    "name": "Buôn Hồ",
+    "full_name": "Thị xã Buôn Hồ",
+    "type": "Thị xã Buôn",
+    "province_code": "66"
+  },
+  {
+    "code": "643",
+    "name": "Buôn Ma Thuột",
+    "full_name": "Thành phố Buôn Ma Thuột",
+    "type": "Thành phố Buôn Ma",
+    "province_code": "66"
+  },
+  {
+    "code": "647",
+    "name": "Buôn Đôn",
+    "full_name": "Huyện Buôn Đôn",
+    "type": "Huyện Buôn",
+    "province_code": "66"
+  },
+  {
+    "code": "657",
+    "name": "Cư Kuin",
+    "full_name": "Huyện Cư Kuin",
+    "type": "Huyện Cư",
+    "province_code": "66"
+  },
+  {
+    "code": "648",
+    "name": "Cư M'gar",
+    "full_name": "Huyện Cư M'gar",
+    "type": "Huyện Cư",
+    "province_code": "66"
+  },
+  {
+    "code": "645",
+    "name": "Ea H'leo",
+    "full_name": "Huyện Ea H'leo",
+    "type": "Huyện Ea",
+    "province_code": "66"
+  },
+  {
+    "code": "651",
+    "name": "Ea Kar",
+    "full_name": "Huyện Ea Kar",
+    "type": "Huyện Ea",
+    "province_code": "66"
+  },
+  {
+    "code": "646",
+    "name": "Ea Súp",
+    "full_name": "Huyện Ea Súp",
+    "type": "Huyện Ea",
+    "province_code": "66"
+  },
+  {
+    "code": "655",
+    "name": "Krông A Na",
+    "full_name": "Huyện Krông A Na",
+    "type": "Huyện Krông A",
+    "province_code": "66"
+  },
+  {
+    "code": "653",
+    "name": "Krông Bông",
+    "full_name": "Huyện Krông Bông",
+    "type": "Huyện Krông",
+    "province_code": "66"
+  },
+  {
+    "code": "649",
+    "name": "Krông Búk",
+    "full_name": "Huyện Krông Búk",
+    "type": "Huyện Krông",
+    "province_code": "66"
+  },
+  {
+    "code": "650",
+    "name": "Krông Năng",
+    "full_name": "Huyện Krông Năng",
+    "type": "Huyện Krông",
+    "province_code": "66"
+  },
+  {
+    "code": "654",
+    "name": "Krông Pắc",
+    "full_name": "Huyện Krông Pắc",
+    "type": "Huyện Krông",
+    "province_code": "66"
+  },
+  {
+    "code": "656",
+    "name": "Lắk",
+    "full_name": "Huyện Lắk",
+    "type": "Huyện",
+    "province_code": "66"
+  },
+  {
+    "code": "652",
+    "name": "M'Đrắk",
+    "full_name": "Huyện M'Đrắk",
+    "type": "Huyện",
+    "province_code": "66"
+  }
+]

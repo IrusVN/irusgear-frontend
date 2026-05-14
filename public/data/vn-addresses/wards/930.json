@@ -1,0 +1,65 @@
+[
+  {
+    "code": "31336",
+    "name": "Hoả Lựu",
+    "full_name": "Xã Hoả Lựu",
+    "type": "Xã Hoả",
+    "district_code": "930"
+  },
+  {
+    "code": "31339",
+    "name": "Hoả Tiến",
+    "full_name": "Xã Hoả Tiến",
+    "type": "Xã Hoả",
+    "district_code": "930"
+  },
+  {
+    "code": "31318",
+    "name": "I",
+    "full_name": "Phường I",
+    "type": "Phường",
+    "district_code": "930"
+  },
+  {
+    "code": "31321",
+    "name": "III",
+    "full_name": "Phường III",
+    "type": "Phường",
+    "district_code": "930"
+  },
+  {
+    "code": "31324",
+    "name": "IV",
+    "full_name": "Phường IV",
+    "type": "Phường",
+    "district_code": "930"
+  },
+  {
+    "code": "31338",
+    "name": "Tân Tiến",
+    "full_name": "Xã Tân Tiến",
+    "type": "Xã Tân",
+    "district_code": "930"
+  },
+  {
+    "code": "31327",
+    "name": "V",
+    "full_name": "Phường V",
+    "type": "Phường",
+    "district_code": "930"
+  },
+  {
+    "code": "31333",
+    "name": "Vị Tân",
+    "full_name": "Xã Vị Tân",
+    "type": "Xã Vị",
+    "district_code": "930"
+  },
+  {
+    "code": "31330",
+    "name": "VII",
+    "full_name": "Phường VII",
+    "type": "Phường",
+    "district_code": "930"
+  }
+]

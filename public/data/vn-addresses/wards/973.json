@@ -1,0 +1,51 @@
+[
+  {
+    "code": "32244",
+    "name": "Rạch Gốc",
+    "full_name": "Thị trấn Rạch Gốc",
+    "type": "Thị trấn Rạch",
+    "district_code": "973"
+  },
+  {
+    "code": "32233",
+    "name": "Tam Giang Tây",
+    "full_name": "Xã Tam Giang Tây",
+    "type": "Xã Tam Giang",
+    "district_code": "973"
+  },
+  {
+    "code": "32245",
+    "name": "Tân Ân",
+    "full_name": "Xã Tân Ân",
+    "type": "Xã Tân",
+    "district_code": "973"
+  },
+  {
+    "code": "32236",
+    "name": "Tân Ân Tây",
+    "full_name": "Xã Tân Ân Tây",
+    "type": "Xã Tân Ân",
+    "district_code": "973"
+  },
+  {
+    "code": "32242",
+    "name": "Viên An",
+    "full_name": "Xã Viên An",
+    "type": "Xã Viên",
+    "district_code": "973"
+  },
+  {
+    "code": "32239",
+    "name": "Viên An Đông",
+    "full_name": "Xã Viên An Đông",
+    "type": "Xã Viên An",
+    "district_code": "973"
+  },
+  {
+    "code": "32248",
+    "name": "Đất Mũi",
+    "full_name": "Xã Đất Mũi",
+    "type": "Xã Đất",
+    "district_code": "973"
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "code": "01231",
+    "name": "Bản Rịa",
+    "full_name": "Xã Bản Rịa",
+    "type": "Xã Bản",
+    "district_code": "035"
+  },
+  {
+    "code": "01246",
+    "name": "Bằng Lang",
+    "full_name": "Xã Bằng Lang",
+    "type": "Xã Bằng",
+    "district_code": "035"
+  },
+  {
+    "code": "01252",
+    "name": "Hương Sơn",
+    "full_name": "Xã Hương Sơn",
+    "type": "Xã Hương",
+    "district_code": "035"
+  },
+  {
+    "code": "01258",
+    "name": "Nà Khương",
+    "full_name": "Xã Nà Khương",
+    "type": "Xã Nà",
+    "district_code": "035"
+  },
+  {
+    "code": "01243",
+    "name": "Tân Bắc",
+    "full_name": "Xã Tân Bắc",
+    "type": "Xã Tân",
+    "district_code": "035"
+  },
+  {
+    "code": "01228",
+    "name": "Tân Nam",
+    "full_name": "Xã Tân Nam",
+    "type": "Xã Tân",
+    "district_code": "035"
+  },
+  {
+    "code": "01240",
+    "name": "Tân Trịnh",
+    "full_name": "Xã Tân Trịnh",
+    "type": "Xã Tân",
+    "district_code": "035"
+  },
+  {
+    "code": "01225",
+    "name": "Tiên Nguyên",
+    "full_name": "Xã Tiên Nguyên",
+    "type": "Xã Tiên",
+    "district_code": "035"
+  },
+  {
+    "code": "01261",
+    "name": "Tiên Yên",
+    "full_name": "Xã Tiên Yên",
+    "type": "Xã Tiên",
+    "district_code": "035"
+  },
+  {
+    "code": "01264",
+    "name": "Vĩ Thượng",
+    "full_name": "Xã Vĩ Thượng",
+    "type": "Xã Vĩ",
+    "district_code": "035"
+  },
+  {
+    "code": "01255",
+    "name": "Xuân Giang",
+    "full_name": "Xã Xuân Giang",
+    "type": "Xã Xuân",
+    "district_code": "035"
+  },
+  {
+    "code": "01222",
+    "name": "Xuân Minh",
+    "full_name": "Xã Xuân Minh",
+    "type": "Xã Xuân",
+    "district_code": "035"
+  },
+  {
+    "code": "01237",
+    "name": "Yên Bình",
+    "full_name": "Thị trấn Yên Bình",
+    "type": "Thị trấn Yên",
+    "district_code": "035"
+  },
+  {
+    "code": "01249",
+    "name": "Yên Hà",
+    "full_name": "Xã Yên Hà",
+    "type": "Xã Yên",
+    "district_code": "035"
+  },
+  {
+    "code": "01234",
+    "name": "Yên Thành",
+    "full_name": "Xã Yên Thành",
+    "type": "Xã Yên",
+    "district_code": "035"
+  }
+]

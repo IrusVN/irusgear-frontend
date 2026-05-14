@@ -1,0 +1,79 @@
+[
+  {
+    "code": "23410",
+    "name": "Măng Ri",
+    "full_name": "Xã Măng Ri",
+    "type": "Xã Măng",
+    "district_code": "617"
+  },
+  {
+    "code": "23404",
+    "name": "Ngọc Lây",
+    "full_name": "Xã Ngọc Lây",
+    "type": "Xã Ngọc",
+    "district_code": "617"
+  },
+  {
+    "code": "23413",
+    "name": "Ngọc Yêu",
+    "full_name": "Xã Ngọc Yêu",
+    "type": "Xã Ngọc",
+    "district_code": "617"
+  },
+  {
+    "code": "23446",
+    "name": "Tê Xăng",
+    "full_name": "Xã Tê Xăng",
+    "type": "Xã Tê",
+    "district_code": "617"
+  },
+  {
+    "code": "23422",
+    "name": "Tu Mơ Rông",
+    "full_name": "Xã Tu Mơ Rông",
+    "type": "Xã Tu Mơ",
+    "district_code": "617"
+  },
+  {
+    "code": "23449",
+    "name": "Văn Xuôi",
+    "full_name": "Xã Văn Xuôi",
+    "type": "Xã Văn",
+    "district_code": "617"
+  },
+  {
+    "code": "23425",
+    "name": "Đắk Hà",
+    "full_name": "Xã Đắk Hà",
+    "type": "Xã Đắk",
+    "district_code": "617"
+  },
+  {
+    "code": "23407",
+    "name": "Đắk Na",
+    "full_name": "Xã Đắk Na",
+    "type": "Xã Đắk",
+    "district_code": "617"
+  },
+  {
+    "code": "23417",
+    "name": "Đắk Rơ Ông",
+    "full_name": "Xã Đắk Rơ Ông",
+    "type": "Xã Đắk Rơ",
+    "district_code": "617"
+  },
+  {
+    "code": "23416",
+    "name": "Đắk Sao",
+    "full_name": "Xã Đắk Sao",
+    "type": "Xã Đắk",
+    "district_code": "617"
+  },
+  {
+    "code": "23419",
+    "name": "Đắk Tờ Kan",
+    "full_name": "Xã Đắk Tờ Kan",
+    "type": "Xã Đắk Tờ",
+    "district_code": "617"
+  }
+]

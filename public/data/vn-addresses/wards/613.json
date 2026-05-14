@@ -1,0 +1,65 @@
+[
+  {
+    "code": "23476",
+    "name": "Hiếu",
+    "full_name": "Xã Hiếu",
+    "type": "Xã",
+    "district_code": "613"
+  },
+  {
+    "code": "23458",
+    "name": "Măng Buk",
+    "full_name": "Xã Măng Buk",
+    "type": "Xã Măng",
+    "district_code": "613"
+  },
+  {
+    "code": "23470",
+    "name": "Măng Cành",
+    "full_name": "Xã Măng Cành",
+    "type": "Xã Măng",
+    "district_code": "613"
+  },
+  {
+    "code": "23473",
+    "name": "Măng Đen",
+    "full_name": "Thị trấn Măng Đen",
+    "type": "Thị trấn Măng",
+    "district_code": "613"
+  },
+  {
+    "code": "23464",
+    "name": "Ngok Tem",
+    "full_name": "Xã Ngok Tem",
+    "type": "Xã Ngok",
+    "district_code": "613"
+  },
+  {
+    "code": "23467",
+    "name": "Pờ Ê",
+    "full_name": "Xã Pờ Ê",
+    "type": "Xã Pờ",
+    "district_code": "613"
+  },
+  {
+    "code": "23452",
+    "name": "Đắk Nên",
+    "full_name": "Xã Đắk Nên",
+    "type": "Xã Đắk",
+    "district_code": "613"
+  },
+  {
+    "code": "23455",
+    "name": "Đắk Ring",
+    "full_name": "Xã Đắk Ring",
+    "type": "Xã Đắk",
+    "district_code": "613"
+  },
+  {
+    "code": "23461",
+    "name": "Đắk Tăng",
+    "full_name": "Xã Đắk Tăng",
+    "type": "Xã Đắk",
+    "district_code": "613"
+  }
+]

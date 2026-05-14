@@ -1,0 +1,149 @@
+[
+  {
+    "code": "14056",
+    "name": "Cát Thành",
+    "full_name": "Thị trấn Cát Thành",
+    "type": "Thị trấn Cát",
+    "district_code": "363"
+  },
+  {
+    "code": "14026",
+    "name": "Cổ Lễ",
+    "full_name": "Thị trấn Cổ Lễ",
+    "type": "Thị trấn Cổ",
+    "district_code": "363"
+  },
+  {
+    "code": "14038",
+    "name": "Liêm Hải",
+    "full_name": "Xã Liêm Hải",
+    "type": "Xã Liêm",
+    "district_code": "363"
+  },
+  {
+    "code": "14077",
+    "name": "Ninh Cường",
+    "full_name": "Thị trấn Ninh Cường",
+    "type": "Thị trấn Ninh",
+    "district_code": "363"
+  },
+  {
+    "code": "14029",
+    "name": "Phương Định",
+    "full_name": "Xã Phương Định",
+    "type": "Xã Phương",
+    "district_code": "363"
+  },
+  {
+    "code": "14032",
+    "name": "Trực Chính",
+    "full_name": "Xã Trực Chính",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14074",
+    "name": "Trực Cường",
+    "full_name": "Xã Trực Cường",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14050",
+    "name": "Trực Hưng",
+    "full_name": "Xã Trực Hưng",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14083",
+    "name": "Trực Hùng",
+    "full_name": "Xã Trực Hùng",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14062",
+    "name": "Trực Khang",
+    "full_name": "Xã Trực Khang",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14068",
+    "name": "Trực Mỹ",
+    "full_name": "Xã Trực Mỹ",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14053",
+    "name": "Trực Nội",
+    "full_name": "Xã Trực Nội",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14080",
+    "name": "Trực Thái",
+    "full_name": "Xã Trực Thái",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14086",
+    "name": "Trực Thắng",
+    "full_name": "Xã Trực Thắng",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14059",
+    "name": "Trực Thanh",
+    "full_name": "Xã Trực Thanh",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14065",
+    "name": "Trực Thuận",
+    "full_name": "Xã Trực Thuận",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14041",
+    "name": "Trực Tuấn",
+    "full_name": "Xã Trực Tuấn",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14071",
+    "name": "Trực Đại",
+    "full_name": "Xã Trực Đại",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14047",
+    "name": "Trực Đạo",
+    "full_name": "Xã Trực Đạo",
+    "type": "Xã Trực",
+    "district_code": "363"
+  },
+  {
+    "code": "14035",
+    "name": "Trung Đông",
+    "full_name": "Xã Trung Đông",
+    "type": "Xã Trung",
+    "district_code": "363"
+  },
+  {
+    "code": "14044",
+    "name": "Việt Hùng",
+    "full_name": "Xã Việt Hùng",
+    "type": "Xã Việt",
+    "district_code": "363"
+  }
+]

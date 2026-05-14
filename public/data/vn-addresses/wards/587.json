@@ -1,0 +1,65 @@
+[
+  {
+    "code": "22888",
+    "name": "An Hải",
+    "full_name": "Xã An Hải",
+    "type": "Xã An",
+    "district_code": "587"
+  },
+  {
+    "code": "22870",
+    "name": "Phước Dân",
+    "full_name": "Thị trấn Phước Dân",
+    "type": "Thị trấn Phước",
+    "district_code": "587"
+  },
+  {
+    "code": "22894",
+    "name": "Phước Hải",
+    "full_name": "Xã Phước Hải",
+    "type": "Xã Phước",
+    "district_code": "587"
+  },
+  {
+    "code": "22879",
+    "name": "Phước Hậu",
+    "full_name": "Xã Phước Hậu",
+    "type": "Xã Phước",
+    "district_code": "587"
+  },
+  {
+    "code": "22891",
+    "name": "Phước Hữu",
+    "full_name": "Xã Phước Hữu",
+    "type": "Xã Phước",
+    "district_code": "587"
+  },
+  {
+    "code": "22873",
+    "name": "Phước Sơn",
+    "full_name": "Xã Phước Sơn",
+    "type": "Xã Phước",
+    "district_code": "587"
+  },
+  {
+    "code": "22876",
+    "name": "Phước Thái",
+    "full_name": "Xã Phước Thái",
+    "type": "Xã Phước",
+    "district_code": "587"
+  },
+  {
+    "code": "22882",
+    "name": "Phước Thuận",
+    "full_name": "Xã Phước Thuận",
+    "type": "Xã Phước",
+    "district_code": "587"
+  },
+  {
+    "code": "22912",
+    "name": "Phước Vinh",
+    "full_name": "Xã Phước Vinh",
+    "type": "Xã Phước",
+    "district_code": "587"
+  }
+]

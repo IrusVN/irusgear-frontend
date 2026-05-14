@@ -1,0 +1,79 @@
+[
+  {
+    "code": "25870",
+    "name": "An Bình",
+    "full_name": "Xã An Bình",
+    "type": "Xã An",
+    "district_code": "722"
+  },
+  {
+    "code": "25861",
+    "name": "An Linh",
+    "full_name": "Xã An Linh",
+    "type": "Xã An",
+    "district_code": "722"
+  },
+  {
+    "code": "25867",
+    "name": "An Long",
+    "full_name": "Xã An Long",
+    "type": "Xã An",
+    "district_code": "722"
+  },
+  {
+    "code": "25865",
+    "name": "An Thái",
+    "full_name": "Xã An Thái",
+    "type": "Xã An",
+    "district_code": "722"
+  },
+  {
+    "code": "25885",
+    "name": "Phước Hoà",
+    "full_name": "Xã Phước Hoà",
+    "type": "Xã Phước",
+    "district_code": "722"
+  },
+  {
+    "code": "25864",
+    "name": "Phước Sang",
+    "full_name": "Xã Phước Sang",
+    "type": "Xã Phước",
+    "district_code": "722"
+  },
+  {
+    "code": "25858",
+    "name": "Phước Vĩnh",
+    "full_name": "Thị trấn Phước Vĩnh",
+    "type": "Thị trấn Phước",
+    "district_code": "722"
+  },
+  {
+    "code": "25876",
+    "name": "Tam Lập",
+    "full_name": "Xã Tam Lập",
+    "type": "Xã Tam",
+    "district_code": "722"
+  },
+  {
+    "code": "25873",
+    "name": "Tân Hiệp",
+    "full_name": "Xã Tân Hiệp",
+    "type": "Xã Tân",
+    "district_code": "722"
+  },
+  {
+    "code": "25879",
+    "name": "Tân Long",
+    "full_name": "Xã Tân Long",
+    "type": "Xã Tân",
+    "district_code": "722"
+  },
+  {
+    "code": "25882",
+    "name": "Vĩnh Hoà",
+    "full_name": "Xã Vĩnh Hoà",
+    "type": "Xã Vĩnh",
+    "district_code": "722"
+  }
+]

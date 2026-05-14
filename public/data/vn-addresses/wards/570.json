@@ -1,0 +1,100 @@
+[
+  {
+    "code": "22465",
+    "name": "Cam An Bắc",
+    "full_name": "Xã Cam An Bắc",
+    "type": "Xã Cam An",
+    "district_code": "570"
+  },
+  {
+    "code": "22471",
+    "name": "Cam An Nam",
+    "full_name": "Xã Cam An Nam",
+    "type": "Xã Cam An",
+    "district_code": "570"
+  },
+  {
+    "code": "22444",
+    "name": "Cam Hải Tây",
+    "full_name": "Xã Cam Hải Tây",
+    "type": "Xã Cam Hải",
+    "district_code": "570"
+  },
+  {
+    "code": "22441",
+    "name": "Cam Hải Đông",
+    "full_name": "Xã Cam Hải Đông",
+    "type": "Xã Cam Hải",
+    "district_code": "570"
+  },
+  {
+    "code": "22450",
+    "name": "Cam Hiệp Bắc",
+    "full_name": "Xã Cam Hiệp Bắc",
+    "type": "Xã Cam Hiệp",
+    "district_code": "570"
+  },
+  {
+    "code": "22456",
+    "name": "Cam Hiệp Nam",
+    "full_name": "Xã Cam Hiệp Nam",
+    "type": "Xã Cam Hiệp",
+    "district_code": "570"
+  },
+  {
+    "code": "22438",
+    "name": "Cam Hòa",
+    "full_name": "Xã Cam Hòa",
+    "type": "Xã Cam",
+    "district_code": "570"
+  },
+  {
+    "code": "22459",
+    "name": "Cam Phước Tây",
+    "full_name": "Xã Cam Phước Tây",
+    "type": "Xã Cam Phước",
+    "district_code": "570"
+  },
+  {
+    "code": "22435",
+    "name": "Cam Tân",
+    "full_name": "Xã Cam Tân",
+    "type": "Xã Cam",
+    "district_code": "570"
+  },
+  {
+    "code": "22462",
+    "name": "Cam Thành Bắc",
+    "full_name": "Xã Cam Thành Bắc",
+    "type": "Xã Cam Thành",
+    "district_code": "570"
+  },
+  {
+    "code": "22453",
+    "name": "Cam Đức",
+    "full_name": "Thị trấn Cam Đức",
+    "type": "Thị trấn Cam",
+    "district_code": "570"
+  },
+  {
+    "code": "22447",
+    "name": "Sơn Tân",
+    "full_name": "Xã Sơn Tân",
+    "type": "Xã Sơn",
+    "district_code": "570"
+  },
+  {
+    "code": "22708",
+    "name": "Suối Cát",
+    "full_name": "Xã Suối Cát",
+    "type": "Xã Suối",
+    "district_code": "570"
+  },
+  {
+    "code": "22711",
+    "name": "Suối Tân",
+    "full_name": "Xã Suối Tân",
+    "type": "Xã Suối",
+    "district_code": "570"
+  }
+]

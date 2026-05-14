@@ -1,0 +1,65 @@
+[
+  {
+    "code": "20041",
+    "name": "Bình Thành",
+    "full_name": "Xã Bình Thành",
+    "type": "Xã Bình",
+    "district_code": "480"
+  },
+  {
+    "code": "20035",
+    "name": "Bình Tiến",
+    "full_name": "Xã Bình Tiến",
+    "type": "Xã Bình",
+    "district_code": "480"
+  },
+  {
+    "code": "20026",
+    "name": "Hương Bình",
+    "full_name": "Xã Hương Bình",
+    "type": "Xã Hương",
+    "district_code": "480"
+  },
+  {
+    "code": "20020",
+    "name": "Hương Chữ",
+    "full_name": "Phường Hương Chữ",
+    "type": "Phường Hương",
+    "district_code": "480"
+  },
+  {
+    "code": "20005",
+    "name": "Hương Toàn",
+    "full_name": "Xã Hương Toàn",
+    "type": "Xã Hương",
+    "district_code": "480"
+  },
+  {
+    "code": "20008",
+    "name": "Hương Vân",
+    "full_name": "Phường Hương Vân",
+    "type": "Phường Hương",
+    "district_code": "480"
+  },
+  {
+    "code": "20011",
+    "name": "Hương Văn",
+    "full_name": "Phường Hương Văn",
+    "type": "Phường Hương",
+    "district_code": "480"
+  },
+  {
+    "code": "20017",
+    "name": "Hương Xuân",
+    "full_name": "Phường Hương Xuân",
+    "type": "Phường Hương",
+    "district_code": "480"
+  },
+  {
+    "code": "19996",
+    "name": "Tứ Hạ",
+    "full_name": "Phường Tứ Hạ",
+    "type": "Phường Tứ",
+    "district_code": "480"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "code": "14833",
+    "name": "Bắc Sơn",
+    "full_name": "Phường Bắc Sơn",
+    "type": "Phường Bắc",
+    "district_code": "382"
+  },
+  {
+    "code": "16531",
+    "name": "Quảng Châu",
+    "full_name": "Phường Quảng Châu",
+    "type": "Phường Quảng",
+    "district_code": "382"
+  },
+  {
+    "code": "14839",
+    "name": "Quảng Cư",
+    "full_name": "Phường Quảng Cư",
+    "type": "Phường Quảng",
+    "district_code": "382"
+  },
+  {
+    "code": "16516",
+    "name": "Quảng Hùng",
+    "full_name": "Xã Quảng Hùng",
+    "type": "Xã Quảng",
+    "district_code": "382"
+  },
+  {
+    "code": "16513",
+    "name": "Quảng Minh",
+    "full_name": "Xã Quảng Minh",
+    "type": "Xã Quảng",
+    "district_code": "382"
+  },
+  {
+    "code": "16528",
+    "name": "Quảng Thọ",
+    "full_name": "Phường Quảng Thọ",
+    "type": "Phường Quảng",
+    "district_code": "382"
+  },
+  {
+    "code": "14842",
+    "name": "Quảng Tiến",
+    "full_name": "Phường Quảng Tiến",
+    "type": "Phường Quảng",
+    "district_code": "382"
+  },
+  {
+    "code": "16534",
+    "name": "Quảng Vinh",
+    "full_name": "Phường Quảng Vinh",
+    "type": "Phường Quảng",
+    "district_code": "382"
+  },
+  {
+    "code": "16537",
+    "name": "Quảng Đại",
+    "full_name": "Xã Quảng Đại",
+    "type": "Xã Quảng",
+    "district_code": "382"
+  },
+  {
+    "code": "14830",
+    "name": "Trung Sơn",
+    "full_name": "Phường Trung Sơn",
+    "type": "Phường Trung",
+    "district_code": "382"
+  },
+  {
+    "code": "14836",
+    "name": "Trường Sơn",
+    "full_name": "Phường Trường Sơn",
+    "type": "Phường Trường",
+    "district_code": "382"
+  }
+]

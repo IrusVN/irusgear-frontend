@@ -1,6 +1,6 @@
 <template>
-  <div class="position-relative">
-    <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 position-relative vh-100 overflow-hidden" :class="{ 'sidebar-collapsed': isCollapsed }" >
+  <div class="sidebar-wrapper position-relative">
+    <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 h-100" :class="{ 'sidebar-collapsed': isCollapsed }" >
       <!-- Header -->
       <div class="d-flex align-items-center gap-2 mb-4">
         <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center p-2" >
@@ -53,7 +53,7 @@
         </ul>
 
         <!-- User -->
-        <div class="d-flex align-items-center gap-3 p-3 rounded-3 bg-light">
+        <div class="d-flex align-items-center gap-3 p-3 rounded-3 bg-light position-relative">
           <i class="bi bi-person-circle fs-2 text-dark"></i>
           <div v-if="!isCollapsed" class="flex-grow-1 overflow-hidden">
             <div class="fw-semibold text-dark text-truncate small">
@@ -64,9 +64,37 @@
             </div>
           </div>
 
-          <button v-if="!isCollapsed" class="btn btn-sm p-0 text-muted">
-            <i class="bi bi-three-dots-vertical"></i>
-          </button>
+          <div v-if="!isCollapsed" class="dropdown">
+            <button 
+              class="btn btn-sm p-0 text-muted" 
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <i class="bi bi-person me-2"></i>
+                  Thông tin cá nhân
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  <i class="bi bi-gear me-2"></i>
+                  Cài đặt
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <button class="dropdown-item text-danger" @click="handleLogout">
+                  <i class="bi bi-box-arrow-right me-2"></i>
+                  Đăng xuất
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </aside>
@@ -90,11 +118,12 @@ const userName = ref('HuuThangLmao')
 const userEmail = ref('thang@gmail.com')
 
 const mainMenuItems = [
-  { key: 'home', label: 'sidebar.menu.home', icon: 'bi-house-door', route: '/dashboard' },
-  { key: 'orders', label: 'sidebar.menu.orders', icon: 'bi-cart3', route: '#' },
+  { key: 'home', label: 'sidebar.menu.home', icon: 'bi-house-door', route: '/admin/dashboard' },
+  { key: 'orders', label: 'sidebar.menu.orders', icon: 'bi-cart3', route: '/admin/orders' },
   { key: 'documentation', label: 'sidebar.menu.documentation', icon: 'bi-file-earmark-text', route: '#' },
   { key: 'map', label: 'sidebar.menu.mapOverview', icon: 'bi-grid-1x2', route: '#' },
   { key: 'stats', label: 'sidebar.menu.statistics', icon: 'bi-pie-chart', route: '#' },
+  { key: 'products', label: 'sidebar.menu.products', icon: 'bi-box-seam', route: '/admin/products' },
 ]
 
 const bottomMenuItems = [
@@ -110,29 +139,68 @@ const isActiveRoute = (itemRoute) => {
   if (itemRoute === '#') return false
   return route.path === itemRoute || route.path.startsWith(itemRoute + '/')
 }
+
+const handleLogout = () => {
+  // Clear auth token
+  const authToken = useCookie('auth_token')
+  authToken.value = null
+  
+  // Redirect to login
+  navigateTo('/auth/login')
+}
 </script>
 
 <style scoped>
+.sidebar-wrapper {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  z-index: 1000 !important;
+  width: 260px;
+  transition: width 0.3s ease;
+}
+
+.sidebar-wrapper:has(.sidebar-collapsed) {
+  width: 80px;
+}
+
 .sidebar-admin {
-  transition: width .3s ease;
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
 }
+
+.sidebar-admin.sidebar-collapsed {
+  overflow-x: hidden;
+}
+
 .toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
   transform: translate(50%, -50%);
+  z-index: 1001;
+  width: 32px;
+  height: 32px;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.toggle-btn i {
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
-  .sidebar-admin {
-    position: fixed;
-    top: 9.1%;
-    left: 0;
-    height: 100vh;
+  .sidebar-wrapper {
     width: 260px;
-    z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    background: #fff;
   }
 
-  .mobile-open .sidebar-admin {
+  .sidebar-wrapper.mobile-open {
     transform: translateX(0);
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
   }

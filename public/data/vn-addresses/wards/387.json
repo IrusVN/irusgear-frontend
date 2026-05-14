@@ -1,0 +1,86 @@
+[
+  {
+    "code": "15025",
+    "name": "Mường Mìn",
+    "full_name": "Xã Mường Mìn",
+    "type": "Xã Mường",
+    "district_code": "387"
+  },
+  {
+    "code": "15013",
+    "name": "Na Mèo",
+    "full_name": "Xã Na Mèo",
+    "type": "Xã Na",
+    "district_code": "387"
+  },
+  {
+    "code": "15004",
+    "name": "Sơn Hà",
+    "full_name": "Xã Sơn Hà",
+    "type": "Xã Sơn",
+    "district_code": "387"
+  },
+  {
+    "code": "15016",
+    "name": "Sơn Lư",
+    "full_name": "Thị trấn Sơn Lư",
+    "type": "Thị trấn Sơn",
+    "district_code": "387"
+  },
+  {
+    "code": "15010",
+    "name": "Sơn Thủy",
+    "full_name": "Xã Sơn Thủy",
+    "type": "Xã Sơn",
+    "district_code": "387"
+  },
+  {
+    "code": "15022",
+    "name": "Sơn Điện",
+    "full_name": "Xã Sơn Điện",
+    "type": "Xã Sơn",
+    "district_code": "387"
+  },
+  {
+    "code": "15019",
+    "name": "Tam Lư",
+    "full_name": "Xã Tam Lư",
+    "type": "Xã Tam",
+    "district_code": "387"
+  },
+  {
+    "code": "15007",
+    "name": "Tam Thanh",
+    "full_name": "Xã Tam Thanh",
+    "type": "Xã Tam",
+    "district_code": "387"
+  },
+  {
+    "code": "15001",
+    "name": "Trung Hạ",
+    "full_name": "Xã Trung Hạ",
+    "type": "Xã Trung",
+    "district_code": "387"
+  },
+  {
+    "code": "14998",
+    "name": "Trung Thượng",
+    "full_name": "Xã Trung Thượng",
+    "type": "Xã Trung",
+    "district_code": "387"
+  },
+  {
+    "code": "14999",
+    "name": "Trung Tiến",
+    "full_name": "Xã Trung Tiến",
+    "type": "Xã Trung",
+    "district_code": "387"
+  },
+  {
+    "code": "14995",
+    "name": "Trung Xuân",
+    "full_name": "Xã Trung Xuân",
+    "type": "Xã Trung",
+    "district_code": "387"
+  }
+]

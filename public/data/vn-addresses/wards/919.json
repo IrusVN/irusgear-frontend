@@ -1,0 +1,51 @@
+[
+  {
+    "code": "31195",
+    "name": "Ba Láng",
+    "full_name": "Phường Ba Láng",
+    "type": "Phường Ba",
+    "district_code": "919"
+  },
+  {
+    "code": "31189",
+    "name": "Hưng Phú",
+    "full_name": "Phường Hưng Phú",
+    "type": "Phường Hưng",
+    "district_code": "919"
+  },
+  {
+    "code": "31192",
+    "name": "Hưng Thạnh",
+    "full_name": "Phường Hưng Thạnh",
+    "type": "Phường Hưng",
+    "district_code": "919"
+  },
+  {
+    "code": "31186",
+    "name": "Lê Bình",
+    "full_name": "Phường Lê Bình",
+    "type": "Phường Lê",
+    "district_code": "919"
+  },
+  {
+    "code": "31201",
+    "name": "Phú Thứ",
+    "full_name": "Phường Phú Thứ",
+    "type": "Phường Phú",
+    "district_code": "919"
+  },
+  {
+    "code": "31204",
+    "name": "Tân Phú",
+    "full_name": "Phường Tân Phú",
+    "type": "Phường Tân",
+    "district_code": "919"
+  },
+  {
+    "code": "31198",
+    "name": "Thường Thạnh",
+    "full_name": "Phường Thường Thạnh",
+    "type": "Phường Thường",
+    "district_code": "919"
+  }
+]

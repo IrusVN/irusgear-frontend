@@ -1,0 +1,79 @@
+[
+  {
+    "code": "30952",
+    "name": "Gò Quao",
+    "full_name": "Thị trấn Gò Quao",
+    "type": "Thị trấn Gò",
+    "district_code": "907"
+  },
+  {
+    "code": "30961",
+    "name": "Thới Quản",
+    "full_name": "Xã Thới Quản",
+    "type": "Xã Thới",
+    "district_code": "907"
+  },
+  {
+    "code": "30967",
+    "name": "Thủy Liễu",
+    "full_name": "Xã Thủy Liễu",
+    "type": "Xã Thủy",
+    "district_code": "907"
+  },
+  {
+    "code": "30955",
+    "name": "Vĩnh Hòa Hưng Bắc",
+    "full_name": "Xã Vĩnh Hòa Hưng Bắc",
+    "type": "Xã Vĩnh Hòa Hưng",
+    "district_code": "907"
+  },
+  {
+    "code": "30970",
+    "name": "Vĩnh Hòa Hưng Nam",
+    "full_name": "Xã Vĩnh Hòa Hưng Nam",
+    "type": "Xã Vĩnh Hòa Hưng",
+    "district_code": "907"
+  },
+  {
+    "code": "30973",
+    "name": "Vĩnh Phước A",
+    "full_name": "Xã Vĩnh Phước A",
+    "type": "Xã Vĩnh Phước",
+    "district_code": "907"
+  },
+  {
+    "code": "30976",
+    "name": "Vĩnh Phước B",
+    "full_name": "Xã Vĩnh Phước B",
+    "type": "Xã Vĩnh Phước",
+    "district_code": "907"
+  },
+  {
+    "code": "30982",
+    "name": "Vĩnh Thắng",
+    "full_name": "Xã Vĩnh Thắng",
+    "type": "Xã Vĩnh",
+    "district_code": "907"
+  },
+  {
+    "code": "30979",
+    "name": "Vĩnh Tuy",
+    "full_name": "Xã Vĩnh Tuy",
+    "type": "Xã Vĩnh",
+    "district_code": "907"
+  },
+  {
+    "code": "30964",
+    "name": "Định An",
+    "full_name": "Xã Định An",
+    "type": "Xã Định",
+    "district_code": "907"
+  },
+  {
+    "code": "30958",
+    "name": "Định Hòa",
+    "full_name": "Xã Định Hòa",
+    "type": "Xã Định",
+    "district_code": "907"
+  }
+]

@@ -1,0 +1,240 @@
+[
+  {
+    "code": "15709",
+    "name": "An Nông",
+    "full_name": "Xã An Nông",
+    "type": "Xã An",
+    "district_code": "397"
+  },
+  {
+    "code": "15769",
+    "name": "Bình Sơn",
+    "full_name": "Xã Bình Sơn",
+    "type": "Xã Bình",
+    "district_code": "397"
+  },
+  {
+    "code": "15700",
+    "name": "Dân Lực",
+    "full_name": "Xã Dân Lực",
+    "type": "Xã Dân",
+    "district_code": "397"
+  },
+  {
+    "code": "15703",
+    "name": "Dân Lý",
+    "full_name": "Xã Dân Lý",
+    "type": "Xã Dân",
+    "district_code": "397"
+  },
+  {
+    "code": "15706",
+    "name": "Dân Quyền",
+    "full_name": "Xã Dân Quyền",
+    "type": "Xã Dân",
+    "district_code": "397"
+  },
+  {
+    "code": "15676",
+    "name": "Hợp Lý",
+    "full_name": "Xã Hợp Lý",
+    "type": "Xã Hợp",
+    "district_code": "397"
+  },
+  {
+    "code": "15688",
+    "name": "Hợp Thắng",
+    "full_name": "Xã Hợp Thắng",
+    "type": "Xã Hợp",
+    "district_code": "397"
+  },
+  {
+    "code": "15682",
+    "name": "Hợp Thành",
+    "full_name": "Xã Hợp Thành",
+    "type": "Xã Hợp",
+    "district_code": "397"
+  },
+  {
+    "code": "15679",
+    "name": "Hợp Tiến",
+    "full_name": "Xã Hợp Tiến",
+    "type": "Xã Hợp",
+    "district_code": "397"
+  },
+  {
+    "code": "15733",
+    "name": "Khuyến Nông",
+    "full_name": "Xã Khuyến Nông",
+    "type": "Xã Khuyến",
+    "district_code": "397"
+  },
+  {
+    "code": "15691",
+    "name": "Minh Sơn",
+    "full_name": "Xã Minh Sơn",
+    "type": "Xã Minh",
+    "district_code": "397"
+  },
+  {
+    "code": "15766",
+    "name": "Nông Trường",
+    "full_name": "Xã Nông Trường",
+    "type": "Xã Nông",
+    "district_code": "397"
+  },
+  {
+    "code": "15718",
+    "name": "Nưa",
+    "full_name": "Thị trấn Nưa",
+    "type": "Thị trấn",
+    "district_code": "397"
+  },
+  {
+    "code": "15715",
+    "name": "Thái Hòa",
+    "full_name": "Xã Thái Hòa",
+    "type": "Xã Thái",
+    "district_code": "397"
+  },
+  {
+    "code": "15670",
+    "name": "Thọ Bình",
+    "full_name": "Xã Thọ Bình",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15754",
+    "name": "Thọ Cường",
+    "full_name": "Xã Thọ Cường",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15742",
+    "name": "Thọ Dân",
+    "full_name": "Xã Thọ Dân",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15751",
+    "name": "Thọ Ngọc",
+    "full_name": "Xã Thọ Ngọc",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15757",
+    "name": "Thọ Phú",
+    "full_name": "Xã Thọ Phú",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15667",
+    "name": "Thọ Sơn",
+    "full_name": "Xã Thọ Sơn",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15748",
+    "name": "Thọ Tân",
+    "full_name": "Xã Thọ Tân",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15763",
+    "name": "Thọ Thế",
+    "full_name": "Xã Thọ Thế",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15673",
+    "name": "Thọ Tiến",
+    "full_name": "Xã Thọ Tiến",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15760",
+    "name": "Thọ Vực",
+    "full_name": "Xã Thọ Vực",
+    "type": "Xã Thọ",
+    "district_code": "397"
+  },
+  {
+    "code": "15730",
+    "name": "Tiến Nông",
+    "full_name": "Xã Tiến Nông",
+    "type": "Xã Tiến",
+    "district_code": "397"
+  },
+  {
+    "code": "15664",
+    "name": "Triệu Sơn",
+    "full_name": "Thị trấn Triệu Sơn",
+    "type": "Thị trấn Triệu",
+    "district_code": "397"
+  },
+  {
+    "code": "15685",
+    "name": "Triệu Thành",
+    "full_name": "Xã Triệu Thành",
+    "type": "Xã Triệu",
+    "district_code": "397"
+  },
+  {
+    "code": "15712",
+    "name": "Văn Sơn",
+    "full_name": "Xã Văn Sơn",
+    "type": "Xã Văn",
+    "district_code": "397"
+  },
+  {
+    "code": "15739",
+    "name": "Xuân Lộc",
+    "full_name": "Xã Xuân Lộc",
+    "type": "Xã Xuân",
+    "district_code": "397"
+  },
+  {
+    "code": "15736",
+    "name": "Xuân Thịnh",
+    "full_name": "Xã Xuân Thịnh",
+    "type": "Xã Xuân",
+    "district_code": "397"
+  },
+  {
+    "code": "15745",
+    "name": "Xuân Thọ",
+    "full_name": "Xã Xuân Thọ",
+    "type": "Xã Xuân",
+    "district_code": "397"
+  },
+  {
+    "code": "15721",
+    "name": "Đồng Lợi",
+    "full_name": "Xã Đồng Lợi",
+    "type": "Xã Đồng",
+    "district_code": "397"
+  },
+  {
+    "code": "15727",
+    "name": "Đồng Thắng",
+    "full_name": "Xã Đồng Thắng",
+    "type": "Xã Đồng",
+    "district_code": "397"
+  },
+  {
+    "code": "15724",
+    "name": "Đồng Tiến",
+    "full_name": "Xã Đồng Tiến",
+    "type": "Xã Đồng",
+    "district_code": "397"
+  }
+]

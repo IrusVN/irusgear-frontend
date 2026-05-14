@@ -1,0 +1,79 @@
+[
+  {
+    "code": "00361",
+    "name": "Hạ Đình",
+    "full_name": "Phường Hạ Đình",
+    "type": "Phường Hạ",
+    "district_code": "009"
+  },
+  {
+    "code": "00352",
+    "name": "Khương Mai",
+    "full_name": "Phường Khương Mai",
+    "type": "Phường Khương",
+    "district_code": "009"
+  },
+  {
+    "code": "00349",
+    "name": "Khương Trung",
+    "full_name": "Phường Khương Trung",
+    "type": "Phường Khương",
+    "district_code": "009"
+  },
+  {
+    "code": "00364",
+    "name": "Khương Đình",
+    "full_name": "Phường Khương Đình",
+    "type": "Phường Khương",
+    "district_code": "009"
+  },
+  {
+    "code": "00373",
+    "name": "Kim Giang",
+    "full_name": "Phường Kim Giang",
+    "type": "Phường Kim",
+    "district_code": "009"
+  },
+  {
+    "code": "00343",
+    "name": "Nhân Chính",
+    "full_name": "Phường Nhân Chính",
+    "type": "Phường Nhân",
+    "district_code": "009"
+  },
+  {
+    "code": "00358",
+    "name": "Phương Liệt",
+    "full_name": "Phường Phương Liệt",
+    "type": "Phường Phương",
+    "district_code": "009"
+  },
+  {
+    "code": "00367",
+    "name": "Thanh Xuân Bắc",
+    "full_name": "Phường Thanh Xuân Bắc",
+    "type": "Phường Thanh Xuân",
+    "district_code": "009"
+  },
+  {
+    "code": "00370",
+    "name": "Thanh Xuân Nam",
+    "full_name": "Phường Thanh Xuân Nam",
+    "type": "Phường Thanh Xuân",
+    "district_code": "009"
+  },
+  {
+    "code": "00355",
+    "name": "Thanh Xuân Trung",
+    "full_name": "Phường Thanh Xuân Trung",
+    "type": "Phường Thanh Xuân",
+    "district_code": "009"
+  },
+  {
+    "code": "00346",
+    "name": "Thượng Đình",
+    "full_name": "Phường Thượng Đình",
+    "type": "Phường Thượng",
+    "district_code": "009"
+  }
+]

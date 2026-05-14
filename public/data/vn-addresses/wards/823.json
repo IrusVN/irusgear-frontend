@@ -1,0 +1,93 @@
+[
+  {
+    "code": "28666",
+    "name": "Bình Nhì",
+    "full_name": "Xã Bình Nhì",
+    "type": "Xã Bình",
+    "district_code": "823"
+  },
+  {
+    "code": "28657",
+    "name": "Bình Phú",
+    "full_name": "Xã Bình Phú",
+    "type": "Xã Bình",
+    "district_code": "823"
+  },
+  {
+    "code": "28681",
+    "name": "Bình Tân",
+    "full_name": "Xã Bình Tân",
+    "type": "Xã Bình",
+    "district_code": "823"
+  },
+  {
+    "code": "28687",
+    "name": "Long Bình",
+    "full_name": "Xã Long Bình",
+    "type": "Xã Long",
+    "district_code": "823"
+  },
+  {
+    "code": "28678",
+    "name": "Long Vĩnh",
+    "full_name": "Xã Long Vĩnh",
+    "type": "Xã Long",
+    "district_code": "823"
+  },
+  {
+    "code": "28663",
+    "name": "Thành Công",
+    "full_name": "Xã Thành Công",
+    "type": "Xã Thành",
+    "district_code": "823"
+  },
+  {
+    "code": "28675",
+    "name": "Thạnh Nhựt",
+    "full_name": "Xã Thạnh Nhựt",
+    "type": "Xã Thạnh",
+    "district_code": "823"
+  },
+  {
+    "code": "28672",
+    "name": "Thạnh Trị",
+    "full_name": "Xã Thạnh Trị",
+    "type": "Xã Thạnh",
+    "district_code": "823"
+  },
+  {
+    "code": "28651",
+    "name": "Vĩnh Bình",
+    "full_name": "Thị trấn Vĩnh Bình",
+    "type": "Thị trấn Vĩnh",
+    "district_code": "823"
+  },
+  {
+    "code": "28684",
+    "name": "Vĩnh Hựu",
+    "full_name": "Xã Vĩnh Hựu",
+    "type": "Xã Vĩnh",
+    "district_code": "823"
+  },
+  {
+    "code": "28669",
+    "name": "Yên Luông",
+    "full_name": "Xã Yên Luông",
+    "type": "Xã Yên",
+    "district_code": "823"
+  },
+  {
+    "code": "28654",
+    "name": "Đồng Sơn",
+    "full_name": "Xã Đồng Sơn",
+    "type": "Xã Đồng",
+    "district_code": "823"
+  },
+  {
+    "code": "28660",
+    "name": "Đồng Thạnh",
+    "full_name": "Xã Đồng Thạnh",
+    "type": "Xã Đồng",
+    "district_code": "823"
+  }
+]

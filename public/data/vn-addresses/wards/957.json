@@ -1,0 +1,58 @@
+[
+  {
+    "code": "31879",
+    "name": "Hưng Phú",
+    "full_name": "Xã Hưng Phú",
+    "type": "Xã Hưng",
+    "district_code": "957"
+  },
+  {
+    "code": "31885",
+    "name": "Phong Thạnh Tây A",
+    "full_name": "Xã Phong Thạnh Tây A",
+    "type": "Xã Phong Thạnh Tây",
+    "district_code": "957"
+  },
+  {
+    "code": "31888",
+    "name": "Phong Thạnh Tây B",
+    "full_name": "Xã Phong Thạnh Tây B",
+    "type": "Xã Phong Thạnh Tây",
+    "district_code": "957"
+  },
+  {
+    "code": "31867",
+    "name": "Phước Long",
+    "full_name": "Thị trấn Phước Long",
+    "type": "Thị trấn Phước",
+    "district_code": "957"
+  },
+  {
+    "code": "31876",
+    "name": "Phước Long",
+    "full_name": "Xã Phước Long",
+    "type": "Xã Phước",
+    "district_code": "957"
+  },
+  {
+    "code": "31873",
+    "name": "Vĩnh Phú Tây",
+    "full_name": "Xã Vĩnh Phú Tây",
+    "type": "Xã Vĩnh Phú",
+    "district_code": "957"
+  },
+  {
+    "code": "31870",
+    "name": "Vĩnh Phú Đông",
+    "full_name": "Xã Vĩnh Phú Đông",
+    "type": "Xã Vĩnh Phú",
+    "district_code": "957"
+  },
+  {
+    "code": "31882",
+    "name": "Vĩnh Thanh",
+    "full_name": "Xã Vĩnh Thanh",
+    "type": "Xã Vĩnh",
+    "district_code": "957"
+  }
+]

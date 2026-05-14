@@ -1,0 +1,51 @@
+[
+  {
+    "code": "27661",
+    "name": "Hiệp Phước",
+    "full_name": "Xã Hiệp Phước",
+    "type": "Xã Hiệp",
+    "district_code": "786"
+  },
+  {
+    "code": "27658",
+    "name": "Long Thới",
+    "full_name": "Xã Long Thới",
+    "type": "Xã Long",
+    "district_code": "786"
+  },
+  {
+    "code": "27643",
+    "name": "Nhà Bè",
+    "full_name": "Thị trấn Nhà Bè",
+    "type": "Thị trấn Nhà",
+    "district_code": "786"
+  },
+  {
+    "code": "27652",
+    "name": "Nhơn Đức",
+    "full_name": "Xã Nhơn Đức",
+    "type": "Xã Nhơn",
+    "district_code": "786"
+  },
+  {
+    "code": "27655",
+    "name": "Phú Xuân",
+    "full_name": "Xã Phú Xuân",
+    "type": "Xã Phú",
+    "district_code": "786"
+  },
+  {
+    "code": "27646",
+    "name": "Phước Kiển",
+    "full_name": "Xã Phước Kiển",
+    "type": "Xã Phước",
+    "district_code": "786"
+  },
+  {
+    "code": "27649",
+    "name": "Phước Lộc",
+    "full_name": "Xã Phước Lộc",
+    "type": "Xã Phước",
+    "district_code": "786"
+  }
+]

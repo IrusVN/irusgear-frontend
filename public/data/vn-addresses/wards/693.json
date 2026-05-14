@@ -1,0 +1,51 @@
+[
+  {
+    "code": "25309",
+    "name": "Hưng Phước",
+    "full_name": "Xã Hưng Phước",
+    "type": "Xã Hưng",
+    "district_code": "693"
+  },
+  {
+    "code": "25310",
+    "name": "Phước Thiện",
+    "full_name": "Xã Phước Thiện",
+    "type": "Xã Phước",
+    "district_code": "693"
+  },
+  {
+    "code": "25318",
+    "name": "Tân Thành",
+    "full_name": "Xã Tân Thành",
+    "type": "Xã Tân",
+    "district_code": "693"
+  },
+  {
+    "code": "25321",
+    "name": "Tân Tiến",
+    "full_name": "Xã Tân Tiến",
+    "type": "Xã Tân",
+    "district_code": "693"
+  },
+  {
+    "code": "25308",
+    "name": "Thanh Bình",
+    "full_name": "Thị trấn Thanh Bình",
+    "type": "Thị trấn Thanh",
+    "district_code": "693"
+  },
+  {
+    "code": "25315",
+    "name": "Thanh Hòa",
+    "full_name": "Xã Thanh Hòa",
+    "type": "Xã Thanh",
+    "district_code": "693"
+  },
+  {
+    "code": "25312",
+    "name": "Thiện Hưng",
+    "full_name": "Xã Thiện Hưng",
+    "type": "Xã Thiện",
+    "district_code": "693"
+  }
+]

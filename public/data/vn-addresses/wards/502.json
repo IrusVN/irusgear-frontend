@@ -1,0 +1,93 @@
+[
+  {
+    "code": "20341",
+    "name": "An Mỹ",
+    "full_name": "Phường An Mỹ",
+    "type": "Phường An",
+    "district_code": "502"
+  },
+  {
+    "code": "20356",
+    "name": "An Phú",
+    "full_name": "Phường An Phú",
+    "type": "Phường An",
+    "district_code": "502"
+  },
+  {
+    "code": "20350",
+    "name": "An Sơn",
+    "full_name": "Phường An Sơn",
+    "type": "Phường An",
+    "district_code": "502"
+  },
+  {
+    "code": "20347",
+    "name": "An Xuân",
+    "full_name": "Phường An Xuân",
+    "type": "Phường An",
+    "district_code": "502"
+  },
+  {
+    "code": "20344",
+    "name": "Hòa Hương",
+    "full_name": "Phường Hòa Hương",
+    "type": "Phường Hòa",
+    "district_code": "502"
+  },
+  {
+    "code": "20375",
+    "name": "Hoà Thuận",
+    "full_name": "Phường Hoà Thuận",
+    "type": "Phường Hoà",
+    "district_code": "502"
+  },
+  {
+    "code": "20338",
+    "name": "Phước Hòa",
+    "full_name": "Phường Phước Hòa",
+    "type": "Phường Phước",
+    "district_code": "502"
+  },
+  {
+    "code": "20389",
+    "name": "Tam Ngọc",
+    "full_name": "Xã Tam Ngọc",
+    "type": "Xã Tam",
+    "district_code": "502"
+  },
+  {
+    "code": "20371",
+    "name": "Tam Phú",
+    "full_name": "Xã Tam Phú",
+    "type": "Xã Tam",
+    "district_code": "502"
+  },
+  {
+    "code": "20362",
+    "name": "Tam Thăng",
+    "full_name": "Xã Tam Thăng",
+    "type": "Xã Tam",
+    "district_code": "502"
+  },
+  {
+    "code": "20359",
+    "name": "Tam Thanh",
+    "full_name": "Xã Tam Thanh",
+    "type": "Xã Tam",
+    "district_code": "502"
+  },
+  {
+    "code": "20335",
+    "name": "Tân Thạnh",
+    "full_name": "Phường Tân Thạnh",
+    "type": "Phường Tân",
+    "district_code": "502"
+  },
+  {
+    "code": "20353",
+    "name": "Trường Xuân",
+    "full_name": "Phường Trường Xuân",
+    "type": "Phường Trường",
+    "district_code": "502"
+  }
+]

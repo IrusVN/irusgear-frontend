@@ -1,0 +1,86 @@
+[
+  {
+    "code": "28303",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "816"
+  },
+  {
+    "code": "28297",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "816"
+  },
+  {
+    "code": "28294",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "816"
+  },
+  {
+    "code": "28300",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "816"
+  },
+  {
+    "code": "28306",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "816"
+  },
+  {
+    "code": "28717",
+    "name": "Bình Xuân",
+    "full_name": "Xã Bình Xuân",
+    "type": "Xã Bình",
+    "district_code": "816"
+  },
+  {
+    "code": "28708",
+    "name": "Bình Đông",
+    "full_name": "Xã Bình Đông",
+    "type": "Xã Bình",
+    "district_code": "816"
+  },
+  {
+    "code": "28315",
+    "name": "Long Chánh",
+    "full_name": "Xã Long Chánh",
+    "type": "Xã Long",
+    "district_code": "816"
+  },
+  {
+    "code": "28318",
+    "name": "Long Hòa",
+    "full_name": "Xã Long Hòa",
+    "type": "Xã Long",
+    "district_code": "816"
+  },
+  {
+    "code": "28309",
+    "name": "Long Hưng",
+    "full_name": "Xã Long Hưng",
+    "type": "Xã Long",
+    "district_code": "816"
+  },
+  {
+    "code": "28312",
+    "name": "Long Thuận",
+    "full_name": "Xã Long Thuận",
+    "type": "Xã Long",
+    "district_code": "816"
+  },
+  {
+    "code": "28729",
+    "name": "Tân Trung",
+    "full_name": "Xã Tân Trung",
+    "type": "Xã Tân",
+    "district_code": "816"
+  }
+]

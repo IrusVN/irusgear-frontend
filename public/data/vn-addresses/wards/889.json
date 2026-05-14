@@ -1,0 +1,93 @@
+[
+  {
+    "code": "30499",
+    "name": "Bình Chánh",
+    "full_name": "Xã Bình Chánh",
+    "type": "Xã Bình",
+    "district_code": "889"
+  },
+  {
+    "code": "30484",
+    "name": "Bình Long",
+    "full_name": "Xã Bình Long",
+    "type": "Xã Bình",
+    "district_code": "889"
+  },
+  {
+    "code": "30487",
+    "name": "Bình Mỹ",
+    "full_name": "Xã Bình Mỹ",
+    "type": "Xã Bình",
+    "district_code": "889"
+  },
+  {
+    "code": "30496",
+    "name": "Bình Phú",
+    "full_name": "Xã Bình Phú",
+    "type": "Xã Bình",
+    "district_code": "889"
+  },
+  {
+    "code": "30490",
+    "name": "Bình Thủy",
+    "full_name": "Xã Bình Thủy",
+    "type": "Xã Bình",
+    "district_code": "889"
+  },
+  {
+    "code": "30463",
+    "name": "Cái Dầu",
+    "full_name": "Thị trấn Cái Dầu",
+    "type": "Thị trấn Cái",
+    "district_code": "889"
+  },
+  {
+    "code": "30466",
+    "name": "Khánh Hòa",
+    "full_name": "Xã Khánh Hòa",
+    "type": "Xã Khánh",
+    "district_code": "889"
+  },
+  {
+    "code": "30472",
+    "name": "Mỹ Phú",
+    "full_name": "Xã Mỹ Phú",
+    "type": "Xã Mỹ",
+    "district_code": "889"
+  },
+  {
+    "code": "30469",
+    "name": "Mỹ Đức",
+    "full_name": "Xã Mỹ Đức",
+    "type": "Xã Mỹ",
+    "district_code": "889"
+  },
+  {
+    "code": "30475",
+    "name": "Ô Long Vỹ",
+    "full_name": "Xã Ô Long Vỹ",
+    "type": "Xã Ô Long",
+    "district_code": "889"
+  },
+  {
+    "code": "30481",
+    "name": "Thạnh Mỹ Tây",
+    "full_name": "Xã Thạnh Mỹ Tây",
+    "type": "Xã Thạnh Mỹ",
+    "district_code": "889"
+  },
+  {
+    "code": "30478",
+    "name": "Vĩnh Thạnh Trung",
+    "full_name": "Thị trấn Vĩnh Thạnh Trung",
+    "type": "Thị trấn Vĩnh Thạnh",
+    "district_code": "889"
+  },
+  {
+    "code": "30493",
+    "name": "Đào Hữu Cảnh",
+    "full_name": "Xã Đào Hữu Cảnh",
+    "type": "Xã Đào Hữu",
+    "district_code": "889"
+  }
+]

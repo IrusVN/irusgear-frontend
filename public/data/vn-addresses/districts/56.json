@@ -1,0 +1,65 @@
+[
+  {
+    "code": "570",
+    "name": "Cam Lâm",
+    "full_name": "Huyện Cam Lâm",
+    "type": "Huyện Cam",
+    "province_code": "56"
+  },
+  {
+    "code": "569",
+    "name": "Cam Ranh",
+    "full_name": "Thành phố Cam Ranh",
+    "type": "Thành phố Cam",
+    "province_code": "56"
+  },
+  {
+    "code": "574",
+    "name": "Diên Khánh",
+    "full_name": "Huyện Diên Khánh",
+    "type": "Huyện Diên",
+    "province_code": "56"
+  },
+  {
+    "code": "575",
+    "name": "Khánh Sơn",
+    "full_name": "Huyện Khánh Sơn",
+    "type": "Huyện Khánh",
+    "province_code": "56"
+  },
+  {
+    "code": "573",
+    "name": "Khánh Vĩnh",
+    "full_name": "Huyện Khánh Vĩnh",
+    "type": "Huyện Khánh",
+    "province_code": "56"
+  },
+  {
+    "code": "568",
+    "name": "Nha Trang",
+    "full_name": "Thành phố Nha Trang",
+    "type": "Thành phố Nha",
+    "province_code": "56"
+  },
+  {
+    "code": "572",
+    "name": "Ninh Hòa",
+    "full_name": "Thị xã Ninh Hòa",
+    "type": "Thị xã Ninh",
+    "province_code": "56"
+  },
+  {
+    "code": "576",
+    "name": "Trường Sa",
+    "full_name": "Huyện Trường Sa",
+    "type": "Huyện Trường",
+    "province_code": "56"
+  },
+  {
+    "code": "571",
+    "name": "Vạn Ninh",
+    "full_name": "Huyện Vạn Ninh",
+    "type": "Huyện Vạn",
+    "province_code": "56"
+  }
+]

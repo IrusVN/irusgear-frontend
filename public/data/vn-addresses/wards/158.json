@@ -1,0 +1,79 @@
+[
+  {
+    "code": "05365",
+    "name": "Bảo Hiệu",
+    "full_name": "Xã Bảo Hiệu",
+    "type": "Xã Bảo",
+    "district_code": "158"
+  },
+  {
+    "code": "05353",
+    "name": "Hàng Trạm",
+    "full_name": "Thị trấn Hàng Trạm",
+    "type": "Thị trấn Hàng",
+    "district_code": "158"
+  },
+  {
+    "code": "05371",
+    "name": "Hữu Lợi",
+    "full_name": "Xã Hữu Lợi",
+    "type": "Xã Hữu",
+    "district_code": "158"
+  },
+  {
+    "code": "05362",
+    "name": "Lạc Lương",
+    "full_name": "Xã Lạc Lương",
+    "type": "Xã Lạc",
+    "district_code": "158"
+  },
+  {
+    "code": "05356",
+    "name": "Lạc Sỹ",
+    "full_name": "Xã Lạc Sỹ",
+    "type": "Xã Lạc",
+    "district_code": "158"
+  },
+  {
+    "code": "05374",
+    "name": "Lạc Thịnh",
+    "full_name": "Xã Lạc Thịnh",
+    "type": "Xã Lạc",
+    "district_code": "158"
+  },
+  {
+    "code": "05389",
+    "name": "Ngọc Lương",
+    "full_name": "Xã Ngọc Lương",
+    "type": "Xã Ngọc",
+    "district_code": "158"
+  },
+  {
+    "code": "05383",
+    "name": "Phú Lai",
+    "full_name": "Xã Phú Lai",
+    "type": "Xã Phú",
+    "district_code": "158"
+  },
+  {
+    "code": "05386",
+    "name": "Yên Trị",
+    "full_name": "Xã Yên Trị",
+    "type": "Xã Yên",
+    "district_code": "158"
+  },
+  {
+    "code": "05368",
+    "name": "Đa Phúc",
+    "full_name": "Xã Đa Phúc",
+    "type": "Xã Đa",
+    "district_code": "158"
+  },
+  {
+    "code": "05380",
+    "name": "Đoàn Kết",
+    "full_name": "Xã Đoàn Kết",
+    "type": "Xã Đoàn",
+    "district_code": "158"
+  }
+]

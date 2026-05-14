@@ -1,0 +1,72 @@
+[
+  {
+    "code": "29980",
+    "name": "Long Khánh A",
+    "full_name": "Xã Long Khánh A",
+    "type": "Xã Long Khánh",
+    "district_code": "870"
+  },
+  {
+    "code": "29983",
+    "name": "Long Khánh B",
+    "full_name": "Xã Long Khánh B",
+    "type": "Xã Long Khánh",
+    "district_code": "870"
+  },
+  {
+    "code": "29992",
+    "name": "Long Thuận",
+    "full_name": "Xã Long Thuận",
+    "type": "Xã Long",
+    "district_code": "870"
+  },
+  {
+    "code": "29998",
+    "name": "Phú Thuận A",
+    "full_name": "Xã Phú Thuận A",
+    "type": "Xã Phú Thuận",
+    "district_code": "870"
+  },
+  {
+    "code": "29995",
+    "name": "Phú Thuận B",
+    "full_name": "Xã Phú Thuận B",
+    "type": "Xã Phú Thuận",
+    "district_code": "870"
+  },
+  {
+    "code": "29977",
+    "name": "Thường Lạc",
+    "full_name": "Xã Thường Lạc",
+    "type": "Xã Thường",
+    "district_code": "870"
+  },
+  {
+    "code": "29956",
+    "name": "Thường Phước 1",
+    "full_name": "Xã Thường Phước 1",
+    "type": "Xã Thường Phước",
+    "district_code": "870"
+  },
+  {
+    "code": "29974",
+    "name": "Thường Phước 2",
+    "full_name": "Xã Thường Phước 2",
+    "type": "Xã Thường Phước",
+    "district_code": "870"
+  },
+  {
+    "code": "29962",
+    "name": "Thường Thới Hậu A",
+    "full_name": "Xã Thường Thới Hậu A",
+    "type": "Xã Thường Thới Hậu",
+    "district_code": "870"
+  },
+  {
+    "code": "29971",
+    "name": "Thường Thới Tiền",
+    "full_name": "Thị trấn Thường Thới Tiền",
+    "type": "Thị trấn Thường Thới",
+    "district_code": "870"
+  }
+]

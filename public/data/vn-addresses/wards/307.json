@@ -1,0 +1,72 @@
+[
+  {
+    "code": "11434",
+    "name": "Bắc Sơn",
+    "full_name": "Phường Bắc Sơn",
+    "type": "Phường Bắc",
+    "district_code": "307"
+  },
+  {
+    "code": "11429",
+    "name": "Lãm Hà",
+    "full_name": "Phường Lãm Hà",
+    "type": "Phường Lãm",
+    "district_code": "307"
+  },
+  {
+    "code": "11437",
+    "name": "Nam Sơn",
+    "full_name": "Phường Nam Sơn",
+    "type": "Phường Nam",
+    "district_code": "307"
+  },
+  {
+    "code": "11440",
+    "name": "Ngọc Sơn",
+    "full_name": "Phường Ngọc Sơn",
+    "type": "Phường Ngọc",
+    "district_code": "307"
+  },
+  {
+    "code": "11449",
+    "name": "Phù Liễn",
+    "full_name": "Phường Phù Liễn",
+    "type": "Phường Phù",
+    "district_code": "307"
+  },
+  {
+    "code": "11428",
+    "name": "Quán Trữ",
+    "full_name": "Phường Quán Trữ",
+    "type": "Phường Quán",
+    "district_code": "307"
+  },
+  {
+    "code": "11443",
+    "name": "Trần Thành Ngọ",
+    "full_name": "Phường Trần Thành Ngọ",
+    "type": "Phường Trần Thành",
+    "district_code": "307"
+  },
+  {
+    "code": "11452",
+    "name": "Tràng Minh",
+    "full_name": "Phường Tràng Minh",
+    "type": "Phường Tràng",
+    "district_code": "307"
+  },
+  {
+    "code": "11446",
+    "name": "Văn Đẩu",
+    "full_name": "Phường Văn Đẩu",
+    "type": "Phường Văn",
+    "district_code": "307"
+  },
+  {
+    "code": "11431",
+    "name": "Đồng Hoà",
+    "full_name": "Phường Đồng Hoà",
+    "type": "Phường Đồng",
+    "district_code": "307"
+  }
+]

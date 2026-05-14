@@ -1,0 +1,79 @@
+[
+  {
+    "code": "06967",
+    "name": "Cái Chiên",
+    "full_name": "Xã Cái Chiên",
+    "type": "Xã Cái",
+    "district_code": "201"
+  },
+  {
+    "code": "06943",
+    "name": "Quảng Chính",
+    "full_name": "Xã Quảng Chính",
+    "type": "Xã Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06922",
+    "name": "Quảng Hà",
+    "full_name": "Thị trấn Quảng Hà",
+    "type": "Thị trấn Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06946",
+    "name": "Quảng Long",
+    "full_name": "Xã Quảng Long",
+    "type": "Xã Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06940",
+    "name": "Quảng Minh",
+    "full_name": "Xã Quảng Minh",
+    "type": "Xã Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06952",
+    "name": "Quảng Phong",
+    "full_name": "Xã Quảng Phong",
+    "type": "Xã Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06928",
+    "name": "Quảng Sơn",
+    "full_name": "Xã Quảng Sơn",
+    "type": "Xã Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06931",
+    "name": "Quảng Thành",
+    "full_name": "Xã Quảng Thành",
+    "type": "Xã Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06937",
+    "name": "Quảng Thịnh",
+    "full_name": "Xã Quảng Thịnh",
+    "type": "Xã Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06925",
+    "name": "Quảng Đức",
+    "full_name": "Xã Quảng Đức",
+    "type": "Xã Quảng",
+    "district_code": "201"
+  },
+  {
+    "code": "06949",
+    "name": "Đường Hoa",
+    "full_name": "Xã Đường Hoa",
+    "type": "Xã Đường",
+    "district_code": "201"
+  }
+]

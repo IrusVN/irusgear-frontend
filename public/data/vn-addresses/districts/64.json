@@ -1,0 +1,121 @@
+[
+  {
+    "code": "623",
+    "name": "An Khê",
+    "full_name": "Thị xã An Khê",
+    "type": "Thị xã An",
+    "province_code": "64"
+  },
+  {
+    "code": "624",
+    "name": "Ayun Pa",
+    "full_name": "Thị xã Ayun Pa",
+    "type": "Thị xã Ayun",
+    "province_code": "64"
+  },
+  {
+    "code": "627",
+    "name": "Chư Păh",
+    "full_name": "Huyện Chư Păh",
+    "type": "Huyện Chư",
+    "province_code": "64"
+  },
+  {
+    "code": "632",
+    "name": "Chư Prông",
+    "full_name": "Huyện Chư Prông",
+    "type": "Huyện Chư",
+    "province_code": "64"
+  },
+  {
+    "code": "639",
+    "name": "Chư Pưh",
+    "full_name": "Huyện Chư Pưh",
+    "type": "Huyện Chư",
+    "province_code": "64"
+  },
+  {
+    "code": "633",
+    "name": "Chư Sê",
+    "full_name": "Huyện Chư Sê",
+    "type": "Huyện Chư",
+    "province_code": "64"
+  },
+  {
+    "code": "628",
+    "name": "Ia Grai",
+    "full_name": "Huyện Ia Grai",
+    "type": "Huyện Ia",
+    "province_code": "64"
+  },
+  {
+    "code": "635",
+    "name": "Ia Pa",
+    "full_name": "Huyện Ia Pa",
+    "type": "Huyện Ia",
+    "province_code": "64"
+  },
+  {
+    "code": "625",
+    "name": "KBang",
+    "full_name": "Huyện KBang",
+    "type": "Huyện",
+    "province_code": "64"
+  },
+  {
+    "code": "630",
+    "name": "Kông Chro",
+    "full_name": "Huyện Kông Chro",
+    "type": "Huyện Kông",
+    "province_code": "64"
+  },
+  {
+    "code": "637",
+    "name": "Krông Pa",
+    "full_name": "Huyện Krông Pa",
+    "type": "Huyện Krông",
+    "province_code": "64"
+  },
+  {
+    "code": "629",
+    "name": "Mang Yang",
+    "full_name": "Huyện Mang Yang",
+    "type": "Huyện Mang",
+    "province_code": "64"
+  },
+  {
+    "code": "638",
+    "name": "Phú Thiện",
+    "full_name": "Huyện Phú Thiện",
+    "type": "Huyện Phú",
+    "province_code": "64"
+  },
+  {
+    "code": "622",
+    "name": "Pleiku",
+    "full_name": "Thành phố Pleiku",
+    "type": "Thành phố",
+    "province_code": "64"
+  },
+  {
+    "code": "634",
+    "name": "Đăk Pơ",
+    "full_name": "Huyện Đăk Pơ",
+    "type": "Huyện Đăk",
+    "province_code": "64"
+  },
+  {
+    "code": "626",
+    "name": "Đăk Đoa",
+    "full_name": "Huyện Đăk Đoa",
+    "type": "Huyện Đăk",
+    "province_code": "64"
+  },
+  {
+    "code": "631",
+    "name": "Đức Cơ",
+    "full_name": "Huyện Đức Cơ",
+    "type": "Huyện Đức",
+    "province_code": "64"
+  }
+]

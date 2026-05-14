@@ -1,0 +1,93 @@
+[
+  {
+    "code": "21400",
+    "name": "Mộ Đức",
+    "full_name": "Thị trấn Mộ Đức",
+    "type": "Thị trấn Mộ",
+    "district_code": "533"
+  },
+  {
+    "code": "21412",
+    "name": "Đức Chánh",
+    "full_name": "Xã Đức Chánh",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21415",
+    "name": "Đức Hiệp",
+    "full_name": "Xã Đức Hiệp",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21424",
+    "name": "Đức Hòa",
+    "full_name": "Xã Đức Hòa",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21436",
+    "name": "Đức Lân",
+    "full_name": "Xã Đức Lân",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21403",
+    "name": "Đức Lợi",
+    "full_name": "Xã Đức Lợi",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21418",
+    "name": "Đức Minh",
+    "full_name": "Xã Đức Minh",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21409",
+    "name": "Đức Nhuận",
+    "full_name": "Xã Đức Nhuận",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21433",
+    "name": "Đức Phong",
+    "full_name": "Xã Đức Phong",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21430",
+    "name": "Đức Phú",
+    "full_name": "Xã Đức Phú",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21427",
+    "name": "Đức Tân",
+    "full_name": "Xã Đức Tân",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21406",
+    "name": "Đức Thắng",
+    "full_name": "Xã Đức Thắng",
+    "type": "Xã Đức",
+    "district_code": "533"
+  },
+  {
+    "code": "21421",
+    "name": "Đức Thạnh",
+    "full_name": "Xã Đức Thạnh",
+    "type": "Xã Đức",
+    "district_code": "533"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "02290",
+    "name": "Bình An",
+    "full_name": "Xã Bình An",
+    "type": "Xã Bình",
+    "district_code": "071"
+  },
+  {
+    "code": "02293",
+    "name": "Hồng Quang",
+    "full_name": "Xã Hồng Quang",
+    "type": "Xã Hồng",
+    "district_code": "071"
+  },
+  {
+    "code": "02251",
+    "name": "Khuôn Hà",
+    "full_name": "Xã Khuôn Hà",
+    "type": "Xã Khuôn",
+    "district_code": "071"
+  },
+  {
+    "code": "02266",
+    "name": "Lăng Can",
+    "full_name": "Thị trấn Lăng Can",
+    "type": "Thị trấn Lăng",
+    "district_code": "071"
+  },
+  {
+    "code": "02302",
+    "name": "Minh Quang",
+    "full_name": "Xã Minh Quang",
+    "type": "Xã Minh",
+    "district_code": "071"
+  },
+  {
+    "code": "02299",
+    "name": "Phúc Sơn",
+    "full_name": "Xã Phúc Sơn",
+    "type": "Xã Phúc",
+    "district_code": "071"
+  },
+  {
+    "code": "02233",
+    "name": "Phúc Yên",
+    "full_name": "Xã Phúc Yên",
+    "type": "Xã Phúc",
+    "district_code": "071"
+  },
+  {
+    "code": "02296",
+    "name": "Thổ Bình",
+    "full_name": "Xã Thổ Bình",
+    "type": "Xã Thổ",
+    "district_code": "071"
+  },
+  {
+    "code": "02269",
+    "name": "Thượng Lâm",
+    "full_name": "Xã Thượng Lâm",
+    "type": "Xã Thượng",
+    "district_code": "071"
+  },
+  {
+    "code": "02242",
+    "name": "Xuân Lập",
+    "full_name": "Xã Xuân Lập",
+    "type": "Xã Xuân",
+    "district_code": "071"
+  }
+]

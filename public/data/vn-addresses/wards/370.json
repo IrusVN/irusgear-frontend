@@ -1,0 +1,65 @@
+[
+  {
+    "code": "14362",
+    "name": "Bắc Sơn",
+    "full_name": "Phường Bắc Sơn",
+    "type": "Phường Bắc",
+    "district_code": "370"
+  },
+  {
+    "code": "14368",
+    "name": "Nam Sơn",
+    "full_name": "Phường Nam Sơn",
+    "type": "Phường Nam",
+    "district_code": "370"
+  },
+  {
+    "code": "14377",
+    "name": "Quang Sơn",
+    "full_name": "Xã Quang Sơn",
+    "type": "Xã Quang",
+    "district_code": "370"
+  },
+  {
+    "code": "14375",
+    "name": "Tân Bình",
+    "full_name": "Phường Tân Bình",
+    "type": "Phường Tân",
+    "district_code": "370"
+  },
+  {
+    "code": "14369",
+    "name": "Tây Sơn",
+    "full_name": "Phường Tây Sơn",
+    "type": "Phường Tây",
+    "district_code": "370"
+  },
+  {
+    "code": "14365",
+    "name": "Trung Sơn",
+    "full_name": "Phường Trung Sơn",
+    "type": "Phường Trung",
+    "district_code": "370"
+  },
+  {
+    "code": "14374",
+    "name": "Yên Bình",
+    "full_name": "Phường Yên Bình",
+    "type": "Phường Yên",
+    "district_code": "370"
+  },
+  {
+    "code": "14371",
+    "name": "Yên Sơn",
+    "full_name": "Xã Yên Sơn",
+    "type": "Xã Yên",
+    "district_code": "370"
+  },
+  {
+    "code": "14380",
+    "name": "Đông Sơn",
+    "full_name": "Xã Đông Sơn",
+    "type": "Xã Đông",
+    "district_code": "370"
+  }
+]

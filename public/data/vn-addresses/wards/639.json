@@ -1,0 +1,65 @@
+[
+  {
+    "code": "23980",
+    "name": "Chư Don",
+    "full_name": "Xã Chư Don",
+    "type": "Xã Chư",
+    "district_code": "639"
+  },
+  {
+    "code": "23987",
+    "name": "Ia BLứ",
+    "full_name": "Xã Ia BLứ",
+    "type": "Xã Ia",
+    "district_code": "639"
+  },
+  {
+    "code": "23974",
+    "name": "Ia Dreng",
+    "full_name": "Xã Ia Dreng",
+    "type": "Xã Ia",
+    "district_code": "639"
+  },
+  {
+    "code": "23978",
+    "name": "Ia Hla",
+    "full_name": "Xã Ia Hla",
+    "type": "Xã Ia",
+    "district_code": "639"
+  },
+  {
+    "code": "23971",
+    "name": "Ia Hrú",
+    "full_name": "Xã Ia Hrú",
+    "type": "Xã Ia",
+    "district_code": "639"
+  },
+  {
+    "code": "23986",
+    "name": "Ia Le",
+    "full_name": "Xã Ia Le",
+    "type": "Xã Ia",
+    "district_code": "639"
+  },
+  {
+    "code": "23983",
+    "name": "Ia Phang",
+    "full_name": "Xã Ia Phang",
+    "type": "Xã Ia",
+    "district_code": "639"
+  },
+  {
+    "code": "23972",
+    "name": "Ia Rong",
+    "full_name": "Xã Ia Rong",
+    "type": "Xã Ia",
+    "district_code": "639"
+  },
+  {
+    "code": "23942",
+    "name": "Nhơn Hoà",
+    "full_name": "Thị trấn Nhơn Hoà",
+    "type": "Thị trấn Nhơn",
+    "district_code": "639"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "code": "20306",
+    "name": "Hòa An",
+    "full_name": "Phường Hòa An",
+    "type": "Phường Hòa",
+    "district_code": "495"
+  },
+  {
+    "code": "20305",
+    "name": "Hòa Phát",
+    "full_name": "Phường Hòa Phát",
+    "type": "Phường Hòa",
+    "district_code": "495"
+  },
+  {
+    "code": "20311",
+    "name": "Hòa Thọ Tây",
+    "full_name": "Phường Hòa Thọ Tây",
+    "type": "Phường Hòa Thọ",
+    "district_code": "495"
+  },
+  {
+    "code": "20312",
+    "name": "Hòa Thọ Đông",
+    "full_name": "Phường Hòa Thọ Đông",
+    "type": "Phường Hòa Thọ",
+    "district_code": "495"
+  },
+  {
+    "code": "20314",
+    "name": "Hòa Xuân",
+    "full_name": "Phường Hòa Xuân",
+    "type": "Phường Hòa",
+    "district_code": "495"
+  },
+  {
+    "code": "20260",
+    "name": "Khuê Trung",
+    "full_name": "Phường Khuê Trung",
+    "type": "Phường Khuê",
+    "district_code": "495"
+  }
+]

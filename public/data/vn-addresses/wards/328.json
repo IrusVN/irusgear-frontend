@@ -1,0 +1,93 @@
+[
+  {
+    "code": "12124",
+    "name": "Bạch Sam",
+    "full_name": "Phường Bạch Sam",
+    "type": "Phường Bạch",
+    "district_code": "328"
+  },
+  {
+    "code": "12103",
+    "name": "Bần Yên Nhân",
+    "full_name": "Phường Bần Yên Nhân",
+    "type": "Phường Bần Yên",
+    "district_code": "328"
+  },
+  {
+    "code": "12109",
+    "name": "Cẩm Xá",
+    "full_name": "Xã Cẩm Xá",
+    "type": "Xã Cẩm",
+    "district_code": "328"
+  },
+  {
+    "code": "12121",
+    "name": "Dị Sử",
+    "full_name": "Phường Dị Sử",
+    "type": "Phường Dị",
+    "district_code": "328"
+  },
+  {
+    "code": "12112",
+    "name": "Dương Quang",
+    "full_name": "Xã Dương Quang",
+    "type": "Xã Dương",
+    "district_code": "328"
+  },
+  {
+    "code": "12115",
+    "name": "Hòa Phong",
+    "full_name": "Xã Hòa Phong",
+    "type": "Xã Hòa",
+    "district_code": "328"
+  },
+  {
+    "code": "12139",
+    "name": "Hưng Long",
+    "full_name": "Xã Hưng Long",
+    "type": "Xã Hưng",
+    "district_code": "328"
+  },
+  {
+    "code": "12127",
+    "name": "Minh Đức",
+    "full_name": "Phường Minh Đức",
+    "type": "Phường Minh",
+    "district_code": "328"
+  },
+  {
+    "code": "12136",
+    "name": "Ngọc Lâm",
+    "full_name": "Xã Ngọc Lâm",
+    "type": "Xã Ngọc",
+    "district_code": "328"
+  },
+  {
+    "code": "12118",
+    "name": "Nhân Hòa",
+    "full_name": "Phường Nhân Hòa",
+    "type": "Phường Nhân",
+    "district_code": "328"
+  },
+  {
+    "code": "12106",
+    "name": "Phan Đình Phùng",
+    "full_name": "Phường Phan Đình Phùng",
+    "type": "Phường Phan Đình",
+    "district_code": "328"
+  },
+  {
+    "code": "12130",
+    "name": "Phùng Chí Kiên",
+    "full_name": "Phường Phùng Chí Kiên",
+    "type": "Phường Phùng Chí",
+    "district_code": "328"
+  },
+  {
+    "code": "12133",
+    "name": "Xuân Dục",
+    "full_name": "Xã Xuân Dục",
+    "type": "Xã Xuân",
+    "district_code": "328"
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "code": "26350",
+    "name": "Bảo Bình",
+    "full_name": "Xã Bảo Bình",
+    "type": "Xã Bảo",
+    "district_code": "739"
+  },
+  {
+    "code": "26365",
+    "name": "Lâm San",
+    "full_name": "Xã Lâm San",
+    "type": "Xã Lâm",
+    "district_code": "739"
+  },
+  {
+    "code": "26341",
+    "name": "Long Giao",
+    "full_name": "Thị trấn Long Giao",
+    "type": "Thị trấn Long",
+    "district_code": "739"
+  },
+  {
+    "code": "26335",
+    "name": "Nhân Nghĩa",
+    "full_name": "Xã Nhân Nghĩa",
+    "type": "Xã Nhân",
+    "district_code": "739"
+  },
+  {
+    "code": "26329",
+    "name": "Sông Nhạn",
+    "full_name": "Xã Sông Nhạn",
+    "type": "Xã Sông",
+    "district_code": "739"
+  },
+  {
+    "code": "26362",
+    "name": "Sông Ray",
+    "full_name": "Xã Sông Ray",
+    "type": "Xã Sông",
+    "district_code": "739"
+  },
+  {
+    "code": "26347",
+    "name": "Thừa Đức",
+    "full_name": "Xã Thừa Đức",
+    "type": "Xã Thừa",
+    "district_code": "739"
+  },
+  {
+    "code": "26353",
+    "name": "Xuân Bảo",
+    "full_name": "Xã Xuân Bảo",
+    "type": "Xã Xuân",
+    "district_code": "739"
+  },
+  {
+    "code": "26344",
+    "name": "Xuân Mỹ",
+    "full_name": "Xã Xuân Mỹ",
+    "type": "Xã Xuân",
+    "district_code": "739"
+  },
+  {
+    "code": "26332",
+    "name": "Xuân Quế",
+    "full_name": "Xã Xuân Quế",
+    "type": "Xã Xuân",
+    "district_code": "739"
+  },
+  {
+    "code": "26356",
+    "name": "Xuân Tây",
+    "full_name": "Xã Xuân Tây",
+    "type": "Xã Xuân",
+    "district_code": "739"
+  },
+  {
+    "code": "26359",
+    "name": "Xuân Đông",
+    "full_name": "Xã Xuân Đông",
+    "type": "Xã Xuân",
+    "district_code": "739"
+  },
+  {
+    "code": "26338",
+    "name": "Xuân Đường",
+    "full_name": "Xã Xuân Đường",
+    "type": "Xã Xuân",
+    "district_code": "739"
+  }
+]

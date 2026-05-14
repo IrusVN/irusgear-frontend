@@ -1,0 +1,65 @@
+[
+  {
+    "code": "25432",
+    "name": "Hưng Long",
+    "full_name": "Phường Hưng Long",
+    "type": "Phường Hưng",
+    "district_code": "697"
+  },
+  {
+    "code": "25441",
+    "name": "Minh Hưng",
+    "full_name": "Phường Minh Hưng",
+    "type": "Phường Minh",
+    "district_code": "697"
+  },
+  {
+    "code": "25435",
+    "name": "Minh Lập",
+    "full_name": "Xã Minh Lập",
+    "type": "Xã Minh",
+    "district_code": "697"
+  },
+  {
+    "code": "25444",
+    "name": "Minh Long",
+    "full_name": "Phường Minh Long",
+    "type": "Phường Minh",
+    "district_code": "697"
+  },
+  {
+    "code": "25453",
+    "name": "Minh Thắng",
+    "full_name": "Xã Minh Thắng",
+    "type": "Xã Minh",
+    "district_code": "697"
+  },
+  {
+    "code": "25447",
+    "name": "Minh Thành",
+    "full_name": "Phường Minh Thành",
+    "type": "Phường Minh",
+    "district_code": "697"
+  },
+  {
+    "code": "25450",
+    "name": "Nha Bích",
+    "full_name": "Xã Nha Bích",
+    "type": "Xã Nha",
+    "district_code": "697"
+  },
+  {
+    "code": "25439",
+    "name": "Quang Minh",
+    "full_name": "Xã Quang Minh",
+    "type": "Xã Quang",
+    "district_code": "697"
+  },
+  {
+    "code": "25433",
+    "name": "Thành Tâm",
+    "full_name": "Phường Thành Tâm",
+    "type": "Phường Thành",
+    "district_code": "697"
+  }
+]

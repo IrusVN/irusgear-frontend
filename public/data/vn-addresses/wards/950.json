@@ -1,0 +1,72 @@
+[
+  {
+    "code": "31783",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "950"
+  },
+  {
+    "code": "31801",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "950"
+  },
+  {
+    "code": "31786",
+    "name": "Hòa Đông",
+    "full_name": "Xã Hòa Đông",
+    "type": "Xã Hòa",
+    "district_code": "950"
+  },
+  {
+    "code": "31789",
+    "name": "Khánh Hòa",
+    "full_name": "Phường Khánh Hòa",
+    "type": "Phường Khánh",
+    "district_code": "950"
+  },
+  {
+    "code": "31798",
+    "name": "Lạc Hòa",
+    "full_name": "Xã Lạc Hòa",
+    "type": "Xã Lạc",
+    "district_code": "950"
+  },
+  {
+    "code": "31810",
+    "name": "Lai Hòa",
+    "full_name": "Xã Lai Hòa",
+    "type": "Xã Lai",
+    "district_code": "950"
+  },
+  {
+    "code": "31795",
+    "name": "Vĩnh Hải",
+    "full_name": "Xã Vĩnh Hải",
+    "type": "Xã Vĩnh",
+    "district_code": "950"
+  },
+  {
+    "code": "31792",
+    "name": "Vĩnh Hiệp",
+    "full_name": "Xã Vĩnh Hiệp",
+    "type": "Xã Vĩnh",
+    "district_code": "950"
+  },
+  {
+    "code": "31804",
+    "name": "Vĩnh Phước",
+    "full_name": "Phường Vĩnh Phước",
+    "type": "Phường Vĩnh",
+    "district_code": "950"
+  },
+  {
+    "code": "31807",
+    "name": "Vĩnh Tân",
+    "full_name": "Xã Vĩnh Tân",
+    "type": "Xã Vĩnh",
+    "district_code": "950"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "code": "22246",
+    "name": "Hòa Hiệp Bắc",
+    "full_name": "Phường Hòa Hiệp Bắc",
+    "type": "Phường Hòa Hiệp",
+    "district_code": "564"
+  },
+  {
+    "code": "22282",
+    "name": "Hòa Hiệp Nam",
+    "full_name": "Phường Hòa Hiệp Nam",
+    "type": "Phường Hòa Hiệp",
+    "district_code": "564"
+  },
+  {
+    "code": "22261",
+    "name": "Hoà Hiệp Trung",
+    "full_name": "Phường Hoà Hiệp Trung",
+    "type": "Phường Hoà Hiệp",
+    "district_code": "564"
+  },
+  {
+    "code": "22297",
+    "name": "Hòa Tâm",
+    "full_name": "Xã Hòa Tâm",
+    "type": "Xã Hòa",
+    "district_code": "564"
+  },
+  {
+    "code": "22267",
+    "name": "Hòa Tân Đông",
+    "full_name": "Xã Hòa Tân Đông",
+    "type": "Xã Hòa Tân",
+    "district_code": "564"
+  },
+  {
+    "code": "22243",
+    "name": "Hòa Thành",
+    "full_name": "Xã Hòa Thành",
+    "type": "Xã Hòa",
+    "district_code": "564"
+  },
+  {
+    "code": "22258",
+    "name": "Hoà Vinh",
+    "full_name": "Phường Hoà Vinh",
+    "type": "Phường Hoà",
+    "district_code": "564"
+  },
+  {
+    "code": "22300",
+    "name": "Hòa Xuân Nam",
+    "full_name": "Xã Hòa Xuân Nam",
+    "type": "Xã Hòa Xuân",
+    "district_code": "564"
+  },
+  {
+    "code": "22279",
+    "name": "Hòa Xuân Tây",
+    "full_name": "Phường Hòa Xuân Tây",
+    "type": "Phường Hòa Xuân",
+    "district_code": "564"
+  },
+  {
+    "code": "22291",
+    "name": "Hòa Xuân Đông",
+    "full_name": "Xã Hòa Xuân Đông",
+    "type": "Xã Hòa Xuân",
+    "district_code": "564"
+  }
+]

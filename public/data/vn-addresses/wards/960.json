@@ -1,0 +1,79 @@
+[
+  {
+    "code": "31990",
+    "name": "An Phúc",
+    "full_name": "Xã An Phúc",
+    "type": "Xã An",
+    "district_code": "960"
+  },
+  {
+    "code": "31987",
+    "name": "An Trạch",
+    "full_name": "Xã An Trạch",
+    "type": "Xã An",
+    "district_code": "960"
+  },
+  {
+    "code": "31988",
+    "name": "An Trạch A",
+    "full_name": "Xã An Trạch A",
+    "type": "Xã An Trạch",
+    "district_code": "960"
+  },
+  {
+    "code": "31972",
+    "name": "Gành Hào",
+    "full_name": "Thị trấn Gành Hào",
+    "type": "Thị trấn Gành",
+    "district_code": "960"
+  },
+  {
+    "code": "31981",
+    "name": "Long Điền",
+    "full_name": "Xã Long Điền",
+    "type": "Xã Long",
+    "district_code": "960"
+  },
+  {
+    "code": "31984",
+    "name": "Long Điền Tây",
+    "full_name": "Xã Long Điền Tây",
+    "type": "Xã Long Điền",
+    "district_code": "960"
+  },
+  {
+    "code": "31975",
+    "name": "Long Điền Đông",
+    "full_name": "Xã Long Điền Đông",
+    "type": "Xã Long Điền",
+    "district_code": "960"
+  },
+  {
+    "code": "31978",
+    "name": "Long Điền Đông A",
+    "full_name": "Xã Long Điền Đông A",
+    "type": "Xã Long Điền Đông",
+    "district_code": "960"
+  },
+  {
+    "code": "31985",
+    "name": "Điền Hải",
+    "full_name": "Xã Điền Hải",
+    "type": "Xã Điền",
+    "district_code": "960"
+  },
+  {
+    "code": "31993",
+    "name": "Định Thành",
+    "full_name": "Xã Định Thành",
+    "type": "Xã Định",
+    "district_code": "960"
+  },
+  {
+    "code": "31996",
+    "name": "Định Thành A",
+    "full_name": "Xã Định Thành A",
+    "type": "Xã Định Thành",
+    "district_code": "960"
+  }
+]

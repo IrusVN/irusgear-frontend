@@ -1,0 +1,86 @@
+[
+  {
+    "code": "24308",
+    "name": "An Bình",
+    "full_name": "Phường An Bình",
+    "type": "Phường An",
+    "district_code": "644"
+  },
+  {
+    "code": "24305",
+    "name": "An Lạc",
+    "full_name": "Phường An Lạc",
+    "type": "Phường An",
+    "district_code": "644"
+  },
+  {
+    "code": "24332",
+    "name": "Bình Tân",
+    "full_name": "Phường Bình Tân",
+    "type": "Phường Bình",
+    "district_code": "644"
+  },
+  {
+    "code": "24337",
+    "name": "Bình Thuận",
+    "full_name": "Xã Bình Thuận",
+    "type": "Xã Bình",
+    "district_code": "644"
+  },
+  {
+    "code": "24340",
+    "name": "Cư Bao",
+    "full_name": "Xã Cư Bao",
+    "type": "Xã Cư",
+    "district_code": "644"
+  },
+  {
+    "code": "24325",
+    "name": "Ea Blang",
+    "full_name": "Xã Ea Blang",
+    "type": "Xã Ea",
+    "district_code": "644"
+  },
+  {
+    "code": "24328",
+    "name": "Ea Drông",
+    "full_name": "Xã Ea Drông",
+    "type": "Xã Ea",
+    "district_code": "644"
+  },
+  {
+    "code": "24334",
+    "name": "Ea Siên",
+    "full_name": "Xã Ea Siên",
+    "type": "Xã Ea",
+    "district_code": "644"
+  },
+  {
+    "code": "24311",
+    "name": "Thiện An",
+    "full_name": "Phường Thiện An",
+    "type": "Phường Thiện",
+    "district_code": "644"
+  },
+  {
+    "code": "24331",
+    "name": "Thống Nhất",
+    "full_name": "Phường Thống Nhất",
+    "type": "Phường Thống",
+    "district_code": "644"
+  },
+  {
+    "code": "24318",
+    "name": "Đạt Hiếu",
+    "full_name": "Phường Đạt Hiếu",
+    "type": "Phường Đạt",
+    "district_code": "644"
+  },
+  {
+    "code": "24322",
+    "name": "Đoàn Kết",
+    "full_name": "Phường Đoàn Kết",
+    "type": "Phường Đoàn",
+    "district_code": "644"
+  }
+]

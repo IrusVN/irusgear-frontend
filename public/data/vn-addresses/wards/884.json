@@ -1,0 +1,51 @@
+[
+  {
+    "code": "30319",
+    "name": "Châu Phú A",
+    "full_name": "Phường Châu Phú A",
+    "type": "Phường Châu Phú",
+    "district_code": "884"
+  },
+  {
+    "code": "30316",
+    "name": "Châu Phú B",
+    "full_name": "Phường Châu Phú B",
+    "type": "Phường Châu Phú",
+    "district_code": "884"
+  },
+  {
+    "code": "30325",
+    "name": "Núi Sam",
+    "full_name": "Phường Núi Sam",
+    "type": "Phường Núi",
+    "district_code": "884"
+  },
+  {
+    "code": "30334",
+    "name": "Vĩnh Châu",
+    "full_name": "Xã Vĩnh Châu",
+    "type": "Xã Vĩnh",
+    "district_code": "884"
+  },
+  {
+    "code": "30322",
+    "name": "Vĩnh Mỹ",
+    "full_name": "Phường Vĩnh Mỹ",
+    "type": "Phường Vĩnh",
+    "district_code": "884"
+  },
+  {
+    "code": "30328",
+    "name": "Vĩnh Ngươn",
+    "full_name": "Phường Vĩnh Ngươn",
+    "type": "Phường Vĩnh",
+    "district_code": "884"
+  },
+  {
+    "code": "30331",
+    "name": "Vĩnh Tế",
+    "full_name": "Xã Vĩnh Tế",
+    "type": "Xã Vĩnh",
+    "district_code": "884"
+  }
+]

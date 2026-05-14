@@ -1,0 +1,51 @@
+[
+  {
+    "code": "29512",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "851"
+  },
+  {
+    "code": "29516",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "851"
+  },
+  {
+    "code": "29524",
+    "name": "Dân Thành",
+    "full_name": "Xã Dân Thành",
+    "type": "Xã Dân",
+    "district_code": "851"
+  },
+  {
+    "code": "29539",
+    "name": "Hiệp Thạnh",
+    "full_name": "Xã Hiệp Thạnh",
+    "type": "Xã Hiệp",
+    "district_code": "851"
+  },
+  {
+    "code": "29518",
+    "name": "Long Hữu",
+    "full_name": "Xã Long Hữu",
+    "type": "Xã Long",
+    "district_code": "851"
+  },
+  {
+    "code": "29515",
+    "name": "Long Toàn",
+    "full_name": "Xã Long Toàn",
+    "type": "Xã Long",
+    "district_code": "851"
+  },
+  {
+    "code": "29527",
+    "name": "Trường Long Hòa",
+    "full_name": "Xã Trường Long Hòa",
+    "type": "Xã Trường Long",
+    "district_code": "851"
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "code": "02503",
+    "name": "An Khang",
+    "full_name": "Xã An Khang",
+    "type": "Xã An",
+    "district_code": "070"
+  },
+  {
+    "code": "02512",
+    "name": "An Tường",
+    "full_name": "Phường An Tường",
+    "type": "Phường An",
+    "district_code": "070"
+  },
+  {
+    "code": "02218",
+    "name": "Hưng Thành",
+    "full_name": "Phường Hưng Thành",
+    "type": "Phường Hưng",
+    "district_code": "070"
+  },
+  {
+    "code": "02497",
+    "name": "Kim Phú",
+    "full_name": "Xã Kim Phú",
+    "type": "Xã Kim",
+    "district_code": "070"
+  },
+  {
+    "code": "02515",
+    "name": "Lưỡng Vượng",
+    "full_name": "Xã Lưỡng Vượng",
+    "type": "Xã Lưỡng",
+    "district_code": "070"
+  },
+  {
+    "code": "02203",
+    "name": "Minh Xuân",
+    "full_name": "Phường Minh Xuân",
+    "type": "Phường Minh",
+    "district_code": "070"
+  },
+  {
+    "code": "02509",
+    "name": "Mỹ Lâm",
+    "full_name": "Phường Mỹ Lâm",
+    "type": "Phường Mỹ",
+    "district_code": "070"
+  },
+  {
+    "code": "02212",
+    "name": "Nông Tiến",
+    "full_name": "Phường Nông Tiến",
+    "type": "Phường Nông",
+    "district_code": "070"
+  },
+  {
+    "code": "02200",
+    "name": "Phan Thiết",
+    "full_name": "Phường Phan Thiết",
+    "type": "Phường Phan",
+    "district_code": "070"
+  },
+  {
+    "code": "02216",
+    "name": "Tân Hà",
+    "full_name": "Phường Tân Hà",
+    "type": "Phường Tân",
+    "district_code": "070"
+  },
+  {
+    "code": "02206",
+    "name": "Tân Quang",
+    "full_name": "Phường Tân Quang",
+    "type": "Phường Tân",
+    "district_code": "070"
+  },
+  {
+    "code": "02521",
+    "name": "Thái Long",
+    "full_name": "Xã Thái Long",
+    "type": "Xã Thái",
+    "district_code": "070"
+  },
+  {
+    "code": "02209",
+    "name": "Tràng Đà",
+    "full_name": "Xã Tràng Đà",
+    "type": "Xã Tràng",
+    "district_code": "070"
+  },
+  {
+    "code": "02215",
+    "name": "Ỷ La",
+    "full_name": "Phường Ỷ La",
+    "type": "Phường Ỷ",
+    "district_code": "070"
+  },
+  {
+    "code": "02524",
+    "name": "Đội Cấn",
+    "full_name": "Phường Đội Cấn",
+    "type": "Phường Đội",
+    "district_code": "070"
+  }
+]

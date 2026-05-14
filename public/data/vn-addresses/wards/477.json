@@ -1,0 +1,79 @@
+[
+  {
+    "code": "19888",
+    "name": "Quảng An",
+    "full_name": "Xã Quảng An",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19879",
+    "name": "Quảng Công",
+    "full_name": "Xã Quảng Công",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19876",
+    "name": "Quảng Lợi",
+    "full_name": "Xã Quảng Lợi",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19873",
+    "name": "Quảng Ngạn",
+    "full_name": "Xã Quảng Ngạn",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19897",
+    "name": "Quảng Phú",
+    "full_name": "Xã Quảng Phú",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19882",
+    "name": "Quảng Phước",
+    "full_name": "Xã Quảng Phước",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19870",
+    "name": "Quảng Thái",
+    "full_name": "Xã Quảng Thái",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19891",
+    "name": "Quảng Thành",
+    "full_name": "Xã Quảng Thành",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19894",
+    "name": "Quảng Thọ",
+    "full_name": "Xã Quảng Thọ",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19885",
+    "name": "Quảng Vinh",
+    "full_name": "Xã Quảng Vinh",
+    "type": "Xã Quảng",
+    "district_code": "477"
+  },
+  {
+    "code": "19867",
+    "name": "Sịa",
+    "full_name": "Thị trấn Sịa",
+    "type": "Thị trấn",
+    "district_code": "477"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "code": "24041",
+    "name": "Cheo Reo",
+    "full_name": "Phường Cheo Reo",
+    "type": "Phường Cheo",
+    "district_code": "624"
+  },
+  {
+    "code": "24065",
+    "name": "Chư Băh",
+    "full_name": "Xã Chư Băh",
+    "type": "Xã Chư",
+    "district_code": "624"
+  },
+  {
+    "code": "24042",
+    "name": "Hòa Bình",
+    "full_name": "Phường Hòa Bình",
+    "type": "Phường Hòa",
+    "district_code": "624"
+  },
+  {
+    "code": "24064",
+    "name": "Ia RBol",
+    "full_name": "Xã Ia RBol",
+    "type": "Xã Ia",
+    "district_code": "624"
+  },
+  {
+    "code": "24070",
+    "name": "Ia RTô",
+    "full_name": "Xã Ia RTô",
+    "type": "Xã Ia",
+    "district_code": "624"
+  },
+  {
+    "code": "24073",
+    "name": "Ia Sao",
+    "full_name": "Xã Ia Sao",
+    "type": "Xã Ia",
+    "district_code": "624"
+  },
+  {
+    "code": "24045",
+    "name": "Sông Bờ",
+    "full_name": "Phường Sông Bờ",
+    "type": "Phường Sông",
+    "district_code": "624"
+  },
+  {
+    "code": "24044",
+    "name": "Đoàn Kết",
+    "full_name": "Phường Đoàn Kết",
+    "type": "Phường Đoàn",
+    "district_code": "624"
+  }
+]

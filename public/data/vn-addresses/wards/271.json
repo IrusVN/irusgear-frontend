@@ -1,0 +1,219 @@
+[
+  {
+    "code": "09697",
+    "name": "Ba Trại",
+    "full_name": "Xã Ba Trại",
+    "type": "Xã Ba",
+    "district_code": "271"
+  },
+  {
+    "code": "09703",
+    "name": "Ba Vì",
+    "full_name": "Xã Ba Vì",
+    "type": "Xã Ba",
+    "district_code": "271"
+  },
+  {
+    "code": "09673",
+    "name": "Cẩm Lĩnh",
+    "full_name": "Xã Cẩm Lĩnh",
+    "type": "Xã Cẩm",
+    "district_code": "271"
+  },
+  {
+    "code": "09688",
+    "name": "Cam Thượng",
+    "full_name": "Xã Cam Thượng",
+    "type": "Xã Cam",
+    "district_code": "271"
+  },
+  {
+    "code": "09637",
+    "name": "Châu Sơn",
+    "full_name": "Xã Châu Sơn",
+    "type": "Xã Châu",
+    "district_code": "271"
+  },
+  {
+    "code": "09667",
+    "name": "Chu Minh",
+    "full_name": "Xã Chu Minh",
+    "type": "Xã Chu",
+    "district_code": "271"
+  },
+  {
+    "code": "09628",
+    "name": "Cổ Đô",
+    "full_name": "Xã Cổ Đô",
+    "type": "Xã Cổ",
+    "district_code": "271"
+  },
+  {
+    "code": "09712",
+    "name": "Khánh Thượng",
+    "full_name": "Xã Khánh Thượng",
+    "type": "Xã Khánh",
+    "district_code": "271"
+  },
+  {
+    "code": "09661",
+    "name": "Minh Châu",
+    "full_name": "Xã Minh Châu",
+    "type": "Xã Minh",
+    "district_code": "271"
+  },
+  {
+    "code": "09700",
+    "name": "Minh Quang",
+    "full_name": "Xã Minh Quang",
+    "type": "Xã Minh",
+    "district_code": "271"
+  },
+  {
+    "code": "09640",
+    "name": "Phong Vân",
+    "full_name": "Xã Phong Vân",
+    "type": "Xã Phong",
+    "district_code": "271"
+  },
+  {
+    "code": "09649",
+    "name": "Phú Châu",
+    "full_name": "Xã Phú Châu",
+    "type": "Xã Phú",
+    "district_code": "271"
+  },
+  {
+    "code": "09625",
+    "name": "Phú Cường",
+    "full_name": "Xã Phú Cường",
+    "type": "Xã Phú",
+    "district_code": "271"
+  },
+  {
+    "code": "09646",
+    "name": "Phú Phương",
+    "full_name": "Xã Phú Phương",
+    "type": "Xã Phú",
+    "district_code": "271"
+  },
+  {
+    "code": "09658",
+    "name": "Phú Sơn",
+    "full_name": "Xã Phú Sơn",
+    "type": "Xã Phú",
+    "district_code": "271"
+  },
+  {
+    "code": "09643",
+    "name": "Phú Đông",
+    "full_name": "Xã Phú Đông",
+    "type": "Xã Phú",
+    "district_code": "271"
+  },
+  {
+    "code": "09676",
+    "name": "Sơn Đà",
+    "full_name": "Xã Sơn Đà",
+    "type": "Xã Sơn",
+    "district_code": "271"
+  },
+  {
+    "code": "09631",
+    "name": "Tản Hồng",
+    "full_name": "Xã Tản Hồng",
+    "type": "Xã Tản",
+    "district_code": "271"
+  },
+  {
+    "code": "09694",
+    "name": "Tản Lĩnh",
+    "full_name": "Xã Tản Lĩnh",
+    "type": "Xã Tản",
+    "district_code": "271"
+  },
+  {
+    "code": "09619",
+    "name": "Tây Đằng",
+    "full_name": "Thị trấn Tây Đằng",
+    "type": "Thị trấn Tây",
+    "district_code": "271"
+  },
+  {
+    "code": "09652",
+    "name": "Thái Hòa",
+    "full_name": "Xã Thái Hòa",
+    "type": "Xã Thái",
+    "district_code": "271"
+  },
+  {
+    "code": "09691",
+    "name": "Thuần Mỹ",
+    "full_name": "Xã Thuần Mỹ",
+    "type": "Xã Thuần",
+    "district_code": "271"
+  },
+  {
+    "code": "09685",
+    "name": "Thụy An",
+    "full_name": "Xã Thụy An",
+    "type": "Xã Thụy",
+    "district_code": "271"
+  },
+  {
+    "code": "09682",
+    "name": "Tiên Phong",
+    "full_name": "Xã Tiên Phong",
+    "type": "Xã Tiên",
+    "district_code": "271"
+  },
+  {
+    "code": "09670",
+    "name": "Tòng Bạt",
+    "full_name": "Xã Tòng Bạt",
+    "type": "Xã Tòng",
+    "district_code": "271"
+  },
+  {
+    "code": "09706",
+    "name": "Vân Hòa",
+    "full_name": "Xã Vân Hòa",
+    "type": "Xã Vân",
+    "district_code": "271"
+  },
+  {
+    "code": "09634",
+    "name": "Vạn Thắng",
+    "full_name": "Xã Vạn Thắng",
+    "type": "Xã Vạn",
+    "district_code": "271"
+  },
+  {
+    "code": "09664",
+    "name": "Vật Lại",
+    "full_name": "Xã Vật Lại",
+    "type": "Xã Vật",
+    "district_code": "271"
+  },
+  {
+    "code": "09709",
+    "name": "Yên Bài",
+    "full_name": "Xã Yên Bài",
+    "type": "Xã Yên",
+    "district_code": "271"
+  },
+  {
+    "code": "09679",
+    "name": "Đông Quang",
+    "full_name": "Xã Đông Quang",
+    "type": "Xã Đông",
+    "district_code": "271"
+  },
+  {
+    "code": "09655",
+    "name": "Đồng Thái",
+    "full_name": "Xã Đồng Thái",
+    "type": "Xã Đồng",
+    "district_code": "271"
+  }
+]

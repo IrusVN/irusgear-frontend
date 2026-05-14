@@ -1,0 +1,79 @@
+[
+  {
+    "code": "12025",
+    "name": "Cửu Cao",
+    "full_name": "Xã Cửu Cao",
+    "type": "Xã Cửu",
+    "district_code": "326"
+  },
+  {
+    "code": "12040",
+    "name": "Liên Nghĩa",
+    "full_name": "Xã Liên Nghĩa",
+    "type": "Xã Liên",
+    "district_code": "326"
+  },
+  {
+    "code": "12034",
+    "name": "Long Hưng",
+    "full_name": "Xã Long Hưng",
+    "type": "Xã Long",
+    "district_code": "326"
+  },
+  {
+    "code": "12049",
+    "name": "Mễ Sở",
+    "full_name": "Xã Mễ Sở",
+    "type": "Xã Mễ",
+    "district_code": "326"
+  },
+  {
+    "code": "12031",
+    "name": "Nghĩa Trụ",
+    "full_name": "Xã Nghĩa Trụ",
+    "type": "Xã Nghĩa",
+    "district_code": "326"
+  },
+  {
+    "code": "12028",
+    "name": "Phụng Công",
+    "full_name": "Xã Phụng Công",
+    "type": "Xã Phụng",
+    "district_code": "326"
+  },
+  {
+    "code": "12043",
+    "name": "Tân Tiến",
+    "full_name": "Xã Tân Tiến",
+    "type": "Xã Tân",
+    "district_code": "326"
+  },
+  {
+    "code": "12046",
+    "name": "Thắng Lợi",
+    "full_name": "Xã Thắng Lợi",
+    "type": "Xã Thắng",
+    "district_code": "326"
+  },
+  {
+    "code": "12019",
+    "name": "Văn Giang",
+    "full_name": "Thị trấn Văn Giang",
+    "type": "Thị trấn Văn",
+    "district_code": "326"
+  },
+  {
+    "code": "12037",
+    "name": "Vĩnh Khúc",
+    "full_name": "Xã Vĩnh Khúc",
+    "type": "Xã Vĩnh",
+    "district_code": "326"
+  },
+  {
+    "code": "12022",
+    "name": "Xuân Quan",
+    "full_name": "Xã Xuân Quan",
+    "type": "Xã Xuân",
+    "district_code": "326"
+  }
+]

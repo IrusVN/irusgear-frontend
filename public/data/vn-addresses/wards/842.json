@@ -1,0 +1,72 @@
+[
+  {
+    "code": "29239",
+    "name": "1",
+    "full_name": "Phường 1",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29245",
+    "name": "2",
+    "full_name": "Phường 2",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29242",
+    "name": "3",
+    "full_name": "Phường 3",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29236",
+    "name": "4",
+    "full_name": "Phường 4",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29248",
+    "name": "5",
+    "full_name": "Phường 5",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29251",
+    "name": "6",
+    "full_name": "Phường 6",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29254",
+    "name": "7",
+    "full_name": "Phường 7",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29257",
+    "name": "8",
+    "full_name": "Phường 8",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29260",
+    "name": "9",
+    "full_name": "Phường 9",
+    "type": "Phường",
+    "district_code": "842"
+  },
+  {
+    "code": "29263",
+    "name": "Long Đức",
+    "full_name": "Xã Long Đức",
+    "type": "Xã Long",
+    "district_code": "842"
+  }
+]

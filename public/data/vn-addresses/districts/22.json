@@ -1,0 +1,93 @@
+[
+  {
+    "code": "202",
+    "name": "Ba Chẽ",
+    "full_name": "Huyện Ba Chẽ",
+    "type": "Huyện Ba",
+    "province_code": "22"
+  },
+  {
+    "code": "198",
+    "name": "Bình Liêu",
+    "full_name": "Huyện Bình Liêu",
+    "type": "Huyện Bình",
+    "province_code": "22"
+  },
+  {
+    "code": "195",
+    "name": "Cẩm Phả",
+    "full_name": "Thành phố Cẩm Phả",
+    "type": "Thành phố Cẩm",
+    "province_code": "22"
+  },
+  {
+    "code": "207",
+    "name": "Cô Tô",
+    "full_name": "Huyện Cô Tô",
+    "type": "Huyện Cô",
+    "province_code": "22"
+  },
+  {
+    "code": "193",
+    "name": "Hạ Long",
+    "full_name": "Thành phố Hạ Long",
+    "type": "Thành phố Hạ",
+    "province_code": "22"
+  },
+  {
+    "code": "201",
+    "name": "Hải Hà",
+    "full_name": "Huyện Hải Hà",
+    "type": "Huyện Hải",
+    "province_code": "22"
+  },
+  {
+    "code": "194",
+    "name": "Móng Cái",
+    "full_name": "Thành phố Móng Cái",
+    "type": "Thành phố Móng",
+    "province_code": "22"
+  },
+  {
+    "code": "206",
+    "name": "Quảng Yên",
+    "full_name": "Thị xã Quảng Yên",
+    "type": "Thị xã Quảng",
+    "province_code": "22"
+  },
+  {
+    "code": "199",
+    "name": "Tiên Yên",
+    "full_name": "Huyện Tiên Yên",
+    "type": "Huyện Tiên",
+    "province_code": "22"
+  },
+  {
+    "code": "196",
+    "name": "Uông Bí",
+    "full_name": "Thành phố Uông Bí",
+    "type": "Thành phố Uông",
+    "province_code": "22"
+  },
+  {
+    "code": "203",
+    "name": "Vân Đồn",
+    "full_name": "Huyện Vân Đồn",
+    "type": "Huyện Vân",
+    "province_code": "22"
+  },
+  {
+    "code": "200",
+    "name": "Đầm Hà",
+    "full_name": "Huyện Đầm Hà",
+    "type": "Huyện Đầm",
+    "province_code": "22"
+  },
+  {
+    "code": "205",
+    "name": "Đông Triều",
+    "full_name": "Thị xã Đông Triều",
+    "type": "Thị xã Đông",
+    "province_code": "22"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "code": "03190",
+    "name": "Hừa Ngài",
+    "full_name": "Xã Hừa Ngài",
+    "type": "Xã Hừa",
+    "district_code": "097"
+  },
+  {
+    "code": "03196",
+    "name": "Huổi Lèng",
+    "full_name": "Xã Huổi Lèng",
+    "type": "Xã Huổi",
+    "district_code": "097"
+  },
+  {
+    "code": "03191",
+    "name": "Huổi Mí",
+    "full_name": "Xã Huổi Mí",
+    "type": "Xã Huổi",
+    "district_code": "097"
+  },
+  {
+    "code": "03200",
+    "name": "Ma Thì Hồ",
+    "full_name": "Xã Ma Thì Hồ",
+    "type": "Xã Ma Thì",
+    "district_code": "097"
+  },
+  {
+    "code": "03172",
+    "name": "Mường Chà",
+    "full_name": "Thị trấn Mường Chà",
+    "type": "Thị trấn Mường",
+    "district_code": "097"
+  },
+  {
+    "code": "03202",
+    "name": "Mường Mươn",
+    "full_name": "Xã Mường Mươn",
+    "type": "Xã Mường",
+    "district_code": "097"
+  },
+  {
+    "code": "03181",
+    "name": "Mường Tùng",
+    "full_name": "Xã Mường Tùng",
+    "type": "Xã Mường",
+    "district_code": "097"
+  },
+  {
+    "code": "03201",
+    "name": "Na Sang",
+    "full_name": "Xã Na Sang",
+    "type": "Xã Na",
+    "district_code": "097"
+  },
+  {
+    "code": "03194",
+    "name": "Nậm Nèn",
+    "full_name": "Xã Nậm Nèn",
+    "type": "Xã Nậm",
+    "district_code": "097"
+  },
+  {
+    "code": "03193",
+    "name": "Pa Ham",
+    "full_name": "Xã Pa Ham",
+    "type": "Xã Pa",
+    "district_code": "097"
+  },
+  {
+    "code": "03197",
+    "name": "Sa Lông",
+    "full_name": "Xã Sa Lông",
+    "type": "Xã Sa",
+    "district_code": "097"
+  },
+  {
+    "code": "03178",
+    "name": "Xá Tổng",
+    "full_name": "Xã Xá Tổng",
+    "type": "Xã Xá",
+    "district_code": "097"
+  }
+]

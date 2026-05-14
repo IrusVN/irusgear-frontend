@@ -1,0 +1,58 @@
+[
+  {
+    "code": "458",
+    "name": "Ba Đồn",
+    "full_name": "Thị xã Ba Đồn",
+    "type": "Thị xã Ba",
+    "province_code": "44"
+  },
+  {
+    "code": "455",
+    "name": "Bố Trạch",
+    "full_name": "Huyện Bố Trạch",
+    "type": "Huyện Bố",
+    "province_code": "44"
+  },
+  {
+    "code": "457",
+    "name": "Lệ Thủy",
+    "full_name": "Huyện Lệ Thủy",
+    "type": "Huyện Lệ",
+    "province_code": "44"
+  },
+  {
+    "code": "452",
+    "name": "Minh Hóa",
+    "full_name": "Huyện Minh Hóa",
+    "type": "Huyện Minh",
+    "province_code": "44"
+  },
+  {
+    "code": "456",
+    "name": "Quảng Ninh",
+    "full_name": "Huyện Quảng Ninh",
+    "type": "Huyện Quảng",
+    "province_code": "44"
+  },
+  {
+    "code": "454",
+    "name": "Quảng Trạch",
+    "full_name": "Huyện Quảng Trạch",
+    "type": "Huyện Quảng",
+    "province_code": "44"
+  },
+  {
+    "code": "453",
+    "name": "Tuyên Hóa",
+    "full_name": "Huyện Tuyên Hóa",
+    "type": "Huyện Tuyên",
+    "province_code": "44"
+  },
+  {
+    "code": "450",
+    "name": "Đồng Hới",
+    "full_name": "Thành phố Đồng Hới",
+    "type": "Thành phố Đồng",
+    "province_code": "44"
+  }
+]

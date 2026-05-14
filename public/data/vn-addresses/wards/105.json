@@ -1,0 +1,51 @@
+[
+  {
+    "code": "03386",
+    "name": "Quyết Thắng",
+    "full_name": "Phường Quyết Thắng",
+    "type": "Phường Quyết",
+    "district_code": "105"
+  },
+  {
+    "code": "03388",
+    "name": "Quyết Tiến",
+    "full_name": "Phường Quyết Tiến",
+    "type": "Phường Quyết",
+    "district_code": "105"
+  },
+  {
+    "code": "03409",
+    "name": "San Thàng",
+    "full_name": "Xã San Thàng",
+    "type": "Xã San",
+    "district_code": "105"
+  },
+  {
+    "code": "03403",
+    "name": "Sùng Phài",
+    "full_name": "Xã Sùng Phài",
+    "type": "Xã Sùng",
+    "district_code": "105"
+  },
+  {
+    "code": "03387",
+    "name": "Tân Phong",
+    "full_name": "Phường Tân Phong",
+    "type": "Phường Tân",
+    "district_code": "105"
+  },
+  {
+    "code": "03389",
+    "name": "Đoàn Kết",
+    "full_name": "Phường Đoàn Kết",
+    "type": "Phường Đoàn",
+    "district_code": "105"
+  },
+  {
+    "code": "03408",
+    "name": "Đông Phong",
+    "full_name": "Phường Đông Phong",
+    "type": "Phường Đông",
+    "district_code": "105"
+  }
+]

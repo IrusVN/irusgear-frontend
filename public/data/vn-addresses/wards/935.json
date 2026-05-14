@@ -1,0 +1,72 @@
+[
+  {
+    "code": "31441",
+    "name": "Nàng Mau",
+    "full_name": "Thị trấn Nàng Mau",
+    "type": "Thị trấn Nàng",
+    "district_code": "935"
+  },
+  {
+    "code": "31468",
+    "name": "Vị Bình",
+    "full_name": "Xã Vị Bình",
+    "type": "Xã Vị",
+    "district_code": "935"
+  },
+  {
+    "code": "31450",
+    "name": "Vị Thắng",
+    "full_name": "Xã Vị Thắng",
+    "type": "Xã Vị",
+    "district_code": "935"
+  },
+  {
+    "code": "31465",
+    "name": "Vị Thanh",
+    "full_name": "Xã Vị Thanh",
+    "type": "Xã Vị",
+    "district_code": "935"
+  },
+  {
+    "code": "31447",
+    "name": "Vị Thuỷ",
+    "full_name": "Xã Vị Thuỷ",
+    "type": "Xã Vị",
+    "district_code": "935"
+  },
+  {
+    "code": "31444",
+    "name": "Vị Trung",
+    "full_name": "Xã Vị Trung",
+    "type": "Xã Vị",
+    "district_code": "935"
+  },
+  {
+    "code": "31462",
+    "name": "Vị Đông",
+    "full_name": "Xã Vị Đông",
+    "type": "Xã Vị",
+    "district_code": "935"
+  },
+  {
+    "code": "31453",
+    "name": "Vĩnh Thuận Tây",
+    "full_name": "Xã Vĩnh Thuận Tây",
+    "type": "Xã Vĩnh Thuận",
+    "district_code": "935"
+  },
+  {
+    "code": "31456",
+    "name": "Vĩnh Trung",
+    "full_name": "Xã Vĩnh Trung",
+    "type": "Xã Vĩnh",
+    "district_code": "935"
+  },
+  {
+    "code": "31459",
+    "name": "Vĩnh Tường",
+    "full_name": "Xã Vĩnh Tường",
+    "type": "Xã Vĩnh",
+    "district_code": "935"
+  }
+]

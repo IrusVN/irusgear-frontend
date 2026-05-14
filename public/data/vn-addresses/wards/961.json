@@ -1,0 +1,58 @@
+[
+  {
+    "code": "31891",
+    "name": "Hòa Bình",
+    "full_name": "Thị trấn Hòa Bình",
+    "type": "Thị trấn Hòa",
+    "district_code": "961"
+  },
+  {
+    "code": "31915",
+    "name": "Minh Diệu",
+    "full_name": "Xã Minh Diệu",
+    "type": "Xã Minh",
+    "district_code": "961"
+  },
+  {
+    "code": "31918",
+    "name": "Vĩnh Bình",
+    "full_name": "Xã Vĩnh Bình",
+    "type": "Xã Vĩnh",
+    "district_code": "961"
+  },
+  {
+    "code": "31927",
+    "name": "Vĩnh Hậu",
+    "full_name": "Xã Vĩnh Hậu",
+    "type": "Xã Vĩnh",
+    "district_code": "961"
+  },
+  {
+    "code": "31930",
+    "name": "Vĩnh Hậu A",
+    "full_name": "Xã Vĩnh Hậu A",
+    "type": "Xã Vĩnh Hậu",
+    "district_code": "961"
+  },
+  {
+    "code": "31933",
+    "name": "Vĩnh Mỹ A",
+    "full_name": "Xã Vĩnh Mỹ A",
+    "type": "Xã Vĩnh Mỹ",
+    "district_code": "961"
+  },
+  {
+    "code": "31924",
+    "name": "Vĩnh Mỹ B",
+    "full_name": "Xã Vĩnh Mỹ B",
+    "type": "Xã Vĩnh Mỹ",
+    "district_code": "961"
+  },
+  {
+    "code": "31936",
+    "name": "Vĩnh Thịnh",
+    "full_name": "Xã Vĩnh Thịnh",
+    "type": "Xã Vĩnh",
+    "district_code": "961"
+  }
+]

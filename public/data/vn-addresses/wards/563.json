@@ -1,0 +1,65 @@
+[
+  {
+    "code": "22315",
+    "name": "Hòa An",
+    "full_name": "Xã Hòa An",
+    "type": "Xã Hòa",
+    "district_code": "563"
+  },
+  {
+    "code": "22309",
+    "name": "Hòa Hội",
+    "full_name": "Xã Hòa Hội",
+    "type": "Xã Hòa",
+    "district_code": "563"
+  },
+  {
+    "code": "22303",
+    "name": "Hòa Quang Bắc",
+    "full_name": "Xã Hòa Quang Bắc",
+    "type": "Xã Hòa Quang",
+    "district_code": "563"
+  },
+  {
+    "code": "22306",
+    "name": "Hòa Quang Nam",
+    "full_name": "Xã Hòa Quang Nam",
+    "type": "Xã Hòa Quang",
+    "district_code": "563"
+  },
+  {
+    "code": "22324",
+    "name": "Hòa Thắng",
+    "full_name": "Xã Hòa Thắng",
+    "type": "Xã Hòa",
+    "district_code": "563"
+  },
+  {
+    "code": "22312",
+    "name": "Hòa Trị",
+    "full_name": "Xã Hòa Trị",
+    "type": "Xã Hòa",
+    "district_code": "563"
+  },
+  {
+    "code": "22321",
+    "name": "Hòa Định Tây",
+    "full_name": "Xã Hòa Định Tây",
+    "type": "Xã Hòa Định",
+    "district_code": "563"
+  },
+  {
+    "code": "22318",
+    "name": "Hòa Định Đông",
+    "full_name": "Xã Hòa Định Đông",
+    "type": "Xã Hòa Định",
+    "district_code": "563"
+  },
+  {
+    "code": "22319",
+    "name": "Phú Hoà",
+    "full_name": "Thị trấn Phú Hoà",
+    "type": "Thị trấn Phú",
+    "district_code": "563"
+  }
+]

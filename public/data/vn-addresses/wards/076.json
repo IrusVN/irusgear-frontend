@@ -1,0 +1,219 @@
+[
+  {
+    "code": "02554",
+    "name": "Bình Yên",
+    "full_name": "Xã Bình Yên",
+    "type": "Xã Bình",
+    "district_code": "076"
+  },
+  {
+    "code": "02563",
+    "name": "Cấp Tiến",
+    "full_name": "Xã Cấp Tiến",
+    "type": "Xã Cấp",
+    "district_code": "076"
+  },
+  {
+    "code": "02599",
+    "name": "Chi Thiết",
+    "full_name": "Xã Chi Thiết",
+    "type": "Xã Chi",
+    "district_code": "076"
+  },
+  {
+    "code": "02623",
+    "name": "Hào Phú",
+    "full_name": "Xã Hào Phú",
+    "type": "Xã Hào",
+    "district_code": "076"
+  },
+  {
+    "code": "02608",
+    "name": "Hồng Lạc",
+    "full_name": "Xã Hồng Lạc",
+    "type": "Xã Hồng",
+    "district_code": "076"
+  },
+  {
+    "code": "02578",
+    "name": "Hợp Hòa",
+    "full_name": "Xã Hợp Hòa",
+    "type": "Xã Hợp",
+    "district_code": "076"
+  },
+  {
+    "code": "02566",
+    "name": "Hợp Thành",
+    "full_name": "Xã Hợp Thành",
+    "type": "Xã Hợp",
+    "district_code": "076"
+  },
+  {
+    "code": "02575",
+    "name": "Kháng Nhật",
+    "full_name": "Xã Kháng Nhật",
+    "type": "Xã Kháng",
+    "district_code": "076"
+  },
+  {
+    "code": "02557",
+    "name": "Lương Thiện",
+    "full_name": "Xã Lương Thiện",
+    "type": "Xã Lương",
+    "district_code": "076"
+  },
+  {
+    "code": "02542",
+    "name": "Minh Thanh",
+    "full_name": "Xã Minh Thanh",
+    "type": "Xã Minh",
+    "district_code": "076"
+  },
+  {
+    "code": "02614",
+    "name": "Ninh Lai",
+    "full_name": "Xã Ninh Lai",
+    "type": "Xã Ninh",
+    "district_code": "076"
+  },
+  {
+    "code": "02611",
+    "name": "Phú Lương",
+    "full_name": "Xã Phú Lương",
+    "type": "Xã Phú",
+    "district_code": "076"
+  },
+  {
+    "code": "02569",
+    "name": "Phúc Ứng",
+    "full_name": "Xã Phúc Ứng",
+    "type": "Xã Phúc",
+    "district_code": "076"
+  },
+  {
+    "code": "02584",
+    "name": "Quyết Thắng",
+    "full_name": "Xã Quyết Thắng",
+    "type": "Xã Quyết",
+    "district_code": "076"
+  },
+  {
+    "code": "02536",
+    "name": "Sơn Dương",
+    "full_name": "Thị trấn Sơn Dương",
+    "type": "Thị trấn Sơn",
+    "district_code": "076"
+  },
+  {
+    "code": "02620",
+    "name": "Sơn Nam",
+    "full_name": "Xã Sơn Nam",
+    "type": "Xã Sơn",
+    "district_code": "076"
+  },
+  {
+    "code": "02626",
+    "name": "Tam Đa",
+    "full_name": "Xã Tam Đa",
+    "type": "Xã Tam",
+    "district_code": "076"
+  },
+  {
+    "code": "02590",
+    "name": "Tân Thanh",
+    "full_name": "Xã Tân Thanh",
+    "type": "Xã Tân",
+    "district_code": "076"
+  },
+  {
+    "code": "02545",
+    "name": "Tân Trào",
+    "full_name": "Xã Tân Trào",
+    "type": "Xã Tân",
+    "district_code": "076"
+  },
+  {
+    "code": "02605",
+    "name": "Thiện Kế",
+    "full_name": "Xã Thiện Kế",
+    "type": "Xã Thiện",
+    "district_code": "076"
+  },
+  {
+    "code": "02551",
+    "name": "Thượng Ấm",
+    "full_name": "Xã Thượng Ấm",
+    "type": "Xã Thượng",
+    "district_code": "076"
+  },
+  {
+    "code": "02539",
+    "name": "Trung Yên",
+    "full_name": "Xã Trung Yên",
+    "type": "Xã Trung",
+    "district_code": "076"
+  },
+  {
+    "code": "02632",
+    "name": "Trường Sinh",
+    "full_name": "Xã Trường Sinh",
+    "type": "Xã Trường",
+    "district_code": "076"
+  },
+  {
+    "code": "02560",
+    "name": "Tú Thịnh",
+    "full_name": "Xã Tú Thịnh",
+    "type": "Xã Tú",
+    "district_code": "076"
+  },
+  {
+    "code": "02596",
+    "name": "Văn Phú",
+    "full_name": "Xã Văn Phú",
+    "type": "Xã Văn",
+    "district_code": "076"
+  },
+  {
+    "code": "02593",
+    "name": "Vân Sơn",
+    "full_name": "Xã Vân Sơn",
+    "type": "Xã Vân",
+    "district_code": "076"
+  },
+  {
+    "code": "02548",
+    "name": "Vĩnh Lợi",
+    "full_name": "Xã Vĩnh Lợi",
+    "type": "Xã Vĩnh",
+    "district_code": "076"
+  },
+  {
+    "code": "02617",
+    "name": "Đại Phú",
+    "full_name": "Xã Đại Phú",
+    "type": "Xã Đại",
+    "district_code": "076"
+  },
+  {
+    "code": "02602",
+    "name": "Đông Lợi",
+    "full_name": "Xã Đông Lợi",
+    "type": "Xã Đông",
+    "district_code": "076"
+  },
+  {
+    "code": "02587",
+    "name": "Đồng Quý",
+    "full_name": "Xã Đồng Quý",
+    "type": "Xã Đồng",
+    "district_code": "076"
+  },
+  {
+    "code": "02572",
+    "name": "Đông Thọ",
+    "full_name": "Xã Đông Thọ",
+    "type": "Xã Đông",
+    "district_code": "076"
+  }
+]

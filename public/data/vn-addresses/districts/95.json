@@ -1,0 +1,51 @@
+[
+  {
+    "code": "954",
+    "name": "Bạc Liêu",
+    "full_name": "Thành phố Bạc Liêu",
+    "type": "Thành phố Bạc",
+    "province_code": "95"
+  },
+  {
+    "code": "959",
+    "name": "Giá Rai",
+    "full_name": "Thị xã Giá Rai",
+    "type": "Thị xã Giá",
+    "province_code": "95"
+  },
+  {
+    "code": "961",
+    "name": "Hoà Bình",
+    "full_name": "Huyện Hoà Bình",
+    "type": "Huyện Hoà",
+    "province_code": "95"
+  },
+  {
+    "code": "956",
+    "name": "Hồng Dân",
+    "full_name": "Huyện Hồng Dân",
+    "type": "Huyện Hồng",
+    "province_code": "95"
+  },
+  {
+    "code": "957",
+    "name": "Phước Long",
+    "full_name": "Huyện Phước Long",
+    "type": "Huyện Phước",
+    "province_code": "95"
+  },
+  {
+    "code": "958",
+    "name": "Vĩnh Lợi",
+    "full_name": "Huyện Vĩnh Lợi",
+    "type": "Huyện Vĩnh",
+    "province_code": "95"
+  },
+  {
+    "code": "960",
+    "name": "Đông Hải",
+    "full_name": "Huyện Đông Hải",
+    "type": "Huyện Đông",
+    "province_code": "95"
+  }
+]

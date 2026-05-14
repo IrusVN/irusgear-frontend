@@ -1,0 +1,72 @@
+[
+  {
+    "code": "25975",
+    "name": "An Phú",
+    "full_name": "Phường An Phú",
+    "type": "Phường An",
+    "district_code": "725"
+  },
+  {
+    "code": "25981",
+    "name": "An Sơn",
+    "full_name": "Xã An Sơn",
+    "type": "Xã An",
+    "district_code": "725"
+  },
+  {
+    "code": "25963",
+    "name": "An Thạnh",
+    "full_name": "Phường An Thạnh",
+    "type": "Phường An",
+    "district_code": "725"
+  },
+  {
+    "code": "25969",
+    "name": "Bình Chuẩn",
+    "full_name": "Phường Bình Chuẩn",
+    "type": "Phường Bình",
+    "district_code": "725"
+  },
+  {
+    "code": "25987",
+    "name": "Bình Hòa",
+    "full_name": "Phường Bình Hòa",
+    "type": "Phường Bình",
+    "district_code": "725"
+  },
+  {
+    "code": "25984",
+    "name": "Bình Nhâm",
+    "full_name": "Phường Bình Nhâm",
+    "type": "Phường Bình",
+    "district_code": "725"
+  },
+  {
+    "code": "25978",
+    "name": "Hưng Định",
+    "full_name": "Phường Hưng Định",
+    "type": "Phường Hưng",
+    "district_code": "725"
+  },
+  {
+    "code": "25966",
+    "name": "Lái Thiêu",
+    "full_name": "Phường Lái Thiêu",
+    "type": "Phường Lái",
+    "district_code": "725"
+  },
+  {
+    "code": "25972",
+    "name": "Thuận Giao",
+    "full_name": "Phường Thuận Giao",
+    "type": "Phường Thuận",
+    "district_code": "725"
+  },
+  {
+    "code": "25990",
+    "name": "Vĩnh Phú",
+    "full_name": "Phường Vĩnh Phú",
+    "type": "Phường Vĩnh",
+    "district_code": "725"
+  }
+]

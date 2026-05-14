@@ -1,0 +1,58 @@
+[
+  {
+    "code": "00697",
+    "name": "Minh Khai",
+    "full_name": "Phường Minh Khai",
+    "type": "Phường Minh",
+    "district_code": "024"
+  },
+  {
+    "code": "00692",
+    "name": "Ngọc Hà",
+    "full_name": "Phường Ngọc Hà",
+    "type": "Phường Ngọc",
+    "district_code": "024"
+  },
+  {
+    "code": "00700",
+    "name": "Ngọc Đường",
+    "full_name": "Xã Ngọc Đường",
+    "type": "Xã Ngọc",
+    "district_code": "024"
+  },
+  {
+    "code": "00694",
+    "name": "Nguyễn Trãi",
+    "full_name": "Phường Nguyễn Trãi",
+    "type": "Phường Nguyễn",
+    "district_code": "024"
+  },
+  {
+    "code": "00949",
+    "name": "Phương Thiện",
+    "full_name": "Xã Phương Thiện",
+    "type": "Xã Phương",
+    "district_code": "024"
+  },
+  {
+    "code": "00946",
+    "name": "Phương Độ",
+    "full_name": "Xã Phương Độ",
+    "type": "Xã Phương",
+    "district_code": "024"
+  },
+  {
+    "code": "00688",
+    "name": "Quang Trung",
+    "full_name": "Phường Quang Trung",
+    "type": "Phường Quang",
+    "district_code": "024"
+  },
+  {
+    "code": "00691",
+    "name": "Trần Phú",
+    "full_name": "Phường Trần Phú",
+    "type": "Phường Trần",
+    "district_code": "024"
+  }
+]
