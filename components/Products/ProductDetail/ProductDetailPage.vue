@@ -212,6 +212,7 @@ onBeforeUnmount(() => {
 
 @media only screen and (min-width: 769px) and (max-width: 990px) {
   .product-detail-page {
+    margin-top: max(12px, calc(var(--customer-sidebar-offset, 104px) - 6.5rem + 12px));
     max-width: 1200px !important;
     padding: 0 10px;
     width: 100% !important;
