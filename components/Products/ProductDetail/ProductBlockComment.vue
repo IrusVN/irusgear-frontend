@@ -3,7 +3,7 @@
     <div class="comment-form">
       <p id="total_comment" class="comment-form-title">{{ $t('product.qaTitle') }}</p>
       <div class="comment-form-content">
-        <i class="bi bi-chat-dots" style="font-size:48px;color:var(--irus-color-accent);"></i>
+        <i class="bi bi-chat-dots comment-form-icon"></i>
         <div class="question">
           <div class="d-flex align-items-center">
             <p class="question-title">{{ $t('product.askQuestion') }}</p>
@@ -341,12 +341,18 @@ const loadMoreQuestions = async () => {
 
 .comment-form-content {
   align-items: center;
-  background: #fff7f7;
-  border: 1px solid #fecaca;
+  background: #fff;
+  border: 1px solid #111827;
   border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   display: flex;
   gap: 20px;
   padding: 16px;
+}
+
+.comment-form-icon {
+  color: #111827;
+  font-size: 48px;
 }
 
 .question {
@@ -391,8 +397,8 @@ const loadMoreQuestions = async () => {
 
 .button__cmt-send {
   align-items: center;
-  background: var(--irus-color-accent);
-  border: none;
+  background: #111827;
+  border: 1px solid #111827;
   border-radius: 10px;
   color: #fff;
   cursor: pointer;
@@ -404,6 +410,11 @@ const loadMoreQuestions = async () => {
   justify-content: center;
   white-space: nowrap;
   padding: 12px 14px;
+}
+
+.button__cmt-send:hover:not(:disabled) {
+  background: #000;
+  border-color: #000;
 }
 
 .button__cmt-send:disabled {
