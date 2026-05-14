@@ -249,11 +249,14 @@ onBeforeUnmount(() => {
   }
 
   .detail-top-layout {
+    flex-direction: column;
     gap: 0;
   }
 
   .detail-top-layout>.box-detail-product__box-left,
   .detail-top-layout>.box-detail-product__box-center {
+    flex: 0 0 100%;
+    max-width: 100%;
     position: relative;
     top: 10px !important;
     width: 100%;
