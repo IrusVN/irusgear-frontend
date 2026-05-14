@@ -169,7 +169,7 @@
               <!-- Notification Dropdown -->
               <div
                 class="header-icon-dropdown-wrapper position-relative d-none d-xl-inline-flex"
-                @mouseenter="isNotiDropdownOpen = true"
+                @mouseenter="handleNotiDropdownEnter"
                 @mouseleave="isNotiDropdownOpen = false"
               >
                 <button
@@ -179,11 +179,11 @@
                 >
                   <i class="bi bi-bell"></i>
                   <span
-                    v-if="unreadNotiCount > 0"
+                    v-if="notificationStore.unreadCount > 0"
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
                     style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;"
                   >
-                    {{ unreadNotiCount > 9 ? '9+' : unreadNotiCount }}
+                    {{ notificationStore.unreadCount > 9 ? '9+' : notificationStore.unreadCount }}
                   </span>
                 </button>
 
@@ -192,30 +192,45 @@
                     <div class="header-dropdown__header">
                       <span class="header-dropdown__title">Thông báo</span>
                       <button
-                        v-if="unreadNotiCount > 0"
+                        v-if="notificationStore.unreadCount > 0"
                         type="button"
                         class="header-dropdown__mark-read"
-                        @click="markAllRead"
+                        @click="handleMarkAllRead"
                       >
                         Đánh dấu đã đọc
                       </button>
                     </div>
 
-                    <div v-if="mockNotifications.length === 0" class="header-dropdown__empty">
+                    <!-- Loading spinner -->
+                    <div v-if="notificationStore.isLoading" class="header-dropdown__loading">
+                      <div class="noti-spinner"></div>
+                      <p>Đang tải...</p>
+                    </div>
+
+                    <!-- Error state -->
+                    <div v-else-if="notiLoadError" class="header-dropdown__empty">
+                      <i class="bi bi-exclamation-triangle"></i>
+                      <p>Không thể tải thông báo</p>
+                    </div>
+
+                    <!-- Empty state -->
+                    <div v-else-if="!notificationStore.isLoading && notificationStore.notifications.length === 0" class="header-dropdown__empty">
                       <i class="bi bi-bell-slash"></i>
                       <p>Không có thông báo</p>
                     </div>
 
+                    <!-- Notifications list -->
                     <div v-else class="header-dropdown__body">
                       <div class="header-dropdown__scroll">
                         <div
-                          v-for="noti in mockNotifications"
+                          v-for="noti in notificationStore.notifications"
                           :key="noti.id"
                           class="noti-item"
                           :class="{ 'noti-item--unread': !noti.isRead }"
+                          @click="handleNotiClick(noti)"
                         >
-                          <div class="noti-item__icon" :class="`noti-item__icon--${noti.type}`">
-                            <i :class="noti.icon"></i>
+                          <div class="noti-item__icon" :class="`noti-item__icon--${noti.type || 'system'}`">
+                            <i :class="noti.icon || 'bi bi-bell'"></i>
                           </div>
                           <div class="noti-item__content">
                             <p class="noti-item__text">{{ noti.text }}</p>
@@ -226,8 +241,8 @@
                             <button
                               type="button"
                               class="noti-item__close"
-                              :aria-label="'Xoá thông báo'"
-                              @click="removeNotification(noti.id)"
+                              aria-label="Xoá thông báo"
+                              @click.stop="handleRemoveNotification(noti.id)"
                             >
                               <i class="bi bi-x"></i>
                             </button>
@@ -306,15 +321,16 @@
           </div>
 
           <div
-            class="d-none d-lg-flex align-items-center justify-content-between gap-3 px-3 px-xl-4 py-2 header-secondary-nav"
+            class="d-none d-md-flex align-items-center justify-content-between gap-2 gap-lg-3 px-2 px-md-3 px-xl-4 py-2 header-secondary-nav"
             :class="{ 'is-hidden': isSecondaryNavHidden }"
           >
-            <div class="d-flex align-items-center gap-1 gap-xl-2 flex-nowrap">
+            <div class="d-flex align-items-center gap-1 gap-xl-2 flex-nowrap flex-shrink-0">
               <NuxtLink
-                v-for="item in primaryNavItems"
+                v-for="(item, idx) in primaryNavItems"
                 :key="item.label"
                 :to="item.to"
-                class="btn header-nav-link d-inline-flex align-items-center gap-2 px-3 py-2 border-0"
+                class="btn header-nav-link d-inline-flex align-items-center gap-1 gap-lg-2 px-2 px-lg-3 py-2 border-0"
+                :class="getPrimaryNavItemClass(idx)"
               >
                 <i :class="item.icon"></i>
                 <span>{{ item.label }}</span>
@@ -324,7 +340,7 @@
                 <button
                   ref="productsButtonRef"
                   type="button"
-                  class="btn header-nav-link d-inline-flex align-items-center gap-2 px-3 py-2 border-0"
+                  class="btn header-nav-link d-inline-flex align-items-center gap-1 gap-lg-2 px-2 px-lg-3 py-2 border-0"
                   :class="{ 'is-open': isProductsMenuOpen }"
                   :aria-expanded="isProductsMenuOpen ? 'true' : 'false'"
                   aria-haspopup="true"
@@ -338,17 +354,17 @@
             </div>
 
             <div class="d-flex align-items-center gap-2 flex-nowrap">
-              <div class="vr opacity-25 mx-1"></div>
+              <div class="vr opacity-25 mx-1 d-none d-lg-block"></div>
 
-              <div class="d-flex align-items-center gap-1 px-2 py-1 rounded-pill featured-nav">
-                <span class="featured-nav-label d-none d-xl-inline px-2">{{ $t('home.category') }}</span>
+              <div class="d-flex align-items-center gap-1 px-1 px-lg-2 py-1 rounded-pill featured-nav">
+                <span v-if="false" class="featured-nav-label d-none d-xl-inline px-2">{{ $t('home.category') }}</span>
 
                 <NuxtLink
                   v-for="item in featuredNavItems"
                   :key="item.label"
                   :to="item.to"
                   :class="[
-                    'btn featured-nav-link d-inline-flex align-items-center gap-2 rounded-pill border-0 px-3 py-2',
+                    'btn featured-nav-link d-inline-flex align-items-center gap-1 rounded-pill border-0 px-2 px-lg-3 py-2',
                     { 'featured-nav-link--active': isFeaturedNavItemActive(item) },
                   ]"
                   :aria-current="isFeaturedNavItemActive(item) ? 'page' : undefined"
@@ -535,6 +551,7 @@ import { useWishlistStore } from '@/stores/wishlistStore'
 import { useSearchStore } from '@/stores/searchStore'
 import { getUserRoleKey } from '@/utils/roleHelper'
 import { useChatbotStore } from '@/stores/chatbotStore'
+import { useNotificationStore } from '@/stores/notificationStore'
 
 const auth = useAuthStore()
 const cartStore = useCartStore()
@@ -542,6 +559,7 @@ const homeStore = useHomeStore()
 const wishlistStore = useWishlistStore()
 const chatbotStore = useChatbotStore()
 const searchStore = useSearchStore()
+const notificationStore = useNotificationStore()
 const { user } = storeToRefs(auth)
 const { itemCount } = storeToRefs(cartStore)
 const { itemCount: wishlistCount } = storeToRefs(wishlistStore)
@@ -564,6 +582,7 @@ const headerSearchKeyword = ref('')
 const searchAnchorRect = ref(null)
 const isCartDropdownOpen = ref(false)
 const isNotiDropdownOpen = ref(false)
+const notiLoadError = ref(false)
 const searchQuery = ref('')
 let customerSidebarResizeObserver = null
 let customerSidebarOffsetFrame = null
@@ -947,6 +966,16 @@ const primaryNavItems = computed(() => [
   },
 ])
 
+// Progressive hiding: Tin tức (lg-), Khuyến mãi (md-), Liên hệ (sm-)
+// idx 0=Trang chủ và idx 4=Sản phẩm luôn hiển thị
+const getPrimaryNavItemClass = (index) => {
+  if (index === 0 || index === 4) return ''
+  if (index === 1) return 'd-none d-lg-flex'   // Tin tức: ẩn < 992px
+  if (index === 2) return 'd-none d-md-flex'   // Khuyến mãi: ẩn < 768px
+  if (index === 3) return 'd-none d-sm-flex'   // Liên hệ: ẩn < 576px
+  return ''
+}
+
 const buildProductsCategoryLink = (category) => {
   const query = new URLSearchParams({
     category,
@@ -986,58 +1015,36 @@ const formatCartVariant = (options) => {
   return Object.values(options).filter(Boolean).join(' · ')
 }
 
-// Notification mock data
-const mockNotifications = ref([
-  {
-    id: 1,
-    type: 'order',
-    icon: 'bi bi-box-seam',
-    text: 'Đơn hàng #DH-28471 đã được giao thành công',
-    time: '2 phút trước',
-    isRead: false,
-  },
-  {
-    id: 2,
-    type: 'promo',
-    icon: 'bi bi-tag',
-    text: 'Flash Sale 50% — Kết thúc trong 3 giờ!',
-    time: '15 phút trước',
-    isRead: false,
-  },
-  {
-    id: 3,
-    type: 'review',
-    icon: 'bi bi-star',
-    text: 'Đánh giá sản phẩm iPhone 16 Pro Max nhận ưu đãi 200k',
-    time: '1 giờ trước',
-    isRead: true,
-  },
-  {
-    id: 4,
-    type: 'system',
-    icon: 'bi bi-shield-check',
-    text: 'Cập nhật bảo mật: Đổi mật khẩu định kỳ',
-    time: 'Hôm qua',
-    isRead: true,
-  },
-  {
-    id: 5,
-    type: 'order',
-    icon: 'bi bi-truck',
-    text: 'Đơn hàng #DH-28450 đang được vận chuyển',
-    time: 'Hôm qua',
-    isRead: true,
-  },
-])
+// Notification helpers
+let _notiFetched = false
 
-const unreadNotiCount = computed(() => mockNotifications.value.filter(n => !n.isRead).length)
+const handleNotiDropdownEnter = () => {
+  isNotiDropdownOpen.value = true
+  if (!user.value) return
+  if (notificationStore.isLoading) return
 
-const markAllRead = () => {
-  mockNotifications.value = mockNotifications.value.map(n => ({ ...n, isRead: true }))
+  if (!notificationStore.hydrated || !_notiFetched) {
+    notiLoadError.value = false
+    notificationStore.fetchNotifications().catch(() => {
+      notiLoadError.value = true
+    })
+    notificationStore.fetchUnreadCount()
+    _notiFetched = true
+  }
 }
 
-const removeNotification = (id) => {
-  mockNotifications.value = mockNotifications.value.filter(n => n.id !== id)
+const handleNotiClick = (noti) => {
+  if (!noti.isRead) {
+    notificationStore.markAsRead(noti.id)
+  }
+}
+
+const handleMarkAllRead = () => {
+  notificationStore.markAllAsRead()
+}
+
+const handleRemoveNotification = async (id) => {
+  await notificationStore.removeNotification(id)
 }
 
 const confirmRemoveCartItem = (item) => {
@@ -1176,9 +1183,16 @@ const featuredNavItems = computed(() => [
 .header-text-btn,
 .header-nav-link,
 .featured-nav-link {
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
+}
+
+@media (min-width: 1200px) {
+  .header-nav-link,
+  .featured-nav-link {
+    font-size: 0.95rem;
+  }
 }
 
 .header-nav-link-chevron {
@@ -1281,6 +1295,7 @@ const featuredNavItems = computed(() => [
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  white-space: nowrap;
   text-transform: uppercase;
 }
 
@@ -2166,5 +2181,37 @@ const featuredNavItems = computed(() => [
 .dropdown-fade-leave-from {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* Notification loading spinner */
+.header-dropdown__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 20px;
+  color: #8e8e93;
+}
+
+.header-dropdown__loading p {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0;
+  color: #6b7280;
+}
+
+.noti-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(15, 23, 42, 0.1);
+  border-top-color: #111827;
+  border-radius: 50%;
+  animation: notiSpin 0.7s linear infinite;
+}
+
+@keyframes notiSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 </style>

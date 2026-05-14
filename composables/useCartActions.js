@@ -3,11 +3,13 @@ import { navigateTo, useLocalePath } from "#imports";
 import { toast } from "vue-sonner";
 import { useCartStore } from "@/stores/cartStore";
 import { useProductStore } from "@/stores/productStore";
+import { useI18n } from "vue-i18n";
 
 export const useCartActions = () => {
   const cartStore = useCartStore();
   const productStore = useProductStore();
   const localePath = useLocalePath();
+  const { t } = useI18n();
 
   const cartBusy = computed(() => cartStore.isMutating);
 
@@ -55,28 +57,33 @@ export const useCartActions = () => {
     const detail = productStore.productDetail;
 
     if (!detail) {
-      toast.warning("Không tìm thấy sản phẩm để thêm vào giỏ.");
+      toast.warning(t("cart.productNotFound"));
+      return null;
+    }
+
+    if (!detail.stock?.inStock || detail.stock?.availableStock === 0) {
+      toast.warning(t("cart.outOfStockForCart"));
       return null;
     }
 
     if (!detail.purchase?.addToCartEnabled) {
-      toast.warning("Sản phẩm hiện chưa thể thêm vào giỏ hàng.");
+      toast.warning(t("cart.addToCartDisabled"));
       return null;
     }
 
     const payload = buildCurrentProductPayload(quantity);
 
     if (!payload) {
-      toast.warning("Không thể xác định phiên bản sản phẩm đang chọn.");
+      toast.warning(t("cart.variantNotSelected"));
       return null;
     }
 
     try {
       const response = await cartStore.addItem(payload, { showSheet: openSheet });
-      toast.success(response?.message || "Đã thêm vào giỏ hàng.");
+      toast.success(response?.message || t("cart.addToCartSuccess"));
       return response;
     } catch (error) {
-      toast.error(error?.data?.message || "Không thể thêm vào giỏ hàng.");
+      toast.error(error?.data?.message || t("cart.addToCartError"));
       throw error;
     }
   };
@@ -98,11 +105,11 @@ export const useCartActions = () => {
       productVariantId = null,
       selectedOptions = {},
       openSheet = true,
-      successMessage = "Đã thêm vào giỏ hàng.",
+      successMessage = "",
     } = {},
   ) => {
     if (!product?.id) {
-      toast.warning("Sản phẩm chưa sẵn sàng để thêm vào giỏ.");
+      toast.warning(t("cart.productNotReady"));
       return null;
     }
 
@@ -116,10 +123,10 @@ export const useCartActions = () => {
         },
         { showSheet: openSheet },
       );
-      toast.success(response?.message || successMessage);
+      toast.success(response?.message || successMessage || t("cart.addToCartSuccess"));
       return response;
     } catch (error) {
-      toast.error(error?.data?.message || "Không thể thêm vào giỏ hàng.");
+      toast.error(error?.data?.message || t("cart.addToCartError"));
       throw error;
     }
   };

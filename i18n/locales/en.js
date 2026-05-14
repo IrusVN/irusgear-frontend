@@ -411,6 +411,12 @@ export default {
         suggestionAdded: "Suggestion added to cart.",
         productLines: "Product Lines",
         hintSave: "Save {amount}",
+        productNotFound: "Product not found to add to cart.",
+        outOfStockForCart: "This product is out of stock.",
+        addToCartDisabled: "Product is currently unavailable for adding to cart.",
+        variantNotSelected: "Cannot determine the selected product variant.",
+        addToCartSuccess: "Added to cart.",
+        productNotReady: "Product is not ready to add to cart.",
     },
     product: {
         buyNow: "Buy Now",

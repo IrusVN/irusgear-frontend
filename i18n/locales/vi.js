@@ -411,6 +411,12 @@ export default {
         suggestionAdded: "Đã thêm gợi ý vào giỏ hàng.",
         productLines: "Dòng hàng",
         hintSave: "Tiết kiệm {amount}",
+        productNotFound: "Không tìm thấy sản phẩm để thêm vào giỏ.",
+        outOfStockForCart: "Đã hết hàng cho sản phẩm này.",
+        addToCartDisabled: "Sản phẩm hiện chưa thể thêm vào giỏ hàng.",
+        variantNotSelected: "Không thể xác định phiên bản sản phẩm đang chọn.",
+        addToCartSuccess: "Đã thêm vào giỏ hàng.",
+        productNotReady: "Sản phẩm chưa sẵn sàng để thêm vào giỏ.",
     },
     product: {
         buyNow: "Mua ngay",
