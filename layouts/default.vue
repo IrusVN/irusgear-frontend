@@ -14,6 +14,9 @@
             <Footer />
             <ChatbotWidget />
             <AddToCartSheet />
+            <ClientOnly>
+              <BackToTop />
+            </ClientOnly>
         </div>
     </div>
 </template>
@@ -25,6 +28,7 @@ import Footer from '@/components/Footer/Footer.vue'
 import ChatbotWidget from '@/components/Chatbot/ChatbotWidget.vue'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 import AddToCartSheet from '@/components/Cart/AddToCartSheet.vue'
+import BackToTop from '@/components/Common/BackToTop.vue'
 import { useCartStore } from '@/stores/cartStore'
 import { useAuthStore } from '@/stores/authStore'
 import { useSearchStore } from '@/stores/searchStore'
