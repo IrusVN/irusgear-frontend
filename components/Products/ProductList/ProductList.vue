@@ -195,9 +195,12 @@
       </div>
 
       <div ref="filterBlockEl" class="product-filter-block">
-        <h2 class="product-filter-title">{{ $t('common.productFilter') }}</h2>
+        <h2 class="product-filter-title">
+          <span class="product-filter-title__desktop">{{ $t('common.productFilter') }}</span>
+          <span class="product-filter-title__mobile">Chọn theo tiêu chí</span>
+        </h2>
 
-        <div class="product-filter-list">
+        <div class="product-filter-list product-filter-list--desktop">
           <button v-for="filter in productFilters" :key="filter.key" :ref="(el) => setFilterChipRef(filter.key, el)"
             type="button" :class="[
               'product-filter-chip',
@@ -264,6 +267,37 @@
                 <circle cx="10" cy="6.1" r="0.75" fill="currentColor" />
               </svg>
             </span>
+          </button>
+        </div>
+
+        <div class="product-filter-list product-filter-list--mobile">
+          <button v-for="filter in mobileCriteriaFilters" :key="`mobile-criteria-${filter.key}`" type="button" :class="[
+            'product-filter-chip',
+            { 'product-filter-chip--active': isFilterSelected(filter.key) },
+          ]" @click="handleMobileCriteriaClick(filter)">
+            <span v-if="filter.leadingIcon === 'truck'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 6.5H13V14.5H3V6.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                <path d="M13 9H17L20 12V14.5H13V9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                <circle cx="7" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
+                <circle cx="17" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.7" />
+              </svg>
+            </span>
+            <span v-else-if="filter.leadingIcon === 'price'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7" />
+                <path d="M12 8.5V12H15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span v-else-if="filter.leadingIcon === 'new'" class="product-filter-chip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 5.5V18.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                <path d="M5 7H14.75L13.25 10.5L14.75 14H5" stroke="currentColor" stroke-width="1.7"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span>{{ filter.label }}</span>
           </button>
         </div>
 
@@ -342,13 +376,52 @@
       <div class="product-sort-block">
         <h2 class="product-sort-title">{{ $t('common.sortBy') }}</h2>
 
-        <div class="product-sort-list">
+        <div class="product-sort-list product-sort-list--desktop">
           <button v-for="sort in sortOptions" :key="sort.key" type="button" :class="[
             'product-sort-chip',
             { 'product-sort-chip--active': activeSortKey === sort.key },
           ]" @click="handleSortClick(sort.key)">
             <span class="product-sort-chip__icon" aria-hidden="true" v-html="sort.icon" />
             <span>{{ sort.label }}</span>
+          </button>
+        </div>
+
+        <div class="product-mobile-sort-tabs">
+          <button type="button" :class="[
+            'product-mobile-sort-tab',
+            { 'product-mobile-sort-tab--active': activeSortKey === 'popular' },
+          ]" @click="handleSortClick('popular')">
+            Phổ biến
+          </button>
+          <button type="button" :class="[
+            'product-mobile-sort-tab',
+            { 'product-mobile-sort-tab--active': activeSortKey === 'promo' },
+          ]" @click="handleSortClick('promo')">
+            Khuyến mãi
+          </button>
+          <button type="button" :class="[
+            'product-mobile-sort-tab',
+            { 'product-mobile-sort-tab--active': activeSortKey === 'price_asc' || activeSortKey === 'price_desc' },
+          ]" @click="handleMobilePriceSort">
+            <span>Giá</span>
+            <span class="product-mobile-sort-tab__arrows" aria-hidden="true">
+              <svg viewBox="0 0 12 16" fill="none">
+                <path d="M6 3L3.5 5.5H8.5L6 3Z" fill="currentColor" />
+                <path d="M6 13L8.5 10.5H3.5L6 13Z" fill="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button type="button" :class="[
+            'product-mobile-sort-tab',
+            { 'product-mobile-sort-tab--active': isMobileFilterActive },
+          ]" @click="openMobileFilterSheet">
+            <span>Bộ lọc</span>
+            <span class="product-mobile-sort-tab__filter" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none">
+                <path d="M3 4H17L11.5 10.2V15.5L8.5 17V10.2L3 4Z" fill="currentColor" />
+              </svg>
+              <span v-if="selectedFilterCount" class="product-mobile-sort-tab__badge">{{ selectedFilterCount }}</span>
+            </span>
           </button>
         </div>
       </div>
@@ -369,6 +442,56 @@
         </button>
       </div>
     </div>
+
+    <BottomSheet :open="isMobileFilterSheetOpen" @close="closeMobileFilterSheet">
+      <div class="mobile-filter-sheet">
+        <div class="mobile-filter-sheet__header">
+          <h3>Bộ lọc</h3>
+          <button type="button" class="mobile-filter-sheet__close" aria-label="Đóng bộ lọc"
+            @click="closeMobileFilterSheet">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="mobile-filter-sheet__body">
+          <div class="mobile-filter-section">
+            <h4>Trạng thái hàng</h4>
+            <div class="mobile-filter-options">
+              <button v-for="filter in mobileStatusFilters" :key="`mobile-status-${filter.key}`" type="button" :class="[
+                'mobile-filter-option',
+                { 'mobile-filter-option--selected': isFilterSelected(filter.key) },
+              ]" @click="toggleMobileBooleanFilter(filter)">
+                {{ filter.label }}
+              </button>
+            </div>
+          </div>
+
+          <div v-for="filter in mobileSheetFilters" :key="`mobile-sheet-${filter.key}`" class="mobile-filter-section">
+            <h4>{{ filter.label }}</h4>
+            <div class="mobile-filter-options">
+              <button v-for="option in filter.options" :key="`mobile-sheet-${filter.key}-${option}`" type="button"
+                :class="[
+                  'mobile-filter-option',
+                  { 'mobile-filter-option--selected': selectedOptionsByFilter[filter.key]?.includes(option) },
+                ]" @click="toggleFilterOption(filter.key, option)">
+                {{ option }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-filter-sheet__footer">
+          <button type="button" class="mobile-filter-sheet__reset" @click="resetMobileFilters">
+            Thiết lập lại
+          </button>
+          <button type="button" class="mobile-filter-sheet__apply" @click="applyMobileFilterOptions">
+            Xem kết quả
+          </button>
+        </div>
+      </div>
+    </BottomSheet>
   </section>
 </template>
 
@@ -377,6 +500,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { storeToRefs } from "pinia";
 import HomeProdCard from "@/components/Home/HomeProdCard.vue";
 import ArrowIcon from "@/components/Icons/ArrowIcon.vue";
+import BottomSheet from "@/components/Common/BottomSheet.vue";
 import { useProductListingStore } from "@/stores/productListingStore";
 
 import "swiper/css";
@@ -412,11 +536,25 @@ const stickyFilterChipRefs = new Map();
 const isStickyFilterVisible = ref(false);
 const stickyTopOffset = ref(0);
 const activeDropdownKey = ref(null);
+const isMobileFilterSheetOpen = ref(false);
 let requestRefreshTimer = null;
 
 const stickyFilterBarStyle = computed(() => ({
   top: `var(--customer-sidebar-offset, ${stickyTopOffset.value}px)`,
 }));
+
+const mobileCriteriaFilters = computed(() => {
+  const order = ["stock", "price", "new"];
+  return order
+    .map((key) => productFilters.value.find((filter) => filter.key === key))
+    .filter(Boolean);
+});
+
+const mobileStatusFilters = computed(() =>
+  ["stock", "new"]
+    .map((key) => productFilters.value.find((filter) => filter.key === key))
+    .filter(Boolean),
+);
 
 const activeDropdown = computed(() =>
   productFilters.value.find((filter) => filter.key === activeDropdownKey.value && (filter.options?.length || filter.key === "filter")),
@@ -425,6 +563,16 @@ const activeDropdown = computed(() =>
 const megaFilterSections = computed(() =>
   productFilters.value.filter((filter) => filter.key !== "filter" && filter.options?.length),
 );
+
+const mobileSheetFilters = computed(() =>
+  productFilters.value.filter((filter) => !["filter", "stock", "new"].includes(filter.key) && filter.options?.length),
+);
+
+const selectedFilterCount = computed(() =>
+  Object.values(selectedOptionsByFilter.value).reduce((total, values) => total + (Array.isArray(values) ? values.length : 0), 0),
+);
+
+const isMobileFilterActive = computed(() => selectedFilterCount.value > 0);
 
 let swiperInstances = [];
 let mounted = false;
@@ -473,12 +621,32 @@ const handleFilterClick = (filter) => {
   activeDropdownKey.value = activeDropdownKey.value === filter.key ? null : filter.key;
 };
 
+const handleMobileCriteriaClick = (filter) => {
+  if (!filter) return;
+
+  if (filter.key === "price") {
+    openMobileFilterSheet();
+    return;
+  }
+
+  handleFilterClick(filter);
+};
+
 const toggleFilterOption = (filterKey, option) => {
   productListingStore.toggleFilterOption(filterKey, option);
 };
 
 const closeDropdown = () => {
   activeDropdownKey.value = null;
+};
+
+const openMobileFilterSheet = () => {
+  closeDropdown();
+  isMobileFilterSheetOpen.value = true;
+};
+
+const closeMobileFilterSheet = () => {
+  isMobileFilterSheetOpen.value = false;
 };
 
 const applyFilterOptions = async () => {
@@ -491,6 +659,25 @@ const applyFilterOptions = async () => {
   closeDropdown();
   await nextTick();
   await updateDropdownPosition();
+};
+
+const applyMobileFilterOptions = async () => {
+  closeMobileFilterSheet();
+  await applyFilterOptions();
+};
+
+const resetMobileFilters = () => {
+  selectedOptionsByFilter.value = {};
+};
+
+const toggleMobileBooleanFilter = (filter) => {
+  if (!filter) return;
+  productListingStore.toggleBooleanFilter(filter.key, filter.label);
+};
+
+const handleMobilePriceSort = () => {
+  const nextSortKey = activeSortKey.value === "price_asc" ? "price_desc" : "price_asc";
+  handleSortClick(nextSortKey);
 };
 
 const handleSortClick = async (sortKey) => {
@@ -951,7 +1138,7 @@ onBeforeUnmount(() => {
 }
 
 .block-sliding .banner-slide .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: var(--irus-color-accent);
+  background-color: #111827;
   border-radius: 50px;
   width: 20px;
 }
@@ -1057,9 +1244,9 @@ onBeforeUnmount(() => {
 
 .product-series-chip--active {
   background: #fff;
-  border-color: var(--irus-color-accent);
-  box-shadow: 0 8px 18px var(--irus-color-focus-ring);
-  color: var(--irus-color-accent);
+  border-color: #111827;
+  box-shadow: 0 8px 18px rgba(17, 24, 39, 0.12);
+  color: #111827;
 }
 
 .product-filter-block {
@@ -1073,6 +1260,12 @@ onBeforeUnmount(() => {
   font-weight: 700;
   line-height: 1.3;
   margin: 0 0 16px;
+}
+
+.product-filter-title__mobile,
+.product-filter-list.product-filter-list--mobile,
+.product-mobile-sort-tabs {
+  display: none;
 }
 
 .product-filter-list {
@@ -1124,10 +1317,10 @@ onBeforeUnmount(() => {
 
 .product-load-more__button {
   align-items: center;
-  background: #dbeafe;
+  background: #111827;
   border: 0;
   border-radius: 12px;
-  color: #3b82f6;
+  color: #fff;
   cursor: pointer;
   display: inline-flex;
   gap: 8px;
@@ -1141,8 +1334,8 @@ onBeforeUnmount(() => {
 }
 
 .product-load-more__button:hover {
-  background: #bfdbfe;
-  color: #2563eb;
+  background: #000;
+  color: #fff;
   transform: translateY(-1px);
 }
 
@@ -1186,10 +1379,10 @@ onBeforeUnmount(() => {
 }
 
 .product-sort-chip--active {
-  background: #eff6ff;
-  border-color: #3b82f6;
-  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.12);
-  color: #2563eb;
+  background: #111827;
+  border-color: #111827;
+  box-shadow: 0 8px 18px rgba(17, 24, 39, 0.14);
+  color: #fff;
 }
 
 .product-sort-chip__icon {
@@ -1201,6 +1394,88 @@ onBeforeUnmount(() => {
 .product-sort-chip__icon :deep(svg) {
   height: 18px;
   width: 18px;
+}
+
+.product-mobile-sort-tabs {
+  align-items: stretch;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  border-top: 1px solid #e5e7eb;
+  display: none;
+  width: 100%;
+}
+
+.product-mobile-sort-tab {
+  align-items: center;
+  background: #fff;
+  border: 0;
+  border-right: 1px solid #d1d5db;
+  color: #6b7280;
+  display: inline-flex;
+  flex: 1 1 0;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 4px;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 6px;
+  position: relative;
+}
+
+.product-mobile-sort-tab:last-child {
+  border-right: 0;
+}
+
+.product-mobile-sort-tab--active {
+  color: #111827;
+  font-weight: 700;
+}
+
+.product-mobile-sort-tab--active::after {
+  background: #111827;
+  bottom: -1px;
+  content: "";
+  height: 1px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.product-mobile-sort-tab__arrows,
+.product-mobile-sort-tab__filter {
+  align-items: center;
+  color: #9ca3af;
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  position: relative;
+}
+
+.product-mobile-sort-tab__arrows svg {
+  height: 16px;
+  width: 12px;
+}
+
+.product-mobile-sort-tab__filter svg {
+  height: 20px;
+  width: 20px;
+}
+
+.product-mobile-sort-tab__badge {
+  align-items: center;
+  background: #111827;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 10px;
+  font-weight: 700;
+  height: 16px;
+  justify-content: center;
+  min-width: 16px;
+  padding: 0 4px;
+  position: absolute;
+  right: -8px;
+  top: -7px;
 }
 
 .product-filter-chip {
@@ -1222,16 +1497,16 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-chip--primary {
-  background: var(--irus-color-accent-soft);
-  border-color: var(--irus-color-accent);
-  color: var(--irus-color-accent);
+  background: #fff;
+  border-color: #111827;
+  color: #111827;
 }
 
 .product-filter-chip--active {
   background: #fff;
-  border-color: var(--irus-color-accent);
+  border-color: #111827;
   box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
-  color: var(--irus-color-accent);
+  color: #111827;
 }
 
 .product-filter-chip__icon,
@@ -1258,7 +1533,7 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-chip--active .product-filter-chip__meta--info {
-  color: var(--irus-color-accent);
+  color: #111827;
 }
 
 .product-filter-chip__meta-group {
@@ -1270,7 +1545,7 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-chip--primary:hover {
-  background: #ffe8e8;
+  background: #f3f4f6;
 }
 
 .product-filter-chip__meta .is-rotated {
@@ -1391,19 +1666,19 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-option:hover {
-  background: #eff6ff;
-  border-color: #3b82f6;
-  color: #2563eb;
+  background: #fff;
+  border-color: #111827;
+  color: #111827;
 }
 
 .product-filter-option--selected {
-  background: #eff6ff;
-  border-color: #3b82f6;
-  color: #2563eb;
+  background: #111827;
+  border-color: #111827;
+  color: #fff;
 }
 
 .product-filter-option--selected .product-filter-chip__meta--info {
-  color: #2563eb;
+  color: #fff;
 }
 
 .product-filter-dropdown__footer {
@@ -1433,13 +1708,134 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-dropdown__button--primary {
-  background: var(--irus-color-accent);
+  background: #111827;
   border: 1px solid transparent;
   color: #fff;
 }
 
 .product-filter-dropdown__button--primary:hover {
-  background: var(--irus-color-accent);
+  background: #000;
+}
+
+.mobile-filter-sheet {
+  background: #fff;
+  color: #111827;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.mobile-filter-sheet__header {
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  min-height: 68px;
+  padding: 16px 56px;
+  position: relative;
+}
+
+.mobile-filter-sheet__header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.mobile-filter-sheet__close {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #111827;
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  right: 16px;
+  top: 14px;
+  width: 40px;
+}
+
+.mobile-filter-sheet__close svg {
+  height: 24px;
+  width: 24px;
+}
+
+.mobile-filter-sheet__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 18px 16px 96px;
+}
+
+.mobile-filter-section {
+  margin-bottom: 18px;
+}
+
+.mobile-filter-section h4 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 10px;
+}
+
+.mobile-filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mobile-filter-option {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  color: #111827;
+  font-size: 14px;
+  min-height: 32px;
+  padding: 6px 10px;
+}
+
+.mobile-filter-option--selected {
+  background: #111827;
+  border-color: #111827;
+  color: #fff;
+}
+
+.mobile-filter-sheet__footer {
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  bottom: 0;
+  display: grid;
+  flex-shrink: 0;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  left: 0;
+  padding: 16px;
+  position: sticky;
+  right: 0;
+}
+
+.mobile-filter-sheet__reset,
+.mobile-filter-sheet__apply {
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 46px;
+  padding: 10px 14px;
+}
+
+.mobile-filter-sheet__reset {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  color: #111827;
+}
+
+.mobile-filter-sheet__apply {
+  background: #111827;
+  border: 1px solid #111827;
+  color: #fff;
 }
 
 .filter-dropdown-enter-active,
@@ -1463,6 +1859,10 @@ onBeforeUnmount(() => {
 }
 
 @media screen and (max-width: 768px) {
+  .sticky-filter-bar {
+    display: none;
+  }
+
   .block-top-sliding-banner {
     flex-direction: column;
   }
@@ -1478,13 +1878,40 @@ onBeforeUnmount(() => {
     margin-bottom: 12px;
   }
 
-  .product-sort-block {
-    align-items: flex-start;
-    flex-direction: column;
+  .product-filter-block {
+    margin-top: 20px;
   }
 
-  .product-sort-list {
-    justify-content: flex-start;
+  .product-filter-title {
+    font-size: 15px;
+  }
+
+  .product-filter-title__desktop,
+  .product-filter-list--desktop,
+  .product-sort-title,
+  .product-sort-list--desktop {
+    display: none;
+  }
+
+  .product-filter-title__mobile {
+    display: inline;
+  }
+
+  .product-filter-list.product-filter-list--mobile {
+    display: flex;
+  }
+
+  .product-sort-block {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-top: 14px;
+  }
+
+  .product-mobile-sort-tabs {
+    display: flex;
   }
 
   .product-card-grid {
