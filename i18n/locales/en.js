@@ -41,6 +41,7 @@ export default {
         buyNowAction: "Buy Now",
         viewProductInfo: "View product information",
         seeMore: "See More",
+        viewMoreProducts: "View {count} more products",
         comboSelect: "Select Combo",
         profile: "Account",
         orders: "Orders",

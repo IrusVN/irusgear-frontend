@@ -41,6 +41,7 @@ export default {
         buyNowAction: "Mua ngay",
         viewProductInfo: "Xem thông tin sản phẩm",
         seeMore: "Xem thêm",
+        viewMoreProducts: "Xem thêm {count} sản phẩm",
         comboSelect: "Chọn combo",
         profile: "Tài khoản",
         orders: "Đơn hàng",

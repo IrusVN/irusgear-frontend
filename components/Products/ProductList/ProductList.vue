@@ -4,8 +4,8 @@
       :class="['sticky-filter-bar', { 'sticky-filter-bar--visible': isStickyFilterVisible }]"
       :style="stickyFilterBarStyle"
     >
-      <div ref="stickyFilterInnerEl" class="container-xl px-3 py-3 sticky-filter-bar__inner">
-        <div class="product-filter-list product-filter-list--sticky">
+      <div ref="stickyFilterInnerEl" class="container-xxl w-100 px-0 sticky-filter-bar__inner">
+        <div class="product-filter-list product-filter-list--sticky px-4">
           <button v-for="filter in productFilters" :key="`sticky-${filter.key}`"
             :ref="(el) => setFilterChipRef(filter.key, el, 'sticky')" type="button" :class="[
               'product-filter-chip',
@@ -141,7 +141,7 @@
                 Đóng
               </button>
               <button type="button" class="product-filter-dropdown__button product-filter-dropdown__button--primary"
-                @click="closeDropdown">
+                @click="applyFilterOptions">
                 Xem kết quả
               </button>
             </div>
@@ -331,7 +331,7 @@
                 Đóng
               </button>
               <button type="button" class="product-filter-dropdown__button product-filter-dropdown__button--primary"
-                @click="closeDropdown">
+                @click="applyFilterOptions">
                 Xem kết quả
               </button>
             </div>
@@ -475,11 +475,22 @@ const handleFilterClick = (filter) => {
 
 const toggleFilterOption = (filterKey, option) => {
   productListingStore.toggleFilterOption(filterKey, option);
-  scheduleProductListingRefresh();
 };
 
 const closeDropdown = () => {
   activeDropdownKey.value = null;
+};
+
+const applyFilterOptions = async () => {
+  if (requestRefreshTimer) {
+    clearTimeout(requestRefreshTimer);
+    requestRefreshTimer = null;
+  }
+
+  await productListingStore.loadProductListingPage({ page: 1 });
+  closeDropdown();
+  await nextTick();
+  await updateDropdownPosition();
 };
 
 const handleSortClick = async (sortKey) => {
@@ -525,6 +536,15 @@ const updateDropdownPosition = async () => {
   const top = triggerRect.bottom - containerRect.top + 10;
   const triggerLeft = triggerRect.left - containerRect.left;
   const triggerRight = containerRect.right - triggerRect.right;
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+  const dropdownViewportTop = containerRect.top + top;
+  const availableHeight = viewportHeight ? viewportHeight - dropdownViewportTop - 16 : 420;
+  const dropdownMaxHeight = Math.max(220, Math.min(520, availableHeight));
+  const dropdownBaseStyle = {
+    top: `${top}px`,
+    "--filter-dropdown-max-height": `${dropdownMaxHeight}px`,
+    "--filter-dropdown-options-max-height": `${Math.max(140, dropdownMaxHeight - 94)}px`,
+  };
 
   if (dropdownNode) {
     const dropdownWidth = dropdownNode.offsetWidth;
@@ -533,9 +553,9 @@ const updateDropdownPosition = async () => {
 
     if (!fitsRightFromLeftAnchor && fitsLeftFromRightAnchor) {
       dropdownStyle.value = {
+        ...dropdownBaseStyle,
         right: `${Math.max(0, triggerRight)}px`,
         left: "auto",
-        top: `${top}px`,
       };
       return;
     }
@@ -544,17 +564,17 @@ const updateDropdownPosition = async () => {
     const left = Math.min(Math.max(0, triggerLeft), maxLeft);
 
     dropdownStyle.value = {
+      ...dropdownBaseStyle,
       left: `${left}px`,
       right: "auto",
-      top: `${top}px`,
     };
     return;
   }
 
   dropdownStyle.value = {
+    ...dropdownBaseStyle,
     left: `${triggerLeft}px`,
     right: "auto",
-    top: `${top}px`,
   };
 };
 
@@ -779,6 +799,7 @@ onBeforeUnmount(() => {
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12); */
   left: 0;
   opacity: 0;
+  padding: 0 0.5rem;
   pointer-events: none;
   position: fixed;
   right: 0;
@@ -802,6 +823,14 @@ onBeforeUnmount(() => {
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
   border-radius: 12px;
+  padding: 1rem;
+}
+
+@media (min-width: 992px) {
+  .sticky-filter-bar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 .block-top-sliding-banner {
@@ -1253,8 +1282,12 @@ onBeforeUnmount(() => {
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 22px 44px rgba(15, 23, 42, 0.16);
+  display: flex;
+  flex-direction: column;
+  max-height: var(--filter-dropdown-max-height, min(62vh, 520px));
   max-width: min(100%, 600px);
   min-width: min(100%, 420px);
+  overflow: hidden;
   padding: 16px;
   width: fit-content;
   z-index: 20;
@@ -1266,13 +1299,20 @@ onBeforeUnmount(() => {
 }
 
 .product-filter-dropdown__options {
+  align-content: flex-start;
   display: flex;
   flex-wrap: wrap;
   gap: 10px 14px;
+  max-height: var(--filter-dropdown-options-max-height, min(44vh, 420px));
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-color: #d1d5db transparent;
+  scrollbar-width: thin;
 }
 
 .product-filter-mega-scroll {
-  max-height: min(52vh, 520px);
+  max-height: var(--filter-dropdown-options-max-height, min(52vh, 520px));
   overflow-x: hidden;
   overflow-y: auto;
   padding-right: 6px;
@@ -1284,11 +1324,24 @@ onBeforeUnmount(() => {
   width: 8px;
 }
 
+.product-filter-dropdown__options::-webkit-scrollbar {
+  width: 8px;
+}
+
 .product-filter-mega-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 
+.product-filter-dropdown__options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .product-filter-mega-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+
+.product-filter-dropdown__options::-webkit-scrollbar-thumb {
   background: #d1d5db;
   border-radius: 999px;
 }
@@ -1355,6 +1408,7 @@ onBeforeUnmount(() => {
 
 .product-filter-dropdown__footer {
   display: grid;
+  flex-shrink: 0;
   gap: 14px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 14px;
