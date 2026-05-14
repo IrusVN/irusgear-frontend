@@ -1,5 +1,5 @@
 <template>
-  <BottomSheet ref="sheetRef" @close="handleClose">
+  <BottomSheet ref="sheetRef">
     <div class="mobile-info-sheet">
       <div class="sheet-header">
         <div class="product-summary">
@@ -127,10 +127,6 @@ const handleChangeColor = (color) => {
       ? String(color.productId || color.id)
       : null,
   )
-}
-
-const handleClose = () => {
-  sheetRef.value?.close()
 }
 
 defineExpose({

@@ -39,6 +39,7 @@ export default {
         showAllSpecs: "Xem tất cả thông số",
         installment0: "Trả góp 0%",
         buyNowAction: "Mua ngay",
+        viewProductInfo: "Xem thông tin sản phẩm",
         seeMore: "Xem thêm",
         comboSelect: "Chọn combo",
         profile: "Tài khoản",

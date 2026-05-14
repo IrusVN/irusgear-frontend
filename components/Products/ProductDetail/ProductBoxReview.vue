@@ -293,7 +293,8 @@ const reviewRatingLabel = (rating) => {
   margin: 0;
 }
 
-.boxReview-review, .box-review-filter {
+.boxReview-review,
+.box-review-filter {
   align-items: stretch;
   background: #fff;
   border-radius: 20px;
@@ -398,7 +399,7 @@ const reviewRatingLabel = (rating) => {
   flex: 1 1 auto;
   display: block;
   max-width: 100%;
-  min-width: 220px;
+  min-width: 0;
   width: auto;
 }
 
@@ -448,6 +449,7 @@ const reviewRatingLabel = (rating) => {
 .item-review-result {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-left: auto;
 }
@@ -624,7 +626,7 @@ const reviewRatingLabel = (rating) => {
   padding: 10px 18px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 990px) {
   .boxReview {
     border-radius: 18px;
     padding: 12px;
@@ -639,6 +641,10 @@ const reviewRatingLabel = (rating) => {
     padding: 18px 16px;
   }
 
+  .boxReview-overview {
+    align-items: flex-start;
+  }
+
   .boxReview-star {
     border-right: none;
     border-top: 1px solid #e5e7eb;
@@ -646,12 +652,9 @@ const reviewRatingLabel = (rating) => {
     padding: 16px 0;
   }
 
-  .rating-level progress {
-    min-width: 0;
-  }
-
   .box-experience-review {
     border-top: 1px solid #e5e7eb;
+    margin-top: 4px;
     padding-left: 0;
     padding-top: 16px;
   }
@@ -666,8 +669,42 @@ const reviewRatingLabel = (rating) => {
     flex-direction: column;
   }
 
+  .experience-review__item {
+    align-items: flex-start;
+    gap: 6px;
+  }
+
   .item-review-result {
     margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .boxReview-review {
+    padding: 16px 12px;
+  }
+
+  .button__review {
+    width: 100%;
+  }
+
+  .rating-level {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 34px minmax(0, 1fr);
+  }
+
+  .rating-count-text {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .experience-stars {
+    flex-wrap: nowrap;
+  }
+
+  .item-count {
+    width: 100%;
   }
 }
 </style>

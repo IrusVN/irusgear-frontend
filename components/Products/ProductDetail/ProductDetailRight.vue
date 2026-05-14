@@ -158,7 +158,7 @@
         </div>
       </div>
     </div>
-    <div class="box-product-promotion">
+    <div v-if="false" class="box-product-promotion">
       <div class="box-product-promotion-header d-flex has-text-weight-semibold align-items-center">
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

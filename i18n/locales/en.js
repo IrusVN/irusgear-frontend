@@ -39,6 +39,7 @@ export default {
         showAllSpecs: "Show All Specs",
         installment0: "0% Installment",
         buyNowAction: "Buy Now",
+        viewProductInfo: "View product information",
         seeMore: "See More",
         comboSelect: "Select Combo",
         profile: "Account",

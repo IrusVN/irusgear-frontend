@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onBeforeUnmount } from 'vue'
 
 const props = defineProps({
     open: {
@@ -36,10 +36,12 @@ const currentY = ref(0)
 const isDragging = ref(false)
 
 const open = () => {
+    if (isVisible.value) return
     isVisible.value = true
     emit('open')
 }
 const close = () => {
+    if (!isVisible.value) return
     isVisible.value = false
     currentY.value = 0
     emit('close')
@@ -83,6 +85,12 @@ const panelStyle = computed(() => {
 watch(isVisible, (val) => {
     if (typeof document !== 'undefined') {
         document.body.style.overflow = val ? 'hidden' : ''
+    }
+})
+
+onBeforeUnmount(() => {
+    if (typeof document !== 'undefined' && isVisible.value) {
+        document.body.style.overflow = ''
     }
 })
 </script>
