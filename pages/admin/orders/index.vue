@@ -13,8 +13,9 @@
       />
     </div>
 
-    <!-- Order Table -->
+    <!-- Order Table (Desktop) -->
     <AdminDataTable
+      v-if="!isMobile"
       :columns="columns"
       :items="paginatedOrders"
       :selectable="true"
@@ -33,17 +34,14 @@
         />
       </template>
 
-      <!-- Order ID -->
       <template #cell-orderCode="{ item }">
         <nuxt-link :to="`/admin/orders/${item.id}`" class="order-id-link" @click.stop>{{ item.orderCode }}</nuxt-link>
       </template>
 
-      <!-- Date -->
       <template #cell-date="{ item }">
         <span class="date-text">{{ formatDate(item.date) }}</span>
       </template>
 
-      <!-- Customer -->
       <template #cell-customer="{ item }">
         <div class="customer-cell">
           <img :src="item.customer.avatar" :alt="item.customer.name" class="customer-avatar" />
@@ -54,22 +52,18 @@
         </div>
       </template>
 
-      <!-- Payment status -->
       <template #cell-paymentStatus="{ item }">
         <AdminStatusBadge :label="paymentLabel(item.paymentStatus)" :variant="paymentVariant(item.paymentStatus)" />
       </template>
 
-      <!-- Fulfillment status -->
       <template #cell-fulfillmentStatus="{ item }">
         <AdminStatusBadge :label="fulfillmentLabel(item.fulfillmentStatus)" :variant="fulfillmentVariant(item.fulfillmentStatus)" dot />
       </template>
 
-      <!-- Method -->
       <template #cell-paymentMethod="{ item }">
         <span class="method-text">{{ item.paymentLabel }}</span>
       </template>
 
-      <!-- Actions -->
       <template #actions="{ item }">
         <AdminActionMenu
           :items="[
@@ -89,6 +83,42 @@
         />
       </template>
     </AdminDataTable>
+
+    <!-- Mobile Card List -->
+    <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
+      <label style="display:block;position:relative;margin-bottom:12px">
+        <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
+        <input class="admin-control" v-model="search" placeholder="Search Order" style="padding-left:36px;width:100%" @input="resetPage">
+      </label>
+      <AdminMobileCard
+        v-for="item in paginatedOrders"
+        :key="item.id"
+        :title="item.orderCode"
+        :subtitle="item.customer.name"
+        :avatar="item.customer.avatar"
+        :meta="[
+          { label: 'Date', value: formatDate(item.date) },
+          { label: 'Method', value: item.paymentLabel },
+        ]"
+        @click="viewOrder(item)"
+      >
+        <template #badge>
+          <AdminStatusBadge :label="paymentLabel(item.paymentStatus)" :variant="paymentVariant(item.paymentStatus)" />
+        </template>
+        <template #actions>
+          <AdminActionMenu
+            :items="[
+              { key: 'view', label: 'View Details', icon: 'bi-eye' },
+              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+            ]"
+            @select="handleAction($event, item)"
+          />
+        </template>
+      </AdminMobileCard>
+      <div v-if="filteredOrders.length > pageSize" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < filteredOrders.length" class="admin-secondary-button" @click="page++">Load More</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -102,6 +132,10 @@ import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
+import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
+import { useMediaQuery } from '@/composables/useMediaQuery'
+
+const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Orders – IrusGear Admin' })
@@ -197,6 +231,6 @@ const handleAction = (action, item) => {
 
 .method-text { font-size: 0.86rem; color: var(--admin-muted); white-space: nowrap; }
 
-@media (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
+@media screen and (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
+@media screen and (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
 </style>

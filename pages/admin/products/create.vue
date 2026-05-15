@@ -388,10 +388,54 @@ const handleDiscard = () => router.push('/admin/products')
 .btn-sm { height: 34px; font-size: 0.82rem; padding: 0 12px; }
 
 /* Responsive */
-@media (max-width: 991.98px) {
+@media screen and (max-width: 991.98px) {
   .form-grid { grid-template-columns: 1fr; }
   .form-page-header { flex-direction: column; align-items: flex-start; }
   .header-actions { width: 100%; flex-wrap: wrap; }
   .field-row { grid-template-columns: 1fr; }
+}
+
+@media screen and (max-width: 767.98px) {
+  .form-card { padding: 16px; }
+  .card-title { font-size: 0.92rem; margin-bottom: 14px; }
+  .page-title { font-size: 1.1rem; }
+  .page-sub { font-size: 0.82rem; }
+
+  /* Touch-friendly inputs */
+  .field-input,
+  .field-textarea,
+  .admin-control {
+    min-height: 44px;
+    font-size: 16px; /* prevents iOS zoom */
+  }
+
+  /* Full-width action buttons */
+  .header-actions {
+    flex-direction: column;
+  }
+  .header-actions .admin-primary-button,
+  .header-actions .admin-secondary-button {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  /* Media upload compact */
+  .media-upload-zone { padding: 22px 14px; }
+  .upload-icon { font-size: 1.8rem; }
+  .media-preview-grid { grid-template-columns: repeat(3, 1fr); }
+  .media-remove { opacity: 1; } /* always visible on touch */
+
+  /* Toggle touch-friendly */
+  .toggle-track { width: 44px; height: 26px; }
+  .toggle-track::after { width: 20px; height: 20px; }
+  .stock-toggle input:checked + .toggle-track::after { transform: translateX(18px); }
+
+  /* Compact empty state */
+  .empty-variants { padding: 20px 14px; }
+  .empty-variants i { font-size: 1.6rem; }
+
+  /* Back link touch target */
+  .back-link { width: 44px; height: 44px; }
 }
 </style>

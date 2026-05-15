@@ -13,8 +13,9 @@
       />
     </div>
 
-    <!-- Reviews Table -->
+    <!-- Reviews Table (Desktop) -->
     <AdminDataTable
+      v-if="!isMobile"
       :columns="columns"
       :items="paginatedReviews"
       :selectable="true"
@@ -32,17 +33,14 @@
         />
       </template>
 
-      <!-- Product -->
       <template #cell-productName="{ item }">
         <strong class="product-name">{{ item.productName }}</strong>
       </template>
 
-      <!-- Customer -->
       <template #cell-customerName="{ item }">
         <span class="customer-name">{{ item.customerName }}</span>
       </template>
 
-      <!-- Rating -->
       <template #cell-rating="{ item }">
         <div class="stars-cell">
           <i v-for="s in 5" :key="s" class="bi" :class="s <= item.rating ? 'bi-star-fill star-filled' : 'bi-star star-empty'"></i>
@@ -50,22 +48,18 @@
         </div>
       </template>
 
-      <!-- Title -->
       <template #cell-title="{ item }">
         <span class="review-title">{{ item.title }}</span>
       </template>
 
-      <!-- Status -->
       <template #cell-status="{ item }">
         <AdminStatusBadge :label="statusLabel(item.status)" :variant="statusVariant(item.status)" />
       </template>
 
-      <!-- Date -->
       <template #cell-createdAt="{ item }">
         <span class="date-text">{{ formatDate(item.createdAt) }}</span>
       </template>
 
-      <!-- Actions -->
       <template #actions="{ item }">
         <AdminActionMenu
           :items="actionItems(item)"
@@ -77,6 +71,38 @@
         <AdminPagination :page="page" :page-size="pageSize" :total="filteredReviews.length" @update:page="page = $event" />
       </template>
     </AdminDataTable>
+
+    <!-- Mobile Card List -->
+    <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
+      <label style="display:block;position:relative;margin-bottom:12px">
+        <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
+        <input class="admin-control" v-model="search" placeholder="Search Reviews" style="padding-left:36px;width:100%" @input="resetPage">
+      </label>
+      <AdminMobileCard
+        v-for="item in paginatedReviews"
+        :key="item.id"
+        :title="item.productName"
+        :subtitle="item.customerName"
+        icon="bi-chat-square-text"
+        :meta="[
+          { label: 'Rating', value: '⭐'.repeat(item.rating) + ' ' + item.rating + '.0' },
+          { label: 'Date', value: formatDate(item.createdAt) },
+        ]"
+      >
+        <template #badge>
+          <AdminStatusBadge :label="statusLabel(item.status)" :variant="statusVariant(item.status)" />
+        </template>
+        <template #actions>
+          <AdminActionMenu
+            :items="actionItems(item)"
+            @select="handleAction($event, item)"
+          />
+        </template>
+      </AdminMobileCard>
+      <div v-if="filteredReviews.length > pageSize" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < filteredReviews.length" class="admin-secondary-button" @click="page++">Load More</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -90,6 +116,10 @@ import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
+import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
+import { useMediaQuery } from '@/composables/useMediaQuery'
+
+const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Manage Reviews – IrusGear Admin' })
@@ -158,6 +188,6 @@ const handleExport = () => alert('Export reviews (mock)')
 .star-empty { color: #d5d5da; font-size: 0.82rem; }
 .rating-num { margin-left: 6px; font-size: 0.82rem; font-weight: 700; color: var(--admin-text); }
 
-@media (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
+@media screen and (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
+@media screen and (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
 </style>

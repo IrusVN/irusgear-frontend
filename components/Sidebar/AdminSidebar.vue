@@ -427,7 +427,7 @@ watch(
   transform: translateY(-4px);
 }
 
-@media (max-width: 991.98px) {
+@media screen and (max-width: 991.98px) {
   .admin-sidebar {
     transform: translateX(-100%);
     box-shadow: none;

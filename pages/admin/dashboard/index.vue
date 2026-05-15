@@ -480,19 +480,57 @@ const leadsLegend = [
 .text-end { text-align: right; }
 
 /* ─── Responsive ─── */
-@media (max-width: 1199.98px) {
+@media screen and (max-width: 1199.98px) {
   .dash-row-hero { grid-template-columns: 1fr; }
   .dash-row-charts { grid-template-columns: 1fr 1fr; }
   .dash-row-mid { grid-template-columns: 1fr 1fr; }
   .dash-row-bottom { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 767.98px) {
+@media screen and (max-width: 767.98px) {
+  .dashboard-container { padding-bottom: 12px; }
+
+  .dash-row { gap: 12px; margin-bottom: 12px; }
+
+  .dash-row-hero,
   .dash-row-charts,
   .dash-row-mid,
   .dash-row-bottom { grid-template-columns: 1fr; }
-  .stats-strip { grid-template-columns: 1fr; }
-  .hero-content { flex-direction: column; text-align: center; }
+
+  /* Stats: 2x2 compact grid */
+  .stats-strip { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* Hero compact */
+  .hero-card { padding: 20px; }
+  .hero-content { flex-direction: column; text-align: center; gap: 12px; }
   .hero-cta { align-self: center; }
+  .hero-title { font-size: 1.1rem; }
+  .hero-value { font-size: 1.35rem; }
+  .hero-trophy { font-size: 3rem; }
+
+  /* Mini chart cards compact */
+  .chart-mini-card { padding: 14px 16px; }
+  .mini-value { font-size: 1.2rem; }
+
+  /* Earning items compact */
+  .earning-item { gap: 10px; }
+  .earning-icon { width: 36px; height: 36px; font-size: 1rem; }
+
+  /* Popular products compact */
+  .popular-product-row { padding: 12px 14px; gap: 10px; }
+  .pp-img { width: 36px; height: 36px; }
+
+  /* Transaction compact */
+  .transaction-row { gap: 10px; }
+  .tx-icon { width: 36px; height: 36px; font-size: 1rem; }
+
+  /* Recent orders: hide table columns, show compact */
+  .recent-orders-table th:nth-child(3),
+  .recent-orders-table td:nth-child(3),
+  .recent-orders-table th:nth-child(4),
+  .recent-orders-table td:nth-child(4) { display: none; }
+  .recent-orders-table th,
+  .recent-orders-table td { padding: 10px 12px; font-size: 0.82rem; }
+  .ro-avatar { width: 28px; height: 28px; }
 }
 </style>

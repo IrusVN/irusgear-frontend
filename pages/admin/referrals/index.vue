@@ -8,8 +8,9 @@
       <AdminMetricCard label="Total Earned" :value="formatCompact(totalEarned)" meta="commission" icon="bi-cash-stack" variant="warning" />
     </div>
 
-    <!-- Referrals Table -->
+    <!-- Referrals Table (Desktop) -->
     <AdminDataTable
+      v-if="!isMobile"
       :columns="columns"
       :items="paginatedReferrals"
       :selectable="true"
@@ -27,7 +28,6 @@
         />
       </template>
 
-      <!-- Referrer -->
       <template #cell-referrer="{ item }">
         <div class="referrer-cell">
           <img :src="item.referrerAvatar" :alt="item.referrerName" class="referrer-avatar" />
@@ -38,27 +38,22 @@
         </div>
       </template>
 
-      <!-- Referred User -->
       <template #cell-referred="{ item }">
         <span class="referred-name">{{ item.referredName }}</span>
       </template>
 
-      <!-- Referral Code -->
       <template #cell-code="{ item }">
         <code class="code-chip">{{ item.code }}</code>
       </template>
 
-      <!-- Commission -->
       <template #cell-earning="{ item }">
         <strong class="earning-text">{{ formatCurrency(item.earning) }}</strong>
       </template>
 
-      <!-- Status -->
       <template #cell-status="{ item }">
         <AdminStatusBadge :label="statusLabel(item.status)" :variant="statusVariant(item.status)" dot />
       </template>
 
-      <!-- Date -->
       <template #cell-createdAt="{ item }">
         <span class="date-text">{{ formatDate(item.createdAt) }}</span>
       </template>
@@ -77,6 +72,42 @@
         <AdminPagination :page="page" :page-size="pageSize" :total="filteredReferrals.length" @update:page="page = $event" />
       </template>
     </AdminDataTable>
+
+    <!-- Mobile Card List -->
+    <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
+      <label style="display:block;position:relative;margin-bottom:12px">
+        <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
+        <input class="admin-control" v-model="search" placeholder="Search Referrals" style="padding-left:36px;width:100%" @input="resetPage">
+      </label>
+      <AdminMobileCard
+        v-for="item in paginatedReferrals"
+        :key="item.id"
+        :title="item.referrerName"
+        :subtitle="'→ ' + item.referredName"
+        :avatar="item.referrerAvatar"
+        :meta="[
+          { label: 'Code', value: item.code },
+          { label: 'Earning', value: formatCurrency(item.earning), class: 'earning-text' },
+          { label: 'Date', value: formatDate(item.createdAt) },
+        ]"
+      >
+        <template #badge>
+          <AdminStatusBadge :label="statusLabel(item.status)" :variant="statusVariant(item.status)" dot />
+        </template>
+        <template #actions>
+          <AdminActionMenu
+            :items="[
+              { key: 'view', label: 'View Details', icon: 'bi-eye' },
+              { key: 'revoke', label: 'Revoke', icon: 'bi-x-circle', variant: 'danger' },
+            ]"
+            @select="handleAction($event, item)"
+          />
+        </template>
+      </AdminMobileCard>
+      <div v-if="filteredReferrals.length > pageSize" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < filteredReferrals.length" class="admin-secondary-button" @click="page++">Load More</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -90,6 +121,10 @@ import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
+import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
+import { useMediaQuery } from '@/composables/useMediaQuery'
+
+const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Referrals – IrusGear Admin' })
@@ -166,6 +201,6 @@ const handleExport = () => alert('Export referrals (mock)')
 .earning-text { color: var(--admin-success); font-size: 0.9rem; }
 .date-text { font-size: 0.86rem; color: var(--admin-muted); white-space: nowrap; }
 
-@media (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
+@media screen and (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
+@media screen and (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
 </style>

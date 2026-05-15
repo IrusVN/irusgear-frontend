@@ -15,8 +15,8 @@
       />
     </div>
 
-    <!-- Filters Card -->
-    <div class="admin-card-shell filters-card">
+    <!-- Filters Card (Desktop only) -->
+    <div v-if="!isMobile" class="admin-card-shell filters-card">
       <div class="filters-grid">
         <label class="filter-group">
           <span class="filter-label">Status</span>
@@ -47,8 +47,9 @@
       </div>
     </div>
 
-    <!-- Product Table -->
+    <!-- Product Table (Desktop) -->
     <AdminDataTable
+      v-if="!isMobile"
       :columns="columns"
       :items="paginatedProducts"
       :selectable="true"
@@ -74,7 +75,6 @@
         </AdminTableToolbar>
       </template>
 
-      <!-- Product cell -->
       <template #cell-name="{ item }">
         <div class="product-cell">
           <img :src="item.image" :alt="item.name" class="product-thumb" />
@@ -85,7 +85,6 @@
         </div>
       </template>
 
-      <!-- Category cell -->
       <template #cell-categoryName="{ item }">
         <span class="category-pill">
           <i class="bi" :class="item.categoryIcon"></i>
@@ -93,7 +92,6 @@
         </span>
       </template>
 
-      <!-- Stock toggle -->
       <template #cell-stockEnabled="{ item }">
         <label class="stock-toggle" @click.stop>
           <input type="checkbox" :checked="item.stockEnabled" @change="toggleStock(item)" />
@@ -101,12 +99,10 @@
         </label>
       </template>
 
-      <!-- SKU -->
       <template #cell-sku="{ item }">
         <code class="sku-code">{{ item.sku }}</code>
       </template>
 
-      <!-- Price -->
       <template #cell-price="{ item }">
         <div>
           <strong>{{ formatCurrency(item.price) }}</strong>
@@ -114,17 +110,14 @@
         </div>
       </template>
 
-      <!-- Qty -->
       <template #cell-quantity="{ item }">
         <span :class="qtyClass(item)">{{ item.quantity }}</span>
       </template>
 
-      <!-- Status -->
       <template #cell-status="{ item }">
         <AdminStatusBadge :label="statusLabel(item.status)" :variant="statusVariant(item.status)" />
       </template>
 
-      <!-- Actions -->
       <template #actions="{ item }">
         <div class="action-buttons">
           <nuxt-link :to="`/admin/products/${item.id}/edit`" class="admin-icon-button" title="Edit" @click.stop>
@@ -150,6 +143,52 @@
         />
       </template>
     </AdminDataTable>
+
+    <!-- Mobile Card List -->
+    <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <label style="flex:1;position:relative">
+          <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
+          <input class="admin-control" v-model="search" placeholder="Search Product" style="padding-left:36px;width:100%" @input="resetPage">
+        </label>
+        <AdminMobileFilterSheet
+          :filters="mobileFilters"
+          @change="handleFilterChange"
+          @reset="handleFilterReset"
+        />
+        <nuxt-link to="/admin/products/create" class="admin-primary-button" style="height:40px;white-space:nowrap"><i class="bi bi-plus-lg"></i></nuxt-link>
+      </div>
+      <AdminMobileCard
+        v-for="item in paginatedProducts"
+        :key="item.id"
+        :title="item.name"
+        :subtitle="item.vendor"
+        :avatar="item.image"
+        :meta="[
+          { label: 'Price', value: formatCurrency(item.price) },
+          { label: 'Qty', value: String(item.quantity), class: qtyClass(item) },
+          { label: 'SKU', value: item.sku },
+        ]"
+        @click="navigateToEdit(item)"
+      >
+        <template #badge>
+          <AdminStatusBadge :label="statusLabel(item.status)" :variant="statusVariant(item.status)" />
+        </template>
+        <template #actions>
+          <AdminActionMenu
+            :items="[
+              { key: 'view', label: 'View', icon: 'bi-eye' },
+              { key: 'duplicate', label: 'Duplicate', icon: 'bi-copy' },
+              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+            ]"
+            @select="handleAction($event, item)"
+          />
+        </template>
+      </AdminMobileCard>
+      <div v-if="filteredProducts.length > pageSize" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < filteredProducts.length" class="admin-secondary-button" @click="page++">Load More</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -165,6 +204,11 @@ import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
+import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
+import AdminMobileFilterSheet from '@/components/Admin/ui/AdminMobileFilterSheet.vue'
+import { useMediaQuery } from '@/composables/useMediaQuery'
+
+const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Products – IrusGear Admin' })
@@ -183,6 +227,50 @@ const pageSize = ref(10)
 const selectedIds = ref([])
 
 const resetPage = () => { page.value = 1 }
+
+/* ── mobile filters ── */
+const mobileFilters = computed(() => [
+  {
+    key: 'status', label: 'Status', value: statusFilter.value, defaultValue: 'all',
+    options: [
+      { value: 'all', label: 'All Status' },
+      { value: 'publish', label: 'Published' },
+      { value: 'scheduled', label: 'Scheduled' },
+      { value: 'inactive', label: 'Inactive' },
+      { value: 'draft', label: 'Draft' },
+    ],
+  },
+  {
+    key: 'category', label: 'Category', value: categoryFilter.value, defaultValue: 'all',
+    options: [
+      { value: 'all', label: 'All Categories' },
+      ...categories.map(c => ({ value: c.name, label: c.name })),
+    ],
+  },
+  {
+    key: 'stock', label: 'Stock', value: stockFilter.value, defaultValue: 'all',
+    options: [
+      { value: 'all', label: 'All Stock' },
+      { value: 'in_stock', label: 'In Stock' },
+      { value: 'low_stock', label: 'Low Stock' },
+      { value: 'out_of_stock', label: 'Out of Stock' },
+    ],
+  },
+])
+
+const handleFilterChange = ({ key, value }) => {
+  if (key === 'status') statusFilter.value = value
+  else if (key === 'category') categoryFilter.value = value
+  else if (key === 'stock') stockFilter.value = value
+  resetPage()
+}
+
+const handleFilterReset = () => {
+  statusFilter.value = 'all'
+  categoryFilter.value = 'all'
+  stockFilter.value = 'all'
+  resetPage()
+}
 
 /* ── columns ── */
 const columns = [
@@ -306,10 +394,10 @@ const handleAction = (action, item) => {
 .action-buttons { display: flex; align-items: center; justify-content: center; gap: 4px; }
 
 /* Responsive */
-@media (max-width: 1199.98px) {
+@media screen and (max-width: 1199.98px) {
   .metric-strip { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 767.98px) {
+@media screen and (max-width: 767.98px) {
   .metric-strip { grid-template-columns: 1fr; }
   .filters-grid { grid-template-columns: 1fr; }
 }

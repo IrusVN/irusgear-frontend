@@ -234,14 +234,14 @@ select.admin-control {
 }
 
 /* ── Responsive: Desktop 1440 ── */
-@media (max-width: 1440px) {
+@media screen and (max-width: 1440px) {
   .admin-content {
     padding: 0 20px 24px;
   }
 }
 
 /* ── Responsive: Tablet 1024 ── */
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
   .admin-content {
     padding: 0 16px 22px;
   }
@@ -252,7 +252,7 @@ select.admin-control {
 }
 
 /* ── Responsive: Mobile-like 991 ── */
-@media (max-width: 991.98px) {
+@media screen and (max-width: 991.98px) {
   .admin-content,
   .admin-content.is-collapsed {
     margin-left: 0;
@@ -268,24 +268,11 @@ select.admin-control {
   }
 }
 
-/* ── Responsive: Small Mobile 390 ── */
-@media (max-width: 480px) {
+/* ── Responsive: Small Mobile ── */
+@media screen and (max-width: 480px) {
   .admin-content,
   .admin-content.is-collapsed {
     padding: 0 10px 16px;
-  }
-
-  .admin-primary-button,
-  .admin-secondary-button,
-  .admin-danger-button {
-    height: 36px;
-    font-size: 0.82rem;
-    padding: 0 12px;
-  }
-
-  .admin-control {
-    height: 38px;
-    font-size: 0.86rem;
   }
 
   .admin-card-shell table th,
@@ -294,3 +281,138 @@ select.admin-control {
     font-size: 0.82rem;
   }
 }
+
+/* ── Bottom Nav Mobile Spacing ── */
+@media screen and (max-width: 767px) {
+  .admin-content.has-bottom-nav {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 16px);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Phase M6: Polish — Native-App Feel
+   ═══════════════════════════════════════════ */
+
+/* ── Font Smoothing ── */
+.admin-shell {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Overscroll Behavior ── */
+.admin-shell {
+  overscroll-behavior: none;
+}
+
+.admin-content {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Smooth Scroll ── */
+html:has(.admin-shell) {
+  scroll-behavior: smooth;
+}
+
+/* ── Tap Highlight Removal ── */
+.admin-shell * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Active Press States — Cards ── */
+@media screen and (max-width: 767px) {
+  .admin-card-shell {
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+
+  /* Buttons active feedback */
+  .admin-primary-button:active,
+  .admin-secondary-button:active,
+  .admin-danger-button:active {
+    transform: scale(0.97);
+    opacity: 0.85;
+  }
+
+  .admin-icon-button:active {
+    transform: scale(0.9);
+    background: var(--admin-surface-soft);
+  }
+
+  /* Bottom nav tab press */
+  .bnav-tab:active {
+    transform: scale(0.92);
+    opacity: 0.7;
+  }
+
+  /* Table row touch highlight */
+  .admin-card-shell table tbody tr:active {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ── Focus-Visible Outlines (accessibility) ── */
+.admin-primary-button:focus-visible,
+.admin-secondary-button:focus-visible,
+.admin-danger-button:focus-visible,
+.admin-icon-button:focus-visible,
+.admin-control:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
+}
+
+/* ── Skeleton Loading Placeholder ── */
+@keyframes adminShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.admin-skeleton {
+  background: linear-gradient(90deg, var(--admin-surface-soft) 30%, #e8e8ec 50%, var(--admin-surface-soft) 70%);
+  background-size: 200% 100%;
+  animation: adminShimmer 1.5s ease-in-out infinite;
+  border-radius: var(--admin-radius);
+}
+
+/* ── Transition Polish for Page Elements ── */
+.admin-card-shell {
+  transition: box-shadow 0.2s ease;
+}
+
+.admin-card-shell:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Safe Area (notch devices) ── */
+@supports (padding: env(safe-area-inset-top)) {
+  .admin-topbar {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+/* ── Selection Color ── */
+.admin-shell ::selection {
+  background: rgba(5, 5, 5, 0.12);
+  color: var(--admin-text);
+}
+
+/* ── Scrollbar Minimal (desktop) ── */
+@media screen and (min-width: 768px) {
+  .admin-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .admin-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .admin-content::-webkit-scrollbar-thumb {
+    background: var(--admin-border);
+    border-radius: 999px;
+  }
+
+  .admin-content::-webkit-scrollbar-thumb:hover {
+    background: var(--admin-subtle);
+  }
+}
+

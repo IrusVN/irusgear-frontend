@@ -281,6 +281,23 @@ onMounted(async () => {
 .conv-badge.low { background: rgba(255,76,81,0.14); color: var(--admin-danger); }
 
 /* Responsive */
-@media (max-width: 1199.98px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } .charts-row { grid-template-columns: 1fr; } }
-@media (max-width: 767.98px) { .kpi-grid { grid-template-columns: 1fr; } }
+@media screen and (max-width: 1199.98px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } .charts-row { grid-template-columns: 1fr; } }
+@media screen and (max-width: 767.98px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi-card { padding: 14px; gap: 10px; }
+  .kpi-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+  .kpi-body strong { font-size: 1.05rem; }
+  .charts-row { gap: 12px; margin-bottom: 12px; }
+  .chart-card { padding: 16px; }
+  .chart-card canvas { height: 200px !important; }
+  .card-title { font-size: 0.92rem; margin-bottom: 12px; }
+  .funnel-info { min-width: 140px; gap: 6px; }
+  .funnel-label { min-width: 70px; font-size: 0.78rem; }
+  .section-card { padding: 14px; }
+  .mini-table th:nth-child(4),
+  .mini-table td:nth-child(4) { display: none; }
+  .mini-table th, .mini-table td { padding: 10px 10px; font-size: 0.82rem; }
+  .page-header { margin-bottom: 16px; }
+  .period-select { min-width: 130px; }
+}
 </style>

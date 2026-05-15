@@ -458,11 +458,52 @@ const handleEditDetails = () => alert('Edit details (mock)')
 .btn-sm { height: 34px; font-size: 0.82rem; padding: 0 12px; }
 
 /* Responsive */
-@media (max-width: 991.98px) {
+@media screen and (max-width: 991.98px) {
   .detail-grid { grid-template-columns: 1fr; }
   .detail-header { flex-direction: column; align-items: flex-start; }
   .overview-cards { grid-template-columns: 1fr; }
   .field-row-2 { grid-template-columns: 1fr; }
   .address-grid { grid-template-columns: 1fr; }
+}
+
+@media screen and (max-width: 767.98px) {
+  .page-title { font-size: 1.1rem; }
+  .back-link { width: 44px; height: 44px; }
+
+  /* Profile compact */
+  .profile-top { padding: 20px 16px; }
+  .profile-avatar { width: 64px; height: 64px; }
+  .profile-name { font-size: 1rem; }
+  .details-list { padding: 16px; }
+
+  /* Tabs scrollable + compact */
+  .tabs-nav { padding: 0 14px; }
+  .tab-btn { padding: 12px 12px; font-size: 0.82rem; }
+  .tab-content { padding: 16px; }
+
+  /* Overview cards */
+  .overview-cards { gap: 10px; }
+  .overview-item { padding: 12px; }
+  .ov-icon { width: 38px; height: 38px; font-size: 1rem; }
+
+  /* Orders table compact */
+  .mini-table th:nth-child(2),
+  .mini-table td:nth-child(2) { display: none; }
+  .mini-table th, .mini-table td { padding: 8px 8px; font-size: 0.82rem; }
+
+  /* Touch-friendly inputs & toggles */
+  .field-input, .admin-control { min-height: 44px; font-size: 16px; }
+  .toggle-track { width: 44px; height: 26px; }
+  .toggle-track::after { width: 20px; height: 20px; }
+  .stock-toggle input:checked + .toggle-track::after { transform: translateX(18px); }
+
+  /* Full-width buttons */
+  .edit-details-btn { min-height: 44px; }
+  .btn-sm { min-height: 40px; }
+  .admin-danger-button { width: 100%; justify-content: center; min-height: 44px; }
+
+  /* Loyalty card compact */
+  .loyalty-card { padding: 18px; }
+  .loyalty-points strong { font-size: 1.3rem; }
 }
 </style>

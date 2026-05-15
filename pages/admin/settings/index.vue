@@ -275,7 +275,20 @@ const connections = reactive([
 .toggle input:checked + .slider { background: var(--admin-success); }
 .toggle input:checked + .slider::before { transform: translateX(18px); }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .sgrid { grid-template-columns: 1fr; }
+  .stab { padding: 12px 14px; font-size: .82rem; }
+
+  /* Touch-friendly inputs */
+  .sfield .admin-control { min-height: 44px; font-size: 16px; }
+
+  /* Larger toggles */
+  .toggle { width: 48px; height: 28px; }
+  .toggle .slider::before { width: 22px; height: 22px; }
+  .toggle input:checked + .slider::before { transform: translateX(20px); }
+
+  /* Buttons */
+  .admin-primary-button,
+  .admin-secondary-button { min-height: 44px; }
 }
 </style>

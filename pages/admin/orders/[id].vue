@@ -602,7 +602,7 @@ const handleDelete = () => {
 }
 
 /* Responsive */
-@media (max-width: 991.98px) {
+@media screen and (max-width: 991.98px) {
   .detail-grid {
     grid-template-columns: 1fr;
   }
@@ -611,5 +611,39 @@ const handleDelete = () => {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+@media screen and (max-width: 767.98px) {
+  .detail-card { padding: 16px; }
+  .card-title { font-size: 0.92rem; margin-bottom: 12px; }
+  .page-title { font-size: 1.1rem; }
+  .back-link { width: 44px; height: 44px; }
+
+  /* Full-width delete button */
+  .header-actions { width: 100%; }
+  .header-actions .admin-danger-button { width: 100%; justify-content: center; min-height: 44px; }
+
+  /* Items table: hide price column on small */
+  .items-table th:nth-child(2),
+  .items-table td:nth-child(2) { display: none; }
+  .items-table th, .items-table td { padding: 10px 10px; font-size: 0.84rem; }
+  .item-thumb { width: 36px; height: 36px; }
+  .item-info strong { max-width: 140px; font-size: 0.82rem; }
+
+  /* Totals compact */
+  .total-row { padding: 6px 10px; font-size: 0.84rem; }
+  .grand-total { font-size: 0.92rem; }
+
+  /* Timeline compact */
+  .timeline-content { padding-bottom: 16px; }
+  .timeline-dot { width: 24px; height: 24px; font-size: 0.65rem; }
+
+  /* Customer card compact */
+  .customer-avatar-lg { width: 40px; height: 40px; }
+  .info-item { font-size: 0.82rem; }
+
+  /* Address compact */
+  .address-block p { font-size: 0.84rem; }
+  .btn-sm { min-height: 40px; }
 }
 </style>

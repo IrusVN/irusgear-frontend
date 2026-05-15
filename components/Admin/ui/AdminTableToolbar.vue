@@ -173,7 +173,7 @@ defineProps({
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
 }
 
-@media (max-width: 767.98px) {
+@media screen and (max-width: 767.98px) {
   .admin-table-toolbar {
     align-items: stretch;
     flex-direction: column;

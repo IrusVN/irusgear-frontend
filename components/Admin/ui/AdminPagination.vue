@@ -137,7 +137,7 @@ const goTo = (page) => {
   opacity: 0.65;
 }
 
-@media (max-width: 767.98px) {
+@media screen and (max-width: 767.98px) {
   .admin-pagination {
     align-items: flex-start;
     flex-direction: column;

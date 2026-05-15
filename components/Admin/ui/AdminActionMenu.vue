@@ -1,11 +1,12 @@
 <template>
   <div ref="root" class="admin-action-menu">
-    <button class="action-trigger" type="button" :aria-expanded="isOpen" @click="toggle">
+    <button class="action-trigger" type="button" :aria-expanded="isOpen" @click="handleTrigger">
       <i class="bi bi-three-dots-vertical"></i>
     </button>
 
+    <!-- Desktop dropdown -->
     <Transition name="action-menu">
-      <div v-if="isOpen" class="action-dropdown">
+      <div v-if="isOpen && !isMobile" class="action-dropdown">
         <button
           v-for="item in items"
           :key="item.key || item.label"
@@ -20,11 +21,36 @@
         <slot />
       </div>
     </Transition>
+
+    <!-- Mobile BottomSheet -->
+    <BottomSheet :open="isOpen && isMobile" @close="close">
+      <div class="action-sheet-content">
+        <div class="action-sheet-header">
+          <span>Actions</span>
+          <button type="button" class="action-sheet-close" @click="close">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <button
+          v-for="item in items"
+          :key="'m-' + (item.key || item.label)"
+          class="action-sheet-item"
+          :class="{ danger: item.variant === 'danger' }"
+          type="button"
+          @click="handleSelect(item)"
+        >
+          <i v-if="item.icon" class="bi" :class="item.icon"></i>
+          <span>{{ item.label }}</span>
+        </button>
+      </div>
+    </BottomSheet>
   </div>
 </template>
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useMediaQuery } from '@/composables/useMediaQuery'
+import BottomSheet from '@/components/Common/BottomSheet.vue'
 
 const emit = defineEmits(['select'])
 
@@ -37,8 +63,9 @@ defineProps({
 
 const root = ref(null)
 const isOpen = ref(false)
+const isMobile = useMediaQuery('(max-width: 767px)')
 
-const toggle = () => {
+const handleTrigger = () => {
   isOpen.value = !isOpen.value
 }
 
@@ -53,6 +80,7 @@ const handleSelect = (item) => {
 
 const handleDocumentClick = (event) => {
   if (!root.value || root.value.contains(event.target)) return
+  if (isMobile.value) return // BottomSheet handles its own close
   close()
 }
 
@@ -128,5 +156,69 @@ onBeforeUnmount(() => document.removeEventListener('click', handleDocumentClick)
 .action-menu-leave-to {
   opacity: 0;
   transform: translateY(-4px) scale(0.98);
+}
+
+/* BottomSheet action items */
+.action-sheet-content {
+  padding: 0 0 12px;
+}
+
+.action-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 20px 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--admin-text);
+}
+
+.action-sheet-close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: var(--admin-surface-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-text);
+  font-size: 1rem;
+}
+
+.action-sheet-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border: 0;
+  background: transparent;
+  color: var(--admin-text);
+  font-size: 0.96rem;
+  font-weight: 500;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.action-sheet-item:active {
+  background: var(--admin-surface-soft);
+}
+
+.action-sheet-item i {
+  width: 22px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.action-sheet-item.danger {
+  color: var(--admin-danger);
+}
+
+@media screen and (max-width: 767px) {
+  .action-trigger {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
 }
 </style>

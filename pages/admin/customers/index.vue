@@ -1,7 +1,8 @@
 <template>
   <div class="customers-page">
-    <!-- Customer Table -->
+    <!-- Customer Table (Desktop) -->
     <AdminDataTable
+      v-if="!isMobile"
       :columns="columns"
       :items="paginatedCustomers"
       :selectable="true"
@@ -27,7 +28,6 @@
         </AdminTableToolbar>
       </template>
 
-      <!-- Customer -->
       <template #cell-name="{ item }">
         <div class="customer-cell">
           <img :src="item.avatar" :alt="item.name" class="customer-avatar" />
@@ -38,12 +38,10 @@
         </div>
       </template>
 
-      <!-- Customer ID -->
       <template #cell-customerCode="{ item }">
         <code class="code-chip">{{ item.customerCode }}</code>
       </template>
 
-      <!-- Country -->
       <template #cell-country="{ item }">
         <span class="country-cell">
           <img :src="`https://flagcdn.com/20x15/${item.countryCode.toLowerCase()}.png`" :alt="item.country" class="country-flag" />
@@ -51,17 +49,14 @@
         </span>
       </template>
 
-      <!-- Orders -->
       <template #cell-orders="{ item }">
         <strong>{{ item.orders.toLocaleString() }}</strong>
       </template>
 
-      <!-- Total Spent -->
       <template #cell-totalSpent="{ item }">
         <strong>{{ formatCurrency(item.totalSpent) }}</strong>
       </template>
 
-      <!-- Actions -->
       <template #actions="{ item }">
         <AdminActionMenu
           :items="[
@@ -82,6 +77,41 @@
         />
       </template>
     </AdminDataTable>
+
+    <!-- Mobile Card List -->
+    <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
+      <label style="display:block;position:relative;margin-bottom:12px">
+        <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
+        <input class="admin-control" v-model="search" placeholder="Search Customer" style="padding-left:36px;width:100%" @input="resetPage">
+      </label>
+      <AdminMobileCard
+        v-for="item in paginatedCustomers"
+        :key="item.id"
+        :title="item.name"
+        :subtitle="item.email"
+        :avatar="item.avatar"
+        :meta="[
+          { label: 'Orders', value: item.orders.toLocaleString() },
+          { label: 'Spent', value: formatCurrency(item.totalSpent) },
+          { label: 'ID', value: item.customerCode },
+        ]"
+        @click="viewCustomer(item)"
+      >
+        <template #actions>
+          <AdminActionMenu
+            :items="[
+              { key: 'view', label: 'View Details', icon: 'bi-eye' },
+              { key: 'edit', label: 'Edit', icon: 'bi-pencil' },
+              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+            ]"
+            @select="handleAction($event, item)"
+          />
+        </template>
+      </AdminMobileCard>
+      <div v-if="filteredCustomers.length > pageSize" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < filteredCustomers.length" class="admin-secondary-button" @click="page++">Load More</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -93,6 +123,10 @@ import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
+import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
+import { useMediaQuery } from '@/composables/useMediaQuery'
+
+const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Customers – IrusGear Admin' })
