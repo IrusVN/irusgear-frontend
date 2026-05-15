@@ -27,8 +27,8 @@
           </div>
         </div>
         <div class="header-actions">
-          <button class="admin-danger-button" type="button" @click="handleDelete">
-            <i class="bi bi-trash"></i> Delete Order
+          <button v-if="order.fulfillmentStatus !== 'cancelled'" class="admin-danger-button" type="button" @click="handleCancel">
+            <i class="bi bi-x-circle"></i> Cancel Order
           </button>
         </div>
       </div>
@@ -184,20 +184,87 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter } from '#imports'
-import { adminOrdersMock } from '~/mocks/admin/orders.mock'
+import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 
 definePageMeta({ layout: 'admin' })
 
 const route = useRoute()
 const router = useRouter()
+const admin = useAdminStore()
 
 const orderId = computed(() => Number(route.params.id))
-const order = computed(() => adminOrdersMock.find(o => o.id === orderId.value))
+const order = ref(null)
 
-useHead({ title: computed(() => order.value ? `Order ${order.value.orderCode} – IrusGear Admin` : 'Order Not Found') })
+useHead({ title: computed(() => order.value ? `Order ${order.value.orderCode} – IrusGear Admin` : 'Loading Order...') })
+
+const mapOrderDetail = (o) => ({
+  id: o.id,
+  orderCode: o.order_number,
+  date: o.created_at,
+  paymentStatus: o.payment?.status || 'pending',
+  fulfillmentStatus: o.status,
+  paymentMethod: o.payment?.method || 'cod',
+  paymentLabel: o.payment ? (o.payment.method === 'cod' ? 'Cash on Delivery' : o.payment.method) : 'N/A',
+  customer: {
+    id: o.customer?.id,
+    customerCode: o.customer?.id ? `#CUS${o.customer.id}` : 'Guest',
+    name: o.customer?.name || o.guest_email || 'Guest',
+    email: o.customer?.email || o.guest_email,
+    phone: o.customer?.phone || o.address?.phone,
+    avatar: '',
+  },
+  items: o.items?.map(i => ({
+    id: i.id,
+    name: i.product_name,
+    variant: i.variant_name,
+    image: i.thumbnail,
+    price: i.unit_price,
+    quantity: i.quantity,
+    total: i.line_total,
+  })) || [],
+  subtotal: o.pricing?.subtotal || 0,
+  shipping: o.pricing?.delivery_fee || 0,
+  tax: o.pricing?.tax || 0,
+  discount: o.pricing?.discount_amount || 0,
+  total: o.pricing?.total || 0,
+  shippingAddress: {
+    street: o.address?.line1 || '',
+    ward: o.address?.ward_code || '',
+    district: o.address?.district_code || '',
+    city: o.address?.city || '',
+    country: o.address?.country || 'Vietnam',
+    zip: o.address?.postal_code || '',
+  },
+  billingAddress: {
+    street: o.address?.line1 || '',
+    ward: o.address?.ward_code || '',
+    district: o.address?.district_code || '',
+    city: o.address?.city || '',
+    country: o.address?.country || 'Vietnam',
+  },
+  activity: o.timeline?.map(t => ({
+    id: t.id,
+    title: t.label,
+    description: t.note || '',
+    timestamp: t.created_at,
+    completed: true,
+  })) || [],
+  note: o.order_note,
+})
+
+const fetchOrder = async () => {
+  const res = await admin.fetchOne(`orders/${orderId.value}`)
+  if (res?.data) {
+    order.value = mapOrderDetail(res.data)
+  }
+}
+
+onMounted(() => {
+  fetchOrder()
+})
 
 /* ── helpers ── */
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
@@ -220,10 +287,15 @@ const paymentIcon = (m) => ({
   paypal: 'bi-paypal', cod: 'bi-cash', bank_transfer: 'bi-bank',
 }[m] || 'bi-credit-card')
 
-const handleDelete = () => {
-  if (confirm(`Delete order ${order.value?.orderCode}? This cannot be undone.`)) {
-    alert('Order deleted (mock)')
-    router.push('/admin/orders')
+const handleCancel = async () => {
+  if (confirm(`Cancel order ${order.value?.orderCode}? This cannot be undone.`)) {
+    try {
+      await admin.create(`orders/${orderId.value}/cancel`, { reason: 'Cancelled by admin' })
+      alert('Order cancelled successfully')
+      fetchOrder()
+    } catch (e) {
+      alert('Failed to cancel order: ' + e.message)
+    }
   }
 }
 </script>

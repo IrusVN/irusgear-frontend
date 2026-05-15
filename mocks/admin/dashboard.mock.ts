@@ -1,5 +1,4 @@
 import type { AdminDashboardMock } from '~/types/admin'
-import { adminOrdersMock } from './orders.mock'
 import { adminProductsMock } from './products.mock'
 import { adminCustomersMock } from './customers.mock'
 
@@ -10,7 +9,7 @@ export const adminDashboardMock: AdminDashboardMock = {
     sales: 230000,
     customers: adminCustomersMock.length,
     products: adminProductsMock.length,
-    revenue: adminOrdersMock.reduce((sum, order) => sum + order.total, 0),
+    revenue: 0, // Mocked revenue removed for Phase C cleanup
   },
   salesChannels: [
     { label: 'In-Store Sales', value: 53450000, orders: 5000, change: 5.7, icon: 'bi-shop', variant: 'neutral' },
@@ -60,4 +59,4 @@ export const adminDashboardTopProducts = adminProductsMock
   .sort((a, b) => b.sales - a.sales)
   .slice(0, 6)
 
-export const adminDashboardRecentOrders = adminOrdersMock.slice(0, 6)
+export const adminDashboardRecentOrders = [] // Temporarily empty until Phase F

@@ -240,7 +240,6 @@
 import { ref, computed } from 'vue'
 import { useHead, useRoute, useRouter } from '#imports'
 import { adminCustomersMock } from '~/mocks/admin/customers.mock'
-import { adminOrdersMock } from '~/mocks/admin/orders.mock'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 
 definePageMeta({ layout: 'admin' })
@@ -271,8 +270,7 @@ const notificationSettings = [
 
 /* ── customer orders ── */
 const customerOrders = computed(() => {
-  if (!customer.value) return []
-  return adminOrdersMock.filter(o => o.customer.id === customer.value.id).slice(0, 5)
+  return [] // Orders will be fetched from API in Phase D
 })
 
 /* ── loyalty ── */

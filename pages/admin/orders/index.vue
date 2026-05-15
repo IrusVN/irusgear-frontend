@@ -17,7 +17,7 @@
     <AdminDataTable
       v-if="!isMobile"
       :columns="columns"
-      :items="paginatedOrders"
+      :items="orders"
       :selectable="true"
       :selected-keys="selectedIds"
       @update:selected-keys="selectedIds = $event"
@@ -28,8 +28,8 @@
           :search="search"
           :page-size="pageSize"
           search-placeholder="Search Order"
-          @update:search="search = $event; resetPage()"
-          @update:page-size="pageSize = $event; resetPage()"
+          @update:search="handleSearch"
+          @update:page-size="changePageSize"
           @export="handleExport"
         />
       </template>
@@ -78,8 +78,8 @@
         <AdminPagination
           :page="page"
           :page-size="pageSize"
-          :total="filteredOrders.length"
-          @update:page="page = $event"
+          :total="totalOrders"
+          @update:page="changePage"
         />
       </template>
     </AdminDataTable>
@@ -91,7 +91,7 @@
         <input class="admin-control" v-model="search" placeholder="Search Order" style="padding-left:36px;width:100%" @input="resetPage">
       </label>
       <AdminMobileCard
-        v-for="item in paginatedOrders"
+        v-for="item in orders"
         :key="item.id"
         :title="item.orderCode"
         :subtitle="item.customer.name"
@@ -115,17 +115,18 @@
           />
         </template>
       </AdminMobileCard>
-      <div v-if="filteredOrders.length > pageSize" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < filteredOrders.length" class="admin-secondary-button" @click="page++">Load More</button>
+      <div v-if="totalOrders > orders.length" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < totalOrders" class="admin-secondary-button" @click="changePage(page + 1)">Load More</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useHead, useRouter } from '#imports'
-import { adminOrdersMock } from '~/mocks/admin/orders.mock'
+import { useAdminStore } from '@/stores/adminStore'
+import { usePaginationStore } from '@/stores/paginationStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
@@ -141,23 +142,50 @@ definePageMeta({ layout: 'admin' })
 useHead({ title: 'Orders – IrusGear Admin' })
 
 const router = useRouter()
+const admin = useAdminStore()
+const pagination = usePaginationStore()
 
 /* ── state ── */
 const search = ref('')
-const page = ref(1)
-const pageSize = ref(10)
-const selectedIds = ref([])
+const searchTimeout = ref(null)
+const page = computed(() => pagination.page)
+const pageSize = computed(() => pagination.limit)
+const totalOrders = computed(() => pagination.total)
 
-const resetPage = () => { page.value = 1 }
+const selectedIds = ref([])
+const orders = ref([])
+const stats = ref(null)
+
+const handleSearch = (val) => {
+  search.value = val
+  if (searchTimeout.value) clearTimeout(searchTimeout.value)
+  searchTimeout.value = setTimeout(() => {
+    pagination.setPage(1)
+    fetchOrders()
+  }, 300)
+}
+
+const changePage = (p) => {
+  pagination.setPage(p)
+  fetchOrders()
+}
+
+const changePageSize = (size) => {
+  pagination.setLimit(size)
+  pagination.setPage(1)
+  fetchOrders()
+}
 
 /* ── metrics ── */
-const allOrders = adminOrdersMock
-const paymentMetrics = computed(() => [
-  { label: 'Pending Payment', value: allOrders.filter(o => o.paymentStatus === 'pending').length, meta: 'orders', icon: 'bi-clock', variant: 'warning' },
-  { label: 'Completed', value: allOrders.filter(o => o.paymentStatus === 'paid').length, meta: 'orders', icon: 'bi-check-circle', variant: 'success' },
-  { label: 'Refunded', value: allOrders.filter(o => o.paymentStatus === 'refunded').length, meta: 'orders', icon: 'bi-arrow-counterclockwise', variant: 'info' },
-  { label: 'Failed', value: allOrders.filter(o => o.paymentStatus === 'failed').length, meta: 'orders', icon: 'bi-x-circle', variant: 'danger' },
-])
+const paymentMetrics = computed(() => {
+  const s = stats.value?.by_payment_status || {}
+  return [
+    { label: 'Pending Payment', value: s.pending || 0, meta: 'orders', icon: 'bi-clock', variant: 'warning' },
+    { label: 'Completed', value: s.paid || 0, meta: 'orders', icon: 'bi-check-circle', variant: 'success' },
+    { label: 'Refunded', value: s.refunded || 0, meta: 'orders', icon: 'bi-arrow-counterclockwise', variant: 'info' },
+    { label: 'Failed', value: s.failed || 0, meta: 'orders', icon: 'bi-x-circle', variant: 'danger' },
+  ]
+})
 
 /* ── columns ── */
 const columns = [
@@ -169,20 +197,43 @@ const columns = [
   { key: 'paymentMethod', label: 'Method' },
 ]
 
-/* ── filtering ── */
-const filteredOrders = computed(() => {
-  if (!search.value) return allOrders
-  const q = search.value.toLowerCase()
-  return allOrders.filter(o =>
-    o.orderCode.toLowerCase().includes(q) ||
-    o.customer.name.toLowerCase().includes(q) ||
-    o.customer.email.toLowerCase().includes(q)
-  )
+/* ── mapping ── */
+const mapOrder = (o) => ({
+  id: o.id,
+  orderCode: o.order_number,
+  date: o.created_at,
+  customer: {
+    name: o.customer?.name || 'Guest',
+    email: o.customer?.email || o.guest_email || '',
+    avatar: '', // fallback to initials or empty
+  },
+  paymentStatus: o.payment?.status || 'pending',
+  fulfillmentStatus: o.status,
+  paymentMethod: o.payment?.method || 'cod',
+  paymentLabel: o.payment ? (o.payment.method === 'cod' ? 'Cash on Delivery' : o.payment.method) : 'N/A',
 })
 
-const paginatedOrders = computed(() => {
-  const start = (page.value - 1) * pageSize.value
-  return filteredOrders.value.slice(start, start + pageSize.value)
+/* ── data fetching ── */
+const fetchOrders = async () => {
+  const res = await admin.fetchList('orders', {
+    search: search.value,
+  })
+  if (res?.data) {
+    orders.value = res.data.map(mapOrder)
+  }
+}
+
+const fetchStats = async () => {
+  const res = await admin.fetchOne('orders/stats')
+  if (res?.data) {
+    stats.value = res.data
+  }
+}
+
+onMounted(() => {
+  pagination.reset()
+  fetchOrders()
+  fetchStats()
 })
 
 /* ── helpers ── */
