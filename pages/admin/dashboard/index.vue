@@ -368,7 +368,7 @@
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useHead, useI18n } from '#imports'
-import { adminDashboardMock, adminDashboardTopProducts, adminDashboardRecentOrders } from '~/mocks/admin/dashboard.mock'
+import { useAdminStore } from '@/stores/adminStore'
 import AdminCard from '@/components/Admin/ui/AdminCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminBarChart from '@/components/Admin/charts/AdminBarChart.vue'
@@ -380,10 +380,47 @@ definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
 useHead({ title: () => `${t('admin.dashboard.title')} – IrusGear Admin` })
 
-const dashboardData = adminDashboardMock
-const topProducts = adminDashboardTopProducts
-const recentOrders = adminDashboardRecentOrders
-const countryOrders = [
+const admin = useAdminStore()
+
+const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+
+// Dữ liệu static cho các widget chưa có API
+const dashboardData = ref({
+  metrics: { sales: 0, customers: 0, products: 0, revenue: 0 },
+  salesChannels: [
+    { label: 'In-Store Sales', value: 53450000, orders: 5000, change: 5.7, icon: 'bi-shop', variant: 'neutral' },
+    { label: 'Website Sales', value: 674347000, orders: 21000, change: 12.4, icon: 'bi-display', variant: 'info' },
+    { label: 'Discount', value: 14235000, orders: 6000, change: 0, icon: 'bi-gift', variant: 'warning' },
+    { label: 'Affiliate', value: 8345000, orders: 150, change: -3.5, icon: 'bi-wallet2', variant: 'danger' },
+  ],
+  revenueReport: {
+    labels: monthLabels,
+    earning: [250, 190, 165, 180, 232, 260, 232, 250, 135],
+    expense: [-130, -150, -170, -140, -92, -48, -75, -85, -170],
+  },
+  profit: { labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'], data: [42, 58, 49, 66, 59, 74, 92] },
+  expenseBreakdown: { labels: ['Used', 'Remaining'], data: [78, 22] },
+  leads: { labels: ['Organic', 'Ads', 'Referral'], data: [184, 94, 72] },
+  budget: { labels: monthLabels, data: [42, 56, 47, 53, 38, 68, 57, 60, 43, 62] },
+  earningReports: [
+    { label: 'Net Profit', description: '12.4k Sales', value: 16190000, change: 18.6, icon: 'bi-clock', variant: 'neutral' },
+    { label: 'Total Income', description: 'Sales, Affiliation', value: 35710000, change: 39.6, icon: 'bi-currency-dollar', variant: 'success' },
+    { label: 'Total Expenses', description: 'Ads, Marketing', value: 4300000, change: 52.8, icon: 'bi-credit-card', variant: 'neutral' },
+  ],
+  transactions: [
+    { id: 1, type: 'Wallet', description: 'Starbucks', amount: -75000, icon: 'bi-wallet2', variant: 'neutral' },
+    { id: 2, type: 'Bank Transfer', description: 'Add Money', amount: 480000, icon: 'bi-bank', variant: 'success' },
+    { id: 3, type: 'PayPal', description: 'Client Payment', amount: 268000, icon: 'bi-paypal', variant: 'danger' },
+    { id: 4, type: 'Master Card', description: 'Ordered iPhone 15', amount: -699000, icon: 'bi-credit-card', variant: 'neutral' },
+    { id: 5, type: 'Bank Transactions', description: 'Refund', amount: 98000, icon: 'bi-currency-dollar', variant: 'info' },
+    { id: 6, type: 'PayPal', description: 'Client Payment', amount: 126000, icon: 'bi-paypal', variant: 'danger' },
+    { id: 7, type: 'Bank Transfer', description: 'Pay Office Rent', amount: -1290000, icon: 'bi-bank', variant: 'success' },
+  ]
+})
+
+const topProducts = ref([])
+const recentOrders = ref([])
+const countryOrders = ref([
   {
     id: 'country-order-1',
     sender: 'Myrtle Ullrich',
@@ -398,11 +435,61 @@ const countryOrders = [
     receiver: 'Helena Jacobs',
     receiverAddress: '487 Sunset, California(CA), 94043',
   },
-]
+])
 
 /* ---------- animations ---------- */
 const entered = ref(false)
-onMounted(() => { nextTick(() => { entered.value = true }) })
+
+const fetchDashboard = async () => {
+  const res = await admin.fetchOne('dashboard', { days: 30 })
+  if (res?.data) {
+    if (res.data.metrics) {
+      dashboardData.value.metrics = {
+        ...dashboardData.value.metrics,
+        ...res.data.metrics
+      }
+    }
+    if (res.data.revenue_report) {
+      dashboardData.value.revenueReport = {
+        labels: res.data.revenue_report.labels || dashboardData.value.revenueReport.labels,
+        earning: res.data.revenue_report.earning || dashboardData.value.revenueReport.earning,
+        expense: res.data.revenue_report.expense || dashboardData.value.revenueReport.expense
+      }
+    }
+    if (res.data.top_products) {
+      topProducts.value = res.data.top_products.map(p => ({
+        id: p.id,
+        name: p.name,
+        vendor: p.vendor || p.category || 'Accessories',
+        revenue: p.sales || 0,
+        sales: p.quantity_sold || p.sales || 0,
+        image: p.image || 'https://via.placeholder.com/48'
+      }))
+    }
+    if (res.data.recent_orders) {
+      recentOrders.value = res.data.recent_orders.map(o => {
+        const customerName = o.customer?.name || o.customer_name || 'Guest'
+        return {
+          id: o.id,
+          orderCode: o.orderCode || o.order_number || `#ORD${o.id}`,
+          customer: {
+            name: customerName,
+            avatar: o.customer?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(customerName)}&background=random`,
+            email: o.customer?.email || ''
+          },
+          total: o.total,
+          paymentStatus: o.paymentStatus || o.status || 'pending',
+          date: o.date || o.created_at || new Date().toISOString()
+        }
+      })
+    }
+  }
+}
+
+onMounted(() => {
+  nextTick(() => { entered.value = true })
+  fetchDashboard()
+})
 const enterClass = (i) => ({ 'dash-enter': true, 'is-visible': entered.value, [`delay-${i}`]: true })
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
@@ -419,31 +506,31 @@ const formatDate = (d) => {
   return dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 }
 
-const statusLabel = (s) => t(`admin.dashboard.status.${s}`)
-const statusVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
+const statusLabel = (s) => t(`admin.status.${s}`)
+const statusVariant = (s) => ({ pending: 'warning', paid: 'success', completed: 'success', delivered: 'success', delivering: 'info', processing: 'info', failed: 'danger', cancelled: 'neutral', refunded: 'neutral', returned: 'danger' }[s] || 'neutral')
 
 const statisticsMetrics = computed(() => [
   {
     label: t('admin.dashboard.stats.sales'),
-    value: formatCompact(dashboardData.metrics.sales),
+    value: formatCompact(dashboardData.value.metrics.sales),
     icon: 'bi-pie-chart',
     variant: 'neutral',
   },
   {
     label: t('admin.dashboard.stats.customers'),
-    value: formatCompact(dashboardData.metrics.customers),
+    value: formatCompact(dashboardData.value.metrics.customers),
     icon: 'bi-people',
     variant: 'info',
   },
   {
     label: t('admin.dashboard.stats.products'),
-    value: formatCompact(dashboardData.metrics.products),
+    value: formatCompact(dashboardData.value.metrics.products),
     icon: 'bi-cart3',
     variant: 'danger',
   },
   {
     label: t('admin.dashboard.stats.revenue'),
-    value: `₫${formatCompact(dashboardData.metrics.revenue)}`,
+    value: `₫${formatCompact(dashboardData.value.metrics.revenue)}`,
     icon: 'bi-currency-dollar',
     variant: 'success',
   },
@@ -453,8 +540,8 @@ const statisticsMetrics = computed(() => [
 const sparkOpts = { plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } } }
 
 const revenueDatasets = computed(() => [
-  { label: t('admin.dashboard.earning'), data: dashboardData.revenueReport.earning, backgroundColor: '#000', borderRadius: 6, barThickness: 12 },
-  { label: t('admin.dashboard.expense'), data: dashboardData.revenueReport.expense.map(v => Math.abs(v)), backgroundColor: '#ff9f43', borderRadius: 6, barThickness: 12 },
+  { label: t('admin.dashboard.earning'), data: dashboardData.value.revenueReport.earning, backgroundColor: '#000', borderRadius: 6, barThickness: 12 },
+  { label: t('admin.dashboard.expense'), data: dashboardData.value.revenueReport.expense.map(v => Math.abs(v)), backgroundColor: '#ff9f43', borderRadius: 6, barThickness: 12 },
 ])
 
 const revenueOpts = {
