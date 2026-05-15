@@ -51,6 +51,26 @@ export default {
         confirmNo: "No",
         confirmYes: "Delete"
     },
+    orders: {
+        title: "Order Management",
+        subtitle: "Track and update order statuses",
+        filters: {
+            search: "Search",
+            searchPlaceholder: "Search by order ID, customer name, or email...",
+            status: "Status",
+            allStatus: "All statuses",
+        },
+        table: {
+            orderId: "Order ID",
+            customer: "Customer",
+            items: "Items",
+            total: "Total",
+            status: "Status",
+            date: "Date",
+            actions: "Actions",
+        },
+        noOrders: "No orders found",
+    },
     search: {
         confirmClearHistory: "Clear all search history?",
         suggestionsTitle: "Did you mean",

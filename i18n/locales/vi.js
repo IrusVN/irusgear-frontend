@@ -51,6 +51,26 @@ export default {
         confirmNo: "Không",
         confirmYes: "Xoá"
     },
+    orders: {
+        title: "Quản lý đơn hàng",
+        subtitle: "Theo dõi và cập nhật trạng thái đơn hàng",
+        filters: {
+            search: "Tìm kiếm",
+            searchPlaceholder: "Tìm theo mã đơn, tên khách hàng hoặc email...",
+            status: "Trạng thái",
+            allStatus: "Tất cả trạng thái",
+        },
+        table: {
+            orderId: "Mã đơn",
+            customer: "Khách hàng",
+            items: "Sản phẩm",
+            total: "Tổng tiền",
+            status: "Trạng thái",
+            date: "Ngày đặt",
+            actions: "Thao tác",
+        },
+        noOrders: "Chưa có đơn hàng nào",
+    },
     search: {
         confirmClearHistory: "Xoá toàn bộ lịch sử tìm kiếm?",
         suggestionsTitle: "Có phải bạn muốn tìm",
