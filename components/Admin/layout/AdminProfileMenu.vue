@@ -59,18 +59,23 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
+import { useAdminStore } from '@/stores/adminStore'
+import { useRouter } from '#imports'
 
 const auth = useAuthStore()
+const adminStore = useAdminStore()
+const router = useRouter()
+
 const isOpen = ref(false)
 const menuRoot = ref(null)
 
 const displayName = computed(() => {
-  const user = auth.user || {}
+  const user = adminStore.adminUser || auth.user || {}
   return user.name || user.full_name || user.email || 'Admin User'
 })
 
 const roleLabel = computed(() => {
-  const user = auth.user || {}
+  const user = adminStore.adminUser || auth.user || {}
   return user.role?.name || user.role || 'Admin'
 })
 
@@ -100,6 +105,7 @@ const handleDocumentClick = (event) => {
 const handleLogout = async () => {
   closeMenu()
   await auth.logout()
+  router.push('/auth/login')
 }
 
 onMounted(() => {

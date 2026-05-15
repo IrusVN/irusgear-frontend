@@ -24,7 +24,7 @@
       </button>
       <button class="admin-icon-button notification-button" type="button" aria-label="Notifications">
         <i class="bi bi-bell"></i>
-        <span></span>
+        <span v-if="unreadCount > 0"></span>
       </button>
       <NuxtLink to="/admin/settings" class="admin-icon-button settings-button hide-mobile" aria-label="Settings">
         <i class="bi bi-gear"></i>
@@ -35,12 +35,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import AdminProfileMenu from './AdminProfileMenu.vue'
+import { useAdminStore } from '@/stores/adminStore'
 
 defineEmits(['toggle-mobile'])
 
+const adminStore = useAdminStore()
 const searchQuery = ref('')
+const unreadCount = ref(0)
+
+onMounted(async () => {
+  if (import.meta.client) {
+    const res = await adminStore.fetchOne('notifications/unread-count')
+    if (res && res.data && res.data.count !== undefined) {
+      unreadCount.value = res.data.count
+    }
+  }
+})
 </script>
 
 <style scoped>

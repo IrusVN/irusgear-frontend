@@ -15,7 +15,9 @@
         <div v-if="activeTab==='account'" class="admin-card-shell" style="border-top:0;border-radius:0 0 var(--admin-radius) var(--admin-radius);padding:28px 32px">
           <!-- Avatar -->
           <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px">
-            <img src="https://i.pravatar.cc/80?img=12" style="width:72px;height:72px;border-radius:50%;object-fit:cover" alt="avatar">
+            <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg, #8b7cf6, #f0efff);color:#222233;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:700">
+              {{ userInitials }}
+            </div>
             <div>
               <div style="display:flex;gap:10px;margin-bottom:6px">
                 <button class="admin-primary-button" style="height:36px;font-size:.82rem"><i class="bi bi-cloud-upload"></i> Upload New Photo</button>
@@ -26,8 +28,8 @@
           </div>
           <!-- Form -->
           <div class="sgrid">
-            <div class="sfield"><label>FIRST NAME</label><input class="admin-control" v-model="form.firstName"></div>
-            <div class="sfield"><label>LAST NAME</label><input class="admin-control" v-model="form.lastName"></div>
+            <div class="sfield"><label>FIRST NAME</label><input class="admin-control" v-model="form.first_name"></div>
+            <div class="sfield"><label>LAST NAME</label><input class="admin-control" v-model="form.last_name"></div>
             <div class="sfield"><label>EMAIL</label><input class="admin-control" v-model="form.email" type="email"></div>
             <div class="sfield"><label>ORGANIZATION</label><input class="admin-control" v-model="form.org"></div>
             <div class="sfield"><label>PHONE NUMBER</label><input class="admin-control" v-model="form.phone"></div>
@@ -52,7 +54,9 @@
             </div>
           </div>
           <div style="display:flex;gap:10px;margin-top:22px">
-            <button class="admin-primary-button">Save Changes</button>
+            <button class="admin-primary-button" :disabled="isSavingProfile" @click="updateProfile">
+              {{ isSavingProfile ? 'Saving...' : 'Save Changes' }}
+            </button>
             <button class="admin-secondary-button">Cancel</button>
           </div>
 
@@ -71,9 +75,9 @@
         <div v-if="activeTab==='security'" class="admin-card-shell" style="border-top:0;border-radius:0 0 var(--admin-radius) var(--admin-radius);padding:28px 32px">
           <h4 style="font-size:1rem;font-weight:700;margin:0 0 18px">Change Password</h4>
           <div class="sgrid">
-            <div class="sfield"><label>CURRENT PASSWORD</label><input class="admin-control" type="password" placeholder="••••••••"></div>
-            <div class="sfield"><label>NEW PASSWORD</label><input class="admin-control" type="password" placeholder="••••••••"></div>
-            <div class="sfield"><label>CONFIRM NEW PASSWORD</label><input class="admin-control" type="password" placeholder="••••••••"></div>
+            <div class="sfield"><label>CURRENT PASSWORD</label><input class="admin-control" type="password" v-model="pwdForm.current_password" placeholder="••••••••"></div>
+            <div class="sfield"><label>NEW PASSWORD</label><input class="admin-control" type="password" v-model="pwdForm.new_password" placeholder="••••••••"></div>
+            <div class="sfield"><label>CONFIRM NEW PASSWORD</label><input class="admin-control" type="password" v-model="pwdForm.new_password_confirmation" placeholder="••••••••"></div>
             <div class="sfield" style="align-self:start">
               <label style="margin-bottom:8px">PASSWORD REQUIREMENTS:</label>
               <ul style="font-size:.82rem;color:var(--admin-muted);padding-left:18px;margin:0;line-height:1.8">
@@ -84,8 +88,10 @@
             </div>
           </div>
           <div style="display:flex;gap:10px;margin-top:22px">
-            <button class="admin-primary-button">Save Changes</button>
-            <button class="admin-secondary-button">Cancel</button>
+            <button class="admin-primary-button" :disabled="isSavingPassword" @click="changePassword">
+              {{ isSavingPassword ? 'Saving...' : 'Save Changes' }}
+            </button>
+            <button class="admin-secondary-button" @click="pwdForm.current_password='';pwdForm.new_password='';pwdForm.new_password_confirmation=''">Cancel</button>
           </div>
 
           <!-- 2FA -->
@@ -187,8 +193,14 @@
 </template>
 
 <script setup>
+import { reactive, ref, onMounted, computed } from 'vue'
+import { useAdminStore } from '@/stores/adminStore'
+import { toast } from 'vue-sonner'
+
 definePageMeta({ layout: false })
 useHead({ title: 'Settings – IrusGear Admin' })
+
+const adminStore = useAdminStore()
 
 const activeTab = ref('account')
 const confirmDelete = ref(false)
@@ -201,12 +213,105 @@ const tabs = [
   { key: 'connections', label: 'Connections', icon: 'bi bi-link-45deg' },
 ]
 
+// -- Profile Form --
 const form = reactive({
-  firstName: 'Admin', lastName: 'IrusGear', email: 'admin@irusgear.com', org: 'IrusGear Corp.',
-  phone: '+84 900 000 000', address: '45 Nguyen Hue Street', state: 'Ho Chi Minh', zip: '70000',
-  country: 'Vietnam', lang: 'English', tz: 'Asia/Ho Chi Minh (UTC +7)', currency: 'VND – Vietnamese Đồng',
+  first_name: '',
+  last_name: '',
+  email: '',
+  phone: '',
+  country: '',
+  // Mock fields to preserve layout
+  org: 'IrusGear Corp.',
+  address: '45 Nguyen Hue Street',
+  state: 'Ho Chi Minh',
+  zip: '70000',
+  lang: 'English',
+  tz: 'Asia/Ho Chi Minh (UTC +7)',
+  currency: 'VND – Vietnamese Đồng',
 })
 
+const isSavingProfile = ref(false)
+
+onMounted(async () => {
+  // Ensure we have user data
+  if (!adminStore.adminUser) {
+    await adminStore.fetchAdminMe()
+  }
+  
+  if (adminStore.adminUser) {
+    const user = adminStore.adminUser
+    form.first_name = user.first_name || ''
+    form.last_name = user.last_name || ''
+    form.email = user.email || ''
+    form.phone = user.phone || ''
+    form.country = user.country || 'Vietnam'
+  }
+})
+
+const userInitials = computed(() => {
+  const name = adminStore.adminUser?.name || 'Admin'
+  return name.split(' ').filter(Boolean).slice(0, 2).map(p => p[0].toUpperCase()).join('') || 'A'
+})
+
+const updateProfile = async () => {
+  isSavingProfile.value = true
+  try {
+    const payload = {
+      first_name: form.first_name,
+      last_name: form.last_name,
+      name: `${form.first_name} ${form.last_name}`.trim(),
+      phone: form.phone,
+      country: form.country,
+    }
+    
+    const res = await adminStore.patch('me/profile', null, payload)
+    if (res && res.success) {
+      toast.success(res.message || 'Profile updated successfully')
+      adminStore.adminUser = res.data.user
+    }
+  } catch (err) {
+    toast.error('Failed to update profile')
+  } finally {
+    isSavingProfile.value = false
+  }
+}
+
+// -- Password Form --
+const pwdForm = reactive({
+  current_password: '',
+  new_password: '',
+  new_password_confirmation: ''
+})
+const isSavingPassword = ref(false)
+
+const changePassword = async () => {
+  if (!pwdForm.current_password || !pwdForm.new_password || !pwdForm.new_password_confirmation) {
+    toast.error('Please fill in all password fields')
+    return
+  }
+  
+  if (pwdForm.new_password !== pwdForm.new_password_confirmation) {
+    toast.error('New passwords do not match')
+    return
+  }
+
+  isSavingPassword.value = true
+  try {
+    const res = await adminStore.create('me/change-password', pwdForm)
+    if (res && res.success) {
+      toast.success(res.message || 'Password changed successfully')
+      pwdForm.current_password = ''
+      pwdForm.new_password = ''
+      pwdForm.new_password_confirmation = ''
+    }
+  } catch (err) {
+    toast.error(err.message || 'Failed to change password')
+  } finally {
+    isSavingPassword.value = false
+  }
+}
+
+// -- Mock UI Data --
 const twoFA = [
   { title: 'Authenticator App', desc: 'Use an authenticator app to generate one-time codes.', action: 'Set Up' },
   { title: 'SMS Verification', desc: 'Use your phone number to receive verification codes.', action: 'Set Up' },
@@ -215,7 +320,6 @@ const twoFA = [
 const sessions = [
   { device: 'Chrome on Windows', icon: 'bi bi-laptop', location: 'Ho Chi Minh, VN', time: 'Active now', current: true },
   { device: 'Safari on iPhone', icon: 'bi bi-phone', location: 'Ho Chi Minh, VN', time: '2 hours ago', current: false },
-  { device: 'Firefox on macOS', icon: 'bi bi-laptop', location: 'Hanoi, VN', time: '3 days ago', current: false },
 ]
 
 const plans = [
@@ -232,18 +336,12 @@ const paymentMethods = [
 const notifications = reactive([
   { label: 'New orders', email: true, browser: true, app: true },
   { label: 'Order status updates', email: true, browser: false, app: true },
-  { label: 'New customers', email: false, browser: true, app: false },
-  { label: 'Inventory alerts', email: true, browser: true, app: true },
-  { label: 'Promotional emails', email: false, browser: false, app: false },
   { label: 'Security alerts', email: true, browser: true, app: true },
 ])
 
 const connections = reactive([
   { name: 'Google', desc: 'Calendar, Drive, and Gmail integration', icon: 'bi bi-google', bg: '#fef3f2', color: '#ea4335', connected: true },
-  { name: 'Slack', desc: 'Order notifications and team updates', icon: 'bi bi-slack', bg: '#f0f4ff', color: '#4a154b', connected: true },
-  { name: 'GitHub', desc: 'Deploy and version control', icon: 'bi bi-github', bg: '#f5f5f5', color: '#24292e', connected: false },
   { name: 'Stripe', desc: 'Payment processing', icon: 'bi bi-stripe', bg: '#f0f4ff', color: '#635bff', connected: true },
-  { name: 'Mailchimp', desc: 'Email marketing campaigns', icon: 'bi bi-envelope', bg: '#fff8e1', color: '#ffe01b', connected: false },
 ])
 </script>
 
