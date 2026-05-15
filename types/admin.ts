@@ -96,47 +96,6 @@ export interface AdminChartSeries {
   data: number[]
 }
 
-export interface AdminDashboardMock {
-  metrics: {
-    sales: number
-    customers: number
-    products: number
-    revenue: number
-  }
-  salesChannels: Array<{
-    label: string
-    value: number
-    orders: number
-    change: number
-    icon: string
-    variant: 'neutral' | 'success' | 'info' | 'warning' | 'danger'
-  }>
-  revenueReport: {
-    labels: string[]
-    earning: number[]
-    expense: number[]
-  }
-  profit: AdminChartSeries
-  expenseBreakdown: AdminChartSeries
-  leads: AdminChartSeries
-  budget: AdminChartSeries
-  earningReports: Array<{
-    label: string
-    description: string
-    value: number
-    change: number
-    icon: string
-    variant: 'neutral' | 'success' | 'info' | 'warning' | 'danger'
-  }>
-  transactions: Array<{
-    id: number
-    type: string
-    description: string
-    amount: number
-    icon: string
-    variant: 'neutral' | 'success' | 'info' | 'warning' | 'danger'
-  }>
-}
 
 export interface AdminListResponse<T> {
   items: T[]

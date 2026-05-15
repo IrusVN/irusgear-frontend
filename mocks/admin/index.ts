@@ -1,6 +1,0 @@
-export * from './categories.mock'
-export * from './products.mock'
-export * from './customers.mock'
-export * from './orders.mock'
-export * from './dashboard.mock'
-export * from './reviews.mock'
