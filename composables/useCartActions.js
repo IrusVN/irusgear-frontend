@@ -61,7 +61,7 @@ export const useCartActions = () => {
       return null;
     }
 
-    if (!detail.stock?.inStock || detail.stock?.availableStock === 0) {
+    if (!detail.stock?.inStock || detail.stock?.quantity === 0) {
       toast.warning(t("cart.outOfStockForCart"));
       return null;
     }
