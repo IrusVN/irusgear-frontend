@@ -68,8 +68,8 @@
         <h3 class="card-title">Returning Customers</h3>
         <canvas ref="returningChart"></canvas>
         <div class="donut-legend">
-          <div class="legend-item"><span class="legend-dot" style="background:#6c63ff"></span> Returning (64%)</div>
-          <div class="legend-item"><span class="legend-dot" style="background:#d5d5da"></span> New (36%)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#6c63ff"></span> Returning ({{ returningData.returningRate }}%)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#d5d5da"></span> New ({{ returningData.newRate }}%)</div>
         </div>
       </div>
     </div>
@@ -104,11 +104,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useHead } from '#imports'
+import { useAdminStore } from '@/stores/adminStore'
 
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Analytics – IrusGear Admin' })
+
+const adminStore = useAdminStore()
 
 const period = ref('30d')
 
@@ -116,29 +119,22 @@ const revenueChart = ref(null)
 const categoryChart = ref(null)
 const returningChart = ref(null)
 
-const kpis = [
-  { label: 'Total Revenue', value: '₫674.3M', icon: 'bi-cash-stack', variant: 'success', changeVal: 12.4 },
-  { label: 'Total Orders', value: '21,000', icon: 'bi-bag-check', variant: 'info', changeVal: 8.2 },
-  { label: 'Avg Order Value', value: '₫32.1K', icon: 'bi-receipt', variant: 'warning', changeVal: 3.5 },
-  { label: 'Conversion Rate', value: '3.8%', icon: 'bi-funnel', variant: 'neutral', changeVal: -0.4 },
-]
+let revenueChartInstance = null
+let categoryChartInstance = null
+let returningChartInstance = null
 
-const funnelData = [
-  { label: 'Visits', value: 58200, pct: 100 },
-  { label: 'Product Views', value: 32400, pct: 55.7 },
-  { label: 'Add to Cart', value: 8100, pct: 13.9 },
-  { label: 'Checkout', value: 3200, pct: 5.5 },
-  { label: 'Purchase', value: 2210, pct: 3.8 },
-]
+const kpis = ref([
+  { id: 'revenue', label: 'Total Revenue', value: '₫0', icon: 'bi-cash-stack', variant: 'success', changeVal: 0 },
+  { id: 'orders', label: 'Total Orders', value: '0', icon: 'bi-bag-check', variant: 'info', changeVal: 0 },
+  { id: 'aov', label: 'Avg Order Value', value: '₫0', icon: 'bi-receipt', variant: 'warning', changeVal: 0 },
+  { id: 'conversion', label: 'Conversion Rate', value: '0%', icon: 'bi-funnel', variant: 'neutral', changeVal: 0 },
+])
+
+const funnelData = ref([])
 const funnelColors = ['#6c63ff', '#7c74ff', '#a09aff', '#c5c1ff', '#e3e0ff']
 
-const topProducts = [
-  { name: 'iPhone 15 Pro Max', sold: 342, revenue: 14730000 * 342, conv: 5.2 },
-  { name: 'MacBook Pro M3', sold: 128, revenue: 52990000 * 128, conv: 4.1 },
-  { name: 'AirPods Pro 2', sold: 876, revenue: 6290000 * 876, conv: 7.8 },
-  { name: 'iPad Air M2', sold: 215, revenue: 18990000 * 215, conv: 3.3 },
-  { name: 'Apple Watch Ultra 2', sold: 189, revenue: 22490000 * 189, conv: 2.9 },
-]
+const topProducts = ref([])
+const returningData = ref({ returningRate: 0, newRate: 0 })
 
 const formatCurrency = (n) => {
   if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B ₫'
@@ -146,7 +142,17 @@ const formatCurrency = (n) => {
   return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 }
 
-onMounted(async () => {
+const destroyCharts = () => {
+  if (revenueChartInstance) revenueChartInstance.destroy()
+  if (categoryChartInstance) categoryChartInstance.destroy()
+  if (returningChartInstance) returningChartInstance.destroy()
+}
+
+const renderCharts = async (revenueData, categoryData, returningRate) => {
+  destroyCharts()
+  
+  if (!import.meta.client) return
+  
   const { Chart, registerables } = await import('chart.js')
   Chart.register(...registerables)
 
@@ -154,72 +160,158 @@ onMounted(async () => {
   const fontColor = '#7b7b88'
 
   // Revenue Trend (Line)
-  new Chart(revenueChart.value, {
-    type: 'line',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      datasets: [{
-        label: 'Revenue',
-        data: [42, 56, 47, 63, 58, 72, 68, 75, 82, 78, 85, 92],
-        borderColor: '#6c63ff',
-        backgroundColor: 'rgba(108,99,255,0.08)',
-        fill: true,
-        tension: 0.4,
-        pointRadius: 3,
-        pointBackgroundColor: '#6c63ff',
-        borderWidth: 2,
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { display: false }, ticks: { color: fontColor, font: { size: 11 } } },
-        y: { grid: { color: gridColor }, ticks: { color: fontColor, font: { size: 11 } }, beginAtZero: true },
+  if (revenueChart.value) {
+    revenueChartInstance = new Chart(revenueChart.value, {
+      type: 'line',
+      data: {
+        labels: revenueData.labels || [],
+        datasets: [{
+          label: 'Revenue',
+          data: revenueData.revenue || [],
+          borderColor: '#6c63ff',
+          backgroundColor: 'rgba(108,99,255,0.08)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 3,
+          pointBackgroundColor: '#6c63ff',
+          borderWidth: 2,
+        }],
       },
-    },
-  })
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: fontColor, font: { size: 11 } } },
+          y: { grid: { color: gridColor }, ticks: { color: fontColor, font: { size: 11 } }, beginAtZero: true },
+        },
+      },
+    })
+  }
 
   // Category Split (Doughnut)
-  new Chart(categoryChart.value, {
-    type: 'doughnut',
-    data: {
-      labels: ['Smartphones', 'Laptops', 'Accessories', 'Tablets', 'Wearables'],
-      datasets: [{
-        data: [38, 24, 18, 12, 8],
-        backgroundColor: ['#6c63ff', '#ff6384', '#36a2eb', '#ffce56', '#4bc0c0'],
-        borderWidth: 0,
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: '65%',
-      plugins: {
-        legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 12 }, color: fontColor } },
+  if (categoryChart.value) {
+    categoryChartInstance = new Chart(categoryChart.value, {
+      type: 'doughnut',
+      data: {
+        labels: categoryData.map(c => c.name) || [],
+        datasets: [{
+          data: categoryData.map(c => c.percentage) || [],
+          backgroundColor: ['#6c63ff', '#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966FF', '#FF9F40'],
+          borderWidth: 0,
+        }],
       },
-    },
-  })
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: {
+          legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 12 }, color: fontColor } },
+        },
+      },
+    })
+  }
 
   // Returning Customers (Doughnut)
-  new Chart(returningChart.value, {
-    type: 'doughnut',
-    data: {
-      labels: ['Returning', 'New'],
-      datasets: [{
-        data: [64, 36],
-        backgroundColor: ['#6c63ff', '#d5d5da'],
-        borderWidth: 0,
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: '72%',
-      plugins: { legend: { display: false } },
-    },
-  })
+  if (returningChart.value) {
+    returningChartInstance = new Chart(returningChart.value, {
+      type: 'doughnut',
+      data: {
+        labels: ['Returning', 'New'],
+        datasets: [{
+          data: [returningRate, 100 - returningRate],
+          backgroundColor: ['#6c63ff', '#d5d5da'],
+          borderWidth: 0,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '72%',
+        plugins: { legend: { display: false } },
+      },
+    })
+  }
+}
+
+const fetchAnalytics = async () => {
+  const apiPeriod = period.value === '1y' ? '12m' : period.value
+
+  const [
+    overviewRes,
+    revenueRes,
+    categoriesRes,
+    funnelRes,
+    productsRes,
+    returningRes
+  ] = await Promise.all([
+    adminStore.fetchOne('analytics/overview', { period: apiPeriod }),
+    adminStore.fetchOne('analytics/revenue', { period: apiPeriod }),
+    adminStore.fetchOne('analytics/categories', { period: apiPeriod }),
+    adminStore.fetchOne('analytics/conversion-funnel', { period: apiPeriod }),
+    adminStore.fetchOne('analytics/top-products', { period: apiPeriod }),
+    adminStore.fetchOne('analytics/returning-customers', { period: apiPeriod })
+  ])
+
+  // Update KPIs
+  if (overviewRes && funnelRes) {
+    const rev = overviewRes.revenue || {}
+    const ord = overviewRes.orders || {}
+    
+    kpis.value = [
+      { id: 'revenue', label: 'Total Revenue', value: formatCurrency(rev.current || 0), icon: 'bi-cash-stack', variant: 'success', changeVal: rev.growth || 0 },
+      { id: 'orders', label: 'Total Orders', value: (ord.current || 0).toLocaleString(), icon: 'bi-bag-check', variant: 'info', changeVal: ord.growth || 0 },
+      { id: 'aov', label: 'Avg Order Value', value: formatCurrency(overviewRes.average_order_value || 0), icon: 'bi-receipt', variant: 'warning', changeVal: 0 },
+      { id: 'conversion', label: 'Conversion Rate', value: `${funnelRes.conversion_rate || 0}%`, icon: 'bi-funnel', variant: 'neutral', changeVal: 0 },
+    ]
+  }
+
+  // Update Funnel
+  if (funnelRes && funnelRes.funnel) {
+    funnelData.value = funnelRes.funnel.map(step => ({
+      label: step.label,
+      value: step.count || 0,
+      pct: step.percentage || 0
+    }))
+  }
+
+  // Update Top Products
+  if (productsRes && productsRes.products) {
+    topProducts.value = productsRes.products.map(p => ({
+      name: p.name,
+      sold: p.quantity_sold || 0,
+      revenue: p.revenue || 0,
+      conv: p.conversion_rate || 0
+    }))
+  }
+
+  // Update Returning Customers
+  if (returningRes && returningRes.summary) {
+    returningData.value = {
+      returningRate: returningRes.summary.returning_rate || 0,
+      newRate: 100 - (returningRes.summary.returning_rate || 0)
+    }
+  }
+
+  // Render Charts
+  await nextTick()
+  const revData = (revenueRes && revenueRes.chart) ? revenueRes.chart : { labels: [], revenue: [] }
+  const catData = (categoriesRes && categoriesRes.categories) ? categoriesRes.categories : []
+  const retRate = (returningRes && returningRes.summary) ? returningRes.summary.returning_rate || 0 : 0
+  
+  await renderCharts(revData, catData, retRate)
+}
+
+onMounted(() => {
+  fetchAnalytics()
+})
+
+onUnmounted(() => {
+  destroyCharts()
+})
+
+watch(period, () => {
+  fetchAnalytics()
 })
 </script>
 

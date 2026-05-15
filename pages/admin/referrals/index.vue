@@ -2,9 +2,9 @@
   <div class="referrals-page">
     <!-- Metric Strip -->
     <div class="metric-strip">
-      <AdminMetricCard label="Total Referrals" :value="String(allReferrals.length)" meta="all time" icon="bi-people" variant="neutral" />
-      <AdminMetricCard label="Converted" :value="String(allReferrals.filter(r => r.status === 'converted').length)" meta="referrals" icon="bi-check-circle" variant="success" />
-      <AdminMetricCard label="Active Links" :value="String(allReferrals.filter(r => r.status === 'active').length)" meta="referrals" icon="bi-link-45deg" variant="info" />
+      <AdminMetricCard label="Total Referrals" :value="String(totalReferrals)" meta="all time" icon="bi-people" variant="neutral" />
+      <AdminMetricCard label="Converted" :value="String(convertedCount)" meta="referrals" icon="bi-check-circle" variant="success" />
+      <AdminMetricCard label="Active Links" :value="String(activeLinks)" meta="referrals" icon="bi-link-45deg" variant="info" />
       <AdminMetricCard label="Total Earned" :value="formatCompact(totalEarned)" meta="commission" icon="bi-cash-stack" variant="warning" />
     </div>
 
@@ -12,7 +12,7 @@
     <AdminDataTable
       v-if="!isMobile"
       :columns="columns"
-      :items="paginatedReferrals"
+      :items="referrals"
       :selectable="true"
       :selected-keys="selectedIds"
       @update:selected-keys="selectedIds = $event"
@@ -69,7 +69,7 @@
       </template>
 
       <template #pagination>
-        <AdminPagination :page="page" :page-size="pageSize" :total="filteredReferrals.length" @update:page="page = $event" />
+        <AdminPagination :page="page" :page-size="pageSize" :total="paginationStore.total" @update:page="page = $event" />
       </template>
     </AdminDataTable>
 
@@ -80,7 +80,7 @@
         <input class="admin-control" v-model="search" placeholder="Search Referrals" style="padding-left:36px;width:100%" @input="resetPage">
       </label>
       <AdminMobileCard
-        v-for="item in paginatedReferrals"
+        v-for="item in referrals"
         :key="item.id"
         :title="item.referrerName"
         :subtitle="'→ ' + item.referredName"
@@ -104,15 +104,15 @@
           />
         </template>
       </AdminMobileCard>
-      <div v-if="filteredReferrals.length > pageSize" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < filteredReferrals.length" class="admin-secondary-button" @click="page++">Load More</button>
+      <div v-if="paginationStore.total > page * pageSize" style="text-align:center;padding:8px">
+        <button class="admin-secondary-button" @click="page++">Load More</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useHead } from '#imports'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
@@ -122,11 +122,18 @@ import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
+import { useAdminStore } from '@/stores/adminStore'
+import { usePaginationStore } from '@/stores/paginationStore'
+import { useI18n } from 'vue-i18n'
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Referrals – IrusGear Admin' })
+
+const adminStore = useAdminStore()
+const paginationStore = usePaginationStore()
+const { t } = useI18n()
 
 const search = ref('')
 const page = ref(1)
@@ -134,26 +141,11 @@ const pageSize = ref(10)
 const selectedIds = ref([])
 const resetPage = () => { page.value = 1 }
 
-const statusCycle = ['active', 'converted', 'expired', 'active', 'converted']
-const codePrefixes = ['IRUS', 'GEAR', 'REF', 'VIP', 'DEAL']
-
-const allReferrals = Array.from({ length: 50 }, (_, i) => {
-  const referrer = { id: i + 1, name: `Mock Referrer ${i + 1}`, email: `referrer${i + 1}@example.com`, avatar: `https://ui-avatars.com/api/?name=Referrer+${i + 1}` }
-  const referred = { id: i + 101, name: `Mock Referred ${i + 1}`, email: `referred${i + 1}@example.com`, avatar: `https://ui-avatars.com/api/?name=Referred+${i + 1}` }
-  return {
-    id: i + 1,
-    referrerName: referrer.name,
-    referrerEmail: referrer.email,
-    referrerAvatar: referrer.avatar,
-    referredName: referred.name,
-    code: `${codePrefixes[i % codePrefixes.length]}-${String(1000 + i * 97).slice(0, 4)}`,
-    earning: 50000 + ((i * 73000) % 2500000),
-    status: statusCycle[i % statusCycle.length],
-    createdAt: `2026-04-${String((i % 28) + 1).padStart(2, '0')}T10:00:00.000Z`,
-  }
-})
-
-const totalEarned = computed(() => allReferrals.filter(r => r.status === 'converted').reduce((s, r) => s + r.earning, 0))
+const referrals = ref([])
+const totalReferrals = ref(0)
+const convertedCount = ref(0)
+const activeLinks = ref(0)
+const totalEarned = ref(0)
 
 const columns = [
   { key: 'referrer', label: 'Referrer', width: '22%' },
@@ -164,25 +156,72 @@ const columns = [
   { key: 'createdAt', label: 'Date' },
 ]
 
-const filteredReferrals = computed(() => {
-  if (!search.value) return allReferrals
-  const q = search.value.toLowerCase()
-  return allReferrals.filter(r => r.referrerName.toLowerCase().includes(q) || r.referredName.toLowerCase().includes(q) || r.code.toLowerCase().includes(q))
-})
-
-const paginatedReferrals = computed(() => {
-  const start = (page.value - 1) * pageSize.value
-  return filteredReferrals.value.slice(start, start + pageSize.value)
-})
-
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 const formatCompact = (n) => { if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M ₫'; return (n / 1e3).toFixed(0) + 'K ₫' }
 const formatDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-const statusLabel = (s) => ({ active: 'Active', converted: 'Converted', expired: 'Expired' }[s] || s)
-const statusVariant = (s) => ({ active: 'info', converted: 'success', expired: 'neutral' }[s] || 'neutral')
+const statusLabel = (s) => t(`admin.status.${s}`) || s
+const statusVariant = (s) => ({ active: 'info', converted: 'success', completed: 'success', expired: 'neutral', pending: 'warning', cancelled: 'danger' }[s] || 'neutral')
 
-const handleAction = (action, item) => alert(`${action.label} referral #${item.id} (mock)`)
+const fetchReferrals = async () => {
+  const res = await adminStore.fetchList('referrals', {
+    page: page.value,
+    per_page: pageSize.value,
+    search: search.value
+  })
+  
+  if (res && res.data) {
+    referrals.value = res.data.map(r => {
+      const referrerName = r.referrer?.name || 'Unknown'
+      const referredName = r.referred?.name || 'Unknown'
+      return {
+        id: r.id,
+        referrerName,
+        referrerEmail: r.referrer?.email || '',
+        referrerAvatar: r.referrer?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(referrerName)}&background=random`,
+        referredName,
+        code: r.referral_code || '',
+        earning: Number(r.commission_amount || 0),
+        status: r.status,
+        createdAt: r.created_at,
+      }
+    })
+  }
+}
+
+const fetchStats = async () => {
+  const res = await adminStore.fetchOne('referrals/stats')
+  if (res && res.data) {
+    totalReferrals.value = res.data.referrals?.total || 0
+    convertedCount.value = res.data.referrals?.completed || 0
+    activeLinks.value = res.data.codes?.active || 0
+    totalEarned.value = Number(res.data.commission?.total || 0)
+  }
+}
+
+onMounted(() => {
+  fetchReferrals()
+  fetchStats()
+})
+
+watch([page, pageSize, search], () => {
+  fetchReferrals()
+})
+
+const handleAction = async (action, item) => {
+  if (action.key === 'revoke') {
+    if (confirm('Are you sure you want to revoke this referral?')) {
+      const res = await adminStore.patch(`referrals/${item.id}/status`, { status: 'cancelled' })
+      if (res) {
+        fetchReferrals()
+        fetchStats()
+      }
+    }
+  } else {
+    alert(`${action.label} referral #${item.id}`)
+  }
+}
+
 const handleExport = () => alert('Export referrals (mock)')
 </script>
 
