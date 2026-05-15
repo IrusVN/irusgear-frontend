@@ -27,8 +27,8 @@
           :search="search"
           :page-size="pageSize"
           search-placeholder="Search Reviews"
-          @update:search="search = $event; resetPage()"
-          @update:page-size="pageSize = $event; resetPage()"
+          @update:search="handleSearch"
+          @update:page-size="changePageSize"
           @export="handleExport"
         />
       </template>
@@ -68,7 +68,7 @@
       </template>
 
       <template #pagination>
-        <AdminPagination :page="page" :page-size="pageSize" :total="filteredReviews.length" @update:page="page = $event" />
+        <AdminPagination :page="page" :page-size="pageSize" :total="totalReviews" @update:page="changePage" />
       </template>
     </AdminDataTable>
 
@@ -76,7 +76,7 @@
     <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
       <label style="display:block;position:relative;margin-bottom:12px">
         <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
-        <input class="admin-control" v-model="search" placeholder="Search Reviews" style="padding-left:36px;width:100%" @input="resetPage">
+        <input class="admin-control" :value="search" placeholder="Search Reviews" style="padding-left:36px;width:100%" @input="handleSearch($event.target.value)">
       </label>
       <AdminMobileCard
         v-for="item in paginatedReviews"
@@ -99,17 +99,18 @@
           />
         </template>
       </AdminMobileCard>
-      <div v-if="filteredReviews.length > pageSize" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < filteredReviews.length" class="admin-secondary-button" @click="page++">Load More</button>
+      <div v-if="totalReviews > reviews.length" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < totalReviews" class="admin-secondary-button" @click="changePage(page + 1)">Load More</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useHead } from '#imports'
-import { adminReviewsMock } from '~/mocks/admin/reviews.mock'
+import { useAdminStore } from '@/stores/adminStore'
+import { usePaginationStore } from '@/stores/paginationStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
@@ -124,20 +125,48 @@ const isMobile = useMediaQuery('(max-width: 767px)')
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Manage Reviews – IrusGear Admin' })
 
+const admin = useAdminStore()
+const pagination = usePaginationStore()
+
 const search = ref('')
-const page = ref(1)
-const pageSize = ref(10)
+const searchTimeout = ref(null)
+const page = computed(() => pagination.page)
+const pageSize = computed(() => pagination.limit)
+const totalReviews = computed(() => pagination.total)
+
 const selectedIds = ref([])
-const resetPage = () => { page.value = 1 }
+const reviews = ref([])
+const stats = ref(null)
 
-const allReviews = adminReviewsMock
+const handleSearch = (val) => {
+  search.value = val
+  if (searchTimeout.value) clearTimeout(searchTimeout.value)
+  searchTimeout.value = setTimeout(() => {
+    pagination.page = 1
+    fetchReviews()
+  }, 300)
+}
 
-const reviewMetrics = computed(() => [
-  { label: 'Total Reviews', value: allReviews.length, meta: 'all time', icon: 'bi-chat-square-text', variant: 'neutral' },
-  { label: 'Published', value: allReviews.filter(r => r.status === 'published').length, meta: 'reviews', icon: 'bi-check-circle', variant: 'success' },
-  { label: 'Pending', value: allReviews.filter(r => r.status === 'pending').length, meta: 'reviews', icon: 'bi-clock', variant: 'warning' },
-  { label: 'Avg Rating', value: (allReviews.reduce((s, r) => s + r.rating, 0) / allReviews.length).toFixed(1), meta: 'out of 5', icon: 'bi-star-fill', variant: 'info' },
-])
+const changePage = (p) => {
+  pagination.page = p
+  fetchReviews()
+}
+
+const changePageSize = (size) => {
+  pagination.limit = size
+  pagination.page = 1
+  fetchReviews()
+}
+
+const reviewMetrics = computed(() => {
+  const s = stats.value || {}
+  return [
+    { label: 'Total Reviews', value: s.total_reviews || 0, meta: 'all time', icon: 'bi-chat-square-text', variant: 'neutral' },
+    { label: 'Published', value: s.approved_reviews || 0, meta: 'reviews', icon: 'bi-check-circle', variant: 'success' },
+    { label: 'Pending', value: s.pending_reviews || 0, meta: 'reviews', icon: 'bi-clock', variant: 'warning' },
+    { label: 'Avg Rating', value: Number(s.average_rating || 0).toFixed(1), meta: 'out of 5', icon: 'bi-star-fill', variant: 'info' },
+  ]
+})
 
 const columns = [
   { key: 'productName', label: 'Product', width: '20%' },
@@ -148,30 +177,74 @@ const columns = [
   { key: 'createdAt', label: 'Date' },
 ]
 
-const filteredReviews = computed(() => {
-  if (!search.value) return allReviews
-  const q = search.value.toLowerCase()
-  return allReviews.filter(r => r.productName.toLowerCase().includes(q) || r.customerName.toLowerCase().includes(q) || r.title.toLowerCase().includes(q))
-})
-
-const paginatedReviews = computed(() => {
-  const start = (page.value - 1) * pageSize.value
-  return filteredReviews.value.slice(start, start + pageSize.value)
-})
+const paginatedReviews = computed(() => reviews.value)
 
 const formatDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-const statusLabel = (s) => ({ published: 'Published', pending: 'Pending', rejected: 'Rejected' }[s] || s)
-const statusVariant = (s) => ({ published: 'success', pending: 'warning', rejected: 'danger' }[s] || 'neutral')
+const statusLabel = (s) => ({ approved: 'Published', published: 'Published', pending: 'Pending', rejected: 'Rejected' }[s] || s)
+const statusVariant = (s) => ({ approved: 'success', published: 'success', pending: 'warning', rejected: 'danger' }[s] || 'neutral')
 
 const actionItems = (item) => {
   const items = [{ key: 'view', label: 'View Details', icon: 'bi-eye' }]
   if (item.status === 'pending') items.push({ key: 'approve', label: 'Approve', icon: 'bi-check-lg' })
   if (item.status !== 'rejected') items.push({ key: 'reject', label: 'Reject', icon: 'bi-x-lg', variant: 'danger' })
-  items.push({ key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' })
   return items
 }
-const handleAction = (action, item) => alert(`${action.label} review #${item.id} (mock)`)
+
+const handleAction = async (action, item) => {
+  try {
+    if (action.key === 'approve') {
+      await admin.patch('reviews', item.id + '/status', { status: 'approved' })
+      alert('Review approved successfully')
+      fetchReviews()
+      fetchStats()
+    } else if (action.key === 'reject') {
+      await admin.patch('reviews', item.id + '/status', { status: 'rejected' })
+      alert('Review rejected')
+      fetchReviews()
+      fetchStats()
+    } else {
+      alert(`${action.label} review #${item.id} (mock)`)
+    }
+  } catch (e) {
+    alert('Failed to perform action: ' + e.message)
+  }
+}
+
 const handleExport = () => alert('Export reviews (mock)')
+
+const mapReview = (r) => ({
+  id: r.id,
+  productName: r.product?.name || 'Unknown Product',
+  customerName: r.author?.name || 'Anonymous',
+  rating: r.rating || 0,
+  title: r.content?.substring(0, 50) + (r.content?.length > 50 ? '...' : '') || 'No content',
+  status: r.status,
+  createdAt: r.createdAt || r.created_at,
+})
+
+const fetchReviews = async () => {
+  const res = await admin.fetchList('reviews', {
+    search: search.value,
+    per_page: pageSize.value,
+    page: page.value,
+  })
+  if (res?.data) {
+    reviews.value = res.data.map(mapReview)
+  }
+}
+
+const fetchStats = async () => {
+  const res = await admin.fetchOne('reviews/stats')
+  if (res?.data) {
+    stats.value = res.data
+  }
+}
+
+onMounted(() => {
+  pagination.page = 1
+  fetchReviews()
+  fetchStats()
+})
 </script>
 
 <style scoped>
