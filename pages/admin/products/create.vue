@@ -189,16 +189,20 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useHead, useRouter } from '#imports'
-import { adminCategoriesMock } from '~/mocks/admin/categories.mock'
+import { useAdminStore } from '@/stores/adminStore'
+import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Add Product – IrusGear Admin' })
 
 const router = useRouter()
-const categories = adminCategoriesMock
+const admin = useAdminStore()
+const ui = useUiStore()
+
+const categories = ref([])
 const fileInput = ref(null)
 
 const form = reactive({
@@ -218,6 +222,14 @@ const form = reactive({
 })
 
 const errors = reactive({ name: '', sku: '', price: '' })
+
+/* ── Load categories from API ── */
+onMounted(async () => {
+  const res = await admin.fetchList('categories', { per_page: 100 })
+  if (res?.data) {
+    categories.value = res.data.map(c => ({ id: c.id, name: c.name }))
+  }
+})
 
 const autoSlug = () => {
   form.slug = form.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
@@ -248,17 +260,36 @@ const handleDrop = (e) => {
 }
 const removeImage = (idx) => form.images.splice(idx, 1)
 
-const handlePublish = () => {
+/**
+ * Build payload to match backend API expectations.
+ */
+const buildPayload = (publishStatus) => ({
+  name: form.name,
+  slug: form.slug || undefined,
+  description: form.description || undefined,
+  price: form.price,
+  stock: form.quantity,
+  category_id: form.categoryId || undefined,
+  is_active: publishStatus === 'publish',
+})
+
+const handlePublish = async () => {
   if (!validate()) return
-  form.status = 'publish'
-  alert('Product published (mock)')
-  router.push('/admin/products')
+  try {
+    await admin.create('products', buildPayload('publish'))
+    router.push('/admin/products')
+  } catch (e) {
+    alert(`Failed to publish: ${e.message}`)
+  }
 }
-const handleSaveDraft = () => {
+const handleSaveDraft = async () => {
   if (!validate()) return
-  form.status = 'draft'
-  alert('Draft saved (mock)')
-  router.push('/admin/products')
+  try {
+    await admin.create('products', buildPayload('draft'))
+    router.push('/admin/products')
+  } catch (e) {
+    alert(`Failed to save draft: ${e.message}`)
+  }
 }
 const handleDiscard = () => router.push('/admin/products')
 </script>

@@ -51,7 +51,7 @@
     <AdminDataTable
       v-if="!isMobile"
       :columns="columns"
-      :items="paginatedProducts"
+      :items="products"
       :selectable="true"
       :selected-keys="selectedIds"
       @update:selected-keys="selectedIds = $event"
@@ -138,8 +138,8 @@
         <AdminPagination
           :page="page"
           :page-size="pageSize"
-          :total="filteredProducts.length"
-          @update:page="page = $event"
+          :total="totalProducts"
+          @update:page="changePage"
         />
       </template>
     </AdminDataTable>
@@ -159,7 +159,7 @@
         <nuxt-link to="/admin/products/create" class="admin-primary-button" style="height:40px;white-space:nowrap"><i class="bi bi-plus-lg"></i></nuxt-link>
       </div>
       <AdminMobileCard
-        v-for="item in paginatedProducts"
+        v-for="item in products"
         :key="item.id"
         :title="item.name"
         :subtitle="item.vendor"
@@ -185,19 +185,19 @@
           />
         </template>
       </AdminMobileCard>
-      <div v-if="filteredProducts.length > pageSize" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < filteredProducts.length" class="admin-secondary-button" @click="page++">Load More</button>
+      <div v-if="totalProducts > pageSize" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < totalProducts" class="admin-secondary-button" @click="page++; loadProducts()">Load More</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useHead, useRouter } from '#imports'
-import { adminProductsMock } from '~/mocks/admin/products.mock'
-import { adminCategoriesMock } from '~/mocks/admin/categories.mock'
-import { adminDashboardMock } from '~/mocks/admin/dashboard.mock'
+import { useAdminStore } from '@/stores/adminStore'
+import { usePaginationStore } from '@/stores/paginationStore'
+import { useUiStore } from '@/stores/uiStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
@@ -214,8 +214,15 @@ definePageMeta({ layout: 'admin' })
 useHead({ title: 'Products – IrusGear Admin' })
 
 const router = useRouter()
-const salesChannels = adminDashboardMock.salesChannels
-const categories = adminCategoriesMock
+const admin = useAdminStore()
+const paginationStore = usePaginationStore()
+const ui = useUiStore()
+
+/* ── Reactive data ── */
+const products = ref([])
+const categories = ref([])
+const salesChannels = ref([])
+const totalProducts = ref(0)
 
 /* ── state ── */
 const search = ref('')
@@ -226,7 +233,94 @@ const page = ref(1)
 const pageSize = ref(10)
 const selectedIds = ref([])
 
-const resetPage = () => { page.value = 1 }
+/* ── API→UI Mapping ── */
+const mapProduct = (p) => ({
+  id: p.id,
+  name: p.name,
+  slug: p.slug,
+  sku: p.sku || '—',
+  image: p.thumbnail || '/images/placeholder-product.png',
+  vendor: p.vendor?.shop_name || '—',
+  price: p.price,
+  compareAtPrice: p.compare_at_price || null,
+  quantity: p.stock ?? 0,
+  sales: p.sales_count ?? 0,
+  revenue: p.revenue ?? 0,
+  status: p.is_active ? 'publish' : 'inactive',
+  stockState: p.stock_status,
+  stockEnabled: p.stock_status !== 'out_of_stock',
+  categoryName: p.category?.name || '—',
+  categoryId: p.category_id,
+  categoryIcon: 'bi-tag',
+})
+
+/* ── Data Loading ── */
+const loadProducts = async () => {
+  const params = {
+    per_page: pageSize.value,
+    page: page.value,
+  }
+  if (search.value) params.search = search.value
+  if (statusFilter.value !== 'all') {
+    params.is_active = statusFilter.value === 'publish' ? 1 : 0
+  }
+  if (categoryFilter.value !== 'all') {
+    const cat = categories.value.find(c => c.name === categoryFilter.value)
+    if (cat) params.category_id = cat.id
+  }
+  if (stockFilter.value !== 'all') params.stock_status = stockFilter.value
+
+  const res = await admin.fetchList('products', params)
+  if (res?.data) {
+    products.value = res.data.map(mapProduct)
+    totalProducts.value = res.meta?.total ?? res.data.length
+  }
+}
+
+const loadCategories = async () => {
+  const res = await admin.fetchList('categories', { per_page: 100 })
+  if (res?.data) {
+    categories.value = res.data.map(c => ({ id: c.id, name: c.name }))
+  }
+}
+
+const loadSalesStats = async () => {
+  const res = await admin.fetchOne('products/stats')
+  if (res?.data) {
+    salesChannels.value = [
+      { label: 'Total Products', value: res.data.total_products ?? 0, orders: res.data.active_products ?? 0, change: 0, icon: 'bi-box-seam', variant: 'primary' },
+      { label: 'Active', value: res.data.active_products ?? 0, orders: 0, change: 0, icon: 'bi-check-circle', variant: 'success' },
+      { label: 'Low Stock', value: res.data.low_stock ?? 0, orders: 0, change: 0, icon: 'bi-exclamation-triangle', variant: 'warning' },
+      { label: 'Out of Stock', value: res.data.out_of_stock ?? 0, orders: 0, change: 0, icon: 'bi-x-circle', variant: 'danger' },
+    ]
+  }
+}
+
+/* ── Lifecycle ── */
+onMounted(async () => {
+  await Promise.all([loadProducts(), loadCategories(), loadSalesStats()])
+})
+
+/* ── Page / filter changes ── */
+const resetPage = () => {
+  page.value = 1
+  loadProducts()
+}
+
+const changePage = (newPage) => {
+  page.value = newPage
+  loadProducts()
+}
+
+/* ── Debounced search ── */
+let searchTimer = null
+watch(search, () => {
+  clearTimeout(searchTimer)
+  searchTimer = setTimeout(() => {
+    page.value = 1
+    loadProducts()
+  }, 300)
+})
 
 /* ── mobile filters ── */
 const mobileFilters = computed(() => [
@@ -235,16 +329,14 @@ const mobileFilters = computed(() => [
     options: [
       { value: 'all', label: 'All Status' },
       { value: 'publish', label: 'Published' },
-      { value: 'scheduled', label: 'Scheduled' },
       { value: 'inactive', label: 'Inactive' },
-      { value: 'draft', label: 'Draft' },
     ],
   },
   {
     key: 'category', label: 'Category', value: categoryFilter.value, defaultValue: 'all',
     options: [
       { value: 'all', label: 'All Categories' },
-      ...categories.map(c => ({ value: c.name, label: c.name })),
+      ...categories.value.map(c => ({ value: c.name, label: c.name })),
     ],
   },
   {
@@ -283,24 +375,6 @@ const columns = [
   { key: 'status', label: 'Status' },
 ]
 
-/* ── filtering ── */
-const filteredProducts = computed(() => {
-  let list = [...adminProductsMock]
-  if (search.value) {
-    const q = search.value.toLowerCase()
-    list = list.filter(p => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q))
-  }
-  if (statusFilter.value !== 'all') list = list.filter(p => p.status === statusFilter.value)
-  if (categoryFilter.value !== 'all') list = list.filter(p => p.categoryName === categoryFilter.value)
-  if (stockFilter.value !== 'all') list = list.filter(p => p.stockState === stockFilter.value)
-  return list
-})
-
-const paginatedProducts = computed(() => {
-  const start = (page.value - 1) * pageSize.value
-  return filteredProducts.value.slice(start, start + pageSize.value)
-})
-
 /* ── helpers ── */
 const formatCompact = (n) => {
   if (n >= 1_000_000_000) return '₫' + (n / 1_000_000_000).toFixed(1) + 'B'
@@ -320,14 +394,31 @@ const qtyClass = (item) => {
   return 'qty-ok'
 }
 
-const toggleStock = (item) => { item.stockEnabled = !item.stockEnabled }
+const toggleStock = async (item) => {
+  try {
+    await admin.patch('products', item.id, { is_active: !item.stockEnabled })
+    item.stockEnabled = !item.stockEnabled
+  } catch (e) {
+    console.error('Toggle stock failed:', e.message)
+  }
+}
 
 const navigateToEdit = (item) => router.push(`/admin/products/${item.id}/edit`)
-const handleExport = () => alert('Export triggered (mock)')
-const handleAction = (action, item) => {
-  if (action.key === 'delete') alert(`Delete product #${item.id} (mock)`)
-  else if (action.key === 'duplicate') alert(`Duplicate product #${item.id} (mock)`)
-  else router.push(`/admin/products/${item.id}/edit`)
+const handleExport = () => alert('Export triggered')
+const handleAction = async (action, item) => {
+  if (action.key === 'delete') {
+    if (!confirm(`Delete product "${item.name}"?`)) return
+    try {
+      await admin.remove('products', item.id)
+      loadProducts()
+    } catch (e) {
+      alert(`Delete failed: ${e.message}`)
+    }
+  } else if (action.key === 'duplicate') {
+    alert(`Duplicate product #${item.id}`)
+  } else {
+    router.push(`/admin/products/${item.id}/edit`)
+  }
 }
 </script>
 

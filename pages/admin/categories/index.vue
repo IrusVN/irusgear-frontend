@@ -3,7 +3,7 @@
     <!-- Category Table -->
     <AdminDataTable
       :columns="columns"
-      :items="paginatedCategories"
+      :items="categories"
       :selectable="true"
       :selected-keys="selectedIds"
       @update:selected-keys="selectedIds = $event"
@@ -75,8 +75,8 @@
         <AdminPagination
           :page="page"
           :page-size="pageSize"
-          :total="filteredCategories.length"
-          @update:page="page = $event"
+          :total="totalCategories"
+          @update:page="changePage"
         />
       </template>
     </AdminDataTable>
@@ -135,9 +135,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useHead } from '#imports'
-import { adminCategoriesMock } from '~/mocks/admin/categories.mock'
+import { useAdminStore } from '@/stores/adminStore'
+import { useUiStore } from '@/stores/uiStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
@@ -147,13 +148,71 @@ import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 definePageMeta({ layout: 'admin' })
 useHead({ title: 'Categories – IrusGear Admin' })
 
+const admin = useAdminStore()
+const ui = useUiStore()
+
+/* ── Reactive data ── */
+const categories = ref([])
+const totalCategories = ref(0)
+
 /* ── state ── */
 const search = ref('')
 const page = ref(1)
 const pageSize = ref(10)
 const selectedIds = ref([])
 
-const resetPage = () => { page.value = 1 }
+/* ── API→UI Mapping ── */
+const mapCategory = (c) => ({
+  id: c.id,
+  name: c.name,
+  slug: c.slug,
+  description: c.description || '',
+  image: c.image || '/images/placeholder-category.png',
+  icon: 'bi-tag',
+  productCount: c.products_count ?? 0,
+  totalEarning: c.total_earning ?? 0,
+  status: c.is_active !== undefined ? (c.is_active ? 'active' : 'inactive') : 'active',
+})
+
+/* ── Data Loading ── */
+const loadCategories = async () => {
+  const params = {
+    per_page: pageSize.value,
+    page: page.value,
+  }
+  if (search.value) params.search = search.value
+
+  const res = await admin.fetchList('categories', params)
+  if (res?.data) {
+    categories.value = res.data.map(mapCategory)
+    totalCategories.value = res.meta?.total ?? res.data.length
+  }
+}
+
+/* ── Lifecycle ── */
+onMounted(() => {
+  loadCategories()
+})
+
+const resetPage = () => {
+  page.value = 1
+  loadCategories()
+}
+
+const changePage = (newPage) => {
+  page.value = newPage
+  loadCategories()
+}
+
+/* ── Debounced search ── */
+let searchTimer = null
+watch(search, () => {
+  clearTimeout(searchTimer)
+  searchTimer = setTimeout(() => {
+    page.value = 1
+    loadCategories()
+  }, 300)
+})
 
 /* ── modal ── */
 const modalOpen = ref(false)
@@ -174,9 +233,24 @@ const openEditModal = (cat) => {
 
 const closeModal = () => { modalOpen.value = false }
 
-const saveCategory = () => {
-  alert(editingCategory.value ? `Updated "${form.value.name}" (mock)` : `Created "${form.value.name}" (mock)`)
-  closeModal()
+const saveCategory = async () => {
+  const payload = {
+    name: form.value.name,
+    slug: form.value.slug || undefined,
+    description: form.value.description || undefined,
+  }
+
+  try {
+    if (editingCategory.value) {
+      await admin.update('categories', editingCategory.value.id, payload)
+    } else {
+      await admin.create('categories', payload)
+    }
+    closeModal()
+    loadCategories()
+  } catch (e) {
+    alert(`Save failed: ${e.message}`)
+  }
 }
 
 /* ── columns ── */
@@ -187,24 +261,21 @@ const columns = [
   { key: 'status', label: 'Status' },
 ]
 
-/* ── filtering ── */
-const filteredCategories = computed(() => {
-  if (!search.value) return adminCategoriesMock
-  const q = search.value.toLowerCase()
-  return adminCategoriesMock.filter(c => c.name.toLowerCase().includes(q) || c.description.toLowerCase().includes(q))
-})
-
-const paginatedCategories = computed(() => {
-  const start = (page.value - 1) * pageSize.value
-  return filteredCategories.value.slice(start, start + pageSize.value)
-})
-
 /* ── helpers ── */
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
-const handleAction = (action, item) => {
-  if (action.key === 'delete') alert(`Delete category "${item.name}" (mock)`)
-  else alert(`View products in "${item.name}" (mock)`)
+const handleAction = async (action, item) => {
+  if (action.key === 'delete') {
+    if (!confirm(`Delete category "${item.name}"?`)) return
+    try {
+      await admin.remove('categories', item.id)
+      loadCategories()
+    } catch (e) {
+      alert(`Delete failed: ${e.message}`)
+    }
+  } else {
+    alert(`View products in "${item.name}"`)
+  }
 }
 </script>
 

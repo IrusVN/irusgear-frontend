@@ -201,45 +201,79 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter } from '#imports'
-import { adminProductsMock } from '~/mocks/admin/products.mock'
-import { adminCategoriesMock } from '~/mocks/admin/categories.mock'
+import { useAdminStore } from '@/stores/adminStore'
+import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 
 definePageMeta({ layout: 'admin' })
 
 const route = useRoute()
 const router = useRouter()
-const categories = adminCategoriesMock
+const admin = useAdminStore()
+const ui = useUiStore()
+
+const categories = ref([])
 const fileInput = ref(null)
+const product = ref(null)
+const isLoaded = ref(false)
 
 const productId = computed(() => Number(route.params.id))
-const product = computed(() => adminProductsMock.find(p => p.id === productId.value))
 
 useHead({ title: computed(() => product.value ? `Edit ${product.value.name} – IrusGear Admin` : 'Product Not Found') })
 
-const form = reactive(
-  product.value
-    ? {
-        name: product.value.name,
-        slug: product.value.slug,
-        sku: product.value.sku,
-        vendor: product.value.vendor,
-        description: product.value.description,
-        price: product.value.price,
-        compareAtPrice: product.value.compareAtPrice || null,
-        quantity: product.value.quantity,
-        stockEnabled: product.value.stockEnabled,
-        categoryId: product.value.categoryId,
-        featured: product.value.featured,
-        status: product.value.status,
-        images: [product.value.image],
-      }
-    : { name: '', slug: '', sku: '', vendor: '', description: '', price: 0, compareAtPrice: null, quantity: 0, stockEnabled: true, categoryId: 0, featured: false, status: 'draft', images: [] }
-)
+const form = reactive({
+  name: '',
+  slug: '',
+  sku: '',
+  vendor: '',
+  description: '',
+  price: 0,
+  compareAtPrice: null,
+  quantity: 0,
+  stockEnabled: true,
+  categoryId: 0,
+  featured: false,
+  status: 'draft',
+  images: [],
+})
 
 const errors = reactive({ name: '', sku: '', price: '' })
+
+/* ── Load data from API ── */
+onMounted(async () => {
+  const [productRes, categoriesRes] = await Promise.all([
+    admin.fetchOne(`products/${productId.value}`),
+    admin.fetchList('categories', { per_page: 100 }),
+  ])
+
+  if (categoriesRes?.data) {
+    categories.value = categoriesRes.data.map(c => ({ id: c.id, name: c.name }))
+  }
+
+  if (productRes?.data) {
+    const p = productRes.data
+    product.value = p
+
+    // Map API fields → form fields
+    form.name = p.name || ''
+    form.slug = p.slug || ''
+    form.sku = p.sku || ''
+    form.vendor = p.vendor?.shop_name || ''
+    form.description = p.description || ''
+    form.price = p.price || 0
+    form.compareAtPrice = p.compare_at_price || null
+    form.quantity = p.stock ?? 0
+    form.stockEnabled = p.stock_status !== 'out_of_stock'
+    form.categoryId = p.category_id || 0
+    form.featured = false
+    form.status = p.is_active ? 'publish' : 'inactive'
+    form.images = p.thumbnail ? [p.thumbnail] : []
+  }
+
+  isLoaded.value = true
+})
 
 const autoSlug = () => {
   form.slug = form.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
@@ -262,15 +296,30 @@ const handleFileSelect = (e) => { for (const file of e.target.files) form.images
 const handleDrop = (e) => { for (const file of e.dataTransfer.files) { if (file.type.startsWith('image/')) form.images.push(URL.createObjectURL(file)) } }
 const removeImage = (idx) => form.images.splice(idx, 1)
 
-const handleSave = () => {
+const handleSave = async () => {
   if (!validate()) return
-  alert(`Product "${form.name}" updated (mock)`)
-  router.push('/admin/products')
-}
-const handleDelete = () => {
-  if (confirm(`Delete "${form.name}"? This cannot be undone.`)) {
-    alert('Product deleted (mock)')
+  try {
+    await admin.update('products', productId.value, {
+      name: form.name,
+      slug: form.slug || undefined,
+      description: form.description || undefined,
+      price: form.price,
+      stock: form.quantity,
+      category_id: form.categoryId || undefined,
+      is_active: form.status === 'publish',
+    })
     router.push('/admin/products')
+  } catch (e) {
+    alert(`Save failed: ${e.message}`)
+  }
+}
+const handleDelete = async () => {
+  if (!confirm(`Delete "${form.name}"? This cannot be undone.`)) return
+  try {
+    await admin.remove('products', productId.value)
+    router.push('/admin/products')
+  } catch (e) {
+    alert(`Delete failed: ${e.message}`)
   }
 }
 const handleDiscard = () => router.push('/admin/products')
