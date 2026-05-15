@@ -30,7 +30,7 @@ const variantClass = computed(() => `is-${props.variant}`)
 <style scoped>
 .admin-status-badge {
   min-height: 24px;
-  border-radius: 6px;
+  border-radius: 5px;
   padding: 3px 9px;
   display: inline-flex;
   align-items: center;
@@ -50,27 +50,27 @@ const variantClass = computed(() => `is-${props.variant}`)
 }
 
 .admin-status-badge.is-neutral {
-  background: var(--admin-surface-soft);
+  background: rgba(47, 43, 61, 0.08);
   color: var(--admin-muted);
 }
 
 .admin-status-badge.is-success {
-  background: rgba(40, 199, 111, 0.16);
+  background: rgba(40, 199, 111, 0.14);
   color: var(--admin-success);
 }
 
 .admin-status-badge.is-info {
-  background: rgba(0, 207, 232, 0.16);
+  background: rgba(0, 207, 232, 0.14);
   color: #00a9c0;
 }
 
 .admin-status-badge.is-warning {
-  background: rgba(255, 159, 67, 0.17);
+  background: rgba(255, 159, 67, 0.14);
   color: #ff8a00;
 }
 
 .admin-status-badge.is-danger {
-  background: rgba(255, 76, 81, 0.16);
+  background: rgba(255, 76, 81, 0.14);
   color: var(--admin-danger);
 }
 

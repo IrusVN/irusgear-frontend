@@ -58,10 +58,11 @@ const trendClass = computed(() => `is-${props.trendDirection}`)
 <style scoped>
 .admin-metric-card {
   min-height: 94px;
-  padding: 20px 22px;
+  padding: 20px var(--admin-card-padding);
   background: var(--admin-surface);
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow-soft);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,7 +82,7 @@ const trendClass = computed(() => `is-${props.trendDirection}`)
 
 .metric-value {
   color: var(--admin-text);
-  font-size: 1.55rem;
+  font-size: 1.48rem;
   font-weight: 600;
   line-height: 1.1;
 }
@@ -97,7 +98,7 @@ const trendClass = computed(() => `is-${props.trendDirection}`)
 .metric-trend {
   border-radius: 5px;
   padding: 2px 7px;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 700;
 }
 
@@ -117,9 +118,9 @@ const trendClass = computed(() => `is-${props.trendDirection}`)
 }
 
 .metric-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 9px;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--admin-radius);
   background: var(--admin-surface-soft);
   color: var(--admin-text);
   display: inline-flex;

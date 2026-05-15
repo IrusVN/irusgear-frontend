@@ -1,25 +1,28 @@
 :root {
-  --admin-bg: #f8f8fa;
+  --admin-bg: #f8f7fa;
   --admin-surface: #ffffff;
-  --admin-surface-soft: #f4f4f6;
-  --admin-border: #e5e5ea;
-  --admin-text: #2f2f3d;
-  --admin-muted: #7a7a88;
-  --admin-subtle: #a8a8b3;
+  --admin-surface-soft: #f2f1f4;
+  --admin-border: rgba(47, 43, 61, 0.12);
+  --admin-text: #2f2b3d;
+  --admin-muted: #6d6777;
+  --admin-subtle: #a8a5b4;
   --admin-primary: #050505;
-  --admin-primary-soft: #eeeeef;
+  --admin-primary-soft: rgba(47, 43, 61, 0.08);
   --admin-success: #28c76f;
   --admin-info: #00cfe8;
   --admin-warning: #ff9f43;
   --admin-danger: #ff4c51;
-  --admin-radius: 8px;
-  --admin-shadow: 0 4px 18px rgba(15, 15, 20, 0.08);
+  --admin-radius: 6px;
+  --admin-shadow: 0 4px 18px rgba(47, 43, 61, 0.1);
+  --admin-shadow-soft: 0 2px 10px rgba(47, 43, 61, 0.07);
+  --admin-card-padding: 24px;
+  --admin-dashboard-gap: 24px;
   --admin-sidebar-width: 260px;
   --admin-sidebar-collapsed-width: 84px;
   --admin-topbar-height: 56px;
 }
 
-/* ── Base ── */
+/* Base */
 body:has(.admin-shell) {
   background: var(--admin-bg);
 }
@@ -34,7 +37,7 @@ body:has(.admin-shell) {
 .admin-content {
   min-height: 100vh;
   margin-left: var(--admin-sidebar-width);
-  padding: 0 24px 28px;
+  padding: 0 24px 32px;
   transition: margin-left 0.24s ease;
 }
 
@@ -52,12 +55,12 @@ body:has(.admin-shell) {
   padding-top: 24px;
 }
 
-/* ── Icon Buttons ── */
+/* Icon Buttons */
 .admin-icon-button {
   width: 36px;
   height: 36px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--admin-radius);
   background: transparent;
   color: var(--admin-text);
   display: inline-flex;
@@ -76,21 +79,21 @@ body:has(.admin-shell) {
   transform: scale(0.96);
 }
 
-/* ── Card Shell ── */
+/* Card Shell */
 .admin-card-shell {
   background: var(--admin-surface);
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--admin-shadow-soft);
 }
 
-/* ── Buttons ── */
+/* Buttons */
 .admin-primary-button,
 .admin-secondary-button,
 .admin-danger-button {
   height: 40px;
   border: 0;
-  border-radius: 7px;
+  border-radius: var(--admin-radius);
   padding: 0 16px;
   display: inline-flex;
   align-items: center;
@@ -120,12 +123,12 @@ body:has(.admin-shell) {
 }
 
 .admin-secondary-button {
-  background: #ececef;
+  background: var(--admin-surface-soft);
   color: var(--admin-muted);
 }
 
 .admin-secondary-button:hover {
-  background: #e0e0e4;
+  background: rgba(47, 43, 61, 0.1);
   color: var(--admin-text);
 }
 
@@ -145,11 +148,11 @@ body:has(.admin-shell) {
   cursor: not-allowed;
 }
 
-/* ── Form Controls ── */
+/* Form Controls */
 .admin-control {
   height: 40px;
   border: 1px solid var(--admin-border);
-  border-radius: 7px;
+  border-radius: var(--admin-radius);
   background: #fff;
   color: var(--admin-text);
   padding: 0 12px;
@@ -177,7 +180,7 @@ select.admin-control {
   padding-right: 30px;
 }
 
-/* ── Table Row Polish ── */
+/* Table Row Polish */
 .admin-card-shell table tbody tr {
   transition: background-color 0.14s ease;
 }
@@ -191,7 +194,7 @@ select.admin-control {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: #4b4b59;
+  color: var(--admin-muted);
   padding: 14px 16px;
   white-space: nowrap;
 }
@@ -202,14 +205,14 @@ select.admin-control {
   font-size: 0.88rem;
 }
 
-/* ── Pagination Spacing ── */
+/* Pagination Spacing */
 .admin-card-shell .pagination-container,
 .admin-card-shell [class*="pagination"] {
   padding: 12px 16px;
   gap: 10px;
 }
 
-/* ── Badge Polish ── */
+/* Badge Polish */
 .admin-status-badge {
   padding: 4px 10px;
   font-size: 0.78rem;
@@ -218,12 +221,12 @@ select.admin-control {
   line-height: 1.2;
 }
 
-/* ── Card Section Spacing ── */
+/* Card Section Spacing */
 .admin-card-shell + .admin-card-shell {
   margin-top: 18px;
 }
 
-/* ── Page Entrance Animation ── */
+/* Page Entrance Animation */
 .admin-page-body {
   animation: adminFadeIn 0.28s ease both;
 }
@@ -233,14 +236,14 @@ select.admin-control {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Responsive: Desktop 1440 ── */
+/* Responsive: Desktop 1440 */
 @media screen and (max-width: 1440px) {
   .admin-content {
     padding: 0 20px 24px;
   }
 }
 
-/* ── Responsive: Tablet 1024 ── */
+/* Responsive: Tablet 1024 */
 @media screen and (max-width: 1024px) {
   .admin-content {
     padding: 0 16px 22px;
@@ -251,7 +254,7 @@ select.admin-control {
   }
 }
 
-/* ── Responsive: Mobile-like 991 ── */
+/* Responsive: Mobile-like 991 */
 @media screen and (max-width: 991.98px) {
   .admin-content,
   .admin-content.is-collapsed {
@@ -268,7 +271,7 @@ select.admin-control {
   }
 }
 
-/* ── Responsive: Small Mobile ── */
+/* Responsive: Small Mobile */
 @media screen and (max-width: 480px) {
   .admin-content,
   .admin-content.is-collapsed {
@@ -282,25 +285,23 @@ select.admin-control {
   }
 }
 
-/* ── Bottom Nav Mobile Spacing ── */
+/* Bottom Nav Mobile Spacing */
 @media screen and (max-width: 767px) {
   .admin-content.has-bottom-nav {
     padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 16px);
   }
 }
 
-/* ═══════════════════════════════════════════
-   Phase M6: Polish — Native-App Feel
-   ═══════════════════════════════════════════ */
+/* Phase M6: Polish - Native-App Feel */
 
-/* ── Font Smoothing ── */
+/* Font Smoothing */
 .admin-shell {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-/* ── Overscroll Behavior ── */
+/* Overscroll Behavior */
 .admin-shell {
   overscroll-behavior: none;
 }
@@ -310,17 +311,17 @@ select.admin-control {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ── Smooth Scroll ── */
+/* Smooth Scroll */
 html:has(.admin-shell) {
   scroll-behavior: smooth;
 }
 
-/* ── Tap Highlight Removal ── */
+/* Tap Highlight Removal */
 .admin-shell * {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ── Active Press States — Cards ── */
+/* Active Press States - Cards */
 @media screen and (max-width: 767px) {
   .admin-card-shell {
     transition: transform 0.12s ease, box-shadow 0.12s ease;
@@ -351,7 +352,7 @@ html:has(.admin-shell) {
   }
 }
 
-/* ── Focus-Visible Outlines (accessibility) ── */
+/* Focus-Visible Outlines (accessibility) */
 .admin-primary-button:focus-visible,
 .admin-secondary-button:focus-visible,
 .admin-danger-button:focus-visible,
@@ -361,42 +362,42 @@ html:has(.admin-shell) {
   outline-offset: 2px;
 }
 
-/* ── Skeleton Loading Placeholder ── */
+/* Skeleton Loading Placeholder */
 @keyframes adminShimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
 .admin-skeleton {
-  background: linear-gradient(90deg, var(--admin-surface-soft) 30%, #e8e8ec 50%, var(--admin-surface-soft) 70%);
+  background: linear-gradient(90deg, var(--admin-surface-soft) 30%, #e8e7ec 50%, var(--admin-surface-soft) 70%);
   background-size: 200% 100%;
   animation: adminShimmer 1.5s ease-in-out infinite;
   border-radius: var(--admin-radius);
 }
 
-/* ── Transition Polish for Page Elements ── */
+/* Transition Polish for Page Elements */
 .admin-card-shell {
   transition: box-shadow 0.2s ease;
 }
 
 .admin-card-shell:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--admin-shadow);
 }
 
-/* ── Safe Area (notch devices) ── */
+/* Safe Area (notch devices) */
 @supports (padding: env(safe-area-inset-top)) {
   .admin-topbar {
     padding-top: env(safe-area-inset-top, 0px);
   }
 }
 
-/* ── Selection Color ── */
+/* Selection Color */
 .admin-shell ::selection {
   background: rgba(5, 5, 5, 0.12);
   color: var(--admin-text);
 }
 
-/* ── Scrollbar Minimal (desktop) ── */
+/* Scrollbar Minimal (desktop) */
 @media screen and (min-width: 768px) {
   .admin-content::-webkit-scrollbar {
     width: 6px;
@@ -415,4 +416,3 @@ html:has(.admin-shell) {
     background: var(--admin-subtle);
   }
 }
-

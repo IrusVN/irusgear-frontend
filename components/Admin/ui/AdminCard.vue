@@ -1,5 +1,5 @@
 <template>
-  <section class="admin-card" :class="{ 'is-hoverable': hoverable, 'has-padding': padded }">
+  <section class="admin-card p-4" :class="{ 'is-hoverable': hoverable, 'has-padding': padded }">
     <header v-if="$slots.header || title || subtitle || $slots.actions" class="admin-card-header">
       <div class="admin-card-heading">
         <h3 v-if="title">{{ title }}</h3>
@@ -43,11 +43,12 @@ defineProps({
   background: var(--admin-surface);
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow-soft);
   overflow: hidden;
 }
 
 .admin-card.has-padding {
-  padding: 20px;
+  padding: var(--admin-card-padding);
 }
 
 .admin-card.is-hoverable {
@@ -56,7 +57,7 @@ defineProps({
 
 .admin-card.is-hoverable:hover {
   box-shadow: var(--admin-shadow);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .admin-card-header {

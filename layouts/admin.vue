@@ -26,6 +26,9 @@
     </main>
 
     <AdminBottomNav />
+    <ClientOnly>
+      <BackToTop />
+    </ClientOnly>
   </div>
 </template>
 
@@ -34,6 +37,7 @@ import { ref, watch } from 'vue'
 import AdminTopbar from '@/components/Admin/layout/AdminTopbar.vue'
 import AdminSidebar from '@/components/Sidebar/AdminSidebar.vue'
 import AdminBottomNav from '@/components/Admin/layout/AdminBottomNav.vue'
+import BackToTop from '@/components/Common/BackToTop.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 
 const isMobileSidebarOpen = ref(false)

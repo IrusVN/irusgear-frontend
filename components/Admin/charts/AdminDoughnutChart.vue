@@ -82,6 +82,15 @@ watch(() => [props.labels, props.data, props.colors, props.options], renderChart
 .admin-chart {
   position: relative;
   width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.admin-chart canvas {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  height: 100% !important;
 }
 
 .chart-center {

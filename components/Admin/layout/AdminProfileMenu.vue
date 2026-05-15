@@ -21,7 +21,7 @@
         </div>
 
         <div class="profile-list">
-          <NuxtLink class="profile-item" to="/profile" @click="closeMenu">
+          <NuxtLink v-if="false" class="profile-item" to="/admin/settings" @click="closeMenu">
             <i class="bi bi-person"></i>
             <span>Profile</span>
           </NuxtLink>
