@@ -1,13 +1,12 @@
 import type { AdminDashboardMock } from '~/types/admin'
 import { adminProductsMock } from './products.mock'
-import { adminCustomersMock } from './customers.mock'
 
 const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
 
 export const adminDashboardMock: AdminDashboardMock = {
   metrics: {
     sales: 230000,
-    customers: adminCustomersMock.length,
+    customers: 0, // Mock removed
     products: adminProductsMock.length,
     revenue: 0, // Mocked revenue removed for Phase C cleanup
   },

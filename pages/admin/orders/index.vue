@@ -160,19 +160,19 @@ const handleSearch = (val) => {
   search.value = val
   if (searchTimeout.value) clearTimeout(searchTimeout.value)
   searchTimeout.value = setTimeout(() => {
-    pagination.setPage(1)
+    pagination.page = 1
     fetchOrders()
   }, 300)
 }
 
 const changePage = (p) => {
-  pagination.setPage(p)
+  pagination.page = p
   fetchOrders()
 }
 
 const changePageSize = (size) => {
-  pagination.setLimit(size)
-  pagination.setPage(1)
+  pagination.limit = size
+  pagination.page = 1
   fetchOrders()
 }
 

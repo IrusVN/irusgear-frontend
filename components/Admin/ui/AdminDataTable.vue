@@ -73,6 +73,8 @@
 
 <script setup>
 import { computed, useSlots } from 'vue'
+import AdminSkeleton from '@/components/Admin/ui/AdminSkeleton.vue'
+import AdminEmptyState from '@/components/Admin/ui/AdminEmptyState.vue'
 
 const emit = defineEmits(['update:selectedKeys', 'row-click'])
 

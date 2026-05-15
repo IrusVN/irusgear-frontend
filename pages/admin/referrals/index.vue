@@ -114,7 +114,6 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useHead } from '#imports'
-import { adminCustomersMock } from '~/mocks/admin/customers.mock'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
@@ -139,8 +138,8 @@ const statusCycle = ['active', 'converted', 'expired', 'active', 'converted']
 const codePrefixes = ['IRUS', 'GEAR', 'REF', 'VIP', 'DEAL']
 
 const allReferrals = Array.from({ length: 50 }, (_, i) => {
-  const referrer = adminCustomersMock[i % adminCustomersMock.length]
-  const referred = adminCustomersMock[(i + 7) % adminCustomersMock.length]
+  const referrer = { id: i + 1, name: `Mock Referrer ${i + 1}`, email: `referrer${i + 1}@example.com`, avatar: `https://ui-avatars.com/api/?name=Referrer+${i + 1}` }
+  const referred = { id: i + 101, name: `Mock Referred ${i + 1}`, email: `referred${i + 1}@example.com`, avatar: `https://ui-avatars.com/api/?name=Referred+${i + 1}` }
   return {
     id: i + 1,
     referrerName: referrer.name,

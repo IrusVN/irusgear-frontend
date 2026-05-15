@@ -237,20 +237,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter } from '#imports'
-import { adminCustomersMock } from '~/mocks/admin/customers.mock'
+import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 
 definePageMeta({ layout: 'admin' })
 
 const route = useRoute()
 const router = useRouter()
+const admin = useAdminStore()
 
 const customerId = computed(() => Number(route.params.id))
-const customer = computed(() => adminCustomersMock.find(c => c.id === customerId.value))
+const customer = ref(null)
 
-useHead({ title: computed(() => customer.value ? `Customer ${customer.value.customerCode} – IrusGear Admin` : 'Customer Not Found') })
+useHead({ title: computed(() => customer.value ? `Customer ${customer.value.customerCode} – IrusGear Admin` : 'Loading Customer...') })
 
 const activeTab = ref('overview')
 
@@ -269,9 +270,19 @@ const notificationSettings = [
 ]
 
 /* ── customer orders ── */
-const customerOrders = computed(() => {
-  return [] // Orders will be fetched from API in Phase D
-})
+const customerOrders = ref([])
+const fetchCustomerOrders = async () => {
+  const res = await admin.fetchList(`customers/${customerId.value}/orders`, { per_page: 5 })
+  if (res?.data) {
+    customerOrders.value = res.data.map(o => ({
+      id: o.id,
+      orderCode: o.order_number,
+      date: o.created_at,
+      paymentStatus: o.payment?.status || 'pending',
+      total: o.pricing?.total || 0,
+    }))
+  }
+}
 
 /* ── loyalty ── */
 const loyaltyProgress = computed(() => {
@@ -302,13 +313,55 @@ const statusVariant = (s) => ({ active: 'success', inactive: 'neutral', blocked:
 const paymentLabel = (s) => ({ pending: 'Pending', paid: 'Paid', failed: 'Failed', cancelled: 'Cancelled', refunded: 'Refunded' }[s] || s)
 const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
 
-const handleDelete = () => {
-  if (confirm(`Delete customer ${customer.value?.customerCode}?`)) {
-    alert('Customer deleted (mock)')
-    router.push('/admin/customers')
+const handleDelete = async () => {
+  if (confirm(`Delete customer ${customer.value?.customerCode}? This cannot be undone.`)) {
+    try {
+      await admin.remove('customers', customerId.value)
+      alert('Customer deleted successfully')
+      router.push('/admin/customers')
+    } catch (e) {
+      alert('Failed to delete customer: ' + e.message)
+    }
   }
 }
 const handleEditDetails = () => alert('Edit details (mock)')
+
+const mapCustomerDetail = (c) => {
+  const loyalty = c.member_rank || { name_en: 'Standard', threshold: 0 }
+  return {
+    id: c.id,
+    customerCode: `#CUS${c.id}`,
+    createdAt: c.member_since || c.created_at,
+    name: c.full_name || c.name,
+    email: c.email,
+    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
+    orders: c.orders || 0,
+    totalSpent: c.total_spent || 0,
+    status: c.status || 'active',
+    phone: c.phone || 'N/A',
+    country: c.country || 'Vietnam',
+    countryCode: 'vn',
+    loyaltyTier: loyalty.name_en?.toLowerCase() || 'standard',
+    loyaltyPoints: c.total_spent || 0,
+    accountBalance: c.account_balance || 0,
+    wishlistCount: c.wishlist_count || 0,
+    couponCount: c.coupons_count || 0,
+    shippingAddress: c.default_address || {},
+    billingAddress: c.default_address || {},
+  }
+}
+
+const fetchCustomerDetail = async () => {
+  const res = await admin.fetchOne(`customers/${customerId.value}`)
+  if (res?.data) {
+    customer.value = mapCustomerDetail(res.data)
+  }
+}
+
+onMounted(() => {
+  fetchCustomerDetail()
+  fetchCustomerOrders()
+})
 </script>
 
 <style scoped>

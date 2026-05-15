@@ -15,8 +15,8 @@
           :search="search"
           :page-size="pageSize"
           search-placeholder="Search Customer"
-          @update:search="search = $event; resetPage()"
-          @update:page-size="pageSize = $event; resetPage()"
+          @update:search="handleSearch"
+          @update:page-size="changePageSize"
           @export="handleExport"
         >
           <template #actions>
@@ -72,8 +72,8 @@
         <AdminPagination
           :page="page"
           :page-size="pageSize"
-          :total="filteredCustomers.length"
-          @update:page="page = $event"
+          :total="totalCustomers"
+          @update:page="changePage"
         />
       </template>
     </AdminDataTable>
@@ -82,7 +82,7 @@
     <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
       <label style="display:block;position:relative;margin-bottom:12px">
         <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
-        <input class="admin-control" v-model="search" placeholder="Search Customer" style="padding-left:36px;width:100%" @input="resetPage">
+        <input class="admin-control" :value="search" placeholder="Search Customer" style="padding-left:36px;width:100%" @input="handleSearch($event.target.value)">
       </label>
       <AdminMobileCard
         v-for="item in paginatedCustomers"
@@ -108,17 +108,18 @@
           />
         </template>
       </AdminMobileCard>
-      <div v-if="filteredCustomers.length > pageSize" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < filteredCustomers.length" class="admin-secondary-button" @click="page++">Load More</button>
+      <div v-if="totalCustomers > customers.length" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < totalCustomers" class="admin-secondary-button" @click="changePage(page + 1)">Load More</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useHead, useRouter } from '#imports'
-import { adminCustomersMock } from '~/mocks/admin/customers.mock'
+import { useAdminStore } from '@/stores/adminStore'
+import { usePaginationStore } from '@/stores/paginationStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
@@ -132,13 +133,37 @@ definePageMeta({ layout: 'admin' })
 useHead({ title: 'Customers – IrusGear Admin' })
 
 const router = useRouter()
+const admin = useAdminStore()
+const pagination = usePaginationStore()
 
 const search = ref('')
-const page = ref(1)
-const pageSize = ref(10)
-const selectedIds = ref([])
+const searchTimeout = ref(null)
+const page = computed(() => pagination.page)
+const pageSize = computed(() => pagination.limit)
+const totalCustomers = computed(() => pagination.total)
 
-const resetPage = () => { page.value = 1 }
+const selectedIds = ref([])
+const customers = ref([])
+
+const handleSearch = (val) => {
+  search.value = val
+  if (searchTimeout.value) clearTimeout(searchTimeout.value)
+  searchTimeout.value = setTimeout(() => {
+    pagination.page = 1
+    fetchCustomers()
+  }, 300)
+}
+
+const changePage = (p) => {
+  pagination.page = p
+  fetchCustomers()
+}
+
+const changePageSize = (size) => {
+  pagination.limit = size
+  pagination.page = 1
+  fetchCustomers()
+}
 
 const columns = [
   { key: 'name', label: 'Customer', width: '26%' },
@@ -148,26 +173,55 @@ const columns = [
   { key: 'totalSpent', label: 'Total Spent' },
 ]
 
-const filteredCustomers = computed(() => {
-  if (!search.value) return adminCustomersMock
-  const q = search.value.toLowerCase()
-  return adminCustomersMock.filter(c => c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q) || c.customerCode.includes(q))
-})
-
-const paginatedCustomers = computed(() => {
-  const start = (page.value - 1) * pageSize.value
-  return filteredCustomers.value.slice(start, start + pageSize.value)
-})
+const paginatedCustomers = computed(() => customers.value)
 
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
 const viewCustomer = (item) => router.push(`/admin/customers/${item.id}`)
 const handleExport = () => alert('Export triggered (mock)')
 const handleAdd = () => alert('Add customer (mock)')
-const handleAction = (action, item) => {
-  if (action.key === 'delete') alert(`Delete customer ${item.customerCode} (mock)`)
+const handleAction = async (action, item) => {
+  if (action.key === 'delete') {
+    if (confirm(`Delete customer ${item.customerCode}? This cannot be undone.`)) {
+      try {
+        await admin.remove('customers', item.id)
+        alert('Customer deleted')
+        fetchCustomers()
+      } catch (e) {
+        alert('Failed to delete: ' + e.message)
+      }
+    }
+  }
   else router.push(`/admin/customers/${item.id}`)
 }
+
+const mapCustomer = (c) => ({
+  id: c.id,
+  name: c.full_name || c.name,
+  email: c.email,
+  customerCode: `#CUS${c.id}`,
+  avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
+  country: c.country || 'Vietnam',
+  countryCode: 'vn',
+  orders: c.orders || 0,
+  totalSpent: c.total_spent || 0,
+})
+
+const fetchCustomers = async () => {
+  const res = await admin.fetchList('customers', {
+    search: search.value,
+    per_page: pageSize.value,
+    page: page.value,
+  })
+  if (res?.data) {
+    customers.value = res.data.map(mapCustomer)
+  }
+}
+
+onMounted(() => {
+  pagination.page = 1
+  fetchCustomers()
+})
 </script>
 
 <style scoped>
