@@ -1,0 +1,468 @@
+<template>
+  <div class="customer-detail-page">
+    <!-- Not found -->
+    <div v-if="!customer" class="admin-card-shell" style="text-align:center;padding:48px">
+      <i class="bi bi-exclamation-triangle" style="font-size:2.4rem;color:var(--admin-warning)"></i>
+      <h3 style="margin:12px 0 4px">Customer Not Found</h3>
+      <nuxt-link to="/admin/customers" class="admin-primary-button" style="margin-top:12px">Back to Customers</nuxt-link>
+    </div>
+
+    <template v-else>
+      <!-- Header -->
+      <div class="detail-header">
+        <div class="header-left">
+          <nuxt-link to="/admin/customers" class="back-link"><i class="bi bi-arrow-left"></i></nuxt-link>
+          <div>
+            <h2 class="page-title">Customer ID {{ customer.customerCode }}</h2>
+            <p class="page-sub">Member since {{ formatDateShort(customer.createdAt) }}</p>
+          </div>
+        </div>
+        <button class="admin-danger-button" type="button" @click="handleDelete">
+          <i class="bi bi-trash"></i> Delete Customer
+        </button>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="detail-grid">
+        <!-- LEFT COLUMN -->
+        <div class="detail-col-left">
+          <!-- Profile Summary Card -->
+          <div class="admin-card-shell profile-card">
+            <div class="profile-top">
+              <img :src="customer.avatar" :alt="customer.name" class="profile-avatar" />
+              <h3 class="profile-name">{{ customer.name }}</h3>
+              <p class="profile-code">{{ customer.customerCode }}</p>
+              <div class="profile-stats">
+                <div class="stat">
+                  <strong>{{ customer.orders.toLocaleString() }}</strong>
+                  <small>Orders</small>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                  <strong>{{ formatCompact(customer.totalSpent) }}</strong>
+                  <small>Spent</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Details list -->
+            <div class="details-list">
+              <h4 class="section-title">Details</h4>
+              <div class="detail-row">
+                <span class="detail-label">Username:</span>
+                <span class="detail-value">{{ customer.name.toLowerCase().replace(' ', '.') }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Email:</span>
+                <span class="detail-value">{{ customer.email }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Status:</span>
+                <AdminStatusBadge :label="statusLabel(customer.status)" :variant="statusVariant(customer.status)" />
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Contact:</span>
+                <span class="detail-value">{{ customer.phone }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Country:</span>
+                <span class="detail-value country-val">
+                  <img :src="`https://flagcdn.com/20x15/${customer.countryCode.toLowerCase()}.png`" :alt="customer.country" class="flag-sm" />
+                  {{ customer.country }}
+                </span>
+              </div>
+              <button class="admin-primary-button edit-details-btn" type="button" @click="handleEditDetails">
+                <i class="bi bi-pencil"></i> Edit Details
+              </button>
+            </div>
+          </div>
+
+          <!-- IrusGear Loyalty Card -->
+          <div class="loyalty-card" :class="`tier-${customer.loyaltyTier}`">
+            <div class="loyalty-header">
+              <span class="loyalty-badge">{{ customer.loyaltyTier.toUpperCase() }}</span>
+              <i class="bi bi-gem loyalty-icon"></i>
+            </div>
+            <div class="loyalty-body">
+              <p class="loyalty-brand">IrusGear</p>
+              <h3 class="loyalty-title">Loyalty Program</h3>
+              <div class="loyalty-points">
+                <strong>{{ customer.loyaltyPoints.toLocaleString() }}</strong>
+                <small>points earned</small>
+              </div>
+              <div class="loyalty-progress-track">
+                <div class="loyalty-progress-bar" :style="{ width: loyaltyProgress + '%' }"></div>
+              </div>
+              <p class="loyalty-next">{{ loyaltyNextTier }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="detail-col-right">
+          <!-- Tabs -->
+          <div class="admin-card-shell tabs-card">
+            <div class="tabs-nav">
+              <button
+                v-for="tab in tabs"
+                :key="tab.key"
+                class="tab-btn"
+                :class="{ active: activeTab === tab.key }"
+                @click="activeTab = tab.key"
+              >
+                <i class="bi" :class="tab.icon"></i>
+                {{ tab.label }}
+              </button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div v-if="activeTab === 'overview'" class="tab-content">
+              <div class="overview-cards">
+                <div class="overview-item">
+                  <div class="ov-icon ov-blue"><i class="bi bi-wallet2"></i></div>
+                  <div>
+                    <small>Account Balance</small>
+                    <strong>{{ formatCurrency(customer.accountBalance) }}</strong>
+                  </div>
+                </div>
+                <div class="overview-item">
+                  <div class="ov-icon ov-purple"><i class="bi bi-award"></i></div>
+                  <div>
+                    <small>Loyalty Program</small>
+                    <strong>{{ customer.loyaltyTier }} · {{ customer.loyaltyPoints.toLocaleString() }} pts</strong>
+                  </div>
+                </div>
+                <div class="overview-item">
+                  <div class="ov-icon ov-pink"><i class="bi bi-heart"></i></div>
+                  <div>
+                    <small>Wishlist</small>
+                    <strong>{{ customer.wishlistCount }} items</strong>
+                  </div>
+                </div>
+                <div class="overview-item">
+                  <div class="ov-icon ov-green"><i class="bi bi-ticket-perforated"></i></div>
+                  <div>
+                    <small>Coupons</small>
+                    <strong>{{ customer.couponCount }} available</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Orders placed -->
+              <div class="orders-section">
+                <h4 class="section-title">Orders Placed</h4>
+                <div class="mini-table-scroll">
+                  <table class="mini-table">
+                    <thead>
+                      <tr>
+                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th style="text-align:right">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="o in customerOrders" :key="o.id">
+                        <td><nuxt-link :to="`/admin/orders/${o.id}`" class="order-link">{{ o.orderCode }}</nuxt-link></td>
+                        <td class="muted-text">{{ formatDateShort(o.date) }}</td>
+                        <td><AdminStatusBadge :label="paymentLabel(o.paymentStatus)" :variant="paymentVariant(o.paymentStatus)" /></td>
+                        <td style="text-align:right"><strong>{{ formatCurrency(o.total) }}</strong></td>
+                      </tr>
+                      <tr v-if="customerOrders.length === 0">
+                        <td colspan="4" style="text-align:center;color:var(--admin-muted);padding:24px">No orders found</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Tab -->
+            <div v-if="activeTab === 'security'" class="tab-content">
+              <div class="security-section">
+                <h4 class="section-title">Change Password</h4>
+                <div class="field-row-2">
+                  <div class="field"><label class="field-label">New Password</label><input type="password" class="admin-control field-input" placeholder="••••••••" /></div>
+                  <div class="field"><label class="field-label">Confirm Password</label><input type="password" class="admin-control field-input" placeholder="••••••••" /></div>
+                </div>
+                <button class="admin-primary-button btn-sm" type="button" style="margin-top:12px">Update Password</button>
+              </div>
+              <div class="security-section">
+                <h4 class="section-title">Two-Factor Authentication</h4>
+                <div class="toggle-field">
+                  <div class="toggle-info">
+                    <strong>Enable 2FA</strong>
+                    <small>Add extra security to this account</small>
+                  </div>
+                  <label class="stock-toggle"><input type="checkbox" /><span class="toggle-track"></span></label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Address & Billing Tab -->
+            <div v-if="activeTab === 'address'" class="tab-content">
+              <div class="address-grid">
+                <div class="address-box">
+                  <h4 class="section-title">Shipping Address</h4>
+                  <p>{{ customer.shippingAddress.line1 }}</p>
+                  <p>{{ customer.shippingAddress.city }}, {{ customer.shippingAddress.country }}</p>
+                  <p v-if="customer.shippingAddress.postalCode">{{ customer.shippingAddress.postalCode }}</p>
+                  <button class="admin-secondary-button btn-sm" type="button" style="margin-top:10px"><i class="bi bi-pencil"></i> Edit</button>
+                </div>
+                <div class="address-box">
+                  <h4 class="section-title">Billing Address</h4>
+                  <p>{{ customer.billingAddress.line1 }}</p>
+                  <p>{{ customer.billingAddress.city }}, {{ customer.billingAddress.country }}</p>
+                  <p v-if="customer.billingAddress.postalCode">{{ customer.billingAddress.postalCode }}</p>
+                  <button class="admin-secondary-button btn-sm" type="button" style="margin-top:10px"><i class="bi bi-pencil"></i> Edit</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notifications Tab -->
+            <div v-if="activeTab === 'notifications'" class="tab-content">
+              <div v-for="n in notificationSettings" :key="n.key" class="toggle-field">
+                <div class="toggle-info">
+                  <strong>{{ n.label }}</strong>
+                  <small>{{ n.description }}</small>
+                </div>
+                <label class="stock-toggle"><input type="checkbox" :checked="n.default" /><span class="toggle-track"></span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+import { useHead, useRoute, useRouter } from '#imports'
+import { adminCustomersMock } from '~/mocks/admin/customers.mock'
+import { adminOrdersMock } from '~/mocks/admin/orders.mock'
+import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+
+definePageMeta({ layout: 'admin' })
+
+const route = useRoute()
+const router = useRouter()
+
+const customerId = computed(() => Number(route.params.id))
+const customer = computed(() => adminCustomersMock.find(c => c.id === customerId.value))
+
+useHead({ title: computed(() => customer.value ? `Customer ${customer.value.customerCode} – IrusGear Admin` : 'Customer Not Found') })
+
+const activeTab = ref('overview')
+
+const tabs = [
+  { key: 'overview', label: 'Overview', icon: 'bi-grid' },
+  { key: 'security', label: 'Security', icon: 'bi-shield-lock' },
+  { key: 'address', label: 'Address & Billing', icon: 'bi-geo-alt' },
+  { key: 'notifications', label: 'Notifications', icon: 'bi-bell' },
+]
+
+const notificationSettings = [
+  { key: 'email_order', label: 'Email on new order', description: 'Send email when this customer places an order', default: true },
+  { key: 'email_promo', label: 'Promotional emails', description: 'Include in marketing campaigns', default: true },
+  { key: 'email_account', label: 'Account activity', description: 'Notify on login, password change', default: false },
+  { key: 'sms_order', label: 'SMS order updates', description: 'Send SMS for order status changes', default: false },
+]
+
+/* ── customer orders ── */
+const customerOrders = computed(() => {
+  if (!customer.value) return []
+  return adminOrdersMock.filter(o => o.customer.id === customer.value.id).slice(0, 5)
+})
+
+/* ── loyalty ── */
+const loyaltyProgress = computed(() => {
+  if (!customer.value) return 0
+  const max = customer.value.loyaltyTier === 'platinum' ? 10000 : customer.value.loyaltyTier === 'gold' ? 5000 : 2000
+  return Math.min(100, (customer.value.loyaltyPoints / max) * 100)
+})
+const loyaltyNextTier = computed(() => {
+  if (!customer.value) return ''
+  if (customer.value.loyaltyTier === 'platinum') return 'Highest tier reached!'
+  const next = customer.value.loyaltyTier === 'gold' ? 'Platinum' : 'Gold'
+  const max = customer.value.loyaltyTier === 'gold' ? 10000 : 2000
+  const remaining = Math.max(0, max - customer.value.loyaltyPoints)
+  return `${remaining.toLocaleString()} pts to ${next}`
+})
+
+/* ── helpers ── */
+const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
+const formatCompact = (n) => {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M ₫'
+  if (n >= 1_000) return (n / 1_000).toFixed(0) + 'K ₫'
+  return n.toLocaleString() + ' ₫'
+}
+const formatDateShort = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+
+const statusLabel = (s) => ({ active: 'Active', inactive: 'Inactive', blocked: 'Blocked' }[s] || s)
+const statusVariant = (s) => ({ active: 'success', inactive: 'neutral', blocked: 'danger' }[s] || 'neutral')
+const paymentLabel = (s) => ({ pending: 'Pending', paid: 'Paid', failed: 'Failed', cancelled: 'Cancelled', refunded: 'Refunded' }[s] || s)
+const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
+
+const handleDelete = () => {
+  if (confirm(`Delete customer ${customer.value?.customerCode}?`)) {
+    alert('Customer deleted (mock)')
+    router.push('/admin/customers')
+  }
+}
+const handleEditDetails = () => alert('Edit details (mock)')
+</script>
+
+<style scoped>
+.customer-detail-page { max-width: 1560px; }
+
+/* Header */
+.detail-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-bottom: 24px; flex-wrap: wrap;
+}
+.header-left { display: flex; align-items: center; gap: 14px; }
+.back-link {
+  width: 40px; height: 40px; border-radius: 8px; background: var(--admin-surface);
+  border: 1px solid var(--admin-border); display: flex; align-items: center; justify-content: center;
+  color: var(--admin-text); text-decoration: none; font-size: 1.1rem; flex: 0 0 auto;
+}
+.back-link:hover { background: var(--admin-surface-soft); }
+.page-title { margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--admin-text); }
+.page-sub { margin: 2px 0 0; color: var(--admin-muted); font-size: 0.86rem; }
+
+/* Grid */
+.detail-grid { display: grid; grid-template-columns: 340px 1fr; gap: 20px; }
+.detail-col-left, .detail-col-right { display: flex; flex-direction: column; gap: 20px; }
+
+/* Profile Card */
+.profile-card { overflow: hidden; }
+.profile-top { padding: 28px 22px; text-align: center; border-bottom: 1px solid var(--admin-border); }
+.profile-avatar { width: 80px; height: 80px; border-radius: 999px; object-fit: cover; margin-bottom: 12px; border: 3px solid var(--admin-border); }
+.profile-name { margin: 0; font-size: 1.12rem; font-weight: 700; color: var(--admin-text); }
+.profile-code { margin: 4px 0 16px; color: var(--admin-muted); font-size: 0.84rem; }
+.profile-stats { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.stat { text-align: center; }
+.stat strong { display: block; font-size: 1.05rem; color: var(--admin-text); }
+.stat small { color: var(--admin-muted); font-size: 0.78rem; }
+.stat-divider { width: 1px; height: 32px; background: var(--admin-border); }
+
+/* Details list */
+.details-list { padding: 20px 22px; }
+.section-title { margin: 0 0 14px; font-size: 0.92rem; font-weight: 700; color: var(--admin-text); }
+.detail-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--admin-surface-soft); }
+.detail-row:last-of-type { border-bottom: 0; }
+.detail-label { font-size: 0.84rem; font-weight: 600; color: var(--admin-muted); white-space: nowrap; }
+.detail-value { font-size: 0.88rem; color: var(--admin-text); text-align: right; word-break: break-all; }
+.country-val { display: inline-flex; align-items: center; gap: 6px; }
+.flag-sm { width: 18px; height: 13px; border-radius: 2px; }
+.edit-details-btn { width: 100%; justify-content: center; margin-top: 16px; }
+
+/* Loyalty Card */
+.loyalty-card {
+  border-radius: var(--admin-radius); padding: 22px; color: #fff; position: relative; overflow: hidden;
+}
+.tier-standard { background: linear-gradient(135deg, #4b4b59, #2f2f3d); }
+.tier-gold { background: linear-gradient(135deg, #c79826, #a07b1a); }
+.tier-platinum { background: linear-gradient(135deg, #6c63ff, #4834d4); }
+
+.loyalty-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.loyalty-badge { padding: 3px 10px; border-radius: 5px; background: rgba(255,255,255,0.2); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; }
+.loyalty-icon { font-size: 1.4rem; opacity: 0.7; }
+.loyalty-body {}
+.loyalty-brand { margin: 0 0 2px; font-size: 0.76rem; opacity: 0.7; font-weight: 600; letter-spacing: 0.05em; }
+.loyalty-title { margin: 0 0 12px; font-size: 1.06rem; font-weight: 700; }
+.loyalty-points { margin-bottom: 10px; }
+.loyalty-points strong { font-size: 1.5rem; }
+.loyalty-points small { margin-left: 6px; font-size: 0.8rem; opacity: 0.7; }
+.loyalty-progress-track { width: 100%; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.2); overflow: hidden; }
+.loyalty-progress-bar { height: 100%; border-radius: 999px; background: #fff; transition: width 0.6s ease; }
+.loyalty-next { margin: 8px 0 0; font-size: 0.78rem; opacity: 0.7; }
+
+/* Tabs */
+.tabs-card { overflow: visible; }
+.tabs-nav {
+  display: flex; border-bottom: 1px solid var(--admin-border); padding: 0 22px; gap: 0; overflow-x: auto;
+}
+.tab-btn {
+  padding: 14px 16px; border: 0; border-bottom: 2px solid transparent; background: none;
+  color: var(--admin-muted); font-weight: 600; font-size: 0.88rem; display: inline-flex;
+  align-items: center; gap: 7px; white-space: nowrap; transition: all 0.15s;
+}
+.tab-btn:hover { color: var(--admin-text); }
+.tab-btn.active { color: var(--admin-text); border-bottom-color: var(--admin-primary); }
+
+.tab-content { padding: 22px; }
+
+/* Overview cards */
+.overview-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+.overview-item {
+  display: flex; align-items: center; gap: 14px; padding: 16px;
+  border: 1px solid var(--admin-border); border-radius: 8px;
+}
+.ov-icon { width: 42px; height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex: 0 0 auto; }
+.ov-blue { background: rgba(0,207,232,0.14); color: #00a9c0; }
+.ov-purple { background: rgba(108,99,255,0.14); color: #6c63ff; }
+.ov-pink { background: rgba(255,76,81,0.14); color: var(--admin-danger); }
+.ov-green { background: rgba(40,199,111,0.14); color: var(--admin-success); }
+.overview-item small { display: block; color: var(--admin-muted); font-size: 0.78rem; margin-bottom: 2px; }
+.overview-item strong { font-size: 0.92rem; color: var(--admin-text); }
+
+/* Mini table */
+.orders-section { margin-top: 4px; }
+.mini-table-scroll { overflow-x: auto; }
+.mini-table { width: 100%; border-collapse: collapse; }
+.mini-table th, .mini-table td { padding: 10px 12px; border-bottom: 1px solid var(--admin-border); vertical-align: middle; }
+.mini-table th { font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: #4b4b59; }
+.mini-table td { font-size: 0.88rem; color: #696977; }
+.mini-table tbody tr:last-child td { border-bottom: 0; }
+.order-link { color: var(--admin-primary); font-weight: 700; text-decoration: none; }
+.order-link:hover { text-decoration: underline; }
+.muted-text { color: var(--admin-muted); }
+
+/* Security */
+.security-section { margin-bottom: 24px; }
+.security-section:last-child { margin-bottom: 0; }
+.field-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-label { font-size: 0.82rem; font-weight: 600; color: var(--admin-muted); text-transform: uppercase; letter-spacing: 0.03em; }
+.field-input { width: 100%; }
+
+/* Toggle */
+.toggle-field {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--admin-surface-soft);
+}
+.toggle-field:last-child { border-bottom: 0; }
+.toggle-info strong { display: block; font-size: 0.9rem; color: var(--admin-text); }
+.toggle-info small { color: var(--admin-muted); font-size: 0.8rem; }
+.stock-toggle { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
+.stock-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  width: 38px; height: 22px; border-radius: 999px; background: #d5d5da;
+  transition: background 0.2s; position: relative;
+}
+.toggle-track::after {
+  content: ''; position: absolute; top: 3px; left: 3px;
+  width: 16px; height: 16px; border-radius: 999px; background: #fff;
+  transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.stock-toggle input:checked + .toggle-track { background: var(--admin-success); }
+.stock-toggle input:checked + .toggle-track::after { transform: translateX(16px); }
+
+/* Address */
+.address-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.address-box { padding: 16px; border: 1px solid var(--admin-border); border-radius: 8px; }
+.address-box p { margin: 0 0 4px; font-size: 0.88rem; color: var(--admin-muted); line-height: 1.6; }
+
+.btn-sm { height: 34px; font-size: 0.82rem; padding: 0 12px; }
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .detail-grid { grid-template-columns: 1fr; }
+  .detail-header { flex-direction: column; align-items: flex-start; }
+  .overview-cards { grid-template-columns: 1fr; }
+  .field-row-2 { grid-template-columns: 1fr; }
+  .address-grid { grid-template-columns: 1fr; }
+}
+</style>

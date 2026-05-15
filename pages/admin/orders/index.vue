@@ -1,258 +1,202 @@
 <template>
-  <div class="orders-container">
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <div>
-        <h2 class="fw-bold mb-1">{{ $t('orders.title') }}</h2>
-        <p class="text-muted mb-0">{{ $t('orders.subtitle') }}</p>
-      </div>
+  <div class="orders-page">
+    <!-- Payment Metric Strip -->
+    <div class="metric-strip">
+      <AdminMetricCard
+        v-for="m in paymentMetrics"
+        :key="m.label"
+        :label="m.label"
+        :value="String(m.value)"
+        :meta="m.meta"
+        :icon="m.icon"
+        :variant="m.variant"
+      />
     </div>
 
-    <!-- Filters -->
-    <div class="bg-white rounded-3 p-4 border mb-4">
-      <div class="row g-3">
-        <div class="col-12 col-md-4">
-          <label class="form-label small fw-semibold">{{ $t('orders.filters.search') }}</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            :placeholder="$t('orders.filters.searchPlaceholder')"
-            v-model="searchQuery"
-            @input="handleSearch"
-          />
-        </div>
-        <div class="col-12 col-md-3">
-          <label class="form-label small fw-semibold">{{ $t('orders.filters.status') }}</label>
-          <select class="form-select" v-model="statusFilter" @change="handleFilterChange">
-            <option value="all">{{ $t('orders.filters.allStatus') }}</option>
-            <option value="pending">{{ $t('dashboard.orderStatus.pending') }}</option>
-            <option value="processing">{{ $t('dashboard.orderStatus.processing') }}</option>
-            <option value="shipped">{{ $t('dashboard.orderStatus.shipped') }}</option>
-            <option value="delivered">{{ $t('dashboard.orderStatus.delivered') }}</option>
-            <option value="cancelled">{{ $t('dashboard.orderStatus.cancelled') }}</option>
-          </select>
-        </div>
-      </div>
-    </div>
+    <!-- Order Table -->
+    <AdminDataTable
+      :columns="columns"
+      :items="paginatedOrders"
+      :selectable="true"
+      :selected-keys="selectedIds"
+      @update:selected-keys="selectedIds = $event"
+      @row-click="viewOrder"
+    >
+      <template #toolbar>
+        <AdminTableToolbar
+          :search="search"
+          :page-size="pageSize"
+          search-placeholder="Search Order"
+          @update:search="search = $event; resetPage()"
+          @update:page-size="pageSize = $event; resetPage()"
+          @export="handleExport"
+        />
+      </template>
 
-    <!-- Orders Table -->
-    <div class="bg-white rounded-3 border">
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead class="table-light">
-            <tr>
-              <th class="px-4">{{ $t('orders.table.orderId') }}</th>
-              <th>{{ $t('orders.table.customer') }}</th>
-              <th>{{ $t('orders.table.items') }}</th>
-              <th>{{ $t('orders.table.total') }}</th>
-              <th>{{ $t('orders.table.status') }}</th>
-              <th>{{ $t('orders.table.date') }}</th>
-              <th class="text-center">{{ $t('orders.table.actions') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-if="loading">
-              <td colspan="7" class="text-center py-5">
-                <div class="spinner-border text-primary" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </td>
-            </tr>
-            <tr v-else-if="orders.length === 0">
-              <td colspan="7" class="text-center text-muted py-5">
-                {{ $t('orders.noOrders') }}
-              </td>
-            </tr>
-            <tr v-else v-for="order in orders" :key="order.id" class="cursor-pointer">
-              <td class="px-4">
-                <span class="fw-semibold">#{{ order.id }}</span>
-              </td>
-              <td>
-                <div class="d-flex align-items-center gap-2">
-                  <div class="avatar bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
-                    {{ order.customer.name.charAt(0) }}
-                  </div>
-                  <div>
-                    <div class="fw-semibold">{{ order.customer.name }}</div>
-                    <small class="text-muted">{{ order.customer.email }}</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <span class="badge bg-light text-dark">{{ order.items.length }} sản phẩm</span>
-              </td>
-              <td class="fw-semibold">{{ formatCurrency(order.total) }}</td>
-              <td>
-                <select 
-                  class="form-select form-select-sm"
-                  :class="getStatusClass(order.status)"
-                  :value="order.status"
-                  @change="(e) => handleStatusChange(order.id, (e.target as HTMLSelectElement).value as OrderStatus)"
-                  @click.stop
-                >
-                  <option value="pending">{{ $t('dashboard.orderStatus.pending') }}</option>
-                  <option value="processing">{{ $t('dashboard.orderStatus.processing') }}</option>
-                  <option value="shipped">{{ $t('dashboard.orderStatus.shipped') }}</option>
-                  <option value="delivered">{{ $t('dashboard.orderStatus.delivered') }}</option>
-                  <option value="cancelled">{{ $t('dashboard.orderStatus.cancelled') }}</option>
-                </select>
-              </td>
-              <td class="text-muted">{{ formatDate(order.createdAt) }}</td>
-              <td class="text-center">
-                <NuxtLink 
-                  :to="`/admin/orders/${order.id}`"
-                  class="btn btn-sm btn-outline-primary"
-                >
-                  <i class="bi bi-eye"></i>
-                </NuxtLink>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- Order ID -->
+      <template #cell-orderCode="{ item }">
+        <nuxt-link :to="`/admin/orders/${item.id}`" class="order-id-link" @click.stop>{{ item.orderCode }}</nuxt-link>
+      </template>
 
-      <!-- Pagination -->
-      <div v-if="totalPages > 1" class="d-flex justify-content-between align-items-center p-4 border-top">
-        <div class="text-muted small">
-          Hiển thị {{ orders.length }} / {{ total }} đơn hàng
+      <!-- Date -->
+      <template #cell-date="{ item }">
+        <span class="date-text">{{ formatDate(item.date) }}</span>
+      </template>
+
+      <!-- Customer -->
+      <template #cell-customer="{ item }">
+        <div class="customer-cell">
+          <img :src="item.customer.avatar" :alt="item.customer.name" class="customer-avatar" />
+          <div class="customer-info">
+            <strong>{{ item.customer.name }}</strong>
+            <small>{{ item.customer.email }}</small>
+          </div>
         </div>
-        <nav>
-          <ul class="pagination pagination-sm mb-0">
-            <li class="page-item" :class="{ disabled: page === 1 }">
-              <button class="page-link" @click="changePage(page - 1)">
-                <i class="bi bi-chevron-left"></i>
-              </button>
-            </li>
-            <li 
-              v-for="p in totalPages" 
-              :key="p" 
-              class="page-item" 
-              :class="{ active: p === page }"
-            >
-              <button class="page-link" @click="changePage(p)">{{ p }}</button>
-            </li>
-            <li class="page-item" :class="{ disabled: page === totalPages }">
-              <button class="page-link" @click="changePage(page + 1)">
-                <i class="bi bi-chevron-right"></i>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+      </template>
+
+      <!-- Payment status -->
+      <template #cell-paymentStatus="{ item }">
+        <AdminStatusBadge :label="paymentLabel(item.paymentStatus)" :variant="paymentVariant(item.paymentStatus)" />
+      </template>
+
+      <!-- Fulfillment status -->
+      <template #cell-fulfillmentStatus="{ item }">
+        <AdminStatusBadge :label="fulfillmentLabel(item.fulfillmentStatus)" :variant="fulfillmentVariant(item.fulfillmentStatus)" dot />
+      </template>
+
+      <!-- Method -->
+      <template #cell-paymentMethod="{ item }">
+        <span class="method-text">{{ item.paymentLabel }}</span>
+      </template>
+
+      <!-- Actions -->
+      <template #actions="{ item }">
+        <AdminActionMenu
+          :items="[
+            { key: 'view', label: 'View Details', icon: 'bi-eye' },
+            { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+          ]"
+          @select="handleAction($event, item)"
+        />
+      </template>
+
+      <template #pagination>
+        <AdminPagination
+          :page="page"
+          :page-size="pageSize"
+          :total="filteredOrders.length"
+          @update:page="page = $event"
+        />
+      </template>
+    </AdminDataTable>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { useI18n, useHead } from '#imports'
-import { useOrders } from '~/composables/useOrders'
-import type { OrderStatus } from '~/types/order'
+<script setup>
+import { ref, computed } from 'vue'
+import { useHead, useRouter } from '#imports'
+import { adminOrdersMock } from '~/mocks/admin/orders.mock'
+import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
+import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
+import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
+import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
+import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 
-definePageMeta({
-  layout: 'admin',
+definePageMeta({ layout: 'admin' })
+useHead({ title: 'Orders – IrusGear Admin' })
+
+const router = useRouter()
+
+/* ── state ── */
+const search = ref('')
+const page = ref(1)
+const pageSize = ref(10)
+const selectedIds = ref([])
+
+const resetPage = () => { page.value = 1 }
+
+/* ── metrics ── */
+const allOrders = adminOrdersMock
+const paymentMetrics = computed(() => [
+  { label: 'Pending Payment', value: allOrders.filter(o => o.paymentStatus === 'pending').length, meta: 'orders', icon: 'bi-clock', variant: 'warning' },
+  { label: 'Completed', value: allOrders.filter(o => o.paymentStatus === 'paid').length, meta: 'orders', icon: 'bi-check-circle', variant: 'success' },
+  { label: 'Refunded', value: allOrders.filter(o => o.paymentStatus === 'refunded').length, meta: 'orders', icon: 'bi-arrow-counterclockwise', variant: 'info' },
+  { label: 'Failed', value: allOrders.filter(o => o.paymentStatus === 'failed').length, meta: 'orders', icon: 'bi-x-circle', variant: 'danger' },
+])
+
+/* ── columns ── */
+const columns = [
+  { key: 'orderCode', label: 'Order', width: '100px' },
+  { key: 'date', label: 'Date' },
+  { key: 'customer', label: 'Customer', width: '22%' },
+  { key: 'paymentStatus', label: 'Payment' },
+  { key: 'fulfillmentStatus', label: 'Fulfillment' },
+  { key: 'paymentMethod', label: 'Method' },
+]
+
+/* ── filtering ── */
+const filteredOrders = computed(() => {
+  if (!search.value) return allOrders
+  const q = search.value.toLowerCase()
+  return allOrders.filter(o =>
+    o.orderCode.toLowerCase().includes(q) ||
+    o.customer.name.toLowerCase().includes(q) ||
+    o.customer.email.toLowerCase().includes(q)
+  )
 })
 
-const { t } = useI18n()
-useHead({ title: computed(() => t('orders.title')) })
-
-const { orders, total, page, totalPages, loading, fetchOrders, updateOrderStatus } = useOrders()
-
-const searchQuery = ref('')
-const statusFilter = ref<OrderStatus | 'all'>('all')
-
-let searchTimeout: NodeJS.Timeout
-
-onMounted(() => {
-  fetchOrders()
+const paginatedOrders = computed(() => {
+  const start = (page.value - 1) * pageSize.value
+  return filteredOrders.value.slice(start, start + pageSize.value)
 })
 
-const handleSearch = () => {
-  clearTimeout(searchTimeout)
-  searchTimeout = setTimeout(() => {
-    handleFilterChange()
-  }, 500)
-}
+/* ── helpers ── */
+const formatDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-const handleFilterChange = () => {
-  fetchOrders({
-    search: searchQuery.value,
-    status: statusFilter.value,
-    page: 1
-  })
-}
+const paymentLabel = (s) => ({ pending: 'Pending', paid: 'Paid', failed: 'Failed', cancelled: 'Cancelled', refunded: 'Refunded' }[s] || s)
+const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
 
-const changePage = (newPage: number) => {
-  if (newPage < 1 || newPage > totalPages.value) return
-  
-  fetchOrders({
-    search: searchQuery.value,
-    status: statusFilter.value,
-    page: newPage
-  })
-}
+const fulfillmentLabel = (s) => ({
+  ready_to_pickup: 'Ready to Pickup', out_for_delivery: 'Out for Delivery',
+  delivered: 'Delivered', dispatched: 'Dispatched', processing: 'Processing',
+}[s] || s)
+const fulfillmentVariant = (s) => ({
+  ready_to_pickup: 'info', out_for_delivery: 'warning',
+  delivered: 'success', dispatched: 'neutral', processing: 'neutral',
+}[s] || 'neutral')
 
-const handleStatusChange = async (orderId: string, newStatus: OrderStatus) => {
-  try {
-    await updateOrderStatus(orderId, newStatus)
-  } catch (err) {
-    console.error('Failed to update status:', err)
-  }
-}
-
-const formatCurrency = (amount: number) => {
-  return new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND'
-  }).format(amount)
-}
-
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString('vi-VN', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-}
-
-const getStatusClass = (status: OrderStatus) => {
-  const classes: Record<OrderStatus, string> = {
-    pending: 'border-warning text-warning',
-    processing: 'border-info text-info',
-    shipped: 'border-primary text-primary',
-    delivered: 'border-success text-success',
-    cancelled: 'border-danger text-danger'
-  }
-  return classes[status] || ''
+const viewOrder = (item) => router.push(`/admin/orders/${item.id}`)
+const handleExport = () => alert('Export triggered (mock)')
+const handleAction = (action, item) => {
+  if (action.key === 'delete') alert(`Delete order ${item.orderCode} (mock)`)
+  else router.push(`/admin/orders/${item.id}`)
 }
 </script>
 
 <style scoped>
-.orders-container {
-  max-width: 1400px;
+.orders-page { max-width: 1560px; }
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
 }
 
-.cursor-pointer {
-  cursor: pointer;
-}
+.order-id-link { color: var(--admin-primary); font-weight: 700; text-decoration: none; }
+.order-id-link:hover { text-decoration: underline; }
 
-.avatar {
-  font-size: 0.875rem;
-  font-weight: 600;
-}
+.date-text { color: var(--admin-muted); font-size: 0.88rem; white-space: nowrap; }
 
-.table th {
-  font-weight: 600;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.customer-cell { display: flex; align-items: center; gap: 10px; }
+.customer-avatar { width: 34px; height: 34px; border-radius: 999px; object-fit: cover; flex: 0 0 auto; }
+.customer-info { min-width: 0; }
+.customer-info strong { display: block; font-size: 0.88rem; color: var(--admin-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+.customer-info small { color: var(--admin-muted); font-size: 0.78rem; }
 
-.form-select-sm {
-  font-size: 0.875rem;
-  font-weight: 600;
-  border-width: 2px;
-}
+.method-text { font-size: 0.86rem; color: var(--admin-muted); white-space: nowrap; }
+
+@media (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
 </style>

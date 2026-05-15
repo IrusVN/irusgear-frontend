@@ -1,15 +1,18 @@
 <template>
-  <aside class="admin-sidebar" :class="{ 'is-collapsed': isCollapsed, 'is-mobile-open': mobileOpen }">
+  <aside class="admin-sidebar"
+    :class="{ 'is-collapsed': isCollapsed && !isHovered, 'is-hovered': isCollapsed && isHovered, 'is-mobile-open': mobileOpen }"
+    @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div class="sidebar-brand">
       <NuxtLink class="brand-link" to="/admin/dashboard" @click="handleNavigate">
         <span class="brand-mark">
           <i class="bi bi-bag-check-fill"></i>
         </span>
-        <span v-if="!isCollapsed" class="brand-name">IrusGear</span>
+        <span v-if="showExpanded" class="brand-name">IrusGear</span>
       </NuxtLink>
 
-      <button class="collapse-button d-none d-lg-inline-flex" type="button" :aria-label="collapseLabel" @click="toggleCollapse">
-        <i class="bi" :class="isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
+      <button class="collapse-button d-none d-lg-inline-flex" type="button" :aria-label="collapseLabel"
+        @click="toggleCollapse">
+        <i class="bi" :class="isCollapsed ? 'bi-circle' : 'bi-record-circle'"></i>
       </button>
 
       <button class="collapse-button d-lg-none" type="button" aria-label="Close menu" @click="$emit('close-mobile')">
@@ -19,47 +22,37 @@
 
     <nav class="sidebar-nav">
       <div class="nav-group">
-        <div v-if="!isCollapsed" class="nav-group-label">Apps & Pages</div>
+        <div v-if="showExpanded" class="nav-group-label">Apps & Pages</div>
 
-        <button class="nav-parent" type="button" :class="{ 'is-open': isEcommerceOpen }" @click="toggleGroup('ecommerce')">
+        <button class="nav-parent" type="button" :class="{ 'is-open': isEcommerceOpen }"
+          @click="toggleGroup('ecommerce')">
           <i class="bi bi-cart3"></i>
-          <span v-if="!isCollapsed">Ecommerce</span>
-          <i v-if="!isCollapsed" class="bi bi-chevron-down nav-chevron"></i>
+          <span v-if="showExpanded">Ecommerce</span>
+          <i v-if="showExpanded" class="bi bi-chevron-down nav-chevron"></i>
         </button>
 
         <Transition name="submenu">
-          <div v-if="isEcommerceOpen || isCollapsed" class="submenu">
+          <div v-if="isEcommerceOpen || (isCollapsed && !isHovered)" class="submenu">
             <template v-for="item in ecommerceMenu" :key="item.key">
-              <NuxtLink
-                v-if="!item.children"
-                class="nav-link-item"
-                :class="{ 'is-active': isActiveRoute(item.route) }"
-                :to="item.route"
-                @click="handleNavigate"
-              >
+              <NuxtLink v-if="!item.children" class="nav-link-item" :class="{ 'is-active': isActiveRoute(item.route) }"
+                :to="item.route" @click="handleNavigate">
                 <span class="nav-dot"></span>
-                <span v-if="!isCollapsed">{{ item.label }}</span>
+                <span v-if="showExpanded">{{ item.label }}</span>
               </NuxtLink>
 
               <div v-else class="nav-branch" :class="{ 'is-branch-active': isBranchActive(item) }">
                 <button class="nav-link-item nav-branch-trigger" type="button" @click="toggleGroup(item.key)">
                   <span class="nav-dot"></span>
-                  <span v-if="!isCollapsed">{{ item.label }}</span>
-                  <i v-if="!isCollapsed" class="bi bi-chevron-down nav-chevron"></i>
+                  <span v-if="showExpanded">{{ item.label }}</span>
+                  <i v-if="showExpanded" class="bi bi-chevron-down nav-chevron"></i>
                 </button>
 
                 <Transition name="submenu">
                   <div v-if="openGroups[item.key] || isBranchActive(item)" class="submenu nested">
-                    <NuxtLink
-                      v-for="child in item.children"
-                      :key="child.key"
-                      class="nav-link-item"
-                      :class="{ 'is-active': isActiveRoute(child.route) }"
-                      :to="child.route"
-                      @click="handleNavigate"
-                    >
+                    <NuxtLink v-for="child in item.children" :key="child.key" class="nav-link-item"
+                      :class="{ 'is-active': isActiveRoute(child.route) }" :to="child.route" @click="handleNavigate">
                       <span class="nav-dot"></span>
-                      <span v-if="!isCollapsed">{{ child.label }}</span>
+                      <span v-if="showExpanded">{{ child.label }}</span>
                     </NuxtLink>
                   </div>
                 </Transition>
@@ -70,29 +63,24 @@
       </div>
 
       <div class="nav-group">
-        <div v-if="!isCollapsed" class="nav-group-label">Operations</div>
-        <NuxtLink
-          v-for="item in operationMenu"
-          :key="item.key"
-          class="nav-parent nav-parent-link"
-          :class="{ 'is-active-parent': isActiveRoute(item.route) }"
-          :to="item.route"
-          @click="handleNavigate"
-        >
+        <div v-if="showExpanded" class="nav-group-label">Operations</div>
+        <NuxtLink v-for="item in operationMenu" :key="item.key" class="nav-parent nav-parent-link"
+          :class="{ 'is-active-parent': isActiveRoute(item.route) }" :to="item.route" @click="handleNavigate">
           <i class="bi" :class="item.icon"></i>
-          <span v-if="!isCollapsed">{{ item.label }}</span>
+          <span v-if="showExpanded">{{ item.label }}</span>
         </NuxtLink>
       </div>
     </nav>
 
     <div class="sidebar-footer">
-      <NuxtLink class="nav-parent nav-parent-link" :class="{ 'is-active-parent': isActiveRoute('/admin/settings') }" to="/admin/settings" @click="handleNavigate">
+      <NuxtLink class="nav-parent nav-parent-link" :class="{ 'is-active-parent': isActiveRoute('/admin/settings') }"
+        to="/admin/settings" @click="handleNavigate">
         <i class="bi bi-gear"></i>
-        <span v-if="!isCollapsed">Settings</span>
+        <span v-if="showExpanded">Settings</span>
       </NuxtLink>
       <button class="nav-parent logout-inline" type="button" @click="handleLogout">
         <i class="bi bi-box-arrow-right"></i>
-        <span v-if="!isCollapsed">Logout</span>
+        <span v-if="showExpanded">Logout</span>
       </button>
     </div>
   </aside>
@@ -115,6 +103,7 @@ const emit = defineEmits(['close-mobile', 'collapsed-change'])
 const route = useRoute()
 const auth = useAuthStore()
 const isCollapsed = ref(false)
+const isHovered = ref(false)
 const openGroups = reactive({
   ecommerce: true,
   products: true,
@@ -129,7 +118,6 @@ const ecommerceMenu = [
     label: 'Product',
     children: [
       { key: 'product-list', label: 'List', route: '/admin/products' },
-      { key: 'product-add', label: 'Add', route: '/admin/products/create' },
       { key: 'product-category', label: 'Category', route: '/admin/categories' },
     ],
   },
@@ -138,7 +126,6 @@ const ecommerceMenu = [
     label: 'Order',
     children: [
       { key: 'order-list', label: 'List', route: '/admin/orders' },
-      { key: 'order-detail', label: 'Details', route: '/admin/orders/9042' },
     ],
   },
   {
@@ -146,7 +133,6 @@ const ecommerceMenu = [
     label: 'Customer',
     children: [
       { key: 'customer-list', label: 'List', route: '/admin/customers' },
-      { key: 'customer-detail', label: 'Details', route: '/admin/customers/478426' },
     ],
   },
   { key: 'reviews', label: 'Manage Review', route: '/admin/reviews' },
@@ -155,15 +141,24 @@ const ecommerceMenu = [
 
 const operationMenu = [
   { key: 'analytics', label: 'Analytics', icon: 'bi-pie-chart', route: '/admin/analytics' },
-  { key: 'inventory', label: 'Inventory', icon: 'bi-box-seam', route: '/admin/products' },
 ]
 
 const collapseLabel = computed(() => (isCollapsed.value ? 'Expand sidebar' : 'Collapse sidebar'))
-const isEcommerceOpen = computed(() => openGroups.ecommerce || route.path.startsWith('/admin'))
+const showExpanded = computed(() => !isCollapsed.value || isHovered.value)
+const isEcommerceOpen = computed(() => openGroups.ecommerce)
 
 const toggleCollapse = () => {
   isCollapsed.value = !isCollapsed.value
+  isHovered.value = false
   emit('collapsed-change', isCollapsed.value)
+}
+
+const onMouseEnter = () => {
+  if (isCollapsed.value) isHovered.value = true
+}
+
+const onMouseLeave = () => {
+  isHovered.value = false
 }
 
 const toggleGroup = (key) => {
@@ -220,6 +215,13 @@ watch(
 
 .admin-sidebar.is-collapsed {
   width: var(--admin-sidebar-collapsed-width);
+}
+
+/* Hover-expand overlay: full width floating over content */
+.admin-sidebar.is-hovered {
+  width: var(--admin-sidebar-width);
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.12);
+  z-index: 1040;
 }
 
 .sidebar-brand {
@@ -332,7 +334,7 @@ watch(
 }
 
 .nav-parent.is-open .nav-chevron,
-.nav-branch.is-branch-active > .nav-branch-trigger .nav-chevron {
+.nav-branch.is-branch-active>.nav-branch-trigger .nav-chevron {
   transform: rotate(180deg);
 }
 
