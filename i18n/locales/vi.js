@@ -848,6 +848,7 @@ export default {
     addressDeleted: "Đã xóa địa chỉ.",
     addressError: "Không thể lưu địa chỉ.",
     deleteError: "Không thể xóa địa chỉ.",
+    confirmDeleteAddress: 'Xoá địa chỉ của "{name}"?',
     deliveryMethod: "Phương thức giao hàng",
     selectAddressFirst: "Vui lòng chọn địa chỉ giao hàng trước.",
     selectAddressForAccurateFee: "Chọn địa chỉ giao hàng để có phí ship chính xác.",

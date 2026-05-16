@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useCartStore } from "@/stores/cartStore";
 
@@ -72,11 +72,27 @@ defineEmits(["submit"]);
 const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
 
-const expanded = ref(false);
+// Mở sẵn details mỗi lần mount; user có thể bấm nút toggle để đóng.
+const expanded = ref(true);
 
 const formatMoneyValue = (value) => {
   return `${new Intl.NumberFormat("vi-VN").format(value)}đ`;
 };
+
+// Đánh dấu body khi sticky bar đang hiển thị → ChatbotWidget có thể đọc
+// class này để tự đẩy chatbox lên trên sticky bar (tránh visual overlap
+// ở mobile). Class chỉ ảnh hưởng ở < 992px vì sticky bar mặc định display:none ở desktop.
+onMounted(() => {
+  if (typeof document !== "undefined") {
+    document.body.classList.add("has-checkout-sticky-bar");
+  }
+});
+
+onBeforeUnmount(() => {
+  if (typeof document !== "undefined") {
+    document.body.classList.remove("has-checkout-sticky-bar");
+  }
+});
 </script>
 
 <style scoped>
@@ -93,10 +109,18 @@ const formatMoneyValue = (value) => {
   box-shadow: 0 -10px 28px rgba(15, 23, 42, 0.1);
 }
 
+/* Tablet (768-991px): không có mobile bottom nav (.d-md-none) → sticky bar nằm sát đáy.
+   Mobile (< 768px): mobile bottom nav cao ~88px → đẩy sticky bar lên trên. */
 @media (max-width: 991.98px) {
   .checkout-sticky-bar {
     display: block;
-    bottom: 88px; /* Đẩy lên trên mobile bottom nav (88px) */
+    bottom: 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .checkout-sticky-bar {
+    bottom: 88px;
   }
 }
 

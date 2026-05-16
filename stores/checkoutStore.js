@@ -164,8 +164,12 @@ export const useCheckoutStore = defineStore("checkout", () => {
     return true;
   });
 
-  const fetchAddresses = async () => {
-    addressesLoading.value = true;
+  const fetchAddresses = async ({ silent = false } = {}) => {
+    // silent=true → không bật skeleton (dùng khi mutation đã có spinner riêng,
+    // tránh hiện cả skeleton card + spinner "Đang lưu..." cùng lúc gây rối UI).
+    if (!silent) {
+      addressesLoading.value = true;
+    }
     try {
       feGlobalStore.setApiUrl("addresses");
       const response = await feGlobalStore.fetchItem();
@@ -205,7 +209,9 @@ export const useCheckoutStore = defineStore("checkout", () => {
     } catch (e) {
       console.error("fetchAddresses error:", e);
     } finally {
-      addressesLoading.value = false;
+      if (!silent) {
+        addressesLoading.value = false;
+      }
     }
   };
 
@@ -403,8 +409,9 @@ export const useCheckoutStore = defineStore("checkout", () => {
       if (response?.data) {
         selectedAddressId.value = String(response.data.id);
       }
-      // Re-fetch all addresses to sync is_default and resolve codes → names
-      await fetchAddresses();
+      // Re-fetch all addresses to sync is_default and resolve codes → names.
+      // silent=true: form đã có spinner "Đang lưu..."; bật skeleton ở list cùng lúc sẽ rối UI.
+      await fetchAddresses({ silent: true });
       isEditingAddress.value = false;
       editingAddressId.value = null;
       resetAddressForm();
@@ -430,8 +437,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
       };
       feGlobalStore.setApiUrl("addresses");
       const response = await feGlobalStore.updateItem(id, payload);
-      // Re-fetch all addresses to sync is_default and resolve codes → names
-      await fetchAddresses();
+      // Re-fetch silent — form đã có spinner "Đang lưu..."
+      await fetchAddresses({ silent: true });
       isEditingAddress.value = false;
       editingAddressId.value = null;
       resetAddressForm();
@@ -456,8 +463,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
     setDefaultLoading.value = true;
     try {
       await feGlobalStore.putItem(`addresses/${id}/default`);
-      // Re-fetch all to sync is_default across all addresses
-      await fetchAddresses();
+      // Re-fetch silent — nút "Đặt mặc định" đã có spinner riêng (setDefaultLoading)
+      await fetchAddresses({ silent: true });
     } finally {
       setDefaultLoading.value = false;
     }

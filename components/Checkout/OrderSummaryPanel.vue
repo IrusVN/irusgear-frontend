@@ -7,17 +7,7 @@
       </h2>
     </div>
 
-    <button
-      class="checkout-summary__toggle"
-      type="button"
-      :aria-expanded="expanded"
-      @click="expanded = !expanded"
-    >
-      <span>{{ $t("checkout.viewDetails") }}</span>
-      <i :class="expanded ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
-    </button>
-
-    <div class="checkout-summary__items" :class="{ 'checkout-summary__items--expanded': expanded }">
+    <div class="checkout-summary__items">
       <div
         v-for="item in cartStore.selectedItems"
         :key="item.id"
@@ -186,7 +176,6 @@ defineEmits(["submit"]);
 const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
 
-const expanded = ref(false);
 const mobileExpanded = ref(false);
 const progressExtraOffset = ref(0);
 
@@ -260,38 +249,11 @@ onBeforeUnmount(() => {
   margin: 0;
 }
 
-.checkout-summary__toggle {
-  align-items: center;
-  background: #f7f7f8;
-  border: none;
-  border-radius: 12px;
-  color: #71717a;
-  cursor: pointer;
-  display: flex;
-  font-size: 13px;
-  font-weight: 500;
-  gap: 6px;
-  justify-content: space-between;
-  padding: 10px 14px;
-  transition: background 0.15s ease;
-  width: 100%;
-}
-
-.checkout-summary__toggle:hover {
-  background: #f0f0f2;
-}
-
 .checkout-summary__items {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.25s ease;
-}
-
-.checkout-summary__items--expanded {
-  max-height: 600px;
+  max-height: 360px;
   overflow-y: auto;
 }
 

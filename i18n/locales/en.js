@@ -836,6 +836,7 @@ export default {
     addressDeleted: "Address deleted.",
     addressError: "Failed to save address.",
     deleteError: "Failed to delete address.",
+    confirmDeleteAddress: 'Delete address of "{name}"?',
     deliveryMethod: "Delivery Method",
     selectAddressFirst: "Please select a delivery address first.",
     selectAddressForAccurateFee: "Select a delivery address for accurate shipping fees.",

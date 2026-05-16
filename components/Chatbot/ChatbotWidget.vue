@@ -379,10 +379,22 @@ watch(() => chatbotStore.messages.length, () => {
   transform: translateY(20px);
 }
 
+/* Khi CheckoutStickyBar visible, đẩy chatbox lên trên sticky bar để 2 element
+   không bị visual overlap. Giá trị bottom khớp với breakpoint của sticky bar:
+   - Tablet (768-991px): sticky bar bottom 0, height ~140 → chatbox bottom ~160
+   - Mobile (< 768px):    sticky bar bottom 88, height ~140 → chatbox bottom ~240 */
+:global(body.has-checkout-sticky-bar) .chatbot-widget {
+  bottom: 160px;
+}
+
 @media (max-width: 768px) {
   .chatbot-widget {
     bottom: 16px;
     right: 16px;
+  }
+
+  :global(body.has-checkout-sticky-bar) .chatbot-widget {
+    bottom: 240px;
   }
 
   .chat-window {
