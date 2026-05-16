@@ -8,7 +8,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
     const routePath = to.path || '';
     const isPublicProductPath = /^\/(?:[a-z]{2}\/)?products(?:\/|$)/i.test(routePath);
     const isPublicCartPath = /^\/(?:[a-z]{2}\/)?cart(?:\/|$)/i.test(routePath);
-    const isPublic = routeName.startsWith('auth-') || routeName.startsWith('index') || isPublicProductPath || isPublicCartPath;
+    const isPublicComingSoon = /^\/(?:[a-z]{2}\/)?coming-soon\/?$/i.test(routePath);
+    const isPublic = routeName.startsWith('auth-') || routeName.startsWith('index') || isPublicProductPath || isPublicCartPath || isPublicComingSoon;
 
     if (!authStore.sessionResolved && !isPublic) {
         await authStore.fetchUser();
