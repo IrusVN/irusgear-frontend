@@ -1,9 +1,7 @@
 <template>
   <section class="product-list-page">
-    <div
-      :class="['sticky-filter-bar', { 'sticky-filter-bar--visible': isStickyFilterVisible }]"
-      :style="stickyFilterBarStyle"
-    >
+    <div :class="['sticky-filter-bar', { 'sticky-filter-bar--visible': isStickyFilterVisible }]"
+      :style="stickyFilterBarStyle">
       <div ref="stickyFilterInnerEl" class="container-xxl w-100 px-0 sticky-filter-bar__inner">
         <div class="product-filter-list product-filter-list--sticky px-4">
           <button v-for="filter in productFilters" :key="`sticky-${filter.key}`"
@@ -183,7 +181,7 @@
       </div>
 
       <div class="product-series-block">
-        <h2 v-if="pageTitle" class="product-series-title">{{ pageTitle }}</h2>
+        <h2 v-if="false" class="product-series-title">{{ pageTitle }}</h2>
 
         <div class="product-series-list">
           <button v-for="item in productSeries" :key="item.key || item.label" type="button"
@@ -426,14 +424,22 @@
         </div>
       </div>
 
-      <div class="product-card-grid">
-        <HomeProdCard v-for="product in visibleProductListItems" :key="product.id" :product="product" />
+      <div class="product-list-container">
+        <div v-if="isPageLoading" class="product-list-overlay">
+          <span class="spinner-border text-dark" role="status" aria-hidden="true"></span>
+        </div>
+        <div class="product-card-grid" :class="{ 'is-loading': isPageLoading }">
+          <HomeProdCard v-for="product in visibleProductListItems" :key="product.id" :product="product" />
+        </div>
       </div>
 
       <div v-if="hasMoreProducts" class="product-load-more">
-        <button type="button" class="product-load-more__button" @click="handleLoadMoreProducts">
-          <span>{{ $t('common.viewMoreProducts', { count: remainingProductCount }) }}</span>
-          <span class="product-load-more__icon" aria-hidden="true">
+        <button type="button" class="product-load-more__button" :disabled="isLoadingMore"
+          @click="handleLoadMoreProducts">
+          <span v-if="isLoadingMore" class="spinner-border spinner-border-sm me-2 text-white" role="status"
+            aria-hidden="true"></span>
+          <span v-else>{{ $t('common.viewMoreProducts', { count: remainingProductCount }) }}</span>
+          <span v-if="!isLoadingMore" class="product-load-more__icon" aria-hidden="true">
             <svg viewBox="0 0 20 20" fill="none">
               <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
                 stroke-linejoin="round" />
@@ -1307,6 +1313,30 @@ onBeforeUnmount(() => {
   gap: 16px;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   margin-top: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.product-list-container {
+  position: relative;
+  min-height: 200px;
+}
+
+.product-list-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.product-card-grid.is-loading {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .product-load-more {

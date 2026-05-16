@@ -3,73 +3,40 @@
     <div ref="customerSidebarWrapRef" class="fixed-top w-100 px-2 px-lg-3 pt-1 pt-lg-1 customer-sidebar-wrap">
       <nav class="customer-shell container-xxl w-100 px-0">
         <div class="d-flex flex-column">
-          <div class="d-flex align-items-center gap-2 gap-lg-3 px-3 px-lg-4 py-3 flex-nowrap border-bottom border-light-subtle">
-            <NuxtLink
-              :to="localePath('/')"
-              class="d-flex align-items-center flex-shrink-0 text-decoration-none"
-            >
-              <img
-                src="@/public/image/logo-irusgear-black.png"
-                alt="IrusGear"
-                class="img-fluid navbar-logo"
-              >
+          <div
+            class="d-flex align-items-center gap-2 gap-lg-3 px-3 px-lg-4 py-3 flex-nowrap border-bottom border-light-subtle">
+            <NuxtLink :to="localePath('/')" class="d-flex align-items-center flex-shrink-0 text-decoration-none">
+              <img src="@/public/image/logo-irusgear-black.png" alt="IrusGear" class="img-fluid navbar-logo">
             </NuxtLink>
 
-            <form
-              ref="desktopSearchRef"
-              class="header-search d-none d-md-flex align-items-center gap-2 px-3"
-              :title="$t('sidebar.searchPlaceholder')"
-              role="search"
-              @submit.prevent="submitHeaderSearch"
-            >
+            <form ref="desktopSearchRef" class="header-search d-none d-md-flex align-items-center gap-2 px-3"
+              :title="$t('sidebar.searchPlaceholder')" role="search" @submit.prevent="submitHeaderSearch">
               <i class="bi bi-search fs-5 header-search-icon" aria-hidden="true"></i>
-              <input
-                v-model="headerSearchKeyword"
-                type="search"
-                class="header-search-input"
-                :placeholder="$t('home.searchProducts')"
-                autocomplete="off"
-                aria-haspopup="dialog"
-                :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'"
-                @focus="openSearchDropdown"
-                @click="openSearchDropdown"
-                @input="onSearchInput"
-                @keydown.esc.prevent="isSearchDropdownOpen = false; searchQuery = ''; headerSearchKeyword = ''"
-              >
+              <input v-model="headerSearchKeyword" type="search" class="header-search-input"
+                :placeholder="$t('home.searchProducts')" autocomplete="off" aria-haspopup="dialog"
+                :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'" @focus="openSearchDropdown"
+                @click="openSearchDropdown" @input="onSearchInput"
+                @keydown.esc.prevent="isSearchDropdownOpen = false; searchQuery = ''; headerSearchKeyword = ''">
             </form>
 
             <div class="d-flex align-items-center gap-1 gap-xl-2 flex-shrink-0 flex-nowrap">
 
 
-              <button
-                type="button"
-                class="btn header-icon-btn d-md-none"
-                :aria-label="$t('sidebar.searchPlaceholder')"
-                aria-haspopup="dialog"
-                :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'"
-                @click="openSearchDropdown"
-              >
+              <button type="button" class="btn header-icon-btn d-md-none" :aria-label="$t('sidebar.searchPlaceholder')"
+                aria-haspopup="dialog" :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'"
+                @click="openSearchDropdown">
                 <i class="bi bi-search"></i>
               </button>
 
               <!-- Cart Dropdown -->
-              <div
-                ref="cartDropdownRef"
-                class="header-icon-dropdown-wrapper position-relative"
-                @mouseenter="isCartDropdownOpen = true"
-                @mouseleave="isCartDropdownOpen = false"
-              >
-                <NuxtLink
-                  :to="localePath('/cart')"
-                  class="btn header-icon-btn position-relative"
-                  :aria-label="$t('cart.cart')"
-                >
+              <div ref="cartDropdownRef" class="header-icon-dropdown-wrapper position-relative"
+                @mouseenter="isCartDropdownOpen = true" @mouseleave="isCartDropdownOpen = false">
+                <NuxtLink :to="localePath('/cart')" class="btn header-icon-btn position-relative"
+                  :aria-label="$t('cart.cart')">
                   <i class="bi bi-cart3"></i>
-                  <span
-                    v-if="itemCount > 0"
+                  <span v-if="itemCount > 0"
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
-                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;"
-                  >
+                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
                     {{ itemCount }}
                   </span>
                 </NuxtLink>
@@ -91,36 +58,27 @@
 
                     <div v-else class="header-dropdown__body">
                       <div class="header-dropdown__scroll">
-                        <div
-                          v-for="item in cartStore.items.slice(0, 3)"
-                          :key="item.id"
-                          class="cart-item"
-                        >
+                        <div v-for="item in cartStore.items.slice(0, 3)" :key="item.id" class="cart-item">
                           <NuxtLink :to="item.productUrl || localePath('/cart')" class="cart-item__image">
-                            <img
-                              :src="item.thumbnail || 'https://placehold.co/80x80/f5f5f5/999?text=IMG'"
-                              :alt="item.productName || 'Sản phẩm'"
-                              loading="lazy"
-                            >
+                            <img :src="item.thumbnail || 'https://placehold.co/80x80/f5f5f5/999?text=IMG'"
+                              :alt="item.productName || 'Sản phẩm'" loading="lazy">
                           </NuxtLink>
                           <div class="cart-item__info">
                             <NuxtLink :to="item.productUrl || localePath('/cart')" class="cart-item__name">
                               {{ item.productName || 'Sản phẩm' }}
                             </NuxtLink>
                             <div class="cart-item__meta">
-                              <span v-if="item.selectedOptions && Object.keys(item.selectedOptions).length" class="cart-item__variant">
+                              <span v-if="item.selectedOptions && Object.keys(item.selectedOptions).length"
+                                class="cart-item__variant">
                                 {{ formatCartVariant(item.selectedOptions) }}
                               </span>
                               <span class="cart-item__qty">x{{ item.quantity }}</span>
                             </div>
-                            <span class="cart-item__price">{{ item.currentLineTotal?.formatted || item.lineTotal?.formatted || '0đ' }}</span>
+                            <span class="cart-item__price">{{ item.currentLineTotal?.formatted ||
+                              item.lineTotal?.formatted || '0đ' }}</span>
                           </div>
-                          <button
-                            type="button"
-                            class="cart-item__remove"
-                            :aria-label="$t('common.remove')"
-                            @click="confirmRemoveCartItem(item)"
-                          >
+                          <button type="button" class="cart-item__remove" :aria-label="$t('common.remove')"
+                            @click="confirmRemoveCartItem(item)">
                             <i class="bi bi-x"></i>
                           </button>
                         </div>
@@ -137,10 +95,7 @@
                           <span>Tạm tính</span>
                           <strong>{{ cartStore.subtotal?.formatted || '0đ' }}</strong>
                         </div>
-                        <NuxtLink
-                          :to="localePath('/cart')"
-                          class="header-dropdown__checkout-btn"
-                        >
+                        <NuxtLink :to="localePath('/cart')" class="header-dropdown__checkout-btn">
                           Xem giỏ hàng
                           <i class="bi bi-arrow-right"></i>
                         </NuxtLink>
@@ -151,22 +106,13 @@
               </div>
 
               <!-- Notification Dropdown -->
-              <div
-                class="header-icon-dropdown-wrapper position-relative d-none d-xl-inline-flex"
-                @mouseenter="handleNotiDropdownEnter"
-                @mouseleave="isNotiDropdownOpen = false"
-              >
-                <button
-                  type="button"
-                  class="btn header-icon-btn"
-                  :aria-label="$t('common.notification')"
-                >
+              <div class="header-icon-dropdown-wrapper position-relative d-none d-xl-inline-flex"
+                @mouseenter="handleNotiDropdownEnter" @mouseleave="isNotiDropdownOpen = false">
+                <button type="button" class="btn header-icon-btn" :aria-label="$t('common.notification')">
                   <i class="bi bi-bell"></i>
-                  <span
-                    v-if="notificationStore.unreadCount > 0"
+                  <span v-if="notificationStore.unreadCount > 0"
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
-                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;"
-                  >
+                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
                     {{ notificationStore.unreadCount > 9 ? '9+' : notificationStore.unreadCount }}
                   </span>
                 </button>
@@ -175,12 +121,8 @@
                   <div v-if="isNotiDropdownOpen" class="header-dropdown header-dropdown--noti">
                     <div class="header-dropdown__header">
                       <span class="header-dropdown__title">Thông báo</span>
-                      <button
-                        v-if="notificationStore.unreadCount > 0"
-                        type="button"
-                        class="header-dropdown__mark-read"
-                        @click="handleMarkAllRead"
-                      >
+                      <button v-if="notificationStore.unreadCount > 0" type="button" class="header-dropdown__mark-read"
+                        @click="handleMarkAllRead">
                         Đánh dấu đã đọc
                       </button>
                     </div>
@@ -198,7 +140,8 @@
                     </div>
 
                     <!-- Empty state -->
-                    <div v-else-if="!notificationStore.isLoading && notificationStore.notifications.length === 0" class="header-dropdown__empty">
+                    <div v-else-if="!notificationStore.isLoading && notificationStore.notifications.length === 0"
+                      class="header-dropdown__empty">
                       <i class="bi bi-bell-slash"></i>
                       <p>Không có thông báo</p>
                     </div>
@@ -206,13 +149,8 @@
                     <!-- Notifications list -->
                     <div v-else class="header-dropdown__body">
                       <div class="header-dropdown__scroll">
-                        <div
-                          v-for="noti in notificationStore.notifications"
-                          :key="noti.id"
-                          class="noti-item"
-                          :class="{ 'noti-item--unread': !noti.isRead }"
-                          @click="handleNotiClick(noti)"
-                        >
+                        <div v-for="noti in notificationStore.notifications" :key="noti.id" class="noti-item"
+                          :class="{ 'noti-item--unread': !noti.isRead }" @click="handleNotiClick(noti)">
                           <div class="noti-item__icon" :class="`noti-item__icon--${noti.type || 'system'}`">
                             <i :class="noti.icon || 'bi bi-bell'"></i>
                           </div>
@@ -222,12 +160,8 @@
                           </div>
                           <div class="noti-item__actions">
                             <span v-if="!noti.isRead" class="noti-item__dot"></span>
-                            <button
-                              type="button"
-                              class="noti-item__close"
-                              aria-label="Xoá thông báo"
-                              @click.stop="handleRemoveNotification(noti.id)"
-                            >
+                            <button type="button" class="noti-item__close" aria-label="Xoá thông báo"
+                              @click.stop="handleRemoveNotification(noti.id)">
                               <i class="bi bi-x"></i>
                             </button>
                           </div>
@@ -242,37 +176,30 @@
 
               <div class="vr d-none d-lg-block mx-1 opacity-25"></div>
 
-              <div v-if="!user" class="d-flex align-items-center gap-2 flex-nowrap">
-                <NuxtLink
-                  :to="localePath('/auth/login')"
-                  class="btn header-text-btn d-inline-flex align-items-center gap-2 px-2 px-lg-3 py-2 border-0"
-                >
+              <div v-if="auth.sessionLoading" class="d-flex align-items-center gap-2 flex-nowrap">
+                <div class="spinner-border spinner-border-sm text-secondary" role="status"></div>
+                <div class="d-none d-xl-block"
+                  style="width: 80px; height: 16px; background-color: #e9ecef; border-radius: 4px;"></div>
+              </div>
+
+              <div v-else-if="!user" class="d-flex align-items-center gap-2 flex-nowrap">
+                <NuxtLink :to="localePath('/auth/login')"
+                  class="btn header-text-btn d-inline-flex align-items-center gap-2 px-2 px-lg-3 py-2 border-0">
                   <i class="bi bi-box-arrow-in-right"></i>
                   <span class="d-none d-sm-inline">{{ $t('common.login') }}</span>
                 </NuxtLink>
 
-                <NuxtLink
-                  :to="localePath('/auth/register')"
-                  class="btn btn-dark rounded-pill px-3 py-2 fw-semibold d-none d-sm-inline-flex"
-                >
+                <NuxtLink :to="localePath('/auth/register')"
+                  class="btn btn-dark rounded-pill px-3 py-2 fw-semibold d-none d-sm-inline-flex">
                   {{ $t('common.register') }}
                 </NuxtLink>
               </div>
 
               <div v-else class="dropdown">
-                <button
-                  type="button"
+                <button type="button"
                   class="btn customer-user-trigger d-flex align-items-center gap-2 rounded-pill border-0 ps-2 pe-3 py-1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <img
-                    class="rounded-circle border"
-                    width="36"
-                    height="36"
-                    alt="Avatar"
-                    :src="avatarUrl"
-                  >
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <img class="rounded-circle border" width="36" height="36" alt="Avatar" :src="avatarUrl">
 
                   <div class="d-none d-xl-block text-start lh-sm">
                     <div class="fw-semibold text-dark small">{{ fullName }}</div>
@@ -293,7 +220,9 @@
                       <i class="bi bi-box-seam me-2"></i>{{ $t('common.orders') }}
                     </NuxtLink>
                   </li>
-                  <li><hr class="dropdown-divider opacity-10 my-1"></li>
+                  <li>
+                    <hr class="dropdown-divider opacity-10 my-1">
+                  </li>
                   <li>
                     <button class="dropdown-item rounded-3 py-2 text-danger" @click="auth.logout">
                       <i class="bi bi-box-arrow-right me-2"></i>{{ $t('common.logout') }}
@@ -306,30 +235,20 @@
 
           <div
             class="d-none d-md-flex align-items-center justify-content-between gap-2 gap-lg-3 px-2 px-md-3 px-xl-4 py-2 header-secondary-nav"
-            :class="{ 'is-hidden': isSecondaryNavHidden }"
-          >
+            :class="{ 'is-hidden': isSecondaryNavHidden }">
             <div class="d-flex align-items-center gap-1 gap-xl-2 flex-nowrap flex-shrink-0">
-              <NuxtLink
-                v-for="(item, idx) in primaryNavItems"
-                :key="item.label"
-                :to="item.to"
+              <NuxtLink v-for="(item, idx) in primaryNavItems" :key="item.label" :to="item.to"
                 class="btn header-nav-link d-inline-flex align-items-center gap-1 gap-lg-2 px-2 px-lg-3 py-2 border-0"
-                :class="getPrimaryNavItemClass(idx)"
-              >
+                :class="getPrimaryNavItemClass(idx)">
                 <i :class="item.icon"></i>
                 <span>{{ item.label }}</span>
               </NuxtLink>
 
               <div class="header-products">
-                <button
-                  ref="productsButtonRef"
-                  type="button"
+                <button ref="productsButtonRef" type="button"
                   class="btn header-nav-link d-inline-flex align-items-center gap-1 gap-lg-2 px-2 px-lg-3 py-2 border-0"
-                  :class="{ 'is-open': isProductsMenuOpen }"
-                  :aria-expanded="isProductsMenuOpen ? 'true' : 'false'"
-                  aria-haspopup="true"
-                  @click="handleProductsClick"
-                >
+                  :class="{ 'is-open': isProductsMenuOpen }" :aria-expanded="isProductsMenuOpen ? 'true' : 'false'"
+                  aria-haspopup="true" @click="handleProductsClick">
                   <i class="bi bi-grid"></i>
                   <span>{{ $t('sidebar.menu.products') }}</span>
                   <i class="bi bi-chevron-down small header-nav-link-chevron"></i>
@@ -343,16 +262,10 @@
               <div class="d-flex align-items-center gap-1 px-1 px-lg-2 py-1 rounded-pill featured-nav">
                 <span v-if="false" class="featured-nav-label d-none d-xl-inline px-2">{{ $t('home.category') }}</span>
 
-                <NuxtLink
-                  v-for="item in featuredNavItems"
-                  :key="item.label"
-                  :to="item.to"
-                  :class="[
-                    'btn featured-nav-link d-inline-flex align-items-center gap-1 rounded-pill border-0 px-2 px-lg-3 py-2',
-                    { 'featured-nav-link--active': isFeaturedNavItemActive(item) },
-                  ]"
-                  :aria-current="isFeaturedNavItemActive(item) ? 'page' : undefined"
-                >
+                <NuxtLink v-for="item in featuredNavItems" :key="item.label" :to="item.to" :class="[
+                  'btn featured-nav-link d-inline-flex align-items-center gap-1 rounded-pill border-0 px-2 px-lg-3 py-2',
+                  { 'featured-nav-link--active': isFeaturedNavItemActive(item) },
+                ]" :aria-current="isFeaturedNavItemActive(item) ? 'page' : undefined">
                   <i :class="item.icon"></i>
                   <span>{{ item.label }}</span>
                 </NuxtLink>
@@ -361,18 +274,10 @@
           </div>
         </div>
 
-        <DropdownSearch
-          v-model:open="isSearchDropdownOpen"
-          :anchor-rect="searchAnchorRect"
-          :mode="searchDropdownMode"
-          :search-query="searchQuery"
-        />
+        <DropdownSearch v-model:open="isSearchDropdownOpen" :anchor-rect="searchAnchorRect" :mode="searchDropdownMode"
+          :search-query="searchQuery" />
 
-        <div
-          v-if="!isHomeRoute && isHeaderCategoryMenuOpen"
-          ref="productsDropdownRef"
-          class="header-mega-menu"
-        >
+        <div v-if="!isHomeRoute && isHeaderCategoryMenuOpen" ref="productsDropdownRef" class="header-mega-menu">
           <CategoryMegaMenu />
         </div>
 
@@ -380,84 +285,41 @@
     </div>
 
     <!-- Mobile Top Navigation -->
-    <header
-      ref="mobileTopNavRef"
-      class="mobile-top-nav d-md-none"
-      :class="{ 'is-scrolled': isMobileTopNavScrolled }"
-    >
-      <NuxtLink
-        :to="localePath('/')"
-        class="mobile-top-nav__brand"
-        aria-label="IrusGear"
-      >
-        <img
-          src="@/public/image/logo-irusgear-white.png"
-          alt="IrusGear"
-          class="mobile-top-nav__logo"
-        >
+    <header ref="mobileTopNavRef" class="mobile-top-nav d-md-none" :class="{ 'is-scrolled': isMobileTopNavScrolled }">
+      <NuxtLink :to="localePath('/')" class="mobile-top-nav__brand" aria-label="IrusGear">
+        <img src="@/public/image/logo-irusgear-white.png" alt="IrusGear" class="mobile-top-nav__logo">
       </NuxtLink>
     </header>
 
     <!-- Mobile Bottom Navigation -->
     <div class="mobile-bottom-nav d-md-none">
       <div class="mobile-capsule-nav">
-        <NuxtLink
-          to="/"
-          class="mobile-nav-item"
-          :class="{ active: isMobileNavActive('/') }"
-        >
+        <NuxtLink to="/" class="mobile-nav-item" :class="{ active: isMobileNavActive('/') }">
           <i class="bi" :class="isMobileNavActive('/') ? 'bi-house-door-fill' : 'bi-house-door'"></i>
           <span>{{ $t('home.home') }}</span>
         </NuxtLink>
 
-        <button
-          type="button"
-          class="mobile-nav-item"
-          :aria-label="$t('sidebar.searchPlaceholder')"
-          aria-haspopup="dialog"
-          :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'"
-          @click="openSearchDropdown"
-        >
+        <button type="button" class="mobile-nav-item" :aria-label="$t('sidebar.searchPlaceholder')"
+          aria-haspopup="dialog" :aria-expanded="isSearchDropdownOpen ? 'true' : 'false'" @click="openSearchDropdown">
           <i class="bi bi-search"></i>
           <span>{{ $t('sidebar.search') }}</span>
         </button>
 
-        <NuxtLink
-          to="/profile"
-          class="mobile-nav-item position-relative"
-          :class="{ active: isMobileNavActive('/profile') }"
-          :aria-label="$t('common.wishlist')"
-        >
+        <NuxtLink to="/profile" class="mobile-nav-item position-relative"
+          :class="{ active: isMobileNavActive('/profile') }" :aria-label="$t('common.wishlist')">
           <i class="bi" :class="isMobileNavActive('/profile') ? 'bi-heart-fill' : 'bi-heart'"></i>
           <span>{{ $t('common.wishlist') }}</span>
-          <span
-            v-if="wishlistCount > 0"
-            class="mobile-nav-badge"
-          >{{ wishlistCount }}</span>
+          <span v-if="wishlistCount > 0" class="mobile-nav-badge">{{ wishlistCount }}</span>
         </NuxtLink>
 
-        <NuxtLink
-          v-if="user"
-          to="/profile"
-          class="mobile-nav-item"
-          :class="{ active: isMobileNavActive('/profile') }"
-          :aria-label="$t('common.profile')"
-        >
-          <img
-            class="mobile-nav-avatar"
-            :src="avatarUrl"
-            :alt="fullName"
-          >
+        <NuxtLink v-if="user" to="/profile" class="mobile-nav-item" :class="{ active: isMobileNavActive('/profile') }"
+          :aria-label="$t('common.profile')">
+          <img class="mobile-nav-avatar" :src="avatarUrl" :alt="fullName">
           <span>{{ $t('common.profile') }}</span>
         </NuxtLink>
 
-        <NuxtLink
-          v-else
-          to="/auth/login"
-          class="mobile-nav-item"
-          :class="{ active: isMobileNavActive('/auth/login') }"
-          :aria-label="$t('common.login')"
-        >
+        <NuxtLink v-else to="/auth/login" class="mobile-nav-item" :class="{ active: isMobileNavActive('/auth/login') }"
+          :aria-label="$t('common.login')">
           <i class="bi bi-person"></i>
           <span>{{ $t('common.login') }}</span>
         </NuxtLink>
@@ -468,36 +330,20 @@
         <!-- Capsule dọc chứa Cart + Language -->
         <Transition name="capsule-up">
           <div v-if="isMobileFabOpen" class="mobile-vertical-capsule mb-1">
-            <NuxtLink
-              to="/cart"
-              class="mobile-fab-item"
-              :aria-label="$t('cart.cart')"
-              @click="isMobileFabOpen = false"
-            >
+            <NuxtLink to="/cart" class="mobile-fab-item" :aria-label="$t('cart.cart')" @click="isMobileFabOpen = false">
               <i class="bi bi-cart3"></i>
               <span class="mobile-fab-tooltip">{{ $t('cart.cart') }}</span>
-              <span
-                v-if="itemCount > 0"
-                class="mobile-fab-badge"
-              >{{ itemCount }}</span>
+              <span v-if="itemCount > 0" class="mobile-fab-badge">{{ itemCount }}</span>
             </NuxtLink>
 
-            <button
-              type="button"
-              class="mobile-fab-item"
-              :aria-label="$t('common.language')"
-              @click="toggleLanguage(); isMobileFabOpen = false"
-            >
+            <button type="button" class="mobile-fab-item" :aria-label="$t('common.language')"
+              @click="toggleLanguage(); isMobileFabOpen = false">
               <i class="bi bi-globe-americas"></i>
               <span class="mobile-fab-tooltip">{{ currentLangLabel }}</span>
             </button>
 
-            <button
-              type="button"
-              class="mobile-fab-item"
-              aria-label="Chat với AI"
-              @click="chatbotStore.toggleChat(); isMobileFabOpen = false"
-            >
+            <button type="button" class="mobile-fab-item" aria-label="Chat với AI"
+              @click="chatbotStore.toggleChat(); isMobileFabOpen = false">
               <i class="bi bi-chat-dots-fill"></i>
               <span v-if="chatbotStore.hasNewMessage" class="mobile-fab-badge">!</span>
               <span class="mobile-fab-tooltip">Trợ lý AI</span>
@@ -506,19 +352,14 @@
         </Transition>
 
         <!-- Nút FAB + -->
-        <button
-          type="button"
-          class="mobile-fab-btn"
-          :class="{ 'is-open': isMobileFabOpen }"
-          aria-label="Mở menu"
-          :aria-expanded="isMobileFabOpen ? 'true' : 'false'"
-          @click="isMobileFabOpen = !isMobileFabOpen"
-        >
+        <button type="button" class="mobile-fab-btn" :class="{ 'is-open': isMobileFabOpen }" aria-label="Mở menu"
+          :aria-expanded="isMobileFabOpen ? 'true' : 'false'" @click="isMobileFabOpen = !isMobileFabOpen">
           <i class="bi" :class="isMobileFabOpen ? 'bi-x' : 'bi-plus'"></i>
         </button>
       </div>
     </div>
-  </div></template>
+  </div>
+</template>
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
@@ -751,7 +592,7 @@ const submitHeaderSearch = async () => {
 }
 
 const handleProductsClick = async () => {
-  await homeStore.fetchMegaMenuLeaves().catch(() => {})
+  await homeStore.fetchMegaMenuLeaves().catch(() => { })
 
   if (!isHomeRoute.value) {
     if (isHeaderCategoryMenuOpen.value) {
@@ -861,6 +702,10 @@ watch(
 )
 
 onMounted(() => {
+  if (!homeStore.megaMenuLeaves || homeStore.megaMenuLeaves.length === 0) {
+    homeStore.fetchMegaMenuLeaves().catch(() => { })
+  }
+
   if (typeof document === 'undefined' || typeof window === 'undefined') return
   document.addEventListener('pointerdown', handleDocumentPointerDown)
   window.addEventListener('scroll', syncSecondaryNavVisibility, { passive: true })
@@ -1035,7 +880,7 @@ const confirmRemoveCartItem = (item) => {
   toast(t('cart.confirmRemoveItem', { name: item.productName }), {
     cancel: {
       label: t('common.confirmNo'),
-      onClick: () => {},
+      onClick: () => { },
     },
     action: {
       label: t('common.confirmYes'),
@@ -1173,6 +1018,7 @@ const featuredNavItems = computed(() => [
 }
 
 @media (min-width: 1200px) {
+
   .header-nav-link,
   .featured-nav-link {
     font-size: 0.95rem;
@@ -1235,7 +1081,7 @@ const featuredNavItems = computed(() => [
   vertical-align: middle;
 }
 
-.header-icon-btn > i {
+.header-icon-btn>i {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1699,6 +1545,7 @@ const featuredNavItems = computed(() => [
 
 /* ── Push body content up so nav doesn't cover it ── */
 @media (max-width: 767.98px) {
+
   /* Ẩn top header trên mobile */
   .customer-sidebar-wrap {
     display: none !important;
@@ -2195,7 +2042,12 @@ const featuredNavItems = computed(() => [
 }
 
 @keyframes notiSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
