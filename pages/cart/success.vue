@@ -1930,7 +1930,7 @@ onUnmounted(() => {
 }
 
 .order-success-page__btn--primary:hover {
-  background: var(--irus-color-surface-dark);
+  background: #1a1a1a;
 }
 
 .order-success-page__btn--secondary {

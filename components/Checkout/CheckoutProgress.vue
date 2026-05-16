@@ -207,7 +207,7 @@ onBeforeUnmount(() => {
 }
 
 .checkout-progress__shell {
-  background: linear-gradient(180deg, #fff1f2, #fff7f7);
+  background: #f5f5f5;
   border-radius: 18px;
   overflow-x: auto;
   padding: 18px 20px 14px;
@@ -282,7 +282,7 @@ onBeforeUnmount(() => {
 
 .checkout-progress__marker {
   align-items: center;
-  background: #fff1f2;
+  background: #ffffff;
   border: 2px solid #66606a;
   border-radius: 999px;
   color: #4b4650;
