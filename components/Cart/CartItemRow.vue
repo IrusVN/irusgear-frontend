@@ -5,9 +5,21 @@
       {
         'cart-item--warning': item.warnings?.length,
         'cart-item--pending': busy,
+        'cart-item--unselected': !selected,
       },
     ]"
   >
+    <label class="cart-item__select" :aria-label="$t('cart.selectItem')">
+      <input
+        type="checkbox"
+        :checked="selected"
+        @change="$emit('toggle-select', item.id)"
+      />
+      <span class="cart-item__select-box" aria-hidden="true">
+        <i class="bi bi-check2"></i>
+      </span>
+    </label>
+
     <img :src="item.thumbnail || fallbackImage" :alt="item.productName" class="cart-item__image">
 
     <div class="cart-item__content">
@@ -73,7 +85,7 @@
             <button
               type="button"
               class="cart-item__quantity-btn"
-              :disabled="busy || item.quantity <= 1"
+              :disabled="item.quantity <= 1"
               :aria-label="$t('cart.decreaseQuantity')"
               @click="decrement"
             >
@@ -85,7 +97,7 @@
             <button
               type="button"
               class="cart-item__quantity-btn"
-              :disabled="busy || item.availability?.inStock === false"
+              :disabled="item.availability?.inStock === false"
               :aria-label="$t('cart.increaseQuantity')"
               @click="increment"
             >
@@ -118,9 +130,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  selected: {
+    type: Boolean,
+    default: true,
+  },
 });
 
-const emit = defineEmits(["update-quantity", "remove"]);
+const emit = defineEmits(["update-quantity", "remove", "toggle-select"]);
 
 const fallbackImage = "https://placehold.co/96x96/f4f4f5/d4d4d8?text=%20";
 const localePath = useLocalePath();
@@ -198,6 +214,58 @@ const increment = () => {
 
 .cart-item--pending {
   opacity: 0.75;
+}
+
+.cart-item--unselected {
+  opacity: 0.55;
+}
+
+.cart-item--unselected .cart-item__image {
+  filter: grayscale(0.7);
+}
+
+.cart-item__select {
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 22px;
+  justify-content: center;
+  margin-top: 4px;
+  position: relative;
+  width: 22px;
+}
+
+.cart-item__select input {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  width: 0;
+}
+
+.cart-item__select-box {
+  align-items: center;
+  background: #fff;
+  border: 2px solid #d4d4d8;
+  border-radius: 7px;
+  color: transparent;
+  display: inline-flex;
+  font-size: 14px;
+  height: 22px;
+  justify-content: center;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  width: 22px;
+}
+
+.cart-item__select input:checked + .cart-item__select-box {
+  background: var(--irus-color-accent);
+  border-color: var(--irus-color-accent);
+  color: #fff;
+}
+
+.cart-item__select input:focus-visible + .cart-item__select-box {
+  box-shadow: 0 0 0 3px var(--irus-color-accent-soft);
 }
 
 .cart-item__image {

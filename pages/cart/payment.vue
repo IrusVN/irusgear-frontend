@@ -171,11 +171,11 @@ const paymentMethods = computed(() => [
     name: "Thanh toán khi nhận hàng (COD)",
     description: "Trả tiền mặt khi nhận được hàng",
   },
-  // {
-  //   id: "momo",
-  //   name: "Ví MoMo",
-  //   description: "Thanh toán qua ví MoMo - Nhanh chóng và an toàn",
-  // },
+  {
+    id: "paypal",
+    name: "Ví PayPal",
+    description: "Thanh toán qua ví PayPal - Nhanh chóng và an toàn",
+  },
   {
     id: "vnpay",
     name: "VNPay",

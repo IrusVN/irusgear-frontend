@@ -45,6 +45,15 @@ export const useCartStore = defineStore("cart", () => {
   const isAddToCartSheetOpen = ref(false);
   const pendingItemIds = ref([]);
 
+  // Selection state — track itemIds user đã UN-check (mặc định mọi item đều được chọn).
+  // Item mới add vào tự động được chọn vì không có trong unselectedItemIds.
+  const unselectedItemIds = ref([]);
+
+  // Debounce timers cho quantity update — key = itemId, value = { timer, latestQuantity }.
+  // Click + hoặc - liên tục sẽ reset timer; chỉ 1 API call duy nhất sau khi user dừng.
+  const quantityDebounceMap = new Map();
+  const DEBOUNCE_QUANTITY_MS = 500;
+
   const requestCart = async (apiPath, { method = "GET", body, params, itemId } = {}) => {
     feGlobalStore.setApiUrl(apiPath);
 
@@ -107,6 +116,13 @@ export const useCartStore = defineStore("cart", () => {
     if (!cart.value.items.length) {
       lastAddedItem.value = null;
       isAddToCartSheetOpen.value = false;
+      unselectedItemIds.value = [];
+    } else {
+      // Dọn unselected: xoá id không còn trong cart (item đã bị remove).
+      const validIdSet = new Set(cart.value.items.map((item) => String(item.id)));
+      unselectedItemIds.value = unselectedItemIds.value
+        .map(String)
+        .filter((id) => validIdSet.has(id));
     }
 
     return cart.value;
@@ -177,6 +193,10 @@ export const useCartStore = defineStore("cart", () => {
     }
   };
 
+  /**
+   * Gọi API patch quantity ngay lập tức (không debounce).
+   * Internal — chỉ dùng cho legacy paths; UI nên dùng scheduleQuantityUpdate.
+   */
   const updateQuantity = async (itemId, quantity) => {
     if (Number(quantity) <= 0) {
       return removeItem(itemId);
@@ -195,6 +215,99 @@ export const useCartStore = defineStore("cart", () => {
     } finally {
       removePendingItem(itemId);
     }
+  };
+
+  /**
+   * Optimistic + debounced quantity update.
+   * User click + hoặc - liên tục:
+   *   - UI cập nhật ngay (mutate item.quantity + recompute line total)
+   *   - Timer 500ms được reset mỗi click
+   *   - Khi user dừng, 1 API PATCH duy nhất với quantity cuối cùng
+   * Tránh case user phải chờ N API calls khi giảm từ 4 → 1.
+   */
+  const scheduleQuantityUpdate = (itemId, quantity) => {
+    const idStr = String(itemId);
+    const item = cart.value.items.find((i) => String(i.id) === idStr);
+    if (!item) return;
+
+    const nextQuantity = Math.max(0, Number(quantity) || 0);
+
+    // Nếu cố xuống 0 → debounce remove (không gọi removeItem ngay để cho phép user undo bằng nhấn +)
+    if (nextQuantity <= 0) {
+      // Optimistic không cho giảm dưới 1 — user phải dùng nút thùng rác để remove
+      return;
+    }
+
+    // 1. Optimistic update: mutate cart ngay để UI phản hồi tức thời
+    const unitPrice = Number(item.currentUnitPrice?.value || item.unitPrice?.value || 0);
+    item.quantity = nextQuantity;
+    item.currentLineTotal = formatMoney(unitPrice * nextQuantity);
+
+    // Recompute summary subtotal từ tất cả items đang trong cart
+    const newSubtotal = cart.value.items.reduce((sum, i) => {
+      const price = Number(i.currentUnitPrice?.value || i.unitPrice?.value || 0);
+      return sum + price * Number(i.quantity || 0);
+    }, 0);
+    cart.value.summary.subtotal = formatMoney(newSubtotal);
+    cart.value.summary.itemCount = cart.value.items.reduce((sum, i) => sum + Number(i.quantity || 0), 0);
+
+    // 2. Debounce API call — reset timer nếu user click tiếp
+    const existing = quantityDebounceMap.get(idStr);
+    if (existing?.timer) {
+      clearTimeout(existing.timer);
+    }
+
+    const pending = existing || { originalQuantity: item.quantity };
+    pending.latestQuantity = nextQuantity;
+
+    pending.timer = setTimeout(async () => {
+      const finalQuantity = pending.latestQuantity;
+      quantityDebounceMap.delete(idStr);
+
+      addPendingItem(itemId);
+      try {
+        const response = await requestCart("cart/items", {
+          method: "PATCH",
+          itemId,
+          body: { quantity: finalQuantity },
+        });
+        applyCartPayload(response);
+      } catch (e) {
+        // Rollback bằng fetchCart force để lấy state thật
+        await fetchCart({ force: true, silent: true }).catch(() => {});
+        throw e;
+      } finally {
+        removePendingItem(itemId);
+      }
+    }, DEBOUNCE_QUANTITY_MS);
+
+    quantityDebounceMap.set(idStr, pending);
+  };
+
+  /**
+   * Flush debounce: gọi API ngay (vd trước khi navigate sang checkout).
+   */
+  const flushPendingQuantityUpdates = async () => {
+    const pendingEntries = [...quantityDebounceMap.entries()];
+    if (pendingEntries.length === 0) return;
+
+    const promises = pendingEntries.map(async ([idStr, pending]) => {
+      if (pending.timer) clearTimeout(pending.timer);
+      quantityDebounceMap.delete(idStr);
+      addPendingItem(idStr);
+      try {
+        const response = await requestCart("cart/items", {
+          method: "PATCH",
+          itemId: idStr,
+          body: { quantity: pending.latestQuantity },
+        });
+        applyCartPayload(response);
+      } finally {
+        removePendingItem(idStr);
+      }
+    });
+
+    await Promise.all(promises);
   };
 
   const removeItem = async (itemId) => {
@@ -290,7 +403,64 @@ export const useCartStore = defineStore("cart", () => {
     ),
   );
   const hasPendingItems = computed(() => pendingItemIds.value.length > 0);
-  const canCheckout = computed(() => items.value.length > 0 && blockingItems.value.length === 0);
+
+  // --- Selection getters ---
+  const isItemSelected = (itemId) => !unselectedItemIds.value.includes(String(itemId));
+  const selectedItems = computed(() =>
+    items.value.filter((item) => !unselectedItemIds.value.includes(String(item.id))),
+  );
+  const selectedItemIds = computed(() => selectedItems.value.map((item) => Number(item.id)));
+  const selectedCount = computed(() => selectedItems.value.length);
+  const isAllSelected = computed(
+    () => items.value.length > 0 && selectedCount.value === items.value.length,
+  );
+  const selectedSubtotal = computed(() =>
+    formatMoney(
+      selectedItems.value.reduce((sum, item) => {
+        const price = Number(item.currentUnitPrice?.value || item.unitPrice?.value || 0);
+        return sum + price * Number(item.quantity || 0);
+      }, 0),
+    ),
+  );
+  const selectedBlockingItems = computed(() =>
+    selectedItems.value.filter(
+      (item) => item?.availability?.isActive === false || item?.availability?.inStock === false,
+    ),
+  );
+  const canCheckout = computed(
+    () => selectedItems.value.length > 0 && selectedBlockingItems.value.length === 0,
+  );
+
+  // --- Selection actions ---
+  const toggleItemSelection = (itemId) => {
+    const idStr = String(itemId);
+    if (unselectedItemIds.value.includes(idStr)) {
+      unselectedItemIds.value = unselectedItemIds.value.filter((id) => id !== idStr);
+    } else {
+      unselectedItemIds.value = [...unselectedItemIds.value, idStr];
+    }
+  };
+
+  const selectAllItems = () => {
+    unselectedItemIds.value = [];
+  };
+
+  const deselectAllItems = () => {
+    unselectedItemIds.value = items.value.map((item) => String(item.id));
+  };
+
+  const removeSelectedItems = async () => {
+    const ids = selectedItemIds.value;
+    if (!ids.length) return;
+    // Gọi tuần tự để BE có thời gian apply (mỗi DELETE trả về cart mới)
+    for (const id of ids) {
+      try {
+        await removeItem(id);
+      } catch {
+        // continue
+      }
+    }
+  };
 
   const reset = () => {
     cart.value = createEmptyCart();
@@ -302,6 +472,12 @@ export const useCartStore = defineStore("cart", () => {
     lastRemovedItem.value = null;
     isAddToCartSheetOpen.value = false;
     pendingItemIds.value = [];
+    unselectedItemIds.value = [];
+    // Clear pending debounce timers
+    for (const [, pending] of quantityDebounceMap) {
+      if (pending.timer) clearTimeout(pending.timer);
+    }
+    quantityDebounceMap.clear();
   };
 
   registerStore({ reset });
@@ -328,12 +504,27 @@ export const useCartStore = defineStore("cart", () => {
     fetchCart,
     addItem,
     updateQuantity,
+    scheduleQuantityUpdate,
+    flushPendingQuantityUpdates,
     removeItem,
     undoLastRemoval,
     dismissLastRemovedItem,
     clearCart,
     closeAddToCartSheet,
     isItemPending,
+    // Selection
+    unselectedItemIds,
+    selectedItems,
+    selectedItemIds,
+    selectedCount,
+    selectedSubtotal,
+    selectedBlockingItems,
+    isAllSelected,
+    isItemSelected,
+    toggleItemSelection,
+    selectAllItems,
+    deselectAllItems,
+    removeSelectedItems,
     reset,
   };
 });

@@ -28,6 +28,7 @@
       <aside v-if="isMenuOpen" id="coming-soon-category-menu" class="cs-menu-panel" :aria-label="menuTitle">
         <div class="cs-menu-panel__header">
           <div>
+            <span class="cs-menu-panel__eyebrow">IrusGear</span>
             <h2>{{ menuTitle }}</h2>
           </div>
 
@@ -111,31 +112,14 @@
 
       <p class="cs-timezone">{{ timezoneLabel }}</p>
 
-      <p class="cs-subtitle">We'll let you know when we are Launching</p>
+      <p class="cs-subtitle">{{ subtitleText }}</p>
 
-      <form class="cs-form" @submit.prevent="notify">
-        <input
-          v-model="email"
-          type="email"
-          class="cs-form__input"
-          placeholder="Email Address"
-          :disabled="submitting"
-          required
-        />
-        <button
-          type="submit"
-          class="cs-form__btn"
-          :disabled="submitting"
-        >
-          <span
-            v-if="submitting"
-            class="spinner-border spinner-border-sm text-white me-2"
-            role="status"
-            aria-hidden="true"
-          ></span>
-          {{ submitting ? "Sending..." : "Notify Me" }}
-        </button>
-      </form>
+      <NuxtLink :to="localePath('/')" class="cs-back-btn">
+        <span class="cs-back-btn__icon" aria-hidden="true">
+          <i class="bi bi-arrow-left"></i>
+        </span>
+        <span>{{ backToHomeLabel }}</span>
+      </NuxtLink>
     </main>
   </div>
 </template>
@@ -143,7 +127,6 @@
 <script setup>
 import { ref, computed, nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 import { storeToRefs } from "pinia";
-import { toast } from "vue-sonner";
 import { useHomeStore } from "@/stores/homeStore";
 
 definePageMeta({
@@ -204,6 +187,12 @@ const hourLabel = computed(() => (isEnglishLocale.value ? "HOURS" : "GIỜ"));
 const minuteLabel = computed(() => (isEnglishLocale.value ? "MINUTES" : "PHÚT"));
 const secondLabel = computed(() => (isEnglishLocale.value ? "SECONDS" : "GIÂY"));
 const timezoneLabel = computed(() => (isEnglishLocale.value ? "US Eastern Time" : "Giờ Việt Nam"));
+const subtitleText = computed(() =>
+  isEnglishLocale.value
+    ? "We're putting the finishing touches. Explore the homepage while you wait."
+    : "Chúng tôi đang hoàn thiện những bước cuối. Bạn có thể quay lại trang chủ trong khi chờ."
+);
+const backToHomeLabel = computed(() => (isEnglishLocale.value ? "Back to Home" : "Về trang chủ"));
 const menuOpenLabel = computed(() => (isEnglishLocale.value ? "Open categories" : "Mở danh mục"));
 const menuCloseLabel = computed(() => (isEnglishLocale.value ? "Close categories" : "Đóng danh mục"));
 const menuTitle = computed(() => (isEnglishLocale.value ? "Categories" : "Danh mục"));
@@ -364,34 +353,6 @@ const socials = [
   { name: "Dribbble", icon: "bi bi-dribbble", href: "https://dribbble.com" },
 ];
 
-const email = ref("");
-const submitting = ref(false);
-
-const isValidEmail = (value) =>
-  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
-
-const notify = async () => {
-  if (submitting.value) return;
-
-  if (!isValidEmail(email.value)) {
-    toast.error("Vui lòng nhập email hợp lệ");
-    return;
-  }
-
-  submitting.value = true;
-  try {
-    // Stub: thay bằng API thật khi backend có endpoint /coming-soon/subscribe
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    toast.success(`Chúng tôi sẽ gửi thông báo đến ${email.value}`);
-    email.value = "";
-  } catch (e) {
-    toast.error(e?.message || "Không thể đăng ký, vui lòng thử lại");
-  } finally {
-    submitting.value = false;
-  }
-};
-
-  // Placeholder — image chỉ có icon, chưa có menu thực sự
 </script>
 
 <style scoped>
@@ -499,7 +460,7 @@ const notify = async () => {
 .cs-menu-panel {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   bottom: 0;
   z-index: 21;
   display: flex;
@@ -507,7 +468,7 @@ const notify = async () => {
   width: min(92vw, 420px);
   background: #fff;
   color: #111;
-  box-shadow: 24px 0 70px rgba(0, 0, 0, 0.34);
+  box-shadow: -24px 0 70px rgba(0, 0, 0, 0.34);
 }
 
 .cs-menu-panel__header {
@@ -711,7 +672,7 @@ const notify = async () => {
 .cs-menu-drawer-enter-from,
 .cs-menu-drawer-leave-to {
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 
 @keyframes cs-menu-spin {
@@ -832,63 +793,50 @@ const notify = async () => {
   text-transform: uppercase;
 }
 
-/* Email form */
-.cs-form {
-  display: flex;
+/* Back to Home button */
+.cs-back-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 0;
-  max-width: 460px;
-  margin: 0 auto;
-  padding: 5px;
+  gap: 10px;
+  padding: 12px 26px 12px 14px;
   background: #fff;
+  color: #111;
   border-radius: 999px;
-  box-shadow: 0 8px 26px rgba(15, 23, 42, 0.18);
-}
-
-.cs-form__input {
-  flex: 1;
-  min-width: 0;
-  padding: 10px 18px;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: #1f2937;
   font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.cs-form__input::placeholder {
-  color: #9ca3af;
+.cs-back-btn:hover {
+  background: #f4f4f5;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.34);
+  color: #000;
 }
 
-.cs-form__input:disabled {
-  cursor: not-allowed;
-  opacity: 0.7;
+.cs-back-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 4px;
 }
 
-.cs-form__btn {
+.cs-back-btn__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 24px;
-  background: linear-gradient(90deg, #1a1a1a, #404040);
-  color: #fff;
-  border: 0;
+  width: 32px;
+  height: 32px;
   border-radius: 999px;
+  background: linear-gradient(135deg, #1a1a1a, #3d3d3d);
+  color: #fff;
   font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
-.cs-form__btn:hover:not(:disabled) {
-  background: linear-gradient(90deg, #000000, #2a2a2a);
-  transform: translateY(-1px);
-}
-
-.cs-form__btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.7;
+.cs-back-btn:hover .cs-back-btn__icon {
+  transform: translateX(-3px);
 }
 
 /* Responsive */
@@ -957,13 +905,15 @@ const notify = async () => {
     letter-spacing: 3px;
   }
 
-  .cs-form {
-    max-width: 100%;
+  .cs-back-btn {
+    padding: 10px 22px 10px 12px;
+    font-size: 13px;
   }
 
-  .cs-form__btn {
-    padding: 9px 18px;
-    font-size: 13px;
+  .cs-back-btn__icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
 
   .cs-menu-btn {
