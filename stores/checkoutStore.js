@@ -764,6 +764,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
     // Prepared order data
     preparedOrderId,   // order number từ backend response (ORD-YYYYMMDD-XXXX)
     preparedSessionId, // UUID session key
+    preparedIdemKey,   // idempotency UUID — verify endpoint resolveOrderForVerify hỗ trợ lookup bằng key này
     preparedPricing,
     guestToken,
     guestEmail,

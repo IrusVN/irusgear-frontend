@@ -242,13 +242,83 @@ const openPaymentPopup = (payUrl) => {
 
   // Neu popup bi block boi browser (tra ve null), khong lam gi ca
   // Modal van hien thi trang thai cho user
+  startPopupClosedWatcher();
+};
+
+// Watcher detect khi popup bị đóng (user tự đóng HOẶC backend gọi window.close()).
+// Cần thiết vì cross-origin popup (api.irusgear.me → irusgear.me) có thể bị COOP block
+// → postMessage không reach FE → handler không fire → FE stuck tại /cart/payment.
+// Fallback: khi popup closed mà chưa nhận PAYMENT_DONE, query verify API để biết status.
+let popupClosedInterval = null;
+let paymentDoneHandled = false;
+
+const startPopupClosedWatcher = () => {
+  stopPopupClosedWatcher();
+  paymentDoneHandled = false;
+  if (!paymentPopup.value) return;
+
+  popupClosedInterval = window.setInterval(async () => {
+    if (!paymentPopup.value || paymentPopup.value.closed) {
+      stopPopupClosedWatcher();
+      if (paymentDoneHandled) return; // postMessage đã xử lý xong → bỏ qua
+      await verifyAndNavigateAfterPopupClosed();
+    }
+  }, 800);
+};
+
+const stopPopupClosedWatcher = () => {
+  if (popupClosedInterval !== null) {
+    window.clearInterval(popupClosedInterval);
+    popupClosedInterval = null;
+  }
+};
+
+const verifyAndNavigateAfterPopupClosed = async () => {
+  const orderRef = checkoutStore.preparedIdemKey
+    || checkoutStore.preparedOrderId
+    || selectedPayData.value?.orderId;
+  if (!orderRef) {
+    showQrModal.value = false;
+    selectedMethod.value = null;
+    return;
+  }
+
+  try {
+    const result = await checkoutStore.verifyPayment({
+      order_id: orderRef,
+      gateway: selectedMethod.value || "paypal",
+    });
+    const status = result?.payment?.status;
+    const orderNumber = result?.order?.orderNumber;
+
+    if (status === "completed" || status === "paid") {
+      showQrModal.value = false;
+      await navigateTo(
+        `/cart/success?order_id=${orderNumber || orderRef}&payment_method=${selectedMethod.value || "paypal"}`
+      );
+    } else if (status === "failed" || status === "cancelled") {
+      showQrModal.value = false;
+      toast.error("Thanh toán không thành công hoặc đã bị huỷ.");
+      selectedMethod.value = null;
+    } else {
+      // Vẫn pending — backend webhook chưa confirm xong; cho user retry
+      showQrModal.value = false;
+      toast.warning("Chưa nhận được xác nhận từ cổng thanh toán. Vui lòng thử lại hoặc kiểm tra đơn hàng.");
+      selectedMethod.value = null;
+    }
+  } catch (e) {
+    showQrModal.value = false;
+    toast.error(e?.data?.message || "Không thể xác minh trạng thái thanh toán.");
+    selectedMethod.value = null;
+  }
 };
 
 const closePaymentPopup = () => {
+  stopPopupClosedWatcher();
   if (paymentPopup.value && !paymentPopup.value.closed) {
     paymentPopup.value.close();
-    paymentPopup.value = null;
   }
+  paymentPopup.value = null;
 };
 
 const handleQrCancel = () => {
@@ -304,17 +374,30 @@ const handlePopupMessage = async (event) => {
   const data = event.data;
   if (data?.type !== "PAYMENT_DONE") return;
 
+  // Đánh dấu đã xử lý để popup-closed watcher không gọi verify lần nữa (tránh double navigate)
+  paymentDoneHandled = true;
+  stopPopupClosedWatcher();
+
   showQrModal.value = false;
   closePaymentPopup();
 
   if (data.status === "failed") {
+    toast.error("Thanh toán không thành công.");
+    selectedMethod.value = null;
+    return;
+  }
+
+  if (data.status === "cancelled") {
+    toast.warning("Bạn đã huỷ thanh toán.");
     selectedMethod.value = null;
     return;
   }
 
   const orderId = data.orderId || checkoutStore.preparedOrderId;
   if (orderId) {
-    await navigateTo(`/cart/success?order_id=${orderId}&payment_method=vnpay`);
+    // Dùng paymentMethod từ backend (không hardcode vnpay) — đúng cho mọi gateway
+    const method = data.paymentMethod || selectedMethod.value || "vnpay";
+    await navigateTo(`/cart/success?order_id=${orderId}&payment_method=${method}`);
   } else {
     selectedMethod.value = null;
   }
