@@ -28,7 +28,6 @@
       <aside v-if="isMenuOpen" id="coming-soon-category-menu" class="cs-menu-panel" :aria-label="menuTitle">
         <div class="cs-menu-panel__header">
           <div>
-            <span class="cs-menu-panel__eyebrow">IrusGear</span>
             <h2>{{ menuTitle }}</h2>
           </div>
 
@@ -500,7 +499,7 @@ const notify = async () => {
 .cs-menu-panel {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   bottom: 0;
   z-index: 21;
   display: flex;
@@ -508,7 +507,7 @@ const notify = async () => {
   width: min(92vw, 420px);
   background: #fff;
   color: #111;
-  box-shadow: -24px 0 70px rgba(0, 0, 0, 0.34);
+  box-shadow: 24px 0 70px rgba(0, 0, 0, 0.34);
 }
 
 .cs-menu-panel__header {
@@ -712,7 +711,7 @@ const notify = async () => {
 .cs-menu-drawer-enter-from,
 .cs-menu-drawer-leave-to {
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(-100%);
 }
 
 @keyframes cs-menu-spin {
