@@ -10,9 +10,9 @@
   >
     <div class="payment-card__icon" :class="{ 'payment-card__icon--cod': method === 'cod' }">
       <img
-        v-if="method === 'momo'"
-        src="https://homepage.momocdn.net/fileuploads/svg/momo-file-240411162904.svg"
-        alt="MoMo"
+        v-if="method === 'paypal'"
+        src="https://www.svgrepo.com/show/452082/paypal.svg"
+        alt="PayPal"
         class="payment-card__logo"
       />
       <img
