@@ -687,6 +687,16 @@ const syncOpenSearchDropdownPosition = () => {
 }
 
 watch(
+  () => user.value,
+  (newUser) => {
+    if (newUser) {
+      notificationStore.fetchUnreadCount().catch(() => {})
+    }
+  },
+  { immediate: true }
+)
+
+watch(
   () => route.fullPath,
   async () => {
     isMobileFabOpen.value = false
@@ -857,7 +867,6 @@ const handleNotiDropdownEnter = () => {
     notificationStore.fetchNotifications().catch(() => {
       notiLoadError.value = true
     })
-    notificationStore.fetchUnreadCount()
     _notiFetched = true
   }
 }
