@@ -111,8 +111,10 @@ export const useCheckoutStore = defineStore("checkout", () => {
     return base + timeSlotFee.value;
   });
 
-  const subtotal = computed(() => cartStore.subtotal || formatMoney(0));
-  const savings = computed(() => cartStore.savings || formatMoney(0));
+  // Chỉ tính subtotal/savings dựa trên items user đã chọn ở trang /cart.
+  // Khi không có item nào uncheck → selectedSubtotal == subtotal (toàn bộ cart).
+  const subtotal = computed(() => cartStore.selectedSubtotal || formatMoney(0));
+  const savings = computed(() => cartStore.selectedSavings || formatMoney(0));
 
   const voucherDiscount = computed(() => {
     if (!selectedVoucherCodes.value.length) return formatMoney(0);

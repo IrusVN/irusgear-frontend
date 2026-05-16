@@ -54,7 +54,7 @@
           <!-- Items -->
           <div class="review-items">
             <div
-              v-for="item in cartStore.items"
+              v-for="item in cartStore.selectedItems"
               :key="item.id"
               class="review-item"
             >

@@ -3,7 +3,7 @@
     <div class="d-flex flex-column gap-1">
       <p class="checkout-summary__eyebrow">{{ $t("checkout.orderSummary") }}</p>
       <h2 class="checkout-summary__title">
-        {{ $t("checkout.orderCount", { count: cartStore.itemCount }) }}
+        {{ $t("checkout.orderCount", { count: cartStore.selectedItemCount }) }}
       </h2>
     </div>
 
@@ -19,7 +19,7 @@
 
     <div class="checkout-summary__items" :class="{ 'checkout-summary__items--expanded': expanded }">
       <div
-        v-for="item in cartStore.items"
+        v-for="item in cartStore.selectedItems"
         :key="item.id"
         class="d-flex gap-2 align-items-start pt-2"
       >
@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div v-if="cartStore.items.length === 0" class="checkout-summary__empty">
+      <div v-if="cartStore.selectedItems.length === 0" class="checkout-summary__empty">
         {{ $t("checkout.noItems") }}
       </div>
     </div>

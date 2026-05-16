@@ -422,6 +422,19 @@ export const useCartStore = defineStore("cart", () => {
       }, 0),
     ),
   );
+  // Tổng số lượng (sum quantity) chỉ tính trên selected items — khác với selectedCount (số dòng).
+  const selectedItemCount = computed(() =>
+    selectedItems.value.reduce((sum, item) => sum + Number(item.quantity || 0), 0),
+  );
+  // Tiết kiệm cho selected items = snapshot subtotal - current subtotal
+  const selectedSavings = computed(() => {
+    const snapshot = selectedItems.value.reduce((sum, item) => {
+      const price = Number(item.unitPrice?.value || 0);
+      return sum + price * Number(item.quantity || 0);
+    }, 0);
+    const current = Number(selectedSubtotal.value?.value || 0);
+    return formatMoney(Math.max(snapshot - current, 0));
+  });
   const selectedBlockingItems = computed(() =>
     selectedItems.value.filter(
       (item) => item?.availability?.isActive === false || item?.availability?.inStock === false,
@@ -517,7 +530,9 @@ export const useCartStore = defineStore("cart", () => {
     selectedItems,
     selectedItemIds,
     selectedCount,
+    selectedItemCount,
     selectedSubtotal,
+    selectedSavings,
     selectedBlockingItems,
     isAllSelected,
     isItemSelected,

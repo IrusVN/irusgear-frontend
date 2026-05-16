@@ -8,7 +8,7 @@
       >
         <div class="checkout-sticky-bar__summary">
           <span class="checkout-sticky-bar__count">
-            {{ $t("checkout.itemCount", { count: cartStore.itemCount }) }}
+            {{ $t("checkout.itemCount", { count: cartStore.selectedItemCount }) }}
           </span>
           <span class="checkout-sticky-bar__total">
             {{ checkoutStore.finalTotal?.formatted || "0đ" }}
