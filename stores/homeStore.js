@@ -411,7 +411,6 @@ export const useHomeStore = defineStore("home", () => {
         const apiBaseUrl = getApiBaseUrl();
         const endpoints = [
           `${apiBaseUrl}/collections/mega-menu`,
-          `${apiBaseUrl}/mega-menu`,
         ];
         let res = null;
 
