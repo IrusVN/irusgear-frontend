@@ -1,212 +1,441 @@
 <template>
-  <div class="sidebar-wrapper position-relative">
-    <aside class="sidebar-admin d-flex flex-column bg-white border-end p-3 h-100" :class="{ 'sidebar-collapsed': isCollapsed }" >
-      <!-- Header -->
-      <div class="d-flex align-items-center gap-2 mb-4">
-        <div class="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center p-2" >
-          <i class="bi bi-bag-check-fill fs-5"></i>
-        </div>
-        <span v-if="!isCollapsed" class="fs-5 fw-bold text-dark">
-          {{ $t('sidebar.brandName') }}
+  <aside class="admin-sidebar"
+    :class="{ 'is-collapsed': isCollapsed && !isHovered, 'is-hovered': isCollapsed && isHovered, 'is-mobile-open': mobileOpen }"
+    @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+    <div class="sidebar-brand">
+      <NuxtLink class="brand-link" to="/admin/dashboard" @click="handleNavigate">
+        <span class="brand-mark">
+          <i class="bi bi-bag-check-fill"></i>
         </span>
-      </div>
+        <span v-if="showExpanded" class="brand-name">IrusGear</span>
+      </NuxtLink>
 
-      <!-- Search -->
-      <div v-if="!isCollapsed" class="input-group mb-4">
-        <span class="input-group-text bg-light border-end-0">
-          <i class="bi bi-search text-muted"></i>
-        </span>
-        <input
-          class="form-control bg-light border-start-0"
-          :placeholder="$t('sidebar.searchPlaceholder')"
-          v-model="searchQuery"
-        />
-      </div>
+      <button class="collapse-button d-none d-lg-inline-flex" type="button" :aria-label="collapseLabel"
+        @click="toggleCollapse">
+        <i class="bi" :class="isCollapsed ? 'bi-circle' : 'bi-record-circle'"></i>
+      </button>
 
-      <!-- Navigation -->
-      <nav class="flex-grow-1 overflow-auto">
-        <div class="mb-4">
-          <small v-if="!isCollapsed" class="text-muted text-uppercase fw-semibold ps-3 d-block mb-2" >
-            {{ $t('sidebar.sections.main') }}
-          </small>
+      <button class="collapse-button d-lg-none" type="button" aria-label="Close menu" @click="$emit('close-mobile')">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
 
-          <ul class="nav flex-column gap-1">
-            <li v-for="item in mainMenuItems" :key="item.key">
-              <NuxtLink :to="item.route" class="nav-link d-flex align-items-center gap-3 rounded-3 px-3 py-2" :class="isActiveRoute(item.route) ? 'bg-dark text-white' : 'text-secondary'" >
-                <i class="bi fs-5" :class="item.icon"></i>
-                <span v-if="!isCollapsed">{{ $t(item.label) }}</span>
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <div v-if="showExpanded" class="nav-group-label">Apps & Pages</div>
+
+        <button class="nav-parent" type="button" :class="{ 'is-open': isEcommerceOpen }"
+          @click="toggleGroup('ecommerce')">
+          <i class="bi bi-cart3"></i>
+          <span v-if="showExpanded">Ecommerce</span>
+          <i v-if="showExpanded" class="bi bi-chevron-down nav-chevron"></i>
+        </button>
+
+        <Transition name="submenu">
+          <div v-if="isEcommerceOpen || (isCollapsed && !isHovered)" class="submenu">
+            <template v-for="item in ecommerceMenu" :key="item.key">
+              <NuxtLink v-if="!item.children" class="nav-link-item" :class="{ 'is-active': isActiveRoute(item.route) }"
+                :to="item.route" @click="handleNavigate">
+                <span class="nav-dot"></span>
+                <span v-if="showExpanded">{{ item.label }}</span>
               </NuxtLink>
-            </li>
-          </ul>
-        </div>
-      </nav>
 
-      <!-- Bottom -->
-      <div class="pt-3 border-top">
-        <ul class="nav flex-column gap-1 mb-3">
-          <li v-for="item in bottomMenuItems" :key="item.key">
-            <NuxtLink :to="item.route" class="nav-link d-flex align-items-center gap-3 rounded-3 px-3 py-2" :class="isActiveRoute(item.route) ? 'bg-dark text-white' : 'text-secondary'" >
-              <i class="bi fs-5" :class="item.icon"></i>
-              <span v-if="!isCollapsed">{{ $t(item.label) }}</span>
-            </NuxtLink>
-          </li>
-        </ul>
-
-        <!-- User -->
-        <div class="d-flex align-items-center gap-3 p-3 rounded-3 bg-light position-relative">
-          <i class="bi bi-person-circle fs-2 text-dark"></i>
-          <div v-if="!isCollapsed" class="flex-grow-1 overflow-hidden">
-            <div class="fw-semibold text-dark text-truncate small">
-              {{ userName }}
-            </div>
-            <div class="text-muted text-truncate">
-              {{ userEmail }}
-            </div>
-          </div>
-
-          <div v-if="!isCollapsed" class="dropdown">
-            <button 
-              class="btn btn-sm p-0 text-muted" 
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i class="bi bi-three-dots-vertical"></i>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a class="dropdown-item" href="#">
-                  <i class="bi bi-person me-2"></i>
-                  Thông tin cá nhân
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  <i class="bi bi-gear me-2"></i>
-                  Cài đặt
-                </a>
-              </li>
-              <li><hr class="dropdown-divider"></li>
-              <li>
-                <button class="dropdown-item text-danger" @click="handleLogout">
-                  <i class="bi bi-box-arrow-right me-2"></i>
-                  Đăng xuất
+              <div v-else class="nav-branch" :class="{ 'is-branch-active': isBranchActive(item) }">
+                <button class="nav-link-item nav-branch-trigger" type="button" @click="toggleGroup(item.key)">
+                  <span class="nav-dot"></span>
+                  <span v-if="showExpanded">{{ item.label }}</span>
+                  <i v-if="showExpanded" class="bi bi-chevron-down nav-chevron"></i>
                 </button>
-              </li>
-            </ul>
+
+                <Transition name="submenu">
+                  <div v-if="openGroups[item.key] || isBranchActive(item)" class="submenu nested">
+                    <NuxtLink v-for="child in item.children" :key="child.key" class="nav-link-item"
+                      :class="{ 'is-active': isActiveRoute(child.route) }" :to="child.route" @click="handleNavigate">
+                      <span class="nav-dot"></span>
+                      <span v-if="showExpanded">{{ child.label }}</span>
+                    </NuxtLink>
+                  </div>
+                </Transition>
+              </div>
+            </template>
           </div>
-        </div>
+        </Transition>
       </div>
-    </aside>
-    <!-- Toggle button -->
-    <button class="toggle-btn btn btn-outline-secondary btn-sm position-absolute top-50 end-0 rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center" @click="toggleSidebar" >
-      <i class="bi" :class="isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
-    </button>
-  </div>
+
+      <div class="nav-group">
+        <div v-if="showExpanded" class="nav-group-label">Operations</div>
+        <NuxtLink v-for="item in operationMenu" :key="item.key" class="nav-parent nav-parent-link"
+          :class="{ 'is-active-parent': isActiveRoute(item.route) }" :to="item.route" @click="handleNavigate">
+          <i class="bi" :class="item.icon"></i>
+          <span v-if="showExpanded">{{ item.label }}</span>
+        </NuxtLink>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <NuxtLink class="nav-parent nav-parent-link" :class="{ 'is-active-parent': isActiveRoute('/admin/settings') }"
+        to="/admin/settings" @click="handleNavigate">
+        <i class="bi bi-gear"></i>
+        <span v-if="showExpanded">Settings</span>
+      </NuxtLink>
+      <button class="nav-parent logout-inline" type="button" @click="handleLogout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span v-if="showExpanded">Logout</span>
+      </button>
+    </div>
+  </aside>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
+
+const props = defineProps({
+  mobileOpen: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+const emit = defineEmits(['close-mobile', 'collapsed-change'])
 
 const route = useRoute()
-
+const auth = useAuthStore()
 const isCollapsed = ref(false)
-const searchQuery = ref('')
+const isHovered = ref(false)
+const openGroups = reactive({
+  ecommerce: true,
+  products: true,
+  orders: false,
+  customers: false,
+})
 
-const userName = ref('HuuThangLmao')
-const userEmail = ref('thang@gmail.com')
-
-const mainMenuItems = [
-  { key: 'home', label: 'sidebar.menu.home', icon: 'bi-house-door', route: '/admin/dashboard' },
-  { key: 'orders', label: 'sidebar.menu.orders', icon: 'bi-cart3', route: '/admin/orders' },
-  { key: 'documentation', label: 'sidebar.menu.documentation', icon: 'bi-file-earmark-text', route: '#' },
-  { key: 'map', label: 'sidebar.menu.mapOverview', icon: 'bi-grid-1x2', route: '#' },
-  { key: 'stats', label: 'sidebar.menu.statistics', icon: 'bi-pie-chart', route: '#' },
-  { key: 'products', label: 'sidebar.menu.products', icon: 'bi-box-seam', route: '/admin/products' },
+const ecommerceMenu = [
+  { key: 'dashboard', label: 'Dashboard', route: '/admin/dashboard' },
+  {
+    key: 'products',
+    label: 'Product',
+    children: [
+      { key: 'product-list', label: 'List', route: '/admin/products' },
+      { key: 'product-category', label: 'Category', route: '/admin/categories' },
+    ],
+  },
+  {
+    key: 'orders',
+    label: 'Order',
+    children: [
+      { key: 'order-list', label: 'List', route: '/admin/orders' },
+    ],
+  },
+  {
+    key: 'customers',
+    label: 'Customer',
+    children: [
+      { key: 'customer-list', label: 'List', route: '/admin/customers' },
+    ],
+  },
+  { key: 'reviews', label: 'Manage Review', route: '/admin/reviews' },
+  { key: 'referrals', label: 'Referrals', route: '/admin/referrals' },
 ]
 
-const bottomMenuItems = [
-  { key: 'settings', label: 'sidebar.menu.settings', icon: 'bi-gear', route: '#' },
-  { key: 'help', label: 'sidebar.menu.help', icon: 'bi-question-circle', route: '#' },
+const operationMenu = [
+  { key: 'analytics', label: 'Analytics', icon: 'bi-pie-chart', route: '/admin/analytics' },
 ]
 
-const toggleSidebar = () => {
+const collapseLabel = computed(() => (isCollapsed.value ? 'Expand sidebar' : 'Collapse sidebar'))
+const showExpanded = computed(() => !isCollapsed.value || isHovered.value)
+const isEcommerceOpen = computed(() => openGroups.ecommerce)
+
+const toggleCollapse = () => {
   isCollapsed.value = !isCollapsed.value
+  isHovered.value = false
+  emit('collapsed-change', isCollapsed.value)
+}
+
+const onMouseEnter = () => {
+  if (isCollapsed.value) isHovered.value = true
+}
+
+const onMouseLeave = () => {
+  isHovered.value = false
+}
+
+const toggleGroup = (key) => {
+  if (isCollapsed.value && key !== 'ecommerce') {
+    isCollapsed.value = false
+    emit('collapsed-change', false)
+  }
+  openGroups[key] = !openGroups[key]
 }
 
 const isActiveRoute = (itemRoute) => {
-  if (itemRoute === '#') return false
-  return route.path === itemRoute || route.path.startsWith(itemRoute + '/')
+  if (!itemRoute) return false
+  if (itemRoute === '/admin/dashboard') return route.path === itemRoute
+  return route.path === itemRoute || route.path.startsWith(`${itemRoute}/`)
 }
 
-const handleLogout = () => {
-  // Clear auth token
-  const authToken = useCookie('auth_token')
-  authToken.value = null
-  
-  // Redirect to login
-  navigateTo('/auth/login')
+const isBranchActive = (item) => {
+  return item.children?.some((child) => isActiveRoute(child.route)) || false
 }
+
+const handleNavigate = () => {
+  if (props.mobileOpen) emit('close-mobile')
+}
+
+const handleLogout = async () => {
+  if (props.mobileOpen) emit('close-mobile')
+  await auth.logout()
+}
+
+watch(
+  () => route.path,
+  () => {
+    for (const item of ecommerceMenu) {
+      if (item.children && isBranchActive(item)) openGroups[item.key] = true
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <style scoped>
-.sidebar-wrapper {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  height: 100vh !important;
-  z-index: 1000 !important;
-  width: 260px;
-  transition: width 0.3s ease;
+.admin-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 1030;
+  width: var(--admin-sidebar-width);
+  height: 100vh;
+  background: var(--admin-surface);
+  border-right: 1px solid var(--admin-border);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.24s ease, transform 0.24s ease, box-shadow 0.24s ease;
 }
 
-.sidebar-wrapper:has(.sidebar-collapsed) {
-  width: 80px;
+.admin-sidebar.is-collapsed {
+  width: var(--admin-sidebar-collapsed-width);
 }
 
-.sidebar-admin {
-  width: 100%;
+/* Hover-expand overlay: full width floating over content */
+.admin-sidebar.is-hovered {
+  width: var(--admin-sidebar-width);
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.12);
+  z-index: 1040;
+}
+
+.sidebar-brand {
+  min-height: 64px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-link {
+  min-width: 0;
+  flex: 1;
+  color: var(--admin-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: #000;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 1.05rem;
+}
+
+.brand-name {
+  font-size: 1.32rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.collapse-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--admin-border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--admin-text);
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.collapse-button:hover {
+  background: var(--admin-surface-soft);
+}
+
+.sidebar-nav {
+  flex: 1;
+  min-height: 0;
+  padding: 0 12px 12px;
   overflow-y: auto;
-  height: 100%;
-}
-
-.sidebar-admin.sidebar-collapsed {
   overflow-x: hidden;
 }
 
-.toggle-btn {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translate(50%, -50%);
-  z-index: 1001;
-  width: 32px;
-  height: 32px;
-  padding: 0 !important;
+.nav-group {
+  margin-bottom: 16px;
+}
+
+.nav-group-label {
+  padding: 14px 10px 8px;
+  color: var(--admin-subtle);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.nav-parent,
+.nav-link-item {
+  width: 100%;
+  min-height: 40px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--admin-text);
+  text-decoration: none;
   display: flex;
   align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  font-size: 0.94rem;
+  line-height: 1.2;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.nav-parent:hover,
+.nav-link-item:hover {
+  background: var(--admin-surface-soft);
+}
+
+.nav-parent i:first-child {
+  width: 20px;
+  text-align: center;
+  font-size: 1.08rem;
+  color: currentColor;
+}
+
+.nav-chevron {
+  margin-left: auto;
+  font-size: 0.78rem;
+  transition: transform 0.18s ease;
+}
+
+.nav-parent.is-open .nav-chevron,
+.nav-branch.is-branch-active>.nav-branch-trigger .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.submenu {
+  padding: 3px 0 3px 0;
+}
+
+.submenu.nested {
+  padding-left: 14px;
+}
+
+.nav-link-item {
+  color: #4d4d5c;
+  padding-left: 15px;
+}
+
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  flex: 0 0 auto;
+  opacity: 0.7;
+}
+
+.nav-link-item.is-active {
+  background: linear-gradient(90deg, #000, #2b2b2b);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.26);
+}
+
+.nav-link-item.is-active .nav-dot {
+  opacity: 1;
+}
+
+.nav-parent-link.is-active-parent {
+  background: var(--admin-primary-soft);
+  color: var(--admin-primary);
+  font-weight: 700;
+}
+
+.sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--admin-border);
+}
+
+.logout-inline {
+  color: var(--admin-danger);
+}
+
+.admin-sidebar.is-collapsed .sidebar-brand {
   justify-content: center;
+  padding-inline: 10px;
 }
 
-.toggle-btn i {
-  font-size: 14px;
+.admin-sidebar.is-collapsed .brand-link {
+  flex: 0 0 auto;
 }
 
-@media (max-width: 768px) {
-  .sidebar-wrapper {
-    width: 260px;
+.admin-sidebar.is-collapsed .collapse-button {
+  position: absolute;
+  top: 18px;
+  right: -15px;
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-sidebar.is-collapsed .sidebar-nav,
+.admin-sidebar.is-collapsed .sidebar-footer {
+  padding-inline: 10px;
+}
+
+.admin-sidebar.is-collapsed .nav-parent,
+.admin-sidebar.is-collapsed .nav-link-item {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+.admin-sidebar.is-collapsed .submenu.nested {
+  padding-left: 0;
+}
+
+.submenu-enter-active,
+.submenu-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.submenu-enter-from,
+.submenu-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+@media screen and (max-width: 991.98px) {
+  .admin-sidebar {
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    box-shadow: none;
   }
 
-  .sidebar-wrapper.mobile-open {
+  .admin-sidebar.is-mobile-open {
     transform: translateX(0);
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .toggle-btn {
-    display: none !important;
+    box-shadow: 0 0 30px rgba(15, 15, 20, 0.22);
   }
 }
 </style>

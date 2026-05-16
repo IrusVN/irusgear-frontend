@@ -1,258 +1,287 @@
 <template>
-  <div class="orders-container">
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <div>
-        <h2 class="fw-bold mb-1">{{ $t('orders.title') }}</h2>
-        <p class="text-muted mb-0">{{ $t('orders.subtitle') }}</p>
-      </div>
+  <div class="orders-page">
+    <!-- Payment Metric Strip -->
+    <div class="metric-strip">
+      <AdminMetricCard
+        v-for="m in paymentMetrics"
+        :key="m.label"
+        :label="m.label"
+        :value="String(m.value)"
+        :meta="m.meta"
+        :icon="m.icon"
+        :variant="m.variant"
+      />
     </div>
 
-    <!-- Filters -->
-    <div class="bg-white rounded-3 p-4 border mb-4">
-      <div class="row g-3">
-        <div class="col-12 col-md-4">
-          <label class="form-label small fw-semibold">{{ $t('orders.filters.search') }}</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            :placeholder="$t('orders.filters.searchPlaceholder')"
-            v-model="searchQuery"
-            @input="handleSearch"
+    <!-- Order Table (Desktop) -->
+    <AdminDataTable
+      v-if="!isMobile"
+      :columns="columns"
+      :items="orders"
+      :selectable="true"
+      :selected-keys="selectedIds"
+      @update:selected-keys="selectedIds = $event"
+      @row-click="viewOrder"
+    >
+      <template #toolbar>
+        <AdminTableToolbar
+          :search="search"
+          :page-size="pageSize"
+          search-placeholder="Search Order"
+          @update:search="handleSearch"
+          @update:page-size="changePageSize"
+          @export="handleExport"
+        />
+      </template>
+
+      <template #cell-orderCode="{ item }">
+        <nuxt-link :to="`/admin/orders/${item.id}`" class="order-id-link" @click.stop>{{ item.orderCode }}</nuxt-link>
+      </template>
+
+      <template #cell-date="{ item }">
+        <span class="date-text">{{ formatDate(item.date) }}</span>
+      </template>
+
+      <template #cell-customer="{ item }">
+        <div class="customer-cell">
+          <img :src="item.customer.avatar" :alt="item.customer.name" class="customer-avatar" />
+          <div class="customer-info">
+            <strong>{{ item.customer.name }}</strong>
+            <small>{{ item.customer.email }}</small>
+          </div>
+        </div>
+      </template>
+
+      <template #cell-paymentStatus="{ item }">
+        <AdminStatusBadge :label="paymentLabel(item.paymentStatus)" :variant="paymentVariant(item.paymentStatus)" />
+      </template>
+
+      <template #cell-fulfillmentStatus="{ item }">
+        <AdminStatusBadge :label="fulfillmentLabel(item.fulfillmentStatus)" :variant="fulfillmentVariant(item.fulfillmentStatus)" dot />
+      </template>
+
+      <template #cell-paymentMethod="{ item }">
+        <span class="method-text">{{ item.paymentLabel }}</span>
+      </template>
+
+      <template #actions="{ item }">
+        <AdminActionMenu
+          :items="[
+            { key: 'view', label: 'View Details', icon: 'bi-eye' },
+            { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+          ]"
+          @select="handleAction($event, item)"
+        />
+      </template>
+
+      <template #pagination>
+        <AdminPagination
+          :page="page"
+          :page-size="pageSize"
+          :total="totalOrders"
+          @update:page="changePage"
+        />
+      </template>
+    </AdminDataTable>
+
+    <!-- Mobile Card List -->
+    <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
+      <label style="display:block;position:relative;margin-bottom:12px">
+        <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
+        <input class="admin-control" v-model="search" placeholder="Search Order" style="padding-left:36px;width:100%" @input="resetPage">
+      </label>
+      <AdminMobileCard
+        v-for="item in orders"
+        :key="item.id"
+        :title="item.orderCode"
+        :subtitle="item.customer.name"
+        :avatar="item.customer.avatar"
+        :meta="[
+          { label: 'Date', value: formatDate(item.date) },
+          { label: 'Method', value: item.paymentLabel },
+        ]"
+        @click="viewOrder(item)"
+      >
+        <template #badge>
+          <AdminStatusBadge :label="paymentLabel(item.paymentStatus)" :variant="paymentVariant(item.paymentStatus)" />
+        </template>
+        <template #actions>
+          <AdminActionMenu
+            :items="[
+              { key: 'view', label: 'View Details', icon: 'bi-eye' },
+              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+            ]"
+            @select="handleAction($event, item)"
           />
-        </div>
-        <div class="col-12 col-md-3">
-          <label class="form-label small fw-semibold">{{ $t('orders.filters.status') }}</label>
-          <select class="form-select" v-model="statusFilter" @change="handleFilterChange">
-            <option value="all">{{ $t('orders.filters.allStatus') }}</option>
-            <option value="pending">{{ $t('dashboard.orderStatus.pending') }}</option>
-            <option value="processing">{{ $t('dashboard.orderStatus.processing') }}</option>
-            <option value="shipped">{{ $t('dashboard.orderStatus.shipped') }}</option>
-            <option value="delivered">{{ $t('dashboard.orderStatus.delivered') }}</option>
-            <option value="cancelled">{{ $t('dashboard.orderStatus.cancelled') }}</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- Orders Table -->
-    <div class="bg-white rounded-3 border">
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead class="table-light">
-            <tr>
-              <th class="px-4">{{ $t('orders.table.orderId') }}</th>
-              <th>{{ $t('orders.table.customer') }}</th>
-              <th>{{ $t('orders.table.items') }}</th>
-              <th>{{ $t('orders.table.total') }}</th>
-              <th>{{ $t('orders.table.status') }}</th>
-              <th>{{ $t('orders.table.date') }}</th>
-              <th class="text-center">{{ $t('orders.table.actions') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-if="loading">
-              <td colspan="7" class="text-center py-5">
-                <div class="spinner-border text-primary" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </td>
-            </tr>
-            <tr v-else-if="orders.length === 0">
-              <td colspan="7" class="text-center text-muted py-5">
-                {{ $t('orders.noOrders') }}
-              </td>
-            </tr>
-            <tr v-else v-for="order in orders" :key="order.id" class="cursor-pointer">
-              <td class="px-4">
-                <span class="fw-semibold">#{{ order.id }}</span>
-              </td>
-              <td>
-                <div class="d-flex align-items-center gap-2">
-                  <div class="avatar bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
-                    {{ order.customer.name.charAt(0) }}
-                  </div>
-                  <div>
-                    <div class="fw-semibold">{{ order.customer.name }}</div>
-                    <small class="text-muted">{{ order.customer.email }}</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <span class="badge bg-light text-dark">{{ order.items.length }} sản phẩm</span>
-              </td>
-              <td class="fw-semibold">{{ formatCurrency(order.total) }}</td>
-              <td>
-                <select 
-                  class="form-select form-select-sm"
-                  :class="getStatusClass(order.status)"
-                  :value="order.status"
-                  @change="(e) => handleStatusChange(order.id, (e.target as HTMLSelectElement).value as OrderStatus)"
-                  @click.stop
-                >
-                  <option value="pending">{{ $t('dashboard.orderStatus.pending') }}</option>
-                  <option value="processing">{{ $t('dashboard.orderStatus.processing') }}</option>
-                  <option value="shipped">{{ $t('dashboard.orderStatus.shipped') }}</option>
-                  <option value="delivered">{{ $t('dashboard.orderStatus.delivered') }}</option>
-                  <option value="cancelled">{{ $t('dashboard.orderStatus.cancelled') }}</option>
-                </select>
-              </td>
-              <td class="text-muted">{{ formatDate(order.createdAt) }}</td>
-              <td class="text-center">
-                <NuxtLink 
-                  :to="`/admin/orders/${order.id}`"
-                  class="btn btn-sm btn-outline-primary"
-                >
-                  <i class="bi bi-eye"></i>
-                </NuxtLink>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Pagination -->
-      <div v-if="totalPages > 1" class="d-flex justify-content-between align-items-center p-4 border-top">
-        <div class="text-muted small">
-          Hiển thị {{ orders.length }} / {{ total }} đơn hàng
-        </div>
-        <nav>
-          <ul class="pagination pagination-sm mb-0">
-            <li class="page-item" :class="{ disabled: page === 1 }">
-              <button class="page-link" @click="changePage(page - 1)">
-                <i class="bi bi-chevron-left"></i>
-              </button>
-            </li>
-            <li 
-              v-for="p in totalPages" 
-              :key="p" 
-              class="page-item" 
-              :class="{ active: p === page }"
-            >
-              <button class="page-link" @click="changePage(p)">{{ p }}</button>
-            </li>
-            <li class="page-item" :class="{ disabled: page === totalPages }">
-              <button class="page-link" @click="changePage(page + 1)">
-                <i class="bi bi-chevron-right"></i>
-              </button>
-            </li>
-          </ul>
-        </nav>
+        </template>
+      </AdminMobileCard>
+      <div v-if="totalOrders > orders.length" style="text-align:center;padding:8px">
+        <button v-if="page * pageSize < totalOrders" class="admin-secondary-button" @click="changePage(page + 1)">Load More</button>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { useI18n, useHead } from '#imports'
-import { useOrders } from '~/composables/useOrders'
-import type { OrderStatus } from '~/types/order'
+<script setup>
+import { ref, computed, onMounted, watch } from 'vue'
+import { useHead, useRouter } from '#imports'
+import { useAdminStore } from '@/stores/adminStore'
+import { usePaginationStore } from '@/stores/paginationStore'
+import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
+import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
+import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
+import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
+import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
+import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
+import { useMediaQuery } from '@/composables/useMediaQuery'
 
-definePageMeta({
-  layout: 'admin',
+const isMobile = useMediaQuery('(max-width: 767px)')
+
+definePageMeta({ layout: 'admin' })
+useHead({ title: 'Orders – IrusGear Admin' })
+
+const router = useRouter()
+const admin = useAdminStore()
+const pagination = usePaginationStore()
+
+/* ── state ── */
+const search = ref('')
+const searchTimeout = ref(null)
+const page = computed(() => pagination.page)
+const pageSize = computed(() => pagination.limit)
+const totalOrders = computed(() => pagination.total)
+
+const selectedIds = ref([])
+const orders = ref([])
+const stats = ref(null)
+
+const handleSearch = (val) => {
+  search.value = val
+  if (searchTimeout.value) clearTimeout(searchTimeout.value)
+  searchTimeout.value = setTimeout(() => {
+    pagination.page = 1
+    fetchOrders()
+  }, 300)
+}
+
+const changePage = (p) => {
+  pagination.page = p
+  fetchOrders()
+}
+
+const changePageSize = (size) => {
+  pagination.limit = size
+  pagination.page = 1
+  fetchOrders()
+}
+
+/* ── metrics ── */
+const paymentMetrics = computed(() => {
+  const s = stats.value?.by_payment_status || {}
+  return [
+    { label: 'Pending Payment', value: s.pending || 0, meta: 'orders', icon: 'bi-clock', variant: 'warning' },
+    { label: 'Completed', value: s.paid || 0, meta: 'orders', icon: 'bi-check-circle', variant: 'success' },
+    { label: 'Refunded', value: s.refunded || 0, meta: 'orders', icon: 'bi-arrow-counterclockwise', variant: 'info' },
+    { label: 'Failed', value: s.failed || 0, meta: 'orders', icon: 'bi-x-circle', variant: 'danger' },
+  ]
 })
 
-const { t } = useI18n()
-useHead({ title: computed(() => t('orders.title')) })
+/* ── columns ── */
+const columns = [
+  { key: 'orderCode', label: 'Order', width: '100px' },
+  { key: 'date', label: 'Date' },
+  { key: 'customer', label: 'Customer', width: '22%' },
+  { key: 'paymentStatus', label: 'Payment' },
+  { key: 'fulfillmentStatus', label: 'Fulfillment' },
+  { key: 'paymentMethod', label: 'Method' },
+]
 
-const { orders, total, page, totalPages, loading, fetchOrders, updateOrderStatus } = useOrders()
+/* ── mapping ── */
+const mapOrder = (o) => ({
+  id: o.id,
+  orderCode: o.order_number,
+  date: o.created_at,
+  customer: {
+    name: o.customer?.name || 'Guest',
+    email: o.customer?.email || o.guest_email || '',
+    avatar: '', // fallback to initials or empty
+  },
+  paymentStatus: o.payment?.status || 'pending',
+  fulfillmentStatus: o.status,
+  paymentMethod: o.payment?.method || 'cod',
+  paymentLabel: o.payment ? (o.payment.method === 'cod' ? 'Cash on Delivery' : o.payment.method) : 'N/A',
+})
 
-const searchQuery = ref('')
-const statusFilter = ref<OrderStatus | 'all'>('all')
+/* ── data fetching ── */
+const fetchOrders = async () => {
+  const res = await admin.fetchList('orders', {
+    search: search.value,
+  })
+  if (res?.data) {
+    orders.value = res.data.map(mapOrder)
+  }
+}
 
-let searchTimeout: NodeJS.Timeout
+const fetchStats = async () => {
+  const res = await admin.fetchOne('orders/stats')
+  if (res?.data) {
+    stats.value = res.data
+  }
+}
 
 onMounted(() => {
+  pagination.reset()
   fetchOrders()
+  fetchStats()
 })
 
-const handleSearch = () => {
-  clearTimeout(searchTimeout)
-  searchTimeout = setTimeout(() => {
-    handleFilterChange()
-  }, 500)
-}
+/* ── helpers ── */
+const formatDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-const handleFilterChange = () => {
-  fetchOrders({
-    search: searchQuery.value,
-    status: statusFilter.value,
-    page: 1
-  })
-}
+const paymentLabel = (s) => ({ pending: 'Pending', paid: 'Paid', failed: 'Failed', cancelled: 'Cancelled', refunded: 'Refunded' }[s] || s)
+const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
 
-const changePage = (newPage: number) => {
-  if (newPage < 1 || newPage > totalPages.value) return
-  
-  fetchOrders({
-    search: searchQuery.value,
-    status: statusFilter.value,
-    page: newPage
-  })
-}
+const fulfillmentLabel = (s) => ({
+  ready_to_pickup: 'Ready to Pickup', out_for_delivery: 'Out for Delivery',
+  delivered: 'Delivered', dispatched: 'Dispatched', processing: 'Processing',
+}[s] || s)
+const fulfillmentVariant = (s) => ({
+  ready_to_pickup: 'info', out_for_delivery: 'warning',
+  delivered: 'success', dispatched: 'neutral', processing: 'neutral',
+}[s] || 'neutral')
 
-const handleStatusChange = async (orderId: string, newStatus: OrderStatus) => {
-  try {
-    await updateOrderStatus(orderId, newStatus)
-  } catch (err) {
-    console.error('Failed to update status:', err)
-  }
-}
-
-const formatCurrency = (amount: number) => {
-  return new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND'
-  }).format(amount)
-}
-
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString('vi-VN', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-}
-
-const getStatusClass = (status: OrderStatus) => {
-  const classes: Record<OrderStatus, string> = {
-    pending: 'border-warning text-warning',
-    processing: 'border-info text-info',
-    shipped: 'border-primary text-primary',
-    delivered: 'border-success text-success',
-    cancelled: 'border-danger text-danger'
-  }
-  return classes[status] || ''
+const viewOrder = (item) => router.push(`/admin/orders/${item.id}`)
+const handleExport = () => alert('Export triggered (mock)')
+const handleAction = (action, item) => {
+  if (action.key === 'delete') alert(`Delete order ${item.orderCode} (mock)`)
+  else router.push(`/admin/orders/${item.id}`)
 }
 </script>
 
 <style scoped>
-.orders-container {
-  max-width: 1400px;
+.orders-page { max-width: 1560px; }
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
 }
 
-.cursor-pointer {
-  cursor: pointer;
-}
+.order-id-link { color: var(--admin-primary); font-weight: 700; text-decoration: none; }
+.order-id-link:hover { text-decoration: underline; }
 
-.avatar {
-  font-size: 0.875rem;
-  font-weight: 600;
-}
+.date-text { color: var(--admin-muted); font-size: 0.88rem; white-space: nowrap; }
 
-.table th {
-  font-weight: 600;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.customer-cell { display: flex; align-items: center; gap: 10px; }
+.customer-avatar { width: 34px; height: 34px; border-radius: 999px; object-fit: cover; flex: 0 0 auto; }
+.customer-info { min-width: 0; }
+.customer-info strong { display: block; font-size: 0.88rem; color: var(--admin-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+.customer-info small { color: var(--admin-muted); font-size: 0.78rem; }
 
-.form-select-sm {
-  font-size: 0.875rem;
-  font-weight: 600;
-  border-width: 2px;
-}
+.method-text { font-size: 0.86rem; color: var(--admin-muted); white-space: nowrap; }
+
+@media screen and (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
+@media screen and (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
 </style>

@@ -20,6 +20,7 @@ export default defineNuxtConfig({
   },
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
+    '@/assets/css/admin.css',
     '@/public/assets/css/responsive.css',
   ],
   app: {
