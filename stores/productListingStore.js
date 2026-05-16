@@ -38,6 +38,8 @@ const FILTER_UI = {
 
 const QUICK_FILTER_KEYS = ["filter", "stock", "new", "price"];
 
+const PRICE_FILTER_KEY = "price";
+
 const DEFAULT_BANNERS = [
   { id: "primary", items: [] },
   { id: "secondary", items: [] },
@@ -60,6 +62,7 @@ const DEFAULT_SORT_OPTIONS = Object.keys(SORT_LABELS).map((key) => ({
 
 const DEFAULT_FILTERS = QUICK_FILTER_KEYS.map((key) => ({
   key,
+  queryKey: key,
   label: FILTER_UI[key].label,
   leadingIcon: FILTER_UI[key].leadingIcon,
   trailingIcon: FILTER_UI[key].trailingIcon,
@@ -102,6 +105,28 @@ const normalizeSelectedValues = (value) => {
   }
 
   return [String(value).trim()].filter(Boolean);
+};
+
+const normalizeSearchText = (value) =>
+  String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+const isPriceFilter = (filter) => {
+  const key = normalizeSearchText(filter?.key).replace(/[-\s]+/g, "_");
+  const label = normalizeSearchText(filter?.label);
+
+  return (
+    key === PRICE_FILTER_KEY ||
+    key.includes("price") ||
+    key.includes("gia_tien") ||
+    label === "gia tien" ||
+    label === "xem theo gia" ||
+    label === "khoang gia" ||
+    label === "muc gia"
+  );
 };
 
 const normalizeListingContext = (context = {}) =>
@@ -178,6 +203,7 @@ const transformListingPayload = (payload = {}, previousSelection = {}) => {
 
       return {
         key: String(filter.key),
+        queryKey: String(filter.key),
         label: String(filter?.label || ui.label || filter.key),
         leadingIcon: ui.leadingIcon,
         trailingIcon: ui.trailingIcon || (optionMeta.length ? "chevron" : undefined),
@@ -187,13 +213,29 @@ const transformListingPayload = (payload = {}, previousSelection = {}) => {
       };
     });
 
+  const apiPriceFilter = apiFilters.find(isPriceFilter);
+  const priceFilter = apiPriceFilter
+    ? {
+        ...apiPriceFilter,
+        key: PRICE_FILTER_KEY,
+        queryKey: apiPriceFilter.queryKey || apiPriceFilter.key,
+        label: FILTER_UI[PRICE_FILTER_KEY].label,
+        leadingIcon: FILTER_UI[PRICE_FILTER_KEY].leadingIcon,
+        trailingIcon: apiPriceFilter.trailingIcon || FILTER_UI[PRICE_FILTER_KEY].trailingIcon || "chevron",
+        primary: Boolean(FILTER_UI[PRICE_FILTER_KEY].primary),
+      }
+    : null;
+
   const productFilters = [
     ...QUICK_FILTER_KEYS.map((key) => {
+      if (key === PRICE_FILTER_KEY && priceFilter) return priceFilter;
+
       const filter = apiFilters.find((item) => item.key === key);
       if (filter) return filter;
 
       return {
         key,
+        queryKey: key,
         label: FILTER_UI[key].label,
         leadingIcon: FILTER_UI[key].leadingIcon,
         trailingIcon: FILTER_UI[key].trailingIcon,
@@ -202,23 +244,24 @@ const transformListingPayload = (payload = {}, previousSelection = {}) => {
         optionMeta: [],
       };
     }),
-    ...apiFilters.filter((filter) => !QUICK_FILTER_KEYS.includes(filter.key)),
+    ...apiFilters.filter((filter) => !QUICK_FILTER_KEYS.includes(filter.key) && !isPriceFilter(filter)),
   ];
 
   const selectedOptionsByFilter = Object.entries(appliedFilters).reduce((accumulator, [filterKey, filterValue]) => {
-    const filter = productFilters.find((item) => item.key === filterKey);
+    const filter = productFilters.find((item) => item.key === filterKey || item.queryKey === filterKey);
     if (!filter) return accumulator;
 
+    const selectedFilterKey = filter.key;
     const values = normalizeSelectedValues(filterValue);
 
     if (!values.length) return accumulator;
 
     if (!filter.optionMeta.length) {
-      accumulator[filterKey] = [filter.label];
+      accumulator[selectedFilterKey] = [filter.label];
       return accumulator;
     }
 
-    accumulator[filterKey] = values
+    accumulator[selectedFilterKey] = values
       .map((value) => filter.optionMeta.find((option) => option.value === value)?.label)
       .filter(Boolean);
 
@@ -345,6 +388,11 @@ export const useProductListingStore = defineStore("product-listing", () => {
     return option?.value || optionLabel;
   };
 
+  const resolveFilterQueryKey = (filterKey) => {
+    const filter = productFilters.value.find((item) => item.key === filterKey);
+    return filter?.queryKey || filterKey;
+  };
+
   const buildQueryParams = ({ page = 1 } = {}) => {
     const params = {
       ...normalizeListingContext(listingContext.value),
@@ -372,7 +420,7 @@ export const useProductListingStore = defineStore("product-listing", () => {
         .join(",");
 
       if (queryValue) {
-        params[filterKey] = queryValue;
+        params[resolveFilterQueryKey(filterKey)] = queryValue;
       }
     });
 

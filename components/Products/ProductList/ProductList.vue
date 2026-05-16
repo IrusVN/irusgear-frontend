@@ -1314,6 +1314,7 @@ onBeforeUnmount(() => {
   gap: 16px;
   justify-content: space-between;
   margin-top: 28px;
+  margin-bottom: 28px;
 }
 
 .product-sort-title {
