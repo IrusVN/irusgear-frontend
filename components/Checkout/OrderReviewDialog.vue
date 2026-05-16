@@ -134,7 +134,7 @@
             @click="$emit('confirm')"
           >
             <span v-if="checkoutStore.isSubmitting">
-              <i class="bi bi-arrow-repeat spin"></i>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               {{ $t("checkout.processing") }}
             </span>
             <span v-else>
@@ -479,7 +479,7 @@ const getSelectedOptionsText = (item) => {
 }
 
 .order-review-dialog__btn--confirm:hover:not(:disabled) {
-  background: var(--irus-color-surface-dark);
+  background: #1a1a1a;
 }
 
 .order-review-dialog__btn--confirm:disabled {
@@ -494,5 +494,6 @@ const getSelectedOptionsText = (item) => {
 
 .spin {
   animation: spin 0.8s linear infinite;
+  display: inline-block;
 }
 </style>

@@ -114,7 +114,7 @@
       @click="$emit('submit')"
     >
       <span v-if="checkoutStore.isSubmitting">
-        <i class="bi bi-arrow-repeat spin"></i>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         {{ $t("checkout.processing") }}
       </span>
       <span v-else>
@@ -164,7 +164,7 @@
         @click="$emit('submit')"
       >
         <span v-if="checkoutStore.isSubmitting">
-          <i class="bi bi-arrow-repeat spin"></i>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           {{ $t("checkout.processing") }}
         </span>
         <span v-else>
@@ -415,7 +415,7 @@ onBeforeUnmount(() => {
 }
 
 .checkout-summary__cta:hover:not(:disabled) {
-  background: var(--irus-color-surface-dark);
+  background: #1a1a1a;
   transform: scale(1.02);
 }
 
@@ -435,6 +435,7 @@ onBeforeUnmount(() => {
 
 .spin {
   animation: spin 0.8s linear infinite;
+  display: inline-block;
 }
 
 @media (max-width: 991.98px) {
@@ -532,7 +533,7 @@ onBeforeUnmount(() => {
 }
 
 .order-summary-mobile__cta:hover:not(:disabled) {
-  background: var(--irus-color-surface-dark);
+  background: #1a1a1a;
 }
 
 .order-summary-mobile__cta:disabled {

@@ -50,7 +50,7 @@
         @click="$emit('submit')"
       >
         <span v-if="checkoutStore.isSubmitting">
-          <i class="bi bi-arrow-repeat spin"></i>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           {{ $t("checkout.processing") }}
         </span>
         <span v-else>
@@ -194,12 +194,13 @@ const formatMoneyValue = (value) => {
   gap: 8px;
   justify-content: center;
   min-height: 52px;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
   width: 100%;
 }
 
 .checkout-sticky-bar__cta:hover:not(:disabled) {
-  background: var(--irus-color-surface-dark);
+  background: #1a1a1a;
+  transform: translateY(-1px);
 }
 
 .checkout-sticky-bar__cta:disabled {
@@ -214,5 +215,6 @@ const formatMoneyValue = (value) => {
 
 .spin {
   animation: spin 0.8s linear infinite;
+  display: inline-block;
 }
 </style>
