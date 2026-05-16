@@ -631,6 +631,9 @@ export const useCheckoutStore = defineStore("checkout", () => {
     isSubmitting.value = true;
     submitError.value = null;
     try {
+      const cartStore = useCartStore();
+      const selectedIds = cartStore.selectedItemIds || [];
+
       feGlobalStore.setApiUrl("checkout/prepare");
       const response = await feGlobalStore.createItem({
         address_id: selectedAddressId.value,
@@ -646,6 +649,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
           notify_original: secondaryContact.value.notifyOriginal,
         } : null,
         order_insurance: orderInsurance.value,
+        selected_item_ids: selectedIds.length > 0 ? selectedIds : undefined,
       });
 
       if (response?.data) {

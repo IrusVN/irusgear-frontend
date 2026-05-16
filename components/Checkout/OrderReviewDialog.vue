@@ -222,7 +222,7 @@ const getSelectedOptionsText = (item) => {
 
 .order-review-dialog__header {
   align-items: center;
-  background: #fff7f7;
+  background: #000;
   border-bottom: 1px solid #f0e0e0;
   display: flex;
   gap: 12px;
@@ -232,7 +232,7 @@ const getSelectedOptionsText = (item) => {
 
 .order-review-dialog__title {
   align-items: center;
-  color: var(--irus-color-accent);
+  color: #ffff;
   display: flex;
   font-size: 17px;
   font-weight: 700;

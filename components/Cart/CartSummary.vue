@@ -10,6 +10,11 @@
     </div>
 
     <dl class="cart-summary__rows">
+      <div v-if="totalCount > 0" class="cart-summary__row">
+        <dt>{{ $t('cart.selectedProducts') }}</dt>
+        <dd>{{ selectedCount }}/{{ totalCount }}</dd>
+      </div>
+
       <div class="cart-summary__row">
         <dt>{{ $t('cart.products') }}</dt>
         <dd>{{ summary.itemCount || 0 }}</dd>
@@ -54,7 +59,7 @@
           'cart-summary__cta--primary',
           { 'cart-summary__cta--attention': !canCheckout },
         ]"
-        :disabled="busy || !hasItems"
+        :disabled="busy || !hasItems || selectedCount === 0"
         @click="$emit('checkout')"
       >
         {{ primaryActionLabel }}
@@ -105,6 +110,14 @@ const props = defineProps({
   hasItems: {
     type: Boolean,
     default: false,
+  },
+  selectedCount: {
+    type: Number,
+    default: 0,
+  },
+  totalCount: {
+    type: Number,
+    default: 0,
   },
   canCheckout: {
     type: Boolean,
