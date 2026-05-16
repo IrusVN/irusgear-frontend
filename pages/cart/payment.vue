@@ -106,7 +106,7 @@
           @click="handlePayment"
         >
           <span v-if="loadingMethod">
-            <i class="bi bi-arrow-repeat spin"></i>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             {{ $t("payment.processing") }}
           </span>
           <span v-else>
@@ -541,12 +541,13 @@ onUnmounted(() => {
   justify-content: center;
   min-height: 52px;
   padding: 12px 24px;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
   width: 100%;
 }
 
 .payment-page__submit-btn:hover:not(:disabled) {
-  background: var(--irus-color-surface-dark);
+  background: #1a1a1a;
+  transform: translateY(-1px);
 }
 
 .payment-page__submit-btn:disabled {
@@ -561,6 +562,7 @@ onUnmounted(() => {
 
 .spin {
   animation: spin 0.8s linear infinite;
+  display: inline-block;
 }
 
 @media (max-width: 991.98px) {

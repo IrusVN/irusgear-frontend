@@ -382,7 +382,7 @@ const handleSubmit = () => {
 }
 
 .address-form__btn--save:hover {
-  background: var(--irus-color-surface-dark);
+  background: #1a1a1a;
 }
 
 .address-form__btn--save:disabled {

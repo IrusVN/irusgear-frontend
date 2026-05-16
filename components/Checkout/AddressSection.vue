@@ -322,7 +322,7 @@ const handleDeleteAddress = async (id) => {
 }
 
 .address-section__add-btn:hover {
-  background: var(--irus-color-surface-dark);
+  background: #1a1a1a;
 }
 
 @keyframes shimmer {
