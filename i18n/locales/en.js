@@ -838,6 +838,7 @@ export default {
     deleteError: "Failed to delete address.",
     deliveryMethod: "Delivery Method",
     selectAddressFirst: "Please select a delivery address first.",
+    selectAddressForAccurateFee: "Select a delivery address for accurate shipping fees.",
     deliveryTimeSlot: "Delivery Time Slot",
     free: "Free",
     voucher: "Voucher",

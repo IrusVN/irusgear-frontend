@@ -208,9 +208,9 @@ export const useCheckoutStore = defineStore("checkout", () => {
   };
 
   const fetchDeliveryOptions = async () => {
-    if (!selectedAddressId.value) return;
-
-    // Use cached options if available (instant, no API call)
+    // Use cached options if available (instant, no API call).
+    // Cache chỉ lưu khi BE trả data thật — fallback không bị cache nên sẽ retry
+    // sau khi user chọn address.
     if (_deliveryOptionsCache) {
       deliveryOptions.value = _deliveryOptionsCache;
       if (!selectedDeliveryId.value && deliveryOptions.value.length > 0) {
@@ -222,21 +222,33 @@ export const useCheckoutStore = defineStore("checkout", () => {
     deliveryLoading.value = true;
     try {
       feGlobalStore.setApiUrl("checkout/delivery-options");
-      const response = await feGlobalStore.createItem({ address_id: selectedAddressId.value });
+      // address_id optional — BE sẽ tính phí mặc định nếu thiếu (hoặc trả 400 → fallback)
+      const payload = selectedAddressId.value
+        ? { address_id: selectedAddressId.value }
+        : {};
+      const response = await feGlobalStore.createItem(payload);
       if (response?.data && response.data.length > 0) {
-        _deliveryOptionsCache = response.data;
+        // Chỉ cache khi có address (response đã chính xác theo địa chỉ).
+        // Không có address → response là default → không cache để re-fetch sau.
+        if (selectedAddressId.value) {
+          _deliveryOptionsCache = response.data;
+        }
         deliveryOptions.value = response.data;
         if (!selectedDeliveryId.value) {
           selectedDeliveryId.value = String(response.data[0].id);
         }
       } else {
         deliveryOptions.value = _getFallbackDeliveryOptions();
-        selectedDeliveryId.value = "standard";
+        if (!selectedDeliveryId.value) {
+          selectedDeliveryId.value = "standard";
+        }
       }
     } catch (e) {
       console.error("fetchDeliveryOptions error:", e);
       deliveryOptions.value = _getFallbackDeliveryOptions();
-      selectedDeliveryId.value = "standard";
+      if (!selectedDeliveryId.value) {
+        selectedDeliveryId.value = "standard";
+      }
     } finally {
       deliveryLoading.value = false;
     }

@@ -7,14 +7,17 @@
       </h2>
     </div>
 
-    <!-- No address selected -->
-    <div v-if="!checkoutStore.selectedAddressId" class="delivery-options__empty">
+    <!-- Hint khi chưa chọn địa chỉ — options vẫn hiển thị bên dưới để user xem trước -->
+    <div v-if="!checkoutStore.selectedAddressId" class="delivery-options__hint">
       <i class="bi bi-info-circle"></i>
-      <span>{{ $t("checkout.selectAddressFirst") }}</span>
+      <span>{{ $t("checkout.selectAddressForAccurateFee") }}</span>
     </div>
 
     <!-- Loading -->
-    <div v-else-if="checkoutStore.deliveryLoading" class="delivery-options__loading">
+    <div
+      v-if="checkoutStore.deliveryLoading && !checkoutStore.deliveryOptions.length"
+      class="delivery-options__loading"
+    >
       <div v-for="i in 3" :key="i" class="delivery-options__skeleton"></div>
     </div>
 
@@ -58,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import DeliveryOptionCard from "@/components/Checkout/DeliveryOptionCard.vue";
 import DeliveryTimeSlot from "@/components/Checkout/DeliveryTimeSlot.vue";
@@ -70,6 +73,21 @@ const swiperEl = ref(null);
 const prevBtn = ref(null);
 const nextBtn = ref(null);
 let deliverySwiper = null;
+
+// Luôn fetch delivery options ngay khi mount, không cần chờ user chọn address.
+// Lần đầu sẽ dùng fallback (hoặc default từ BE); khi user chọn address sẽ re-fetch
+// để có phí ship chính xác theo địa chỉ.
+checkoutStore.fetchDeliveryOptions();
+
+// Watch address — chọn address mới → re-fetch để cập nhật phí ship chính xác
+watch(
+  () => checkoutStore.selectedAddressId,
+  (newId, oldId) => {
+    if (newId && newId !== oldId) {
+      checkoutStore.fetchDeliveryOptions();
+    }
+  },
+);
 
 onMounted(async () => {
   if (!import.meta.client || !swiperEl.value) return;
@@ -132,13 +150,20 @@ onUnmounted(() => {
   color: var(--irus-color-accent);
 }
 
-.delivery-options__empty {
+.delivery-options__hint {
   align-items: center;
-  color: #71717a;
+  background: #fff7ed;
+  border-bottom: 1px solid #fed7aa;
+  color: #92400e;
   display: flex;
   font-size: 13px;
   gap: 8px;
-  padding: 16px 20px;
+  padding: 10px 20px;
+}
+
+.delivery-options__hint i {
+  color: #d97706;
+  flex-shrink: 0;
 }
 
 .delivery-options__loading {

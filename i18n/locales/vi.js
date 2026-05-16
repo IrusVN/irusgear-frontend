@@ -850,6 +850,7 @@ export default {
     deleteError: "Không thể xóa địa chỉ.",
     deliveryMethod: "Phương thức giao hàng",
     selectAddressFirst: "Vui lòng chọn địa chỉ giao hàng trước.",
+    selectAddressForAccurateFee: "Chọn địa chỉ giao hàng để có phí ship chính xác.",
     deliveryTimeSlot: "Khung giờ giao hàng",
     free: "Miễn phí",
     voucher: "Mã giảm giá",
