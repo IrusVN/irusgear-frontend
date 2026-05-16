@@ -82,12 +82,12 @@ export const useWishlistStore = defineStore("wishlist", () => {
     isMutating.value = true;
 
     try {
-      const response = await requestWishlist("wishlist/items", {
+      await requestWishlist("wishlist/items", {
         method: "POST",
         body: payload,
       });
 
-      return applyWishlistPayload(response);
+      return await fetchWishlist({ force: true, silent: true });
     } finally {
       isMutating.value = false;
     }
@@ -97,12 +97,12 @@ export const useWishlistStore = defineStore("wishlist", () => {
     isMutating.value = true;
 
     try {
-      const response = await requestWishlist("wishlist/items", {
+      await requestWishlist("wishlist/items", {
         method: "DELETE",
         itemId,
       });
 
-      return applyWishlistPayload(response);
+      return await fetchWishlist({ force: true, silent: true });
     } finally {
       isMutating.value = false;
     }
@@ -112,11 +112,12 @@ export const useWishlistStore = defineStore("wishlist", () => {
     isMutating.value = true;
 
     try {
-      const response = await requestWishlist("wishlist", {
+      await requestWishlist("wishlist", {
         method: "DELETE",
       });
 
-      return applyWishlistPayload(response);
+      wishlist.value = createEmptyWishlist();
+      return wishlist.value;
     } finally {
       isMutating.value = false;
     }

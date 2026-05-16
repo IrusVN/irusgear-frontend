@@ -1,5 +1,6 @@
 <template>
   <div ref="rootEl" class="box-detail-product__box-center column">
+    <template v-if="productStore.productDetail">
     <div class="box-product-price">
       <div class="box-product-price-wrapper">
         <div class="price-label-container">
@@ -2252,6 +2253,30 @@
     <div style="">
       <div></div>
     </div>
+    </template>
+    <template v-else>
+      <div class="box-product-price mb-3">
+         <div class="skeleton" style="width: 150px; height: 30px; margin-bottom: 10px;"></div>
+         <div class="skeleton" style="width: 100px; height: 20px;"></div>
+      </div>
+      <div class="box-linked mb-3 mt-4">
+         <div class="skeleton" style="width: 100px; height: 20px; margin-bottom: 10px;"></div>
+         <div class="d-flex gap-2">
+           <div class="skeleton" style="width: 80px; height: 40px; border-radius: 8px;"></div>
+           <div class="skeleton" style="width: 80px; height: 40px; border-radius: 8px;"></div>
+           <div class="skeleton" style="width: 80px; height: 40px; border-radius: 8px;"></div>
+         </div>
+      </div>
+      <div class="box-product-variants mb-3 mt-4">
+         <div class="skeleton" style="width: 100px; height: 20px; margin-bottom: 10px;"></div>
+         <div class="d-flex flex-wrap gap-2">
+           <div class="skeleton" style="width: 150px; height: 60px; border-radius: 8px;"></div>
+           <div class="skeleton" style="width: 150px; height: 60px; border-radius: 8px;"></div>
+           <div class="skeleton" style="width: 150px; height: 60px; border-radius: 8px;"></div>
+           <div class="skeleton" style="width: 150px; height: 60px; border-radius: 8px;"></div>
+         </div>
+      </div>
+    </template>
   </div>
 </template>
 <script setup>
@@ -2403,6 +2428,21 @@ onBeforeUnmount(() => {
 });
 </script>
 <style scoped>
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .column {
   display: block;
   flex-basis: 0;

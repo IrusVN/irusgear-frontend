@@ -286,10 +286,84 @@
 
     <!-- Mobile Top Navigation -->
     <header ref="mobileTopNavRef" class="mobile-top-nav d-md-none" :class="{ 'is-scrolled': isMobileTopNavScrolled }">
+      <button type="button" class="mobile-top-nav__menu-btn" :aria-label="$t('sidebar.mobileCategory.open')"
+        :aria-expanded="isMobileCategorySidebarOpen ? 'true' : 'false'" aria-controls="mobile-category-sidebar"
+        @click="toggleMobileCategorySidebar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <NuxtLink :to="localePath('/')" class="mobile-top-nav__brand" aria-label="IrusGear">
         <img src="@/public/image/logo-irusgear-white.png" alt="IrusGear" class="mobile-top-nav__logo">
       </NuxtLink>
     </header>
+
+    <Transition name="mobile-category-overlay">
+      <div v-if="isMobileCategorySidebarOpen" class="mobile-category-overlay d-md-none"
+        @click="closeMobileCategorySidebar"></div>
+    </Transition>
+
+    <Transition name="mobile-category-drawer">
+      <aside v-if="isMobileCategorySidebarOpen" id="mobile-category-sidebar" class="mobile-category-sidebar d-md-none"
+        :aria-label="$t('sidebar.mobileCategory.ariaLabel')">
+        <div class="mobile-category-sidebar__header">
+          <div>
+            <h2>{{ $t('sidebar.mobileCategory.title') }}</h2>
+          </div>
+
+          <button type="button" class="mobile-category-sidebar__close" :aria-label="$t('sidebar.mobileCategory.close')"
+            @click="closeMobileCategorySidebar">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <div v-if="megaMenuLoading && !mobileMegaMenuSections.length" class="mobile-category-sidebar__state">
+          <span class="mobile-category-sidebar__spinner"></span>
+          <span>{{ $t('sidebar.mobileCategory.loading') }}</span>
+        </div>
+
+        <div v-else-if="megaMenuError && !mobileMegaMenuSections.length" class="mobile-category-sidebar__state">
+          <i class="bi bi-exclamation-circle"></i>
+          <span>{{ $t('sidebar.mobileCategory.loadError') }}</span>
+        </div>
+
+        <div v-else class="mobile-category-sidebar__body">
+          <nav class="mobile-category-sidebar__roots" :aria-label="$t('sidebar.mobileCategory.rootAriaLabel')">
+            <button v-for="section in mobileMegaMenuSections" :key="section.key || section.title" type="button"
+              class="mobile-category-root" :class="{ 'is-active': section.key === activeMobileMegaMenuKey }"
+              @click="setMobileMegaMenuSection(section)">
+              <span class="mobile-category-root__icon">
+                <i :class="getMobileCategoryIcon(section)"></i>
+              </span>
+              <span>{{ section.title }}</span>
+            </button>
+          </nav>
+
+          <div ref="mobileCategoryContentRef" class="mobile-category-sidebar__content">
+            <NuxtLink v-if="activeMobileMegaMenuSection" :to="buildMobileSectionLink(activeMobileMegaMenuSection)"
+              class="mobile-category-view-all" @click="closeMobileCategorySidebar">
+              <span>{{ $t('sidebar.mobileCategory.viewAll', { title: activeMobileMegaMenuSection.title }) }}</span>
+              <i class="bi bi-arrow-right"></i>
+            </NuxtLink>
+
+            <section v-for="group in activeMobileMegaMenuGroups" :key="group.key || group.title"
+              class="mobile-category-group">
+              <h3>{{ group.title }}</h3>
+
+              <div class="mobile-category-items">
+                <NuxtLink v-for="item in group.items" :key="item.key || item.slug || item.title"
+                  :to="resolveMobileCategoryItemTo(item)" class="mobile-category-item"
+                  @click="closeMobileCategorySidebar">
+                  <span>{{ item.title }}</span>
+                  <span v-if="item.badge" class="mobile-category-item__badge">{{ item.badge }}</span>
+                </NuxtLink>
+              </div>
+            </section>
+          </div>
+        </div>
+      </aside>
+    </Transition>
 
     <!-- Mobile Bottom Navigation -->
     <div class="mobile-bottom-nav d-md-none">
@@ -388,12 +462,19 @@ const notificationStore = useNotificationStore()
 const { user } = storeToRefs(auth)
 const { itemCount } = storeToRefs(cartStore)
 const { itemCount: wishlistCount } = storeToRefs(wishlistStore)
-const { heroMegaMenuOpen } = storeToRefs(homeStore)
+const {
+  heroMegaMenuOpen,
+  megaMenuSections,
+  activeMegaMenuKey,
+  megaMenuLoading,
+  megaMenuError,
+} = storeToRefs(homeStore)
 const localePath = useLocalePath()
 const route = useRoute()
 const { t, locale } = useI18n()
 const customerSidebarWrapRef = ref(null)
 const mobileTopNavRef = ref(null)
+const mobileCategoryContentRef = ref(null)
 const desktopSearchRef = ref(null)
 const productsButtonRef = ref(null)
 const productsDropdownRef = ref(null)
@@ -401,6 +482,7 @@ const isHeaderCategoryMenuOpen = ref(false)
 const isSecondaryNavHidden = ref(false)
 const isMobileTopNavScrolled = ref(false)
 const isMobileFabOpen = ref(false)
+const isMobileCategorySidebarOpen = ref(false)
 const isSearchDropdownOpen = ref(false)
 const searchDropdownMode = ref('desktop')
 const headerSearchKeyword = ref('')
@@ -427,6 +509,45 @@ const activeFeaturedCategory = computed(() => {
   return String(value || '').trim()
 })
 
+const mobileMegaMenuSections = computed(() =>
+  Array.isArray(megaMenuSections.value) ? megaMenuSections.value.filter(Boolean) : []
+)
+
+const activeMobileMegaMenuKey = computed(() =>
+  activeMegaMenuKey.value || mobileMegaMenuSections.value[0]?.key || ''
+)
+
+const activeMobileMegaMenuSection = computed(() =>
+  mobileMegaMenuSections.value.find((section) => section?.key === activeMobileMegaMenuKey.value)
+  || mobileMegaMenuSections.value[0]
+  || null
+)
+
+const activeMobileMegaMenuGroups = computed(() => {
+  const section = activeMobileMegaMenuSection.value
+  if (!section) return []
+
+  if (Array.isArray(section.children) && section.children.length) {
+    return section.children
+      .map((group) => ({
+        key: group?.key || group?.title,
+        title: group?.title || t('sidebar.mobileCategory.fallbackTitle'),
+        items: Array.isArray(group?.items) ? group.items.filter(Boolean) : [],
+      }))
+      .filter((group) => group.items.length)
+  }
+
+  if (Array.isArray(section.items) && section.items.length) {
+    return [{
+      key: section.key || section.title,
+      title: section.title || t('sidebar.mobileCategory.fallbackTitle'),
+      items: section.items.filter(Boolean),
+    }]
+  }
+
+  return []
+})
+
 const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ''))
 
 const fullName = computed(() => {
@@ -439,6 +560,29 @@ const avatarUrl = computed(() =>
     ? `https://ui-avatars.com/api/?name=${user.value.first_name}+${user.value.last_name}&background=000&color=fff`
     : ''
 )
+
+const closeMobileCategorySidebar = () => {
+  isMobileCategorySidebarOpen.value = false
+}
+
+const openMobileCategorySidebar = async () => {
+  isSearchDropdownOpen.value = false
+  isMobileFabOpen.value = false
+  closeHeaderCategoryMenu()
+  homeStore.closeHeroMegaMenu()
+  isMobileCategorySidebarOpen.value = true
+
+  await homeStore.fetchMegaMenuLeaves().catch(() => { })
+}
+
+const toggleMobileCategorySidebar = () => {
+  if (isMobileCategorySidebarOpen.value) {
+    closeMobileCategorySidebar()
+    return
+  }
+
+  openMobileCategorySidebar()
+}
 
 const closeHeaderCategoryMenu = () => {
   isHeaderCategoryMenuOpen.value = false
@@ -521,6 +665,7 @@ const syncSearchAnchorRect = () => {
 }
 
 const openSearchDropdown = () => {
+  closeMobileCategorySidebar()
   closeHeaderCategoryMenu()
   homeStore.closeHeroMegaMenu()
   isMobileFabOpen.value = false
@@ -658,6 +803,12 @@ const handleDocumentPointerDown = (event) => {
   closeHeaderCategoryMenu()
 }
 
+const handleDocumentKeydown = (event) => {
+  if (event.key !== 'Escape') return
+
+  closeMobileCategorySidebar()
+}
+
 const getSecondaryNavHideThreshold = () => {
   if (typeof window === 'undefined') return 0
   return window.innerHeight * 0.25
@@ -699,6 +850,7 @@ watch(
 watch(
   () => route.fullPath,
   async () => {
+    closeMobileCategorySidebar()
     isMobileFabOpen.value = false
     isSearchDropdownOpen.value = false
     searchDropdownMode.value = 'desktop'
@@ -711,6 +863,12 @@ watch(
   }
 )
 
+watch(isMobileCategorySidebarOpen, (isOpen) => {
+  if (typeof document === 'undefined') return
+
+  document.body.classList.toggle('mobile-category-sidebar-open', isOpen)
+})
+
 onMounted(() => {
   if (!homeStore.megaMenuLeaves || homeStore.megaMenuLeaves.length === 0) {
     homeStore.fetchMegaMenuLeaves().catch(() => { })
@@ -718,6 +876,7 @@ onMounted(() => {
 
   if (typeof document === 'undefined' || typeof window === 'undefined') return
   document.addEventListener('pointerdown', handleDocumentPointerDown)
+  document.addEventListener('keydown', handleDocumentKeydown)
   window.addEventListener('scroll', syncSecondaryNavVisibility, { passive: true })
   window.addEventListener('scroll', syncMobileTopNavState, { passive: true })
   window.addEventListener('scroll', syncOpenSearchDropdownPosition, { passive: true })
@@ -747,6 +906,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (typeof document === 'undefined' || typeof window === 'undefined') return
   document.removeEventListener('pointerdown', handleDocumentPointerDown)
+  document.removeEventListener('keydown', handleDocumentKeydown)
+  document.body.classList.remove('mobile-category-sidebar-open')
   window.removeEventListener('scroll', syncSecondaryNavVisibility)
   window.removeEventListener('scroll', syncMobileTopNavState)
   window.removeEventListener('scroll', syncOpenSearchDropdownPosition)
@@ -824,6 +985,88 @@ const buildProductsCategoryLink = (category) => {
 
   return `${localePath('/products')}?${query.toString()}`
 }
+
+const normalizeMobileCategoryText = (value) =>
+  String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D')
+    .toLowerCase()
+
+const getMobileCategoryIcon = (section) => {
+  const key = normalizeMobileCategoryText(section?.key)
+  const title = normalizeMobileCategoryText(section?.title)
+  const value = `${key} ${title}`
+  const iconRules = [
+    { tokens: ['dien-thoai', 'phone'], icon: 'bi bi-phone' },
+    { tokens: ['tablet', 'may-tinh-bang'], icon: 'bi bi-tablet' },
+    { tokens: ['laptop'], icon: 'bi bi-laptop' },
+    { tokens: ['am-thanh', 'audio', 'tai-nghe', 'loa'], icon: 'bi bi-headphones' },
+    { tokens: ['mic', 'thu-am', 'micro'], icon: 'bi bi-mic' },
+    { tokens: ['dong-ho', 'watch'], icon: 'bi bi-smartwatch' },
+    { tokens: ['camera'], icon: 'bi bi-camera' },
+    { tokens: ['do-gia-dung', 'gia-dung', 'home-appliance'], icon: 'bi bi-house-gear' },
+    { tokens: ['lam-dep', 'suc-khoe', 'beauty', 'health'], icon: 'bi bi-heart-pulse' },
+    { tokens: ['phu-kien', 'accessory'], icon: 'bi bi-plug' },
+    { tokens: ['pc'], icon: 'bi bi-pc-display' },
+    { tokens: ['man-hinh', 'monitor'], icon: 'bi bi-display' },
+    { tokens: ['may-in', 'printer'], icon: 'bi bi-printer' },
+    { tokens: ['tivi', 'tv'], icon: 'bi bi-tv' },
+    { tokens: ['dien-may'], icon: 'bi bi-lightning-charge' },
+    { tokens: ['thu-cu', 'doi-moi', 'hang-cu'], icon: 'bi bi-arrow-repeat' },
+    { tokens: ['apple'], icon: 'bi bi-apple' },
+    { tokens: ['gaming', 'game'], icon: 'bi bi-controller' },
+    { tokens: ['sim'], icon: 'bi bi-sim' },
+    { tokens: ['mang', 'wifi', 'router'], icon: 'bi bi-router' },
+    { tokens: ['pin', 'sac'], icon: 'bi bi-battery-charging' },
+  ]
+
+  return iconRules.find((rule) => rule.tokens.some((token) => value.includes(token)))?.icon || 'bi bi-box'
+}
+
+const scrollMobileCategoryContentToTop = async () => {
+  await nextTick()
+
+  const contentEl = mobileCategoryContentRef.value
+  if (!(contentEl instanceof HTMLElement)) return
+
+  contentEl.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+}
+
+const setMobileMegaMenuSection = async (section) => {
+  if (!section?.key) return
+  homeStore.setActiveMegaMenuKey(section.key)
+  await scrollMobileCategoryContentToTop()
+}
+
+const localizeInternalTo = (to) => {
+  if (!to) return localePath('/products')
+
+  if (typeof to === 'string') {
+    return to.startsWith('/') ? localePath(to) : to
+  }
+
+  if (typeof to === 'object' && to.path) {
+    return {
+      ...to,
+      path: localePath(to.path),
+    }
+  }
+
+  return to
+}
+
+const buildMobileSectionLink = (section) => {
+  const category = section?.slug || section?.key
+  return category ? buildProductsCategoryLink(category) : localePath('/products')
+}
+
+const resolveMobileCategoryItemTo = (item) =>
+  localizeInternalTo(item?.to || item?.url || localePath('/products'))
 
 const isFeaturedNavItemActive = (item) => {
   if (!isProductsRoute.value) return false
@@ -1198,9 +1441,46 @@ const featuredNavItems = computed(() => [
     transition: border-color 0.22s ease, box-shadow 0.22s ease;
   }
 
+  :global(body.mobile-category-sidebar-open) {
+    overflow: hidden;
+    touch-action: none;
+  }
+
   .mobile-top-nav.is-scrolled {
     border-bottom-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  }
+
+  .mobile-top-nav__menu-btn {
+    position: absolute;
+    left: 16px;
+    bottom: 12px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .mobile-top-nav__menu-btn:active {
+    transform: scale(0.94);
+  }
+
+  .mobile-top-nav__menu-btn span {
+    display: block;
+    width: 17px;
+    height: 2px;
+    margin: 0 auto;
+    border-radius: 999px;
+    background: currentColor;
   }
 
   .mobile-top-nav__brand {
@@ -1218,6 +1498,244 @@ const featuredNavItems = computed(() => [
     height: 28px;
     object-fit: contain;
     filter: drop-shadow(0 1px 4px rgba(255, 255, 255, 0.08));
+  }
+
+  .mobile-category-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1060;
+    background: rgba(0, 0, 0, 0.52);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .mobile-category-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1061;
+    display: flex;
+    flex-direction: column;
+    width: min(88vw, 380px);
+    padding-top: env(safe-area-inset-top, 0px);
+    background: #ffffff;
+    color: #111111;
+    box-shadow: 22px 0 60px rgba(0, 0, 0, 0.24);
+  }
+
+  .mobile-category-sidebar__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 18px 16px;
+    color: #ffffff;
+    background: #000000;
+  }
+
+  .mobile-category-sidebar__eyebrow {
+    display: block;
+    margin-bottom: 4px;
+    color: rgba(255, 255, 255, 0.64);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mobile-category-sidebar__header h2 {
+    margin: 0;
+    font-size: 1.28rem;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+
+  .mobile-category-sidebar__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+  }
+
+  .mobile-category-sidebar__state {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 18px;
+    color: #555555;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  .mobile-category-sidebar__spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #dddddd;
+    border-top-color: #111111;
+    border-radius: 50%;
+    animation: mobile-category-spin 0.8s linear infinite;
+  }
+
+  .mobile-category-sidebar__body {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    min-height: 0;
+    flex: 1;
+    background: #f5f5f5;
+  }
+
+  .mobile-category-sidebar__roots {
+    overflow-y: auto;
+    padding: 10px 8px 18px;
+    background: #0b0b0b;
+  }
+
+  .mobile-category-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    width: 100%;
+    min-height: 76px;
+    margin-bottom: 6px;
+    padding: 10px 6px;
+    border: 0;
+    border-radius: 14px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .mobile-category-root:active {
+    transform: scale(0.96);
+  }
+
+  .mobile-category-root.is-active {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .mobile-category-root__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 1rem;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .mobile-category-root.is-active .mobile-category-root__icon {
+    background: #000000;
+    color: #ffffff;
+    transform: scale(1.04);
+  }
+
+  .mobile-category-sidebar__content {
+    overflow-y: auto;
+    min-width: 0;
+    padding: 14px 12px 22px;
+    scroll-behavior: smooth;
+  }
+
+  .mobile-category-view-all {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding: 13px 14px;
+    border-radius: 14px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .mobile-category-group {
+    margin-bottom: 18px;
+  }
+
+  .mobile-category-group h3 {
+    margin: 0 0 9px;
+    color: #111111;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+
+  .mobile-category-items {
+    display: grid;
+    gap: 7px;
+  }
+
+  .mobile-category-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 42px;
+    padding: 10px 11px;
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #191919;
+    font-size: 0.86rem;
+    font-weight: 650;
+    line-height: 1.25;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.035);
+  }
+
+  .mobile-category-item__badge {
+    flex: 0 0 auto;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+  }
+
+  .mobile-category-overlay-enter-active,
+  .mobile-category-overlay-leave-active {
+    transition: opacity 0.24s ease;
+  }
+
+  .mobile-category-overlay-enter-from,
+  .mobile-category-overlay-leave-to {
+    opacity: 0;
+  }
+
+  .mobile-category-drawer-enter-active,
+  .mobile-category-drawer-leave-active {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease;
+  }
+
+  .mobile-category-drawer-enter-from,
+  .mobile-category-drawer-leave-to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  @keyframes mobile-category-spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 <template>
   <div ref="rootEl" class="box-detail-product__box-left column">
+    <template v-if="productStore.productDetail">
     <div class="box-header box-header-desktop">
       <div class="box-product-name">
         <h1>{{ productStore.productDetail?.name }}</h1>
@@ -369,6 +370,32 @@
         <p class="no-specs-msg">{{ $t('product.specsUpdating') }}</p>
       </template>
     </div>
+    </template>
+    <template v-else>
+      <div class="box-header box-header-desktop">
+        <div class="box-product-name">
+          <div class="skeleton" style="width: 80%; height: 28px; border-radius: 4px; margin-bottom: 8px;"></div>
+          <div class="skeleton" style="width: 50%; height: 28px; border-radius: 4px;"></div>
+        </div>
+        <div class="d-flex align-items-center mt-2">
+           <div class="skeleton" style="width: 150px; height: 18px; border-radius: 4px;"></div>
+        </div>
+        <div class="box-header__bottom mt-2 d-flex">
+           <div class="skeleton" style="width: 100px; height: 24px; border-radius: 4px; margin-right: 15px;"></div>
+           <div class="skeleton" style="width: 100px; height: 24px; border-radius: 4px; margin-right: 15px;"></div>
+           <div class="skeleton" style="width: 100px; height: 24px; border-radius: 4px; margin-right: 15px;"></div>
+        </div>
+      </div>
+      <div class="box-gallery mt-3">
+         <div class="skeleton" style="width: 100%; height: 358px; border-radius: 15px; margin-bottom: 10px;"></div>
+         <div class="d-flex gap-2">
+           <div class="skeleton" style="width: 58px; height: 58px; border-radius: 8px;"></div>
+           <div class="skeleton" style="width: 58px; height: 58px; border-radius: 8px;"></div>
+           <div class="skeleton" style="width: 58px; height: 58px; border-radius: 8px;"></div>
+           <div class="skeleton" style="width: 58px; height: 58px; border-radius: 8px;"></div>
+         </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -609,6 +636,21 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .column {
   display: block;
   flex-basis: 0;

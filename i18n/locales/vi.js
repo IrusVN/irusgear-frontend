@@ -106,6 +106,17 @@ export default {
     brandName: "IrusGear",
     search: "Tìm kiếm",
     searchPlaceholder: "Tìm kiếm...",
+    mobileCategory: {
+      open: "Mở danh mục",
+      close: "Đóng danh mục",
+      title: "Danh mục",
+      ariaLabel: "Danh mục sản phẩm",
+      rootAriaLabel: "Danh mục chính",
+      loading: "Đang tải danh mục...",
+      loadError: "Không thể tải danh mục",
+      viewAll: "Xem tất cả {title}",
+      fallbackTitle: "Danh mục",
+    },
     sections: {
       main: "Chính",
       communication: "Liên lạc",
