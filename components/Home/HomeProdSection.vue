@@ -2,9 +2,9 @@
   <section class="my-3 my-md-4">
     <div class="d-flex flex-column flex-md-row gap-2 align-items-stretch">
       <div class="d-none d-md-flex promo-side flex-column justify-content-between gap-3">
-        <a v-for="banner in resolvedDesktopBanners" :key="banner.image" :href="banner.href" class="d-block text-decoration-none">
+        <div v-for="banner in resolvedDesktopBanners" :key="banner.image" class="d-block text-decoration-none">
           <img :src="banner.image" :alt="banner.alt" class="w-100 promo-side-image" loading="lazy" />
-        </a>
+        </div>
       </div>
 
       <div class="d-md-none">

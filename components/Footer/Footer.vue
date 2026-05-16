@@ -13,8 +13,8 @@
           </p>
 
           <div class="d-flex gap-2">
-            <a class="social-btn"><i class="bi bi-facebook"></i></a>
-            <a class="social-btn"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/hoang.mai.190636" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/hoanqmaj/" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="bi bi-instagram"></i></a>
             <a class="social-btn"><i class="bi bi-tiktok"></i></a>
             <a class="social-btn"><i class="bi bi-youtube"></i></a>
           </div>
@@ -24,10 +24,10 @@
         <div class="">
           <h6 class="footer-title">{{ $t('sidebar.menu.products') }}</h6>
           <ul class="footer-list">
-            <li><NuxtLink to="#">{{ $t('footerNav.laptopPc') }}</NuxtLink></li>
-            <li><NuxtLink to="#">{{ $t('footerNav.smartphone') }}</NuxtLink></li>
-            <li><NuxtLink to="#">{{ $t('footerNav.audioDevice') }}</NuxtLink></li>
-            <li><NuxtLink to="#" class="text-danger">{{ $t('footerNav.getOffers') }}</NuxtLink></li>
+            <li><NuxtLink :to="localePath('/products?category=laptop')">{{ $t('footerNav.laptopPc') }}</NuxtLink></li>
+            <li><NuxtLink :to="localePath('/products?category=dien-thoai')">{{ $t('footerNav.smartphone') }}</NuxtLink></li>
+            <li><NuxtLink :to="localePath('/products?category=am-thanh')">{{ $t('footerNav.audioDevice') }}</NuxtLink></li>
+            <li><NuxtLink :to="localePath('/khuyen-mai')" class="text-danger">{{ $t('footerNav.getOffers') }}</NuxtLink></li>
           </ul>
         </div>
 
@@ -35,10 +35,10 @@
         <div class="">
           <h6 class="footer-title">{{ $t('common.support') }}</h6>
           <ul class="footer-list">
-            <li><NuxtLink to="#">{{ $t('footerNav.orderLookup') }}</NuxtLink></li>
-            <li><NuxtLink to="#">{{ $t('footerNav.warrantyPolicy') }}</NuxtLink></li>
-            <li><NuxtLink to="#">{{ $t('footerNav.faq') }}</NuxtLink></li>
-            <li><NuxtLink to="#">{{ $t('footerNav.contactFooter') }}</NuxtLink></li>
+            <li><NuxtLink :to="localePath('/orders')">{{ $t('footerNav.orderLookup') }}</NuxtLink></li>
+            <li><NuxtLink :to="localePath('/warranty')">{{ $t('footerNav.warrantyPolicy') }}</NuxtLink></li>
+            <li><NuxtLink :to="localePath('/policy')">{{ $t('footerNav.faq') }}</NuxtLink></li>
+            <li><NuxtLink :to="localePath('/lien-he')">{{ $t('footerNav.contactFooter') }}</NuxtLink></li>
           </ul>
         </div>
 
@@ -73,16 +73,20 @@
         </span>
 
         <div class="d-flex gap-4">
-          <a class="footer-link-sm">{{ $t('footerNav.terms') }}</a>
-          <a class="footer-link-sm">{{ $t('footerNav.privacy') }}</a>
-          <a class="footer-link-sm">{{ $t('footerNav.cookies') }}</a>
+          <NuxtLink :to="localePath('/tos')" class="footer-link-sm">{{ $t('footerNav.terms') }}</NuxtLink>
+          <NuxtLink :to="localePath('/policy')" class="footer-link-sm">{{ $t('footerNav.privacy') }}</NuxtLink>
+          <NuxtLink :to="localePath('/policy')" class="footer-link-sm">{{ $t('footerNav.cookies') }}</NuxtLink>
         </div>
       </div>
     </div>
   </footer>
 </template>
 
-<script setup></script>
+<script setup>
+import { useLocalePath } from '#imports'
+
+const localePath = useLocalePath()
+</script>
 
 <style scoped>
 .navbar-logo {

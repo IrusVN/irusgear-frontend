@@ -688,6 +688,7 @@ export default {
     accessoryBag: "Balo, túi xách",
     accessoryHub: "Hub chuyển đổi",
     accessoryPhone: "Phụ kiện điện thoại",
+    backToHome: "Quay về trang chủ",
     accessoryLaptop: "Phụ kiện Laptop",
     gamingGear: "Gaming Gear, Playstation",
     sim4g5g: "Sim 4G - 5G",
@@ -742,6 +743,16 @@ export default {
     terms: "Điều khoản",
     privacy: "Bảo mật",
     cookies: "Cookies",
+    news: "Tin tức",
+    contact: "Liên hệ",
+  },
+  news: {
+    comingSoon: "Coming Soon",
+    desc: "Nội dung tin tức sẽ sớm được cập nhật",
+  },
+  promotion: {
+    comingSoon: "Coming Soon",
+    desc: "Nội dung khuyến mãi sẽ sớm được cập nhật",
   },
   modalReview: {
     title: "Đánh giá & nhận xét",
