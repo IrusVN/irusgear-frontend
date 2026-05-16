@@ -39,23 +39,7 @@
             </form>
 
             <div class="d-flex align-items-center gap-1 gap-xl-2 flex-shrink-0 flex-nowrap">
-              <NuxtLink
-                v-for="link in utilityLinks"
-                :key="link.label"
-                :to="link.to"
-                class="btn header-text-btn d-none d-xxl-inline-flex align-items-center gap-2 px-3 py-2 border-0"
-              >
-                <i :class="link.icon"></i>
-                <span>{{ link.label }}</span>
-              </NuxtLink>
 
-              <NuxtLink
-                :to="ctaLink.to"
-                class="btn btn-dark rounded-pill px-3 px-xl-4 py-2 fw-semibold d-none d-lg-inline-flex align-items-center gap-2 shadow-sm"
-              >
-                <i :class="ctaLink.icon"></i>
-                <span>{{ ctaLink.label }}</span>
-              </NuxtLink>
 
               <button
                 type="button"

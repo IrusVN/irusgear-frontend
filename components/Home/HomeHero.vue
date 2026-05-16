@@ -140,7 +140,7 @@
               <span class="service-role-chip">{{ $t(userRoleKey) }}</span>
             </div>
 
-            <NuxtLink :to="localePath('/')"
+            <NuxtLink :to="localePath('/promotion')"
               class="d-flex align-items-center gap-2 mt-2 text-decoration-none text-dark fw-semibold small">
               <span class="d-inline-flex align-items-center justify-content-center text-dark" style="width: 18px;">
                 <i class="bi bi-gift-fill"></i>
@@ -201,9 +201,9 @@
             </NuxtLink>
           </div>
 
-          <NuxtLink :to="localePath('/')" class="d-block mt-2 text-decoration-none">
+          <!-- <NuxtLink :to="localePath('/')" class="d-block mt-2 text-decoration-none">
             <span class="service-bottom-pill">{{ $t('home.featuredPromotions') }}</span>
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
       </div>
     </div>
