@@ -16,9 +16,9 @@
       <button class="admin-icon-button hide-mobile" type="button" aria-label="Language">
         <i class="bi bi-translate"></i>
       </button>
-      <button class="admin-icon-button hide-mobile" type="button" aria-label="Toggle theme">
+      <!-- <button class="admin-icon-button hide-mobile" type="button" aria-label="Toggle theme">
         <i class="bi bi-sun"></i>
-      </button>
+      </button> -->
       <button class="admin-icon-button hide-mobile" type="button" aria-label="Apps">
         <i class="bi bi-grid-3x3-gap"></i>
       </button>

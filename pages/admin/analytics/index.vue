@@ -324,8 +324,8 @@ watch(period, () => {
 .period-select { min-width: 160px; }
 
 /* KPI */
-.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 20px; }
-.kpi-card { padding: 20px; display: flex; align-items: center; gap: 16px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 20px; align-items: start; }
+.kpi-card { padding: 20px; display: flex; align-items: flex-start; gap: 16px; margin-top: 0 !important; }
 .kpi-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex: 0 0 auto; }
 .kpi-success { background: rgba(40,199,111,0.14); color: var(--admin-success); }
 .kpi-info { background: rgba(0,207,232,0.14); color: #00a9c0; }
