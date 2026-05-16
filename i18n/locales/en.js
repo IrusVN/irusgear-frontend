@@ -106,6 +106,17 @@ export default {
     brandName: "IrusGear",
     search: "Search",
     searchPlaceholder: "Search for anything...",
+    mobileCategory: {
+      open: "Open categories",
+      close: "Close categories",
+      title: "Categories",
+      ariaLabel: "Product categories",
+      rootAriaLabel: "Main categories",
+      loading: "Loading categories...",
+      loadError: "Could not load categories",
+      viewAll: "View all {title}",
+      fallbackTitle: "Categories",
+    },
     sections: {
       main: "Main",
       communication: "Communication",

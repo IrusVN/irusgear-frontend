@@ -408,8 +408,23 @@ export const useHomeStore = defineStore("home", () => {
 
     megaMenuPromise = (async () => {
       try {
-        const res = await fetch(`${getApiBaseUrl()}/collections/mega-menu`);
-        if (!res.ok) throw new Error("Fetch mega menu failed");
+        const apiBaseUrl = getApiBaseUrl();
+        const endpoints = [
+          `${apiBaseUrl}/collections/mega-menu`,
+          `${apiBaseUrl}/mega-menu`,
+        ];
+        let res = null;
+
+        for (const endpoint of endpoints) {
+          try {
+            res = await fetch(endpoint);
+            if (res.ok) break;
+          } catch {
+            res = null;
+          }
+        }
+
+        if (!res?.ok) throw new Error("Fetch mega menu failed");
 
         const json = await res.json();
         const sections = json?.data?.sections || json?.sections || [];
