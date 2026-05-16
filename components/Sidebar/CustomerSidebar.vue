@@ -951,7 +951,7 @@ const primaryNavItems = computed(() => [
   },
   {
     label: t('home.news'),
-    to: localePath('/tin-tuc'),
+    to: localePath('/coming-soon'),
     icon: 'bi bi-newspaper',
   },
   {

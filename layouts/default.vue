@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import CustomerSidebar from '@/components/Sidebar/CustomerSidebar.vue'
 import Footer from '@/components/Footer/Footer.vue'
 import ChatbotWidget from '@/components/Chatbot/ChatbotWidget.vue'
@@ -27,10 +27,21 @@ import BackToTop from '@/components/Common/BackToTop.vue'
 import { useCartStore } from '@/stores/cartStore'
 import { useAuthStore } from '@/stores/authStore'
 import { useSearchStore } from '@/stores/searchStore'
+import { useWishlistStore } from '@/stores/wishlistStore'
 
 const cartStore = useCartStore()
 const authStore = useAuthStore()
 const searchStore = useSearchStore()
+const wishlistStore = useWishlistStore()
+
+// Hydrate wishlist khi user đã login — là source of truth duy nhất cho UI icon heart
+// trên mọi product card (Home, ProductList, SameProduct, ...). Fetch 1 lần khi
+// isLoggedIn=true, các lần navigate sau tận dụng hydrated guard trong store.
+const hydrateWishlistIfNeeded = () => {
+    if (authStore.isLoggedIn && !wishlistStore.hydrated) {
+        wishlistStore.fetchWishlist({ silent: true }).catch(() => {})
+    }
+}
 
 onMounted(() => {
     if (!authStore.sessionResolved && !authStore.sessionLoading) {
@@ -43,7 +54,23 @@ onMounted(() => {
     // Fetch search history + trending once on app load (like /me and /cart)
     searchStore.fetchHistory()
     searchStore.fetchTrending()
+
+    // Nếu session đã resolved sẵn (vd page reload với session cookie hợp lệ) → fetch ngay
+    hydrateWishlistIfNeeded()
 })
+
+// Khi user vừa login xong (isLoggedIn chuyển false → true) → fetch wishlist.
+// Khi logout (true → false) → reset store để không leak wishlist cũ.
+watch(
+    () => authStore.isLoggedIn,
+    (loggedIn) => {
+        if (loggedIn) {
+            hydrateWishlistIfNeeded()
+        } else {
+            wishlistStore.reset?.()
+        }
+    },
+)
 </script>
 
 <style scoped>

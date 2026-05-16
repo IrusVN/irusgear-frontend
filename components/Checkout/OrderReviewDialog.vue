@@ -164,11 +164,13 @@ const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
 const fullAddress = computed(() => {
   const addr = checkoutStore.selectedAddress;
   if (!addr) return "";
-  // Backend trả province/district/ward là object {code, name}
-  const ward = addr.ward?.name || addr.ward;
-  const district = addr.district?.name || addr.district;
-  const province = addr.province?.name || addr.province;
-  const parts = [addr.detail, ward, district, province].filter(Boolean);
+  // Data lưu dạng {value, label} từ resolveAddressCode() — giống AddressCard.vue.
+  // Fallback về string code gốc nếu chưa resolve.
+  const ward = addr.ward?.label || addr.ward;
+  const district = addr.district?.label || addr.district;
+  const province = addr.province?.label || addr.province;
+  const parts = [addr.detail, ward, district, province]
+    .filter((p) => Boolean(p) && typeof p === "string");
   return parts.join(", ");
 });
 

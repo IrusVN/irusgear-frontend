@@ -99,6 +99,8 @@ const router = useRouter();
 
 const props = defineProps({ product: { type: Object, required: true } });
 
+// Source of truth duy nhất: wishlistStore (đã được fetch từ /wishlist khi user login
+// — xem layouts/default.vue). Không phụ thuộc field is_wishlist từ API products.
 const isInWishlist = computed(() => {
   const productId = props.product?.id;
   if (!productId) return false;
