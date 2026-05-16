@@ -91,9 +91,12 @@ const isLoggedIn = computed(() => !!user.value);
         user.value = data.user;
         permissions.value = data.permissions || [];
       } else {
-        await fetchUser();
+        // Fetch user in background
+        fetchUser();
       }
-      await cartStore.fetchCart({ force: true, silent: true });
+      // Fetch cart in background
+      cartStore.fetchCart({ force: true, silent: true });
+      
       return data;
     } catch (error) {
       user.value = null;

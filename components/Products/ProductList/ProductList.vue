@@ -426,10 +426,29 @@
 
       <div class="product-list-container">
         <div v-if="isPageLoading" class="product-list-overlay">
-          <span class="spinner-border text-dark" role="status" aria-hidden="true"></span>
+          <div class="product-list-overlay__content">
+            <span class="spinner-border text-dark" role="status" aria-hidden="true"></span>
+            <span class="product-list-overlay__text">Đang tải sản phẩm...</span>
+          </div>
         </div>
-        <div class="product-card-grid" :class="{ 'is-loading': isPageLoading }">
+        <div v-if="visibleProductListItems.length > 0" class="product-card-grid"
+          :class="{ 'is-loading': isPageLoading }">
           <HomeProdCard v-for="product in visibleProductListItems" :key="product.id" :product="product" />
+        </div>
+
+        <div v-else-if="!isPageLoading" class="product-empty-state">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+            stroke-linecap="round" stroke-linejoin="round" class="product-empty-state__icon">
+            <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+            <path
+              d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
+            </path>
+          </svg>
+          <h3 class="product-empty-state__title">Không tìm thấy sản phẩm nào</h3>
+          <p class="product-empty-state__subtitle">Rất tiếc, không có sản phẩm nào phù hợp với tiêu chí của bạn.</p>
+          <button v-if="selectedFilterCount > 0" class="product-empty-state__reset-btn" @click="handleClearFilters">
+            Xóa bộ lọc
+          </button>
         </div>
       </div>
 
@@ -674,6 +693,11 @@ const applyMobileFilterOptions = async () => {
 
 const resetMobileFilters = () => {
   selectedOptionsByFilter.value = {};
+};
+
+const handleClearFilters = async () => {
+  resetMobileFilters();
+  await applyFilterOptions();
 };
 
 const toggleMobileBooleanFilter = (filter) => {
@@ -1322,16 +1346,31 @@ onBeforeUnmount(() => {
 }
 
 .product-list-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
   bottom: 0;
-  background: rgba(255, 255, 255, 0.6);
   display: flex;
   justify-content: center;
-  align-items: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
   z-index: 10;
+}
+
+.product-list-overlay__content {
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+}
+
+.product-list-overlay__text {
+  color: #111827;
+  font-weight: 500;
+  font-size: 15px;
 }
 
 .product-card-grid.is-loading {
@@ -2004,5 +2043,53 @@ onBeforeUnmount(() => {
   .product-filter-mega-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.product-empty-state {
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 400px;
+  padding: 40px 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.product-empty-state__icon {
+  color: #9ca3af;
+  margin-bottom: 20px;
+}
+
+.product-empty-state__title {
+  color: #111827;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.product-empty-state__subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0 0 24px;
+  max-width: 400px;
+}
+
+.product-empty-state__reset-btn {
+  background: #ef4444;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 24px;
+  transition: background-color 0.2s;
+}
+
+.product-empty-state__reset-btn:hover {
+  background: #dc2626;
 }
 </style>
