@@ -227,7 +227,7 @@
       </div>
 
       <!-- Transactions -->
-      <div class="dash-col dash-col-transactions" :class="enterClass(10)" v-if="dashboardData.transactions.length > 0">
+      <div class="dash-col dash-col-transactions" :class="enterClass(10)" v-if="transactionsView.length > 0">
         <AdminCard :title="t('admin.dashboard.transactions')" :subtitle="t('admin.dashboard.transactionsSubtitle')">
           <template #actions>
             <button class="card-menu-button" type="button" :aria-label="t('admin.dashboard.moreTxActions')">
@@ -235,7 +235,7 @@
             </button>
           </template>
           <div class="transaction-list">
-            <div v-for="tx in dashboardData.transactions" :key="tx.id" class="transaction-row">
+            <div v-for="tx in transactionsView" :key="tx.id" class="transaction-row">
               <span class="tx-icon" :class="'is-' + tx.variant">
                 <i class="bi" :class="tx.icon"></i>
               </span>
@@ -347,6 +347,41 @@ const dashboardData = ref({
 
 const topProducts = ref([])
 const recentOrders = ref([])
+
+/* ---------- Transactions normaliser ---------- */
+// Backend đôi khi trả chuỗi tiếng Việt bị hỏng encoding (xuất hiện ký tự "?"),
+// nên ta tự suy ra label dựa vào icon/variant/dấu của amount rồi dịch qua i18n.
+const isCorruptedText = (s) => typeof s !== 'string' || !s.trim() || s.includes('?')
+
+const inferTxTypeKey = (tx) => {
+  const icon = (tx?.icon || '').toLowerCase()
+  const variant = (tx?.variant || '').toLowerCase()
+  if (icon.includes('arrow-return') || variant === 'danger' || (typeof tx?.amount === 'number' && tx.amount < 0)) {
+    return 'refund'
+  }
+  if (icon.includes('credit-card')) return 'vnpayPayment'
+  if (icon.includes('wallet')) return 'momoPayment'
+  if (icon.includes('cash')) return 'codPayment'
+  return 'payment'
+}
+
+const inferTxDescription = (tx) => {
+  const key = inferTxTypeKey(tx)
+  if (key === 'refund') return t('admin.dashboard.txDescriptions.refundCustomer')
+  const id = tx?.order_id || tx?.orderId || tx?.id || '—'
+  return t('admin.dashboard.txDescriptions.orderRef', { id })
+}
+
+const transactionsView = computed(() =>
+  (dashboardData.value.transactions || []).map((tx) => {
+    const typeKey = inferTxTypeKey(tx)
+    return {
+      ...tx,
+      type: isCorruptedText(tx.type) ? t(`admin.dashboard.txTypes.${typeKey}`) : tx.type,
+      description: isCorruptedText(tx.description) ? inferTxDescription(tx) : tx.description,
+    }
+  })
+)
 
 /* ---------- animations ---------- */
 const entered = ref(false)
