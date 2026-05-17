@@ -111,8 +111,10 @@ export const useCheckoutStore = defineStore("checkout", () => {
     return base + timeSlotFee.value;
   });
 
-  const subtotal = computed(() => cartStore.subtotal || formatMoney(0));
-  const savings = computed(() => cartStore.savings || formatMoney(0));
+  // Chỉ tính subtotal/savings dựa trên items user đã chọn ở trang /cart.
+  // Khi không có item nào uncheck → selectedSubtotal == subtotal (toàn bộ cart).
+  const subtotal = computed(() => cartStore.selectedSubtotal || formatMoney(0));
+  const savings = computed(() => cartStore.selectedSavings || formatMoney(0));
 
   const voucherDiscount = computed(() => {
     if (!selectedVoucherCodes.value.length) return formatMoney(0);
@@ -162,8 +164,12 @@ export const useCheckoutStore = defineStore("checkout", () => {
     return true;
   });
 
-  const fetchAddresses = async () => {
-    addressesLoading.value = true;
+  const fetchAddresses = async ({ silent = false } = {}) => {
+    // silent=true → không bật skeleton (dùng khi mutation đã có spinner riêng,
+    // tránh hiện cả skeleton card + spinner "Đang lưu..." cùng lúc gây rối UI).
+    if (!silent) {
+      addressesLoading.value = true;
+    }
     try {
       feGlobalStore.setApiUrl("addresses");
       const response = await feGlobalStore.fetchItem();
@@ -203,14 +209,16 @@ export const useCheckoutStore = defineStore("checkout", () => {
     } catch (e) {
       console.error("fetchAddresses error:", e);
     } finally {
-      addressesLoading.value = false;
+      if (!silent) {
+        addressesLoading.value = false;
+      }
     }
   };
 
   const fetchDeliveryOptions = async () => {
-    if (!selectedAddressId.value) return;
-
-    // Use cached options if available (instant, no API call)
+    // Use cached options if available (instant, no API call).
+    // Cache chỉ lưu khi BE trả data thật — fallback không bị cache nên sẽ retry
+    // sau khi user chọn address.
     if (_deliveryOptionsCache) {
       deliveryOptions.value = _deliveryOptionsCache;
       if (!selectedDeliveryId.value && deliveryOptions.value.length > 0) {
@@ -222,21 +230,33 @@ export const useCheckoutStore = defineStore("checkout", () => {
     deliveryLoading.value = true;
     try {
       feGlobalStore.setApiUrl("checkout/delivery-options");
-      const response = await feGlobalStore.createItem({ address_id: selectedAddressId.value });
+      // address_id optional — BE sẽ tính phí mặc định nếu thiếu (hoặc trả 400 → fallback)
+      const payload = selectedAddressId.value
+        ? { address_id: selectedAddressId.value }
+        : {};
+      const response = await feGlobalStore.createItem(payload);
       if (response?.data && response.data.length > 0) {
-        _deliveryOptionsCache = response.data;
+        // Chỉ cache khi có address (response đã chính xác theo địa chỉ).
+        // Không có address → response là default → không cache để re-fetch sau.
+        if (selectedAddressId.value) {
+          _deliveryOptionsCache = response.data;
+        }
         deliveryOptions.value = response.data;
         if (!selectedDeliveryId.value) {
           selectedDeliveryId.value = String(response.data[0].id);
         }
       } else {
         deliveryOptions.value = _getFallbackDeliveryOptions();
-        selectedDeliveryId.value = "standard";
+        if (!selectedDeliveryId.value) {
+          selectedDeliveryId.value = "standard";
+        }
       }
     } catch (e) {
       console.error("fetchDeliveryOptions error:", e);
       deliveryOptions.value = _getFallbackDeliveryOptions();
-      selectedDeliveryId.value = "standard";
+      if (!selectedDeliveryId.value) {
+        selectedDeliveryId.value = "standard";
+      }
     } finally {
       deliveryLoading.value = false;
     }
@@ -389,8 +409,9 @@ export const useCheckoutStore = defineStore("checkout", () => {
       if (response?.data) {
         selectedAddressId.value = String(response.data.id);
       }
-      // Re-fetch all addresses to sync is_default and resolve codes → names
-      await fetchAddresses();
+      // Re-fetch all addresses to sync is_default and resolve codes → names.
+      // silent=true: form đã có spinner "Đang lưu..."; bật skeleton ở list cùng lúc sẽ rối UI.
+      await fetchAddresses({ silent: true });
       isEditingAddress.value = false;
       editingAddressId.value = null;
       resetAddressForm();
@@ -416,8 +437,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
       };
       feGlobalStore.setApiUrl("addresses");
       const response = await feGlobalStore.updateItem(id, payload);
-      // Re-fetch all addresses to sync is_default and resolve codes → names
-      await fetchAddresses();
+      // Re-fetch silent — form đã có spinner "Đang lưu..."
+      await fetchAddresses({ silent: true });
       isEditingAddress.value = false;
       editingAddressId.value = null;
       resetAddressForm();
@@ -442,8 +463,8 @@ export const useCheckoutStore = defineStore("checkout", () => {
     setDefaultLoading.value = true;
     try {
       await feGlobalStore.putItem(`addresses/${id}/default`);
-      // Re-fetch all to sync is_default across all addresses
-      await fetchAddresses();
+      // Re-fetch silent — nút "Đặt mặc định" đã có spinner riêng (setDefaultLoading)
+      await fetchAddresses({ silent: true });
     } finally {
       setDefaultLoading.value = false;
     }
@@ -743,6 +764,7 @@ export const useCheckoutStore = defineStore("checkout", () => {
     // Prepared order data
     preparedOrderId,   // order number từ backend response (ORD-YYYYMMDD-XXXX)
     preparedSessionId, // UUID session key
+    preparedIdemKey,   // idempotency UUID — verify endpoint resolveOrderForVerify hỗ trợ lookup bằng key này
     preparedPricing,
     guestToken,
     guestEmail,

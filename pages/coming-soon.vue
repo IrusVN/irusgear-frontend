@@ -460,7 +460,7 @@ const socials = [
 .cs-menu-panel {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   bottom: 0;
   z-index: 21;
   display: flex;
@@ -468,7 +468,7 @@ const socials = [
   width: min(92vw, 420px);
   background: #fff;
   color: #111;
-  box-shadow: -24px 0 70px rgba(0, 0, 0, 0.34);
+  box-shadow: 24px 0 70px rgba(0, 0, 0, 0.34);
 }
 
 .cs-menu-panel__header {
@@ -672,7 +672,7 @@ const socials = [
 .cs-menu-drawer-enter-from,
 .cs-menu-drawer-leave-to {
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(-100%);
 }
 
 @keyframes cs-menu-spin {

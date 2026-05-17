@@ -7,7 +7,7 @@
         <span class="brand-mark">
           <i class="bi bi-bag-check-fill"></i>
         </span>
-        <span v-if="showExpanded" class="brand-name">IrusGear</span>
+        <span v-if="showExpanded" class="brand-name">{{ $t('admin.layout.brandName') }}</span>
       </NuxtLink>
 
       <button class="collapse-button d-none d-lg-inline-flex" type="button" :aria-label="collapseLabel"
@@ -15,19 +15,19 @@
         <i class="bi" :class="isCollapsed ? 'bi-circle' : 'bi-record-circle'"></i>
       </button>
 
-      <button class="collapse-button d-lg-none" type="button" aria-label="Close menu" @click="$emit('close-mobile')">
+      <button class="collapse-button d-lg-none" type="button" :aria-label="$t('admin.layout.closeMenu')" @click="$emit('close-mobile')">
         <i class="bi bi-x-lg"></i>
       </button>
     </div>
 
     <nav class="sidebar-nav">
       <div class="nav-group">
-        <div v-if="showExpanded" class="nav-group-label">Apps & Pages</div>
+        <div v-if="showExpanded" class="nav-group-label">{{ $t('admin.sidebar.appsPages') }}</div>
 
         <button class="nav-parent" type="button" :class="{ 'is-open': isEcommerceOpen }"
           @click="toggleGroup('ecommerce')">
           <i class="bi bi-cart3"></i>
-          <span v-if="showExpanded">Ecommerce</span>
+          <span v-if="showExpanded">{{ $t('admin.sidebar.ecommerce') }}</span>
           <i v-if="showExpanded" class="bi bi-chevron-down nav-chevron"></i>
         </button>
 
@@ -63,7 +63,7 @@
       </div>
 
       <div class="nav-group">
-        <div v-if="showExpanded" class="nav-group-label">Operations</div>
+        <div v-if="showExpanded" class="nav-group-label">{{ $t('admin.sidebar.operations') }}</div>
         <NuxtLink v-for="item in operationMenu" :key="item.key" class="nav-parent nav-parent-link"
           :class="{ 'is-active-parent': isActiveRoute(item.route) }" :to="item.route" @click="handleNavigate">
           <i class="bi" :class="item.icon"></i>
@@ -76,11 +76,11 @@
       <NuxtLink class="nav-parent nav-parent-link" :class="{ 'is-active-parent': isActiveRoute('/admin/settings') }"
         to="/admin/settings" @click="handleNavigate">
         <i class="bi bi-gear"></i>
-        <span v-if="showExpanded">Settings</span>
+        <span v-if="showExpanded">{{ $t('admin.layout.settings') }}</span>
       </NuxtLink>
       <button class="nav-parent logout-inline" type="button" @click="handleLogout">
         <i class="bi bi-box-arrow-right"></i>
-        <span v-if="showExpanded">Logout</span>
+        <span v-if="showExpanded">{{ $t('admin.layout.logout') }}</span>
       </button>
     </div>
   </aside>
@@ -89,7 +89,10 @@
 <script setup>
 import { computed, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from '#imports'
 import { useAuthStore } from '@/stores/authStore'
+
+const { t } = useI18n()
 
 const props = defineProps({
   mobileOpen: {
@@ -111,39 +114,39 @@ const openGroups = reactive({
   customers: false,
 })
 
-const ecommerceMenu = [
-  { key: 'dashboard', label: 'Dashboard', route: '/admin/dashboard' },
+const ecommerceMenu = computed(() => [
+  { key: 'dashboard', label: t('admin.sidebar.dashboard'), route: '/admin/dashboard' },
   {
     key: 'products',
-    label: 'Product',
+    label: t('admin.sidebar.product'),
     children: [
-      { key: 'product-list', label: 'List', route: '/admin/products' },
-      { key: 'product-category', label: 'Category', route: '/admin/categories' },
+      { key: 'product-list', label: t('admin.sidebar.productList'), route: '/admin/products' },
+      { key: 'product-category', label: t('admin.sidebar.productCategory'), route: '/admin/categories' },
     ],
   },
   {
     key: 'orders',
-    label: 'Order',
+    label: t('admin.sidebar.order'),
     children: [
-      { key: 'order-list', label: 'List', route: '/admin/orders' },
+      { key: 'order-list', label: t('admin.sidebar.orderList'), route: '/admin/orders' },
     ],
   },
   {
     key: 'customers',
-    label: 'Customer',
+    label: t('admin.sidebar.customer'),
     children: [
-      { key: 'customer-list', label: 'List', route: '/admin/customers' },
+      { key: 'customer-list', label: t('admin.sidebar.customerList'), route: '/admin/customers' },
     ],
   },
-  { key: 'reviews', label: 'Manage Review', route: '/admin/reviews' },
-  { key: 'referrals', label: 'Referrals', route: '/admin/referrals' },
-]
+  { key: 'reviews', label: t('admin.sidebar.manageReview'), route: '/admin/reviews' },
+  { key: 'referrals', label: t('admin.sidebar.referrals'), route: '/admin/referrals' },
+])
 
-const operationMenu = [
-  { key: 'analytics', label: 'Analytics', icon: 'bi-pie-chart', route: '/admin/analytics' },
-]
+const operationMenu = computed(() => [
+  { key: 'analytics', label: t('admin.sidebar.analytics'), icon: 'bi-pie-chart', route: '/admin/analytics' },
+])
 
-const collapseLabel = computed(() => (isCollapsed.value ? 'Expand sidebar' : 'Collapse sidebar'))
+const collapseLabel = computed(() => (isCollapsed.value ? t('admin.layout.expandMenu') : t('admin.layout.collapseMenu')))
 const showExpanded = computed(() => !isCollapsed.value || isHovered.value)
 const isEcommerceOpen = computed(() => openGroups.ecommerce)
 
@@ -191,7 +194,8 @@ const handleLogout = async () => {
 watch(
   () => route.path,
   () => {
-    for (const item of ecommerceMenu) {
+    // ecommerceMenu giờ là computed ref (sau khi i18n) → dùng .value để iterate
+    for (const item of ecommerceMenu.value) {
       if (item.children && isBranchActive(item)) openGroups[item.key] = true
     }
   },

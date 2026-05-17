@@ -4,8 +4,15 @@ import { ADMIN_ROLES } from "@/constants/userConstants";
 export default defineNuxtRouteMiddleware(async (to) => {
     const authStore = useAuthStore();
     const publicRoutes = ['/auth/login', '/auth/register', '/auth/forgot-password'];
+
+    // Strip locale prefix (vd: /en/admin/dashboard → /admin/dashboard) trước khi check route.
+    // Cần thiết vì @nuxtjs/i18n strategy 'prefix_except_default' thêm /en/... cho non-default locale.
+    // Nếu check trực tiếp to.path.startsWith('/admin') thì /en/admin/* không match → admin bị redirect sai.
+    const stripLocale = (p) => p.replace(/^\/[a-z]{2}(?=\/|$)/i, '') || '/';
+    const normalizedPath = stripLocale(to.path);
+
     // Cho phép admin truy cập trang coming-soon (cả locale prefix lẫn không)
-    const isComingSoon = /^\/(?:[a-z]{2}\/)?coming-soon\/?$/i.test(to.path);
+    const isComingSoon = /^\/coming-soon\/?$/i.test(normalizedPath);
 
     if (!authStore.isAuthenticated || !authStore.user) {
         if (!authStore.sessionResolved) {
@@ -20,10 +27,11 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
     const isAdmin = ADMIN_ROLES.includes(userRoleId);
 
-    const targetIsAdminRoute = to.path.startsWith('/admin');
+    const targetIsAdminRoute = normalizedPath.startsWith('/admin');
+    const isPublic = publicRoutes.includes(normalizedPath);
 
     if (isAdmin) {
-        if (!targetIsAdminRoute && !publicRoutes.includes(to.path) && !isComingSoon) {
+        if (!targetIsAdminRoute && !isPublic && !isComingSoon) {
             return navigateTo('/admin/dashboard');
         }
     } else {

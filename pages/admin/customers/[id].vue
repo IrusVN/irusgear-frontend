@@ -3,8 +3,8 @@
     <!-- Not found -->
     <div v-if="!customer" class="admin-card-shell" style="text-align:center;padding:48px">
       <i class="bi bi-exclamation-triangle" style="font-size:2.4rem;color:var(--admin-warning)"></i>
-      <h3 style="margin:12px 0 4px">Customer Not Found</h3>
-      <nuxt-link to="/admin/customers" class="admin-primary-button" style="margin-top:12px">Back to Customers</nuxt-link>
+      <h3 style="margin:12px 0 4px">{{ $t('admin.customers.customerNotFound') }}</h3>
+      <nuxt-link to="/admin/customers" class="admin-primary-button" style="margin-top:12px">{{ $t('admin.customers.backToCustomers') }}</nuxt-link>
     </div>
 
     <template v-else>
@@ -13,12 +13,12 @@
         <div class="header-left">
           <nuxt-link to="/admin/customers" class="back-link"><i class="bi bi-arrow-left"></i></nuxt-link>
           <div>
-            <h2 class="page-title">Customer ID {{ customer.customerCode }}</h2>
-            <p class="page-sub">Member since {{ formatDateShort(customer.createdAt) }}</p>
+            <h2 class="page-title">{{ $t('admin.customers.customerIdHeader', { code: customer.customerCode }) }}</h2>
+            <p class="page-sub">{{ $t('admin.customers.memberSince') }} {{ formatDateShort(customer.createdAt) }}</p>
           </div>
         </div>
         <button class="admin-danger-button" type="button" @click="handleDelete">
-          <i class="bi bi-trash"></i> Delete Customer
+          <i class="bi bi-trash"></i> {{ $t('admin.customers.deleteCustomer') }}
         </button>
       </div>
 
@@ -35,44 +35,44 @@
               <div class="profile-stats">
                 <div class="stat">
                   <strong>{{ customer.orders.toLocaleString() }}</strong>
-                  <small>Orders</small>
+                  <small>{{ $t('admin.customers.orders') }}</small>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat">
                   <strong>{{ formatCompact(customer.totalSpent) }}</strong>
-                  <small>Spent</small>
+                  <small>{{ $t('admin.customers.spent') }}</small>
                 </div>
               </div>
             </div>
 
             <!-- Details list -->
             <div class="details-list">
-              <h4 class="section-title">Details</h4>
+              <h4 class="section-title">{{ $t('admin.customers.details') }}</h4>
               <div class="detail-row">
-                <span class="detail-label">Username:</span>
+                <span class="detail-label">{{ $t('admin.customers.username') }}</span>
                 <span class="detail-value">{{ customer.name.toLowerCase().replace(' ', '.') }}</span>
               </div>
               <div class="detail-row">
-                <span class="detail-label">Email:</span>
+                <span class="detail-label">{{ $t('admin.customers.email') }}</span>
                 <span class="detail-value">{{ customer.email }}</span>
               </div>
               <div class="detail-row">
-                <span class="detail-label">Status:</span>
+                <span class="detail-label">{{ $t('admin.customers.statusLabel') }}</span>
                 <AdminStatusBadge :label="statusLabel(customer.status)" :variant="statusVariant(customer.status)" />
               </div>
               <div class="detail-row">
-                <span class="detail-label">Contact:</span>
+                <span class="detail-label">{{ $t('admin.customers.contact') }}</span>
                 <span class="detail-value">{{ customer.phone }}</span>
               </div>
               <div class="detail-row">
-                <span class="detail-label">Country:</span>
+                <span class="detail-label">{{ $t('admin.customers.countryLabel') }}</span>
                 <span class="detail-value country-val">
                   <img :src="`https://flagcdn.com/20x15/${customer.countryCode.toLowerCase()}.png`" :alt="customer.country" class="flag-sm" />
                   {{ customer.country }}
                 </span>
               </div>
               <button class="admin-primary-button edit-details-btn" type="button" @click="handleEditDetails">
-                <i class="bi bi-pencil"></i> Edit Details
+                <i class="bi bi-pencil"></i> {{ $t('admin.customers.editDetails') }}
               </button>
             </div>
           </div>
@@ -80,15 +80,15 @@
           <!-- IrusGear Loyalty Card -->
           <div class="loyalty-card" :class="`tier-${customer.loyaltyTier}`">
             <div class="loyalty-header">
-              <span class="loyalty-badge">{{ customer.loyaltyTier.toUpperCase() }}</span>
+              <span class="loyalty-badge">{{ loyaltyTierLabel.toUpperCase() }}</span>
               <i class="bi bi-gem loyalty-icon"></i>
             </div>
             <div class="loyalty-body">
               <p class="loyalty-brand">IrusGear</p>
-              <h3 class="loyalty-title">Loyalty Program</h3>
+              <h3 class="loyalty-title">{{ $t('admin.customers.loyaltyProgram') }}</h3>
               <div class="loyalty-points">
                 <strong>{{ customer.loyaltyPoints.toLocaleString() }}</strong>
-                <small>points earned</small>
+                <small>{{ $t('admin.customers.pointsEarned') }}</small>
               </div>
               <div class="loyalty-progress-track">
                 <div class="loyalty-progress-bar" :style="{ width: loyaltyProgress + '%' }"></div>
@@ -121,44 +121,44 @@
                 <div class="overview-item">
                   <div class="ov-icon ov-blue"><i class="bi bi-wallet2"></i></div>
                   <div>
-                    <small>Account Balance</small>
+                    <small>{{ $t('admin.customers.accountBalance') }}</small>
                     <strong>{{ formatCurrency(customer.accountBalance) }}</strong>
                   </div>
                 </div>
                 <div class="overview-item">
                   <div class="ov-icon ov-purple"><i class="bi bi-award"></i></div>
                   <div>
-                    <small>Loyalty Program</small>
-                    <strong>{{ customer.loyaltyTier }} · {{ customer.loyaltyPoints.toLocaleString() }} pts</strong>
+                    <small>{{ $t('admin.customers.loyaltyProgram') }}</small>
+                    <strong>{{ loyaltyTierLabel }} · {{ customer.loyaltyPoints.toLocaleString() }} {{ $t('admin.customers.pts') }}</strong>
                   </div>
                 </div>
                 <div class="overview-item">
                   <div class="ov-icon ov-pink"><i class="bi bi-heart"></i></div>
                   <div>
-                    <small>Wishlist</small>
-                    <strong>{{ customer.wishlistCount }} items</strong>
+                    <small>{{ $t('admin.customers.wishlist') }}</small>
+                    <strong>{{ customer.wishlistCount }} {{ $t('admin.customers.items') }}</strong>
                   </div>
                 </div>
                 <div class="overview-item">
                   <div class="ov-icon ov-green"><i class="bi bi-ticket-perforated"></i></div>
                   <div>
-                    <small>Coupons</small>
-                    <strong>{{ customer.couponCount }} available</strong>
+                    <small>{{ $t('admin.customers.coupons') }}</small>
+                    <strong>{{ customer.couponCount }} {{ $t('admin.customers.available') }}</strong>
                   </div>
                 </div>
               </div>
 
               <!-- Orders placed -->
               <div class="orders-section">
-                <h4 class="section-title">Orders Placed</h4>
+                <h4 class="section-title">{{ $t('admin.customers.ordersPlaced') }}</h4>
                 <div class="mini-table-scroll">
                   <table class="mini-table">
                     <thead>
                       <tr>
-                        <th>Order</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th style="text-align:right">Total</th>
+                        <th>{{ $t('admin.customers.order') }}</th>
+                        <th>{{ $t('admin.customers.date') }}</th>
+                        <th>{{ $t('admin.customers.status') }}</th>
+                        <th style="text-align:right">{{ $t('admin.customers.total') }}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -169,7 +169,7 @@
                         <td style="text-align:right"><strong>{{ formatCurrency(o.total) }}</strong></td>
                       </tr>
                       <tr v-if="customerOrders.length === 0">
-                        <td colspan="4" style="text-align:center;color:var(--admin-muted);padding:24px">No orders found</td>
+                        <td colspan="4" style="text-align:center;color:var(--admin-muted);padding:24px">{{ $t('admin.customers.noOrdersFound') }}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -180,19 +180,19 @@
             <!-- Security Tab -->
             <div v-if="activeTab === 'security'" class="tab-content">
               <div class="security-section">
-                <h4 class="section-title">Change Password</h4>
+                <h4 class="section-title">{{ $t('admin.customers.changePassword') }}</h4>
                 <div class="field-row-2">
-                  <div class="field"><label class="field-label">New Password</label><input type="password" class="admin-control field-input" placeholder="••••••••" /></div>
-                  <div class="field"><label class="field-label">Confirm Password</label><input type="password" class="admin-control field-input" placeholder="••••••••" /></div>
+                  <div class="field"><label class="field-label">{{ $t('admin.customers.newPassword') }}</label><input type="password" class="admin-control field-input" placeholder="••••••••" /></div>
+                  <div class="field"><label class="field-label">{{ $t('admin.customers.confirmPassword') }}</label><input type="password" class="admin-control field-input" placeholder="••••••••" /></div>
                 </div>
-                <button class="admin-primary-button btn-sm" type="button" style="margin-top:12px">Update Password</button>
+                <button class="admin-primary-button btn-sm" type="button" style="margin-top:12px">{{ $t('admin.customers.updatePassword') }}</button>
               </div>
               <div class="security-section">
-                <h4 class="section-title">Two-Factor Authentication</h4>
+                <h4 class="section-title">{{ $t('admin.customers.twoFactor') }}</h4>
                 <div class="toggle-field">
                   <div class="toggle-info">
-                    <strong>Enable 2FA</strong>
-                    <small>Add extra security to this account</small>
+                    <strong>{{ $t('admin.customers.enable2fa') }}</strong>
+                    <small>{{ $t('admin.customers.enable2faDesc') }}</small>
                   </div>
                   <label class="stock-toggle"><input type="checkbox" /><span class="toggle-track"></span></label>
                 </div>
@@ -203,18 +203,18 @@
             <div v-if="activeTab === 'address'" class="tab-content">
               <div class="address-grid">
                 <div class="address-box">
-                  <h4 class="section-title">Shipping Address</h4>
+                  <h4 class="section-title">{{ $t('admin.orders.shippingAddress') }}</h4>
                   <p>{{ customer.shippingAddress.line1 }}</p>
                   <p>{{ customer.shippingAddress.city }}, {{ customer.shippingAddress.country }}</p>
                   <p v-if="customer.shippingAddress.postalCode">{{ customer.shippingAddress.postalCode }}</p>
-                  <button class="admin-secondary-button btn-sm" type="button" style="margin-top:10px"><i class="bi bi-pencil"></i> Edit</button>
+                  <button class="admin-secondary-button btn-sm" type="button" style="margin-top:10px"><i class="bi bi-pencil"></i> {{ $t('admin.customers.edit') }}</button>
                 </div>
                 <div class="address-box">
-                  <h4 class="section-title">Billing Address</h4>
+                  <h4 class="section-title">{{ $t('admin.orders.billingAddress') }}</h4>
                   <p>{{ customer.billingAddress.line1 }}</p>
                   <p>{{ customer.billingAddress.city }}, {{ customer.billingAddress.country }}</p>
                   <p v-if="customer.billingAddress.postalCode">{{ customer.billingAddress.postalCode }}</p>
-                  <button class="admin-secondary-button btn-sm" type="button" style="margin-top:10px"><i class="bi bi-pencil"></i> Edit</button>
+                  <button class="admin-secondary-button btn-sm" type="button" style="margin-top:10px"><i class="bi bi-pencil"></i> {{ $t('admin.customers.edit') }}</button>
                 </div>
               </div>
             </div>
@@ -238,11 +238,12 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useHead, useRoute, useRouter } from '#imports'
+import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 
 definePageMeta({ layout: 'admin' })
+const { t } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
@@ -251,23 +252,23 @@ const admin = useAdminStore()
 const customerId = computed(() => Number(route.params.id))
 const customer = ref(null)
 
-useHead({ title: computed(() => customer.value ? `Customer ${customer.value.customerCode} – IrusGear Admin` : 'Loading Customer...') })
+useHead({ title: () => customer.value ? t('admin.customers.customerPageTitle', { code: customer.value.customerCode }) : t('admin.customers.loadingCustomer') })
 
 const activeTab = ref('overview')
 
-const tabs = [
-  { key: 'overview', label: 'Overview', icon: 'bi-grid' },
-  { key: 'security', label: 'Security', icon: 'bi-shield-lock' },
-  { key: 'address', label: 'Address & Billing', icon: 'bi-geo-alt' },
-  { key: 'notifications', label: 'Notifications', icon: 'bi-bell' },
-]
+const tabs = computed(() => [
+  { key: 'overview', label: t('admin.customers.tabOverview'), icon: 'bi-grid' },
+  { key: 'security', label: t('admin.customers.tabSecurity'), icon: 'bi-shield-lock' },
+  { key: 'address', label: t('admin.customers.tabAddress'), icon: 'bi-geo-alt' },
+  { key: 'notifications', label: t('admin.customers.tabNotifications'), icon: 'bi-bell' },
+])
 
-const notificationSettings = [
-  { key: 'email_order', label: 'Email on new order', description: 'Send email when this customer places an order', default: true },
-  { key: 'email_promo', label: 'Promotional emails', description: 'Include in marketing campaigns', default: true },
-  { key: 'email_account', label: 'Account activity', description: 'Notify on login, password change', default: false },
-  { key: 'sms_order', label: 'SMS order updates', description: 'Send SMS for order status changes', default: false },
-]
+const notificationSettings = computed(() => [
+  { key: 'email_order', label: t('admin.customers.notifEmailOrder'), description: t('admin.customers.notifEmailOrderDesc'), default: true },
+  { key: 'email_promo', label: t('admin.customers.notifEmailPromo'), description: t('admin.customers.notifEmailPromoDesc'), default: true },
+  { key: 'email_account', label: t('admin.customers.notifEmailAccount'), description: t('admin.customers.notifEmailAccountDesc'), default: false },
+  { key: 'sms_order', label: t('admin.customers.notifSmsOrder'), description: t('admin.customers.notifSmsOrderDesc'), default: false },
+])
 
 /* ── customer orders ── */
 const customerOrders = ref([])
@@ -285,6 +286,13 @@ const fetchCustomerOrders = async () => {
 }
 
 /* ── loyalty ── */
+const loyaltyTierLabel = computed(() => {
+  if (!customer.value) return ''
+  const tier = customer.value.loyaltyTier
+  if (tier === 'platinum') return t('admin.customers.platinumTier')
+  if (tier === 'gold') return t('admin.customers.goldTier')
+  return t('admin.customers.standardTier')
+})
 const loyaltyProgress = computed(() => {
   if (!customer.value) return 0
   const max = customer.value.loyaltyTier === 'platinum' ? 10000 : customer.value.loyaltyTier === 'gold' ? 5000 : 2000
@@ -292,11 +300,12 @@ const loyaltyProgress = computed(() => {
 })
 const loyaltyNextTier = computed(() => {
   if (!customer.value) return ''
-  if (customer.value.loyaltyTier === 'platinum') return 'Highest tier reached!'
-  const next = customer.value.loyaltyTier === 'gold' ? 'Platinum' : 'Gold'
+  if (customer.value.loyaltyTier === 'platinum') return t('admin.customers.highestTier')
+  const nextKey = customer.value.loyaltyTier === 'gold' ? 'platinumTier' : 'goldTier'
+  const next = t(`admin.customers.${nextKey}`)
   const max = customer.value.loyaltyTier === 'gold' ? 10000 : 2000
   const remaining = Math.max(0, max - customer.value.loyaltyPoints)
-  return `${remaining.toLocaleString()} pts to ${next}`
+  return t('admin.customers.ptsToNext', { pts: remaining.toLocaleString(), tier: next })
 })
 
 /* ── helpers ── */
@@ -308,23 +317,33 @@ const formatCompact = (n) => {
 }
 const formatDateShort = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-const statusLabel = (s) => ({ active: 'Active', inactive: 'Inactive', blocked: 'Blocked' }[s] || s)
+const statusLabel = (s) => ({
+  active: t('admin.status.active'),
+  inactive: t('admin.status.inactive'),
+  blocked: t('admin.status.blocked'),
+}[s] || s)
 const statusVariant = (s) => ({ active: 'success', inactive: 'neutral', blocked: 'danger' }[s] || 'neutral')
-const paymentLabel = (s) => ({ pending: 'Pending', paid: 'Paid', failed: 'Failed', cancelled: 'Cancelled', refunded: 'Refunded' }[s] || s)
+const paymentLabel = (s) => ({
+  pending: t('admin.status.pending'),
+  paid: t('admin.status.paid'),
+  failed: t('admin.status.failed'),
+  cancelled: t('admin.status.cancelled'),
+  refunded: t('admin.status.refunded'),
+}[s] || s)
 const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
 
 const handleDelete = async () => {
-  if (confirm(`Delete customer ${customer.value?.customerCode}? This cannot be undone.`)) {
+  if (confirm(t('admin.customers.confirmDelete', { code: customer.value?.customerCode }))) {
     try {
       await admin.remove('customers', customerId.value)
-      alert('Customer deleted successfully')
+      alert(t('admin.customers.deleteSuccess'))
       router.push('/admin/customers')
     } catch (e) {
-      alert('Failed to delete customer: ' + e.message)
+      alert(t('admin.customers.deleteFailed', { msg: e.message }))
     }
   }
 }
-const handleEditDetails = () => alert('Edit details (mock)')
+const handleEditDetails = () => alert(t('admin.customers.editDetailsMock'))
 
 const mapCustomerDetail = (c) => {
   const loyalty = c.member_rank || { name_en: 'Standard', threshold: 0 }
@@ -338,8 +357,8 @@ const mapCustomerDetail = (c) => {
     orders: c.orders || 0,
     totalSpent: c.total_spent || 0,
     status: c.status || 'active',
-    phone: c.phone || 'N/A',
-    country: c.country || 'Vietnam',
+    phone: c.phone || t('admin.orders.notAvailable'),
+    country: c.country || t('admin.customers.defaultCountry'),
     countryCode: 'vn',
     loyaltyTier: loyalty.name_en?.toLowerCase() || 'standard',
     loyaltyPoints: c.total_spent || 0,

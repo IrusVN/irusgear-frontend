@@ -27,7 +27,7 @@
         <AdminTableToolbar
           :search="search"
           :page-size="pageSize"
-          search-placeholder="Search Order"
+          :search-placeholder="$t('admin.orders.searchOrder')"
           @update:search="handleSearch"
           @update:page-size="changePageSize"
           @export="handleExport"
@@ -67,8 +67,8 @@
       <template #actions="{ item }">
         <AdminActionMenu
           :items="[
-            { key: 'view', label: 'View Details', icon: 'bi-eye' },
-            { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+            { key: 'view', label: $t('admin.orders.viewDetails'), icon: 'bi-eye' },
+            { key: 'delete', label: $t('admin.orders.delete'), icon: 'bi-trash', variant: 'danger' },
           ]"
           @select="handleAction($event, item)"
         />
@@ -88,7 +88,7 @@
     <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
       <label style="display:block;position:relative;margin-bottom:12px">
         <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
-        <input class="admin-control" v-model="search" placeholder="Search Order" style="padding-left:36px;width:100%" @input="resetPage">
+        <input class="admin-control" v-model="search" :placeholder="$t('admin.orders.searchOrder')" style="padding-left:36px;width:100%" @input="resetPage">
       </label>
       <AdminMobileCard
         v-for="item in orders"
@@ -97,8 +97,8 @@
         :subtitle="item.customer.name"
         :avatar="item.customer.avatar"
         :meta="[
-          { label: 'Date', value: formatDate(item.date) },
-          { label: 'Method', value: item.paymentLabel },
+          { label: $t('admin.orders.date'), value: formatDate(item.date) },
+          { label: $t('admin.orders.method'), value: item.paymentLabel },
         ]"
         @click="viewOrder(item)"
       >
@@ -108,15 +108,15 @@
         <template #actions>
           <AdminActionMenu
             :items="[
-              { key: 'view', label: 'View Details', icon: 'bi-eye' },
-              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+              { key: 'view', label: $t('admin.orders.viewDetails'), icon: 'bi-eye' },
+              { key: 'delete', label: $t('admin.orders.delete'), icon: 'bi-trash', variant: 'danger' },
             ]"
             @select="handleAction($event, item)"
           />
         </template>
       </AdminMobileCard>
       <div v-if="totalOrders > orders.length" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < totalOrders" class="admin-secondary-button" @click="changePage(page + 1)">Load More</button>
+        <button v-if="page * pageSize < totalOrders" class="admin-secondary-button" @click="changePage(page + 1)">{{ $t('admin.orders.loadMore') }}</button>
       </div>
     </div>
   </div>
@@ -124,7 +124,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useHead, useRouter } from '#imports'
+import { useHead, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
@@ -136,10 +136,11 @@ import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 
+const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
-useHead({ title: 'Orders – IrusGear Admin' })
+useHead({ title: () => t('admin.orders.pageTitle') })
 
 const router = useRouter()
 const admin = useAdminStore()
@@ -179,23 +180,24 @@ const changePageSize = (size) => {
 /* ── metrics ── */
 const paymentMetrics = computed(() => {
   const s = stats.value?.by_payment_status || {}
+  const meta = t('admin.orders.ordersMeta')
   return [
-    { label: 'Pending Payment', value: s.pending || 0, meta: 'orders', icon: 'bi-clock', variant: 'warning' },
-    { label: 'Completed', value: s.paid || 0, meta: 'orders', icon: 'bi-check-circle', variant: 'success' },
-    { label: 'Refunded', value: s.refunded || 0, meta: 'orders', icon: 'bi-arrow-counterclockwise', variant: 'info' },
-    { label: 'Failed', value: s.failed || 0, meta: 'orders', icon: 'bi-x-circle', variant: 'danger' },
+    { label: t('admin.orders.pendingPayment'), value: s.pending || 0, meta, icon: 'bi-clock', variant: 'warning' },
+    { label: t('admin.orders.completed'), value: s.paid || 0, meta, icon: 'bi-check-circle', variant: 'success' },
+    { label: t('admin.orders.refunded'), value: s.refunded || 0, meta, icon: 'bi-arrow-counterclockwise', variant: 'info' },
+    { label: t('admin.orders.failed'), value: s.failed || 0, meta, icon: 'bi-x-circle', variant: 'danger' },
   ]
 })
 
 /* ── columns ── */
-const columns = [
-  { key: 'orderCode', label: 'Order', width: '100px' },
-  { key: 'date', label: 'Date' },
-  { key: 'customer', label: 'Customer', width: '22%' },
-  { key: 'paymentStatus', label: 'Payment' },
-  { key: 'fulfillmentStatus', label: 'Fulfillment' },
-  { key: 'paymentMethod', label: 'Method' },
-]
+const columns = computed(() => [
+  { key: 'orderCode', label: t('admin.orders.order'), width: '100px' },
+  { key: 'date', label: t('admin.orders.date') },
+  { key: 'customer', label: t('admin.orders.customer'), width: '22%' },
+  { key: 'paymentStatus', label: t('admin.orders.payment') },
+  { key: 'fulfillmentStatus', label: t('admin.orders.fulfillment') },
+  { key: 'paymentMethod', label: t('admin.orders.method') },
+])
 
 /* ── mapping ── */
 const mapOrder = (o) => ({
@@ -203,14 +205,14 @@ const mapOrder = (o) => ({
   orderCode: o.order_number,
   date: o.created_at,
   customer: {
-    name: o.customer?.name || 'Guest',
+    name: o.customer?.name || t('admin.orders.guest'),
     email: o.customer?.email || o.guest_email || '',
     avatar: '', // fallback to initials or empty
   },
   paymentStatus: o.payment?.status || 'pending',
   fulfillmentStatus: o.status,
   paymentMethod: o.payment?.method || 'cod',
-  paymentLabel: o.payment ? (o.payment.method === 'cod' ? 'Cash on Delivery' : o.payment.method) : 'N/A',
+  paymentLabel: o.payment ? (o.payment.method === 'cod' ? t('admin.orders.cashOnDelivery') : o.payment.method) : t('admin.orders.notAvailable'),
 })
 
 /* ── data fetching ── */
@@ -239,12 +241,21 @@ onMounted(() => {
 /* ── helpers ── */
 const formatDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-const paymentLabel = (s) => ({ pending: 'Pending', paid: 'Paid', failed: 'Failed', cancelled: 'Cancelled', refunded: 'Refunded' }[s] || s)
+const paymentLabel = (s) => ({
+  pending: t('admin.status.pending'),
+  paid: t('admin.dashboard.status.paid'),
+  failed: t('admin.status.failed'),
+  cancelled: t('admin.status.cancelled'),
+  refunded: t('admin.status.refunded'),
+}[s] || s)
 const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
 
 const fulfillmentLabel = (s) => ({
-  ready_to_pickup: 'Ready to Pickup', out_for_delivery: 'Out for Delivery',
-  delivered: 'Delivered', dispatched: 'Dispatched', processing: 'Processing',
+  ready_to_pickup: t('admin.orders.statusReadyToPickup'),
+  out_for_delivery: t('admin.orders.statusOutForDelivery'),
+  delivered: t('admin.orders.statusDelivered'),
+  dispatched: t('admin.orders.statusDispatched'),
+  processing: t('admin.orders.statusProcessing'),
 }[s] || s)
 const fulfillmentVariant = (s) => ({
   ready_to_pickup: 'info', out_for_delivery: 'warning',
@@ -252,9 +263,9 @@ const fulfillmentVariant = (s) => ({
 }[s] || 'neutral')
 
 const viewOrder = (item) => router.push(`/admin/orders/${item.id}`)
-const handleExport = () => alert('Export triggered (mock)')
+const handleExport = () => alert(t('admin.orders.exportMock'))
 const handleAction = (action, item) => {
-  if (action.key === 'delete') alert(`Delete order ${item.orderCode} (mock)`)
+  if (action.key === 'delete') alert(t('admin.orders.deleteMock', { code: item.orderCode }))
   else router.push(`/admin/orders/${item.id}`)
 }
 </script>

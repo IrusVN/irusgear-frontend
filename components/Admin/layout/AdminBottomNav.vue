@@ -17,7 +17,7 @@
       :class="{ 'is-active': isSettingsActive }"
     >
       <i class="bi bi-gear"></i>
-      <span>Settings</span>
+      <span>{{ $t('admin.bottomNav.settings') }}</span>
     </NuxtLink>
   </nav>
 </template>
@@ -25,17 +25,19 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from '#imports'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 
+const { t } = useI18n()
 const route = useRoute()
 const isMobile = useMediaQuery('(max-width: 767px)')
 
-const mainTabs = [
-  { key: 'dashboard', label: 'Dashboard', icon: 'bi-house', route: '/admin/dashboard' },
-  { key: 'products', label: 'Products', icon: 'bi-box-seam', route: '/admin/products' },
-  { key: 'orders', label: 'Orders', icon: 'bi-receipt', route: '/admin/orders' },
-  { key: 'analytics', label: 'Analytics', icon: 'bi-bar-chart-line', route: '/admin/analytics' },
-]
+const mainTabs = computed(() => [
+  { key: 'dashboard', label: t('admin.bottomNav.dashboard'), icon: 'bi-house', route: '/admin/dashboard' },
+  { key: 'products', label: t('admin.bottomNav.products'), icon: 'bi-box-seam', route: '/admin/products' },
+  { key: 'orders', label: t('admin.bottomNav.orders'), icon: 'bi-receipt', route: '/admin/orders' },
+  { key: 'analytics', label: t('admin.bottomNav.analytics'), icon: 'bi-bar-chart-line', route: '/admin/analytics' },
+])
 
 const isSettingsActive = computed(() => route.path.startsWith('/admin/settings'))
 

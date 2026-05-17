@@ -3,9 +3,9 @@
     <!-- Not found -->
     <div v-if="!order" class="admin-card-shell" style="text-align:center;padding:48px">
       <i class="bi bi-exclamation-triangle" style="font-size:2.4rem;color:var(--admin-warning)"></i>
-      <h3 style="margin:12px 0 4px">Order Not Found</h3>
-      <p style="color:var(--admin-muted)">The order you're looking for doesn't exist.</p>
-      <nuxt-link to="/admin/orders" class="admin-primary-button" style="margin-top:12px">Back to Orders</nuxt-link>
+      <h3 style="margin:12px 0 4px">{{ $t('admin.orders.orderNotFound') }}</h3>
+      <p style="color:var(--admin-muted)">{{ $t('admin.orders.orderNotFoundDesc') }}</p>
+      <nuxt-link to="/admin/orders" class="admin-primary-button" style="margin-top:12px">{{ $t('admin.orders.backToOrders') }}</nuxt-link>
     </div>
 
     <template v-else>
@@ -17,7 +17,7 @@
           </nuxt-link>
           <div>
             <div class="header-title-row">
-              <h2 class="page-title">Order {{ order.orderCode }}</h2>
+              <h2 class="page-title">{{ $t('admin.orders.orderPrefix') }} {{ order.orderCode }}</h2>
               <AdminStatusBadge :label="paymentLabel(order.paymentStatus)"
                 :variant="paymentVariant(order.paymentStatus)" />
               <AdminStatusBadge :label="fulfillmentLabel(order.fulfillmentStatus)"
@@ -28,7 +28,7 @@
         </div>
         <div class="header-actions">
           <button v-if="order.fulfillmentStatus !== 'cancelled'" class="admin-danger-button" type="button" @click="handleCancel">
-            <i class="bi bi-x-circle"></i> Cancel Order
+            <i class="bi bi-x-circle"></i> {{ $t('admin.orders.cancelOrder') }}
           </button>
         </div>
       </div>
@@ -39,15 +39,15 @@
         <div class="detail-col-left">
           <!-- Order Items Table -->
           <div class="admin-card-shell detail-card">
-            <h3 class="card-title">Order Details</h3>
+            <h3 class="card-title">{{ $t('admin.orders.orderDetails') }}</h3>
             <div class="items-table-scroll">
               <table class="items-table">
                 <thead>
                   <tr>
-                    <th>Product</th>
-                    <th style="text-align:right">Price</th>
-                    <th style="text-align:center">Qty</th>
-                    <th style="text-align:right">Total</th>
+                    <th>{{ $t('admin.orders.product') }}</th>
+                    <th style="text-align:right">{{ $t('admin.orders.price') }}</th>
+                    <th style="text-align:center">{{ $t('admin.orders.qty') }}</th>
+                    <th style="text-align:right">{{ $t('admin.orders.total') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -72,23 +72,23 @@
             <!-- Totals Summary -->
             <div class="totals-summary">
               <div class="total-row">
-                <span>Subtotal</span>
+                <span>{{ $t('admin.orders.subtotal') }}</span>
                 <span>{{ formatCurrency(order.subtotal) }}</span>
               </div>
               <div v-if="order.discount" class="total-row discount-row">
-                <span>Discount</span>
+                <span>{{ $t('admin.orders.discount') }}</span>
                 <span>-{{ formatCurrency(order.discount) }}</span>
               </div>
               <div class="total-row">
-                <span>Shipping</span>
-                <span>{{ order.shipping === 0 ? 'Free' : formatCurrency(order.shipping) }}</span>
+                <span>{{ $t('admin.orders.shipping') }}</span>
+                <span>{{ order.shipping === 0 ? $t('admin.orders.free') : formatCurrency(order.shipping) }}</span>
               </div>
               <div class="total-row">
-                <span>Tax (8%)</span>
+                <span>{{ $t('admin.orders.tax') }}</span>
                 <span>{{ formatCurrency(order.tax) }}</span>
               </div>
               <div class="total-row grand-total">
-                <span>Total</span>
+                <span>{{ $t('admin.orders.total') }}</span>
                 <span>{{ formatCurrency(order.total) }}</span>
               </div>
             </div>
@@ -96,7 +96,7 @@
 
           <!-- Shipping Activity Timeline -->
           <div class="admin-card-shell detail-card">
-            <h3 class="card-title">Shipping Activity</h3>
+            <h3 class="card-title">{{ $t('admin.orders.shippingActivity') }}</h3>
             <div class="timeline">
               <div v-for="(step, idx) in order.activity" :key="step.id" class="timeline-item"
                 :class="{ completed: step.completed, 'is-last': idx === order.activity.length - 1 }">
@@ -120,12 +120,12 @@
         <div class="detail-col-right">
           <!-- Customer Details -->
           <div class="admin-card-shell detail-card">
-            <h3 class="card-title">Customer Details</h3>
+            <h3 class="card-title">{{ $t('admin.orders.customerDetails') }}</h3>
             <div class="customer-detail-cell">
               <img :src="order.customer.avatar" :alt="order.customer.name" class="customer-avatar-lg" />
               <div>
                 <strong>{{ order.customer.name }}</strong>
-                <small>Customer ID: {{ order.customer.customerCode }}</small>
+                <small>{{ $t('admin.orders.customerIdLabel', { code: order.customer.customerCode }) }}</small>
               </div>
             </div>
             <div class="detail-info-list">
@@ -143,8 +143,8 @@
           <!-- Shipping Address -->
           <div class="admin-card-shell detail-card">
             <div class="card-header-row">
-              <h3 class="card-title">Shipping Address</h3>
-              <button class="admin-secondary-button btn-sm" type="button"><i class="bi bi-pencil"></i> Edit</button>
+              <h3 class="card-title">{{ $t('admin.orders.shippingAddress') }}</h3>
+              <button class="admin-secondary-button btn-sm" type="button"><i class="bi bi-pencil"></i> {{ $t('admin.orders.edit') }}</button>
             </div>
             <div class="address-block">
               <p>{{ order.shippingAddress.street }}</p>
@@ -156,7 +156,7 @@
 
           <!-- Billing & Payment -->
           <div class="admin-card-shell detail-card">
-            <h3 class="card-title">Billing Address</h3>
+            <h3 class="card-title">{{ $t('admin.orders.billingAddress') }}</h3>
             <div class="address-block">
               <p>{{ order.billingAddress.street }}</p>
               <p>{{ order.billingAddress.ward }}, {{ order.billingAddress.district }}</p>
@@ -164,7 +164,7 @@
             </div>
 
             <div class="payment-section">
-              <h4 class="section-subtitle">Payment Method</h4>
+              <h4 class="section-subtitle">{{ $t('admin.orders.paymentMethod') }}</h4>
               <div class="payment-card-info">
                 <i class="bi" :class="paymentIcon(order.paymentMethod)"></i>
                 <span>{{ order.paymentLabel }}</span>
@@ -174,7 +174,7 @@
 
           <!-- Order Note -->
           <div v-if="order.note" class="admin-card-shell detail-card">
-            <h3 class="card-title">Note</h3>
+            <h3 class="card-title">{{ $t('admin.orders.note') }}</h3>
             <p class="note-text">{{ order.note }}</p>
           </div>
         </div>
@@ -185,11 +185,12 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useHead, useRoute, useRouter } from '#imports'
+import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 
 definePageMeta({ layout: 'admin' })
+const { t } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
@@ -198,7 +199,7 @@ const admin = useAdminStore()
 const orderId = computed(() => Number(route.params.id))
 const order = ref(null)
 
-useHead({ title: computed(() => order.value ? `Order ${order.value.orderCode} – IrusGear Admin` : 'Loading Order...') })
+useHead({ title: () => order.value ? t('admin.orders.orderPageTitle', { code: order.value.orderCode }) : t('admin.orders.loadingOrder') })
 
 const mapOrderDetail = (o) => ({
   id: o.id,
@@ -207,11 +208,11 @@ const mapOrderDetail = (o) => ({
   paymentStatus: o.payment?.status || 'pending',
   fulfillmentStatus: o.status,
   paymentMethod: o.payment?.method || 'cod',
-  paymentLabel: o.payment ? (o.payment.method === 'cod' ? 'Cash on Delivery' : o.payment.method) : 'N/A',
+  paymentLabel: o.payment ? (o.payment.method === 'cod' ? t('admin.orders.cashOnDelivery') : o.payment.method) : t('admin.orders.notAvailable'),
   customer: {
     id: o.customer?.id,
-    customerCode: o.customer?.id ? `#CUS${o.customer.id}` : 'Guest',
-    name: o.customer?.name || o.guest_email || 'Guest',
+    customerCode: o.customer?.id ? `#CUS${o.customer.id}` : t('admin.orders.guest'),
+    name: o.customer?.name || o.guest_email || t('admin.orders.guest'),
     email: o.customer?.email || o.guest_email,
     phone: o.customer?.phone || o.address?.phone,
     avatar: '',
@@ -235,7 +236,7 @@ const mapOrderDetail = (o) => ({
     ward: o.address?.ward_code || '',
     district: o.address?.district_code || '',
     city: o.address?.city || '',
-    country: o.address?.country || 'Vietnam',
+    country: o.address?.country || t('admin.customers.defaultCountry'),
     zip: o.address?.postal_code || '',
   },
   billingAddress: {
@@ -243,13 +244,13 @@ const mapOrderDetail = (o) => ({
     ward: o.address?.ward_code || '',
     district: o.address?.district_code || '',
     city: o.address?.city || '',
-    country: o.address?.country || 'Vietnam',
+    country: o.address?.country || t('admin.customers.defaultCountry'),
   },
-  activity: o.timeline?.map(t => ({
-    id: t.id,
-    title: t.label,
-    description: t.note || '',
-    timestamp: t.created_at,
+  activity: o.timeline?.map(tl => ({
+    id: tl.id,
+    title: tl.label,
+    description: tl.note || '',
+    timestamp: tl.created_at,
     completed: true,
   })) || [],
   note: o.order_note,
@@ -271,11 +272,20 @@ const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency'
 const formatDateFull = (d) => new Date(d).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })
 const formatTimestamp = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 
-const paymentLabel = (s) => ({ pending: 'Pending', paid: 'Paid', failed: 'Failed', cancelled: 'Cancelled', refunded: 'Refunded' }[s] || s)
+const paymentLabel = (s) => ({
+  pending: t('admin.status.pending'),
+  paid: t('admin.status.paid'),
+  failed: t('admin.status.failed'),
+  cancelled: t('admin.status.cancelled'),
+  refunded: t('admin.status.refunded'),
+}[s] || s)
 const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
 const fulfillmentLabel = (s) => ({
-  ready_to_pickup: 'Ready to Pickup', out_for_delivery: 'Out for Delivery',
-  delivered: 'Delivered', dispatched: 'Dispatched', processing: 'Processing',
+  ready_to_pickup: t('admin.status.ready_to_pickup'),
+  out_for_delivery: t('admin.status.out_for_delivery'),
+  delivered: t('admin.status.delivered'),
+  dispatched: t('admin.status.dispatched'),
+  processing: t('admin.status.processing'),
 }[s] || s)
 const fulfillmentVariant = (s) => ({
   ready_to_pickup: 'info', out_for_delivery: 'warning',
@@ -288,13 +298,13 @@ const paymentIcon = (m) => ({
 }[m] || 'bi-credit-card')
 
 const handleCancel = async () => {
-  if (confirm(`Cancel order ${order.value?.orderCode}? This cannot be undone.`)) {
+  if (confirm(t('admin.orders.confirmCancel', { code: order.value?.orderCode }))) {
     try {
-      await admin.create(`orders/${orderId.value}/cancel`, { reason: 'Cancelled by admin' })
-      alert('Order cancelled successfully')
+      await admin.create(`orders/${orderId.value}/cancel`, { reason: t('admin.orders.cancelReason') })
+      alert(t('admin.orders.cancelSuccess'))
       fetchOrder()
     } catch (e) {
-      alert('Failed to cancel order: ' + e.message)
+      alert(t('admin.orders.cancelFailed', { msg: e.message }))
     }
   }
 }

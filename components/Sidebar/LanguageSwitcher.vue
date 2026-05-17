@@ -38,9 +38,13 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useI18n, navigateTo } from '#imports'
+import { useI18n, useSwitchLocalePath, navigateTo } from '#imports'
 
-const { locale } = useI18n()
+// setLocale từ @nuxtjs/i18n tự lo navigate + cập nhật reactive locale (text + URL).
+// Dùng navigateTo() thủ công sẽ đổi URL nhưng không trigger locale.value re-evaluate
+// → text component không đổi.
+const { locale, setLocale } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
 
 const LOCALE_META = {
   vi: { name: 'Tiếng Việt', flagCode: 'vn' },
@@ -56,12 +60,17 @@ const localeItems = computed(() =>
 )
 
 const switchToLocale = async (targetLocale) => {
-  const currentPath = window.location.pathname
-  const pathWithoutLocale = currentPath.replace(/^\/(vi|en)/, '') || '/'
-  const targetPath = targetLocale === 'en'
-    ? `/en${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
-    : pathWithoutLocale
-  await navigateTo(targetPath)
+  if (targetLocale === locale.value) return
+
+  // Cách chuẩn: setLocale tự navigate sang URL có prefix đúng (vi không prefix,
+  // en có /en/...) VÀ cập nhật locale.value để tất cả $t() re-evaluate.
+  try {
+    await setLocale(targetLocale)
+  } catch {
+    // Fallback nếu setLocale fail (vd Nuxt context issue): navigate thủ công
+    const target = switchLocalePath(targetLocale)
+    if (target) await navigateTo(target)
+  }
 }
 </script>
 

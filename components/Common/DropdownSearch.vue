@@ -396,8 +396,16 @@ const panelStyle = computed(() => {
   };
 });
 
+// BE có thể trả 2 shape:
+//  - Cũ: ['keyword 1', 'keyword 2', ...]
+//  - Mới: [{ name: 'keyword', image: 'url' }, ...]
+// Normalize về { name, image } để template render đồng nhất.
 const trendingItems = computed(() =>
-  searchStore.trending.map(keyword => ({ name: keyword }))
+  searchStore.trending.map((item) =>
+    typeof item === "string"
+      ? { name: item, image: null }
+      : { name: item?.name || item?.keyword || "", image: item?.image || null }
+  )
 );
 
 const buildSearchTo = (keyword) => ({

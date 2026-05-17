@@ -932,14 +932,14 @@ onBeforeUnmount(() => {
 const utilityLinks = computed(() => [
   {
     label: t('home.promotion'),
-    to: localePath('/khuyen-mai'),
+    to: localePath('/products?category=khuyen-mai&sort=promo'),
     icon: 'bi bi-tags',
   },
 ])
 
 const ctaLink = computed(() => ({
   label: t('home.dealHot'),
-  to: localePath('/khuyen-mai'),
+  to: localePath('/products?category=khuyen-mai&sort=promo'),
   icon: 'bi bi-stars',
 }))
 
@@ -951,12 +951,12 @@ const primaryNavItems = computed(() => [
   },
   {
     label: t('home.news'),
-    to: localePath('/tin-tuc'),
+    to: localePath('/coming-soon'),
     icon: 'bi bi-newspaper',
   },
   {
     label: t('home.promotion'),
-    to: localePath('/khuyen-mai'),
+    to: localePath('/products?category=khuyen-mai&sort=promo'),
     icon: 'bi bi-megaphone',
   },
   {

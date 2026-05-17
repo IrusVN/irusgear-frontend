@@ -63,7 +63,10 @@
 <script setup>
 import { computed } from "vue";
 import { useI18n } from "#imports";
+import { toast } from "vue-sonner";
 import { useCheckoutStore } from "@/stores/checkoutStore";
+
+const { t } = useI18n();
 
 const props = defineProps({
   address: {
@@ -104,9 +107,16 @@ const formatPhone = (phone) => {
 };
 
 const handleDelete = () => {
-  if (confirm("Xóa địa chỉ này?")) {
-    emit("delete");
-  }
+  toast(
+    t("checkout.confirmDeleteAddress", { name: props.address?.name || "" }),
+    {
+      cancel: { label: t("common.confirmNo"), onClick: () => {} },
+      action: {
+        label: t("common.confirmYes"),
+        onClick: () => emit("delete"),
+      },
+    },
+  );
 };
 </script>
 

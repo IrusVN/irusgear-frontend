@@ -54,7 +54,7 @@
           <!-- Items -->
           <div class="review-items">
             <div
-              v-for="item in cartStore.items"
+              v-for="item in cartStore.selectedItems"
               :key="item.id"
               class="review-item"
             >
@@ -164,11 +164,13 @@ const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
 const fullAddress = computed(() => {
   const addr = checkoutStore.selectedAddress;
   if (!addr) return "";
-  // Backend trả province/district/ward là object {code, name}
-  const ward = addr.ward?.name || addr.ward;
-  const district = addr.district?.name || addr.district;
-  const province = addr.province?.name || addr.province;
-  const parts = [addr.detail, ward, district, province].filter(Boolean);
+  // Data lưu dạng {value, label} từ resolveAddressCode() — giống AddressCard.vue.
+  // Fallback về string code gốc nếu chưa resolve.
+  const ward = addr.ward?.label || addr.ward;
+  const district = addr.district?.label || addr.district;
+  const province = addr.province?.label || addr.province;
+  const parts = [addr.detail, ward, district, province]
+    .filter((p) => Boolean(p) && typeof p === "string");
   return parts.join(", ");
 });
 
@@ -199,8 +201,12 @@ const getSelectedOptionsText = (item) => {
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 130;
+  /* Cao hơn CustomerSidebar (z-index 1040-1070) để header không đè lên dialog */
+  z-index: 1080;
   padding: 20px;
+  /* iOS safe area */
+  padding-top: max(20px, env(safe-area-inset-top, 0));
+  padding-bottom: max(20px, env(safe-area-inset-bottom, 0));
 }
 
 .order-review-dialog {
@@ -208,11 +214,26 @@ const getSelectedOptionsText = (item) => {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
+  /* Auto height theo content, tối đa 90vh để không tràn viewport */
   max-height: 90vh;
   max-width: 560px;
   overflow: hidden;
   width: 100%;
   animation: slideUp 0.25s ease-out;
+}
+
+@media (max-width: 575.98px) {
+  .modal-backdrop {
+    padding: 10px;
+    padding-top: max(10px, env(safe-area-inset-top, 0));
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 0));
+  }
+
+  .order-review-dialog {
+    border-radius: 14px;
+    /* Mobile: dialog có thể full chiều cao available để dùng hết screen */
+    max-height: 100%;
+  }
 }
 
 @keyframes slideUp {

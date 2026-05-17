@@ -26,7 +26,7 @@
         <AdminTableToolbar
           :search="search"
           :page-size="pageSize"
-          search-placeholder="Search Reviews"
+          :search-placeholder="$t('admin.reviews.searchReviews')"
           @update:search="handleSearch"
           @update:page-size="changePageSize"
           @export="handleExport"
@@ -76,7 +76,7 @@
     <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
       <label style="display:block;position:relative;margin-bottom:12px">
         <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
-        <input class="admin-control" :value="search" placeholder="Search Reviews" style="padding-left:36px;width:100%" @input="handleSearch($event.target.value)">
+        <input class="admin-control" :value="search" :placeholder="$t('admin.reviews.searchReviews')" style="padding-left:36px;width:100%" @input="handleSearch($event.target.value)">
       </label>
       <AdminMobileCard
         v-for="item in paginatedReviews"
@@ -85,8 +85,8 @@
         :subtitle="item.customerName"
         icon="bi-chat-square-text"
         :meta="[
-          { label: 'Rating', value: '⭐'.repeat(item.rating) + ' ' + item.rating + '.0' },
-          { label: 'Date', value: formatDate(item.createdAt) },
+          { label: $t('admin.reviews.ratingLabel'), value: '⭐'.repeat(item.rating) + ' ' + item.rating + '.0' },
+          { label: $t('admin.reviews.date'), value: formatDate(item.createdAt) },
         ]"
       >
         <template #badge>
@@ -100,7 +100,7 @@
         </template>
       </AdminMobileCard>
       <div v-if="totalReviews > reviews.length" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < totalReviews" class="admin-secondary-button" @click="changePage(page + 1)">Load More</button>
+        <button v-if="page * pageSize < totalReviews" class="admin-secondary-button" @click="changePage(page + 1)">{{ $t('admin.reviews.loadMore') }}</button>
       </div>
     </div>
   </div>
@@ -108,7 +108,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useHead } from '#imports'
+import { useHead, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
@@ -120,10 +120,11 @@ import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 
+const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
-useHead({ title: 'Manage Reviews – IrusGear Admin' })
+useHead({ title: () => t('admin.reviews.pageTitle') })
 
 const admin = useAdminStore()
 const pagination = usePaginationStore()
@@ -161,32 +162,37 @@ const changePageSize = (size) => {
 const reviewMetrics = computed(() => {
   const s = stats.value || {}
   return [
-    { label: 'Total Reviews', value: s.total_reviews || 0, meta: 'all time', icon: 'bi-chat-square-text', variant: 'neutral' },
-    { label: 'Published', value: s.approved_reviews || 0, meta: 'reviews', icon: 'bi-check-circle', variant: 'success' },
-    { label: 'Pending', value: s.pending_reviews || 0, meta: 'reviews', icon: 'bi-clock', variant: 'warning' },
-    { label: 'Avg Rating', value: Number(s.average_rating || 0).toFixed(1), meta: 'out of 5', icon: 'bi-star-fill', variant: 'info' },
+    { label: t('admin.reviews.totalReviews'), value: s.total_reviews || 0, meta: t('admin.reviews.allTime'), icon: 'bi-chat-square-text', variant: 'neutral' },
+    { label: t('admin.reviews.published'), value: s.approved_reviews || 0, meta: t('admin.reviews.reviewsMeta'), icon: 'bi-check-circle', variant: 'success' },
+    { label: t('admin.reviews.pending'), value: s.pending_reviews || 0, meta: t('admin.reviews.reviewsMeta'), icon: 'bi-clock', variant: 'warning' },
+    { label: t('admin.reviews.avgRating'), value: Number(s.average_rating || 0).toFixed(1), meta: t('admin.reviews.outOf5'), icon: 'bi-star-fill', variant: 'info' },
   ]
 })
 
-const columns = [
-  { key: 'productName', label: 'Product', width: '20%' },
-  { key: 'customerName', label: 'Customer' },
-  { key: 'rating', label: 'Rating' },
-  { key: 'title', label: 'Review' },
-  { key: 'status', label: 'Status' },
-  { key: 'createdAt', label: 'Date' },
-]
+const columns = computed(() => [
+  { key: 'productName', label: t('admin.reviews.product'), width: '20%' },
+  { key: 'customerName', label: t('admin.reviews.customer') },
+  { key: 'rating', label: t('admin.reviews.rating') },
+  { key: 'title', label: t('admin.reviews.review') },
+  { key: 'status', label: t('admin.reviews.status') },
+  { key: 'createdAt', label: t('admin.reviews.date') },
+])
 
 const paginatedReviews = computed(() => reviews.value)
 
 const formatDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-const statusLabel = (s) => ({ approved: 'Published', published: 'Published', pending: 'Pending', rejected: 'Rejected' }[s] || s)
+const statusLabel = (s) => ({
+  approved: t('admin.reviews.published'),
+  published: t('admin.reviews.published'),
+  pending: t('admin.reviews.pending'),
+  rejected: t('admin.reviews.rejected'),
+}[s] || s)
 const statusVariant = (s) => ({ approved: 'success', published: 'success', pending: 'warning', rejected: 'danger' }[s] || 'neutral')
 
 const actionItems = (item) => {
-  const items = [{ key: 'view', label: 'View Details', icon: 'bi-eye' }]
-  if (item.status === 'pending') items.push({ key: 'approve', label: 'Approve', icon: 'bi-check-lg' })
-  if (item.status !== 'rejected') items.push({ key: 'reject', label: 'Reject', icon: 'bi-x-lg', variant: 'danger' })
+  const items = [{ key: 'view', label: t('admin.reviews.viewDetails'), icon: 'bi-eye' }]
+  if (item.status === 'pending') items.push({ key: 'approve', label: t('admin.reviews.approve'), icon: 'bi-check-lg' })
+  if (item.status !== 'rejected') items.push({ key: 'reject', label: t('admin.reviews.reject'), icon: 'bi-x-lg', variant: 'danger' })
   return items
 }
 
@@ -194,30 +200,30 @@ const handleAction = async (action, item) => {
   try {
     if (action.key === 'approve') {
       await admin.patch('reviews', item.id + '/status', { status: 'approved' })
-      alert('Review approved successfully')
+      alert(t('admin.reviews.approvedMock'))
       fetchReviews()
       fetchStats()
     } else if (action.key === 'reject') {
       await admin.patch('reviews', item.id + '/status', { status: 'rejected' })
-      alert('Review rejected')
+      alert(t('admin.reviews.rejectedMock'))
       fetchReviews()
       fetchStats()
     } else {
-      alert(`${action.label} review #${item.id} (mock)`)
+      alert(t('admin.reviews.actionMock', { label: action.label, id: item.id }))
     }
   } catch (e) {
-    alert('Failed to perform action: ' + e.message)
+    alert(t('admin.reviews.actionFailed', { error: e.message }))
   }
 }
 
-const handleExport = () => alert('Export reviews (mock)')
+const handleExport = () => alert(t('admin.reviews.exportMock'))
 
 const mapReview = (r) => ({
   id: r.id,
-  productName: r.product?.name || 'Unknown Product',
-  customerName: r.author?.name || 'Anonymous',
+  productName: r.product?.name || t('admin.reviews.unknownProduct'),
+  customerName: r.author?.name || t('admin.reviews.anonymous'),
   rating: r.rating || 0,
-  title: r.content?.substring(0, 50) + (r.content?.length > 50 ? '...' : '') || 'No content',
+  title: r.content?.substring(0, 50) + (r.content?.length > 50 ? '...' : '') || t('admin.reviews.noContent'),
   status: r.status,
   createdAt: r.createdAt || r.created_at,
 })

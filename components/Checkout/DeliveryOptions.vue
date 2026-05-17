@@ -7,14 +7,17 @@
       </h2>
     </div>
 
-    <!-- No address selected -->
-    <div v-if="!checkoutStore.selectedAddressId" class="delivery-options__empty">
+    <!-- Hint khi chưa chọn địa chỉ — options vẫn hiển thị bên dưới để user xem trước -->
+    <div v-if="!checkoutStore.selectedAddressId" class="delivery-options__hint">
       <i class="bi bi-info-circle"></i>
-      <span>{{ $t("checkout.selectAddressFirst") }}</span>
+      <span>{{ $t("checkout.selectAddressForAccurateFee") }}</span>
     </div>
 
     <!-- Loading -->
-    <div v-else-if="checkoutStore.deliveryLoading" class="delivery-options__loading">
+    <div
+      v-if="checkoutStore.deliveryLoading && !checkoutStore.deliveryOptions.length"
+      class="delivery-options__loading"
+    >
       <div v-for="i in 3" :key="i" class="delivery-options__skeleton"></div>
     </div>
 
@@ -34,17 +37,19 @@
 
         <button
           ref="prevBtn"
-          class="swiper-button-prev delivery-swiper__prev"
-          aria-label="Previous"
+          type="button"
+          class="delivery-swiper__nav delivery-swiper__nav--prev"
+          aria-label="Phương thức trước"
         >
-          <ArrowIcon direction="left" :size="12" />
+          <i class="bi bi-chevron-left"></i>
         </button>
         <button
           ref="nextBtn"
-          class="swiper-button-next delivery-swiper__next"
-          aria-label="Next"
+          type="button"
+          class="delivery-swiper__nav delivery-swiper__nav--next"
+          aria-label="Phương thức tiếp theo"
         >
-          <ArrowIcon direction="right" :size="12" />
+          <i class="bi bi-chevron-right"></i>
         </button>
       </div>
 
@@ -58,11 +63,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import DeliveryOptionCard from "@/components/Checkout/DeliveryOptionCard.vue";
 import DeliveryTimeSlot from "@/components/Checkout/DeliveryTimeSlot.vue";
-import ArrowIcon from "@/components/Icons/ArrowIcon.vue";
 
 const checkoutStore = useCheckoutStore();
 
@@ -70,6 +74,21 @@ const swiperEl = ref(null);
 const prevBtn = ref(null);
 const nextBtn = ref(null);
 let deliverySwiper = null;
+
+// Luôn fetch delivery options ngay khi mount, không cần chờ user chọn address.
+// Lần đầu sẽ dùng fallback (hoặc default từ BE); khi user chọn address sẽ re-fetch
+// để có phí ship chính xác theo địa chỉ.
+checkoutStore.fetchDeliveryOptions();
+
+// Watch address — chọn address mới → re-fetch để cập nhật phí ship chính xác
+watch(
+  () => checkoutStore.selectedAddressId,
+  (newId, oldId) => {
+    if (newId && newId !== oldId) {
+      checkoutStore.fetchDeliveryOptions();
+    }
+  },
+);
 
 onMounted(async () => {
   if (!import.meta.client || !swiperEl.value) return;
@@ -84,7 +103,7 @@ onMounted(async () => {
   deliverySwiper = new Swiper(swiperEl.value, {
     modules: [Navigation],
     slidesPerView: "auto",
-    spaceBetween: 10,
+    spaceBetween: 16,
     navigation: {
       nextEl: nextBtn.value,
       prevEl: prevBtn.value,
@@ -132,13 +151,20 @@ onUnmounted(() => {
   color: var(--irus-color-accent);
 }
 
-.delivery-options__empty {
+.delivery-options__hint {
   align-items: center;
-  color: #71717a;
+  background: #fff7ed;
+  border-bottom: 1px solid #fed7aa;
+  color: #92400e;
   display: flex;
   font-size: 13px;
   gap: 8px;
-  padding: 16px 20px;
+  padding: 10px 20px;
+}
+
+.delivery-options__hint i {
+  color: #d97706;
+  flex-shrink: 0;
 }
 
 .delivery-options__loading {
@@ -162,52 +188,79 @@ onUnmounted(() => {
 
 /* Swiper overrides */
 .delivery-swiper {
-  padding: 12px 48px;
+  padding: 14px 56px;
   overflow: visible;
 }
 
-.delivery-swiper__prev,
-.delivery-swiper__next {
+.delivery-swiper__nav {
+  align-items: center;
+  background: #fff;
+  border: 0;
+  border-radius: 999px;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 8px 24px rgba(15, 23, 42, 0.12);
+  color: #18181b;
+  cursor: pointer;
+  display: flex;
+  font-size: 18px;
+  height: 40px;
+  justify-content: center;
+  outline: 0;
+  padding: 0;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  transition: background 0.18s ease, box-shadow 0.18s ease,
+    transform 0.18s ease, color 0.18s ease;
+  width: 40px;
   z-index: 10;
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  border: 1.5px solid #e4e4e7;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  color: #52525b;
-  padding: 0;
-  transition: background 0.15s ease, box-shadow 0.15s ease;
 }
 
-.delivery-swiper__prev {
+.delivery-swiper__nav i {
+  font-weight: 700;
+  line-height: 1;
+}
+
+.delivery-swiper__nav--prev {
   left: 8px;
 }
 
-.delivery-swiper__next {
+.delivery-swiper__nav--next {
   right: 8px;
 }
 
-.delivery-swiper__prev:hover,
-.delivery-swiper__next:hover {
-  background: #f4f4f5;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+.delivery-swiper__nav:hover {
+  background: var(--irus-color-accent, #ef4444);
+  color: #fff;
+  box-shadow:
+    0 4px 10px rgba(15, 23, 42, 0.1),
+    0 12px 24px rgba(15, 23, 42, 0.18);
+  transform: translateY(-50%) scale(1.06);
 }
 
-.delivery-swiper__prev::after,
-.delivery-swiper__next::after {
+.delivery-swiper__nav:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.delivery-swiper__nav:focus-visible {
+  box-shadow:
+    0 0 0 3px var(--irus-color-accent-soft, rgba(239, 68, 68, 0.25)),
+    0 8px 24px rgba(15, 23, 42, 0.12);
+}
+
+/* Reset mọi pseudo-arrow do Swiper hoặc framework khác inject để
+   không bị overlap với <i class="bi bi-chevron-*"> bên trong button. */
+.delivery-swiper__nav::before,
+.delivery-swiper__nav::after {
+  content: none !important;
   display: none !important;
 }
 
 .delivery-swiper .swiper-button-disabled {
   opacity: 0;
   pointer-events: none;
+  transform: translateY(-50%) scale(0.85);
 }
 
 .delivery-swiper .swiper-slide {
@@ -222,8 +275,7 @@ onUnmounted(() => {
 }
 
 @media (max-width: 767.98px) {
-  .delivery-swiper__prev,
-  .delivery-swiper__next {
+  .delivery-swiper__nav {
     display: none;
   }
 

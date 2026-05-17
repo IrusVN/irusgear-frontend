@@ -116,7 +116,7 @@
 
       <!-- Orders by Status -->
       <div class="dash-col dash-col-leads" :class="enterClass(6)" v-if="dashboardData.ordersByStatus.data.length > 0">
-        <AdminCard :title="t('admin.dashboard.ordersByStatus', 'Orders By Status')" subtitle="Summary of order statuses">
+        <AdminCard :title="t('admin.dashboard.ordersByStatus')" :subtitle="t('admin.dashboard.ordersByStatusSubtitle')">
           <template #actions>
             <button class="card-menu-button" type="button" :aria-label="t('admin.dashboard.moreActions')">
               <i class="bi bi-three-dots-vertical"></i>
@@ -125,7 +125,7 @@
           <div class="leads-content">
             <div class="leads-copy">
               <h3>{{ dashboardData.ordersByStatus.data.reduce((a, b) => a + b, 0) }}</h3>
-              <span>Total Orders</span>
+              <span>{{ t('admin.dashboard.totalOrders') }}</span>
               <strong>{{ dashboardData.ordersByStatus.data[0] || 0 }}</strong>
               <small><i class="bi bi-chevron-up"></i> {{ dashboardData.ordersByStatus.labels[0] || '' }}</small>
             </div>
@@ -152,7 +152,7 @@
 
       <!-- Sales Channels -->
       <div class="dash-col dash-col-earning" :class="enterClass(7)" v-if="dashboardData.salesChannels.length > 0">
-        <AdminCard :title="t('admin.dashboard.salesChannels', 'Sales Channels')" subtitle="Revenue by channel" :padded="false">
+        <AdminCard :title="t('admin.dashboard.salesChannels')" :subtitle="t('admin.dashboard.salesChannelsSubtitle')" :padded="false">
           <template #actions>
             <button class="card-menu-button" type="button" :aria-label="t('admin.dashboard.moreEarningActions')">
               <i class="bi bi-three-dots-vertical"></i>
@@ -165,7 +165,7 @@
               </span>
               <div class="earning-copy">
                 <strong>{{ item.channel }}</strong>
-                <small>{{ item.orders }} orders</small>
+                <small>{{ t('admin.dashboard.ordersCount', { count: item.orders }) }}</small>
               </div>
               <div class="earning-stat">
                 <strong>{{ formatNumber(item.revenue) }}đ</strong>
@@ -203,7 +203,7 @@
 
       <!-- Orders by Location -->
       <div class="dash-col dash-col-countries" :class="enterClass(9)" v-if="dashboardData.ordersByLocation.length > 0">
-        <AdminCard :title="t('admin.dashboard.ordersByLocation', 'Orders By Location')" :subtitle="t('admin.dashboard.locationSubtitle', 'Revenue from top locations')">
+        <AdminCard :title="t('admin.dashboard.ordersByLocation')" :subtitle="t('admin.dashboard.locationSubtitle')">
           <template #actions>
             <button class="card-menu-button" type="button" :aria-label="t('admin.dashboard.moreCountryActions')">
               <i class="bi bi-three-dots-vertical"></i>
@@ -216,7 +216,7 @@
               </span>
               <div class="tx-copy">
                 <strong>{{ item.location }}</strong>
-                <small>{{ item.orders_count }} {{ t('admin.dashboard.orders', 'Orders') }}</small>
+                <small>{{ item.orders_count }} {{ t('admin.dashboard.orders') }}</small>
               </div>
               <span class="tx-amount">
                 {{ formatNumber(item.revenue) }}đ
@@ -315,6 +315,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useHead, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
+import { vietnamAddressApi } from '@/composables/useVietnamAddressApi'
 import AdminCard from '@/components/Admin/ui/AdminCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminBarChart from '@/components/Admin/charts/AdminBarChart.vue'
@@ -403,7 +404,32 @@ const fetchDashboard = async () => {
       }
     }
     if (res.data.orders_by_location) {
-      dashboardData.value.ordersByLocation = res.data.orders_by_location
+      // BE trả raw province_code (vd '79', 'HCM'). Resolve qua vietnamAddressApi
+      // (cache local, gọi 1 lần fetch /provinces.json) → tên tỉnh tiếng Việt.
+      // Đồng thời merge các entry trùng tỉnh (vd 'HCM' + '79' = TP HCM).
+      const resolved = await Promise.all(
+        res.data.orders_by_location.map(async (item) => {
+          const result = await vietnamAddressApi.resolveAddressCode({
+            province_code: item.location,
+          })
+          return {
+            ...item,
+            location: result?.province?.label || item.location,
+          }
+        }),
+      )
+
+      // Merge các entry cùng resolved label (HCM text + 79 code → cùng "TP Hồ Chí Minh")
+      const merged = {}
+      for (const item of resolved) {
+        if (!merged[item.location]) {
+          merged[item.location] = { location: item.location, orders_count: 0, revenue: 0 }
+        }
+        merged[item.location].orders_count += Number(item.orders_count || 0)
+        merged[item.location].revenue += Number(item.revenue || 0)
+      }
+      dashboardData.value.ordersByLocation = Object.values(merged)
+        .sort((a, b) => b.revenue - a.revenue)
     }
     if (res.data.sales_channels) {
       dashboardData.value.salesChannels = res.data.sales_channels

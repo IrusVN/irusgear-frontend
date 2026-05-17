@@ -3,7 +3,7 @@
     <div class="hero-layout">
       <div class="hero-category-wrap d-none d-lg-flex flex-shrink-0" @mouseenter="openMegaMenu"
         @mouseleave="closeMegaMenu">
-        <div
+        <div ref="categorySidebarRef"
           class="bg-white rounded-3 shadow-sm border overflow-hidden d-flex flex-column justify-content-between hero-category-sidebar">
           <a v-for="cat in categories" :key="cat.key" href="#"
             class="d-flex align-items-center gap-2 px-3 text-decoration-none text-dark cat-item border-bottom"
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="d-flex flex-column gap-2 min-w-0 overflow-hidden hero-main-column">
+      <div class="d-flex flex-column gap-2 min-w-0 overflow-hidden hero-main-column" :style="syncedHeightStyle">
         <div id="heroCarousel" ref="carouselRef" class="carousel slide rounded-3 shadow-sm overflow-hidden bg-white"
           data-bs-ride="carousel" data-bs-interval="4000">
           <div ref="tabScrollerRef" :class="[
@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <div class="service-panel d-none d-xl-flex flex-column gap-3 flex-shrink-0">
+      <div class="service-panel d-none d-xl-flex flex-column gap-3 flex-shrink-0" :style="syncedHeightStyle">
         <div class="service-welcome-card p-3">
           <template v-if="user">
             <div class="d-flex align-items-center gap-2">
@@ -230,6 +230,31 @@ const carouselRef = ref(null);
 const tabScrollerRef = ref(null);
 const tabButtons = ref([]);
 const activeIndex = ref(0);
+
+// Đồng bộ chiều cao của hero-main-column + service-panel theo hero-category-sidebar.
+// Sidebar (12 categories) là reference height; 2 cột kia khớp theo bằng inline style.
+// Khi sidebar bị ẩn (< lg, d-none) → offsetHeight=0 → syncedHeight=null → không apply style
+// (mobile/tablet tự fit content tự nhiên).
+const categorySidebarRef = ref(null);
+const syncedHeight = ref(null);
+let sidebarResizeObserver = null;
+
+const syncedHeightStyle = computed(() =>
+  syncedHeight.value
+    ? { height: `${syncedHeight.value}px`, maxHeight: `${syncedHeight.value}px` }
+    : {}
+);
+
+const measureSidebarHeight = () => {
+  const el = categorySidebarRef.value;
+  if (!el) {
+    syncedHeight.value = null;
+    return;
+  }
+  const h = el.offsetHeight;
+  // offsetHeight = 0 khi sidebar bị d-none (mobile/tablet) → bỏ sync
+  syncedHeight.value = h > 0 ? h : null;
+};
 const isMegaMenuOpen = computed({
   get: () => heroMegaMenuOpen.value,
   set: (value) => homeStore.setHeroMegaMenuOpen(value),
@@ -411,6 +436,18 @@ onMounted(() => {
     homeStore.setActiveMegaMenuKey(categories[0]?.key || "");
   }
 
+  // Sync chiều cao 2 cột bên theo sidebar (chỉ chạy client-side)
+  if (import.meta.client) {
+    nextTick(measureSidebarHeight);
+
+    if (typeof window !== "undefined" && typeof ResizeObserver !== "undefined" && categorySidebarRef.value) {
+      sidebarResizeObserver = new ResizeObserver(() => measureSidebarHeight());
+      sidebarResizeObserver.observe(categorySidebarRef.value);
+    }
+
+    window.addEventListener("resize", measureSidebarHeight);
+  }
+
   const carouselEl = carouselRef.value;
   if (!carouselEl) return;
 
@@ -425,6 +462,14 @@ onUnmounted(() => {
   }
 
   homeStore.closeHeroMegaMenu();
+
+  if (import.meta.client) {
+    if (sidebarResizeObserver) {
+      sidebarResizeObserver.disconnect();
+      sidebarResizeObserver = null;
+    }
+    window.removeEventListener("resize", measureSidebarHeight);
+  }
 
   const carouselEl = carouselRef.value;
   if (!carouselEl) return;
@@ -475,6 +520,53 @@ onUnmounted(() => {
 
 .hero-main-column {
   min-width: 0;
+  overflow: hidden;
+}
+
+/* Khi height được sync theo sidebar (JS set inline style), carousel co theo
+   space còn lại; promo banners giữ kích thước tự nhiên. */
+.hero-main-column #heroCarousel {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-main-column .hero-carousel-image-area {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Chain height 100% xuống tận image: Bootstrap mặc định không stretch
+   carousel-inner/carousel-item theo container → image bị tụt lên trên,
+   chừa khoảng trắng dưới khi main-column bị JS kéo height sync sidebar. */
+.hero-main-column .carousel-inner,
+.hero-main-column .carousel-item,
+.hero-main-column .carousel-item.active {
+  height: 100%;
+}
+
+.hero-main-column .hero-slide-image {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+
+.hero-main-column .promo-banner-list {
+  flex-shrink: 0;
+}
+
+.service-panel {
+  overflow: hidden;
+}
+
+.service-benefits-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .cat-item {

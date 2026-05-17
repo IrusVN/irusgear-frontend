@@ -3,9 +3,9 @@
     <!-- Not found -->
     <div v-if="!product" class="admin-card-shell form-card" style="text-align:center;padding:48px">
       <i class="bi bi-exclamation-triangle" style="font-size:2.4rem;color:var(--admin-warning)"></i>
-      <h3 style="margin:12px 0 4px">Product Not Found</h3>
-      <p style="color:var(--admin-muted)">The product you're looking for doesn't exist.</p>
-      <nuxt-link to="/admin/products" class="admin-primary-button" style="margin-top:12px">Back to Products</nuxt-link>
+      <h3 style="margin:12px 0 4px">{{ $t('admin.products.productNotFound') }}</h3>
+      <p style="color:var(--admin-muted)">{{ $t('admin.products.productNotFoundDesc') }}</p>
+      <nuxt-link to="/admin/products" class="admin-primary-button" style="margin-top:12px">{{ $t('admin.products.backToProducts') }}</nuxt-link>
     </div>
 
     <template v-else>
@@ -16,17 +16,17 @@
             <i class="bi bi-arrow-left"></i>
           </nuxt-link>
           <div>
-            <h2 class="page-title">Edit Product</h2>
+            <h2 class="page-title">{{ $t('admin.products.editProduct') }}</h2>
             <p class="page-sub">{{ product.name }} · {{ product.sku }}</p>
           </div>
         </div>
         <div class="header-actions">
           <button class="admin-danger-button" type="button" @click="handleDelete">
-            <i class="bi bi-trash"></i> Delete
+            <i class="bi bi-trash"></i> {{ $t('admin.products.delete') }}
           </button>
-          <button class="admin-secondary-button" type="button" @click="handleDiscard">Discard</button>
+          <button class="admin-secondary-button" type="button" @click="handleDiscard">{{ $t('admin.products.discard') }}</button>
           <button class="admin-primary-button" type="button" @click="handleSave">
-            <i class="bi bi-check-lg"></i> Save Changes
+            <i class="bi bi-check-lg"></i> {{ $t('admin.products.saveChanges') }}
           </button>
         </div>
       </div>
@@ -37,24 +37,24 @@
         <div class="form-col-left">
           <!-- Basic Information -->
           <div class="admin-card-shell form-card">
-            <h3 class="card-title">Basic Information</h3>
+            <h3 class="card-title">{{ $t('admin.products.basicInformation') }}</h3>
             <div class="field">
-              <label class="field-label">Product Name <span class="req">*</span></label>
+              <label class="field-label">{{ $t('admin.products.productName') }} <span class="req">*</span></label>
               <input v-model="form.name" type="text" class="admin-control field-input" @input="autoSlug" />
               <p v-if="errors.name" class="field-error">{{ errors.name }}</p>
             </div>
             <div class="field">
-              <label class="field-label">Slug</label>
+              <label class="field-label">{{ $t('admin.products.slug') }}</label>
               <input v-model="form.slug" type="text" class="admin-control field-input" />
             </div>
             <div class="field-row">
               <div class="field">
-                <label class="field-label">SKU <span class="req">*</span></label>
+                <label class="field-label">{{ $t('admin.products.sku') }} <span class="req">*</span></label>
                 <input v-model="form.sku" type="text" class="admin-control field-input" />
                 <p v-if="errors.sku" class="field-error">{{ errors.sku }}</p>
               </div>
               <div class="field">
-                <label class="field-label">Vendor</label>
+                <label class="field-label">{{ $t('admin.products.vendor') }}</label>
                 <input v-model="form.vendor" type="text" class="admin-control field-input" />
               </div>
             </div>
@@ -62,29 +62,29 @@
 
           <!-- Description -->
           <div class="admin-card-shell form-card">
-            <h3 class="card-title">Description</h3>
+            <h3 class="card-title">{{ $t('admin.products.description') }}</h3>
             <div class="field">
-              <label class="field-label">Product Description</label>
+              <label class="field-label">{{ $t('admin.products.productDescription') }}</label>
               <textarea v-model="form.description" class="admin-control field-textarea" rows="5"></textarea>
             </div>
           </div>
 
           <!-- Media -->
           <div class="admin-card-shell form-card">
-            <h3 class="card-title">Media</h3>
+            <h3 class="card-title">{{ $t('admin.products.media') }}</h3>
             <div class="media-upload-zone" @click="triggerUpload" @dragover.prevent @drop.prevent="handleDrop">
               <i class="bi bi-cloud-arrow-up upload-icon"></i>
-              <p class="upload-text">Drag and drop or <span class="upload-link">browse</span> to upload</p>
-              <small class="upload-hint">PNG, JPG, WEBP up to 5MB</small>
+              <p class="upload-text">{{ $t('admin.products.dragAndDrop') }} <span class="upload-link">{{ $t('admin.products.browseUpload') }}</span> {{ $t('admin.products.toUpload') }}</p>
+              <small class="upload-hint">{{ $t('admin.products.uploadHint') }}</small>
               <input ref="fileInput" type="file" accept="image/*" multiple hidden @change="handleFileSelect" />
             </div>
             <div v-if="form.images.length" class="media-preview-grid">
               <div v-for="(img, idx) in form.images" :key="idx" class="media-preview-item">
-                <img :src="img" alt="Product image" />
+                <img :src="img" :alt="$t('admin.products.productImageAlt')" />
                 <button class="media-remove" type="button" @click="removeImage(idx)">
                   <i class="bi bi-x"></i>
                 </button>
-                <span v-if="idx === 0" class="media-primary-badge">Primary</span>
+                <span v-if="idx === 0" class="media-primary-badge">{{ $t('admin.products.primary') }}</span>
               </div>
             </div>
           </div>
@@ -92,15 +92,15 @@
           <!-- Variants -->
           <div class="admin-card-shell form-card">
             <div class="card-header-row">
-              <h3 class="card-title">Variants</h3>
+              <h3 class="card-title">{{ $t('admin.products.variants') }}</h3>
               <button class="admin-secondary-button btn-sm" type="button">
-                <i class="bi bi-plus-lg"></i> Add Variant
+                <i class="bi bi-plus-lg"></i> {{ $t('admin.products.addVariant') }}
               </button>
             </div>
             <div class="empty-variants">
               <i class="bi bi-diagram-3"></i>
-              <p>No variants added yet</p>
-              <small>Add variants like size, color, or material</small>
+              <p>{{ $t('admin.products.noVariants') }}</p>
+              <small>{{ $t('admin.products.variantsHint') }}</small>
             </div>
           </div>
         </div>
@@ -109,9 +109,9 @@
         <div class="form-col-right">
           <!-- Pricing -->
           <div class="admin-card-shell form-card">
-            <h3 class="card-title">Pricing</h3>
+            <h3 class="card-title">{{ $t('admin.products.pricing') }}</h3>
             <div class="field">
-              <label class="field-label">Price <span class="req">*</span></label>
+              <label class="field-label">{{ $t('admin.products.price') }} <span class="req">*</span></label>
               <div class="input-with-prefix">
                 <span class="input-prefix">₫</span>
                 <input v-model.number="form.price" type="number" class="admin-control field-input has-prefix" />
@@ -119,7 +119,7 @@
               <p v-if="errors.price" class="field-error">{{ errors.price }}</p>
             </div>
             <div class="field">
-              <label class="field-label">Compare at Price</label>
+              <label class="field-label">{{ $t('admin.products.compareAtPrice') }}</label>
               <div class="input-with-prefix">
                 <span class="input-prefix">₫</span>
                 <input v-model.number="form.compareAtPrice" type="number" class="admin-control field-input has-prefix" />
@@ -129,15 +129,15 @@
 
           <!-- Inventory -->
           <div class="admin-card-shell form-card">
-            <h3 class="card-title">Inventory</h3>
+            <h3 class="card-title">{{ $t('admin.products.inventory') }}</h3>
             <div class="field">
-              <label class="field-label">Quantity</label>
+              <label class="field-label">{{ $t('admin.products.quantity') }}</label>
               <input v-model.number="form.quantity" type="number" class="admin-control field-input" min="0" />
             </div>
             <div class="toggle-field">
               <div class="toggle-info">
-                <strong>Track inventory</strong>
-                <small>Enable stock management for this product</small>
+                <strong>{{ $t('admin.products.trackInventory') }}</strong>
+                <small>{{ $t('admin.products.trackInventoryDesc') }}</small>
               </div>
               <label class="stock-toggle">
                 <input v-model="form.stockEnabled" type="checkbox" />
@@ -148,18 +148,18 @@
 
           <!-- Category -->
           <div class="admin-card-shell form-card">
-            <h3 class="card-title">Category</h3>
+            <h3 class="card-title">{{ $t('admin.products.category') }}</h3>
             <div class="field">
-              <label class="field-label">Product Category</label>
+              <label class="field-label">{{ $t('admin.products.productCategory') }}</label>
               <select v-model.number="form.categoryId" class="admin-control field-input">
-                <option :value="0" disabled>Select a category</option>
+                <option :value="0" disabled>{{ $t('admin.products.selectCategory') }}</option>
                 <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
               </select>
             </div>
             <div class="toggle-field">
               <div class="toggle-info">
-                <strong>Featured product</strong>
-                <small>Show in featured sections</small>
+                <strong>{{ $t('admin.products.featuredProduct') }}</strong>
+                <small>{{ $t('admin.products.featuredProductDesc') }}</small>
               </div>
               <label class="stock-toggle">
                 <input v-model="form.featured" type="checkbox" />
@@ -170,14 +170,14 @@
 
           <!-- Publish Status -->
           <div class="admin-card-shell form-card">
-            <h3 class="card-title">Status</h3>
+            <h3 class="card-title">{{ $t('admin.products.status') }}</h3>
             <div class="field">
-              <label class="field-label">Product Status</label>
+              <label class="field-label">{{ $t('admin.products.productStatus') }}</label>
               <select v-model="form.status" class="admin-control field-input">
-                <option value="draft">Draft</option>
-                <option value="publish">Published</option>
-                <option value="scheduled">Scheduled</option>
-                <option value="inactive">Inactive</option>
+                <option value="draft">{{ $t('admin.products.draft') }}</option>
+                <option value="publish">{{ $t('admin.products.published') }}</option>
+                <option value="scheduled">{{ $t('admin.products.scheduled') }}</option>
+                <option value="inactive">{{ $t('admin.products.inactive') }}</option>
               </select>
             </div>
             <div class="status-indicator">
@@ -187,11 +187,11 @@
 
           <!-- SEO Preview -->
           <div class="admin-card-shell form-card">
-            <h3 class="card-title">SEO Preview</h3>
+            <h3 class="card-title">{{ $t('admin.products.seoPreview') }}</h3>
             <div class="seo-preview">
-              <p class="seo-title">{{ form.name || 'Product Name' }} – IrusGear</p>
-              <p class="seo-url">irusgear.com/products/{{ form.slug || 'product-slug' }}</p>
-              <p class="seo-desc">{{ form.description ? form.description.substring(0, 160) : 'Product description will appear here...' }}</p>
+              <p class="seo-title">{{ form.name || $t('admin.products.seoProductName') }} – IrusGear</p>
+              <p class="seo-url">irusgear.com/products/{{ form.slug || $t('admin.products.seoProductSlug') }}</p>
+              <p class="seo-desc">{{ form.description ? form.description.substring(0, 160) : $t('admin.products.seoDescPlaceholder') }}</p>
             </div>
           </div>
         </div>
@@ -202,12 +202,13 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
-import { useHead, useRoute, useRouter } from '#imports'
+import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 
 definePageMeta({ layout: 'admin' })
+const { t } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
@@ -221,7 +222,7 @@ const isLoaded = ref(false)
 
 const productId = computed(() => Number(route.params.id))
 
-useHead({ title: computed(() => product.value ? `Edit ${product.value.name} – IrusGear Admin` : 'Product Not Found') })
+useHead({ title: () => product.value ? t('admin.products.headTitleEdit', { name: product.value.name }) : t('admin.products.headTitleNotFound') })
 
 const form = reactive({
   name: '',
@@ -282,13 +283,18 @@ const autoSlug = () => {
 const validate = () => {
   let valid = true
   errors.name = ''; errors.sku = ''; errors.price = ''
-  if (!form.name.trim()) { errors.name = 'Product name is required'; valid = false }
-  if (!form.sku.trim()) { errors.sku = 'SKU is required'; valid = false }
-  if (!form.price || form.price <= 0) { errors.price = 'Price must be greater than 0'; valid = false }
+  if (!form.name.trim()) { errors.name = t('admin.products.nameRequired'); valid = false }
+  if (!form.sku.trim()) { errors.sku = t('admin.products.skuRequired'); valid = false }
+  if (!form.price || form.price <= 0) { errors.price = t('admin.products.priceRequired'); valid = false }
   return valid
 }
 
-const statusLabel = (s) => ({ publish: 'Published', scheduled: 'Scheduled', inactive: 'Inactive', draft: 'Draft' }[s] || s)
+const statusLabel = (s) => ({
+  publish: t('admin.products.published'),
+  scheduled: t('admin.products.scheduled'),
+  inactive: t('admin.products.inactive'),
+  draft: t('admin.products.draft'),
+}[s] || s)
 const statusVariant = (s) => ({ publish: 'success', scheduled: 'warning', inactive: 'danger', draft: 'neutral' }[s] || 'neutral')
 
 const triggerUpload = () => fileInput.value?.click()
@@ -310,16 +316,16 @@ const handleSave = async () => {
     })
     router.push('/admin/products')
   } catch (e) {
-    alert(`Save failed: ${e.message}`)
+    alert(t('admin.products.saveFailed', { message: e.message }))
   }
 }
 const handleDelete = async () => {
-  if (!confirm(`Delete "${form.name}"? This cannot be undone.`)) return
+  if (!confirm(t('admin.products.deleteConfirmEdit', { name: form.name }))) return
   try {
     await admin.remove('products', productId.value)
     router.push('/admin/products')
   } catch (e) {
-    alert(`Delete failed: ${e.message}`)
+    alert(t('admin.products.deleteFailed', { message: e.message }))
   }
 }
 const handleDiscard = () => router.push('/admin/products')

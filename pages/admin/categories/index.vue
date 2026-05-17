@@ -12,7 +12,7 @@
         <AdminTableToolbar
           :search="search"
           :page-size="pageSize"
-          search-placeholder="Search Category"
+          :search-placeholder="$t('admin.categories.searchCategory')"
           :show-export="false"
           @update:search="search = $event; resetPage()"
           @update:page-size="pageSize = $event; resetPage()"
@@ -20,7 +20,7 @@
           <template #actions>
             <button class="admin-primary-button" type="button" @click="openAddModal">
               <i class="bi bi-plus-lg"></i>
-              <span>Add Category</span>
+              <span>{{ $t('admin.categories.addCategory') }}</span>
             </button>
           </template>
         </AdminTableToolbar>
@@ -50,7 +50,7 @@
       <!-- Status -->
       <template #cell-status="{ item }">
         <AdminStatusBadge
-          :label="item.status === 'active' ? 'Active' : 'Inactive'"
+          :label="item.status === 'active' ? $t('admin.categories.active') : $t('admin.categories.inactive')"
           :variant="item.status === 'active' ? 'success' : 'danger'"
         />
       </template>
@@ -58,13 +58,13 @@
       <!-- Actions -->
       <template #actions="{ item }">
         <div class="action-buttons">
-          <button class="admin-icon-button" title="Edit" @click.stop="openEditModal(item)">
+          <button class="admin-icon-button" :title="$t('admin.categories.edit')" @click.stop="openEditModal(item)">
             <i class="bi bi-pencil"></i>
           </button>
           <AdminActionMenu
             :items="[
-              { key: 'view', label: 'View Products', icon: 'bi-box-seam' },
-              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+              { key: 'view', label: t('admin.categories.viewProducts'), icon: 'bi-box-seam' },
+              { key: 'delete', label: t('admin.categories.delete'), icon: 'bi-trash', variant: 'danger' },
             ]"
             @select="handleAction($event, item)"
           />
@@ -87,7 +87,7 @@
         <div v-if="modalOpen" class="modal-backdrop" @click.self="closeModal">
           <div class="category-modal admin-card-shell">
             <div class="modal-header">
-              <h3>{{ editingCategory ? 'Edit Category' : 'Add Category' }}</h3>
+              <h3>{{ editingCategory ? $t('admin.categories.editCategory') : $t('admin.categories.addCategory') }}</h3>
               <button class="admin-icon-button" type="button" @click="closeModal">
                 <i class="bi bi-x-lg"></i>
               </button>
@@ -95,36 +95,36 @@
 
             <div class="modal-body">
               <label class="form-field">
-                <span class="field-label">Name</span>
-                <input v-model="form.name" type="text" class="admin-control field-input" placeholder="Category name" />
+                <span class="field-label">{{ $t('admin.categories.name') }}</span>
+                <input v-model="form.name" type="text" class="admin-control field-input" :placeholder="$t('admin.categories.categoryNamePlaceholder')" />
               </label>
               <label class="form-field">
-                <span class="field-label">Slug</span>
-                <input v-model="form.slug" type="text" class="admin-control field-input" placeholder="category-slug" />
+                <span class="field-label">{{ $t('admin.categories.slug') }}</span>
+                <input v-model="form.slug" type="text" class="admin-control field-input" :placeholder="$t('admin.categories.slugPlaceholder')" />
               </label>
               <label class="form-field">
-                <span class="field-label">Description</span>
-                <textarea v-model="form.description" class="admin-control field-textarea" rows="3" placeholder="Short description"></textarea>
+                <span class="field-label">{{ $t('admin.categories.description') }}</span>
+                <textarea v-model="form.description" class="admin-control field-textarea" rows="3" :placeholder="$t('admin.categories.descriptionPlaceholder')"></textarea>
               </label>
               <div class="form-row-2">
                 <label class="form-field">
-                  <span class="field-label">Icon (BI class)</span>
-                  <input v-model="form.icon" type="text" class="admin-control field-input" placeholder="bi-phone" />
+                  <span class="field-label">{{ $t('admin.categories.iconLabel') }}</span>
+                  <input v-model="form.icon" type="text" class="admin-control field-input" :placeholder="$t('admin.categories.iconPlaceholder')" />
                 </label>
                 <label class="form-field">
-                  <span class="field-label">Status</span>
+                  <span class="field-label">{{ $t('admin.categories.status') }}</span>
                   <select v-model="form.status" class="admin-control field-input">
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="active">{{ $t('admin.categories.active') }}</option>
+                    <option value="inactive">{{ $t('admin.categories.inactive') }}</option>
                   </select>
                 </label>
               </div>
             </div>
 
             <div class="modal-footer">
-              <button class="admin-secondary-button" type="button" @click="closeModal">Cancel</button>
+              <button class="admin-secondary-button" type="button" @click="closeModal">{{ $t('admin.categories.cancel') }}</button>
               <button class="admin-primary-button" type="button" @click="saveCategory">
-                {{ editingCategory ? 'Save Changes' : 'Create Category' }}
+                {{ editingCategory ? $t('admin.categories.saveChanges') : $t('admin.categories.createCategory') }}
               </button>
             </div>
           </div>
@@ -136,7 +136,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useHead } from '#imports'
+import { useHead, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
@@ -146,7 +146,8 @@ import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 
 definePageMeta({ layout: 'admin' })
-useHead({ title: 'Categories – IrusGear Admin' })
+const { t } = useI18n()
+useHead({ title: () => t('admin.categories.pageTitle') })
 
 const admin = useAdminStore()
 const ui = useUiStore()
@@ -249,32 +250,32 @@ const saveCategory = async () => {
     closeModal()
     loadCategories()
   } catch (e) {
-    alert(`Save failed: ${e.message}`)
+    alert(t('admin.categories.saveFailed', { message: e.message }))
   }
 }
 
 /* ── columns ── */
-const columns = [
-  { key: 'name', label: 'Category', width: '38%' },
-  { key: 'productCount', label: 'Total Products', align: 'center' },
-  { key: 'totalEarning', label: 'Total Earning' },
-  { key: 'status', label: 'Status' },
-]
+const columns = computed(() => [
+  { key: 'name', label: t('admin.categories.category'), width: '38%' },
+  { key: 'productCount', label: t('admin.categories.totalProducts'), align: 'center' },
+  { key: 'totalEarning', label: t('admin.categories.totalEarning') },
+  { key: 'status', label: t('admin.categories.status') },
+])
 
 /* ── helpers ── */
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
 const handleAction = async (action, item) => {
   if (action.key === 'delete') {
-    if (!confirm(`Delete category "${item.name}"?`)) return
+    if (!confirm(t('admin.categories.deleteConfirm', { name: item.name }))) return
     try {
       await admin.remove('categories', item.id)
       loadCategories()
     } catch (e) {
-      alert(`Delete failed: ${e.message}`)
+      alert(t('admin.categories.deleteFailed', { message: e.message }))
     }
   } else {
-    alert(`View products in "${item.name}"`)
+    alert(t('admin.categories.viewProductsAlert', { name: item.name }))
   }
 }
 </script>
