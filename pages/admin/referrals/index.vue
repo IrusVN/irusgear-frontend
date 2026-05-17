@@ -2,10 +2,10 @@
   <div class="referrals-page">
     <!-- Metric Strip -->
     <div class="metric-strip">
-      <AdminMetricCard label="Total Referrals" :value="String(totalReferrals)" meta="all time" icon="bi-people" variant="neutral" />
-      <AdminMetricCard label="Converted" :value="String(convertedCount)" meta="referrals" icon="bi-check-circle" variant="success" />
-      <AdminMetricCard label="Active Links" :value="String(activeLinks)" meta="referrals" icon="bi-link-45deg" variant="info" />
-      <AdminMetricCard label="Total Earned" :value="formatCompact(totalEarned)" meta="commission" icon="bi-cash-stack" variant="warning" />
+      <AdminMetricCard :label="$t('admin.referrals.totalReferrals')" :value="String(totalReferrals)" :meta="$t('admin.referrals.allTime')" icon="bi-people" variant="neutral" />
+      <AdminMetricCard :label="$t('admin.referrals.converted')" :value="String(convertedCount)" :meta="$t('admin.referrals.referralsMeta')" icon="bi-check-circle" variant="success" />
+      <AdminMetricCard :label="$t('admin.referrals.activeLinks')" :value="String(activeLinks)" :meta="$t('admin.referrals.referralsMeta')" icon="bi-link-45deg" variant="info" />
+      <AdminMetricCard :label="$t('admin.referrals.totalEarned')" :value="formatCompact(totalEarned)" :meta="$t('admin.referrals.commissionMeta')" icon="bi-cash-stack" variant="warning" />
     </div>
 
     <!-- Referrals Table (Desktop) -->
@@ -21,7 +21,7 @@
         <AdminTableToolbar
           :search="search"
           :page-size="pageSize"
-          search-placeholder="Search Referrals"
+          :search-placeholder="$t('admin.referrals.searchReferrals')"
           @update:search="search = $event; resetPage()"
           @update:page-size="pageSize = $event; resetPage()"
           @export="handleExport"
@@ -61,8 +61,8 @@
       <template #actions="{ item }">
         <AdminActionMenu
           :items="[
-            { key: 'view', label: 'View Details', icon: 'bi-eye' },
-            { key: 'revoke', label: 'Revoke', icon: 'bi-x-circle', variant: 'danger' },
+            { key: 'view', label: $t('admin.referrals.viewDetails'), icon: 'bi-eye' },
+            { key: 'revoke', label: $t('admin.referrals.revoke'), icon: 'bi-x-circle', variant: 'danger' },
           ]"
           @select="handleAction($event, item)"
         />
@@ -77,7 +77,7 @@
     <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
       <label style="display:block;position:relative;margin-bottom:12px">
         <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
-        <input class="admin-control" v-model="search" placeholder="Search Referrals" style="padding-left:36px;width:100%" @input="resetPage">
+        <input class="admin-control" v-model="search" :placeholder="$t('admin.referrals.searchReferrals')" style="padding-left:36px;width:100%" @input="resetPage">
       </label>
       <AdminMobileCard
         v-for="item in referrals"
@@ -86,9 +86,9 @@
         :subtitle="'→ ' + item.referredName"
         :avatar="item.referrerAvatar"
         :meta="[
-          { label: 'Code', value: item.code },
-          { label: 'Earning', value: formatCurrency(item.earning), class: 'earning-text' },
-          { label: 'Date', value: formatDate(item.createdAt) },
+          { label: $t('admin.referrals.codeLabel'), value: item.code },
+          { label: $t('admin.referrals.earningLabel'), value: formatCurrency(item.earning), class: 'earning-text' },
+          { label: $t('admin.referrals.dateLabel'), value: formatDate(item.createdAt) },
         ]"
       >
         <template #badge>
@@ -97,15 +97,15 @@
         <template #actions>
           <AdminActionMenu
             :items="[
-              { key: 'view', label: 'View Details', icon: 'bi-eye' },
-              { key: 'revoke', label: 'Revoke', icon: 'bi-x-circle', variant: 'danger' },
+              { key: 'view', label: $t('admin.referrals.viewDetails'), icon: 'bi-eye' },
+              { key: 'revoke', label: $t('admin.referrals.revoke'), icon: 'bi-x-circle', variant: 'danger' },
             ]"
             @select="handleAction($event, item)"
           />
         </template>
       </AdminMobileCard>
       <div v-if="paginationStore.total > page * pageSize" style="text-align:center;padding:8px">
-        <button class="admin-secondary-button" @click="page++">Load More</button>
+        <button class="admin-secondary-button" @click="page++">{{ $t('admin.referrals.loadMore') }}</button>
       </div>
     </div>
   </div>
@@ -129,7 +129,7 @@ import { useI18n } from 'vue-i18n'
 const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
-useHead({ title: 'Referrals – IrusGear Admin' })
+useHead({ title: () => t('admin.referrals.pageTitle') })
 
 const adminStore = useAdminStore()
 const paginationStore = usePaginationStore()
@@ -147,14 +147,14 @@ const convertedCount = ref(0)
 const activeLinks = ref(0)
 const totalEarned = ref(0)
 
-const columns = [
-  { key: 'referrer', label: 'Referrer', width: '22%' },
-  { key: 'referred', label: 'Referred User' },
-  { key: 'code', label: 'Code' },
-  { key: 'earning', label: 'Earning' },
-  { key: 'status', label: 'Status' },
-  { key: 'createdAt', label: 'Date' },
-]
+const columns = computed(() => [
+  { key: 'referrer', label: t('admin.referrals.referrer'), width: '22%' },
+  { key: 'referred', label: t('admin.referrals.referredUser') },
+  { key: 'code', label: t('admin.referrals.code') },
+  { key: 'earning', label: t('admin.referrals.earning') },
+  { key: 'status', label: t('admin.referrals.status') },
+  { key: 'createdAt', label: t('admin.referrals.date') },
+])
 
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 const formatCompact = (n) => { if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M ₫'; return (n / 1e3).toFixed(0) + 'K ₫' }
@@ -172,8 +172,8 @@ const fetchReferrals = async () => {
   
   if (res && res.data) {
     referrals.value = res.data.map(r => {
-      const referrerName = r.referrer?.name || 'Unknown'
-      const referredName = r.referred?.name || 'Unknown'
+      const referrerName = r.referrer?.name || t('admin.referrals.unknown')
+      const referredName = r.referred?.name || t('admin.referrals.unknown')
       return {
         id: r.id,
         referrerName,
@@ -210,7 +210,7 @@ watch([page, pageSize, search], () => {
 
 const handleAction = async (action, item) => {
   if (action.key === 'revoke') {
-    if (confirm('Are you sure you want to revoke this referral?')) {
+    if (confirm(t('admin.referrals.confirmRevoke'))) {
       const res = await adminStore.patch(`referrals/${item.id}/status`, { status: 'cancelled' })
       if (res) {
         fetchReferrals()
@@ -218,11 +218,11 @@ const handleAction = async (action, item) => {
       }
     }
   } else {
-    alert(`${action.label} referral #${item.id}`)
+    alert(t('admin.referrals.actionMock', { label: action.label, id: item.id }))
   }
 }
 
-const handleExport = () => alert('Export referrals (mock)')
+const handleExport = () => alert(t('admin.referrals.exportReferrals'))
 </script>
 
 <style scoped>

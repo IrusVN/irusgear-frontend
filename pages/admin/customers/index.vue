@@ -14,7 +14,7 @@
         <AdminTableToolbar
           :search="search"
           :page-size="pageSize"
-          search-placeholder="Search Customer"
+          :search-placeholder="$t('admin.customers.searchCustomer')"
           @update:search="handleSearch"
           @update:page-size="changePageSize"
           @export="handleExport"
@@ -22,7 +22,7 @@
           <template #actions>
             <button class="admin-primary-button" type="button" @click="handleAdd">
               <i class="bi bi-plus-lg"></i>
-              <span>Add Customer</span>
+              <span>{{ $t('admin.customers.addCustomer') }}</span>
             </button>
           </template>
         </AdminTableToolbar>
@@ -60,9 +60,9 @@
       <template #actions="{ item }">
         <AdminActionMenu
           :items="[
-            { key: 'view', label: 'View Details', icon: 'bi-eye' },
-            { key: 'edit', label: 'Edit', icon: 'bi-pencil' },
-            { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+            { key: 'view', label: $t('admin.customers.viewDetails'), icon: 'bi-eye' },
+            { key: 'edit', label: $t('admin.customers.edit'), icon: 'bi-pencil' },
+            { key: 'delete', label: $t('admin.customers.delete'), icon: 'bi-trash', variant: 'danger' },
           ]"
           @select="handleAction($event, item)"
         />
@@ -82,7 +82,7 @@
     <div v-if="isMobile" class="admin-card-shell" style="padding:14px">
       <label style="display:block;position:relative;margin-bottom:12px">
         <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
-        <input class="admin-control" :value="search" placeholder="Search Customer" style="padding-left:36px;width:100%" @input="handleSearch($event.target.value)">
+        <input class="admin-control" :value="search" :placeholder="$t('admin.customers.searchCustomer')" style="padding-left:36px;width:100%" @input="handleSearch($event.target.value)">
       </label>
       <AdminMobileCard
         v-for="item in paginatedCustomers"
@@ -91,25 +91,25 @@
         :subtitle="item.email"
         :avatar="item.avatar"
         :meta="[
-          { label: 'Orders', value: item.orders.toLocaleString() },
-          { label: 'Spent', value: formatCurrency(item.totalSpent) },
-          { label: 'ID', value: item.customerCode },
+          { label: $t('admin.customers.orders'), value: item.orders.toLocaleString() },
+          { label: $t('admin.customers.spent'), value: formatCurrency(item.totalSpent) },
+          { label: $t('admin.customers.idLabel'), value: item.customerCode },
         ]"
         @click="viewCustomer(item)"
       >
         <template #actions>
           <AdminActionMenu
             :items="[
-              { key: 'view', label: 'View Details', icon: 'bi-eye' },
-              { key: 'edit', label: 'Edit', icon: 'bi-pencil' },
-              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+              { key: 'view', label: $t('admin.customers.viewDetails'), icon: 'bi-eye' },
+              { key: 'edit', label: $t('admin.customers.edit'), icon: 'bi-pencil' },
+              { key: 'delete', label: $t('admin.customers.delete'), icon: 'bi-trash', variant: 'danger' },
             ]"
             @select="handleAction($event, item)"
           />
         </template>
       </AdminMobileCard>
       <div v-if="totalCustomers > customers.length" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < totalCustomers" class="admin-secondary-button" @click="changePage(page + 1)">Load More</button>
+        <button v-if="page * pageSize < totalCustomers" class="admin-secondary-button" @click="changePage(page + 1)">{{ $t('admin.customers.loadMore') }}</button>
       </div>
     </div>
   </div>
@@ -117,7 +117,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useHead, useRouter } from '#imports'
+import { useHead, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
@@ -127,10 +127,11 @@ import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 
+const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
-useHead({ title: 'Customers – IrusGear Admin' })
+useHead({ title: () => t('admin.customers.pageTitle') })
 
 const router = useRouter()
 const admin = useAdminStore()
@@ -165,30 +166,30 @@ const changePageSize = (size) => {
   fetchCustomers()
 }
 
-const columns = [
-  { key: 'name', label: 'Customer', width: '26%' },
-  { key: 'customerCode', label: 'Customer ID' },
-  { key: 'country', label: 'Country' },
-  { key: 'orders', label: 'Orders', align: 'center' },
-  { key: 'totalSpent', label: 'Total Spent' },
-]
+const columns = computed(() => [
+  { key: 'name', label: t('admin.customers.title').replace(/s$/i, ''), width: '26%' },
+  { key: 'customerCode', label: t('admin.customers.customerId') },
+  { key: 'country', label: t('admin.customers.country') },
+  { key: 'orders', label: t('admin.customers.totalOrders'), align: 'center' },
+  { key: 'totalSpent', label: t('admin.customers.totalSpent') },
+])
 
 const paginatedCustomers = computed(() => customers.value)
 
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
 const viewCustomer = (item) => router.push(`/admin/customers/${item.id}`)
-const handleExport = () => alert('Export triggered (mock)')
-const handleAdd = () => alert('Add customer (mock)')
+const handleExport = () => alert(t('admin.customers.exportMock'))
+const handleAdd = () => alert(t('admin.customers.addMock'))
 const handleAction = async (action, item) => {
   if (action.key === 'delete') {
-    if (confirm(`Delete customer ${item.customerCode}? This cannot be undone.`)) {
+    if (confirm(t('admin.customers.confirmDelete', { code: item.customerCode }))) {
       try {
         await admin.remove('customers', item.id)
-        alert('Customer deleted')
+        alert(t('admin.customers.deleteSuccess'))
         fetchCustomers()
       } catch (e) {
-        alert('Failed to delete: ' + e.message)
+        alert(t('admin.customers.deleteFailed', { error: e.message }))
       }
     }
   }
@@ -201,7 +202,7 @@ const mapCustomer = (c) => ({
   email: c.email,
   customerCode: `#CUS${c.id}`,
   avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
-  country: c.country || 'Vietnam',
+  country: c.country || t('admin.customers.defaultCountry'),
   countryCode: 'vn',
   orders: c.orders || 0,
   totalSpent: c.total_spent || 0,

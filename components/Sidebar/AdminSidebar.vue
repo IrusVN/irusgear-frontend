@@ -194,7 +194,8 @@ const handleLogout = async () => {
 watch(
   () => route.path,
   () => {
-    for (const item of ecommerceMenu) {
+    // ecommerceMenu giờ là computed ref (sau khi i18n) → dùng .value để iterate
+    for (const item of ecommerceMenu.value) {
       if (item.children && isBranchActive(item)) openGroups[item.key] = true
     }
   },
