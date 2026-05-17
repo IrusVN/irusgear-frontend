@@ -194,6 +194,7 @@ import { useHead, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import { toast } from 'vue-sonner'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -285,7 +286,7 @@ const handlePublish = async () => {
     await admin.create('products', buildPayload('publish'))
     router.push('/admin/products')
   } catch (e) {
-    alert(t('admin.products.publishFailed', { message: e.message }))
+    toast.error(t('admin.products.publishFailed', { message: e.message }))
   }
 }
 const handleSaveDraft = async () => {
@@ -294,7 +295,7 @@ const handleSaveDraft = async () => {
     await admin.create('products', buildPayload('draft'))
     router.push('/admin/products')
   } catch (e) {
-    alert(t('admin.products.saveDraftFailed', { message: e.message }))
+    toast.error(t('admin.products.saveDraftFailed', { message: e.message }))
   }
 }
 const handleDiscard = () => router.push('/admin/products')

@@ -126,6 +126,7 @@ import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
+import { toast } from 'vue-sonner'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -179,17 +180,17 @@ const paginatedCustomers = computed(() => customers.value)
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
 const viewCustomer = (item) => router.push(`/admin/customers/${item.id}`)
-const handleExport = () => alert(t('admin.customers.exportMock'))
-const handleAdd = () => alert(t('admin.customers.addMock'))
+const handleExport = () => toast.info(t('admin.customers.exportMock'))
+const handleAdd = () => toast.info(t('admin.customers.addMock'))
 const handleAction = async (action, item) => {
   if (action.key === 'delete') {
     if (confirm(t('admin.customers.confirmDelete', { code: item.customerCode }))) {
       try {
         await admin.remove('customers', item.id)
-        alert(t('admin.customers.deleteSuccess'))
+        toast.success(t('admin.customers.deleteSuccess'))
         fetchCustomers()
       } catch (e) {
-        alert(t('admin.customers.deleteFailed', { error: e.message }))
+        toast.error(t('admin.customers.deleteFailed', { error: e.message }))
       }
     }
   }

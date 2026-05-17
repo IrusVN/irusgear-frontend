@@ -143,6 +143,7 @@ import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
 import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import { toast } from 'vue-sonner'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 
 definePageMeta({ layout: 'admin' })
@@ -250,7 +251,7 @@ const saveCategory = async () => {
     closeModal()
     loadCategories()
   } catch (e) {
-    alert(t('admin.categories.saveFailed', { message: e.message }))
+    toast.error(t('admin.categories.saveFailed', { message: e.message }))
   }
 }
 
@@ -272,10 +273,10 @@ const handleAction = async (action, item) => {
       await admin.remove('categories', item.id)
       loadCategories()
     } catch (e) {
-      alert(t('admin.categories.deleteFailed', { message: e.message }))
+      toast.error(t('admin.categories.deleteFailed', { message: e.message }))
     }
   } else {
-    alert(t('admin.categories.viewProductsAlert', { name: item.name }))
+    toast.info(t('admin.categories.viewProductsAlert', { name: item.name }))
   }
 }
 </script>

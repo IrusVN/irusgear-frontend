@@ -188,6 +188,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import { toast } from 'vue-sonner'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -301,10 +302,10 @@ const handleCancel = async () => {
   if (confirm(t('admin.orders.confirmCancel', { code: order.value?.orderCode }))) {
     try {
       await admin.create(`orders/${orderId.value}/cancel`, { reason: t('admin.orders.cancelReason') })
-      alert(t('admin.orders.cancelSuccess'))
+      toast.success(t('admin.orders.cancelSuccess'))
       fetchOrder()
     } catch (e) {
-      alert(t('admin.orders.cancelFailed', { msg: e.message }))
+      toast.error(t('admin.orders.cancelFailed', { msg: e.message }))
     }
   }
 }

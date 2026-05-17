@@ -125,6 +125,7 @@ import { useMediaQuery } from '@/composables/useMediaQuery'
 import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import { useI18n } from 'vue-i18n'
+import { toast } from 'vue-sonner'
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 
@@ -218,11 +219,11 @@ const handleAction = async (action, item) => {
       }
     }
   } else {
-    alert(t('admin.referrals.actionMock', { label: action.label, id: item.id }))
+    toast.info(t('admin.referrals.actionMock', { label: action.label, id: item.id }))
   }
 }
 
-const handleExport = () => alert(t('admin.referrals.exportReferrals'))
+const handleExport = () => toast.info(t('admin.referrals.exportReferrals'))
 </script>
 
 <style scoped>

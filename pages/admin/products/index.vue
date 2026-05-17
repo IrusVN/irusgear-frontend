@@ -207,6 +207,7 @@ import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import AdminMobileFilterSheet from '@/components/Admin/ui/AdminMobileFilterSheet.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
+import { toast } from 'vue-sonner'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -410,7 +411,7 @@ const toggleStock = async (item) => {
 }
 
 const navigateToEdit = (item) => router.push(`/admin/products/${item.id}/edit`)
-const handleExport = () => alert(t('admin.products.exportTriggered'))
+const handleExport = () => toast.info(t('admin.products.exportTriggered'))
 const handleAction = async (action, item) => {
   if (action.key === 'delete') {
     if (!confirm(t('admin.products.deleteConfirm', { name: item.name }))) return
@@ -418,10 +419,10 @@ const handleAction = async (action, item) => {
       await admin.remove('products', item.id)
       loadProducts()
     } catch (e) {
-      alert(t('admin.products.deleteFailed', { message: e.message }))
+      toast.error(t('admin.products.deleteFailed', { message: e.message }))
     }
   } else if (action.key === 'duplicate') {
-    alert(t('admin.products.duplicateAction', { id: item.id }))
+    toast.info(t('admin.products.duplicateAction', { id: item.id }))
   } else {
     router.push(`/admin/products/${item.id}/edit`)
   }

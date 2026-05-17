@@ -119,6 +119,7 @@ import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
+import { toast } from 'vue-sonner'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -200,23 +201,23 @@ const handleAction = async (action, item) => {
   try {
     if (action.key === 'approve') {
       await admin.patch('reviews', item.id + '/status', { status: 'approved' })
-      alert(t('admin.reviews.approvedMock'))
+      toast.success(t('admin.reviews.approvedMock'))
       fetchReviews()
       fetchStats()
     } else if (action.key === 'reject') {
       await admin.patch('reviews', item.id + '/status', { status: 'rejected' })
-      alert(t('admin.reviews.rejectedMock'))
+      toast.success(t('admin.reviews.rejectedMock'))
       fetchReviews()
       fetchStats()
     } else {
-      alert(t('admin.reviews.actionMock', { label: action.label, id: item.id }))
+      toast.info(t('admin.reviews.actionMock', { label: action.label, id: item.id }))
     }
   } catch (e) {
-    alert(t('admin.reviews.actionFailed', { error: e.message }))
+    toast.error(t('admin.reviews.actionFailed', { error: e.message }))
   }
 }
 
-const handleExport = () => alert(t('admin.reviews.exportMock'))
+const handleExport = () => toast.info(t('admin.reviews.exportMock'))
 
 const mapReview = (r) => ({
   id: r.id,

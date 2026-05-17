@@ -206,6 +206,7 @@ import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import { toast } from 'vue-sonner'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -316,7 +317,7 @@ const handleSave = async () => {
     })
     router.push('/admin/products')
   } catch (e) {
-    alert(t('admin.products.saveFailed', { message: e.message }))
+    toast.error(t('admin.products.saveFailed', { message: e.message }))
   }
 }
 const handleDelete = async () => {
@@ -325,7 +326,7 @@ const handleDelete = async () => {
     await admin.remove('products', productId.value)
     router.push('/admin/products')
   } catch (e) {
-    alert(t('admin.products.deleteFailed', { message: e.message }))
+    toast.error(t('admin.products.deleteFailed', { message: e.message }))
   }
 }
 const handleDiscard = () => router.push('/admin/products')

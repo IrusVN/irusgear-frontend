@@ -241,6 +241,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import { toast } from 'vue-sonner'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -336,14 +337,14 @@ const handleDelete = async () => {
   if (confirm(t('admin.customers.confirmDelete', { code: customer.value?.customerCode }))) {
     try {
       await admin.remove('customers', customerId.value)
-      alert(t('admin.customers.deleteSuccess'))
+      toast.success(t('admin.customers.deleteSuccess'))
       router.push('/admin/customers')
     } catch (e) {
-      alert(t('admin.customers.deleteFailed', { msg: e.message }))
+      toast.error(t('admin.customers.deleteFailed', { msg: e.message }))
     }
   }
 }
-const handleEditDetails = () => alert(t('admin.customers.editDetailsMock'))
+const handleEditDetails = () => toast.info(t('admin.customers.editDetailsMock'))
 
 const mapCustomerDetail = (c) => {
   const loyalty = c.member_rank || { name_en: 'Standard', threshold: 0 }
