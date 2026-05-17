@@ -65,12 +65,27 @@ const root = ref(null)
 const isOpen = ref(false)
 const isMobile = useMediaQuery('(max-width: 767px)')
 
+// Singleton: chỉ cho phép 1 AdminActionMenu mở tại một thời điểm trên toàn page.
+// Mỗi instance khi mở sẽ "kick" instance đang mở (nếu có) đóng lại — tránh
+// hiển thị nhiều dropdown chồng nhau khi user click sang row khác.
 const handleTrigger = () => {
-  isOpen.value = !isOpen.value
+  if (isOpen.value) {
+    close()
+    return
+  }
+
+  if (activeClose && activeClose !== close) {
+    activeClose()
+  }
+  activeClose = close
+  isOpen.value = true
 }
 
 const close = () => {
   isOpen.value = false
+  if (activeClose === close) {
+    activeClose = null
+  }
 }
 
 const handleSelect = (item) => {
@@ -85,7 +100,17 @@ const handleDocumentClick = (event) => {
 }
 
 onMounted(() => document.addEventListener('click', handleDocumentClick))
-onBeforeUnmount(() => document.removeEventListener('click', handleDocumentClick))
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleDocumentClick)
+  if (activeClose === close) activeClose = null
+})
+</script>
+
+<script>
+// Module-scope (chia sẻ giữa các instance của AdminActionMenu) — ref tới hàm
+// `close` của instance đang mở. Dùng plain let thay vì reactive ref vì không
+// cần render reactive với giá trị này.
+let activeClose = null
 </script>
 
 <style scoped>

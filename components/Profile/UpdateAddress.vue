@@ -1,356 +1,365 @@
 <template>
-  <Teleport to="body">
-    <Transition name="profile-address-fade">
-      <div
-        v-if="modelValue"
-        class="profile-address"
-        role="presentation"
-        @click.self="close"
-      >
-        <aside
-          class="profile-address__panel"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="profile-address-title"
-        >
-          <header class="profile-address__header">
-            <h2 id="profile-address-title" class="profile-address__title">
-              Thêm địa chỉ
-            </h2>
-            <button
-              type="button"
-              class="profile-address__close"
-              aria-label="Đóng"
-              @click="close"
+  <QuickView
+    :model-value="modelValue"
+    title="Thêm địa chỉ"
+    close-label="Đóng"
+    :close-on-esc="!openDropdown"
+    :z-index="zIndex"
+    @update:model-value="(v) => emit('update:modelValue', v)"
+    @close="emit('close')"
+    @open="onOpen"
+  >
+    <template #body-wrapper>
+      <form class="profile-address__form" @submit.prevent="submitAddress">
+        <div class="quick-view__body profile-address__body">
+          <h3 class="profile-address__section-title">Địa chỉ nhận hàng</h3>
+
+          <div class="profile-address__field">
+            <span class="profile-address__label">Tỉnh/Thành phố</span>
+            <div
+              class="profile-address__select"
+              :class="{ 'is-open': openDropdown === 'province' }"
             >
-              <i class="bi bi-x-lg"></i>
-            </button>
-          </header>
-
-          <form class="profile-address__form" @submit.prevent="submitAddress">
-            <div class="profile-address__body">
-              <h3 class="profile-address__section-title">Địa chỉ nhận hàng</h3>
-
-              <div class="profile-address__field">
-                <span class="profile-address__label">Tỉnh/Thành phố</span>
-                <div
-                  class="profile-address__select"
-                  :class="{ 'is-open': openDropdown === 'province' }"
-                >
-                  <button
-                    type="button"
-                    class="profile-address__select-trigger"
-                    @click.stop="toggleDropdown('province')"
-                  >
-                    <span :class="{ 'is-placeholder': !form.province }">
-                      {{ form.province?.label || "Chọn Tỉnh/Thành phố" }}
-                    </span>
-                    <i class="bi bi-chevron-down"></i>
-                  </button>
-
-                  <Transition name="profile-address-menu">
-                    <div
-                      v-if="openDropdown === 'province'"
-                      class="profile-address__select-menu"
-                      role="listbox"
-                    >
-                      <div class="profile-address__select-search" @click.stop>
-                        <i class="bi bi-search"></i>
-                        <input
-                          v-model="searchTerms.province"
-                          type="search"
-                          placeholder="Tìm kiếm"
-                          @keydown.stop
-                        />
-                      </div>
-                      <div class="profile-address__select-list">
-                      <button
-                        v-if="!provinceOptions.length"
-                        type="button"
-                        class="profile-address__select-option is-muted"
-                        disabled
-                      >
-                        Đang tải...
-                      </button>
-                      <button
-                        v-else-if="!filteredProvinceOptions.length"
-                        type="button"
-                        class="profile-address__select-option is-muted"
-                        disabled
-                      >
-                        Không tìm thấy
-                      </button>
-                      <button
-                        v-for="option in filteredProvinceOptions"
-                        :key="option.value"
-                        type="button"
-                        class="profile-address__select-option"
-                        :class="{ 'is-selected': form.province?.value === option.value }"
-                        role="option"
-                        :aria-selected="form.province?.value === option.value"
-                        @click.stop="selectProvince(option)"
-                      >
-                        <span>{{ option.label }}</span>
-                        <i
-                          v-if="form.province?.value === option.value"
-                          class="bi bi-check2"
-                        ></i>
-                      </button>
-                      </div>
-                    </div>
-                  </Transition>
-                </div>
-              </div>
-
-              <div class="profile-address__field">
-                <span class="profile-address__label">Quận/Huyện</span>
-                <div
-                  class="profile-address__select"
-                  :class="{
-                    'is-open': openDropdown === 'district',
-                    'is-disabled': !form.province,
-                  }"
-                >
-                  <button
-                    type="button"
-                    class="profile-address__select-trigger"
-                    :disabled="!form.province"
-                    @click.stop="toggleDropdown('district')"
-                  >
-                    <span :class="{ 'is-placeholder': !form.district }">
-                      {{ districtPlaceholder }}
-                    </span>
-                    <i class="bi bi-chevron-down"></i>
-                  </button>
-
-                  <Transition name="profile-address-menu">
-                    <div
-                      v-if="openDropdown === 'district'"
-                      class="profile-address__select-menu"
-                      role="listbox"
-                    >
-                      <div class="profile-address__select-search" @click.stop>
-                        <i class="bi bi-search"></i>
-                        <input
-                          v-model="searchTerms.district"
-                          type="search"
-                          placeholder="Tìm kiếm"
-                          @keydown.stop
-                        />
-                      </div>
-                      <div class="profile-address__select-list">
-                      <button
-                        v-if="districtsLoading || !districtOptions.length"
-                        type="button"
-                        class="profile-address__select-option is-muted"
-                        disabled
-                      >
-                        {{ districtsLoading ? "Đang tải..." : "Không có dữ liệu" }}
-                      </button>
-                      <button
-                        v-else-if="!filteredDistrictOptions.length"
-                        type="button"
-                        class="profile-address__select-option is-muted"
-                        disabled
-                      >
-                        Không tìm thấy
-                      </button>
-                      <button
-                        v-for="option in filteredDistrictOptions"
-                        :key="option.value"
-                        type="button"
-                        class="profile-address__select-option"
-                        :class="{ 'is-selected': form.district?.value === option.value }"
-                        role="option"
-                        :aria-selected="form.district?.value === option.value"
-                        @click.stop="selectDistrict(option)"
-                      >
-                        <span>{{ option.label }}</span>
-                        <i
-                          v-if="form.district?.value === option.value"
-                          class="bi bi-check2"
-                        ></i>
-                      </button>
-                      </div>
-                    </div>
-                  </Transition>
-                </div>
-              </div>
-
-              <div class="profile-address__field">
-                <span class="profile-address__label">Phường/Xã</span>
-                <div
-                  class="profile-address__select"
-                  :class="{
-                    'is-open': openDropdown === 'ward',
-                    'is-disabled': !form.district,
-                  }"
-                >
-                  <button
-                    type="button"
-                    class="profile-address__select-trigger"
-                    :disabled="!form.district"
-                    @click.stop="toggleDropdown('ward')"
-                  >
-                    <span :class="{ 'is-placeholder': !form.ward }">
-                      {{ wardPlaceholder }}
-                    </span>
-                    <i class="bi bi-chevron-down"></i>
-                  </button>
-
-                  <Transition name="profile-address-menu">
-                    <div
-                      v-if="openDropdown === 'ward'"
-                      class="profile-address__select-menu"
-                      role="listbox"
-                    >
-                      <div class="profile-address__select-search" @click.stop>
-                        <i class="bi bi-search"></i>
-                        <input
-                          v-model="searchTerms.ward"
-                          type="search"
-                          placeholder="Tìm kiếm"
-                          @keydown.stop
-                        />
-                      </div>
-                      <div class="profile-address__select-list">
-                      <button
-                        v-if="wardsLoading || !wardOptions.length"
-                        type="button"
-                        class="profile-address__select-option is-muted"
-                        disabled
-                      >
-                        {{ wardsLoading ? "Đang tải..." : "Không có dữ liệu" }}
-                      </button>
-                      <button
-                        v-else-if="!filteredWardOptions.length"
-                        type="button"
-                        class="profile-address__select-option is-muted"
-                        disabled
-                      >
-                        Không tìm thấy
-                      </button>
-                      <button
-                        v-for="option in filteredWardOptions"
-                        :key="option.value"
-                        type="button"
-                        class="profile-address__select-option"
-                        :class="{ 'is-selected': form.ward?.value === option.value }"
-                        role="option"
-                        :aria-selected="form.ward?.value === option.value"
-                        @click.stop="selectWard(option)"
-                      >
-                        <span>{{ option.label }}</span>
-                        <i
-                          v-if="form.ward?.value === option.value"
-                          class="bi bi-check2"
-                        ></i>
-                      </button>
-                      </div>
-                    </div>
-                  </Transition>
-                </div>
-              </div>
-
-              <label class="profile-address__field">
-                <span class="profile-address__label">Địa chỉ nhà</span>
-                <input
-                  v-model.trim="form.detail"
-                  type="text"
-                  class="profile-address__control"
-                  placeholder="Nhập địa chỉ nhà"
-                />
-              </label>
-
-              <div class="profile-address__divider" aria-hidden="true"></div>
-
-              <label class="profile-address__field">
-                <span class="profile-address__label">Đặt tên gợi nhớ</span>
-                <input
-                  v-model.trim="form.reminderName"
-                  type="text"
-                  class="profile-address__control"
-                  placeholder="Đặt tên gợi nhớ"
-                />
-              </label>
-
-              <div class="profile-address__field">
-                <span class="profile-address__label">Loại địa chỉ</span>
-                <div class="profile-address__type-options">
-                  <button
-                    type="button"
-                    class="profile-address__type-btn"
-                    :class="{ 'is-active': form.label === 'home' }"
-                    @click="form.label = 'home'"
-                  >
-                    Nhà
-                  </button>
-                  <button
-                    type="button"
-                    class="profile-address__type-btn"
-                    :class="{ 'is-active': form.label === 'office' }"
-                    @click="form.label = 'office'"
-                  >
-                    Văn phòng
-                  </button>
-                </div>
-              </div>
-
-              <div class="profile-address__divider" aria-hidden="true"></div>
-
-              <label class="profile-address__default-row">
-                <span>Đặt làm địa chỉ mặc định</span>
-                <input
-                  v-model="form.isDefault"
-                  type="checkbox"
-                  class="profile-address__switch-input"
-                />
-                <span class="profile-address__switch" aria-hidden="true"></span>
-              </label>
-            </div>
-
-            <footer class="profile-address__footer">
               <button
-                type="submit"
-                class="profile-address__submit"
-                :disabled="isSubmitDisabled"
+                type="button"
+                class="profile-address__select-trigger"
+                @click.stop="toggleDropdown('province')"
               >
-                <span
-                  v-if="addressSaving"
-                  class="profile-address__spinner"
-                  aria-hidden="true"
-                ></span>
-                <span>{{ addressSaving ? "Đang thêm..." : "Thêm địa chỉ" }}</span>
+                <span :class="{ 'is-placeholder': !form.province }">
+                  {{ form.province?.label || "Chọn Tỉnh/Thành phố" }}
+                </span>
+                <i class="bi bi-chevron-down"></i>
               </button>
-            </footer>
-          </form>
-        </aside>
-      </div>
-    </Transition>
-  </Teleport>
+
+              <Transition name="profile-address-menu">
+                <div
+                  v-if="openDropdown === 'province'"
+                  class="profile-address__select-menu"
+                  role="listbox"
+                >
+                  <div class="profile-address__select-search" @click.stop>
+                    <i class="bi bi-search"></i>
+                    <input
+                      v-model="searchTerms.province"
+                      type="search"
+                      placeholder="Tìm kiếm"
+                      @keydown.stop
+                    />
+                  </div>
+                  <div class="profile-address__select-list">
+                    <button
+                      v-if="!provinceOptions.length"
+                      type="button"
+                      class="profile-address__select-option is-muted"
+                      disabled
+                    >
+                      Đang tải...
+                    </button>
+                    <button
+                      v-else-if="!filteredProvinceOptions.length"
+                      type="button"
+                      class="profile-address__select-option is-muted"
+                      disabled
+                    >
+                      Không tìm thấy
+                    </button>
+                    <button
+                      v-for="option in filteredProvinceOptions"
+                      :key="option.value"
+                      type="button"
+                      class="profile-address__select-option"
+                      :class="{ 'is-selected': form.province?.value === option.value }"
+                      role="option"
+                      :aria-selected="form.province?.value === option.value"
+                      @click.stop="selectProvince(option)"
+                    >
+                      <span>{{ option.label }}</span>
+                      <i
+                        v-if="form.province?.value === option.value"
+                        class="bi bi-check2"
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+              </Transition>
+            </div>
+          </div>
+
+          <div class="profile-address__field">
+            <span class="profile-address__label">Quận/Huyện</span>
+            <div
+              class="profile-address__select"
+              :class="{
+                'is-open': openDropdown === 'district',
+                'is-disabled': !form.province,
+              }"
+            >
+              <button
+                type="button"
+                class="profile-address__select-trigger"
+                :disabled="!form.province"
+                @click.stop="toggleDropdown('district')"
+              >
+                <span :class="{ 'is-placeholder': !form.district }">
+                  {{ districtPlaceholder }}
+                </span>
+                <i class="bi bi-chevron-down"></i>
+              </button>
+
+              <Transition name="profile-address-menu">
+                <div
+                  v-if="openDropdown === 'district'"
+                  class="profile-address__select-menu"
+                  role="listbox"
+                >
+                  <div class="profile-address__select-search" @click.stop>
+                    <i class="bi bi-search"></i>
+                    <input
+                      v-model="searchTerms.district"
+                      type="search"
+                      placeholder="Tìm kiếm"
+                      @keydown.stop
+                    />
+                  </div>
+                  <div class="profile-address__select-list">
+                    <button
+                      v-if="districtsLoading || !districtOptions.length"
+                      type="button"
+                      class="profile-address__select-option is-muted"
+                      disabled
+                    >
+                      {{ districtsLoading ? "Đang tải..." : "Không có dữ liệu" }}
+                    </button>
+                    <button
+                      v-else-if="!filteredDistrictOptions.length"
+                      type="button"
+                      class="profile-address__select-option is-muted"
+                      disabled
+                    >
+                      Không tìm thấy
+                    </button>
+                    <button
+                      v-for="option in filteredDistrictOptions"
+                      :key="option.value"
+                      type="button"
+                      class="profile-address__select-option"
+                      :class="{ 'is-selected': form.district?.value === option.value }"
+                      role="option"
+                      :aria-selected="form.district?.value === option.value"
+                      @click.stop="selectDistrict(option)"
+                    >
+                      <span>{{ option.label }}</span>
+                      <i
+                        v-if="form.district?.value === option.value"
+                        class="bi bi-check2"
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+              </Transition>
+            </div>
+          </div>
+
+          <div class="profile-address__field">
+            <span class="profile-address__label">Phường/Xã</span>
+            <div
+              class="profile-address__select"
+              :class="{
+                'is-open': openDropdown === 'ward',
+                'is-disabled': !form.district,
+              }"
+            >
+              <button
+                type="button"
+                class="profile-address__select-trigger"
+                :disabled="!form.district"
+                @click.stop="toggleDropdown('ward')"
+              >
+                <span :class="{ 'is-placeholder': !form.ward }">
+                  {{ wardPlaceholder }}
+                </span>
+                <i class="bi bi-chevron-down"></i>
+              </button>
+
+              <Transition name="profile-address-menu">
+                <div
+                  v-if="openDropdown === 'ward'"
+                  class="profile-address__select-menu"
+                  role="listbox"
+                >
+                  <div class="profile-address__select-search" @click.stop>
+                    <i class="bi bi-search"></i>
+                    <input
+                      v-model="searchTerms.ward"
+                      type="search"
+                      placeholder="Tìm kiếm"
+                      @keydown.stop
+                    />
+                  </div>
+                  <div class="profile-address__select-list">
+                    <button
+                      v-if="wardsLoading || !wardOptions.length"
+                      type="button"
+                      class="profile-address__select-option is-muted"
+                      disabled
+                    >
+                      {{ wardsLoading ? "Đang tải..." : "Không có dữ liệu" }}
+                    </button>
+                    <button
+                      v-else-if="!filteredWardOptions.length"
+                      type="button"
+                      class="profile-address__select-option is-muted"
+                      disabled
+                    >
+                      Không tìm thấy
+                    </button>
+                    <button
+                      v-for="option in filteredWardOptions"
+                      :key="option.value"
+                      type="button"
+                      class="profile-address__select-option"
+                      :class="{ 'is-selected': form.ward?.value === option.value }"
+                      role="option"
+                      :aria-selected="form.ward?.value === option.value"
+                      @click.stop="selectWard(option)"
+                    >
+                      <span>{{ option.label }}</span>
+                      <i
+                        v-if="form.ward?.value === option.value"
+                        class="bi bi-check2"
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+              </Transition>
+            </div>
+          </div>
+
+          <label class="profile-address__field">
+            <span class="profile-address__label">Địa chỉ nhà</span>
+            <input
+              v-model.trim="form.detail"
+              type="text"
+              class="profile-address__control"
+              placeholder="Nhập địa chỉ nhà"
+            />
+          </label>
+
+          <div class="profile-address__divider" aria-hidden="true"></div>
+
+          <label class="profile-address__field">
+            <span class="profile-address__label">Đặt tên gợi nhớ</span>
+            <input
+              v-model.trim="form.reminderName"
+              type="text"
+              class="profile-address__control"
+              placeholder="Đặt tên gợi nhớ"
+            />
+          </label>
+
+          <div class="profile-address__field">
+            <span class="profile-address__label">Loại địa chỉ</span>
+            <div class="profile-address__type-options">
+              <button
+                type="button"
+                class="profile-address__type-btn"
+                :class="{ 'is-active': form.label === 'home' }"
+                @click="form.label = 'home'"
+              >
+                Nhà
+              </button>
+              <button
+                type="button"
+                class="profile-address__type-btn"
+                :class="{ 'is-active': form.label === 'office' }"
+                @click="form.label = 'office'"
+              >
+                Văn phòng
+              </button>
+            </div>
+          </div>
+
+          <div class="profile-address__divider" aria-hidden="true"></div>
+
+          <label class="profile-address__default-row">
+            <span>Đặt làm địa chỉ mặc định</span>
+            <input
+              v-model="form.isDefault"
+              type="checkbox"
+              class="profile-address__switch-input"
+            />
+            <span class="profile-address__switch" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <footer class="quick-view__footer profile-address__footer">
+          <button
+            type="submit"
+            class="profile-address__submit"
+            :disabled="isSubmitDisabled"
+          >
+            <span
+              v-if="addressSaving"
+              class="profile-address__spinner"
+              aria-hidden="true"
+            ></span>
+            <span>{{ addressSaving ? "Đang thêm..." : "Thêm địa chỉ" }}</span>
+          </button>
+        </footer>
+      </form>
+    </template>
+  </QuickView>
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, reactive, ref, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { toast } from "vue-sonner";
 import { useAddress } from "@/composables/useAddress";
 import { useAuthStore } from "@/stores/authStore";
 import { useCheckoutStore } from "@/stores/checkoutStore";
+import QuickView from "@/components/Common/QuickView.vue";
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
   },
+  /**
+   * Controlled mode: nếu truyền `customer` (object) → component không tự call
+   * checkoutStore.saveAddress (vốn save cho auth user). Thay vào đó emit `save`
+   * với payload, parent chịu trách nhiệm POST (vd: admin tạo address cho customer
+   * khác). Cũng dùng `customer.name`/`customer.phone_number` làm receiver thay
+   * vì auth user.
+   */
+  customer: {
+    type: Object,
+    default: null,
+  },
+  /** Parent-controlled loading state (override addressSaving của checkoutStore khi controlled mode) */
+  saving: {
+    type: Boolean,
+    default: false,
+  },
+  /** z-index forward cho QuickView — set cao hơn khi stack trên drawer khác */
+  zIndex: {
+    type: [Number, String],
+    default: 10030,
+  },
 });
 
-const emit = defineEmits(["update:modelValue", "close", "saved"]);
+const emit = defineEmits(["update:modelValue", "close", "saved", "save"]);
 
 const authStore = useAuthStore();
 const checkoutStore = useCheckoutStore();
 const { user } = storeToRefs(authStore);
-const { addressSaving } = storeToRefs(checkoutStore);
+const { addressSaving: storeSaving } = storeToRefs(checkoutStore);
+
+// Mode flag: controlled (admin/external) vs uncontrolled (user profile)
+const isControlled = computed(() => !!props.customer);
+
+// Combined saving state: parent's khi controlled, store's khi uncontrolled.
+const addressSaving = computed(() => (isControlled.value ? props.saving : storeSaving.value));
 
 const form = reactive({
   province: null,
@@ -375,7 +384,6 @@ const {
 } = useAddress(form);
 
 const openDropdown = ref(null);
-const previousBodyOverflow = ref("");
 const searchTerms = reactive({
   province: "",
   district: "",
@@ -386,7 +394,7 @@ const normalizeKeyword = (value = "") =>
   String(value)
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .replace(/đ/g, "d")
     .trim();
 
@@ -444,33 +452,6 @@ const isSubmitDisabled = computed(() => {
   );
 });
 
-watch(
-  () => props.modelValue,
-  (visible) => {
-    if (visible) {
-      openDropdown.value = null;
-      loadProvinces();
-      previousBodyOverflow.value = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      window.addEventListener("click", closeDropdown);
-      window.addEventListener("keydown", onKeydown);
-      return;
-    }
-
-    unlockDocument();
-  }
-);
-
-onBeforeUnmount(() => {
-  unlockDocument();
-});
-
-const unlockDocument = () => {
-  document.body.style.overflow = previousBodyOverflow.value;
-  window.removeEventListener("click", closeDropdown);
-  window.removeEventListener("keydown", onKeydown);
-};
-
 const resetForm = () => {
   Object.assign(form, {
     province: null,
@@ -497,13 +478,18 @@ const closeDropdown = () => {
   openDropdown.value = null;
 };
 
+// Khi QuickView mở: load provinces + reset trạng thái dropdown nội bộ.
+const onOpen = () => {
+  openDropdown.value = null;
+  loadProvinces();
+};
+
+// ESC trong khi 1 dropdown đang mở: chỉ đóng dropdown.
+// QuickView đã được prop `close-on-esc="!openDropdown"` nên ESC ở mức panel
+// sẽ KHÔNG bắn khi dropdown đang mở → consumer xử lý case này riêng.
 const onKeydown = (event) => {
-  if (event.key === "Escape") {
-    if (openDropdown.value) {
-      openDropdown.value = null;
-      return;
-    }
-    close();
+  if (event.key === "Escape" && openDropdown.value) {
+    openDropdown.value = null;
   }
 };
 
@@ -579,86 +565,47 @@ const submitAddress = async () => {
     );
   }
 };
+
+// Listener click-outside cho dropdown — chỉ active khi drawer đang mở.
+watch(
+  () => props.modelValue,
+  (visible) => {
+    if (typeof window === "undefined") return;
+    if (visible) {
+      window.addEventListener("click", closeDropdown);
+      window.addEventListener("keydown", onKeydown);
+    } else {
+      window.removeEventListener("click", closeDropdown);
+      window.removeEventListener("keydown", onKeydown);
+    }
+  }
+);
+
+onMounted(() => {
+  if (props.modelValue) {
+    window.addEventListener("click", closeDropdown);
+    window.addEventListener("keydown", onKeydown);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (typeof window !== "undefined") {
+    window.removeEventListener("click", closeDropdown);
+    window.removeEventListener("keydown", onKeydown);
+  }
+});
 </script>
 
 <style scoped>
-.profile-address {
-  position: fixed;
-  inset: 0;
-  z-index: 10020;
-  display: flex;
-  justify-content: flex-end;
-  padding: 16px 16px 16px 0;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(3px);
-}
-
-.profile-address__panel {
-  width: min(454px, calc(100vw - 16px));
-  height: 100%;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.18);
-}
-
-.profile-address__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 45px;
-  padding: 0 14px 0 16px;
-  border-bottom: 1px solid #edf0f3;
-}
-
-.profile-address__title {
-  margin: 0;
-  color: #111827;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.profile-address__close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  color: #6b7280;
-  cursor: pointer;
-  background: #f3f4f6;
-  border: 0;
-  border-radius: 50%;
-  transition:
-    color 0.18s ease,
-    background-color 0.18s ease;
-}
-
-.profile-address__close:hover {
-  color: #111827;
-  background: #e5e7eb;
-}
-
-.profile-address__close i {
-  font-size: 10px;
-  line-height: 1;
-}
-
 .profile-address__form {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
-  height: calc(100% - 45px);
+  min-height: 0;
 }
 
 .profile-address__body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
   gap: 12px;
-  min-height: 0;
-  padding: 16px 18px 24px;
-  overflow-y: auto;
 }
 
 .profile-address__section-title {
@@ -939,8 +886,6 @@ const submitAddress = async () => {
 
 .profile-address__footer {
   padding: 13px 18px 13px;
-  background: #fff;
-  box-shadow: 0 -18px 34px rgba(255, 255, 255, 0.96);
 }
 
 .profile-address__submit {
@@ -980,26 +925,6 @@ const submitAddress = async () => {
   animation: profile-address-spin 0.8s linear infinite;
 }
 
-.profile-address-fade-enter-active,
-.profile-address-fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.profile-address-fade-enter-from,
-.profile-address-fade-leave-to {
-  opacity: 0;
-}
-
-.profile-address-fade-enter-active .profile-address__panel,
-.profile-address-fade-leave-active .profile-address__panel {
-  transition: transform 0.24s ease;
-}
-
-.profile-address-fade-enter-from .profile-address__panel,
-.profile-address-fade-leave-to .profile-address__panel {
-  transform: translateX(16px);
-}
-
 .profile-address-menu-enter-active,
 .profile-address-menu-leave-active {
   transition:
@@ -1016,18 +941,6 @@ const submitAddress = async () => {
 @keyframes profile-address-spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 640px) {
-  .profile-address {
-    padding: 0;
-  }
-
-  .profile-address__panel {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
   }
 }
 </style>

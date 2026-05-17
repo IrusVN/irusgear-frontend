@@ -235,6 +235,14 @@
         </div>
       </div>
     </template>
+
+    <!-- Quick Edit drawer: dùng `customer` (đã mapped) làm source vì có
+         defaultAddressText cho address section + đầy đủ field hydrate. -->
+    <QuickEditCustomer
+      v-model="showQuickEdit"
+      :customer="customer"
+      @updated="onQuickEditUpdated"
+    />
   </div>
 </template>
 
@@ -243,6 +251,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import QuickEditCustomer from '@/components/Admin/customers/QuickEditCustomer.vue'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 
@@ -356,16 +365,47 @@ const handleDelete = async () => {
     isDeleting.value = false
   }
 }
-const handleEditDetails = () => toast.info(t('admin.customers.editDetailsMock'))
+/* ── QuickEdit drawer (shared với listing page) ── */
+const showQuickEdit = ref(false)
+// Object pass vào QuickEditCustomer — phải match shape mà modal hydrate
+// (xem QuickEditCustomer.hydrateFromCustomer: first_name, last_name, email,
+//  phone_number, status, email_verified). Tận dụng rawCustomer giữ raw response
+//  từ BE để pass đầy đủ + ổn định khi mapCustomerDetail thay đổi.
+const rawCustomer = ref(null)
+
+const handleEditDetails = () => {
+  if (!rawCustomer.value) return
+  showQuickEdit.value = true
+}
+
+const onQuickEditUpdated = () => {
+  // Luôn refetch detail sau khi modal emit 'updated' (user update info OR thêm
+  // address) — đảm bảo mọi field (status badge, tên header, defaultAddressText,
+  // loyalty tier, ...) đều đồng bộ. Đơn giản hơn merge manual nhiều field.
+  fetchCustomerDetail()
+}
 
 const mapCustomerDetail = (c) => {
   const loyalty = c.member_rank || { name_en: 'Standard', threshold: 0 }
+  const addr = c.default_address || null
+  // Build text 1 dòng cho address display trong QuickEdit drawer.
+  // Fallback hiển thị field nào có; format theo VN order: số nhà, phường, quận, tỉnh.
+  const addressParts = addr
+    ? [addr.line1, addr.line2, addr.full_address, addr.city, addr.country].filter(Boolean)
+    : []
+  // Ưu tiên full_address nếu BE đã build sẵn, otherwise concat line/city/country.
+  const addressText = addr?.full_address || (addressParts.length ? addressParts.join(', ') : null)
+
   return {
     id: c.id,
     customerCode: `#CUS${c.id}`,
     createdAt: c.member_since || c.created_at,
     name: c.full_name || c.name,
+    first_name: c.first_name,
+    last_name: c.last_name,
     email: c.email,
+    phone_number: c.phone || c.phone_number,
+    email_verified: typeof c.email_verified === 'boolean' ? c.email_verified : Boolean(c.email_verified_at),
     avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
     orders: c.orders || 0,
     totalSpent: c.total_spent || 0,
@@ -378,14 +418,17 @@ const mapCustomerDetail = (c) => {
     accountBalance: c.account_balance || 0,
     wishlistCount: c.wishlist_count || 0,
     couponCount: c.coupons_count || 0,
-    shippingAddress: c.default_address || {},
-    billingAddress: c.default_address || {},
+    shippingAddress: addr || {},
+    billingAddress: addr || {},
+    // Field dùng riêng cho QuickEdit drawer (xem template QuickEditCustomer.address section)
+    defaultAddressText: addressText,
   }
 }
 
 const fetchCustomerDetail = async () => {
   const res = await admin.fetchOne(`customers/${customerId.value}`)
   if (res?.data) {
+    rawCustomer.value = res.data
     customer.value = mapCustomerDetail(res.data)
   }
 }
