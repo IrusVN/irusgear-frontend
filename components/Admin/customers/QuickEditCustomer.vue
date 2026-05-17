@@ -238,34 +238,31 @@
     </template>
   </QuickView>
 
-  <!-- Nested QuickView: AddressForm cho admin thêm địa chỉ mới cho customer.
-       z-index +10 để stack trên drawer chính. Khi save → POST admin endpoint
-       → đóng nested → emit 'updated' để parent refetch + close cả drawer chính
-       (tuỳ thiết kế — hiện ta giữ drawer chính mở để admin tiếp tục edit). -->
-  <QuickView
+  <!-- Nested address picker: dùng UpdateAddress (component hoàn chỉnh có province/
+       district/ward picker + UI khớp design) ở chế độ controlled — pass `customer`
+       prop để component biết là admin đang tạo address cho người khác (không call
+       checkoutStore.saveAddress mặc định). Component sẽ emit `save` với payload
+       đã build sẵn — parent xử lý POST admin endpoint. z-index +10 để stack
+       trên drawer chính. -->
+  <UpdateAddress
+    ref="addressDrawerRef"
     v-model="showAddAddress"
-    :title="$t('admin.customers.quickEditAddAddress')"
-    :close-label="$t('common.close')"
+    :customer="props.customer"
+    :saving="addressSaving"
     :z-index="10040"
+    @save="onAddressFormSave"
     @close="onCloseAddAddress"
-  >
-    <AddressForm
-      :saving="addressSaving"
-      @save="onAddressFormSave"
-      @cancel="showAddAddress = false"
-    />
-  </QuickView>
+  />
 </template>
 
 <script setup>
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, useTemplateRef, watch } from 'vue'
 import { toast } from 'vue-sonner'
 import { useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
-import { useCheckoutStore } from '@/stores/checkoutStore'
 import QuickView from '@/components/Common/QuickView.vue'
 import QuickSelect from '@/components/Common/QuickSelect.vue'
-import AddressForm from '@/components/Checkout/AddressForm.vue'
+import UpdateAddress from '@/components/Profile/UpdateAddress.vue'
 
 const props = defineProps({
   modelValue: {
@@ -325,32 +322,24 @@ const showPasswordSection = ref(false)
 const showPasswordPlain = ref(false)
 
 // ── Add Address sub-drawer ──
-// Tái sử dụng AddressForm (vốn dùng trong checkout flow). AddressForm đọc state
-// từ checkoutStore.addressForm — ta reset store trước khi mở để admin không
-// thấy data dở dang từ checkout. Sau khi save (qua admin endpoint) → đóng drawer
-// + emit 'updated' để parent refetch customer (có thêm defaultAddressText).
-const checkoutStore = useCheckoutStore()
+// Dùng UpdateAddress.vue (component có sẵn đầy đủ province/district/ward picker
+// + UI nhất quán với profile). Truyền `customer` prop để switch sang controlled
+// mode — component chỉ emit `save`, parent (admin) POST tới admin endpoint thay
+// vì checkoutStore.saveAddress (vốn cho user tự sửa của mình).
 const showAddAddress = ref(false)
 const addressSaving = ref(false)
+const addressDrawerRef = useTemplateRef('addressDrawerRef') // dùng để gọi resetForm sau save
 
 const openAddAddress = () => {
-  // Reset state checkoutStore để admin form sạch (không pickup từ checkout flow).
-  if (typeof checkoutStore.resetAddressForm === 'function') {
-    checkoutStore.resetAddressForm()
-  }
-  // Pre-fill receiver từ customer info (tiện nhập)
-  if (props.customer) {
-    checkoutStore.addressForm.name = props.customer.name || ''
-    checkoutStore.addressForm.phone = props.customer.phone_number || props.customer.phone || ''
-  }
-  checkoutStore.editingAddressId = null
   showAddAddress.value = true
 }
 
 const onCloseAddAddress = () => {
-  // Cleanup khi user đóng (overlay click / ESC / cancel)
-  if (typeof checkoutStore.resetAddressForm === 'function') {
-    checkoutStore.resetAddressForm()
+  // UpdateAddress (controlled) không tự reset — đảm bảo lần mở sau form sạch.
+  // Tuy nhiên onOpen của UpdateAddress chỉ load provinces, không reset state cũ
+  // → ta gọi resetForm thông qua ref.
+  if (addressDrawerRef.value?.resetForm) {
+    addressDrawerRef.value.resetForm()
   }
 }
 
@@ -359,8 +348,8 @@ const onAddressFormSave = async (payload) => {
 
   addressSaving.value = true
   try {
-    // Transform shape AddressForm → shape BE StoreAddressRequest.
-    // AddressForm trả: { name, phone, province: {value,label}, district: {...}, ward: {...}, detail, label, isDefault }
+    // Transform shape UpdateAddress emit → shape BE StoreAddressRequest.
+    // UpdateAddress trả: { name, phone, province: {value,label}, district, ward, detail, label, isDefault }
     // BE expects: { name, phone, province_code, district_code, ward_code, address_line1, city, country, label, is_default }
     const apiPayload = {
       name: payload.name,
@@ -378,13 +367,11 @@ const onAddressFormSave = async (payload) => {
     await admin.create(`customers/${props.customer.id}/addresses`, apiPayload)
     toast.success(t('admin.customers.quickEditAddressCreated'))
 
-    // Đóng nested drawer + emit updated để parent refetch (sẽ thấy defaultAddressText
-    // mới ở address section khi user mở lại — hoặc nếu parent là [id].vue thì
-    // address card được hiển thị refresh ngay).
-    showAddAddress.value = false
-    if (typeof checkoutStore.resetAddressForm === 'function') {
-      checkoutStore.resetAddressForm()
+    // Reset form trong nested drawer + đóng drawer.
+    if (addressDrawerRef.value?.resetForm) {
+      addressDrawerRef.value.resetForm()
     }
+    showAddAddress.value = false
     emit('updated', null) // null → parent fetch lại từ BE
   } catch (error) {
     toast.error(

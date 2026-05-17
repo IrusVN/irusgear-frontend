@@ -254,6 +254,7 @@ import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import QuickEditCustomer from '@/components/Admin/customers/QuickEditCustomer.vue'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -330,20 +331,11 @@ const formatCompact = (n) => {
 }
 const formatDateShort = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-const statusLabel = (s) => ({
-  active: t('admin.status.active'),
-  inactive: t('admin.status.inactive'),
-  blocked: t('admin.status.blocked'),
-}[s] || s)
-const statusVariant = (s) => ({ active: 'success', inactive: 'neutral', blocked: 'danger' }[s] || 'neutral')
-const paymentLabel = (s) => ({
-  pending: t('admin.status.pending'),
-  paid: t('admin.status.paid'),
-  failed: t('admin.status.failed'),
-  cancelled: t('admin.status.cancelled'),
-  refunded: t('admin.status.refunded'),
-}[s] || s)
-const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
+const { formatUserStatus, formatPaymentStatus } = useStatusFormat()
+const statusLabel = (s) => formatUserStatus(s).label
+const statusVariant = (s) => formatUserStatus(s).variant
+const paymentLabel = (s) => formatPaymentStatus(s).label
+const paymentVariant = (s) => formatPaymentStatus(s).variant
 
 const { confirm } = useConfirm()
 const isDeleting = ref(false)

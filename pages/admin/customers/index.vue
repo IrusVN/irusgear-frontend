@@ -204,6 +204,7 @@ import { useMediaQuery } from '@/composables/useMediaQuery'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { exportToCsv } from '@/utils/exportCsv'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -290,17 +291,13 @@ const columns = computed(() => [
 
 const paginatedCustomers = computed(() => customers.value)
 
-// Map status code/text → badge label + variant.
-// BE có thể trả '0'/'1' (code), 'active'/'inactive' (text) hoặc enum object.
+// Status badge — dùng composable thống nhất (xem useStatusFormat).
+// formatUserStatus chấp nhận '0'..'3' (code), 'active'/'inactive'/'pending'/'banned' (text)
+// hoặc 'blocked' legacy → trả về { label, variant }.
+const { formatUserStatus } = useStatusFormat()
 const statusBadge = (status) => {
-  const v = status?.value ?? status
-  const key = String(v ?? '').toLowerCase()
-  // Code-based mapping (UserStatus enum: 0=INACTIVE, 1=ACTIVE, 2=PENDING, 3=BANNED)
-  if (key === '1' || key === 'active') return { label: t('admin.customers.statusActive'), variant: 'success' }
-  if (key === '0' || key === 'inactive') return { label: t('admin.customers.statusInactive'), variant: 'neutral' }
-  if (key === '2' || key === 'pending') return { label: t('admin.customers.statusPending'), variant: 'warning' }
-  if (key === '3' || key === 'banned') return { label: t('admin.customers.statusBanned'), variant: 'danger' }
-  return { label: '—', variant: 'neutral' }
+  const raw = status?.value ?? status
+  return formatUserStatus(raw)
 }
 
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)

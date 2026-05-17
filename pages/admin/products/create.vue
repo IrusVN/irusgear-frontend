@@ -200,6 +200,7 @@ import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import { toast } from 'vue-sonner'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -275,13 +276,9 @@ const validate = () => {
   return valid
 }
 
-const statusLabel = (s) => ({
-  publish: t('admin.products.published'),
-  scheduled: t('admin.products.scheduled'),
-  inactive: t('admin.products.inactive'),
-  draft: t('admin.products.draft'),
-}[s] || s)
-const statusVariant = (s) => ({ publish: 'success', scheduled: 'warning', inactive: 'danger', draft: 'neutral' }[s] || 'neutral')
+const { formatProductStatus } = useStatusFormat()
+const statusLabel = (s) => formatProductStatus(s).label
+const statusVariant = (s) => formatProductStatus(s).variant
 
 const triggerUpload = () => fileInput.value?.click()
 const handleFileSelect = (e) => {

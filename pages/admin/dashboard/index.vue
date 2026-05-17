@@ -322,6 +322,7 @@ import AdminBarChart from '@/components/Admin/charts/AdminBarChart.vue'
 import AdminLineChart from '@/components/Admin/charts/AdminLineChart.vue'
 import AdminDoughnutChart from '@/components/Admin/charts/AdminDoughnutChart.vue'
 import AdminSparkline from '@/components/Admin/charts/AdminSparkline.vue'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -499,8 +500,9 @@ const formatDate = (d) => {
   return dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 }
 
-const statusLabel = (s) => t(`admin.status.${s}`)
-const statusVariant = (s) => ({ pending: 'warning', paid: 'success', completed: 'success', delivered: 'success', delivering: 'info', processing: 'info', failed: 'danger', cancelled: 'neutral', refunded: 'neutral', returned: 'danger' }[s] || 'neutral')
+const { formatPaymentStatus } = useStatusFormat()
+const statusLabel = (s) => formatPaymentStatus(s).label
+const statusVariant = (s) => formatPaymentStatus(s).variant
 
 const statisticsMetrics = computed(() => [
   {

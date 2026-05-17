@@ -192,6 +192,7 @@ import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -276,25 +277,11 @@ const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency'
 const formatDateFull = (d) => new Date(d).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })
 const formatTimestamp = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 
-const paymentLabel = (s) => ({
-  pending: t('admin.status.pending'),
-  paid: t('admin.status.paid'),
-  failed: t('admin.status.failed'),
-  cancelled: t('admin.status.cancelled'),
-  refunded: t('admin.status.refunded'),
-}[s] || s)
-const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
-const fulfillmentLabel = (s) => ({
-  ready_to_pickup: t('admin.status.ready_to_pickup'),
-  out_for_delivery: t('admin.status.out_for_delivery'),
-  delivered: t('admin.status.delivered'),
-  dispatched: t('admin.status.dispatched'),
-  processing: t('admin.status.processing'),
-}[s] || s)
-const fulfillmentVariant = (s) => ({
-  ready_to_pickup: 'info', out_for_delivery: 'warning',
-  delivered: 'success', dispatched: 'neutral', processing: 'neutral',
-}[s] || 'neutral')
+const { formatPaymentStatus } = useStatusFormat()
+const paymentLabel = (s) => formatPaymentStatus(s).label
+const paymentVariant = (s) => formatPaymentStatus(s).variant
+const fulfillmentLabel = (s) => formatPaymentStatus(s).label
+const fulfillmentVariant = (s) => formatPaymentStatus(s).variant
 
 const paymentIcon = (m) => ({
   visa: 'bi-credit-card', mastercard: 'bi-credit-card-2-front',

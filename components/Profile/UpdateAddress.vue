@@ -535,23 +535,41 @@ const submitAddress = async () => {
     return;
   }
 
+  // Build payload chuẩn (province/district/ward giữ nguyên option object để parent
+  // tự transform theo BE API của họ — admin endpoint vs user endpoint expect khác).
+  const payload = {
+    name: isControlled.value
+      ? (props.customer?.name || form.reminderName.trim() || "Khách hàng")
+      : (receiverName.value || form.reminderName.trim() || "Khách hàng"),
+    phone: isControlled.value
+      ? (props.customer?.phone_number || props.customer?.phone || "").trim()
+      : receiverPhone.value,
+    province: form.province,
+    district: form.district,
+    ward: form.ward,
+    detail: form.detail.trim(),
+    label: form.label,
+    isDefault: form.isDefault,
+  };
+
+  // ── Controlled mode (admin tạo address cho customer khác) ──
+  // Parent chịu trách nhiệm POST. Component chỉ emit + chờ parent đóng drawer
+  // qua v-model. KHÔNG reset/close ở đây vì parent có thể giữ drawer mở khi
+  // request fail để user sửa.
+  if (isControlled.value) {
+    emit("save", payload);
+    return;
+  }
+
+  // ── Uncontrolled mode (user profile) ──
+  // Component tự call checkoutStore + show toast + close.
   if (!receiverPhone.value) {
     toast.error("Vui lòng cập nhật số điện thoại trước khi thêm địa chỉ.");
     return;
   }
 
   try {
-    await checkoutStore.saveAddress({
-      name: receiverName.value || form.reminderName.trim() || "Khách hàng",
-      phone: receiverPhone.value,
-      province: form.province,
-      district: form.district,
-      ward: form.ward,
-      detail: form.detail.trim(),
-      label: form.label,
-      isDefault: form.isDefault,
-    });
-
+    await checkoutStore.saveAddress(payload);
     toast.success("Thêm địa chỉ thành công.");
     emit("saved");
     resetForm();
@@ -594,6 +612,10 @@ onBeforeUnmount(() => {
     window.removeEventListener("keydown", onKeydown);
   }
 });
+
+// Expose `resetForm` để parent (controlled mode) có thể clear form sau khi save
+// thành công — vì component không tự reset khi controlled (parent kiểm soát flow).
+defineExpose({ resetForm });
 </script>
 
 <style scoped>

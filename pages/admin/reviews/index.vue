@@ -121,6 +121,7 @@ import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 import { toast } from 'vue-sonner'
 import { exportToCsv } from '@/utils/exportCsv'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -183,13 +184,9 @@ const columns = computed(() => [
 const paginatedReviews = computed(() => reviews.value)
 
 const formatDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-const statusLabel = (s) => ({
-  approved: t('admin.reviews.published'),
-  published: t('admin.reviews.published'),
-  pending: t('admin.reviews.pending'),
-  rejected: t('admin.reviews.rejected'),
-}[s] || s)
-const statusVariant = (s) => ({ approved: 'success', published: 'success', pending: 'warning', rejected: 'danger' }[s] || 'neutral')
+const { formatReviewStatus } = useStatusFormat()
+const statusLabel = (s) => formatReviewStatus(s).label
+const statusVariant = (s) => formatReviewStatus(s).variant
 
 const actionItems = (item) => {
   const items = [{ key: 'view', label: t('admin.reviews.viewDetails'), icon: 'bi-eye' }]
