@@ -34,7 +34,7 @@
           >
             <div class="message" :class="message.role === 'user' ? 'message-user' : 'message-bot'">
               <div class="message-content" v-html="renderMarkdown(message.content)"></div>
-              <small class="message-time text-muted">{{ formatTime(message.timestamp) }}</small>
+              <small class="message-time">{{ formatTime(message.timestamp) }}</small>
             </div>
 
             <!-- Product Cards -->
@@ -212,12 +212,23 @@ watch(() => chatbotStore.messages.length, () => {
   background: white;
 }
 
+.chat-input .form-control {
+  text-align: left;
+  direction: ltr;
+  unicode-bidi: plaintext;
+}
+
+.chat-input .form-control::placeholder {
+  text-align: left;
+}
+
 .message {
   display: inline-block;
   max-width: 80%;
   padding: 12px 16px;
   border-radius: 16px;
   word-wrap: break-word;
+  text-align: left;
 }
 
 .message-user {
@@ -241,10 +252,17 @@ watch(() => chatbotStore.messages.length, () => {
 .message-time {
   font-size: 0.75rem;
   opacity: 0.7;
+  display: block;
+  margin-top: 4px;
+}
+
+.message-bot .message-time {
+  color: #6c757d;
 }
 
 .message-user .message-time {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 1;
 }
 
 /* Product cards */
