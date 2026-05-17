@@ -315,6 +315,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useHead, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
+import { vietnamAddressApi } from '@/composables/useVietnamAddressApi'
 import AdminCard from '@/components/Admin/ui/AdminCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminBarChart from '@/components/Admin/charts/AdminBarChart.vue'
@@ -403,7 +404,32 @@ const fetchDashboard = async () => {
       }
     }
     if (res.data.orders_by_location) {
-      dashboardData.value.ordersByLocation = res.data.orders_by_location
+      // BE trả raw province_code (vd '79', 'HCM'). Resolve qua vietnamAddressApi
+      // (cache local, gọi 1 lần fetch /provinces.json) → tên tỉnh tiếng Việt.
+      // Đồng thời merge các entry trùng tỉnh (vd 'HCM' + '79' = TP HCM).
+      const resolved = await Promise.all(
+        res.data.orders_by_location.map(async (item) => {
+          const result = await vietnamAddressApi.resolveAddressCode({
+            province_code: item.location,
+          })
+          return {
+            ...item,
+            location: result?.province?.label || item.location,
+          }
+        }),
+      )
+
+      // Merge các entry cùng resolved label (HCM text + 79 code → cùng "TP Hồ Chí Minh")
+      const merged = {}
+      for (const item of resolved) {
+        if (!merged[item.location]) {
+          merged[item.location] = { location: item.location, orders_count: 0, revenue: 0 }
+        }
+        merged[item.location].orders_count += Number(item.orders_count || 0)
+        merged[item.location].revenue += Number(item.revenue || 0)
+      }
+      dashboardData.value.ordersByLocation = Object.values(merged)
+        .sort((a, b) => b.revenue - a.revenue)
     }
     if (res.data.sales_channels) {
       dashboardData.value.salesChannels = res.data.sales_channels
