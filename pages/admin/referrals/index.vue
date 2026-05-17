@@ -126,6 +126,8 @@ import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import { useI18n } from 'vue-i18n'
 import { toast } from 'vue-sonner'
+import { useConfirm } from '@/composables/useConfirm'
+import { exportToCsv } from '@/utils/exportCsv'
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 
@@ -223,7 +225,27 @@ const handleAction = async (action, item) => {
   }
 }
 
-const handleExport = () => toast.info(t('admin.referrals.exportReferrals'))
+const handleExport = () => {
+  if (!referrals.value.length) {
+    toast.warning(t('admin.referrals.noDataToExport'))
+    return
+  }
+  exportToCsv({
+    filename: 'referrals',
+    items: referrals.value,
+    columns: [
+      { key: 'id', label: 'ID' },
+      { key: 'referrerName', label: t('admin.referrals.referrer') },
+      { key: 'referrerEmail', label: 'Email' },
+      { key: 'referredName', label: t('admin.referrals.referred') },
+      { key: 'code', label: t('admin.referrals.code') },
+      { key: 'earning', label: t('admin.referrals.earning'), format: (v) => v ?? 0 },
+      { key: 'status', label: t('admin.referrals.statusLabel'), format: (v) => statusLabel(v) },
+      { key: 'createdAt', label: t('admin.referrals.date'), format: (v) => formatDate(v) },
+    ],
+  })
+  toast.success(t('admin.referrals.exportSuccess', { count: referrals.value.length }))
+}
 </script>
 
 <style scoped>

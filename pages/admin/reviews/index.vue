@@ -120,6 +120,7 @@ import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 import { toast } from 'vue-sonner'
+import { exportToCsv } from '@/utils/exportCsv'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -217,7 +218,26 @@ const handleAction = async (action, item) => {
   }
 }
 
-const handleExport = () => toast.info(t('admin.reviews.exportMock'))
+const handleExport = () => {
+  if (!reviews.value.length) {
+    toast.warning(t('admin.reviews.noDataToExport'))
+    return
+  }
+  exportToCsv({
+    filename: 'reviews',
+    items: reviews.value,
+    columns: [
+      { key: 'id', label: 'ID' },
+      { key: 'productName', label: t('admin.reviews.product') },
+      { key: 'customerName', label: t('admin.reviews.customer') },
+      { key: 'rating', label: t('admin.reviews.rating') },
+      { key: 'title', label: t('admin.reviews.review') },
+      { key: 'status', label: t('admin.reviews.status') },
+      { key: 'createdAt', label: t('admin.reviews.date') },
+    ],
+  })
+  toast.success(t('admin.reviews.exportSuccess', { count: reviews.value.length }))
+}
 
 const mapReview = (r) => ({
   id: r.id,
