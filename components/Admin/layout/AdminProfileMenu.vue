@@ -23,15 +23,15 @@
         <div class="profile-list">
           <NuxtLink v-if="false" class="profile-item" to="/admin/settings" @click="closeMenu">
             <i class="bi bi-person"></i>
-            <span>Profile</span>
+            <span>{{ $t('admin.profile.profile') }}</span>
           </NuxtLink>
           <NuxtLink class="profile-item" to="/admin/settings" @click="closeMenu">
             <i class="bi bi-gear"></i>
-            <span>Settings</span>
+            <span>{{ $t('admin.profile.settings') }}</span>
           </NuxtLink>
           <button class="profile-item" type="button" @click="closeMenu">
             <i class="bi bi-receipt"></i>
-            <span>Billing Plan</span>
+            <span>{{ $t('admin.profile.billingPlan') }}</span>
             <span class="profile-count">4</span>
           </button>
         </div>
@@ -39,16 +39,16 @@
         <div class="profile-list profile-list-bordered">
           <button class="profile-item" type="button" @click="closeMenu">
             <i class="bi bi-currency-dollar"></i>
-            <span>Pricing</span>
+            <span>{{ $t('admin.profile.pricing') }}</span>
           </button>
           <button class="profile-item" type="button" @click="closeMenu">
             <i class="bi bi-question-lg"></i>
-            <span>FAQ</span>
+            <span>{{ $t('admin.profile.faq') }}</span>
           </button>
         </div>
 
         <button class="logout-button" type="button" :disabled="auth.loading" @click="handleLogout">
-          <span>{{ auth.loading ? 'Logging out...' : 'Logout' }}</span>
+          <span>{{ auth.loading ? $t('admin.profile.loggingOut') : $t('admin.profile.logout') }}</span>
           <i class="bi bi-box-arrow-right"></i>
         </button>
       </div>
@@ -60,8 +60,9 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 import { useAdminStore } from '@/stores/adminStore'
-import { useRouter } from '#imports'
+import { useRouter, useI18n } from '#imports'
 
+const { t } = useI18n()
 const auth = useAuthStore()
 const adminStore = useAdminStore()
 const router = useRouter()
@@ -71,12 +72,12 @@ const menuRoot = ref(null)
 
 const displayName = computed(() => {
   const user = adminStore.adminUser || auth.user || {}
-  return user.name || user.full_name || user.email || 'Admin User'
+  return user.name || user.full_name || user.email || t('admin.profile.defaultName')
 })
 
 const roleLabel = computed(() => {
   const user = adminStore.adminUser || auth.user || {}
-  return user.role?.name || user.role || 'Admin'
+  return user.role?.name || user.role || t('admin.profile.defaultRole')
 })
 
 const initials = computed(() => {

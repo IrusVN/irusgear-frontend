@@ -3,15 +3,15 @@
     <!-- Header -->
     <div class="page-header">
       <div>
-        <h2 class="page-title">Analytics</h2>
-        <p class="page-sub">Store performance overview and insights</p>
+        <h2 class="page-title">{{ t('admin.analytics.title') }}</h2>
+        <p class="page-sub">{{ t('admin.analytics.subtitle') }}</p>
       </div>
       <div class="period-select">
         <select v-model="period" class="admin-control">
-          <option value="7d">Last 7 Days</option>
-          <option value="30d">Last 30 Days</option>
-          <option value="90d">Last 90 Days</option>
-          <option value="1y">Last Year</option>
+          <option value="7d">{{ t('admin.analytics.period7d') }}</option>
+          <option value="30d">{{ t('admin.analytics.period30d') }}</option>
+          <option value="90d">{{ t('admin.analytics.period90d') }}</option>
+          <option value="1y">{{ t('admin.analytics.period1y') }}</option>
         </select>
       </div>
     </div>
@@ -35,12 +35,12 @@
     <div class="charts-row">
       <!-- Revenue Trend -->
       <div class="admin-card-shell chart-card chart-card-wide">
-        <h3 class="card-title">Revenue Trend</h3>
+        <h3 class="card-title">{{ t('admin.analytics.revenueTrend') }}</h3>
         <canvas ref="revenueChart"></canvas>
       </div>
       <!-- Category Split -->
       <div class="admin-card-shell chart-card">
-        <h3 class="card-title">Sales by Category</h3>
+        <h3 class="card-title">{{ t('admin.analytics.salesByCategory') }}</h3>
         <canvas ref="categoryChart"></canvas>
       </div>
     </div>
@@ -49,7 +49,7 @@
     <div class="charts-row">
       <!-- Conversion Funnel -->
       <div class="admin-card-shell chart-card">
-        <h3 class="card-title">Conversion Funnel</h3>
+        <h3 class="card-title">{{ t('admin.analytics.conversionFunnel') }}</h3>
         <div class="funnel">
           <div v-for="(step, i) in funnelData" :key="step.label" class="funnel-step">
             <div class="funnel-bar-track">
@@ -65,26 +65,26 @@
       </div>
       <!-- Returning Customer Rate -->
       <div class="admin-card-shell chart-card">
-        <h3 class="card-title">Returning Customers</h3>
+        <h3 class="card-title">{{ t('admin.analytics.returningCustomers') }}</h3>
         <canvas ref="returningChart"></canvas>
         <div class="donut-legend">
-          <div class="legend-item"><span class="legend-dot" style="background:#6c63ff"></span> Returning ({{ returningData.returningRate }}%)</div>
-          <div class="legend-item"><span class="legend-dot" style="background:#d5d5da"></span> New ({{ returningData.newRate }}%)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#6c63ff"></span> {{ t('admin.analytics.returning') }} ({{ returningData.returningRate }}%)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#d5d5da"></span> {{ t('admin.analytics.newCustomer') }} ({{ returningData.newRate }}%)</div>
         </div>
       </div>
     </div>
 
     <!-- Top Products Table -->
     <div class="admin-card-shell section-card">
-      <h3 class="card-title">Top Performing Products</h3>
+      <h3 class="card-title">{{ t('admin.analytics.topProducts') }}</h3>
       <div class="mini-table-scroll">
         <table class="mini-table">
           <thead>
             <tr>
-              <th>Product</th>
-              <th style="text-align:center">Units Sold</th>
-              <th style="text-align:right">Revenue</th>
-              <th style="text-align:center">Conversion</th>
+              <th>{{ t('admin.analytics.product') }}</th>
+              <th style="text-align:center">{{ t('admin.analytics.unitsSold') }}</th>
+              <th style="text-align:right">{{ t('admin.analytics.revenue') }}</th>
+              <th style="text-align:center">{{ t('admin.analytics.conversion') }}</th>
             </tr>
           </thead>
           <tbody>

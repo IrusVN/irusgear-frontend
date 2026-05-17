@@ -7,7 +7,7 @@
         :key="ch.label"
         :label="ch.label"
         :value="formatCompact(ch.value)"
-        :meta="ch.orders.toLocaleString() + ' orders'"
+        :meta="ch.orders.toLocaleString() + ' ' + t('admin.products.ordersLabel')"
         :trend="ch.change !== 0 ? (ch.change > 0 ? '+' : '') + ch.change + '%' : ''"
         :trend-direction="ch.change > 0 ? 'up' : ch.change < 0 ? 'down' : 'neutral'"
         :icon="ch.icon"
@@ -19,29 +19,29 @@
     <div v-if="!isMobile" class="admin-card-shell filters-card">
       <div class="filters-grid">
         <label class="filter-group">
-          <span class="filter-label">Status</span>
+          <span class="filter-label">{{ $t('admin.products.filterStatusLabel') }}</span>
           <select v-model="statusFilter" class="admin-control filter-select" @change="resetPage">
-            <option value="all">All Status</option>
-            <option value="publish">Published</option>
-            <option value="scheduled">Scheduled</option>
-            <option value="inactive">Inactive</option>
-            <option value="draft">Draft</option>
+            <option value="all">{{ $t('admin.products.allStatus') }}</option>
+            <option value="publish">{{ $t('admin.products.published') }}</option>
+            <option value="scheduled">{{ $t('admin.products.scheduled') }}</option>
+            <option value="inactive">{{ $t('admin.products.inactive') }}</option>
+            <option value="draft">{{ $t('admin.products.draft') }}</option>
           </select>
         </label>
         <label class="filter-group">
-          <span class="filter-label">Category</span>
+          <span class="filter-label">{{ $t('admin.products.filterCategoryLabel') }}</span>
           <select v-model="categoryFilter" class="admin-control filter-select" @change="resetPage">
-            <option value="all">All Categories</option>
+            <option value="all">{{ $t('admin.products.allCategories') }}</option>
             <option v-for="cat in categories" :key="cat.id" :value="cat.name">{{ cat.name }}</option>
           </select>
         </label>
         <label class="filter-group">
-          <span class="filter-label">Stock</span>
+          <span class="filter-label">{{ $t('admin.products.filterStockLabel') }}</span>
           <select v-model="stockFilter" class="admin-control filter-select" @change="resetPage">
-            <option value="all">All Stock</option>
-            <option value="in_stock">In Stock</option>
-            <option value="low_stock">Low Stock</option>
-            <option value="out_of_stock">Out of Stock</option>
+            <option value="all">{{ $t('admin.products.allStock') }}</option>
+            <option value="in_stock">{{ $t('admin.products.inStock') }}</option>
+            <option value="low_stock">{{ $t('admin.products.lowStock') }}</option>
+            <option value="out_of_stock">{{ $t('admin.products.outOfStock') }}</option>
           </select>
         </label>
       </div>
@@ -61,7 +61,7 @@
         <AdminTableToolbar
           :search="search"
           :page-size="pageSize"
-          search-placeholder="Search Product"
+          :search-placeholder="$t('admin.products.searchProduct')"
           @update:search="search = $event; resetPage()"
           @update:page-size="pageSize = $event; resetPage()"
           @export="handleExport"
@@ -69,7 +69,7 @@
           <template #actions>
             <nuxt-link to="/admin/products/create" class="admin-primary-button">
               <i class="bi bi-plus-lg"></i>
-              <span>Add Product</span>
+              <span>{{ $t('admin.products.addProduct') }}</span>
             </nuxt-link>
           </template>
         </AdminTableToolbar>
@@ -120,14 +120,14 @@
 
       <template #actions="{ item }">
         <div class="action-buttons">
-          <nuxt-link :to="`/admin/products/${item.id}/edit`" class="admin-icon-button" title="Edit" @click.stop>
+          <nuxt-link :to="`/admin/products/${item.id}/edit`" class="admin-icon-button" :title="$t('admin.products.edit')" @click.stop>
             <i class="bi bi-pencil"></i>
           </nuxt-link>
           <AdminActionMenu
             :items="[
-              { key: 'view', label: 'View', icon: 'bi-eye' },
-              { key: 'duplicate', label: 'Duplicate', icon: 'bi-copy' },
-              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+              { key: 'view', label: t('admin.products.view'), icon: 'bi-eye' },
+              { key: 'duplicate', label: t('admin.products.duplicate'), icon: 'bi-copy' },
+              { key: 'delete', label: t('admin.products.delete'), icon: 'bi-trash', variant: 'danger' },
             ]"
             @select="handleAction($event, item)"
           />
@@ -149,7 +149,7 @@
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
         <label style="flex:1;position:relative">
           <i class="bi bi-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--admin-muted)"></i>
-          <input class="admin-control" v-model="search" placeholder="Search Product" style="padding-left:36px;width:100%" @input="resetPage">
+          <input class="admin-control" v-model="search" :placeholder="$t('admin.products.searchProduct')" style="padding-left:36px;width:100%" @input="resetPage">
         </label>
         <AdminMobileFilterSheet
           :filters="mobileFilters"
@@ -165,9 +165,9 @@
         :subtitle="item.vendor"
         :avatar="item.image"
         :meta="[
-          { label: 'Price', value: formatCurrency(item.price) },
-          { label: 'Qty', value: String(item.quantity), class: qtyClass(item) },
-          { label: 'SKU', value: item.sku },
+          { label: t('admin.products.price'), value: formatCurrency(item.price) },
+          { label: t('admin.products.qty'), value: String(item.quantity), class: qtyClass(item) },
+          { label: t('admin.products.sku'), value: item.sku },
         ]"
         @click="navigateToEdit(item)"
       >
@@ -177,16 +177,16 @@
         <template #actions>
           <AdminActionMenu
             :items="[
-              { key: 'view', label: 'View', icon: 'bi-eye' },
-              { key: 'duplicate', label: 'Duplicate', icon: 'bi-copy' },
-              { key: 'delete', label: 'Delete', icon: 'bi-trash', variant: 'danger' },
+              { key: 'view', label: t('admin.products.view'), icon: 'bi-eye' },
+              { key: 'duplicate', label: t('admin.products.duplicate'), icon: 'bi-copy' },
+              { key: 'delete', label: t('admin.products.delete'), icon: 'bi-trash', variant: 'danger' },
             ]"
             @select="handleAction($event, item)"
           />
         </template>
       </AdminMobileCard>
       <div v-if="totalProducts > pageSize" style="text-align:center;padding:8px">
-        <button v-if="page * pageSize < totalProducts" class="admin-secondary-button" @click="page++; loadProducts()">Load More</button>
+        <button v-if="page * pageSize < totalProducts" class="admin-secondary-button" @click="page++; loadProducts()">{{ $t('admin.products.loadMore') }}</button>
       </div>
     </div>
   </div>
@@ -194,7 +194,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useHead, useRouter } from '#imports'
+import { useHead, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import { useUiStore } from '@/stores/uiStore'
@@ -208,10 +208,11 @@ import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import AdminMobileFilterSheet from '@/components/Admin/ui/AdminMobileFilterSheet.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 
+const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
 
 definePageMeta({ layout: 'admin' })
-useHead({ title: 'Products – IrusGear Admin' })
+useHead({ title: () => t('admin.products.headTitle') })
 
 const router = useRouter()
 const admin = useAdminStore()
@@ -288,10 +289,10 @@ const loadSalesStats = async () => {
   const res = await admin.fetchOne('products/stats')
   if (res?.data) {
     salesChannels.value = [
-      { label: 'Total Products', value: res.data.total_products ?? 0, orders: res.data.active_products ?? 0, change: 0, icon: 'bi-box-seam', variant: 'primary' },
-      { label: 'Active', value: res.data.active_products ?? 0, orders: 0, change: 0, icon: 'bi-check-circle', variant: 'success' },
-      { label: 'Low Stock', value: res.data.low_stock ?? 0, orders: 0, change: 0, icon: 'bi-exclamation-triangle', variant: 'warning' },
-      { label: 'Out of Stock', value: res.data.out_of_stock ?? 0, orders: 0, change: 0, icon: 'bi-x-circle', variant: 'danger' },
+      { label: t('admin.products.totalProducts'), value: res.data.total_products ?? 0, orders: res.data.active_products ?? 0, change: 0, icon: 'bi-box-seam', variant: 'primary' },
+      { label: t('admin.products.active'), value: res.data.active_products ?? 0, orders: 0, change: 0, icon: 'bi-check-circle', variant: 'success' },
+      { label: t('admin.products.lowStock'), value: res.data.low_stock ?? 0, orders: 0, change: 0, icon: 'bi-exclamation-triangle', variant: 'warning' },
+      { label: t('admin.products.outOfStock'), value: res.data.out_of_stock ?? 0, orders: 0, change: 0, icon: 'bi-x-circle', variant: 'danger' },
     ]
   }
 }
@@ -325,27 +326,27 @@ watch(search, () => {
 /* ── mobile filters ── */
 const mobileFilters = computed(() => [
   {
-    key: 'status', label: 'Status', value: statusFilter.value, defaultValue: 'all',
+    key: 'status', label: t('admin.products.filterStatusLabel'), value: statusFilter.value, defaultValue: 'all',
     options: [
-      { value: 'all', label: 'All Status' },
-      { value: 'publish', label: 'Published' },
-      { value: 'inactive', label: 'Inactive' },
+      { value: 'all', label: t('admin.products.allStatus') },
+      { value: 'publish', label: t('admin.products.published') },
+      { value: 'inactive', label: t('admin.products.inactive') },
     ],
   },
   {
-    key: 'category', label: 'Category', value: categoryFilter.value, defaultValue: 'all',
+    key: 'category', label: t('admin.products.filterCategoryLabel'), value: categoryFilter.value, defaultValue: 'all',
     options: [
-      { value: 'all', label: 'All Categories' },
+      { value: 'all', label: t('admin.products.allCategories') },
       ...categories.value.map(c => ({ value: c.name, label: c.name })),
     ],
   },
   {
-    key: 'stock', label: 'Stock', value: stockFilter.value, defaultValue: 'all',
+    key: 'stock', label: t('admin.products.filterStockLabel'), value: stockFilter.value, defaultValue: 'all',
     options: [
-      { value: 'all', label: 'All Stock' },
-      { value: 'in_stock', label: 'In Stock' },
-      { value: 'low_stock', label: 'Low Stock' },
-      { value: 'out_of_stock', label: 'Out of Stock' },
+      { value: 'all', label: t('admin.products.allStock') },
+      { value: 'in_stock', label: t('admin.products.inStock') },
+      { value: 'low_stock', label: t('admin.products.lowStock') },
+      { value: 'out_of_stock', label: t('admin.products.outOfStock') },
     ],
   },
 ])
@@ -365,15 +366,15 @@ const handleFilterReset = () => {
 }
 
 /* ── columns ── */
-const columns = [
-  { key: 'name', label: 'Product', width: '28%' },
-  { key: 'categoryName', label: 'Category' },
-  { key: 'stockEnabled', label: 'Stock', width: '80px', align: 'center' },
-  { key: 'sku', label: 'SKU' },
-  { key: 'price', label: 'Price' },
-  { key: 'quantity', label: 'Qty', width: '70px', align: 'center' },
-  { key: 'status', label: 'Status' },
-]
+const columns = computed(() => [
+  { key: 'name', label: t('admin.products.product'), width: '28%' },
+  { key: 'categoryName', label: t('admin.products.category') },
+  { key: 'stockEnabled', label: t('admin.products.stock'), width: '80px', align: 'center' },
+  { key: 'sku', label: t('admin.products.sku') },
+  { key: 'price', label: t('admin.products.price') },
+  { key: 'quantity', label: t('admin.products.qty'), width: '70px', align: 'center' },
+  { key: 'status', label: t('admin.products.status') },
+])
 
 /* ── helpers ── */
 const formatCompact = (n) => {
@@ -385,7 +386,12 @@ const formatCompact = (n) => {
 
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
-const statusLabel = (s) => ({ publish: 'Published', scheduled: 'Scheduled', inactive: 'Inactive', draft: 'Draft' }[s] || s)
+const statusLabel = (s) => ({
+  publish: t('admin.products.published'),
+  scheduled: t('admin.products.scheduled'),
+  inactive: t('admin.products.inactive'),
+  draft: t('admin.products.draft'),
+}[s] || s)
 const statusVariant = (s) => ({ publish: 'success', scheduled: 'warning', inactive: 'danger', draft: 'neutral' }[s] || 'neutral')
 
 const qtyClass = (item) => {
@@ -404,18 +410,18 @@ const toggleStock = async (item) => {
 }
 
 const navigateToEdit = (item) => router.push(`/admin/products/${item.id}/edit`)
-const handleExport = () => alert('Export triggered')
+const handleExport = () => alert(t('admin.products.exportTriggered'))
 const handleAction = async (action, item) => {
   if (action.key === 'delete') {
-    if (!confirm(`Delete product "${item.name}"?`)) return
+    if (!confirm(t('admin.products.deleteConfirm', { name: item.name }))) return
     try {
       await admin.remove('products', item.id)
       loadProducts()
     } catch (e) {
-      alert(`Delete failed: ${e.message}`)
+      alert(t('admin.products.deleteFailed', { message: e.message }))
     }
   } else if (action.key === 'duplicate') {
-    alert(`Duplicate product #${item.id}`)
+    alert(t('admin.products.duplicateAction', { id: item.id }))
   } else {
     router.push(`/admin/products/${item.id}/edit`)
   }
