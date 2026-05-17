@@ -112,6 +112,57 @@
         <button v-if="page * pageSize < totalCustomers" class="admin-secondary-button" @click="changePage(page + 1)">{{ $t('admin.customers.loadMore') }}</button>
       </div>
     </div>
+
+    <!-- Add Customer Modal -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div v-if="showAddModal" class="customer-modal-overlay" @click.self="closeAddModal">
+          <div class="customer-modal">
+            <div class="customer-modal__header">
+              <h3>{{ $t('admin.customers.addCustomer') }}</h3>
+              <button type="button" class="customer-modal__close" @click="closeAddModal">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+            <form class="customer-modal__body" @submit.prevent="submitAddCustomer">
+              <div class="field-grid">
+                <label class="field">
+                  <span>{{ $t('common.firstName') }} <em>*</em></span>
+                  <input v-model="addForm.first_name" class="admin-control" required maxlength="50">
+                </label>
+                <label class="field">
+                  <span>{{ $t('common.lastName') }} <em>*</em></span>
+                  <input v-model="addForm.last_name" class="admin-control" required maxlength="50">
+                </label>
+              </div>
+              <label class="field">
+                <span>Email <em>*</em></span>
+                <input v-model="addForm.email" type="email" class="admin-control" required>
+              </label>
+              <label class="field">
+                <span>{{ $t('common.phoneNumber') }}</span>
+                <input v-model="addForm.phone_number" class="admin-control" maxlength="20">
+              </label>
+              <label class="field">
+                <span>{{ $t('common.password') }} <em>*</em></span>
+                <input v-model="addForm.password" type="password" class="admin-control" required minlength="8" autocomplete="new-password">
+                <small class="field-hint">{{ $t('admin.customers.passwordHint') }}</small>
+              </label>
+              <div class="customer-modal__footer">
+                <button type="button" class="admin-secondary-button" @click="closeAddModal" :disabled="submittingAdd">
+                  {{ $t('common.cancel') }}
+                </button>
+                <button type="submit" class="admin-primary-button" :disabled="submittingAdd">
+                  <span v-if="submittingAdd" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <i v-else class="bi bi-plus-lg"></i>
+                  {{ submittingAdd ? $t('common.loading') : $t('admin.customers.addCustomer') }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -126,6 +177,9 @@ import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
+import { toast } from 'vue-sonner'
+import { useConfirm } from '@/composables/useConfirm'
+import { exportToCsv } from '@/utils/exportCsv'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -145,6 +199,41 @@ const totalCustomers = computed(() => pagination.total)
 
 const selectedIds = ref([])
 const customers = ref([])
+
+/* ── Add Customer Modal ── */
+const showAddModal = ref(false)
+const submittingAdd = ref(false)
+const addForm = ref({ first_name: '', last_name: '', email: '', phone_number: '', password: '' })
+const resetAddForm = () => {
+  addForm.value = { first_name: '', last_name: '', email: '', phone_number: '', password: '' }
+}
+const closeAddModal = () => {
+  showAddModal.value = false
+  resetAddForm()
+}
+const submitAddCustomer = async () => {
+  submittingAdd.value = true
+  try {
+    const payload = {
+      first_name: addForm.value.first_name.trim(),
+      last_name: addForm.value.last_name.trim(),
+      name: `${addForm.value.first_name} ${addForm.value.last_name}`.trim(),
+      email: addForm.value.email.trim().toLowerCase(),
+      phone_number: addForm.value.phone_number.trim() || null,
+      password: addForm.value.password,
+      role_id: 3, // CUSTOMER role
+    }
+    await admin.create('users', payload)
+    toast.success(t('admin.customers.addSuccess'))
+    closeAddModal()
+    fetchCustomers()
+  } catch (e) {
+    const msg = e?.data?.message || e?.message || t('admin.customers.addFailed')
+    toast.error(msg)
+  } finally {
+    submittingAdd.value = false
+  }
+}
 
 const handleSearch = (val) => {
   search.value = val
@@ -179,18 +268,51 @@ const paginatedCustomers = computed(() => customers.value)
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
 const viewCustomer = (item) => router.push(`/admin/customers/${item.id}`)
-const handleExport = () => alert(t('admin.customers.exportMock'))
-const handleAdd = () => alert(t('admin.customers.addMock'))
+
+const handleExport = () => {
+  if (!customers.value.length) {
+    toast.warning(t('admin.customers.noDataToExport'))
+    return
+  }
+  exportToCsv({
+    filename: 'customers',
+    items: customers.value,
+    columns: [
+      { key: 'customerCode', label: t('admin.customers.customerId') },
+      { key: 'name', label: t('admin.customers.title').replace(/s$/i, '') },
+      { key: 'email', label: 'Email' },
+      { key: 'country', label: t('admin.customers.country') },
+      { key: 'orders', label: t('admin.customers.totalOrders') },
+      { key: 'totalSpent', label: t('admin.customers.totalSpent'), format: (v) => v ?? 0 },
+    ],
+  })
+  toast.success(t('admin.customers.exportSuccess', { count: customers.value.length }))
+}
+
+const handleAdd = () => {
+  showAddModal.value = true
+}
+
+const { confirm } = useConfirm()
+const deletingIds = ref(new Set())
+
 const handleAction = async (action, item) => {
   if (action.key === 'delete') {
-    if (confirm(t('admin.customers.confirmDelete', { code: item.customerCode }))) {
-      try {
-        await admin.remove('customers', item.id)
-        alert(t('admin.customers.deleteSuccess'))
-        fetchCustomers()
-      } catch (e) {
-        alert(t('admin.customers.deleteFailed', { error: e.message }))
-      }
+    if (deletingIds.value.has(item.id)) return
+    const ok = await confirm({
+      message: t('admin.customers.confirmDelete', { code: item.customerCode }),
+      variant: 'danger',
+    })
+    if (!ok) return
+    deletingIds.value.add(item.id)
+    try {
+      await admin.remove('customers', item.id)
+      toast.success(t('admin.customers.deleteSuccess'))
+      fetchCustomers()
+    } catch (e) {
+      toast.error(t('admin.customers.deleteFailed', { error: e.message }))
+    } finally {
+      deletingIds.value.delete(item.id)
     }
   }
   else router.push(`/admin/customers/${item.id}`)
@@ -238,4 +360,47 @@ onMounted(() => {
 
 .country-cell { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--admin-text); white-space: nowrap; }
 .country-flag { width: 20px; height: 15px; border-radius: 2px; object-fit: cover; }
+
+/* Add Customer Modal */
+.customer-modal-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(17, 17, 22, 0.55); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.customer-modal {
+  background: var(--admin-surface); border-radius: var(--admin-radius);
+  width: 100%; max-width: 480px; max-height: calc(100vh - 40px); overflow: auto;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+}
+.customer-modal__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px; border-bottom: 1px solid var(--admin-border);
+}
+.customer-modal__header h3 { margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--admin-text); }
+.customer-modal__close {
+  width: 36px; height: 36px; border: 0; border-radius: 8px;
+  background: var(--admin-surface-soft); color: var(--admin-text);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.customer-modal__close:hover { background: var(--admin-border); }
+.customer-modal__body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field span { font-size: 0.82rem; font-weight: 600; color: var(--admin-text); }
+.field span em { color: var(--admin-danger); font-style: normal; }
+.field-hint { font-size: 0.75rem; color: var(--admin-muted); margin-top: 2px; }
+.customer-modal__footer {
+  display: flex; gap: 12px; justify-content: flex-end; margin-top: 8px;
+  padding-top: 16px; border-top: 1px solid var(--admin-border);
+}
+.customer-modal__footer button[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+.modal-enter-active, .modal-leave-active { transition: opacity 0.18s ease; }
+.modal-enter-active .customer-modal, .modal-leave-active .customer-modal { transition: transform 0.22s ease, opacity 0.18s ease; }
+.modal-enter-from, .modal-leave-to { opacity: 0; }
+.modal-enter-from .customer-modal, .modal-leave-to .customer-modal { transform: translateY(20px); opacity: 0; }
+
+@media (max-width: 575px) {
+  .field-grid { grid-template-columns: 1fr; }
+}
 </style>

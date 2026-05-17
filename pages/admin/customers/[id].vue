@@ -17,8 +17,10 @@
             <p class="page-sub">{{ $t('admin.customers.memberSince') }} {{ formatDateShort(customer.createdAt) }}</p>
           </div>
         </div>
-        <button class="admin-danger-button" type="button" @click="handleDelete">
-          <i class="bi bi-trash"></i> {{ $t('admin.customers.deleteCustomer') }}
+        <button class="admin-danger-button" type="button" :disabled="isDeleting" @click="handleDelete">
+          <span v-if="isDeleting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <i v-else class="bi bi-trash"></i>
+          {{ isDeleting ? $t('common.loading') : $t('admin.customers.deleteCustomer') }}
         </button>
       </div>
 
@@ -241,6 +243,8 @@ import { ref, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import { toast } from 'vue-sonner'
+import { useConfirm } from '@/composables/useConfirm'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -332,18 +336,27 @@ const paymentLabel = (s) => ({
 }[s] || s)
 const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
 
+const { confirm } = useConfirm()
+const isDeleting = ref(false)
 const handleDelete = async () => {
-  if (confirm(t('admin.customers.confirmDelete', { code: customer.value?.customerCode }))) {
-    try {
-      await admin.remove('customers', customerId.value)
-      alert(t('admin.customers.deleteSuccess'))
-      router.push('/admin/customers')
-    } catch (e) {
-      alert(t('admin.customers.deleteFailed', { msg: e.message }))
-    }
+  if (isDeleting.value) return
+  const ok = await confirm({
+    message: t('admin.customers.confirmDelete', { code: customer.value?.customerCode }),
+    variant: 'danger',
+  })
+  if (!ok) return
+  isDeleting.value = true
+  try {
+    await admin.remove('customers', customerId.value)
+    toast.success(t('admin.customers.deleteSuccess'))
+    router.push('/admin/customers')
+  } catch (e) {
+    toast.error(t('admin.customers.deleteFailed', { msg: e.message }))
+  } finally {
+    isDeleting.value = false
   }
 }
-const handleEditDetails = () => alert(t('admin.customers.editDetailsMock'))
+const handleEditDetails = () => toast.info(t('admin.customers.editDetailsMock'))
 
 const mapCustomerDetail = (c) => {
   const loyalty = c.member_rank || { name_en: 'Standard', threshold: 0 }

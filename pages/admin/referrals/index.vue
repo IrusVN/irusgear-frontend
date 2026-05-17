@@ -125,6 +125,9 @@ import { useMediaQuery } from '@/composables/useMediaQuery'
 import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import { useI18n } from 'vue-i18n'
+import { toast } from 'vue-sonner'
+import { useConfirm } from '@/composables/useConfirm'
+import { exportToCsv } from '@/utils/exportCsv'
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 
@@ -208,21 +211,53 @@ watch([page, pageSize, search], () => {
   fetchReferrals()
 })
 
+const { confirm } = useConfirm()
+const revokingIds = ref(new Set())
+
 const handleAction = async (action, item) => {
   if (action.key === 'revoke') {
-    if (confirm(t('admin.referrals.confirmRevoke'))) {
+    if (revokingIds.value.has(item.id)) return
+    const ok = await confirm({
+      message: t('admin.referrals.confirmRevoke'),
+      variant: 'danger',
+    })
+    if (!ok) return
+    revokingIds.value.add(item.id)
+    try {
       const res = await adminStore.patch(`referrals/${item.id}/status`, { status: 'cancelled' })
       if (res) {
         fetchReferrals()
         fetchStats()
       }
+    } finally {
+      revokingIds.value.delete(item.id)
     }
   } else {
-    alert(t('admin.referrals.actionMock', { label: action.label, id: item.id }))
+    toast.info(t('admin.referrals.actionMock', { label: action.label, id: item.id }))
   }
 }
 
-const handleExport = () => alert(t('admin.referrals.exportReferrals'))
+const handleExport = () => {
+  if (!referrals.value.length) {
+    toast.warning(t('admin.referrals.noDataToExport'))
+    return
+  }
+  exportToCsv({
+    filename: 'referrals',
+    items: referrals.value,
+    columns: [
+      { key: 'id', label: 'ID' },
+      { key: 'referrerName', label: t('admin.referrals.referrer') },
+      { key: 'referrerEmail', label: 'Email' },
+      { key: 'referredName', label: t('admin.referrals.referred') },
+      { key: 'code', label: t('admin.referrals.code') },
+      { key: 'earning', label: t('admin.referrals.earning'), format: (v) => v ?? 0 },
+      { key: 'status', label: t('admin.referrals.statusLabel'), format: (v) => statusLabel(v) },
+      { key: 'createdAt', label: t('admin.referrals.date'), format: (v) => formatDate(v) },
+    ],
+  })
+  toast.success(t('admin.referrals.exportSuccess', { count: referrals.value.length }))
+}
 </script>
 
 <style scoped>

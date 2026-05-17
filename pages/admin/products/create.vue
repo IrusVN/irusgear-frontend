@@ -12,10 +12,15 @@
         </div>
       </div>
       <div class="header-actions">
-        <button class="admin-secondary-button" type="button" @click="handleDiscard">{{ $t('admin.products.discard') }}</button>
-        <button class="admin-secondary-button" type="button" @click="handleSaveDraft">{{ $t('admin.products.saveDraft') }}</button>
-        <button class="admin-primary-button" type="button" @click="handlePublish">
-          <i class="bi bi-check-lg"></i> {{ $t('admin.products.publishProduct') }}
+        <button class="admin-secondary-button" type="button" :disabled="isPublishing || isSavingDraft" @click="handleDiscard">{{ $t('admin.products.discard') }}</button>
+        <button class="admin-secondary-button" type="button" :disabled="isPublishing || isSavingDraft" @click="handleSaveDraft">
+          <span v-if="isSavingDraft" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ isSavingDraft ? $t('common.loading') : $t('admin.products.saveDraft') }}
+        </button>
+        <button class="admin-primary-button" type="button" :disabled="isPublishing || isSavingDraft" @click="handlePublish">
+          <span v-if="isPublishing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <i v-else class="bi bi-check-lg"></i>
+          {{ isPublishing ? $t('common.loading') : $t('admin.products.publishProduct') }}
         </button>
       </div>
     </div>
@@ -190,21 +195,25 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-import { useHead, useRouter, useI18n } from '#imports'
+import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import { toast } from 'vue-sonner'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
 useHead({ title: () => t('admin.products.headTitleAdd') })
 
 const router = useRouter()
+const route = useRoute()
 const admin = useAdminStore()
 const ui = useUiStore()
 
 const categories = ref([])
 const fileInput = ref(null)
+const isPublishing = ref(false)
+const isSavingDraft = ref(false)
 
 const form = reactive({
   name: '',
@@ -224,11 +233,32 @@ const form = reactive({
 
 const errors = reactive({ name: '', sku: '', price: '' })
 
-/* ── Load categories from API ── */
+/* ── Load categories from API + optional duplicate source ── */
 onMounted(async () => {
-  const res = await admin.fetchList('categories', { per_page: 100 })
-  if (res?.data) {
-    categories.value = res.data.map(c => ({ id: c.id, name: c.name }))
+  const [catsRes, dupSource] = await Promise.all([
+    admin.fetchList('categories', { per_page: 100 }),
+    route.query.duplicate ? admin.fetchOne(`products/${route.query.duplicate}`) : Promise.resolve(null),
+  ])
+
+  if (catsRes?.data) {
+    categories.value = catsRes.data.map(c => ({ id: c.id, name: c.name }))
+  }
+
+  // Pre-fill form when duplicating an existing product
+  if (dupSource?.data) {
+    const src = dupSource.data
+    form.name = src.name ? `${src.name} (Copy)` : ''
+    form.slug = '' // force re-generate to avoid slug clash
+    form.sku = src.sku ? `${src.sku}-COPY` : ''
+    form.description = src.description || ''
+    form.price = src.price || null
+    form.compareAtPrice = src.original_price || null
+    form.quantity = 0 // start fresh stock — duplicates shouldn't inherit inventory
+    form.categoryId = src.category_id || 0
+    form.featured = false
+    form.status = 'draft'
+    form.images = Array.isArray(src.images) ? src.images.map(i => i.image || i.url).filter(Boolean) : []
+    toast.info(t('admin.products.duplicatePrefilled'))
   }
 })
 
@@ -280,21 +310,27 @@ const buildPayload = (publishStatus) => ({
 })
 
 const handlePublish = async () => {
-  if (!validate()) return
+  if (!validate() || isPublishing.value || isSavingDraft.value) return
+  isPublishing.value = true
   try {
     await admin.create('products', buildPayload('publish'))
     router.push('/admin/products')
   } catch (e) {
-    alert(t('admin.products.publishFailed', { message: e.message }))
+    toast.error(t('admin.products.publishFailed', { message: e.message }))
+  } finally {
+    isPublishing.value = false
   }
 }
 const handleSaveDraft = async () => {
-  if (!validate()) return
+  if (!validate() || isPublishing.value || isSavingDraft.value) return
+  isSavingDraft.value = true
   try {
     await admin.create('products', buildPayload('draft'))
     router.push('/admin/products')
   } catch (e) {
-    alert(t('admin.products.saveDraftFailed', { message: e.message }))
+    toast.error(t('admin.products.saveDraftFailed', { message: e.message }))
+  } finally {
+    isSavingDraft.value = false
   }
 }
 const handleDiscard = () => router.push('/admin/products')

@@ -21,12 +21,16 @@
           </div>
         </div>
         <div class="header-actions">
-          <button class="admin-danger-button" type="button" @click="handleDelete">
-            <i class="bi bi-trash"></i> {{ $t('admin.products.delete') }}
+          <button class="admin-danger-button" type="button" :disabled="isDeleting || isSaving" @click="handleDelete">
+            <span v-if="isDeleting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <i v-else class="bi bi-trash"></i>
+            {{ isDeleting ? $t('common.loading') : $t('admin.products.delete') }}
           </button>
-          <button class="admin-secondary-button" type="button" @click="handleDiscard">{{ $t('admin.products.discard') }}</button>
-          <button class="admin-primary-button" type="button" @click="handleSave">
-            <i class="bi bi-check-lg"></i> {{ $t('admin.products.saveChanges') }}
+          <button class="admin-secondary-button" type="button" :disabled="isDeleting || isSaving" @click="handleDiscard">{{ $t('admin.products.discard') }}</button>
+          <button class="admin-primary-button" type="button" :disabled="isDeleting || isSaving" @click="handleSave">
+            <span v-if="isSaving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <i v-else class="bi bi-check-lg"></i>
+            {{ isSaving ? $t('common.loading') : $t('admin.products.saveChanges') }}
           </button>
         </div>
       </div>
@@ -206,6 +210,8 @@ import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import { toast } from 'vue-sonner'
+import { useConfirm } from '@/composables/useConfirm'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -302,8 +308,13 @@ const handleFileSelect = (e) => { for (const file of e.target.files) form.images
 const handleDrop = (e) => { for (const file of e.dataTransfer.files) { if (file.type.startsWith('image/')) form.images.push(URL.createObjectURL(file)) } }
 const removeImage = (idx) => form.images.splice(idx, 1)
 
+const { confirm } = useConfirm()
+const isSaving = ref(false)
+const isDeleting = ref(false)
+
 const handleSave = async () => {
-  if (!validate()) return
+  if (!validate() || isSaving.value) return
+  isSaving.value = true
   try {
     await admin.update('products', productId.value, {
       name: form.name,
@@ -316,16 +327,26 @@ const handleSave = async () => {
     })
     router.push('/admin/products')
   } catch (e) {
-    alert(t('admin.products.saveFailed', { message: e.message }))
+    toast.error(t('admin.products.saveFailed', { message: e.message }))
+  } finally {
+    isSaving.value = false
   }
 }
 const handleDelete = async () => {
-  if (!confirm(t('admin.products.deleteConfirmEdit', { name: form.name }))) return
+  if (isDeleting.value) return
+  const ok = await confirm({
+    message: t('admin.products.deleteConfirmEdit', { name: form.name }),
+    variant: 'danger',
+  })
+  if (!ok) return
+  isDeleting.value = true
   try {
     await admin.remove('products', productId.value)
     router.push('/admin/products')
   } catch (e) {
-    alert(t('admin.products.deleteFailed', { message: e.message }))
+    toast.error(t('admin.products.deleteFailed', { message: e.message }))
+  } finally {
+    isDeleting.value = false
   }
 }
 const handleDiscard = () => router.push('/admin/products')

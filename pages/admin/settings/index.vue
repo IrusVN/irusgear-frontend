@@ -69,6 +69,7 @@
           </div>
           <div style="display:flex;gap:10px;margin-top:22px">
             <button class="admin-primary-button" :disabled="isSavingProfile" @click="updateProfile">
+              <span v-if="isSavingProfile" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               {{ isSavingProfile ? $t('admin.settings.saving') : $t('admin.settings.saveChanges') }}
             </button>
             <button class="admin-secondary-button">{{ $t('admin.settings.cancel') }}</button>
@@ -103,6 +104,7 @@
           </div>
           <div style="display:flex;gap:10px;margin-top:22px">
             <button class="admin-primary-button" :disabled="isSavingPassword" @click="changePassword">
+              <span v-if="isSavingPassword" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               {{ isSavingPassword ? $t('admin.settings.saving') : $t('admin.settings.saveChanges') }}
             </button>
             <button class="admin-secondary-button" @click="pwdForm.current_password='';pwdForm.new_password='';pwdForm.new_password_confirmation=''">{{ $t('admin.settings.cancel') }}</button>

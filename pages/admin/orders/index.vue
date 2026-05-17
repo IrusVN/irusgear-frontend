@@ -135,6 +135,8 @@ import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
+import { toast } from 'vue-sonner'
+import { exportToCsv } from '@/utils/exportCsv'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -263,9 +265,28 @@ const fulfillmentVariant = (s) => ({
 }[s] || 'neutral')
 
 const viewOrder = (item) => router.push(`/admin/orders/${item.id}`)
-const handleExport = () => alert(t('admin.orders.exportMock'))
+const handleExport = () => {
+  if (!orders.value.length) {
+    toast.warning(t('admin.orders.noDataToExport'))
+    return
+  }
+  exportToCsv({
+    filename: 'orders',
+    items: orders.value,
+    columns: [
+      { key: 'orderCode', label: t('admin.orders.orderId') },
+      { key: (o) => o.customer?.name || '', label: t('admin.orders.customer') },
+      { key: (o) => o.customer?.email || '', label: 'Email' },
+      { key: 'paymentStatus', label: t('admin.orders.paymentStatus'), format: (v) => paymentLabel(v) },
+      { key: 'fulfillmentStatus', label: t('admin.orders.status'), format: (v) => fulfillmentLabel(v) },
+      { key: 'paymentMethod', label: t('admin.orders.paymentMethod') },
+      { key: 'date', label: t('admin.orders.date'), format: (v) => formatDate(v) },
+    ],
+  })
+  toast.success(t('admin.orders.exportSuccess', { count: orders.value.length }))
+}
 const handleAction = (action, item) => {
-  if (action.key === 'delete') alert(t('admin.orders.deleteMock', { code: item.orderCode }))
+  if (action.key === 'delete') toast.info(t('admin.orders.deleteMock', { code: item.orderCode }))
   else router.push(`/admin/orders/${item.id}`)
 }
 </script>
