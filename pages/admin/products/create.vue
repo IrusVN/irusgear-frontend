@@ -12,10 +12,15 @@
         </div>
       </div>
       <div class="header-actions">
-        <button class="admin-secondary-button" type="button" @click="handleDiscard">{{ $t('admin.products.discard') }}</button>
-        <button class="admin-secondary-button" type="button" @click="handleSaveDraft">{{ $t('admin.products.saveDraft') }}</button>
-        <button class="admin-primary-button" type="button" @click="handlePublish">
-          <i class="bi bi-check-lg"></i> {{ $t('admin.products.publishProduct') }}
+        <button class="admin-secondary-button" type="button" :disabled="isPublishing || isSavingDraft" @click="handleDiscard">{{ $t('admin.products.discard') }}</button>
+        <button class="admin-secondary-button" type="button" :disabled="isPublishing || isSavingDraft" @click="handleSaveDraft">
+          <span v-if="isSavingDraft" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ isSavingDraft ? $t('common.loading') : $t('admin.products.saveDraft') }}
+        </button>
+        <button class="admin-primary-button" type="button" :disabled="isPublishing || isSavingDraft" @click="handlePublish">
+          <span v-if="isPublishing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <i v-else class="bi bi-check-lg"></i>
+          {{ isPublishing ? $t('common.loading') : $t('admin.products.publishProduct') }}
         </button>
       </div>
     </div>
@@ -207,6 +212,8 @@ const ui = useUiStore()
 
 const categories = ref([])
 const fileInput = ref(null)
+const isPublishing = ref(false)
+const isSavingDraft = ref(false)
 
 const form = reactive({
   name: '',
@@ -303,21 +310,27 @@ const buildPayload = (publishStatus) => ({
 })
 
 const handlePublish = async () => {
-  if (!validate()) return
+  if (!validate() || isPublishing.value || isSavingDraft.value) return
+  isPublishing.value = true
   try {
     await admin.create('products', buildPayload('publish'))
     router.push('/admin/products')
   } catch (e) {
     toast.error(t('admin.products.publishFailed', { message: e.message }))
+  } finally {
+    isPublishing.value = false
   }
 }
 const handleSaveDraft = async () => {
-  if (!validate()) return
+  if (!validate() || isPublishing.value || isSavingDraft.value) return
+  isSavingDraft.value = true
   try {
     await admin.create('products', buildPayload('draft'))
     router.push('/admin/products')
   } catch (e) {
     toast.error(t('admin.products.saveDraftFailed', { message: e.message }))
+  } finally {
+    isSavingDraft.value = false
   }
 }
 const handleDiscard = () => router.push('/admin/products')

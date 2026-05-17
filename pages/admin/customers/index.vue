@@ -153,7 +153,8 @@
                   {{ $t('common.cancel') }}
                 </button>
                 <button type="submit" class="admin-primary-button" :disabled="submittingAdd">
-                  <i class="bi bi-plus-lg"></i>
+                  <span v-if="submittingAdd" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <i v-else class="bi bi-plus-lg"></i>
                   {{ submittingAdd ? $t('common.loading') : $t('admin.customers.addCustomer') }}
                 </button>
               </div>
@@ -291,16 +292,27 @@ const handleExport = () => {
 const handleAdd = () => {
   showAddModal.value = true
 }
+
+const { confirm } = useConfirm()
+const deletingIds = ref(new Set())
+
 const handleAction = async (action, item) => {
   if (action.key === 'delete') {
-    if (confirm(t('admin.customers.confirmDelete', { code: item.customerCode }))) {
-      try {
-        await admin.remove('customers', item.id)
-        toast.success(t('admin.customers.deleteSuccess'))
-        fetchCustomers()
-      } catch (e) {
-        toast.error(t('admin.customers.deleteFailed', { error: e.message }))
-      }
+    if (deletingIds.value.has(item.id)) return
+    const ok = await confirm({
+      message: t('admin.customers.confirmDelete', { code: item.customerCode }),
+      variant: 'danger',
+    })
+    if (!ok) return
+    deletingIds.value.add(item.id)
+    try {
+      await admin.remove('customers', item.id)
+      toast.success(t('admin.customers.deleteSuccess'))
+      fetchCustomers()
+    } catch (e) {
+      toast.error(t('admin.customers.deleteFailed', { error: e.message }))
+    } finally {
+      deletingIds.value.delete(item.id)
     }
   }
   else router.push(`/admin/customers/${item.id}`)

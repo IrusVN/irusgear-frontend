@@ -211,14 +211,26 @@ watch([page, pageSize, search], () => {
   fetchReferrals()
 })
 
+const { confirm } = useConfirm()
+const revokingIds = ref(new Set())
+
 const handleAction = async (action, item) => {
   if (action.key === 'revoke') {
-    if (confirm(t('admin.referrals.confirmRevoke'))) {
+    if (revokingIds.value.has(item.id)) return
+    const ok = await confirm({
+      message: t('admin.referrals.confirmRevoke'),
+      variant: 'danger',
+    })
+    if (!ok) return
+    revokingIds.value.add(item.id)
+    try {
       const res = await adminStore.patch(`referrals/${item.id}/status`, { status: 'cancelled' })
       if (res) {
         fetchReferrals()
         fetchStats()
       }
+    } finally {
+      revokingIds.value.delete(item.id)
     }
   } else {
     toast.info(t('admin.referrals.actionMock', { label: action.label, id: item.id }))

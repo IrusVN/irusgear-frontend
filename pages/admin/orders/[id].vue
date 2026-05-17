@@ -27,8 +27,10 @@
           </div>
         </div>
         <div class="header-actions">
-          <button v-if="order.fulfillmentStatus !== 'cancelled'" class="admin-danger-button" type="button" @click="handleCancel">
-            <i class="bi bi-x-circle"></i> {{ $t('admin.orders.cancelOrder') }}
+          <button v-if="order.fulfillmentStatus !== 'cancelled'" class="admin-danger-button" type="button" :disabled="isCancelling" @click="handleCancel">
+            <span v-if="isCancelling" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <i v-else class="bi bi-x-circle"></i>
+            {{ isCancelling ? $t('common.loading') : $t('admin.orders.cancelOrder') }}
           </button>
         </div>
       </div>
@@ -189,6 +191,7 @@ import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import { toast } from 'vue-sonner'
+import { useConfirm } from '@/composables/useConfirm'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -298,15 +301,24 @@ const paymentIcon = (m) => ({
   paypal: 'bi-paypal', cod: 'bi-cash', bank_transfer: 'bi-bank',
 }[m] || 'bi-credit-card')
 
+const { confirm } = useConfirm()
+const isCancelling = ref(false)
 const handleCancel = async () => {
-  if (confirm(t('admin.orders.confirmCancel', { code: order.value?.orderCode }))) {
-    try {
-      await admin.create(`orders/${orderId.value}/cancel`, { reason: t('admin.orders.cancelReason') })
-      toast.success(t('admin.orders.cancelSuccess'))
-      fetchOrder()
-    } catch (e) {
-      toast.error(t('admin.orders.cancelFailed', { msg: e.message }))
-    }
+  if (isCancelling.value) return
+  const ok = await confirm({
+    message: t('admin.orders.confirmCancel', { code: order.value?.orderCode }),
+    variant: 'danger',
+  })
+  if (!ok) return
+  isCancelling.value = true
+  try {
+    await admin.create(`orders/${orderId.value}/cancel`, { reason: t('admin.orders.cancelReason') })
+    toast.success(t('admin.orders.cancelSuccess'))
+    fetchOrder()
+  } catch (e) {
+    toast.error(t('admin.orders.cancelFailed', { msg: e.message }))
+  } finally {
+    isCancelling.value = false
   }
 }
 </script>

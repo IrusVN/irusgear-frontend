@@ -122,9 +122,10 @@
             </div>
 
             <div class="modal-footer">
-              <button class="admin-secondary-button" type="button" @click="closeModal">{{ $t('admin.categories.cancel') }}</button>
-              <button class="admin-primary-button" type="button" @click="saveCategory">
-                {{ editingCategory ? $t('admin.categories.saveChanges') : $t('admin.categories.createCategory') }}
+              <button class="admin-secondary-button" type="button" :disabled="isSavingCategory" @click="closeModal">{{ $t('admin.categories.cancel') }}</button>
+              <button class="admin-primary-button" type="button" :disabled="isSavingCategory" @click="saveCategory">
+                <span v-if="isSavingCategory" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                {{ isSavingCategory ? $t('common.loading') : (editingCategory ? $t('admin.categories.saveChanges') : $t('admin.categories.createCategory')) }}
               </button>
             </div>
           </div>
@@ -144,6 +145,7 @@ import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import { toast } from 'vue-sonner'
+import { useConfirm } from '@/composables/useConfirm'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 
 definePageMeta({ layout: 'admin' })
@@ -235,13 +237,18 @@ const openEditModal = (cat) => {
 
 const closeModal = () => { modalOpen.value = false }
 
+const isSavingCategory = ref(false)
+const { confirm } = useConfirm()
+
 const saveCategory = async () => {
+  if (isSavingCategory.value) return
   const payload = {
     name: form.value.name,
     slug: form.value.slug || undefined,
     description: form.value.description || undefined,
   }
 
+  isSavingCategory.value = true
   try {
     if (editingCategory.value) {
       await admin.update('categories', editingCategory.value.id, payload)
@@ -252,6 +259,8 @@ const saveCategory = async () => {
     loadCategories()
   } catch (e) {
     toast.error(t('admin.categories.saveFailed', { message: e.message }))
+  } finally {
+    isSavingCategory.value = false
   }
 }
 
@@ -268,7 +277,11 @@ const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency'
 
 const handleAction = async (action, item) => {
   if (action.key === 'delete') {
-    if (!confirm(t('admin.categories.deleteConfirm', { name: item.name }))) return
+    const ok = await confirm({
+      message: t('admin.categories.deleteConfirm', { name: item.name }),
+      variant: 'danger',
+    })
+    if (!ok) return
     try {
       await admin.remove('categories', item.id)
       loadCategories()

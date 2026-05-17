@@ -16,7 +16,7 @@
     <div class="toolbar-actions">
       <label v-if="showPageSize" class="page-size-select">
         <select :value="pageSize" @change="$emit('update:page-size', Number($event.target.value))">
-          <option v-for="option in pageSizeOptions" :key="option" :value="option">{{ option }}</option>
+          <option v-for="option in resolvedPageSizeOptions" :key="option" :value="option">{{ option }}</option>
         </select>
         <i class="bi bi-chevron-down"></i>
       </label>
@@ -32,9 +32,11 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+
 defineEmits(['update:search', 'update:page-size', 'export'])
 
-defineProps({
+const props = defineProps({
   search: {
     type: String,
     default: '',
@@ -63,6 +65,17 @@ defineProps({
     type: Array,
     default: () => [10, 25, 50, 100],
   },
+})
+
+/**
+ * Đảm bảo current pageSize luôn nằm trong dropdown.
+ * Khi parent set pageSize ngoài options (vd paginationStore default 12),
+ * select sẽ rỗng vì không option nào match → inject thêm value đó vào và sort.
+ */
+const resolvedPageSizeOptions = computed(() => {
+  const base = props.pageSizeOptions ?? []
+  if (props.pageSize == null || base.includes(props.pageSize)) return base
+  return [...base, props.pageSize].sort((a, b) => a - b)
 })
 </script>
 

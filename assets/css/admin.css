@@ -416,3 +416,21 @@ html:has(.admin-shell) {
     background: var(--admin-subtle);
   }
 }
+
+
+/* ==========================================================================
+   Soften disabled buttons during loading so user knows it's "in progress",
+   not "blocked permanently". Pair with Bootstrap's .spinner-border-sm.
+   Usage:
+     <button :disabled="loading">
+       <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+       <i v-else class="bi bi-check-lg"></i>
+       <span>{{ loading ? t('...saving') : t('...save') }}</span>
+     </button>
+   ========================================================================== */
+.admin-primary-button[disabled],
+.admin-secondary-button[disabled],
+.admin-danger-button[disabled] {
+  cursor: progress;
+  opacity: 0.7;
+}
