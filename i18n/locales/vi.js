@@ -959,6 +959,7 @@ export default {
     mobileRedirecting: "Đang chuyển hướng đến ứng dụng...",
     proceedToPayment: "Tiến hành thanh toán",
     selectMethod: "Vui lòng chọn phương thức thanh toán",
+    selectMethodFirst: "Chọn phương thức thanh toán để tiếp tục",
     paymentError: "Không thể tạo thanh toán. Vui lòng thử lại.",
     noPreparedOrder:
       "Không tìm thấy đơn hàng. Vui lòng quay lại bước đặt hàng.",

@@ -34,7 +34,7 @@
 
             <div class="payment-page__summary-items">
               <div
-                v-for="item in cartStore.items"
+                v-for="item in cartStore.selectedItems"
                 :key="item.id"
                 class="payment-page__summary-item"
               >
@@ -97,30 +97,104 @@
       </div>
     </div>
 
-    <div v-if="checkoutStore.preparedSessionId" class="payment-page__sticky-bar">
-      <div class="container-xl">
+    <!-- Mobile sticky checkout bar — thay cho summary-col bị ẩn -->
+    <aside
+      v-if="checkoutStore.preparedSessionId"
+      class="payment-page__sticky-bar"
+      role="complementary"
+      :aria-label="$t('checkout.orderSummary')"
+    >
+      <!-- Row 0: horizontal scroll product list -->
+      <div v-if="cartStore.selectedItems.length" class="payment-page__sticky-products">
+        <div
+          v-for="item in cartStore.selectedItems"
+          :key="item.id"
+          class="payment-page__sticky-product"
+        >
+          <img
+            :src="item.thumbnail || fallbackImage"
+            :alt="item.productName"
+            class="payment-page__sticky-product-img"
+            loading="lazy"
+          >
+          <div class="payment-page__sticky-product-info">
+            <span class="payment-page__sticky-product-name">{{ item.productName }}</span>
+            <span class="payment-page__sticky-product-meta">
+              {{ item.quantity }} × {{ item.unitPrice?.formatted || "0đ" }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 1: chips info -->
+      <div v-if="hasInfoRow" class="payment-page__sticky-info">
+        <span class="payment-page__sticky-chip">
+          <i class="bi bi-bag-check"></i>
+          {{ $t("cart.products") }}: <strong>{{ cartStore.selectedItems.length }}</strong>
+        </span>
+
+        <span
+          v-if="(checkoutStore.savings?.value || 0) > 0"
+          class="payment-page__sticky-chip payment-page__sticky-chip--saving"
+        >
+          <i class="bi bi-tag"></i>
+          {{ $t("cart.saving", { amount: checkoutStore.savings.formatted }) }}
+        </span>
+      </div>
+
+      <!-- Row 2: meta + CTA -->
+      <div class="payment-page__sticky-row">
+        <div class="payment-page__sticky-meta">
+          <span class="payment-page__sticky-label">{{ $t("checkout.total") }}</span>
+          <strong class="payment-page__sticky-value">
+            {{ checkoutStore.finalTotal?.formatted || "0đ" }}
+          </strong>
+          <span v-if="checkoutStore.finalDeliveryFee > 0" class="payment-page__sticky-hint">
+            {{ $t("checkout.deliveryFee") }}: {{ formatMoney(checkoutStore.finalDeliveryFee) }}
+          </span>
+          <span v-else class="payment-page__sticky-hint">
+            {{ $t("checkout.deliveryFee") }}: {{ $t("checkout.free") }}
+          </span>
+        </div>
+
         <button
           type="button"
           class="payment-page__submit-btn"
           :disabled="!selectedMethod || loadingMethod"
           @click="handlePayment"
         >
-          <span v-if="loadingMethod">
+          <span v-if="loadingMethod" class="payment-page__submit-btn-content">
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             {{ $t("payment.processing") }}
           </span>
-          <span v-else>
+          <span v-else class="payment-page__submit-btn-content">
             <i class="bi bi-shield-lock"></i>
             {{ $t("payment.proceedToPayment") }}
           </span>
         </button>
       </div>
-    </div>
+
+      <!-- Row 3: footer link (mobile only) -->
+      <div class="payment-page__sticky-footer">
+        <button
+          type="button"
+          class="payment-page__sticky-back"
+          @click="navigateTo('/cart/checkout')"
+        >
+          <i class="bi bi-arrow-left"></i>
+          {{ $t("common.back") }}
+        </button>
+
+        <span v-if="!selectedMethod" class="payment-page__sticky-helper">
+          {{ $t("payment.selectMethodFirst") }}
+        </span>
+      </div>
+    </aside>
 
     <QrPaymentModal
       :show="showQrModal"
       :pay-url="selectedPayUrl"
-      :method="selectedMethod"
+      :method="selectedMethod || ''"
       :amount="checkoutStore.finalTotal?.value"
       :order-id="selectedPayData?.orderId || checkoutStore.preparedOrderId"
       :session-id="checkoutStore.preparedSessionId"
@@ -182,6 +256,10 @@ const paymentMethods = computed(() => [
     description: "Thanh toán qua cổng VNPay - Hỗ trợ 40+ ngân hàng",
   },
 ]);
+
+const hasInfoRow = computed(
+  () => cartStore.selectedItems.length > 0 || (checkoutStore.savings?.value || 0) > 0,
+);
 
 const handleSelectMethod = (method) => {
   selectedMethod.value = method;
@@ -599,15 +677,42 @@ onUnmounted(() => {
   font-size: 20px !important;
 }
 
+/* ──────────────────────────────────────────
+ * Desktop sticky bar (full-width CTA)
+ * ────────────────────────────────────────── */
 .payment-page__sticky-bar {
   background: #fff;
   border-top: 1px solid #ececf1;
   bottom: 0;
+  display: block;
   left: 0;
-  padding: 14px 0;
+  padding: 14px 16px;
   position: fixed;
   right: 0;
   z-index: 100;
+}
+
+.payment-page__sticky-info {
+  display: none;
+}
+
+.payment-page__sticky-products {
+  display: none;
+}
+
+.payment-page__sticky-row {
+  display: flex;
+  gap: 12px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.payment-page__sticky-meta {
+  display: none;
+}
+
+.payment-page__sticky-footer {
+  display: none;
 }
 
 .payment-page__submit-btn {
@@ -628,6 +733,12 @@ onUnmounted(() => {
   width: 100%;
 }
 
+.payment-page__submit-btn-content {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+}
+
 .payment-page__submit-btn:hover:not(:disabled) {
   background: #1a1a1a;
   transform: translateY(-1px);
@@ -638,16 +749,9 @@ onUnmounted(() => {
   cursor: not-allowed;
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.spin {
-  animation: spin 0.8s linear infinite;
-  display: inline-block;
-}
-
+/* ──────────────────────────────────────────
+ * Tablet
+ * ────────────────────────────────────────── */
 @media (max-width: 991.98px) {
   .payment-page {
     padding-bottom: 170px;
@@ -658,13 +762,19 @@ onUnmounted(() => {
   }
 }
 
+/* ──────────────────────────────────────────
+ * Mobile: ẩn summary-col, hiện sticky bar 3 row giống Cart
+ * ────────────────────────────────────────── */
 @media (max-width: 767.98px) {
   .payment-page {
-    padding-bottom: 160px;
+    padding-bottom: 240px;
   }
-}
 
-@media (max-width: 767.98px) {
+  /* Ẩn sidebar summary-col — đã có sticky bar bên dưới */
+  .payment-page__summary-col {
+    display: none;
+  }
+
   .payment-page__section {
     border-radius: 14px;
     padding: 16px;
@@ -675,70 +785,221 @@ onUnmounted(() => {
     margin-bottom: 14px;
   }
 
-  .payment-page__summary {
-    border-radius: 14px;
-    padding: 16px;
-  }
-
-  .payment-page__summary-eyebrow {
-    font-size: 11px;
-  }
-
-  .payment-page__summary-items {
-    gap: 10px;
-    margin-top: 12px;
-  }
-
-  .payment-page__summary-img {
-    width: 44px;
-    height: 44px;
-  }
-
-  .payment-page__summary-name {
-    font-size: 12px;
-  }
-
-  .payment-page__summary-meta {
-    font-size: 11px;
-  }
-
-  .payment-page__summary-price {
-    font-size: 13px;
-  }
-
-  .payment-page__summary-row {
-    font-size: 13px;
-  }
-
-  .payment-page__summary-total {
-    font-size: 15px;
-  }
-
-  .payment-page__summary-total-value {
-    font-size: 18px !important;
-  }
-
-  .payment-page__sticky-bar {
-    bottom: 88px;
-    padding: 12px 0;
-  }
-
-  .payment-page__submit-btn {
-    border-radius: 10px;
-    font-size: 15px;
-    min-height: 48px;
-    padding: 10px 20px;
-  }
-
   .payment-page__no-order {
     border-radius: 14px;
     padding: 48px 16px;
   }
+
+  /* Sticky bar 3 hàng */
+  .payment-page__sticky-bar {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(228, 228, 231, 0.95);
+    border-radius: 22px 22px 0 0;
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    box-shadow: 0 -10px 28px rgba(15, 23, 42, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  }
+
+  /* Row 0: horizontal product list */
+  .payment-page__sticky-products {
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    gap: 8px;
+    margin: 0 -14px;
+    overflow-x: auto;
+    padding: 0 14px 4px;
+    scrollbar-width: none;
+  }
+
+  .payment-page__sticky-products::-webkit-scrollbar {
+    display: none;
+  }
+
+  .payment-page__sticky-product {
+    align-items: center;
+    background: #f7f7f8;
+    border: 1px solid #ececf1;
+    border-radius: 12px;
+    display: flex;
+    flex-shrink: 0;
+    gap: 8px;
+    max-width: 200px;
+    min-width: 120px;
+    padding: 6px 10px 6px 6px;
+  }
+
+  .payment-page__sticky-product-img {
+    background: #fff;
+    border: 1px solid #ececf1;
+    border-radius: 8px;
+    flex-shrink: 0;
+    height: 36px;
+    object-fit: cover;
+    width: 36px;
+  }
+
+  .payment-page__sticky-product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  .payment-page__sticky-product-name {
+    color: #18181b;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .payment-page__sticky-product-meta {
+    color: #71717a;
+    font-size: 10px;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Row 1: chips */
+  .payment-page__sticky-info {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .payment-page__sticky-chip {
+    align-items: center;
+    background: #f7f7f8;
+    border-radius: 999px;
+    color: #52525b;
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 600;
+    gap: 6px;
+    line-height: 1.3;
+    padding: 4px 10px;
+  }
+
+  .payment-page__sticky-chip i {
+    font-size: 12px;
+  }
+
+  .payment-page__sticky-chip strong {
+    color: #18181b;
+    font-weight: 700;
+  }
+
+  .payment-page__sticky-chip--saving {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+  }
+
+  /* Row 2: meta + CTA */
+  .payment-page__sticky-row {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  .payment-page__sticky-meta {
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  .payment-page__sticky-label {
+    color: #71717a;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .payment-page__sticky-value {
+    color: var(--irus-color-accent);
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .payment-page__sticky-hint {
+    color: #a1a1aa;
+    font-size: 10px;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .payment-page__submit-btn {
+    border-radius: 14px;
+    flex-shrink: 0;
+    font-size: 13px;
+    min-height: 44px;
+    min-width: 140px;
+    padding: 0 14px;
+    width: auto;
+  }
+
+  /* Row 3: footer link + helper */
+  .payment-page__sticky-footer {
+    align-items: center;
+    border-top: 1px solid #ececf1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    padding-top: 6px;
+  }
+
+  .payment-page__sticky-back {
+    align-items: center;
+    background: none;
+    border: 0;
+    color: #18181b;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 700;
+    gap: 4px;
+    padding: 0;
+  }
+
+  .payment-page__sticky-back:hover {
+    color: var(--irus-color-accent);
+  }
+
+  .payment-page__sticky-helper {
+    color: #71717a;
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: right;
+  }
 }
 
+/* ──────────────────────────────────────────
+ * Smaller phones
+ * ────────────────────────────────────────── */
 @media (max-width: 575.98px) {
   .payment-page {
-    padding-bottom: 100px;
+    padding-bottom: 220px;
   }
 
   .payment-page__section {
@@ -755,77 +1016,61 @@ onUnmounted(() => {
     font-size: 16px;
   }
 
-  .payment-page__summary {
-    border-radius: 12px;
-    padding: 14px;
-    position: static;
-  }
-
-  .payment-page__summary-eyebrow {
-    font-size: 11px;
-  }
-
-  .payment-page__summary-items {
-    gap: 8px;
-    margin-top: 10px;
-  }
-
-  .payment-page__summary-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 6px;
-  }
-
-  .payment-page__summary-name {
-    font-size: 12px;
-  }
-
-  .payment-page__summary-price {
-    font-size: 12px;
-  }
-
-  .payment-page__summary-divider {
-    margin: 10px 0;
-  }
-
-  .payment-page__summary-pricing {
-    gap: 6px;
-  }
-
-  .payment-page__summary-row {
-    font-size: 12px;
-  }
-
-  .payment-page__summary-total {
-    font-size: 14px;
-    padding-top: 8px;
-  }
-
-  .payment-page__summary-total-value {
-    font-size: 16px !important;
-  }
-
   .payment-page__sticky-bar {
-    padding: 10px 0;
+    border-radius: 18px 18px 0 0;
+    gap: 6px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  }
+
+  .payment-page__sticky-products {
+    margin: 0 -12px;
+    padding: 0 12px 4px;
+  }
+
+  .payment-page__sticky-product {
+    border-radius: 10px;
+    max-width: 180px;
+    min-width: 110px;
+    padding: 4px 8px 4px 4px;
+  }
+
+  .payment-page__sticky-product-img {
+    border-radius: 6px;
+    height: 32px;
+    width: 32px;
+  }
+
+  .payment-page__sticky-product-name {
+    font-size: 10px;
+  }
+
+  .payment-page__sticky-product-meta {
+    font-size: 9px;
+  }
+
+  .payment-page__sticky-chip {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .payment-page__sticky-value {
+    font-size: 16px;
+  }
+
+  .payment-page__sticky-hint {
+    display: none;
   }
 
   .payment-page__submit-btn {
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 700;
-    gap: 6px;
-    min-height: 44px;
-    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 12px;
+    min-height: 40px;
+    min-width: 120px;
+    padding: 0 12px;
   }
 
-  .payment-page__submit-btn span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .payment-page__submit-btn i {
-    font-size: 14px;
+  .payment-page__sticky-back {
+    font-size: 11px;
   }
 
   .btn-back {
@@ -846,6 +1091,10 @@ onUnmounted(() => {
 }
 
 @media (max-width: 480px) {
+  .payment-page {
+    padding-bottom: 200px;
+  }
+
   .payment-page__section {
     border-radius: 12px;
     padding: 12px;
@@ -856,24 +1105,23 @@ onUnmounted(() => {
     margin-bottom: 12px;
   }
 
-  .payment-page__summary {
-    border-radius: 12px;
-    padding: 12px;
-  }
-
-  .payment-page__summary-total-value {
-    font-size: 15px !important;
-  }
-
   .payment-page__sticky-bar {
-    padding: 8px 0;
+    gap: 4px;
+    padding: 6px 10px calc(6px + env(safe-area-inset-bottom));
+  }
+
+  .payment-page__sticky-row {
+    gap: 6px;
   }
 
   .payment-page__submit-btn {
-    border-radius: 8px;
-    font-size: 14px;
-    min-height: 42px;
-    padding: 8px 14px;
+    min-height: 38px;
+    min-width: 0;
+    padding: 0 10px;
+  }
+
+  .payment-page__sticky-helper {
+    display: none;
   }
 }
 </style>

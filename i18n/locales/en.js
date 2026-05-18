@@ -949,6 +949,7 @@ export default {
     mobileRedirecting: "Redirecting to app...",
     proceedToPayment: "Proceed to Payment",
     selectMethod: "Please select a payment method",
+    selectMethodFirst: "Select a payment method to continue",
     paymentError: "Failed to create payment. Please try again.",
     noPreparedOrder: "Order not found. Please go back to checkout.",
     confirmingPayment: "Confirming payment...",

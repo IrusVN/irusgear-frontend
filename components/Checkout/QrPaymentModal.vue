@@ -114,7 +114,7 @@ const props = defineProps({
   },
   method: {
     type: String,
-    required: true,
+    default: "",
   },
   amount: {
     type: Number,
