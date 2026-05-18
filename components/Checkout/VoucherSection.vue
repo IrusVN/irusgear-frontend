@@ -488,14 +488,5 @@ const confirmRemoveVoucher = (code) => {
   .voucher-section__list {
     max-height: 200px;
   }
-
-  .voucher-input-wrapper {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .voucher-input-wrapper input {
-    width: 100%;
-  }
 }
 </style>
