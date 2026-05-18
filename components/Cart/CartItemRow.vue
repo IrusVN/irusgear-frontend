@@ -72,6 +72,7 @@
 
       <div class="cart-item__bottom">
         <div class="cart-item__price">
+          <span class="cart-item__price-label">{{ $t('cart.price') }}</span>
           <strong>{{ item.currentUnitPrice?.formatted || item.unitPrice?.formatted }}</strong>
           <span v-if="item.priceChanged" class="cart-item__old-price">
             {{ item.unitPrice?.formatted }}
@@ -386,6 +387,13 @@ const increment = () => {
   gap: 4px;
 }
 
+.cart-item__price-label {
+  color: #71717a;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
 .cart-item__price strong,
 .cart-item__line-total strong {
   color: var(--irus-color-accent);
@@ -454,28 +462,105 @@ const increment = () => {
 
 @media (max-width: 767.98px) {
   .cart-item {
-    flex-direction: column;
+    border-radius: 18px;
+    gap: 12px;
+    padding: 14px;
   }
 
   .cart-item__image {
-    height: 88px;
-    width: 88px;
+    border-radius: 14px;
+    height: 78px;
+    width: 78px;
   }
 
-  .cart-item__top,
+  .cart-item__content {
+    gap: 12px;
+  }
+
+  .cart-item__top {
+    gap: 10px;
+  }
+
+  .cart-item__name {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .cart-item__remove {
+    border-radius: 12px;
+    height: 36px;
+    width: 36px;
+  }
+
+  /* Bottom: stack 2 row riêng — price + (quantity / line-total) */
   .cart-item__bottom {
+    align-items: stretch;
     flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Row 1: Giá inline với value */
+  .cart-item__price {
+    align-items: baseline;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .cart-item__price-label {
+    color: #71717a;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+
+  .cart-item__price strong {
+    font-size: 17px;
+  }
+
+  /* Row 2: Số lượng (trái) + Thành tiền (phải) */
+  .cart-item__quantity-wrap,
+  .cart-item__line-total {
+    align-items: baseline;
+    flex-direction: row;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .cart-item__quantity-wrap {
+    flex-shrink: 0;
   }
 
   .cart-item__line-total {
-    align-items: flex-start;
-    min-width: 0;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .cart-item__quantity-label,
+  .cart-item__line-total-label {
+    color: #71717a;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+
+  .cart-item__line-total strong {
+    font-size: 17px;
   }
 }
 
 @media (max-width: 575.98px) {
+  .cart-item {
+    border-radius: 16px;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .cart-item__image {
+    border-radius: 12px;
+    height: 72px;
+    width: 72px;
+  }
+
   .cart-item__name {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .cart-item__options,
@@ -485,18 +570,46 @@ const increment = () => {
 
   .cart-item__option,
   .cart-item__chip {
-    font-size: 10px;
-    padding: 2px 6px;
+    font-size: 11px;
+    padding: 3px 8px;
   }
 
   .cart-item__warnings li {
     font-size: 11px;
   }
+
+  .cart-item__select {
+    height: 20px;
+    margin-top: 2px;
+    width: 20px;
+  }
+
+  .cart-item__select-box {
+    height: 20px;
+    width: 20px;
+    font-size: 12px;
+  }
+
+  .cart-item__remove {
+    height: 32px;
+    width: 32px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
+  .cart-item {
+    padding: 10px;
+  }
+
+  .cart-item__image {
+    height: 64px;
+    width: 64px;
+  }
+
   .cart-item__quantity {
-    gap: 4px;
+    gap: 2px;
+    padding: 3px;
   }
 
   .cart-item__quantity-btn {
@@ -506,8 +619,13 @@ const increment = () => {
   }
 
   .cart-item__quantity-value {
-    min-width: 28px;
+    min-width: 26px;
     font-size: 13px;
+  }
+
+  .cart-item__price strong,
+  .cart-item__line-total strong {
+    font-size: 15px;
   }
 }
 </style>

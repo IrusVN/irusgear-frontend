@@ -183,11 +183,47 @@ const iconClass = computed(() => {
 
 @media (max-width: 767.98px) {
   .cart-alert {
+    border-radius: 18px;
     flex-wrap: wrap;
+    padding: 12px 14px;
+  }
+
+  .cart-alert__icon {
+    font-size: 18px;
+    height: 34px;
+    width: 34px;
+  }
+
+  .cart-alert__title {
+    font-size: 14px;
+  }
+
+  .cart-alert__description {
+    font-size: 12px;
   }
 
   .cart-alert__actions {
-    margin-left: 52px;
+    flex: 1 1 100%;
+    justify-content: flex-end;
+    margin-left: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-alert {
+    border-radius: 16px;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .cart-alert__actions {
+    margin-left: 0;
+    margin-top: 4px;
+    width: 100%;
+  }
+
+  .cart-alert__action {
+    flex: 1;
   }
 }
 </style>

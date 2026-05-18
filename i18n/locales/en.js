@@ -373,6 +373,7 @@ export default {
     cartOf: "Your Cart",
     addedToCart: "Added to cart",
     quantity: "Quantity",
+    price: "Price",
     moreItems: "more items",
     productsInCart: "{count} products in cart",
     total: "Total",

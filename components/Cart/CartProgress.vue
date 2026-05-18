@@ -413,4 +413,15 @@ onBeforeUnmount(() => {
     gap: 4px;
   }
 }
+
+@media (max-width: 340px) {
+  .cart-progress__label {
+    display: none;
+  }
+
+  .cart-progress__item--active .cart-progress__label {
+    display: inline-block;
+    font-size: 10px;
+  }
+}
 </style>

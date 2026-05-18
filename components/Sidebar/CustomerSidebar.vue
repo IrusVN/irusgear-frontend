@@ -34,18 +34,22 @@
                 <NuxtLink :to="localePath('/cart')" class="btn header-icon-btn position-relative"
                   :aria-label="$t('cart.cart')">
                   <i class="bi bi-cart3"></i>
-                  <span v-if="itemCount > 0"
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
-                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
-                    {{ itemCount }}
-                  </span>
+                  <ClientOnly>
+                    <span v-if="itemCount > 0"
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                      style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
+                      {{ itemCount }}
+                    </span>
+                  </ClientOnly>
                 </NuxtLink>
 
                 <Transition name="dropdown-fade">
                   <div v-if="isCartDropdownOpen" class="header-dropdown header-dropdown--cart">
                     <div class="header-dropdown__header">
                       <span class="header-dropdown__title">Giỏ hàng</span>
-                      <span v-if="itemCount > 0" class="header-dropdown__count">{{ itemCount }} sản phẩm</span>
+                      <ClientOnly>
+                        <span v-if="itemCount > 0" class="header-dropdown__count">{{ itemCount }} sản phẩm</span>
+                      </ClientOnly>
                     </div>
 
                     <div v-if="cartStore.items.length === 0" class="header-dropdown__empty">
@@ -110,11 +114,13 @@
                 @mouseenter="handleNotiDropdownEnter" @mouseleave="isNotiDropdownOpen = false">
                 <button type="button" class="btn header-icon-btn" :aria-label="$t('common.notification')">
                   <i class="bi bi-bell"></i>
-                  <span v-if="notificationStore.unreadCount > 0"
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
-                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
-                    {{ notificationStore.unreadCount > 9 ? '9+' : notificationStore.unreadCount }}
-                  </span>
+                  <ClientOnly>
+                    <span v-if="notificationStore.unreadCount > 0"
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                      style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
+                      {{ notificationStore.unreadCount > 9 ? '9+' : notificationStore.unreadCount }}
+                    </span>
+                  </ClientOnly>
                 </button>
 
                 <Transition name="dropdown-fade">
@@ -383,7 +389,9 @@
           :class="{ active: isMobileNavActive('/profile') }" :aria-label="$t('common.wishlist')">
           <i class="bi" :class="isMobileNavActive('/profile') ? 'bi-heart-fill' : 'bi-heart'"></i>
           <span>{{ $t('common.wishlist') }}</span>
-          <span v-if="wishlistCount > 0" class="mobile-nav-badge">{{ wishlistCount }}</span>
+          <ClientOnly>
+            <span v-if="wishlistCount > 0" class="mobile-nav-badge">{{ wishlistCount }}</span>
+          </ClientOnly>
         </NuxtLink>
 
         <NuxtLink v-if="user" to="/profile" class="mobile-nav-item" :class="{ active: isMobileNavActive('/profile') }"
@@ -407,7 +415,9 @@
             <NuxtLink to="/cart" class="mobile-fab-item" :aria-label="$t('cart.cart')" @click="isMobileFabOpen = false">
               <i class="bi bi-cart3"></i>
               <span class="mobile-fab-tooltip">{{ $t('cart.cart') }}</span>
-              <span v-if="itemCount > 0" class="mobile-fab-badge">{{ itemCount }}</span>
+              <ClientOnly>
+                <span v-if="itemCount > 0" class="mobile-fab-badge">{{ itemCount }}</span>
+              </ClientOnly>
             </NuxtLink>
 
             <button type="button" class="mobile-fab-item" :aria-label="$t('common.language')"
@@ -419,7 +429,9 @@
             <button type="button" class="mobile-fab-item" aria-label="Chat với AI"
               @click="chatbotStore.toggleChat(); isMobileFabOpen = false">
               <i class="bi bi-chat-dots-fill"></i>
-              <span v-if="chatbotStore.hasNewMessage" class="mobile-fab-badge">!</span>
+              <ClientOnly>
+                <span v-if="chatbotStore.hasNewMessage" class="mobile-fab-badge">!</span>
+              </ClientOnly>
               <span class="mobile-fab-tooltip">Trợ lý AI</span>
             </button>
           </div>
