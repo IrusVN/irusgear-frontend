@@ -405,7 +405,9 @@ const filterOptions = (options, keyword) => {
 };
 
 const receiverName = computed(() => {
-  const profile = user.value || {};
+  // Controlled mode: lấy từ customer prop (admin tạo cho user khác)
+  // Default: lấy từ auth user (user tự tạo cho mình)
+  const profile = isControlled.value ? (props.customer || {}) : (user.value || {});
   return (
     profile.full_name ||
     profile.fullName ||
@@ -416,7 +418,7 @@ const receiverName = computed(() => {
 });
 
 const receiverPhone = computed(() => {
-  const profile = user.value || {};
+  const profile = isControlled.value ? (props.customer || {}) : (user.value || {});
   return (profile.phone || profile.phone_number || profile.mobile || "").trim();
 });
 

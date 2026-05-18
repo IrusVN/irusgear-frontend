@@ -282,13 +282,9 @@ const admin = useAdminStore()
 
 const isSubmitting = ref(false)
 
-// Map UI label ↔ backend enum value (App\Enums\UserStatus).
-// BE dùng giá trị số dạng string ('0'..'3') — không phải 'active'/'inactive'.
-// Giữ UI dùng key text cho dễ đọc + dropdown i18n; chỉ convert khi submit/hydrate.
 const STATUS_TO_CODE = { inactive: '0', active: '1', pending: '2', banned: '3' }
 const CODE_TO_STATUS = { 0: 'inactive', 1: 'active', 2: 'pending', 3: 'banned' }
 
-// Options cho QuickSelect — computed để label tự re-evaluate khi đổi locale.
 const statusOptions = computed(() => [
   { value: 'active', label: t('admin.customers.statusActive'), icon: 'bi-check-circle-fill' },
   { value: 'inactive', label: t('admin.customers.statusInactive'), icon: 'bi-pause-circle-fill' },
@@ -317,27 +313,18 @@ const errors = reactive({
   password: '',
 })
 
-// Password section collapse: mặc định đóng, admin chủ động mở để reset.
 const showPasswordSection = ref(false)
 const showPasswordPlain = ref(false)
 
-// ── Add Address sub-drawer ──
-// Dùng UpdateAddress.vue (component có sẵn đầy đủ province/district/ward picker
-// + UI nhất quán với profile). Truyền `customer` prop để switch sang controlled
-// mode — component chỉ emit `save`, parent (admin) POST tới admin endpoint thay
-// vì checkoutStore.saveAddress (vốn cho user tự sửa của mình).
 const showAddAddress = ref(false)
 const addressSaving = ref(false)
-const addressDrawerRef = useTemplateRef('addressDrawerRef') // dùng để gọi resetForm sau save
+const addressDrawerRef = useTemplateRef('addressDrawerRef')
 
 const openAddAddress = () => {
   showAddAddress.value = true
 }
 
 const onCloseAddAddress = () => {
-  // UpdateAddress (controlled) không tự reset — đảm bảo lần mở sau form sạch.
-  // Tuy nhiên onOpen của UpdateAddress chỉ load provinces, không reset state cũ
-  // → ta gọi resetForm thông qua ref.
   if (addressDrawerRef.value?.resetForm) {
     addressDrawerRef.value.resetForm()
   }
@@ -348,9 +335,6 @@ const onAddressFormSave = async (payload) => {
 
   addressSaving.value = true
   try {
-    // Transform shape UpdateAddress emit → shape BE StoreAddressRequest.
-    // UpdateAddress trả: { name, phone, province: {value,label}, district, ward, detail, label, isDefault }
-    // BE expects: { name, phone, province_code, district_code, ward_code, address_line1, city, country, label, is_default }
     const apiPayload = {
       name: payload.name,
       phone: payload.phone,
@@ -367,12 +351,11 @@ const onAddressFormSave = async (payload) => {
     await admin.create(`customers/${props.customer.id}/addresses`, apiPayload)
     toast.success(t('admin.customers.quickEditAddressCreated'))
 
-    // Reset form trong nested drawer + đóng drawer.
     if (addressDrawerRef.value?.resetForm) {
       addressDrawerRef.value.resetForm()
     }
     showAddAddress.value = false
-    emit('updated', null) // null → parent fetch lại từ BE
+    emit('updated', null)
   } catch (error) {
     toast.error(
       error?.data?.message ||
@@ -418,14 +401,11 @@ const hydrateFromCustomer = (c) => {
   form.last_name = c.last_name || (parts.length > 1 ? parts.slice(-1).join(' ') : '')
   form.email = c.email || ''
   form.phone_number = c.phone_number || c.phone || ''
-  // BE có thể trả status dạng code ('1') HOẶC string ('active') — chấp nhận cả 2.
   const raw = c.status
   if (raw == null) form.status = 'active'
   else if (CODE_TO_STATUS[raw] !== undefined) form.status = CODE_TO_STATUS[raw]
   else form.status = String(raw)
 
-  // email_verified: BE trả boolean (xem AdminCustomerResource). Fallback dùng
-  // email_verified_at nếu boolean không có (vd: chỗ list cũ chưa map).
   form.email_verified = typeof c.email_verified === 'boolean'
     ? c.email_verified
     : Boolean(c.email_verified_at)
@@ -461,8 +441,6 @@ const validate = () => {
     errors.phone_number = t('admin.customers.quickEditPhoneInvalid')
   }
 
-  // Password chỉ validate khi section mở VÀ user nhập gì đó.
-  // BE rule: min 8, mixedCase + numbers (xem App\Http\Requests\Admin\UpdateUserRequest).
   if (showPasswordSection.value && form.password) {
     if (form.password.length < 8) {
       errors.password = t('admin.customers.quickEditPasswordTooShort')
@@ -486,15 +464,10 @@ const submit = async () => {
       name: `${form.first_name} ${form.last_name}`.trim() || undefined,
       email: form.email,
       phone_number: form.phone_number || null,
-      // Convert 'active'/'inactive'/... → '0'/'1'/... cho khớp UserStatus enum BE.
       status: STATUS_TO_CODE[form.status] ?? form.status,
-      // BE (AdminUserService::update) convert flag này → email_verified_at = now()/null.
       email_verified: form.email_verified,
     }
 
-    // Chỉ gửi password nếu section mở VÀ user thực sự nhập — tránh ghi đè rỗng.
-    // BE đã có guard `if (empty($data['password'])) unset($data['password'])`,
-    // nhưng client side check trước để rõ ràng intent.
     if (showPasswordSection.value && form.password) {
       payload.password = form.password
     }

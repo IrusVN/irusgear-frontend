@@ -58,17 +58,27 @@
       </template>
 
       <template #cell-status="{ item }">
-        <div class="status-stack">
-          <AdminStatusBadge
-            :label="statusBadge(item.status).label"
-            :variant="statusBadge(item.status).variant"
-            dot
-          />
-          <span v-if="!item.email_verified" class="unverified-chip" :title="$t('admin.customers.emailVerifyNo')">
-            <i class="bi bi-envelope-exclamation"></i>
-            {{ $t('admin.customers.emailVerifyNo') }}
-          </span>
-        </div>
+        <AdminStatusBadge
+          :label="statusBadge(item.status).label"
+          :variant="statusBadge(item.status).variant"
+          dot
+        />
+      </template>
+
+      <template #cell-emailVerified="{ item }">
+        <!-- Dùng AdminStatusBadge cho nhất quán với Status. Verified=success(xanh) icon
+             check; Unverified=danger(đỏ) icon envelope-exclamation. -->
+        <AdminStatusBadge
+          :label="item.email_verified ? $t('admin.customers.emailVerifyYes') : $t('admin.customers.emailVerifyNo')"
+          :variant="item.email_verified ? 'success' : 'danger'"
+        >
+          <i
+            :class="item.email_verified ? 'bi bi-patch-check-fill' : 'bi bi-envelope-exclamation'"
+            class="email-verify-icon"
+            aria-hidden="true"
+          ></i>
+          <span>{{ item.email_verified ? $t('admin.customers.emailVerifyYes') : $t('admin.customers.emailVerifyNo') }}</span>
+        </AdminStatusBadge>
       </template>
 
       <template #actions="{ item }">
@@ -106,6 +116,7 @@
         :avatar="item.avatar"
         :meta="[
           { label: $t('admin.customers.statusLabel').replace(':', ''), value: statusBadge(item.status).label },
+          { label: $t('admin.customers.emailVerifyLabel'), value: item.email_verified ? $t('admin.customers.emailVerifyYes') : $t('admin.customers.emailVerifyNo') },
           { label: $t('admin.customers.orders'), value: item.orders.toLocaleString() },
           { label: $t('admin.customers.spent'), value: formatCurrency(item.totalSpent) },
           { label: $t('admin.customers.idLabel'), value: item.customerCode },
@@ -281,10 +292,13 @@ const changePageSize = (size) => {
 }
 
 const columns = computed(() => [
-  { key: 'name', label: t('admin.customers.title').replace(/s$/i, ''), width: '24%' },
+  { key: 'name', label: t('admin.customers.title').replace(/s$/i, ''), width: '22%' },
   { key: 'customerCode', label: t('admin.customers.customerId') },
   { key: 'country', label: t('admin.customers.country') },
   { key: 'status', label: t('admin.customers.statusLabel').replace(':', '') },
+  // Email Verify: cột riêng để admin scan nhanh user nào chưa verify (chặn login).
+  // Map từ AdminCustomerResource.email_verified (boolean derive từ email_verified_at).
+  { key: 'emailVerified', label: t('admin.customers.emailVerifyLabel'), align: 'center' },
   { key: 'orders', label: t('admin.customers.totalOrders'), align: 'center' },
   { key: 'totalSpent', label: t('admin.customers.totalSpent') },
 ])
@@ -466,16 +480,11 @@ onMounted(() => {
 .country-cell { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--admin-text); white-space: nowrap; }
 .country-flag { width: 20px; height: 15px; border-radius: 2px; object-fit: cover; }
 
-/* Status cell: badge phía trên, "Chưa verify" chip phụ phía dưới nếu user chưa xác thực email */
-.status-stack { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
-.unverified-chip {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 2px 7px; border-radius: 4px;
-  background: rgba(245, 158, 11, 0.12); color: #b45309;
-  font-size: 0.72rem; font-weight: 600; line-height: 1.2;
-  white-space: nowrap;
+/* Email Verify icon trong badge — fine-tune size để khớp badge typography */
+.email-verify-icon {
+  font-size: 0.85rem;
+  line-height: 1;
 }
-.unverified-chip i { font-size: 0.8rem; }
 
 /* Add Customer Modal */
 .customer-modal-overlay {

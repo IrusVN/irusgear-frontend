@@ -227,8 +227,17 @@
                 <div class="toggle-info">
                   <strong>{{ n.label }}</strong>
                   <small>{{ n.description }}</small>
+                  <span v-if="n.mock" class="notif-mock-badge">{{ $t('admin.customers.notifMockBadge') }}</span>
                 </div>
-                <label class="stock-toggle"><input type="checkbox" :checked="n.default" /><span class="toggle-track"></span></label>
+                <label class="stock-toggle">
+                  <input
+                    type="checkbox"
+                    :checked="notifValues[n.key]"
+                    :disabled="n.mock || notifSavingKey === n.key"
+                    @change="onNotifToggle(n, $event.target.checked)"
+                  />
+                  <span class="toggle-track"></span>
+                </label>
               </div>
             </div>
           </div>
@@ -236,8 +245,6 @@
       </div>
     </template>
 
-    <!-- Quick Edit drawer: dùng `customer` (đã mapped) làm source vì có
-         defaultAddressText cho address section + đầy đủ field hydrate. -->
     <QuickEditCustomer
       v-model="showQuickEdit"
       :customer="customer"
@@ -278,11 +285,62 @@ const tabs = computed(() => [
 ])
 
 const notificationSettings = computed(() => [
-  { key: 'email_order', label: t('admin.customers.notifEmailOrder'), description: t('admin.customers.notifEmailOrderDesc'), default: true },
-  { key: 'email_promo', label: t('admin.customers.notifEmailPromo'), description: t('admin.customers.notifEmailPromoDesc'), default: true },
-  { key: 'email_account', label: t('admin.customers.notifEmailAccount'), description: t('admin.customers.notifEmailAccountDesc'), default: false },
-  { key: 'sms_order', label: t('admin.customers.notifSmsOrder'), description: t('admin.customers.notifSmsOrderDesc'), default: false },
+  {
+    key: 'email_order',
+    label: t('admin.customers.notifEmailOrder'),
+    description: t('admin.customers.notifEmailOrderDesc'),
+    settingKey: 'notify_order_email',
+    defaultValue: true,
+    mock: false,
+  },
+  { key: 'email_promo', label: t('admin.customers.notifEmailPromo'), description: t('admin.customers.notifEmailPromoDesc'), defaultValue: true, mock: true },
+  {
+    key: 'email_account',
+    label: t('admin.customers.notifEmailAccount'),
+    description: t('admin.customers.notifEmailAccountDesc'),
+    settingKey: 'notify_login_telegram',
+    defaultValue: true,
+    mock: false,
+  },
+  { key: 'sms_order', label: t('admin.customers.notifSmsOrder'), description: t('admin.customers.notifSmsOrderDesc'), defaultValue: false, mock: true },
 ])
+
+const notifValues = ref({})
+const notifSavingKey = ref(null)
+
+const hydrateNotifValues = (settings = {}) => {
+  const out = {}
+  for (const n of notificationSettings.value) {
+    out[n.key] = n.settingKey
+      ? (settings[n.settingKey] ?? n.defaultValue)
+      : n.defaultValue
+  }
+  notifValues.value = out
+}
+
+const onNotifToggle = async (notif, newValue) => {
+  if (notif.mock) {
+    notifValues.value[notif.key] = !newValue
+    toast.info(t('admin.customers.notifMockToast'))
+    return
+  }
+  if (!notif.settingKey || notifSavingKey.value) return
+
+  const previous = notifValues.value[notif.key]
+  notifValues.value[notif.key] = newValue
+  notifSavingKey.value = notif.key
+  try {
+    await admin.update('users', customerId.value, {
+      settings: { [notif.settingKey]: newValue },
+    })
+    toast.success(t('admin.customers.notifUpdateSuccess'))
+  } catch (e) {
+    notifValues.value[notif.key] = previous
+    toast.error(e?.data?.message || e?.message || t('admin.customers.notifUpdateFailed'))
+  } finally {
+    notifSavingKey.value = null
+  }
+}
 
 /* ── customer orders ── */
 const customerOrders = ref([])
@@ -357,12 +415,7 @@ const handleDelete = async () => {
     isDeleting.value = false
   }
 }
-/* ── QuickEdit drawer (shared với listing page) ── */
 const showQuickEdit = ref(false)
-// Object pass vào QuickEditCustomer — phải match shape mà modal hydrate
-// (xem QuickEditCustomer.hydrateFromCustomer: first_name, last_name, email,
-//  phone_number, status, email_verified). Tận dụng rawCustomer giữ raw response
-//  từ BE để pass đầy đủ + ổn định khi mapCustomerDetail thay đổi.
 const rawCustomer = ref(null)
 
 const handleEditDetails = () => {
@@ -371,21 +424,15 @@ const handleEditDetails = () => {
 }
 
 const onQuickEditUpdated = () => {
-  // Luôn refetch detail sau khi modal emit 'updated' (user update info OR thêm
-  // address) — đảm bảo mọi field (status badge, tên header, defaultAddressText,
-  // loyalty tier, ...) đều đồng bộ. Đơn giản hơn merge manual nhiều field.
   fetchCustomerDetail()
 }
 
 const mapCustomerDetail = (c) => {
   const loyalty = c.member_rank || { name_en: 'Standard', threshold: 0 }
   const addr = c.default_address || null
-  // Build text 1 dòng cho address display trong QuickEdit drawer.
-  // Fallback hiển thị field nào có; format theo VN order: số nhà, phường, quận, tỉnh.
   const addressParts = addr
     ? [addr.line1, addr.line2, addr.full_address, addr.city, addr.country].filter(Boolean)
     : []
-  // Ưu tiên full_address nếu BE đã build sẵn, otherwise concat line/city/country.
   const addressText = addr?.full_address || (addressParts.length ? addressParts.join(', ') : null)
 
   return {
@@ -412,7 +459,6 @@ const mapCustomerDetail = (c) => {
     couponCount: c.coupons_count || 0,
     shippingAddress: addr || {},
     billingAddress: addr || {},
-    // Field dùng riêng cho QuickEdit drawer (xem template QuickEditCustomer.address section)
     defaultAddressText: addressText,
   }
 }
@@ -422,6 +468,7 @@ const fetchCustomerDetail = async () => {
   if (res?.data) {
     rawCustomer.value = res.data
     customer.value = mapCustomerDetail(res.data)
+    hydrateNotifValues(res.data.settings || {})
   }
 }
 
@@ -554,6 +601,18 @@ onMounted(() => {
 .toggle-field:last-child { border-bottom: 0; }
 .toggle-info strong { display: block; font-size: 0.9rem; color: var(--admin-text); }
 .toggle-info small { color: var(--admin-muted); font-size: 0.8rem; }
+.notif-mock-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
 .stock-toggle { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
 .stock-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
 .toggle-track {
