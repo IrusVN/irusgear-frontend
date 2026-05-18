@@ -133,9 +133,15 @@ const handleConfirmOrder = async () => {
   width: 380px;
 }
 
+/* Padding-bottom phải đủ chỗ cho sticky bar + (mobile) bottom nav:
+   - Tablet (768-991px): sticky bar sát đáy (bottom: 0), cao ~160px
+   - Mobile (<768px): sticky bar (bottom: 88px) + mobile-bottom-nav (88px) → cần nhiều space */
+
+/* Tablet: iPad Mini (768), Surface Duo open, iPad Air (820),
+   Zenbook Fold (853), Surface Pro 7 (912) — summary panel ẩn, sticky bar sát đáy */
 @media (max-width: 991.98px) {
   .checkout-page {
-    padding-bottom: 170px;
+    padding-bottom: 180px;
   }
 
   .checkout-page__summary-col {
@@ -143,21 +149,32 @@ const handleConfirmOrder = async () => {
   }
 }
 
+/* Mobile lớn: iPhone 14 Pro Max (430), Pixel 7 (412), iPhone XR (414),
+   Samsung S20 Ultra (412), Galaxy A51/71 (412) */
 @media (max-width: 767.98px) {
   .checkout-page {
-    padding-bottom: 160px;
+    padding-bottom: 250px;
   }
 }
 
+/* Mobile trung: iPhone 12 Pro (390), iPhone SE (375), Surface Duo closed (540) */
 @media (max-width: 575.98px) {
   .checkout-page {
-    padding-bottom: 145px;
+    padding-bottom: 240px;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile nhỏ: Samsung S8+ (360), Galaxy Z Fold 5 mở */
+@media (max-width: 380px) {
   .checkout-page {
-    padding: 14px 0 130px;
+    padding: 14px 0 230px;
+  }
+}
+
+/* Galaxy Z Fold 5 closed (344px) — extreme narrow */
+@media (max-width: 360px) {
+  .checkout-page {
+    padding: 12px 0 220px;
   }
 }
 </style>

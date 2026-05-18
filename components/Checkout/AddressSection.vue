@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch, nextTick } from "vue";
 import { toast } from "vue-sonner";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import AddressCard from "@/components/Checkout/AddressCard.vue";
@@ -116,28 +116,43 @@ const swiperEl = ref(null);
 const prevBtn = ref(null);
 const nextBtn = ref(null);
 let addressSwiper = null;
+let SwiperClass = null;
+let SwiperModules = null;
+
+const initSwiper = () => {
+  if (!swiperEl.value || !SwiperClass) return;
+  if (addressSwiper && !addressSwiper.destroyed) {
+    addressSwiper.destroy(true, true);
+  }
+  addressSwiper = new SwiperClass(swiperEl.value, {
+    modules: [SwiperModules.Navigation],
+    slidesPerView: "auto",
+    spaceBetween: 16,
+    navigation: { nextEl: nextBtn.value, prevEl: prevBtn.value },
+    observer: true,
+    observeParents: true,
+  });
+};
 
 onMounted(async () => {
-  if (!import.meta.client || !swiperEl.value) return;
+  if (!import.meta.client) return;
 
   const [{ default: Swiper }, modules] = await Promise.all([
     import("swiper"),
     import("swiper/modules"),
   ]);
+  SwiperClass = Swiper;
+  SwiperModules = modules;
 
-  const { Navigation } = modules;
+  initSwiper();
+});
 
-  addressSwiper = new Swiper(swiperEl.value, {
-    modules: [Navigation],
-    slidesPerView: "auto",
-    spaceBetween: 16,
-    navigation: {
-      nextEl: nextBtn.value,
-      prevEl: prevBtn.value,
-    },
-    observer: true,
-    observeParents: true,
-  });
+// Re-init khi DOM swiper xuất hiện trở lại (vd: sau khi đóng AddressForm —
+// v-if/v-else-if toggle khiến container cũ bị destroy + tạo lại element mới).
+watch(swiperEl, async (newEl) => {
+  if (!newEl || !SwiperClass) return;
+  await nextTick();
+  initSwiper();
 });
 
 onUnmounted(() => {
@@ -368,6 +383,8 @@ const handleDeleteAddress = async (id) => {
   }
 }
 
+/* Mobile: dùng "peek next card" pattern — slide width ~88% để hé thấy mép card
+   tiếp theo bên phải → user biết có thể vuốt qua mà không cần dots/buttons. */
 @media (max-width: 575.98px) {
   .address-section__header {
     padding: 12px 14px 10px;
@@ -388,8 +405,9 @@ const handleDeleteAddress = async (id) => {
 
   .address-section__skeleton-card {
     height: 80px;
-    min-width: calc(100vw - 48px);
-    max-width: calc(100vw - 48px);
+    width: 88%;
+    min-width: 0;
+    max-width: 88%;
   }
 
   .address-swiper {
@@ -397,9 +415,63 @@ const handleDeleteAddress = async (id) => {
   }
 
   .address-swiper .swiper-slide {
-    width: calc(100vw - 48px);
-    min-width: calc(100vw - 48px);
-    max-width: calc(100vw - 48px);
+    width: 88%;
+    min-width: 0;
+    max-width: 88%;
+  }
+}
+
+/* Mobile nhỏ: Samsung S8+ (360), iPhone SE (375), Galaxy Z Fold mở */
+@media (max-width: 380px) {
+  .address-section__header {
+    padding: 10px 12px 8px;
+  }
+
+  .address-section__title {
+    font-size: 13px;
+  }
+
+  .address-section__add-btn {
+    font-size: 11px;
+    padding: 5px 10px;
+    gap: 4px;
+  }
+
+  .address-swiper {
+    padding: 8px 10px;
+  }
+
+  .address-section__empty {
+    padding: 24px 16px;
+  }
+
+  .address-section__empty-icon {
+    font-size: 40px;
+  }
+}
+
+/* Galaxy Z Fold 5 closed (344px) — extreme narrow */
+@media (max-width: 360px) {
+  .address-section__header-row {
+    gap: 8px;
+  }
+
+  .address-section__title {
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .address-section__title i {
+    font-size: 14px;
+  }
+
+  .address-section__add-btn {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .address-swiper {
+    padding: 6px 8px;
   }
 }
 </style>

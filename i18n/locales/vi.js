@@ -372,6 +372,7 @@ export default {
     cartOf: "Giỏ hàng của bạn",
     addedToCart: "Đã thêm sản phẩm vào giỏ",
     quantity: "Số lượng",
+    moreItems: "sản phẩm khác",
     productsInCart: "{count} sản phẩm trong giỏ",
     total: "Thành tiền",
     subtotal: "Tạm tính",

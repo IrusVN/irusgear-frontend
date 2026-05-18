@@ -129,7 +129,8 @@ onUnmounted(() => {
   border: 1px solid #ececf1;
   border-radius: 18px;
   overflow: hidden;
-  width: 870px;
+  width: 100%;
+  max-width: 870px;
 }
 
 .delivery-options__header {
@@ -284,11 +285,13 @@ onUnmounted(() => {
   }
 }
 
+/* Mobile: "peek next card" — slide ~88% để hé mép card kế bên,
+   user thấy ngay là carousel có thể vuốt được, không cần dots/buttons. */
 @media (max-width: 575.98px) {
   .delivery-swiper .swiper-slide {
-    width: calc(100vw - 28px);
-    min-width: calc(100vw - 28px);
-    max-width: calc(100vw - 28px);
+    width: 88%;
+    min-width: 0;
+    max-width: 88%;
   }
 
   .delivery-swiper {
@@ -306,6 +309,37 @@ onUnmounted(() => {
   .delivery-options__empty,
   .delivery-options__loading {
     padding: 12px 16px;
+  }
+}
+
+/* Mobile nhỏ: Samsung S8+ (360), iPhone SE (375), Galaxy Z Fold mở */
+@media (max-width: 380px) {
+  .delivery-swiper {
+    padding: 8px 10px;
+  }
+
+  .delivery-options__header {
+    padding: 12px 14px 10px;
+  }
+
+  .delivery-options__title {
+    font-size: 14px;
+  }
+}
+
+/* Galaxy Z Fold 5 closed (344px) — extreme narrow */
+@media (max-width: 360px) {
+  .delivery-swiper {
+    padding: 6px 8px;
+  }
+
+  .delivery-options__header {
+    padding: 10px 12px 8px;
+  }
+
+  .delivery-options__title {
+    font-size: 13px;
+    gap: 6px;
   }
 }
 </style>
