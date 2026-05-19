@@ -227,14 +227,29 @@
                 <div class="toggle-info">
                   <strong>{{ n.label }}</strong>
                   <small>{{ n.description }}</small>
+                  <span v-if="n.mock" class="notif-mock-badge">{{ $t('admin.customers.notifMockBadge') }}</span>
                 </div>
-                <label class="stock-toggle"><input type="checkbox" :checked="n.default" /><span class="toggle-track"></span></label>
+                <label class="stock-toggle">
+                  <input
+                    type="checkbox"
+                    :checked="notifValues[n.key]"
+                    :disabled="n.mock || notifSavingKey === n.key"
+                    @change="onNotifToggle(n, $event.target.checked)"
+                  />
+                  <span class="toggle-track"></span>
+                </label>
               </div>
             </div>
           </div>
         </div>
       </div>
     </template>
+
+    <QuickEditCustomer
+      v-model="showQuickEdit"
+      :customer="customer"
+      @updated="onQuickEditUpdated"
+    />
   </div>
 </template>
 
@@ -243,8 +258,10 @@ import { ref, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import QuickEditCustomer from '@/components/Admin/customers/QuickEditCustomer.vue'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -268,11 +285,62 @@ const tabs = computed(() => [
 ])
 
 const notificationSettings = computed(() => [
-  { key: 'email_order', label: t('admin.customers.notifEmailOrder'), description: t('admin.customers.notifEmailOrderDesc'), default: true },
-  { key: 'email_promo', label: t('admin.customers.notifEmailPromo'), description: t('admin.customers.notifEmailPromoDesc'), default: true },
-  { key: 'email_account', label: t('admin.customers.notifEmailAccount'), description: t('admin.customers.notifEmailAccountDesc'), default: false },
-  { key: 'sms_order', label: t('admin.customers.notifSmsOrder'), description: t('admin.customers.notifSmsOrderDesc'), default: false },
+  {
+    key: 'email_order',
+    label: t('admin.customers.notifEmailOrder'),
+    description: t('admin.customers.notifEmailOrderDesc'),
+    settingKey: 'notify_order_email',
+    defaultValue: true,
+    mock: false,
+  },
+  { key: 'email_promo', label: t('admin.customers.notifEmailPromo'), description: t('admin.customers.notifEmailPromoDesc'), defaultValue: true, mock: true },
+  {
+    key: 'email_account',
+    label: t('admin.customers.notifEmailAccount'),
+    description: t('admin.customers.notifEmailAccountDesc'),
+    settingKey: 'notify_login_telegram',
+    defaultValue: true,
+    mock: false,
+  },
+  { key: 'sms_order', label: t('admin.customers.notifSmsOrder'), description: t('admin.customers.notifSmsOrderDesc'), defaultValue: false, mock: true },
 ])
+
+const notifValues = ref({})
+const notifSavingKey = ref(null)
+
+const hydrateNotifValues = (settings = {}) => {
+  const out = {}
+  for (const n of notificationSettings.value) {
+    out[n.key] = n.settingKey
+      ? (settings[n.settingKey] ?? n.defaultValue)
+      : n.defaultValue
+  }
+  notifValues.value = out
+}
+
+const onNotifToggle = async (notif, newValue) => {
+  if (notif.mock) {
+    notifValues.value[notif.key] = !newValue
+    toast.info(t('admin.customers.notifMockToast'))
+    return
+  }
+  if (!notif.settingKey || notifSavingKey.value) return
+
+  const previous = notifValues.value[notif.key]
+  notifValues.value[notif.key] = newValue
+  notifSavingKey.value = notif.key
+  try {
+    await admin.update('users', customerId.value, {
+      settings: { [notif.settingKey]: newValue },
+    })
+    toast.success(t('admin.customers.notifUpdateSuccess'))
+  } catch (e) {
+    notifValues.value[notif.key] = previous
+    toast.error(e?.data?.message || e?.message || t('admin.customers.notifUpdateFailed'))
+  } finally {
+    notifSavingKey.value = null
+  }
+}
 
 /* ── customer orders ── */
 const customerOrders = ref([])
@@ -321,20 +389,11 @@ const formatCompact = (n) => {
 }
 const formatDateShort = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-const statusLabel = (s) => ({
-  active: t('admin.status.active'),
-  inactive: t('admin.status.inactive'),
-  blocked: t('admin.status.blocked'),
-}[s] || s)
-const statusVariant = (s) => ({ active: 'success', inactive: 'neutral', blocked: 'danger' }[s] || 'neutral')
-const paymentLabel = (s) => ({
-  pending: t('admin.status.pending'),
-  paid: t('admin.status.paid'),
-  failed: t('admin.status.failed'),
-  cancelled: t('admin.status.cancelled'),
-  refunded: t('admin.status.refunded'),
-}[s] || s)
-const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
+const { formatUserStatus, formatPaymentStatus } = useStatusFormat()
+const statusLabel = (s) => formatUserStatus(s).label
+const statusVariant = (s) => formatUserStatus(s).variant
+const paymentLabel = (s) => formatPaymentStatus(s).label
+const paymentVariant = (s) => formatPaymentStatus(s).variant
 
 const { confirm } = useConfirm()
 const isDeleting = ref(false)
@@ -356,16 +415,36 @@ const handleDelete = async () => {
     isDeleting.value = false
   }
 }
-const handleEditDetails = () => toast.info(t('admin.customers.editDetailsMock'))
+const showQuickEdit = ref(false)
+const rawCustomer = ref(null)
+
+const handleEditDetails = () => {
+  if (!rawCustomer.value) return
+  showQuickEdit.value = true
+}
+
+const onQuickEditUpdated = () => {
+  fetchCustomerDetail()
+}
 
 const mapCustomerDetail = (c) => {
   const loyalty = c.member_rank || { name_en: 'Standard', threshold: 0 }
+  const addr = c.default_address || null
+  const addressParts = addr
+    ? [addr.line1, addr.line2, addr.full_address, addr.city, addr.country].filter(Boolean)
+    : []
+  const addressText = addr?.full_address || (addressParts.length ? addressParts.join(', ') : null)
+
   return {
     id: c.id,
     customerCode: `#CUS${c.id}`,
     createdAt: c.member_since || c.created_at,
     name: c.full_name || c.name,
+    first_name: c.first_name,
+    last_name: c.last_name,
     email: c.email,
+    phone_number: c.phone || c.phone_number,
+    email_verified: typeof c.email_verified === 'boolean' ? c.email_verified : Boolean(c.email_verified_at),
     avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
     orders: c.orders || 0,
     totalSpent: c.total_spent || 0,
@@ -378,15 +457,18 @@ const mapCustomerDetail = (c) => {
     accountBalance: c.account_balance || 0,
     wishlistCount: c.wishlist_count || 0,
     couponCount: c.coupons_count || 0,
-    shippingAddress: c.default_address || {},
-    billingAddress: c.default_address || {},
+    shippingAddress: addr || {},
+    billingAddress: addr || {},
+    defaultAddressText: addressText,
   }
 }
 
 const fetchCustomerDetail = async () => {
   const res = await admin.fetchOne(`customers/${customerId.value}`)
   if (res?.data) {
+    rawCustomer.value = res.data
     customer.value = mapCustomerDetail(res.data)
+    hydrateNotifValues(res.data.settings || {})
   }
 }
 
@@ -519,6 +601,18 @@ onMounted(() => {
 .toggle-field:last-child { border-bottom: 0; }
 .toggle-info strong { display: block; font-size: 0.9rem; color: var(--admin-text); }
 .toggle-info small { color: var(--admin-muted); font-size: 0.8rem; }
+.notif-mock-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
 .stock-toggle { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
 .stock-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
 .toggle-track {

@@ -172,4 +172,38 @@ const quickLinks = computed(() => [
     max-width: 100%;
   }
 }
+
+@media (max-width: 480px) {
+  .cart-empty {
+    border-radius: 18px;
+    gap: 12px;
+    padding: 22px 14px 26px;
+  }
+
+  .cart-empty__icon {
+    font-size: 26px;
+    height: 68px;
+    width: 68px;
+  }
+
+  .cart-empty__title {
+    font-size: 20px;
+  }
+
+  .cart-empty__description {
+    font-size: 13px;
+  }
+
+  .cart-empty__cta {
+    font-size: 14px;
+    min-height: 42px;
+    padding: 0 18px;
+  }
+
+  .cart-empty__chip {
+    font-size: 12px;
+    min-height: 34px;
+    padding: 0 12px;
+  }
+}
 </style>

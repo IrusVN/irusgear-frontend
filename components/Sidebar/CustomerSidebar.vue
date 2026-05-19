@@ -34,18 +34,22 @@
                 <NuxtLink :to="localePath('/cart')" class="btn header-icon-btn position-relative"
                   :aria-label="$t('cart.cart')">
                   <i class="bi bi-cart3"></i>
-                  <span v-if="itemCount > 0"
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
-                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
-                    {{ itemCount }}
-                  </span>
+                  <ClientOnly>
+                    <span v-if="itemCount > 0"
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                      style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
+                      {{ itemCount }}
+                    </span>
+                  </ClientOnly>
                 </NuxtLink>
 
                 <Transition name="dropdown-fade">
                   <div v-if="isCartDropdownOpen" class="header-dropdown header-dropdown--cart">
                     <div class="header-dropdown__header">
                       <span class="header-dropdown__title">Giỏ hàng</span>
-                      <span v-if="itemCount > 0" class="header-dropdown__count">{{ itemCount }} sản phẩm</span>
+                      <ClientOnly>
+                        <span v-if="itemCount > 0" class="header-dropdown__count">{{ itemCount }} sản phẩm</span>
+                      </ClientOnly>
                     </div>
 
                     <div v-if="cartStore.items.length === 0" class="header-dropdown__empty">
@@ -110,11 +114,13 @@
                 @mouseenter="handleNotiDropdownEnter" @mouseleave="isNotiDropdownOpen = false">
                 <button type="button" class="btn header-icon-btn" :aria-label="$t('common.notification')">
                   <i class="bi bi-bell"></i>
-                  <span v-if="notificationStore.unreadCount > 0"
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
-                    style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
-                    {{ notificationStore.unreadCount > 9 ? '9+' : notificationStore.unreadCount }}
-                  </span>
+                  <ClientOnly>
+                    <span v-if="notificationStore.unreadCount > 0"
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white"
+                      style="min-width:1.1rem;height:1.1rem;padding:0;font-size:0.65rem;display:inline-flex;align-items:center;justify-content:center;">
+                      {{ notificationStore.unreadCount > 9 ? '9+' : notificationStore.unreadCount }}
+                    </span>
+                  </ClientOnly>
                 </button>
 
                 <Transition name="dropdown-fade">
@@ -150,7 +156,12 @@
                     <div v-else class="header-dropdown__body">
                       <div class="header-dropdown__scroll">
                         <div v-for="noti in notificationStore.notifications" :key="noti.id" class="noti-item"
-                          :class="{ 'noti-item--unread': !noti.isRead }" @click="handleNotiClick(noti)">
+                          :class="{ 'noti-item--unread': !noti.isRead }"
+                          role="button" tabindex="0"
+                          @mouseenter="handleNotiHover(noti)"
+                          @click="handleNotiClick(noti)"
+                          @keydown.enter.prevent="handleNotiClick(noti)"
+                          @keydown.space.prevent="handleNotiClick(noti)">
                           <div class="noti-item__icon" :class="`noti-item__icon--${noti.type || 'system'}`">
                             <i :class="noti.icon || 'bi bi-bell'"></i>
                           </div>
@@ -160,7 +171,7 @@
                           </div>
                           <div class="noti-item__actions">
                             <span v-if="!noti.isRead" class="noti-item__dot"></span>
-                            <button type="button" class="noti-item__close" aria-label="Xoá thông báo"
+                            <button type="button" class="noti-item__close" :aria-label="$t('notification.removeAria')"
                               @click.stop="handleRemoveNotification(noti.id)">
                               <i class="bi bi-x"></i>
                             </button>
@@ -297,7 +308,108 @@
       <NuxtLink :to="localePath('/')" class="mobile-top-nav__brand" aria-label="IrusGear">
         <img src="@/public/image/logo-irusgear-white.png" alt="IrusGear" class="mobile-top-nav__logo">
       </NuxtLink>
+
+      <!-- Notification icon (mobile) -->
+      <button
+        type="button"
+        class="mobile-top-nav__noti-btn"
+        :aria-label="$t('common.notification')"
+        :aria-expanded="isMobileNotiDropdownOpen ? 'true' : 'false'"
+        aria-controls="mobile-noti-dropdown"
+        @click="handleMobileNotiToggle"
+      >
+        <i class="bi bi-bell"></i>
+        <ClientOnly>
+          <span v-if="notificationStore.unreadCount > 0" class="mobile-top-nav__noti-badge">
+            {{ notificationStore.unreadCount > 9 ? '9+' : notificationStore.unreadCount }}
+          </span>
+        </ClientOnly>
+      </button>
     </header>
+
+    <!-- Mobile Notification Dropdown -->
+    <Transition name="mobile-noti-panel">
+      <div
+        v-if="isMobileNotiDropdownOpen"
+        id="mobile-noti-dropdown"
+        class="mobile-noti-panel d-md-none"
+        role="dialog"
+        :aria-label="$t('common.notification')"
+      >
+        <div class="mobile-noti-panel__header">
+          <h3>{{ $t('common.notification') }}</h3>
+          <div class="mobile-noti-panel__header-actions">
+            <button
+              v-if="notificationStore.unreadCount > 0"
+              type="button"
+              class="mobile-noti-panel__mark-read"
+              @click="handleMarkAllRead"
+            >
+              {{ $t('notification.markAllRead') }}
+            </button>
+            <button
+              type="button"
+              class="mobile-noti-panel__close"
+              :aria-label="$t('common.close')"
+              @click="closeMobileNotiDropdown"
+            >
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading spinner -->
+        <div v-if="notificationStore.isLoading" class="mobile-noti-panel__state">
+          <div class="noti-spinner"></div>
+          <p>{{ $t('common.loading') }}</p>
+        </div>
+
+        <!-- Error state -->
+        <div v-else-if="notiLoadError" class="mobile-noti-panel__state">
+          <i class="bi bi-exclamation-triangle"></i>
+          <p>{{ $t('notification.loadError') }}</p>
+        </div>
+
+        <!-- Empty state -->
+        <div
+          v-else-if="!notificationStore.isLoading && notificationStore.notifications.length === 0"
+          class="mobile-noti-panel__state"
+        >
+          <i class="bi bi-bell-slash"></i>
+          <p>{{ $t('notification.empty') }}</p>
+        </div>
+
+        <!-- Notifications list -->
+        <div v-else class="mobile-noti-panel__body">
+          <div
+            v-for="noti in notificationStore.notifications"
+            :key="noti.id"
+            class="noti-item"
+            :class="{ 'noti-item--unread': !noti.isRead }"
+            @click="handleMobileNotiClick(noti)"
+          >
+            <div class="noti-item__icon" :class="`noti-item__icon--${noti.type || 'system'}`">
+              <i :class="noti.icon || 'bi bi-bell'"></i>
+            </div>
+            <div class="noti-item__content">
+              <p class="noti-item__text">{{ noti.text }}</p>
+              <span class="noti-item__time">{{ noti.time }}</span>
+            </div>
+            <div class="noti-item__actions">
+              <span v-if="!noti.isRead" class="noti-item__dot"></span>
+              <button
+                type="button"
+                class="noti-item__close"
+                :aria-label="$t('common.remove')"
+                @click.stop="handleRemoveNotification(noti.id)"
+              >
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
 
     <Transition name="mobile-category-overlay">
       <div v-if="isMobileCategorySidebarOpen" class="mobile-category-overlay d-md-none"
@@ -383,7 +495,9 @@
           :class="{ active: isMobileNavActive('/profile') }" :aria-label="$t('common.wishlist')">
           <i class="bi" :class="isMobileNavActive('/profile') ? 'bi-heart-fill' : 'bi-heart'"></i>
           <span>{{ $t('common.wishlist') }}</span>
-          <span v-if="wishlistCount > 0" class="mobile-nav-badge">{{ wishlistCount }}</span>
+          <ClientOnly>
+            <span v-if="wishlistCount > 0" class="mobile-nav-badge">{{ wishlistCount }}</span>
+          </ClientOnly>
         </NuxtLink>
 
         <NuxtLink v-if="user" to="/profile" class="mobile-nav-item" :class="{ active: isMobileNavActive('/profile') }"
@@ -407,7 +521,9 @@
             <NuxtLink to="/cart" class="mobile-fab-item" :aria-label="$t('cart.cart')" @click="isMobileFabOpen = false">
               <i class="bi bi-cart3"></i>
               <span class="mobile-fab-tooltip">{{ $t('cart.cart') }}</span>
-              <span v-if="itemCount > 0" class="mobile-fab-badge">{{ itemCount }}</span>
+              <ClientOnly>
+                <span v-if="itemCount > 0" class="mobile-fab-badge">{{ itemCount }}</span>
+              </ClientOnly>
             </NuxtLink>
 
             <button type="button" class="mobile-fab-item" :aria-label="$t('common.language')"
@@ -419,7 +535,9 @@
             <button type="button" class="mobile-fab-item" aria-label="Chat với AI"
               @click="chatbotStore.toggleChat(); isMobileFabOpen = false">
               <i class="bi bi-chat-dots-fill"></i>
-              <span v-if="chatbotStore.hasNewMessage" class="mobile-fab-badge">!</span>
+              <ClientOnly>
+                <span v-if="chatbotStore.hasNewMessage" class="mobile-fab-badge">!</span>
+              </ClientOnly>
               <span class="mobile-fab-tooltip">Trợ lý AI</span>
             </button>
           </div>
@@ -489,6 +607,7 @@ const headerSearchKeyword = ref('')
 const searchAnchorRect = ref(null)
 const isCartDropdownOpen = ref(false)
 const isNotiDropdownOpen = ref(false)
+const isMobileNotiDropdownOpen = ref(false)
 const notiLoadError = ref(false)
 const searchQuery = ref('')
 let customerSidebarResizeObserver = null
@@ -794,6 +913,15 @@ const handleDocumentPointerDown = (event) => {
     }
   }
 
+  // Đóng mobile noti dropdown khi click bên ngoài
+  if (isMobileNotiDropdownOpen.value) {
+    const panel = document.getElementById('mobile-noti-dropdown')
+    const notiBtn = target instanceof Element ? target.closest('.mobile-top-nav__noti-btn') : null
+    if (!notiBtn && panel && !panel.contains(target)) {
+      closeMobileNotiDropdown()
+    }
+  }
+
   if (!isHeaderCategoryMenuOpen.value) return
 
   const clickedButton = productsButtonRef.value?.contains(target)
@@ -807,6 +935,7 @@ const handleDocumentKeydown = (event) => {
   if (event.key !== 'Escape') return
 
   closeMobileCategorySidebar()
+  closeMobileNotiDropdown()
 }
 
 const getSecondaryNavHideThreshold = () => {
@@ -851,6 +980,7 @@ watch(
   () => route.fullPath,
   async () => {
     closeMobileCategorySidebar()
+    closeMobileNotiDropdown()
     isMobileFabOpen.value = false
     isSearchDropdownOpen.value = false
     searchDropdownMode.value = 'desktop'
@@ -1114,10 +1244,35 @@ const handleNotiDropdownEnter = () => {
   }
 }
 
-const handleNotiClick = (noti) => {
+const handleNotiHover = (noti) => {
+  if (!noti || noti.isRead) return
+  notificationStore.markAsRead(noti.id)
+}
+
+const navigateNotification = async (noti) => {
+  const target = noti?.actionUrl || noti?.action_url
+  if (!target) return false
+  try {
+    // Nếu là URL ngoài → mở tab mới; nội bộ → navigateTo
+    const isExternal = /^https?:\/\//i.test(target)
+    if (isExternal) {
+      if (typeof window !== 'undefined') window.open(target, '_blank', 'noopener')
+    } else {
+      await navigateTo(target)
+    }
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+const handleNotiClick = async (noti) => {
+  if (!noti) return
   if (!noti.isRead) {
     notificationStore.markAsRead(noti.id)
   }
+  isNotiDropdownOpen.value = false
+  await navigateNotification(noti)
 }
 
 const handleMarkAllRead = () => {
@@ -1126,6 +1281,37 @@ const handleMarkAllRead = () => {
 
 const handleRemoveNotification = async (id) => {
   await notificationStore.removeNotification(id)
+}
+
+const closeMobileNotiDropdown = () => {
+  isMobileNotiDropdownOpen.value = false
+}
+
+const handleMobileNotiToggle = () => {
+  if (isMobileNotiDropdownOpen.value) {
+    closeMobileNotiDropdown()
+    return
+  }
+  isMobileNotiDropdownOpen.value = true
+  if (!user.value) return
+  if (notificationStore.isLoading) return
+
+  if (!notificationStore.hydrated || !_notiFetched) {
+    notiLoadError.value = false
+    notificationStore.fetchNotifications().catch(() => {
+      notiLoadError.value = true
+    })
+    _notiFetched = true
+  }
+}
+
+const handleMobileNotiClick = async (noti) => {
+  if (!noti) return
+  if (!noti.isRead) {
+    notificationStore.markAsRead(noti.id)
+  }
+  closeMobileNotiDropdown()
+  await navigateNotification(noti)
 }
 
 const confirmRemoveCartItem = (item) => {
@@ -1498,6 +1684,166 @@ const featuredNavItems = computed(() => [
     height: 28px;
     object-fit: contain;
     filter: drop-shadow(0 1px 4px rgba(255, 255, 255, 0.08));
+  }
+
+  .mobile-top-nav__noti-btn {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    font-size: 1.05rem;
+    line-height: 1;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .mobile-top-nav__noti-btn:active {
+    transform: scale(0.94);
+  }
+
+  .mobile-top-nav__noti-btn i {
+    line-height: 1;
+  }
+
+  .mobile-top-nav__noti-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #dc2626;
+    color: #ffffff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1;
+    border: 1.5px solid #000000;
+    box-sizing: border-box;
+  }
+
+  .mobile-noti-panel {
+    position: fixed;
+    top: var(--irus-mobile-top-nav-total-height, calc(64px + env(safe-area-inset-top, 0px)));
+    right: 12px;
+    z-index: 1059;
+    display: flex;
+    flex-direction: column;
+    width: min(360px, calc(100vw - 24px));
+    max-height: 280px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  .mobile-noti-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    background: #fafafa;
+  }
+
+  .mobile-noti-panel__header h3 {
+    margin: 0;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .mobile-noti-panel__header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mobile-noti-panel__mark-read {
+    border: none;
+    background: transparent;
+    color: #2563eb;
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 4px 6px;
+    border-radius: 999px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-noti-panel__mark-read:active {
+    background: rgba(37, 99, 235, 0.08);
+  }
+
+  .mobile-noti-panel__close {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.06);
+    color: #0f172a;
+    font-size: 0.85rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-noti-panel__close:active {
+    transform: scale(0.94);
+  }
+
+  .mobile-noti-panel__body {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-noti-panel__state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 20px 16px;
+    color: #6b7280;
+    text-align: center;
+  }
+
+  .mobile-noti-panel__state i {
+    font-size: 1.4rem;
+    color: #9ca3af;
+  }
+
+  .mobile-noti-panel__state p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+
+  .mobile-noti-panel-enter-active,
+  .mobile-noti-panel-leave-active {
+    transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+  }
+
+  .mobile-noti-panel-enter-from,
+  .mobile-noti-panel-leave-to {
+    opacity: 0;
+    transform: translateY(-12px);
   }
 
   .mobile-category-overlay {
@@ -2394,7 +2740,13 @@ const featuredNavItems = computed(() => [
   padding: 12px 16px;
   border-bottom: 1px solid rgba(15, 23, 42, 0.05);
   transition: background-color 0.15s ease;
-  cursor: default;
+  cursor: pointer;
+  outline: none;
+}
+
+.noti-item:focus-visible {
+  background: rgba(15, 23, 42, 0.04);
+  box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.4);
 }
 
 .noti-item:last-child {

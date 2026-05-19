@@ -1,151 +1,131 @@
 <template>
-  <Teleport to="body">
-    <Transition name="profile-password-fade">
-      <div
-        v-if="modelValue"
-        class="profile-password"
-        role="presentation"
-        @click.self="close"
-      >
-        <aside
-          class="profile-password__panel"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="profile-password-title"
-        >
-          <header class="profile-password__header">
-            <h2 id="profile-password-title" class="profile-password__title">
-              Đổi mật khẩu
-            </h2>
-            <button
-              type="button"
-              class="profile-password__close"
-              aria-label="Đóng"
-              @click="close"
-            >
-              <i class="bi bi-x-lg" aria-hidden="true"></i>
-            </button>
-          </header>
-
-          <form class="profile-password__form" @submit.prevent="submitPassword">
-            <div class="profile-password__body">
-              <label class="profile-password__field">
-                <span class="profile-password__label">Mật khẩu cũ</span>
-                <span class="profile-password__control-wrap">
-                  <input
-                    v-model.trim="form.currentPassword"
-                    :type="visibleFields.current ? 'text' : 'password'"
-                    class="profile-password__control"
-                    :class="{ 'is-invalid': errors.currentPassword }"
-                    placeholder="Nhập mật khẩu cũ của bạn"
-                    autocomplete="current-password"
-                    @input="clearError('currentPassword')"
-                  />
-                  <button
-                    type="button"
-                    class="profile-password__eye"
-                    :aria-label="visibleFields.current ? 'Ẩn mật khẩu cũ' : 'Hiện mật khẩu cũ'"
-                    @click="toggleVisibility('current')"
-                  >
-                    <i
-                      :class="visibleFields.current ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"
-                      aria-hidden="true"
-                    ></i>
-                  </button>
-                </span>
-                <span v-if="errors.currentPassword" class="profile-password__error">
-                  {{ errors.currentPassword }}
-                </span>
-              </label>
-
-              <label class="profile-password__field">
-                <span class="profile-password__label">Mật khẩu mới</span>
-                <span class="profile-password__control-wrap">
-                  <input
-                    v-model.trim="form.newPassword"
-                    :type="visibleFields.new ? 'text' : 'password'"
-                    class="profile-password__control"
-                    :class="{ 'is-invalid': errors.newPassword }"
-                    placeholder="Nhập mật khẩu mới của bạn"
-                    autocomplete="new-password"
-                    @input="clearError('newPassword')"
-                  />
-                  <button
-                    type="button"
-                    class="profile-password__eye"
-                    :aria-label="visibleFields.new ? 'Ẩn mật khẩu mới' : 'Hiện mật khẩu mới'"
-                    @click="toggleVisibility('new')"
-                  >
-                    <i
-                      :class="visibleFields.new ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"
-                      aria-hidden="true"
-                    ></i>
-                  </button>
-                </span>
-                <span class="profile-password__hint">
-                  <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
-                  <span>Mật khẩu tối thiểu 8 ký tự, có ít nhất chữ hoa và chữ thường, số</span>
-                </span>
-                <span v-if="errors.newPassword" class="profile-password__error">
-                  {{ errors.newPassword }}
-                </span>
-              </label>
-
-              <label class="profile-password__field">
-                <span class="profile-password__label">Nhập lại mật khẩu mới</span>
-                <span class="profile-password__control-wrap">
-                  <input
-                    v-model.trim="form.confirmPassword"
-                    :type="visibleFields.confirm ? 'text' : 'password'"
-                    class="profile-password__control"
-                    :class="{ 'is-invalid': errors.confirmPassword }"
-                    placeholder="Nhập lại mật khẩu mới của bạn"
-                    autocomplete="new-password"
-                    @input="clearError('confirmPassword')"
-                  />
-                  <button
-                    type="button"
-                    class="profile-password__eye"
-                    :aria-label="visibleFields.confirm ? 'Ẩn mật khẩu nhập lại' : 'Hiện mật khẩu nhập lại'"
-                    @click="toggleVisibility('confirm')"
-                  >
-                    <i
-                      :class="visibleFields.confirm ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"
-                      aria-hidden="true"
-                    ></i>
-                  </button>
-                </span>
-                <span v-if="errors.confirmPassword" class="profile-password__error">
-                  {{ errors.confirmPassword }}
-                </span>
-              </label>
-            </div>
-
-            <footer class="profile-password__footer">
+  <QuickView
+    :model-value="modelValue"
+    title="Đổi mật khẩu"
+    close-label="Đóng"
+    @update:model-value="(v) => emit('update:modelValue', v)"
+    @close="emit('close')"
+    @open="resetForm"
+  >
+    <template #body-wrapper>
+      <form class="profile-password__form" @submit.prevent="submitPassword">
+        <div class="quick-view__body profile-password__body">
+          <label class="profile-password__field">
+            <span class="profile-password__label">Mật khẩu cũ</span>
+            <span class="profile-password__control-wrap">
+              <input
+                v-model.trim="form.currentPassword"
+                :type="visibleFields.current ? 'text' : 'password'"
+                class="profile-password__control"
+                :class="{ 'is-invalid': errors.currentPassword }"
+                placeholder="Nhập mật khẩu cũ của bạn"
+                autocomplete="current-password"
+                @input="clearError('currentPassword')"
+              />
               <button
-                type="submit"
-                class="profile-password__submit"
-                :disabled="isSubmitting"
+                type="button"
+                class="profile-password__eye"
+                :aria-label="visibleFields.current ? 'Ẩn mật khẩu cũ' : 'Hiện mật khẩu cũ'"
+                @click="toggleVisibility('current')"
               >
-                <span
-                  v-if="isSubmitting"
-                  class="profile-password__spinner"
+                <i
+                  :class="visibleFields.current ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"
                   aria-hidden="true"
-                ></span>
-                <span>{{ isSubmitting ? "Đang đổi mật khẩu..." : "Đổi mật khẩu" }}</span>
+                ></i>
               </button>
-            </footer>
-          </form>
-        </aside>
-      </div>
-    </Transition>
-  </Teleport>
+            </span>
+            <span v-if="errors.currentPassword" class="profile-password__error">
+              {{ errors.currentPassword }}
+            </span>
+          </label>
+
+          <label class="profile-password__field">
+            <span class="profile-password__label">Mật khẩu mới</span>
+            <span class="profile-password__control-wrap">
+              <input
+                v-model.trim="form.newPassword"
+                :type="visibleFields.new ? 'text' : 'password'"
+                class="profile-password__control"
+                :class="{ 'is-invalid': errors.newPassword }"
+                placeholder="Nhập mật khẩu mới của bạn"
+                autocomplete="new-password"
+                @input="clearError('newPassword')"
+              />
+              <button
+                type="button"
+                class="profile-password__eye"
+                :aria-label="visibleFields.new ? 'Ẩn mật khẩu mới' : 'Hiện mật khẩu mới'"
+                @click="toggleVisibility('new')"
+              >
+                <i
+                  :class="visibleFields.new ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"
+                  aria-hidden="true"
+                ></i>
+              </button>
+            </span>
+            <span class="profile-password__hint">
+              <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+              <span>Mật khẩu tối thiểu 8 ký tự, có ít nhất chữ hoa và chữ thường, số</span>
+            </span>
+            <span v-if="errors.newPassword" class="profile-password__error">
+              {{ errors.newPassword }}
+            </span>
+          </label>
+
+          <label class="profile-password__field">
+            <span class="profile-password__label">Nhập lại mật khẩu mới</span>
+            <span class="profile-password__control-wrap">
+              <input
+                v-model.trim="form.confirmPassword"
+                :type="visibleFields.confirm ? 'text' : 'password'"
+                class="profile-password__control"
+                :class="{ 'is-invalid': errors.confirmPassword }"
+                placeholder="Nhập lại mật khẩu mới của bạn"
+                autocomplete="new-password"
+                @input="clearError('confirmPassword')"
+              />
+              <button
+                type="button"
+                class="profile-password__eye"
+                :aria-label="visibleFields.confirm ? 'Ẩn mật khẩu nhập lại' : 'Hiện mật khẩu nhập lại'"
+                @click="toggleVisibility('confirm')"
+              >
+                <i
+                  :class="visibleFields.confirm ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"
+                  aria-hidden="true"
+                ></i>
+              </button>
+            </span>
+            <span v-if="errors.confirmPassword" class="profile-password__error">
+              {{ errors.confirmPassword }}
+            </span>
+          </label>
+        </div>
+
+        <footer class="quick-view__footer profile-password__footer">
+          <button
+            type="submit"
+            class="profile-password__submit"
+            :disabled="isSubmitting"
+          >
+            <span
+              v-if="isSubmitting"
+              class="profile-password__spinner"
+              aria-hidden="true"
+            ></span>
+            <span>{{ isSubmitting ? "Đang đổi mật khẩu..." : "Đổi mật khẩu" }}</span>
+          </button>
+        </footer>
+      </form>
+    </template>
+  </QuickView>
 </template>
 
 <script setup>
-import { onBeforeUnmount, reactive, ref, watch } from "vue";
+import { reactive, ref } from "vue";
 import { toast } from "vue-sonner";
 import { useUserInfoStore } from "@/stores/userInfoStore";
+import QuickView from "@/components/Common/QuickView.vue";
 
 const props = defineProps({
   modelValue: {
@@ -159,7 +139,6 @@ const emit = defineEmits(["update:modelValue", "close", "updated"]);
 const userInfoStore = useUserInfoStore();
 
 const isSubmitting = ref(false);
-const previousBodyOverflow = ref("");
 
 const form = reactive({
   currentPassword: "",
@@ -197,17 +176,6 @@ const clearError = (field) => {
 
 const toggleVisibility = (field) => {
   visibleFields[field] = !visibleFields[field];
-};
-
-const lockBodyScroll = () => {
-  if (typeof document === "undefined") return;
-  previousBodyOverflow.value = document.body.style.overflow;
-  document.body.style.overflow = "hidden";
-};
-
-const unlockBodyScroll = () => {
-  if (typeof document === "undefined") return;
-  document.body.style.overflow = previousBodyOverflow.value;
 };
 
 const close = () => {
@@ -268,101 +236,14 @@ const submitPassword = async () => {
     isSubmitting.value = false;
   }
 };
-
-const onKeydown = (event) => {
-  if (event.key === "Escape" && props.modelValue) {
-    close();
-  }
-};
-
-watch(
-  () => props.modelValue,
-  (visible) => {
-    if (visible) {
-      resetForm();
-      lockBodyScroll();
-      window.addEventListener("keydown", onKeydown);
-      return;
-    }
-
-    unlockBodyScroll();
-    window.removeEventListener("keydown", onKeydown);
-  }
-);
-
-onBeforeUnmount(() => {
-  unlockBodyScroll();
-  if (typeof window !== "undefined") {
-    window.removeEventListener("keydown", onKeydown);
-  }
-});
 </script>
 
 <style scoped>
-.profile-password {
-  position: fixed;
-  inset: 0;
-  z-index: 10030;
-  display: flex;
-  justify-content: flex-end;
-  padding: 16px 16px 16px 0;
-  background: rgba(0, 0, 0, 0.56);
-  backdrop-filter: blur(3px);
-}
-
-.profile-password__panel {
-  display: flex;
-  flex-direction: column;
-  width: min(454px, calc(100vw - 16px));
-  height: 100%;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.18);
-}
-
-.profile-password__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 45px;
-  padding: 0 14px 0 13px;
-  border-bottom: 1px solid #edf0f3;
-}
-
-.profile-password__title {
-  margin: 0;
-  color: #111827;
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.4;
-}
-
-.profile-password__close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  color: #6b7280;
-  cursor: pointer;
-  background: #f3f4f6;
-  border: 0;
-  border-radius: 50%;
-  transition:
-    color 0.18s ease,
-    background-color 0.18s ease;
-}
-
-.profile-password__close:hover {
-  color: #111827;
-  background: #e5e7eb;
-}
-
-.profile-password__close i {
-  font-size: 10px;
-  line-height: 1;
-}
+/* Shell drawer (overlay/panel/header/transition/body padding) đã chuyển sang
+   <QuickView />. Ở đây chỉ giữ style nội dung password form.
+   Lưu ý: class .quick-view__body / .quick-view__footer được thêm song song để
+   kế thừa layout (padding, overflow, sticky shadow) từ stylesheet global của QuickView
+   khi cần — vì scoped chặn ở component biên, ta dùng style :deep ở dưới để override. */
 
 .profile-password__form {
   display: flex;
@@ -372,13 +253,7 @@ onBeforeUnmount(() => {
 }
 
 .profile-password__body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 13px;
-  min-height: 0;
-  padding: 16px 18px 24px;
-  overflow-y: auto;
+  /* override màu/gap riêng nếu cần */
 }
 
 .profile-password__field {
@@ -482,12 +357,6 @@ onBeforeUnmount(() => {
   line-height: 1.35;
 }
 
-.profile-password__footer {
-  padding: 13px 18px 24px;
-  background: #fff;
-  box-shadow: 0 -18px 34px rgba(255, 255, 255, 0.96);
-}
-
 .profile-password__submit {
   display: inline-flex;
   align-items: center;
@@ -526,41 +395,9 @@ onBeforeUnmount(() => {
   animation: profile-password-spin 0.8s linear infinite;
 }
 
-.profile-password-fade-enter-active,
-.profile-password-fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.profile-password-fade-enter-from,
-.profile-password-fade-leave-to {
-  opacity: 0;
-}
-
-.profile-password-fade-enter-active .profile-password__panel,
-.profile-password-fade-leave-active .profile-password__panel {
-  transition: transform 0.24s ease;
-}
-
-.profile-password-fade-enter-from .profile-password__panel,
-.profile-password-fade-leave-to .profile-password__panel {
-  transform: translateX(16px);
-}
-
 @keyframes profile-password-spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 640px) {
-  .profile-password {
-    padding: 0;
-  }
-
-  .profile-password__panel {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
   }
 }
 </style>

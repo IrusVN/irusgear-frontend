@@ -18,6 +18,32 @@
       </button>
 
       <div v-if="expanded" class="checkout-sticky-bar__details">
+        <!-- Items list: thumbnail + name (clamp 2 lines) + qty.
+             Field name: cart store normalize sang camelCase (productName), không phải snake_case. -->
+        <div v-if="cartStore.selectedItems.length" class="checkout-sticky-bar__items">
+          <div
+            v-for="item in cartStore.selectedItems.slice(0, 3)"
+            :key="item.id"
+            class="checkout-sticky-bar__item"
+          >
+            <img
+              :src="item.thumbnail || item.image || '/placeholder.png'"
+              :alt="item.productName"
+              class="checkout-sticky-bar__item-thumb"
+            />
+            <div class="checkout-sticky-bar__item-info">
+              <span class="checkout-sticky-bar__item-name">{{ item.productName || item.product_name || item.name }}</span>
+              <span v-if="item.variantName || item.meta?.variant_name" class="checkout-sticky-bar__item-variant">
+                {{ item.variantName || item.meta?.variant_name }}
+              </span>
+            </div>
+            <span class="checkout-sticky-bar__item-qty">x{{ item.quantity }}</span>
+          </div>
+          <div v-if="cartStore.selectedItems.length > 3" class="checkout-sticky-bar__more">
+            +{{ cartStore.selectedItems.length - 3 }} {{ $t("cart.moreItems") }}
+          </div>
+        </div>
+
         <div class="checkout-sticky-bar__detail-row">
           <span>{{ $t("checkout.subtotal") }}</span>
           <span>{{ checkoutStore.subtotal?.formatted || "0đ" }}</span>
@@ -42,6 +68,20 @@
           <strong>{{ checkoutStore.finalTotal?.formatted || "0đ" }}</strong>
         </div>
       </div>
+
+      <label class="checkout-sticky-bar__agreement">
+        <input
+          type="checkbox"
+          v-model="checkoutStore.agreedToTerms"
+          class="checkout-sticky-bar__checkbox"
+        />
+        <span class="checkout-sticky-bar__agreement-text">
+          {{ $t("checkout.agreeTerms") }}
+          <a :href="$t('checkout.termsUrl')" target="_blank" rel="noopener noreferrer" @click.stop>{{ $t("checkout.terms") }}</a>
+          {{ $t("checkout.and") }}
+          <a :href="$t('checkout.shippingPolicyUrl')" target="_blank" rel="noopener noreferrer" @click.stop>{{ $t("checkout.shippingPolicy") }}</a>
+        </span>
+      </label>
 
       <button
         type="button"
@@ -168,8 +208,74 @@ onBeforeUnmount(() => {
   background: #fafafa;
   border-radius: 12px;
   margin-bottom: 8px;
-  overflow: hidden;
+  max-height: 50vh;
+  overflow-y: auto;
   padding: 12px 14px;
+}
+
+.checkout-sticky-bar__items {
+  border-bottom: 1px dashed #e4e4e7;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+
+.checkout-sticky-bar__item {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.checkout-sticky-bar__item-thumb {
+  background: #fff;
+  border: 1px solid #ececf1;
+  border-radius: 8px;
+  flex-shrink: 0;
+  height: 40px;
+  object-fit: cover;
+  width: 40px;
+}
+
+.checkout-sticky-bar__item-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.checkout-sticky-bar__item-name {
+  color: #18181b;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.checkout-sticky-bar__item-variant {
+  color: #71717a;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.checkout-sticky-bar__item-qty {
+  color: #52525b;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.checkout-sticky-bar__more {
+  color: #71717a;
+  font-size: 12px;
+  font-style: italic;
+  padding-left: 50px;
 }
 
 .checkout-sticky-bar__detail-row {
@@ -230,6 +336,66 @@ onBeforeUnmount(() => {
 .checkout-sticky-bar__cta:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+.checkout-sticky-bar__agreement {
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.checkout-sticky-bar__checkbox {
+  accent-color: var(--irus-color-accent);
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 16px;
+  margin-top: 2px;
+  width: 16px;
+}
+
+.checkout-sticky-bar__agreement-text {
+  color: #52525b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.checkout-sticky-bar__agreement-text a {
+  color: var(--irus-color-accent);
+  text-decoration: none;
+}
+
+.checkout-sticky-bar__agreement-text a:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsive nhỏ hơn để khít các device folded / small phones ── */
+/* Galaxy Z Fold 5 (344px), Samsung S8+ (360px), iPhone SE (375px) */
+@media (max-width: 380px) {
+  .checkout-sticky-bar__inner {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .checkout-sticky-bar__toggle {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+
+  .checkout-sticky-bar__total {
+    font-size: 13px;
+  }
+
+  .checkout-sticky-bar__agreement-text {
+    font-size: 11px;
+  }
+
+  .checkout-sticky-bar__cta {
+    font-size: 14px;
+    min-height: 46px;
+  }
 }
 
 @keyframes spin {

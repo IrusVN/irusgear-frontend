@@ -137,6 +137,7 @@ import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 import { toast } from 'vue-sonner'
 import { exportToCsv } from '@/utils/exportCsv'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -243,26 +244,12 @@ onMounted(() => {
 /* ── helpers ── */
 const formatDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-const paymentLabel = (s) => ({
-  pending: t('admin.status.pending'),
-  paid: t('admin.dashboard.status.paid'),
-  failed: t('admin.status.failed'),
-  cancelled: t('admin.status.cancelled'),
-  refunded: t('admin.status.refunded'),
-}[s] || s)
-const paymentVariant = (s) => ({ pending: 'warning', paid: 'success', failed: 'danger', cancelled: 'neutral', refunded: 'info' }[s] || 'neutral')
-
-const fulfillmentLabel = (s) => ({
-  ready_to_pickup: t('admin.orders.statusReadyToPickup'),
-  out_for_delivery: t('admin.orders.statusOutForDelivery'),
-  delivered: t('admin.orders.statusDelivered'),
-  dispatched: t('admin.orders.statusDispatched'),
-  processing: t('admin.orders.statusProcessing'),
-}[s] || s)
-const fulfillmentVariant = (s) => ({
-  ready_to_pickup: 'info', out_for_delivery: 'warning',
-  delivered: 'success', dispatched: 'neutral', processing: 'neutral',
-}[s] || 'neutral')
+const { formatPaymentStatus } = useStatusFormat()
+const paymentLabel = (s) => formatPaymentStatus(s).label
+const paymentVariant = (s) => formatPaymentStatus(s).variant
+// Fulfillment dùng cùng map như payment vì OrderStatus + PaymentStatus cùng key namespace.
+const fulfillmentLabel = (s) => formatPaymentStatus(s).label
+const fulfillmentVariant = (s) => formatPaymentStatus(s).variant
 
 const viewOrder = (item) => router.push(`/admin/orders/${item.id}`)
 const handleExport = () => {

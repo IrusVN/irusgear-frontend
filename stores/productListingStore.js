@@ -168,13 +168,15 @@ const transformListingPayload = (payload = {}, previousSelection = {}) => {
   const meta = payload?.meta || {};
   const applied = payload?.applied || meta?.applied || {};
   const appliedFilters = applied?.filters || payload?.filters || {};
-  const rawItems = Array.isArray(payload?.items)
-    ? payload.items
-    : Array.isArray(payload?.data?.items)
-      ? payload.data.items
-      : Array.isArray(payload?.data)
-        ? payload.data
-        : [];
+  const rawItems = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload?.items)
+      ? payload.items
+      : Array.isArray(payload?.data?.items)
+        ? payload.data.items
+        : Array.isArray(payload?.data)
+          ? payload.data
+          : [];
 
   const primaryBanners = toArray(payload?.banners?.primary || meta?.banners?.primary).filter(Boolean);
   const secondaryBanners = toArray(payload?.banners?.secondary || meta?.banners?.secondary).filter(Boolean);
@@ -316,7 +318,14 @@ const transformListingPayload = (payload = {}, previousSelection = {}) => {
       id: product?.id ?? product?.product_id ?? product?.slug ?? product?.url ?? product?.name ?? "",
       slug: product?.slug || product?.handle || "",
       url: product?.url || product?.href || "",
-      img: product?.img || product?.image || product?.thumbnail || product?.thumbnail_url || "",
+      img:
+        product?.img ||
+        product?.image ||
+        product?.thumbnail ||
+        product?.thumbnail_url ||
+        product?.main_image?.image ||
+        product?.main_image?.url ||
+        "",
       name: product?.name || product?.title || "",
       badge: typeof product?.badge === "boolean" ? product.badge : toNumber(product?.discount) > 0,
       discount: toNumber(product?.discount),
@@ -324,7 +333,7 @@ const transformListingPayload = (payload = {}, previousSelection = {}) => {
       price: toNumber(product?.price),
       originalPrice: toNumber(product?.originalPrice ?? product?.original_price),
       gifts: toArray(product?.gifts).filter((gift) => typeof gift === "string" && gift.trim()),
-      rating: toNumber(product?.rating, 5),
+      rating: toNumber(product?.rating ?? product?.reviews_avg_rating, 5),
     })),
     paginationState: {
       page,
@@ -466,7 +475,9 @@ export const useProductListingStore = defineStore("product-listing", () => {
       }
 
       if (res) {
-        applyListingState(res.data || res, { append });
+        // API trả {success, data: [...products], meta: {pagination}} hoặc {data: {items, pagination}}.
+        // Truyền nguyên res để transformListingPayload đọc cả items lẫn meta pagination.
+        applyListingState(res, { append });
       } else if (!append) {
         productListItems.value = [];
       }

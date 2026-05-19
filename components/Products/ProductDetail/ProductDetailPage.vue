@@ -272,7 +272,8 @@ onBeforeUnmount(() => {
   display: none;
   position: fixed;
   bottom: 96px;
-  right: 16px;
+  left: 16px;
+  right: auto;
   z-index: 102;
   align-items: center;
   gap: 6px;

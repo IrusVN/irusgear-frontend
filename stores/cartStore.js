@@ -1,7 +1,30 @@
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { defineStore } from "pinia";
 import { useFeGlobalStore } from "@/stores/feGlobalStore";
 import { registerStore } from "@/utils/storeRegistry";
+
+const SELECTION_STORAGE_KEY = "irusgear:cart:unselectedItemIds";
+
+const loadPersistedUnselected = () => {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.sessionStorage.getItem(SELECTION_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.map(String) : [];
+  } catch {
+    return [];
+  }
+};
+
+const persistUnselected = (ids) => {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(SELECTION_STORAGE_KEY, JSON.stringify(ids));
+  } catch {
+    /* quota exceeded — ignore */
+  }
+};
 
 const formatMoney = (value = 0) => {
   const normalizedValue = Number(value) || 0;
@@ -47,7 +70,18 @@ export const useCartStore = defineStore("cart", () => {
 
   // Selection state — track itemIds user đã UN-check (mặc định mọi item đều được chọn).
   // Item mới add vào tự động được chọn vì không có trong unselectedItemIds.
+  // Persist vào sessionStorage để giữ qua F5/reload trong cùng tab (load lazy ở client).
   const unselectedItemIds = ref([]);
+  let selectionHydratedFromStorage = false;
+
+  const hydrateSelectionFromStorage = () => {
+    if (selectionHydratedFromStorage || typeof window === "undefined") return;
+    selectionHydratedFromStorage = true;
+    const persisted = loadPersistedUnselected();
+    if (persisted.length) {
+      unselectedItemIds.value = persisted;
+    }
+  };
 
   // Debounce timers cho quantity update — key = itemId, value = { timer, latestQuantity }.
   // Click + hoặc - liên tục sẽ reset timer; chỉ 1 API call duy nhất sau khi user dừng.
@@ -113,6 +147,9 @@ export const useCartStore = defineStore("cart", () => {
     cart.value = normalizeCart(payload?.data ?? payload);
     hydrated.value = true;
 
+    // Hydrate selection từ sessionStorage 1 lần ở client (giữ selection qua F5).
+    hydrateSelectionFromStorage();
+
     if (!cart.value.items.length) {
       lastAddedItem.value = null;
       isAddToCartSheetOpen.value = false;
@@ -139,6 +176,16 @@ export const useCartStore = defineStore("cart", () => {
 
   const fetchCart = async ({ force = false, silent = false } = {}) => {
     if (hydrated.value && !force) {
+      // Cart đã hydrated (vd: SSR đã pre-render hoặc đã fetch trước) — vẫn cần
+      // hydrate selection từ sessionStorage 1 lần ở client để giữ qua F5.
+      hydrateSelectionFromStorage();
+      // Đồng thời reconcile: bỏ id không còn trong cart hiện tại
+      if (cart.value.items.length) {
+        const validIdSet = new Set(cart.value.items.map((item) => String(item.id)));
+        unselectedItemIds.value = unselectedItemIds.value
+          .map(String)
+          .filter((id) => validIdSet.has(id));
+      }
       return cart.value;
     }
 
@@ -486,6 +533,14 @@ export const useCartStore = defineStore("cart", () => {
     isAddToCartSheetOpen.value = false;
     pendingItemIds.value = [];
     unselectedItemIds.value = [];
+    selectionHydratedFromStorage = false;
+    if (typeof window !== "undefined") {
+      try {
+        window.sessionStorage.removeItem(SELECTION_STORAGE_KEY);
+      } catch {
+        /* ignore */
+      }
+    }
     // Clear pending debounce timers
     for (const [, pending] of quantityDebounceMap) {
       if (pending.timer) clearTimeout(pending.timer);
@@ -494,6 +549,20 @@ export const useCartStore = defineStore("cart", () => {
   };
 
   registerStore({ reset });
+
+  // Persist selection state qua sessionStorage để F5 không reset.
+  // CHỈ persist sau khi đã hydrate từ storage để tránh ghi đè [] (initial state)
+  // lên sessionStorage trước khi đọc data đã lưu.
+  if (typeof window !== "undefined") {
+    watch(
+      unselectedItemIds,
+      (next) => {
+        if (!selectionHydratedFromStorage) return;
+        persistUnselected(next);
+      },
+      { deep: true },
+    );
+  }
 
   return {
     cart,

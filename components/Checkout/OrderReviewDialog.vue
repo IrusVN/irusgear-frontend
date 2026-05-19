@@ -1,176 +1,118 @@
 <template>
-  <Teleport to="body">
-    <div class="modal-backdrop" @click.self="$emit('close')">
-      <div class="order-review-dialog" role="dialog" aria-modal="true" :aria-labelledby="'dialog-title'">
-        <div class="order-review-dialog__header">
-          <h3 id="dialog-title" class="order-review-dialog__title">
-            <i class="bi bi-clipboard-check"></i>
-            {{ $t("checkout.reviewOrder") }}
-          </h3>
-          <button type="button" class="order-review-dialog__close" @click="$emit('close')">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </div>
+  <!-- Mobile: BottomSheet -->
+  <BottomSheet v-if="isMobile" :open="open" @close="$emit('close')">
+    <div class="order-review-sheet">
+      <header class="order-review-sheet__header">
+        <h3 class="order-review-sheet__title">
+          <i class="bi bi-clipboard-check"></i>
+          {{ $t("checkout.reviewOrder") }}
+        </h3>
+      </header>
 
-        <div class="order-review-dialog__body">
-          <!-- Address -->
-          <div class="review-section">
-            <div class="review-section__header">
-              <span class="review-section__label">{{ $t("checkout.deliveryAddress") }}</span>
-              <button type="button" class="review-section__edit" @click="$emit('close')">
-                {{ $t("checkout.change") }}
-              </button>
-            </div>
-            <div v-if="checkoutStore.selectedAddress" class="review-section__content">
-              <p class="review-section__name">
-                {{ checkoutStore.selectedAddress.name }}
-                <span class="review-section__phone">{{ checkoutStore.selectedAddress.phone }}</span>
-              </p>
-              <p class="review-section__address">{{ fullAddress }}</p>
-            </div>
-          </div>
+      <div class="order-review-sheet__body">
+        <ReviewContent
+          :address="checkoutStore.selectedAddress"
+          :delivery="checkoutStore.selectedDelivery"
+          :delivery-fee="checkoutStore.finalDeliveryFee"
+          :delivery-time="deliveryTime"
+          :full-address="fullAddress"
+          :items="cartStore.selectedItems"
+          :pricing="pricingSummary"
+          v-model:agreed="checkoutStore.agreedToTerms"
+          @edit="$emit('close')"
+        />
+      </div>
 
-          <!-- Delivery -->
-          <div class="review-section">
-            <div class="review-section__header">
-              <span class="review-section__label">{{ $t("checkout.deliveryMethod") }}</span>
-              <button type="button" class="review-section__edit" @click="$emit('close')">
-                {{ $t("checkout.change") }}
-              </button>
-            </div>
-            <div v-if="checkoutStore.selectedDelivery" class="review-section__content">
-              <p>
-                {{ checkoutStore.selectedDelivery.name }}
-                <span class="review-section__muted">({{ deliveryTime }})</span>
-              </p>
-              <p class="review-section__fee">
-                {{ checkoutStore.finalDeliveryFee > 0 ? formatMoney(checkoutStore.finalDeliveryFee) : $t("checkout.free") }}
-              </p>
-            </div>
-          </div>
+      <footer class="order-review-sheet__footer">
+        <ReviewFooterButtons
+          :submitting="checkoutStore.isSubmitting"
+          :disabled="!checkoutStore.agreedToTerms || checkoutStore.isSubmitting"
+          @back="$emit('close')"
+          @confirm="$emit('confirm')"
+        />
+      </footer>
+    </div>
+  </BottomSheet>
 
-          <div class="order-review-dialog__divider"></div>
-
-          <!-- Items -->
-          <div class="review-items">
-            <div
-              v-for="item in cartStore.selectedItems"
-              :key="item.id"
-              class="review-item"
+  <!-- Desktop: Modal centered dialog -->
+  <Teleport v-else to="body">
+    <Transition name="dialog-fade">
+      <div v-if="open" class="modal-backdrop" @click.self="$emit('close')">
+        <div class="order-review-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+          <header class="order-review-dialog__header">
+            <h3 id="dialog-title" class="order-review-dialog__title">
+              <i class="bi bi-clipboard-check"></i>
+              {{ $t("checkout.reviewOrder") }}
+            </h3>
+            <button
+              type="button"
+              class="order-review-dialog__close"
+              :aria-label="$t('common.close')"
+              @click="$emit('close')"
             >
-              <img
-                :src="item.thumbnail || fallbackImage"
-                :alt="item.productName"
-                class="review-item__image"
-                loading="lazy"
-              />
-              <div class="review-item__info">
-                <p class="review-item__name">{{ item.productName }}</p>
-                <p v-if="getSelectedOptionsText(item)" class="review-item__options">
-                  {{ getSelectedOptionsText(item) }}
-                </p>
-                <p class="review-item__meta">
-                  <span>{{ item.quantity }} × {{ item.unitPrice?.formatted || "0đ" }}</span>
-                </p>
-              </div>
-              <span class="review-item__price">
-                {{ item.currentLineTotal?.formatted || "0đ" }}
-              </span>
-            </div>
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </header>
+
+          <div class="order-review-dialog__body">
+            <ReviewContent
+              :address="checkoutStore.selectedAddress"
+              :delivery="checkoutStore.selectedDelivery"
+              :delivery-fee="checkoutStore.finalDeliveryFee"
+              :delivery-time="deliveryTime"
+              :full-address="fullAddress"
+              :items="cartStore.selectedItems"
+              :pricing="pricingSummary"
+              v-model:agreed="checkoutStore.agreedToTerms"
+              @edit="$emit('close')"
+            />
           </div>
 
-          <div class="order-review-dialog__divider"></div>
-
-          <!-- Pricing summary -->
-          <dl class="review-pricing">
-            <div class="review-pricing__row">
-              <dt>{{ $t("checkout.subtotal") }}</dt>
-              <dd>{{ checkoutStore.subtotal?.formatted || "0đ" }}</dd>
-            </div>
-            <div v-if="checkoutStore.savings?.value > 0" class="review-pricing__row">
-              <dt>{{ $t("checkout.discount") }}</dt>
-              <dd class="review-pricing__discount">-{{ checkoutStore.savings?.formatted }}</dd>
-            </div>
-            <div v-if="checkoutStore.voucherDiscount?.value > 0" class="review-pricing__row">
-              <dt>{{ $t("checkout.voucher") }}</dt>
-              <dd class="review-pricing__discount">-{{ checkoutStore.voucherDiscount?.formatted }}</dd>
-            </div>
-            <div class="review-pricing__row">
-              <dt>{{ $t("checkout.deliveryFee") }}</dt>
-              <dd>{{ checkoutStore.finalDeliveryFee > 0 ? '+' + formatMoney(checkoutStore.finalDeliveryFee) : $t("checkout.free") }}</dd>
-            </div>
-            <div v-if="checkoutStore.insuranceFee?.value > 0" class="review-pricing__row">
-              <dt>{{ $t("checkout.insurance") }}</dt>
-              <dd>+{{ checkoutStore.insuranceFee?.formatted }}</dd>
-            </div>
-            <div class="review-pricing__total">
-              <strong>{{ $t("checkout.total") }}</strong>
-              <strong class="review-pricing__total-value">
-                {{ checkoutStore.finalTotal?.formatted || "0đ" }}
-              </strong>
-            </div>
-          </dl>
-
-          <label class="order-review-dialog__terms">
-            <input type="checkbox" v-model="checkoutStore.agreedToTerms" />
-            <span>
-              {{ $t("checkout.agreeTerms") }}
-              <a href="#" target="_blank">{{ $t("checkout.terms") }}</a>
-              {{ $t("checkout.and") }}
-              <a href="#" target="_blank">{{ $t("checkout.shippingPolicy") }}</a>
-            </span>
-          </label>
-        </div>
-
-        <div class="order-review-dialog__footer">
-          <button type="button" class="order-review-dialog__btn order-review-dialog__btn--back" @click="$emit('close')">
-            <i class="bi bi-arrow-left"></i>
-            {{ $t("checkout.back") }}
-          </button>
-          <button
-            type="button"
-            class="order-review-dialog__btn order-review-dialog__btn--confirm"
-            :disabled="!checkoutStore.agreedToTerms || checkoutStore.isSubmitting"
-            @click="$emit('confirm')"
-          >
-            <span v-if="checkoutStore.isSubmitting">
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-              {{ $t("checkout.processing") }}
-            </span>
-            <span v-else>
-              <i class="bi bi-check-circle"></i>
-              {{ $t("checkout.confirmOrder") }}
-            </span>
-          </button>
+          <footer class="order-review-dialog__footer">
+            <ReviewFooterButtons
+              :submitting="checkoutStore.isSubmitting"
+              :disabled="!checkoutStore.agreedToTerms || checkoutStore.isSubmitting"
+              @back="$emit('close')"
+              @confirm="$emit('confirm')"
+            />
+          </footer>
         </div>
       </div>
-    </div>
+    </Transition>
   </Teleport>
 </template>
 
 <script setup>
 import { computed } from "vue";
-import { storeToRefs } from "pinia";
+import BottomSheet from "@/components/Common/BottomSheet.vue";
+import ReviewContent from "@/components/Checkout/OrderReviewContent.vue";
+import ReviewFooterButtons from "@/components/Checkout/OrderReviewFooter.vue";
 import { useCheckoutStore } from "@/stores/checkoutStore";
 import { useCartStore } from "@/stores/cartStore";
+import { useMediaQuery } from "@/composables/useMediaQuery";
+
+defineProps({
+  open: {
+    type: Boolean,
+    default: true,
+  },
+});
 
 defineEmits(["close", "confirm"]);
 
 const checkoutStore = useCheckoutStore();
 const cartStore = useCartStore();
-
-const fallbackImage = "https://placehold.co/56x56/f4f4f5/d4d4d8?text=%20";
+const isMobile = useMediaQuery("(max-width: 767.98px)");
 
 const fullAddress = computed(() => {
   const addr = checkoutStore.selectedAddress;
   if (!addr) return "";
-  // Data lưu dạng {value, label} từ resolveAddressCode() — giống AddressCard.vue.
-  // Fallback về string code gốc nếu chưa resolve.
   const ward = addr.ward?.label || addr.ward;
   const district = addr.district?.label || addr.district;
   const province = addr.province?.label || addr.province;
-  const parts = [addr.detail, ward, district, province]
-    .filter((p) => Boolean(p) && typeof p === "string");
+  const parts = [addr.detail, ward, district, province].filter(
+    (p) => Boolean(p) && typeof p === "string",
+  );
   return parts.join(", ");
 });
 
@@ -180,17 +122,20 @@ const deliveryTime = computed(() => {
   return d.estimatedDays || d.estimatedHours || d.estimatedText || d.time || "";
 });
 
-const formatMoney = (value) => {
-  return `${new Intl.NumberFormat("vi-VN").format(value)}đ`;
-};
-
-const getSelectedOptionsText = (item) => {
-  if (!item?.selectedOptions) return null;
-  return Object.values(item.selectedOptions).join(", ");
-};
+const pricingSummary = computed(() => ({
+  subtotal: checkoutStore.subtotal,
+  savings: checkoutStore.savings,
+  voucherDiscount: checkoutStore.voucherDiscount,
+  deliveryFee: checkoutStore.finalDeliveryFee,
+  insuranceFee: checkoutStore.insuranceFee,
+  finalTotal: checkoutStore.finalTotal,
+}));
 </script>
 
 <style scoped>
+/* ──────────────────────────────────────────
+ * Desktop modal
+ * ────────────────────────────────────────── */
 .modal-backdrop {
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
@@ -198,15 +143,34 @@ const getSelectedOptionsText = (item) => {
   display: flex;
   justify-content: center;
   left: 0;
+  padding: 20px;
+  padding-top: max(20px, env(safe-area-inset-top, 0));
+  padding-bottom: max(20px, env(safe-area-inset-bottom, 0));
   position: fixed;
   right: 0;
   top: 0;
-  /* Cao hơn CustomerSidebar (z-index 1040-1070) để header không đè lên dialog */
   z-index: 1080;
-  padding: 20px;
-  /* iOS safe area */
-  padding-top: max(20px, env(safe-area-inset-top, 0));
-  padding-bottom: max(20px, env(safe-area-inset-bottom, 0));
+}
+
+.dialog-fade-enter-active,
+.dialog-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.dialog-fade-enter-from,
+.dialog-fade-leave-to {
+  opacity: 0;
+}
+
+.dialog-fade-enter-active .order-review-dialog,
+.dialog-fade-leave-active .order-review-dialog {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.dialog-fade-enter-from .order-review-dialog,
+.dialog-fade-leave-to .order-review-dialog {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .order-review-dialog {
@@ -214,37 +178,15 @@ const getSelectedOptionsText = (item) => {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  /* Auto height theo content, tối đa 90vh để không tràn viewport */
   max-height: 90vh;
   max-width: 560px;
   overflow: hidden;
   width: 100%;
-  animation: slideUp 0.25s ease-out;
-}
-
-@media (max-width: 575.98px) {
-  .modal-backdrop {
-    padding: 10px;
-    padding-top: max(10px, env(safe-area-inset-top, 0));
-    padding-bottom: max(10px, env(safe-area-inset-bottom, 0));
-  }
-
-  .order-review-dialog {
-    border-radius: 14px;
-    /* Mobile: dialog có thể full chiều cao available để dùng hết screen */
-    max-height: 100%;
-  }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
 }
 
 .order-review-dialog__header {
   align-items: center;
-  background: #000;
-  border-bottom: 1px solid #f0e0e0;
+  background: #18181b;
   display: flex;
   gap: 12px;
   justify-content: space-between;
@@ -253,7 +195,7 @@ const getSelectedOptionsText = (item) => {
 
 .order-review-dialog__title {
   align-items: center;
-  color: #ffff;
+  color: #fff;
   display: flex;
   font-size: 17px;
   font-weight: 700;
@@ -263,10 +205,11 @@ const getSelectedOptionsText = (item) => {
 
 .order-review-dialog__close {
   background: none;
-  border: none;
-  color: #71717a;
+  border: 0;
+  color: #fff;
   cursor: pointer;
-  padding: 0;
+  font-size: 16px;
+  padding: 4px;
 }
 
 .order-review-dialog__body {
@@ -275,246 +218,51 @@ const getSelectedOptionsText = (item) => {
   padding: 0 20px;
 }
 
-.review-section {
-  padding: 14px 0;
-  border-bottom: 1px solid #f0f0f2;
-}
-
-.review-section__header {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.review-section__label {
-  color: #71717a;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.review-section__edit {
-  background: none;
-  border: none;
-  color: var(--irus-color-accent);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 0;
-}
-
-.review-section__name {
-  color: #18181b;
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0;
-}
-
-.review-section__phone {
-  color: #71717a;
-  font-weight: 400;
-  margin-left: 8px;
-}
-
-.review-section__address {
-  color: #52525b;
-  font-size: 13px;
-  margin: 4px 0 0;
-}
-
-.review-section__muted {
-  color: #71717a;
-  font-weight: 400;
-}
-
-.review-section__fee {
-  color: #18181b;
-  font-size: 14px;
-  font-weight: 600;
-  margin: 2px 0 0;
-}
-
-.order-review-dialog__divider {
-  border-top: 1px solid #ececf1;
-}
-
-.review-items {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 14px 0;
-}
-
-.review-item {
-  align-items: flex-start;
-  display: flex;
-  gap: 12px;
-}
-
-.review-item__image {
-  border-radius: 8px;
-  height: 56px;
-  object-fit: cover;
-  width: 56px;
-  flex-shrink: 0;
-}
-
-.review-item__info {
-  flex: 1;
-  min-width: 0;
-}
-
-.review-item__name {
-  color: #18181b;
-  font-size: 13px;
-  font-weight: 500;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.review-item__options {
-  color: #71717a;
-  font-size: 12px;
-  margin: 2px 0 0;
-}
-
-.review-item__meta {
-  color: #71717a;
-  font-size: 12px;
-  margin: 4px 0 0;
-}
-
-.review-item__price {
-  color: #18181b;
-  font-size: 14px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.review-pricing {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 0;
-  padding: 14px 0;
-}
-
-.review-pricing__row {
-  align-items: center;
-  display: flex;
-  font-size: 14px;
-  justify-content: space-between;
-}
-
-.review-pricing__row dt {
-  color: #71717a;
-  margin: 0;
-}
-
-.review-pricing__row dd {
-  color: #18181b;
-  font-weight: 600;
-  margin: 0;
-}
-
-.review-pricing__discount {
-  color: #15803d !important;
-}
-
-.review-pricing__total {
-  align-items: center;
-  border-top: 2px solid #18181b;
-  display: flex;
-  font-size: 16px;
-  justify-content: space-between;
-  margin-top: 4px;
-  padding-top: 10px;
-}
-
-.review-pricing__total-value {
-  color: var(--irus-color-accent) !important;
-  font-size: 22px;
-}
-
-.order-review-dialog__terms {
-  align-items: flex-start;
-  cursor: pointer;
-  display: flex;
-  font-size: 12px;
-  gap: 8px;
-  line-height: 1.55;
-  color: #52525b;
-  padding-bottom: 16px;
-}
-
-.order-review-dialog__terms input {
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.order-review-dialog__terms a {
-  color: var(--irus-color-accent);
-}
-
 .order-review-dialog__footer {
   border-top: 1px solid #ececf1;
-  display: flex;
-  gap: 10px;
   padding: 14px 20px;
 }
 
-.order-review-dialog__btn {
+/* ──────────────────────────────────────────
+ * Mobile bottom sheet wrapper
+ * ────────────────────────────────────────── */
+.order-review-sheet {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(90vh - 30px);
+  max-height: calc(90dvh - 30px);
+}
+
+.order-review-sheet__header {
   align-items: center;
-  border-radius: 12px;
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 15px;
-  font-weight: 700;
-  gap: 6px;
-  justify-content: center;
-  min-height: 48px;
-  padding: 10px 20px;
-  transition: background 0.15s ease;
+  background: #18181b;
+  display: flex;
+  flex-shrink: 0;
+  gap: 12px;
+  justify-content: space-between;
+  padding: 14px 18px;
 }
 
-.order-review-dialog__btn--back {
-  background: #f4f4f5;
-  border: none;
-  color: #52525b;
-  flex: 1;
-}
-
-.order-review-dialog__btn--back:hover {
-  background: #e4e4e7;
-}
-
-.order-review-dialog__btn--confirm {
-  background: var(--irus-color-surface-strong);
-  border: none;
+.order-review-sheet__title {
+  align-items: center;
   color: #fff;
-  flex: 2;
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  gap: 8px;
+  margin: 0;
 }
 
-.order-review-dialog__btn--confirm:hover:not(:disabled) {
-  background: #1a1a1a;
+.order-review-sheet__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px;
+  -webkit-overflow-scrolling: touch;
 }
 
-.order-review-dialog__btn--confirm:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.spin {
-  animation: spin 0.8s linear infinite;
-  display: inline-block;
+.order-review-sheet__footer {
+  border-top: 1px solid #ececf1;
+  flex-shrink: 0;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0));
 }
 </style>

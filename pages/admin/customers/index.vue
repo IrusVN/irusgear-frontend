@@ -57,6 +57,30 @@
         <strong>{{ formatCurrency(item.totalSpent) }}</strong>
       </template>
 
+      <template #cell-status="{ item }">
+        <AdminStatusBadge
+          :label="statusBadge(item.status).label"
+          :variant="statusBadge(item.status).variant"
+          dot
+        />
+      </template>
+
+      <template #cell-emailVerified="{ item }">
+        <!-- Dùng AdminStatusBadge cho nhất quán với Status. Verified=success(xanh) icon
+             check; Unverified=danger(đỏ) icon envelope-exclamation. -->
+        <AdminStatusBadge
+          :label="item.email_verified ? $t('admin.customers.emailVerifyYes') : $t('admin.customers.emailVerifyNo')"
+          :variant="item.email_verified ? 'success' : 'danger'"
+        >
+          <i
+            :class="item.email_verified ? 'bi bi-patch-check-fill' : 'bi bi-envelope-exclamation'"
+            class="email-verify-icon"
+            aria-hidden="true"
+          ></i>
+          <span>{{ item.email_verified ? $t('admin.customers.emailVerifyYes') : $t('admin.customers.emailVerifyNo') }}</span>
+        </AdminStatusBadge>
+      </template>
+
       <template #actions="{ item }">
         <AdminActionMenu
           :items="[
@@ -91,6 +115,8 @@
         :subtitle="item.email"
         :avatar="item.avatar"
         :meta="[
+          { label: $t('admin.customers.statusLabel').replace(':', ''), value: statusBadge(item.status).label },
+          { label: $t('admin.customers.emailVerifyLabel'), value: item.email_verified ? $t('admin.customers.emailVerifyYes') : $t('admin.customers.emailVerifyNo') },
           { label: $t('admin.customers.orders'), value: item.orders.toLocaleString() },
           { label: $t('admin.customers.spent'), value: formatCurrency(item.totalSpent) },
           { label: $t('admin.customers.idLabel'), value: item.customerCode },
@@ -112,6 +138,13 @@
         <button v-if="page * pageSize < totalCustomers" class="admin-secondary-button" @click="changePage(page + 1)">{{ $t('admin.customers.loadMore') }}</button>
       </div>
     </div>
+
+    <!-- Quick Edit Customer Modal -->
+    <QuickEditCustomer
+      v-model="showQuickEdit"
+      :customer="quickEditCustomer"
+      @updated="onQuickEditUpdated"
+    />
 
     <!-- Add Customer Modal -->
     <Teleport to="body">
@@ -176,10 +209,13 @@ import AdminTableToolbar from '@/components/Admin/ui/AdminTableToolbar.vue'
 import AdminPagination from '@/components/Admin/ui/AdminPagination.vue'
 import AdminActionMenu from '@/components/Admin/ui/AdminActionMenu.vue'
 import AdminMobileCard from '@/components/Admin/ui/AdminMobileCard.vue'
+import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import QuickEditCustomer from '@/components/Admin/customers/QuickEditCustomer.vue'
 import { useMediaQuery } from '@/composables/useMediaQuery'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { exportToCsv } from '@/utils/exportCsv'
+import { useStatusFormat } from '@/composables/useStatusFormat'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -256,14 +292,27 @@ const changePageSize = (size) => {
 }
 
 const columns = computed(() => [
-  { key: 'name', label: t('admin.customers.title').replace(/s$/i, ''), width: '26%' },
+  { key: 'name', label: t('admin.customers.title').replace(/s$/i, ''), width: '22%' },
   { key: 'customerCode', label: t('admin.customers.customerId') },
   { key: 'country', label: t('admin.customers.country') },
+  { key: 'status', label: t('admin.customers.statusLabel').replace(':', '') },
+  // Email Verify: cột riêng để admin scan nhanh user nào chưa verify (chặn login).
+  // Map từ AdminCustomerResource.email_verified (boolean derive từ email_verified_at).
+  { key: 'emailVerified', label: t('admin.customers.emailVerifyLabel'), align: 'center' },
   { key: 'orders', label: t('admin.customers.totalOrders'), align: 'center' },
   { key: 'totalSpent', label: t('admin.customers.totalSpent') },
 ])
 
 const paginatedCustomers = computed(() => customers.value)
+
+// Status badge — dùng composable thống nhất (xem useStatusFormat).
+// formatUserStatus chấp nhận '0'..'3' (code), 'active'/'inactive'/'pending'/'banned' (text)
+// hoặc 'blocked' legacy → trả về { label, variant }.
+const { formatUserStatus } = useStatusFormat()
+const statusBadge = (status) => {
+  const raw = status?.value ?? status
+  return formatUserStatus(raw)
+}
 
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
@@ -296,7 +345,63 @@ const handleAdd = () => {
 const { confirm } = useConfirm()
 const deletingIds = ref(new Set())
 
+/* ── Quick Edit drawer state ── */
+const showQuickEdit = ref(false)
+const quickEditCustomer = ref(null)
+
+const openQuickEdit = (item) => {
+  quickEditCustomer.value = item
+  showQuickEdit.value = true
+}
+
+const onQuickEditUpdated = (updated) => {
+  // Merge updated fields vào row hiện tại để UI cập nhật ngay (status badge,
+  // tên hiển thị, ...) — tránh phải fetch lại toàn bộ list. Quan trọng: phải
+  // merge ĐỦ field đã edit (không chỉ name/email) để lần edit kế tiếp hydrate
+  // từ row cũng thấy giá trị mới, không bị "stale".
+  if (!updated || !quickEditCustomer.value) {
+    // Backend không trả data → fetch lại cho chắc
+    fetchCustomers()
+    return
+  }
+
+  const idx = customers.value.findIndex(c => c.id === quickEditCustomer.value.id)
+  if (idx === -1) return
+
+  const fullName = updated.full_name || updated.name || customers.value[idx].name
+
+  // Tạo object mới (không Object.assign trực tiếp) để Vue reactivity tracking
+  // detect được thay đổi ở row.
+  customers.value[idx] = {
+    ...customers.value[idx],
+    name: fullName,
+    first_name: updated.first_name ?? customers.value[idx].first_name,
+    last_name: updated.last_name ?? customers.value[idx].last_name,
+    email: updated.email || customers.value[idx].email,
+    phone_number: updated.phone_number ?? customers.value[idx].phone_number,
+    status: updated.status ?? customers.value[idx].status,
+    email_verified: typeof updated.email_verified === 'boolean'
+      ? updated.email_verified
+      : Boolean(updated.email_verified_at),
+    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=random`,
+  }
+
+  // Đồng bộ quickEditCustomer ref để nếu user re-open ngay drawer cho cùng row
+  // (mặc dù hiện ta đóng sau save) thì cũng thấy dữ liệu mới.
+  quickEditCustomer.value = customers.value[idx]
+}
+
 const handleAction = async (action, item) => {
+  if (action.key === 'view') {
+    router.push(`/admin/customers/${item.id}`)
+    return
+  }
+
+  if (action.key === 'edit') {
+    openQuickEdit(item)
+    return
+  }
+
   if (action.key === 'delete') {
     if (deletingIds.value.has(item.id)) return
     const ok = await confirm({
@@ -315,20 +420,34 @@ const handleAction = async (action, item) => {
       deletingIds.value.delete(item.id)
     }
   }
-  else router.push(`/admin/customers/${item.id}`)
 }
 
-const mapCustomer = (c) => ({
-  id: c.id,
-  name: c.full_name || c.name,
-  email: c.email,
-  customerCode: `#CUS${c.id}`,
-  avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
-  country: c.country || t('admin.customers.defaultCountry'),
-  countryCode: 'vn',
-  orders: c.orders || 0,
-  totalSpent: c.total_spent || 0,
-})
+const mapCustomer = (c) => {
+  // Build single-line text từ default_address để QuickEdit drawer hiển thị
+  // section "Địa chỉ mặc định" (read-only). Ưu tiên full_address nếu BE đã build,
+  // fallback nối line1/city/country.
+  const addr = c.default_address || null
+  const addressText = addr?.full_address
+    || (addr ? [addr.line1, addr.city, addr.country].filter(Boolean).join(', ') : null)
+
+  return {
+    id: c.id,
+    name: c.full_name || c.name,
+    first_name: c.first_name,
+    last_name: c.last_name,
+    email: c.email,
+    phone_number: c.phone || c.phone_number,
+    status: c.status,
+    email_verified: c.email_verified,
+    customerCode: `#CUS${c.id}`,
+    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
+    country: c.country || t('admin.customers.defaultCountry'),
+    countryCode: 'vn',
+    orders: c.orders || 0,
+    totalSpent: c.total_spent || 0,
+    defaultAddressText: addressText,
+  }
+}
 
 const fetchCustomers = async () => {
   const res = await admin.fetchList('customers', {
@@ -360,6 +479,12 @@ onMounted(() => {
 
 .country-cell { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--admin-text); white-space: nowrap; }
 .country-flag { width: 20px; height: 15px; border-radius: 2px; object-fit: cover; }
+
+/* Email Verify icon trong badge — fine-tune size để khớp badge typography */
+.email-verify-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+}
 
 /* Add Customer Modal */
 .customer-modal-overlay {
