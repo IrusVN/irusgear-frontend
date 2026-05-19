@@ -68,8 +68,15 @@
       </div>
     </div>
 
-    <ShipperOrderDetailModal :open="modalOpen" :order="selectedOrder" @close="modalOpen = false"
-      @complete="handleComplete" />
+    <ShipperOrderDetailModal
+      :open="modalOpen"
+      :order="selectedOrder"
+      @close="modalOpen = false"
+      @pickup="handleAfterShipmentChange"
+      @started="handleAfterShipmentChange"
+      @complete="handleComplete"
+      @failed="handleAfterShipmentChange"
+    />
   </div>
 </template>
 
@@ -87,7 +94,13 @@ const { t } = useI18n()
 useHead({ title: () => `${t('shipper.pending.title')} – IrusGear Shipper` })
 
 const shipper = useShipperStore()
-const orders = computed(() => shipper.orders)
+// Pending page chỉ hiển thị các đơn còn cần shipper xử lý. Backend đã default
+// scope theo open statuses khi không có ?status= filter, nhưng lọc thêm ở
+// client để page không vỡ nếu backend regression hoặc store còn cache cũ.
+const ACTIVE_STATUSES = ['pending_pickup', 'picked_up', 'delivering', 'failed']
+const orders = computed(() =>
+  shipper.orders.filter((o) => ACTIVE_STATUSES.includes(o.status)),
+)
 
 const counts = computed(() => ({
   ready: orders.value.filter((o) => o.status === 'pending_pickup').length,
@@ -133,12 +146,33 @@ const handleClaim = async (order) => {
   }
 }
 
-const handleComplete = ({ orderId }) => {
+/**
+ * Re-sync the open modal after pickup / start-delivery / fail. The store
+ * already upsertOrder()ed the response, but `selectedOrder` is a stale ref
+ * captured at openDetail time — re-fetch the detail and replace the object
+ * so the modal re-renders the next available action button (e.g. "Bắt đầu
+ * giao" after pickup).
+ */
+const handleAfterShipmentChange = async ({ orderId } = {}) => {
+  const id = orderId || selectedOrder.value?.id
+  if (!id) return
+
+  await shipper.fetchOrders({ per_page: 50 })
+  const detail = await shipper.fetchOrder(id)
+  if (detail) {
+    selectedOrder.value = detail
+  }
+}
+
+const handleComplete = async ({ orderId } = {}) => {
   const finished = orders.value.find((o) => o.id === orderId)
   modalOpen.value = false
+  selectedOrder.value = null
   toast.success(t('shipper.orderDetail.completedToast', {
     code: finished?.orderCode || '',
   }))
+  await shipper.fetchOrders({ per_page: 50 })
+  await shipper.fetchStats()
 }
 
 onMounted(async () => {

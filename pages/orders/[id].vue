@@ -70,6 +70,42 @@
           </ol>
         </div>
 
+        <!-- Proof of delivery (visible once order is delivered + payload includes signed URLs) -->
+        <div
+          v-if="order.proofOfDelivery && order.proofOfDelivery.photos?.length"
+          class="order-detail__card order-detail__pod"
+        >
+          <h2 class="order-detail__section-title">
+            <i class="bi bi-check2-square"></i>
+            {{ $t('profile.orderDetail.proofOfDelivery.title') }}
+          </h2>
+          <div class="order-detail__pod-meta">
+            <span v-if="order.proofOfDelivery.deliveredAt">
+              <i class="bi bi-clock-history"></i>
+              {{ $t('profile.orderDetail.proofOfDelivery.deliveredAt') }}:
+              {{ formatDateTime(order.proofOfDelivery.deliveredAt) }}
+            </span>
+            <span v-if="order.proofOfDelivery.recipientName">
+              <i class="bi bi-person-badge"></i>
+              {{ $t('profile.orderDetail.proofOfDelivery.recipient') }}:
+              {{ order.proofOfDelivery.recipientName }}
+            </span>
+          </div>
+          <div class="order-detail__pod-grid">
+            <a
+              v-for="(photo, idx) in order.proofOfDelivery.photos"
+              :key="`${photo.url}-${idx}`"
+              :href="photo.url"
+              target="_blank"
+              rel="noopener"
+              class="order-detail__pod-tile"
+              :title="$t('profile.orderDetail.proofOfDelivery.viewLarger')"
+            >
+              <img :src="photo.thumbUrl || photo.url" :alt="`POD ${idx + 1}`" loading="lazy" />
+            </a>
+          </div>
+        </div>
+
         <!-- Items -->
         <div v-if="order.items?.length" class="order-detail__card">
           <h2 class="order-detail__section-title">
@@ -634,6 +670,54 @@ onMounted(() => {
 
 .order-detail__timeline-note {
   color: #52525b;
+}
+
+/* ── Proof of Delivery ── */
+.order-detail__pod-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.86rem;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+.order-detail__pod-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.order-detail__pod-meta i {
+  color: #16a34a;
+}
+
+.order-detail__pod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.order-detail__pod-tile {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.order-detail__pod-tile:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.order-detail__pod-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* ── Items ─── */

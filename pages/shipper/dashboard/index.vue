@@ -154,7 +154,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { useI18n, useHead } from '#imports'
 import { useAuthStore } from '@/stores/authStore'
 import { useShipperStore } from '@/stores/shipperStore'
@@ -179,17 +179,79 @@ const shipperName = computed(() => {
 const isOnline = ref(true)
 const chartRange = ref('7')
 const entered = ref(false)
+const deliveredHistory = ref([])
 
-const metrics = computed(() => ({
-  totalEarnings: 0,
-  pendingOrders: shipper.stats.pending_pickup || 0,
-  deliveredOrders: shipper.stats.delivered_today || 0,
-  todayEarnings: 0,
-}))
+const metrics = computed(() => {
+  const stats = shipper.stats || {}
+  const todayKey = formatLocalDateKey(new Date())
 
-const earningsChart = ref({
-  labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
-  data: [320000, 480000, 410000, 680000, 540000, 720000, 540000],
+  const todayDelivered = deliveredHistory.value.filter((o) => {
+    const ts = o.pickedUpAt || o.lastAttemptAt || o.raw?.updated_at || o.raw?.delivered_at
+    if (!ts) return false
+    const dt = new Date(ts)
+    if (Number.isNaN(dt.getTime())) return false
+    return formatLocalDateKey(dt) === todayKey
+  })
+
+  const sum = (rows) => rows.reduce((acc, o) => acc + Number(o.shippingFee || 0), 0)
+
+  return {
+    totalEarnings: sum(deliveredHistory.value),
+    pendingOrders: stats.pending_pickup || 0,
+    deliveredOrders: stats.delivered_today || todayDelivered.length || deliveredHistory.value.length,
+    todayEarnings: sum(todayDelivered),
+  }
+})
+
+/**
+ * Local-timezone date key (YYYY-MM-DD).
+ *
+ * `Date.prototype.toISOString()` always emits UTC, which is a foot-gun for
+ * VN ops (UTC+7): local midnight 00:00 +07 maps to 17:00 UTC of the
+ * previous day, so `today.toISOString().slice(0,10)` returns yesterday's
+ * date and chart buckets never match server timestamps. Using local
+ * components keeps the chart aligned with the labels we render.
+ */
+function formatLocalDateKey(d) {
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
+
+const earningsChart = computed(() => {
+  const days = Number(chartRange.value || 7)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const buckets = []
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(today)
+    d.setDate(d.getDate() - i)
+    buckets.push({
+      key: formatLocalDateKey(d),
+      label: d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' }),
+      total: 0,
+    })
+  }
+
+  const indexByKey = new Map(buckets.map((b, i) => [b.key, i]))
+
+  for (const o of deliveredHistory.value) {
+    const ts = o.pickedUpAt || o.lastAttemptAt || o.raw?.delivered_at || o.raw?.updated_at
+    if (!ts) continue
+    const dt = new Date(ts)
+    if (Number.isNaN(dt.getTime())) continue
+    const idx = indexByKey.get(formatLocalDateKey(dt))
+    if (idx !== undefined) {
+      buckets[idx].total += Number(o.shippingFee || 0)
+    }
+  }
+
+  return {
+    labels: buckets.map((b) => b.label),
+    data: buckets.map((b) => b.total),
+  }
 })
 
 const statusBreakdown = computed(() => ({
@@ -234,9 +296,40 @@ const statusVariant = (s) =>
 
 const enterClass = (i) => ({ 'dash-enter': true, 'is-visible': entered.value, [`delay-${i}`]: true })
 
+/**
+ * Reload delivered history when the range selector toggles between 7d / 30d.
+ * Replaces the active queue afterwards so the pending list keeps showing
+ * `pending_pickup` / `delivering` rows (not delivered ones).
+ */
+const reloadDeliveredHistory = async (perPage = 50) => {
+  try {
+    const res = await shipper.fetchOrders({ status: 'delivered', per_page: perPage })
+    deliveredHistory.value = (res?.data || []).map((o) => ({
+      shippingFee: Number(o.delivery_fee || 0),
+      pickedUpAt: o.picked_up_at,
+      lastAttemptAt: o.last_attempt_at,
+      raw: o,
+    }))
+  } catch (_) {
+    // ignore — keep previous history; metrics fall back gracefully.
+  } finally {
+    await shipper.fetchOrders({ per_page: 5 })
+  }
+}
+
+watch(chartRange, async (next) => {
+  // 30-day chart needs a wider history to fill all buckets; cap at 50 to
+  // keep the API call lightweight (`per_page` server max is 50).
+  await reloadDeliveredHistory(Number(next) >= 30 ? 50 : 50)
+})
+
 onMounted(async () => {
+  // Stats card metrics + queue list dùng `shipper.orders` (đơn đang active);
+  // separately ta fetch lịch sử đơn delivered để tính total / today earnings
+  // mà không ghi đè list active đang dùng cho card "Đơn hàng cần giao".
   await shipper.fetchStats()
   await shipper.fetchOrders({ per_page: 5 })
+  await reloadDeliveredHistory(50)
   nextTick(() => { entered.value = true })
 })
 </script>

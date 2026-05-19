@@ -3,6 +3,8 @@ import { computed, ref } from "vue";
 import { useRuntimeConfig, useRequestHeaders } from "#imports";
 import { useAuthStore } from "@/stores/authStore";
 import { useFeGlobalStore } from "@/stores/feGlobalStore";
+import { useIdempotencyKey } from "@/composables/useIdempotency";
+import { retryWithBackoff } from "@/composables/useRetry";
 
 const defaultStats = () => ({
   pending_pickup: 0,
@@ -31,7 +33,6 @@ export const useShipperStore = defineStore("shipper/orders", () => {
   const buildHeaders = (extra = {}) => {
     const headers = {
       Accept: "application/json",
-      "Content-Type": "application/json",
       ...extra,
     };
 
@@ -52,7 +53,10 @@ export const useShipperStore = defineStore("shipper/orders", () => {
     } catch (_) {}
 
     const err = new Error(body?.error?.message || body?.message || `HTTP ${res.status}`);
+    err.status = res.status;
+    err.code = body?.error?.code;
     err.data = body;
+    err.errors = body?.errors || null;
     return err;
   };
 
@@ -155,24 +159,44 @@ export const useShipperStore = defineStore("shipper/orders", () => {
     }
   };
 
-  const idempotencyKey = () =>
-    globalThis.crypto?.randomUUID?.() || `shipper-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-
-  const postOrderAction = async (orderId, action, payload = {}) => {
+  /**
+   * Send a mutation to /shipper/orders/{id}/{action}.
+   *
+   * @param {number} orderId
+   * @param {string} action
+   * @param {object|FormData} payload
+   * @param {{ idempotencyKey?: string, retries?: number }} options
+   */
+  const postOrderAction = async (orderId, action, payload = {}, options = {}) => {
     loading.value = true;
     error.value = null;
 
-    try {
-      const res = await fetch(`${config.public.apiBaseUrl}/shipper/orders/${orderId}/${action}`, {
+    const isFormData = payload instanceof FormData;
+    const idemKey = options.idempotencyKey || (() => {
+      const k = useIdempotencyKey();
+      return k.ensure();
+    })();
+
+    const url = `${config.public.apiBaseUrl}/shipper/orders/${orderId}/${action}`;
+
+    const fetchOnce = async () => {
+      const headers = buildHeaders({
+        "Idempotency-Key": idemKey,
+        ...(isFormData ? {} : { "Content-Type": "application/json" }),
+      });
+
+      const res = await fetch(url, {
         method: "POST",
         credentials: "include",
-        headers: buildHeaders({ "Idempotency-Key": idempotencyKey() }),
-        body: JSON.stringify(payload),
+        headers,
+        body: isFormData ? payload : JSON.stringify(payload),
       });
 
       if (res.status === 401) {
         auth.logout();
-        return null;
+        const e = new Error("Unauthorized");
+        e.status = 401;
+        throw e;
       }
 
       if (!res.ok) {
@@ -180,6 +204,13 @@ export const useShipperStore = defineStore("shipper/orders", () => {
       }
 
       return await res.json();
+    };
+
+    try {
+      return await retryWithBackoff(fetchOnce, {
+        retries: options.retries ?? 2,
+        backoff: [1000, 3000],
+      });
     } catch (e) {
       error.value = e.message;
       throw e;
@@ -210,11 +241,37 @@ export const useShipperStore = defineStore("shipper/orders", () => {
     return response;
   };
 
-  const pickup = (orderId, payload = {}) => postOrderAction(orderId, "pickup", payload);
-  const startDelivery = (orderId, payload = {}) => postOrderAction(orderId, "start-delivery", payload);
-  const complete = (orderId, payload = {}) => postOrderAction(orderId, "complete", payload);
-  const fail = (orderId, payload = {}) => postOrderAction(orderId, "fail", payload);
-  const reschedule = (orderId, payload = {}) => postOrderAction(orderId, "reschedule", payload);
+  const pickup = async (orderId, options = {}) => {
+    const response = await postOrderAction(orderId, "pickup", {}, options);
+    upsertOrder(response?.data);
+    return response;
+  };
+
+  const startDelivery = async (orderId, options = {}) => {
+    const response = await postOrderAction(orderId, "start-delivery", {}, options);
+    upsertOrder(response?.data);
+    return response;
+  };
+
+  const complete = async (orderId, payload, options = {}) => {
+    const response = await postOrderAction(orderId, "complete", payload, options);
+    upsertOrder(response?.data);
+    await fetchStats();
+    return response;
+  };
+
+  const fail = async (orderId, payload, options = {}) => {
+    const response = await postOrderAction(orderId, "fail", payload, options);
+    upsertOrder(response?.data);
+    await fetchStats();
+    return response;
+  };
+
+  const reschedule = async (orderId, payload, options = {}) => {
+    const response = await postOrderAction(orderId, "reschedule", payload, options);
+    upsertOrder(response?.data);
+    return response;
+  };
 
   const reset = () => {
     orders.value = [];

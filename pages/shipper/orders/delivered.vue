@@ -5,13 +5,6 @@
         <h1 class="page-title">{{ t('shipper.delivered.title') }}</h1>
         <p class="page-sub">{{ t('shipper.delivered.subtitle', { count: orders.length }) }}</p>
       </div>
-      <div class="filter-group">
-        <select class="admin-control" v-model="filterRange">
-          <option value="7">{{ t('shipper.delivered.last7') }}</option>
-          <option value="30">{{ t('shipper.delivered.last30') }}</option>
-          <option value="90">{{ t('shipper.delivered.last90') }}</option>
-        </select>
-      </div>
     </div>
 
     <div class="metric-strip">
@@ -19,7 +12,7 @@
         icon="bi-check2-circle" variant="success" />
       <AdminMetricCard :label="t('shipper.metrics.totalFee')" :value="formatMoney(totalFee)"
         icon="bi-cash-coin" variant="success" />
-      <AdminMetricCard :label="t('shipper.metrics.successRate')" value="98.4%"
+      <AdminMetricCard :label="t('shipper.metrics.successRate')" value="—"
         icon="bi-graph-up" variant="info" />
     </div>
 
@@ -35,6 +28,9 @@
           </tr>
         </thead>
         <tbody>
+          <tr v-if="loading && !orders.length">
+            <td colspan="5" class="empty-row">{{ t('shipper.delivered.loading') }}</td>
+          </tr>
           <tr v-for="order in orders" :key="order.id">
             <td><strong>{{ order.orderCode }}</strong></td>
             <td>
@@ -49,10 +45,10 @@
             <td>
               <span class="ro-address">{{ order.address }}</span>
             </td>
-            <td>{{ formatDate(order.deliveredAt) }}</td>
+            <td>{{ order.pickedUpAt ? formatDate(order.pickedUpAt) : '—' }}</td>
             <td class="text-end"><strong>{{ formatMoney(order.shippingFee) }}</strong></td>
           </tr>
-          <tr v-if="!orders.length">
+          <tr v-if="!loading && !orders.length">
             <td colspan="5" class="empty-row">{{ t('shipper.delivered.empty') }}</td>
           </tr>
         </tbody>
@@ -62,42 +58,22 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useI18n, useHead } from '#imports'
 import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
+import { useShipperStore } from '@/stores/shipperStore'
 
 definePageMeta({ layout: 'shipper' })
 const { t } = useI18n()
 useHead({ title: () => `${t('shipper.delivered.title')} – IrusGear Shipper` })
 
-const filterRange = ref('7')
+const shipper = useShipperStore()
 
-const orders = ref([
-  {
-    id: 101,
-    orderCode: '#ORD2300',
-    customer: { name: 'Vũ Thị E', phone: '0945 678 901' },
-    address: '12 Hai Bà Trưng, Quận 1, TP HCM',
-    deliveredAt: '2026-05-16T14:32:00',
-    shippingFee: 35000,
-  },
-  {
-    id: 102,
-    orderCode: '#ORD2301',
-    customer: { name: 'Hoàng Văn F', phone: '0967 890 123' },
-    address: '88 Lý Thường Kiệt, Quận 10, TP HCM',
-    deliveredAt: '2026-05-16T11:10:00',
-    shippingFee: 40000,
-  },
-  {
-    id: 103,
-    orderCode: '#ORD2302',
-    customer: { name: 'Đỗ Minh G', phone: '0978 901 234' },
-    address: '301 Điện Biên Phủ, Bình Thạnh, TP HCM',
-    deliveredAt: '2026-05-15T16:45:00',
-    shippingFee: 30000,
-  },
-])
+const orders = computed(() =>
+  shipper.orders.filter((o) => o.status === 'delivered'),
+)
+
+const loading = computed(() => shipper.loading)
 
 const totalFee = computed(() => orders.value.reduce((s, o) => s + (o.shippingFee || 0), 0))
 
@@ -108,8 +84,13 @@ const initials = (name) =>
 
 const formatDate = (d) => {
   const dt = new Date(d)
+  if (Number.isNaN(dt.getTime())) return '—'
   return dt.toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
 }
+
+onMounted(async () => {
+  await shipper.fetchOrders({ status: 'delivered', per_page: 50 })
+})
 </script>
 
 <style scoped>
@@ -140,8 +121,6 @@ const formatDate = (d) => {
   color: var(--admin-muted);
   font-size: 0.9rem;
 }
-
-.filter-group .admin-control { min-width: 160px; }
 
 .metric-strip {
   display: grid;

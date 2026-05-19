@@ -48,22 +48,6 @@
         {{ $t('common.cancel') }}
       </button>
     </div>
-
-    <div v-if="showRefundConfirm" class="approval-modal-backdrop" @click.self="showRefundConfirm = false">
-      <div class="approval-modal" role="dialog" aria-modal="true">
-        <i class="bi bi-exclamation-triangle modal-icon" aria-hidden="true"></i>
-        <h4>{{ $t('admin.orders.approval.refundTitle') }}</h4>
-        <p>{{ $t('admin.orders.approval.refundWarning') }}</p>
-        <div class="modal-actions">
-          <button class="admin-secondary-button" type="button" :disabled="isSubmitting" @click="showRefundConfirm = false">
-            {{ $t('common.cancel') }}
-          </button>
-          <button class="admin-danger-button" type="button" :disabled="isSubmitting" @click="confirmRefundReject">
-            {{ $t('admin.orders.approval.confirmReject') }}
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -89,7 +73,6 @@ const admin = useAdminStore()
 const reason = ref('')
 const reasonError = ref('')
 const showRejectForm = ref(false)
-const showRefundConfirm = ref(false)
 const isSubmitting = ref(false)
 const activeAction = ref('')
 
@@ -122,7 +105,6 @@ const openRejectForm = () => {
 
 const cancelReject = () => {
   showRejectForm.value = false
-  showRefundConfirm.value = false
   reason.value = ''
   reasonError.value = ''
 }
@@ -138,31 +120,44 @@ const reject = async () => {
   }
 
   if (needsRefundConfirm.value) {
-    showRefundConfirm.value = true
+    promptRefundConfirm(trimmedReason)
     return
   }
 
   await submitReject(trimmedReason)
 }
 
-const confirmRefundReject = async () => {
-  const trimmedReason = reason.value.trim()
-  if (!trimmedReason) {
-    reasonError.value = t('admin.orders.approval.reasonRequired')
-    showRefundConfirm.value = false
-    return
-  }
-
-  await submitReject(trimmedReason)
+/**
+ * For paid orders, surface a refund warning via vue-sonner instead of a
+ * blocking inline modal. The toast offers two actions: confirm (proceeds
+ * with the reject API call) and cancel (dismisses the toast). Long
+ * duration ensures the admin actually reads the warning before deciding.
+ */
+const promptRefundConfirm = (trimmedReason) => {
+  toast.warning(t('admin.orders.approval.refundTitle'), {
+    description: t('admin.orders.approval.refundWarning'),
+    duration: 15000,
+    action: {
+      label: t('admin.orders.approval.confirmReject'),
+      onClick: () => submitReject(trimmedReason),
+    },
+    cancel: {
+      label: t('common.cancel'),
+      onClick: () => {
+        // No-op — toast dismisses itself, form stays so admin can revise.
+      },
+    },
+  })
 }
 
 const submitReject = async (trimmedReason) => {
+  if (isSubmitting.value) return
+
   isSubmitting.value = true
   activeAction.value = 'reject'
   try {
     const res = await admin.rejectOrder(props.order.id, trimmedReason)
     toast.success(t('admin.orders.approval.rejected'))
-    showRefundConfirm.value = false
     cancelReject()
     emit('updated', res?.data)
   } catch (e) {
@@ -264,73 +259,17 @@ const submitReject = async (trimmedReason) => {
   flex-wrap: wrap;
 }
 
-.approval-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1050;
-  background: rgba(15, 18, 32, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.approval-modal {
-  width: min(420px, 100%);
-  border-radius: 8px;
-  background: var(--admin-surface);
-  border: 1px solid var(--admin-border);
-  box-shadow: 0 18px 42px rgba(15, 18, 32, 0.18);
-  padding: 22px;
-}
-
-.modal-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: rgba(255, 159, 67, 0.14);
-  color: var(--admin-warning);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-}
-
-.approval-modal h4 {
-  margin: 0 0 8px;
-  color: var(--admin-text);
-  font-size: 1rem;
-}
-
-.approval-modal p {
-  margin: 0;
-  color: var(--admin-muted);
-  font-size: 0.88rem;
-  line-height: 1.55;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 18px;
-}
-
 @media screen and (max-width: 767.98px) {
   .approval-panel {
     padding: 16px;
   }
 
   .approval-actions,
-  .approval-actions button,
-  .modal-actions,
-  .modal-actions button {
+  .approval-actions button {
     width: 100%;
   }
 
-  .approval-actions button,
-  .modal-actions button {
+  .approval-actions button {
     justify-content: center;
   }
 }
