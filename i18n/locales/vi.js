@@ -1134,6 +1134,34 @@ export default {
       },
     },
 
+    // === pages/orders/[id].vue ===
+    orderDetail: {
+      title: "Chi tiết đơn hàng",
+      orderNumber: "Đơn hàng",
+      timeline: "Lịch sử trạng thái",
+      items: "Sản phẩm đã đặt",
+      summary: "Tóm tắt đơn hàng",
+      shipping: "Thông tin giao hàng",
+      payment: "Thông tin thanh toán",
+      note: "Ghi chú",
+      deliveryMethod: "Phương thức giao hàng",
+      deliveryStandard: "Giao tiêu chuẩn",
+      deliveryExpress: "Giao hỏa tốc",
+      deliverySameDay: "Giao trong ngày",
+      deliveryPickup: "Nhận tại cửa hàng",
+      tracking: "Mã vận đơn",
+      estimatedDelivery: "Dự kiến giao",
+      backToList: "Quay lại danh sách",
+      cancelOrder: "Hủy đơn hàng",
+      reorder: "Đặt lại",
+      confirmCancel: "Bạn có chắc muốn hủy đơn hàng này?",
+      cancelSuccess: "Đã gửi yêu cầu hủy đơn hàng",
+      cancelError: "Không thể hủy đơn hàng",
+      fetchError: "Không thể tải thông tin đơn hàng",
+      notFound: "Không tìm thấy đơn hàng",
+      notFoundDesc: "Đơn hàng có thể đã bị xóa hoặc bạn không có quyền xem.",
+    },
+
     // === pages/warranty/index.vue ===
     warranty: {
       title: "Bảo hành",

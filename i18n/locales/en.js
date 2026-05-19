@@ -1123,6 +1123,34 @@ export default {
       },
     },
 
+    // === pages/orders/[id].vue ===
+    orderDetail: {
+      title: "Order details",
+      orderNumber: "Order",
+      timeline: "Status history",
+      items: "Ordered items",
+      summary: "Order summary",
+      shipping: "Shipping info",
+      payment: "Payment info",
+      note: "Note",
+      deliveryMethod: "Delivery method",
+      deliveryStandard: "Standard delivery",
+      deliveryExpress: "Express delivery",
+      deliverySameDay: "Same-day delivery",
+      deliveryPickup: "In-store pickup",
+      tracking: "Tracking number",
+      estimatedDelivery: "Estimated delivery",
+      backToList: "Back to list",
+      cancelOrder: "Cancel order",
+      reorder: "Reorder",
+      confirmCancel: "Are you sure you want to cancel this order?",
+      cancelSuccess: "Cancellation request submitted",
+      cancelError: "Could not cancel order",
+      fetchError: "Could not load order information",
+      notFound: "Order not found",
+      notFoundDesc: "The order may have been removed or you don't have permission to view it.",
+    },
+
     // === pages/warranty/index.vue ===
     warranty: {
       title: "Warranty",

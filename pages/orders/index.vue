@@ -84,9 +84,12 @@
           <button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3">
             <i class="bi bi-chat-left-text me-1"></i>{{ $t('profile.orders.contact') }}
           </button>
-          <button type="button" class="btn btn-dark btn-sm rounded-pill px-3">
+          <NuxtLink
+            :to="localePath(`/orders/${order.id}`)"
+            class="btn btn-dark btn-sm rounded-pill px-3"
+          >
             <i class="bi bi-eye me-1"></i>{{ $t('profile.orders.detail') }}
-          </button>
+          </NuxtLink>
         </div>
       </div>
     </div>
