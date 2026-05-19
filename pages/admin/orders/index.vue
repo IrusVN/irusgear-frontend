@@ -13,6 +13,22 @@
       />
     </div>
 
+    <div class="fulfillment-chip-strip" role="list">
+      <button
+        v-for="chip in fulfillmentChips"
+        :key="chip.key"
+        type="button"
+        class="fulfillment-chip"
+        :class="{ active: chip.active, 'has-pulse': chip.pulse }"
+        role="listitem"
+        @click="setStatusFilter(chip.status)"
+      >
+        <span v-if="chip.pulse" class="approval-pulse" aria-hidden="true"></span>
+        <span class="chip-label">{{ chip.label }}</span>
+        <span class="chip-count">{{ chip.count }}</span>
+      </button>
+    </div>
+
     <!-- Order Table (Desktop) -->
     <AdminDataTable
       v-if="!isMobile"
@@ -123,8 +139,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
-import { useHead, useRouter, useI18n } from '#imports'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
@@ -146,8 +162,21 @@ definePageMeta({ layout: 'admin' })
 useHead({ title: () => t('admin.orders.pageTitle') })
 
 const router = useRouter()
+const route = useRoute()
 const admin = useAdminStore()
 const pagination = usePaginationStore()
+
+const FULFILLMENT_STATUSES = [
+  'confirmed',
+  'processing',
+  'ready_to_ship',
+  'shipped',
+  'delivering',
+  'delivered',
+  'delivery_failed',
+  'returned',
+  'cancelled',
+]
 
 /* ── state ── */
 const search = ref('')
@@ -159,6 +188,12 @@ const totalOrders = computed(() => pagination.total)
 const selectedIds = ref([])
 const orders = ref([])
 const stats = ref(null)
+const statsTimer = ref(null)
+
+const activeStatus = computed(() => {
+  const status = route.query.status
+  return typeof status === 'string' && FULFILLMENT_STATUSES.includes(status) ? status : ''
+})
 
 const handleSearch = (val) => {
   search.value = val
@@ -180,6 +215,11 @@ const changePageSize = (size) => {
   fetchOrders()
 }
 
+const resetPage = () => {
+  pagination.page = 1
+  fetchOrders()
+}
+
 /* ── metrics ── */
 const paymentMetrics = computed(() => {
   const s = stats.value?.by_payment_status || {}
@@ -190,6 +230,34 @@ const paymentMetrics = computed(() => {
     { label: t('admin.orders.refunded'), value: s.refunded || 0, meta, icon: 'bi-arrow-counterclockwise', variant: 'info' },
     { label: t('admin.orders.failed'), value: s.failed || 0, meta, icon: 'bi-x-circle', variant: 'danger' },
   ]
+})
+
+const fulfillmentChips = computed(() => {
+  const counts = stats.value?.by_status || {}
+  const chips = [
+    {
+      key: 'all',
+      status: '',
+      label: t('admin.orders.chips.all'),
+      count: stats.value?.total_orders || 0,
+      active: activeStatus.value === '',
+      pulse: false,
+    },
+  ]
+
+  FULFILLMENT_STATUSES.forEach((status) => {
+    const count = counts[status] || 0
+    chips.push({
+      key: status,
+      status,
+      label: t(`admin.orders.chips.${status}`),
+      count,
+      active: activeStatus.value === status,
+      pulse: status === 'confirmed' && count > 0,
+    })
+  })
+
+  return chips
 })
 
 /* ── columns ── */
@@ -222,6 +290,7 @@ const mapOrder = (o) => ({
 const fetchOrders = async () => {
   const res = await admin.fetchList('orders', {
     search: search.value,
+    status: activeStatus.value,
   })
   if (res?.data) {
     orders.value = res.data.map(mapOrder)
@@ -239,6 +308,28 @@ onMounted(() => {
   pagination.reset()
   fetchOrders()
   fetchStats()
+
+  if (import.meta.client) {
+    statsTimer.value = window.setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        fetchStats()
+      }
+    }, 30000)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (statsTimer.value) {
+    clearInterval(statsTimer.value)
+  }
+  if (searchTimeout.value) {
+    clearTimeout(searchTimeout.value)
+  }
+})
+
+watch(activeStatus, () => {
+  pagination.page = 1
+  fetchOrders()
 })
 
 /* ── helpers ── */
@@ -252,6 +343,14 @@ const fulfillmentLabel = (s) => formatPaymentStatus(s).label
 const fulfillmentVariant = (s) => formatPaymentStatus(s).variant
 
 const viewOrder = (item) => router.push(`/admin/orders/${item.id}`)
+const setStatusFilter = (status) => {
+  router.push({
+    query: {
+      ...route.query,
+      status: status || undefined,
+    },
+  })
+}
 const handleExport = () => {
   if (!orders.value.length) {
     toast.warning(t('admin.orders.noDataToExport'))
@@ -288,6 +387,79 @@ const handleAction = (action, item) => {
   margin-bottom: 20px;
 }
 
+.fulfillment-chip-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.fulfillment-chip {
+  min-height: 38px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-surface);
+  color: var(--admin-muted);
+  border-radius: 8px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  font-size: 0.84rem;
+  font-weight: 700;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.fulfillment-chip:hover {
+  background: var(--admin-surface-soft);
+  color: var(--admin-text);
+}
+
+.fulfillment-chip.active {
+  background: rgba(115, 103, 240, 0.12);
+  border-color: rgba(115, 103, 240, 0.34);
+  color: var(--admin-primary);
+}
+
+.chip-label {
+  white-space: nowrap;
+}
+
+.chip-count {
+  min-width: 24px;
+  height: 22px;
+  border-radius: 999px;
+  padding: 0 7px;
+  background: rgba(47, 43, 61, 0.08);
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+}
+
+.approval-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--admin-warning);
+  box-shadow: 0 0 0 0 rgba(255, 159, 67, 0.52);
+  animation: approval-pulse 1.5s ease-out infinite;
+}
+
+@keyframes approval-pulse {
+  70% {
+    box-shadow: 0 0 0 8px rgba(255, 159, 67, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 159, 67, 0);
+  }
+}
+
 .order-id-link { color: var(--admin-primary); font-weight: 700; text-decoration: none; }
 .order-id-link:hover { text-decoration: underline; }
 
@@ -302,5 +474,8 @@ const handleAction = (action, item) => {
 .method-text { font-size: 0.86rem; color: var(--admin-muted); white-space: nowrap; }
 
 @media screen and (max-width: 1199.98px) { .metric-strip { grid-template-columns: repeat(2, 1fr); } }
-@media screen and (max-width: 767.98px) { .metric-strip { grid-template-columns: 1fr; } }
+@media screen and (max-width: 767.98px) {
+  .metric-strip { grid-template-columns: 1fr; }
+  .fulfillment-chip { min-height: 42px; }
+}
 </style>

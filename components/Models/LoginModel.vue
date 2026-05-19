@@ -241,7 +241,7 @@ import EmailIcon from '@/components/Icons/EmailIcon.vue'
 import LockIcon from '@/components/Icons/LockIcon.vue'
 import ShowEye from '@/components/Icons/ShowEye.vue'
 import HideEye from '@/components/Icons/HideEye.vue'
-import { useLocalePath } from '#imports'
+import { useLocalePath, useRoute } from '#imports'
 import { useAuthStore } from "@/stores/authStore";
 import { useI18n } from '#imports'
 import { toast } from 'vue-sonner'
@@ -250,6 +250,7 @@ import { useMobileSheet } from '@/composables/useMobileSheet'
 const { t } = useI18n();
 const auth = useAuthStore();
 const localePath = useLocalePath()
+const route = useRoute()
 
 const email = ref('')
 const password = ref('')
@@ -280,7 +281,11 @@ const handleLogin = async () => {
     if (response.status === true) {
       toast.success(t('login.loginSuccess'));
       mobileSheetRef.value?.close();
-      return navigateTo('/');
+      const redirectQuery = Array.isArray(route.query.redirect)
+        ? route.query.redirect[0]
+        : route.query.redirect;
+      const defaultRoute = auth.user?.role?.default_route || response.user?.role?.default_route || '/';
+      return navigateTo(redirectQuery || localePath(defaultRoute));
     }
   } catch (e) {
     const errorCode = e.data?.code;
