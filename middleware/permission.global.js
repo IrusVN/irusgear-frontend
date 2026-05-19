@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/stores/authStore";
-import { ADMIN_ROLES } from "@/constants/userConstants";
+import { ADMIN_ROLES, COURIER_ROLES } from "@/constants/userConstants";
 
 export default defineNuxtRouteMiddleware(async (to) => {
     const authStore = useAuthStore();
@@ -26,9 +26,19 @@ export default defineNuxtRouteMiddleware(async (to) => {
     const userRoleId = String(authStore.user.role_id);
 
     const isAdmin = ADMIN_ROLES.includes(userRoleId);
+    const isCourier = COURIER_ROLES.includes(userRoleId);
 
     const targetIsAdminRoute = normalizedPath.startsWith('/admin');
+    const targetIsShipperRoute = normalizedPath.startsWith('/shipper');
     const isPublic = publicRoutes.includes(normalizedPath);
+
+    if (targetIsShipperRoute && !isCourier) {
+        return abortNavigation(createError({
+            statusCode: 403,
+            statusMessage: 'Access Denied',
+            fatal: true
+        }));
+    }
 
     if (isAdmin) {
         if (!targetIsAdminRoute && !isPublic && !isComingSoon) {

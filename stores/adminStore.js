@@ -252,6 +252,14 @@ export const useAdminStore = defineStore("admin/globals", () => {
     }
   };
 
+  const approveOrder = (id) => create(`orders/${id}/approve`, {});
+
+  const rejectOrder = (id, reason) => create(`orders/${id}/reject`, { reason });
+
+  const assignOrder = (id, shipperId) => create(`orders/${id}/assign`, { shipper_id: shipperId });
+
+  const reassignOrder = (id, shipperId) => create(`orders/${id}/reassign`, { shipper_id: shipperId });
+
   /* ── Admin Auth ── */
 
   /**
@@ -315,6 +323,10 @@ export const useAdminStore = defineStore("admin/globals", () => {
     update,
     patch,
     remove,
+    approveOrder,
+    rejectOrder,
+    assignOrder,
+    reassignOrder,
 
     // Auth
     fetchAdminMe,

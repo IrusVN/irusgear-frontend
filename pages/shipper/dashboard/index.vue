@@ -157,6 +157,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useI18n, useHead } from '#imports'
 import { useAuthStore } from '@/stores/authStore'
+import { useShipperStore } from '@/stores/shipperStore'
 import AdminCard from '@/components/Admin/ui/AdminCard.vue'
 import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
@@ -168,6 +169,7 @@ const { t } = useI18n()
 useHead({ title: () => `${t('shipper.dashboard.title')} – IrusGear Shipper` })
 
 const auth = useAuthStore()
+const shipper = useShipperStore()
 
 const shipperName = computed(() => {
   const u = auth.user || {}
@@ -178,13 +180,12 @@ const isOnline = ref(true)
 const chartRange = ref('7')
 const entered = ref(false)
 
-/* ── Mock data (sẵn sàng thay bằng API thật) ── */
-const metrics = ref({
-  totalEarnings: 18450000,
-  pendingOrders: 12,
-  deliveredOrders: 187,
-  todayEarnings: 540000,
-})
+const metrics = computed(() => ({
+  totalEarnings: 0,
+  pendingOrders: shipper.stats.pending_pickup || 0,
+  deliveredOrders: shipper.stats.delivered_today || 0,
+  todayEarnings: 0,
+}))
 
 const earningsChart = ref({
   labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
@@ -195,49 +196,20 @@ const statusBreakdown = computed(() => ({
   labels: [
     t('shipper.status.delivered'),
     t('shipper.status.delivering'),
-    t('shipper.status.cancelled'),
+    t('shipper.status.failed'),
   ],
-  data: [187, 12, 4],
+  data: [
+    shipper.stats.delivered_today || 0,
+    shipper.stats.delivering || 0,
+    shipper.stats.failed_today || 0,
+  ],
 }))
 
 const totalOrders = computed(() =>
   statusBreakdown.value.data.reduce((a, b) => a + b, 0)
 )
 
-const pendingOrders = ref([
-  {
-    id: 1,
-    orderCode: '#ORD2381',
-    customer: { name: 'Nguyễn Văn A', phone: '0901 234 567' },
-    address: '123 Lê Lợi, Quận 1, TP HCM',
-    status: 'delivering',
-    shippingFee: 35000,
-  },
-  {
-    id: 2,
-    orderCode: '#ORD2382',
-    customer: { name: 'Trần Thị B', phone: '0987 654 321' },
-    address: '45 Nguyễn Trãi, Quận 5, TP HCM',
-    status: 'ready_to_pickup',
-    shippingFee: 30000,
-  },
-  {
-    id: 3,
-    orderCode: '#ORD2383',
-    customer: { name: 'Lê Hoàng C', phone: '0912 345 678' },
-    address: '78 Pasteur, Quận 3, TP HCM',
-    status: 'delivering',
-    shippingFee: 40000,
-  },
-  {
-    id: 4,
-    orderCode: '#ORD2384',
-    customer: { name: 'Phạm Minh D', phone: '0934 567 890' },
-    address: '210 Cách Mạng Tháng 8, Quận 10, TP HCM',
-    status: 'shipped',
-    shippingFee: 45000,
-  },
-])
+const pendingOrders = computed(() => shipper.orders.slice(0, 5))
 
 /* ── helpers ── */
 const formatMoney = (n) => `${new Intl.NumberFormat('vi-VN').format(n || 0)}đ`
@@ -253,15 +225,18 @@ const initials = (name) =>
 const statusVariant = (s) =>
   ({
     delivering: 'info',
-    ready_to_pickup: 'warning',
-    shipped: 'info',
+    pending_pickup: 'warning',
+    picked_up: 'info',
+    failed: 'danger',
     delivered: 'success',
     cancelled: 'danger',
   }[s] || 'neutral')
 
 const enterClass = (i) => ({ 'dash-enter': true, 'is-visible': entered.value, [`delay-${i}`]: true })
 
-onMounted(() => {
+onMounted(async () => {
+  await shipper.fetchStats()
+  await shipper.fetchOrders({ per_page: 5 })
   nextTick(() => { entered.value = true })
 })
 </script>

@@ -46,6 +46,11 @@
         </div>
 
         <div class="order-card-actions">
+          <button v-if="!order.assignedShipperId" class="admin-primary-button detail-btn" type="button"
+            :disabled="shipper.loading" @click="handleClaim(order)">
+            <i class="bi bi-hand-index-thumb"></i>
+            {{ t('shipper.actions.claim') }}
+          </button>
           <a class="admin-secondary-button call-btn" :href="`tel:${order.customer.phone}`">
             <i class="bi bi-telephone"></i>
             {{ t('shipper.actions.call') }}
@@ -69,9 +74,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useI18n, useHead } from '#imports'
 import { toast } from 'vue-sonner'
+import { useShipperStore } from '@/stores/shipperStore'
 import AdminMetricCard from '@/components/Admin/ui/AdminMetricCard.vue'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import ShipperOrderDetailModal from '@/components/Shipper/ShipperOrderDetailModal.vue'
@@ -80,88 +86,12 @@ definePageMeta({ layout: 'shipper' })
 const { t } = useI18n()
 useHead({ title: () => `${t('shipper.pending.title')} – IrusGear Shipper` })
 
-/* ── Mock data có thêm items + paymentMethod để modal hiển thị đầy đủ ── */
-const orders = ref([
-  {
-    id: 1,
-    orderCode: '#ORD2381',
-    customer: { name: 'Nguyễn Văn A', phone: '0901 234 567' },
-    address: '123 Lê Lợi, Quận 1, TP HCM',
-    status: 'delivering',
-    shippingFee: 35000,
-    paymentMethod: 'cod',
-    items: [
-      {
-        id: 'i1',
-        name: 'Tai nghe Sony WH-1000XM5',
-        quantity: 1,
-        price: 7990000,
-        image: 'https://picsum.photos/seed/sony-wh/200',
-      },
-      {
-        id: 'i2',
-        name: 'Ốp lưng iPhone 15 Pro',
-        quantity: 1,
-        price: 350000,
-        image: 'https://picsum.photos/seed/case15/200',
-      },
-    ],
-  },
-  {
-    id: 2,
-    orderCode: '#ORD2382',
-    customer: { name: 'Trần Thị B', phone: '0987 654 321' },
-    address: '45 Nguyễn Trãi, Quận 5, TP HCM',
-    status: 'ready_to_pickup',
-    shippingFee: 30000,
-    paymentMethod: 'vnpay',
-    items: [
-      {
-        id: 'i3',
-        name: 'Apple Watch SE 44mm',
-        quantity: 1,
-        price: 6990000,
-        image: 'https://picsum.photos/seed/aw-se/200',
-      },
-    ],
-  },
-  {
-    id: 3,
-    orderCode: '#ORD2383',
-    customer: { name: 'Lê Hoàng C', phone: '0912 345 678' },
-    address: '78 Pasteur, Quận 3, TP HCM',
-    status: 'delivering',
-    shippingFee: 40000,
-    paymentMethod: 'momo',
-    items: [
-      {
-        id: 'i4',
-        name: 'Bàn phím Logitech MX Keys',
-        quantity: 1,
-        price: 2990000,
-        image: 'https://picsum.photos/seed/mxkeys/200',
-      },
-      {
-        id: 'i5',
-        name: 'Chuột MX Master 3S',
-        quantity: 1,
-        price: 2590000,
-        image: 'https://picsum.photos/seed/mxm3/200',
-      },
-      {
-        id: 'i6',
-        name: 'Dây sạc USB-C 1m',
-        quantity: 2,
-        price: 250000,
-        image: 'https://picsum.photos/seed/usbc/200',
-      },
-    ],
-  },
-])
+const shipper = useShipperStore()
+const orders = computed(() => shipper.orders)
 
 const counts = computed(() => ({
-  ready: orders.value.filter((o) => o.status === 'ready_to_pickup').length,
-  delivering: orders.value.filter((o) => o.status === 'delivering' || o.status === 'shipped').length,
+  ready: orders.value.filter((o) => o.status === 'pending_pickup').length,
+  delivering: orders.value.filter((o) => o.status === 'delivering' || o.status === 'picked_up').length,
 }))
 
 const estimateFee = computed(() =>
@@ -173,8 +103,9 @@ const formatMoney = (n) => `${new Intl.NumberFormat('vi-VN').format(n || 0)}đ`
 const statusVariant = (s) =>
   ({
     delivering: 'info',
-    ready_to_pickup: 'warning',
-    shipped: 'info',
+    pending_pickup: 'warning',
+    picked_up: 'info',
+    failed: 'danger',
     delivered: 'success',
     cancelled: 'danger',
   }[s] || 'neutral')
@@ -183,20 +114,37 @@ const statusVariant = (s) =>
 const modalOpen = ref(false)
 const selectedOrder = ref(null)
 
-const openDetail = (order) => {
+const openDetail = async (order) => {
   selectedOrder.value = order
   modalOpen.value = true
+  const detail = await shipper.fetchOrder(order.id)
+  if (detail) {
+    selectedOrder.value = detail
+  }
+}
+
+const handleClaim = async (order) => {
+  try {
+    await shipper.claim(order.id)
+    await shipper.fetchOrders({ per_page: 50 })
+    toast.success(t('shipper.pending.claimed', { code: order.orderCode }))
+  } catch (e) {
+    toast.error(t('shipper.pending.claimFailed', { msg: e.message }))
+  }
 }
 
 const handleComplete = ({ orderId }) => {
-  // TODO: gọi API thật để upload ảnh + đánh dấu đã giao
   const finished = orders.value.find((o) => o.id === orderId)
-  orders.value = orders.value.filter((o) => o.id !== orderId)
   modalOpen.value = false
   toast.success(t('shipper.orderDetail.completedToast', {
     code: finished?.orderCode || '',
   }))
 }
+
+onMounted(async () => {
+  await shipper.fetchOrders({ per_page: 50 })
+  await shipper.fetchStats()
+})
 </script>
 
 <style scoped>

@@ -99,27 +99,15 @@
           <!-- Shipping Activity Timeline -->
           <div class="admin-card-shell detail-card">
             <h3 class="card-title">{{ $t('admin.orders.shippingActivity') }}</h3>
-            <div class="timeline">
-              <div v-for="(step, idx) in order.activity" :key="step.id" class="timeline-item"
-                :class="{ completed: step.completed, 'is-last': idx === order.activity.length - 1 }">
-                <div class="timeline-indicator">
-                  <span class="timeline-dot">
-                    <i v-if="step.completed" class="bi bi-check"></i>
-                  </span>
-                  <span v-if="idx < order.activity.length - 1" class="timeline-line"></span>
-                </div>
-                <div class="timeline-content">
-                  <strong>{{ step.title }}</strong>
-                  <small>{{ step.description }}</small>
-                  <span class="timeline-time">{{ formatTimestamp(step.timestamp) }}</span>
-                </div>
-              </div>
-            </div>
+            <ShipmentTimeline :order="order" />
           </div>
         </div>
 
         <!-- RIGHT COLUMN -->
         <div class="detail-col-right">
+          <ApprovalPanel :order="order" @updated="handleOrderUpdated" />
+          <AssignShipperPanel :order="order" @updated="handleOrderUpdated" />
+
           <!-- Customer Details -->
           <div class="admin-card-shell detail-card">
             <h3 class="card-title">{{ $t('admin.orders.customerDetails') }}</h3>
@@ -190,6 +178,9 @@ import { ref, computed, onMounted } from 'vue'
 import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
+import ApprovalPanel from '@/components/Admin/Orders/ApprovalPanel.vue'
+import AssignShipperPanel from '@/components/Admin/Orders/AssignShipperPanel.vue'
+import ShipmentTimeline from '@/components/Admin/Orders/ShipmentTimeline.vue'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { useStatusFormat } from '@/composables/useStatusFormat'
@@ -209,7 +200,9 @@ useHead({ title: () => order.value ? t('admin.orders.orderPageTitle', { code: or
 const mapOrderDetail = (o) => ({
   id: o.id,
   orderCode: o.order_number,
+  status: o.status,
   date: o.created_at,
+  payment: o.payment,
   paymentStatus: o.payment?.status || 'pending',
   fulfillmentStatus: o.status,
   paymentMethod: o.payment?.method || 'cod',
@@ -258,6 +251,9 @@ const mapOrderDetail = (o) => ({
     timestamp: tl.created_at,
     completed: true,
   })) || [],
+  timeline: o.timeline || o.timelines || [],
+  timelines: o.timelines || o.timeline || [],
+  shipment: o.shipment,
   note: o.order_note,
 })
 
@@ -268,6 +264,10 @@ const fetchOrder = async () => {
   }
 }
 
+const handleOrderUpdated = async () => {
+  await fetchOrder()
+}
+
 onMounted(() => {
   fetchOrder()
 })
@@ -275,7 +275,6 @@ onMounted(() => {
 /* ── helpers ── */
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 const formatDateFull = (d) => new Date(d).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })
-const formatTimestamp = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 
 const { formatPaymentStatus } = useStatusFormat()
 const paymentLabel = (s) => formatPaymentStatus(s).label
@@ -515,83 +514,6 @@ const handleCancel = async () => {
   padding-top: 14px;
 }
 
-/* ── Timeline ── */
-.timeline {
-  display: flex;
-  flex-direction: column;
-}
-
-.timeline-item {
-  display: flex;
-  gap: 14px;
-}
-
-.timeline-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.timeline-dot {
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  flex: 0 0 auto;
-  border: 2px solid var(--admin-border);
-  background: var(--admin-surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--admin-subtle);
-  font-size: 0.72rem;
-  transition: all 0.2s;
-}
-
-.timeline-item.completed .timeline-dot {
-  background: var(--admin-success);
-  border-color: var(--admin-success);
-  color: #fff;
-}
-
-.timeline-line {
-  width: 2px;
-  flex: 1;
-  min-height: 28px;
-  background: var(--admin-border);
-}
-
-.timeline-item.completed .timeline-line {
-  background: var(--admin-success);
-}
-
-.timeline-content {
-  padding-bottom: 22px;
-  min-width: 0;
-}
-
-.timeline-content strong {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--admin-text);
-  margin-bottom: 2px;
-}
-
-.timeline-content small {
-  display: block;
-  color: var(--admin-muted);
-  font-size: 0.82rem;
-  margin-bottom: 4px;
-}
-
-.timeline-time {
-  font-size: 0.76rem;
-  color: var(--admin-subtle);
-}
-
-.timeline-item.is-last .timeline-content {
-  padding-bottom: 0;
-}
-
 /* Customer */
 .customer-detail-cell {
   display: flex;
@@ -715,10 +637,6 @@ const handleCancel = async () => {
   /* Totals compact */
   .total-row { padding: 6px 10px; font-size: 0.84rem; }
   .grand-total { font-size: 0.92rem; }
-
-  /* Timeline compact */
-  .timeline-content { padding-bottom: 16px; }
-  .timeline-dot { width: 24px; height: 24px; font-size: 0.65rem; }
 
   /* Customer card compact */
   .customer-avatar-lg { width: 40px; height: 40px; }
