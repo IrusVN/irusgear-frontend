@@ -712,6 +712,11 @@ const isVNPay = computed(() => !!route.query.vnp_TxnRef);
 const isMoMo = computed(() => !!route.query.orderId || !!route.query.resultCode);
 
 const paymentMethod = computed(() => {
+  // Ưu tiên data từ order (source of truth) — query param không phải lúc nào cũng có
+  // (vd PayPal mobile fullpage redirect chỉ có order_id + status, không có payment_method).
+  const fromOrder = order.value?.payment?.method || order.value?.paymentMethod;
+  if (fromOrder) return String(fromOrder).toLowerCase();
+
   if (isVNPay.value) return "vnpay";
   if (isMoMo.value) return "momo";
   return route.query.payment_method || "cod";
@@ -720,12 +725,14 @@ const paymentMethod = computed(() => {
 const paymentMethodLabel = computed(() => {
   if (paymentMethod.value === "vnpay") return "VNPay";
   if (paymentMethod.value === "momo") return "MoMo";
+  if (paymentMethod.value === "paypal") return "PayPal";
   return "COD";
 });
 
 const paymentIcon = computed(() => {
   if (paymentMethod.value === "vnpay") return "bi bi-credit-card-2-front-fill";
   if (paymentMethod.value === "momo") return "bi bi-wallet2";
+  if (paymentMethod.value === "paypal") return "bi bi-paypal";
   return "bi bi-cash-coin";
 });
 
