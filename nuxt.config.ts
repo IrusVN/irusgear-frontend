@@ -18,6 +18,9 @@ export default defineNuxtConfig({
       aiApiUrl: process.env.NUXT_PUBLIC_AI_API_URL ?? 'https://ai-user-6f5c.onrender.com/api/v1',
     },
   },
+  routeRules: {
+    '/shipper': { redirect: '/shipper/dashboard' },
+  },
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
     '@/assets/css/admin.css',
