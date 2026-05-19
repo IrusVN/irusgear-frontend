@@ -107,7 +107,12 @@
         <div class="detail-col-right">
           <ApprovalPanel :order="order" @updated="handleOrderUpdated" />
           <AssignShipperPanel :order="order" @updated="handleOrderUpdated" />
+          <ApprovalPanel :order="order" @updated="handleOrderUpdated" />
 
+          <MarkReadyPanel :order="order" @updated="handleOrderUpdated" />
+          <AssignShipperPanel :order="order" @updated="handleOrderUpdated" />
+          <ApprovalPanel :order="order" @updated="handleOrderUpdated" />
+          <AssignShipperPanel :order="order" @updated="handleOrderUpdated" />
           <!-- Customer Details -->
           <div class="admin-card-shell detail-card">
             <h3 class="card-title">{{ $t('admin.orders.customerDetails') }}</h3>
@@ -181,6 +186,7 @@ import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
 import ApprovalPanel from '@/components/Admin/Orders/ApprovalPanel.vue'
 import AssignShipperPanel from '@/components/Admin/Orders/AssignShipperPanel.vue'
 import ShipmentTimeline from '@/components/Admin/Orders/ShipmentTimeline.vue'
+import MarkReadyPanel from '@/components/Admin/Orders/MarkReadyPanel.vue'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { useStatusFormat } from '@/composables/useStatusFormat'
