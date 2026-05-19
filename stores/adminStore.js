@@ -255,14 +255,6 @@ export const useAdminStore = defineStore("admin/globals", () => {
   const approveOrder = (id) => create(`orders/${id}/approve`, {});
 
   const rejectOrder = (id, reason) => create(`orders/${id}/reject`, { reason });
-  /**
-   * POST /admin/orders/{id}/ship – chuyển order từ processing → ready_to_ship
-   * và tạo shipment row (status=pending_pickup) để vào pool shipper.
-   *
-   * Backend endpoint: AdminOrderController::createShipment.
-   * Field bắt buộc: partner. Optional: tracking_number, estimated_delivery_date, note.
-   */
-  const markOrderReadyToShip = (id, payload = {}) => create(`orders/${id}/ship`, payload);
 
   const assignOrder = (id, shipperId) => create(`orders/${id}/assign`, { shipper_id: shipperId });
 
@@ -333,7 +325,6 @@ export const useAdminStore = defineStore("admin/globals", () => {
     remove,
     approveOrder,
     rejectOrder,
-    markOrderReadyToShip,
     assignOrder,
     reassignOrder,
     approveOrder,
