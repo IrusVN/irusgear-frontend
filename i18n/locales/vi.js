@@ -49,6 +49,7 @@ export default {
     save: "Lưu",
     cancel: "Huỷ",
     close: "Đóng",
+    remove: "Xoá",
     confirmNo: "Không",
     confirmYes: "Xoá",
   },
@@ -93,6 +94,14 @@ export default {
     addedToCart: "Đã thêm vào giỏ hàng",
     addToCartError: "Không thể thêm vào giỏ hàng",
     loginRequired: "Vui lòng đăng nhập để xem wishlist",
+  },
+  notification: {
+    title: "Thông báo",
+    markAllRead: "Đánh dấu đã đọc",
+    loading: "Đang tải...",
+    loadError: "Không thể tải thông báo",
+    empty: "Không có thông báo",
+    removeAria: "Xoá thông báo",
   },
   role: {
     default: "Mặc định",

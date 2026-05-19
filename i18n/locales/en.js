@@ -49,6 +49,7 @@ export default {
     save: "Save",
     cancel: "Cancel",
     close: "Close",
+    remove: "Remove",
     confirmNo: "No",
     confirmYes: "Delete",
   },
@@ -93,6 +94,14 @@ export default {
     addedToCart: "Added to cart",
     addToCartError: "Could not add to cart",
     loginRequired: "Please login to view your wishlist",
+  },
+  notification: {
+    title: "Notifications",
+    markAllRead: "Mark all as read",
+    loading: "Loading...",
+    loadError: "Could not load notifications",
+    empty: "No notifications",
+    removeAria: "Remove notification",
   },
   role: {
     default: "DEFAULT",
