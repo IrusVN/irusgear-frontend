@@ -327,10 +327,6 @@ export const useAdminStore = defineStore("admin/globals", () => {
     rejectOrder,
     assignOrder,
     reassignOrder,
-    approveOrder,
-    rejectOrder,
-    assignOrder,
-    reassignOrder,
 
     // Auth
     fetchAdminMe,
