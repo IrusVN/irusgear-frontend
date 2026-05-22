@@ -2,6 +2,7 @@ import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 import { storeToRefs } from "pinia";
 import { useFeGlobalStore } from "@/stores/feGlobalStore";
+import { getDeviceId } from "@/utils/deviceId";
 
 export const useProductStore = defineStore("product", () => {
   const feGlobalStore = useFeGlobalStore();
@@ -67,6 +68,34 @@ export const useProductStore = defineStore("product", () => {
     });
 
     return mergedGallery;
+  };
+
+  const reviewDeviceHeaders = () => ({
+    "X-Device-Id": getDeviceId() || "",
+  });
+
+  const normalizeReviewFilters = (filters = {}, fallback = {}) => {
+    const source = filters && Object.keys(filters).length ? filters : fallback;
+    const rawRating = source.rating ?? null;
+    const rating = rawRating === null || rawRating === "" || rawRating === undefined
+      ? null
+      : Number(rawRating);
+
+    return {
+      rating: Number.isFinite(rating) ? rating : null,
+      sort: source.sort || fallback.sort || "latest",
+    };
+  };
+
+  const replaceReviewItem = (review) => {
+    if (!review?.id || !Array.isArray(productReviewList.value?.items)) return;
+
+    productReviewList.value = {
+      ...productReviewList.value,
+      items: productReviewList.value.items.map((item) => (
+        Number(item.id) === Number(review.id) ? { ...item, ...review } : item
+      )),
+    };
   };
 
   const normalizeProductDetail = (detail) => {
@@ -360,7 +389,7 @@ export const useProductStore = defineStore("product", () => {
       productReviewList.value = {
         items: options.append ? [...(productReviewList.value.items || []), ...(payload.items || [])] : (payload.items || []),
         pagination: payload.pagination || null,
-        filters: payload.filters || { rating: null, sort: "latest" },
+        filters: normalizeReviewFilters(payload.filters, params),
       };
     } catch (e) {
       productReviewList.value = { items: [], pagination: null, filters: { rating: null, sort: "latest" } };
@@ -374,6 +403,32 @@ export const useProductStore = defineStore("product", () => {
 
     feGlobalStore.setApiUrl(`products/${id}/reviews`);
     return feGlobalStore.createItem(payload);
+  };
+
+  const markProductReviewHelpful = async (productId, reviewId) => {
+    if (!productId || !reviewId) return null;
+
+    const res = await feGlobalStore.createItemWithPathAndHeaders(
+      `products/${productId}/reviews/${reviewId}/helpful`,
+      {},
+      reviewDeviceHeaders(),
+    );
+
+    if (res?.data) {
+      replaceReviewItem(res.data);
+    }
+
+    return res;
+  };
+
+  const reportProductReview = async (productId, reviewId, payload) => {
+    if (!productId || !reviewId) return null;
+
+    return feGlobalStore.createItemWithPathAndHeaders(
+      `products/${productId}/reviews/${reviewId}/report`,
+      payload,
+      reviewDeviceHeaders(),
+    );
   };
 
   const fetchProductQuestions = async (id, params = {}, options = {}) => {
@@ -436,6 +491,8 @@ export const useProductStore = defineStore("product", () => {
     fetchProductReviewFilters,
     fetchProductReviews,
     submitProductReview,
+    markProductReviewHelpful,
+    reportProductReview,
     fetchProductQuestions,
     submitProductQuestion,
     submitProductQuestionReply,

@@ -31,7 +31,7 @@
   </div>
 </template>
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import ProductDetailLeft from "@/components/Products/ProductDetail/ProductDetailLeft.vue";
 import ProductDetailRight from "@/components/Products/ProductDetail/ProductDetailRight.vue";
 import ProductSameProduct from "@/components/Products/ProductDetail/ProductSameProduct.vue";
@@ -49,6 +49,7 @@ const productStore = useProductStore();
 const pageSectionEl = ref(null);
 const mobileInfoSheetRef = ref(null);
 const scrollY = ref(0);
+const openedReviewKey = ref("");
 const windowWidth = ref(
   typeof window !== "undefined" ? window.innerWidth : 1200,
 );
@@ -88,6 +89,25 @@ const handleScroll = () => {
   windowWidth.value = window.innerWidth;
 };
 
+const openReviewFromQuery = async () => {
+  if (!process.client || route.query.review !== "1" || !productStore.productDetail?.id) {
+    return;
+  }
+
+  const key = `${route.params.slug}:${route.query.product_id || ""}:${productStore.productDetail.id}`;
+  if (openedReviewKey.value === key) return;
+
+  openedReviewKey.value = key;
+
+  await nextTick();
+
+  window.setTimeout(() => {
+    const reviewSection = document.getElementById("review");
+    reviewSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.dispatchEvent(new CustomEvent("open-review-modal"));
+  }, 250);
+};
+
 watch(
   () => [route.params.slug, route.query.product_id],
   async ([slug, productId]) => {
@@ -99,6 +119,7 @@ watch(
     if (sameSlugLoaded) {
       const applied = productStore.selectColorVariant(normalizedProductId);
       if (applied) {
+        openReviewFromQuery();
         return;
       }
     }
@@ -111,9 +132,17 @@ watch(
       productStore.fetchProductReviewFilters(detail.id);
       productStore.fetchProductReviews(detail.id, { page: 1, per_page: 5, sort: "latest" });
       productStore.fetchProductQuestions(detail.id, { page: 1, per_page: 5 });
+      openReviewFromQuery();
     }
   },
   { immediate: true },
+);
+
+watch(
+  () => route.query.review,
+  () => {
+    openReviewFromQuery();
+  },
 );
 
 watch(

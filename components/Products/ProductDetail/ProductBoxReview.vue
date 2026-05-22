@@ -13,7 +13,14 @@
             <span class="rating-total">/5</span>
           </div>
           <div class="summary-stars">
-            <span v-for="star in 5" :key="`summary-${star}`" class="mini-star active">★</span>
+            <span
+              v-for="star in 5"
+              :key="`summary-${star}`"
+              class="mini-star"
+              :class="{ active: averageRatingValue >= star }"
+            >
+              &#9733;
+            </span>
           </div>
           <p class="boxReview-score__count">{{ totalReviews }} {{ $t('product.reviewCount') }}</p>
         </div>
@@ -30,34 +37,18 @@
         >
           <div class="star-count is-flex is-align-items-center">
             <span>{{ star.value }}</span>
-            <span class="mini-star active small">★</span>
+            <span class="mini-star active small">&#9733;</span>
           </div>
           <progress
             :max="Math.max(totalReviews, 1)"
-            class="progress is-small m-0"
+            class="progress is-small m-0 rating-progress"
+            :class="{ 'has-count': star.count > 0 }"
             :value="star.count"
           />
           <span class="rating-count-text">{{ star.count }} {{ $t('product.reviews') }}</span>
         </div>
       </div>
 
-      <div class="box-experience-review">
-        <div class="title">{{ $t('product.reviewByExperience') }}</div>
-        <div
-          v-for="experience in experienceRows"
-          :key="experience.key"
-          class="experience-review__item"
-        >
-          <div class="item-title">{{ experience.label }}</div>
-          <div class="item-review-result is-flex">
-            <div class="experience-stars">
-              <span v-for="star in 5" :key="`${experience.key}-${star}`" class="mini-star active small">★</span>
-            </div>
-            <div class="experience-average">{{ Number(experience.average || 0).toFixed(1) }}/5</div>
-            <div class="item-count">({{ experience.total }} {{ $t('product.reviews') }})</div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="box-review-filter">
@@ -89,11 +80,26 @@
     </div>
 
     <div class="boxReview-comment">
+      <div v-if="!reviews.length" class="review-empty">
+        <div class="review-empty__icon">&#9733;</div>
+        <div>
+          <p class="review-empty__title">{{ emptyReviewTitle }}</p>
+          <p class="review-empty__text">{{ emptyReviewText }}</p>
+        </div>
+        <button type="button" class="button review-empty__button" @click="openReviewModal">
+          {{ $t('product.writeReview') }}
+        </button>
+      </div>
       <div v-for="review in reviews" :key="review.id" class="boxReview-comment-item">
         <div class="boxReview-comment-item-avatar">{{ review.author?.initial || "A" }}</div>
         <div class="boxReview-comment-item-review">
           <div class="review-head">
-            <p class="name">{{ review.author?.name }}</p>
+            <div class="review-author">
+              <p class="name">{{ review.author?.name }}</p>
+              <span v-if="review.verifiedPurchase" class="verified-purchase-badge">
+                {{ $t('product.verifiedPurchaseBadge') }}
+              </span>
+            </div>
             <div class="date-time">
               <span>{{ review.createdAtHuman }}</span>
             </div>
@@ -107,30 +113,68 @@
                   class="mini-star"
                   :class="{ active: review.rating >= star }"
                 >
-                  ★
+                  &#9733;
                 </span>
               </div>
               <div class="rating-label">{{ reviewRatingLabel(review.rating) }}</div>
             </div>
-            <div v-if="review.attributes?.length" class="item-review-rating__list-attribute">
-              <div
-                v-for="attribute in review.attributes"
-                :key="`${review.id}-${attribute.key}-${attribute.value}`"
-                class="item-review-rating__item-attribute"
-              >
-                {{ attribute.value }}
-              </div>
-            </div>
           </div>
           <div class="review-content">{{ review.content }}</div>
-          <div v-if="review.images?.length" class="review-images">
-            <img
-              v-for="image in review.images"
-              :key="image.id || image.image"
-              :src="image.image"
-              alt="review"
-            />
+          <div class="review-actions">
+            <button
+              type="button"
+              class="review-action"
+              :disabled="isHelpfulPending(review.id)"
+              @click="markHelpful(review)"
+            >
+              {{ isHelpfulPending(review.id) ? $t('common.loading') : $t('product.helpful') }}
+              <span v-if="review.helpfulCount">({{ review.helpfulCount }})</span>
+            </button>
+            <button
+              type="button"
+              class="review-action"
+              @click="openReportForm(review.id)"
+            >
+              {{ $t('product.reportReview') }}
+            </button>
           </div>
+          <form
+            v-if="reportingReviewId === review.id"
+            class="review-report"
+            @submit.prevent="submitReport(review)"
+          >
+            <select v-model="reportReason" class="review-report__select">
+              <option
+                v-for="reason in reportReasons"
+                :key="reason.value"
+                :value="reason.value"
+              >
+                {{ reason.label }}
+              </option>
+            </select>
+            <textarea
+              v-model="reportContent"
+              class="review-report__textarea"
+              rows="3"
+              :placeholder="$t('product.reportContentPlaceholder')"
+            />
+            <div class="review-report__actions">
+              <button
+                type="button"
+                class="review-report__button is-secondary"
+                @click="cancelReport"
+              >
+                {{ $t('product.cancelReport') }}
+              </button>
+              <button
+                type="submit"
+                class="review-report__button"
+                :disabled="isSubmittingReport"
+              >
+                {{ isSubmittingReport ? $t('common.loading') : $t('product.submitReport') }}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
       <button
@@ -152,6 +196,7 @@
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useI18n } from "#imports";
+import { toast } from "vue-sonner";
 import { useProductStore } from "@/stores/productStore";
 import ModalReview from "@/components/Models/ModalReview.vue";
 
@@ -165,22 +210,34 @@ const {
 } = storeToRefs(productStore);
 
 const isLoadingMoreReviews = ref(false);
+const pendingHelpfulIds = ref(new Set());
+const reportingReviewId = ref(null);
+const reportReason = ref("spam");
+const reportContent = ref("");
+const isSubmittingReport = ref(false);
 
-const experienceLabelMap = {
-  performance: t('product.expPerformance'),
-  camera: t('product.expCamera'),
-  battery: t('product.expBattery'),
-  design: t('product.expDesign'),
-  screen: t('product.expScreen'),
-};
-
-const averageRatingDisplay = computed(() =>
-  Number(productReviewSummary.value?.summary?.averageRating || 0).toFixed(1),
-);
+const averageRatingValue = computed(() => Number(productReviewSummary.value?.summary?.averageRating || 0));
+const averageRatingDisplay = computed(() => averageRatingValue.value.toFixed(1));
 const totalReviews = computed(() => Number(productReviewSummary.value?.summary?.totalReviews || 0));
 const reviews = computed(() => productReviewList.value?.items || []);
-const selectedRating = computed(() => productReviewList.value?.filters?.rating ?? null);
+const selectedRating = computed(() => {
+  const rating = productReviewList.value?.filters?.rating;
+
+  if (rating === null || rating === undefined || rating === "") {
+    return null;
+  }
+
+  const normalizedRating = Number(rating);
+  return Number.isFinite(normalizedRating) ? normalizedRating : null;
+});
 const selectedSort = computed(() => productReviewList.value?.filters?.sort || "latest");
+const hasAnyReviews = computed(() => totalReviews.value > 0);
+const emptyReviewTitle = computed(() =>
+  hasAnyReviews.value ? t('product.noMatchingReviewsTitle') : t('product.noReviewsTitle'),
+);
+const emptyReviewText = computed(() =>
+  hasAnyReviews.value ? t('product.noMatchingReviewsText') : t('product.noReviewsText'),
+);
 const sortOptions = computed(() => {
   const defaults = {
     latest: t('product.sortLatest'),
@@ -204,21 +261,21 @@ const ratingFilterOptions = computed(() => ([
 ]));
 const ratingRows = computed(() => {
   const breakdown = productReviewSummary.value?.summary?.ratingBreakdown || {};
+  const starValues = [5, 4, 3, 2, 1];
 
-  return [5, 4, 3, 2, 1].map((value) => ({
+  return starValues.map((value, index) => ({
     value,
-    count: Number(breakdown[String(value)] || 0),
-  }));
-});
-const experienceRows = computed(() => {
-  const rows = productReviewSummary.value?.summary?.experienceBreakdown || [];
-
-  return rows.map((item) => ({
-    ...item,
-    label: experienceLabelMap[item.key] || item.key,
+    count: Number(Array.isArray(breakdown) ? breakdown[index] || 0 : breakdown[String(value)] || 0),
   }));
 });
 const hasMoreReviews = computed(() => Boolean(productReviewList.value?.pagination?.hasMore));
+const reportReasons = computed(() => ([
+  { value: "spam", label: t('product.reportSpam') },
+  { value: "irrelevant", label: t('product.reportIrrelevant') },
+  { value: "offensive", label: t('product.reportOffensive') },
+  { value: "personal_info", label: t('product.reportPersonalInfo') },
+  { value: "other", label: t('product.reportOther') },
+]));
 
 const openReviewModal = () => {
   if (typeof window !== "undefined") {
@@ -269,6 +326,56 @@ const loadMoreReviews = async () => {
   }
 };
 
+const isHelpfulPending = (reviewId) => pendingHelpfulIds.value.has(reviewId);
+
+const markHelpful = async (review) => {
+  if (!productDetail.value?.id || !review?.id || isHelpfulPending(review.id)) return;
+
+  pendingHelpfulIds.value = new Set([...pendingHelpfulIds.value, review.id]);
+
+  try {
+    await productStore.markProductReviewHelpful(productDetail.value.id, review.id);
+    toast.success(t('product.reviewHelpfulSuccess'));
+  } catch (error) {
+    toast.error(error?.message || t('product.reviewActionFailed'));
+  } finally {
+    const nextPendingIds = new Set(pendingHelpfulIds.value);
+    nextPendingIds.delete(review.id);
+    pendingHelpfulIds.value = nextPendingIds;
+  }
+};
+
+const openReportForm = (reviewId) => {
+  reportingReviewId.value = reviewId;
+  reportReason.value = "spam";
+  reportContent.value = "";
+};
+
+const cancelReport = () => {
+  reportingReviewId.value = null;
+  reportReason.value = "spam";
+  reportContent.value = "";
+};
+
+const submitReport = async (review) => {
+  if (!productDetail.value?.id || !review?.id || isSubmittingReport.value) return;
+
+  isSubmittingReport.value = true;
+
+  try {
+    await productStore.reportProductReview(productDetail.value.id, review.id, {
+      reason: reportReason.value,
+      content: reportContent.value.trim() || null,
+    });
+    toast.success(t('product.reviewReportSuccess'));
+    cancelReport();
+  } catch (error) {
+    toast.error(error?.message || t('product.reviewActionFailed'));
+  } finally {
+    isSubmittingReport.value = false;
+  }
+};
+
 const reviewRatingLabel = (rating) => {
   if (rating >= 5) return t('product.ratingExcellent');
   if (rating >= 4) return t('product.ratingVeryGood');
@@ -300,14 +407,13 @@ const reviewRatingLabel = (rating) => {
   border-radius: 20px;
   display: grid;
   gap: 0;
-  grid-template-columns: 190px minmax(0, 1fr) minmax(320px, 360px);
+  grid-template-columns: 190px minmax(0, 1fr);
   margin: 16px 0;
   padding: 28px;
 }
 
 .boxReview-overview,
-.boxReview-star,
-.box-experience-review {
+.boxReview-star {
   min-width: 0;
 }
 
@@ -378,7 +484,7 @@ const reviewRatingLabel = (rating) => {
 }
 
 .boxReview-star {
-  border-right: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -403,6 +509,43 @@ const reviewRatingLabel = (rating) => {
   width: auto;
 }
 
+.rating-progress {
+  accent-color: #d1d5db;
+  appearance: none;
+  background: #d1d5db;
+  border: 0;
+  border-radius: 999px;
+  height: 16px;
+  overflow: hidden;
+}
+
+.rating-progress::-webkit-progress-bar {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+
+.rating-progress::-webkit-progress-value {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+
+.rating-progress::-moz-progress-bar {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+
+.rating-progress.has-count {
+  accent-color: #fbbf24;
+}
+
+.rating-progress.has-count::-webkit-progress-value {
+  background: #fbbf24;
+}
+
+.rating-progress.has-count::-moz-progress-bar {
+  background: #fbbf24;
+}
+
 .star-count {
   flex: 0 0 34px;
   gap: 4px;
@@ -421,11 +564,6 @@ const reviewRatingLabel = (rating) => {
   text-align: left;
 }
 
-.box-experience-review {
-  padding-left: 24px;
-}
-
-.box-experience-review .title,
 .box-review-filter .title {
   color: #111827;
   font-size: 18px;
@@ -433,28 +571,6 @@ const reviewRatingLabel = (rating) => {
   margin-bottom: 14px;
 }
 
-.experience-review__item {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.item-title {
-  color: #111827;
-  font-size: 16px;
-  min-width: 128px;
-}
-
-.item-review-result {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-left: auto;
-}
-
-.experience-stars,
 .star-row {
   display: flex;
   gap: 2px;
@@ -471,17 +587,6 @@ const reviewRatingLabel = (rating) => {
 
 .mini-star.active {
   color: #fbbf24;
-}
-
-.experience-average {
-  color: #111827;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.item-count {
-  color: #9ca3af;
-  font-size: 14px;
 }
 
 .box-review-filter {
@@ -518,6 +623,47 @@ const reviewRatingLabel = (rating) => {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.review-empty {
+  align-items: center;
+  background: #fff;
+  border: 1px dashed #d1d5db;
+  border-radius: 14px;
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+}
+
+.review-empty__icon {
+  align-items: center;
+  background: #fff7ed;
+  border-radius: 999px;
+  color: #f59e0b;
+  display: flex;
+  flex: 0 0 42px;
+  font-size: 20px;
+  height: 42px;
+  justify-content: center;
+  width: 42px;
+}
+
+.review-empty__title {
+  color: #111827;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.review-empty__text {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.review-empty__button {
+  flex: 0 0 auto;
+  margin-left: auto;
 }
 
 .boxReview-comment-item {
@@ -558,6 +704,23 @@ const reviewRatingLabel = (rating) => {
   margin: 0;
 }
 
+.review-author {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.verified-purchase-badge {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  border-radius: 999px;
+  color: #047857;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+}
+
 .date-time {
   color: #6b7280;
   font-size: 13px;
@@ -582,37 +745,86 @@ const reviewRatingLabel = (rating) => {
   font-weight: 600;
 }
 
-.item-review-rating__list-attribute {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.item-review-rating__item-attribute {
-  background: #eff6ff;
-  border-radius: 999px;
-  color: #1d4ed8;
-  font-size: 12px;
-  padding: 6px 10px;
-}
-
 .review-content {
   color: #374151;
   font-size: 14px;
   line-height: 1.6;
 }
 
-.review-images {
+.review-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
 }
 
-.review-images img {
+.review-action {
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  color: #4b5563;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 12px;
+}
+
+.review-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.review-report {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px;
+}
+
+.review-report__select,
+.review-report__textarea {
+  border: 1px solid #d1d5db;
   border-radius: 10px;
-  height: 72px;
-  object-fit: cover;
-  width: 72px;
+  color: #111827;
+  font-size: 14px;
+  outline: none;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.review-report__textarea {
+  resize: vertical;
+}
+
+.review-report__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.review-report__button {
+  background: var(--irus-color-accent);
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+}
+
+.review-report__button.is-secondary {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.review-report__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .load-more {
@@ -646,36 +858,33 @@ const reviewRatingLabel = (rating) => {
   }
 
   .boxReview-star {
-    border-right: none;
+    border-left: none;
     border-top: 1px solid #e5e7eb;
     margin-top: 16px;
     padding: 16px 0;
-  }
-
-  .box-experience-review {
-    border-top: 1px solid #e5e7eb;
-    margin-top: 4px;
-    padding-left: 0;
-    padding-top: 16px;
   }
 
   .average-rating {
     font-size: 48px;
   }
 
-  .experience-review__item,
   .review-head,
-  .boxReview-comment-item {
+  .boxReview-comment-item,
+  .review-empty {
     flex-direction: column;
   }
 
-  .experience-review__item {
+  .review-empty {
     align-items: flex-start;
-    gap: 6px;
   }
 
-  .item-review-result {
+  .review-empty__button {
     margin-left: 0;
+    width: 100%;
+  }
+
+  .review-report__actions {
+    flex-direction: column;
   }
 }
 
@@ -699,12 +908,5 @@ const reviewRatingLabel = (rating) => {
     min-width: 0;
   }
 
-  .experience-stars {
-    flex-wrap: nowrap;
-  }
-
-  .item-count {
-    width: 100%;
-  }
 }
 </style>
