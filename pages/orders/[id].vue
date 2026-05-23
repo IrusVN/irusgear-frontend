@@ -60,7 +60,7 @@
             >
               <span class="order-detail__timeline-dot"></span>
               <div class="order-detail__timeline-content">
-                <p class="order-detail__timeline-label">{{ step.label }}</p>
+                <p class="order-detail__timeline-label">{{ displayTimelineLabel(step) }}</p>
                 <p class="order-detail__timeline-meta">
                   {{ formatDateTime(step.timestamp) }}
                   <span v-if="step.note" class="order-detail__timeline-note">— {{ step.note }}</span>
@@ -72,7 +72,7 @@
 
         <!-- Proof of delivery (visible once order is delivered + payload includes signed URLs) -->
         <div
-          v-if="order.proofOfDelivery && order.proofOfDelivery.photos?.length"
+          v-if="proofPhotos.length"
           class="order-detail__card order-detail__pod"
         >
           <h2 class="order-detail__section-title">
@@ -80,21 +80,21 @@
             {{ $t('profile.orderDetail.proofOfDelivery.title') }}
           </h2>
           <div class="order-detail__pod-meta">
-            <span v-if="order.proofOfDelivery.deliveredAt">
+            <span v-if="proofOfDelivery.deliveredAt">
               <i class="bi bi-clock-history"></i>
               {{ $t('profile.orderDetail.proofOfDelivery.deliveredAt') }}:
-              {{ formatDateTime(order.proofOfDelivery.deliveredAt) }}
+              {{ formatDateTime(proofOfDelivery.deliveredAt) }}
             </span>
-            <span v-if="order.proofOfDelivery.recipientName">
+            <span v-if="proofOfDelivery.recipientName">
               <i class="bi bi-person-badge"></i>
               {{ $t('profile.orderDetail.proofOfDelivery.recipient') }}:
-              {{ order.proofOfDelivery.recipientName }}
+              {{ proofOfDelivery.recipientName }}
             </span>
           </div>
           <div class="order-detail__pod-grid">
             <a
-              v-for="(photo, idx) in order.proofOfDelivery.photos"
-              :key="`${photo.url}-${idx}`"
+              v-for="(photo, idx) in proofPhotos"
+              :key="photo.id || photo.url"
               :href="photo.url"
               target="_blank"
               rel="noopener"
@@ -285,7 +285,7 @@ definePageMeta({ layout: "default", middleware: ["auth-guard"] });
 const route = useRoute();
 const router = useRouter();
 const localePath = useLocalePath();
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const checkoutStore = useCheckoutStore();
 
 const order = ref(null);
@@ -301,6 +301,42 @@ useHead({
       : `${t("profile.orderDetail.title")} - IrusGear`,
   ),
 });
+
+const normalizeProofPhoto = (photo) => {
+  if (!photo || typeof photo !== "object") return null;
+
+  const url = photo.url || photo.cdn_url || null;
+  if (!url) return null;
+
+  return {
+    id: photo.id || null,
+    url,
+    thumbUrl: photo.thumbUrl || photo.thumb_url || url,
+    capturedAt: photo.capturedAt || photo.captured_at || null,
+    mimeType: photo.mimeType || photo.mime_type || null,
+  };
+};
+
+const proofOfDelivery = computed(() => {
+  const pod = order.value?.proofOfDelivery || order.value?.proof_of_delivery || null;
+  if (!pod) {
+    return {
+      deliveredAt: null,
+      recipientName: null,
+      photos: [],
+    };
+  }
+
+  return {
+    deliveredAt: pod.deliveredAt || pod.delivered_at || null,
+    recipientName: pod.recipientName || pod.recipient_name || null,
+    photos: Array.isArray(pod.photos)
+      ? pod.photos.map(normalizeProofPhoto).filter(Boolean)
+      : [],
+  };
+});
+
+const proofPhotos = computed(() => proofOfDelivery.value.photos);
 
 const fetchOrder = async () => {
   const orderId = route.params.id;
@@ -386,19 +422,93 @@ const canCancel = computed(() => {
 const formatMoney = (value = 0) =>
   `${new Intl.NumberFormat("vi-VN").format(Number(value || 0))}đ`;
 
+const VIETNAM_TIME_ZONE = "Asia/Ho_Chi_Minh";
+
+const parseTimestamp = (value) => {
+  if (!value) return null;
+  if (value instanceof Date) return Number.isNaN(value.getTime()) ? null : value;
+
+  const raw = String(value).trim();
+  const hasTimezone = /(?:z|[+-]\d{2}:?\d{2})$/i.test(raw);
+  const looksLikeSqlDatetime = /^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?$/.test(raw);
+  const normalized = !hasTimezone && looksLikeSqlDatetime
+    ? `${raw.replace(" ", "T")}Z`
+    : raw;
+  const date = new Date(normalized);
+
+  return Number.isNaN(date.getTime()) ? null : date;
+};
+
 const formatDateTime = (iso) => {
   if (!iso) return "";
-  try {
-    return new Date(iso).toLocaleString("vi-VN", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  } catch {
-    return iso;
-  }
+  const date = parseTimestamp(iso);
+  if (!date) return iso;
+
+  return new Intl.DateTimeFormat("vi-VN", {
+    timeZone: VIETNAM_TIME_ZONE,
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+};
+
+const CUSTOMER_TIMELINE_LABELS = {
+  vi: {
+    pending: "Đơn hàng đã được tạo",
+    awaiting_payment: "Chờ thanh toán",
+    confirmed: "Đơn hàng đã được xác nhận",
+    processing: "Đơn hàng đang được xử lý",
+    ready_to_ship: "Đơn hàng sẵn sàng giao",
+    shipped: "Đơn vị giao hàng đã lấy hàng",
+    delivering: "Đơn hàng đang được giao",
+    delivered: "Đã giao hàng thành công",
+    delivery_failed: "Giao hàng chưa thành công",
+    cancelled: "Đơn hàng đã bị hủy",
+    refunding: "Đang hoàn tiền",
+    refunded: "Đã hoàn tiền",
+    returned: "Đơn hàng đã được trả lại",
+  },
+  en: {
+    pending: "Order placed",
+    awaiting_payment: "Awaiting payment",
+    confirmed: "Order confirmed",
+    processing: "Order is being processed",
+    ready_to_ship: "Order is ready to ship",
+    shipped: "Carrier picked up the order",
+    delivering: "Order is out for delivery",
+    delivered: "Order delivered",
+    delivery_failed: "Delivery was unsuccessful",
+    cancelled: "Order cancelled",
+    refunding: "Refund in progress",
+    refunded: "Refunded",
+    returned: "Order returned",
+  },
+};
+
+const CUSTOMER_TIMELINE_LABEL_ALIASES = {
+  "admin approved": "processing",
+  "auto approved": "processing",
+  "shipment assigned": "ready_to_ship",
+  "shipment reassigned": "ready_to_ship",
+  "shipper đã lấy hàng": "shipped",
+  "shipper da lay hang": "shipped",
+};
+
+const displayTimelineLabel = (step) => {
+  const language = String(locale.value || "vi").startsWith("en") ? "en" : "vi";
+  const labels = CUSTOMER_TIMELINE_LABELS[language];
+  const status = String(step?.status || "").toLowerCase();
+
+  if (labels[status]) return labels[status];
+
+  const rawLabel = String(step?.label || "").trim();
+  const aliasStatus = CUSTOMER_TIMELINE_LABEL_ALIASES[rawLabel.toLowerCase()];
+
+  return aliasStatus && labels[aliasStatus]
+    ? labels[aliasStatus]
+    : rawLabel;
 };
 
 const formatDeliveryMethod = (method) => {
@@ -434,7 +544,10 @@ const getOptionsText = (item) => {
 
 // ─── Actions ─────────────────────────────────
 const goBack = () => {
-  if (window.history.length > 1) {
+  const referrer = document.referrer ? new URL(document.referrer) : null;
+  const canGoBackInsideApp = referrer?.origin === window.location.origin && window.history.length > 1;
+
+  if (canGoBackInsideApp) {
     router.back();
   } else {
     navigateTo(localePath("/orders"));

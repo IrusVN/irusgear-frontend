@@ -131,6 +131,14 @@
                     {{ t('shipper.orderDetail.fromGallery') }}
                   </button>
                 </div>
+
+                <div v-if="proofUploadItems.length" class="upload-progress-list">
+                  <div v-for="item in proofUploadItems" :key="item.clientId" class="upload-progress-item">
+                    <span class="upload-progress-name">{{ item.filename }}</span>
+                    <progress class="upload-progress-bar" max="100" :value="item.progress || 0"></progress>
+                    <span class="upload-progress-status">{{ uploadStatusLabel(item) }}</span>
+                  </div>
+                </div>
               </section>
 
               <!-- Recipient + COD form -->
@@ -208,13 +216,16 @@
 
 <script setup>
 import { computed, nextTick, ref, watch } from 'vue'
-import { useI18n } from '#imports'
+import { useI18n, useRuntimeConfig } from '#imports'
 import { toast } from 'vue-sonner'
 import { useShipperStore } from '@/stores/shipperStore'
 import { useIdempotencyKey } from '@/composables/useIdempotency'
+import { useProofPhotoUpload } from '@/composables/useProofPhotoUpload'
 
 const { t } = useI18n()
+const config = useRuntimeConfig()
 const shipper = useShipperStore()
+const proofUploader = useProofPhotoUpload()
 
 const props = defineProps({
   open: { type: Boolean, default: false },
@@ -244,6 +255,9 @@ const pickupIdemKey = useIdempotencyKey()
 const startIdemKey = useIdempotencyKey()
 
 let lastSubmitFn = null
+
+const cdnUploadEnabled = computed(() => config.public.shipperProofCdnUpload === true)
+const proofUploadItems = computed(() => proofUploader.items.value || [])
 
 watch(
   () => props.open,
@@ -278,6 +292,7 @@ function initFromOrder() {
   failNote.value = ''
   serverError.value = null
   canRetrySubmit.value = false
+  proofUploader.reset()
   completeIdemKey.reset()
   failIdemKey.reset()
   pickupIdemKey.reset()
@@ -314,6 +329,7 @@ const paymentIcon = computed(() => {
     cod: 'bi-cash-coin',
     vnpay: 'bi-credit-card',
     momo: 'bi-wallet2',
+    paypal: 'bi-paypal',
     bank: 'bi-bank',
   }[m] || 'bi-cash-coin')
 })
@@ -420,13 +436,9 @@ async function onSubmit() {
 }
 
 async function onComplete() {
-  const formData = buildBaseFormData()
-  formData.append('recipient_name', recipientName.value.trim())
-  formData.append('cod_collected_amount', String(isCodOrder.value ? Number(codCollectedAmount.value) : 0))
-
   await runMutation(
-    () =>
-      shipper.complete(props.order.id, formData, {
+    async () =>
+      shipper.complete(props.order.id, await buildCompletePayload(), {
         idempotencyKey: completeIdemKey.ensure(),
       }),
     {
@@ -442,14 +454,9 @@ async function onComplete() {
 }
 
 async function onFail() {
-  const formData = buildBaseFormData()
-  formData.append('reason_code', failReason.value)
-  if (failNote.value.trim()) formData.append('note', failNote.value.trim())
-  if (recipientName.value.trim()) formData.append('recipient_name', recipientName.value.trim())
-
   await runMutation(
-    () =>
-      shipper.fail(props.order.id, formData, {
+    async () =>
+      shipper.fail(props.order.id, await buildFailPayload(), {
         idempotencyKey: failIdemKey.ensure(),
       }),
     {
@@ -462,10 +469,68 @@ async function onFail() {
   )
 }
 
+async function buildCompletePayload() {
+  const payload = await buildProofPayload('complete')
+
+  if (payload instanceof FormData) {
+    payload.append('recipient_name', recipientName.value.trim())
+    payload.append('cod_collected_amount', String(isCodOrder.value ? Number(codCollectedAmount.value) : 0))
+    return payload
+  }
+
+  return {
+    ...payload,
+    recipient_name: recipientName.value.trim(),
+    cod_collected_amount: isCodOrder.value ? Number(codCollectedAmount.value) : 0,
+  }
+}
+
+async function buildFailPayload() {
+  const payload = await buildProofPayload('fail')
+  const note = failNote.value.trim()
+  const recipient = recipientName.value.trim()
+
+  if (payload instanceof FormData) {
+    payload.append('reason_code', failReason.value)
+    if (note) payload.append('note', note)
+    if (recipient) payload.append('recipient_name', recipient)
+    return payload
+  }
+
+  return {
+    ...payload,
+    reason_code: failReason.value,
+    ...(note ? { note } : {}),
+    ...(recipient ? { recipient_name: recipient } : {}),
+  }
+}
+
+async function buildProofPayload(action) {
+  if (!cdnUploadEnabled.value) {
+    return buildBaseFormData()
+  }
+
+  try {
+    const uploadedPhotos = await proofUploader.uploadPhotos(props.order.id, photos.value, action)
+    return { photos: uploadedPhotos }
+  } catch (e) {
+    console.warn('Proof photo CDN upload failed, falling back to multipart upload.', e)
+    proofUploader.reset()
+    return buildBaseFormData()
+  }
+}
+
 function buildBaseFormData() {
   const fd = new FormData()
   photos.value.forEach((p) => fd.append('photos[]', p.file))
   return fd
+}
+
+function uploadStatusLabel(item) {
+  if (item.status === 'uploaded') return '100%'
+  if (item.status === 'failed') return item.error || 'Upload lỗi'
+  if (item.status === 'uploading') return `${item.progress || 0}%`
+  return 'Chờ upload'
 }
 
 async function runMutation(fn, { success }) {
@@ -815,6 +880,52 @@ function isRetryableError(e) {
 
 .upload-trigger:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.upload-progress-list {
+  display: grid;
+  gap: 8px;
+}
+
+.upload-progress-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(90px, 140px) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+}
+
+.upload-progress-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-progress-bar {
+  width: 100%;
+  height: 6px;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.upload-progress-bar::-webkit-progress-bar {
+  background: var(--admin-surface-soft);
+}
+
+.upload-progress-bar::-webkit-progress-value {
+  background: var(--admin-text);
+}
+
+.upload-progress-bar::-moz-progress-bar {
+  background: var(--admin-text);
+}
+
+.upload-progress-status {
+  color: var(--admin-text);
+  white-space: nowrap;
+}
+
 .quick-actions {
   display: grid;
   grid-template-columns: 1fr;
@@ -965,6 +1076,7 @@ function isRetryableError(e) {
   .modal-footer { padding: 12px 14px env(safe-area-inset-bottom, 14px); }
   .upload-actions { flex-direction: column; }
   .upload-trigger { width: 100%; }
+  .upload-progress-item { grid-template-columns: 1fr; }
   .photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .item-row { padding: 8px; }
   .item-img { width: 44px; height: 44px; }

@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     public: {
       apiBaseUrl: process.env.API_BASE_URL ?? 'http://localhost:8000/api/v1',
       aiApiUrl: process.env.NUXT_PUBLIC_AI_API_URL ?? 'https://ai-user-6f5c.onrender.com/api/v1',
+      shipperProofCdnUpload: process.env.NUXT_PUBLIC_SHIPPER_PROOF_CDN_UPLOAD === 'true',
     },
   },
   routeRules: {
