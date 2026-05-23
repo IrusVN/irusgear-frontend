@@ -588,8 +588,17 @@ onMounted(() => {
   justify-content: center;
   padding: 0;
   cursor: pointer;
-  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.92);
   transition: background 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+}
+.profile-avatar-wrap:hover .profile-avatar-action,
+.profile-avatar-wrap:focus-within .profile-avatar-action,
+.profile-avatar-action:disabled {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
 }
 .profile-avatar-action:hover:not(:disabled) {
   background: #1f2937;

@@ -491,8 +491,18 @@ onUnmounted(() => {
   justify-content: center;
   padding: 0;
   cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.92);
+  transition: background 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+}
+
+.profile-layout__avatar:hover .profile-layout__avatar-action,
+.profile-layout__avatar:focus-within .profile-layout__avatar-action,
+.profile-layout__avatar-action:disabled {
+  opacity: 1;
+  pointer-events: auto;
   transform: translate(-50%, -50%);
-  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .profile-layout__avatar-action:hover:not(:disabled) {
