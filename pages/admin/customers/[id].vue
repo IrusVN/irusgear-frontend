@@ -262,6 +262,7 @@ import QuickEditCustomer from '@/components/Admin/customers/QuickEditCustomer.vu
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { useStatusFormat } from '@/composables/useStatusFormat'
+import { resolveUserAvatarUrl } from '@/utils/avatar'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -444,8 +445,10 @@ const mapCustomerDetail = (c) => {
     last_name: c.last_name,
     email: c.email,
     phone_number: c.phone || c.phone_number,
+    role_id: c.role_id ?? c.role?.id,
+    role: c.role,
     email_verified: typeof c.email_verified === 'boolean' ? c.email_verified : Boolean(c.email_verified_at),
-    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
+    avatar: resolveUserAvatarUrl(c, { name: c.full_name || c.name, background: 'random' }),
     orders: c.orders || 0,
     totalSpent: c.total_spent || 0,
     status: c.status || 'active',

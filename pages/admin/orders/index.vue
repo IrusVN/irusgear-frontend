@@ -154,6 +154,7 @@ import { useMediaQuery } from '@/composables/useMediaQuery'
 import { toast } from 'vue-sonner'
 import { exportToCsv } from '@/utils/exportCsv'
 import { useStatusFormat } from '@/composables/useStatusFormat'
+import { resolveUserAvatarUrl } from '@/utils/avatar'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -278,7 +279,10 @@ const mapOrder = (o) => ({
   customer: {
     name: o.customer?.name || t('admin.orders.guest'),
     email: o.customer?.email || o.guest_email || '',
-    avatar: '', // fallback to initials or empty
+    avatar: resolveUserAvatarUrl(o.customer, {
+      name: o.customer?.name || t('admin.orders.guest'),
+      background: 'random',
+    }),
   },
   paymentStatus: o.payment?.status || 'pending',
   fulfillmentStatus: o.status,

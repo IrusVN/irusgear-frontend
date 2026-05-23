@@ -101,7 +101,17 @@
             </span>
           </label>
 
-          <!-- 2 dropdown song song: Status (chặn login) + Email verify -->
+          <!-- Role / Status / Email verify -->
+          <div class="quick-edit__field">
+            <span class="quick-edit__label">
+              {{ $t('admin.customers.roleLabel') }}
+            </span>
+            <QuickSelect
+              v-model="form.role_id"
+              :options="roleOptions"
+            />
+          </div>
+
           <div class="quick-edit__row">
             <div class="quick-edit__field">
               <span class="quick-edit__label">
@@ -263,6 +273,7 @@ import { useAdminStore } from '@/stores/adminStore'
 import QuickView from '@/components/Common/QuickView.vue'
 import QuickSelect from '@/components/Common/QuickSelect.vue'
 import UpdateAddress from '@/components/Profile/UpdateAddress.vue'
+import { USER_ROLES } from '@/constants/userConstants'
 
 const props = defineProps({
   modelValue: {
@@ -295,11 +306,30 @@ const verifyOptions = computed(() => [
   { value: false, label: t('admin.customers.emailVerifyNo'), icon: 'bi-x-circle' },
 ])
 
+const roleOptions = computed(() =>
+  USER_ROLES
+    .map((role) => ({
+      value: role.value,
+      label: t(role.label),
+      icon: roleIcon(role.value),
+    }))
+)
+
+const roleIcon = (roleId) => ({
+  1: 'bi-shield-lock-fill',
+  2: 'bi-person-gear',
+  3: 'bi-person-fill',
+  4: 'bi-person-plus-fill',
+  5: 'bi-calculator-fill',
+  6: 'bi-truck',
+}[Number(roleId)] || 'bi-person')
+
 const form = reactive({
   first_name: '',
   last_name: '',
   email: '',
   phone_number: '',
+  role_id: '3',
   status: 'active',
   email_verified: false,
   password: '',
@@ -382,6 +412,7 @@ const resetForm = () => {
   form.last_name = ''
   form.email = ''
   form.phone_number = ''
+  form.role_id = '3'
   form.status = 'active'
   form.email_verified = false
   form.password = ''
@@ -401,6 +432,7 @@ const hydrateFromCustomer = (c) => {
   form.last_name = c.last_name || (parts.length > 1 ? parts.slice(-1).join(' ') : '')
   form.email = c.email || ''
   form.phone_number = c.phone_number || c.phone || ''
+  form.role_id = String(c.role_id ?? c.role?.id ?? '3')
   const raw = c.status
   if (raw == null) form.status = 'active'
   else if (CODE_TO_STATUS[raw] !== undefined) form.status = CODE_TO_STATUS[raw]
@@ -464,6 +496,7 @@ const submit = async () => {
       name: `${form.first_name} ${form.last_name}`.trim() || undefined,
       email: form.email,
       phone_number: form.phone_number || null,
+      role_id: Number(form.role_id),
       status: STATUS_TO_CODE[form.status] ?? form.status,
       email_verified: form.email_verified,
     }

@@ -28,6 +28,15 @@ export const useAuthStore = defineStore("auth", () => {
   const isAuthenticated = computed(() => !!user.value);
 const isLoggedIn = computed(() => !!user.value);
 
+  const mergeUser = (nextUser) => {
+    if (!nextUser || typeof nextUser !== 'object') {
+      return user.value;
+    }
+
+    user.value = { ...user.value, ...nextUser };
+    return user.value;
+  };
+
   const apiFetch = async (endpoint, options = {}) => {
     return await $fetch(`${config.public.apiBaseUrl}${endpoint}`, {
       ...options,
@@ -276,7 +285,7 @@ const resetPassword = async (password, passwordConfirmation) => {
       // Response: { success, message, data: { id, name, first_name, ..., phone } }
       const updatedUser = data?.data ?? data?.user ?? data;
       if (updatedUser && typeof updatedUser === 'object') {
-        user.value = { ...user.value, ...updatedUser };
+        mergeUser(updatedUser);
       }
       return { status: true, data };
     } catch (err) {
@@ -316,5 +325,6 @@ const resetPassword = async (password, passwordConfirmation) => {
     verifyOtp,
     resendOtp,
     updateProfile,
+    mergeUser,
   };
 });

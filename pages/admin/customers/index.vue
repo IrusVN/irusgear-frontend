@@ -216,6 +216,7 @@ import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { exportToCsv } from '@/utils/exportCsv'
 import { useStatusFormat } from '@/composables/useStatusFormat'
+import { resolveUserAvatarUrl } from '@/utils/avatar'
 
 const { t } = useI18n()
 const isMobile = useMediaQuery('(max-width: 767px)')
@@ -369,6 +370,13 @@ const onQuickEditUpdated = (updated) => {
   if (idx === -1) return
 
   const fullName = updated.full_name || updated.name || customers.value[idx].name
+  const mergedUser = { ...customers.value[idx], ...updated }
+  const nextRoleId = String(updated.role_id ?? updated.role?.id ?? customers.value[idx].role_id ?? '')
+
+  if (nextRoleId && !['3', '4'].includes(nextRoleId)) {
+    fetchCustomers()
+    return
+  }
 
   // Tạo object mới (không Object.assign trực tiếp) để Vue reactivity tracking
   // detect được thay đổi ở row.
@@ -379,11 +387,13 @@ const onQuickEditUpdated = (updated) => {
     last_name: updated.last_name ?? customers.value[idx].last_name,
     email: updated.email || customers.value[idx].email,
     phone_number: updated.phone_number ?? customers.value[idx].phone_number,
+    role_id: updated.role_id ?? updated.role?.id ?? customers.value[idx].role_id,
+    role: updated.role ?? customers.value[idx].role,
     status: updated.status ?? customers.value[idx].status,
     email_verified: typeof updated.email_verified === 'boolean'
       ? updated.email_verified
       : Boolean(updated.email_verified_at),
-    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=random`,
+    avatar: resolveUserAvatarUrl(mergedUser, { name: fullName, background: 'random' }),
   }
 
   // Đồng bộ quickEditCustomer ref để nếu user re-open ngay drawer cho cùng row
@@ -437,10 +447,12 @@ const mapCustomer = (c) => {
     last_name: c.last_name,
     email: c.email,
     phone_number: c.phone || c.phone_number,
+    role_id: c.role_id ?? c.role?.id,
+    role: c.role,
     status: c.status,
     email_verified: c.email_verified,
     customerCode: `#CUS${c.id}`,
-    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(c.full_name || c.name)}&background=random`,
+    avatar: resolveUserAvatarUrl(c, { name: c.full_name || c.name, background: 'random' }),
     country: c.country || t('admin.customers.defaultCountry'),
     countryCode: 'vn',
     orders: c.orders || 0,

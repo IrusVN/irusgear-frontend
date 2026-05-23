@@ -210,7 +210,14 @@
                 <button type="button"
                   class="btn customer-user-trigger d-flex align-items-center gap-2 rounded-pill border-0 ps-2 pe-3 py-1"
                   data-bs-toggle="dropdown" aria-expanded="false">
-                  <img class="rounded-circle border" width="36" height="36" alt="Avatar" :src="avatarUrl">
+                  <img
+                    class="rounded-circle border"
+                    width="36"
+                    height="36"
+                    alt="Avatar"
+                    :src="avatarUrl"
+                    @error="handleAvatarImageError"
+                  >
 
                   <div class="d-none d-xl-block text-start lh-sm">
                     <div class="fw-semibold text-dark small">{{ fullName }}</div>
@@ -502,7 +509,12 @@
 
         <NuxtLink v-if="user" to="/profile" class="mobile-nav-item" :class="{ active: isMobileNavActive('/profile') }"
           :aria-label="$t('common.profile')">
-          <img class="mobile-nav-avatar" :src="avatarUrl" :alt="fullName">
+          <img
+            class="mobile-nav-avatar"
+            :src="avatarUrl"
+            :alt="fullName"
+            @error="handleAvatarImageError"
+          >
           <span>{{ $t('common.profile') }}</span>
         </NuxtLink>
 
@@ -567,6 +579,7 @@ import { useCartStore } from '@/stores/cartStore'
 import { useWishlistStore } from '@/stores/wishlistStore'
 import { useSearchStore } from '@/stores/searchStore'
 import { getUserRoleKey } from '@/utils/roleHelper'
+import { getUserAvatarFallbackUrl, getUserDisplayName, resolveUserAvatarUrl } from '@/utils/avatar'
 import { useChatbotStore } from '@/stores/chatbotStore'
 import { useNotificationStore } from '@/stores/notificationStore'
 
@@ -670,15 +683,27 @@ const activeMobileMegaMenuGroups = computed(() => {
 const userRoleKey = computed(() => (user.value ? getUserRoleKey(user.value.role_id) : ''))
 
 const fullName = computed(() => {
-  if (!user.value) return ''
-  return `${user.value.first_name || ''} ${user.value.last_name || ''}`.trim()
+  return getUserDisplayName(user.value)
 })
 
-const avatarUrl = computed(() =>
-  user.value
-    ? `https://ui-avatars.com/api/?name=${user.value.first_name}+${user.value.last_name}&background=000&color=fff`
-    : ''
-)
+const avatarUrl = computed(() => resolveUserAvatarUrl(user.value, {
+  name: fullName.value,
+  background: '000',
+  color: 'fff',
+}))
+
+const fallbackAvatarUrl = computed(() => getUserAvatarFallbackUrl(user.value, {
+  name: fullName.value,
+  background: '000',
+  color: 'fff',
+}))
+
+const handleAvatarImageError = (event) => {
+  const image = event.currentTarget
+  if (!image || image.src === fallbackAvatarUrl.value) return
+
+  image.src = fallbackAvatarUrl.value
+}
 
 const closeMobileCategorySidebar = () => {
   isMobileCategorySidebarOpen.value = false

@@ -6,8 +6,38 @@
         <div class="profile-layout__member-left">
           <div class="profile-layout__avatar-wrap">
             <div class="profile-layout__avatar">
-              <img :src="avatarUrl" alt="Avatar" class="profile-layout__avatar-img" loading="lazy" />
+              <img
+                :src="avatarUrl"
+                alt="Avatar"
+                class="profile-layout__avatar-img"
+                loading="lazy"
+                @error="handleAvatarImageError"
+              />
+              <button
+                type="button"
+                class="profile-layout__avatar-action"
+                :disabled="avatarUploading"
+                :aria-label="$t('profile.layout.avatar.update')"
+                :title="$t('profile.layout.avatar.update')"
+                @click="openAvatarPicker"
+              >
+                <span v-if="avatarUploading" class="spinner-border spinner-border-sm"></span>
+                <i v-else class="bi bi-camera"></i>
+              </button>
+              <span
+                v-if="avatarUploading"
+                class="profile-layout__avatar-progress"
+                :style="{ '--avatar-progress': `${avatarProgress}%` }"
+              ></span>
             </div>
+            <input
+              ref="avatarInput"
+              type="file"
+              class="profile-layout__avatar-input"
+              accept="image/jpeg,image/jpg,image/png,image/webp"
+              :disabled="avatarUploading"
+              @change="handleAvatarChange"
+            />
           </div>
           <div class="profile-layout__member-info">
             <h2 class="profile-layout__member-name">{{ fullName }}</h2>
@@ -240,14 +270,19 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { toast } from 'vue-sonner'
 import { useLocalePath, useRoute } from '#imports'
 import { useAuthStore } from '@/stores/authStore'
 import { useMemberRankStore } from '@/stores/memberRankStore'
+import { useAvatarUpload } from '@/composables/useAvatarUpload'
+import { getUserAvatarFallbackUrl, resolveUserAvatarUrl } from '@/utils/avatar'
 
 const localePath = useLocalePath()
 const route = useRoute()
+const { t } = useI18n()
 const authStore = useAuthStore()
 const memberRankStore = useMemberRankStore()
+const avatarUploader = useAvatarUpload()
 const { user } = storeToRefs(authStore)
 const { currentUser } = storeToRefs(memberRankStore)
 
@@ -257,6 +292,7 @@ const phoneEditing = ref(false)
 const phoneInput = ref('')
 const phoneSaving = ref(false)
 const phoneError = ref('')
+const avatarInput = ref(null)
 
 const PHONE_REGEX = /^(\+84|0)(3[2-9]|5[689]|7[06-9]|8[1-689]|9[0-46-9])[0-9]{7}$|^(\+84|0)(2[0-9])[0-9]{8}$/
 
@@ -289,14 +325,61 @@ const avatarUrl = computed(() => {
   if (!user.value) {
     return 'https://ui-avatars.com/api/?name=KH&background=f4f4f5&color=71717a&size=88'
   }
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName.value)}&background=1a1a1a&color=fff&size=88`
+
+  return resolveUserAvatarUrl(user.value, {
+    name: fullName.value,
+    size: 88,
+  })
 })
 
+const fallbackAvatarUrl = computed(() => getUserAvatarFallbackUrl(user.value, {
+  name: fullName.value,
+  background: user.value ? '1a1a1a' : 'f4f4f5',
+  color: user.value ? 'fff' : '71717a',
+  size: 88,
+}))
+
 const totalOrders = ref(0)
+const avatarUploading = computed(() => avatarUploader.isUploading.value)
+const avatarProgress = computed(() => avatarUploader.progress.value)
 
 const handleLogout = () => {
   authStore.logout()
   navigateTo('/auth/login')
+}
+
+const openAvatarPicker = () => {
+  if (avatarUploading.value || !user.value) return
+  avatarInput.value?.click()
+}
+
+const handleAvatarImageError = (event) => {
+  const image = event.currentTarget
+  if (!image || image.src === fallbackAvatarUrl.value) return
+
+  image.src = fallbackAvatarUrl.value
+}
+
+const handleAvatarChange = async (event) => {
+  const file = event.target.files?.[0]
+  event.target.value = ''
+
+  if (!file) return
+
+  try {
+    const response = await avatarUploader.uploadAvatar(file)
+    const updatedUser = response?.data
+
+    if (updatedUser && typeof updatedUser === 'object') {
+      authStore.mergeUser(updatedUser)
+    }
+
+    toast.success(response?.message || t('profile.layout.avatar.updateSuccess'))
+  } catch (error) {
+    toast.error(error?.message || t('profile.layout.avatar.updateFailed'))
+  } finally {
+    avatarUploader.reset()
+  }
 }
 
 const startPhoneEdit = () => {
@@ -384,12 +467,67 @@ onUnmounted(() => {
   border-radius: 50%;
   overflow: hidden;
   background: #f4f4f5;
+  position: relative;
 }
 
 .profile-layout__avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.profile-layout__avatar-action {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.profile-layout__avatar-action:hover:not(:disabled) {
+  background: #27272a;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.profile-layout__avatar-action:disabled {
+  cursor: wait;
+  opacity: 0.85;
+}
+
+.profile-layout__avatar-action i {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.profile-layout__avatar-action .spinner-border-sm {
+  width: 13px;
+  height: 13px;
+  border-width: 2px;
+}
+
+.profile-layout__avatar-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--avatar-progress);
+  height: 3px;
+  background: #111;
+  transition: width 0.15s ease;
+}
+
+.profile-layout__avatar-input {
+  display: none;
 }
 
 .profile-layout__member-info {
