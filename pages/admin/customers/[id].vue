@@ -31,7 +31,33 @@
           <!-- Profile Summary Card -->
           <div class="admin-card-shell profile-card">
             <div class="profile-top">
-              <img :src="customer.avatar" :alt="customer.name" class="profile-avatar" />
+              <div class="profile-avatar-wrap">
+                <img :src="customer.avatar" :alt="customer.name" class="profile-avatar" />
+                <button
+                  type="button"
+                  class="profile-avatar-action"
+                  :disabled="avatarUploading"
+                  :aria-label="$t('admin.customers.updateAvatar')"
+                  :title="$t('admin.customers.updateAvatar')"
+                  @click="openAvatarPicker"
+                >
+                  <span v-if="avatarUploading" class="spinner-border spinner-border-sm"></span>
+                  <i v-else class="bi bi-camera"></i>
+                </button>
+                <span
+                  v-if="avatarUploading"
+                  class="profile-avatar-progress"
+                  :style="{ '--avatar-progress': `${avatarProgress}%` }"
+                ></span>
+                <input
+                  ref="avatarInput"
+                  type="file"
+                  class="profile-avatar-input"
+                  accept="image/jpeg,image/jpg,image/png,image/webp"
+                  :disabled="avatarUploading"
+                  @change="handleAvatarChange"
+                />
+              </div>
               <h3 class="profile-name">{{ customer.name }}</h3>
               <p class="profile-code">{{ customer.customerCode }}</p>
               <div class="profile-stats">
@@ -262,6 +288,7 @@ import QuickEditCustomer from '@/components/Admin/customers/QuickEditCustomer.vu
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { useStatusFormat } from '@/composables/useStatusFormat'
+import { useAvatarUpload } from '@/composables/useAvatarUpload'
 import { resolveUserAvatarUrl } from '@/utils/avatar'
 
 definePageMeta({ layout: 'admin' })
@@ -270,9 +297,13 @@ const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const admin = useAdminStore()
+const avatarUploader = useAvatarUpload()
 
 const customerId = computed(() => Number(route.params.id))
 const customer = ref(null)
+const avatarInput = ref(null)
+const avatarUploading = computed(() => avatarUploader.isUploading.value)
+const avatarProgress = computed(() => avatarUploader.progress.value)
 
 useHead({ title: () => customer.value ? t('admin.customers.customerPageTitle', { code: customer.value.customerCode }) : t('admin.customers.loadingCustomer') })
 
@@ -428,6 +459,33 @@ const onQuickEditUpdated = () => {
   fetchCustomerDetail()
 }
 
+const openAvatarPicker = () => {
+  if (avatarUploading.value || !customer.value?.id) return
+  avatarInput.value?.click()
+}
+
+const handleAvatarChange = async (event) => {
+  const file = event.target.files?.[0]
+  event.target.value = ''
+
+  if (!file || !customer.value?.id) return
+
+  try {
+    const id = customer.value.id
+    const response = await avatarUploader.uploadAvatar(file, {
+      uploadTargetEndpoint: `/admin/users/${id}/avatar/upload-target`,
+      confirmEndpoint: `/admin/users/${id}/avatar/confirm`,
+    })
+
+    await fetchCustomerDetail()
+    toast.success(response?.message || t('admin.customers.avatarUpdateSuccess'))
+  } catch (error) {
+    toast.error(error?.message || t('admin.customers.avatarUpdateFailed'))
+  } finally {
+    avatarUploader.reset()
+  }
+}
+
 const mapCustomerDetail = (c) => {
   const loyalty = c.member_rank || { name_en: 'Standard', threshold: 0 }
   const addr = c.default_address || null
@@ -506,7 +564,60 @@ onMounted(() => {
 /* Profile Card */
 .profile-card { overflow: hidden; }
 .profile-top { padding: 28px 22px; text-align: center; border-bottom: 1px solid var(--admin-border); }
-.profile-avatar { width: 80px; height: 80px; border-radius: 999px; object-fit: cover; margin-bottom: 12px; border: 3px solid var(--admin-border); }
+.profile-avatar-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 12px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.profile-avatar { width: 100%; height: 100%; border-radius: 999px; object-fit: cover; border: 3px solid var(--admin-border); }
+.profile-avatar-action {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #111827;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: background 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+}
+.profile-avatar-action:hover:not(:disabled) {
+  background: #1f2937;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+.profile-avatar-action:disabled {
+  cursor: wait;
+  opacity: 0.88;
+}
+.profile-avatar-action i {
+  font-size: 14px;
+  line-height: 1;
+}
+.profile-avatar-action .spinner-border-sm {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+.profile-avatar-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--avatar-progress);
+  height: 3px;
+  background: #111827;
+  transition: width 0.15s ease;
+}
+.profile-avatar-input { display: none; }
 .profile-name { margin: 0; font-size: 1.12rem; font-weight: 700; color: var(--admin-text); }
 .profile-code { margin: 4px 0 16px; color: var(--admin-muted); font-size: 0.84rem; }
 .profile-stats { display: flex; align-items: center; justify-content: center; gap: 18px; }

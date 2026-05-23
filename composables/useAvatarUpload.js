@@ -70,8 +70,8 @@ export const useAvatarUpload = () => {
     }
   }
 
-  const createUploadTarget = async (file) => {
-    const response = await fetch(`${config.public.apiBaseUrl}/user/avatar/upload-target`, {
+  const createUploadTarget = async (file, endpoint = '/user/avatar/upload-target') => {
+    const response = await fetch(`${config.public.apiBaseUrl}${endpoint}`, {
       method: 'POST',
       credentials: 'include',
       headers: buildHeaders(),
@@ -124,8 +124,8 @@ export const useAvatarUpload = () => {
     xhr.send(file)
   })
 
-  const confirmUpload = async (target, file) => {
-    const response = await fetch(`${config.public.apiBaseUrl}/user/avatar/confirm`, {
+  const confirmUpload = async (target, file, endpoint = '/user/avatar/confirm') => {
+    const response = await fetch(`${config.public.apiBaseUrl}${endpoint}`, {
       method: 'POST',
       credentials: 'include',
       headers: buildHeaders(),
@@ -145,7 +145,7 @@ export const useAvatarUpload = () => {
     return await response.json()
   }
 
-  const uploadAvatar = async (file) => {
+  const uploadAvatar = async (file, options = {}) => {
     error.value = null
     progress.value = 0
 
@@ -153,13 +153,13 @@ export const useAvatarUpload = () => {
       validateFile(file)
 
       status.value = 'creating'
-      const target = await createUploadTarget(file)
+      const target = await createUploadTarget(file, options.uploadTargetEndpoint)
 
       status.value = 'uploading'
       await uploadFileToTarget(file, target)
 
       status.value = 'confirming'
-      const response = await confirmUpload(target, file)
+      const response = await confirmUpload(target, file, options.confirmEndpoint)
 
       status.value = 'done'
       return response
