@@ -84,7 +84,7 @@
             </div>
             <div v-if="form.images.length" class="media-preview-grid">
               <div v-for="(img, idx) in form.images" :key="idx" class="media-preview-item">
-                <img :src="img" :alt="$t('admin.products.productImageAlt')" />
+                <img :src="img.previewUrl" :alt="$t('admin.products.productImageAlt')" />
                 <button class="media-remove" type="button" @click="removeImage(idx)">
                   <i class="bi bi-x"></i>
                 </button>
@@ -206,7 +206,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
-import { useHead, useRoute, useRouter, useI18n } from '#imports'
+import { useHead, useRoute, useRouter, useI18n, useRuntimeConfig, useRequestHeaders } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
@@ -221,6 +221,7 @@ const route = useRoute()
 const router = useRouter()
 const admin = useAdminStore()
 const ui = useUiStore()
+const config = useRuntimeConfig()
 
 const categories = ref([])
 const fileInput = ref(null)
@@ -245,6 +246,7 @@ const form = reactive({
   featured: false,
   status: 'draft',
   images: [],
+  variantId: null,
 })
 
 const errors = reactive({ name: '', sku: '', price: '' })
@@ -268,6 +270,7 @@ onMounted(async () => {
     form.name = p.name || ''
     form.slug = p.slug || ''
     form.sku = p.sku || ''
+    form.variantId = Array.isArray(p.variants) && p.variants.length ? p.variants[0].id : null
     form.vendor = p.vendor?.shop_name || ''
     form.description = p.description || ''
     form.price = p.price || 0
@@ -277,7 +280,11 @@ onMounted(async () => {
     form.categoryId = p.category_id || 0
     form.featured = false
     form.status = p.is_active ? 'publish' : 'inactive'
-    form.images = p.thumbnail ? [p.thumbnail] : []
+    const images = Array.isArray(p.images) && p.images.length
+      ? p.images.map(i => i.image || i.url).filter(Boolean)
+      : (p.thumbnail ? [p.thumbnail] : [])
+
+    form.images = images.map(url => ({ previewUrl: url, cdnUrl: url, file: null }))
   }
 
   isLoaded.value = true
@@ -300,10 +307,124 @@ const { formatProductStatus } = useStatusFormat()
 const statusLabel = (s) => formatProductStatus(s).label
 const statusVariant = (s) => formatProductStatus(s).variant
 
+const buildJsonHeaders = (extra = {}) => {
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    ...extra,
+  }
+
+  if (import.meta.server) {
+    const reqHeaders = useRequestHeaders(['cookie'])
+    if (reqHeaders.cookie) headers.cookie = reqHeaders.cookie
+  }
+
+  return headers
+}
+
+const parseApiError = async (response) => {
+  let body = {}
+  try {
+    body = await response.json()
+  } catch (_) {}
+
+  return new Error(body?.message || body?.error?.message || `HTTP ${response.status}`)
+}
+
+const createImageUploadTarget = async (file) => {
+  const response = await fetch(`${config.public.apiBaseUrl}/admin/products/images/upload-target`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: buildJsonHeaders(),
+    body: JSON.stringify({
+      filename: file.name || 'product-image',
+      contentType: file.type,
+      size: file.size,
+    }),
+  })
+
+  if (!response.ok) {
+    throw await parseApiError(response)
+  }
+
+  const body = await response.json()
+  const target = body?.data
+
+  if (!target?.uploadUrl || !target?.cdnUrl) {
+    throw new Error('Product image upload target is invalid.')
+  }
+
+  return target
+}
+
+const uploadFileToTarget = (file, target) => new Promise((resolve, reject) => {
+  const xhr = new XMLHttpRequest()
+  xhr.open(target.method || 'PUT', target.uploadUrl)
+
+  Object.entries(target.headers || {}).forEach(([key, value]) => {
+    xhr.setRequestHeader(key, value)
+  })
+
+  xhr.onload = () => {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      resolve()
+      return
+    }
+
+    reject(new Error(`Image upload failed with HTTP ${xhr.status}.`))
+  }
+
+  xhr.onerror = () => reject(new Error('Image upload network failed.'))
+  xhr.onabort = () => reject(new Error('Image upload was aborted.'))
+  xhr.send(file)
+})
+
+const addPendingImage = (file) => {
+  if (!file?.type?.startsWith('image/')) return
+
+  form.images.push({
+    previewUrl: URL.createObjectURL(file),
+    cdnUrl: null,
+    file,
+  })
+}
+
 const triggerUpload = () => fileInput.value?.click()
-const handleFileSelect = (e) => { for (const file of e.target.files) form.images.push(URL.createObjectURL(file)) }
-const handleDrop = (e) => { for (const file of e.dataTransfer.files) { if (file.type.startsWith('image/')) form.images.push(URL.createObjectURL(file)) } }
-const removeImage = (idx) => form.images.splice(idx, 1)
+const handleFileSelect = (e) => {
+  const files = Array.from(e.target.files || [])
+  e.target.value = ''
+  files.forEach(addPendingImage)
+}
+const handleDrop = (e) => {
+  const files = Array.from(e.dataTransfer.files || [])
+  files.forEach(addPendingImage)
+}
+const removeImage = (idx) => {
+  const [removed] = form.images.splice(idx, 1)
+  if (removed?.file && removed.previewUrl?.startsWith('blob:')) {
+    URL.revokeObjectURL(removed.previewUrl)
+  }
+}
+
+const resolveImageUrlsForSubmit = async () => {
+  const resolved = []
+
+  for (const image of form.images) {
+    if (image.cdnUrl) {
+      resolved.push(image.cdnUrl)
+      continue
+    }
+
+    if (!image.file) continue
+
+    const target = await createImageUploadTarget(image.file)
+    await uploadFileToTarget(image.file, target)
+    image.cdnUrl = target.cdnUrl
+    resolved.push(target.cdnUrl)
+  }
+
+  return resolved
+}
 
 const { confirm } = useConfirm()
 const isSaving = ref(false)
@@ -313,14 +434,28 @@ const handleSave = async () => {
   if (!validate() || isSaving.value) return
   isSaving.value = true
   try {
+    const imageUrls = await resolveImageUrlsForSubmit()
+
     await admin.update('products', productId.value, {
       name: form.name,
       slug: form.slug || undefined,
+      vendor: form.vendor || undefined,
       description: form.description || undefined,
       price: form.price,
       stock: form.quantity,
       category_id: form.categoryId || undefined,
       is_active: form.status === 'publish',
+      images: imageUrls.map((image, index) => ({
+        image,
+        is_main: index === 0,
+      })),
+      variants: [{
+        id: form.variantId || undefined,
+        name: form.name,
+        price: form.price,
+        stock: form.quantity,
+        sku: form.sku,
+      }],
     })
     router.push('/admin/products')
   } catch (e) {

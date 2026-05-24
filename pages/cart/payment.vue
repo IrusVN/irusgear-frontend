@@ -262,6 +262,10 @@ const hasInfoRow = computed(
 );
 
 const handleSelectMethod = (method) => {
+  if (selectedMethod.value && selectedMethod.value !== method) {
+    resetPaymentAttempt();
+  }
+
   selectedMethod.value = method;
 };
 
@@ -293,7 +297,7 @@ const handlePayment = async () => {
     }
   } catch (e) {
     toast.error(e?.data?.message || "Tạo thanh toán thất bại");
-    selectedMethod.value = null;
+    resetPaymentAttempt();
   } finally {
     loadingMethod.value = false;
   }
@@ -399,39 +403,32 @@ const closePaymentPopup = () => {
   paymentPopup.value = null;
 };
 
-const handleQrCancel = () => {
+const resetPaymentAttempt = () => {
   showQrModal.value = false;
   selectedPayUrl.value = "";
   selectedPayData.value = null;
   selectedExpiresAt.value = null;
   closePaymentPopup();
+};
+
+const handleQrCancel = () => {
+  resetPaymentAttempt();
 };
 
 const handleQrExpired = () => {
-  showQrModal.value = false;
+  resetPaymentAttempt();
   toast.warning("Mã thanh toán đã hết hạn. Vui lòng tạo mã mới.");
-  selectedPayUrl.value = "";
-  selectedPayData.value = null;
-  selectedExpiresAt.value = null;
   selectedMethod.value = null;
-  closePaymentPopup();
 };
 
 const handleQrSuccess = async (paymentData) => {
-  closePaymentPopup();
-  showQrModal.value = false;
-  selectedPayUrl.value = "";
-  selectedPayData.value = null;
-  selectedExpiresAt.value = null;
+  resetPaymentAttempt();
   await navigateTo(`/cart/success?order_id=${paymentData.orderId || checkoutStore.preparedOrderId}`);
 };
 
 const handleQrFailed = (reason) => {
-  showQrModal.value = false;
+  resetPaymentAttempt();
   toast.error(reason || "Thanh toán không thành công");
-  selectedPayUrl.value = "";
-  selectedPayData.value = null;
-  selectedExpiresAt.value = null;
 };
 
 const handleQrRetry = async () => {

@@ -323,6 +323,7 @@ import AdminLineChart from '@/components/Admin/charts/AdminLineChart.vue'
 import AdminDoughnutChart from '@/components/Admin/charts/AdminDoughnutChart.vue'
 import AdminSparkline from '@/components/Admin/charts/AdminSparkline.vue'
 import { useStatusFormat } from '@/composables/useStatusFormat'
+import { resolveUserAvatarUrl } from '@/utils/avatar'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -471,7 +472,7 @@ const fetchDashboard = async () => {
           orderCode: o.orderCode || o.order_number || `#ORD${o.id}`,
           customer: {
             name: customerName,
-            avatar: o.customer?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(customerName)}&background=random`,
+            avatar: resolveUserAvatarUrl(o.customer, { name: customerName, background: 'random' }),
             email: o.customer?.email || ''
           },
           total: o.total,

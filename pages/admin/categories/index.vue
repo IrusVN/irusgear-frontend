@@ -29,7 +29,16 @@
       <!-- Category cell -->
       <template #cell-name="{ item }">
         <div class="category-cell">
-          <img :src="item.image" :alt="item.name" class="cat-thumb" />
+          <img
+            v-if="item.image && !item.imageLoadFailed"
+            :src="item.image"
+            :alt="item.name"
+            class="cat-thumb"
+            @error="handleImageError(item)"
+          />
+          <div v-else class="cat-thumb cat-thumb--initials" aria-hidden="true">
+            {{ item.initials }}
+          </div>
           <div class="cat-info">
             <strong>{{ item.name }}</strong>
             <small>{{ item.description }}</small>
@@ -109,7 +118,25 @@
               <div class="form-row-2">
                 <label class="form-field">
                   <span class="field-label">{{ $t('admin.categories.iconLabel') }}</span>
-                  <input v-model="form.icon" type="text" class="admin-control field-input" :placeholder="$t('admin.categories.iconPlaceholder')" />
+                  <div class="icon-select-wrap">
+                    <i class="bi icon-select-preview" :class="form.icon || 'bi-tag'"></i>
+                    <span class="icon-select-label">{{ selectedCategoryIconLabel }}</span>
+                  </div>
+                  <div class="icon-picker-grid" role="listbox" :aria-label="$t('admin.categories.iconLabel')">
+                    <button
+                      v-for="icon in categoryIconOptions"
+                      :key="icon.value"
+                      type="button"
+                      class="icon-picker-option"
+                      :class="{ 'is-selected': form.icon === icon.value }"
+                      :title="icon.label"
+                      :aria-label="icon.label"
+                      :aria-selected="form.icon === icon.value ? 'true' : 'false'"
+                      @click="form.icon = icon.value"
+                    >
+                      <i class="bi" :class="icon.value"></i>
+                    </button>
+                  </div>
                 </label>
                 <label class="form-field">
                   <span class="field-label">{{ $t('admin.categories.status') }}</span>
@@ -137,7 +164,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useHead, useI18n } from '#imports'
+import { useHead, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminDataTable from '@/components/Admin/ui/AdminDataTable.vue'
@@ -154,6 +181,7 @@ useHead({ title: () => t('admin.categories.pageTitle') })
 
 const admin = useAdminStore()
 const ui = useUiStore()
+const router = useRouter()
 
 /* ── Reactive data ── */
 const categories = ref([])
@@ -165,14 +193,60 @@ const page = ref(1)
 const pageSize = ref(10)
 const selectedIds = ref([])
 
+const categoryIconOptions = [
+  { value: 'bi-tag', label: 'Tag' },
+  { value: 'bi-tags', label: 'Tags' },
+  { value: 'bi-grid', label: 'Grid' },
+  { value: 'bi-grid-3x3-gap', label: 'Grid 3x3' },
+  { value: 'bi-box', label: 'Box' },
+  { value: 'bi-box-seam', label: 'Box Seam' },
+  { value: 'bi-bag', label: 'Bag' },
+  { value: 'bi-basket', label: 'Basket' },
+  { value: 'bi-cart', label: 'Cart' },
+  { value: 'bi-phone', label: 'Phone' },
+  { value: 'bi-tablet', label: 'Tablet' },
+  { value: 'bi-laptop', label: 'Laptop' },
+  { value: 'bi-pc-display', label: 'PC Display' },
+  { value: 'bi-display', label: 'Display' },
+  { value: 'bi-keyboard', label: 'Keyboard' },
+  { value: 'bi-mouse', label: 'Mouse' },
+  { value: 'bi-headphones', label: 'Headphones' },
+  { value: 'bi-speaker', label: 'Speaker' },
+  { value: 'bi-smartwatch', label: 'Smartwatch' },
+  { value: 'bi-tv', label: 'TV' },
+  { value: 'bi-camera', label: 'Camera' },
+  { value: 'bi-printer', label: 'Printer' },
+  { value: 'bi-router', label: 'Router' },
+  { value: 'bi-usb-drive', label: 'USB Drive' },
+  { value: 'bi-cpu', label: 'CPU' },
+  { value: 'bi-gpu-card', label: 'GPU Card' },
+  { value: 'bi-memory', label: 'Memory' },
+  { value: 'bi-motherboard', label: 'Motherboard' },
+  { value: 'bi-battery-charging', label: 'Battery' },
+  { value: 'bi-lightning-charge', label: 'Charging' },
+  { value: 'bi-plug', label: 'Plug' },
+  { value: 'bi-controller', label: 'Controller' },
+  { value: 'bi-watch', label: 'Watch' },
+  { value: 'bi-house', label: 'Home' },
+  { value: 'bi-lamp', label: 'Lamp' },
+  { value: 'bi-snow', label: 'Air Conditioner' },
+  { value: 'bi-droplet', label: 'Appliance' },
+  { value: 'bi-heart-pulse', label: 'Health' },
+  { value: 'bi-stars', label: 'Beauty' },
+  { value: 'bi-gift', label: 'Gift' },
+  { value: 'bi-percent', label: 'Promotion' },
+]
+
 /* ── API→UI Mapping ── */
 const mapCategory = (c) => ({
   id: c.id,
   name: c.name,
   slug: c.slug,
   description: c.description || '',
-  image: c.image || '/images/placeholder-category.png',
-  icon: 'bi-tag',
+  image: c.image || '',
+  imageLoadFailed: false,
+  initials: getCategoryInitials(c.name),
+  icon: c.icon || 'bi-tag',
   productCount: c.products_count ?? 0,
   totalEarning: c.total_earning ?? 0,
   status: c.is_active !== undefined ? (c.is_active ? 'active' : 'inactive') : 'active',
@@ -222,6 +296,9 @@ watch(search, () => {
 const modalOpen = ref(false)
 const editingCategory = ref(null)
 const form = ref({ name: '', slug: '', description: '', icon: 'bi-tag', status: 'active' })
+const selectedCategoryIconLabel = computed(() => (
+  categoryIconOptions.find((icon) => icon.value === form.value.icon)?.label || 'Tag'
+))
 
 const openAddModal = () => {
   editingCategory.value = null
@@ -246,6 +323,8 @@ const saveCategory = async () => {
     name: form.value.name,
     slug: form.value.slug || undefined,
     description: form.value.description || undefined,
+    icon: form.value.icon || undefined,
+    is_active: form.value.status === 'active',
   }
 
   isSavingCategory.value = true
@@ -275,7 +354,29 @@ const columns = computed(() => [
 /* ── helpers ── */
 const formatCurrency = (n) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n)
 
+const getCategoryInitials = (name = '') => {
+  const words = String(name)
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+
+  const letters = words.length > 1
+    ? words.slice(0, 2).map((word) => word.charAt(0)).join('')
+    : String(name).trim().slice(0, 2)
+
+  return letters.toLocaleUpperCase('vi-VN') || 'CA'
+}
+
+const handleImageError = (item) => {
+  item.imageLoadFailed = true
+}
+
 const handleAction = async (action, item) => {
+  if (action.key === 'view') {
+    router.push({ path: '/admin/products', query: { category_id: item.id } })
+    return
+  }
+
   if (action.key === 'delete') {
     const ok = await confirm({
       message: t('admin.categories.deleteConfirm', { name: item.name }),
@@ -288,8 +389,6 @@ const handleAction = async (action, item) => {
     } catch (e) {
       toast.error(t('admin.categories.deleteFailed', { message: e.message }))
     }
-  } else {
-    toast.info(t('admin.categories.viewProductsAlert', { name: item.name }))
   }
 }
 </script>
@@ -300,6 +399,16 @@ const handleAction = async (action, item) => {
 /* Category cell */
 .category-cell { display: flex; align-items: center; gap: 14px; }
 .cat-thumb { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex: 0 0 auto; background: var(--admin-surface-soft); }
+.cat-thumb--initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--admin-border);
+}
 .cat-info { min-width: 0; }
 .cat-info strong { display: block; font-size: 0.92rem; color: var(--admin-text); }
 .cat-info small { color: var(--admin-muted); font-size: 0.8rem; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; max-width: 320px; }
@@ -335,6 +444,56 @@ const handleAction = async (action, item) => {
 .field-label { font-size: 0.82rem; font-weight: 600; color: var(--admin-muted); text-transform: uppercase; letter-spacing: 0.03em; }
 .field-input { width: 100%; }
 .field-textarea { width: 100%; min-height: 72px; padding: 10px 12px; resize: vertical; border: 1px solid var(--admin-border); border-radius: 7px; background: #fff; color: var(--admin-text); outline: 0; }
+.icon-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: #fff;
+}
+.icon-select-preview {
+  color: var(--admin-muted);
+  font-size: 1rem;
+}
+.icon-select-label {
+  color: var(--admin-text);
+  font-size: 0.92rem;
+}
+.icon-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(34px, 1fr));
+  gap: 8px;
+  max-height: 132px;
+  overflow: auto;
+  padding: 10px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-surface-soft);
+}
+.icon-picker-option {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--admin-muted);
+  transition: border-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+}
+.icon-picker-option:hover,
+.icon-picker-option.is-selected {
+  border-color: var(--admin-primary);
+  color: var(--admin-primary);
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.1);
+}
+.icon-picker-option i {
+  font-size: 1rem;
+}
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 .modal-footer {

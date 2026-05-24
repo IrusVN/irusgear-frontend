@@ -128,6 +128,7 @@ import { useI18n } from 'vue-i18n'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { exportToCsv } from '@/utils/exportCsv'
+import { resolveUserAvatarUrl } from '@/utils/avatar'
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 
@@ -181,7 +182,7 @@ const fetchReferrals = async () => {
         id: r.id,
         referrerName,
         referrerEmail: r.referrer?.email || '',
-        referrerAvatar: r.referrer?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(referrerName)}&background=random`,
+        referrerAvatar: resolveUserAvatarUrl(r.referrer, { name: referrerName, background: 'random' }),
         referredName,
         code: r.referral_code || '',
         earning: Number(r.commission_amount || 0),

@@ -297,6 +297,31 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       }
     };
 
+    const createItemWithPathAndHeaders = async (subPath, payload = {}, extraHeaders = {}) => {
+      ui.isCreating = true;
+      try {
+        const url = `${config.public.apiBaseUrl}/${subPath}`;
+        const res = await fetch(url, {
+          method: "POST",
+          credentials: "include",
+          headers: buildHeaders(extraHeaders),
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          let errorBody = {};
+          try { errorBody = await res.json(); } catch (_) {}
+          const errMsg = errorBody?.error?.message || errorBody?.message || errorBody?.error?.code || errorBody?.code || `HTTP ${res.status}`;
+          const err = new Error(errMsg);
+          err.data = errorBody;
+          throw err;
+        }
+        return await res.json();
+      } finally {
+        ui.isCreating = false;
+      }
+    };
+
     // GET với custom headers (cho GET /search/history với X-Device-Id)
     const fetchWithHeaders = async (subPath, params = {}, extraHeaders = {}) => {
       ui.isLoading = true;
@@ -370,6 +395,7 @@ export const useFeGlobalStore = defineStore("frontend/globals", () => {
       deleteItem,
       reset,
       createItemWithPath,
+      createItemWithPathAndHeaders,
       fetchWithHeaders,
       deleteWithHeaders,
     };

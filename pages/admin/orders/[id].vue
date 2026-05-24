@@ -184,6 +184,7 @@ import ShipmentTimeline from '@/components/Admin/Orders/ShipmentTimeline.vue'
 import { toast } from 'vue-sonner'
 import { useConfirm } from '@/composables/useConfirm'
 import { useStatusFormat } from '@/composables/useStatusFormat'
+import { resolveUserAvatarUrl } from '@/utils/avatar'
 
 definePageMeta({ layout: 'admin' })
 const { t } = useI18n()
@@ -213,7 +214,10 @@ const mapOrderDetail = (o) => ({
     name: o.customer?.name || o.guest_email || t('admin.orders.guest'),
     email: o.customer?.email || o.guest_email,
     phone: o.customer?.phone || o.address?.phone,
-    avatar: '',
+    avatar: resolveUserAvatarUrl(o.customer, {
+      name: o.customer?.name || o.guest_email || t('admin.orders.guest'),
+      background: 'random',
+    }),
   },
   items: o.items?.map(i => ({
     id: i.id,

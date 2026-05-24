@@ -74,7 +74,7 @@
           </div>
           <div v-if="form.images.length" class="media-preview-grid">
             <div v-for="(img, idx) in form.images" :key="idx" class="media-preview-item">
-              <img :src="img" :alt="$t('admin.products.productImageAlt')" />
+              <img :src="img.previewUrl" :alt="$t('admin.products.productImageAlt')" />
               <button class="media-remove" type="button" @click="removeImage(idx)">
                 <i class="bi bi-x"></i>
               </button>
@@ -195,7 +195,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-import { useHead, useRoute, useRouter, useI18n } from '#imports'
+import { useHead, useRoute, useRouter, useI18n, useRuntimeConfig, useRequestHeaders } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { useUiStore } from '@/stores/uiStore'
 import AdminStatusBadge from '@/components/Admin/ui/AdminStatusBadge.vue'
@@ -210,6 +210,7 @@ const router = useRouter()
 const route = useRoute()
 const admin = useAdminStore()
 const ui = useUiStore()
+const config = useRuntimeConfig()
 
 const categories = ref([])
 const fileInput = ref(null)
@@ -258,7 +259,12 @@ onMounted(async () => {
     form.categoryId = src.category_id || 0
     form.featured = false
     form.status = 'draft'
-    form.images = Array.isArray(src.images) ? src.images.map(i => i.image || i.url).filter(Boolean) : []
+    form.images = Array.isArray(src.images)
+      ? src.images
+        .map(i => i.image || i.url)
+        .filter(Boolean)
+        .map(url => ({ previewUrl: url, cdnUrl: url, file: null }))
+      : []
     toast.info(t('admin.products.duplicatePrefilled'))
   }
 })
@@ -280,37 +286,157 @@ const { formatProductStatus } = useStatusFormat()
 const statusLabel = (s) => formatProductStatus(s).label
 const statusVariant = (s) => formatProductStatus(s).variant
 
-const triggerUpload = () => fileInput.value?.click()
-const handleFileSelect = (e) => {
-  for (const file of e.target.files) {
-    form.images.push(URL.createObjectURL(file))
+const buildJsonHeaders = (extra = {}) => {
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    ...extra,
   }
+
+  if (import.meta.server) {
+    const reqHeaders = useRequestHeaders(['cookie'])
+    if (reqHeaders.cookie) headers.cookie = reqHeaders.cookie
+  }
+
+  return headers
+}
+
+const parseApiError = async (response) => {
+  let body = {}
+  try {
+    body = await response.json()
+  } catch (_) {}
+
+  return new Error(body?.message || body?.error?.message || `HTTP ${response.status}`)
+}
+
+const createImageUploadTarget = async (file) => {
+  const response = await fetch(`${config.public.apiBaseUrl}/admin/products/images/upload-target`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: buildJsonHeaders(),
+    body: JSON.stringify({
+      filename: file.name || 'product-image',
+      contentType: file.type,
+      size: file.size,
+    }),
+  })
+
+  if (!response.ok) {
+    throw await parseApiError(response)
+  }
+
+  const body = await response.json()
+  const target = body?.data
+
+  if (!target?.uploadUrl || !target?.cdnUrl) {
+    throw new Error('Product image upload target is invalid.')
+  }
+
+  return target
+}
+
+const uploadFileToTarget = (file, target) => new Promise((resolve, reject) => {
+  const xhr = new XMLHttpRequest()
+  xhr.open(target.method || 'PUT', target.uploadUrl)
+
+  Object.entries(target.headers || {}).forEach(([key, value]) => {
+    xhr.setRequestHeader(key, value)
+  })
+
+  xhr.onload = () => {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      resolve()
+      return
+    }
+
+    reject(new Error(`Image upload failed with HTTP ${xhr.status}.`))
+  }
+
+  xhr.onerror = () => reject(new Error('Image upload network failed.'))
+  xhr.onabort = () => reject(new Error('Image upload was aborted.'))
+  xhr.send(file)
+})
+
+const addPendingImage = (file) => {
+  if (!file?.type?.startsWith('image/')) return
+
+  form.images.push({
+    previewUrl: URL.createObjectURL(file),
+    cdnUrl: null,
+    file,
+  })
+}
+
+const triggerUpload = () => {
+  fileInput.value?.click()
+}
+const handleFileSelect = (e) => {
+  const files = Array.from(e.target.files || [])
+  e.target.value = ''
+  files.forEach(addPendingImage)
 }
 const handleDrop = (e) => {
-  for (const file of e.dataTransfer.files) {
-    if (file.type.startsWith('image/')) form.images.push(URL.createObjectURL(file))
+  const files = Array.from(e.dataTransfer.files || [])
+  files.forEach(addPendingImage)
+}
+const removeImage = (idx) => {
+  const [removed] = form.images.splice(idx, 1)
+  if (removed?.file && removed.previewUrl?.startsWith('blob:')) {
+    URL.revokeObjectURL(removed.previewUrl)
   }
 }
-const removeImage = (idx) => form.images.splice(idx, 1)
+
+const resolveImageUrlsForSubmit = async () => {
+  const resolved = []
+
+  for (const image of form.images) {
+    if (image.cdnUrl) {
+      resolved.push(image.cdnUrl)
+      continue
+    }
+
+    if (!image.file) continue
+
+    const target = await createImageUploadTarget(image.file)
+    await uploadFileToTarget(image.file, target)
+    image.cdnUrl = target.cdnUrl
+    resolved.push(target.cdnUrl)
+  }
+
+  return resolved
+}
 
 /**
  * Build payload to match backend API expectations.
  */
-const buildPayload = (publishStatus) => ({
+const buildPayload = (publishStatus, imageUrls = []) => ({
   name: form.name,
   slug: form.slug || undefined,
+  vendor: form.vendor || undefined,
   description: form.description || undefined,
   price: form.price,
   stock: form.quantity,
   category_id: form.categoryId || undefined,
   is_active: publishStatus === 'publish',
+  images: imageUrls.map((image, index) => ({
+    image,
+    is_main: index === 0,
+  })),
+  variants: [{
+    name: form.name,
+    price: form.price,
+    stock: form.quantity,
+    sku: form.sku,
+  }],
 })
 
 const handlePublish = async () => {
   if (!validate() || isPublishing.value || isSavingDraft.value) return
   isPublishing.value = true
   try {
-    await admin.create('products', buildPayload('publish'))
+    const imageUrls = await resolveImageUrlsForSubmit()
+    await admin.create('products', buildPayload('publish', imageUrls))
     router.push('/admin/products')
   } catch (e) {
     toast.error(t('admin.products.publishFailed', { message: e.message }))
@@ -322,7 +448,8 @@ const handleSaveDraft = async () => {
   if (!validate() || isPublishing.value || isSavingDraft.value) return
   isSavingDraft.value = true
   try {
-    await admin.create('products', buildPayload('draft'))
+    const imageUrls = await resolveImageUrlsForSubmit()
+    await admin.create('products', buildPayload('draft', imageUrls))
     router.push('/admin/products')
   } catch (e) {
     toast.error(t('admin.products.saveDraftFailed', { message: e.message }))

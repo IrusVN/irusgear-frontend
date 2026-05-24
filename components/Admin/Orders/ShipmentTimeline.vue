@@ -22,8 +22,8 @@
                 <strong>{{ event.title }}</strong>
                 <small v-if="event.description">{{ event.description }}</small>
               </div>
-              <time :datetime="event.timestamp" :title="formatAbsolute(event.timestamp)">
-                {{ formatRelative(event.timestamp) }}
+              <time :datetime="event.timestamp" :title="formatRelative(event.timestamp)">
+                {{ formatAbsolute(event.timestamp) }}
               </time>
             </div>
 
@@ -39,12 +39,12 @@
             <div v-if="event.photos.length" class="pod-grid">
               <button
                 v-for="photo in event.photos"
-                :key="photo.id"
+                :key="photo.id || photo.url"
                 type="button"
                 class="pod-thumb"
                 @click="openPhoto(photo)"
               >
-                <img :src="photo.thumb_url || photo.url" :alt="$t('admin.orders.timeline.photoAlt')" />
+                <img :src="photo.thumbUrl" :alt="$t('admin.orders.timeline.photoAlt')" loading="lazy" />
               </button>
             </div>
           </div>
@@ -61,7 +61,7 @@
       <button type="button" class="lightbox-close" :aria-label="$t('common.close')" @click="closePhoto">
         <i class="bi bi-x-lg"></i>
       </button>
-      <img :src="selectedPhoto.url || selectedPhoto.thumb_url" :alt="$t('admin.orders.timeline.photoAlt')" class="lightbox-image" />
+      <img :src="selectedPhoto.url" :alt="$t('admin.orders.timeline.photoAlt')" class="lightbox-image" />
     </div>
   </div>
 </template>
@@ -81,6 +81,7 @@ const { t, locale } = useI18n()
 const selectedPhoto = ref(null)
 const nowMs = ref(Date.now())
 const timer = ref(null)
+const VIETNAM_TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 const events = computed(() => {
   const timeline = props.order?.timelines || props.order?.timeline || props.order?.activity || []
@@ -93,7 +94,7 @@ const events = computed(() => {
       id: `timeline-${item.id || index}`,
       type: 'timeline',
       icon: timelineIcon(item.actor_type),
-      title: item.label || item.title || t('admin.orders.timeline.statusUpdated'),
+      title: timelineTitle(item),
       description: item.actor_name || item.description || actorLabel(item.actor_type),
       note: item.note || '',
       timestamp,
@@ -103,7 +104,9 @@ const events = computed(() => {
   })
 
   const attemptEvents = attempts.map((attempt) => {
-    const photos = (attempt.photos || []).filter((photo) => photo.thumb_url || photo.url)
+    const photos = Array.isArray(attempt.photos)
+      ? attempt.photos.map(normalizePhoto).filter(Boolean)
+      : []
 
     return {
       id: `attempt-${attempt.id}`,
@@ -120,20 +123,22 @@ const events = computed(() => {
 
   return [...timelineEvents, ...attemptEvents]
     .filter((event) => Boolean(event.timestamp))
-    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    .sort((a, b) => getTimestampMs(b.timestamp) - getTimestampMs(a.timestamp))
 })
 
 const groups = computed(() => {
   const byDay = new Map()
 
   events.value.forEach((event) => {
-    const date = new Date(event.timestamp)
-    const key = date.toISOString().slice(0, 10)
+    const date = parseTimestamp(event.timestamp)
+    if (!date) return
+
+    const key = getVietnamDateKey(date)
 
     if (!byDay.has(key)) {
       byDay.set(key, {
         key,
-        label: date.toLocaleDateString(locale.value, { day: '2-digit', month: 'short', year: 'numeric' }),
+        label: formatVietnamDate(date),
         items: [],
       })
     }
@@ -156,6 +161,49 @@ const attemptMeta = (attempt) => {
     meta.push({ label: t('admin.orders.timeline.location'), value: `${attempt.gps_lat}, ${attempt.gps_lng}` })
   }
   return meta
+}
+
+const normalizePhoto = (photo) => {
+  if (!photo || typeof photo !== 'object') return null
+
+  const url = photo.url || photo.cdn_url || null
+  if (!url) return null
+
+  return {
+    ...photo,
+    id: photo.id || null,
+    url,
+    thumbUrl: photo.thumbUrl || photo.thumb_url || url,
+  }
+}
+
+const TIMELINE_LABEL_ALIASES = {
+  'admin approved': 'processing',
+  'auto approved': 'processing',
+  'shipment assigned': 'ready_to_ship',
+  'shipment reassigned': 'ready_to_ship',
+  'shipper đã lấy hàng': 'shipped',
+  'shipper da lay hang': 'shipped',
+}
+
+const timelineTitle = (item) => {
+  const status = String(item?.status || '').toLowerCase()
+  const statusLabel = timelineStatusLabel(status)
+  if (statusLabel) return statusLabel
+
+  const rawLabel = String(item?.label || item?.title || '').trim()
+  const aliasStatus = TIMELINE_LABEL_ALIASES[rawLabel.toLowerCase()]
+  const aliasLabel = timelineStatusLabel(aliasStatus)
+  if (aliasLabel) return aliasLabel
+
+  return rawLabel || t('admin.orders.timeline.statusUpdated')
+}
+
+const timelineStatusLabel = (status) => {
+  if (!status) return ''
+  const key = `admin.orders.timeline.eventLabels.${status}`
+  const label = t(key)
+  return label === key ? '' : label
 }
 
 const actorLabel = (actorType) => {
@@ -182,16 +230,61 @@ const outcomeLabel = (outcome) => {
 
 const formatCurrency = (value) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(value || 0))
 
-const formatAbsolute = (timestamp) => new Date(timestamp).toLocaleString(locale.value, {
+const parseTimestamp = (timestamp) => {
+  if (!timestamp) return null
+  if (timestamp instanceof Date) return Number.isNaN(timestamp.getTime()) ? null : timestamp
+
+  const raw = String(timestamp).trim()
+  const hasTimezone = /(?:z|[+-]\d{2}:?\d{2})$/i.test(raw)
+  const looksLikeSqlDatetime = /^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?$/.test(raw)
+  const normalized = !hasTimezone && looksLikeSqlDatetime
+    ? `${raw.replace(' ', 'T')}Z`
+    : raw
+  const date = new Date(normalized)
+
+  return Number.isNaN(date.getTime()) ? null : date
+}
+
+const getTimestampMs = (timestamp) => parseTimestamp(timestamp)?.getTime() || 0
+
+const getVietnamDateKey = (date) => {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: VIETNAM_TIME_ZONE,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date)
+
+  const values = Object.fromEntries(parts.filter((part) => part.type !== 'literal').map((part) => [part.type, part.value]))
+
+  return `${values.year}-${values.month}-${values.day}`
+}
+
+const formatVietnamDate = (date) => new Intl.DateTimeFormat(locale.value, {
+  timeZone: VIETNAM_TIME_ZONE,
   day: '2-digit',
   month: 'short',
   year: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-})
+}).format(date)
+
+const formatAbsolute = (timestamp) => {
+  const date = parseTimestamp(timestamp)
+  if (!date) return ''
+
+  return new Intl.DateTimeFormat(locale.value, {
+    timeZone: VIETNAM_TIME_ZONE,
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date)
+}
 
 const formatRelative = (timestamp) => {
-  const date = new Date(timestamp)
+  const date = parseTimestamp(timestamp)
+  if (!date) return ''
+
   const diffSeconds = Math.round((date.getTime() - nowMs.value) / 1000)
   const absSeconds = Math.abs(diffSeconds)
   const rtf = new Intl.RelativeTimeFormat(locale.value, { numeric: 'auto' })

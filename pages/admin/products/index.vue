@@ -32,7 +32,7 @@
           <span class="filter-label">{{ $t('admin.products.filterCategoryLabel') }}</span>
           <select v-model="categoryFilter" class="admin-control filter-select" @change="resetPage">
             <option value="all">{{ $t('admin.products.allCategories') }}</option>
-            <option v-for="cat in categories" :key="cat.id" :value="cat.name">{{ cat.name }}</option>
+            <option v-for="cat in categories" :key="cat.id" :value="String(cat.id)">{{ cat.name }}</option>
           </select>
         </label>
         <label class="filter-group">
@@ -194,7 +194,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useHead, useRouter, useI18n } from '#imports'
+import { useHead, useRoute, useRouter, useI18n } from '#imports'
 import { useAdminStore } from '@/stores/adminStore'
 import { usePaginationStore } from '@/stores/paginationStore'
 import { useUiStore } from '@/stores/uiStore'
@@ -219,6 +219,7 @@ definePageMeta({ layout: 'admin' })
 useHead({ title: () => t('admin.products.headTitle') })
 
 const router = useRouter()
+const route = useRoute()
 const admin = useAdminStore()
 const paginationStore = usePaginationStore()
 const ui = useUiStore()
@@ -270,8 +271,7 @@ const loadProducts = async () => {
     params.is_active = statusFilter.value === 'publish' ? 1 : 0
   }
   if (categoryFilter.value !== 'all') {
-    const cat = categories.value.find(c => c.name === categoryFilter.value)
-    if (cat) params.category_id = cat.id
+    params.category_id = categoryFilter.value
   }
   if (stockFilter.value !== 'all') params.stock_status = stockFilter.value
 
@@ -303,6 +303,11 @@ const loadSalesStats = async () => {
 
 /* ── Lifecycle ── */
 onMounted(async () => {
+  const routeCategoryId = route.query.category_id
+  if (routeCategoryId) {
+    categoryFilter.value = String(Array.isArray(routeCategoryId) ? routeCategoryId[0] : routeCategoryId)
+  }
+
   await Promise.all([loadProducts(), loadCategories(), loadSalesStats()])
 })
 
@@ -341,7 +346,7 @@ const mobileFilters = computed(() => [
     key: 'category', label: t('admin.products.filterCategoryLabel'), value: categoryFilter.value, defaultValue: 'all',
     options: [
       { value: 'all', label: t('admin.products.allCategories') },
-      ...categories.value.map(c => ({ value: c.name, label: c.name })),
+      ...categories.value.map(c => ({ value: String(c.id), label: c.name })),
     ],
   },
   {
