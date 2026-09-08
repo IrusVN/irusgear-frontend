@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "irusgear-frontend",
+  "compatibility_date": "2025-07-15",
+  "main": ".output/server/index.mjs",
+  // Nuxt SSR trên Workers cần nodejs_compat để shim các API Node
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".output/public",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
