@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  // Deploy lên Cloudflare Workers — build ra module worker (.output/server/index.mjs)
+  // Chỉ ảnh hưởng tới `pnpm build`; `pnpm dev` vẫn chạy dev server Node bình thường.
+  nitro: {
+    preset: 'cloudflare_module',
+  },
   modules: ['@nuxtjs/i18n','@pinia/nuxt'],
   i18n: {
     locales: [
